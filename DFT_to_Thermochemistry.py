@@ -151,7 +151,6 @@ class Particle(object):
         Call Entropy method to calculate standard state entropy
         '''
         self.Calc_Entropy()
-        self.Calc_Entropy_ASE()
 
         '''
         Call Heat Capacity method to calculate heat capacities at the
@@ -164,7 +163,6 @@ class Particle(object):
         '''
         if not hasattr(self, 'hf_Tstp'):
             self.Calc_Enthalpy()
-            self.Calc_Enthalpy_ASE()
 
     def Determine_Phase(self):
         '''
@@ -188,78 +186,6 @@ class Particle(object):
             'S' as a default value
             '''
             self.phase = 'S'
-
-    def Calc_Entropy_ASE(self):
-
-        if self.phase == "G":
-            self.S_Tstp_ASE = self.ASE.get_entropy(
-                    temperature=self.Tstp,
-                    pressure=self.Pstp,
-                    verbose=False)/c.R3*c.R1
-        else:
-            self.S_Tstp_ASE = self.ASE.get_entropy(
-                    temperature=self.Tstp,
-                    verbose=False)/c.R3*c.R1
-
-    def Calc_Entropy(self):
-        '''
-        Calculate the vibrational, rotational and translational components and
-        total entropy of a species at standard conditions
-        '''
-
-        '''
-        Calculate vibrational component of entropy for gas and surface species
-        '''
-        T = self.Tstp
-        self.S_Tstp_vib = c.R1 * sum((self.theta/T) /
-                                     (_np.exp(self.theta/T)-1) -
-                                     _np.log(1 - _np.exp(-self.theta/T)))
-        self.q_vib = _np.product(_np.divide(1, (1 - _np.exp(-self.theta/T))))
-
-        '''
-        Calculate rotational and translational components of entropy
-        '''
-        if self.phase == 'G':
-            '''
-            Gas phase calculation
-            '''
-            if self.islinear == 0:
-                '''
-                Non-linear species
-                '''
-                Irot = _np.product(self.I3)
-                self.S_Tstp_rot = c.R1*(3./2. + 1./2. *
-                                        _np.log(pi*T**3/self.T_I**3*Irot) -
-                                        _np.log(self.sigma))
-                self.q_rot = _np.sqrt(_np.pi*Irot)/self.sigma *\
-                    (T/self.T_I)**(3./2.)
-            else:
-                '''
-                Linear species
-                '''
-                Irot = _np.max(self.I3)
-                self.S_Tstp_rot = c.R1*(1. + _np.log(T/self.T_I*Irot) -
-                                        _np.log(self.sigma))
-                self.q_rot = (T*Irot/self.sigma)/self.T_I
-            p = 100000  # Presure of 1 atm or 100000 Pa
-            self.S_Tstp_trans = c.R1*(5./2. + 3./2. *
-                                      _np.log(2.*pi*self.MW/c.h1**2) +
-                                      5./2.*_np.log(c.kb1*T) -
-                                      _np.log(p))
-            if hasattr(self, 'A_st'):
-                self.q_trans2D = self.A_st * (2*_np.pi*self.MW*c.kb1*T)/c.h1**2
-        else:
-            '''
-            Surface phase calculation
-            '''
-            self.S_Tstp_rot = 0.
-            self.S_Tstp_trans = 0.
-            self.q_rot = 0.
-        '''
-        Sum of all contributions to entropy for total entropy
-        '''
-        self.S_Tstp = self.S_Tstp_vib + self.S_Tstp_rot + self.S_Tstp_trans +\
-            _np.log(2*self.spin + 1)
 
     def Calc_HeatCapacities(self):
         '''
@@ -305,62 +231,28 @@ class Particle(object):
         '''
         self.Cp = c.R1*(self.Cp_trans + self.Cp_rot + self.Cp_vib + self.Cv2Cp)
 
-    def Calc_Enthalpy_ASE(self):
-
-        if self.phase == 'G':
-            self.dfth_ASE = self.ASE.get_enthalpy(
-                    temperature=self.Tstp,
-                    verbose=False)/c.R3*c.R4
-        else:
-            self.dfth_ASE = self.ASE.get_internal_energy(
-                    temperature=self.Tstp,
-                    verbose=False)/c.R3*c.R4
-
     def Calc_Enthalpy(self):
-        T = self.Tstp
-        '''
-        Calculate zero-point energy
-        '''
-        self.zpe = sum(self.nu/2.*c.h2)*c.NA/1000
 
-        '''
-        Calculate vibrational component of enthalpy
-        '''
-        self.E_Tstp_vib = c.kb2 *\
-            sum(_np.divide(self.theta*_np.exp(-self.theta/T),
-                           (1 - _np.exp(-self.theta/T))))*c.NA/1000
-        '''
-        Calculate translational and rotational component of enthalpy
-        '''
         if self.phase == 'G':
-            '''
-            Gas phase calculation
-            '''
-            self.E_Tstp_trans = 3./2.*c.R1*T/1000
-            if self.islinear == 0:
-                '''
-                Non-linear species
-                '''
-                self.E_Tstp_rot = 3./2.*c.R1*T/1000
-            else:
-                '''
-                Linear species
-                '''
-                self.E_Tstp_rot = 1.*c.R1*T/1000
-            self.pv_Tstp = 1.*c.R1*T/1000
+            self.dfth = self.ASE.get_enthalpy(
+                temperature=self.Tstp,
+                verbose=False)/c.R3*c.R4
         else:
-            '''
-            Surface phase calculation
-            '''
-            self.E_Tstp_trans = 0.
-            self.E_Tstp_rot = 0.
-            self.pv_Tstp = 0.
-        '''
-        Sum all contribution to enthalpy for total enthalpy
-        '''
-        self.dfth = self.etotal*c.R1/c.R2*c.NA/1000 + self.zpe +\
-            self.E_Tstp_vib + self.E_Tstp_trans + self.E_Tstp_rot +\
-            self.pv_Tstp
+            self.dfth = self.ASE.get_internal_energy(
+                temperature=self.Tstp,
+                verbose=False)/c.R3*c.R4
+
+    def Calc_Entropy(self):
+
+        if self.phase == "G":
+            self.S_Tstp = self.ASE.get_entropy(
+                temperature=self.Tstp,
+                pressure=self.Pstp,
+                verbose=False)/c.R3*c.R1
+        else:
+            self.S_Tstp = self.ASE.get_entropy(
+                temperature=self.Tstp,
+                verbose=False)/c.R3*c.R1
 
 
 class Reference(Particle):
