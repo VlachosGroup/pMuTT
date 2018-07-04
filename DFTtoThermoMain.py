@@ -73,12 +73,12 @@ Test output (To be removed in final version)
 
 
 '''
-print '\n\nHeat Capacities [cal/mol K] over a range of Temperatures [K]'
-print '------------------------------------------------------------\n'
-print 'Name             ',
+print('\n\nHeat Capacities [cal/mol K] over a range of Temperatures [K]')
+print('------------------------------------------------------------\n')
+print('Name             '),
 for y in range(0, len(T_target[0].Cp_Range)):
     print ' %4d ' % (T_target[0].Cp_Range[y]),
-print '\n',
+print'\n',
 print '---------------- ',
 for y in range(0, len(T_target[0].Cp_Range)):
     print ' %s ' % ('----'),

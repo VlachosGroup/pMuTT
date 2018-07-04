@@ -10,6 +10,7 @@
                 Chemical and Biomolecular Egineering
                       University of Delaware
 
+                         Jonathan A Lym
                      Gerhard R Wittreich, P.E.
           -----------------------------------------------------
 
@@ -29,14 +30,13 @@ Adopted from Matlab code written and modified by:
 
 '''
 import numpy as _np
-from numpy import pi
-import os
+import os as _os
 import ase.io as _ase
-import ase.thermochemistry as thermo
-import re
+import ase.thermochemistry as _thermo
+import re as _re
 import scipy.interpolate as _sp
-import datetime
-from GRW_constants import constant as c
+import datetime as _datetime
+from GRW_constants import constant as _c
 
 
 class Particle(object):
@@ -44,7 +44,7 @@ class Particle(object):
     Cp_Range = _np.linspace(100, 1500, 15)
     VibScalingFactor = 1         # Vibrational Scaling Factor
 
-    def __init__(self, data, dict, Base_path, Tstp=298.15, P=100000.):
+    def __init__(self, data, dict, Base_path, Tstp=298.15, Pstp=100000.):
 
         '''
         Fill object with species name and associated thermodynamic data
@@ -68,16 +68,16 @@ class Particle(object):
             else:
                 self.nitrogen = int(0)
         if 'mw' in dict:
-            self.MW = float(data[dict['mw']])/c.NA/1000
+            self.MW = float(data[dict['mw']])/_c.NA/1000
         else:
-            self.MW = (self.carbon * c.MW_carbon +
-                       self.hydrogen * c.MW_hydorgen +
-                       self.oxygen * c.MW_oxygen +
-                       self.nitrogen * c.MW_nitrogen)/c.NA/1000
+            self.MW = (self.carbon * _c.MW_carbon +
+                       self.hydrogen * _c.MW_hydorgen +
+                       self.oxygen * _c.MW_oxygen +
+                       self.nitrogen * _c.MW_nitrogen)/_c.NA/1000
         if not hasattr(self, 'Inertia') and 'totengpath' in dict:
-            self.totengpath = os.path.join(*re.split(r'\\|/',
-                                           str(data[dict['totengpath']]).
-                                           strip('.').strip('\\')))
+            self.totengpath = _os.path.join(*_re.split(r'\\|/',
+                                            str(data[dict['totengpath']]).
+                                            strip('.').strip('\\')))
         if 'etotal' in dict:
             self.etotal = float(data[dict['etotal']])   # Total energy
         if 'hf_tstp' in dict:
@@ -100,15 +100,13 @@ class Particle(object):
         self.vibfreq = _np.array(self.vibfreq)
         self.Base_path = Base_path
         self.Tstp = Tstp
-        self.Pstp = P
+        self.Pstp = Pstp
         self.ThermoProperties()
 
     def ThermoProperties(self):
         '''
         Calculate all thermodynamic properties from input data
         '''
-
-        self.Determine_Phase()
 
         '''
         Get rotational data from VASP CONTCAR for gas species using
@@ -118,34 +116,34 @@ class Particle(object):
             if hasattr(self, 'Inertia'):
                 self.I3 = self.Inertia
             else:
-                filepath = os.path.join(self.Base_path,
-                                        self.totengpath,
-                                        'CONTCAR')
+                filepath = _os.path.join(self.Base_path,
+                                         self.totengpath,
+                                         'CONTCAR')
                 self.VASP = _ase.read(filepath)
                 self.I3 = self.VASP.get_moments_of_inertia() *\
-                    c.A2_to_m2*c.amu_to_kg
-                self.MW = sum(self.VASP.get_masses())/c.NA/1000.
-            self.T_I = c.h1**2/(8*_np.pi**2*c.kb1)
+                    _c.A2_to_m2*_c.amu_to_kg
+                self.MW = sum(self.VASP.get_masses())/_c.NA/1000.
+            self.T_I = _c.h1**2/(8*_np.pi**2*_c.kb1)
         '''
         Calulcate common frequency data for vibrational components
         '''
-        self.nu = self.vibfreq * 100 * c.c2
-        self.theta = c.h1 * self.nu / c.kb1
+        self.nu = self.vibfreq * 100 * _c.c2
+        self.theta = _c.h1 * self.nu / _c.kb1
         '''
         Initialize ASE thermochemistry modules
         '''
-        self.vib_energy = self.vibfreq * 100 * c.c2 * c.h3
+        self.vib_energy = self.nu * _c.h3  # Energies in eV
         if self.phase == "G":
-            self.ASE = thermo.IdealGasThermo(vib_energies=self.vib_energy,
-                                             geometry=self.Geometry,
-                                             potentialenergy=self.etotal,
-                                             spin=self.spin,
-                                             atoms=self.VASP,
-                                             symmetrynumber=self.sigma)
+            self.ASE = _thermo.IdealGasThermo(vib_energies=self.vib_energy,
+                                              geometry=self.Geometry,
+                                              potentialenergy=self.etotal,
+                                              spin=self.spin,
+                                              atoms=self.VASP,
+                                              symmetrynumber=self.sigma)
 
         else:
-            self.ASE = thermo.HarmonicThermo(vib_energies=self.vib_energy,
-                                             potentialenergy=self.etotal)
+            self.ASE = _thermo.HarmonicThermo(vib_energies=self.vib_energy,
+                                              potentialenergy=self.etotal)
 
         '''
         Call Entropy method to calculate standard state entropy
@@ -164,29 +162,6 @@ class Particle(object):
         if not hasattr(self, 'hf_Tstp'):
             self.Calc_Enthalpy()
 
-    def Determine_Phase(self):
-        '''
-        Determine species phase if one is not provided
-        '''
-
-        if self.phase is not None:
-            pass
-        elif hasattr(self, 'surface'):
-            self.phase = 'S'
-
-        elif self.islinear is not None:
-            self.phase = 'G'
-
-        elif hasattr(self, 'sigma'):
-            self.phase = 'G'
-
-        else:
-            '''
-            This should proabbaly result in an error condition vs supplying
-            'S' as a default value
-            '''
-            self.phase = 'S'
-
     def Calc_HeatCapacities(self):
         '''
         Calculate the vibrational, rotational and translational components and
@@ -196,51 +171,51 @@ class Particle(object):
         Calculate vibrational contribution to heat capacity for temperature
         range specified in Cp_Range for linear and non-linear species
         '''
-        zz = []
+        vib = _np.zeros([len(self.theta), len(self.Cp_Range)])
         for x in range(0, len(self.Cp_Range)):
-            zz.append(_np.divide(self.theta, self.Cp_Range[x]))
-        zz = _np.array(zz).T
-        self.Cp_vib = sum(_np.divide(_np.multiply(_np.power(zz, 2),
-                                                  _np.exp(-zz)),
-                                     _np.power(1-_np.exp(-zz), 2)))
+            vib[:, x] = _np.divide(self.theta, self.Cp_Range[x])
+        self.Cp_vib = sum(_np.divide(_np.multiply(_np.power(vib, 2),
+                                                  _np.exp(-vib)),
+                                     _np.power(1-_np.exp(-vib), 2)))
         if self.phase == 'G':
             '''
             Translational and rotational Gas phase calculation
             '''
-            self.Cp_trans = _np.array([3./2.]*len(self.Cp_Range))
-            self.Cv2Cp = 1
+            self.Cp_trans = 3./2
+            self.Cv2Cp = 1.
             if self.islinear == 0:
                 '''
                 Non-Linear species
                 '''
-                self.Cp_rot = _np.array([3./2.]*len(self.Cp_Range))
+                self.Cp_rot = 3./2
             else:
                 '''
                 Linear species
                 '''
-                self.Cp_rot = _np.array([1.]*len(self.Cp_Range))
+                self.Cp_rot = 1.
         else:
             '''
             Surface species
             '''
-            self.Cp_rot = _np.array([0.]*len(self.Cp_Range))
-            self.Cp_trans = _np.array([0.]*len(self.Cp_Range))
-            self.Cv2Cp = 0
+            self.Cp_rot = 0.
+            self.Cp_trans = 0.
+            self.Cv2Cp = 0.
         '''
         Sum all contribution to heat capacity for total heat capapcity
         '''
-        self.Cp = c.R1*(self.Cp_trans + self.Cp_rot + self.Cp_vib + self.Cv2Cp)
+        self.Cp = _c.R1*(self.Cp_trans + self.Cp_rot +
+                         self.Cp_vib + self.Cv2Cp)
 
     def Calc_Enthalpy(self):
 
         if self.phase == 'G':
             self.dfth = self.ASE.get_enthalpy(
                 temperature=self.Tstp,
-                verbose=False)/c.R3*c.R4
+                verbose=False)/_c.R3*_c.R4
         else:
             self.dfth = self.ASE.get_internal_energy(
                 temperature=self.Tstp,
-                verbose=False)/c.R3*c.R4
+                verbose=False)/_c.R3*_c.R4
 
     def Calc_Entropy(self):
 
@@ -248,11 +223,11 @@ class Particle(object):
             self.S_Tstp = self.ASE.get_entropy(
                 temperature=self.Tstp,
                 pressure=self.Pstp,
-                verbose=False)/c.R3*c.R1
+                verbose=False)/_c.R3*_c.R1
         else:
             self.S_Tstp = self.ASE.get_entropy(
                 temperature=self.Tstp,
-                verbose=False)/c.R3*c.R1
+                verbose=False)/_c.R3*_c.R1
 
 
 class Reference(Particle):
@@ -319,23 +294,23 @@ class Target(Particle):
                                       _np.dot(Molecule, Basis))[0]
                 if hasattr(Species[x], 'edisp'):
                     Species[x].convedisp = (Species[x].edisp *
-                                            c.ev_atom_2_kcal_mol)
+                                            _c.ev_atom_2_kcal_mol)
             else:
                 Slab = next((y for y in Surface if y.name ==
                              Species[x].surface),
                             None)
                 if Slab is None:
-                    print 'Error'
+                    print('Error')
                 else:
                     Species[x].hf_Tstp = (Species[x].dfth +
                                           _np.dot(Molecule, Basis) -
                                           Slab.etotal *
-                                          c.ev_atom_2_kcal_mol)[0]
+                                          _c.ev_atom_2_kcal_mol)[0]
                     if hasattr(Species[x], 'edisp'):
                         Species[x].convedisp = (Species[x].edisp *
-                                                c.ev_atom_2_kcal_mol -
+                                                _c.ev_atom_2_kcal_mol -
                                                 Slab.edisp *
-                                                c.ev_atom_2_kcal_mol)
+                                                _c.ev_atom_2_kcal_mol)
         return(Species)
 
     @staticmethod
@@ -362,7 +337,7 @@ class Target(Particle):
             T_rng_low = _np.linspace(min(Species[x].Cp_Range), T_mid, 1600)
             T_rng_high = _np.linspace(T_mid, max(Species[x].Cp_Range), 4000)
             T_func = _sp.InterpolatedUnivariateSpline(Species[x].Cp_Range,
-                                                      Species[x].Cp/c.R1, k=4)
+                                                      Species[x].Cp/_c.R1, k=4)
             '''
             Fit coefficients A1-A5 to heat capacity data
             '''
@@ -381,9 +356,9 @@ class Target(Particle):
             '''
             Determine A6 coefficient for enthalpy calculations
             '''
-            a6_high = (Species[x].hf_Tstp/c.R1/Tstp*1000 -
+            a6_high = (Species[x].hf_Tstp/_c.R1/Tstp*1000 -
                        HS_NASA(Tstp, Species[x].a_high)[0])*Tstp
-            a6_low = (Species[x].hf_Tstp/c.R1/Tstp*1000 -
+            a6_low = (Species[x].hf_Tstp/_c.R1/Tstp*1000 -
                       HS_NASA(Tstp, Species[x].a_low)[0])*Tstp
             '''
             Correct A6 high temperature range coefficient to eliminate
@@ -400,9 +375,9 @@ class Target(Particle):
             '''
             Determine A7 coefficient for entropy calculations
             '''
-            a7_high = Species[x].S_Tstp/c.R1 - \
+            a7_high = Species[x].S_Tstp/_c.R1 - \
                 HS_NASA(Tstp, Species[x].a_high)[1]
-            a7_low = Species[x].S_Tstp/c.R1 - \
+            a7_low = Species[x].S_Tstp/_c.R1 - \
                 HS_NASA(Tstp, Species[x].a_low)[1]
 
             '''
@@ -421,9 +396,9 @@ class Target(Particle):
         a low temperature range and other data in the Chemkin thermdat
         file format
         '''
-        if os.path.isdir(os.path.join(Base_path, Output)) is False:
-            os.mkdir(os.path.join(Base_path, Output))
-        filepath = os.path.join(Base_path, Output, 'thermdat')
+        if _os.path.isdir(_os.path.join(Base_path, Output)) is False:
+            _os.mkdir(_os.path.join(Base_path, Output))
+        filepath = _os.path.join(Base_path, Output, 'thermdat')
         fid = open(filepath, 'w')
         fid.truncate()
         '''
@@ -438,7 +413,7 @@ class Target(Particle):
             Write header line for each species on line 1
             '''
             fid.write('%-16s' % (Species[s].name))
-            fid.write('%-8s' % (datetime.date.today().strftime('%Y%m%d')))
+            fid.write('%-8s' % (_datetime.date.today().strftime('%Y%m%d')))
             fid.write('%1s%4i' % ('C', Species[s].carbon))
             fid.write('%1s%4i' % ('H', Species[s].hydrogen))
             fid.write('%1s%4i' % ('O', Species[s].oxygen))
