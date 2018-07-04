@@ -16,7 +16,7 @@
 
 Created on Fri Mar 31 16:20:43 2017
 
-@author: wittregr
+@author: wittreich, lym
 
 Adopted from Matlab code written and modified by:
 
