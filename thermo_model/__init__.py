@@ -44,7 +44,7 @@ class IdealGasThermo:
         CvoR_vib = get_CvoR_vib(vib_energies=self.model.vib_energies, Ts=Ts)
         CvoR_rot = get_CvoR_rot(geometry=self.model.geometry)
         CvoR_to_CpoR = 1.
-        CvoR = CvoR_trans + CvoR_vib + CvoR_rot + CvoR_to_CpoR
+        CpoR = CvoR_trans + CvoR_vib + CvoR_rot + CvoR_to_CpoR
         return CpoR
 
     def get_HoRT(self, T, verbose=False):

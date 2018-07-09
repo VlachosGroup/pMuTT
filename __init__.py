@@ -48,7 +48,7 @@ class BaseThermo:
         self.phase = phase
         self.elements = elements
         self.T_ref = T_ref
-        self.HoRTref = HoRT_ref
+        self.HoRT_ref = HoRT_ref
         if inspect.isclass(thermo_model):
             self.thermo_model = _pass_expected_arguments(thermo_model, **kwargs)
         else:

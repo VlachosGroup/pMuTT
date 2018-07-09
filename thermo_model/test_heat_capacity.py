@@ -3,7 +3,7 @@ import numpy as np
 from Thermochemistry import constants as c
 from Thermochemistry.thermo_model import heat_capacity
 
-class TestThermochemistry(unittest.TestCase):
+class TestHeatCapacity(unittest.TestCase):
 	def test_get_CvoR_trans(self):
 		self.assertEqual(heat_capacity.get_CvoR_trans(degrees=1), 0.5)
 		self.assertEqual(heat_capacity.get_CvoR_trans(), 1.5)
