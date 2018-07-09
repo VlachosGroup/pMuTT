@@ -5,7 +5,6 @@ Contains universal constants for catalysis research
 Created on Fri Jul 7 12:31:00 2018
 """
 import numpy as np
-from Thermochemistry import parse_formula
 
 def R(units):
     """
@@ -407,31 +406,6 @@ def convert_unit(num = 1., from_ = None, to = None):
         return num + unit_dict[to] - unit_dict[from_]
     else:
         return num * unit_dict[to] / unit_dict[from_]
-
-
-def get_molecular_weight(elements):
-    """
-    Molecular mass (in g/mol) given the elemental composition.
-    Data taken from: https://en.wikipedia.org/wiki/Standard_atomic_weight
-
-    Parameters
-        elements - dict or str
-            Elemental composition of species.
-            If a dictionary is passed, the keys are the element symbol, atomic number, 
-            or element name and the value is the stoichiometric coefficient.
-            If a string is passed, the formula will be guessed using Thermochemistry.parse_formula
-
-    Returns
-        molecular_weight - float
-            Molecular weight as float
-    """
-    if isinstance(elements, str):
-        elements = parse_formula(elements)
-
-    molecular_weight = 0.
-    for element, coefficient in elements.items():
-        molecular_weight += atomic_weight[element] * coefficient
-    return molecular_weight
 
 prefixes = {
     'Y': 1.e24,

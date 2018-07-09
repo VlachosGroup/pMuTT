@@ -61,22 +61,5 @@ class TestConstants(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			c.convert_unit(from_ = 'cm', to = 'arbitrary unit')
 
-	def test_get_molecular_weight(self):
-		elements_dict = {
-			'Fe': 3,
-			'O': 4,
-			}
-		self.assertAlmostEqual(c.get_molecular_weight(elements_dict), 231.531)
-
-		elements_str =  'Fe3O4'
-		self.assertAlmostEqual(c.get_molecular_weight(elements_str), 231.531)
-
-		elements_dict_error = {
-			'non-existent element': 1,
-			'O': 1,
-			}
-		with self.assertRaises(KeyError):
-			c.get_molecular_weight(c.get_molecular_weight(elements_dict_error))
-
 if __name__ == '__main__':
 	unittest.main()
