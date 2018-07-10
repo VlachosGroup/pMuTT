@@ -7,10 +7,10 @@ Created on Mon Jul 9 5:00:00 2018
 import unittest
 import numpy as np
 from ase.build import molecule
-from Thermochemistry import BaseThermo
 from Thermochemistry import constants as c
-from Thermochemistry.references import References
-from Thermochemistry.thermo_model import IdealGasThermo
+from Thermochemistry.models.empirical import BaseThermo
+from Thermochemistry.models.empirical.references import References
+from Thermochemistry.models.statmech.idealgasthermo import IdealGasThermo
 
 class TestReferences(unittest.TestCase):
 	def setUp(self):
@@ -55,6 +55,7 @@ class TestReferences(unittest.TestCase):
 
 	def test_calc_offset(self):
 		expected_element_offset = {'H': -124.6701878, 'O': -278.4253082}
+		#print(self.references._references[0].thermo_model)
 		self.references.calc_offset()
 		calculated_element_offset = self.references.element_offset
 

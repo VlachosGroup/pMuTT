@@ -5,7 +5,7 @@ Vlachos group code for reference species.
 Created on Sun Jul 8 13:50:00 2018
 """
 import numpy as np
-from Thermochemistry import BaseThermo
+from Thermochemistry.models.empirical import BaseThermo
 
 class References:
 	"""
@@ -125,9 +125,8 @@ class References:
 		elements_mat = self.get_elements_matrix()
 		HoRT_ref_dft = np.array([reference.thermo_model.get_HoRT(T=reference.T_ref) for reference in self])
 		HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
-
 		ref_offset = HoRT_ref_dft - HoRT_ref_exp #Offset between the DFT energies and experimental values for reference species
-		element_offset = np.linalg.lstsq(elements_mat, ref_offset, rcond = None)[0] #Offset between the DFT energies and experimental values for each element
+		element_offset = np.linalg.lstsq(elements_mat, ref_offset)[0] #Offset between the DFT energies and experimental values for each element
 		#Convert element_offset to a dictionary
 		self.element_offset = {element: offset for element, offset in zip(elements, element_offset)}
 

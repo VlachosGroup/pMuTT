@@ -62,25 +62,7 @@ class TestThermochemistry(unittest.TestCase):
 			def __eq__(self, other):
 				return self.__dict__ == other.__dict__
 		self.assertEqual(Thermochemistry._pass_expected_arguments(sum_class, **{'num1': 1, 'num2': 2}), sum_class(num1 = 1, num2 = 2))
-
-	def setUp(self):
-		unittest.TestCase.setUp(self)
-		self.BaseThermo = Thermochemistry.BaseThermo(
-			name = 'H2O',
-			elements = {'H': 2, 'O': 1},
-			phase = 'g',
-			thermo_model = IdealGasThermo,
-			potentialenergy = -14.2209,
-			geometry = 'nonlinear',
-			atoms = molecule('H2O'),
-			symmetrynumber = 2,
-			spin = 0,
-			vib_energies = np.array([0.47462, 0.46033, 0.19633])
-			)
-
-	# def test_BaseThermo(unittest.TestCase):
-	# 	pass
-
+		self.assertEqual(Thermochemistry._pass_expected_arguments(sum_class, **{'num1': 1, 'num2': 2, 'num3': 3}), sum_class(num1 = 1, num2 = 2))
 
 if __name__ == '__main__':
 	unittest.main()

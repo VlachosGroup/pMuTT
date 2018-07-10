@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from Thermochemistry import constants as c
-from Thermochemistry.thermo_model import heat_capacity
+from Thermochemistry.models.statmech import heat_capacity
 
 class TestHeatCapacity(unittest.TestCase):
 	def test_get_CvoR_trans(self):
