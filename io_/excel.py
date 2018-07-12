@@ -8,6 +8,7 @@ Created on Fri Jul 7 12:40:00 2018
 import numpy as np
 import pandas as pd
 from ase.io import read
+from Thermochemistry import constants as c
 from Thermochemistry import parse_formula
 from Thermochemistry.models.empirical import BaseThermo
 
@@ -39,10 +40,12 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 	input_data = pd.read_excel(io=io, skiprows=skiprows, header=header, **kwargs)
 	thermos_out = []
 	for row, row_data in input_data.iterrows():
-		thermo_data = {}
+		thermo_data = {'vib_energies': []}
 		for col, cell_data in row_data.iteritems():
 			#Special parsing instructions
-			if 'element' in col:
+			if pd.isnull(cell_data):
+			 	continue
+			elif 'element' in col:
 				thermo_data = set_element(header=col, value=cell_data, output_structure=thermo_data, delimiter=delimiter)
 			elif 'formula' in col:
 				thermo_data = set_formula(formula=cell_data, output_structure=thermo_data)
@@ -52,6 +55,10 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 				thermo_data = set_thermo_model(path=cell_data, output_structure=thermo_data)
 			elif 'vib_energy' in col:
 				thermo_data = set_vib_energy(value=cell_data, output_structure=thermo_data)
+			elif 'vib_wavenumber' in col:
+				thermo_data = set_vib_wavenumber(value=cell_data, output_structure=thermo_data)				
+			elif 'vib_frequency' in col:
+				thermo_data = set_vib_wavefreq(value=cell_data, output_structure=thermo_data)				
 			else:
 				thermo_data[col] = cell_data
 		thermos_out.append(thermo_data)
@@ -141,18 +148,46 @@ def set_vib_energy(value, output_structure):
 	Parses element header and assigns to output_structure['vib_energies']
 	
 	Parameters
-		value - int
-			Amount found in formula
+		value - float
+			Vibrational energy in eV
 		output_structure - dict
 			Structure to assign value. Will assign to output_structure['elements'][element]
 	Returns
 		dict
 			output_structure with new vibration added
 	"""
-	if np.isnan(value):
-		return output_structure
 	try:
 		output_structure['vib_energies'].append(value)
 	except (NameError, KeyError):
 		output_structure['vib_energies'] = [value]
 	return output_structure
+
+def set_vib_wavenumber(value, output_structure):
+	"""
+	Parses element header and assigns to output_structure['vib_energies']
+	
+	Parameters
+		value - float
+			Vibrational frequency in 1/cm
+		output_structure - dict
+			Structure to assign value. Will assign to output_structure['elements'][element]
+	Returns
+		dict
+			output_structure with new vibration added
+	"""
+	return set_vib_energy(value=value*c.c('cm/s')*c.h('eV s'), output_structure=output_structure)
+
+def set_vib_frequency(value, output_structure):
+	"""
+	Parses element header and assigns to output_structure['vib_energies']
+	
+	Parameters
+		value - float
+			Vibrational frequency in 1/s
+		output_structure - dict
+			Structure to assign value. Will assign to output_structure['elements'][element]
+	Returns
+		dict
+			output_structure with new vibration added
+	"""
+	return set_vib_energy(value=value*c.h('eV s'), output_structure=output_structure)

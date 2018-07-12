@@ -4,6 +4,7 @@ Thermochemistry.references
 Vlachos group code for reference species.
 Created on Sun Jul 8 13:50:00 2018
 """
+from warnings import warn
 import numpy as np
 from Thermochemistry.models.empirical import BaseThermo
 
@@ -35,6 +36,12 @@ class References:
 		Returns length of references attribute
 		"""
 		return len(self._references)
+
+	def __setitem__(self, index, reference):
+		self._references[index] = reference
+
+	def __getitem__(self, index):
+		return self._references[index]
 
 	def append(self, obj):
 		"""
@@ -123,17 +130,17 @@ class References:
 		"""
 		elements = self.get_elements()
 		elements_mat = self.get_elements_matrix()
-		HoRT_ref_dft = np.array([reference.thermo_model.get_HoRT(T=reference.T_ref) for reference in self])
+		HoRT_ref_dft = np.array([reference.thermo_model.get_HoRT(Ts=reference.T_ref) for reference in self])
 		HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
 		ref_offset = HoRT_ref_dft - HoRT_ref_exp #Offset between the DFT energies and experimental values for reference species
-		element_offset = np.linalg.lstsq(elements_mat, ref_offset)[0] #Offset between the DFT energies and experimental values for each element
+		element_offset = np.linalg.lstsq(elements_mat, ref_offset, rcond=None)[0] #Offset between the DFT energies and experimental values for each element
 		#Convert element_offset to a dictionary
 		self.element_offset = {element: offset for element, offset in zip(elements, element_offset)}
 
 	def get_specie_offset(self, elements):
 		"""
 		Returns the offset due to the element composition of a specie. The offset is defined as follows:
-		H_exp = H_dft - offset
+		H_exp = H_dft + offset
 		calc_offset must be run before meaningful offset values can be returned.
 
 		Parameters
@@ -143,11 +150,11 @@ class References:
 		Returns
 			float
 				Offset to add to potentialenergy (in eV) to adjust to References
-		Raises
-			KeyError
-				If any element in elements is not found in _element_offset
 		"""
 		offset = 0.
 		for element, val in elements.items():
-			offset -= self.element_offset[element] * val
+			try:
+				offset -= self.element_offset[element] * val
+			except KeyError:
+				warn('References does not have offset value for the element: {}.'.format(element), RuntimeWarning)
 		return offset

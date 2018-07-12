@@ -19,7 +19,9 @@ This repository contains a Python library for Thermochemistry developed by the V
 - [Atomic Simulation Environment](https://wiki.fysik.dtu.dk/ase/): Used for I/O operations and to calculate thermodynamic properties
 - [Numpy](http://www.numpy.org/): Used for vector and matrix operations
 - [Pandas](https://pandas.pydata.org/): Used to import data from Excel files
-   
+- [SciPy](https://www.scipy.org/): Used for fitting heat capacities.
+- [Matplotlib](https://matplotlib.org/): Used for plotting thermodynamic data
+
 ## Getting Started
 1. Download the repository to your local machine
 2. Add to parent folder to PYTHONPATH
