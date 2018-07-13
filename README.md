@@ -46,7 +46,7 @@ refs_input = read_excel(io=refs_path)
 refs = References([BaseThermo(**ref_input) for ref_input in refs_input])
 ```
 
-2. **Use the references to calculate the offset between DFT data and experimental data.** The offset is calculated for each element. Therefore, the element composition should be specified in the Excel file. The elemental composition can be specified using the ```formula``` keyword where the formula unit can be typed (e.g. H2O) or by using the ```elements``` keyword where each element has a column indicating the number in a formula unit.
+2. **Use the references to calculate the offset between DFT data and experimental data.** The offset is calculated for each element. Therefore, the element composition should be specified in the Excel file. The elemental composition can be specified using the ```formula``` keyword where the formula unit can be typed (e.g. H2O) or by using the ```elements``` keyword where each element has a column indicating the number in a formula unit. [Read below if you're interested on how referencing is done](#referencing).
 ```python
 refs.calc_offset()
 ```
@@ -74,3 +74,12 @@ from Thermochemistry.io_.thermdat import write_thermdat
 
 write_thermdat(thermdats=thermdats, filename=thermdats_out_path)
 ```
+
+## Referencing
+Enthalpies calculated using VASP (and some other computational methods) have different references than standard references (i.e. the enthalpy of formation of pure substances, like O<sub>2</sub> or Pt, is not necessarily zero). This difference makes it difficult to ensure thermodynamic consistency for our mechanisms since we may be mixing experimental gas thermodynamics with computational surface thermodynamics. In order to make the references consistent, we find a correction factor for each element by solving the equation:
+
+![Eq1](README_Eq1.gif)
+
+where M is the number of reference species, N is the number of elements, H<sup>expt</sup> is the experimental standard enthalpies, H<sup>DFT</sup> is the standard enthalpies calculated using DFT, x is a matrix that describes the composition of the references (each row represents a specie, each column represents an element), and θ is the correction for each element.
+
+The equation can be solved using a Least Squares approach. The correction factor can then be added to subsequent species calculated through DFT to ensure consistent references.
