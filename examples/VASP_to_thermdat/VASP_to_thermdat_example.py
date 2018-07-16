@@ -19,7 +19,7 @@ T_low = 500.
 T_high = 1100. #K
 
 #Miscellaneous options
-show_plot = False
+show_plot = True
 
 '''
 Processing References

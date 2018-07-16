@@ -3,7 +3,7 @@ This repository contains a Python library for Thermochemistry developed by the V
 
 ## Implemented features
 1. DFT-generated data can be input using Excel and special column header names.
-2. Ideal Gas and Harmonic Thermo statistical thermodynamic models have been implemented. Framework to create new models is straightforward (classes only need to: state explicitly attributes required in the ```__init__``` method, contain the methods ```get_CpoR```, ```get_HoRT```, ```get_SoR```, and ```get_GoRT```).
+2. Ideal Gas and Harmonic Thermo statistical thermodynamic models have been implemented. Framework to create new models is straightforward (classes only need to: state explicitly attributes required in the ```__init__``` method, contain the methods ```get_CpoR(Ts)```, ```get_HoRT(Ts)```, ```get_SoR(Ts)```, and ```get_GoRT(Ts)```).
 3. Thermdat empirical model has been implemented. Given Cp as a function of temperature, a reference temperature and associated enthalpy and entropy, NASA polynomials can be generated.
 4. Framework to convert statistical thermodynamic model to empirical models implemented. See [Thermochemistry.examples.VASP_to_thermdat](https://github.com/VlachosGroup/Thermochemistry/tree/master/examples/VASP_to_thermdat).
 
@@ -78,7 +78,7 @@ write_thermdat(thermdats=thermdats, filename=thermdats_out_path)
 ## Referencing
 Enthalpies calculated using VASP (and some other computational methods) have different references than standard references (i.e. the enthalpy of formation of pure substances, like O<sub>2</sub> or Pt, is not necessarily zero). This difference makes it difficult to ensure thermodynamic consistency for our mechanisms since we may be mixing experimental gas thermodynamics with computational surface thermodynamics. In order to make the references consistent, we find a correction factor for each element by solving the equation:
 
-![Eq1](README_Eq1.gif)
+![Eq1](./docs/README_Eq1.gif)
 
 where M is the number of reference species, N is the number of elements, H<sup>expt</sup> is the experimental standard enthalpies, H<sup>DFT</sup> is the standard enthalpies calculated using DFT, x is a matrix that describes the composition of the references (each row represents a specie, each column represents an element), and θ is the correction for each element.
 
