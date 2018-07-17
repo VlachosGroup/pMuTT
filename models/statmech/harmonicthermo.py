@@ -58,7 +58,7 @@ class HarmonicThermo:
 		else:
 			HoRT = np.zeros_like(Ts)
 			for i, T in enumerate(Ts):
-				HoRT[i] = self.model.get_internal_energy(temperature=T, verbose=verbose)/(c.kb('eV/K') * T)/(c.kb('eV/K') * T)
+				HoRT[i] = self.model.get_internal_energy(temperature=T, verbose=verbose)/(c.kb('eV/K') * T)
 		return HoRT
 
 	def get_SoR(self, Ts, verbose=False):

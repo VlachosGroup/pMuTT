@@ -236,7 +236,7 @@ class Thermdat(BaseThermo):
 		   self.a_high = np.zeros(7)
 		else:
 			max_R2 = -1
-			R2 = np.zero_like(Ts)
+			R2 = np.zeros_like(Ts)
 			for i, T_mid in enumerate(Ts):
 				#Need at least 5 points to fit the polynomial
 				if i > 5 and i < (len(Ts)-6):

@@ -54,6 +54,7 @@ class BaseThermo:
 		self.HoRT_ref = HoRT_ref
 		self.notes = notes
 		if inspect.isclass(thermo_model):
+			#If you're passing a class. Note that the required arguments will be guessed.
 			self.thermo_model = _pass_expected_arguments(thermo_model, **kwargs)
 		else:
 			#If it's an object that has already been initialized

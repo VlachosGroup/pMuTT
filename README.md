@@ -153,7 +153,7 @@ def get_HoRT(self, Ts, verbose = False):
 		#Can be iterated over and therefore is an array
 		HoRT = np.zeros_like(Ts)
 		for i, T in enumerate(Ts):
-			HoRT[i] = self.model.get_internal_energy(temperature=T, verbose=verbose)/(c.kb('eV/K') * T)/(c.kb('eV/K') * T)
+			HoRT[i] = self.model.get_internal_energy(temperature=T, verbose=verbose)/(c.kb('eV/K') * T)
 	return HoRT
 ```
 
