@@ -96,7 +96,7 @@ class Thermdat(BaseThermo):
 			a = self.get_a(T=Ts)
 			HoRT = get_nasa_HoRT(a=a, T=Ts)
 		else:
-			HoRT = np.zeros(len(Ts))
+			HoRT = np.zeros_like(Ts)
 			for i, T in enumerate(Ts):
 				a = self.get_a(T=T)
 				HoRT[i] = get_nasa_HoRT(a=a,T=T)
@@ -119,7 +119,7 @@ class Thermdat(BaseThermo):
 			a = self.get_a(T=Ts)
 			SoR = get_nasa_SoR(a=a,T=Ts)
 		else:
-			SoR = np.zeros(len(Ts))
+			SoR = np.zeros_like(Ts)
 			for i, T in enumerate(Ts):
 				a = self.get_a(T=T)
 				SoR[i] = get_nasa_SoR(a=a, T=T)
@@ -142,7 +142,7 @@ class Thermdat(BaseThermo):
 			a = self.get_a(T=Ts)
 			GoRT = get_nasa_GoRT(a=a, T=Ts)
 		else:
-			GoRT = np.zeros(len(Ts))
+			GoRT = np.zeros_like(Ts)
 			for i, T in enumerate(Ts):
 				a = self.get_a(T=T)
 				GoRT[i] = get_nasa_GoRT(a=a, T=T)
@@ -236,7 +236,7 @@ class Thermdat(BaseThermo):
 		   self.a_high = np.zeros(7)
 		else:
 			max_R2 = -1
-			R2 = np.zeros(len(Ts))
+			R2 = np.zero_like(Ts)
 			for i, T_mid in enumerate(Ts):
 				#Need at least 5 points to fit the polynomial
 				if i > 5 and i < (len(Ts)-6):

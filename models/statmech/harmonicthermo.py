@@ -54,13 +54,9 @@ class HarmonicThermo:
 		try:
 			iter(Ts)
 		except TypeError:
-			# #If all vibrational energies are 0, ignore vibrational contribution
-			# if np.isclose(np.sum(self.model.vib_energies), 0.):
-			# 	HoRT = self.model.potentialenergy/(c.kb('eV/K') * Ts)
-			# else:
 				HoRT = self.model.get_internal_energy(temperature=Ts, verbose=verbose)/(c.kb('eV/K') * Ts)
 		else:
-			HoRT = np.zeros(len(Ts))
+			HoRT = np.zeros_like(Ts)
 			for i, T in enumerate(Ts):
 				HoRT[i] = self.model.get_internal_energy(temperature=T, verbose=verbose)/(c.kb('eV/K') * T)/(c.kb('eV/K') * T)
 		return HoRT
@@ -83,7 +79,7 @@ class HarmonicThermo:
 		except TypeError:
 			SoR = self.model.get_entropy(temperature=Ts, verbose=verbose)/c.R('eV/K')
 		else:
-			SoR = np.zeros(len(Ts))
+			SoR = np.zeros_like(Ts)
 			for i, T in enumerate(SoR):
 				SoR[i] = self.model.get_entropy(temperature=T, verbose=verbose)/c.R('eV/K')
 		return SoR
@@ -106,7 +102,7 @@ class HarmonicThermo:
 		except TypeError:
 			GoRT = self.model.get_helmholtz_energy(temperature=Ts, verbose=verbose)/(c.kb('eV/K') * Ts)
 		else:
-			GoRT = np.zeros(len(Ts))
+			GoRT = np.zeros_like(Ts)
 			for i, T in enumerate(GoRT):
 				GoRT[i] = self.model.get_helmholtz_energy(temperature=T, verbose=verbose)/(c.kb('eV/K') * T)
 		return GoRT

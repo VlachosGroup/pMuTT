@@ -42,14 +42,17 @@ class BaseThermo:
 		HoRT_ref - float
 			Reference dimensionless enthalpy corresponding to T_ref. Only used 
 			for reference species.
+		notes - str
+			Any additional details you would like to include such as computational set up.
 	"""
 
-	def __init__(self, name, phase, elements, thermo_model = None, T_ref = None, HoRT_ref = None, **kwargs):
+	def __init__(self, name, phase, elements, thermo_model = None, T_ref = None, HoRT_ref = None, notes = None, **kwargs):
 		self.name = name
 		self.phase = phase
 		self.elements = elements
 		self.T_ref = T_ref
 		self.HoRT_ref = HoRT_ref
+		self.notes = notes
 		if inspect.isclass(thermo_model):
 			self.thermo_model = _pass_expected_arguments(thermo_model, **kwargs)
 		else:

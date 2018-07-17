@@ -73,7 +73,7 @@ def get_CvoR_vib(vib_energies, Ts):
 		CvoR_vib = _get_single_CvoR_vib(vib_energies=vib_energies, T=Ts)
 	else:
 		#If array-like
-		CvoR_vib = np.zeros(len(Ts))
+		CvoR_vib = np.zeros_like(Ts)
 		for i, T in enumerate(Ts):
 			CvoR_vib[i] = _get_single_CvoR_vib(vib_energies=vib_energies, T=T)
 	return CvoR_vib
