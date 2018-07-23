@@ -1,0 +1,10 @@
+
+[CGROUPS] No /cgroup/memory/UGE/370442.1 exists for this job
+[CGROUPS] UD Grid Engine cgroup setup commencing
+[CGROUPS] n180 (master) fully allocated to this job
+[CGROUPS] done.
+
+ERROR:  no previous session on record, unable to roll back
+Adding dependency `intel/2015.3.187` to your environment
+Adding dependency `openmpi/1.8.2-intel64` to your environment
+Adding package `vasp/5.3.2:d3,gamma_only,intel,mpi,vtst` to your environment
