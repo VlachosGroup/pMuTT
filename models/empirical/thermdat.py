@@ -362,7 +362,7 @@ def get_nasa_HoRT(a, T):
 		float
 			Dimensionless enthalpy
 	"""
-	T_arr = np.array([1., T/2., T**2/3, T**3/4, T**4/5, 1./T, 0.])
+	T_arr = np.array([1., T/2., T**2./3., T**3./4., T**4./5., 1./T, 0.])
 	return np.dot(a, T_arr)
 
 def get_nasa_SoR(a, T):
@@ -379,7 +379,7 @@ def get_nasa_SoR(a, T):
 		float
 			Dimensionless entropy
 	"""
-	T_arr = np.array([np.log(T), T, T**2/2, T**3/3, T**4/4, 0., 1.])
+	T_arr = np.array([np.log(T), T, T**2./2., T**3./3., T**4./4., 0., 1.])
 	return np.dot(a, T_arr)
 
 def get_nasa_GoRT(a, T):
