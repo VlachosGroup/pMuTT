@@ -1,0 +1,88 @@
+
+[CGROUPS] No /cgroup/memory/UGE/370376.10 exists for this job
+[CGROUPS] UD Grid Engine cgroup setup commencing
+[CGROUPS] n129 (master) fully allocated to this job
+[CGROUPS] done.
+
+ERROR:  no previous session on record, unable to roll back
+Adding dependency `intel/2015.3.187` to your environment
+Adding dependency `openmpi/1.8.2-intel64` to your environment
+Adding package `vasp/5.3.2:d3,intel,mpi,vtst` to your environment
+GridEngine parameters:
+  mpirun        = /opt/shared/openmpi/1.8.2-intel64/bin/mpirun
+  nhosts        = 1
+  nproc         = 20
+-- begin OPENMPI run --
+ running on   20 total cores
+ distrk:  each k-point on   20 cores,    1 groups
+ distr:  one band on   20 cores,    1 groups
+ using from now: INCAR     
+ vasp.5.3.2 13Sep12 (build Oct  1 2014 13:46:58) complex                        
+  
+ POSCAR found type information on POSCAR  O  H  C 
+ POSCAR found :  3 types and       9 ions
+
+ ----------------------------------------------------------------------------- 
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|      For optimal performance we recommend that you set                      |
+|        NPAR = 4 - approx SQRT( number of cores)                             |
+|      (number of cores/NPAR must be integer)                                 |
+|      This setting will greatly improve the performance of VASP for DFT.     |
+|      The default NPAR=number of cores might be grossly inefficient          |
+|      on modern multi-core architectures or massively parallel machines.     |
+|      Do your own testing.                                                   |
+|      Unfortunately you need to use the default for hybrid, GW and RPA       |
+|      calculations.                                                          |
+|                                                                             |
+ ----------------------------------------------------------------------------- 
+
+ LDA part: xc-table for Pade appr. of Perdew
+ POSCAR found type information on POSCAR  O  H  C 
+ POSCAR found :  3 types and       9 ions
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.121302783188E+03    0.12130E+03   -0.37559E+03    46   0.479E+02
+DAV:   2     0.524489385331E+01   -0.11606E+03   -0.11427E+03    60   0.118E+02
+DAV:   3    -0.398169434336E+02   -0.45062E+02   -0.45036E+02    37   0.730E+01
+DAV:   4    -0.503718805896E+02   -0.10555E+02   -0.10555E+02    30   0.344E+01
+DAV:   5    -0.509351424835E+02   -0.56326E+00   -0.56383E+00    37   0.843E+00
+DAV:   6    -0.509394628091E+02   -0.43203E-02   -0.37403E-02    37   0.926E-01
+DAV:   7    -0.509395728657E+02   -0.11006E-03   -0.11005E-03    44   0.176E-01
+DAV:   8    -0.509395788233E+02   -0.59576E-05   -0.59575E-05    44   0.352E-02
+DAV:   9    -0.509395792073E+02   -0.38398E-06   -0.38404E-06    44   0.914E-03
+DAV:  10    -0.509395792282E+02   -0.20893E-07   -0.20575E-07    36   0.226E-03    0.116E+01
+RMM:  11    -0.473885587974E+02    0.35510E+01   -0.58717E+00    30   0.132E+01    0.612E+00
+RMM:  12    -0.465295530147E+02    0.85901E+00   -0.26437E+00    30   0.816E+00    0.250E+00
+RMM:  13    -0.463891953836E+02    0.14036E+00   -0.23467E-01    30   0.300E+00    0.318E-01
+RMM:  14    -0.463786618869E+02    0.10533E-01   -0.32219E-02    31   0.871E-01    0.229E-01
+RMM:  15    -0.463797056059E+02   -0.10437E-02   -0.35394E-03    30   0.366E-01    0.112E-01
+RMM:  16    -0.463772548592E+02    0.24507E-02   -0.46638E-03    30   0.331E-01    0.717E-02
+RMM:  17    -0.463847931433E+02   -0.75383E-02   -0.55639E-03    30   0.346E-01    0.920E-02
+RMM:  18    -0.463868001311E+02   -0.20070E-02   -0.10744E-03    30   0.204E-01    0.208E-02
+RMM:  19    -0.463903031294E+02   -0.35030E-02   -0.52415E-04    30   0.112E-01    0.133E-02
+RMM:  20    -0.463926496531E+02   -0.23465E-02   -0.32472E-04    31   0.742E-02    0.129E-02
+RMM:  21    -0.463939094984E+02   -0.12598E-02   -0.24397E-04    30   0.686E-02    0.962E-03
+RMM:  22    -0.463936146117E+02    0.29489E-03   -0.54449E-05    31   0.309E-02    0.628E-03
+RMM:  23    -0.463944217069E+02   -0.80710E-03   -0.15056E-05    28   0.150E-02    0.230E-03
+RMM:  24    -0.463939122701E+02    0.50944E-03   -0.27482E-06    22   0.914E-03    0.227E-03
+RMM:  25    -0.463939557923E+02   -0.43522E-04   -0.85957E-07    20   0.536E-03    0.416E-04
+RMM:  26    -0.463939630415E+02   -0.72491E-05   -0.18143E-07    18   0.246E-03    0.448E-04
+RMM:  27    -0.463939715045E+02   -0.84630E-05   -0.12630E-07    17   0.214E-03    0.151E-04
+RMM:  28    -0.463939726457E+02   -0.11412E-05   -0.12163E-08    11   0.126E-03    0.138E-04
+RMM:  29    -0.463939736688E+02   -0.10232E-05    0.00000E+00    10   0.120E-03    0.497E-05
+RMM:  30    -0.463939743247E+02   -0.65590E-06    0.00000E+00    10   0.121E-03
+   1 F= -.46440050E+02 E0= -.46440243E+02  d E =-.464400E+02
+ BRION: g(F)=  0.157E-04 g(S)=  0.000E+00
+ reached required accuracy - stopping structural energy minimisation
+-- end OPENMPI run --

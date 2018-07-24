@@ -1,0 +1,182 @@
+
+[CGROUPS] No /cgroup/memory/UGE/370360.4 exists for this job
+[CGROUPS] UD Grid Engine cgroup setup commencing
+[CGROUPS] n060 (master) fully allocated to this job
+[CGROUPS] done.
+
+ERROR:  no previous session on record, unable to roll back
+Adding dependency `intel/2015.3.187` to your environment
+Adding dependency `openmpi/1.8.2-intel64` to your environment
+Adding package `vasp/5.3.2:d3,intel,mpi,vtst` to your environment
+GridEngine parameters:
+  mpirun        = /opt/shared/openmpi/1.8.2-intel64/bin/mpirun
+  nhosts        = 1
+  nproc         = 20
+-- begin OPENMPI run --
+ running on   20 total cores
+ distrk:  each k-point on   20 cores,    1 groups
+ distr:  one band on    1 cores,   20 groups
+ using from now: INCAR     
+ vasp.5.3.2 13Sep12 (build Oct  1 2014 13:46:58) complex                        
+  
+ POSCAR found type information on POSCAR  H 
+ POSCAR found :  1 types and       2 ions
+
+ ----------------------------------------------------------------------------- 
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|      For optimal performance we recommend that you set                      |
+|        NPAR = 4 - approx SQRT( number of cores)                             |
+|      (number of cores/NPAR must be integer)                                 |
+|      This setting will greatly improve the performance of VASP for DFT.     |
+|      The default NPAR=number of cores might be grossly inefficient          |
+|      on modern multi-core architectures or massively parallel machines.     |
+|      Do your own testing.                                                   |
+|      Unfortunately you need to use the default for hybrid, GW and RPA       |
+|      calculations.                                                          |
+|                                                                             |
+ ----------------------------------------------------------------------------- 
+
+
+ ----------------------------------------------------------------------------- 
+|                                                                             |
+|  ADVICE TO THIS USER RUNNING 'VASP/VAMP'   (HEAR YOUR MASTER'S VOICE ...):  |
+|                                                                             |
+|      You have a (more or less) 'small supercell' and for smaller cells      |
+|      it is recommended  to use the reciprocal-space projection scheme!      |
+|      The real space optimization is not  efficient for small cells and it   |
+|      is also less accurate ...                                              |
+|      Therefore set LREAL=.FALSE. in the  INCAR file                         |
+|                                                                             |
+ ----------------------------------------------------------------------------- 
+
+ LDA part: xc-table for Pade appr. of Perdew
+ POSCAR found type information on POSCAR  H 
+ POSCAR found :  1 types and       2 ions
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ WARNING: small aliasing (wrap around) errors must be expected
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.274216610077E+01   -0.27422E+01   -0.39427E+02    60   0.349E+01
+DAV:   2    -0.695574600833E+01   -0.42136E+01   -0.42136E+01    40   0.927E+00
+DAV:   3    -0.702402566432E+01   -0.68280E-01   -0.68280E-01    60   0.150E+00
+DAV:   4    -0.702405979213E+01   -0.34128E-04   -0.34127E-04    40   0.330E-02
+DAV:   5    -0.702405994133E+01   -0.14920E-06   -0.14987E-06    80   0.314E-03
+DAV:   6    -0.702405994178E+01   -0.45665E-09    0.22737E-11    40   0.137E-05
+DAV:   7    -0.702405994202E+01   -0.24097E-09    0.60183E-11    80   0.870E-07
+DAV:   8    -0.702405994159E+01    0.43252E-09    0.46292E-11    40   0.489E-09
+DAV:   9    -0.702405994179E+01   -0.19934E-09    0.48388E-11    80   0.387E-10
+DAV:  10    -0.702405994190E+01   -0.11125E-09    0.47322E-11    40   0.801E-10    0.354E+00
+RMM:  11    -0.672970855240E+01    0.29435E+00   -0.10859E-01    40   0.391E-01    0.197E+00
+RMM:  12    -0.656101961695E+01    0.16869E+00   -0.30523E-01    40   0.651E-01    0.233E-01
+RMM:  13    -0.656382715466E+01   -0.28075E-02   -0.31294E-03    40   0.696E-02    0.168E-01
+RMM:  14    -0.656213278362E+01    0.16944E-02   -0.23534E-03    40   0.565E-02    0.270E-02
+RMM:  15    -0.656339389630E+01   -0.12611E-02   -0.85058E-04    40   0.303E-02    0.116E-02
+RMM:  16    -0.656410930420E+01   -0.71541E-03   -0.39579E-05    40   0.734E-03    0.888E-03
+RMM:  17    -0.656549108984E+01   -0.13818E-02   -0.24920E-04    40   0.177E-02    0.409E-03
+RMM:  18    -0.656566509533E+01   -0.17401E-03   -0.56658E-06    40   0.272E-03    0.268E-03
+RMM:  19    -0.656582574074E+01   -0.16065E-03   -0.10721E-05    40   0.364E-03    0.119E-03
+RMM:  20    -0.656587495880E+01   -0.49218E-04   -0.81774E-07    40   0.107E-03    0.171E-03
+RMM:  21    -0.656588308548E+01   -0.81267E-05   -0.10116E-07    39   0.406E-04    0.205E-04
+RMM:  22    -0.656589481125E+01   -0.11726E-04   -0.10961E-07    39   0.388E-04    0.102E-04
+RMM:  23    -0.656589657931E+01   -0.17681E-05   -0.13687E-08    39   0.152E-04    0.145E-04
+RMM:  24    -0.656589813825E+01   -0.15589E-05   -0.84878E-09    39   0.113E-04    0.234E-05
+RMM:  25    -0.656589847894E+01   -0.34069E-06    0.00000E+00    38   0.599E-05
+   1 F= -.65659011E+01 E0= -.65660944E+01  d E =-.656590E+01
+ BRION: g(F)=  0.783E+00 g(S)=  0.000E+00
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.626807082569E+01    0.29783E+00   -0.21847E+01    40   0.856E+00    0.233E+00
+RMM:   2    -0.620289146822E+01    0.65179E-01   -0.24311E-01    40   0.952E-01    0.142E+00
+RMM:   3    -0.616562812328E+01    0.37263E-01   -0.13113E-01    40   0.423E-01    0.243E-01
+RMM:   4    -0.616502019477E+01    0.60793E-03   -0.18082E-03    40   0.589E-02    0.495E-02
+RMM:   5    -0.616569406436E+01   -0.67387E-03   -0.32471E-04    40   0.301E-02    0.435E-02
+RMM:   6    -0.616576684538E+01   -0.72781E-04   -0.80723E-05    40   0.101E-02    0.752E-03
+RMM:   7    -0.616608673834E+01   -0.31989E-03   -0.10328E-04    40   0.108E-02    0.764E-03
+RMM:   8    -0.616615908878E+01   -0.72350E-04   -0.28967E-06    40   0.211E-03    0.333E-03
+RMM:   9    -0.616631613594E+01   -0.15705E-03   -0.11855E-05    40   0.394E-03    0.239E-03
+RMM:  10    -0.616634771430E+01   -0.31578E-04   -0.10822E-06    40   0.126E-03    0.191E-03
+RMM:  11    -0.616636411985E+01   -0.16406E-04   -0.84610E-07    40   0.102E-03    0.322E-04
+RMM:  12    -0.616637191725E+01   -0.77974E-05   -0.11417E-07    39   0.406E-04    0.232E-04
+RMM:  13    -0.616637289455E+01   -0.97729E-06   -0.61637E-09    39   0.113E-04
+   2 F= -.61663734E+01 E0= -.61665667E+01  d E =0.399528E+00
+ BRION: g(F)=  0.832E+01 g(S)=  0.000E+00 retain N=  1 mean eig= 0.23
+ eig:   0.235
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.678852413498E+01   -0.62215E+00   -0.14263E+01    40   0.745E+00    0.203E+00
+RMM:   2    -0.672762372098E+01    0.60900E-01   -0.85943E-02    40   0.457E-01    0.106E+00
+RMM:   3    -0.671065303692E+01    0.16971E-01   -0.56030E-02    40   0.265E-01    0.102E-01
+RMM:   4    -0.671151202235E+01   -0.85899E-03   -0.14586E-03    40   0.487E-02    0.474E-02
+RMM:   5    -0.671174495287E+01   -0.23293E-03   -0.10449E-04    40   0.159E-02    0.867E-03
+RMM:   6    -0.671180729830E+01   -0.62345E-04   -0.18859E-05    40   0.466E-03    0.552E-03
+RMM:   7    -0.671183074229E+01   -0.23444E-04   -0.10753E-05    40   0.339E-03    0.153E-03
+RMM:   8    -0.671186820655E+01   -0.37464E-04   -0.32940E-06    40   0.180E-03    0.132E-03
+RMM:   9    -0.671187616492E+01   -0.79584E-05   -0.49780E-07    40   0.748E-04    0.123E-03
+RMM:  10    -0.671189196733E+01   -0.15802E-04   -0.71713E-07    40   0.898E-04    0.237E-04
+RMM:  11    -0.671189740766E+01   -0.54403E-05   -0.42176E-08    39   0.245E-04    0.197E-04
+RMM:  12    -0.671189985436E+01   -0.24467E-05   -0.18301E-08    39   0.158E-04    0.532E-05
+RMM:  13    -0.671190127980E+01   -0.14254E-05    0.00000E+00    38   0.989E-05    0.298E-05
+RMM:  14    -0.671190139459E+01   -0.11479E-06    0.00000E+00    38   0.104E-04
+   3 F= -.67119026E+01 E0= -.67120958E+01  d E =-.545529E+00
+ BRION: g(F)=  0.244E+00 g(S)=  0.000E+00 retain N=  1 mean eig= 0.20
+ eig:   0.200
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.674986765346E+01   -0.37966E-01   -0.26623E-01    40   0.949E-01    0.235E-01
+RMM:   2    -0.674899717166E+01    0.87048E-03   -0.11344E-03    40   0.609E-02    0.132E-01
+RMM:   3    -0.674872603429E+01    0.27114E-03   -0.95753E-04    40   0.345E-02    0.103E-02
+RMM:   4    -0.674873661098E+01   -0.10577E-04   -0.48425E-06    40   0.283E-03    0.550E-03
+RMM:   5    -0.674874892417E+01   -0.12313E-04   -0.17550E-06    40   0.212E-03    0.237E-03
+RMM:   6    -0.674875281257E+01   -0.38884E-05   -0.39749E-07    40   0.648E-04    0.641E-04
+RMM:   7    -0.674876331107E+01   -0.10499E-04   -0.80686E-07    40   0.856E-04    0.384E-04
+RMM:   8    -0.674876816069E+01   -0.48496E-05   -0.88880E-08    39   0.316E-04    0.159E-04
+RMM:   9    -0.674877193089E+01   -0.37702E-05   -0.15750E-07    39   0.395E-04    0.794E-05
+RMM:  10    -0.674877413732E+01   -0.22064E-05   -0.33541E-08    39   0.212E-04    0.182E-04
+RMM:  11    -0.674877446026E+01   -0.32294E-06    0.00000E+00    38   0.991E-05
+   4 F= -.67487754E+01 E0= -.67489687E+01  d E =-.368728E-01
+ BRION: g(F)=  0.590E-01 g(S)=  0.000E+00 retain N=  1 mean eig= 0.39
+ eig:   0.394
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.675956400224E+01   -0.10790E-01   -0.25949E-01    40   0.950E-01    0.244E-01
+RMM:   2    -0.675860861352E+01    0.95539E-03   -0.11672E-03    40   0.609E-02    0.136E-01
+RMM:   3    -0.675833283353E+01    0.27578E-03   -0.10245E-03    40   0.361E-02    0.104E-02
+RMM:   4    -0.675834401167E+01   -0.11178E-04   -0.54379E-06    40   0.300E-03    0.541E-03
+RMM:   5    -0.675835601733E+01   -0.12006E-04   -0.16387E-06    40   0.207E-03    0.232E-03
+RMM:   6    -0.675836016868E+01   -0.41514E-05   -0.45990E-07    40   0.708E-04    0.750E-04
+RMM:   7    -0.675836998934E+01   -0.98207E-05   -0.71213E-07    40   0.817E-04    0.340E-04
+RMM:   8    -0.675837474163E+01   -0.47523E-05   -0.82831E-08    39   0.302E-04    0.168E-04
+RMM:   9    -0.675837840219E+01   -0.36606E-05   -0.15176E-07    39   0.390E-04    0.689E-05
+RMM:  10    -0.675838067492E+01   -0.22727E-05   -0.35671E-08    39   0.218E-04    0.176E-04
+RMM:  11    -0.675838089449E+01   -0.21957E-06    0.00000E+00    38   0.911E-05
+   5 F= -.67583817E+01 E0= -.67585750E+01  d E =-.960629E-02
+ BRION: g(F)=  0.269E-02 g(S)=  0.000E+00 retain N=  1 mean eig= 0.33
+ eig:   0.325
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.675882018601E+01   -0.43951E-03   -0.82134E-03    60   0.171E-01    0.448E-02
+RMM:   2    -0.675878485162E+01    0.35334E-04   -0.19725E-05    40   0.536E-03    0.243E-02
+RMM:   3    -0.675877700746E+01    0.78442E-05   -0.31100E-05    40   0.635E-03    0.162E-03
+RMM:   4    -0.675877830357E+01   -0.12961E-05   -0.33555E-07    40   0.767E-04    0.325E-04
+RMM:   5    -0.675877862201E+01   -0.31845E-06   -0.18042E-08    39   0.190E-04
+   6 F= -.67587794E+01 E0= -.67589727E+01  d E =-.397748E-03
+ BRION: g(F)=  0.181E-04 g(S)=  0.000E+00 retain N=  1 mean eig= 0.30
+ eig:   0.300
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.675878235887E+01   -0.40553E-05   -0.47724E-05    60   0.129E-02    0.346E-03
+RMM:   2    -0.675878226636E+01    0.92505E-07   -0.10326E-07    39   0.403E-04
+   7 F= -.67587831E+01 E0= -.67589763E+01  d E =-.364274E-05
+ BRION: g(F)=  0.118E-06 g(S)=  0.000E+00 retain N=  1 mean eig= 0.32
+ eig:   0.324
+ reached required accuracy - stopping structural energy minimisation
+-- end OPENMPI run --

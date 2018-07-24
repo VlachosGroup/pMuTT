@@ -1,0 +1,28 @@
+Electronic minimization
+   PREC    = NORMAL
+   VOSKOWN = 1
+   GGA     = 91      #Change ot "91" to run Perdew-Wang 91 
+   LREAL   = auto    #Use FALSE for small systems
+   ALGO    = FAST
+   ENCUT   = 400     #plane wave cutoff in eV (396 eV for O)
+   EDIFF   = 1e-6    #Criteria for SCF convergence
+   ISYM    = 0       #0=no symmetry, 1=symmetry on
+   ISPIN   = 1       #1=closed shell systems, 2=spin polarized
+   NELM    = 500
+   LWAVE   = .FALSE.
+   LCHARG  = .FALSE.
+Ionic relaxation
+   ISIF    = 0       #2=optimize ion positions, 3=optimize ions, shell shape and size
+   EDIFFG  = -0.05   #Positive converges on energy, Negative converges on forces
+   NSW     = 2500
+   IBRION  = 2       #1=Quasi Newton, 2=Conjugate Gradient, 0=MD, 5=Vibration
+   POTIM   = 0.25    #Ionic step size scaling, reduce value if geom steps too big
+DOS related values
+   ISMEAR  = 0       #Smearing set for metals, change for others or molecules
+   SIGMA   = 0.1     #Smaller values --> more accurate energies, harder to converge
+Parallelization
+   NSIM    = 4       #Use always on hydra, birch, aspen
+   NPAR    = 1       #Set equal to number of nodes
+   LPLANE  = .TRUE.  #Use always on hydra, birch, aspen
+   LSCALU  = .FALSE. #Use always on hydra, birch, aspen
+

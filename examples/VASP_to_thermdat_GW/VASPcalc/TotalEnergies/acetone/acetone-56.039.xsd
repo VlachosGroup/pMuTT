@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XSD Version="4.0">
+   <AtomisticTreeRoot ID="1" NumChildren="1" NumProperties="40">
+      <Property DefinedOn="ClassicalEnergyHolder" Name="AngleEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="BendBendEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="BendTorsionBendEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="BondEnergy" Type="Double"/>
+      <Property DefinedOn="Atom" Name="EFGAsymmetry" Type="Double"/>
+      <Property DefinedOn="Atom" Name="EFGQuadrupolarCoupling" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="ElectrostaticEnergy" Type="Double"/>
+      <Property DefinedOn="GrowthFace" Name="FaceMillerIndex" Type="MillerIndex"/>
+      <Property DefinedOn="GrowthFace" Name="FacetTransparency" Type="Float"/>
+      <Property DefinedOn="Bondable" Name="Force" Type="CoDirection"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="HydrogenBondEnergy" Type="Double"/>
+      <Property DefinedOn="Bondable" Name="ImportOrder" Type="UnsignedInteger"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="InversionEnergy" Type="Double"/>
+      <Property DefinedOn="Atom" Name="IsBackboneAtom" Type="Boolean"/>
+      <Property DefinedOn="Atom" Name="IsChiralCenter" Type="Boolean"/>
+      <Property DefinedOn="Atom" Name="IsOutOfPlane" Type="Boolean"/>
+      <Property DefinedOn="BestFitLineMonitor" Name="LineExtentPadding" Type="Double"/>
+      <Property DefinedOn="Linkage" Name="LinkageGroupName" Type="String"/>
+      <Property DefinedOn="PropertyList" Name="ListIdentifier" Type="String"/>
+      <Property DefinedOn="Atom" Name="NMRShielding" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="NonBondEnergy" Type="Double"/>
+      <Property DefinedOn="Bondable" Name="NormalMode" Type="Direction"/>
+      <Property DefinedOn="Bondable" Name="NormalModeFrequency" Type="Double"/>
+      <Property DefinedOn="Bondable" Name="OrbitalCutoffRadius" Type="Double"/>
+      <Property DefinedOn="BestFitPlaneMonitor" Name="PlaneExtentPadding" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="PotentialEnergy" Type="Double"/>
+      <Property DefinedOn="ScalarFieldBase" Name="QuantizationValue" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="RestraintEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="SeparatedStretchStretchEnergy" Type="Double"/>
+      <Property DefinedOn="Trajectory" Name="SimulationStep" Type="Integer"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="StretchBendStretchEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="StretchStretchEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="StretchTorsionStretchEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="TorsionBendBendEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="TorsionEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="TorsionStretchEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="ValenceCrossTermEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="ValenceDiagonalEnergy" Type="Double"/>
+      <Property DefinedOn="ClassicalEnergyHolder" Name="VanDerWaalsEnergy" Type="Double"/>
+      <Property DefinedOn="SymmetrySystem" Name="_Stress" Type="Matrix"/>
+      <SymmetrySystem Children="4,5,6,7,8,9,10,11,12,13,15" ID="2" Mapping="3" Name="SymmSys" Normalized="1" OverspecificationTolerance="0.05" PeriodicDisplayType="Original" UserID="28" XYZ="0.00000000000000,0.00000000000000,0.000000000000000">
+         <MappingSet ActiveSystem="2" ID="14" NumFamilies="1" OwnsTotalConstraintMapping="1" SymmetryDefinition="15" TotalConstraintMapping="3">
+            <MappingFamily ID="16" NumImageMappings="0">
+               <IdentityMapping Constraint="1,0,0,0,0,1,0,0,0,0,1,0" DefectObjects="15,18" Element="1,0,0,0,0,1,0,0,0,0,1,0" ID="17" MappedObjects="4,5,6,7,8,9,10,11,12,13" NumDefects="2" NumImages="10">
+                  <Atom3d Components="O" DisplayStyle="Ball and Stick" ID="4" Mapping="17" Name="O1" Parent="2" UserID="1" XYZ="0.3970402837584928,0.5659413021989579,0.5683525501964724"/>
+                  <Atom3d Components="C" DisplayStyle="Ball and Stick" ID="5" Mapping="17" Name="C2" Parent="2" UserID="2" XYZ="0.4132615774266384,0.5429060872527955,0.6227794822017003"/>
+                  <Atom3d Components="C" DisplayStyle="Ball and Stick" ID="6" Mapping="17" Name="C3" Parent="2" UserID="3" XYZ="0.3859319290827941,0.4768715342074117,0.6477627415776937"/>
+                  <Atom3d Components="C" DisplayStyle="Ball and Stick" ID="7" Mapping="17" Name="C4" Parent="2" UserID="4" XYZ="0.4619516638775707,0.5787887178017357,0.6683630606639710"/>
+                  <Atom3d Components="H" DisplayStyle="Ball and Stick" ID="8" Mapping="17" Name="H5" Parent="2" UserID="5" XYZ="0.4752957264580715,0.6276245673169356,0.6473780503501700"/>
+                  <Atom3d Components="H" DisplayStyle="Ball and Stick" ID="9" Mapping="17" Name="H6" Parent="2" UserID="6" XYZ="0.3530111607481743,0.4544585298788135,0.6101202642680406"/>
+                  <Atom3d Components="H" DisplayStyle="Ball and Stick" ID="10" Mapping="17" Name="H7" Parent="2" UserID="7" XYZ="0.3579965082069236,0.4845008433738087,0.6946464617418471"/>
+                  <Atom3d Components="H" DisplayStyle="Ball and Stick" ID="11" Mapping="17" Name="H8" Parent="2" UserID="8" XYZ="0.4271792893444228,0.4423064465882618,0.6595993934451130"/>
+                  <Atom3d Components="H" DisplayStyle="Ball and Stick" ID="12" Mapping="17" Name="H9" Parent="2" UserID="9" XYZ="0.5075155055748724,0.5483729739760719,0.6744848180047498"/>
+                  <Atom3d Components="H" DisplayStyle="Ball and Stick" ID="13" Mapping="17" Name="H10" Parent="2" UserID="10" XYZ="0.4404984588862177,0.5850578369993329,0.7186931983112572"/>
+                  <SpaceGroup AVector="16.3299316185545000,-8.1649658092772608,-8.1649658092772608" ActiveSystem="2" BVector="0.0000000000000000,14.1421356237308990,-14.1421356237308990" CVector="11.5470053837925000,11.5470053837925000,11.5470053837925000" Centering="3D Primitive-Centered" Children="18" Class="1" Color="0,0,0,0" CylinderRadius="0.2" DisplayRange="0,1,0,1,0,1" DisplayStyle="Solid" GroupName="GroupName" ID="15" ITNumber="1" LabelAxes="1" Lattice="3D Triclinic" LineThickness="2" LongName="P 1" Operators="1,0,0,0,0,1,0,0,0,0,1,0" OrientationBase="C along Z, B in YZ plane" Parent="2" Qualifier="Origin-1" SchoenfliesName="C1-1" System="Triclinic" XYZ="0.00,0.00,0.00"/>
+                  <ReciprocalLattice3D ID="18" Parent="15"/>
+               </IdentityMapping>
+               <MappingRepairs NumRepairs="0"/>
+            </MappingFamily>
+            <InfiniteMapping Element="1,0,0,0,0,1,0,0,0,0,1,0" ID="3" MappedObjects="2"/>
+         </MappingSet>
+      </SymmetrySystem>
+   </AtomisticTreeRoot>
+</XSD>
