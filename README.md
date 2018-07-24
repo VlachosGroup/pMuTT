@@ -4,7 +4,7 @@ This repository contains a Python library for Thermochemistry developed by the V
 ## Implemented features
 1. DFT-generated data can be input using Excel and special column header names.
 2. Ideal Gas and Harmonic Thermo statistical thermodynamic models have been implemented. Framework to create new models is straightforward (classes only need to: state explicitly attributes required in the `__init__` method, contain the methods `get_CpoR(Ts)`, `get_HoRT(Ts)`, `get_SoR(Ts)`, and `get_GoRT(Ts)`).
-3. Thermdat empirical model has been implemented. Given Cp as a function of temperature, a reference temperature and associated enthalpy and entropy, NASA polynomials can be generated.
+3. Nasa empirical model has been implemented. Given Cp as a function of temperature, a reference temperature and associated enthalpy and entropy, NASA polynomials can be generated.
 4. Framework to convert statistical thermodynamic model to empirical models implemented. See [Thermochemistry.examples.VASP_to_thermdat](https://github.com/VlachosGroup/Thermochemistry/tree/master/examples/VASP_to_thermdat).
 
 ## Planned features
@@ -65,15 +65,17 @@ species = [Nasa(references=refs, T_low=T_low, T_high=T_high, T_ref=c.T0('K'), **
 ```python
 from Thermochemistry.io_.thermdat import write_thermdat
 
-write_thermdat(thermdats=thermdats, filename=thermdats_out_path)
+thermdat_path = './thermdat'
+write_thermdat(nasa_spcies=species, filename=thermdat_path)
 ```
 
 6. **Check that your empirical form sufficiently fits the thermodynamic model.** The ```BaseThermo``` class has the ```plot_thermo_model_and_empirical``` method for this purpose.
 ```python
 from matplotlib import pyplot as plt
-	for nasa in species:
-		nasa.plot_thermo_model_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
-	plt.show()
+
+for nasa in species:
+	nasa.plot_thermo_model_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
+plt.show()
 ```
 
 ![H2 Plot Comparing Empirical Model to Statistical Thermodynamic Model](./docs/H2_plot_thermo_model_and_empirical.png)
@@ -176,7 +178,7 @@ def get_CpoR(self, Ts):
 ___
 
 ## Adding an Empirical Model
-The empirical models are a child class of the `BaseThermo` class (located in `Themochemistry.models.empirical.BaseThermo`). First, we will discuss the `BaseThermo` class. Second, we will show the `Thermdat` class (located in `Thermdat.models.empirical.thermdat.Thermdat`) that builds on it.
+The empirical models are a child class of the `BaseThermo` class (located in `Themochemistry.models.empirical.BaseThermo`). First, we will discuss the `BaseThermo` class. Second, we will show the `Nasa` class (located in `Thermochemistry.models.empirical.nasa.Nasa`) that builds on it.
 
 ### BaseThermo
 `BaseThermo` has several attributes that will be applicable to many thermodynamic problems. The initialization is shown below:
@@ -236,13 +238,13 @@ class BaseThermo:
 			self.thermo_model = thermo_model
 ```
 
-### Thermdat
-Since the `Thermdat` class is a child of the `BaseThermo` class, it has all the attributes as `BaseThermo`. It also has other parameters related to NASA polynomials. The initialization is shown below:
+### Nasa
+Since the `Nasa` class is a child of the `BaseThermo` class, it has all the attributes as `BaseThermo`. It also has other parameters related to NASA polynomials. The initialization is shown below:
 
 ```python
-class Thermdat(BaseThermo):
+class Nasa(BaseThermo):
 	"""
-	Stores the information for an individual thermdat specie
+	Stores the information for an individual nasa specie
 	Inherits from Thermochemistry.models.empirical.BaseThermo
 
 	The thermodynamic properties are calculated using the following form:

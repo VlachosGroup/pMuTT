@@ -1,5 +1,0 @@
-!symbol,is_gas,C,H,O,N,H0,potentialenergy,geometry,symmetrynumber,spin,atoms,vib_freq,,
-!Label given in thermdat,1 for gas phase. 0 for surface phase.,# C,# H ,# O ,# N,Enthalpy of formation in kJ/mol,Potential energy from atoms.get_potential_energy() in eV,"Gas species only. Either monatomic, linear or nonlinear.",Gas species only. Symmetry number given by DOI: 10.1007/s00214-007-0328-0,"Gas species only. The total electronic spin. (0 for molecules in which all electrons are paired, 0.5 for a free radical with a single unpaired electron, 1.0 for a triplet with two unpaired electrons, such as O_2.)",Gas species only. Path to the trajectory file,Vibrational frequencies in cm^-1,,
-!0,1,2,3,4,5,6,7,8,9,10,11,12,,
-H2O,1,0,2,1,0,-241.826,-14.2209,nonlinear,2,0,./H2O/CONTCAR,3825.434,3710.2642,1582.432
-H2,1,0,2,0,0,0,-6.7598,linear,2,0,./H2/CONTCAR,4306.1793,,

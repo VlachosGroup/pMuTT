@@ -12,11 +12,16 @@ User inputs
 #Reference information
 refs_path = './references.xlsx'
 
+#Surface information
+surfaces_path = './surfaces.xlsx'
+
 #Input information
-species_in_path = './thermdat_input.xlsx'
-thermdats_out_path = './thermdat'
-T_low = 200.
-T_high = 1100. #K
+species_path = './input_data.xlsx'
+T_low = 300.
+T_high = 1000. #K
+
+#Output information
+thermdat_path = './thermdat'
 
 #Miscellaneous options
 show_plot = True
@@ -25,20 +30,32 @@ show_plot = True
 Processing References
 '''
 #Import from excel
-refs_input = read_excel(io=refs_path)
-refs = References([BaseThermo(**ref_input) for ref_input in refs_input])
+refs_data = read_excel(io=refs_path)
+refs = References([BaseThermo(**ref_data) for ref_data in refs_data])
+
+'''
+Processing Surfaces
+'''
+surfaces_data = read_excel(io=surfaces_path)
 
 '''
 Processing Input Species
 '''
 #Import from excel
-species_data = read_excel(io=species_in_path)
+species_data = read_excel(io=species_path)
+#Adjust potential energy to subtract contribution from surface
+for specie_data in species_data:
+	#Find appropriate surface
+	for surface_data in surfaces_data:
+		if surface_data['name'] in specie_data['notes']:
+			specie_data['potentialenergy'] -= surface_data['potentialenergy']
+			break
 species = [Nasa(references=refs, T_low=T_low, T_high=T_high, T_ref=c.T0('K'), **specie_data) for specie_data in species_data]
 
 '''
 Printing Out Results
 '''
-write_thermdat(nasa_species=species, filename=thermdats_out_path)
+write_thermdat(nasa_species=species, filename=thermdat_path)
 if show_plot:
 	for nasa in species:
 		nasa.plot_thermo_model_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
