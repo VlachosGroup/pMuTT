@@ -100,11 +100,10 @@ A spreadsheet with DFT data can be read using `Thermochemistry.io_.excel.read_ex
 Below, we show the contents of the references.xlsx spreadsheet found in `Thermochemistry.examples.VASP_to_thermdat` (the description of the fields have been omitted here due to difficult of formatting). The first row corresponds to the field name and the second row by default is ignored so comments can be inputted here. Some fields do not require any additional processing, like `name`, `potentialenergy`, and `geometry`. However, in some cases the field does need further processing, like `atoms` (the value is only the location to find a file to read and not the actual atoms object) or `elements~H` (in this case, the field name needs to be processed to show this header represents hydrogen atoms in a formula unit). Special parsing instructions can be found and added to the [`Thermochemistry.io_.excel.read_excel`](https://github.com/VlachosGroup/Thermochemistry/blob/master/io_/excel.py#L45) function.
 
 
-| name | phase | elements~H | elements~O | thermo_model | T_ref | HoRT_ref | potentialenergy | geometry  | atoms          | symmetrynumber | spin | vib_wavenumber~1 | vib_wavenumber~2 | vib_wavenumber~3 |
-|------|-------|------------|------------|---------------------------------------------------------------|----------------|----------------|------|------------------|------------------|------------------|
-| H2   | G     | 2          | 0          | IdealGas     | 298   | 0        | -6.7598         | linear    | .\H2\CONTCAR   | 2              | 0    | 4306.1793        |                  |                  |
-| H2O  | G     | 2          | 1          | IdealGas     | 298   | -97.606  | -14.2209        | nonlinear | .\H2O\CONTCAR  | 2              | 0    | 3825.434         | 3710.2642        | 1582.432         |
-
+| name | phase | elements~H | elements~O | thermo_model | T_ref | HoRT_ref | potentialenergy | geometry  | atoms         | symmetrynumber | spin | vib_wavenumber~1 | vib_wavenumber~2 | vib_wavenumber~3 |
+|------|-------|------------|------------|--------------|-------|----------|-----------------|-----------|---------------|----------------|------|------------------|------------------|------------------|
+| H2   | G     | 2          | 0          | IdealGas     | 298   | 0        | -6.7598         | linear    | .\H2\CONTCAR  | 2              | 0    | 4306.1793        |                  |                  |
+| H2O  | G     | 2          | 1          | IdealGas     | 298   | -97.606  | -14.2209        | nonlinear | .\H2O\CONTCAR | 2              | 0    | 3825.434         | 3710.2642        | 1582.432         |
 
 The `Thermochemistry.io_.excel.read_excel` function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in Step 1 and Step 3 of the section: [Outline to convert DFT-generated data to empirical models](#outline-to-convert-dft-generated-data-to-empirical-models)
 
