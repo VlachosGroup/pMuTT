@@ -7,6 +7,7 @@ Created on Fri Jul 7 12:40:00 2018
 
 import numpy as np
 import pandas as pd
+import os
 from ase.io import read
 from Thermochemistry import constants as c
 from Thermochemistry import parse_formula
@@ -38,6 +39,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 			dict objects that can be used to initialize BaseThermo or BaseThermo-derived object
 	"""
 	input_data = pd.read_excel(io=io, skiprows=skiprows, header=header, **kwargs)
+	excel_path = os.path.dirname(io)
 	thermos_out = []
 	for row, row_data in input_data.iterrows():
 		thermo_data = {'vib_energies': []}
@@ -50,7 +52,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 			elif 'formula' in col:
 				thermo_data = set_formula(formula=cell_data, output_structure=thermo_data)
 			elif 'atoms' in col:
-				thermo_data = set_atoms(path=cell_data, output_structure=thermo_data)
+				thermo_data = set_atoms(path=cell_data, excel_path=excel_path, output_structure=thermo_data)
 			elif 'thermo_model' in col:
 				thermo_data = set_thermo_model(model=cell_data, output_structure=thermo_data)
 			elif 'vib_wavenumber' in col:
@@ -103,20 +105,30 @@ def set_formula(formula, output_structure):
 	output_structure['elements'] = elements
 	return output_structure
 
-def set_atoms(path, output_structure):
+def set_atoms(path, output_structure, excel_path=None):
 	"""
 	Reads the atoms object ans assigns to output_structure
 
 	Parameters
 		path - str
-			Location to import atoms object. See ase.read for supported formats
+			Location to import atoms object. If relative references used, the path should be relative to excel_path.
+			See ase.read for supported formats
+		excel_path - str
+			Location where excel path is located
 		output_structure - dict
 			Structure to assign value. Will assign to output_structure['atoms']
 	Returns
 		output_structure - dict
 			output_structure with new thermo model added
 	"""
-	output_structure['atoms'] = read(path)
+	try:
+		output_structure['atoms'] = read(path)
+	except FileNotFoundError:
+		try:
+			output_structure['atoms'] = read(os.path.join(excel_path, path))
+		except FileNotFoundError:
+			raise FileNotFoundError('If using relative references for atoms files, use a path relative to the spreadsheet imported.')
+
 	return output_structure		
 
 def set_thermo_model(model, output_structure):

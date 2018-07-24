@@ -49,30 +49,16 @@ refs_input = read_excel(io=refs_path)
 refs = References([BaseThermo(**ref_input) for ref_input in refs_input])
 ```
 
-2. **Use the references to calculate the offset between DFT data and experimental data.** The offset is calculated for each element. Therefore, the element composition should be specified in the Excel file. The elemental composition can be specified using the `formula` keyword where the formula unit can be typed (e.g. H2O) or by using the `elements` keyword where each element has a column indicating the number in a formula unit. [Read below if you're interested on how referencing is done](#referencing).
-
-```python
-refs.calc_offset()
-```
+2. **Use the references to calculate the offset between DFT data and experimental data.** This is done automatically be the References object using the `References.calc_offset()`. The offset is calculated for each element. Therefore, the element composition should be specified in the Excel file. The elemental composition can be specified using the `formula` keyword where the formula unit can be typed (e.g. H2O) or by using the `elements` keyword where each element has a column indicating the number in a formula unit. [Read below if you're interested on how referencing is done](#referencing).
 
 3. **Read the DFT-generated data for the interested species.** This is similar to Step 1 but the `T_ref` and `HoRT_ref` fields are not required.
 
 ```python
-thermdats_data = read_excel(io=thermdats_in_path)
-thermdats = [Thermdat(**thermdat_data) for thermdat_data in thermdats_data]
+species_data = read_excel(io=species_in_path)
+species = [Nasa(references=refs, T_low=T_low, T_high=T_high, T_ref=c.T0('K'), **specie_data) for specie_data in species_data]
 ```
 
-4. **Calculate the reference enthalpy using the offset calculated in Step 2 and fit to the desired empirical formula.**
-
-```python
-from Thermochemistry import constants as c
-from Thermochemistry.models.empirical.thermdat import Thermdat
-
-for thermdat_specie in thermdats:
-	thermdat_specie.T_ref = c.T0('K')
-	thermdat_specie.HoRT_ref = thermdat_specie.thermo_model.get_HoRT(Ts=c.T0('K')) + refs.get_specie_offset(thermdat_specie.elements)
-	thermdat_specie.calc_nasa(T_low=T_low, T_high=T_high, T_ref=c.T0('K'))
-```
+4. **Calculate the reference enthalpy using the offset calculated in Step 2 and fit to the desired empirical formula.** The Nasa object does this automatically using the `Nasa.fit()` method.
 
 5. **Save the coefficients of the empirical form.**
 
@@ -81,6 +67,16 @@ from Thermochemistry.io_.thermdat import write_thermdat
 
 write_thermdat(thermdats=thermdats, filename=thermdats_out_path)
 ```
+
+6. **Check that your empirical form sufficiently fits the thermodynamic model.** The ```BaseThermo``` class has the ```plot_thermo_model_and_empirical``` method for this purpose.
+```python
+from matplotlib import pyplot as plt
+	for nasa in species:
+		nasa.plot_thermo_model_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
+	plt.show()
+```
+
+![H2 Plot Comparing Empirical Model to Statistical Thermodynamic Model](./docs/H2_plot_thermo_model_and_empirical.png)
 
 ___
 
@@ -104,10 +100,10 @@ A spreadsheet with DFT data can be read using `Thermochemistry.io_.excel.read_ex
 Below, we show the contents of the references.xlsx spreadsheet found in `Thermochemistry.examples.VASP_to_thermdat` (the description of the fields have been omitted here due to difficult of formatting). The first row corresponds to the field name and the second row by default is ignored so comments can be inputted here. Some fields do not require any additional processing, like `name`, `potentialenergy`, and `geometry`. However, in some cases the field does need further processing, like `atoms` (the value is only the location to find a file to read and not the actual atoms object) or `elements~H` (in this case, the field name needs to be processed to show this header represents hydrogen atoms in a formula unit). Special parsing instructions can be found and added to the [`Thermochemistry.io_.excel.read_excel`](https://github.com/VlachosGroup/Thermochemistry/blob/master/io_/excel.py#L45) function.
 
 
-| name | phase | elements~H | elements~O | thermo_model                                                  | T_ref | HoRT_ref | potentialenergy | geometry  | atoms                                                                                                           | symmetrynumber | spin | vib_wavenumber~1 | vib_wavenumber~2 | vib_wavenumber~3 |
-|------|-------|------------|------------|---------------------------------------------------------------|-------|----------|-----------------|-----------|-----------------------------------------------------------------------------------------------------------------|----------------|------|------------------|------------------|------------------|
-| H2   | G     | 2          | 0          | Thermochemistry.models.statmech.idealgasthermo.IdealGasThermo | 298   | 0        | -6.7598         | linear    | G:\My Drive\UDel Documents\UDel Research\Thermochemistry\Thermochemistry\examples\VASP_to_thermdat\H2\CONTCAR   | 2              | 0    | 4306.1793        |                  |                  |
-| H2O  | G     | 2          | 1          | Thermochemistry.models.statmech.idealgasthermo.IdealGasThermo | 298   | -97.606  | -14.2209        | nonlinear | G:\My Drive\UDel Documents\UDel Research\Thermochemistry\Thermochemistry\examples\VASP_to_thermdat\H2O\CONTCAR  | 2              | 0    | 3825.434         | 3710.2642        | 1582.432         |
+| name | phase | elements~H | elements~O | thermo_model | T_ref | HoRT_ref | potentialenergy | geometry  | atoms          | symmetrynumber | spin | vib_wavenumber~1 | vib_wavenumber~2 | vib_wavenumber~3 |
+|------|-------|------------|------------|---------------------------------------------------------------|----------------|----------------|------|------------------|------------------|------------------|
+| H2   | G     | 2          | 0          | IdealGas     | 298   | 0        | -6.7598         | linear    | .\H2\CONTCAR   | 2              | 0    | 4306.1793        |                  |                  |
+| H2O  | G     | 2          | 1          | IdealGas     | 298   | -97.606  | -14.2209        | nonlinear | .\H2O\CONTCAR  | 2              | 0    | 3825.434         | 3710.2642        | 1582.432         |
 
 
 The `Thermochemistry.io_.excel.read_excel` function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in Step 1 and Step 3 of the section: [Outline to convert DFT-generated data to empirical models](#outline-to-convert-dft-generated-data-to-empirical-models)
