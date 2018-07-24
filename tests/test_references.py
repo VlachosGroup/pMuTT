@@ -71,8 +71,6 @@ class TestReferences(unittest.TestCase):
 
 	def test_calc_offset(self):
 		expected_element_offset = {'H': -123.10868373, 'O': -186.72503046}
-		#print(self.references._references[0].thermo_model)
-		self.references.calc_offset()
 		calculated_element_offset = self.references.element_offset
 
 		#Assess whether the keys are the same
@@ -82,7 +80,6 @@ class TestReferences(unittest.TestCase):
 			self.assertAlmostEqual(expected_element_offset[element], calculated_element_offset[element])
 
 	def test_get_specie_offset(self):
-		self.references.calc_offset()
 		elements = {'H': 2, 'O': 2}
 		self.assertAlmostEqual(self.references.get_specie_offset(elements=elements), 619.667428373883)
 		with self.assertWarns(RuntimeWarning):

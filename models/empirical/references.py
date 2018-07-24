@@ -23,6 +23,7 @@ class References:
 	def __init__(self, references):
 		self._references = references
 		self.element_offset = {}
+		self.calc_offset()
 
 	def __iter__(self):
 		"""
@@ -140,7 +141,7 @@ class References:
 	def get_specie_offset(self, elements):
 		"""
 		Returns the offset due to the element composition of a specie. The offset is defined as follows:
-		H_exp = H_dft + offset
+		HoRT_exp = HoRT_dft + offset
 		calc_offset must be run before meaningful offset values can be returned.
 
 		Parameters

@@ -9,6 +9,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 from Thermochemistry import _pass_expected_arguments
 from Thermochemistry import constants as c
+from pprint import pprint
 
 class BaseThermo:
 	"""
@@ -38,27 +39,48 @@ class BaseThermo:
 				get_SoR
 				get_GoRT
 		T_ref - float
-			Reference temperature. Only used for reference species.
+			Temperature (in K) at which HoRT_dft was calculated. Only used for fitting empirical coefficients.
+		HoRT_dft - float
+			Dimensionless enthalpy calculated using DFT that corresponds to T_dft. Only used for fitting empirical
+			coefficients.
 		HoRT_ref - float
-			Reference dimensionless enthalpy corresponding to T_ref. Only used 
-			for reference species.
+			Reference dimensionless enthalpy corresponding to T_ref. 
+		references - Thermochemistry.models.empirical.References object
+			Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.
 		notes - str
 			Any additional details you would like to include such as computational set up.
 	"""
 
-	def __init__(self, name, phase, elements, thermo_model = None, T_ref = None, HoRT_ref = None, notes = None, **kwargs):
+	def __init__(self, name, phase=None, elements=None, thermo_model=None, T_ref=c.T0('K'), HoRT_dft=None, HoRT_ref=None, references=None, notes=None, **kwargs):
 		self.name = name
 		self.phase = phase
 		self.elements = elements
 		self.T_ref = T_ref
-		self.HoRT_ref = HoRT_ref
+		self.references = references
 		self.notes = notes
+
+		#Assign self.thermo_model
 		if inspect.isclass(thermo_model):
 			#If you're passing a class. Note that the required arguments will be guessed.
 			self.thermo_model = _pass_expected_arguments(thermo_model, **kwargs)
 		else:
 			#If it's an object that has already been initialized
 			self.thermo_model = thermo_model
+
+		#Calculate dimensionless DFT energy using ideal gas model
+		if HoRT_dft is None:
+			self.HoRT_dft = self.thermo_model.get_HoRT(Ts=self.T_ref)
+		else:
+			self.HoRT_dft = HoRT_dft
+
+		#Assign self.HoRT_ref
+		if HoRT_ref is None:
+			if references is None:
+				self.HoRT_ref = self.HoRT_dft
+			else:
+				self.HoRT_ref = self.HoRT_dft + references.get_specie_offset(elements=elements)
+		else:
+			self.HoRT_ref = HoRT_ref
 
 	def plot_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
 		"""
@@ -92,58 +114,54 @@ class BaseThermo:
 		Heat Capacity
 		'''
 		plt.subplot(411)
-		plt.title('Thermdat Specie: {}'.format(self.name))
+		plt.title('Specie: {}'.format(self.name))
 		plt.xlabel('Temperature (K)')
-		CpoR = self.get_CpoR(Ts=Ts)
+		Cp_plot = self.get_CpoR(Ts=Ts)
 		if Cp_units is None:
 			plt.ylabel('Cp/R')
-			y1 = CpoR
 		else:
 			plt.ylabel('Cp ({})'.format(Cp_units))
-			y1 = CpoR * c.R(Cp_units)
-		plt.plot(Ts, y1, 'r-')
+			Cp_plot = Cp_plot * c.R(Cp_units)
+		plt.plot(Ts, Cp_plot, 'r-')
 
 		'''
 		Enthalpy
 		'''
 		plt.subplot(412)
 		plt.xlabel('Temperature (K)')
-		HoRT = self.get_HoRT(Ts=Ts)
+		H_plot = self.get_HoRT(Ts=Ts)
 		if H_units is None:
 			plt.ylabel('H/RT')
-			y2 = HoRT
 		else:
 			plt.ylabel('H ({})'.format(H_units))
-			y2 = HoRT * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, y2, 'g-')
+			H_plot = H_plot * c.R('{}/K'.format(H_units)) * Ts
+		plt.plot(Ts, H_plot, 'g-')
 
 		'''
 		Entropy
 		'''
 		plt.subplot(413)
 		plt.xlabel('Temperature (K)')
-		SoR = self.get_SoR(Ts=Ts)
+		S_plot = self.get_SoR(Ts=Ts)
 		if S_units is None:
 			plt.ylabel('S/R')
-			y3 = SoR
 		else:
 			plt.ylabel('S ({})'.format(S_units))
-			y3 = SoR * c.R(S_units)
-		plt.plot(Ts, y3, 'b-')
+			S_plot = S_plot * c.R(S_units)
+		plt.plot(Ts, S_plot, 'b-')
 
 		'''
 		Gibbs energy
 		'''
 		plt.subplot(414)
 		plt.xlabel('Temperature (K)')
-		GoRT = self.get_GoRT(Ts=Ts)
+		G_plot = self.get_GoRT(Ts=Ts)
 		if G_units is None:
 			plt.ylabel('G/RT')
-			y4 = GoRT
 		else:
-			plt.ylabel('G ({})'.format(H_units))
-			y4 = GoRT * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, y4, 'k-')
+			plt.ylabel('G ({})'.format(G_units))
+			G_plot = G_plot * c.R('{}/K'.format(G_units)) * Ts
+		plt.plot(Ts, G_plot, 'k-')
 
 	def plot_thermo_model(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
 		"""
@@ -177,58 +195,61 @@ class BaseThermo:
 		Heat Capacity
 		'''
 		plt.subplot(411)
-		plt.title('Thermdat Specie: {}'.format(self.name))
+		plt.title('Specie: {}'.format(self.name))
 		plt.xlabel('Temperature (K)')
-		CpoR = self.thermo_model.get_CpoR(Ts=Ts)
+		Cp_plot = self.thermo_model.get_CpoR(Ts=Ts)
 		if Cp_units is None:
 			plt.ylabel('Cp/R')
-			y1 = CpoR
 		else:
 			plt.ylabel('Cp ({})'.format(Cp_units))
-			y1 = CpoR * c.R(Cp_units)
-		plt.plot(Ts, y1, 'r-')
+			Cp_plot = Cp_plot * c.R(Cp_units)
+		plt.plot(Ts, Cp_plot, 'r-')
 
 		'''
 		Enthalpy
 		'''
 		plt.subplot(412)
 		plt.xlabel('Temperature (K)')
-		HoRT = self.thermo_model.get_HoRT(Ts=Ts)
+
+		H_plot = self.thermo_model.get_HoRT(Ts=Ts)
+		if self.references is not None:
+			H_plot += self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+
 		if H_units is None:
 			plt.ylabel('H/RT')
-			y2 = HoRT
 		else:
 			plt.ylabel('H ({})'.format(H_units))
-			y2 = HoRT * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, y2, 'g-')
+			H_plot = H_plot * c.R('{}/K'.format(H_units)) * Ts
+		plt.plot(Ts, H_plot, 'g-')
 
 		'''
 		Entropy
 		'''
 		plt.subplot(413)
 		plt.xlabel('Temperature (K)')
-		SoR = self.thermo_model.get_SoR(Ts=Ts)
+		S_plot = self.thermo_model.get_SoR(Ts=Ts)
 		if S_units is None:
 			plt.ylabel('S/R')
-			y3 = SoR
 		else:
 			plt.ylabel('S ({})'.format(S_units))
-			y3 = SoR * c.R(S_units)
-		plt.plot(Ts, y3, 'b-')
+			S_plot = S_plot * c.R(S_units)
+		plt.plot(Ts, S_plot, 'b-')
 
 		'''
 		Gibbs energy
 		'''
 		plt.subplot(414)
 		plt.xlabel('Temperature (K)')
-		GoRT = self.thermo_model.get_GoRT(Ts=Ts)
+		G_plot = self.thermo_model.get_GoRT(Ts=Ts)
+		if self.references is not None:
+			G_plot += self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+
 		if G_units is None:
 			plt.ylabel('G/RT')
-			y4 = GoRT
 		else:
-			plt.ylabel('G ({})'.format(H_units))
-			y4 = GoRT * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, y4, 'k-')
+			plt.ylabel('G ({})'.format(G_units))
+			G_plot = G_plot * c.R('{}/K'.format(G_units)) * Ts
+		plt.plot(Ts, G_plot, 'k-')
 
 	def plot_thermo_model_and_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
 		"""
@@ -262,20 +283,18 @@ class BaseThermo:
 		Heat Capacity
 		'''
 		plt.subplot(411)
-		plt.title('Thermdat Specie: {}'.format(self.name))
+		plt.title('Specie: {}'.format(self.name))
 		plt.xlabel('Temperature (K)')
-		CpoR_thermo_model = self.thermo_model.get_CpoR(Ts=Ts)
-		CpoR_empirical = self.get_CpoR(Ts=Ts)
+		Ts, Cp_plot_thermo_model, Cp_plot_empirical = self.compare_CpoR(Ts=Ts)
 		if Cp_units is None:
 			plt.ylabel('Cp/R')
-			y1_thermo_model = CpoR_thermo_model
-			y1_empirical = CpoR_empirical
 		else:
 			plt.ylabel('Cp ({})'.format(Cp_units))
-			y1_thermo_model = CpoR_thermo_model * c.R(Cp_units)
-			y1_empirical = CpoR_empirical * c.R(Cp_units)
-		plt.plot(Ts, y1_thermo_model, 'r-', label = 'Stat Mech Model')
-		plt.plot(Ts, y1_empirical, 'b-', label = 'Empirical Model')
+			Cp_plot_thermo_model = Cp_plot_thermo_model * c.R(Cp_units)
+			Cp_plot_empirical = Cp_plot_empirical * c.R(Cp_units)
+
+		plt.plot(Ts, Cp_plot_thermo_model, 'r-', label = 'Stat Mech Model')
+		plt.plot(Ts, Cp_plot_empirical, 'b-', label = 'Empirical Model')
 		plt.legend()
 		
 		'''
@@ -283,51 +302,177 @@ class BaseThermo:
 		'''
 		plt.subplot(412)
 		plt.xlabel('Temperature (K)')
-		HoRT_thermo_model = self.thermo_model.get_HoRT(Ts=Ts)
-		HoRT_empirical = self.get_HoRT(Ts=Ts)
+		Ts, H_plot_thermo_model, H_plot_empirical = self.compare_HoRT(Ts=Ts)
+
 		if H_units is None:
 			plt.ylabel('H/RT')
-			y2_thermo_model = HoRT_thermo_model
-			y2_empirical = HoRT_empirical
 		else:
 			plt.ylabel('H ({})'.format(H_units))
-			y2_thermo_model = HoRT_thermo_model * c.R('{}/K'.format(H_units)) * Ts
-			y2_empirical = HoRT_empirical * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, y2_thermo_model, 'r-')
-		plt.plot(Ts, y2_empirical, 'b-')
+			H_plot_thermo_model = H_plot_thermo_model * c.R('{}/K'.format(H_units)) * Ts
+			H_plot_empirical = H_plot_empirical * c.R('{}/K'.format(H_units)) * Ts
+		plt.plot(Ts, H_plot_thermo_model, 'r-')
+		plt.plot(Ts, H_plot_empirical, 'b-')
 
 		'''
 		Entropy
 		'''
 		plt.subplot(413)
 		plt.xlabel('Temperature (K)')
-		SoR_thermo_model = self.thermo_model.get_SoR(Ts=Ts)
-		SoR_empirical = self.get_SoR(Ts=Ts)
+		Ts, S_plot_thermo_model, S_plot_empirical = self.compare_SoR(Ts=Ts)
 		if S_units is None:
 			plt.ylabel('S/R')
-			y3_thermo_model = SoR_thermo_model
-			y3_empirical = SoR_empirical
 		else:
 			plt.ylabel('S ({})'.format(S_units))
-			y3_thermo_model = SoR_thermo_model * c.R(S_units)
-			y3_empirical = SoR_empirical * c.R(S_units)
-		plt.plot(Ts, y3_thermo_model, 'r-')
-		plt.plot(Ts, y3_empirical, 'b-')
+			S_plot_thermo_model = S_plot_thermo_model * c.R(S_units)
+			S_plot_empirical = S_plot_empirical * c.R(S_units)
+		plt.plot(Ts, S_plot_thermo_model, 'r-')
+		plt.plot(Ts, S_plot_empirical, 'b-')
 
 		'''
 		Gibbs energy
 		'''
 		plt.subplot(414)
 		plt.xlabel('Temperature (K)')
-		GoRT_thermo_model = self.thermo_model.get_GoRT(Ts=Ts)
-		GoRT_empirical = self.get_GoRT(Ts=Ts)
+		Ts, G_plot_thermo_model, G_plot_empirical = self.compare_GoRT(Ts=Ts)
 		if G_units is None:
 			plt.ylabel('G/RT')
-			y4_thermo_model = GoRT_thermo_model
-			y4_empirical = GoRT_empirical
 		else:
-			plt.ylabel('G ({})'.format(H_units))
-			y4_thermo_model = GoRT_thermo_model * c.R('{}/K'.format(H_units)) * Ts
-			y4_empirical = GoRT_empirical * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, y4_thermo_model, 'r-')
-		plt.plot(Ts, y4_empirical, 'b-')
+			plt.ylabel('G ({})'.format(G_units))
+			G_plot_thermo_model = G_plot_thermo_model * c.R('{}/K'.format(G_units)) * Ts
+			G_plot_empirical = G_plot_empirical * c.R('{}/K'.format(G_units)) * Ts
+		plt.plot(Ts, G_plot_thermo_model, 'r-')
+		plt.plot(Ts, G_plot_empirical, 'b-')
+
+	def compare_CpoR(self, Ts = None):
+		"""
+		Returns the dimensionless heat capacity of the statistical model and the empirical model 
+		Parameters
+			Ts - (N,) ndarray, float, or None
+				Temperatures (in K) to calculate CpoR. If None, generates a list of temperatures between self.T_low and self.T_high
+		Returns
+			tuple of length 3
+			Element 0:
+				Temperature in K
+			Element 1: 
+				CpoR_statmech Dimensionless heat capacity of statistical thermodynamic model
+			Element 2: 
+				CpoR_empirical Dimensionless heat capacity of empirical model
+		"""
+
+		if Ts is None:
+			Ts = np.linspace(self.T_low, self.T_high)
+
+		try:
+			iter(Ts)
+		except TypeError:
+			CpoR_statmech = self.thermo_model.get_CpoR(Ts=Ts)
+			CpoR_empirical = self.get_CpoR(Ts=Ts)
+		else:
+			CpoR_statmech = np.zeros_like(Ts)
+			CpoR_empirical = np.zeros_like(Ts)
+			for i, T in enumerate(Ts):
+				CpoR_statmech[i] = self.thermo_model.get_CpoR(Ts=T)
+				CpoR_empirical[i] = self.get_CpoR(Ts=T)
+		return (Ts, CpoR_statmech, CpoR_empirical)
+
+	def compare_HoRT(self, Ts = None):
+		"""
+		Returns the dimensionless enthalpy of the statistical model and the empirical model 
+		Parameters
+			Ts - (N,) ndarray, float, or None
+				Temperatures (in K) to calculate HoRT. If None, generates a list of temperatures between self.T_low and self.T_high
+		Returns
+			tuple of length 3
+			Element 0:
+				Temperature in K
+			Element 1: 
+				HoRT_statmech Dimensionless enthalpy of statistical thermodynamic model
+			Element 2: 
+				HoRT_empirical Dimensionless enthalpy capacity of empirical model
+		"""
+
+		if Ts is None:
+			Ts = np.linspace(self.T_low, self.T_high)
+
+		if self.references is not None:
+			H_offset = self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+
+		try:
+			iter(Ts)
+		except TypeError:
+			HoRT_statmech = self.thermo_model.get_HoRT(Ts=Ts) + H_offset
+			HoRT_empirical = self.get_HoRT(Ts=Ts)
+		else:
+			HoRT_statmech = np.zeros_like(Ts)
+			HoRT_empirical = np.zeros_like(Ts)
+			for i, T in enumerate(Ts):
+				HoRT_statmech[i] = self.thermo_model.get_HoRT(Ts=T) + H_offset[i]
+				HoRT_empirical[i] = self.get_HoRT(Ts=T)
+		return (Ts, HoRT_statmech, HoRT_empirical)
+
+	def compare_SoR(self, Ts = None):
+		"""
+		Returns the dimensionless entropy of the statistical model and the empirical model 
+		Parameters
+			Ts - (N,) ndarray, float, or None
+				Temperatures (in K) to calculate SoR. If None, generates a list of temperatures between self.T_low and self.T_high
+		Returns
+			tuple of length 3
+			Element 0:
+				Temperature in K
+			Element 1: 
+				SoR_statmech Dimensionless entropy of statistical thermodynamic model
+			Element 2: 
+				SoR_empirical Dimensionless entropy of empirical model
+		"""
+
+		if Ts is None:
+			Ts = np.linspace(self.T_low, self.T_high)
+
+		try:
+			iter(Ts)
+		except TypeError:
+			SoR_statmech = self.thermo_model.get_SoR(Ts=Ts)
+			SoR_empirical = self.get_SoR(Ts=Ts)
+		else:
+			SoR_statmech = np.zeros_like(Ts)
+			SoR_empirical = np.zeros_like(Ts)
+			for i, T in enumerate(Ts):
+				SoR_statmech[i] = self.thermo_model.get_SoR(Ts=T)
+				SoR_empirical[i] = self.get_SoR(Ts=T)
+		return (Ts, SoR_statmech, SoR_empirical)
+
+	def compare_GoRT(self, Ts = None):
+		"""
+		Returns the dimensionless Gibbs energy of the statistical model and the empirical model 
+		Parameters
+			Ts - (N,) ndarray, float, or None
+				Temperatures (in K) to calculate GoRT. If None, generates a list of temperatures between self.T_low and self.T_high
+		Returns
+			tuple of length 3
+			Element 0:
+				Temperature in K
+			Element 1: 
+				GoRT_statmech Dimensionless Gibbs energy of statistical thermodynamic model
+			Element 2: 
+				GoRT_empirical Dimensionless Gibbs energy of empirical model
+		"""
+
+		if Ts is None:
+			Ts = np.linspace(self.T_low, self.T_high)
+
+		if self.references is not None:
+			G_offset = self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+
+		try:
+			iter(Ts)
+		except TypeError:
+			GoRT_statmech = self.thermo_model.get_GoRT(Ts=Ts) + G_offset
+			GoRT_empirical = self.get_GoRT(Ts=Ts)
+		else:
+			GoRT_statmech = np.zeros_like(Ts)
+			GoRT_empirical = np.zeros_like(Ts)
+			for i, T in enumerate(Ts):
+				GoRT_statmech[i] = self.thermo_model.get_GoRT(Ts=T) + G_offset[i]
+				GoRT_empirical[i] = self.get_GoRT(Ts=T)
+		return (Ts, GoRT_statmech, GoRT_empirical)

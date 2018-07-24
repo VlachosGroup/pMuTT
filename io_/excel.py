@@ -52,13 +52,9 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 			elif 'atoms' in col:
 				thermo_data = set_atoms(path=cell_data, output_structure=thermo_data)
 			elif 'thermo_model' in col:
-				thermo_data = set_thermo_model(path=cell_data, output_structure=thermo_data)
-			elif 'vib_energy' in col:
-				thermo_data = set_vib_energy(value=cell_data, output_structure=thermo_data)
+				thermo_data = set_thermo_model(model=cell_data, output_structure=thermo_data)
 			elif 'vib_wavenumber' in col:
 				thermo_data = set_vib_wavenumber(value=cell_data, output_structure=thermo_data)				
-			elif 'vib_frequency' in col:
-				thermo_data = set_vib_wavefreq(value=cell_data, output_structure=thermo_data)				
 			else:
 				thermo_data[col] = cell_data
 		thermos_out.append(thermo_data)
@@ -123,43 +119,35 @@ def set_atoms(path, output_structure):
 	output_structure['atoms'] = read(path)
 	return output_structure		
 
-def set_thermo_model(path, output_structure):
+def set_thermo_model(model, output_structure):
 	"""
 	Imports module and assigns the class to output_structure
 
 	Parameters
-		path - str
-			Module to be imported.
-			e.g. Thermochemistry.thermo_model.IdealGasThermo
+		model - str
+			Thermodynamic model to import.
+			Supported Options:
+				IdealGas
+				Harmonic
 		output_structure - dict
 			Structure to assign value. Will assign to output_structure['thermo_model']
 	Returns
 		output_structure - dict
 			output_structure with new thermo model added
 	"""
-	module = '.'.join(path.split('.')[:-1])
-	thermo_model = path.split('.')[-1]
-	exec('from {} import {}'.format(module, thermo_model))
-	exec("output_structure['thermo_model'] = {}".format(thermo_model))
-	return output_structure
-
-def set_vib_energy(value, output_structure):
-	"""
-	Parses element header and assigns to output_structure['vib_energies']
-	
-	Parameters
-		value - float
-			Vibrational energy in eV
-		output_structure - dict
-			Structure to assign value. Will assign to output_structure['elements'][element]
-	Returns
-		dict
-			output_structure with new vibration added
-	"""
-	try:
-		output_structure['vib_energies'].append(value)
-	except (NameError, KeyError):
-		output_structure['vib_energies'] = [value]
+	model = model.lower()
+	if model == 'idealgas':
+		import Thermochemistry.models.statmech.idealgasthermo as idealgasthermo
+		output_structure['thermo_model'] = idealgasthermo.IdealGasThermo
+	elif model == 'harmonic':
+		import Thermochemistry.models.statmech.harmonicthermo as harmonicthermo
+		output_structure['thermo_model'] = harmonicthermo.HarmonicThermo
+	else:
+		raise ValueError('Unsupported thermodynamic model, {}. See docstring of Thermochemistry.io_.excel.set_thermo_model for supported models.'.format(model))
+	# module = '.'.join(path.split('.')[:-1])
+	# thermo_model = path.split('.')[-1]
+	# exec('from {} import {}'.format(module, thermo_model))
+	# exec("output_structure['thermo_model'] = {}".format(thermo_model))
 	return output_structure
 
 def set_vib_wavenumber(value, output_structure):
@@ -175,19 +163,9 @@ def set_vib_wavenumber(value, output_structure):
 		dict
 			output_structure with new vibration added
 	"""
-	return set_vib_energy(value=value*c.c('cm/s')*c.h('eV s'), output_structure=output_structure)
-
-def set_vib_frequency(value, output_structure):
-	"""
-	Parses element header and assigns to output_structure['vib_energies']
-	
-	Parameters
-		value - float
-			Vibrational frequency in 1/s
-		output_structure - dict
-			Structure to assign value. Will assign to output_structure['elements'][element]
-	Returns
-		dict
-			output_structure with new vibration added
-	"""
-	return set_vib_energy(value=value*c.h('eV s'), output_structure=output_structure)
+	vib_energy = value*c.c('cm/s')*c.h('eV s')
+	try:
+		output_structure['vib_energies'].append(vib_energy)
+	except (NameError, KeyError):
+		output_structure['vib_energies'] = [vib_energy]
+	return output_structure

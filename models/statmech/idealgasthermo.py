@@ -127,7 +127,7 @@ class IdealGasThermo:
 			SoR = self.model.get_entropy(temperature=Ts, pressure=P*c.convert_unit(from_='atm', to='Pa'), verbose=verbose)/c.R('eV/K')
 		else:
 			SoR = np.zeros_like(Ts)
-			for i, T in enumerate(SoR):
+			for i, T in enumerate(Ts):
 				SoR[i] = self.model.get_entropy(temperature=T, pressure=P*c.convert_unit(from_='atm', to='Pa'), verbose=verbose)/c.R('eV/K')
 		return SoR
 
@@ -152,6 +152,6 @@ class IdealGasThermo:
 			GoRT = self.model.get_gibbs_energy(temperature=Ts, pressure=P*c.convert_unit(from_='bar', to='Pa'), verbose=verbose)/(c.kb('eV/K') * Ts)
 		else:
 			GoRT = np.zeros_like(Ts)
-			for i, T in enumerate(GoRT):
+			for i, T in enumerate(Ts):
 				GoRT[i] = self.model.get_gibbs_energy(temperature=T, pressure=P*c.convert_unit(from_='bar', to='Pa'), verbose=verbose)/(c.kb('eV/K') * T)
 		return GoRT

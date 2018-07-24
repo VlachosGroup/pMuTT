@@ -1,47 +1,33 @@
-def write_thermdat(filename, thermdats):
+def write_thermdat(filename, nasa_species):
     """
     Writes thermdats in the Chemkin format
 
     Parameters
         filename - str
             Output file name
-        thermdats - list 
-            List of Thermochemistry.models.empirical.thermdat.Thermdat objects
+        nasa_species - list 
+            List of Thermochemistry.models.empirical.nasa.Nasa objects
     """
     with open(filename, 'w') as f_ptr:
         f_ptr.write('THERMO ALL\n       100       500      1500\n')
         
         float_string = '%.8E'    
-        for thermdat_specie in thermdats:
-            _write_line1(f_ptr, thermdat_specie)
-            _write_line2(f_ptr, thermdat_specie, float_string)
-            _write_line3(f_ptr, thermdat_specie, float_string)
-            _write_line4(f_ptr, thermdat_specie, float_string)
+        for nasa_specie in nasa_species:
+            _write_line1(f_ptr, nasa_specie)
+            _write_line2(f_ptr, nasa_specie, float_string)
+            _write_line3(f_ptr, nasa_specie, float_string)
+            _write_line4(f_ptr, nasa_specie, float_string)
         f_ptr.write('END')    
         
-def _write_line1(thermdat_file, thermdat_specie):
+def _write_line1(thermdat_file, nasa_specie):
     """
     Writes the first line of the thermdat file, which contains information on the composition, phase, and temperature ranges
 
     Parameters
         thermdat_file - file object
             Thermdat file that is being written to
-        thermdat_specie - Thermochemistry.models.empirical.thermdat.Thermdat object
+        nasa_specie - Thermochemistry.models.empirical.thermdat.Thermdat object
     """
-    # line1_pos = [
-    #     24, # Element 1
-    #     28, # Element 1#
-    #     29, # Element 2
-    #     33, # Element 2#
-    #     34, # Element 3
-    #     38, # Element 3#
-    #     39, # Element 4
-    #     43, # Element 4#
-    #     44, # Phase
-    #     45, # T_low
-    #     55, # T_high
-    #     65, # T_mid
-    #     79] # Line num
     element_pos = [
     	24, #Element 1
     	28, #Element 1#
@@ -60,18 +46,18 @@ def _write_line1(thermdat_file, thermdat_specie):
 
     #Adjusts the position based on the number of elements
     line1_pos = []
-    for element, val in thermdat_specie.elements.items():
+    for element, val in nasa_specie.elements.items():
     	if val > 0.:
     		line1_pos.append(element_pos.pop(0))
     		line1_pos.append(element_pos.pop(0))
     line1_pos.extend(temperature_pos)
 
     #Creating a list of the text to insert
-    line1_fields = [thermdat_specie.name]
-    for element, val in thermdat_specie.elements.items():
+    line1_fields = [nasa_specie.name]
+    for element, val in nasa_specie.elements.items():
     	if val > 0.:
 	        line1_fields.extend([element, '%d' % val])
-    line1_fields.extend([thermdat_specie.phase, '%.1f' % thermdat_specie.T_low, '%.1f' % thermdat_specie.T_high, '%.1f' % thermdat_specie.T_mid])
+    line1_fields.extend([nasa_specie.phase, '%.1f' % nasa_specie.T_low, '%.1f' % nasa_specie.T_high, '%.1f' % nasa_specie.T_mid])
 
     #Write the content with appropriate spacing
     line = ''
@@ -81,42 +67,42 @@ def _write_line1(thermdat_file, thermdat_specie):
     line += '1\n'
     thermdat_file.write(line)
 
-def _write_line2(thermdat_file, thermdat_specie, float_string):
+def _write_line2(thermdat_file, nasa_specie, float_string):
     """
     Writes the second line of the thermdat file
     """
     line = ''
     for i in range(5):
-        a = thermdat_specie.a_high[i]
+        a = nasa_specie.a_high[i]
         if a >= 0:
             line += ' '            
         line += float_string % a
     line += '    2\n'
     thermdat_file.write(line)
 
-def _write_line3(thermdat_file, thermdat_specie, float_string):
+def _write_line3(thermdat_file, nasa_specie, float_string):
     """
     Writes the third line of the thermdat file
     """
     line = ''
     for i in range(5):
         if i < 2:
-            a = thermdat_specie.a_high[i+5]
+            a = nasa_specie.a_high[i+5]
         else:
-            a = thermdat_specie.a_low[i-2]
+            a = nasa_specie.a_low[i-2]
         if a >= 0:
             line += ' '
         line += float_string % a
     line += '    3\n'
     thermdat_file.write(line)
 
-def _write_line4(thermdat_file, thermdat_specie, float_string):
+def _write_line4(thermdat_file, nasa_specie, float_string):
     """
     Writes the fourth line of the thermdat file
     """
     line = ''
     for i in range(3,7):
-        a = thermdat_specie.a_low[i]
+        a = nasa_specie.a_low[i]
         if a >= 0:
             line += ' '
         line += float_string % a

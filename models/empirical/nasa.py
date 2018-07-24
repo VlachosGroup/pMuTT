@@ -6,9 +6,9 @@ from warnings import warn
 from Thermochemistry import constants as c
 from Thermochemistry.models.empirical import BaseThermo
 
-class Thermdat(BaseThermo):
+class Nasa(BaseThermo):
 	"""
-	Stores the information for an individual thermdat specie
+	Stores the information for an individual nasa specie
 	Inherits from Thermochemistry.models.empirical.BaseThermo
 
 	The thermodynamic properties are calculated using the following form:
@@ -28,13 +28,15 @@ class Thermdat(BaseThermo):
 		a_high - (7,) ndarray
 			NASA polynomial to use between T_mid and T_high
 	"""
-	def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7), a_high=np.zeros(7), **kwargs):
+	def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7), a_high=np.zeros(7), Ts=None, CpoR=None, SoR_dft=None, **kwargs):
 		super().__init__(**kwargs)
 		self.T_low = T_low
 		self.T_mid = T_mid
 		self.T_high = T_high
 		self.a_low = a_low
 		self.a_high = a_high
+		if np.array_equal(a_low, np.zeros(7)) and np.array_equal(a_high, np.zeros(7)):
+			self.fit(Ts=Ts, CpoR=CpoR, SoR_dft=SoR_dft)
 
 	def get_a(self, T):
 		"""
@@ -148,7 +150,7 @@ class Thermdat(BaseThermo):
 				GoRT[i] = get_nasa_GoRT(a=a, T=T)
 		return GoRT
 
-	def calc_nasa(self, T_low=None, T_high=None, Ts=None, CpoR=None, T_ref=None, HoRT_ref=None, SoR_ref=None):
+	def fit(self, T_low=None, T_high=None, Ts=None, CpoR=None, T_ref=None, HoRT_dft=None, SoR_dft=None, references=None):
 		"""
 		Calculates the NASA polynomials using internal attributes
 
@@ -158,16 +160,18 @@ class Thermdat(BaseThermo):
 			T_high - float
 				High temperature to fit. If not specified, uses T_high attribute
 			Ts - (N,) ndarray
-				Temperatures in K used for fitting CpoR. If not specified, calculates using self.get_CpoR
+				Temperatures in K used for fitting CpoR.
 			CpoR - (N,) ndarray
-				Dimensionless heat capacity corresponding to T
+				Dimensionless heat capacity corresponding to T. If not specified, calculates using self.thermo_model.get_CpoR
 			T_ref - float
-				Reference temperature in K used for fitting HoRT_ref and SoR_ref. If not specified, uses T_ref attribute
-			HoRT_ref - float
-				Dimensionless enthalpy that corresponds to T_ref. If not specified, uses HoRT_ref attribute.
-				If the HoRT_ref attribute is not specified, uses self.get_HoRT
+				Reference temperature in K used fitting empirical coefficients. If not specified, uses T_ref attribute
+			HoRT_dft - float
+				Dimensionless enthalpy calculated using DFT that corresponds to T_ref. If not specified, uses HoRT_dft attribute.
+				If the HoRT_dft attribute is not specified, uses self.thermo_model.get_HoRT
 			SoR_ref - float
-				Dimensionless entropy that corresponds to T_ref. If not specified, uses self.get_SoR
+				Dimensionless entropy that corresponds to T_ref. If not specified, uses self.thermo_model.get_SoR
+			references - Thermochemistry.models.empirical.References object
+				Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.
 		"""
 
 		'''
@@ -185,12 +189,14 @@ class Thermdat(BaseThermo):
 		else:
 			self.T_high = T_high
 		
-		#Get temperatures
-		if Ts is None:
-			Ts = np.linspace(T_low, T_high)
-
-		#Get heat capacity data
-		if CpoR is None:
+		#Get temperatures and heat capacity data
+		if CpoR is not None:
+			if Ts is None:
+				#If heat capacities are specified but temperatures aren't
+				raise ValueError('Must specify temperatures corresponding to CpoR.')
+		else:
+			if Ts is None:
+				Ts = np.linspace(T_low, T_high)
 			CpoR = self.thermo_model.get_CpoR(Ts=Ts)
 
 		#Get reference temperature
@@ -198,15 +204,28 @@ class Thermdat(BaseThermo):
 			T_ref = self.T_ref
 
 		#Get reference enthalpy
-		if HoRT_ref is None:
-			if self.HoRT_ref is None:
-				HoRT_ref = self.thermo_model.get_HoRT(T=T_ref)
-			else:
-				HoRT_ref = self.HoRT_ref
+		if HoRT_dft is None:
+			if self.HoRT_dft is None:
+				self.HoRT_dft = self.thermo_model.get_HoRT(Ts=T_dft)
+			HoRT_dft = self.HoRT_dft
+
 
 		#Get reference entropy
-		if SoR_ref is None:
-			SoR_ref = self.thermo_model.get_SoR(Ts=T_ref)
+		if SoR_dft is None:
+			SoR_dft = self.thermo_model.get_SoR(Ts=T_ref)
+
+		#Get references
+		if references is not None:
+			self.references = references
+
+		#Set HoRT_ref
+		#If references specified
+		if self.references is not None:
+			self.HoRT_ref = HoRT_dft + self.references.get_specie_offset(self.elements)
+		#If dimensionless DFT enthalpy specified
+		elif HoRT_dft is not None:
+			self.HoRT_ref = HoRT_dft
+		HoRT_ref = self.HoRT_ref
 
 		#Reinitialize coefficients
 		self.a_low = np.zeros(7)
@@ -217,7 +236,7 @@ class Thermdat(BaseThermo):
 		'''
 		self.fit_CpoR(Ts=Ts, CpoR=CpoR)
 		self.fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref)
-		self.fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref)
+		self.fit_SoR(T_ref=T_ref, SoR_ref=SoR_dft)
 
 	def fit_CpoR(self, Ts, CpoR):
 		"""
@@ -362,7 +381,7 @@ def get_nasa_HoRT(a, T):
 		float
 			Dimensionless enthalpy
 	"""
-	T_arr = np.array([1., T/2., T**2./3., T**3./4., T**4./5., 1./T, 0.])
+	T_arr = np.array([1., T/2., (T**2)/3., (T**3)/4., (T**4)/5., 1./T, 0.])
 	return np.dot(a, T_arr)
 
 def get_nasa_SoR(a, T):
@@ -379,7 +398,7 @@ def get_nasa_SoR(a, T):
 		float
 			Dimensionless entropy
 	"""
-	T_arr = np.array([np.log(T), T, T**2./2., T**3./3., T**4./4., 0., 1.])
+	T_arr = np.array([np.log(T), T, (T**2)/2., (T**3)/3., (T**4)/4., 0., 1.])
 	return np.dot(a, T_arr)
 
 def get_nasa_GoRT(a, T):
