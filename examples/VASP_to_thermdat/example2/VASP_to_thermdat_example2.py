@@ -17,8 +17,8 @@ surfaces_path = './surfaces.xlsx'
 
 #Input information
 species_path = './input_data.xlsx'
-T_low = 300.
-T_high = 1000. #K
+T_low = 100.
+T_high = 1500. #K
 
 #Output information
 thermdat_path = './thermdat'

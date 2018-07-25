@@ -71,7 +71,7 @@ class TestReferences(unittest.TestCase):
 
 	def test_calc_offset(self):
 		expected_element_offset = {'H': -123.10868373, 'O': -186.72503046}
-		calculated_element_offset = self.references.element_offset
+		calculated_element_offset = self.references.HoRT_element_offset
 
 		#Assess whether the keys are the same
 		self.assertSetEqual(set(expected_element_offset.keys()), set(calculated_element_offset.keys()))
@@ -81,9 +81,9 @@ class TestReferences(unittest.TestCase):
 
 	def test_get_specie_offset(self):
 		elements = {'H': 2, 'O': 2}
-		self.assertAlmostEqual(self.references.get_specie_offset(elements=elements), 619.667428373883)
+		self.assertAlmostEqual(self.references.get_HoRT_offset(elements=elements), 619.667428373883)
 		with self.assertWarns(RuntimeWarning):
-			self.assertEqual(self.references.get_specie_offset(elements={'non-referenced element': 1}), 0.)
+			self.assertEqual(self.references.get_HoRT_offset(elements={'non-referenced element': 1}), 0.)
 
 
 if __name__ == '__main__':

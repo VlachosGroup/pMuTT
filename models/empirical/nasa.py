@@ -221,7 +221,7 @@ class Nasa(BaseThermo):
 		#Set HoRT_ref
 		#If references specified
 		if self.references is not None:
-			self.HoRT_ref = HoRT_dft + self.references.get_specie_offset(self.elements)
+			self.HoRT_ref = HoRT_dft + self.references.get_HoRT_offset(self.elements, Ts=self.T_ref)
 		#If dimensionless DFT enthalpy specified
 		elif HoRT_dft is not None:
 			self.HoRT_ref = HoRT_dft

@@ -78,7 +78,7 @@ class BaseThermo:
 			if references is None:
 				self.HoRT_ref = self.HoRT_dft
 			else:
-				self.HoRT_ref = self.HoRT_dft + references.get_specie_offset(elements=elements)
+				self.HoRT_ref = self.HoRT_dft + references.get_HoRT_offset(elements=elements, Ts=self.T_ref)
 		else:
 			self.HoRT_ref = HoRT_ref
 
@@ -213,7 +213,7 @@ class BaseThermo:
 
 		H_plot = self.thermo_model.get_HoRT(Ts=Ts)
 		if self.references is not None:
-			H_plot += self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+			H_plot += self.references.get_HoRT_offset(elements=self.elements, Ts=Ts)
 
 		if H_units is None:
 			plt.ylabel('H/RT')
@@ -242,7 +242,7 @@ class BaseThermo:
 		plt.xlabel('Temperature (K)')
 		G_plot = self.thermo_model.get_GoRT(Ts=Ts)
 		if self.references is not None:
-			G_plot += self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+			G_plot += self.references.get_HoRT_offset(elements=self.elements, Ts=Ts)
 
 		if G_units is None:
 			plt.ylabel('G/RT')
@@ -395,7 +395,7 @@ class BaseThermo:
 			Ts = np.linspace(self.T_low, self.T_high)
 
 		if self.references is not None:
-			H_offset = self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+			H_offset = self.references.get_HoRT_offset(elements=self.elements, Ts=Ts)
 
 		try:
 			iter(Ts)
@@ -462,7 +462,7 @@ class BaseThermo:
 			Ts = np.linspace(self.T_low, self.T_high)
 
 		if self.references is not None:
-			G_offset = self.references.get_specie_offset(elements=self.elements) * c.T0('K')/Ts
+			G_offset = self.references.get_HoRT_offset(elements=self.elements, Ts=Ts)
 
 		try:
 			iter(Ts)

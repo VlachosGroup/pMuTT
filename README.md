@@ -302,3 +302,15 @@ def get_CpoR(self, Ts):
 			CpoR[i] = get_nasa_CpoR(a=a, T=T)
 	return CpoR
 ```
+
+## Testing
+In order to reduce errors, unit tests should be written for any new code created. Write tests you create in the test folder using the [unittest library](https://docs.python.org/3/library/unittest.html) to write our tests. Before pushing, you can run all the unit tests by typing `python -m unittest` in a command line prompt when the current working directory is the tests folder. A sample output is shown below.
+
+```
+python -m unittest
+.........................
+----------------------------------------------------------------------
+Ran 25 tests in 0.020s
+
+OK
+```
