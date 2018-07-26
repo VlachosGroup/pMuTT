@@ -141,6 +141,7 @@ def set_thermo_model(model, output_structure):
 			Supported Options:
 				IdealGas
 				Harmonic
+				HinderedRotor
 		output_structure - dict
 			Structure to assign value. Will assign to output_structure['thermo_model']
 	Returns
@@ -154,6 +155,9 @@ def set_thermo_model(model, output_structure):
 	elif model == 'harmonic':
 		import Thermochemistry.models.statmech.harmonicthermo as harmonicthermo
 		output_structure['thermo_model'] = harmonicthermo.HarmonicThermo
+	elif model == 'hinderedrotor':
+		import Thermochemistry.models.statmech.hinderedrotor as hinderedrotor
+		output_structure['thermo_model'] = hinderedrotor.HinderedRotor	
 	else:
 		raise ValueError('Unsupported thermodynamic model, {}. See docstring of Thermochemistry.io_.excel.set_thermo_model for supported models.'.format(model))
 	# module = '.'.join(path.split('.')[:-1])
