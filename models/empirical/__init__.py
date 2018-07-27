@@ -66,16 +66,16 @@ class BaseThermo:
 		else:
 			#If it's an object that has already been initialized
 			self.thermo_model = thermo_model
-
-		#Calculate dimensionless DFT energy using ideal gas model
-		if HoRT_dft is None:
+		
+		#Calculate dimensionless DFT energy using thermo model
+		if (HoRT_dft is None) and (self.thermo_model is not None):
 			self.HoRT_dft = self.thermo_model.get_HoRT(Ts=self.T_ref)
 		else:
 			self.HoRT_dft = HoRT_dft
 
 		#Assign self.HoRT_ref
 		if HoRT_ref is None:
-			if references is None:
+			if (references is None) or (self.HoRT is None):
 				self.HoRT_ref = self.HoRT_dft
 			else:
 				self.HoRT_ref = self.HoRT_dft + references.get_HoRT_offset(elements=elements, Ts=self.T_ref)
