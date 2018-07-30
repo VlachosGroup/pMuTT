@@ -10,18 +10,24 @@ class Zacros(BaseThermo):
     Inherits from Thermochemistry.models.empirical.BaseThermo
     """
     def __init__(self, A_st=None, atoms=None, symmetrynumber=None,
-                 inertia=None, geometry=None, vib_energies=None, **kwargs):
+                 inertia=None, geometry=None, vib_energies=None,
+                 potentialenergy=None, **kwargs):
         super().__init__(atoms=atoms, symmetrynumber=symmetrynumber,
                          geometry=geometry, vib_energies=vib_energies,
-                         **kwargs)
+                         potentialenergy=potentialenergy, **kwargs)
         self.A_st = A_st
         self.atoms = atoms
         self.geometry = geometry
         self.symmetrynumber = symmetrynumber
         self.inertia = inertia
-        self.theta = np.array(vib_energies) * c.kb('eV/K')
+        self.etotal = potentialenergy
+        self.vib_energies = vib_energies
+        self.theta = np.array(vib_energies) / c.kb('eV/K')
+        self.zpe = sum(np.array(vib_energies)/2.) *\
+            c.convert_unit(from_='eV', to='kcal')*c.Na
         if np.sum(vib_energies) != 0:
-            self.q_vib = np.product(np.divide(1, (1 - np.exp(-self.theta/c.T0('K')))))
+            self.q_vib = np.product(np.divide(1, (1 - np.exp(-self.theta /
+                                                             c.T0('K')))))
         if self.phase == 'G':
             if self.inertia is not None:
                 self.I3 = self.inertia
@@ -42,4 +48,4 @@ class Zacros(BaseThermo):
         if self.A_st is not None:
             self.MW = mw(self.elements)*c.convert_unit(from_='g', to='kg')
             self.q_trans2D = self.A_st * (2*np.pi*self.MW*c.kb('J/K') *
-                                          c.T0('K'))/c.h('J s')**2
+                                          c.T0('K'))/c.h('J s')**2/c.Na
