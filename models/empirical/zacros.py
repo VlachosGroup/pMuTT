@@ -46,6 +46,6 @@ class Zacros(BaseThermo):
         else:
             self.q_rot = 0.
         if self.A_st is not None:
-            self.MW = mw(self.elements)*c.convert_unit(from_='g', to='kg')
+            self.MW = mw(self.elements)*c.convert_unit(from_='g', to='kg')/c.Na
             self.q_trans2D = self.A_st * (2*np.pi*self.MW*c.kb('J/K') *
-                                          c.T0('K'))/c.h('J s')**2/c.Na
+                                          c.T0('K'))/c.h('J s')**2
