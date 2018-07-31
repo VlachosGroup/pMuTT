@@ -75,7 +75,7 @@ class BaseThermo:
 
 		#Assign self.HoRT_ref
 		if HoRT_ref is None:
-			if (references is None) or (self.HoRT is None):
+			if (references is None) or (self.HoRT_dft is None):
 				self.HoRT_ref = self.HoRT_dft
 			else:
 				self.HoRT_ref = self.HoRT_dft + references.get_HoRT_offset(elements=elements, Ts=self.T_ref)
