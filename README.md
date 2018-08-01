@@ -1,4 +1,4 @@
-# Thermochemistry
+# **Py**thon **Mu**ltiscale **T**hermochemistry **T**oolbox (PyMuTT)
 This repository contains a Python library for Thermochemistry developed by the Vlachos Research Group at the University of Delaware. This code was originally developed to convert *ab-initio* data from DFT to observable thermodynamic properties such as heat capacity, enthalpy, entropy, and Gibbs energy. These properties can be fit to empirical equations and written to different formats. Check the [Wiki](https://github.com/VlachosGroup/Thermochemistry/wiki) for more detailed explanations.
 
 ## Developers
