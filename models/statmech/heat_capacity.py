@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.thermo_model.heat_capacity
+PyMuTT.thermo_model.heat_capacity
 Vlachos group code for common heat capacity calculations.
 Created on Mon Jul 9 12:40:00 2018
 """
 import numpy as np
-from Thermochemistry import constants as c
+from PyMuTT import constants as c
 
 def get_CvoR_trans(degrees=3):
 	"""

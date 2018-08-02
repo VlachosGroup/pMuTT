@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.io
+PyMuTT.io
 Vlachos group code to read from/write to csv files of particular format.
 Created on Fri Jul 7 12:40:00 2018
 """
@@ -9,9 +9,9 @@ import numpy as np
 import pandas as pd
 import os
 from ase.io import read
-from Thermochemistry import constants as c
-from Thermochemistry import parse_formula
-from Thermochemistry.models.empirical import BaseThermo
+from PyMuTT import constants as c
+from PyMuTT import parse_formula
+from PyMuTT.models.empirical import BaseThermo
 
 def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 	"""
@@ -150,16 +150,16 @@ def set_thermo_model(model, output_structure):
 	"""
 	model = model.lower()
 	if model == 'idealgas':
-		import Thermochemistry.models.statmech.idealgasthermo as idealgasthermo
+		import PyMuTT.models.statmech.idealgasthermo as idealgasthermo
 		output_structure['thermo_model'] = idealgasthermo.IdealGasThermo
 	elif model == 'harmonic':
-		import Thermochemistry.models.statmech.harmonicthermo as harmonicthermo
+		import PyMuTT.models.statmech.harmonicthermo as harmonicthermo
 		output_structure['thermo_model'] = harmonicthermo.HarmonicThermo
 	elif model == 'hinderedrotor':
-		import Thermochemistry.models.statmech.hinderedrotor as hinderedrotor
+		import PyMuTT.models.statmech.hinderedrotor as hinderedrotor
 		output_structure['thermo_model'] = hinderedrotor.HinderedRotor	
 	else:
-		raise ValueError('Unsupported thermodynamic model, {}. See docstring of Thermochemistry.io_.excel.set_thermo_model for supported models.'.format(model))
+		raise ValueError('Unsupported thermodynamic model, {}. See docstring of PyMuTT.io_.excel.set_thermo_model for supported models.'.format(model))
 	# module = '.'.join(path.split('.')[:-1])
 	# thermo_model = path.split('.')[-1]
 	# exec('from {} import {}'.format(module, thermo_model))

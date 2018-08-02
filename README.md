@@ -1,5 +1,5 @@
-# **Py**thon **Mu**ltiscale **T**hermochemistry **T**oolbox (PyMuTT)
-This repository contains a Python library for Thermochemistry developed by the Vlachos Research Group at the University of Delaware. This code was originally developed to convert *ab-initio* data from DFT to observable thermodynamic properties such as heat capacity, enthalpy, entropy, and Gibbs energy. These properties can be fit to empirical equations and written to different formats. Check the [Wiki](https://github.com/VlachosGroup/Thermochemistry/wiki) for more detailed explanations.
+# Python Multiscale Thermochemistry Toolbox (PyMuTT)
+The **Py**thon **Mu**ltiscale **T**hermochemistry **T**oolbox (PyMuTT) is a Python library for Thermochemistry developed by the Vlachos Research Group at the University of Delaware. This code was originally developed to convert *ab-initio* data from DFT to observable thermodynamic properties such as heat capacity, enthalpy, entropy, and Gibbs energy. These properties can be fit to empirical equations and written to different formats. Check the [Wiki](https://github.com/VlachosGroup/PyMuTT/wiki) for more detailed explanations.
 
 ## Useful Topics
 - [Outline to convert DFT data to empirical forms](https://github.com/VlachosGroup/PyMuTT/wiki/Converting-DFT-Generated-Data-to-Empirical-Models)
@@ -24,7 +24,7 @@ This repository contains a Python library for Thermochemistry developed by the V
 1. Install the dependencies
 2. Download the repository to your local machine
 3. Add to parent folder to PYTHONPATH
-4. Run the tests by navigating to the [Thermochemistry/tests](https://github.com/VlachosGroup/Thermochemistry/tree/master/tests) folder and inputting the following command:
+4. Run the tests by navigating to the [tests directory](https://github.com/VlachosGroup/PyMuTT/tree/master/tests) in a command-line interface and inputting the following command:
 ```
 python -m unittest
 ```
@@ -40,4 +40,4 @@ OK
 5. Look at [examples using the code](https://github.com/VlachosGroup/PyMuTT/tree/master/examples)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/VlachosGroup/Thermochemistry/blob/master/LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/VlachosGroup/PyMuTT/blob/master/LICENSE.md) file for details.

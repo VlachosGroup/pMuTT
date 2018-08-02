@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.references
+PyMuTT.references
 Vlachos group code for reference species.
 Created on Sun Jul 8 13:50:00 2018
 """
 from warnings import warn
 import numpy as np
-from Thermochemistry.models.empirical import BaseThermo
+from PyMuTT.models.empirical import BaseThermo
 
 class References:
 	"""

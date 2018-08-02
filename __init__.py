@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry
+PyMuTT
 Vlachos group code to read, write, and generate thermochemical data.
 Created on Fri Jul 7 12:40:00 2018
 """
 
 import re
 import inspect
-from Thermochemistry import constants as c
+from PyMuTT import constants as c
 
 def _get_expected_arguments(fn):
 	"""
@@ -84,7 +84,7 @@ def get_molecular_weight(elements):
 			Elemental composition of species.
 			If a dictionary is passed, the keys are the element symbol, atomic number, 
 			or element name and the value is the stoichiometric coefficient.
-			If a string is passed, the formula will be guessed using Thermochemistry.parse_formula
+			If a string is passed, the formula will be guessed using PyMuTT.parse_formula
 
 	Returns
 		molecular_weight - float

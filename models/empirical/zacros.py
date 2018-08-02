@@ -1,13 +1,13 @@
 import numpy as np
-from Thermochemistry import constants as c
-from Thermochemistry import get_molecular_weight as mw
-from Thermochemistry.models.empirical import BaseThermo
+from PyMuTT import constants as c
+from PyMuTT import get_molecular_weight as mw
+from PyMuTT.models.empirical import BaseThermo
 
 
 class Zacros(BaseThermo):
     """
     Stores the information for an individual nasa specie
-    Inherits from Thermochemistry.models.empirical.BaseThermo
+    Inherits from PyMuTT.models.empirical.BaseThermo
     """
     def __init__(self, A_st=None, atoms=None, symmetrynumber=None,
                  inertia=None, geometry=None, vib_energies=None,

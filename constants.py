@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.constants
+PyMuTT.constants
 Contains universal constants for catalysis research
 Created on Fri Jul 7 12:31:00 2018
 """
@@ -49,7 +49,7 @@ def R(units):
     try:
         return R_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit for R: {}. Use help(Thermochemistry.constants.R) for accepted units.'.format(units))
+        raise KeyError('Invalid unit for R: {}. Use help(PyMuTT.constants.R) for accepted units.'.format(units))
     
 def h(units, bar = False):
     """
@@ -75,7 +75,7 @@ def h(units, bar = False):
     try:
         h_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.h) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.h) for accepted units.'.format(units))
 
     if bar:
         return h_dict[units]/(2.*np.pi)
@@ -105,7 +105,7 @@ def kb(units):
     try:
         return kb_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.kb) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.kb) for accepted units.'.format(units))
 
 def c(units):
     """
@@ -126,7 +126,7 @@ def c(units):
     try:
         return c_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.c) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.c) for accepted units.'.format(units))
 
 def m_e(units):
     """
@@ -149,7 +149,7 @@ def m_e(units):
     try:
         return m_e_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.m_e) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.m_e) for accepted units.'.format(units))
 
 def m_p(units):
     """
@@ -171,7 +171,7 @@ def m_p(units):
     try:
         return m_p_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.m_p) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.m_p) for accepted units.'.format(units))
 
 def P0(units):
     """
@@ -205,7 +205,7 @@ def P0(units):
     try:
         return P0_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.P0) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.P0) for accepted units.'.format(units))
 
 def T0(units):
     """
@@ -230,7 +230,7 @@ def T0(units):
     try:
         return T0_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(Thermochemistry.constants.T0) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.T0) for accepted units.'.format(units))
 
 
 Na = 6.02214086e23 #Avogadro number
@@ -394,14 +394,14 @@ def convert_unit(num = 1., from_ = None, to = None):
 
     #Check if the entry exists  
     if type_dict.get(from_) is None:
-        raise ValueError("%r not a supported unit. Use help(Thermochemistry.constants.convert_unit) for accepted units." % from_)
+        raise ValueError("%r not a supported unit. Use help(PyMuTT.constants.convert_unit) for accepted units." % from_)
     if type_dict.get(to) is None:
-        raise ValueError("%r not a supported unit. Use help(Thermochemistry.constants.convert_unit) for accepted units." % to)
+        raise ValueError("%r not a supported unit. Use help(PyMuTT.constants.convert_unit) for accepted units." % to)
     #Check that the unit types are the same
     from_type = type_dict[from_]
     to_type = type_dict[to]
     if from_type != to_type:
-        raise ValueError("%r [Type %r] not compatible with %r [Type %r]. Use help(Thermochemistry.constants.convert_unit) for accepted units." % (from_, from_type, to, to_type))
+        raise ValueError("%r [Type %r] not compatible with %r [Type %r]. Use help(PyMuTT.constants.convert_unit) for accepted units." % (from_, from_type, to, to_type))
     elif from_type == 'temp':
         return num + unit_dict[to] - unit_dict[from_]
     else:

@@ -1,5 +1,5 @@
 """
-Thermochemistry.models.statmech.basethermo
+PyMuTT.models.statmech.basethermo
 Vlachos group code for thermodynamic models.
 Created on Tues Jul 10 12:40:00 2018
 """
@@ -7,8 +7,8 @@ Created on Tues Jul 10 12:40:00 2018
 import inspect
 from matplotlib import pyplot as plt
 import numpy as np
-from Thermochemistry import _pass_expected_arguments
-from Thermochemistry import constants as c
+from PyMuTT import _pass_expected_arguments
+from PyMuTT import constants as c
 from pprint import pprint
 
 class BaseThermo:
@@ -32,7 +32,7 @@ class BaseThermo:
 				'H': 4,
 				'O': 1,
 			}
-		thermo_model - Thermochemistry.thermo_model class or custom class
+		thermo_model - PyMuTT.thermo_model class or custom class
 			Class should have the following methods:
 				get_CpoR
 				get_HoRT
@@ -45,7 +45,7 @@ class BaseThermo:
 			coefficients.
 		HoRT_ref - float
 			Reference dimensionless enthalpy corresponding to T_ref. 
-		references - Thermochemistry.models.empirical.References object
+		references - PyMuTT.models.empirical.References object
 			Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.
 		notes - str
 			Any additional details you would like to include such as computational set up.
@@ -91,16 +91,16 @@ class BaseThermo:
 			T_high - float
 				Upper temperature in K. If not specified, T_high attribute used
 			Cp_units - str
-				Units to plot heat capacity. See Thermochemistry.constants.R for accepted units. 
+				Units to plot heat capacity. See PyMuTT.constants.R for accepted units. 
 				If not specified, dimensionless units used.
 			H_units - str
-				Units to plot enthalpy. See Thermochemistry.constants.R for accepted units but omit the '/K' (e.g. J/mol).
+				Units to plot enthalpy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
 			S_units - str
-				Units to plot entropy. See Thermochemistry.constants.R for accepted units. 
+				Units to plot entropy. See PyMuTT.constants.R for accepted units. 
 				If not specified, dimensionless units used.
 			G_units - str
-				Units to plot Gibbs free energy. See Thermochemistry.constants.R for accepted units but omit the '/K' (e.g. J/mol).
+				Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
 		"""
 		if T_low is None:
@@ -172,16 +172,16 @@ class BaseThermo:
 			T_high - float
 				Upper temperature in K. If not specified, T_high attribute used
 			Cp_units - str
-				Units to plot heat capacity. See Thermochemistry.constants.R for accepted units. 
+				Units to plot heat capacity. See PyMuTT.constants.R for accepted units. 
 				If not specified, dimensionless units used.
 			H_units - str
-				Units to plot enthalpy. See Thermochemistry.constants.R for accepted units but omit the '/K' (e.g. J/mol).
+				Units to plot enthalpy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
 			S_units - str
-				Units to plot entropy. See Thermochemistry.constants.R for accepted units. 
+				Units to plot entropy. See PyMuTT.constants.R for accepted units. 
 				If not specified, dimensionless units used.
 			G_units - str
-				Units to plot Gibbs free energy. See Thermochemistry.constants.R for accepted units but omit the '/K' (e.g. J/mol).
+				Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
 		"""
 		if T_low is None:
@@ -260,16 +260,16 @@ class BaseThermo:
 			T_high - float
 				Upper temperature in K. If not specified, T_high attribute used
 			Cp_units - str
-				Units to plot heat capacity. See Thermochemistry.constants.R for accepted units. 
+				Units to plot heat capacity. See PyMuTT.constants.R for accepted units. 
 				If not specified, dimensionless units used.
 			H_units - str
-				Units to plot enthalpy. See Thermochemistry.constants.R for accepted units but omit the '/K' (e.g. J/mol).
+				Units to plot enthalpy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
 			S_units - str
-				Units to plot entropy. See Thermochemistry.constants.R for accepted units. 
+				Units to plot entropy. See PyMuTT.constants.R for accepted units. 
 				If not specified, dimensionless units used.
 			G_units - str
-				Units to plot Gibbs free energy. See Thermochemistry.constants.R for accepted units but omit the '/K' (e.g. J/mol).
+				Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
 		"""
 		if T_low is None:

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.test_constants
-Tests for Thermochemistry.constants file
+PyMuTT.test_constants
+Tests for PyMuTT.constants file
 Created on Fri Jul 7 12:31:00 2018
 """
 import unittest
-from Thermochemistry import constants as c
+from PyMuTT import constants as c
 import numpy as np
 
 class TestConstants(unittest.TestCase):

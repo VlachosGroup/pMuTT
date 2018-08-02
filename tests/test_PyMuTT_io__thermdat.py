@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Tests for Thermochemistry.io_.thermdat module
+Tests for PyMuTT.io_.thermdat module
 Created on Fri Jul 7 12:31:00 2018
 """
 import unittest
-import Thermochemistry.io_.thermdat as thermdat
+import PyMuTT.io_.thermdat as thermdat
 import numpy as np
 
 class TestThermdat(unittest.TestCase):

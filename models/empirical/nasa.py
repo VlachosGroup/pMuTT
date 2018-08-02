@@ -3,13 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from scipy.stats import variation
 from warnings import warn
-from Thermochemistry import constants as c
-from Thermochemistry.models.empirical import BaseThermo
+from PyMuTT import constants as c
+from PyMuTT.models.empirical import BaseThermo
 
 class Nasa(BaseThermo):
 	"""
 	Stores the information for an individual nasa specie
-	Inherits from Thermochemistry.models.empirical.BaseThermo
+	Inherits from PyMuTT.models.empirical.BaseThermo
 
 	The thermodynamic properties are calculated using the following form:
 	Cp/R = a[0] + a[1]*T + a[2]*T^2 + a[3]*T^3+a[4]*T^4
@@ -170,7 +170,7 @@ class Nasa(BaseThermo):
 				If the HoRT_dft attribute is not specified, uses self.thermo_model.get_HoRT
 			SoR_ref - float
 				Dimensionless entropy that corresponds to T_ref. If not specified, uses self.thermo_model.get_SoR
-			references - Thermochemistry.models.empirical.References object
+			references - PyMuTT.models.empirical.References object
 				Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.
 		"""
 

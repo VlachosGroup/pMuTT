@@ -2,8 +2,8 @@
 
 import numpy as np
 from ase import thermochemistry
-from Thermochemistry import constants as c
-from Thermochemistry.models.statmech.heat_capacity import get_CvoR_trans, get_CvoR_vib, get_CvoR_rot
+from PyMuTT import constants as c
+from PyMuTT.models.statmech.heat_capacity import get_CvoR_trans, get_CvoR_vib, get_CvoR_rot
 
 class HinderedThermo:
 	"""
@@ -12,10 +12,10 @@ class HinderedThermo:
 	1 rotational mode perpendicular to the surface, and 3N-3 vibrational modes.
 
 	See further documentation from the ASE implementation. 
-	https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#hindered-translator-hindered-rotor-model
+	https://wiki.fysik.dtu.dk/ase/ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model
 
 	Attributes
-		model - ase.Thermochemistry.HinderedThermo object
+		model - ase.thermochemistry.HinderedThermo object
 			The Hindered Thermo object has the following attributes.
 				vib_energies - (3N,) ndarray where N is number of atoms
 					Vibrational energies in eV.

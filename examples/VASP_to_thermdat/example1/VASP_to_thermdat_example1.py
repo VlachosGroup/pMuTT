@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
 from pprint import pprint
 
-from Thermochemistry import constants as c
-from Thermochemistry.io_.excel import read_excel
-from Thermochemistry.io_.thermdat import write_thermdat
-from Thermochemistry.models.empirical import BaseThermo
-from Thermochemistry.models.empirical.nasa import Nasa
-from Thermochemistry.models.empirical.references import References
+from PyMuTT import constants as c
+from PyMuTT.io_.excel import read_excel
+from PyMuTT.io_.thermdat import write_thermdat
+from PyMuTT.models.empirical import BaseThermo
+from PyMuTT.models.empirical.nasa import Nasa
+from PyMuTT.models.empirical.references import References
 
 '''
 User inputs

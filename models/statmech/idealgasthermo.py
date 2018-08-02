@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.models.statmech.idealgasthermo
+PyMuTT.models.statmech.idealgasthermo
 Vlachos group code for thermodynamic models.
 Created on Tues Jul 10 12:40:00 2018
 """
 
 import numpy as np
 from ase import thermochemistry
-from Thermochemistry import constants as c
-from Thermochemistry.models.statmech.heat_capacity import get_CvoR_trans, get_CvoR_vib, get_CvoR_rot
+from PyMuTT import constants as c
+from PyMuTT.models.statmech.heat_capacity import get_CvoR_trans, get_CvoR_vib, get_CvoR_rot
 
 class IdealGasThermo:
 	"""

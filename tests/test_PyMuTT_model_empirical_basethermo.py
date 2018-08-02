@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.test_Thermochemistry
-Tests for Thermochemistry module
+PyMuTT.test_PyMuTT
+Tests for PyMuTT module
 Created on Fri Jul 7 12:31:00 2018
 """
 import unittest
 import numpy as np
 from ase.build import molecule
 from ase.thermochemistry import IdealGasThermo
-from Thermochemistry.models.empirical import BaseThermo
+from PyMuTT.models.empirical import BaseThermo
 
 class TestBaseThermo(unittest.TestCase):
 	def setUp(self):

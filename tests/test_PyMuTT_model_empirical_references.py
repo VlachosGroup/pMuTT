@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Thermochemistry.test_references
-Tests for Thermochemistry.references module
+PyMuTT.test_references
+Tests for PyMuTT.references module
 Created on Mon Jul 9 5:00:00 2018
 """
 import unittest
 import warnings
 import numpy as np
 from ase.build import molecule
-from Thermochemistry import constants as c
-from Thermochemistry.models.empirical import BaseThermo
-from Thermochemistry.models.empirical.references import References
-from Thermochemistry.models.statmech.idealgasthermo import IdealGasThermo
+from PyMuTT import constants as c
+from PyMuTT.models.empirical import BaseThermo
+from PyMuTT.models.empirical.references import References
+from PyMuTT.models.statmech.idealgasthermo import IdealGasThermo
 
 class TestReferences(unittest.TestCase):
 	def setUp(self):

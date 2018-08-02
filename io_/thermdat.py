@@ -1,5 +1,5 @@
 import numpy as np
-from Thermochemistry.models.empirical.nasa import Nasa
+from PyMuTT.models.empirical.nasa import Nasa
 
 def read_thermdat(filename):
 	"""
@@ -9,7 +9,7 @@ def read_thermdat(filename):
 		filename - str
 			Input filename
 	Returns
-		list of Thermochemistry.models.empirical.nasa.Nasa objects
+		list of PyMuTT.models.empirical.nasa.Nasa objects
 	"""
 
 	species = []
@@ -252,7 +252,7 @@ def write_thermdat(filename, nasa_species):
 		filename - str
 			Output file name
 		nasa_species - list 
-			List of Thermochemistry.models.empirical.nasa.Nasa objects
+			List of PyMuTT.models.empirical.nasa.Nasa objects
 	"""
 	with open(filename, 'w') as f_ptr:
 		f_ptr.write('THERMO ALL\n       100       500      1500\n')
@@ -272,7 +272,7 @@ def _write_line1(thermdat_file, nasa_specie):
 	Parameters
 		thermdat_file - file object
 			Thermdat file that is being written to
-		nasa_specie - Thermochemistry.models.empirical.thermdat.Thermdat object
+		nasa_specie - PyMuTT.models.empirical.thermdat.Thermdat object
 	"""
 	element_pos = [
 		24, #Element 1
@@ -320,7 +320,7 @@ def _write_line2(thermdat_file, nasa_specie, float_string):
 	Parameters
 		thermdat_file - file object
 			Thermdat file that is being written to
-		nasa_specie - Thermochemistry.models.empirical.thermdat.Thermdat object
+		nasa_specie - PyMuTT.models.empirical.thermdat.Thermdat object
 		float_string - str
 			Float format
 	"""

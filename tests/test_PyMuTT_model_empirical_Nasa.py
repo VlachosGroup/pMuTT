@@ -2,8 +2,8 @@ import unittest
 import warnings
 import numpy as np
 from ase.build import molecule
-from Thermochemistry.models.statmech.idealgasthermo import IdealGasThermo
-from Thermochemistry.models.empirical.nasa import Nasa
+from PyMuTT.models.statmech.idealgasthermo import IdealGasThermo
+from PyMuTT.models.empirical.nasa import Nasa
 
 class TestBaseThermo(unittest.TestCase):
 	def setUp(self):
