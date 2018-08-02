@@ -28,15 +28,33 @@ class Nasa(BaseThermo):
 		a_high - (7,) ndarray
 			NASA polynomial to use between T_mid and T_high
 	"""
-	def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7), a_high=np.zeros(7), Ts=None, CpoR=None, SoR_dft=None, **kwargs):
-		super().__init__(**kwargs)
-		self.T_low = T_low
-		self.T_mid = T_mid
-		self.T_high = T_high
+	def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7), a_high=np.zeros(7), Ts=None, CpoR=None, T_ref=c.T0('K'), HoRT_dft=None, SoR_dft=None, **kwargs):
+		super().__init__(T_ref=T_ref, HoRT_dft=HoRT_dft, **kwargs)
+		#Assign polynomial coefficients
 		self.a_low = a_low
 		self.a_high = a_high
+
+		#Assign temperatures
+		if T_low is not None:
+			self.T_low = T_low
+		else:
+			try:
+				self.T_low = np.min(Ts)
+			except NameError:
+				pass
+
+		if T_high is not None:
+			self.T_high = T_high
+		else:
+			try:
+				self.T_high = np.max(Ts)
+			except NameError:
+				pass
+
+		self.T_mid = T_mid
+
 		if np.array_equal(a_low, np.zeros(7)) and np.array_equal(a_high, np.zeros(7)):
-			self.fit(Ts=Ts, CpoR=CpoR, SoR_dft=SoR_dft)
+			self.fit(T_low=self.T_low, T_high=self.T_high, Ts=Ts, CpoR=CpoR, T_ref=T_ref, HoRT_dft=HoRT_dft, SoR_dft=SoR_dft)
 
 	def get_a(self, T):
 		"""
@@ -177,6 +195,7 @@ class Nasa(BaseThermo):
 		'''
 		Processing inputs
 		'''
+
 		#Get lower temperature bound
 		if T_low is None:
 			T_low = self.T_low

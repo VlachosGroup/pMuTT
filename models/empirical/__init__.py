@@ -102,6 +102,14 @@ class BaseThermo:
 			G_units - str
 				Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
+		Returns
+			matplotlib.figure.Figure
+			axes - (4,) ndarray
+				The plot's contents can be modified by the indices of axes.
+					axes[0] - Cp
+					axes[1] - H
+					axes[2] - S
+					axes[3] - G
 		"""
 		if T_low is None:
 			T_low = self.T_low
@@ -109,59 +117,54 @@ class BaseThermo:
 			T_high = self.T_high
 		Ts = np.linspace(T_low, T_high)
 
-		plt.figure()
+		f, ax = plt.subplots(4, sharex=True)
 		'''
 		Heat Capacity
 		'''
-		plt.subplot(411)
-		plt.title('Specie: {}'.format(self.name))
-		plt.xlabel('Temperature (K)')
+		ax[0].set_title('Specie: {}'.format(self.name))
 		Cp_plot = self.get_CpoR(Ts=Ts)
 		if Cp_units is None:
-			plt.ylabel('Cp/R')
+			ax[0].set_ylabel('Cp/R')
 		else:
-			plt.ylabel('Cp ({})'.format(Cp_units))
+			ax[0].set_ylabel('Cp ({})'.format(Cp_units))
 			Cp_plot = Cp_plot * c.R(Cp_units)
-		plt.plot(Ts, Cp_plot, 'r-')
+		ax[0].plot(Ts, Cp_plot, 'r-')
 
 		'''
 		Enthalpy
 		'''
-		plt.subplot(412)
-		plt.xlabel('Temperature (K)')
 		H_plot = self.get_HoRT(Ts=Ts)
 		if H_units is None:
-			plt.ylabel('H/RT')
+			ax[1].set_ylabel('H/RT')
 		else:
-			plt.ylabel('H ({})'.format(H_units))
+			ax[1].set_ylabel('H ({})'.format(H_units))
 			H_plot = H_plot * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, H_plot, 'g-')
+		ax[1].plot(Ts, H_plot, 'g-')
 
 		'''
 		Entropy
 		'''
-		plt.subplot(413)
-		plt.xlabel('Temperature (K)')
 		S_plot = self.get_SoR(Ts=Ts)
 		if S_units is None:
-			plt.ylabel('S/R')
+			ax[2].set_ylabel('S/R')
 		else:
-			plt.ylabel('S ({})'.format(S_units))
+			ax[2].set_ylabel('S ({})'.format(S_units))
 			S_plot = S_plot * c.R(S_units)
-		plt.plot(Ts, S_plot, 'b-')
+		ax[2].plot(Ts, S_plot, 'b-')
 
 		'''
 		Gibbs energy
 		'''
-		plt.subplot(414)
-		plt.xlabel('Temperature (K)')
+		ax[3].set_xlabel('Temperature (K)')
 		G_plot = self.get_GoRT(Ts=Ts)
 		if G_units is None:
-			plt.ylabel('G/RT')
+			ax[3].set_ylabel('G/RT')
 		else:
-			plt.ylabel('G ({})'.format(G_units))
+			ax[3].set_ylabel('G ({})'.format(G_units))
 			G_plot = G_plot * c.R('{}/K'.format(G_units)) * Ts
-		plt.plot(Ts, G_plot, 'k-')
+		ax[3].plot(Ts, G_plot, 'k-')
+
+		return f, ax
 
 	def plot_thermo_model(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
 		"""
@@ -183,6 +186,14 @@ class BaseThermo:
 			G_units - str
 				Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
+		Returns
+			matplotlib.figure.Figure
+			axes - (4,) ndarray
+				The plot's contents can be modified by the indices of axes.
+					axes[0] - Cp
+					axes[1] - H
+					axes[2] - S
+					axes[3] - G
 		"""
 		if T_low is None:
 			T_low = self.T_low
@@ -190,66 +201,60 @@ class BaseThermo:
 			T_high = self.T_high
 		Ts = np.linspace(T_low, T_high)
 
-		plt.figure()
+		f, ax = plt.subplots(4, sharex=True)
 		'''
 		Heat Capacity
 		'''
-		plt.subplot(411)
-		plt.title('Specie: {}'.format(self.name))
-		plt.xlabel('Temperature (K)')
+		ax[0].set_title('Specie: {}'.format(self.name))
 		Cp_plot = self.thermo_model.get_CpoR(Ts=Ts)
 		if Cp_units is None:
-			plt.ylabel('Cp/R')
+			ax[0].set_ylabel('Cp/R')
 		else:
-			plt.ylabel('Cp ({})'.format(Cp_units))
+			ax[0].set_ylabel('Cp ({})'.format(Cp_units))
 			Cp_plot = Cp_plot * c.R(Cp_units)
-		plt.plot(Ts, Cp_plot, 'r-')
+		ax[0].plot(Ts, Cp_plot, 'r-')
 
 		'''
 		Enthalpy
 		'''
-		plt.subplot(412)
-		plt.xlabel('Temperature (K)')
-
 		H_plot = self.thermo_model.get_HoRT(Ts=Ts)
 		if self.references is not None:
 			H_plot += self.references.get_HoRT_offset(elements=self.elements, Ts=Ts)
 
 		if H_units is None:
-			plt.ylabel('H/RT')
+			ax[1].set_ylabel('H/RT')
 		else:
-			plt.ylabel('H ({})'.format(H_units))
+			ax[1].set_ylabel('H ({})'.format(H_units))
 			H_plot = H_plot * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, H_plot, 'g-')
+		ax[1].plot(Ts, H_plot, 'g-')
 
 		'''
 		Entropy
 		'''
-		plt.subplot(413)
-		plt.xlabel('Temperature (K)')
 		S_plot = self.thermo_model.get_SoR(Ts=Ts)
 		if S_units is None:
-			plt.ylabel('S/R')
+			ax[2].set_ylabel('S/R')
 		else:
-			plt.ylabel('S ({})'.format(S_units))
+			ax[2].set_ylabel('S ({})'.format(S_units))
 			S_plot = S_plot * c.R(S_units)
-		plt.plot(Ts, S_plot, 'b-')
+		ax[2].plot(Ts, S_plot, 'b-')
 
 		'''
 		Gibbs energy
 		'''
-		plt.subplot(414)
-		plt.xlabel('Temperature (K)')
+		ax[3].set_xlabel('Temperature (K)')
 		G_plot = self.thermo_model.get_GoRT(Ts=Ts)
 		if self.references is not None:
 			G_plot += self.references.get_HoRT_offset(elements=self.elements, Ts=Ts)
 
 		if G_units is None:
-			plt.ylabel('G/RT')
+			ax[3].set_ylabel('G/RT')
 		else:
-			plt.ylabel('G ({})'.format(G_units))
+			ax[3].set_ylabel('G ({})'.format(G_units))
 			G_plot = G_plot * c.R('{}/K'.format(G_units)) * Ts
-		plt.plot(Ts, G_plot, 'k-')
+		ax[3].plot(Ts, G_plot, 'k-')
+
+		return f, ax
 
 	def plot_thermo_model_and_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
 		"""
@@ -271,6 +276,14 @@ class BaseThermo:
 			G_units - str
 				Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol).
 				If not specified, dimensionless units used.
+		Returns
+			matplotlib.figure.Figure
+			axes - (4,) ndarray
+				The plot's contents can be modified by the indices of axes.
+					axes[0] - Cp
+					axes[1] - H
+					axes[2] - S
+					axes[3] - G
 		"""
 		if T_low is None:
 			T_low = self.T_low
@@ -278,70 +291,66 @@ class BaseThermo:
 			T_high = self.T_high
 		Ts = np.linspace(T_low, T_high)
 
-		plt.figure()
+		f, ax = plt.subplots(4, sharex=True)
 		'''
 		Heat Capacity
 		'''
-		plt.subplot(411)
-		plt.title('Specie: {}'.format(self.name))
-		plt.xlabel('Temperature (K)')
+		ax[0].set_title('Specie: {}'.format(self.name))
 		Ts, Cp_plot_thermo_model, Cp_plot_empirical = self.compare_CpoR(Ts=Ts)
 		if Cp_units is None:
-			plt.ylabel('Cp/R')
+			ax[0].set_ylabel('Cp/R')
 		else:
-			plt.ylabel('Cp ({})'.format(Cp_units))
+			ax[0].set_ylabel('Cp ({})'.format(Cp_units))
 			Cp_plot_thermo_model = Cp_plot_thermo_model * c.R(Cp_units)
 			Cp_plot_empirical = Cp_plot_empirical * c.R(Cp_units)
 
-		plt.plot(Ts, Cp_plot_thermo_model, 'r-', label = 'Stat Mech Model')
-		plt.plot(Ts, Cp_plot_empirical, 'b-', label = 'Empirical Model')
-		plt.legend()
+		ax[0].plot(Ts, Cp_plot_thermo_model, 'r-', label = 'Stat Mech Model')
+		ax[0].plot(Ts, Cp_plot_empirical, 'b-', label = 'Empirical Model')
+		ax[0].legend()
 		
 		'''
 		Enthalpy
 		'''
-		plt.subplot(412)
-		plt.xlabel('Temperature (K)')
 		Ts, H_plot_thermo_model, H_plot_empirical = self.compare_HoRT(Ts=Ts)
 
 		if H_units is None:
-			plt.ylabel('H/RT')
+			ax[1].set_ylabel('H/RT')
 		else:
-			plt.ylabel('H ({})'.format(H_units))
+			ax[1].set_ylabel('H ({})'.format(H_units))
 			H_plot_thermo_model = H_plot_thermo_model * c.R('{}/K'.format(H_units)) * Ts
 			H_plot_empirical = H_plot_empirical * c.R('{}/K'.format(H_units)) * Ts
-		plt.plot(Ts, H_plot_thermo_model, 'r-')
-		plt.plot(Ts, H_plot_empirical, 'b-')
+		ax[1].plot(Ts, H_plot_thermo_model, 'r-')
+		ax[1].plot(Ts, H_plot_empirical, 'b-')
 
 		'''
 		Entropy
 		'''
-		plt.subplot(413)
-		plt.xlabel('Temperature (K)')
 		Ts, S_plot_thermo_model, S_plot_empirical = self.compare_SoR(Ts=Ts)
 		if S_units is None:
-			plt.ylabel('S/R')
+			ax[2].set_ylabel('S/R')
 		else:
-			plt.ylabel('S ({})'.format(S_units))
+			ax[2].set_ylabel('S ({})'.format(S_units))
 			S_plot_thermo_model = S_plot_thermo_model * c.R(S_units)
 			S_plot_empirical = S_plot_empirical * c.R(S_units)
-		plt.plot(Ts, S_plot_thermo_model, 'r-')
-		plt.plot(Ts, S_plot_empirical, 'b-')
+		ax[2].plot(Ts, S_plot_thermo_model, 'r-')
+		ax[2].plot(Ts, S_plot_empirical, 'b-')
 
 		'''
 		Gibbs energy
 		'''
-		plt.subplot(414)
-		plt.xlabel('Temperature (K)')
+		ax[3].set_xlabel('Temperature (K)')
 		Ts, G_plot_thermo_model, G_plot_empirical = self.compare_GoRT(Ts=Ts)
 		if G_units is None:
-			plt.ylabel('G/RT')
+			ax[3].set_ylabel('G/RT')
 		else:
-			plt.ylabel('G ({})'.format(G_units))
+			ax[3].set_ylabel('G ({})'.format(G_units))
 			G_plot_thermo_model = G_plot_thermo_model * c.R('{}/K'.format(G_units)) * Ts
 			G_plot_empirical = G_plot_empirical * c.R('{}/K'.format(G_units)) * Ts
-		plt.plot(Ts, G_plot_thermo_model, 'r-')
-		plt.plot(Ts, G_plot_empirical, 'b-')
+		ax[3].plot(Ts, G_plot_thermo_model, 'r-')
+		ax[3].plot(Ts, G_plot_empirical, 'b-')
+
+		return f, ax
+
 
 	def compare_CpoR(self, Ts = None):
 		"""

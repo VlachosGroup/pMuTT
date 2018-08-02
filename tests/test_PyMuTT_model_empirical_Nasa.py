@@ -5,7 +5,7 @@ from ase.build import molecule
 from PyMuTT.models.statmech.idealgasthermo import IdealGasThermo
 from PyMuTT.models.empirical.nasa import Nasa
 
-class TestBaseThermo(unittest.TestCase):
+class TestNasa(unittest.TestCase):
 	def setUp(self):
 		unittest.TestCase.setUp(self)
 		self.Nasa = Nasa(
