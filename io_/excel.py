@@ -56,7 +56,14 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 			elif 'thermo_model' in col:
 				thermo_data = set_thermo_model(model=cell_data, output_structure=thermo_data)
 			elif 'vib_wavenumber' in col:
-				thermo_data = set_vib_wavenumber(value=cell_data, output_structure=thermo_data)				
+				thermo_data = set_vib_wavenumber(value=cell_data, output_structure=thermo_data)
+			elif 'nasa' in col:
+				if 'a_low' in col:
+					thermo_data = set_nasa_a_low(header=col, value=cell_data, output_structure=thermo_data)
+				elif 'a_high' in col:
+					thermo_data = set_nasa_a_high(header=col, value=cell_data, output_structure=thermo_data)
+				else:
+					raise NotImplementedError('Does not support {}'.format(col))
 			else:
 				thermo_data[col] = cell_data
 		thermos_out.append(thermo_data)
@@ -184,4 +191,60 @@ def set_vib_wavenumber(value, output_structure):
 		output_structure['vib_energies'].append(vib_energy)
 	except (NameError, KeyError):
 		output_structure['vib_energies'] = [vib_energy]
+	return output_structure
+
+def set_nasa_a_low(header, value, output_structure, delimiter='~'):
+	"""
+	Parses a_low parameter for PyMuTT.models.empirical.nasa.Nasa object
+	
+	Parameters
+		header - str
+			Name of the header. Used to determine coefficient. 
+			Assumes zero index and header takes the format:
+				nasa[delimiter]a_low[delimiter][index]
+				e.g. nasa~a_low~0
+		value - float
+			a_low value
+		output_structure - dict
+			Structure to assign value. Will assign to output_structure['a_low']
+		delimiter - str
+			How to parse header to find the coefficient
+	Returns
+		dict
+			output_structure with a_low value added
+	"""
+	i = int(header.split(delimiter)[-1])
+	try:
+		output_structure['a_low'][i] = value
+	except KeyError:
+		output_structure['a_low'] = np.zeros(7,)
+		output_structure['a_low'][i] = value
+	return output_structure
+
+def set_nasa_a_high(header, value, output_structure, delimiter='~'):
+	"""
+	Parses a_high parameter for PyMuTT.models.empirical.nasa.Nasa object
+	
+	Parameters
+		header - str
+			Name of the header. Used to determine coefficient. 
+			Assumes zero index and header takes the format:
+				nasa[delimiter]a_high[delimiter][index]
+				e.g. nasa~a_high~0
+		value - float
+			a_high value
+		output_structure - dict
+			Structure to assign value. Will assign to output_structure['a_high']
+		delimiter - str
+			How to parse header to find the coefficient
+	Returns
+		dict
+			output_structure with a_high value added
+	"""
+	i = int(header.split(delimiter)[-1])
+	try:
+		output_structure['a_high'][i] = value
+	except KeyError:
+		output_structure['a_high'] = np.zeros(7,)
+		output_structure['a_high'][i] = value	
 	return output_structure

@@ -485,3 +485,4 @@ class BaseThermo:
 				GoRT_statmech[i] = self.thermo_model.get_GoRT(Ts=T) + G_offset[i]
 				GoRT_empirical[i] = self.get_GoRT(Ts=T)
 		return (Ts, GoRT_statmech, GoRT_empirical)
+		

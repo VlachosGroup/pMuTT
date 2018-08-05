@@ -28,8 +28,8 @@ class Nasa(BaseThermo):
 		a_high - (7,) ndarray
 			NASA polynomial to use between T_mid and T_high
 	"""
-	def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7), a_high=np.zeros(7), Ts=None, CpoR=None, T_ref=c.T0('K'), HoRT_dft=None, SoR_dft=None, **kwargs):
-		super().__init__(T_ref=T_ref, HoRT_dft=HoRT_dft, **kwargs)
+	def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7), a_high=np.zeros(7), Ts=None, CpoR=None, T_ref=c.T0('K'), HoRT_ref=None, SoR_ref=None, **kwargs):
+		super().__init__(T_ref=T_ref, HoRT_ref=HoRT_ref, **kwargs)
 		#Assign polynomial coefficients
 		self.a_low = a_low
 		self.a_high = a_high
@@ -54,7 +54,7 @@ class Nasa(BaseThermo):
 		self.T_mid = T_mid
 
 		if np.array_equal(a_low, np.zeros(7)) and np.array_equal(a_high, np.zeros(7)):
-			self.fit(T_low=self.T_low, T_high=self.T_high, Ts=Ts, CpoR=CpoR, T_ref=T_ref, HoRT_dft=HoRT_dft, SoR_dft=SoR_dft)
+			self.fit(T_low=self.T_low, T_high=self.T_high, Ts=Ts, CpoR=CpoR, T_ref=T_ref, HoRT_dft=HoRT_ref, SoR_ref=SoR_ref)
 
 	def get_a(self, T):
 		"""
@@ -168,7 +168,7 @@ class Nasa(BaseThermo):
 				GoRT[i] = get_nasa_GoRT(a=a, T=T)
 		return GoRT
 
-	def fit(self, T_low=None, T_high=None, Ts=None, CpoR=None, T_ref=None, HoRT_dft=None, SoR_dft=None, references=None):
+	def fit(self, T_low=None, T_high=None, Ts=None, CpoR=None, T_ref=None, HoRT_dft=None, HoRT_ref=None, SoR_ref=None, references=None):
 		"""
 		Calculates the NASA polynomials using internal attributes
 
@@ -186,6 +186,9 @@ class Nasa(BaseThermo):
 			HoRT_dft - float
 				Dimensionless enthalpy calculated using DFT that corresponds to T_ref. If not specified, uses HoRT_dft attribute.
 				If the HoRT_dft attribute is not specified, uses self.thermo_model.get_HoRT
+			HoRT_ref - float
+				Dimensionless reference enthalpy that corresponds to T_ref. If this is specified, uses this value when fitting
+				a_low[5] and a_high[5] instead of HoRT_dft and references
 			SoR_ref - float
 				Dimensionless entropy that corresponds to T_ref. If not specified, uses self.thermo_model.get_SoR
 			references - PyMuTT.models.empirical.References object
@@ -225,13 +228,13 @@ class Nasa(BaseThermo):
 		#Get reference enthalpy
 		if HoRT_dft is None:
 			if self.HoRT_dft is None:
-				self.HoRT_dft = self.thermo_model.get_HoRT(Ts=T_dft)
+				self.HoRT_dft = self.thermo_model.get_HoRT(Ts=T_ref)
 			HoRT_dft = self.HoRT_dft
 
 
 		#Get reference entropy
-		if SoR_dft is None:
-			SoR_dft = self.thermo_model.get_SoR(Ts=T_ref)
+		if SoR_ref is None:
+			SoR_ref = self.thermo_model.get_SoR(Ts=T_ref)
 
 		#Get references
 		if references is not None:
@@ -239,12 +242,15 @@ class Nasa(BaseThermo):
 
 		#Set HoRT_ref
 		#If references specified
-		if self.references is not None:
-			self.HoRT_ref = HoRT_dft + self.references.get_HoRT_offset(self.elements, Ts=self.T_ref)
-		#If dimensionless DFT enthalpy specified
-		elif HoRT_dft is not None:
-			self.HoRT_ref = HoRT_dft
-		HoRT_ref = self.HoRT_ref
+		if HoRT_ref is not None:
+			self.HoRT_ref = HoRT_ref
+		else:
+			if self.references is not None:
+				self.HoRT_ref = HoRT_dft + self.references.get_HoRT_offset(self.elements, Ts=self.T_ref)
+			#If dimensionless DFT enthalpy specified
+			elif HoRT_dft is not None:
+				self.HoRT_ref = HoRT_dft
+			HoRT_ref = self.HoRT_ref
 
 		#Reinitialize coefficients
 		self.a_low = np.zeros(7)
@@ -255,7 +261,7 @@ class Nasa(BaseThermo):
 		'''
 		self.fit_CpoR(Ts=Ts, CpoR=CpoR)
 		self.fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref)
-		self.fit_SoR(T_ref=T_ref, SoR_ref=SoR_dft)
+		self.fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref)
 
 	def fit_CpoR(self, Ts, CpoR):
 		"""

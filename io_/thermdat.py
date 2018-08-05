@@ -1,4 +1,5 @@
 import numpy as np
+from PyMuTT import constants as c
 from PyMuTT.models.empirical.nasa import Nasa
 
 def read_thermdat(filename):
@@ -19,7 +20,7 @@ def read_thermdat(filename):
 			Lines to skip
 			'''
 			#Skip the header line
-			if 'THERMO ALL' in line:
+			if 'THERMO' in line:
 				continue
 			#Skip the end line
 			if 'END' in line:
@@ -239,7 +240,7 @@ def _read_line4(line, nasa_data):
 	offset = 15
 
 	j = 3
-	for i, position in enumerate(positions):
+	for position in positions:
 		nasa_data['a_low'][j] = float(line[position:position+offset])
 		j += 1
 	return nasa_data

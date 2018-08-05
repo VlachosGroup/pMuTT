@@ -105,3 +105,6 @@ venv.bak/
 
 # GDrive syncing
 desktop.ini
+
+# VS Code
+.vscode
