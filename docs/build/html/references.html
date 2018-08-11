@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; PyMuTT 1.0.0 documentation</title>
+  <title>Referencing &mdash; PyMuTT 1.0.0 documentation</title>
   
 
   
@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -59,7 +59,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -123,12 +123,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Search</li>
+      <li>Referencing</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/references.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -140,19 +142,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="referencing">
+<h1>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline">¶</a></h1>
+<p>Enthalpies calculated using VASP (and some other computational methods)
+have different references than standard references (i.e. the enthalpy of
+formation of pure substances, like O2 or Pt, is not necessarily zero).
+This difference makes it difficult to ensure thermodynamic consistency
+for our mechanisms since we may be mixing experimental gas
+thermodynamics with computational surface thermodynamics. In order to
+make the references consistent, we find a correction factor for each
+element by solving the equation:</p>
+<div class="figure" id="id3">
+<img alt="Eq1" src="https://github.com/VlachosGroup/PyMuTT/blob/master/docs/README_Eq1.gif" />
+<p class="caption"><span class="caption-text">Eq1</span></p>
+</div>
+<p>where M is the number of reference species, N is the number of elements,
+Hexpt is the experimental standard enthalpies, HDFT is the standard
+enthalpies calculated using DFT, x is a matrix that describes the
+composition of the references (each row represents a specie, each column
+represents an element), and θ is the correction for each element.</p>
+<p>The equation can be solved using a Least Squares approach. The
+correction factor can then be added to subsequent species calculated
+through DFT to ensure consistent references. Referencing is handled by
+the <a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id4"><span class="problematic" id="id5">`PyMuTT.models.empirical.references.References```_</span></a> class.</p>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
            
@@ -198,7 +212,6 @@
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -208,14 +221,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

@@ -8,7 +8,6 @@ Welcome to PyMuTT's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    includeme
 
