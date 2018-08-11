@@ -1,16 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+PyMuTT.io_.thermdat
+Vlachos group code to read from/write to thermdat files.
+Created on Fri Jul 7 12:40:00 2018
+"""
+
 import numpy as np
 from PyMuTT import constants as c
 from PyMuTT.models.empirical.nasa import Nasa
 
 def read_thermdat(filename):
-	"""
-	Directly read thermdat file that is in the Chemkin format
+	"""Directly read thermdat file that is in the Chemkin format
 	
-	Parameters
-		filename - str
-			Input filename
+	Args
+		filename (str): Input filename
 	Returns
-		list of PyMuTT.models.empirical.nasa.Nasa objects
+		:obj: `list` of :obj: `PyMuTT.models.empirical.nasa.Nasa` objects
+	Raises
+		IOError: Invalid line number found.
 	"""
 
 	species = []
@@ -50,19 +57,14 @@ def read_thermdat(filename):
 	return species
 
 def _get_fields(line, delimiter = ' ', remove_fields = ['', '\n']):
-	"""
-	Gets the fields from a line delimited by delimiter and without entries in remove_fields
+	"""Gets the fields from a line delimited by delimiter and without entries in remove_fields
 
-	Parameters
-		line - str
-			Line to find the fields
-		delimiter - str
-			Text separating fields in string
-		remove_fields - list of str
-			Fields to delete
+	Args
+		line (str): Line to find the fields
+		delimiter (str): Text separating fields in string
+		remove_fields (:obj: `list` of :obj: `str`): Fields to delete
 	Returns
-		list of str
-			Fields of the line
+		:obj: `list` of :obj: `str`: Fields of the line
 	"""
 	for remove_field in remove_fields:
 		line = line.replace(remove_field, '')
@@ -75,15 +77,12 @@ def _get_fields(line, delimiter = ' ', remove_fields = ['', '\n']):
 	return fields
 
 def _is_temperature_header(line):
-	"""
-	Determines if the line if the temperature header by seeing if the line only contains three numbers.
+	"""Determines if the line if the temperature header by seeing if the line only contains three numbers.
 
-	Parameters
-		line - str
-			Line to test
+	Args
+		line (str): Line to test
 	Returns
-		bool
-			True if the line is the temperature header. False otherwise.
+		bool: True if the line is the temperature header. False otherwise.
 	"""
 
 	fields = _get_fields(line)
@@ -104,30 +103,24 @@ def _is_temperature_header(line):
 		return False
 
 def _read_line_num(line):
-	"""
-	Reads the line number. Assumes the line number is the last character
+	"""Reads the line number. Assumes the line number is the last character
 
 	Parameters
-		line - str
-			Line to be read
+		line (str): Line to be read
 	Returns
-		int
-			Line number.
+		int: Line number.
 	"""
 
 	fields = _get_fields(line)
 	return int(fields[-1])
 
 def _read_line1(line):
-	"""
-	Reads the first line of a thermdat specie
+	"""Reads the first line of a thermdat specie
 
-	Parameters
-		line - str
-			Line 1 of thermdat specie
+	Args
+		line (str): Line 1 of thermdat specie
 	Returns
-		dict
-			Nasa input fields
+		dict: Nasa input fields
 	"""
 	nasa_data = {}
 	ref_pos = 24
@@ -170,17 +163,13 @@ def _read_line1(line):
 	return nasa_data
 
 def _read_line2(line, nasa_data):
-	"""
-	Reads the second line of a thermdat specie
+	"""Reads the second line of a thermdat specie
 
-	Parameters
-		line - str
-			Line 2 of thermdat specie
-		nasa_data - dict
-			Pre-filled Nasa input fields
+	Args
+		line (str): Line 2 of thermdat specie
+		nasa_data (dict): Pre-filled Nasa input fields
 	Returns
-		dict
-			Nasa input fields
+		dict: Nasa input fields
 	"""
 	#Locations to find a values
 	positions = [0, 15, 30, 45, 60]
@@ -193,17 +182,13 @@ def _read_line2(line, nasa_data):
 	return nasa_data
 
 def _read_line3(line, nasa_data):
-	"""
-	Reads the third line of a thermdat specie
+	"""Reads the third line of a thermdat specie
 
-	Parameters
-		line - str
-			Line 3 of thermdat specie
-		nasa_data - dict
-			Pre-filled Nasa input fields
+	Args
+		line (str): Line 3 of thermdat specie
+		nasa_data (dict): Pre-filled Nasa input fields
 	Returns
-		dict
-			Nasa input fields
+		dict: Nasa input fields
 	"""
 	#Locations to find a values
 	positions = [0, 15, 30, 45, 60]
@@ -223,17 +208,13 @@ def _read_line3(line, nasa_data):
 	return nasa_data
 
 def _read_line4(line, nasa_data):
-	"""
-	Reads the third line of a thermdat specie
+	"""Reads the third line of a thermdat specie
 
-	Parameters
-		line - str
-			Line 3 of thermdat specie
-		nasa_data - dict
-			Pre-filled Nasa input fields
+	Args
+		line (str): Line 3 of thermdat specie
+		nasa_data (dict): Pre-filled Nasa input fields
 	Returns
-		dict
-			Nasa input fields
+		dict: Nasa input fields
 	"""
 	#Locations to find a values
 	positions = [0, 15, 30, 45]
@@ -246,14 +227,11 @@ def _read_line4(line, nasa_data):
 	return nasa_data
 
 def write_thermdat(filename, nasa_species):
-	"""
-	Writes thermdats in the Chemkin format
+	"""Writes thermdats in the Chemkin format
 
-	Parameters
-		filename - str
-			Output file name
-		nasa_species - list 
-			List of PyMuTT.models.empirical.nasa.Nasa objects
+	Args
+		filename (str): Output file name
+		nasa_species (list): :obj: `list` of :obj: `PyMuTT.models.empirical.nasa.Nasa` objects
 	"""
 	with open(filename, 'w') as f_ptr:
 		f_ptr.write('THERMO ALL\n       100       500      1500\n')
@@ -267,13 +245,11 @@ def write_thermdat(filename, nasa_species):
 		f_ptr.write('END')
 
 def _write_line1(thermdat_file, nasa_specie):
-	"""
-	Writes the first line of the thermdat file, which contains information on the composition, phase, and temperature ranges
+	"""Writes the first line of the thermdat file, which contains information on the composition, phase, and temperature ranges
 
-	Parameters
-		thermdat_file - file object
-			Thermdat file that is being written to
-		nasa_specie - PyMuTT.models.empirical.thermdat.Thermdat object
+	Args
+		thermdat_file (file object): Thermdat file that is being written to
+		nasa_specie (:obj: `PyMuTT.models.empirical.thermdat.Thermdat` object): Nasa specie to take information from
 	"""
 	element_pos = [
 		24, #Element 1
@@ -315,15 +291,12 @@ def _write_line1(thermdat_file, nasa_specie):
 	thermdat_file.write(line)
 
 def _write_line2(thermdat_file, nasa_specie, float_string):
-	"""
-	Writes the second line of the thermdat file
+	"""Writes the second line of the thermdat file
 
-	Parameters
-		thermdat_file - file object
-			Thermdat file that is being written to
-		nasa_specie - PyMuTT.models.empirical.thermdat.Thermdat object
-		float_string - str
-			Float format
+	Args
+		thermdat_file (file object): Thermdat file that is being written to
+		nasa_specie (:obj: `PyMuTT.models.empirical.thermdat.Thermdat` object): Nasa specie to take information from
+		float_string (str): float format
 	"""
 	line = ''
 	for i in range(5):
@@ -335,8 +308,12 @@ def _write_line2(thermdat_file, nasa_specie, float_string):
 	thermdat_file.write(line)
 
 def _write_line3(thermdat_file, nasa_specie, float_string):
-	"""
-	Writes the third line of the thermdat file
+	"""Writes the third line of the thermdat file
+
+	Args
+		thermdat_file (file object): Thermdat file that is being written to
+		nasa_specie (:obj: `PyMuTT.models.empirical.thermdat.Thermdat` object): Nasa specie to take information from
+		float_string (str): float format
 	"""
 	line = ''
 	for i in range(5):
@@ -351,8 +328,12 @@ def _write_line3(thermdat_file, nasa_specie, float_string):
 	thermdat_file.write(line)
 
 def _write_line4(thermdat_file, nasa_specie, float_string):
-	"""
-	Writes the fourth line of the thermdat file
+	"""Writes the fourth line of the thermdat file
+
+	Args
+		thermdat_file (file object): Thermdat file that is being written to
+		nasa_specie (:obj: `PyMuTT.models.empirical.thermdat.Thermdat` object): Nasa specie to take information from
+		float_string (str): float format
 	"""
 	line = ''
 	for i in range(3,7):
@@ -364,9 +345,13 @@ def _write_line4(thermdat_file, nasa_specie, float_string):
 	thermdat_file.write(line)
 
 def _insert_space(end_index, string):
-	"""
-	Inserts the number of spaces required given the string and the position of
-	the next non-blank field.
+	"""Inserts the number of spaces required given the string and the position of the next non-blank field.
+
+	Args:
+		end_index (int): Expected string length
+		string (str): String to add spaces to
+	Returns:
+		str: String with spaces padded on the end
 	"""
 	string += ' ' * (end_index - len(string))
 	return string

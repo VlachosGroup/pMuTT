@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 PyMuTT.models.statmech.idealgasthermo
-Vlachos group code for thermodynamic models.
+Vlachos group code for ideal gas thermodynamic model.
 Created on Tues Jul 10 12:40:00 2018
 """
 
@@ -11,25 +11,19 @@ from PyMuTT import constants as c
 from PyMuTT.models.statmech.heat_capacity import get_CvoR_trans, get_CvoR_vib, get_CvoR_rot
 
 class IdealGasThermo:
-	"""
-	Ideal Gas Model. Uses ase.thermochemistry.IdealGasThermo to calculate
-	enthalpy and entropy
+	"""Ideal Gas Model. Uses ase.thermochemistry.IdealGasThermo to calculate enthalpy and entropy
+
 	Attributes
-		model - ase.thermochemistry.IdealGasThermo
-			Ideal Gas Model which takes the following parameters
-				vib_energies - (N,) ndarray
-					Vibrational frequencies in eV
-				geometry - str
-					Geometry of molecule. Supported options:
-						monatomic
-						linear
-						nonlinear
-				potentialenergy - float
-					DFT electronic energy in eV
-				atoms - ase.Atoms object
-					Atoms object required for calculating rotational modes
-				symmetrynumber - int
-		            Symmetry number.
+		model (ase.thermochemistry.IdealGasThermo object):
+			Ideal Gas Model which takes the following Args
+				vib_energies ((N,) ndarray): Vibrational frequencies in eV
+				geometry (str):	Geometry of molecule. Supported options:
+					monatomic
+					linear
+					nonlinear
+				potentialenergy (float): DFT electronic energy in eV
+				atoms (ase.Atoms object): Atoms object required for calculating rotational modes
+				symmetrynumber (int): Symmetry number.
 		            Reference point group/symmetry number table:
 		            Point group    symmetry number
 		            C1             1
@@ -46,8 +40,7 @@ class IdealGasThermo:
 		            Td             12
 		            Oh             24
 		            See DOI for more details: 10.1007/s00214-007-0328-0
-		        spin - float
-		            Holds the total electronic spin. 
+		        spin (float): Holds the total electronic spin. 
 		            0 for molecules in which all electrons are paired
 		            0.5 for a free radical with a single unpaired electron
 		            1.0 for a triplet with two unpaired electrons, such as O_2.
@@ -63,17 +56,14 @@ class IdealGasThermo:
 			natoms = natoms)
 
 	def get_CpoR(self, Ts):
-		"""
-		Calculates the dimensionless heat capacity (Cp/R) at a given temperature.
+		"""Calculates the dimensionless heat capacity (Cp/R) at a given temperature.
 		If you would like to use different behavior from the default, the
 		thermo_model used must have the function 'get_CpoR'.
 
-		Parameters
-			Ts - array-like or scalar
-				Temperature(s) in K
+		Args
+			Ts (array-like or scalar): Temperature(s) in K
 		Returns
-			float or (N,) ndarray
-				Dimensionless heat capacity (Cp/R)
+			float or (N,) ndarray: Dimensionless heat capacity (Cp/R)
 		"""
 		CvoR_trans = get_CvoR_trans(degrees=3.)
 		CvoR_vib = get_CvoR_vib(vib_energies=self.model.vib_energies, Ts=Ts)
@@ -83,17 +73,13 @@ class IdealGasThermo:
 		return CpoR
 
 	def get_HoRT(self, Ts, verbose=False):
-		"""
-		Returns the dimensionless enthalpy at a given temperature
+		"""Returns the dimensionless enthalpy at a given temperature
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
-			verbose - bool
-				Whether a table breaking down each contribution should be printed
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
+			verbose (bool): Whether a table breaking down each contribution should be printed
 		Returns
-			float or (N,) ndarray
-				Dimensionless heat capacity (H/RT) at the specified temperature
+			float or (N,) ndarray: Dimensionless heat capacity (H/RT) at the specified temperature
 		"""
 		try:
 			iter(Ts)
@@ -107,19 +93,14 @@ class IdealGasThermo:
 
 
 	def get_SoR(self, Ts, P=1., verbose=False):
-		"""
-		Returns the dimensionless entropy at a given temperature and pressure
+		"""Returns the dimensionless entropy at a given temperature and pressure
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
-			P - float
-				Pressure in atm
-			verbose - bool
-				Whether a table breaking down each contribution should be printed
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
+			P (float): Pressure in atm
+			verbose (bool):	Whether a table breaking down each contribution should be printed
 		Returns
-			float or (N,) ndarray
-				Dimensionless entropy (S/R) at the specified temperature and pressure
+			float or (N,) ndarray: Dimensionless entropy (S/R) at the specified temperature and pressure
 		"""
 		try:
 			iter(Ts)
@@ -132,19 +113,14 @@ class IdealGasThermo:
 		return SoR
 
 	def get_GoRT(self, Ts, P=1., verbose=False):
-		"""
-		Returns the dimensionless Gibbs energy at a given temperature
+		"""Returns the dimensionless Gibbs energy at a given temperature
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
-			P - float
-				Pressure in bar
-			verbose - bool
-				Whether a table breaking down each contribution should be printed
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
+			P (float): Pressure in bar
+			verbose (bool):	Whether a table breaking down each contribution should be printed
 		Returns
-			float or (N,) ndarray
-				Dimensionless heat capacity (G/RT) at the specified temperature
+			float or (N,) ndarray: Dimensionless heat capacity (G/RT) at the specified temperature
 		"""
 		try:
 			iter(Ts)

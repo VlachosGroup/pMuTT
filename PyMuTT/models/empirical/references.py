@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-PyMuTT.references
+PyMuTT.models.empirical.references
 Vlachos group code for reference species.
 Created on Sun Jul 8 13:50:00 2018
 """
@@ -9,18 +9,14 @@ import numpy as np
 from PyMuTT.models.empirical import BaseThermo
 
 class References:
-	"""
-	Holds reference species to adjust DFT energies to experimental data.
+	"""Holds reference species to adjust DFT energies to experimental data.
 
 	Attributes
-		_references - list
-			Reference species. Each member of the list should have the attributes:
-				T_ref
-				HoRT_ref
-		HoRT_element_offset - dict
-			Dimensionless enthalpy offset for each element
-		T_ref - float
-			Reference temperature in K
+		_references (:obj: `list` of :obj: `PyMuTT.models.empirical.basethermo.BaseThermo` objects): Reference species. Each member of the list should have the attributes:
+			T_ref
+			HoRT_ref
+		HoRT_element_offset (dict): Dimensionless enthalpy offset for each element
+		T_ref (float): Reference temperature in K
 	"""
 	def __init__(self, references):
 		self._references = references
@@ -28,15 +24,19 @@ class References:
 		self.fit_HoRT_offset()
 
 	def __iter__(self):
-		"""
-		Iterates over references attribute
+		"""Iterates over references attribute
+		
+		Yields:
+			:obj: `PyMuTT.models.empirical.basethermo.BaseThermo` object
 		"""
 		for reference in self._references:
 			yield reference
 
 	def __len__(self):
-		"""
-		Returns length of references attribute
+		"""Returns length of references attribute
+
+		Returns:
+			int: length of references
 		"""
 		return len(self._references)
 
@@ -47,58 +47,42 @@ class References:
 		return self._references[index]
 
 	def append(self, obj):
-		"""
-		Operates the same as list.append using references attribute
-		"""
+		"""Appends onto _references attribute"""
 		self._references.append(obj)
 
 	def extend(self, seq):
-		"""
-		Operates the same as list.extend using references attribute
-		"""
+		"""Extends onto _references attribute"""
 		self._references.extend(seq)
 
 	def insert(self, obj):
-		"""
-		Operates the same as list.insert using references attribute
-		"""
+		"""Inserts into _references attribute"""
 		self._references.insert(obj)
 
 	def pop(self, obj=-1):
-		"""
-		Operates the same as list.pop using references attribute
-		"""
+		"""Pops from _references attribute"""
 		self._references.pop(obj)
 
 	def remove(self, obj):
-		"""
-		Operates the same as list.remove using references attribute
-		"""
+		"""Removes from _references attribute"""
 		self._references.remove(obj)
 
-	def index(self, obj):
-		"""
-		Operates the same as list.index using references attribute
-		"""
+	def index(self, name):
+		"""Finds index where the name matches the reference object's name"""
 		for i, reference in enumerate(self):
-			if obj == reference.name:
+			if name == reference.name:
 				return i
 		else:
 			return None
 
 	def clear_offset(self):
-		"""
-		Removes all entries from element offset dictionary.
-		"""
+		"""Removes all entries from element offset dictionary."""
 		self.HoRT_element_offset.clear()
 
 	def get_elements(self):
-		"""
-		Returns the elements in references.
+		"""Returns the elements in references.
 
 		Returns
-			tuple
-				Unique elements in reference species
+			tuple: Unique elements in reference species
 		"""
 		unique_elements = []
 		for reference in self:
@@ -108,13 +92,10 @@ class References:
 		return tuple(sorted(unique_elements))
 
 	def get_elements_matrix(self):
-		"""
-		Creates the elements matrix required for calculating the offset. The elements are sorted
-		in alphabetical order.
+		"""Creates the elements matrix required for calculating the offset. The elements are sorted in alphabetical order.
 
 		Returns
-			(M,N) ndarray
-				Rows correspond to reference species. Columns correspond to elements
+			(M,N) ndarray: Rows correspond to reference species. Columns correspond to elements
 		"""
 		elements = self.get_elements()
 		elements_mat = np.zeros((len(self), len(elements)))
@@ -128,9 +109,7 @@ class References:
 		return elements_mat
 
 	def fit_HoRT_offset(self):
-		"""
-		Calculate the elemental offset between DFT and formation energies using reference species.
-		"""
+		"""Calculate the elemental offset between DFT and formation energies using reference species."""
 		elements = self.get_elements()
 		elements_mat = self.get_elements_matrix()
 
@@ -148,20 +127,14 @@ class References:
 		self.HoRT_element_offset = {element: offset for element, offset in zip(elements, HoRT_element_offset)}
 
 	def get_HoRT_offset(self, elements, Ts=None):
-		"""
-		Returns the offset due to the element composition of a specie. The offset is defined as follows:
-		HoRT_exp = HoRT_dft + offset
-		calc_offset must be run before meaningful offset values can be returned.
+		"""Returns the offset due to the element composition of a specie. The offset is defined as follows:
+			HoRT_exp = HoRT_dft + offset
 
-		Parameters
-			elements - dict
-				Dictionary where the keys are elements and the values are
-				the number of each element in a formula unit
-			Ts - float or (N,) ndarray
-				Temperatures in K. If not specified, adjusts using T_ref
+		Args
+			elements (dict): Dictionary where the keys are elements and the values are the number of each element in a formula unit
+			Ts (float or (N,) ndarray): Temperatures in K. If not specified, adjusts using T_ref
 		Returns
-			float
-				Offset to add to potentialenergy (in eV) to adjust to References
+			float: Offset to add to potentialenergy (in eV) to adjust to References
 		"""
 		HoRT_offset = 0.
 		for element, coefficient in elements.items():

@@ -10,20 +10,16 @@ import inspect
 from PyMuTT import constants as c
 
 def _get_expected_arguments(fn):
-	"""
-	Returns the arguments expected by a function. Useful for determining
+	"""Returns the arguments expected by a function. Useful for determining
 	where to assign **kwargs parameters.
 	
-	Parameters
-		fn - Function or Class
-			Function or class you would like to find the expected arguments.
+	Args
+		fn (function or class): Function or class you would like to find the expected arguments.
 	Returns
-		tuple of str
-			Expected arguments. If a class is specified, returns the
-			expected arguments of __init__
+		tuple of str: Expected arguments. If a class is specified, returns the expected arguments of __init__
 	"""
-	#If class passed, use __init__ to find expected arguments
 
+	#If class passed, use __init__ to find expected arguments
 	if inspect.isclass(fn):
 		fn = fn.__init__
 
@@ -33,15 +29,13 @@ def _get_expected_arguments(fn):
 	return args
 
 def _pass_expected_arguments(fn, **kwargs):
-	"""
-	Finds expected values from a function or class and passes the
-	appropriate arguments.
+	"""Finds expected values from a function or class and passes the appropriate arguments.
 
-	Arguments
-		fn - Function or Class
-			Function or class you would like to find the expected arguments.
-		**kwargs - Keyword arguments
-			Keyword arguments that contain parameters to pass to fn
+	Args
+		fn (Function or Class): Function or class you would like to find the expected arguments.
+		**kwargs: Keyword arguments that contain parameters to pass to fn
+	Returns
+		Output of fn that has been fed the expected arguments.
 	"""
 	expected_args = _get_expected_arguments(fn)
 	expected_arg_val = {}
@@ -53,17 +47,12 @@ def _pass_expected_arguments(fn, **kwargs):
 	return fn(**expected_arg_val)
 
 def parse_formula(formula):
-	"""
-	Parses chemical formula into its elements and returns it as a dictionary.
+	"""Parses chemical formula into its elements and returns it as a dictionary.
 
-	Parameters	
-		formula - string
-			Chemical formula
-			e.g. Al2O3
-	Returns	
-		elements - dict
-			ELement composition of formula
-			e.g. {'Al': 2, 'O': 3}
+	Args	
+		formula (str): Chemical formula e.g. Al2O3
+	Returns
+		elements (dict): ELement composition of formula e.g. {'Al': 2, 'O': 3}
 	"""
 	elements_tuples = re.findall(r'([A-Z][a-z]*)(\d*)', formula)
 	elements = {}
@@ -75,20 +64,17 @@ def parse_formula(formula):
 	return elements
 
 def get_molecular_weight(elements):
-	"""
-	Molecular mass (in g/mol) given the elemental composition.
+	"""Molecular mass (in g/mol) given the elemental composition.
 	Data taken from: https://en.wikipedia.org/wiki/Standard_atomic_weight
 
 	Parameters
-		elements - dict or str
-			Elemental composition of species.
+		elements (:obj: `dict` , :obj: `str`): Elemental composition of species.
 			If a dictionary is passed, the keys are the element symbol, atomic number, 
 			or element name and the value is the stoichiometric coefficient.
 			If a string is passed, the formula will be guessed using PyMuTT.parse_formula
 
 	Returns
-		molecular_weight - float
-			Molecular weight as float
+		molecular_weight (float): Molecular weight as float in kg/mol
 	"""
 	if isinstance(elements, str):
 		elements = parse_formula(elements)

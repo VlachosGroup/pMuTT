@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+PyMuTT.models.empirical.zacros
+Vlachos group code for Zacros wrapper.
+Created on Sun Jul 8 13:50:00 2018
+"""
+
 import numpy as np
 from PyMuTT import constants as c
 from PyMuTT import get_molecular_weight as mw
@@ -5,8 +12,7 @@ from PyMuTT.models.empirical import BaseThermo
 
 
 class Zacros(BaseThermo):
-    """
-    Stores the information for an individual nasa specie
+    """Stores the information for an individual nasa specie
     Inherits from PyMuTT.models.empirical.BaseThermo
     """
     def __init__(self, A_st=None, atoms=None, symmetrynumber=None,

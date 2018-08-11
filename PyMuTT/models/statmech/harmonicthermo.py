@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-PyMuTT.thermo_model
-Vlachos group code for thermodynamic models.
+PyMuTT.models.statmech.harmonicthermo
+Vlachos group code for Harmonic approximation.
 Created on Fri Jul 7 12:40:00 2018
 """
 
@@ -11,12 +11,12 @@ from PyMuTT import constants as c
 from PyMuTT.models.statmech.heat_capacity import get_CvoR_trans, get_CvoR_vib, get_CvoR_rot
 
 class HarmonicThermo:
-	"""
-	Treats all degrees of freedom harmonically. Uses ase.thermochemistry.HarmonicThermo to calculate
-	enthalpy and entropy
+	"""Treats all degrees of freedom harmonically. Uses ase.thermochemistry.HarmonicThermo to calculate	enthalpy and entropy
+
 	Attributes
-		model - ase.thermochemistry.HarmonicThermo
-			Harmonic Model
+		model (ase.thermochemistry.HarmonicThermo): The HarmonicThermo object has the following attributes.
+			vib_energies ((3N,) ndarray where N is number of atoms): Vibrational energies in eV.
+			potentialenergy (float): Potential energy in eV
 	"""
 	def __init__(self, vib_energies, potentialenergy=0.0):
 		self.model = thermochemistry.HarmonicThermo(
@@ -24,32 +24,23 @@ class HarmonicThermo:
 			potentialenergy = potentialenergy)
 
 	def get_CpoR(self, Ts):
-		"""
-		Calculates the dimensionless heat capacity (Cp/R) at a given temperature.
-		If you would like to use different behavior from the default, the
-		thermo_model used must have the function 'get_CpoR'.
+		"""Calculates the dimensionless heat capacity (Cp/R) at a given temperature.
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
 		Returns
-			float or (N,) ndarray
-				Dimensionless heat capacity (Cp/R)
+			float or (N,) ndarray: Dimensionless heat capacity (Cp/R)
 		""" 
 		return get_CvoR_vib(vib_energies=self.model.vib_energies, Ts=Ts)
 
 	def get_HoRT(self, Ts, verbose = False):
-		"""
-		Returns the dimensionless enthalpy at a given temperature
+		"""Returns the dimensionless enthalpy at a given temperature
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
-			verbose - bool
-				Whether a table breaking down each contribution should be printed
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
+			verbose (bool): Whether a table breaking down each contribution should be printed
 		Returns
-			float or (N,) ndarray
-				Dimensionless heat capacity (H/RT) at the specified temperature
+			float or (N,) ndarray: Dimensionless heat capacity (H/RT) at the specified temperature
 		"""
 		try:
 			iter(Ts)
@@ -62,17 +53,13 @@ class HarmonicThermo:
 		return HoRT
 
 	def get_SoR(self, Ts, verbose=False):
-		"""
-		Returns the dimensionless entropy at a given temperature and pressure
+		"""Returns the dimensionless entropy at a given temperature and pressure
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
-			verbose - bool
-				Whether a table breaking down each contribution should be printed
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
+			verbose (bool): Whether a table breaking down each contribution should be printed
 		Returns
-			float
-				Dimensionless entropy (S/R) at the specified temperature and pressure
+			float or (N,) ndarray: Dimensionless entropy (S/R) at the specified temperature and pressure
 		"""
 		try:
 			iter(Ts)
@@ -85,17 +72,13 @@ class HarmonicThermo:
 		return SoR
 
 	def get_GoRT(self, Ts, verbose=False):
-		"""
-		Returns the dimensionless Gibbs energy at a given temperature
+		"""Returns the dimensionless Gibbs energy at a given temperature
 
-		Parameters
-			Ts - float or (N,) ndarray
-				Temperature(s) in K
-			verbose - bool
-				Whether a table breaking down each contribution should be printed
+		Args
+			Ts (float or (N,) ndarray): Temperature(s) in K
+			verbose (bool): Whether a table breaking down each contribution should be printed
 		Returns
-			float
-				Dimensionless heat capacity (G/RT) at the specified temperature
+			float or (N,) ndarray: Dimensionless heat capacity (G/RT) at the specified temperature
 		"""
 		try:
 			iter(Ts)
