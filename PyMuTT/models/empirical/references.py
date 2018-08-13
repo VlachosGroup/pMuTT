@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 PyMuTT.models.empirical.references
-Vlachos group code for reference species.
-Created on Sun Jul 8 13:50:00 2018
+
+Operations related to referencing DFT energy to enthalpies of experimental references.
 """
+
 from warnings import warn
 import numpy as np
 from PyMuTT.models.empirical import BaseThermo
@@ -12,11 +13,17 @@ class References:
 	"""Holds reference species to adjust DFT energies to experimental data.
 
 	Attributes
-		_references (:obj: `list` of :obj: `PyMuTT.models.empirical.basethermo.BaseThermo` objects): Reference species. Each member of the list should have the attributes:
-			T_ref
-			HoRT_ref
-		HoRT_element_offset (dict): Dimensionless enthalpy offset for each element
-		T_ref (float): Reference temperature in K
+	----------
+		_references : list of `PyMuTT.models.empirical.basethermo.BaseThermo`
+			Reference species. Each member of the list should have the attributes `T_ref` and `HoRT_ref`
+		HoRT_element_offset : dict
+			Dimensionless enthalpy offset for each element
+		T_ref : float
+			Reference temperature in K
+
+	Notes
+	-----
+		List-like methods (such as `append`, `extend`) will affect the `_references` attribute.
 	"""
 	def __init__(self, references):
 		self._references = references
@@ -26,18 +33,14 @@ class References:
 	def __iter__(self):
 		"""Iterates over references attribute
 		
-		Yields:
-			:obj: `PyMuTT.models.empirical.basethermo.BaseThermo` object
+		Yields
+		------
+			reference : `PyMuTT.models.empirical.basethermo.BaseThermo`
 		"""
 		for reference in self._references:
 			yield reference
 
 	def __len__(self):
-		"""Returns length of references attribute
-
-		Returns:
-			int: length of references
-		"""
 		return len(self._references)
 
 	def __setitem__(self, index, reference):
@@ -47,27 +50,21 @@ class References:
 		return self._references[index]
 
 	def append(self, obj):
-		"""Appends onto _references attribute"""
 		self._references.append(obj)
 
 	def extend(self, seq):
-		"""Extends onto _references attribute"""
 		self._references.extend(seq)
 
 	def insert(self, obj):
-		"""Inserts into _references attribute"""
 		self._references.insert(obj)
 
 	def pop(self, obj=-1):
-		"""Pops from _references attribute"""
 		self._references.pop(obj)
 
 	def remove(self, obj):
-		"""Removes from _references attribute"""
 		self._references.remove(obj)
 
 	def index(self, name):
-		"""Finds index where the name matches the reference object's name"""
 		for i, reference in enumerate(self):
 			if name == reference.name:
 				return i
@@ -82,7 +79,9 @@ class References:
 		"""Returns the elements in references.
 
 		Returns
-			tuple: Unique elements in reference species
+		-------
+			elements : tuple
+				Unique elements in reference species
 		"""
 		unique_elements = []
 		for reference in self:
@@ -95,7 +94,11 @@ class References:
 		"""Creates the elements matrix required for calculating the offset. The elements are sorted in alphabetical order.
 
 		Returns
-			(M,N) ndarray: Rows correspond to reference species. Columns correspond to elements
+		-------
+			Element matrix : (M,N) `numpy.ndarray`_
+				Rows correspond to reference species. Columns correspond to elements
+
+		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
 		"""
 		elements = self.get_elements()
 		elements_mat = np.zeros((len(self), len(elements)))
@@ -130,11 +133,18 @@ class References:
 		"""Returns the offset due to the element composition of a specie. The offset is defined as follows:
 			HoRT_exp = HoRT_dft + offset
 
-		Args
-			elements (dict): Dictionary where the keys are elements and the values are the number of each element in a formula unit
-			Ts (float or (N,) ndarray): Temperatures in K. If not specified, adjusts using T_ref
+		Parameters
+		----------
+			elements : dict
+				Dictionary where the keys are elements and the values are the number of each element in a formula unit
+			Ts : float or (N,) numpy.ndarray_
+				Temperatures in K. If not specified, adjusts using `T_ref`
 		Returns
-			float: Offset to add to potentialenergy (in eV) to adjust to References
+		-------
+			HoRT_offset : float
+				Offset to add to potentialenergy (in eV) to adjust to References
+
+		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
 		"""
 		HoRT_offset = 0.
 		for element, coefficient in elements.items():

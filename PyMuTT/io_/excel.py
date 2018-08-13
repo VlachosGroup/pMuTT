@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 PyMuTT.io_.excel
-Vlachos group code to read from/write to xlsx files of particular format.
-Created on Fri Jul 7 12:40:00 2018
+
+Read from/write to xlsx files of particular format.
 """
 
 import numpy as np
@@ -16,20 +16,42 @@ from PyMuTT.models.empirical import BaseThermo
 def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 	"""Reads an excel file and returns it as a list of dictionaries to initialize objects
 
-	Args
-		io (str): Name of the Excel spreadsheet
-		skiprows (:obj: `list`, optional): Rows to skip at the beginning (0-indexed). Default is [1] so comments can be put in that row
-		header (:obj: `int`, optional): Location to find header names (0-index). Default is 0
-		delimiter (:obj: `str`, optional): Delimiter to parse column names. Default is '~'
-		``**kwargs``: Parameters used by pandas.read_excel
-			Not required but some potentially useful parameters include:
-				sheet_name (str): Specify the name of the sheet you're reading.
-				converters - Specify how to process certain columns
-				dtype (dict): Expected data type. Will be guessed if not specified
-				na_values (scalar, str, list-like, or dict): What strings to interpret as NaN
-				convert_float (bool): Converts integral floats to int (i.e. 1.0 --> 1)
+	Parameters
+	----------
+		io : str
+			Name of the Excel spreadsheet
+		skiprows : list, optional
+			Rows to skip at the beginning (0-indexed). Default is [1] so comments can be put in that row
+		header : int, optional
+			Location to find header names (0-index). Default is 0
+		delimiter : str, optional
+			Delimiter to parse column names. Default is '~'
+		\*\*kwargs: keyword arguments
+			Parameters used by `pandas.read_excel`_. Not required but some potentially useful parameters include:
+
+			- sheet_name (str): Specify the name of the sheet you're reading
+			- converters: Specify how to process certain columns
+			- dtype (dict): Expected data type. Will be guessed if not specified
+			- na_values (scalar, str, list-like, or dict): What strings to interpret as NaN
+			- convert_float (bool): Converts integral floats to int (i.e. 1.0 --> 1)
 	Returns
-		:obj: `list` of :obj: `dict`: Can be used to initialize objects with the **kwargs syntax
+	-------
+		excel_data : list of dict
+			Can be used to initialize objects with the \*\*kwargs syntax
+
+	Notes
+	-----
+		Special rules exist for the following column headings
+
+		- element
+		- formula
+		- atoms
+		- thermo_model
+		- vib_wavenumber
+		- nasa~a_low
+		- nasa~a_high
+
+	.. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
 	"""
 	input_data = pd.read_excel(io=io, skiprows=skiprows, header=header, **kwargs)
 	excel_path = os.path.dirname(io)
@@ -65,14 +87,20 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 def set_element(header, value, output_structure, delimiter = '~'):
 	"""Parses element header and assigns to output_structure['elements']
 	
-	Args
-		header (str): String containing the element name. Element symbol should be at the end.
-			e.g. 'element~O'
-		value (int): Amount found in formula
-		output_structure (dict): Structure to assign value. Will assign to output_structure['elements'][element]
-		delimiter (str): Delimiter for element. Element symbol should be at the end
+	Parameters
+	----------
+		header : str
+			String containing the element name. Element symbol should be at the end. e.g. 'element~O'
+		value : int
+			Amount found in formula
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['elements'][element]
+		delimiter : str
+			Delimiter for element. Element symbol should be at the end
 	Returns
-		dict: output_structure with new element added
+	-------
+		output_structure : (dict)
+			output_structure with new element added
 	"""
 	element = header.split(delimiter)[-1]
 	try:
@@ -84,12 +112,17 @@ def set_element(header, value, output_structure, delimiter = '~'):
 def set_formula(formula, output_structure):
 	"""Parses stoichiometric formula unit and assigns to output_structure
 
-	Args
-		formula (str): Stoichiometric formula unit. e.g. H2O
+	Parameters
+	----------
+		formula : str
+			Stoichiometric formula unit. e.g. H2O
 			Note that an element cannot be specified multiple times. e.g. CH3OH is not supported
-		output_structure (dict): Structure to assign value. Will assign to output_structure['elements']
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['elements']
 	Returns
-		dict: output_structure with new elements added
+	-------
+		output_structure : dict
+			output_structure with new elements added
 	"""
 	elements = parse_formula(formula=formula)
 	output_structure['elements'] = elements
@@ -98,13 +131,19 @@ def set_formula(formula, output_structure):
 def set_atoms(path, output_structure, excel_path=None):
 	"""Reads the atoms object ans assigns to output_structure
 
-	Args
-		path (str): Location to import atoms object. If relative references used, the path should be relative to excel_path.
+	Parameters
+	----------
+		path : str
+			Location to import atoms object. If relative references used, the path should be relative to excel_path.
 			See ase.read for supported formats
-		excel_path (str): Location where excel path is located
-		output_structure (dict): Structure to assign value. Will assign to output_structure['atoms']
+		excel_path : str
+			Location where excel path is located
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['atoms']
 	Returns
-		dict: output_structure with new thermo model added
+	-------
+		output_structure: dict
+			output_structure with new thermo model added
 	"""
 	try:
 		output_structure['atoms'] = read(path)
@@ -119,15 +158,20 @@ def set_atoms(path, output_structure, excel_path=None):
 def set_thermo_model(model, output_structure):
 	"""Imports module and assigns the class to output_structure
 
-	Args
-		model (str): Thermodynamic model to import.
-			Supported Options:
-				IdealGas
-				Harmonic
-				HinderedRotor
-		output_structure (dict): Structure to assign value. Will assign to output_structure['thermo_model']
+	Parameters
+	----------
+		model : str
+			Thermodynamic model to import. Supported Options:
+
+				- IdealGas
+				- Harmonic
+				- HinderedRotor
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['thermo_model']
 	Returns
-		dict: output_structure with new thermo model added
+	-------
+		output_structure: dict
+			output_structure with new thermo model added
 	"""
 	model = model.lower()
 	if model == 'idealgas':
@@ -146,11 +190,16 @@ def set_thermo_model(model, output_structure):
 def set_vib_wavenumber(value, output_structure):
 	"""Parses element header and assigns to output_structure['vib_energies']
 	
-	Args
-		value (float): Vibrational frequency in 1/cm
-		output_structure (dict): Structure to assign value. Will assign to output_structure['elements'][element]
+	Parameters
+	----------
+		value : float
+			Vibrational frequency in 1/cm
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['elements'][element]
 	Returns
-		dict: output_structure with new vibration added
+	-------
+		output_structure: dict
+			output_structure with new vibration added
 	"""
 	vib_energy = value*c.c('cm/s')*c.h('eV s')
 	try:
@@ -160,18 +209,24 @@ def set_vib_wavenumber(value, output_structure):
 	return output_structure
 
 def set_nasa_a_low(header, value, output_structure, delimiter='~'):
-	"""Parses a_low parameter for PyMuTT.models.empirical.nasa.Nasa object
+	"""Parses a_low parameter for `PyMuTT.models.empirical.nasa.Nasa` object
 	
-	Args
-		header (str): Name of the header. Used to determine coefficient. 
-			Assumes zero index and header takes the format:
+	Parameters
+	----------
+		header : str
+			Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:
 				nasa[delimiter]a_low[delimiter][index]
 				e.g. nasa~a_low~0
-		value (float): a_low value
-		output_structure (dict): Structure to assign value. Will assign to output_structure['a_low']
-		delimiter (str): How to parse header to find the coefficient
+		value : float
+			a_low value
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['a_low']
+		delimiter : str
+			How to parse header to find the coefficient
 	Returns
-		dict: output_structure with a_low value added
+	-------
+		output_structure : dict
+			output_structure with a_low value added
 	"""
 	i = int(header.split(delimiter)[-1])
 	try:
@@ -182,18 +237,24 @@ def set_nasa_a_low(header, value, output_structure, delimiter='~'):
 	return output_structure
 
 def set_nasa_a_high(header, value, output_structure, delimiter='~'):
-	"""Parses a_high parameter for PyMuTT.models.empirical.nasa.Nasa object
+	"""Parses a_high parameter for `PyMuTT.models.empirical.nasa.Nasa` object
 	
-	Args
-		header (str): Name of the header. Used to determine coefficient. 
-			Assumes zero index and header takes the format:
+	Parameters
+	----------
+		header : str
+			Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:
 				nasa[delimiter]a_high[delimiter][index]
 				e.g. nasa~a_high~0
-		value (float): a_high value
-		output_structure (dict): Structure to assign value. Will assign to output_structure['a_high']
-		delimiter (str): How to parse header to find the coefficient
+		value : float
+			a_high value
+		output_structure : dict
+			Structure to assign value. Will assign to output_structure['a_high']
+		delimiter : str
+			How to parse header to find the coefficient
 	Returns
-		dict: output_structure with a_high value added
+	-------
+		output_structure : dict
+			output_structure with a_high value added
 	"""
 	i = int(header.split(delimiter)[-1])
 	try:

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-PyMuTT.models.empirical.basethermo
-Vlachos group code for thermodynamic models.
-Created on Tues Jul 10 12:40:00 2018
+PyMuTT.models.empirical
+
+Empirical models.
 """
 
 import inspect
@@ -17,29 +17,32 @@ class BaseThermo:
 	Holds properties of a specie, the statistical-mechanical thermodynamic model.
 
 	Attributes
-		name (str): Name of the specie
-		phase (str): Phase of the specie
-			G - gas
-			S - surface
-		elements (dict): Composition of the species. 
-			Keys of dictionary are elements, values are stoichiometric values in a formula unit
+	---------- 
+		name : str
+			Name of the specie.
+		phase : str 
+			Phase of the specie.
+			G - gas.
+			S - surface.
+		elements : dict
+			Composition of the species.
+			Keys of dictionary are elements, values are stoichiometric values in a formula unit.
 			e.g. CH3OH can be represented as:
-			{
-				'C': 1,
-				'H': 4,
-				'O': 1,
-			}
-		thermo_model (:obj: `PyMuTT.thermo_model` class): Statistical thermodynamic model
-			Class should have the following methods:
-				get_CpoR
-				get_HoRT
-				get_SoR
-				get_GoRT
-		T_ref (float): Temperature (in K) at which HoRT_dft was calculated. Only used for fitting empirical coefficients.
-		HoRT_dft (float): Dimensionless enthalpy calculated using DFT that corresponds to T_dft. Only used for fitting empirical coefficients.
-		HoRT_ref (float): Reference dimensionless enthalpy corresponding to T_ref. 
-		references (:obj: `PyMuTT.models.empirical.References` object): Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.
-		notes (str): Any additional details you would like to include such as computational set up.
+			{'C': 1, 'H': 4, 'O': 1,}.
+		thermo_model : `PyMuTT.models.statmech` object
+			Statistical thermodynamic model.
+		    Object should have the following methods: `get_CpoR`, `get_HoRT`, `get_SoR`, `get_GoRT`.
+		T_ref : float 
+			Temperature (in K) at which `HoRT_dft` was calculated. Only used for fitting empirical coefficients.
+		HoRT_dft : float
+			Dimensionless enthalpy calculated using DFT that corresponds to `T_ref`. Only used for fitting empirical coefficients.
+		HoRT_ref : float
+			Reference dimensionless enthalpy corresponding to `T_ref`.
+		references : `PyMuTT.models.empirical.References.references` object
+			Contains references to calculate `HoRT_ref`. If not specified then HoRT_dft will be used without adjustment.
+		notes : str
+			Any additional details you would like to include such as computational set up.
+
 	"""
 
 	def __init__(self, name, phase=None, elements=None, thermo_model=None, T_ref=c.T0('K'), HoRT_dft=None, HoRT_ref=None, references=None, notes=None, **kwargs):
@@ -74,22 +77,35 @@ class BaseThermo:
 			self.HoRT_ref = HoRT_ref
 
 	def plot_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
-		"""Plots the thermodynamic profiles between T_low and T_high using empirical relationship
+		"""Plots the thermodynamic profiles between `T_low` and `T_high` using empirical relationship
 
-		Args
-			T_low (float): Lower temperature in K. If not specified, T_low attribute used
-			T_high (float): Upper temperature in K. If not specified, T_high attribute used
-			Cp_units (str): Units to plot heat capacity. See PyMuTT.constants.R for accepted units. If not specified, dimensionless units used.
-			H_units (str): Units to plot enthalpy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
-			S_units (str): Units to plot entropy. See PyMuTT.constants.R for accepted units. If not specified, dimensionless units used.
-			G_units (str): Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+		Parameters
+		----------
+			T_low : float
+				Lower temperature in K. If not specified, `T_low` attribute used.
+			T_high : float 
+				Upper temperature in K. If not specified, `T_high` attribute used.
+			Cp_units : str
+				Units to plot heat capacity. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+			H_units : str
+				Units to plot enthalpy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+			S_units : str
+				Units to plot entropy. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+			G_units : str
+				Units to plot Gibbs free energy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 		Returns
-			(2,) tuple: matplotlib.figure.Figure, axes
-				where axes is a (4,) ndarray. The plot's contents can be modified by the indices of axes.
-					axes[0] - Cp
-					axes[1] - H
-					axes[2] - S
-					axes[3] - G
+		-------
+			figure : `matplotlib.figure.Figure`_
+				Figure
+			axes : tuple of `matplotlib.axes.Axes.axis`_
+				Axes of the plots. 
+				0. Cp
+				1. H
+				2. S
+				3. G
+
+		.. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+		.. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
 		"""
 		if T_low is None:
 			T_low = self.T_low
@@ -147,22 +163,35 @@ class BaseThermo:
 		return f, ax
 
 	def plot_thermo_model(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
-		"""Plots the thermodynamic profiles between T_low and T_high using empirical relationship
+		"""Plots the thermodynamic profiles between `T_low` and `T_high` using empirical relationship
 
-		Args
-			T_low (float): Lower temperature in K. If not specified, T_low attribute used
-			T_high (float): Upper temperature in K. If not specified, T_high attribute used
-			Cp_units (str): Units to plot heat capacity. See PyMuTT.constants.R for accepted units. If not specified, dimensionless units used.
-			H_units (str): Units to plot enthalpy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
-			S_units (str): Units to plot entropy. See PyMuTT.constants.R for accepted units. If not specified, dimensionless units used.
-			G_units (str): Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+		Parameters
+		----------
+			T_low : float
+				Lower temperature in K. If not specified, `T_low` attribute used
+			T_high : float
+				Upper temperature in K. If not specified, `T_high` attribute used
+			Cp_units : str
+				Units to plot heat capacity. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+			H_units : str
+				Units to plot enthalpy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+			S_units : str
+				Units to plot entropy. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+			G_units : str
+				Units to plot Gibbs free energy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 		Returns
-			(2,) tuple: matplotlib.figure.Figure, axes
-				where axes is a (4,) ndarray. The plot's contents can be modified by the indices of axes.
-					axes[0] - Cp
-					axes[1] - H
-					axes[2] - S
-					axes[3] - G
+		-------
+			figure : `matplotlib.figure.Figure`_
+				Figure
+			axes : tuple of `matplotlib.axes.Axes.axis`_
+				Axes of the plots. 
+				0. Cp
+				1. H
+				2. S
+				3. G
+
+		.. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+		.. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
 		"""
 		if T_low is None:
 			T_low = self.T_low
@@ -226,22 +255,35 @@ class BaseThermo:
 		return f, ax
 
 	def plot_thermo_model_and_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
-		"""Plots the thermodynamic profiles between T_low and T_high using empirical relationship
+		"""Plots the thermodynamic profiles between `T_low` and `T_high` using empirical relationship
 
-		Args
-			T_low (float): Lower temperature in K. If not specified, T_low attribute used
-			T_high (float): Upper temperature in K. If not specified, T_high attribute used
-			Cp_units (str): Units to plot heat capacity. See PyMuTT.constants.R for accepted units. If not specified, dimensionless units used.
-			H_units (str): Units to plot enthalpy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
-			S_units (str): Units to plot entropy. See PyMuTT.constants.R for accepted units. If not specified, dimensionless units used.
-			G_units (str): Units to plot Gibbs free energy. See PyMuTT.constants.R for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+		Parameters
+		----------
+			T_low : float
+				Lower temperature in K. If not specified, `T_low` attribute used
+			T_high : float
+				Upper temperature in K. If not specified, `T_high` attribute used
+			Cp_units : str
+				Units to plot heat capacity. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+			H_units : str
+				Units to plot enthalpy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+			S_units : str
+				Units to plot entropy. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+			G_units : str
+				Units to plot Gibbs free energy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 		Returns
-			(2,) tuple: matplotlib.figure.Figure, axes
-				where axes is a (4,) ndarray. The plot's contents can be modified by the indices of axes.
-					axes[0] - Cp
-					axes[1] - H
-					axes[2] - S
-					axes[3] - G
+		-------
+			figure : `matplotlib.figure.Figure`_
+				Figure
+			axes : tuple of `matplotlib.axes.Axes.axis`_
+				Axes of the plots. 
+				0. Cp
+				1. H
+				2. S
+				3. G
+
+		.. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+		.. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
 		"""
 		if T_low is None:
 			T_low = self.T_low
@@ -311,15 +353,22 @@ class BaseThermo:
 
 
 	def compare_CpoR(self, Ts = None):
-		"""Returns the dimensionless heat capacity of the statistical model and the empirical model 
+		"""Compares the dimensionless heat capacity of the statistical model and the empirical model 
 
-		Args
-			Ts ((N,) ndarray, float, or None): Temperatures (in K) to calculate CpoR. If None, generates a list of temperatures between self.T_low and self.T_high
+		Parameters
+		----------
+			Ts : (N,) `numpy.ndarray`_ or float, optional
+				Temperatures (in K) to calculate CpoR. If None, generates a list of temperatures between self.T_low and self.T_high
 		Returns
-			(3,) tuple: 
-				Temperature in K
-				CpoR_statmech Dimensionless heat capacity of statistical thermodynamic model
-				CpoR_empirical Dimensionless heat capacity of empirical model
+		-------
+			Ts : (N,) `numpy.ndarray`_ or float
+				Temperatures in K
+			CpoR_statmech : (N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of statistical thermodynamic model
+			CpoR_empirical :((N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of empirical model
+
+		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
 		"""
 
 		if Ts is None:
@@ -339,17 +388,23 @@ class BaseThermo:
 		return (Ts, CpoR_statmech, CpoR_empirical)
 
 	def compare_HoRT(self, Ts = None):
-		"""Returns the dimensionless enthalpy of the statistical model and the empirical model 
+		"""Compares the dimensionless enthalpy of the statistical model and the empirical model 
 
-		Args
-			Ts ((N,) ndarray, float, or None): Temperatures (in K) to calculate HoRT. If None, generates a list of temperatures between self.T_low and self.T_high
+		Parameters
+		----------
+			Ts : (N,) `numpy.ndarray`_ or float, optional
+				Temperatures (in K) to calculate CpoR. If None, generates a list of temperatures between self.T_low and self.T_high
 		Returns
-			(3,) tuple:
-				Temperature in K
-				HoRT_statmech Dimensionless enthalpy of statistical thermodynamic model
-				HoRT_empirical Dimensionless enthalpy capacity of empirical model
-		"""
+		-------
+			Ts : (N,) `numpy.ndarray`_ or float
+				Temperatures in K
+			CpoR_statmech : (N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of statistical thermodynamic model
+			CpoR_empirical :((N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of empirical model
 
+		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+		"""
 		if Ts is None:
 			Ts = np.linspace(self.T_low, self.T_high)
 
@@ -370,17 +425,23 @@ class BaseThermo:
 		return (Ts, HoRT_statmech, HoRT_empirical)
 
 	def compare_SoR(self, Ts = None):
-		"""Returns the dimensionless entropy of the statistical model and the empirical model 
+		"""Compares the dimensionless entropy of the statistical model and the empirical model 
 
-		Args
-			Ts ((N,) ndarray, float, or None): Temperatures (in K) to calculate SoR. If None, generates a list of temperatures between self.T_low and self.T_high
+		Parameters
+		----------
+			Ts : (N,) `numpy.ndarray`_ or float, optional
+				Temperatures (in K) to calculate CpoR. If None, generates a list of temperatures between self.T_low and self.T_high
 		Returns
-			(3,) tuple:
-				Temperature in K
-				SoR_statmech Dimensionless entropy of statistical thermodynamic model
-				SoR_empirical Dimensionless entropy of empirical model
-		"""
+		-------
+			Ts : (N,) `numpy.ndarray`_ or float
+				Temperatures in K
+			CpoR_statmech : (N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of statistical thermodynamic model
+			CpoR_empirical :((N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of empirical model
 
+		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+		"""
 		if Ts is None:
 			Ts = np.linspace(self.T_low, self.T_high)
 
@@ -398,17 +459,23 @@ class BaseThermo:
 		return (Ts, SoR_statmech, SoR_empirical)
 
 	def compare_GoRT(self, Ts = None):
-		"""Returns the dimensionless Gibbs energy of the statistical model and the empirical model 
+		"""Compares the dimensionless Gibbs energy of the statistical model and the empirical model 
 
-		Args
-			Ts ((N,) ndarray, float, or None): Temperatures (in K) to calculate GoRT. If None, generates a list of temperatures between self.T_low and self.T_high
+		Parameters
+		----------
+			Ts : (N,) `numpy.ndarray`_ or float, optional
+				Temperatures (in K) to calculate CpoR. If None, generates a list of temperatures between self.T_low and self.T_high
 		Returns
-			(3,) tuple
-				Temperature in K
-				GoRT_statmech Dimensionless Gibbs energy of statistical thermodynamic model
-				GoRT_empirical Dimensionless Gibbs energy of empirical model
-		"""
+		-------
+			Ts : (N,) `numpy.ndarray`_ or float
+				Temperatures in K
+			CpoR_statmech : (N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of statistical thermodynamic model
+			CpoR_empirical : (N,) `numpy.ndarray`_ or float
+				Dimensionless heat capacity of empirical model
 
+		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+		"""
 		if Ts is None:
 			Ts = np.linspace(self.T_low, self.T_high)
 

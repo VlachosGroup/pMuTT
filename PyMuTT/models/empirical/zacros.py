@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 PyMuTT.models.empirical.zacros
-Vlachos group code for Zacros wrapper.
-Created on Sun Jul 8 13:50:00 2018
+
+Operations related to the Zacros wrapper
 """
 
 import numpy as np

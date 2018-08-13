@@ -16,7 +16,7 @@ in*\ `PyMuTT.examples.VASP_to_thermdat.example1`_
    elements.
 
 For this example, our references are specified in the Excel file,
-```references.xlsx```_. The file contains all the data we need for
+`references.xlsx`_. The file contains all the data we need for
 referencing, including: \* ``name`` (identify the molecule being
 described) \* ``elements~x`` (number of element x in the formula unit)
 \* ``thermo_model`` (statistical thermodynamic model to use. In this
@@ -61,4 +61,4 @@ cell=[20.0, 21.0, 22.0]), ‘elements’: {‘H’: 2, ‘O’: 0}, ‘geometry�
 [0.47429336414391626, 0.460014128927786,
 
 .. _PyMuTT.examples.VASP_to_thermdat.example1: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1
-.. _``references.xlsx``: https://github.com/VlachosGroup/PyMuTT/blob/master/examples/VASP_to_thermdat/example1/references.xlsx
+.. _`references.xlsx`: https://github.com/VlachosGroup/PyMuTT/blob/master/examples/VASP_to_thermdat/example1/references.xlsx
