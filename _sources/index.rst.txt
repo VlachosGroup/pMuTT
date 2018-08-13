@@ -10,6 +10,10 @@ Welcome to PyMuTT's documentation!
    :maxdepth: 2
 
    includeme
+   io
+   empirical
+   statmech
+   constants
 
 Indices and tables
 ==================

@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Constants &mdash; PyMuTT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyMuTT
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Constants</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyMuTT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Constants</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/constants.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-PyMuTT.constants">
+<span id="constants"></span><h1>Constants<a class="headerlink" href="#module-PyMuTT.constants" title="Permalink to this headline">¶</a></h1>
+<p>PyMuTT.constants</p>
+<p>Contains universal constants for catalysis research</p>
+<dl class="data">
+<dt id="PyMuTT.constants.Na">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">Na</code><em class="property"> = 6.02214086e+23</em><a class="headerlink" href="#PyMuTT.constants.Na" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Avogadro’s number in molecules/mol</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.P0">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">P0</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.P0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference pressure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for P0. Supported units</p>
+<ul class="simple">
+<li>bar</li>
+<li>atm</li>
+<li>Pa</li>
+<li>kPa</li>
+<li>MPa</li>
+<li>psi</li>
+<li>mmHg</li>
+<li>Torr</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>P0</strong> – Reference pressure in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.R">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">R</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.R" title="Permalink to this definition">¶</a></dt>
+<dd><p>Universal molar gas constant, R</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for R. Supported units</p>
+<ul class="simple">
+<li>J/mol/K</li>
+<li>kJ/mol/K</li>
+<li>L kPa/mol/K</li>
+<li>cm3 kPa/mol/K</li>
+<li>m3 Pa/mol/K</li>
+<li>cm3 MPa/mol/K</li>
+<li>m3 bar/mol/K</li>
+<li>L bar/mol/K</li>
+<li>L torr/mol/K</li>
+<li>cal/mol/K</li>
+<li>kcal/mol/K</li>
+<li>L atm/mol/K</li>
+<li>cm3 atm/mol/K</li>
+<li>eV/K (This option implies per molecule. i.e. Uses the value of kb)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>R</strong> – Universal molar gas constant in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.T0">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">T0</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.T0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Room temperature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for T0. Supported units</p>
+<ul class="simple">
+<li>K</li>
+<li>C</li>
+<li>R</li>
+<li>F</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T0</strong> – Room temperature in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="PyMuTT.constants.atomic_weight">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">atomic_weight</code><em class="property"> = {1: 1.008, 2: 4.002602, 3: 6.938, 4: 9.0121831, 5: 10.806, 6: 12.0116, 7: 14.007, 8: 15.999, 9: 18.99840316, 10: 20.1797, 11: 22.98976928, 12: 24.305, 13: 26.9815385, 14: 28.085, 15: 30.973762, 16: 32.06, 17: 35.45, 18: 39.948, 19: 39.0983, 20: 40.078, 21: 44.955908, 22: 47.867, 23: 50.9415, 24: 51.9961, 25: 54.938044, 26: 55.845, 27: 58.933194, 28: 58.6934, 29: 63.546, 30: 65.38, 31: 69.723, 32: 72.63, 33: 74.921595, 34: 78.971, 35: 79.901, 36: 83.798, 37: 85.4678, 38: 87.62, 39: 88.90584, 40: 91.224, 41: 92.90637, 42: 95.95, 43: 98, 44: 101.07, 45: 102.9055, 46: 106.42, 47: 107.8682, 48: 112.414, 49: 114.818, 50: 118.71, 51: 121.76, 52: 127.6, 53: 126.90447, 54: 131.293, 55: 132.905452, 56: 137.327, 57: 138.90547, 58: 140.116, 59: 140.90766, 60: 144.242, 61: 145, 62: 150.36, 63: 151.964, 64: 157.25, 65: 158.92535, 66: 162.5, 67: 164.93033, 68: 167.259, 69: 168.93422, 70: 173.054, 71: 174.9668, 72: 178.49, 73: 180.94788, 74: 183.84, 75: 186.207, 76: 190.23, 77: 192.217, 78: 195.084, 79: 196.966569, 80: 200.592, 81: 204.382, 82: 207.2, 83: 208.9804, 84: 209, 85: 210, 86: 222, 87: 223, 88: 226, 89: 227, 90: 232.0377, 91: 231.03588, 92: 238.02891, 93: 237, 94: 244, 95: 243, 96: 247, 97: 247, 98: 251, 99: 252, 100: 257, 101: 258, 102: 259, 103: 262, 104: 267, 105: 268, 106: 271, 107: 272, 108: 270, 109: 276, 110: 281, 111: 280, 112: 285, 113: 284, 114: 289, 115: 288, 116: 293, 118: 294, 'H': 1.008, 'He': 4.002602, 'Li': 6.938, 'Be': 9.0121831, 'B': 10.806, 'C': 12.0116, 'N': 14.007, 'O': 15.999, 'F': 18.99840316, 'Ne': 20.1797, 'Na': 22.98976928, 'Mg': 24.305, 'Al': 26.9815385, 'Si': 28.085, 'P': 30.973762, 'S': 32.06, 'Cl': 35.45, 'Ar': 39.948, 'K': 39.0983, 'Ca': 40.078, 'Sc': 44.955908, 'Ti': 47.867, 'V': 50.9415, 'Cr': 51.9961, 'Mn': 54.938044, 'Fe': 55.845, 'Co': 58.933194, 'Ni': 58.6934, 'Cu': 63.546, 'Zn': 65.38, 'Ga': 69.723, 'Ge': 72.63, 'As': 74.921595, 'Se': 78.971, 'Br': 79.901, 'Kr': 83.798, 'Rb': 85.4678, 'Sr': 87.62, 'Y': 88.90584, 'Zr': 91.224, 'Nb': 92.90637, 'Mo': 95.95, 'Tc': 98, 'Ru': 101.07, 'Rh': 102.9055, 'Pd': 106.42, 'Ag': 107.8682, 'Cd': 112.414, 'In': 114.818, 'Sn': 118.71, 'Sb': 121.76, 'Te': 127.6, 'I': 126.90447, 'Xe': 131.293, 'Cs': 132.905452, 'Ba': 137.327, 'La': 138.90547, 'Ce': 140.116, 'Pr': 140.90766, 'Nd': 144.242, 'Pm': 145, 'Sm': 150.36, 'Eu': 151.964, 'Gd': 157.25, 'Tb': 158.92535, 'Dy': 162.5, 'Ho': 164.93033, 'Er': 167.259, 'Tm': 168.93422, 'Yb': 173.054, 'Lu': 174.9668, 'Hf': 178.49, 'Ta': 180.94788, 'W': 183.84, 'Re': 186.207, 'Os': 190.23, 'Ir': 192.217, 'Pt': 195.084, 'Au': 196.966569, 'Hg': 200.592, 'Tl': 204.382, 'Pb': 207.2, 'Bi': 208.9804, 'Po': 209, 'At': 210, 'Rn': 222, 'Fr': 223, 'Ra': 226, 'Ac': 227, 'Th': 232.0377, 'Pa': 231.03588, 'U': 238.02891, 'Np': 237, 'Pu': 244, 'Am': 243, 'Cm': 247, 'Bk': 247, 'Cf': 251, 'Es': 252, 'Fm': 257, 'Md': 258, 'No': 259, 'Lr': 262, 'Rf': 267, 'Db': 268, 'Sg': 271, 'Bh': 272, 'Hs': 270, 'Mt': 276, 'Ds': 281, 'Rg': 280, 'Cn': 285, 'Uut': 284, 'Fl': 289, 'Uup': 288, 'Lv': 293, 'Uuo': 294}</em><a class="headerlink" href="#PyMuTT.constants.atomic_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Atomic weight. The key can be the atomic number, the element symbol, or the element name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.c">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">c</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Speed of light</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for c. Supported units</p>
+<ul class="simple">
+<li>m/s</li>
+<li>cm/s</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>c</strong> – Speed of light in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.convert_unit">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">convert_unit</code><span class="sig-paren">(</span><em>num=None</em>, <em>from_=None</em>, <em>to=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.convert_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts units between two unit sets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number to convert. I not specified, will return the appropriate conversion factor.</li>
+<li><strong>from</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units that num is currently in</li>
+<li><strong>to</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units you would like num to be in</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>conversion_num</strong> – num in the appropriate units</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If unit types are not consistent or not supported</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Supported Units</strong></p>
+<p><em>Energy</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J</td>
+<td>Joules</td>
+</tr>
+<tr class="row-odd"><td>kJ</td>
+<td>KiloJoules</td>
+</tr>
+<tr class="row-even"><td>eV</td>
+<td>Electron Volts</td>
+</tr>
+<tr class="row-odd"><td>cal</td>
+<td>Calories</td>
+</tr>
+<tr class="row-even"><td>kcal</td>
+<td>Kilocalories</td>
+</tr>
+<tr class="row-odd"><td>L atm</td>
+<td>Liter atmospheres</td>
+</tr>
+</tbody>
+</table>
+<p><em>Energy/Amount</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J/mol</td>
+<td>Joules per mole</td>
+</tr>
+<tr class="row-odd"><td>kJ/mol</td>
+<td>KiloJoules per mole</td>
+</tr>
+<tr class="row-even"><td>cal/mol</td>
+<td>Calories per mole</td>
+</tr>
+<tr class="row-odd"><td>kcal/mol</td>
+<td>Kilocalories per mole</td>
+</tr>
+<tr class="row-even"><td>eV/molecule</td>
+<td>eV per molecule</td>
+</tr>
+</tbody>
+</table>
+<p><em>Time</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>s</td>
+<td>Seconds</td>
+</tr>
+<tr class="row-odd"><td>min</td>
+<td>Minutes</td>
+</tr>
+<tr class="row-even"><td>hr</td>
+<td>Hours</td>
+</tr>
+</tbody>
+</table>
+<p><em>Amount</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>molecule</td>
+<td>Molecules</td>
+</tr>
+<tr class="row-odd"><td>mol</td>
+<td>Moles</td>
+</tr>
+</tbody>
+</table>
+<p><em>Temperature</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>C</td>
+<td>Celcius</td>
+</tr>
+<tr class="row-odd"><td>K</td>
+<td>Kelvin</td>
+</tr>
+</tbody>
+</table>
+<p><em>Length</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>m</td>
+<td>Meter</td>
+</tr>
+<tr class="row-odd"><td>cm</td>
+<td>Centimeter</td>
+</tr>
+<tr class="row-even"><td>nm</td>
+<td>Nanometer</td>
+</tr>
+<tr class="row-odd"><td>A</td>
+<td>Anstrom</td>
+</tr>
+</tbody>
+</table>
+<p><em>Area</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>m2</td>
+<td>Meters squared</td>
+</tr>
+<tr class="row-odd"><td>cm2</td>
+<td>Centimeter squared</td>
+</tr>
+<tr class="row-even"><td>A2</td>
+<td>Anstrom squared</td>
+</tr>
+</tbody>
+</table>
+<p><em>Volume</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>m3</td>
+<td>Metre cubed</td>
+</tr>
+<tr class="row-odd"><td>cm3</td>
+<td>Centimeter cubed</td>
+</tr>
+<tr class="row-even"><td>mL</td>
+<td>Milliliters</td>
+</tr>
+<tr class="row-odd"><td>L</td>
+<td>Liters</td>
+</tr>
+</tbody>
+</table>
+<p><em>Mass</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>kg</td>
+<td>Kilograms</td>
+</tr>
+<tr class="row-odd"><td>g</td>
+<td>Grams</td>
+</tr>
+<tr class="row-even"><td>amu</td>
+<td>Atomic mass units</td>
+</tr>
+</tbody>
+</table>
+<p><em>Pressure</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Pa</td>
+<td>Pascals</td>
+</tr>
+<tr class="row-odd"><td>kPa</td>
+<td>KiloPascals</td>
+</tr>
+<tr class="row-even"><td>MPa</td>
+<td>MegaPascals</td>
+</tr>
+<tr class="row-odd"><td>atm</td>
+<td>Atmospheres</td>
+</tr>
+<tr class="row-even"><td>bar</td>
+<td>Bars</td>
+</tr>
+<tr class="row-odd"><td>mmHg</td>
+<td>Millilmeters of Mercury</td>
+</tr>
+<tr class="row-even"><td>psi</td>
+<td>Pounds per square inch</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="PyMuTT.constants.e">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">e</code><em class="property"> = 1.6021766208e-19</em><a class="headerlink" href="#PyMuTT.constants.e" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Electronic charge in Coulombs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.h">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">h</code><span class="sig-paren">(</span><em>units</em>, <em>bar=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Planck’s constant, h</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for h. Supported units</p>
+<ul>
+<li>J s</li>
+<li>kJ s</li>
+<li>eV s</li>
+</ul>
+</li>
+<li><strong>bar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns h/2*pi . Default is False</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>h</strong> – Planck’s constant in appropriate units</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.kb">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">kb</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.kb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boltzmann constant</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for kb. Supported units</p>
+<ul class="simple">
+<li>J/K</li>
+<li>eV/K</li>
+<li>cal/K</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>kb</strong> – Boltzmann constant in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.m_e">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">m_e</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.m_e" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass of an electron</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for m_e. Supported units</p>
+<ul class="simple">
+<li>kg</li>
+<li>g</li>
+<li>amu</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>m_e</strong> – Mass of electron in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.m_p">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">m_p</code><span class="sig-paren">(</span><em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.m_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass of a proton</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for m_p. Supported units</p>
+<ul class="simple">
+<li>kg</li>
+<li>amu</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>m_p</strong> – Mass of proton in appropriate units</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="PyMuTT.constants.prefixes">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">prefixes</code><em class="property"> = {'E': 1e+18, 'G': 1000000000.0, 'M': 1000000.0, 'P': 1000000000000000.0, 'T': 1000000000000.0, 'Y': 1e+24, 'Z': 1e+21, 'a': 1e-18, 'f': 1e-15, 'k': 1000.0, 'm': 0.001, 'mu': 1e-09, 'p': 1e-12, 'y': 1e-24, 'z': 1e-21}</em><a class="headerlink" href="#PyMuTT.constants.prefixes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – SI unit prefixes</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gerhard Wittreich, Jonathan Lym.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
