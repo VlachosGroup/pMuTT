@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Empirical Models" href="empirical.html" />
-    <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (PyMuTT)" href="includeme.html" /> 
+    <link rel="prev" title="Referencing" href="referencing.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -80,9 +80,25 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.excel">Excel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.thermdat">Thermdat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excel">Excel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-PyMuTT.io_.excel">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dft-input-example">DFT Input Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasa-polynomial-input-example">NASA Polynomial Input Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reading-thermdat">Reading Thermdat</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -154,9 +170,12 @@
             
   <div class="section" id="input-and-output">
 <h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
+<p>Input and output to different forms is an active area of development for PyMuTT</p>
+<div class="section" id="excel">
+<h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-PyMuTT.io_.excel">
-<span id="excel"></span><h2>Excel<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id1"><span class="problematic" id="id2">PyMuTT.io_</span></a>.excel</p>
+<span id="docstrings"></span><h3>Docstrings<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h3>
+<p><a href="#id4"><span class="problematic" id="id5">PyMuTT.io_</span></a>.excel</p>
 <p>Read from/write to xlsx files of particular format.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.excel.read_excel">
@@ -284,7 +303,7 @@ Note that an element cannot be specified multiple times. e.g. CH3OH is not suppo
 <dl class="function">
 <dt id="PyMuTT.io_.excel.set_nasa_a_high">
 <code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='~'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a_high parameter for <cite>PyMuTT.models.empirical.nasa.Nasa</cite> object</p>
+<dd><p>Parses a_high parameter for <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -315,7 +334,7 @@ e.g. nasa~a_high~0</dd>
 <dl class="function">
 <dt id="PyMuTT.io_.excel.set_nasa_a_low">
 <code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='~'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a_low parameter for <cite>PyMuTT.models.empirical.nasa.Nasa</cite> object</p>
+<dd><p>Parses a_low parameter for <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -400,9 +419,322 @@ e.g. nasa~a_low~0</dd>
 </dd></dl>
 
 </div>
-<div class="section" id="module-PyMuTT.io_.thermdat">
-<span id="thermdat"></span><h2>Thermdat<a class="headerlink" href="#module-PyMuTT.io_.thermdat" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id3"><span class="problematic" id="id4">PyMuTT.io_</span></a>.thermdat</p>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dft-input-example">
+<span id="id1"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
+<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1">PyMuTT.examples.VASP_to_thermdat.example1</a>. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.read_excel</span></code>. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="4%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="4%" />
+<col width="8%" />
+<col width="9%" />
+<col width="6%" />
+<col width="8%" />
+<col width="9%" />
+<col width="3%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">phase</th>
+<th class="head">elements~H</th>
+<th class="head">elements~O</th>
+<th class="head">thermo_model</th>
+<th class="head">T_ref</th>
+<th class="head">HoRT_ref</th>
+<th class="head">potentialenergy</th>
+<th class="head">geometry</th>
+<th class="head">atoms</th>
+<th class="head">symmetrynumber</th>
+<th class="head">spin</th>
+<th class="head">vib_wavenumber</th>
+<th class="head">vib_wavenumber</th>
+<th class="head">vib_wavenumber</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>H2</td>
+<td>G</td>
+<td>2</td>
+<td>0</td>
+<td>IdealGas</td>
+<td>298</td>
+<td>0</td>
+<td>-6.7598</td>
+<td>linear</td>
+<td>.H2CONTCAR</td>
+<td>2</td>
+<td>0</td>
+<td>4306.1793</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>H2O</td>
+<td>G</td>
+<td>2</td>
+<td>1</td>
+<td>IdealGas</td>
+<td>298</td>
+<td>-97.60604334</td>
+<td>-14.2209</td>
+<td>nonlinear</td>
+<td>.H2OCONTCAR</td>
+<td>2</td>
+<td>0</td>
+<td>3825.434</td>
+<td>3710.2642</td>
+<td>1582.432</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.excel.read_excel</span></code> function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in code below:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">References</span>
+
+<span class="n">refs_path</span> <span class="o">=</span> <span class="s1">&#39;./references.xlsx&#39;</span>
+<span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
+<span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">BaseThermo</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference Input:&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">refs_input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output can be shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[{&#39;atoms&#39;: Atoms(symbols=&#39;OH2&#39;, pbc=True, cell=[20.0, 21.0, 22.0]),
+  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;O&#39;: 1, &#39;Pt&#39;: 0},
+  &#39;geometry&#39;: &#39;nonlinear&#39;,
+  &#39;name&#39;: &#39;H2O&#39;,
+  &#39;phase&#39;: &#39;G&#39;,
+  &#39;potentialenergy&#39;: -14.2209,
+  &#39;spin&#39;: 0.0,
+  &#39;symmetrynumber&#39;: 2.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.47429336414391626,
+                   0.460014128927786,
+                   0.19619656143825398]},
+ {&#39;atoms&#39;: Atoms(symbols=&#39;H2&#39;, pbc=True, cell=[20.0, 21.0, 22.0]),
+  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;O&#39;: 0, &#39;Pt&#39;: 0},
+  &#39;geometry&#39;: &#39;linear&#39;,
+  &#39;name&#39;: &#39;H2&#39;,
+  &#39;phase&#39;: &#39;G&#39;,
+  &#39;potentialenergy&#39;: -6.7598,
+  &#39;spin&#39;: 0.0,
+  &#39;symmetrynumber&#39;: 2.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.5338981843116086]},
+ {&#39;atoms&#39;: Atoms(symbols=&#39;O2&#39;, pbc=True, cell=[20.0, 20.0, 20.0]),
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 2, &#39;Pt&#39;: 0},
+  &#39;geometry&#39;: &#39;linear&#39;,
+  &#39;name&#39;: &#39;O2&#39;,
+  &#39;phase&#39;: &#39;G&#39;,
+  &#39;potentialenergy&#39;: -9.86,
+  &#39;spin&#39;: 1.0,
+  &#39;symmetrynumber&#39;: 2.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.2733851552365915]},
+ {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 1, &#39;Pt&#39;: 1},
+  &#39;name&#39;: &#39;MO(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: 0.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.07025434894614345,
+                   0.06873635809621279,
+                   0.034434367577936324]},
+ {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 0, &#39;Pt&#39;: 1},
+  &#39;name&#39;: &#39;MO(B)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: 0.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.07025434894614345,
+                   0.06873635809621279,
+                   0.034434367577936324]},
+ {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 0, &#39;Pt&#39;: 1},
+  &#39;name&#39;: &#39;V-MO(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: 7.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;vib_energies&#39;: []},
+ {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 1, &#39;Pt&#39;: 1},
+  &#39;name&#39;: &#39;MO_bulk(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: 0.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.07025434894614345,
+                   0.06873635809621279,
+                   0.034434367577936324]},
+ {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 0, &#39;Pt&#39;: 1},
+  &#39;name&#39;: &#39;MO_bulk(B)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: 0.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;vib_energies&#39;: [0.07025434894614345,
+                   0.06873635809621279,
+                   0.034434367577936324]},
+ {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 0, &#39;Pt&#39;: 1},
+  &#39;name&#39;: &#39;V-MO_bulk(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: 7.0,
+  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;vib_energies&#39;: []}]
+</pre></div>
+</div>
+</div>
+<div class="section" id="nasa-polynomial-input-example">
+<h4>NASA Polynomial Input Example<a class="headerlink" href="#nasa-polynomial-input-example" title="Permalink to this headline">¶</a></h4>
+<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_excel">PyMuTT.examples.read_nasa_from_excel</a>. Due to the special rules defined for NASA parsing, a group of NASA polynomials can be directly imported using <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.excel.read_excel</span></code>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="3%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">phase</th>
+<th class="head">elements~H</th>
+<th class="head">elements~O</th>
+<th class="head">T_low</th>
+<th class="head">T_mid</th>
+<th class="head">T_high</th>
+<th class="head">nasa~a_low~0</th>
+<th class="head">nasa~a_low~1</th>
+<th class="head">nasa~a_low~2</th>
+<th class="head">nasa~a_low~3</th>
+<th class="head">nasa~a_low~4</th>
+<th class="head">nasa~a_low~5</th>
+<th class="head">nasa~a_low~6</th>
+<th class="head">nasa~a_high~0</th>
+<th class="head">nasa~a_high~1</th>
+<th class="head">nasa~a_high~2</th>
+<th class="head">nasa~a_high~3</th>
+<th class="head">nasa~a_high~4</th>
+<th class="head">nasa~a_high~5</th>
+<th class="head">nasa~a_high~6</th>
+<th class="head">notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>O2</td>
+<td>G</td>
+<td>&#160;</td>
+<td>2</td>
+<td>200</td>
+<td>1000</td>
+<td>3500</td>
+<td>3.78E+00</td>
+<td>-3.00E-03</td>
+<td>9.85E-06</td>
+<td>-9.68E-09</td>
+<td>3.24E-12</td>
+<td>-1.06E+03</td>
+<td>3.66E+00</td>
+<td>3.28E+00</td>
+<td>1.48E-03</td>
+<td>-7.58E-07</td>
+<td>2.09E-10</td>
+<td>-2.17E-14</td>
+<td>-1.09E+03</td>
+<td>5.45E+00</td>
+<td>TPIS89</td>
+</tr>
+<tr class="row-odd"><td>H2</td>
+<td>G</td>
+<td>2</td>
+<td>&#160;</td>
+<td>200</td>
+<td>1000</td>
+<td>3500</td>
+<td>2.34E+00</td>
+<td>7.98E-03</td>
+<td>-1.95E-05</td>
+<td>2.02E-08</td>
+<td>-7.38E-12</td>
+<td>-9.18E+02</td>
+<td>6.83E-01</td>
+<td>3.34E+00</td>
+<td>-4.94E-05</td>
+<td>4.99E-07</td>
+<td>-1.80E-10</td>
+<td>2.00E-14</td>
+<td>-950.158922</td>
+<td>-3.20502331</td>
+<td>TPIS78</td>
+</tr>
+</tbody>
+</table>
+<p>Using a similar set of statements as the <a class="reference internal" href="#dft-input-example"><span class="std std-ref">DFT Input Example</span></a>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+
+<span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;input_data.xlsx&#39;</span><span class="p">)</span>
+<span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nasa</span><span class="p">(</span><span class="o">**</span><span class="n">specie_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">specie_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">]</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">species_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above code gives the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;T_high&#39;</span><span class="p">:</span> <span class="mi">3500</span><span class="p">,</span>
+  <span class="s1">&#39;T_low&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="s1">&#39;T_mid&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="s1">&#39;a_high&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span> <span class="mf">3.28253784e+00</span><span class="p">,</span>  <span class="mf">1.48308754e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.57966669e-07</span><span class="p">,</span>  <span class="mf">2.09470555e-10</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">2.16717794e-14</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.08845772e+03</span><span class="p">,</span>  <span class="mf">5.45323129e+00</span><span class="p">]),</span>
+  <span class="s1">&#39;a_low&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span> <span class="mf">3.78245636e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.99673416e-03</span><span class="p">,</span>  <span class="mf">9.84730201e-06</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.68129509e-09</span><span class="p">,</span>
+        <span class="mf">3.24372837e-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.06394356e+03</span><span class="p">,</span>  <span class="mf">3.65767573e+00</span><span class="p">]),</span>
+  <span class="s1">&#39;elements&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">},</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;O2&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;notes&#39;</span><span class="p">:</span> <span class="s1">&#39;TPIS89&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;phase&#39;</span><span class="p">:</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;vib_energies&#39;</span><span class="p">:</span> <span class="p">[]},</span>
+ <span class="p">{</span><span class="s1">&#39;T_high&#39;</span><span class="p">:</span> <span class="mi">3500</span><span class="p">,</span>
+  <span class="s1">&#39;T_low&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="s1">&#39;T_mid&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="s1">&#39;a_high&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span> <span class="mf">3.33727920e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.94024731e-05</span><span class="p">,</span>  <span class="mf">4.99456778e-07</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.79566394e-10</span><span class="p">,</span>
+        <span class="mf">2.00255376e-14</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.50158922e+02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.20502331e+00</span><span class="p">]),</span>
+  <span class="s1">&#39;a_low&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span> <span class="mf">2.34433112e+00</span><span class="p">,</span>  <span class="mf">7.98052075e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.94781510e-05</span><span class="p">,</span>  <span class="mf">2.01572094e-08</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">7.37611761e-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.17935173e+02</span><span class="p">,</span>  <span class="mf">6.83010238e-01</span><span class="p">]),</span>
+  <span class="s1">&#39;elements&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">},</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;H2&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;notes&#39;</span><span class="p">:</span> <span class="s1">&#39;TPIS78&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;phase&#39;</span><span class="p">:</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;vib_energies&#39;</span><span class="p">:</span> <span class="p">[]}]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="thermdat">
+<h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Docstrings<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id6"><span class="problematic" id="id7">PyMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.thermdat.read_thermdat">
@@ -418,7 +750,7 @@ e.g. nasa~a_low~0</dd>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Nasas</strong></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of <cite>PyMuTT.models.empirical.nasa.Nasa</cite></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -441,7 +773,7 @@ e.g. nasa~a_low~0</dd>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
-<li><strong>nasa_species</strong> (list of <cite>PyMuTT.models.empirical.nasa.Nasa</cite>) – </li>
+<li><strong>nasa_species</strong> (list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code>) – </li>
 </ul>
 </td>
 </tr>
@@ -449,6 +781,55 @@ e.g. nasa~a_low~0</dd>
 </table>
 </dd></dl>
 
+</div>
+<div class="section" id="id3">
+<h3>Examples<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="reading-thermdat">
+<h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
+<p>A thermdat file can be read directly by using <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.thermdat.read_thermdat</span></code>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_thermdat">PyMuTT.examples.read_nasa_from_thermdat</a></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+
+<span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="c1">#Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat</span>
+<span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/thermdat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_path</span><span class="p">))</span>
+
+<span class="c1">#Printing information related to each specie</span>
+<span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">specie</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">specie</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+
+<span class="c1">#Plot an example of an imported NASA polynomial</span>
+<span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A snippet of the species information printed is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Name</span><span class="p">:</span> <span class="n">AR</span>
+    <span class="n">phase</span>   <span class="n">G</span>
+    <span class="n">elements</span>        <span class="p">{</span><span class="s1">&#39;AR&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+    <span class="n">T_ref</span>   <span class="mf">298.15</span>
+    <span class="n">references</span>      <span class="kc">None</span>
+    <span class="n">notes</span>   <span class="mi">120186</span>
+    <span class="n">thermo_model</span>    <span class="kc">None</span>
+    <span class="n">HoRT_dft</span>        <span class="kc">None</span>
+    <span class="n">HoRT_ref</span>        <span class="kc">None</span>
+    <span class="n">a_low</span>   <span class="p">[</span>   <span class="mf">2.5</span>      <span class="mf">0.</span>       <span class="mf">0.</span>       <span class="mf">0.</span>       <span class="mf">0.</span>    <span class="o">-</span><span class="mf">745.375</span>    <span class="mf">4.366</span><span class="p">]</span>
+    <span class="n">a_high</span>  <span class="p">[</span>   <span class="mf">2.5</span>      <span class="mf">0.</span>       <span class="mf">0.</span>       <span class="mf">0.</span>       <span class="mf">0.</span>    <span class="o">-</span><span class="mf">745.375</span>    <span class="mf">4.366</span><span class="p">]</span>
+    <span class="n">T_low</span>   <span class="mf">300.0</span>
+    <span class="n">T_high</span>  <span class="mf">5000.0</span>
+    <span class="n">T_mid</span>   <span class="mf">1000.0</span>
+</pre></div>
+</div>
+<p>And a sample plot is shown below</p>
+<img alt="_images/read_nasa_from_thermdat_example_O2.png" src="_images/read_nasa_from_thermdat_example_O2.png" />
+</div>
+</div>
 </div>
 </div>
 
@@ -463,7 +844,7 @@ e.g. nasa~a_low~0</dd>
         <a href="empirical.html" class="btn btn-neutral float-right" title="Empirical Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (PyMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="referencing.html" class="btn btn-neutral" title="Referencing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

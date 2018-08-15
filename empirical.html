@@ -80,6 +80,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Empirical Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.empirical.nasa">Nasa</a></li>
@@ -309,18 +310,18 @@ Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT<
 <dl class="method">
 <dt id="PyMuTT.models.empirical.BaseThermo.plot_empirical">
 <code class="descname">plot_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_empirical" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots the thermodynamic profiles between <cite>T_low</cite> and <cite>T_high</cite> using empirical relationship</p>
+<dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code> using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <cite>T_low</cite> attribute used.</li>
-<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <cite>T_high</cite> attribute used.</li>
-<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <cite>PyMuTT.constants.R</cite> for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <cite>PyMuTT.constants.R</cite> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
-<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <cite>PyMuTT.constants.R</cite> for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <cite>PyMuTT.constants.R</cite> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used.</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used.</li>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
 </ul>
 </td>
 </tr>
@@ -342,18 +343,18 @@ Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT<
 <dl class="method">
 <dt id="PyMuTT.models.empirical.BaseThermo.plot_thermo_model">
 <code class="descname">plot_thermo_model</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_thermo_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots the thermodynamic profiles between <cite>T_low</cite> and <cite>T_high</cite> using empirical relationship</p>
+<dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code> using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <cite>T_low</cite> attribute used</li>
-<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <cite>T_high</cite> attribute used</li>
-<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <cite>PyMuTT.constants.R</cite> for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <cite>PyMuTT.constants.R</cite> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
-<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <cite>PyMuTT.constants.R</cite> for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <cite>PyMuTT.constants.R</cite> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used</li>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
 </ul>
 </td>
 </tr>
@@ -375,18 +376,18 @@ Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT<
 <dl class="method">
 <dt id="PyMuTT.models.empirical.BaseThermo.plot_thermo_model_and_empirical">
 <code class="descname">plot_thermo_model_and_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_thermo_model_and_empirical" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots the thermodynamic profiles between <cite>T_low</cite> and <cite>T_high</cite> using empirical relationship</p>
+<dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code> using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <cite>T_low</cite> attribute used</li>
-<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <cite>T_high</cite> attribute used</li>
-<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <cite>PyMuTT.constants.R</cite> for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <cite>PyMuTT.constants.R</cite> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
-<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <cite>PyMuTT.constants.R</cite> for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <cite>PyMuTT.constants.R</cite> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used</li>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <code class="docutils literal notranslate"><span class="pre">PyMuTT.constants.R</span></code> for accepted units but omit the ‘/K’ (e.g. J/mol). If not specified, dimensionless units used.</li>
 </ul>
 </td>
 </tr>
@@ -467,7 +468,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <li><strong>HoRT_dft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless enthalpy calculated using DFT that corresponds to T_ref. If not specified, uses HoRT_dft attribute. If the HoRT_dft attribute is not specified, uses self.thermo_model.get_HoRT</li>
 <li><strong>HoRT_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless reference enthalpy that corresponds to T_ref. If this is specified, uses this value when fitting a_low[5] and a_high[5] instead of HoRT_dft and references</li>
 <li><strong>SoR_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless entropy that corresponds to T_ref. If not specified, uses self.thermo_model.get_SoR</li>
-<li><strong>references</strong> (<cite>PyMuTT.models.empirical.References</cite>) – Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.</li>
+<li><strong>references</strong> (<code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.References</span></code>) – Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.</li>
 </ul>
 </td>
 </tr>
@@ -484,8 +485,8 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>Ts</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperatures in K</li>
-<li><strong>CpoR</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Dimensionless heat capacity</li>
+<li><strong>Ts</strong> ((N,) <cite>numpy.ndarray_</cite>) – Temperatures in K</li>
+<li><strong>CpoR</strong> ((N,) <cite>numpy.ndarray_</cite>) – Dimensionless heat capacity</li>
 </ul>
 </td>
 </tr>
@@ -630,7 +631,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> ((7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Coefficients of NASA polynomial</li>
+<li><strong>a</strong> ((7,) <cite>numpy.ndarray_</cite>) – Coefficients of NASA polynomial</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 </ul>
 </td>
@@ -654,7 +655,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> ((7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Coefficients of NASA polynomial</li>
+<li><strong>a</strong> ((7,) <cite>numpy.ndarray_</cite>) – Coefficients of NASA polynomial</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 </ul>
 </td>
@@ -678,7 +679,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> ((7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Coefficients of NASA polynomial</li>
+<li><strong>a</strong> ((7,) <cite>numpy.ndarray_</cite>) – Coefficients of NASA polynomial</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 </ul>
 </td>
@@ -702,7 +703,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> ((7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Coefficients of NASA polynomial</li>
+<li><strong>a</strong> ((7,) <cite>numpy.ndarray_</cite>) – Coefficients of NASA polynomial</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 </ul>
 </td>
@@ -741,7 +742,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <dl class="attribute">
 <dt id="PyMuTT.models.empirical.references.References._references">
 <code class="descname">_references</code><a class="headerlink" href="#PyMuTT.models.empirical.references.References._references" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of <cite>PyMuTT.models.empirical.basethermo.BaseThermo</cite> – Reference species. Each member of the list should have the attributes <cite>T_ref</cite> and <cite>HoRT_ref</cite></p>
+<dd><p>list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.basethermo.BaseThermo</span></code> – Reference species. Each member of the list should have the attributes <code class="docutils literal notranslate"><span class="pre">T_ref</span></code> and <code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
@@ -757,7 +758,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 </dd></dl>
 
 <p class="rubric">Notes</p>
-<p>List-like methods (such as <cite>append</cite>, <cite>extend</cite>) will affect the <cite>_references</cite> attribute.</p>
+<p>List-like methods (such as <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">extend</span></code>) will affect the <code class="docutils literal notranslate"><span class="pre">_references</span></code> attribute.</p>
 <dl class="method">
 <dt id="PyMuTT.models.empirical.references.References.clear_offset">
 <code class="descname">clear_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.references.References.clear_offset" title="Permalink to this definition">¶</a></dt>
@@ -783,7 +784,7 @@ Inherits from PyMuTT.models.empirical.BaseThermo</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dictionary where the keys are elements and the values are the number of each element in a formula unit</li>
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperatures in K. If not specified, adjusts using <cite>T_ref</cite></li>
+<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperatures in K. If not specified, adjusts using <code class="docutils literal notranslate"><span class="pre">T_ref</span></code></li>
 </ul>
 </td>
 </tr>
