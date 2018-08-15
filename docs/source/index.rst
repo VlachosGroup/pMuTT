@@ -10,6 +10,7 @@ Welcome to PyMuTT's documentation!
    :maxdepth: 2
 
    includeme
+   referencing
    io
    empirical
    statmech

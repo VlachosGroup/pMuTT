@@ -77,22 +77,22 @@ class BaseThermo:
 			self.HoRT_ref = HoRT_ref
 
 	def plot_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
-		"""Plots the thermodynamic profiles between `T_low` and `T_high` using empirical relationship
+		"""Plots the thermodynamic profiles between ``T_low`` and ``T_high`` using empirical relationship
 
 		Parameters
 		----------
 			T_low : float
-				Lower temperature in K. If not specified, `T_low` attribute used.
+				Lower temperature in K. If not specified, ``T_low`` attribute used.
 			T_high : float 
-				Upper temperature in K. If not specified, `T_high` attribute used.
+				Upper temperature in K. If not specified, ``T_high`` attribute used.
 			Cp_units : str
-				Units to plot heat capacity. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+				Units to plot heat capacity. See ``PyMuTT.constants.R`` for accepted units. If not specified, dimensionless units used.
 			H_units : str
-				Units to plot enthalpy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+				Units to plot enthalpy. See ``PyMuTT.constants.R`` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 			S_units : str
-				Units to plot entropy. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+				Units to plot entropy. See ``PyMuTT.constants.R`` for accepted units. If not specified, dimensionless units used.
 			G_units : str
-				Units to plot Gibbs free energy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+				Units to plot Gibbs free energy. See ``PyMuTT.constants.R`` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 		Returns
 		-------
 			figure : `matplotlib.figure.Figure`_
@@ -163,22 +163,22 @@ class BaseThermo:
 		return f, ax
 
 	def plot_thermo_model(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
-		"""Plots the thermodynamic profiles between `T_low` and `T_high` using empirical relationship
+		"""Plots the thermodynamic profiles between ``T_low`` and ``T_high`` using empirical relationship
 
 		Parameters
 		----------
 			T_low : float
-				Lower temperature in K. If not specified, `T_low` attribute used
+				Lower temperature in K. If not specified, ``T_low`` attribute used
 			T_high : float
-				Upper temperature in K. If not specified, `T_high` attribute used
+				Upper temperature in K. If not specified, ``T_high`` attribute used
 			Cp_units : str
-				Units to plot heat capacity. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+				Units to plot heat capacity. See ``PyMuTT.constants.R`` for accepted units. If not specified, dimensionless units used.
 			H_units : str
-				Units to plot enthalpy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+				Units to plot enthalpy. See ``PyMuTT.constants.R`` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 			S_units : str
-				Units to plot entropy. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+				Units to plot entropy. See ``PyMuTT.constants.R`` for accepted units. If not specified, dimensionless units used.
 			G_units : str
-				Units to plot Gibbs free energy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+				Units to plot Gibbs free energy. See ``PyMuTT.constants.R`` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 		Returns
 		-------
 			figure : `matplotlib.figure.Figure`_
@@ -255,22 +255,22 @@ class BaseThermo:
 		return f, ax
 
 	def plot_thermo_model_and_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
-		"""Plots the thermodynamic profiles between `T_low` and `T_high` using empirical relationship
+		"""Plots the thermodynamic profiles between ``T_low`` and ``T_high`` using empirical relationship
 
 		Parameters
 		----------
 			T_low : float
-				Lower temperature in K. If not specified, `T_low` attribute used
+				Lower temperature in K. If not specified, ``T_low`` attribute used
 			T_high : float
-				Upper temperature in K. If not specified, `T_high` attribute used
+				Upper temperature in K. If not specified, ``T_high`` attribute used
 			Cp_units : str
-				Units to plot heat capacity. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+				Units to plot heat capacity. See ``PyMuTT.constants.R`` for accepted units. If not specified, dimensionless units used.
 			H_units : str
-				Units to plot enthalpy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+				Units to plot enthalpy. See ``PyMuTT.constants.R`` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 			S_units : str
-				Units to plot entropy. See `PyMuTT.constants.R` for accepted units. If not specified, dimensionless units used.
+				Units to plot entropy. See ``PyMuTT.constants.R`` for accepted units. If not specified, dimensionless units used.
 			G_units : str
-				Units to plot Gibbs free energy. See `PyMuTT.constants.R` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
+				Units to plot Gibbs free energy. See ``PyMuTT.constants.R`` for accepted units but omit the '/K' (e.g. J/mol). If not specified, dimensionless units used.
 		Returns
 		-------
 			figure : `matplotlib.figure.Figure`_

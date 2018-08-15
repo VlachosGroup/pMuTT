@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os
 from pprint import pprint
 
 from PyMuTT import constants as c
@@ -11,16 +12,18 @@ from PyMuTT.models.empirical.references import References
 '''
 User inputs
 '''
+base_path = os.path.dirname(__file__)
+
 #Reference information
-refs_path = './references.xlsx'
+refs_path = '{}/references.xlsx'.format(base_path)
 
 #Input information
-species_path = './thermdat_input.xlsx'
+species_path = '{}/thermdat_input.xlsx'.format(base_path)
 T_low = 200.
 T_high = 1100. #K
 
 #Output information
-thermdat_path = './thermdat'
+thermdat_path = '{}/thermdat'.format(base_path)
 
 #Miscellaneous options
 show_plot = True

@@ -18,7 +18,7 @@ def read_thermdat(filename):
 			Input filename
 	Returns
 	-------
-		Nasas : list of `PyMuTT.models.empirical.nasa.Nasa`
+		Nasas : list of ``PyMuTT.models.empirical.nasa.Nasa``
 	Raises
 	------
 		FileNotFoundError
@@ -272,7 +272,7 @@ def write_thermdat(filename, nasa_species):
 	----------
 		filename : str
 			Output file name
-		nasa_species : list of `PyMuTT.models.empirical.nasa.Nasa`
+		nasa_species : list of ``PyMuTT.models.empirical.nasa.Nasa``
 	"""
 	with open(filename, 'w') as f_ptr:
 		f_ptr.write('THERMO ALL\n       100       500      1500\n')
@@ -292,7 +292,7 @@ def _write_line1(thermdat_file, nasa_specie):
 	----------
 		thermdat_file : file object
 			Thermdat file that is being written to
-		nasa_specie : `PyMuTT.models.empirical.thermdat.Thermdat`
+		nasa_specie : ``PyMuTT.models.empirical.thermdat.Thermdat``
 			Nasa specie to take information from
 	"""
 	element_pos = [
@@ -341,7 +341,7 @@ def _write_line2(thermdat_file, nasa_specie, float_string):
 	----------
 		thermdat_file : file object
 			Thermdat file that is being written to
-		nasa_specie : `PyMuTT.models.empirical.thermdat.Thermdat`
+		nasa_specie : ``PyMuTT.models.empirical.thermdat.Thermdat``
 			Nasa specie to take information from
 		float_string : str
 			float format
@@ -362,7 +362,7 @@ def _write_line3(thermdat_file, nasa_specie, float_string):
 	----------
 		thermdat_file : file object
 			Thermdat file that is being written to
-		nasa_specie : `PyMuTT.models.empirical.thermdat.Thermdat`
+		nasa_specie : ``PyMuTT.models.empirical.thermdat.Thermdat``
 			Nasa specie to take information from
 		float_string : str
 			float format
@@ -386,7 +386,7 @@ def _write_line4(thermdat_file, nasa_specie, float_string):
 	----------
 		thermdat_file : file object
 			Thermdat file that is being written to
-		nasa_specie : `PyMuTT.models.empirical.thermdat.Thermdat`
+		nasa_specie : ``PyMuTT.models.empirical.thermdat.Thermdat``
 			Nasa specie to take information from
 		float_string : str
 			float format

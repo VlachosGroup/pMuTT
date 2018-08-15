@@ -14,8 +14,8 @@ class References:
 
 	Attributes
 	----------
-		_references : list of `PyMuTT.models.empirical.basethermo.BaseThermo`
-			Reference species. Each member of the list should have the attributes `T_ref` and `HoRT_ref`
+		_references : list of ``PyMuTT.models.empirical.basethermo.BaseThermo``
+			Reference species. Each member of the list should have the attributes ``T_ref`` and ``HoRT_ref``
 		HoRT_element_offset : dict
 			Dimensionless enthalpy offset for each element
 		T_ref : float
@@ -23,7 +23,7 @@ class References:
 
 	Notes
 	-----
-		List-like methods (such as `append`, `extend`) will affect the `_references` attribute.
+		List-like methods (such as ``append``, ``extend``) will affect the ``_references`` attribute.
 	"""
 	def __init__(self, references):
 		self._references = references
@@ -35,7 +35,7 @@ class References:
 		
 		Yields
 		------
-			reference : `PyMuTT.models.empirical.basethermo.BaseThermo`
+			reference : ``PyMuTT.models.empirical.basethermo.BaseThermo``
 		"""
 		for reference in self._references:
 			yield reference
@@ -138,7 +138,7 @@ class References:
 			elements : dict
 				Dictionary where the keys are elements and the values are the number of each element in a formula unit
 			Ts : float or (N,) numpy.ndarray_
-				Temperatures in K. If not specified, adjusts using `T_ref`
+				Temperatures in K. If not specified, adjusts using ``T_ref``
 		Returns
 		-------
 			HoRT_offset : float

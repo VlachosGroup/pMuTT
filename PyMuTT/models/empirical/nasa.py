@@ -216,7 +216,7 @@ class Nasa(BaseThermo):
 				Dimensionless reference enthalpy that corresponds to T_ref. If this is specified, uses this value when fitting a_low[5] and a_high[5] instead of HoRT_dft and references
 			SoR_ref : float
 				Dimensionless entropy that corresponds to T_ref. If not specified, uses self.thermo_model.get_SoR
-			references : `PyMuTT.models.empirical.References`
+			references : ``PyMuTT.models.empirical.References``
 				Contains references to calculate HoRT_ref. If not specified then HoRT_dft will be used without adjustment.
 
 		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
@@ -295,9 +295,9 @@ class Nasa(BaseThermo):
 
 		Parameters
 		----------
-			Ts : (N,) numpy.ndarray_
+			Ts : (N,) `numpy.ndarray_`
 				Temperatures in K
-			CpoR : (N,) numpy.ndarray_
+			CpoR : (N,) `numpy.ndarray_`
 				Dimensionless heat capacity
 
 		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
@@ -328,9 +328,9 @@ class Nasa(BaseThermo):
 
 		Parameters
 		----------
-			Ts : (N,) numpy.ndarray_
+			Ts : (N,) `numpy.ndarray_`
 				Temperatures (K) to fit the polynomial
-			CpoR : (N,) numpy.ndarray_
+			CpoR : (N,) `numpy.ndarray_`
 				Dimensionless heat capacities that correspond to T array
 			i_mid : int
 				Index that splits T and CpoR arrays into a lower and higher range
@@ -338,9 +338,9 @@ class Nasa(BaseThermo):
 		-------
 			R2 : float)
 				R2 value resulting from NASA polynomial fit to T and CpoR
-			p_low : (5,) numpy.ndarray_
+			p_low : (5,) `numpy.ndarray_`
 				Polynomial corresponding to lower range of data
-			p_high : (5,) numpy.ndarray_
+			p_high : (5,) `numpy.ndarray_`
 				Polynomial corresponding to high range of data
 
 		.. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
@@ -413,7 +413,7 @@ def get_nasa_CpoR(a, T):
 
 	Parameters
 	----------
-		a : (7,) numpy.ndarray_ 
+		a : (7,) `numpy.ndarray_` 
 			Coefficients of NASA polynomial
 		T : float
 			Temperature in K
@@ -432,7 +432,7 @@ def get_nasa_HoRT(a, T):
 
 	Parameters
 	----------
-		a : (7,) numpy.ndarray_ 
+		a : (7,) `numpy.ndarray_` 
 			Coefficients of NASA polynomial
 		T : float
 			Temperature in K
@@ -451,7 +451,7 @@ def get_nasa_SoR(a, T):
 
 	Parameters
 	----------
-		a : (7,) numpy.ndarray_
+		a : (7,) `numpy.ndarray_`
 			Coefficients of NASA polynomial
 		T : float
 			Temperature in K
@@ -470,7 +470,7 @@ def get_nasa_GoRT(a, T):
 
 	Parameters
 	----------
-		a : (7,) numpy.ndarray_
+		a : (7,) `numpy.ndarray_`
 			Coefficients of NASA polynomial
 		T : float
 			Temperature in K

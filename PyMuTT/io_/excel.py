@@ -209,7 +209,7 @@ def set_vib_wavenumber(value, output_structure):
 	return output_structure
 
 def set_nasa_a_low(header, value, output_structure, delimiter='~'):
-	"""Parses a_low parameter for `PyMuTT.models.empirical.nasa.Nasa` object
+	"""Parses a_low parameter for ``PyMuTT.models.empirical.nasa.Nasa`` object
 	
 	Parameters
 	----------
@@ -237,7 +237,7 @@ def set_nasa_a_low(header, value, output_structure, delimiter='~'):
 	return output_structure
 
 def set_nasa_a_high(header, value, output_structure, delimiter='~'):
-	"""Parses a_high parameter for `PyMuTT.models.empirical.nasa.Nasa` object
+	"""Parses a_high parameter for ``PyMuTT.models.empirical.nasa.Nasa`` object
 	
 	Parameters
 	----------
