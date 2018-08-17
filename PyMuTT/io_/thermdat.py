@@ -6,6 +6,7 @@ Read from/write to thermdat files.
 """
 
 import numpy as np
+from datetime import datetime
 from PyMuTT import constants as c
 from PyMuTT.models.empirical.nasa import Nasa
 
@@ -265,7 +266,7 @@ def _read_line4(line, nasa_data):
 		j += 1
 	return nasa_data
 
-def write_thermdat(filename, nasa_species):
+def write_thermdat(filename, nasa_species, write_date=True):
 	"""Writes thermdats in the Chemkin format
 
 	Parameters
@@ -273,19 +274,21 @@ def write_thermdat(filename, nasa_species):
 		filename : str
 			Output file name
 		nasa_species : list of ``PyMuTT.models.empirical.nasa.Nasa``
+		write_date : bool, optional
+			Whether or not the date should be written. If False, writes the first 8 characters of ``notes`` attribute. Defaults to True			
 	"""
 	with open(filename, 'w') as f_ptr:
 		f_ptr.write('THERMO ALL\n       100       500      1500\n')
 		
 		float_string = '%.8E'
 		for nasa_specie in nasa_species:
-			_write_line1(f_ptr, nasa_specie)
+			_write_line1(f_ptr, nasa_specie, write_date)
 			_write_line2(f_ptr, nasa_specie, float_string)
 			_write_line3(f_ptr, nasa_specie, float_string)
 			_write_line4(f_ptr, nasa_specie, float_string)
 		f_ptr.write('END')
 
-def _write_line1(thermdat_file, nasa_specie):
+def _write_line1(thermdat_file, nasa_specie, write_date=True):
 	"""Writes the first line of the thermdat file, which contains information on the composition, phase, and temperature ranges
 
 	Parameters
@@ -294,6 +297,8 @@ def _write_line1(thermdat_file, nasa_specie):
 			Thermdat file that is being written to
 		nasa_specie : ``PyMuTT.models.empirical.thermdat.Thermdat``
 			Nasa specie to take information from
+		write_date : bool, optional
+			Whether or not the date should be written. If False, writes the first 8 characters of ``notes`` attribute. Defaults to True
 	"""
 	element_pos = [
 		24, #Element 1
@@ -312,7 +317,7 @@ def _write_line1(thermdat_file, nasa_specie):
 		79] # Line num
 
 	#Adjusts the position based on the number of elements
-	line1_pos = []
+	line1_pos = [16]
 	for element, val in nasa_specie.elements.items():
 		if val > 0.:
 			line1_pos.append(element_pos.pop(0))
@@ -320,7 +325,15 @@ def _write_line1(thermdat_file, nasa_specie):
 	line1_pos.extend(temperature_pos)
 
 	#Creating a list of the text to insert
-	line1_fields = [nasa_specie.name]
+	if write_date:
+		now = datetime.now()
+		notes = now.strftime('%Y%m%d')
+	elif (nasa_specie.notes is None) or (nasa_specie.notes == ''):
+		notes = ''
+	else:
+		notes = nasa_specie.notes[:8]
+
+	line1_fields = [nasa_specie.name, notes]
 	for element, val in nasa_specie.elements.items():
 		if val > 0.:
 			line1_fields.extend([element, '%d' % val])

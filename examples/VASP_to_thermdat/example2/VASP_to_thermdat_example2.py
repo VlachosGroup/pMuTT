@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 from PyMuTT import constants as c
 from PyMuTT.io_.excel import read_excel
@@ -9,19 +10,21 @@ from PyMuTT.models.empirical.references import References
 '''
 User inputs
 '''
+base_path = os.path.dirname(__file__)
+
 #Reference information
-refs_path = './references.xlsx'
+refs_path = '{}/references.xlsx'.format(base_path)
 
 #Surface information
-surfaces_path = './surfaces.xlsx'
+surfaces_path = '{}/surfaces.xlsx'.format(base_path)
 
 #Input information
-species_path = './input_data.xlsx'
+species_path = '{}/input_data.xlsx'.format(base_path)
 T_low = 100.
 T_high = 1500. #K
 
 #Output information
-thermdat_path = './thermdat'
+thermdat_path = '{}/thermdat'.format(base_path)
 
 #Miscellaneous options
 show_plot = True
