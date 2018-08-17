@@ -765,7 +765,7 @@ e.g. nasa~a_low~0</dd>
 
 <dl class="function">
 <dt id="PyMuTT.io_.thermdat.write_thermdat">
-<code class="descclassname">PyMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PyMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes thermdats in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -774,6 +774,7 @@ e.g. nasa~a_low~0</dd>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
 <li><strong>nasa_species</strong> (list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code>) – </li>
+<li><strong>write_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether or not the date should be written. If False, writes the first 8 characters of <code class="docutils literal notranslate"><span class="pre">notes</span></code> attribute. Defaults to True</li>
 </ul>
 </td>
 </tr>
