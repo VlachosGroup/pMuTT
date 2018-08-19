@@ -45,7 +45,7 @@ class BaseThermo:
 
 	"""
 
-	def __init__(self, name, phase=None, elements=None, thermo_model=None, T_ref=c.T0('K'), HoRT_dft=None, HoRT_ref=None, references=None, notes=None, **kwargs):
+	def __init__(self, name, phase=None, elements=None, thermo_model=None, T_ref=c.T0('K'), HoRT_dft=None, HoRT_ref=None, references=None, notes='', **kwargs):
 		self.name = name
 		self.phase = phase
 		self.elements = elements
