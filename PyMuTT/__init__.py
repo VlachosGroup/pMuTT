@@ -68,10 +68,12 @@ def parse_formula(formula):
 	elements_tuples = re.findall(r'([A-Z][a-z]*)(\d*)', formula)
 	elements = {}
 	for (element, coefficient) in elements_tuples:
+		if element not in elements:
+			elements[element] = 0
 		if coefficient == '':
-			elements[element] = 1
+			elements[element] += 1
 		else:
-			elements[element] = int(coefficient)
+			elements[element] += int(coefficient)
 	return elements
 
 def get_molecular_weight(elements):
