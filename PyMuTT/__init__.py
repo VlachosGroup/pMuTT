@@ -59,21 +59,17 @@ def parse_formula(formula):
 	Parameters
 	----------
 		formula : str
-			Chemical formula e.g. Al2O3
+			Chemical formula e.g. Al2O3 or CH3CH2CH3
 	Returns
 	-------
 		elements : dict
 			Element composition of formula e.g. {'Al': 2, 'O': 3}
+			Element composition of formula e.g. {'C': 3, 'H': 8}
 	"""
 	elements_tuples = re.findall(r'([A-Z][a-z]*)(\d*)', formula)
 	elements = {}
-	for (element, coefficient) in elements_tuples:
-		if element not in elements:
-			elements[element] = 0
-		if coefficient == '':
-			elements[element] += 1
-		else:
-			elements[element] += int(coefficient)
+	for (element, int(coefficient or '1')) in elements_tuples:
+		elements[element] = elements.get(elements, 0) + coefficient
 	return elements
 
 def get_molecular_weight(elements):
