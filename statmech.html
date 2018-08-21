@@ -712,9 +712,9 @@ Used for surface species where there are 2 translational modes,
 <dt id="PyMuTT.models.statmech.heat_capacity.get_CvoR_rot">
 <code class="descclassname">PyMuTT.models.statmech.heat_capacity.</code><code class="descname">get_CvoR_rot</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.heat_capacity.get_CvoR_rot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless rotational heat capacity</p>
-<p><img class="math" src="_images/math/c5279866d008fa58833eb20e9ea37ae0b1531cc3.svg" alt="\frac {Cv_{rot}} {R} = 0"/> if monatomic</p>
-<p><img class="math" src="_images/math/ada0eea12a5e4e07eba8f7f056f2e1014e603902.svg" alt="\frac {Cv_{rot}} {R} = 1"/> if linear</p>
-<p><img class="math" src="_images/math/231690860a2ad5bad4df09884b7166e776b49f4a.svg" alt="\frac {Cv_{rot}} {R} = 1.5"/> if nonlinear</p>
+<p><img class="math" src="_images/math/6608de37e8ecd6a4719828db145f53d5ce71ede2.svg" alt="\frac {Cv_{rot}} {R} = 0"/> if monatomic</p>
+<p><img class="math" src="_images/math/ea705dbaba772cf5f0b1427af09a83d747275500.svg" alt="\frac {Cv_{rot}} {R} = 1"/> if linear</p>
+<p><img class="math" src="_images/math/a217ffb99fa48e6a843070e5c66c43114192f2a9.svg" alt="\frac {Cv_{rot}} {R} = 1.5"/> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -741,7 +741,7 @@ Used for surface species where there are 2 translational modes,
 <dt id="PyMuTT.models.statmech.heat_capacity.get_CvoR_trans">
 <code class="descclassname">PyMuTT.models.statmech.heat_capacity.</code><code class="descname">get_CvoR_trans</code><span class="sig-paren">(</span><em>degrees=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.heat_capacity.get_CvoR_trans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless translational heat capacity</p>
-<p><img class="math" src="_images/math/97ee1836e6f6d3d97a17f0ab89553ec6d851da40.svg" alt="\frac {Cv_{trans}} {R} = \frac {N} {2}"/> where N is the degrees of freedom</p>
+<p><img class="math" src="_images/math/5435f5a4a7033da3fef11800733eab8a21ca4f18.svg" alt="\frac {Cv_{trans}} {R} = \frac {N} {2}"/> where N is the degrees of freedom</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -762,7 +762,7 @@ Used for surface species where there are 2 translational modes,
 <dt id="PyMuTT.models.statmech.heat_capacity.get_CvoR_vib">
 <code class="descclassname">PyMuTT.models.statmech.heat_capacity.</code><code class="descname">get_CvoR_vib</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.heat_capacity.get_CvoR_vib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless vibrational heat capacity</p>
-<p><img class="math" src="_images/math/9e4be592fcab141bc711c92b4ddd510f049c4c50.svg" alt="\frac {Cv_{vib}} {R} = \sum_{i=1}^{3n-6} \bigg(\frac {\Theta_{Vi}} {T} \frac {e^{\Theta_{Vi}}} {1-e^{\frac {\Theta_{Vi}} {T}}} - \ln ({1 - e^{\frac {-\Theta_{Vi}}{T}}})\bigg)"/></p>
+<p><img class="math" src="_images/math/320c74a91bcb55a84ee41782cdf3c9c5c130949e.svg" alt="\frac {Cp_{vib}}{R} = \sum_{i=1}^{n} \bigg(\frac {\Theta_{V,i}}{2T}\bigg)^2 \frac {1}{\big(sinh(\frac {\Theta_{V,i}}{2T})\big)^2}"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
