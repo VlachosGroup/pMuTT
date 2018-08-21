@@ -68,7 +68,7 @@ def get_CvoR_rot(geometry):
 def get_CvoR_vib(vib_energies, Ts):
 	"""Calculates the dimensionless vibrational heat capacity
 
-	:math:`\\frac {Cv_{vib}} {R} = \\sum_{i=1}^{3n-6} \\bigg(\\frac {\\Theta_{Vi}} {T} \\frac {e^{\\Theta_{Vi}}} {1-e^{\\frac {\\Theta_{Vi}} {T}}} - \\ln ({1 - e^{\\frac {-\\Theta_{Vi}}{T}}})\\bigg)`
+	:math:`\\frac {Cp_{vib}}{R} = \\sum_{i=1}^{n} \\bigg(\\frac {\\Theta_{V,i}}{2T}\\bigg)^2 \\frac {1}{\\big(sinh(\\frac {\\Theta_{V,i}}{2T})\\big)^2}`
 
 	Parameters
 	----------

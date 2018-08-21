@@ -179,3 +179,4 @@ napoleon_google_docstring = True
 
 # Latex equations options
 imgmath_image_format = 'svg'
+imgmath_font_size = 18
