@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Input and Output" href="io.html" />
-    <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (PyMuTT)" href="includeme.html" /> 
+    <link rel="prev" title="Experimental Data to NASA polynomial" href="examples.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -80,11 +80,13 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Experimental Data to NASA polynomial</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
 </ul>
 
             
@@ -151,7 +153,7 @@
             
   <div class="section" id="referencing">
 <h1>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline">¶</a></h1>
-<p>Enthalpies calculated using VASP (and some other computational methods) have different references than standard references (i.e. the enthalpy of formation of pure substances, like O&lt;sub&gt;2&lt;/sub&gt; or Pt, is not necessarily zero). This difference makes it difficult to ensure thermodynamic consistency for our mechanisms since we may be mixing experimental gas thermodynamics with computational surface thermodynamics. In order to make the references consistent, we find a correction factor for each element by solving the equation:</p>
+<p>Enthalpies calculated using VASP (and some other computational methods) have different references than standard references (i.e. the enthalpy of formation of pure substances, like O:sub:<cite>2</cite> or Pt, is not necessarily zero). This difference makes it difficult to ensure thermodynamic consistency for our mechanisms since we may be mixing experimental gas thermodynamics with computational surface thermodynamics. In order to make the references consistent, we find a correction factor for each element by solving the equation:</p>
 <p><img class="math" src="_images/math/4f7a5ac2a41e290d558a9df9597fcd9540d0a5fa.svg" alt="\underline {\underline {H}}^{expt}_{[M \times N]} = \underline {\underline {H}}^{DFT}_{[M \times N]} + \underline {\underline {x}}_{[M \times N]} \underline{\theta}_{[N]}"/></p>
 <p>where M is the number of reference species, N is the number of elements, H&lt;sup&gt;expt&lt;/sup&gt; is the experimental standard enthalpies, H&lt;sup&gt;DFT&lt;/sup&gt; is the standard enthalpies calculated using DFT, x is a matrix that describes the composition of the references (each row represents a specie, each column represents an element), and θ is the correction for each element.</p>
 <p>The equation can be solved using a Least Squares approach. The correction factor can then be added to subsequent species calculated through DFT to ensure consistent references. Referencing is handled by the <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.references.References</span></code>.</p>
@@ -168,7 +170,7 @@
         <a href="io.html" class="btn btn-neutral float-right" title="Input and Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (PyMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral" title="Experimental Data to NASA polynomial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

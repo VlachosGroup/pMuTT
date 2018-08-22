@@ -1,10 +1,9 @@
 Outline to convert DFT-generated data to empirical models
 =========================================================
 
-*Sample code here can be found
-in*\ `PyMuTT.examples.VASP_to_thermdat.example1`_
+Sample code here can be found in `PyMuTT.examples.VASP_to_thermdat.example1`_
 
-.. figure:: https://github.com/VlachosGroup/PyMuTT/blob/master/docs/flowchart_dft_to_empirical.png
+.. figure:: flowchart_dft_to_empirical.png
    :alt: Flowchart of DFT data to empirical
 
    Flowchart of DFT data to empirical
@@ -60,5 +59,5 @@ cell=[20.0, 21.0, 22.0]), ‘elements’: {‘H’: 2, ‘O’: 0}, ‘geometry�
 ‘PyMuTT.models.statmech.idealgasthermo.IdealGasThermo’>, ‘vib_energies’:
 [0.47429336414391626, 0.460014128927786,
 
-.. _PyMuTT.examples.VASP_to_thermdat.example1: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1
+.. _`PyMuTT.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1
 .. _`references.xlsx`: https://github.com/VlachosGroup/PyMuTT/blob/master/examples/VASP_to_thermdat/example1/references.xlsx
