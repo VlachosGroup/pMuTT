@@ -167,7 +167,6 @@ def _read_line1(line):
 	nasa_data['elements'] = {}
 	for i in range(max_elements):
 		blank_pos = line.find(' ', ref_pos)
-
 		#All the elements have been assigned
 		if blank_pos == ref_pos:
 			break
@@ -320,8 +319,9 @@ def _write_line1(thermdat_file, nasa_specie, write_date=True):
 	line1_pos = [16]
 	for element, val in nasa_specie.elements.items():
 		if val > 0.:
+			two_digit = len(str(val)) - 1
 			line1_pos.append(element_pos.pop(0))
-			line1_pos.append(element_pos.pop(0))
+			line1_pos.append(element_pos.pop(0) - two_digit)
 	line1_pos.extend(temperature_pos)
 
 	#Creating a list of the text to insert
