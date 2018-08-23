@@ -13,7 +13,7 @@ from PyMuTT import constants as c
 from PyMuTT import parse_formula
 from PyMuTT.models.empirical import BaseThermo
 
-def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
+def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
 	"""Reads an excel file and returns it as a list of dictionaries to initialize objects
 
 	Parameters
@@ -25,7 +25,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 		header : int, optional
 			Location to find header names (0-index). Default is 0
 		delimiter : str, optional
-			Delimiter to parse column names. Default is '~'
+			Delimiter to parse column names. Default is '.'
 		\*\*kwargs: keyword arguments
 			Parameters used by `pandas.read_excel`_. Not required but some potentially useful parameters include:
 
@@ -48,8 +48,8 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 		- atoms
 		- thermo_model
 		- vib_wavenumber
-		- nasa~a_low
-		- nasa~a_high
+		- nasa.a_low
+		- nasa.a_high
 
 	.. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
 	"""
@@ -84,13 +84,13 @@ def read_excel(io, skiprows=[1], header=0, delimiter='~', **kwargs):
 		thermos_out.append(thermo_data)
 	return thermos_out
 
-def set_element(header, value, output_structure, delimiter = '~'):
+def set_element(header, value, output_structure, delimiter = '.'):
 	"""Parses element header and assigns to output_structure['elements']
 	
 	Parameters
 	----------
 		header : str
-			String containing the element name. Element symbol should be at the end. e.g. 'element~O'
+			String containing the element name. Element symbol should be at the end. e.g. 'element.O'
 		value : int
 			Amount found in formula
 		output_structure : dict
@@ -208,7 +208,7 @@ def set_vib_wavenumber(value, output_structure):
 		output_structure['vib_energies'] = [vib_energy]
 	return output_structure
 
-def set_nasa_a_low(header, value, output_structure, delimiter='~'):
+def set_nasa_a_low(header, value, output_structure, delimiter='.'):
 	"""Parses a_low parameter for ``PyMuTT.models.empirical.nasa.Nasa`` object
 	
 	Parameters
@@ -216,7 +216,7 @@ def set_nasa_a_low(header, value, output_structure, delimiter='~'):
 		header : str
 			Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:
 				nasa[delimiter]a_low[delimiter][index]
-				e.g. nasa~a_low~0
+				e.g. nasa.a_low.0
 		value : float
 			a_low value
 		output_structure : dict
@@ -236,7 +236,7 @@ def set_nasa_a_low(header, value, output_structure, delimiter='~'):
 		output_structure['a_low'][i] = value
 	return output_structure
 
-def set_nasa_a_high(header, value, output_structure, delimiter='~'):
+def set_nasa_a_high(header, value, output_structure, delimiter='.'):
 	"""Parses a_high parameter for ``PyMuTT.models.empirical.nasa.Nasa`` object
 	
 	Parameters
@@ -244,7 +244,7 @@ def set_nasa_a_high(header, value, output_structure, delimiter='~'):
 		header : str
 			Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:
 				nasa[delimiter]a_high[delimiter][index]
-				e.g. nasa~a_high~0
+				e.g. nasa.a_high.0
 		value : float
 			a_high value
 		output_structure : dict

@@ -45,7 +45,7 @@ Processing Input Species
 species_data = read_excel(io=species_path)
 species = [Nasa(references=refs, T_low=T_low, T_high=T_high, T_ref=c.T0('K'), **specie_data) for specie_data in species_data]
 print('Species Input:')
-pprint(species_data)
+pprint(species)
 
 '''
 Printing Out Results

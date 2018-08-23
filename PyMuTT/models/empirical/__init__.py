@@ -76,6 +76,14 @@ class BaseThermo:
 		else:
 			self.HoRT_ref = HoRT_ref
 
+	def __repr__(self):
+		out = ['{} object for Name: {}'.format(self.__class__.__name__, self.name)]
+		for key, val in self.__dict__.items():
+			if key != 'name':
+				out.append('\t{}: {}'.format(key, val))
+		return '\n'.join(out)
+		
+
 	def plot_empirical(self, T_low = None, T_high = None, Cp_units = None, H_units = None, S_units = None, G_units = None):
 		"""Plots the thermodynamic profiles between ``T_low`` and ``T_high`` using empirical relationship
 
