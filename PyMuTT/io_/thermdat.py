@@ -265,7 +265,7 @@ def _read_line4(line, nasa_data):
 		j += 1
 	return nasa_data
 
-def write_thermdat(filename, nasa_species, write_date=True):
+def write_thermdat(filename, nasa_species, write_date=True, newline='\n'):
 	"""Writes thermdats in the Chemkin format
 
 	Parameters
@@ -275,8 +275,10 @@ def write_thermdat(filename, nasa_species, write_date=True):
 		nasa_species : list of ``PyMuTT.models.empirical.nasa.Nasa``
 		write_date : bool, optional
 			Whether or not the date should be written. If False, writes the first 8 characters of ``notes`` attribute. Defaults to True			
+		newline : str, optional
+			Newline character to use. Default is the Unix convention (\\n)
 	"""
-	with open(filename, 'w') as f_ptr:
+	with open(filename, 'w', newline=newline) as f_ptr:
 		f_ptr.write('THERMO ALL\n       100       500      1500\n')
 		
 		float_string = '%.8E'

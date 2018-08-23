@@ -9,11 +9,7 @@ base_path = os.path.dirname(__file__)
 species = read_thermdat('{}/thermdat'.format(base_path))
 
 #Printing information related to each specie
-for specie in species:
-	print('Name: {}'.format(specie.name))
-	for key, val in specie.__dict__.items():
-		if key != 'name':
-			print('\t{}\t{}'.format(key, val))
+pprint(species)
 
 #Plot an example of an imported NASA polynomial
 species[1].plot_empirical()
