@@ -166,7 +166,8 @@
 <dl class="class">
 <dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.idealgasthermo.</code><code class="descname">IdealGasThermo</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>geometry</em>, <em>potentialenergy=0.0</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>spin=None</em>, <em>natoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ideal Gas Model. Uses <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo">ase.thermochemistry.IdealGasThermo</a> to calculate enthalpy and entropy</p>
+<dd><p>Ideal Gas Model. Uses <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo">ase.thermochemistry.IdealGasThermo</a> to
+calculate enthalpy and entropy</p>
 <dl class="attribute">
 <dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.model">
 <code class="descname">model</code><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.model" title="Permalink to this definition">¶</a></dt>
@@ -176,8 +177,8 @@
 <p>Below are the parameters accepted by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo">ase.thermochemistry.IdealGasThermo</a></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="19%" />
-<col width="81%" />
+<col width="24%" />
+<col width="76%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameters</th>
@@ -201,7 +202,8 @@
 <td>(float) Potential energy in eV</td>
 </tr>
 <tr class="row-odd"><td>atoms</td>
-<td>(<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a>) Atoms object required for calculating rotational modes</td>
+<td>(<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a>) Atoms object required for calculating
+rotational modes</td>
 </tr>
 <tr class="row-even"><td>symmetrynumber</td>
 <td><p class="first">(int) Symmetry number</p>
@@ -264,8 +266,10 @@
 <td><p class="first">(float) Holds the total electronic spin</p>
 <ul class="last simple">
 <li>0 for molecules in which all electrons are paired</li>
-<li>0.5 for a free radical with a single unpaired electron</li>
-<li>1.0 for a triplet with two unpaired electrons, such as O_2</li>
+<li>0.5 for a free radical with a single unpaired
+electron</li>
+<li>1.0 for a triplet with two unpaired electrons,
+such as O_2</li>
 </ul>
 </td>
 </tr>
@@ -274,9 +278,9 @@
 <dl class="method">
 <dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given temperature.
-If you would like to use different behavior from the default, the
-thermo_model used must have the function ‘get_CpoR’.</p>
+<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given
+temperature. If you would like to use different behavior from the
+default, the thermo_model used must have the function ‘get_CpoR’.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -302,7 +306,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is 1 atm.</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
@@ -326,7 +331,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
@@ -343,7 +349,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless entropy at a given temperature and pressure</p>
+<dd><p>Returns the dimensionless entropy at a given temperature and
+pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -351,11 +358,13 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm.</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and pressure</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and
+pressure</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
@@ -375,7 +384,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <dl class="class">
 <dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.harmonicthermo.</code><code class="descname">HarmonicThermo</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>potentialenergy=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Treats all degrees of freedom harmonically. Uses ase.thermochemistry.HarmonicThermo to calculate    enthalpy and entropy</p>
+<dd><p>Treats all degrees of freedom harmonically.
+Uses ase.thermochemistry.HarmonicThermo to calculate enthalpy and entropy</p>
 <dl class="attribute">
 <dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.model">
 <code class="descname">model</code><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.model" title="Permalink to this definition">¶</a></dt>
@@ -385,8 +395,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <p>Below are parameters accepted by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.HarmonicThermo">ase.thermochemistry.HarmonicThermo</a></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="18%" />
-<col width="82%" />
+<col width="24%" />
+<col width="76%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -395,7 +405,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>vib_energies</td>
-<td>((3N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> where N is number of atoms) Vibrational energies in eV</td>
+<td>((3N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> where N is number of atoms)
+Vibrational energies in eV</td>
 </tr>
 <tr class="row-odd"><td>potentialenergy</td>
 <td>(float) Potential energy in eV</td>
@@ -405,7 +416,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given temperature.</p>
+<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given
+temperature.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -430,7 +442,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
@@ -454,7 +467,8 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should
+be printed</li>
 </ul>
 </td>
 </tr>
@@ -471,18 +485,21 @@ thermo_model used must have the function ‘get_CpoR’.</p>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>Ts</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless entropy at a given temperature and pressure</p>
+<dd><p>Returns the dimensionless entropy at a given temperature and
+pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and pressure</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and
+pressure</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
@@ -515,8 +532,8 @@ Used for surface species where there are 2 translational modes,
 <p>Below are parameters accepted by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model">ase.thermochemistry.HinderedThermo</a></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="16%" />
-<col width="84%" />
+<col width="31%" />
+<col width="69%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameters</th>
@@ -525,7 +542,8 @@ Used for surface species where there are 2 translational modes,
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>vib_energies</td>
-<td>((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) Vibrational energies in eV</td>
+<td>((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) Vibrational energies
+in eV</td>
 </tr>
 <tr class="row-odd"><td>trans_barrier_energy</td>
 <td>(float) Translational energy barrier in eV</td>
@@ -537,16 +555,24 @@ Used for surface species where there are 2 translational modes,
 <td>(float) Site density in cm^-2</td>
 </tr>
 <tr class="row-even"><td>rotationalminima</td>
-<td>(int) Number of equivalent minima for an adsorbate full rotation e.g. 6 for an adsorbate on an fcc(111) top site</td>
+<td><p class="first">(int) Number of equivalent minima for an
+adsorbate full rotation e.g. 6 for an adsorbate</p>
+<blockquote class="last">
+<div>on an fcc(111) top site</div></blockquote>
+</td>
 </tr>
 <tr class="row-odd"><td>potentialenergy</td>
 <td>(float) Potential energy in eV</td>
 </tr>
 <tr class="row-even"><td>atoms</td>
-<td>(<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a>) Atoms object required for calculating rotational modes</td>
+<td><blockquote class="first">
+<div>(<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a>) Atoms object required for</div></blockquote>
+<p class="last">calculating rotational modes</p>
+</td>
 </tr>
 <tr class="row-odd"><td>symmetrynumber</td>
-<td><p class="first">(int) Symmetry number</p>
+<td><blockquote class="first">
+<div><p>(int) Symmetry number</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="42%" />
@@ -599,21 +625,27 @@ Used for surface species where there are 2 translational modes,
 </tr>
 </tbody>
 </table>
-<p class="last">See DOI for more details: 10.1007/s00214-007-0328-0</p>
+</div></blockquote>
+<p class="last">See DOI for more details:10.1007/s00214-007-0328-0</p>
 </td>
 </tr>
 <tr class="row-odd"><td>mass</td>
-<td>(float) Mass of adsorbate in amu. If unspecified, uses the atoms object</td>
+<td>(float) Mass of adsorbate in amu. If unspecified,
+uses the atoms object</td>
 </tr>
 <tr class="row-even"><td>inertia</td>
-<td>(float) Reduced moment of inertia in amu*A^-2. If unspecified, uses atoms object</td>
+<td><blockquote class="first">
+<div>(float) Reduced moment of inertia in amu*A^-2.</div></blockquote>
+<p class="last">If unspecified, uses atoms object</p>
+</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given temperature.</p>
+<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given
+temperature.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -631,7 +663,8 @@ Used for surface species where there are 2 translational modes,
 <dl class="method">
 <dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_GoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless Gibbs energy at a given temperature and pressure</p>
+<dd><p>Returns the dimensionless Gibbs energy at a given temperature and
+pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -639,7 +672,8 @@ Used for surface species where there are 2 translational modes,
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Pressure in atm. Default is 1 atm</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
@@ -663,7 +697,8 @@ Used for surface species where there are 2 translational modes,
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
@@ -680,7 +715,8 @@ Used for surface species where there are 2 translational modes,
 <dl class="method">
 <dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless entropy at a given temperature and pressure</p>
+<dd><p>Returns the dimensionless entropy at a given temperature and
+pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -688,11 +724,13 @@ Used for surface species where there are 2 translational modes,
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Pressure in atm. Default is 1 atm</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be printed</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
+printed</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and pressure</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and
+pressure</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
@@ -748,7 +786,9 @@ Used for surface species where there are 2 translational modes,
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Degrees of freedom the specie has. Gas-phase species will be 3 degrees whereas surface species may have less depending on the thermodynamic model</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Degrees of freedom the specie has. Gas-phase species will be
+3 degrees whereas surface species may have less depending on the
+thermodynamic model</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_trans</strong> – Dimensionless translational heat capacity</td>
 </tr>

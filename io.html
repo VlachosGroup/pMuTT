@@ -93,8 +93,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Docstrings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reading-thermdat">Reading Thermdat</a></li>
 </ul>
 </li>
@@ -177,34 +177,40 @@
 <h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-PyMuTT.io_.excel">
 <span id="docstrings"></span><h3>Docstrings<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h3>
-<p><a href="#id4"><span class="problematic" id="id5">PyMuTT.io_</span></a>.excel</p>
+<p><a href="#id6"><span class="problematic" id="id7">PyMuTT.io_</span></a>.excel</p>
 <p>Read from/write to xlsx files of particular format.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.excel.read_excel">
 <code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads an excel file and returns it as a list of dictionaries to initialize objects</p>
+<dd><p>Reads an excel file and returns it as a list of dictionaries to
+initialize objects</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>io</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the Excel spreadsheet</li>
-<li><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed). Default is [1] so comments can be put in that row</li>
+<li><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed).
+Default is [1] so comments can be put in that row</li>
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</li>
-<li><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some potentially useful parameters include:</p>
+<li><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some
+potentially useful parameters include:</p>
 <ul>
 <li>sheet_name (str): Specify the name of the sheet you’re reading</li>
 <li>converters: Specify how to process certain columns</li>
-<li>dtype (dict): Expected data type. Will be guessed if not specified</li>
-<li>na_values (scalar, str, list-like, or dict): What strings to interpret as NaN</li>
-<li>convert_float (bool): Converts integral floats to int (i.e. 1.0 –&gt; 1)</li>
+<li>dtype (dict): Expected data type. Will be guessed if
+not specified</li>
+<li>na_values (scalar, str, list-like, or dict): What strings to
+interpret as NaN</li>
+<li>convert_float (bool): Converts integral floats to
+int (i.e. 1.0 –&gt; 1)</li>
 </ul>
 </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>excel_data</strong> – Can be used to initialize objects with the **kwargs syntax</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>excel_data</strong> – Can be used to initialize objects with the <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs syntax</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of dict</p>
@@ -234,7 +240,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location to import atoms object. If relative references used, the path should be relative to excel_path.
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location to import atoms object. If relative references used,
+the path should be relative to excel_path.
 See ase.read for supported formats</li>
 <li><strong>excel_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location where excel path is located</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘atoms’]</li>
@@ -260,9 +267,11 @@ See ase.read for supported formats</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String containing the element name. Element symbol should be at the end. e.g. ‘element.O’</li>
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String containing the element name. Element symbol should be at
+the end. e.g. ‘element.O’</li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Amount found in formula</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘elements’][element]</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Delimiter for element. Element symbol should be at the end</li>
 </ul>
 </td>
@@ -287,8 +296,10 @@ See ase.read for supported formats</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>formula</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Stoichiometric formula unit. e.g. H2O
-Note that an element cannot be specified multiple times. e.g. CH3OH is not supported</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘elements’]</li>
+Note that an element cannot be specified multiple times.
+e.g. CH3OH is not supported</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’]</li>
 </ul>
 </td>
 </tr>
@@ -311,14 +322,14 @@ Note that an element cannot be specified multiple times. e.g. CH3OH is not suppo
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <dl class="docutils">
-<dt>Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:</dt>
-<dd>nasa[delimiter]a_high[delimiter][index]
-e.g. nasa.a_high.0</dd>
-</dl>
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
+Assumes zero index and header takes the format:</p>
+<p>nasa[delimiter]a_high[delimiter][index]
+e.g. nasa.a_high.0</p>
 </li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_high value</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘a_high’]</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘a_high’]</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
 </ul>
 </td>
@@ -342,11 +353,10 @@ e.g. nasa.a_high.0</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <dl class="docutils">
-<dt>Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:</dt>
-<dd>nasa[delimiter]a_low[delimiter][index]
-e.g. nasa.a_low.0</dd>
-</dl>
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
+Assumes zero index and header takes the format:</p>
+<p>nasa[delimiter]a_low[delimiter][index]
+e.g. nasa.a_low.0</p>
 </li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_low value</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘a_low’]</li>
@@ -382,7 +392,8 @@ e.g. nasa.a_low.0</dd>
 </ul>
 </div></blockquote>
 </li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘thermo_model’]</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘thermo_model’]</li>
 </ul>
 </td>
 </tr>
@@ -406,7 +417,8 @@ e.g. nasa.a_low.0</dd>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘elements’][element]</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
 </ul>
 </td>
 </tr>
@@ -424,7 +436,7 @@ e.g. nasa.a_low.0</dd>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="dft-input-example">
-<span id="id1"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
+<span id="id3"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
 <p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1">PyMuTT.examples.VASP_to_thermdat.example1</a>. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.read_excel</span></code>. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -734,9 +746,9 @@ e.g. nasa.a_low.0</dd>
 </div>
 <div class="section" id="thermdat">
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id2">
-<h3>Docstrings<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id6"><span class="problematic" id="id7">PyMuTT.io_</span></a>.thermdat</p>
+<div class="section" id="id4">
+<h3>Docstrings<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">PyMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.thermdat.read_thermdat">
@@ -776,7 +788,8 @@ e.g. nasa.a_low.0</dd>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
 <li><strong>nasa_species</strong> (list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code>) – </li>
-<li><strong>write_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether or not the date should be written. If False, writes the first 8 characters of <code class="docutils literal notranslate"><span class="pre">notes</span></code> attribute. Defaults to True</li>
+<li><strong>write_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether or not the date should be written. If False, writes the
+first 8 characters of <code class="docutils literal notranslate"><span class="pre">notes</span></code> attribute. Defaults to True</li>
 <li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character to use. Default is the Unix convention (n)</li>
 </ul>
 </td>
@@ -786,8 +799,8 @@ e.g. nasa.a_low.0</dd>
 </dd></dl>
 
 </div>
-<div class="section" id="id3">
-<h3>Examples<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.thermdat.read_thermdat</span></code>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_thermdat">PyMuTT.examples.read_nasa_from_thermdat</a></p>
