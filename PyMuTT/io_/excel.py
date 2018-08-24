@@ -11,7 +11,6 @@ import os
 from ase.io import read
 from PyMuTT import constants as c
 from PyMuTT import parse_formula
-from PyMuTT.models.empirical import BaseThermo
 
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):

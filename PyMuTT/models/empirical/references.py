@@ -8,7 +8,6 @@ references.
 
 from warnings import warn
 import numpy as np
-from PyMuTT.models.empirical import BaseThermo
 
 
 class References:
