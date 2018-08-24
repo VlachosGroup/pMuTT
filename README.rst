@@ -14,11 +14,9 @@ Documentation available at: https://vlachosgroup.github.io/PyMuTT/
 Useful Topics
 -------------
 
--  `Outline to convert DFT data to empirical forms`_
--  `Explanation of enthalpy referencing`_
--  `Supported IO operations`_
--  `Examples`_
--  `How to contribute`_
+-  :ref:`Referencing <referencing>`
+-  :ref:`Supported IO operations <io>`
+-  :ref:`Examples <examples>`
 
 Developers
 ----------
@@ -69,16 +67,10 @@ License
 This project is licensed under the MIT License - see the `LICENSE.md`_
 file for details.
 
-.. _Outline to convert DFT data to empirical forms: https://vlachosgroup.github.io/PyMuTT/DFT_to_Empirical_Outline.html
-.. _Explanation of enthalpy referencing: https://vlachosgroup.github.io/PyMuTT/references.html
-.. _Supported IO operations: https://vlachosgroup.github.io/PyMuTT/io.html
-.. _Examples: https://github.com/VlachosGroup/PyMuTT/tree/master/examples
-.. _How to contribute: https://vlachosgroup.github.io/PyMuTT/contributing.html
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
 .. _Pandas: https://pandas.pydata.org/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
 .. _tests directory: https://github.com/VlachosGroup/PyMuTT/tree/master/tests
-.. _examples using the code: https://github.com/VlachosGroup/PyMuTT/tree/master/examples
 .. _LICENSE.md: https://github.com/VlachosGroup/PyMuTT/blob/master/LICENSE.md
