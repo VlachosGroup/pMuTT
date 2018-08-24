@@ -1,3 +1,5 @@
+.. _io:
+
 Input and Output
 ****************
 

@@ -8,13 +8,15 @@ Welcome to PyMuTT's documentation!
 
 .. toctree::
    :maxdepth: 2
-
+   
    includeme
+   examples
    referencing
    io
    empirical
    statmech
    constants
+   Return to Github <https://github.com/VlachosGroup/PyMuTT>
 
 Indices and tables
 ==================
@@ -22,3 +24,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
