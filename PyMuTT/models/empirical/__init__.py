@@ -135,10 +135,8 @@ class BaseThermo:
                 2. S
                 3. G
 
-        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/
-                                               matplotlib.figure.Figure.html
-        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/
-                                                matplotlib.axes.Axes.axis.html
+        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
         if T_low is None:
             T_low = self.T_low
@@ -233,10 +231,8 @@ class BaseThermo:
                 2. S
                 3. G
 
-        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/
-                                                matplotlib.figure.Figure.html
-        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/
-                                                 matplotlib.axes.Axes.axis.html
+        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
         if T_low is None:
             T_low = self.T_low
@@ -340,10 +336,8 @@ class BaseThermo:
                 2. S
                 3. G
 
-        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/
-                                                matplotlib.figure.Figure.html
-        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/
-                                                 matplotlib.axes.Axes.axis.html
+        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
         if T_low is None:
             T_low = self.T_low
@@ -433,8 +427,7 @@ class BaseThermo:
             CpoR_empirical :((N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-                                     generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
 
         if Ts is None:
@@ -471,8 +464,7 @@ class BaseThermo:
             CpoR_empirical :((N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-                                     generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         if Ts is None:
             Ts = np.linspace(self.T_low, self.T_high)
@@ -513,8 +505,7 @@ class BaseThermo:
             CpoR_empirical :((N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-                                     generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         if Ts is None:
             Ts = np.linspace(self.T_low, self.T_high)
@@ -550,8 +541,7 @@ class BaseThermo:
             CpoR_empirical : (N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-                                     generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         if Ts is None:
             Ts = np.linspace(self.T_low, self.T_high)

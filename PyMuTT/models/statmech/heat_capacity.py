@@ -12,8 +12,7 @@ from PyMuTT import constants as c
 def get_CvoR_trans(degrees=3):
     """Calculates the dimensionless translational heat capacity
 
-    :math:`\\frac {Cv_{trans}} {R} = \\frac {N} {2}` where N is the degrees
-    of freedom
+    :math:`\\frac {Cv_{trans}} {R} = \\frac {N} {2}` where N is the degrees of freedom
 
     Parameters
     ----------
@@ -75,9 +74,7 @@ def get_CvoR_rot(geometry):
 def get_CvoR_vib(vib_energies, Ts):
     """Calculates the dimensionless vibrational heat capacity
 
-    :math:`\\frac {Cp_{vib}}{R} = \\sum_{i=1}^{n} \\bigg(\\frac '
-    '{\\Theta_{V,i}}{2T}\\bigg)^2 \\frac {1}{\\big(sinh(\\frac '
-    '{\\Theta_{V,i}}{2T})\\big)^2}`
+    :math:`\\frac {Cp_{vib}}{R} = \\sum_{i=1}^{n} \\bigg(\\frac {\\Theta_{V,i}}{2T}\\bigg)^2 \\frac {1}{\\big(sinh(\\frac {\\Theta_{V,i}}{2T})\\big)^2}`
 
     Parameters
     ----------

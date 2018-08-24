@@ -58,8 +58,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
         - nasa.a_low
         - nasa.a_high
 
-    .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable
-                                     /generated/pandas.read_excel.html
+    .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
     input_data = pd.read_excel(io=io, skiprows=skiprows,
                                header=header, **kwargs)

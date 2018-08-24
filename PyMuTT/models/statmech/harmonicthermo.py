@@ -29,10 +29,8 @@ class HarmonicThermo:
     potentialenergy   (float) Potential energy in eV
     ================= =======================================================
 
-    .. _`ase.thermochemistry.HarmonicThermo`: https://wiki.fysik.dtu.dk/ase/
-  ase/thermochemistry/thermochemistry.html#ase.thermochemistry.HarmonicThermo
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-    generated/numpy.ndarray.html
+    .. _`ase.thermochemistry.HarmonicThermo`: https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.HarmonicThermo
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
     def __init__(self, vib_energies, potentialenergy=0.0):
         self.model = thermochemistry.HarmonicThermo(
@@ -52,8 +50,7 @@ class HarmonicThermo:
             CpoR : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (Cp/R)
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return get_CvoR_vib(vib_energies=self.model.vib_energies, Ts=Ts)
 
@@ -72,8 +69,7 @@ class HarmonicThermo:
             HoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (H/RT) at the specified temperature
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)
@@ -104,8 +100,7 @@ class HarmonicThermo:
                 Dimensionless entropy (S/R) at the specified temperature and
                 pressure
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)
@@ -134,8 +129,7 @@ class HarmonicThermo:
             GoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (G/RT) at the specified temperature
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)

@@ -74,8 +74,7 @@ class HinderedThermo:
     |                      |If unspecified, uses atoms object                 |
     +----------------------+--------------------------------------------------+
 
-    .. _`ase.thermochemistry.HinderedThermo`: https://wiki.fysik.dtu.dk/ase/
-    ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model
+    .. _`ase.thermochemistry.HinderedThermo`: https://wiki.fysik.dtu.dk/ase/ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model
     .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
     def __init__(self, vib_energies, trans_barrier_energy, rot_barrier_energy,
@@ -106,8 +105,7 @@ class HinderedThermo:
             CpoR : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (Cp/R)
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         raise NotImplementedError
 
@@ -126,8 +124,7 @@ class HinderedThermo:
             HoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (H/RT) at the specified temperature
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)
@@ -162,8 +159,7 @@ class HinderedThermo:
                 Dimensionless entropy (S/R) at the specified temperature and
                 pressure
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)
@@ -195,8 +191,7 @@ class HinderedThermo:
             GoRT: float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (G/RT) at the specified temperature
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)

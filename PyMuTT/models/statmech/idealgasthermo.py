@@ -74,10 +74,8 @@ class IdealGasThermo:
     |                 |                                                       |
     +-----------------+-------------------------------------------------------+
 
-    .. _`ase.thermochemistry.IdealGasThermo`: https://wiki.fysik.dtu.dk/ase/
-    ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-    generated/numpy.ndarray.html
+    .. _`ase.thermochemistry.IdealGasThermo`: https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
     def __init__(self, vib_energies, geometry, potentialenergy=0.0,
@@ -105,8 +103,7 @@ class IdealGasThermo:
             CpoR : float or (N,) `numpy.ndarray_`
                 Dimensionless heat capacity (Cp/R)
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         CvoR_trans = get_CvoR_trans(degrees=3.)
         CvoR_vib = get_CvoR_vib(vib_energies=self.model.vib_energies, Ts=Ts)
@@ -130,8 +127,7 @@ class IdealGasThermo:
             HoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (H/RT) at the specified temperature
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)
@@ -165,8 +161,7 @@ class IdealGasThermo:
                 Dimensionless entropy (S/R) at the specified temperature and
                 pressure
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)
@@ -201,8 +196,7 @@ class IdealGasThermo:
             GoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity (G/RT) at the specified temperature
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-        generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
             iter(Ts)

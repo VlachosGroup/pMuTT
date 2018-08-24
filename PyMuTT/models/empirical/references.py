@@ -104,8 +104,7 @@ class References:
                 Rows correspond to reference species. Columns correspond to
                 elements
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-                                     generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         elements = self.get_elements()
         elements_mat = np.zeros((len(self), len(elements)))
@@ -165,8 +164,7 @@ class References:
                 Offset to add to potentialenergy (in eV) to adjust to
                 References
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/
-                                     generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         HoRT_offset = 0.
         for element, coefficient in elements.items():
