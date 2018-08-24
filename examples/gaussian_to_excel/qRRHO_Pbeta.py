@@ -60,7 +60,7 @@ for line in f:
        # if re.search('Sum of electronic and thermal Free Energies=(.*)',line):
        #     epg = float(re.search('Sum of electronic and thermal Free Energies=(.*)',line).groups()[0])
 
-	# Get all the frequencies in the unit of cm^-1.
+    # Get all the frequencies in the unit of cm^-1.
         if re.search('Frequencies -- (.*)',line):
 
             a = re.search('Frequencies -- (.*)',line)
@@ -344,9 +344,9 @@ if args.mass1:
         f.write(str(item)+'\n')
 
 if args.mass1:
-	f.write('If we consider vibrational degrees of freedom and 1D translational motion and use q_RRHO,the electronic and zero-point; electronic and thermal; electronic and enthalpy; electronic and free energy; S are:\n')
-	for item in S_p_qRRHO_1d:
-		f.write(str(item)+'\n')
+    f.write('If we consider vibrational degrees of freedom and 1D translational motion and use q_RRHO,the electronic and zero-point; electronic and thermal; electronic and enthalpy; electronic and free energy; S are:\n')
+    for item in S_p_qRRHO_1d:
+        f.write(str(item)+'\n')
 
 
 f.write('Use harmonic oscillator and keep all the degrees of freedom. The thermal energies (electronic, zpe, electronic and zero-point, electronic and thermal, electronic and enthalpy, electronic and free energy) in kcal/mol and S are:\n')
