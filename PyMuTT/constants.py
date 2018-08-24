@@ -15,20 +15,26 @@ def R(units):
 		units : str
 			Units for R. Supported units
 
-			- J/mol/K
-			- kJ/mol/K
-			- L kPa/mol/K
-			- cm3 kPa/mol/K
-			- m3 Pa/mol/K
-			- cm3 MPa/mol/K
-			- m3 bar/mol/K
-			- L bar/mol/K
-			- L torr/mol/K
-			- cal/mol/K
-			- kcal/mol/K
-			- L atm/mol/K
-			- cm3 atm/mol/K
-			- eV/K (This option implies per molecule. i.e. Uses the value of kb)
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			J/mol/K             Joule per mole per kelvin
+			kJ/mol/K            kiloJoule per mole per kelvin
+			L kPa/mol/K         Liter kilopascal per mole per kelvin
+			cm3 kPa/mol/K       Cubic centimeter kilopascal per mole per kelvin
+			m3 Pa/mol/K         Cubic meter pascal per mole per kelvin
+			cm3 MPa/mol/K       Cubic centimeter megapascal per mole per kelvin
+			m3 bar/mol/K        Cubic meters bar per mole per kelvin
+			L bar/mol/K         Liter bar per mole per kelvin
+			L torr/mol/K        Liter torr per mole per kelvin
+			cal/mol/K           Calorie per mole per kelvin
+			kcal/mol/K          Kilocalorie per mole per kevin
+			L atm/mol/K         Liter atmosphere per mole per kelvin
+			cm3 atm/mol/K       Cubic centimeter atmosphere per mole per kelvin
+			eV/K                Electron volt per molecule per kelvin
+			Eh/K                Hartree per molecule per kelvin
+			Ha/K                Hartree per molecule per kelvin
+			=================   ===============================================
 
 	Returns
 	-------
@@ -53,7 +59,9 @@ def R(units):
 		'kcal/mol/K': 1.9872036e-3,
 		'L atm/mol/K': 0.082057338,
 		'cm3 atm/mol/K': 82.057338,
-		'eV/K': 8.6173303e-5
+		'eV/K': 8.6173303e-5,
+		'Eh/K': 3.1668105e-06,
+		'Ha/K': 3.1668105e-06,
 	}
 	try:
 		return R_dict[units]
@@ -68,9 +76,15 @@ def h(units, bar = False):
 		units : str
 			Units for h. Supported units
 
-			- J s
-			- kJ s
-			- eV s
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			J s                 Joule second
+			kJ s                Kilojoule second
+			eV s                Electron volt second
+			Eh s                Hartree second
+			Ha s                Hartree second
+			=================   ===============================================
 
 		bar : bool, optional
 			If True, returns h/2*pi . Default is False
@@ -86,7 +100,10 @@ def h(units, bar = False):
 	h_dict = {
 		'J s': 6.626070040e-34,
 		'kJ s': 6.626070040e-37,
-		'eV s': 4.135667662e-15
+		'eV s': 4.135667662e-15,
+		'Eh s': 1.519829846E-16,
+		'Ha s': 1.519829846E-16,
+
 	}
 
 	try:
@@ -106,10 +123,16 @@ def kb(units):
 	----------
 		units : str
 			Units for kb. Supported units
-
-			- J/K
-			- eV/K
-			- cal/K
+			
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			J/K                 Joule per kelvin
+			eV/K                Electron volt per kelvin
+			cal/K               Calorie per kelvin
+			Eh/K                Hartree per kelvin
+			Ha/K                Hartree per kelvin
+			=================   ===============================================
 
 	Returns
 	-------
@@ -125,7 +148,9 @@ def kb(units):
 		'kJ/K': 1.38064852e-26,		
 		'eV/K': 8.6173303e-5,
 		'cal/K': 3.2976230e-24,
-		'kcal/K': 3.2976230e-27
+		'kcal/K': 3.2976230e-27,
+		'Eh/K': 3.1668105e-06,
+		'Ha/K': 3.1668105e-06,
 	}
 	try:
 		return kb_dict[units]
@@ -140,8 +165,12 @@ def c(units):
 		units : str
 			Units for c. Supported units
 
-			- m/s
-			- cm/s	
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			m/s                 Meter per second
+			cm/s	            Centimeter per second
+			=================   ===============================================
 
 	Returns
 	-------
@@ -169,9 +198,13 @@ def m_e(units):
 		units : str
 			Units for m_e. Supported units 
 
-			- kg
-			- g
-			- amu   
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			kg                  Kilograms
+			g                   Grams
+			amu                 Atomic mass units
+			=================   ===============================================
 
 	Returns
 	-------
@@ -200,9 +233,14 @@ def m_p(units):
 		units : str
 			Units for m_p. Supported units
 
-			- kg
-			- amu   
-
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			kg                  Kilograms
+			g                   Grams
+			amu                 Atomic mass units
+			=================   ===============================================
+			
 	Returns
 	-------
 		m_p : float
@@ -230,14 +268,18 @@ def P0(units):
 		units : str
 			Units for P0. Supported units
 
-			- bar
-			- atm
-			- Pa
-			- kPa
-			- MPa
-			- psi
-			- mmHg
-			- Torr
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			bar                 Bar
+			atm                 Atmosphere
+			Pa                  Pascal
+			kPa                 Kilopascal
+			MPa                 Megapascal
+			psi                 Pound per square inch
+			mmHg                Millimeter of mercury
+			Torr                Torr
+			=================   ===============================================
 
 	Returns
 	-------
@@ -272,10 +314,14 @@ def T0(units):
 		units : str
 			Units for T0. Supported units
 
-			- K
-			- C
-			- R
-			- F
+			=================   ===============================================
+			Unit                Description
+			=================   ===============================================
+			K                   Kelvin
+			C                   Celcius
+			R                   Rankine
+			F                   Fahrenheit
+			=================   ===============================================
 
 	Returns
 	-------
@@ -337,19 +383,23 @@ def convert_unit(num = None, from_ = None, to = None):
 	cal       Calories
 	kcal      Kilocalories
 	L atm     Liter atmospheres
+	Eh        Hartree
+	Ha        Hartree
 	========= =================
 
 	*Energy/Amount*
 
-	=========== =====================
-	Symbol      Unit
-	=========== =====================
-	J/mol       Joules per mole
-	kJ/mol      KiloJoules per mole
-	cal/mol     Calories per mole
-	kcal/mol    Kilocalories per mole
-	eV/molecule eV per molecule
-	=========== =====================
+	===========      =====================
+	Symbol           Unit
+	===========      =====================
+	J/mol            Joules per mole
+	kJ/mol           KiloJoules per mole
+	cal/mol          Calories per mole
+	kcal/mol         Kilocalories per mole
+	eV/molecule      eV per molecule
+	Eh/molecule      Hartree per molecule
+	Ha/molecule      Hartree per molecule
+	===========      =====================
 
 	*Time*
 
@@ -444,11 +494,15 @@ def convert_unit(num = None, from_ = None, to = None):
 		'cal': 'energy',
 		'kcal': 'energy',
 		'L atm': 'energy',
+		'Eh': 'energy',
+		'Ha': 'energy',
 		'J/mol': 'energy/amount',
 		'kJ/mol': 'energy/amount',
 		'cal/mol': 'energy/amount',
 		'kcal/mol': 'energy/amount',
 		'eV/molecule': 'energy/amount',
+		'Eh/molecule': 'energy/amount',
+		'Ha/molecule': 'energy/amount',
 		's': 'time',
 		'min': 'time',
 		'hr': 'time',
@@ -487,6 +541,8 @@ def convert_unit(num = None, from_ = None, to = None):
 		'cal': 0.239006,
 		'kcal': 0.000239006,
 		'L atm': 101.33,
+		'Eh': 4.359744650e-18,
+		'Ha': 4.359744650e-18,
 		'J/mol': 1.,
 		'kJ/mol': 1.e-3,
 		'cal/mol': 0.239006,

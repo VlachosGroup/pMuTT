@@ -1,3 +1,5 @@
+.. _statmech:
+
 Statistical Thermodynamic Models
 ********************************
 

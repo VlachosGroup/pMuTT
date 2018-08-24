@@ -37,6 +37,8 @@ refs_input = read_excel(io=refs_path)
 refs = References([BaseThermo(**ref_input) for ref_input in refs_input])
 print('Reference Input:')
 pprint(refs_input)
+print('Reference Data:')
+pprint(refs[0])
 
 '''
 Processing Input Species
