@@ -7,6 +7,7 @@ Contains universal constants for catalysis research
 
 import numpy as np
 
+
 def R(units):
     """Universal molar gas constant, R
 
@@ -66,11 +67,13 @@ def R(units):
     try:
         return R_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit for R: {}. Use help(PyMuTT.constants.R) for accepted units.'.format(units))
-    
-def h(units, bar = False):
+        raise KeyError('Invalid unit for R: {}. Use help(PyMuTT.constants.R) '
+                       'for accepted units.'.format(units))
+
+
+def h(units, bar=False):
     """Planck's constant, h
-    
+
     Parameters
     ----------
         units : str
@@ -109,12 +112,14 @@ def h(units, bar = False):
     try:
         h_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.h) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.h) for '
+                       'accepted units.'.format(units))
 
     if bar:
         return h_dict[units]/(2.*np.pi)
     else:
         return h_dict[units]
+
 
 def kb(units):
     """Boltzmann constant
@@ -123,7 +128,7 @@ def kb(units):
     ----------
         units : str
             Units for kb. Supported units
-            
+
             =================   ===============================================
             Unit                Description
             =================   ===============================================
@@ -137,7 +142,7 @@ def kb(units):
     Returns
     -------
         kb : float
-            Boltzmann constant in appropriate units    
+            Boltzmann constant in appropriate units
     Raises
     ------
         KeyError
@@ -145,7 +150,7 @@ def kb(units):
     """
     kb_dict = {
         'J/K': 1.38064852e-23,
-        'kJ/K': 1.38064852e-26,        
+        'kJ/K': 1.38064852e-26,
         'eV/K': 8.6173303e-5,
         'cal/K': 3.2976230e-24,
         'kcal/K': 3.2976230e-27,
@@ -155,11 +160,13 @@ def kb(units):
     try:
         return kb_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.kb) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.kb) for '
+                       'accepted units.'.format(units))
+
 
 def c(units):
     """Speed of light
-    
+
     Parameters
     ----------
         units : str
@@ -188,15 +195,17 @@ def c(units):
     try:
         return c_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.c) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.c) for '
+                       'accepted units.'.format(units))
+
 
 def m_e(units):
     """Mass of an electron
-    
+
     Parameters
     ----------
         units : str
-            Units for m_e. Supported units 
+            Units for m_e. Supported units
 
             =================   ===============================================
             Unit                Description
@@ -223,11 +232,13 @@ def m_e(units):
     try:
         return m_e_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.m_e) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.m_e) for '
+                       'accepted units.'.format(units))
+
 
 def m_p(units):
     """Mass of a proton
-    
+
     Parameters
     ----------
         units : str
@@ -240,7 +251,7 @@ def m_p(units):
             g                   Grams
             amu                 Atomic mass units
             =================   ===============================================
-            
+
     Returns
     -------
         m_p : float
@@ -258,11 +269,13 @@ def m_p(units):
     try:
         return m_p_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.m_p) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.m_p) for '
+                       'accepted units.'.format(units))
+
 
 def P0(units):
     """Reference pressure
-    
+
     Parameters
     ----------
         units : str
@@ -304,11 +317,13 @@ def P0(units):
     try:
         return P0_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.P0) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.P0) for '
+                       'accepted units.'.format(units))
+
 
 def T0(units):
     """Room temperature
-    
+
     Parameters
     ----------
         units : str
@@ -332,31 +347,33 @@ def T0(units):
         KeyError
             If units is not supported.
     """
-    T0_dict = {
-    'K': 298.15,
-    'C': 25.,
-    'R': 533.07,
-    'F': 73.4
-    }
+    T0_dict = {'K': 298.15,
+               'C': 25.,
+               'R': 533.07,
+               'F': 73.4
+               }
     try:
         return T0_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.T0) for accepted units.'.format(units))
+        raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.T0) for '
+                       'accepted units.'.format(units))
 
 
-Na = 6.02214086e23 #Avogadro number
+Na = 6.02214086e23  # Avogadro number
 """float : Avogadro's number in molecules/mol"""
 
-e = 1.6021766208e-19 #Electronic charge
+e = 1.6021766208e-19  # Electronic charge
 """float : Electronic charge in Coulombs"""
+
 
 def convert_unit(num = None, from_ = None, to = None):
     """Converts units between two unit sets
-    
+
     Parameters
     ----------
         num : float, optional
-            Number to convert. I not specified, will return the appropriate conversion factor.
+            Number to convert. I not specified, will return the appropriate
+            conversion factor.
         from_ : str
             Units that num is currently in
         to : str
@@ -462,7 +479,7 @@ def convert_unit(num = None, from_ = None, to = None):
     ========= =================
 
     *Mass*
-    
+
     ========= =================
     Symbol    Unit
     ========= =================
@@ -486,7 +503,7 @@ def convert_unit(num = None, from_ = None, to = None):
     ========= =======================
 
     """
-    
+
     type_dict = {
         'J': 'energy',
         'kJ': 'energy',
@@ -519,7 +536,7 @@ def convert_unit(num = None, from_ = None, to = None):
         'A2': 'area',
         'm3': 'volume',
         'cm3': 'volume',
-        'mL': 'volume',        
+        'mL': 'volume',
         'L': 'volume',
         'kg': 'mass',
         'g': 'mass',
@@ -533,7 +550,7 @@ def convert_unit(num = None, from_ = None, to = None):
         'torr': 'pressure',
         'psi': 'pressure'
     }
-    
+
     unit_dict = {
         'J': 1.,
         'kJ': 1.e-3,
@@ -579,16 +596,20 @@ def convert_unit(num = None, from_ = None, to = None):
         'psi': 0.000145038
     }
 
-    #Check if the entry exists  
+    # Check if the entry exists
     if type_dict.get(from_) is None:
-        raise ValueError("%r not a supported unit. Use help(PyMuTT.constants.convert_unit) for accepted units." % from_)
+        raise ValueError("%r not a supported unit. Use help(PyMuTT.constants."
+                         "convert_unit) for accepted units." % from_)
     if type_dict.get(to) is None:
-        raise ValueError("%r not a supported unit. Use help(PyMuTT.constants.convert_unit) for accepted units." % to)
-    #Check that the unit types are the same
+        raise ValueError("%r not a supported unit. Use help(PyMuTT.constants."
+                         "convert_unit) for accepted units." % to)
+    # Check that the unit types are the same
     from_type = type_dict[from_]
     to_type = type_dict[to]
     if from_type != to_type:
-        raise ValueError("%r [Type %r] not compatible with %r [Type %r]. Use help(PyMuTT.constants.convert_unit) for accepted units." % (from_, from_type, to, to_type))
+        raise ValueError("%r [Type %r] not compatible with %r [Type %r]. "
+                         "Use help(PyMuTT.constants.convert_unit) for "
+                         "accepted units." % (from_, from_type, to, to_type))
     elif from_type == 'temp':
         if num is None:
             num = 0.
@@ -597,6 +618,7 @@ def convert_unit(num = None, from_ = None, to = None):
         if num is None:
             num = 1.
         return num * unit_dict[to] / unit_dict[from_]
+
 
 prefixes = {
     'Y': 1.e24,
@@ -853,4 +875,5 @@ atomic_weight = {
     'Lv': 293,
     'Uuo': 294,
 }
-"""dict : Atomic weight. The key can be the atomic number, the element symbol, or the element name"""
+"""dict : Atomic weight. The key can be the atomic number, the element symbol,
+or the element name"""

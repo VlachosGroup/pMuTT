@@ -11,11 +11,7 @@ from PyMuTT import constants as c
 def _get_expected_arguments(fn):
     """Returns the arguments expected by a function. Useful for determining
     where to assign **kwargs parameters.
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
     Parameters
     ----------
         fn : function or class
@@ -23,18 +19,11 @@ def _get_expected_arguments(fn):
     Returns
     -------
         expected_arguments : tuple of str
-<<<<<<< HEAD
             Expected arguments. If a class is specified, returns the
             expected arguments of __init__
     """
 
     # If class passed, use __init__ to find expected arguments
-=======
-            Expected arguments. If a class is specified, returns the expected arguments of __init__
-    """
-
-    #If class passed, use __init__ to find expected arguments
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
     if inspect.isclass(fn):
         fn = fn.__init__
 
@@ -42,31 +31,22 @@ def _get_expected_arguments(fn):
     arg_count = fn_code.co_argcount
     args = fn_code.co_varnames[:arg_count]
     return args
-<<<<<<< HEAD
 
-=======
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
 
 def _pass_expected_arguments(fn, **kwargs):
-    """Finds expected values from a function or class and passes the appropriate arguments.
+    """Finds expected values from a function or class and passes the
+    appropriate arguments.
 
     Parameters
     ----------
         fn : Function or class
             Function or class you would like to find the expected arguments.
-<<<<<<< HEAD
+
         **kwargs :
             Keyword arguments that contain parameters to pass to fn
     Returns
     -------
         fn_or_class_output :
-=======
-        **kwargs : 
-            Keyword arguments that contain parameters to pass to fn
-    Returns
-    -------
-        fn_or_class_output : 
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
         Output of fn that has been fed the expected arguments.
     """
     expected_args = _get_expected_arguments(fn)
@@ -77,13 +57,11 @@ def _pass_expected_arguments(fn, **kwargs):
         except KeyError:
             continue
     return fn(**expected_arg_val)
-<<<<<<< HEAD
 
-=======
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
 
 def parse_formula(formula):
-    """Parses chemical formula into its elements and returns it as a dictionary.
+    """Parses chemical formula into its elements and returns it as a
+    dictionary.
 
     Parameters
     ----------
@@ -100,10 +78,7 @@ def parse_formula(formula):
     for (element, coefficient) in elements_tuples:
         elements[element] = elements.get(element, 0) + int(coefficient or '1')
     return elements
-<<<<<<< HEAD
 
-=======
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
 
 def get_molecular_weight(elements):
     """Molecular mass (in g/mol) given the elemental composition.
@@ -113,16 +88,12 @@ def get_molecular_weight(elements):
     ----------
         elements : dict or str
             Elemental composition of species.
-<<<<<<< HEAD
-            If a dictionary is passed, the keys are the element symbol,
-            atomic number, or element name and the value is the stoichiometric
+
+            If a dictionary is passed, the keys are the element symbol, atomic
+            number, or element name and the value is the stoichiometric
             coefficient.
             If a string is passed, the formula will be guessed using
             PyMuTT.parse_formula
-=======
-            If a dictionary is passed, the keys are the element symbol, atomic number, or element name and the value is the stoichiometric coefficient.
-            If a string is passed, the formula will be guessed using PyMuTT.parse_formula
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
 
     Returns
     -------
@@ -135,8 +106,5 @@ def get_molecular_weight(elements):
     molecular_weight = 0.
     for element, coefficient in elements.items():
         molecular_weight += c.atomic_weight[element] * coefficient
-<<<<<<< HEAD
+
     return molecular_weight
-=======
-    return molecular_weight
->>>>>>> 434bc3d2f861fd2754334346682a7b4c0a030e25
