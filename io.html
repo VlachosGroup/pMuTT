@@ -80,7 +80,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Experimental Data to NASA polynomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#excel">Excel</a><ul>
@@ -171,7 +171,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="input-and-output">
-<h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
+<span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
 <p>Input and output to different forms is an active area of development for PyMuTT</p>
 <div class="section" id="excel">
 <h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
@@ -181,7 +181,7 @@
 <p>Read from/write to xlsx files of particular format.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.excel.read_excel">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='~', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an excel file and returns it as a list of dictionaries to initialize objects</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -191,7 +191,7 @@
 <li><strong>io</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the Excel spreadsheet</li>
 <li><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed). Default is [1] so comments can be put in that row</li>
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</li>
-<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘~’</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</li>
 <li><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some potentially useful parameters include:</p>
 <ul>
 <li>sheet_name (str): Specify the name of the sheet you’re reading</li>
@@ -220,8 +220,8 @@
 <li>atoms</li>
 <li>thermo_model</li>
 <li>vib_wavenumber</li>
-<li>nasa~a_low</li>
-<li>nasa~a_high</li>
+<li>nasa.a_low</li>
+<li>nasa.a_high</li>
 </ul>
 </dd></dl>
 
@@ -253,14 +253,14 @@ See ase.read for supported formats</li>
 
 <dl class="function">
 <dt id="PyMuTT.io_.excel.set_element">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='~'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure[‘elements’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String containing the element name. Element symbol should be at the end. e.g. ‘element~O’</li>
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String containing the element name. Element symbol should be at the end. e.g. ‘element.O’</li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Amount found in formula</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘elements’][element]</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Delimiter for element. Element symbol should be at the end</li>
@@ -304,7 +304,7 @@ Note that an element cannot be specified multiple times. e.g. CH3OH is not suppo
 
 <dl class="function">
 <dt id="PyMuTT.io_.excel.set_nasa_a_high">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='~'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses a_high parameter for <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -314,7 +314,7 @@ Note that an element cannot be specified multiple times. e.g. CH3OH is not suppo
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <dl class="docutils">
 <dt>Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:</dt>
 <dd>nasa[delimiter]a_high[delimiter][index]
-e.g. nasa~a_high~0</dd>
+e.g. nasa.a_high.0</dd>
 </dl>
 </li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_high value</li>
@@ -335,7 +335,7 @@ e.g. nasa~a_high~0</dd>
 
 <dl class="function">
 <dt id="PyMuTT.io_.excel.set_nasa_a_low">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='~'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses a_low parameter for <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -345,7 +345,7 @@ e.g. nasa~a_high~0</dd>
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <dl class="docutils">
 <dt>Name of the header. Used to determine coefficient. Assumes zero index and header takes the format:</dt>
 <dd>nasa[delimiter]a_low[delimiter][index]
-e.g. nasa~a_low~0</dd>
+e.g. nasa.a_low.0</dd>
 </dl>
 </li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_low value</li>
@@ -767,7 +767,7 @@ e.g. nasa~a_low~0</dd>
 
 <dl class="function">
 <dt id="PyMuTT.io_.thermdat.write_thermdat">
-<code class="descclassname">PyMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PyMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes thermdats in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -777,6 +777,7 @@ e.g. nasa~a_low~0</dd>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
 <li><strong>nasa_species</strong> (list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code>) – </li>
 <li><strong>write_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether or not the date should be written. If False, writes the first 8 characters of <code class="docutils literal notranslate"><span class="pre">notes</span></code> attribute. Defaults to True</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character to use. Default is the Unix convention (n)</li>
 </ul>
 </td>
 </tr>

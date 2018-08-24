@@ -79,7 +79,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Experimental Data to NASA polynomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -150,9 +150,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-PyMuTT.constants">
-<span id="constants"></span><h1>Constants<a class="headerlink" href="#module-PyMuTT.constants" title="Permalink to this headline">¶</a></h1>
-<p>PyMuTT.constants</p>
+  <div class="section" id="constants">
+<span id="id1"></span><h1>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-PyMuTT.constants"></span><p>PyMuTT.constants</p>
 <p>Contains universal constants for catalysis research</p>
 <dl class="data">
 <dt id="PyMuTT.constants.Na">
@@ -169,16 +169,43 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for P0. Supported units</p>
-<ul class="simple">
-<li>bar</li>
-<li>atm</li>
-<li>Pa</li>
-<li>kPa</li>
-<li>MPa</li>
-<li>psi</li>
-<li>mmHg</li>
-<li>Torr</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>bar</td>
+<td>Bar</td>
+</tr>
+<tr class="row-odd"><td>atm</td>
+<td>Atmosphere</td>
+</tr>
+<tr class="row-even"><td>Pa</td>
+<td>Pascal</td>
+</tr>
+<tr class="row-odd"><td>kPa</td>
+<td>Kilopascal</td>
+</tr>
+<tr class="row-even"><td>MPa</td>
+<td>Megapascal</td>
+</tr>
+<tr class="row-odd"><td>psi</td>
+<td>Pound per square inch</td>
+</tr>
+<tr class="row-even"><td>mmHg</td>
+<td>Millimeter of mercury</td>
+</tr>
+<tr class="row-odd"><td>Torr</td>
+<td>Torr</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>P0</strong> – Reference pressure in appropriate units</td>
@@ -200,22 +227,67 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for R. Supported units</p>
-<ul class="simple">
-<li>J/mol/K</li>
-<li>kJ/mol/K</li>
-<li>L kPa/mol/K</li>
-<li>cm3 kPa/mol/K</li>
-<li>m3 Pa/mol/K</li>
-<li>cm3 MPa/mol/K</li>
-<li>m3 bar/mol/K</li>
-<li>L bar/mol/K</li>
-<li>L torr/mol/K</li>
-<li>cal/mol/K</li>
-<li>kcal/mol/K</li>
-<li>L atm/mol/K</li>
-<li>cm3 atm/mol/K</li>
-<li>eV/K (This option implies per molecule. i.e. Uses the value of kb)</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J/mol/K</td>
+<td>Joule per mole per kelvin</td>
+</tr>
+<tr class="row-odd"><td>kJ/mol/K</td>
+<td>kiloJoule per mole per kelvin</td>
+</tr>
+<tr class="row-even"><td>L kPa/mol/K</td>
+<td>Liter kilopascal per mole per kelvin</td>
+</tr>
+<tr class="row-odd"><td>cm3 kPa/mol/K</td>
+<td>Cubic centimeter kilopascal per mole per kelvin</td>
+</tr>
+<tr class="row-even"><td>m3 Pa/mol/K</td>
+<td>Cubic meter pascal per mole per kelvin</td>
+</tr>
+<tr class="row-odd"><td>cm3 MPa/mol/K</td>
+<td>Cubic centimeter megapascal per mole per kelvin</td>
+</tr>
+<tr class="row-even"><td>m3 bar/mol/K</td>
+<td>Cubic meters bar per mole per kelvin</td>
+</tr>
+<tr class="row-odd"><td>L bar/mol/K</td>
+<td>Liter bar per mole per kelvin</td>
+</tr>
+<tr class="row-even"><td>L torr/mol/K</td>
+<td>Liter torr per mole per kelvin</td>
+</tr>
+<tr class="row-odd"><td>cal/mol/K</td>
+<td>Calorie per mole per kelvin</td>
+</tr>
+<tr class="row-even"><td>kcal/mol/K</td>
+<td>Kilocalorie per mole per kevin</td>
+</tr>
+<tr class="row-odd"><td>L atm/mol/K</td>
+<td>Liter atmosphere per mole per kelvin</td>
+</tr>
+<tr class="row-even"><td>cm3 atm/mol/K</td>
+<td>Cubic centimeter atmosphere per mole per kelvin</td>
+</tr>
+<tr class="row-odd"><td>eV/K</td>
+<td>Electron volt per molecule per kelvin</td>
+</tr>
+<tr class="row-even"><td>Eh/K</td>
+<td>Hartree per molecule per kelvin</td>
+</tr>
+<tr class="row-odd"><td>Ha/K</td>
+<td>Hartree per molecule per kelvin</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>R</strong> – Universal molar gas constant in appropriate units</td>
@@ -237,12 +309,31 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for T0. Supported units</p>
-<ul class="simple">
-<li>K</li>
-<li>C</li>
-<li>R</li>
-<li>F</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>K</td>
+<td>Kelvin</td>
+</tr>
+<tr class="row-odd"><td>C</td>
+<td>Celcius</td>
+</tr>
+<tr class="row-even"><td>R</td>
+<td>Rankine</td>
+</tr>
+<tr class="row-odd"><td>F</td>
+<td>Fahrenheit</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T0</strong> – Room temperature in appropriate units</td>
@@ -270,10 +361,25 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for c. Supported units</p>
-<ul class="simple">
-<li>m/s</li>
-<li>cm/s</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>m/s</td>
+<td>Meter per second</td>
+</tr>
+<tr class="row-odd"><td>cm/s</td>
+<td>Centimeter per second</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>c</strong> – Speed of light in appropriate units</td>
@@ -343,6 +449,12 @@
 <tr class="row-odd"><td>L atm</td>
 <td>Liter atmospheres</td>
 </tr>
+<tr class="row-even"><td>Eh</td>
+<td>Hartree</td>
+</tr>
+<tr class="row-odd"><td>Ha</td>
+<td>Hartree</td>
+</tr>
 </tbody>
 </table>
 <p><em>Energy/Amount</em></p>
@@ -371,6 +483,12 @@
 </tr>
 <tr class="row-even"><td>eV/molecule</td>
 <td>eV per molecule</td>
+</tr>
+<tr class="row-odd"><td>Eh/molecule</td>
+<td>Hartree per molecule</td>
+</tr>
+<tr class="row-even"><td>Ha/molecule</td>
+<td>Hartree per molecule</td>
 </tr>
 </tbody>
 </table>
@@ -588,11 +706,34 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for h. Supported units</p>
-<ul>
-<li>J s</li>
-<li>kJ s</li>
-<li>eV s</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J s</td>
+<td>Joule second</td>
+</tr>
+<tr class="row-odd"><td>kJ s</td>
+<td>Kilojoule second</td>
+</tr>
+<tr class="row-even"><td>eV s</td>
+<td>Electron volt second</td>
+</tr>
+<tr class="row-odd"><td>Eh s</td>
+<td>Hartree second</td>
+</tr>
+<tr class="row-even"><td>Ha s</td>
+<td>Hartree second</td>
+</tr>
+</tbody>
+</table>
 </li>
 <li><strong>bar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns h/2*pi . Default is False</li>
 </ul>
@@ -620,11 +761,34 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for kb. Supported units</p>
-<ul class="simple">
-<li>J/K</li>
-<li>eV/K</li>
-<li>cal/K</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J/K</td>
+<td>Joule per kelvin</td>
+</tr>
+<tr class="row-odd"><td>eV/K</td>
+<td>Electron volt per kelvin</td>
+</tr>
+<tr class="row-even"><td>cal/K</td>
+<td>Calorie per kelvin</td>
+</tr>
+<tr class="row-odd"><td>Eh/K</td>
+<td>Hartree per kelvin</td>
+</tr>
+<tr class="row-even"><td>Ha/K</td>
+<td>Hartree per kelvin</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>kb</strong> – Boltzmann constant in appropriate units</td>
@@ -646,11 +810,28 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for m_e. Supported units</p>
-<ul class="simple">
-<li>kg</li>
-<li>g</li>
-<li>amu</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>kg</td>
+<td>Kilograms</td>
+</tr>
+<tr class="row-odd"><td>g</td>
+<td>Grams</td>
+</tr>
+<tr class="row-even"><td>amu</td>
+<td>Atomic mass units</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>m_e</strong> – Mass of electron in appropriate units</td>
@@ -672,10 +853,28 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Units for m_p. Supported units</p>
-<ul class="simple">
-<li>kg</li>
-<li>amu</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>kg</td>
+<td>Kilograms</td>
+</tr>
+<tr class="row-odd"><td>g</td>
+<td>Grams</td>
+</tr>
+<tr class="row-even"><td>amu</td>
+<td>Atomic mass units</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>m_p</strong> – Mass of proton in appropriate units</td>
