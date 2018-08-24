@@ -23,8 +23,8 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
         io : str
             Name of the Excel spreadsheet
         skiprows : list, optional
-            Rows to skip at the beginning (0-indexed). Default is [1] so
-            comments can be put in that row
+            Rows to skip at the beginning (0-indexed).
+            Default is [1] so comments can be put in that row
         header : int, optional
             Location to find header names (0-index). Default is 0
         delimiter : str, optional
@@ -36,11 +36,11 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
             - sheet_name (str): Specify the name of the sheet you're reading
             - converters: Specify how to process certain columns
             - dtype (dict): Expected data type. Will be guessed if
-                            not specified
+              not specified
             - na_values (scalar, str, list-like, or dict): What strings to
-                                                           interpret as NaN
+              interpret as NaN
             - convert_float (bool): Converts integral floats to
-                                    int (i.e. 1.0 --> 1)
+              int (i.e. 1.0 --> 1)
     Returns
     -------
         excel_data : list of dict
@@ -248,10 +248,11 @@ def set_nasa_a_low(header, value, output_structure, delimiter='.'):
     Parameters
     ----------
         header : str
-            Name of the header. Used to determine coefficient. Assumes zero
-            index and header takes the format:
-                nasa[delimiter]a_low[delimiter][index]
-                e.g. nasa.a_low.0
+            Name of the header. Used to determine coefficient. 
+            Assumes zero index and header takes the format:
+
+            nasa[delimiter]a_low[delimiter][index]
+            e.g. nasa.a_low.0
         value : float
             a_low value
         output_structure : dict
@@ -278,10 +279,11 @@ def set_nasa_a_high(header, value, output_structure, delimiter='.'):
     Parameters
     ----------
         header : str
-            Name of the header. Used to determine coefficient. Assumes zero
-            index and header takes the format:
-                nasa[delimiter]a_high[delimiter][index]
-                e.g. nasa.a_high.0
+            Name of the header. Used to determine coefficient. 
+            Assumes zero index and header takes the format:
+
+            nasa[delimiter]a_high[delimiter][index]
+            e.g. nasa.a_high.0
         value : float
             a_high value
         output_structure : dict

@@ -147,9 +147,10 @@ class References:
                                                   HoRT_element_offset)}
 
     def get_HoRT_offset(self, elements, Ts=None):
-        """Returns the offset due to the element composition of a specie. The
-        offset is defined as follows:
-            HoRT_exp = HoRT_dft + offset
+        """Returns the offset due to the element composition of a specie. 
+        The offset is defined as follows:
+        
+        HoRT_exp = HoRT_dft + offset
 
         Parameters
         ----------

@@ -19,16 +19,16 @@ class Nasa(BaseThermo):
 
     The thermodynamic properties are calculated using the following form:
 
-    :math:`\\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3} '
-    '+ a_{5} T^{4}`
+    :math:`\\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3} 
+    + a_{5} T^{4}`
 
-    :math:`\\frac {H} {RT} = a_{1} + a_{2} \\frac {T} {2} + a_{3} '
-    '\\frac {T^{2}} {3} + a_{4} \\frac {T^{3}} {4} + a_{5} '
-    '\\frac {T^{4}} {5} + a_{6} \\frac {1} {T}`
+    :math:`\\frac {H} {RT} = a_{1} + a_{2} \\frac {T} {2} + a_{3} 
+    \\frac {T^{2}} {3} + a_{4} \\frac {T^{3}} {4} + a_{5} 
+    \\frac {T^{4}} {5} + a_{6} \\frac {1} {T}`
 
-    :math:`\\frac {S} {R} = a_{1} \\ln {T} + a_{2} T + a_{3} '
-    '\\frac {T^{2}} {2} + a_{4} \\frac {T^{3}} {3} + a_{5}  '
-    '\\frac {T^{4}} {4} + a_{7}`
+    :math:`\\frac {S} {R} = a_{1} \\ln {T} + a_{2} T + a_{3} 
+    \\frac {T^{2}} {2} + a_{4} \\frac {T^{3}} {3} + a_{5}  
+    \\frac {T^{4}} {4} + a_{7}`
 
     Attributes
     ----------
