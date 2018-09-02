@@ -276,7 +276,8 @@ def _read_line4(line, nasa_data):
     return nasa_data
 
 
-def write_thermdat(filename, nasa_species, write_date=True, newline='\n'):
+def write_thermdat(filename, nasa_species, write_date=True, supp_data= None,
+                   supp_txt=None, newline='\n'):
     """Writes thermdats in the Chemkin format
 
     Parameters
@@ -284,6 +285,11 @@ def write_thermdat(filename, nasa_species, write_date=True, newline='\n'):
         filename : str
             Output file name
         nasa_species : list of ``PyMuTT.models.empirical.nasa.Nasa``
+        supp_data : Additional thermdat entries to include, optional
+            Must be in therndat format.
+        supp_txt : Comment field to preceed nasa_species entries, optional
+            Each line needs to begin with a ! so it is recognized as a
+            comment.
         write_date : bool, optional
             Whether or not the date should be written. If False, writes the
             first 8 characters of ``notes`` attribute. Defaults to True
@@ -292,7 +298,14 @@ def write_thermdat(filename, nasa_species, write_date=True, newline='\n'):
     """
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('THERMO ALL\n       100       500      1500\n')
-
+        if supp_data is not None:
+            f_ptr.write(supp_data)
+            if supp_data[-1] is not '\n':
+                f_ptr.write('\n')
+        if supp_txt is not None:
+            f_ptr.write(supp_txt)
+            if supp_txt[-1] is not '\n':
+                f_ptr.write('\n')
         float_string = '%.8E'
         for nasa_specie in nasa_species:
             _write_line1(f_ptr, nasa_specie, write_date)
