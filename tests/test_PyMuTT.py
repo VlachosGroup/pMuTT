@@ -12,12 +12,13 @@ from ase.thermochemistry import IdealGasThermo
 
 class TestPyMuTT(unittest.TestCase):
     def test_parse_formula(self):
-        elements_dict = {
-            'Ca': 1,
-            'Ti': 1,
-            'O': 3,
-            }
+        elements_dict = {'Ca': 1, 'Ti': 1, 'O': 3,}
         self.assertEqual(PyMuTT.parse_formula('CaTiO3'), elements_dict)
+        elements_dict = {'H': 1, 'F': 1,}
+        self.assertEqual(PyMuTT.parse_formula('HF'), elements_dict)
+        elements_dict = {'H': 8, 'C': 3,}
+        self.assertEqual(PyMuTT.parse_formula('CH3CH2CH3'), elements_dict)
+        
 
     def test_get_molecular_weight(self):
         elements_dict = {
