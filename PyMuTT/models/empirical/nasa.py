@@ -8,7 +8,6 @@ Operations related to Nasa polynomials
 
 import numpy as np
 from scipy.stats import variation
-import matplotlib.pyplot as plt
 from warnings import warn
 from PyMuTT import constants as c
 from PyMuTT.models.empirical import BaseThermo
