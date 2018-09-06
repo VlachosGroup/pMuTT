@@ -71,21 +71,21 @@ class Nasa(BaseThermo):
             except NameError:
                 pass
 
-		# Check the form of T_mid to be sure it is a sorted list
+        # Check the form of T_mid to be sure it is a sorted list
         if T_mid is not None:
-			# If a list, sort it
+            # If a list, sort it
             if type(T_mid) == list:
                 self.T_mid = T_mid
                 self.T_mid.sort()
-			# if an ndarray then convert to list and sort
+            # if an ndarray then convert to list and sort
             elif type(T_mid) == np.ndarray:
                 self.T_mid = np.ndarray.tolist(T_mid)
                 self.T_mid.sort()
-			# If a single value then convert to list
+            # If a single value then convert to list
             else:
                 self.T_mid = [T_mid]
-			# Check if all T_mid's are also in Ts. If not create error
-			# and exit execution
+            # Check if all T_mid's are also in Ts. If not create error
+            # and exit execution
             if Ts is not None and not all(T in Ts for T in self.T_mid):
                 warn('T_mids not found in Ts')
                 sys.exit()
@@ -289,10 +289,10 @@ class Nasa(BaseThermo):
                 raise ValueError('Must specify temperatures corresponding '
                                  'to CpoR.')
         else:
-			# If Ts are not specified then create a list of Ts
+            # If Ts are not specified then create a list of Ts
             if Ts is None:
                 Ts = np.linspace(T_low, T_high)
-			# Check if user specified value(s) for T_mid
+            # Check if user specified value(s) for T_mid
             if self.T_mid is not None:
                 # Check to see if specified T_mid's are in Ts and, if not,
                 # insert them into Ts.
@@ -301,7 +301,7 @@ class Nasa(BaseThermo):
                         # Insert T_mid's into Ts and save position
                         Ts_index = np.where(Ts > self.T_mid[x])[0][0]
                         Ts = np.insert(Ts, Ts_index, self.T_mid[x])
-			# Calculate CpoR for the list of Ts
+            # Calculate CpoR for the list of Ts
             CpoR = self.thermo_model.get_CpoR(Ts=Ts)
 
         # Get reference temperature
@@ -384,13 +384,13 @@ class Nasa(BaseThermo):
                                                                    CpoR=CpoR,
                                                                    i_mid=i)
                         # Check if the optimum T_mid has been found by
-						# determining if the fit R2 value for the current
-						# T_mid is lower than the previous indicating that
-						# subsequent guesses will not improve the fit
-						if R2[i] < R2_prev:
-                                break
+                        # determining if the fit R2 value for the current
+                        # T_mid is lower than the previous indicating that
+                        # subsequent guesses will not improve the fit
+                        if R2[i] < R2_prev:
+                            break
                         R2_prev = R2[i]
-				# Select the optimum T_mid based on the highest fit R2 value
+                # Select the optimum T_mid based on the highest fit R2 value
                 max_R2 = max(R2)
                 max_i = np.where(max_R2 == R2)[0][0]
             else:
@@ -409,14 +409,15 @@ class Nasa(BaseThermo):
                                     Ts=Ts,
                                     CpoR=CpoR,
                                     i_mid=i)
-							# Check if the optimum T_mid has been found by
-							# determining if the fit R2 value for the current
-							# T_mid is lower than the previous indicating that
-							# subsequent guesses will not improve the fit
+                            # Check if the optimum T_mid has been found by
+                            # determining if the fit R2 value for the current
+                            # T_mid is lower than the previous indicating that
+                            # subsequent guesses will not improve the fit
                             if R2[i] < R2_prev:
                                 break
                             R2_prev = R2[i]
-					# Select the optimum T_mid based on the highest fit R2 value
+                    # Select the optimum T_mid based on the highest fit R2
+                    # value
                     max_R2 = max(R2)
                     max_i = np.where(max_R2 == R2)[0][0]
                 else:
