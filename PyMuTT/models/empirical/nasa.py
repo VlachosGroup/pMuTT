@@ -8,9 +8,11 @@ Operations related to Nasa polynomials
 
 import numpy as np
 from scipy.stats import variation
+import matplotlib.pyplot as plt
 from warnings import warn
 from PyMuTT import constants as c
 from PyMuTT.models.empirical import BaseThermo
+import sys
 
 
 class Nasa(BaseThermo):
@@ -70,7 +72,21 @@ class Nasa(BaseThermo):
             except NameError:
                 pass
 
-        self.T_mid = T_mid
+        if T_mid is not None:
+            if type(T_mid) == list:
+                self.T_mid = T_mid
+                self.T_mid.sort()
+            elif type(T_mid) == np.ndarray:
+                self.T_mid = np.ndarray.tolist(T_mid)
+                self.T_mid.sort()
+            else:
+                self.T_mid = [T_mid]
+
+            if Ts is not None and not all(T in Ts for T in self.T_mid):
+                warn('T_mids not found in Ts')
+                sys.exit()
+        else:
+            self.T_mid = T_mid
 
         if np.array_equal(a_low, np.zeros(7)) and np.array_equal(a_high,
                                                                  np.zeros(7)):
@@ -271,6 +287,15 @@ class Nasa(BaseThermo):
         else:
             if Ts is None:
                 Ts = np.linspace(T_low, T_high)
+            if self.T_mid is not None:
+                # Check to see if specified T_mid's are in Ts and, if not,
+                # insert them into Ts. Save the position of the T_mid's in
+                # Ts in the list Ts_mid
+                for x in range(0, len(self.T_mid)):
+                    if np.where(Ts == self.T_mid[x])[0].size == 0:
+                        # Insert T_mid's into Ts and save position
+                        Ts_index = np.where(Ts > self.T_mid[x])[0][0]
+                        Ts = np.insert(Ts, Ts_index, self.T_mid[x])
             CpoR = self.thermo_model.get_CpoR(Ts=Ts)
 
         # Get reference temperature
@@ -336,19 +361,59 @@ class Nasa(BaseThermo):
                 self.T_mid = Ts[int(len(Ts)/2)]
                 self.a_low = np.zeros(7)
                 self.a_high = np.zeros(7)
+
         else:
-            max_R2 = -1
-            R2 = np.zeros_like(Ts)
-            for i, T_mid in enumerate(Ts):
-                # Need at least 5 points to fit the polynomial
-                if i > 5 and i < (len(Ts)-6):
-                    # Separate the temperature and heat capacities into
-                    # low and high range
-                    (R2[i], a_low, a_high) = self._get_CpoR_R2(Ts=Ts,
-                                                               CpoR=CpoR,
-                                                               i_mid=i)
-            max_R2 = max(R2)
-            max_i = np.where(max_R2 == R2)[0][0]
+            # Check if one or more T_mid's were specified
+            if self.T_mid is None:
+                # Find the optimum T_mid by checking all Ts
+                max_R2 = -1
+                R2 = np.zeros_like(Ts)
+                R2_prev = 0
+                for i, T_mid in enumerate(Ts):
+                    # Need at least 5 points to fit the polynomial
+                    if i > 5 and i < (len(Ts)-6):
+                        # Separate the temperature and heat capacities into
+                        # low and high range
+                        (R2[i], a_low, a_high) = self._get_CpoR_R2(Ts=Ts,
+                                                                   CpoR=CpoR,
+                                                                   i_mid=i)
+                        # Check if the optimum T_mid has been found by
+						# checking if the fit R2 value for the current T_mid
+						# is lower than the previous indicating that
+						# subsequent guesses will not improve the fit
+						if R2[i] < R2_prev:
+                                break
+                        R2_prev = R2[i]
+                max_R2 = max(R2)
+                max_i = np.where(max_R2 == R2)[0][0]
+            else:
+                # Check if more than one T_mid was specified.
+                if len(self.T_mid) > 1:
+                    # Check which T_mid provides the optimum fit
+                    R2 = np.zeros_like(Ts)
+                    R2_prev = 0
+                    for T in self.T_mid:
+                        i = np.where(Ts == T)[0][0]
+                        # Need at least 5 points to fit the polynomial
+                        if i > 5 and i < (len(Ts)-6):
+                            # Separate the temperature and heat capacities into
+                            # low and high range
+                            (R2[i], a_low, a_high) = self._get_CpoR_R2(
+                                    Ts=Ts,
+                                    CpoR=CpoR,
+                                    i_mid=i)
+							# Check if the optimum T_mid has been found by
+							# checking if the fit R2 value for the current T_mid
+							# is lower than the previous indicating that
+							# subsequent guesses will not improve the fit
+                            if R2[i] < R2_prev:
+                                break
+                            R2_prev = R2[i]
+                    max_R2 = max(R2)
+                    max_i = np.where(max_R2 == R2)[0][0]
+                else:
+                    # Use the provided T_mid to fit CPoR
+                    max_i = np.where(Ts == self.T_mid)[0][0]
             (max_R2, a_low_rev, a_high_rev) = self._get_CpoR_R2(Ts=Ts,
                                                                 CpoR=CpoR,
                                                                 i_mid=max_i)
