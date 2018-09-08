@@ -10,6 +10,8 @@ from PyMuTT import _pass_expected_arguments
 
 class EmptyMode:
     """Placeholder mode that returns 0 for all functions."""
+    def get_q(self):
+        return 1.
     def get_CvoR(self):
         return 0.
     def get_CpoR(self):
