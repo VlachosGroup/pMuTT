@@ -619,6 +619,19 @@ def convert_unit(num = None, from_ = None, to = None):
             num = 1.
         return num * unit_dict[to] / unit_dict[from_]
 
+def wavenumber_to_temp(wavenumber):
+    """Converts wavenumbers (1/cm) to temperatures (K)
+
+    Parameters
+    ---------- 
+        wavenumber : float
+            Wavenumber in 1/cm
+    Returns
+    -------
+        temperature : float
+            Corresponding temperature in K
+    """
+    return wavenumber*c('cm/s')*h('J s')/kb('J/K')
 
 prefixes = {
     'Y': 1.e24,

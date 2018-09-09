@@ -27,3 +27,23 @@ Enthalpy, entropy, and Gibbs energy are calculated using ASE. Heat capacity are 
 
 .. automodule:: PyMuTT.models.statmech.heat_capacity
    :members:
+
+Translational Models
+====================
+.. automodule:: PyMuTT.models.statmech.trans
+   :members:
+
+Vibrational Models
+====================
+.. automodule:: PyMuTT.models.statmech.vib
+   :members:
+
+Electronic Models
+====================
+.. automodule:: PyMuTT.models.statmech.elect
+   :members:
+
+Nuclear Models
+====================
+.. automodule:: PyMuTT.models.statmech.nucl
+   :members:

@@ -31,7 +31,8 @@ class IdealTrans:
             V : float, optional
                 The units for V depend on self.n_degrees.
                 Default is 1 m^n_degrees
-                +===========+==============+================+
+
+                +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
                 +===========+==============+================+
                 | 1         | Length       | m              |
@@ -40,6 +41,7 @@ class IdealTrans:
                 +-----------+--------------+----------------+
                 | 3         | Volume       | m3             |
                 +-----------+--------------+----------------+
+
         Returns
         -------
             q_trans : float
@@ -52,7 +54,7 @@ class IdealTrans:
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
 
-        :math:`\\frac{Cv^{trans}}{R}=\\frac{n_{degrees}}{2}
+        :math:`\\frac{Cv^{trans}}{R}=\\frac{n_{degrees}}{2}`
         
         Returns
         -------
@@ -64,7 +66,7 @@ class IdealTrans:
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
 
-        :math:`\\frac{Cv^{trans}}{R}=\\frac{Cv^{trans}}{R} + 1
+        :math:`\\frac{Cv^{trans}}{R}=\\frac{Cv^{trans}}{R} + 1`
         
         Returns
         -------
@@ -76,7 +78,7 @@ class IdealTrans:
     def get_UoRT(self):
         """Calculates the dimensionless internal energy
 
-        :math:`\\frac{U^{trans}}{RT}=\\frac{n_{degrees}}{2}
+        :math:`\\frac{U^{trans}}{RT}=\\frac{n_{degrees}}{2}`
 
         Returns
         -------
@@ -88,7 +90,7 @@ class IdealTrans:
     def get_HoRT(self):
         """Calculates the dimensionless enthalpy
 
-        :math:`\\frac{H^{trans}}{RT}=\\frac{U^{trans}}{RT} + 1
+        :math:`\\frac{H^{trans}}{RT}=\\frac{U^{trans}}{RT} + 1`
 
         Returns
         -------
@@ -110,7 +112,8 @@ class IdealTrans:
             V : float, optional
                 The units for V depend on self.n_degrees.
                 Default is 1 m^n_degrees
-                +===========+==============+================+
+
+                +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
                 +===========+==============+================+
                 | 1         | Length       | m              |
@@ -119,6 +122,7 @@ class IdealTrans:
                 +-----------+--------------+----------------+
                 | 3         | Volume       | m3             |
                 +-----------+--------------+----------------+
+
         Returns
         -------
             SoR_trans : float
@@ -129,8 +133,7 @@ class IdealTrans:
     def get_AoRT(self, T, V=1.):
         """Calculates the dimensionless Helmholtz energy
 
-        :math:`\\frac{A^{trans}}{RT} = \\frac{U^{trans}}{RT} - 
-        \\frac{S^{trans}}{R}`
+        :math:`\\frac{A^{trans}}{RT}=\\frac{U^{trans}}{RT}-\\frac{S^{trans}}{R}`
 
         Parameters
         ----------
@@ -139,7 +142,8 @@ class IdealTrans:
             V : float, optional
                 The units for V depend on self.n_degrees. 
                 Default is 1 m^n_degrees
-                +===========+==============+================+
+
+                +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
                 +===========+==============+================+
                 | 1         | Length       | m              |
@@ -148,6 +152,7 @@ class IdealTrans:
                 +-----------+--------------+----------------+
                 | 3         | Volume       | m3             |
                 +-----------+--------------+----------------+
+
         Returns
         -------
             AoRT_trans : float
@@ -158,8 +163,7 @@ class IdealTrans:
     def get_GoRT(self, T, V=1.):
         """Calculates the dimensionless Gibbs energy
 
-        :math:`\\frac{G^{trans}}{RT} = \\frac{H^{trans}}{RT} - 
-        \\frac{S^{trans}}{R}        
+        :math:`\\frac{G^{trans}}{RT}=\\frac{H^{trans}}{RT}-\\frac{S^{trans}}{R}`       
         
         Parameters
         ----------
@@ -167,7 +171,8 @@ class IdealTrans:
                 Temperature in K
             V : float, optional
                 The units for V depend on self.n_degrees.
-                +===========+==============+================+
+
+                +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
                 +===========+==============+================+
                 | 1         | Length       | m              |
@@ -176,9 +181,10 @@ class IdealTrans:
                 +-----------+--------------+----------------+
                 | 3         | Volume       | m3             |
                 +-----------+--------------+----------------+
+
         Returns
         -------
-            SoR_trans : float
+            GoR_trans : float
                 Translational dimensionless Gibbs energy 
         """
         return self.get_HoRT()-self.get_SoR(T=T, V=V)
