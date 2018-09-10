@@ -186,3 +186,203 @@ class HarmonicVib:
                 Vibrational dimensionless Gibbs energy
         """
         return self.get_HoRT(T=T) - self.get_SoR(T=T)
+
+class RigidRotor:
+    """Vibrational modes using the rigid rotor approximation.
+    
+    Attributes
+    ----------
+        vib_wavenumber : list of float
+            Vibrational wavenumbers in 1/cm
+    """
+
+    def __init__(self, vib_wavenumbers):
+        self.vib_wavenumbers = vib_wavenumbers
+        self._vib_temperatures = [c.wavenumber_to_temp(wavenumber) 
+            for wavenumber in vib_wavenumbers]
+
+    def get_q(self):
+        """Calculates the partition function
+
+        Returns
+        -------
+            q_vib : float
+                Vibrational partition function
+        """
+        pass
+
+    def get_CvoR(self):
+        """Calculates the dimensionless heat capacity at constant volume
+
+        Returns
+        -------
+            CvoR_vib : float
+                Vibrational dimensionless heat capacity at constant volume
+        """
+        pass
+
+    def get_CpoR(self):
+        """Calculates the dimensionless heat capacity at constant pressure
+
+        Returns
+        -------
+            CpoR_vib : float
+                Vibrational dimensionless heat capacity at constant pressure
+        """
+        pass
+    
+    def get_UoRT(self):
+        """Calculates the imensionless internal energy
+
+        Returns
+        -------
+            UoRT_vib : float
+                Vibrational dimensionless internal energy
+        """
+        pass
+
+    def get_HoRT(self):
+        """Calculates the dimensionless enthalpy
+
+        Returns
+        -------
+            HoRT_vib : float
+                Vibrational dimensionless enthalpy
+        """
+        pass
+
+    def get_SoR(self):
+        """Calculates the dimensionless entropy
+
+        Returns
+        -------
+            SoR_vib : float
+                Vibrational dimensionless entropy
+        """
+        pass
+
+    def get_AoRT(self):
+        """Calculates the dimensionless Helmholtz energy
+
+        Returns
+        -------
+            AoRT_vib : float
+                Vibrational dimensionless Helmholtz energy
+        """
+        pass
+
+    def get_GoRT(self):
+        """Calculates the dimensionless Gibbs energy
+
+        Returns
+        -------
+            GoRT_vib : float
+                Vibrational dimensionless Gibbs energy
+        """
+        pass
+
+class QuasiRigidRotor:
+    """Vibrational modes using the Quasi Rigid Rotor approximation.
+    
+    Attributes
+    ----------
+        vib_wavenumber : list of float
+            Vibrational wavenumbers in 1/cm
+        Bav : float, optional
+            Average molecular moment of inertia as a limiting value of small
+            wavenumbers. Default is 1.e-44 J
+        w0 : float
+        harmonic_model : `PyMuTT.models.statmech.vib.HarmonicVib` object
+            Harmonic approximation contribution
+        rigidrotor_model: `PyMuTT.models.statmech.vib.RigidRotor` object
+            Rigid rotor approximation contribution
+    """
+
+    def __init__(self, vib_wavenumbers, Bav=1.e-44, w0=100.):
+        self.vib_wavenumbers = vib_wavenumbers
+        self._vib_temperatures = [c.wavenumber_to_temp(wavenumber) 
+            for wavenumber in vib_wavenumbers]
+        self.Bav = Bav
+        self.w0 = w0
+        self.harmonic_model = HarmonicVib(vib_wavenumbers=vib_wavenumbers)
+        self.rigidrotor_model = RigidRotor(vib_wavenumbers=vib_wavenumbers)
+
+    def get_q(self):
+        """Calculates the partition function
+
+        Returns
+        -------
+            q_vib : float
+                Vibrational partition function
+        """
+        pass
+
+    def get_CvoR(self):
+        """Calculates the dimensionless heat capacity at constant volume
+
+        Returns
+        -------
+            CvoR_vib : float
+                Vibrational dimensionless heat capacity at constant volume
+        """
+        pass
+
+    def get_CpoR(self):
+        """Calculates the dimensionless heat capacity at constant pressure
+
+        Returns
+        -------
+            CpoR_vib : float
+                Vibrational dimensionless heat capacity at constant pressure
+        """
+        pass
+    
+    def get_UoRT(self):
+        """Calculates the imensionless internal energy
+
+        Returns
+        -------
+            UoRT_vib : float
+                Vibrational dimensionless internal energy
+        """
+        pass
+
+    def get_HoRT(self):
+        """Calculates the dimensionless enthalpy
+
+        Returns
+        -------
+            HoRT_vib : float
+                Vibrational dimensionless enthalpy
+        """
+        pass
+
+    def get_SoR(self):
+        """Calculates the dimensionless entropy
+
+        Returns
+        -------
+            SoR_vib : float
+                Vibrational dimensionless entropy
+        """
+        pass
+
+    def get_AoRT(self):
+        """Calculates the dimensionless Helmholtz energy
+
+        Returns
+        -------
+            AoRT_vib : float
+                Vibrational dimensionless Helmholtz energy
+        """
+        pass
+
+    def get_GoRT(self):
+        """Calculates the dimensionless Gibbs energy
+
+        Returns
+        -------
+            GoRT_vib : float
+                Vibrational dimensionless Gibbs energy
+        """
+        pass

@@ -358,6 +358,25 @@ def T0(units):
         raise KeyError('Invalid unit: {}. Use help(PyMuTT.constants.T0) for '
                        'accepted units.'.format(units))
 
+def V0(units):
+    """Molar volume of ideal gas at standard temperature and pressure
+
+    Parameters
+    ----------
+        units : str
+            Units for V0. Supported units
+
+            ========= =================
+            Symbol    Unit
+            ========= =================
+            m3        Metre cubed
+            cm3       Centimeter cubed
+            mL        Milliliters
+            L         Liters
+            ========= =================
+    """
+    V0 = R('J/mol/K')*T0('K')/P0('Pa')
+    return V0*convert_unit(from_='m3', to=units)
 
 Na = 6.02214086e23  # Avogadro number
 """float : Avogadro's number in molecules/mol"""
@@ -632,6 +651,20 @@ def wavenumber_to_temp(wavenumber):
             Corresponding temperature in K
     """
     return wavenumber*c('cm/s')*h('J s')/kb('J/K')
+
+def wavenumber_to_energy(wavenumber):
+    """Converts wavenumbers (1/cm) to energies (eV)
+
+    Parameters
+    ---------- 
+        wavenumber : float
+            Wavenumber in 1/cm
+    Returns
+    -------
+        energies : float
+            Corresponding temperature in eV
+    """
+    return wavenumber*c('cm/s')*h('eV s')
 
 prefixes = {
     'Y': 1.e24,

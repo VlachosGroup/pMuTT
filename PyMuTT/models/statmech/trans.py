@@ -18,7 +18,7 @@ class IdealTrans:
         self.molecular_weight = molecular_weight
         self.n_degrees = n_degrees
 
-    def get_q(self, T, V=1.):
+    def get_q(self, T, V=c.V0):
         """Calculates the partition function
 
         :math:`q_{trans} = \\bigg(\\frac{2\\pi \\sum_{i}^{atoms}m_ikT}{h^2}
@@ -29,8 +29,8 @@ class IdealTrans:
             T : float
                 Temperature in K
             V : float, optional
-                The units for V depend on self.n_degrees.
-                Default is 1 m^n_degrees
+                Volume or volume-like (if n_degrees < 3) quantity. 
+                Default is molar volume at standard conditions
 
                 +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
@@ -99,7 +99,7 @@ class IdealTrans:
         """
         return self.get_UoRT() + 1.
 
-    def get_SoR(self, T, V=1.):
+    def get_SoR(self, T, V=c.V0):
         """Calculates the dimensionless entropy
 
         :math:`\\frac{S^{trans}}{R} = 1 + \\ln {\\frac {q_{trans}}{N_A}} 
@@ -110,8 +110,8 @@ class IdealTrans:
             T : float
                 Temperature in K
             V : float, optional
-                The units for V depend on self.n_degrees.
-                Default is 1 m^n_degrees
+                Volume or volume-like (if n_degrees < 3) quantity. 
+                Default is molar volume at standard conditions
 
                 +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
@@ -130,7 +130,7 @@ class IdealTrans:
         """
         return 1. + self.get_UoRT() + np.log(self.get_q(T=T, V=V)/c.Na)
 
-    def get_AoRT(self, T, V=1.):
+    def get_AoRT(self, T, V=c.V0):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{trans}}{RT}=\\frac{U^{trans}}{RT}-\\frac{S^{trans}}{R}`
@@ -140,8 +140,8 @@ class IdealTrans:
             T : float
                 Temperature in K
             V : float, optional
-                The units for V depend on self.n_degrees. 
-                Default is 1 m^n_degrees
+                Volume or volume-like (if n_degrees < 3) quantity. 
+                Default is molar volume at standard conditions
 
                 +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |
@@ -160,7 +160,7 @@ class IdealTrans:
         """
         return self.get_UoRT()-self.get_SoR(T=T, V=V)
 
-    def get_GoRT(self, T, V=1.):
+    def get_GoRT(self, T, V=c.V0):
         """Calculates the dimensionless Gibbs energy
 
         :math:`\\frac{G^{trans}}{RT}=\\frac{H^{trans}}{RT}-\\frac{S^{trans}}{R}`       
@@ -170,7 +170,8 @@ class IdealTrans:
             T : float
                 Temperature in K
             V : float, optional
-                The units for V depend on self.n_degrees.
+                Volume or volume-like (if n_degrees < 3) quantity. 
+                Default is molar volume at standard conditions
 
                 +-----------+--------------+----------------+
                 | n_degrees | Meaning of V | Expected units |

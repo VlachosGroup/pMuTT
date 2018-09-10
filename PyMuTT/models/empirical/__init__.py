@@ -66,8 +66,8 @@ class BaseThermo:
         if inspect.isclass(thermo_model):
             # If you're passing a class. Note that the required
             # arguments will be guessed.
-            self.thermo_model = _pass_expected_arguments(thermo_model,
-                                                         **kwargs)
+            self.thermo_model = _pass_expected_arguments(thermo_model, **kwargs, 
+                verbose=False)
         else:
             # If it's an object that has already been initialized
             self.thermo_model = thermo_model

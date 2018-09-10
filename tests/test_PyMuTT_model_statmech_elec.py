@@ -5,14 +5,14 @@ Tests for PyMuTT module
 """
 import unittest
 import numpy as np
-from PyMuTT.models.statmech import elect
+from PyMuTT.models.statmech import elec
 
 class TestIdealElect(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.elect_H2 = elect.IdealElect(potentialenergy=-6.759576, spin=0.)
-        self.elect_OH = elect.IdealElect(potentialenergy=-7.554949, spin=0.5)
-        self.elect_O2 = elect.IdealElect(potentialenergy=-9.862407, spin=1.)
+        self.elect_H2 = elec.IdealElec(potentialenergy=-6.759576, spin=0.)
+        self.elect_OH = elec.IdealElec(potentialenergy=-7.554949, spin=0.5)
+        self.elect_O2 = elec.IdealElec(potentialenergy=-9.862407, spin=1.)
 
         self.T = 300 # K
 

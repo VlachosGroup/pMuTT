@@ -47,18 +47,18 @@ class TestIdealRot(unittest.TestCase):
 
     def test_get_SoR(self):
         self.assertAlmostEqual(self.rot_He.get_SoR(T=self.T), 0.)
-        self.assertAlmostEqual(self.rot_CO2.get_SoR(T=self.T), 5.588669668)
-        self.assertAlmostEqual(self.rot_H2O.get_SoR(T=self.T), 3.771701374)
+        self.assertAlmostEqual(self.rot_CO2.get_SoR(T=self.T), 6.588669668)
+        self.assertAlmostEqual(self.rot_H2O.get_SoR(T=self.T), 5.271701374)
         
     def test_get_AoRT(self):
         self.assertAlmostEqual(self.rot_He.get_AoRT(T=self.T), 0.)
-        self.assertAlmostEqual(self.rot_CO2.get_AoRT(T=self.T), -4.588669668)
-        self.assertAlmostEqual(self.rot_H2O.get_AoRT(T=self.T), -2.271701374)
+        self.assertAlmostEqual(self.rot_CO2.get_AoRT(T=self.T), -5.588669668)
+        self.assertAlmostEqual(self.rot_H2O.get_AoRT(T=self.T), -3.771701374)
         
     def test_get_GoRT(self):
         self.assertAlmostEqual(self.rot_He.get_GoRT(T=self.T), 0.)
-        self.assertAlmostEqual(self.rot_CO2.get_GoRT(T=self.T), -4.588669668)
-        self.assertAlmostEqual(self.rot_H2O.get_GoRT(T=self.T), -2.271701374)
+        self.assertAlmostEqual(self.rot_CO2.get_GoRT(T=self.T), -5.588669668)
+        self.assertAlmostEqual(self.rot_H2O.get_GoRT(T=self.T), -3.771701374)
 
 class TestRotFunc(unittest.TestCase):
     def setUp(self):

@@ -161,10 +161,11 @@ class IdealRot:
         if self.geometry == 'monatomic':
             return 0.
         elif self.geometry == 'linear':
-            return np.log(T/self.symmetrynumber/np.prod(self.rot_temperatures))
+            return np.log(T/self.symmetrynumber \
+                /np.prod(self.rot_temperatures)) + 1.
         elif self.geometry == 'nonlinear':
             return np.log(np.sqrt(np.pi)/self.symmetrynumber* \
-                (T**3/np.prod(self.rot_temperatures))**0.5)
+                (T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
         else:
             raise ValueError(
                 'Geometry, {}, not supported.'.format(self.geometry))
@@ -224,7 +225,7 @@ def get_rot_temperatures_from_atoms(atoms, geometry):
         return [0.]
     elif geometry == 'linear':
         assert np.isclose(rot_temperatures[0], rot_temperatures[1])
-        return [rot_temperatures[0]]
+        return [max(rot_temperatures)]
     elif geometry == 'nonlinear':
         return rot_temperatures
     else:

@@ -3,43 +3,50 @@
 import numpy as np
 from PyMuTT import constants as c
 
-class IdealElect:
-    """Electronic modes using the ideal gas assumption.
+class IdealElec:
+    """elecronic modes using the ideal gas assumption.
     
     Attributes
     ----------
         potentialenergy : float, optional
             Potential energy in eV. Default is 0
         spin : float, optional
-            Electron spin. Default is 0
+            elecron spin. Default is 0
     """
 
     def __init__(self, potentialenergy=0., spin=0.):
         self.potentialenergy = potentialenergy
         self.spin = spin
-        self._degeneracy = 2. * self.spin + 1.
+        self._degeneracy = 2.*self.spin + 1.
 
-    def get_q(self, T):
+    def get_q(self, T, ignore_q_elec=False):
         """Calculates the partition function
 
         Parameters
         ----------
             T : float
                 Temperature in K
+            ignore_q_elec : bool, optional
+                Ignore the contribution of elecronic mode to partition function
+                . Often necessary since DFT's value for potentialenergy is
+                very negative causing q_elec to go to infinity.
         Returns
         -------
-            q_elect : float
-                Electronic partition function
+            q_elec : float
+                elecronic partition function
         """
-        return self._degeneracy*np.exp(-self.get_UoRT(T=T))
+        if ignore_q_elec:
+            return 1.
+        else:
+            return self._degeneracy*np.exp(-self.get_UoRT(T=T))
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
 
         Returns
         -------
-            CvoR_elect : float
-                Electronic dimensionless heat capacity at constant volume
+            CvoR_elec : float
+                elecronic dimensionless heat capacity at constant volume
         """
         return 0
 
@@ -48,8 +55,8 @@ class IdealElect:
 
         Returns
         -------
-            CpoR_elect : float
-                Electronic dimensionless heat capacity at constant pressure
+            CpoR_elec : float
+                elecronic dimensionless heat capacity at constant pressure
         """
         return self.get_CvoR()
     
@@ -60,11 +67,10 @@ class IdealElect:
         ----------
             T : float
                 Temperature in K
-
         Returns
         -------
-            UoRT_elect : float
-                Electronic dimensionless internal energy
+            UoRT_elec : float
+                elecronic dimensionless internal energy
         """
         return self.potentialenergy/c.kb('eV/K')/T
 
@@ -75,11 +81,10 @@ class IdealElect:
         ----------
             T : float
                 Temperature in K
-
         Returns
         -------
-            HoRT_elect : float
-                Electronic dimensionless enthalpy
+            HoRT_elec : float
+                elecronic dimensionless enthalpy
         """
         return self.get_UoRT(T=T)
 
@@ -88,8 +93,8 @@ class IdealElect:
 
         Returns
         -------
-            SoR_elect : float
-                Electronic dimensionless entropy
+            SoR_elec : float
+                elecronic dimensionless entropy
         """
         return np.log(self._degeneracy)
 
@@ -100,11 +105,10 @@ class IdealElect:
         ----------
             T : float
                 Temperature in K
-
         Returns
         -------
-            AoRT_elect : float
-                Electronic dimensionless Helmholtz energy
+            AoRT_elec : float
+                elecronic dimensionless Helmholtz energy
         """
         return self.get_UoRT(T=T) - self.get_SoR()
 
@@ -115,10 +119,9 @@ class IdealElect:
         ----------
             T : float
                 Temperature in K
-
         Returns
         -------
-            GoRT_elect : float
-                Electronic dimensionless Gibbs energy
+            GoRT_elec : float
+                elecronic dimensionless Gibbs energy
         """
         return self.get_HoRT(T=T) - self.get_SoR()
