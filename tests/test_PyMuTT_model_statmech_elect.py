@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-PyMuTT.test_PyMuTT_model_statmech_trans
+PyMuTT.test_PyMuTT_model_statmech_elect
 Tests for PyMuTT module
 """
 import unittest

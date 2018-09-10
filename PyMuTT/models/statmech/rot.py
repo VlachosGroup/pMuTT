@@ -161,9 +161,9 @@ class IdealRot:
         if self.geometry == 'monatomic':
             return 0.
         elif self.geometry == 'linear':
-            np.log(T/self.symmetrynumber/np.prod(self.rot_temperatures))
+            return np.log(T/self.symmetrynumber/np.prod(self.rot_temperatures))
         elif self.geometry == 'nonlinear':
-            np.log(np.sqrt(np.pi)/self.symmetrynumber* \
+            return np.log(np.sqrt(np.pi)/self.symmetrynumber* \
                 (T**3/np.prod(self.rot_temperatures))**0.5)
         else:
             raise ValueError(
@@ -209,13 +209,20 @@ def get_rot_temperatures_from_atoms(atoms, geometry):
         rot_temperatures : list of float
             Rotational temperatures
     """
-    rot_temperatures = [c.h('eV s')**2/8/np.pi**2/c.kb('eV/K')/moment \
-        for moment in atoms.get_moments_of_inertia()]
+    rot_temperatures = []
+    for moment in atoms.get_moments_of_inertia():
+        if np.isclose(0., moment):
+            continue
+        moment_SI = moment*c.convert_unit(from_='amu', to='kg') \
+            *c.convert_unit(from_='A2', to='m2')
+        rot_temperatures.append(
+            c.h('eV s', bar=True)**2/2/c.kb('eV/K')/moment_SI \
+                *c.convert_unit(from_='eV', to='J'))
+
     if geometry == 'monatomic':
         assert np.isclose(np.sum(rot_temperatures), 0.)
         return [0.]
     elif geometry == 'linear':
-        rot_temperatures.remove(0.)
         assert np.isclose(rot_temperatures[0], rot_temperatures[1])
         return [rot_temperatures[0]]
     elif geometry == 'nonlinear':
@@ -240,6 +247,8 @@ def get_geometry_from_atoms(atoms, degree_tol=10.):
     """
     if len(atoms) == 1:
         return 'monatomic'
+    elif len(atoms) == 2:
+        return 'linear'
     else:
         for i, j, k in itertools.combinations(range(len(atoms)), 3):
             angle = atoms.get_angle(i, j, k)
