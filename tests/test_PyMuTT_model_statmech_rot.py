@@ -13,11 +13,11 @@ class TestIdealRot(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.rot_He = rot.IdealRot(symmetrynumber=1, geometry='monatomic',
-            rot_temperatures=[0.])
+                                   rot_temperatures=[0.])
         self.rot_CO2 = rot.IdealRot(symmetrynumber=2, geometry='linear',
-            rot_temperatures=[0.561])
+                                    rot_temperatures=[0.561])
         self.rot_H2O = rot.IdealRot(symmetrynumber=2, geometry='nonlinear',
-            rot_temperatures=[40.1, 20.9, 13.4])
+                                    rot_temperatures=[40.1, 20.9, 13.4])
         self.T = 300 # K
 
     def test_get_q(self):
@@ -73,7 +73,7 @@ class TestRotFunc(unittest.TestCase):
     def test_get_rot_temperatures_from_atoms(self):
         self.assertListEqual(
             rot.get_rot_temperatures_from_atoms(self.He, geometry='monatomic'), 
-                [0.])
+                                                [0.])
 
         rot_Ts_CO2 = rot.get_rot_temperatures_from_atoms(self.CO2, 
             geometry='linear')
@@ -82,11 +82,11 @@ class TestRotFunc(unittest.TestCase):
 
         exp_rot_Ts_H2O = [38.0937696114643, 20.650669844110, 13.3912565453767]
         rot_Ts_H2O = rot.get_rot_temperatures_from_atoms(self.H2O,
-            geometry='nonlinear')
+                                                         geometry='nonlinear')
         self.assertTrue(len(rot_Ts_H2O), 3)
         for rot_T in rot_Ts_H2O:
             self.assertTrue(any(np.isclose(rot_T, exp_rot_T)
-                for exp_rot_T in exp_rot_Ts_H2O))
+                            for exp_rot_T in exp_rot_Ts_H2O))
         
     def test_get_geometry_from_atoms(self):
         self.assertEqual(rot.get_geometry_from_atoms(self.He), 'monatomic')

@@ -61,10 +61,10 @@ class IdealRot:
         symmetrynumber = symmetrynumber
         geometry = get_geometry_from_atoms(atoms=atoms)
         rot_temperatures = get_rot_temperatures_from_atoms(atoms=atoms, 
-            geometry=geometry)
+                                                           geometry=geometry)
 
         idealrot = cls(symmetrynumber=symmetrynumber, 
-            rot_temperatures=rot_temperatures, geometry=geometry)
+                       rot_temperatures=rot_temperatures, geometry=geometry)
         return idealrot
 
     def get_q(self, T):
@@ -85,7 +85,7 @@ class IdealRot:
             return T/self.symmetrynumber/np.prod(self.rot_temperatures)
         elif self.geometry == 'nonlinear':
             return np.sqrt(np.pi)/self.symmetrynumber \
-                *(T**3/np.prod(self.rot_temperatures))**0.5
+                  *(T**3/np.prod(self.rot_temperatures))**0.5
         else:
             raise ValueError(
                 'Geometry, {}, not supported.'.format(self.geometry))
@@ -162,10 +162,10 @@ class IdealRot:
             return 0.
         elif self.geometry == 'linear':
             return np.log(T/self.symmetrynumber \
-                /np.prod(self.rot_temperatures)) + 1.
+                  /np.prod(self.rot_temperatures)) + 1.
         elif self.geometry == 'nonlinear':
-            return np.log(np.sqrt(np.pi)/self.symmetrynumber* \
-                (T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
+            return np.log(np.sqrt(np.pi)/self.symmetrynumber \
+                  *(T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
         else:
             raise ValueError(
                 'Geometry, {}, not supported.'.format(self.geometry))
@@ -198,35 +198,44 @@ class IdealRot:
         """
         return self.get_HoRT()-self.get_SoR(T=T)
 
-def get_rot_temperatures_from_atoms(atoms, geometry):
+def get_rot_temperatures_from_atoms(atoms, geometry=None):
     """Calculate the rotational temperatures from ase.Atoms object
 
     Parameters
     ----------
         atoms : ase.Atoms object
             Atoms object
+        geometry : str, optional
+            Geometry of molecule. If not specified, it will be guessed from
+            Atoms object.
     Returns
     -------
         rot_temperatures : list of float
             Rotational temperatures
     """
+    if geometry is None:
+        geometry = get_geometry_from_atoms(atoms)
+
     rot_temperatures = []
     for moment in atoms.get_moments_of_inertia():
         if np.isclose(0., moment):
             continue
         moment_SI = moment*c.convert_unit(from_='amu', to='kg') \
-            *c.convert_unit(from_='A2', to='m2')
+                   *c.convert_unit(from_='A2', to='m2')
         rot_temperatures.append(
             c.h('eV s', bar=True)**2/2/c.kb('eV/K')/moment_SI \
-                *c.convert_unit(from_='eV', to='J'))
+            *c.convert_unit(from_='eV', to='J'))
 
     if geometry == 'monatomic':
+        # Expecting all modes to be 0
         assert np.isclose(np.sum(rot_temperatures), 0.)
         return [0.]
     elif geometry == 'linear':
+        # Expecting one mode to be 0 and the other modes to be identical
         assert np.isclose(rot_temperatures[0], rot_temperatures[1])
         return [max(rot_temperatures)]
     elif geometry == 'nonlinear':
+        # Expecting 3 modes. May or may not be equal
         return rot_temperatures
     else:
         raise ValueError(
@@ -254,7 +263,7 @@ def get_geometry_from_atoms(atoms, degree_tol=10.):
         for i, j, k in itertools.combinations(range(len(atoms)), 3):
             angle = atoms.get_angle(i, j, k)
             if np.isclose(angle, 0., atol=degree_tol) \
-                or np.isclose(angle, 180., atol=degree_tol):
+               or np.isclose(angle, 180., atol=degree_tol):
                 return 'linear'
         else:
             return 'nonlinear'

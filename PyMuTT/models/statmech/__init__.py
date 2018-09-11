@@ -45,8 +45,8 @@ class StatMech:
     """
 
     def __init__(self, trans_model=EmptyMode(), vib_model=EmptyMode(), 
-        rot_model=EmptyMode(), elec_model=EmptyMode(), 
-        nucl_model=EmptyMode(), **kwargs):
+                 rot_model=EmptyMode(), elec_model=EmptyMode(), 
+                 nucl_model=EmptyMode(), **kwargs):
 
         # Translational modes
         if inspect.isclass(trans_model):

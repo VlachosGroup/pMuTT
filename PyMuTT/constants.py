@@ -666,6 +666,20 @@ def wavenumber_to_energy(wavenumber):
     """
     return wavenumber*c('cm/s')*h('eV s')
 
+def wavenumber_to_inertia(wavenumber):
+    """Converts wavenumber (1/cm) to moment of inertia
+
+    Parameters
+    ----------
+        wavenumber : float
+            Wavenumber in 1/cm
+    Returns
+    -------
+        mu : float
+            Moment of inertia ni kg*m2
+    """
+    return h('J s')/(8.*np.pi**2*wavenumber*c('cm/s'))
+
 prefixes = {
     'Y': 1.e24,
     'Z': 1.e21,

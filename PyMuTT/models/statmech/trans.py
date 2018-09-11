@@ -47,9 +47,9 @@ class IdealTrans:
             q_trans : float
                 Translational partition function
         """
-        unit_mass = self.molecular_weight*c.convert_unit(from_='g', to='kg')/c.Na
+        unit_mass = self.molecular_weight*c.convert_unit(from_='g',to='kg')/c.Na
         return V*(2*np.pi*c.kb('J/K')*T*unit_mass/c.h('J s')**2) \
-            **(float(self.n_degrees)/2.)
+              **(float(self.n_degrees)/2.)
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
