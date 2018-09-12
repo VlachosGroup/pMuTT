@@ -38,6 +38,11 @@ Vibrational Models
 .. automodule:: PyMuTT.models.statmech.vib
    :members:
 
+Rotational Models
+=================
+.. automodule:: PyMuTT.models.statmech.rot
+   :members:
+
 Electronic Models
 ====================
 .. automodule:: PyMuTT.models.statmech.elect

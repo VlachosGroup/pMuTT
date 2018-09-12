@@ -260,25 +260,37 @@ class QRRHOVib:
         """
         raise NotImplementedError()
 
-    def get_CvoR(self):
+    def get_CvoR(self, T):
         """Calculates the dimensionless heat capacity at constant volume
 
+        Parameters
+        ----------
+            T : float
+                Temperature in K
         Returns
         -------
             CvoR_vib : float
                 Vibrational dimensionless heat capacity at constant volume
         """
-        raise NotImplementedError()
+        CvoR = []
+        for theta_i, w_i in zip(self._vib_temperatures, self._scaled_wavenumbers):
+            CvoR_RRHO = (theta_i/T/(1. - np.exp(-theta_i/T)))**2
+            CvoR.append(w_i*CvoR_RRHO + 0.5*(1.-w_i))
+        return np.sum(CvoR)
 
-    def get_CpoR(self):
+    def get_CpoR(self, T):
         """Calculates the dimensionless heat capacity at constant pressure
 
+        Parameters
+        ----------
+            T : float
+                Temperature in K
         Returns
         -------
             CpoR_vib : float
                 Vibrational dimensionless heat capacity at constant pressure
         """
-        raise NotImplementedError()
+        return self.get_CvoR(T=T)
     
     def _get_UoRT_RRHO(self, T, vib_temperature):
         """Calculates the dimensionless RRHO contribution to internal energy
