@@ -271,7 +271,7 @@ class Nasa(BaseThermo):
         else:
             if Ts is None:
                 Ts = np.linspace(T_low, T_high)
-            CpoR = self.thermo_model.get_CpoR(Ts=Ts)
+            CpoR = [self.thermo_model.get_CpoR(T=T) for T in Ts]
 
         # Get reference temperature
         if T_ref is None:
@@ -280,12 +280,12 @@ class Nasa(BaseThermo):
         # Get reference enthalpy
         if HoRT_dft is None:
             if self.HoRT_dft is None:
-                self.HoRT_dft = self.thermo_model.get_HoRT(Ts=T_ref)
+                self.HoRT_dft = self.thermo_model.get_HoRT(T=T_ref)
             HoRT_dft = self.HoRT_dft
 
         # Get reference entropy
         if SoR_ref is None:
-            SoR_ref = self.thermo_model.get_SoR(Ts=T_ref)
+            SoR_ref = self.thermo_model.get_SoR(T=T_ref)
 
         # Get references
         if references is not None:

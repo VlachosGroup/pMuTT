@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import itertools
+from warnings import warn
 import numpy as np
 from PyMuTT import constants as c
 
-class IdealRot:
-    """Rotational mode using the ideal gas assumption
+class RigidRotor:
+    """Rotational mode using the rigid rotor assumption
 
     Attributes
     ----------
@@ -38,35 +39,23 @@ class IdealRot:
             - monatomic
             - linear
             - nonlinear
-    """
-
-    def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None):
-        self.symmetrynumber = symmetrynumber
-        self.rot_temperatures = rot_temperatures
-        self.geometry = geometry
-                    
-    @classmethod
-    def from_atoms(cls, symmetrynumber, atoms):
-        """Calculates the rotational temperatures and geometry from atoms
-        object
-        
-        Parameters
-        ----------
-        symmetrynumber : int
-            Symmetry number.
         atoms : ase.Atoms object, optional
             An atoms object can be used to calculate rot_temperatures and
             guess geometry
-        """
-        symmetrynumber = symmetrynumber
-        geometry = get_geometry_from_atoms(atoms=atoms)
-        rot_temperatures = get_rot_temperatures_from_atoms(atoms=atoms, 
-                                                           geometry=geometry)
+    """
 
-        idealrot = cls(symmetrynumber=symmetrynumber, 
-                       rot_temperatures=rot_temperatures, geometry=geometry)
-        return idealrot
+    def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None, atoms=None):
+        self.symmetrynumber = symmetrynumber
+        if rot_temperatures is None and atoms is not None:
+            self.rot_temperatures = get_rot_temperatures_from_atoms(atoms=atoms)
+        else:
+            self.rot_temperatures = rot_temperatures
 
+        if geometry is None and atoms is not None:
+            self.geometry = get_geometry_from_atoms(atoms=atoms)
+        else:
+            self.geometry = geometry
+                    
     def get_q(self, T):
         """Calculates the partition function
 
@@ -232,7 +221,9 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
         return [0.]
     elif geometry == 'linear':
         # Expecting one mode to be 0 and the other modes to be identical
-        assert np.isclose(rot_temperatures[0], rot_temperatures[1])
+        if not np.isclose(rot_temperatures[0], rot_temperatures[1]):
+            warn('Expected rot_temperatures for linear specie, {}, to be '
+                 'similar. Values found were:{}'.format(atoms,rot_temperatures))
         return [max(rot_temperatures)]
     elif geometry == 'nonlinear':
         # Expecting 3 modes. May or may not be equal
@@ -241,7 +232,7 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
         raise ValueError(
             'Geometry, {}, not supported.'.format(geometry))
 
-def get_geometry_from_atoms(atoms, degree_tol=10.):
+def get_geometry_from_atoms(atoms, degree_tol=5.):
     """Estimate the geometry using the ase.Atoms object
 
     Parameters
@@ -262,8 +253,9 @@ def get_geometry_from_atoms(atoms, degree_tol=10.):
     else:
         for i, j, k in itertools.combinations(range(len(atoms)), 3):
             angle = atoms.get_angle(i, j, k)
-            if np.isclose(angle, 0., atol=degree_tol) \
-               or np.isclose(angle, 180., atol=degree_tol):
-                return 'linear'
+            # If the angles are NOT close to 0 and 180 degrees
+            if not np.isclose(angle, 0., atol=degree_tol) \
+               and not np.isclose(angle, 180., atol=degree_tol):
+                return 'nonlinear'
         else:
-            return 'nonlinear'
+            return 'linear'

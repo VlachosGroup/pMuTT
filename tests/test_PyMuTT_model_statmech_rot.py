@@ -9,14 +9,14 @@ from ase import Atoms
 from ase.build import molecule
 from PyMuTT.models.statmech import rot
 
-class TestIdealRot(unittest.TestCase):
+class TestRigidRotor(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.rot_He = rot.IdealRot(symmetrynumber=1, geometry='monatomic',
+        self.rot_He = rot.RigidRotor(symmetrynumber=1, geometry='monatomic',
                                    rot_temperatures=[0.])
-        self.rot_CO2 = rot.IdealRot(symmetrynumber=2, geometry='linear',
+        self.rot_CO2 = rot.RigidRotor(symmetrynumber=2, geometry='linear',
                                     rot_temperatures=[0.561])
-        self.rot_H2O = rot.IdealRot(symmetrynumber=2, geometry='nonlinear',
+        self.rot_H2O = rot.RigidRotor(symmetrynumber=2, geometry='nonlinear',
                                     rot_temperatures=[40.1, 20.9, 13.4])
         self.T = 300 # K
 

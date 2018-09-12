@@ -34,7 +34,7 @@ def _get_expected_arguments(fn):
     return args
 
 
-def _pass_expected_arguments(fn, verbose=True, **kwargs):
+def _pass_expected_arguments(fn, **kwargs):
     """Finds expected values from a function or class and passes the
     appropriate arguments.
 
@@ -60,8 +60,6 @@ def _pass_expected_arguments(fn, verbose=True, **kwargs):
         try:
             expected_arg_val[arg] = kwargs[arg]
         except KeyError:
-            if verbose:
-                warn('Could not find arg: {} for fn: {}'.format(arg, fn))
             continue
     return fn(**expected_arg_val)
 

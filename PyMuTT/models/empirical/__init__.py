@@ -66,15 +66,14 @@ class BaseThermo:
         if inspect.isclass(thermo_model):
             # If you're passing a class. Note that the required
             # arguments will be guessed.
-            self.thermo_model = _pass_expected_arguments(thermo_model, **kwargs, 
-                verbose=False)
+            self.thermo_model = thermo_model(**kwargs)
         else:
             # If it's an object that has already been initialized
             self.thermo_model = thermo_model
 
         # Calculate dimensionless DFT energy using thermo model
         if (HoRT_dft is None) and (self.thermo_model is not None):
-            self.HoRT_dft = self.thermo_model.get_HoRT(Ts=self.T_ref)
+            self.HoRT_dft = self.thermo_model.get_HoRT(T=self.T_ref)
         else:
             self.HoRT_dft = HoRT_dft
 
@@ -245,7 +244,7 @@ class BaseThermo:
         Heat Capacity
         '''
         ax[0].set_title('Specie: {}'.format(self.name))
-        Cp_plot = self.thermo_model.get_CpoR(Ts=Ts)
+        Cp_plot = [self.thermo_model.get_CpoR(T=T) for T in Ts]
         if Cp_units is None:
             ax[0].set_ylabel('Cp/R')
         else:
@@ -256,7 +255,7 @@ class BaseThermo:
         '''
         Enthalpy
         '''
-        H_plot = self.thermo_model.get_HoRT(Ts=Ts)
+        H_plot = [self.thermo_model.get_HoRT(T=T) for T in Ts]
         if self.references is not None:
             H_plot += self.references.get_HoRT_offset(elements=self.elements,
                                                       Ts=Ts)
@@ -271,7 +270,7 @@ class BaseThermo:
         '''
         Entropy
         '''
-        S_plot = self.thermo_model.get_SoR(Ts=Ts)
+        S_plot = [self.thermo_model.get_SoR(T=T) for T in Ts]
         if S_units is None:
             ax[2].set_ylabel('S/R')
         else:
@@ -283,7 +282,7 @@ class BaseThermo:
         Gibbs energy
         '''
         ax[3].set_xlabel('Temperature (K)')
-        G_plot = self.thermo_model.get_GoRT(Ts=Ts)
+        G_plot = [self.thermo_model.get_GoRT(T=T) for T in Ts]
         if self.references is not None:
             G_plot += self.references.get_HoRT_offset(elements=self.elements,
                                                       Ts=Ts)
@@ -436,13 +435,13 @@ class BaseThermo:
         try:
             iter(Ts)
         except TypeError:
-            CpoR_statmech = self.thermo_model.get_CpoR(Ts=Ts)
+            CpoR_statmech = [self.thermo_model.get_CpoR(T=T) for T in Ts]
             CpoR_empirical = self.get_CpoR(Ts=Ts)
         else:
             CpoR_statmech = np.zeros_like(Ts)
             CpoR_empirical = np.zeros_like(Ts)
             for i, T in enumerate(Ts):
-                CpoR_statmech[i] = self.thermo_model.get_CpoR(Ts=T)
+                CpoR_statmech[i] = self.thermo_model.get_CpoR(T=T)
                 CpoR_empirical[i] = self.get_CpoR(Ts=T)
         return (Ts, CpoR_statmech, CpoR_empirical)
 
@@ -476,14 +475,15 @@ class BaseThermo:
         try:
             iter(Ts)
         except TypeError:
-            HoRT_statmech = self.thermo_model.get_HoRT(Ts=Ts) + H_offset
+            HoRT_statmech = [self.thermo_model.get_HoRT(T=T) + H_offset \
+                             for T in Ts]
             HoRT_empirical = self.get_HoRT(Ts=Ts)
         else:
             HoRT_statmech = np.zeros_like(Ts)
             HoRT_empirical = np.zeros_like(Ts)
             for i, T in enumerate(Ts):
-                HoRT_statmech[i] = self.thermo_model.get_HoRT(Ts=T) +\
-                    H_offset[i]
+                HoRT_statmech[i] = self.thermo_model.get_HoRT(T=T) \
+                                  + H_offset[i]
                 HoRT_empirical[i] = self.get_HoRT(Ts=T)
         return (Ts, HoRT_statmech, HoRT_empirical)
 
@@ -513,13 +513,13 @@ class BaseThermo:
         try:
             iter(Ts)
         except TypeError:
-            SoR_statmech = self.thermo_model.get_SoR(Ts=Ts)
+            SoR_statmech = [self.thermo_model.get_SoR(T=T) for T in Ts]
             SoR_empirical = self.get_SoR(Ts=Ts)
         else:
             SoR_statmech = np.zeros_like(Ts)
             SoR_empirical = np.zeros_like(Ts)
             for i, T in enumerate(Ts):
-                SoR_statmech[i] = self.thermo_model.get_SoR(Ts=T)
+                SoR_statmech[i] = self.thermo_model.get_SoR(T=T)
                 SoR_empirical[i] = self.get_SoR(Ts=T)
         return (Ts, SoR_statmech, SoR_empirical)
 
@@ -553,13 +553,13 @@ class BaseThermo:
         try:
             iter(Ts)
         except TypeError:
-            GoRT_statmech = self.thermo_model.get_GoRT(Ts=Ts) + G_offset
+            GoRT_statmech = [self.thermo_model.get_GoRT(T=T) + G_offset for T in Ts]
             GoRT_empirical = self.get_GoRT(Ts=Ts)
         else:
             GoRT_statmech = np.zeros_like(Ts)
             GoRT_empirical = np.zeros_like(Ts)
             for i, T in enumerate(Ts):
-                GoRT_statmech[i] = self.thermo_model.get_GoRT(Ts=T) +\
+                GoRT_statmech[i] = self.thermo_model.get_GoRT(T=T) +\
                     G_offset[i]
                 GoRT_empirical[i] = self.get_GoRT(Ts=T)
         return (Ts, GoRT_statmech, GoRT_empirical)

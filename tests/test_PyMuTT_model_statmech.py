@@ -23,7 +23,7 @@ class TestStatMech(unittest.TestCase):
             'n_degrees': 3,
             'molecular_weight': get_molecular_weight('CO2'),
 
-            'rot_model': rot.IdealRot,
+            'rot_model': rot.RigidRotor,
             'rot_temperatures': rot.get_rot_temperatures_from_atoms(CO2, 
                 geometry='linear'),
             'geometry': 'linear',

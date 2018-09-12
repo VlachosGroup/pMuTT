@@ -12,7 +12,7 @@ class HarmonicVib:
             Vibrational wavenumbers in 1/cm
     """
 
-    def __init__(self, vib_wavenumbers):
+    def __init__(self, vib_wavenumbers=[]):
         self.vib_wavenumbers = vib_wavenumbers
         self._vib_temperatures = [
             c.wavenumber_to_temp(wavenumber) for wavenumber in vib_wavenumbers]

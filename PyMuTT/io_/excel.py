@@ -10,8 +10,10 @@ import pandas as pd
 import os
 from ase.io import read
 from PyMuTT import constants as c
-from PyMuTT import parse_formula
-
+from PyMuTT import parse_formula, get_molecular_weight
+from PyMuTT.models.statmech import presets, StatMech
+from PyMuTT.models.statmech.rot import get_geometry_from_atoms
+from PyMuTT.models.statmech.rot import get_rot_temperatures_from_atoms
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
@@ -54,6 +56,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
         - atoms
         - thermo_model
         - vib_wavenumber
+        - rot_temperatures
         - nasa.a_low
         - nasa.a_high
 
@@ -83,8 +86,11 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
                 thermo_data = set_thermo_model(model=cell_data,
                                                output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
-                thermo_data = set_vib_wavenumber(value=cell_data,
+                thermo_data = set_vib_wavenumbers(value=cell_data,
                                                  output_structure=thermo_data)
+            elif 'rot_temperatures' in col:
+                thermo_data = set_rot_temperatures(value=cell_data,
+                                                   output_structure=thermo_data)
             elif 'nasa' in col:
                 if 'a_low' in col:
                     thermo_data = set_nasa_a_low(header=col, value=cell_data,
@@ -167,7 +173,7 @@ def set_atoms(path, output_structure, excel_path=None):
     Returns
     -------
         output_structure: dict
-            output_structure with new thermo model added
+            output_structure with atoms added
     """
     try:
         output_structure['atoms'] = read(path)
@@ -178,7 +184,6 @@ def set_atoms(path, output_structure, excel_path=None):
             raise FileNotFoundError('If using relative references for atoms '
                                     'files, use a path relative to the '
                                     'spreadsheet imported.')
-
     return output_structure
 
 
@@ -188,11 +193,10 @@ def set_thermo_model(model, output_structure):
     Parameters
     ----------
         model : str
-            Thermodynamic model to import. Supported Options:
+            Thermodynamic model to import. Presets:
 
                 - IdealGas
                 - Harmonic
-                - HinderedRotor
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['thermo_model']
@@ -202,24 +206,18 @@ def set_thermo_model(model, output_structure):
             output_structure with new thermo model added
     """
     model = model.lower()
-    if model == 'idealgas':
-        import PyMuTT.models.statmech.idealgasthermo as idealgasthermo
-        output_structure['thermo_model'] = idealgasthermo.IdealGasThermo
-    elif model == 'harmonic':
-        import PyMuTT.models.statmech.harmonicthermo as harmonicthermo
-        output_structure['thermo_model'] = harmonicthermo.HarmonicThermo
-    elif model == 'hinderedrotor':
-        import PyMuTT.models.statmech.hinderedrotor as hinderedrotor
-        output_structure['thermo_model'] = hinderedrotor.HinderedRotor
-    else:
+    output_structure['thermo_model'] = StatMech
+    try:
+        output_structure.update(presets[model])
+    except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of PyMuTT.io_.excel.set_thermo_model for supported '
+                         'of presets in PyMuTT.models.statmech for supported '
                          'models.'.format(model))
     return output_structure
 
 
-def set_vib_wavenumber(value, output_structure):
-    """Parses element header and assigns to output_structure['vib_energies']
+def set_vib_wavenumbers(value, output_structure):
+    """Parses element header and assigns to output_structure['vib_wavenumber']
 
     Parameters
     ----------
@@ -233,13 +231,33 @@ def set_vib_wavenumber(value, output_structure):
         output_structure: dict
             output_structure with new vibration added
     """
-    vib_energy = value*c.c('cm/s')*c.h('eV s')
     try:
-        output_structure['vib_energies'].append(vib_energy)
+        output_structure['vib_wavenumbers'].append(value)
     except (NameError, KeyError):
-        output_structure['vib_energies'] = [vib_energy]
+        output_structure['vib_wavenumbers'] = [value]
     return output_structure
 
+
+def set_rot_temperatures(value, output_structure):
+    """Parses element header and assigns to output_structure['rot_temperatures']
+
+    Parameters
+    ----------
+        value : float
+            Vibrational frequency in 1/cm
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure['elements'][element]
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new vibration added
+    """
+    try:
+        output_structure['rot_temperatures'].append(value)
+    except (NameError, KeyError):
+        output_structure['rot_temperatures'] = [value]
+    return output_structure
 
 def set_nasa_a_low(header, value, output_structure, delimiter='.'):
     """Parses a_low parameter for ``PyMuTT.models.empirical.nasa.Nasa`` object

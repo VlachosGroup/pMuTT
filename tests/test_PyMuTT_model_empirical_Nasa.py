@@ -2,7 +2,7 @@ import unittest
 import warnings
 import numpy as np
 from ase.build import molecule
-from PyMuTT.models.statmech.idealgasthermo import IdealGasThermo
+from PyMuTT.models.statmech import presets, StatMech, trans, rot, vib, elec
 from PyMuTT.models.empirical.nasa import Nasa
 
 class TestNasa(unittest.TestCase):
@@ -12,13 +12,18 @@ class TestNasa(unittest.TestCase):
             name = 'H2O',
             elements = {'H': 2, 'O': 1},
             phase = 'g',
-            thermo_model = IdealGasThermo,
+            thermo_model = StatMech,
+            trans_model = trans.IdealTrans,
+            n_degrees = 3,
+            vib_model = vib.HarmonicVib,
+            elec_model = elec.IdealElec,
+            rot_model = rot.RigidRotor,
             potentialenergy = -14.2209,
             geometry = 'nonlinear',
             atoms = molecule('H2O'),
             symmetrynumber = 2,
             spin = 0,
-            vib_energies = np.array([0.47462, 0.46033, 0.19633]),
+            vib_wavenumbers = np.array([0.47462, 0.46033, 0.19633]),
             a_low = np.array([4.04618796E+00, -6.87238823E-04, 2.79722240E-06, -1.42318006E-09, 2.34551159E-13, -3.02826236E+04, -2.50036531E-01]),
             a_high = np.array([2.41854323E+00, 3.35448922E-03, -9.66398101E-07, 1.34441829E-10, -7.18940063E-15, -2.97582484E+04, 8.37839787E+00]),
             T_low = 100.,

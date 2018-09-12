@@ -7,6 +7,7 @@ Created on Fri Jul 7 12:40:00 2018
 import inspect
 import numpy as np
 from PyMuTT import _pass_expected_arguments
+from PyMuTT.models.statmech import trans, vib, elec, rot
 
 class EmptyMode:
     """Placeholder mode that returns 0 for all functions."""
@@ -316,3 +317,21 @@ class StatMech:
         else:
             return np.sum(GoRT)
 
+presets = {
+    'idealgas': {
+        'trans_model': trans.IdealTrans,
+        'n_degrees': 3,
+        'vib_model': vib.HarmonicVib,
+        'elec_model': elec.IdealElec,
+        'rot_model': rot.RigidRotor,
+        'required': ['molecular_weight', 'vib_wavenumbers', 'potentialenergy', 
+                     'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'],
+        },
+    'harmonic': {
+        'vib_model': vib.HarmonicVib,
+        'elec_model': elec.IdealElec,
+        'required': ['vib_wavenumber', 'potentialenergy', 'spin'],
+    },
+}
+"""Commonly used models. The 'required' and 'optional' fields indicate
+parameters that still need to be passed."""

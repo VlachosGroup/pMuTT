@@ -20,17 +20,17 @@ class TestIdealTrans(unittest.TestCase):
         self.trans_3D = trans.IdealTrans(molecular_weight=molecular_weight,
                                          n_degrees=3)
         self.T = 300 # K
-        self.V = 0.025 # m3
+        self.P = 0.99768 # bar
 
     def test_get_q(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_q(T=self.T, V=self.V), 
-                                   2.0899208249E+09))
-        self.assertTrue(np.isclose(self.trans_2D.get_q(T=self.T, V=self.V), 
-                                   1.7471076218E+20))
-        self.assertTrue(np.isclose(self.trans_3D.get_q(T=self.T, V=self.V), 
-                                   1.4605266408E+31))        
+        self.assertTrue(np.isclose(self.trans_1D.get_q(T=self.T, P=self.P), 
+                                   2090036406.020292))
+        self.assertTrue(np.isclose(self.trans_2D.get_q(T=self.T, P=self.P), 
+                                   1.747204243477979e+20))
+        self.assertTrue(np.isclose(self.trans_3D.get_q(T=self.T, P=self.P), 
+                                   1.4606074131695383e+31))        
 
     def test_get_CvoR(self):
         self.assertEqual(self.trans_1D.get_CvoR(), 0.5)
@@ -55,31 +55,31 @@ class TestIdealTrans(unittest.TestCase):
     def test_get_SoR(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_SoR(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_1D.get_SoR(T=self.T, P=self.P), 
                                    -3.1794507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_SoR(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_2D.get_SoR(T=self.T, P=self.P), 
                                    -6.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_SoR(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_3D.get_SoR(T=self.T, P=self.P), 
                                    1.9504035007E+01))        
 
     def test_get_AoRT(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_AoRT(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_1D.get_AoRT(T=self.T, P=self.P), 
                                    3.2294507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_AoRT(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_2D.get_AoRT(T=self.T, P=self.P), 
                                    7.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_AoRT(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_3D.get_AoRT(T=self.T, P=self.P), 
                                    -1.8004035007E+01))        
 
     def test_get_GoRT(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_GoRT(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_1D.get_GoRT(T=self.T, P=self.P), 
                                    3.3294507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_GoRT(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_2D.get_GoRT(T=self.T, P=self.P), 
                                    8.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_GoRT(T=self.T, V=self.V), 
+        self.assertTrue(np.isclose(self.trans_3D.get_GoRT(T=self.T, P=self.P), 
                                    -1.7004035007E+01))        
 
 if __name__ == '__main__':

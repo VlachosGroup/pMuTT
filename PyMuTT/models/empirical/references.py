@@ -103,7 +103,7 @@ class References:
                 Rows correspond to reference species. Columns correspond to
                 elements
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        
         """
         elements = self.get_elements()
         elements_mat = np.zeros((len(self), len(elements)))
@@ -129,9 +129,9 @@ class References:
                  'error in referencing. Using mean temperature.')
         self.T_ref = np.mean(T_refs)
 
-        HoRT_ref_dft = np.array([reference.thermo_model.
-                                 get_HoRT(Ts=reference.T_ref)
-                                 for reference in self])
+        HoRT_ref_dft = np.array(
+                [reference.thermo_model.get_HoRT(T=reference.T_ref) 
+                    for reference in self])
         HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
         # Offset between the DFT energies and experimentalvalues
         # for reference species

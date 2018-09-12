@@ -2,6 +2,7 @@
 
 import numpy as np
 from PyMuTT import constants as c
+from PyMuTT import get_molecular_weight
 
 class IdealTrans:
     """Translational mode using ideal gas assumption
@@ -14,11 +15,31 @@ class IdealTrans:
             Molecular weight of the molecule in g/mol.
     """
 
-    def __init__(self, molecular_weight, n_degrees=3):
-        self.molecular_weight = molecular_weight
+    def __init__(self, n_degrees=3, molecular_weight=None, atoms=None):
         self.n_degrees = n_degrees
+        if molecular_weight is None and atoms is not None:
+            self.molecular_weight = get_molecular_weight(
+                    atoms.get_chemical_formula(mode='hill'))
+        else:
+            self.molecular_weight = molecular_weight
 
-    def get_q(self, T, V=c.V0):
+    def get_V(self, T, P):
+        """Calculates the molar volume of an ideal gas at T and P
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+            P : float
+                Pressure in bar
+        Returns
+        -------
+            V : float
+                Molar volume in m3
+        """
+        return T*c.R('J/mol/K')/(P*c.convert_unit(from_='bar', to='Pa'))
+
+    def get_q(self, T, P=c.P0('bar')):
         """Calculates the partition function
 
         :math:`q_{trans} = \\bigg(\\frac{2\\pi \\sum_{i}^{atoms}m_ikT}{h^2}
@@ -28,25 +49,14 @@ class IdealTrans:
         ----------
             T : float
                 Temperature in K
-            V : float, optional
-                Volume or volume-like (if n_degrees < 3) quantity. 
-                Default is molar volume at standard conditions
-
-                +-----------+--------------+----------------+
-                | n_degrees | Meaning of V | Expected units |
-                +===========+==============+================+
-                | 1         | Length       | m              |
-                +-----------+--------------+----------------+
-                | 2         | Area         | m2             |
-                +-----------+--------------+----------------+
-                | 3         | Volume       | m3             |
-                +-----------+--------------+----------------+
-
+            P : float, optional
+                Pressure or pressure-like quantity. Default is 1 bar
         Returns
         -------
             q_trans : float
                 Translational partition function
         """
+        V = self.get_V(T=T, P=P)
         unit_mass = self.molecular_weight*c.convert_unit(from_='g',to='kg')/c.Na
         return V*(2*np.pi*c.kb('J/K')*T*unit_mass/c.h('J s')**2) \
               **(float(self.n_degrees)/2.)
@@ -99,7 +109,7 @@ class IdealTrans:
         """
         return self.get_UoRT() + 1.
 
-    def get_SoR(self, T, V=c.V0):
+    def get_SoR(self, T, P=c.P0('bar')):
         """Calculates the dimensionless entropy
 
         :math:`\\frac{S^{trans}}{R} = 1 + \\ln {\\frac {q_{trans}}{N_A}} 
@@ -109,28 +119,21 @@ class IdealTrans:
         ----------
             T : float
                 Temperature in K
-            V : float, optional
-                Volume or volume-like (if n_degrees < 3) quantity. 
-                Default is molar volume at standard conditions
-
-                +-----------+--------------+----------------+
-                | n_degrees | Meaning of V | Expected units |
-                +===========+==============+================+
-                | 1         | Length       | m              |
-                +-----------+--------------+----------------+
-                | 2         | Area         | m2             |
-                +-----------+--------------+----------------+
-                | 3         | Volume       | m3             |
-                +-----------+--------------+----------------+
+            P : float, optional
+                Pressure or pressure-like quantity. Default is 1 bar
 
         Returns
         -------
             SoR_trans : float
                 Translational dimensionless entropy 
         """
-        return 1. + self.get_UoRT() + np.log(self.get_q(T=T, V=V)/c.Na)
+        V = self.get_V(T=T, P=P)
+        unit_mass = self.molecular_weight*c.convert_unit(from_='g',to='kg')/c.Na
+        return 1. + float(self.n_degrees)/2. \
+              + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2)**(float(self.n_degrees)/2.) \
+                       *V/c.Na)
 
-    def get_AoRT(self, T, V=c.V0):
+    def get_AoRT(self, T, P=c.P0('bar')):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{trans}}{RT}=\\frac{U^{trans}}{RT}-\\frac{S^{trans}}{R}`
@@ -139,28 +142,16 @@ class IdealTrans:
         ----------
             T : float
                 Temperature in K
-            V : float, optional
-                Volume or volume-like (if n_degrees < 3) quantity. 
-                Default is molar volume at standard conditions
-
-                +-----------+--------------+----------------+
-                | n_degrees | Meaning of V | Expected units |
-                +===========+==============+================+
-                | 1         | Length       | m              |
-                +-----------+--------------+----------------+
-                | 2         | Area         | m2             |
-                +-----------+--------------+----------------+
-                | 3         | Volume       | m3             |
-                +-----------+--------------+----------------+
-
+            P : float, optional
+                Pressure or pressure-like quantity. Default is 1 bar
         Returns
         -------
             AoRT_trans : float
                 Translational dimensionless Helmholtz energy 
         """
-        return self.get_UoRT()-self.get_SoR(T=T, V=V)
+        return self.get_UoRT()-self.get_SoR(T=T, P=P)
 
-    def get_GoRT(self, T, V=c.V0):
+    def get_GoRT(self, T, P=c.P0('bar')):
         """Calculates the dimensionless Gibbs energy
 
         :math:`\\frac{G^{trans}}{RT}=\\frac{H^{trans}}{RT}-\\frac{S^{trans}}{R}`       
@@ -169,23 +160,11 @@ class IdealTrans:
         ----------
             T : float
                 Temperature in K
-            V : float, optional
-                Volume or volume-like (if n_degrees < 3) quantity. 
-                Default is molar volume at standard conditions
-
-                +-----------+--------------+----------------+
-                | n_degrees | Meaning of V | Expected units |
-                +===========+==============+================+
-                | 1         | Length       | m              |
-                +-----------+--------------+----------------+
-                | 2         | Area         | m2             |
-                +-----------+--------------+----------------+
-                | 3         | Volume       | m3             |
-                +-----------+--------------+----------------+
-
+            P : float, optional
+                Pressure or pressure-like quantity. Default is 1 bar
         Returns
         -------
             GoR_trans : float
                 Translational dimensionless Gibbs energy 
         """
-        return self.get_HoRT()-self.get_SoR(T=T, V=V)
+        return self.get_HoRT()-self.get_SoR(T=T, P=P)
