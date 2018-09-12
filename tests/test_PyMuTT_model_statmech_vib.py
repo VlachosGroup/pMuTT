@@ -69,12 +69,12 @@ class TestQRRHOVib(unittest.TestCase):
                                1.76893896253E-49)
 
     def test_get_CvoR(self):
-        self.assertAlmostEqual(self.vib_H2.get_CvoR(T=self.T), 4.2650956E+02)
-        self.assertAlmostEqual(self.vib_H2O.get_CvoR(T=self.T), 710.87889075522)
+        self.assertAlmostEqual(self.vib_H2.get_CvoR(T=self.T), 6.0337598762E-07)
+        self.assertAlmostEqual(self.vib_H2O.get_CvoR(T=self.T), 2.918349716E-02)
 
     def test_get_CpoR(self):
-        self.assertAlmostEqual(self.vib_H2.get_CpoR(T=self.T), 4.2650956E+02)
-        self.assertAlmostEqual(self.vib_H2O.get_CpoR(T=self.T), 710.87889075522)
+        self.assertAlmostEqual(self.vib_H2.get_CpoR(T=self.T), 6.0337598762E-07)
+        self.assertAlmostEqual(self.vib_H2O.get_CpoR(T=self.T), 2.918349716E-02)
 
     def test_get_UoRT_RHHO(self):
         self.assertAlmostEqual(

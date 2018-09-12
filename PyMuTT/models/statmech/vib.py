@@ -274,7 +274,9 @@ class QRRHOVib:
         """
         CvoR = []
         for theta_i, w_i in zip(self._vib_temperatures, self._scaled_wavenumbers):
-            CvoR_RRHO = (theta_i/T/(1. - np.exp(-theta_i/T)))**2
+            vib_dimless = theta_i/T
+            CvoR_RRHO = np.exp(-vib_dimless) \
+                       *(vib_dimless/(1. - np.exp(-vib_dimless)))**2
             CvoR.append(w_i*CvoR_RRHO + 0.5*(1.-w_i))
         return np.sum(CvoR)
 
