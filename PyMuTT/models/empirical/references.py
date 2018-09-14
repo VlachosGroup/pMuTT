@@ -130,7 +130,7 @@ class References:
         self.T_ref = np.mean(T_refs)
 
         HoRT_ref_dft = np.array(
-                [reference.thermo_model.get_HoRT(T=reference.T_ref) 
+                [reference.statmech_model.get_HoRT(T=reference.T_ref) 
                     for reference in self])
         HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
         # Offset between the DFT energies and experimentalvalues

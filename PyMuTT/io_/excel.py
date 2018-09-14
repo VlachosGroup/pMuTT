@@ -54,7 +54,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
         - element
         - formula
         - atoms
-        - thermo_model
+        - statmech_model
         - vib_wavenumber
         - rot_temperatures
         - nasa.a_low
@@ -82,8 +82,8 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
             elif 'atoms' in col:
                 thermo_data = set_atoms(path=cell_data, excel_path=excel_path,
                                         output_structure=thermo_data)
-            elif 'thermo_model' in col:
-                thermo_data = set_thermo_model(model=cell_data,
+            elif 'statmech_model' in col:
+                thermo_data = set_statmech_model(model=cell_data,
                                                output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
                 thermo_data = set_vib_wavenumbers(value=cell_data,
@@ -187,7 +187,7 @@ def set_atoms(path, output_structure, excel_path=None):
     return output_structure
 
 
-def set_thermo_model(model, output_structure):
+def set_statmech_model(model, output_structure):
     """Imports module and assigns the class to output_structure
 
     Parameters
@@ -199,14 +199,14 @@ def set_thermo_model(model, output_structure):
                 - Harmonic
         output_structure : dict
             Structure to assign value. Will assign to
-            output_structure['thermo_model']
+            output_structure['statmech_model']
     Returns
     -------
         output_structure: dict
             output_structure with new thermo model added
     """
     model = model.lower()
-    output_structure['thermo_model'] = StatMech
+    output_structure['statmech_model'] = StatMech
     try:
         output_structure.update(presets[model])
     except KeyError:

@@ -223,7 +223,7 @@ class Nasa(BaseThermo):
                 Temperatures in K used for fitting CpoR.
             CpoR : (N,) `numpy.ndarray`_
                 Dimensionless heat capacity corresponding to T. If not
-                specified, calculates using self.thermo_model.get_CpoR
+                specified, calculates using self.statmech_model.get_CpoR
             T_ref : float
                 Reference temperature in K used fitting empirical coefficients.
                 If not specified, uses T_ref attribute
@@ -231,14 +231,14 @@ class Nasa(BaseThermo):
                 Dimensionless enthalpy calculated using DFT that corresponds
                 to T_ref. If not specified, uses HoRT_dft attribute. If the
                 HoRT_dft attribute is not specified, uses
-                self.thermo_model.get_HoRT
+                self.statmech_model.get_HoRT
             HoRT_ref : float
                 Dimensionless reference enthalpy that corresponds to T_ref. If
                 this is specified, uses this value when fitting a_low[5] and
                 a_high[5] instead of HoRT_dft and references
             SoR_ref : float
                 Dimensionless entropy that corresponds to T_ref. If not
-                specified, uses self.thermo_model.get_SoR
+                specified, uses self.statmech_model.get_SoR
             references : ``PyMuTT.models.empirical.References``
                 Contains references to calculate HoRT_ref. If not specified
                 then HoRT_dft will be used without adjustment.
@@ -271,7 +271,7 @@ class Nasa(BaseThermo):
         else:
             if Ts is None:
                 Ts = np.linspace(T_low, T_high)
-            CpoR = [self.thermo_model.get_CpoR(T=T) for T in Ts]
+            CpoR = [self.statmech_model.get_CpoR(T=T) for T in Ts]
 
         # Get reference temperature
         if T_ref is None:
@@ -280,12 +280,12 @@ class Nasa(BaseThermo):
         # Get reference enthalpy
         if HoRT_dft is None:
             if self.HoRT_dft is None:
-                self.HoRT_dft = self.thermo_model.get_HoRT(T=T_ref)
+                self.HoRT_dft = self.statmech_model.get_HoRT(T=T_ref)
             HoRT_dft = self.HoRT_dft
 
         # Get reference entropy
         if SoR_ref is None:
-            SoR_ref = self.thermo_model.get_SoR(T=T_ref)
+            SoR_ref = self.statmech_model.get_SoR(T=T_ref)
 
         # Get references
         if references is not None:

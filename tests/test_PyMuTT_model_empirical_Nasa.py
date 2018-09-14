@@ -12,7 +12,7 @@ class TestNasa(unittest.TestCase):
             name = 'H2O',
             elements = {'H': 2, 'O': 1},
             phase = 'g',
-            thermo_model = StatMech,
+            statmech_model = StatMech,
             trans_model = trans.IdealTrans,
             n_degrees = 3,
             vib_model = vib.HarmonicVib,
