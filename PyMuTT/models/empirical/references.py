@@ -128,7 +128,6 @@ class References:
             warn('All the reference temperatures are not the same. May cause '
                  'error in referencing. Using mean temperature.')
         self.T_ref = np.mean(T_refs)
-
         HoRT_ref_dft = np.array([reference.thermo_model.
                                  get_HoRT(Ts=reference.T_ref)
                                  for reference in self])
@@ -146,9 +145,9 @@ class References:
                                                   HoRT_element_offset)}
 
     def get_HoRT_offset(self, elements, Ts=None):
-        """Returns the offset due to the element composition of a specie. 
+        """Returns the offset due to the element composition of a specie.
         The offset is defined as follows:
-        
+
         HoRT_exp = HoRT_dft + offset
 
         Parameters

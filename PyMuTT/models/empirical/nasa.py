@@ -73,6 +73,7 @@ class Nasa(BaseThermo):
 
         # Check the form of T_mid to be sure it is a sorted list
         if T_mid is not None:
+            print(T_mid)
             # If a list, sort it
             if type(T_mid) == list:
                 self.T_mid = T_mid
@@ -112,7 +113,9 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        if T < self.T_mid[0]:
+        if type(self.T_mid) is list:
+            self.T_mid = self.T_mid[0]
+        if T < self.T_mid:
             if T < self.T_low:
                 warn('Temperature below T_low for {}'.format(self.name),
                      RuntimeWarning)
