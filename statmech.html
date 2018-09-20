@@ -85,10 +85,22 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Statistical Thermodynamic Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.idealgasthermo">Ideal Gas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.harmonicthermo">Harmonic Approximation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.hinderedthermo">Hindered Rigid Rotor Approximation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#heat-capacity">Heat Capacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statmech-base-class">StatMech Base Class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-of-initialization-using-objects">Example of initialization using objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-of-initialization-using-classes-and-parameters">Example of initialization using classes and parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#presets">Presets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ideal-gas-idealgas">Ideal Gas (idealgas)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#harmonic-approximation-harmonic">Harmonic Approximation (harmonic)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.trans">Translational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.vib">Vibrational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.rot">Rotational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.elec">Electronic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nuclear-models">Nuclear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-your-own-model">Making your own model</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
@@ -159,162 +171,67 @@
             
   <div class="section" id="statistical-thermodynamic-models">
 <span id="statmech"></span><h1>Statistical Thermodynamic Models<a class="headerlink" href="#statistical-thermodynamic-models" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-PyMuTT.models.statmech.idealgasthermo">
-<span id="ideal-gas"></span><h2>Ideal Gas<a class="headerlink" href="#module-PyMuTT.models.statmech.idealgasthermo" title="Permalink to this headline">¶</a></h2>
-<p>PyMuTT.models.statmech.idealgasthermo</p>
-<p>Operations for ideal gas models</p>
-<dl class="class">
-<dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo">
-<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.idealgasthermo.</code><code class="descname">IdealGasThermo</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>geometry</em>, <em>potentialenergy=0.0</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>spin=None</em>, <em>natoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ideal Gas Model. Uses <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo">ase.thermochemistry.IdealGasThermo</a> to
-calculate enthalpy and entropy</p>
+<div class="section" id="statmech-base-class">
+<h2>StatMech Base Class<a class="headerlink" href="#statmech-base-class" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> class stores the classes associated with each mode. Each mode has methods that specifies how to
+calculate thermodynamic quantities, such as partition functions, heat capacities, internal energy, enthalpy, entropy,
+Helmholtz energy and Gibbs energy.</p>
+<blockquote>
+<div><dl class="class">
+<dt id="PyMuTT.models.statmech.StatMech">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>trans_model=&lt;PyMuTT.models.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;PyMuTT.models.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;PyMuTT.models.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;PyMuTT.models.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;PyMuTT.models.statmech.EmptyMode object&gt;</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for statistical mechanic models.</p>
 <dl class="attribute">
-<dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.model">
-<code class="descname">model</code><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo">ase.thermochemistry.IdealGasThermo</a></p>
+<dt id="PyMuTT.models.statmech.StatMech.trans_model">
+<code class="descname">trans_model</code><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.trans_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>PyMuTT.models.statmech.trans</cite> object – Deals with translational modes</p>
 </dd></dl>
 
-<p>Below are the parameters accepted by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.IdealGasThermo">ase.thermochemistry.IdealGasThermo</a></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="24%" />
-<col width="76%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameters</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>vib_energies</td>
-<td>((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) Vibrational energies in eV</td>
-</tr>
-<tr class="row-odd"><td>geometry</td>
-<td><p class="first">(str) Geometry of molecule. Supported options:</p>
-<ul class="last simple">
-<li>monatomic</li>
-<li>linear</li>
-<li>nonlinear</li>
-</ul>
-</td>
-</tr>
-<tr class="row-even"><td>potentialenergy</td>
-<td>(float) Potential energy in eV</td>
-</tr>
-<tr class="row-odd"><td>atoms</td>
-<td>(<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a>) Atoms object required for calculating
-rotational modes</td>
-</tr>
-<tr class="row-even"><td>symmetrynumber</td>
-<td><p class="first">(int) Symmetry number</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="42%" />
-<col width="58%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Point group</th>
-<th class="head">symmetry number</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>C1</td>
-<td>1</td>
-</tr>
-<tr class="row-odd"><td>Cs</td>
-<td>1</td>
-</tr>
-<tr class="row-even"><td>C2</td>
-<td>2</td>
-</tr>
-<tr class="row-odd"><td>C2v</td>
-<td>2</td>
-</tr>
-<tr class="row-even"><td>C3v</td>
-<td>3</td>
-</tr>
-<tr class="row-odd"><td>Cinfv</td>
-<td>1</td>
-</tr>
-<tr class="row-even"><td>D2h</td>
-<td>4</td>
-</tr>
-<tr class="row-odd"><td>D3h</td>
-<td>6</td>
-</tr>
-<tr class="row-even"><td>D5h</td>
-<td>10</td>
-</tr>
-<tr class="row-odd"><td>Dinfh</td>
-<td>2</td>
-</tr>
-<tr class="row-even"><td>D3d</td>
-<td>6</td>
-</tr>
-<tr class="row-odd"><td>Td</td>
-<td>12</td>
-</tr>
-<tr class="row-even"><td>Oh</td>
-<td>24</td>
-</tr>
-</tbody>
-</table>
-<p class="last">See DOI for more details: 10.1007/s00214-007-0328-0</p>
-</td>
-</tr>
-<tr class="row-odd"><td>spin</td>
-<td><p class="first">(float) Holds the total electronic spin</p>
-<ul class="last simple">
-<li>0 for molecules in which all electrons are paired</li>
-<li>0.5 for a free radical with a single unpaired
-electron</li>
-<li>1.0 for a triplet with two unpaired electrons,
-such as O_2</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given
-temperature. If you would like to use different behavior from the
-default, the thermo_model used must have the function ‘get_CpoR’.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Ts</strong> (<em>array-like</em><em> or </em><em>scalar</em>) – Temperature(s) in K</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR</strong> – Dimensionless heat capacity (Cp/R)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <cite>numpy.ndarray_</cite></td>
-</tr>
-</tbody>
-</table>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.StatMech.vib_model">
+<code class="descname">vib_model</code><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.vib_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>PyMuTT.models.statmech.vib</cite> object – Deals with vibrational modes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.StatMech.rot_model">
+<code class="descname">rot_model</code><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.rot_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>PyMuTT.models.statmech.rot</cite> object – Deals with rotational modes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.StatMech.elec_model">
+<code class="descname">elec_model</code><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.elec_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>PyMuTT.models.statmech.elec</cite> object – Deals with electronic modes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.StatMech.nucl_model">
+<code class="descname">nucl_model</code><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.nucl_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>PyMuTT.models.statmech.nucl</cite> object – Deals with nuclear modes</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_GoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless Gibbs energy at a given temperature</p>
+<dt id="PyMuTT.models.statmech.StatMech.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless Helmholtz energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is 1 atm.</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Helmholtz energy. If True, returns
+contribution of each mode.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless heat capacity (G/RT) at the specified temperature</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>AoRT</strong> – Dimensionless Helmoltz energy. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
 </td>
 </tr>
 </tbody>
@@ -322,24 +239,26 @@ printed</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_HoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless enthalpy at a given temperature</p>
+<dt id="PyMuTT.models.statmech.StatMech.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless heat capacity (constant P)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+contribution of each mode.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless heat capacity (H/RT) at the specified temperature</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR</strong> – Dimensionless heat capacity. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
 </td>
 </tr>
 </tbody>
@@ -347,28 +266,178 @@ printed</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.idealgasthermo.IdealGasThermo.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless entropy at a given temperature and
-pressure</p>
+<dt id="PyMuTT.models.statmech.StatMech.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless heat capacity (constant V)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm.</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+contribution of each mode.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and
-pressure</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR</strong> – Dimensionless heat capacity. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.StatMech.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless Gibbs energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
+contribution of each mode.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless Gibbs energy. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.StatMech.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless enthalpy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total enthalpy. If True, returns
+contribution of each mode.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless enthalpy. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.StatMech.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless entropy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total entropy. If True, returns
+contribution of each mode.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.StatMech.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless internal energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total internal energy. If True, returns
+contribution of each mode.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT</strong> – Dimensionless internal energy. If tuple returned, contribution
+to each mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.StatMech.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partition function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the product of partition functions. If True,
+returns contributions of each mode</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q</strong> – Partition function. If tuple returned, contribution to each
+mode are as follows:
+[trans, vib, rot, elec, nucl]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.StatMech.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -376,23 +445,81 @@ pressure</p>
 
 </dd></dl>
 
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object can be initialized in two ways:</p>
+<ol class="arabic simple">
+<li>by each passing each mode as objects or</li>
+<li>passing each mode as a class and the associated parameters.</li>
+</ol>
+<p>The examples below give an equivalent result:</p>
+<div class="section" id="example-of-initialization-using-objects">
+<h3>Example of initialization using objects<a class="headerlink" href="#example-of-initialization-using-objects" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">)</span>
+<span class="n">H2O_trans</span> <span class="o">=</span> <span class="n">trans</span><span class="o">.</span><span class="n">IdealTrans</span><span class="p">(</span><span class="n">n_degrees</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">)</span>
+<span class="n">H2O_vib</span> <span class="o">=</span> <span class="n">vib</span><span class="o">.</span><span class="n">HarmonicVib</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">])</span>
+<span class="n">H2O_rot</span> <span class="o">=</span> <span class="n">rot</span><span class="o">.</span><span class="n">RigidRotor</span><span class="p">(</span><span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">)</span>
+<span class="n">H2O_elec</span> <span class="o">=</span> <span class="n">elec</span><span class="o">.</span><span class="n">IdealElec</span><span class="p">(</span><span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">14.2209</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">H2O_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">H2O_trans</span><span class="p">,</span>
+                        <span class="n">vib_model</span><span class="o">=</span><span class="n">H2O_vib</span><span class="p">,</span>
+                        <span class="n">rot_model</span><span class="o">=</span><span class="n">H2O_rot</span><span class="p">,</span>
+                        <span class="n">elec_model</span><span class="o">=</span><span class="n">H2O_elec</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="module-PyMuTT.models.statmech.harmonicthermo">
-<span id="harmonic-approximation"></span><h2>Harmonic Approximation<a class="headerlink" href="#module-PyMuTT.models.statmech.harmonicthermo" title="Permalink to this headline">¶</a></h2>
-<p>PyMuTT.models.statmech.harmonicthermo</p>
-<p>Vlachos group code for Harmonic approximation.</p>
-<dl class="class">
-<dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo">
-<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.harmonicthermo.</code><code class="descname">HarmonicThermo</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>potentialenergy=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Treats all degrees of freedom harmonically.
-Uses ase.thermochemistry.HarmonicThermo to calculate enthalpy and entropy</p>
-<dl class="attribute">
-<dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.model">
-<code class="descname">model</code><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.HarmonicThermo">ase.thermochemistry.HarmonicThermo</a></p>
+</div>
+<div class="section" id="example-of-initialization-using-classes-and-parameters">
+<h3>Example of initialization using classes and parameters<a class="headerlink" href="#example-of-initialization-using-classes-and-parameters" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+
+
+<span class="n">H2O_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans</span><span class="o">.</span><span class="n">IdealTrans</span><span class="p">,</span>
+                        <span class="n">n_degrees</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                        <span class="n">vib_model</span><span class="o">=</span><span class="n">vib</span><span class="o">.</span><span class="n">HarmonicVib</span><span class="p">,</span>
+                        <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
+                        <span class="n">rot_model</span><span class="o">=</span><span class="n">rot</span><span class="o">.</span><span class="n">RigidRotor</span><span class="p">,</span>
+                        <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">),</span>
+                        <span class="n">elec_model</span><span class="o">=</span><span class="n">elec</span><span class="o">.</span><span class="n">IdealElec</span><span class="p">,</span>
+                        <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">14.2209</span><span class="p">,</span>
+                        <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="presets">
+<h2>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">¶</a></h2>
+<p>If you are using a common model (e.g. the ideal gas model), then you can get the default parameters from
+the dictionary, <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.presets</span></code>. The same H2O StatMech object can be specified without
+the need to pass all the types of modes:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+
+<span class="n">idealgas_defaults</span> <span class="o">=</span> <span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]</span>
+<span class="n">H2O_new</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
+                   <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">14.2209</span><span class="p">,</span>
+                   <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O),</span>
+                   <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                   <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                   <span class="o">**</span><span class="n">idealgas_defaults</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary is flexible where you can create a new entry if you will use a model often.</p>
+<dl class="data">
+<dt id="PyMuTT.models.statmech.presets">
+<code class="descclassname">PyMuTT.models.statmech.</code><code class="descname">presets</code><em class="property"> = {'harmonic': {'vib_model': &lt;class 'PyMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'PyMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumber', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'PyMuTT.models.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'PyMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'PyMuTT.models.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'PyMuTT.models.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}}</em><a class="headerlink" href="#PyMuTT.models.statmech.presets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
+parameters that still need to be passed.</p>
 </dd></dl>
 
-<p>Below are parameters accepted by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.HarmonicThermo">ase.thermochemistry.HarmonicThermo</a></p>
+<p>Currently supported presets are described below. The first table shows the parameters already specified,
+and the second table shows the parameters that are still required.</p>
+<div class="section" id="ideal-gas-idealgas">
+<h3>Ideal Gas (idealgas)<a class="headerlink" href="#ideal-gas-idealgas" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="24%" />
@@ -400,422 +527,147 @@ Uses ase.thermochemistry.HarmonicThermo to calculate enthalpy and entropy</p>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Description</th>
+<th class="head">Default Value</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>vib_energies</td>
-<td>((3N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> where N is number of atoms)
-Vibrational energies in eV</td>
+<tr class="row-even"><td>trans_model</td>
+<td>PyMuTT.models.statmech.trans.IdealTrans</td>
 </tr>
-<tr class="row-odd"><td>potentialenergy</td>
-<td>(float) Potential energy in eV</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given
-temperature.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR</strong> – Dimensionless heat capacity (Cp/R)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_GoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless Gibbs energy at a given temperature</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless heat capacity (G/RT) at the specified temperature</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_HoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless enthalpy at a given temperature</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should
-be printed</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless heat capacity (H/RT) at the specified temperature</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>Ts</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.harmonicthermo.HarmonicThermo.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless entropy at a given temperature and
-pressure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and
-pressure</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-PyMuTT.models.statmech.hinderedthermo">
-<span id="hindered-rigid-rotor-approximation"></span><h2>Hindered Rigid Rotor Approximation<a class="headerlink" href="#module-PyMuTT.models.statmech.hinderedthermo" title="Permalink to this headline">¶</a></h2>
-<p>PyMuTT.models.statmech.hinderedthermo</p>
-<p>Hindered translator/hindered rotor model</p>
-<dl class="class">
-<dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo">
-<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.hinderedthermo.</code><code class="descname">HinderedThermo</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>trans_barrier_energy</em>, <em>rot_barrier_energy</em>, <em>sitedensity</em>, <em>rotationalminima</em>, <em>potentialenergy=0.0</em>, <em>mass=None</em>, <em>inertia=None</em>, <em>atoms=None</em>, <em>symmetrynumber=1</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Hindered translator/hindered rotor model.
-Used for surface species where there are 2 translational modes,
-1 rotational mode perpendicular to the surface, and 3N-3 vibrational modes.</p>
-<p>See further documentation from <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model">ase.thermochemistry.HinderedThermo</a></p>
-<dl class="attribute">
-<dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.model">
-<code class="descname">model</code><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model">ase.thermochemistry.HinderedThermo</a></p>
-</dd></dl>
-
-<p>Below are parameters accepted by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/PyMuTT/PyMuTT.html#hindered-translator-hindered-rotor-model">ase.thermochemistry.HinderedThermo</a></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="31%" />
-<col width="69%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameters</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>vib_energies</td>
-<td>((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) Vibrational energies
-in eV</td>
-</tr>
-<tr class="row-odd"><td>trans_barrier_energy</td>
-<td>(float) Translational energy barrier in eV</td>
-</tr>
-<tr class="row-even"><td>rot_barrier_energy</td>
-<td>(float) Rotational energy barrier in eV</td>
-</tr>
-<tr class="row-odd"><td>sitedensity</td>
-<td>(float) Site density in cm^-2</td>
-</tr>
-<tr class="row-even"><td>rotationalminima</td>
-<td><p class="first">(int) Number of equivalent minima for an
-adsorbate full rotation e.g. 6 for an adsorbate</p>
-<blockquote class="last">
-<div>on an fcc(111) top site</div></blockquote>
-</td>
-</tr>
-<tr class="row-odd"><td>potentialenergy</td>
-<td>(float) Potential energy in eV</td>
-</tr>
-<tr class="row-even"><td>atoms</td>
-<td><blockquote class="first">
-<div>(<a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a>) Atoms object required for</div></blockquote>
-<p class="last">calculating rotational modes</p>
-</td>
-</tr>
-<tr class="row-odd"><td>symmetrynumber</td>
-<td><blockquote class="first">
-<div><p>(int) Symmetry number</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="42%" />
-<col width="58%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Point group</th>
-<th class="head">symmetry number</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>C1</td>
-<td>1</td>
-</tr>
-<tr class="row-odd"><td>Cs</td>
-<td>1</td>
-</tr>
-<tr class="row-even"><td>C2</td>
-<td>2</td>
-</tr>
-<tr class="row-odd"><td>C2v</td>
-<td>2</td>
-</tr>
-<tr class="row-even"><td>C3v</td>
+<tr class="row-odd"><td>n_degrees</td>
 <td>3</td>
 </tr>
-<tr class="row-odd"><td>Cinfv</td>
-<td>1</td>
+<tr class="row-even"><td>vib_model</td>
+<td>PyMuTT.models.statmech.vib.HarmonicVib</td>
 </tr>
-<tr class="row-even"><td>D2h</td>
-<td>4</td>
+<tr class="row-odd"><td>elec_model</td>
+<td>PyMuTT.models.statmech.elec.IdealElec</td>
 </tr>
-<tr class="row-odd"><td>D3h</td>
-<td>6</td>
-</tr>
-<tr class="row-even"><td>D5h</td>
-<td>10</td>
-</tr>
-<tr class="row-odd"><td>Dinfh</td>
-<td>2</td>
-</tr>
-<tr class="row-even"><td>D3d</td>
-<td>6</td>
-</tr>
-<tr class="row-odd"><td>Td</td>
-<td>12</td>
-</tr>
-<tr class="row-even"><td>Oh</td>
-<td>24</td>
+<tr class="row-even"><td>rot_model</td>
+<td>PyMuTT.models.statmech.rot.RigidRotor</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<p class="last">See DOI for more details:10.1007/s00214-007-0328-0</p>
-</td>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Required Parameters</th>
+<th class="head">Description</th>
 </tr>
-<tr class="row-odd"><td>mass</td>
-<td>(float) Mass of adsorbate in amu. If unspecified,
-uses the atoms object</td>
-</tr>
-<tr class="row-even"><td>inertia</td>
-<td><blockquote class="first">
-<div>(float) Reduced moment of inertia in amu*A^-2.</div></blockquote>
-<p class="last">If unspecified, uses atoms object</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless heat capacity (Cp/R) at a given
-temperature.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+</thead>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="row-even"><td>molecular_weight</td>
+<td>(float) Molecular weight in g/mol</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR</strong> – Dimensionless heat capacity (Cp/R)</td>
+<tr class="row-odd"><td>vib_wavenumbers</td>
+<td>(list of float) Vibrational wavenumbers in 1/cm</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="row-even"><td>potentialenergy</td>
+<td>(float) Electronic potential energy in eV</td>
 </tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_GoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless Gibbs energy at a given temperature and
-pressure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Pressure in atm. Default is 1 atm</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
-</ul>
-</td>
+<tr class="row-odd"><td>spin</td>
+<td>(float) Electron spin</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless heat capacity (G/RT) at the specified temperature</p>
-</td>
+<tr class="row-even"><td>geometry</td>
+<td>(str) Geometry of molecule</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
-</td>
+<tr class="row-odd"><td>rot_temperatures</td>
+<td>(list of float) Rotational temperatures in K</td>
+</tr>
+<tr class="row-even"><td>symmetrynumber</td>
+<td>(int) Symmetry number</td>
+</tr>
+<tr class="row-odd"><td>atoms</td>
+<td>(ase.Atoms object) Optional. If this parameter is specified, <code class="docutils literal notranslate"><span class="pre">molecular_weight</span></code>, <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, and <code class="docutils literal notranslate"><span class="pre">rot_temperatures</span></code> do not have to be specified.</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="method">
-<dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>Ts</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_HoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless enthalpy at a given temperature</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless heat capacity (H/RT) at the specified temperature</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>Ts</em>, <em>P=1.0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.hinderedthermo.HinderedThermo.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dimensionless entropy at a given temperature and
-pressure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Ts</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Pressure in atm. Default is 1 atm</li>
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether a table breaking down each contribution should be
-printed</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy (S/R) at the specified temperature and
-pressure</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
-<div class="section" id="heat-capacity">
-<h2>Heat Capacity<a class="headerlink" href="#heat-capacity" title="Permalink to this headline">¶</a></h2>
-<p>Enthalpy, entropy, and Gibbs energy are calculated using ASE. Heat capacity are calculated internally.</p>
-<span class="target" id="module-PyMuTT.models.statmech.heat_capacity"></span><p>PyMuTT.models.statmech.heat_capacity</p>
-<p>Common heat capacity calculations</p>
-<dl class="function">
-<dt id="PyMuTT.models.statmech.heat_capacity.get_CvoR_rot">
-<code class="descclassname">PyMuTT.models.statmech.heat_capacity.</code><code class="descname">get_CvoR_rot</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.heat_capacity.get_CvoR_rot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless rotational heat capacity</p>
-<p><img class="math" src="_images/math/6608de37e8ecd6a4719828db145f53d5ce71ede2.svg" alt="\frac {Cv_{rot}} {R} = 0"/> if monatomic</p>
-<p><img class="math" src="_images/math/ea705dbaba772cf5f0b1427af09a83d747275500.svg" alt="\frac {Cv_{rot}} {R} = 1"/> if linear</p>
-<p><img class="math" src="_images/math/a217ffb99fa48e6a843070e5c66c43114192f2a9.svg" alt="\frac {Cv_{rot}} {R} = 1.5"/> if nonlinear</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<div class="section" id="harmonic-approximation-harmonic">
+<h3>Harmonic Approximation (harmonic)<a class="headerlink" href="#harmonic-approximation-harmonic" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Default Value</th>
+</tr>
+</thead>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>geometry</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Geometry of the specie. Currently accepts:</p>
-<ul class="simple">
-<li>monatomic</li>
-<li>linear</li>
-<li>nonlinear</li>
-</ul>
-</td>
+<tr class="row-even"><td>vib_model</td>
+<td>PyMuTT.models.statmech.vib.HarmonicVib</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_rot</strong> – Dimensionless rotational heat capacity</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If none of the supported units are provided</td>
+<tr class="row-odd"><td>elec_model</td>
+<td>PyMuTT.models.statmech.elec.IdealElec</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="function">
-<dt id="PyMuTT.models.statmech.heat_capacity.get_CvoR_trans">
-<code class="descclassname">PyMuTT.models.statmech.heat_capacity.</code><code class="descname">get_CvoR_trans</code><span class="sig-paren">(</span><em>degrees=3</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.heat_capacity.get_CvoR_trans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless translational heat capacity</p>
-<p><img class="math" src="_images/math/5435f5a4a7033da3fef11800733eab8a21ca4f18.svg" alt="\frac {Cv_{trans}} {R} = \frac {N} {2}"/> where N is the degrees of freedom</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Required Parameters</th>
+<th class="head">Description</th>
+</tr>
+</thead>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>degrees</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Degrees of freedom the specie has. Gas-phase species will be
-3 degrees whereas surface species may have less depending on the
-thermodynamic model</td>
+<tr class="row-even"><td>vib_wavenumbers</td>
+<td>(list of float) Vibrational wavenumbers in 1/cm</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_trans</strong> – Dimensionless translational heat capacity</td>
+<tr class="row-odd"><td>potentialenergy</td>
+<td>(float) Electronic potential energy in eV</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If degrees &gt; 3 since this is not possible</td>
+<tr class="row-even"><td>spin</td>
+<td>(float) Electron spin</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="section" id="module-PyMuTT.models.statmech.trans">
+<span id="translational-models"></span><h2>Translational Models<a class="headerlink" href="#module-PyMuTT.models.statmech.trans" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.trans.</code><code class="descname">IdealTrans</code><span class="sig-paren">(</span><em>n_degrees=3</em>, <em>molecular_weight=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translational mode using ideal gas assumption. Equations found in
+Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+John Wiley &amp; Sons, 2010.</p>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.n_degrees">
+<code class="descname">n_degrees</code><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.n_degrees" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int, optional</em> – Number of degrees of freedom. Default is 3</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="PyMuTT.models.statmech.heat_capacity.get_CvoR_vib">
-<code class="descclassname">PyMuTT.models.statmech.heat_capacity.</code><code class="descname">get_CvoR_vib</code><span class="sig-paren">(</span><em>vib_energies</em>, <em>Ts</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.heat_capacity.get_CvoR_vib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless vibrational heat capacity</p>
-<p><img class="math" src="_images/math/320c74a91bcb55a84ee41782cdf3c9c5c130949e.svg" alt="\frac {Cp_{vib}}{R} = \sum_{i=1}^{n} \bigg(\frac {\Theta_{V,i}}{2T}\bigg)^2 \frac {1}{\big(sinh(\frac {\Theta_{V,i}}{2T})\big)^2}"/></p>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.molecular_weight">
+<code class="descname">molecular_weight</code><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.molecular_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Molecular weight of the molecule in g/mol.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><img class="math" src="_images/math/ab985e388fac316d08f412909359a866a3939092.svg" alt="\frac{A^{trans}}{RT}=\frac{U^{trans}}{RT}-\frac{S^{trans}}{R}"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>vib_energies</strong> (<em>array-like</em>) – Vibrational energies in eV</li>
-<li><strong>Ts</strong> (<em>array-like</em><em> or </em><em>scalar</em>) – Temperatures in K to calculate heat capacity</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+Default is atmospheric pressure</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR_vib</strong> – Dimensionless vibrational heat capacity</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>AoRT_trans</strong> – Translational dimensionless Helmholtz energy</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -825,6 +677,1301 @@ thermodynamic model</td>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><img class="math" src="_images/math/5496cec576ffaea04254044cc8ae29d18b0c7f49.svg" alt="\frac{Cv^{trans}}{R}=\frac{Cv^{trans}}{R} + 1"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_trans</strong> – Translational dimensionless heat capacity at constant P</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><img class="math" src="_images/math/0218bcb0f0ff5584f98c236ae40d444f5454fdb2.svg" alt="\frac{Cv^{trans}}{R}=\frac{n_{degrees}}{2}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_trans</strong> – Translational dimensionless heat capacity at constant V</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><img class="math" src="_images/math/fb04cb843d9632a4e088de231a8400a30c15671f.svg" alt="\frac{G^{trans}}{RT}=\frac{H^{trans}}{RT}-\frac{S^{trans}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+Default is atmospheric pressure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoR_trans</strong> – Translational dimensionless Gibbs energy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><img class="math" src="_images/math/b151a20081de4de7f95aa0c1d761792b73e52dd4.svg" alt="\frac{H^{trans}}{RT}=\frac{U^{trans}}{RT} + 1"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_trans</strong> – Translational enthalpy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><img class="math" src="_images/math/47971fa10a2b971d187507515ecb525a78aaaa10.svg" alt="\frac{S^{trans}}{R}=1+\frac{n_{degrees}}{2}+\log\bigg(\big(
+\frac{2\pi mk_bT}{h^2})^\frac{n_{degrees}}{2}\frac{RT}{PN_a}\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+Default is atmospheric pressure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR_trans</strong> – Translational dimensionless entropy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless internal energy</p>
+<p><img class="math" src="_images/math/139ea2f9fb4519aef5f13b6fbe20529879fe937d.svg" alt="\frac{U^{trans}}{RT}=\frac{n_{degrees}}{2}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_trans</strong> – Translational internal energy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_V">
+<code class="descname">get_V</code><span class="sig-paren">(</span><em>T</em>, <em>P</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_V" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the molar volume of an ideal gas at T and P</p>
+<p><img class="math" src="_images/math/c8037499c1d4bcade86a92f8807d23527c2a7606.svg" alt="V_m=\frac{RT}{P}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Pressure in bar</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>V</strong> – Molar volume in m3</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<p><img class="math" src="_images/math/34828a644c13d03c8b291543f0a3ef6900dcf53b.svg" alt="q_{trans} = \bigg(\frac{2\pi \sum_{i}^{atoms}m_ikT}{h^2}
+\bigg)^\frac {n_{degrees}} {2}V"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+Default is atmospheric pressure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q_trans</strong> – Translational partition function</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyMuTT.models.statmech.vib">
+<span id="vibrational-models"></span><h2>Vibrational Models<a class="headerlink" href="#module-PyMuTT.models.statmech.vib" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vibrational modes using the harmonic approximation.Equations found in
+Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+John Wiley &amp; Sons, 2010.</p>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.vib_wavenumbers">
+<code class="descname">vib_wavenumbers</code><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><img class="math" src="_images/math/4fdc1992db3e15abbc630581ad7d20400210e2c4.svg" alt="\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>AoRT_vib</strong> – Vibrational dimensionless Helmholtz energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><img class="math" src="_images/math/ae2955238d050da86d795e1976224b9f9921d46c.svg" alt="\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{
+\Theta_{V,i}}{2T}\bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}
+{2T}}\big)^2}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_vib</strong> – Vibrational dimensionless heat capacity at constant pressure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><img class="math" src="_images/math/6a633ba03d941b140d634cdee3bbec8e803592ec.svg" alt="\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}
+\bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}{2T}}\big)^2}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_vib</strong> – Vibrational dimensionless heat capacity at constant volume</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><img class="math" src="_images/math/627ad27c25142e80572d4bd85aef587cd6ddc41e.svg" alt="\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT_vib</strong> – Vibrational dimensionless Gibbs energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><img class="math" src="_images/math/5e3d7a51c505e82572d4556bcf186a95da332808.svg" alt="\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{
+\Theta_{V,i}}{2T}+\frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{
+\Theta_{V,i}}{T}\big)}{1-\exp\big(-\frac{\Theta_{V_i}}{T}\big)}
+\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_vib</strong> – Vibrational dimensionless enthalpy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><img class="math" src="_images/math/a49222f24368c79bde6d690b9f06ef6ae9425501.svg" alt="\frac{S^{vib}}{R}=\sum_i \frac{\Theta_{V,i}}{T}\frac{\exp
+\big(-\frac{\Theta_{V,i}}{T}\big)}{1-\exp\big(-\frac{
+\Theta_{V,i}}{T}\big)}-\ln \bigg(1-\exp\big(-\frac{
+\Theta_{V,i}}{T}\big)\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR_vib</strong> – Vibrational dimensionless entropy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the imensionless internal energy</p>
+<p><img class="math" src="_images/math/2990886bb3fe7c1b7efff57f427b404090f268e4.svg" alt="\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}+
+\frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{\Theta_{V,i}}{T}
+\big)}{1-\exp\big(-\frac{\Theta_{V_i}}{T}\big)}\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_vib</strong> – Vibrational dimensionless internal energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_ZPE">
+<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the zero point energy</p>
+<p><img class="math" src="_images/math/f9ed93122d36603e38722acfba243105742cb2f6.svg" alt="ZPE=\frac{1}{2}h\sum_i \Theta_{V,i}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>zpe</strong> – Zero point energy in eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<p><img class="math" src="_images/math/0c8b154acbc39bb01e75214b6f1d05c6d5fc2a29.svg" alt="q^{vib}=\prod_i \frac{\exp({-\frac{\Theta_{V,i}}{2T}})}
+{1-\exp({-\frac{\Theta_{V,i}}{T}})}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>q_vib</strong> – Vibrational partition function</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.vib.</code><code class="descname">QRRHOVib</code><span class="sig-paren">(</span><em>vib_wavenumbers</em>, <em>Bav=1e-44</em>, <em>v0=100.0</em>, <em>alpha=4</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
+approximation. Equations found in</p>
+<p>1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
+Phys. Chem. C 2015, 119 (4), 1840–1850.
+2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.</p>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.vib_wavenumber">
+<code class="descname">vib_wavenumber</code><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.vib_wavenumber" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.Bav">
+<code class="descname">Bav</code><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.Bav" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – Average molecular moment of inertia as a limiting value of small
+wavenumbers. Default is 1.e-44 kg m2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.v0">
+<code class="descname">v0</code><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.v0" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – Wavenumber to scale vibrations. Default is 100 cm <sup>-1</sup></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.alpha">
+<code class="descname">alpha</code><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int, optional</em> – Power to raise ratio of wavenumbers. Default is 4</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><img class="math" src="_images/math/0af9184456e21f1028a171d972b77f12e591d09d.svg" alt="\frac{A^{qRRHO}}{RT} = \frac{U^{qRRHO}}{RT}-
+\frac{S^{qRRHO}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>AoRT_vib</strong> – Vibrational dimensionless Helmholtz energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><img class="math" src="_images/math/dfc75fa92d2052242fb820bf27cab707c878174d.svg" alt="\frac{C_{P}^{qRRHO}} {R} = \frac{C_{V}^{qRRHO}} {R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_vib</strong> – Vibrational dimensionless heat capacity at constant pressure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><img class="math" src="_images/math/4f513014ef1716477f57098a1da630d45016a166.svg" alt="\frac {C_{v}^{qRRHO}}{R} = \sum_{i}\omega_i\frac{C_{v,i}
+^{RRHO}}{R} + \frac{1}{2}(1-\omega_i)"/></p>
+<p><img class="math" src="_images/math/5f7468674e6986ae3a5c24200a17040605c45def.svg" alt="\frac{C_{v}^{RRHO}}{R} = \sum_{i}\exp \bigg(-\frac{
+\Theta_i}{T}\bigg) \bigg(\frac{\Theta_i}{T}\frac{1}{1-\exp(-
+\frac{\Theta_i}{T})}\bigg)^2"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_vib</strong> – Vibrational dimensionless heat capacity at constant volume</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><img class="math" src="_images/math/d5adf3c42ab9d7c6feb9c3aac5f49cd75d25b391.svg" alt="\frac{G^{qRRHO}}{RT} = \frac{H^{qRRHO}}{RT}-
+\frac{S^{qRRHO}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT_vib</strong> – Vibrational dimensionless Gibbs energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><img class="math" src="_images/math/32a0a62c52844f12d899ed93cc061b3f36966740.svg" alt="\frac{H^{qRRHO}} {RT} = \frac{U^{qRRHO}} {RT}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_vib</strong> – Vibrational dimensionless enthalpy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><img class="math" src="_images/math/c03f429b67fb37d0fd4dfde33f48881da93c68be.svg" alt="\frac{S^{qRRHO}}{R}=\sum_i\omega_i\frac{S_i^{H}}{R}+(1-
+\omega_i)\frac{S_i^{RRHO}}{R}"/></p>
+<p><img class="math" src="_images/math/916433ea5b0b8b52cd5eab3747313429c9722b7e.svg" alt="\frac {S^{RRHO}_i}{R} = \frac{1}{2} + \log \bigg(\bigg[
+\frac{8\pi^3\mu'_ik_BT}{h^2}\bigg]^{\frac{1}{2}}\bigg)"/></p>
+<p><img class="math" src="_images/math/9922eb477f5b4b1720cca1db7bd3d6fc0d115c17.svg" alt="\frac {S^{H}_i}{R}=\bigg(\frac{\Theta_i}{T}\bigg)\frac{1}
+{\exp(\frac{\Theta_i}{T})-1}-\log\bigg(1-\exp(\frac{-\Theta_i}
+{T})\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR_vib</strong> – Vibrational dimensionless entropy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the imensionless internal energy</p>
+<p><img class="math" src="_images/math/22575ef1cb2c1cccdd79e6d42074cfcc65ae765f.svg" alt="\frac {U^{qRRHO}}{RT} = \sum_{i}\omega_i\frac{U^{RRHO}}{RT}
++ \frac{1}{2}(1-\omega_i)"/></p>
+<p><img class="math" src="_images/math/6e4c3fbbd95d5f42d90863aafacc11cc37a4e12b.svg" alt="\frac {U^{RRHO}}{RT} = \frac{\Theta_i}{T} \bigg(\frac{1}{2}
++ \frac{\exp(-\frac{\Theta_i}{T})}{1-\exp(-\frac{\Theta_i}{T})}
+\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_vib</strong> – Vibrational dimensionless internal energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>q_vib</strong> – Vibrational partition function</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyMuTT.models.statmech.rot">
+<span id="rotational-models"></span><h2>Rotational Models<a class="headerlink" href="#module-PyMuTT.models.statmech.rot" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.rot.</code><code class="descname">RigidRotor</code><span class="sig-paren">(</span><em>symmetrynumber</em>, <em>rot_temperatures=None</em>, <em>geometry=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotational mode using the rigid rotor assumption. Equations found in
+Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+John Wiley &amp; Sons, 2010.</p>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.symmetrynumber">
+<code class="descname">symmetrynumber</code><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.symmetrynumber" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Symmetry number of molecule.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Point group</th>
+<th class="head">symmetry number</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>C1</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>Cs</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>C2</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>C2v</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>C3v</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>Cinfv</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>D2h</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>D3h</td>
+<td>6</td>
+</tr>
+<tr class="row-even"><td>D5h</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>Dinfh</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>D3d</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>Td</td>
+<td>12</td>
+</tr>
+<tr class="row-even"><td>Oh</td>
+<td>24</td>
+</tr>
+</tbody>
+</table>
+<p>See DOI for more details: 10.1007/s00214-007-0328-0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.rot_temperatures">
+<code class="descname">rot_temperatures</code><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.rot_temperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of float, optional</em> – Rotational temperatures in K</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.geometry">
+<code class="descname">geometry</code><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – Geometry of molecule. Accepted options are:</p>
+<ul class="simple">
+<li>monatomic</li>
+<li>linear</li>
+<li>nonlinear</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.atoms">
+<code class="descname">atoms</code><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ase.Atoms object, optional</em> – An atoms object can be used to calculate rot_temperatures and
+guess geometry</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><img class="math" src="_images/math/49320154ef774b07b90d6834980fb52914cc470a.svg" alt="\frac{A^{rot}}{RT}=\frac{U^{rot}}{RT}-\frac{S^{rot}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>AoRT_rot</strong> – Rotational dimensionless Helmholtz energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><img class="math" src="_images/math/19dfd50ae3a288229b765f2ad6fea07081ea3876.svg" alt="\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}"/> if monatomic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_rot</strong> – Rotational dimensionless heat capacity at constant pressure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><img class="math" src="_images/math/b3cc8df184aaf6ecefd8f4d15f096b5a0a2db708.svg" alt="\frac{C_V^{rot}}{R}=0"/> if monatomic</p>
+<p><img class="math" src="_images/math/9a3ea3c155afb9d37c06e572a810b05b01c213be.svg" alt="\frac{C_V^{rot}}{R}=1"/> if linear</p>
+<p><img class="math" src="_images/math/3b9814b0f5415d3f9bf7dc5984dfbe96e6d7968e.svg" alt="\frac{C_V^{rot}}{R}=1.5"/> if monatomic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_rot</strong> – Rotational dimensionless heat capacity at constant volume</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><img class="math" src="_images/math/b2b3e57e2d6458fb992c6dd0b85e815aca91cfb6.svg" alt="\frac{G^{rot}}{RT}=\frac{H^{rot}}{RT}-\frac{S^{rot}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT_rot</strong> – Rotational dimensionless Gibbs energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><img class="math" src="_images/math/dd496c4a8151538d71651e6a371b2347e1da93e9.svg" alt="\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}"/> if monatomic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_rot</strong> – Rotational dimensionless enthalpy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><img class="math" src="_images/math/86ab4d737e3f5666c1163fbd7c48a9f803c9f225.svg" alt="\frac{S^{rot}}{R}=0"/> if monatomic</p>
+<p><img class="math" src="_images/math/1fa071c44c9ab411d504a17e3e0b50351a1c4482.svg" alt="\frac{S}{R}=\log(\frac{T}{\sigma}\prod_i \frac{1}{
+\Theta_{R,i}})+1"/> if linear</p>
+<p><img class="math" src="_images/math/0ff8d87c13dcc111ce76d83558a0cf1b4a29ac64.svg" alt="\frac{S^{rot}}{R}=\log\bigg(\frac{\sqrt\pi }{\sigma}
+\prod_i{(\frac{T^3}{\Theta_{R,i}})^\frac{1}{2}}\bigg)+1.5"/>
+if monatomic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR_rot</strong> – Rotational dimensionless entropy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the imensionless internal energy</p>
+<p><img class="math" src="_images/math/b765565725eff9ada5a4d3b2b8ff8c029190a32b.svg" alt="\frac{U^{rot}}{RT}=0"/> if monatomic</p>
+<p><img class="math" src="_images/math/74c9de51a116ef61bb7e872a818ea8d967fc98bb.svg" alt="\frac{U^{rot}}{RT}=1"/> if linear</p>
+<p><img class="math" src="_images/math/d7dbf092fc2ea4a6e5033744645a33e8812b0d85.svg" alt="\frac{U^{rot}}{RT}=1.5"/> if monatomic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_rot</strong> – Rotational dimensionless internal energy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<p><img class="math" src="_images/math/4096cd5d3faf0b373f2d93c7a0fd2f74cb61f73b.svg" alt="q^{rot}=0"/> if monatomic</p>
+<p><img class="math" src="_images/math/f90655bcb53522b2c36b4c78bfd316c555736560.svg" alt="q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_V}"/> if linear</p>
+<p><img class="math" src="_images/math/081a1052f05eae11c3255b6f104b3e2bad40bbd7.svg" alt="q^{rot}=\frac{\sqrt{\pi}}{\sigma}(T^3\prod_i\frac{1}{
+\Theta_{Vi}})^\frac{1}{2}"/> if nonlinear</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>q_rot</strong> – Rotational partition function</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.models.statmech.rot.get_geometry_from_atoms">
+<code class="descclassname">PyMuTT.models.statmech.rot.</code><code class="descname">get_geometry_from_atoms</code><span class="sig-paren">(</span><em>atoms</em>, <em>degree_tol=5.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.get_geometry_from_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the geometry using the ase.Atoms object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>atoms</strong> (<em>ase.Atoms object</em>) – Atoms object</li>
+<li><strong>degree_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Degree tolerance in degrees</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>geometry</strong> – Geometry</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.models.statmech.rot.get_rot_temperatures_from_atoms">
+<code class="descclassname">PyMuTT.models.statmech.rot.</code><code class="descname">get_rot_temperatures_from_atoms</code><span class="sig-paren">(</span><em>atoms</em>, <em>geometry=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.get_rot_temperatures_from_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the rotational temperatures from ase.Atoms object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>atoms</strong> (<em>ase.Atoms object</em>) – Atoms object</li>
+<li><strong>geometry</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Geometry of molecule. If not specified, it will be guessed from
+Atoms object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rot_temperatures</strong> – Rotational temperatures</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyMuTT.models.statmech.elec">
+<span id="electronic-models"></span><h2>Electronic Models<a class="headerlink" href="#module-PyMuTT.models.statmech.elec" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.models.statmech.elec.IdealElec">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.elec.</code><code class="descname">IdealElec</code><span class="sig-paren">(</span><em>potentialenergy=0.0</em>, <em>spin=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electronic modes using the ideal gas assumption. Equations found in
+Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+John Wiley &amp; Sons, 2010.</p>
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.potentialenergy">
+<code class="descname">potentialenergy</code><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.potentialenergy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – Potential energy in eV. Default is 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.spin">
+<code class="descname">spin</code><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.spin" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – The total electron spin. Default is 0</p>
+<ul class="simple">
+<li>0 for molecules in which all electrons are paired</li>
+<li>0.5 for a free radical with a single unpaired electron</li>
+<li>1.0 for a triplet with two unpaired electrons, such as O <sub>2</sub></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><img class="math" src="_images/math/b9fe60bdedf07e7aa673c451028a9c6802827c1f.svg" alt="\frac{A^{elec}}{RT}=\frac{U^{elec}}{RT}-\frac{S^{elec}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>AoRT_elec</strong> – Electronic dimensionless Helmholtz energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><img class="math" src="_images/math/ebcd215cdae28ef3b26d59df8c00603af5c85d08.svg" alt="\frac{C_V^{elec}}{R}=\frac{C_P^{elec}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_elec</strong> – Electronic dimensionless heat capacity at constant pressure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><img class="math" src="_images/math/228fff39b542f7b35cf12f58a1e5c77ef7dc2fd9.svg" alt="\frac{C_V^{elec}}{R}=0"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_elec</strong> – electronic dimensionless heat capacity at constant volume</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><img class="math" src="_images/math/64748b4e1731bd51d6de11ea875413144c383df7.svg" alt="\frac{G^{elec}}{RT}=\frac{H^{elec}}{RT}-\frac{S^{elec}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT_elec</strong> – Electronic dimensionless Gibbs energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><img class="math" src="_images/math/25295999ee69df3171847e2145cd46e85311a03e.svg" alt="\frac{H^{elec}}{RT}=\frac{U^{elec}}{RT}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_elec</strong> – Electronic dimensionless enthalpy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><img class="math" src="_images/math/9b0ace822491a8c50034a4053c693fa93d87fa5a.svg" alt="\frac{S^{elec}}{R}=\log \omega"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR_elec</strong> – Electronic dimensionless entropy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the imensionless internal energy</p>
+<p><img class="math" src="_images/math/7ae708b30ed1fd3367cec7b1d1de61c289d11685.svg" alt="\frac{U^{elec}}{RT}=\frac{E}{RT}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_elec</strong> – Electronic dimensionless internal energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>ignore_q_elec=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<p><img class="math" src="_images/math/96e5fbfbbd2695b3e4fa165174f35b3a76b47482.svg" alt="q^{elec}=\omega_i \exp\bigg(-\frac{E}{RT}\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>ignore_q_elec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Ignore the contribution of electronic mode to partition function
+. Often necessary since DFT’s value for potentialenergy is
+very negative causing q_elec to go to infinity.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q_elec</strong> – Electronic partition function</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nuclear-models">
+<h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Permalink to this headline">¶</a></h2>
+<p>Typically these are unimportant for chemical reactions, but the module is present in case
+nuclear modes become important in the future.</p>
+<span class="target" id="module-PyMuTT.models.statmech.nucl"></span><dl class="class">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.nucl.</code><code class="descname">IdealNucl</code><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nuclear modes. Assumes no change in any chemical reaction and hence
+does not affect thermodynamic quantities.</p>
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>AoRT_nucl</strong> – Nuclear dimensionless Helmholtz energy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_nucl</strong> – Nuclear dimensionless heat capacity at constant pressure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_nucl</strong> – Nuclear dimensionless heat capacity at constant volume</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT_nucl</strong> – Nuclear dimensionless Gibbs energy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_nucl</strong> – Nuclear dimensionless enthalpy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR_nucl</strong> – Nuclear dimensionless entropy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the imensionless internal energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_nucl</strong> – Nuclear dimensionless internal energy</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>q_nucl</strong> – Nuclear partition function</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="making-your-own-model">
+<h2>Making your own model<a class="headerlink" href="#making-your-own-model" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to create your own class to be stored by <code class="docutils literal notranslate"><span class="pre">StatMech</span></code>, it should have the methods:
+<code class="docutils literal notranslate"><span class="pre">get_q</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_AoRT</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>.</p>
 </div>
 </div>
 

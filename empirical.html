@@ -162,7 +162,7 @@
 <p>Empirical models.</p>
 <dl class="class">
 <dt id="PyMuTT.models.empirical.BaseThermo">
-<em class="property">class </em><code class="descclassname">PyMuTT.models.empirical.</code><code class="descname">BaseThermo</code><span class="sig-paren">(</span><em>name</em>, <em>phase=None</em>, <em>elements=None</em>, <em>thermo_model=None</em>, <em>T_ref=298.15</em>, <em>HoRT_dft=None</em>, <em>HoRT_ref=None</em>, <em>references=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">PyMuTT.models.empirical.</code><code class="descname">BaseThermo</code><span class="sig-paren">(</span><em>name</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>T_ref=298.15</em>, <em>HoRT_dft=None</em>, <em>HoRT_ref=None</em>, <em>references=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Thermodynamic Parent class.
 Holds properties of a specie, the statistical-mechanical thermodynamic
 model.</p>
@@ -191,8 +191,8 @@ e.g. CH3OH can be represented as:
 </dd></dl>
 
 <dl class="attribute">
-<dt id="PyMuTT.models.empirical.BaseThermo.thermo_model">
-<code class="descname">thermo_model</code><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.thermo_model" title="Permalink to this definition">¶</a></dt>
+<dt id="PyMuTT.models.empirical.BaseThermo.statmech_model">
+<code class="descname">statmech_model</code><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.statmech_model" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>PyMuTT.models.statmech</cite> object – Statistical thermodynamic model.
 Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT</cite>,
 <cite>get_SoR</cite>, <cite>get_GoRT</cite>.</p>
@@ -367,8 +367,8 @@ specified, dimensionless units used.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.empirical.BaseThermo.plot_thermo_model">
-<code class="descname">plot_thermo_model</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_thermo_model" title="Permalink to this definition">¶</a></dt>
+<dt id="PyMuTT.models.empirical.BaseThermo.plot_statmech">
+<code class="descname">plot_statmech</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_statmech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -409,8 +409,8 @@ specified, dimensionless units used.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.empirical.BaseThermo.plot_thermo_model_and_empirical">
-<code class="descname">plot_thermo_model_and_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_thermo_model_and_empirical" title="Permalink to this definition">¶</a></dt>
+<dt id="PyMuTT.models.empirical.BaseThermo.plot_statmech_and_empirical">
+<code class="descname">plot_statmech_and_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.plot_statmech_and_empirical" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -445,6 +445,22 @@ specified, dimensionless units used.</li>
 </ul>
 </p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.empirical.BaseThermo.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.BaseThermo.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -515,18 +531,18 @@ T_low attribute</li>
 T_high attribute</li>
 <li><strong>Ts</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperatures in K used for fitting CpoR.</li>
 <li><strong>CpoR</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Dimensionless heat capacity corresponding to T. If not
-specified, calculates using self.thermo_model.get_CpoR</li>
+specified, calculates using self.statmech_model.get_CpoR</li>
 <li><strong>T_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Reference temperature in K used fitting empirical coefficients.
 If not specified, uses T_ref attribute</li>
 <li><strong>HoRT_dft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless enthalpy calculated using DFT that corresponds
 to T_ref. If not specified, uses HoRT_dft attribute. If the
 HoRT_dft attribute is not specified, uses
-self.thermo_model.get_HoRT</li>
+self.statmech_model.get_HoRT</li>
 <li><strong>HoRT_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless reference enthalpy that corresponds to T_ref. If
 this is specified, uses this value when fitting a_low[5] and
 a_high[5] instead of HoRT_dft and references</li>
 <li><strong>SoR_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless entropy that corresponds to T_ref. If not
-specified, uses self.thermo_model.get_SoR</li>
+specified, uses self.statmech_model.get_SoR</li>
 <li><strong>references</strong> (<code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.References</span></code>) – Contains references to calculate HoRT_ref. If not specified
 then HoRT_dft will be used without adjustment.</li>
 </ul>
@@ -684,6 +700,22 @@ T_high</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="PyMuTT.models.empirical.nasa.Nasa.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.nasa.Nasa.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="function">
@@ -793,6 +825,22 @@ polynomial form</p>
 <em class="property">class </em><code class="descclassname">PyMuTT.models.empirical.zacros.</code><code class="descname">Zacros</code><span class="sig-paren">(</span><em>A_st=None</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>inertia=None</em>, <em>geometry=None</em>, <em>vib_energies=None</em>, <em>potentialenergy=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.zacros.Zacros" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores the information for an individual nasa specie
 Inherits from PyMuTT.models.empirical.BaseThermo</p>
+<dl class="method">
+<dt id="PyMuTT.models.empirical.zacros.Zacros.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.zacros.Zacros.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -897,6 +945,22 @@ The elements are sorted in alphabetical order.</p>
 elements</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(M,N) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.empirical.references.References.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.empirical.references.References.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
