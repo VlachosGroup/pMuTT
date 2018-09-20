@@ -11,19 +11,26 @@ from ase.build import molecule
 from PyMuTT import constants as c
 from PyMuTT.models.empirical import BaseThermo
 from PyMuTT.models.empirical.references import References
+from PyMuTT.models.statmech import presets, StatMech, trans, rot, vib, elec
 from PyMuTT.models.statmech.idealgasthermo import IdealGasThermo
 
 class TestReferences(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
+
         H2_thermo = BaseThermo(
             name = 'H2',
             phase = 'G',
             elements = {'H':2},
-            thermo_model = IdealGasThermo,
             T_ref = c.T0('K'),
             HoRT_ref = 0.,
-            vib_energies = np.array([4306.1793]) * c.c('cm/s') * c.h('eV s'),
+            statmech_model = StatMech,
+            trans_model = trans.IdealTrans,
+            n_degrees = 3,
+            vib_model = vib.HarmonicVib,
+            elec_model = elec.IdealElec,
+            rot_model = rot.RigidRotor,
+            vib_wavenumbers = np.array([4306.1793]),
             potentialenergy = -6.7598,
             geometry = 'linear',
             symmetrynumber = 2,
@@ -34,10 +41,15 @@ class TestReferences(unittest.TestCase):
             name = 'H2O',
             phase = 'G',
             elements = {'H': 2, 'O': 1},
-            thermo_model = IdealGasThermo,
             T_ref = c.T0('K'),
             HoRT_ref = -241.826/(c.R('kJ/mol/K') * c.T0('K')),
-            vib_energies = np.array([3825.434, 3710.264, 1582.432]) * c.c('cm/s') * c.h('eV s'),
+            statmech_model = StatMech,
+            trans_model = trans.IdealTrans,
+            n_degrees = 3,
+            vib_model = vib.HarmonicVib,
+            elec_model = elec.IdealElec,
+            rot_model = rot.RigidRotor,
+            vib_wavenumbers = np.array([3825.434, 3710.264, 1582.432]),
             potentialenergy = -14.2209,
             geometry = 'nonlinear',
             symmetrynumber = 2,
@@ -48,10 +60,15 @@ class TestReferences(unittest.TestCase):
             name = 'H2O',
             phase = 'G',
             elements = {'O': 2},
-            thermo_model = IdealGasThermo,
             T_ref = c.T0('K'),
             HoRT_ref = 0.,
-            vib_energies = np.array([2205.]) * c.c('cm/s') * c.h('eV s'),
+            statmech_model = StatMech,
+            trans_model = trans.IdealTrans,
+            n_degrees = 3,
+            vib_model = vib.HarmonicVib,
+            elec_model = elec.IdealElec,
+            rot_model = rot.RigidRotor,
+            vib_wavenumbers = np.array([2205.]),
             potentialenergy = -9.86,
             geometry = 'linear',
             symmetrynumber = 2,
@@ -81,7 +98,7 @@ class TestReferences(unittest.TestCase):
 
     def test_get_specie_offset(self):
         elements = {'H': 2, 'O': 2}
-        self.assertAlmostEqual(self.references.get_HoRT_offset(elements=elements), 619.667428373883)
+        self.assertAlmostEqual(self.references.get_HoRT_offset(elements=elements), 619.6674284923677)
         with self.assertWarns(RuntimeWarning):
             self.assertEqual(self.references.get_HoRT_offset(elements={'non-referenced element': 1}), 0.)
 

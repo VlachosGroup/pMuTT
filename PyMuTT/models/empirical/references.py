@@ -8,7 +8,7 @@ references.
 
 from warnings import warn
 import numpy as np
-
+from PyMuTT.io_.jsonio import json_to_PyMuTT
 
 class References:
     """Holds reference species to adjust DFT energies to experimental data.
@@ -103,7 +103,7 @@ class References:
                 Rows correspond to reference species. Columns correspond to
                 elements
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        
         """
         elements = self.get_elements()
         elements_mat = np.zeros((len(self), len(elements)))
@@ -128,9 +128,10 @@ class References:
             warn('All the reference temperatures are not the same. May cause '
                  'error in referencing. Using mean temperature.')
         self.T_ref = np.mean(T_refs)
-        HoRT_ref_dft = np.array([reference.thermo_model.
-                                 get_HoRT(Ts=reference.T_ref)
-                                 for reference in self])
+
+        HoRT_ref_dft = np.array(
+                [reference.statmech_model.get_HoRT(T=reference.T_ref) 
+                    for reference in self])
         HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
         # Offset between the DFT energies and experimentalvalues
         # for reference species
@@ -177,3 +178,24 @@ class References:
         else:
             # Adjust for the temperature
             return HoRT_offset * self.T_ref/Ts
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': self.__class__,
+                'references': [ref.to_dict() for ref in self._references]}
+    
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        json_obj['references'] = [json_to_PyMuTT(ref_dict) \
+                                  for ref_dict in json_obj['references']]
+        return cls(**json_obj)

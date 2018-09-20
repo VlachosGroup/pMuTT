@@ -5,6 +5,7 @@ PyMuTT.models.statmech.idealgasthermo
 Operations for ideal gas models
 """
 
+from warnings import warn
 import numpy as np
 from ase import thermochemistry
 from PyMuTT import constants as c
@@ -80,6 +81,9 @@ class IdealGasThermo:
     """
     def __init__(self, vib_energies, geometry, potentialenergy=0.0,
                  atoms=None, symmetrynumber=None, spin=None, natoms=None):
+        warn('Class replaced with StatMech class. To replicate IdealGasThermo '
+             'behavior, use PyMuTT.models.statmech.presents.',
+             DeprecationWarning)
         self.model = thermochemistry.IdealGasThermo(
             vib_energies=vib_energies,
             geometry=geometry,

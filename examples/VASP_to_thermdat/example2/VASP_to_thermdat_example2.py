@@ -61,5 +61,5 @@ Printing Out Results
 write_thermdat(nasa_species=species, filename=thermdat_path)
 if show_plot:
     for nasa in species:
-        nasa.plot_thermo_model_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
+        nasa.plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
     plt.show()

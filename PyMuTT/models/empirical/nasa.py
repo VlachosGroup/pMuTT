@@ -10,6 +10,7 @@ import numpy as np
 from scipy.stats import variation
 from warnings import warn
 from PyMuTT import constants as c
+from PyMuTT.io_.jsonio import json_to_PyMuTT
 from PyMuTT.models.empirical import BaseThermo
 import sys
 
@@ -51,8 +52,8 @@ class Nasa(BaseThermo):
                  HoRT_ref=None, SoR_ref=None, **kwargs):
         super().__init__(T_ref=T_ref, HoRT_ref=HoRT_ref, **kwargs)
         # A ssign polynomial coefficients
-        self.a_low = a_low
-        self.a_high = a_high
+        self.a_low = np.array(a_low)
+        self.a_high = np.array(a_high)
 
         # Assign temperatures
         if T_low is not None:
@@ -246,7 +247,7 @@ class Nasa(BaseThermo):
                 Temperatures in K used for fitting CpoR.
             CpoR : (N,) `numpy.ndarray`_
                 Dimensionless heat capacity corresponding to T. If not
-                specified, calculates using self.thermo_model.get_CpoR
+                specified, calculates using self.statmech_model.get_CpoR
             T_ref : float
                 Reference temperature in K used fitting empirical coefficients.
                 If not specified, uses T_ref attribute
@@ -254,14 +255,14 @@ class Nasa(BaseThermo):
                 Dimensionless enthalpy calculated using DFT that corresponds
                 to T_ref. If not specified, uses HoRT_dft attribute. If the
                 HoRT_dft attribute is not specified, uses
-                self.thermo_model.get_HoRT
+                self.statmech_model.get_HoRT
             HoRT_ref : float
                 Dimensionless reference enthalpy that corresponds to T_ref. If
                 this is specified, uses this value when fitting a_low[5] and
                 a_high[5] instead of HoRT_dft and references
             SoR_ref : float
                 Dimensionless entropy that corresponds to T_ref. If not
-                specified, uses self.thermo_model.get_SoR
+                specified, uses self.statmech_model.get_SoR
             references : ``PyMuTT.models.empirical.References``
                 Contains references to calculate HoRT_ref. If not specified
                 then HoRT_dft will be used without adjustment.
@@ -314,12 +315,12 @@ class Nasa(BaseThermo):
         # Get reference enthalpy
         if HoRT_dft is None:
             if self.HoRT_dft is None:
-                self.HoRT_dft = self.thermo_model.get_HoRT(Ts=T_ref)
+                self.HoRT_dft = self.statmech_model.get_HoRT(T=T_ref)
             HoRT_dft = self.HoRT_dft
 
         # Get reference entropy
         if SoR_ref is None:
-            SoR_ref = self.thermo_model.get_SoR(Ts=T_ref)
+            SoR_ref = self.statmech_model.get_SoR(T=T_ref)
 
         # Get references
         if references is not None:
@@ -521,6 +522,37 @@ class Nasa(BaseThermo):
 
         self.a_low[6] = a7_low
         self.a_high[6] = a7_high + S_offset
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = super().to_dict()
+        obj_dict['class'] = str(self.__class__)
+        obj_dict['a_low'] = list(self.a_low)
+        obj_dict['a_high'] = list(self.a_high)
+        obj_dict['T_low'] = self.T_low
+        obj_dict['T_mid'] = self.T_mid
+        obj_dict['T_high'] = self.T_high
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        # Reconstruct statmech model
+        json_obj['statmech_model'] = \
+                json_to_PyMuTT(json_obj['statmech_model'])
+        json_obj['references'] = \
+                json_to_PyMuTT(json_obj['references'])
+
+        return cls(**json_obj)
 
 
 def get_nasa_CpoR(a, T):

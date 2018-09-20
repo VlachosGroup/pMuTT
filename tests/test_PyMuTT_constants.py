@@ -61,5 +61,15 @@ class TestConstants(unittest.TestCase):
         with self.assertRaises(ValueError):
             c.convert_unit(from_ = 'cm', to = 'arbitrary unit')
 
+    def test_wavenumber_to_temp(self):
+        self.assertAlmostEqual(c.wavenumber_to_temp(1.), 1.4387773538277204)
+
+    def test_wavenumber_to_energy(self):
+        self.assertAlmostEqual(c.wavenumber_to_energy(1.), 1.239841974E-04)
+
+    def test_wavenumber_to_inertia(self):
+        self.assertTrue( \
+                np.isclose(c.wavenumber_to_inertia(1.), 2.799275137826E-46))
+
 if __name__ == '__main__':
     unittest.main()

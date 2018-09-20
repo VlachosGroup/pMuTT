@@ -5,6 +5,7 @@ PyMuTT
 
 import re
 import inspect
+from warnings import warn
 from PyMuTT import constants as c
 
 
@@ -41,7 +42,8 @@ def _pass_expected_arguments(fn, **kwargs):
     ----------
         fn : Function or class
             Function or class you would like to find the expected arguments.
-
+        verbose : bool, Optional
+            If True, warns when an argument could not be found. Default is True
         **kwargs :
             Keyword arguments that contain parameters to pass to fn
     Returns
@@ -52,6 +54,9 @@ def _pass_expected_arguments(fn, **kwargs):
     expected_args = _get_expected_arguments(fn)
     expected_arg_val = {}
     for arg in expected_args:
+        if arg == 'self':
+            continue
+
         try:
             expected_arg_val[arg] = kwargs[arg]
         except KeyError:

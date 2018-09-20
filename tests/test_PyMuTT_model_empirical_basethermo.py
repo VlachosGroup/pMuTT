@@ -7,7 +7,7 @@ Created on Fri Jul 7 12:31:00 2018
 import unittest
 import numpy as np
 from ase.build import molecule
-from ase.thermochemistry import IdealGasThermo
+from PyMuTT.models.statmech import StatMech, presets
 from PyMuTT.models.empirical import BaseThermo
 
 class TestBaseThermo(unittest.TestCase):
@@ -17,14 +17,13 @@ class TestBaseThermo(unittest.TestCase):
             name = 'H2O',
             elements = {'H': 2, 'O': 1},
             phase = 'g',
-            thermo_model = IdealGasThermo,
+            statmech_model = StatMech,
             potentialenergy = -14.2209,
-            geometry = 'nonlinear',
             atoms = molecule('H2O'),
             symmetrynumber = 2,
             spin = 0,
-            vib_energies = np.array([0.47462, 0.46033, 0.19633])
-            )
+            vib_wavenumbers = np.array([3825.434, 3710.2642, 1582.432]),
+            **presets['idealgas'])
 
 if __name__ == '__main__':
     unittest.main()
