@@ -32,12 +32,12 @@ class TestNasa(unittest.TestCase):
             )
 
     def test_get_a(self):
-        np.testing.assert_array_equal(self.Nasa.get_a(T=self.Nasa.T_mid-500), self.Nasa.a_low)
-        np.testing.assert_array_equal(self.Nasa.get_a(T=self.Nasa.T_mid+500), self.Nasa.a_high)
+        np.testing.assert_array_equal(self.Nasa.get_a(T=300.), self.Nasa.a_low)
+        np.testing.assert_array_equal(self.Nasa.get_a(T=2000.), self.Nasa.a_high)
         with self.assertWarns(RuntimeWarning):
-            np.testing.assert_array_equal(self.Nasa.get_a(T=self.Nasa.T_high+100), self.Nasa.a_high)
+            np.testing.assert_array_equal(self.Nasa.get_a(T=6000.), self.Nasa.a_high)
         with self.assertWarns(RuntimeWarning):
-            np.testing.assert_array_equal(self.Nasa.get_a(T=self.Nasa.T_low-100), self.Nasa.a_low)
+            np.testing.assert_array_equal(self.Nasa.get_a(T=50.), self.Nasa.a_low)
 
     def test_get_CpoR(self):
         Ts = np.array([500., 600., 700., 800., 900., 1000., 1100., 1200., 1300., 1400., 1500., 1600., 1700., 1800., 1900., 2000., 2100., 2200])

@@ -74,7 +74,6 @@ class Nasa(BaseThermo):
 
         # Check the form of T_mid to be sure it is a sorted list
         if T_mid is not None:
-            print(T_mid)
             # If a list, sort it
             if type(T_mid) == list:
                 self.T_mid = T_mid
