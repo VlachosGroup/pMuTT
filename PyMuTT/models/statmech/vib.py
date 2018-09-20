@@ -4,7 +4,9 @@ import numpy as np
 from PyMuTT import constants as c
 
 class HarmonicVib:
-    """Vibrational modes using the harmonic approximation.
+    """Vibrational modes using the harmonic approximation.Equations found in
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    John Wiley & Sons, 2010.
     
     Attributes
     ----------
@@ -79,6 +81,8 @@ class HarmonicVib:
     
     def get_ZPE(self):
         """Calculates the zero point energy
+
+        :math:`ZPE=\\frac{1}{2}h\\sum_i \\Theta_{V,i}`
 
         Returns
         -------
@@ -187,9 +191,33 @@ class HarmonicVib:
         """
         return self.get_HoRT(T=T) - self.get_SoR(T=T)
 
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__),
+                'vib_wavenumbers': list(self.vib_wavenumbers)}
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        return cls(**json_obj)
+
 class QRRHOVib:
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
-    approximation.
+    approximation. Equations found in 
+
+    1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J. 
+    Phys. Chem. C 2015, 119 (4), 1840–1850.
+    2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
+
     
     Attributes
     ----------
@@ -198,13 +226,10 @@ class QRRHOVib:
         Bav : float, optional
             Average molecular moment of inertia as a limiting value of small
             wavenumbers. Default is 1.e-44 kg m2
-        v0 : float
+        v0 : float, optional
+            Wavenumber to scale vibrations. Default is 100 cm :sup:`-1`
         alpha : int, optional
             Power to raise ratio of wavenumbers. Default is 4
-        harmonic_model : `PyMuTT.models.statmech.vib.HarmonicVib` object
-            Harmonic approximation contribution
-        rigidrotor_model: `PyMuTT.models.statmech.vib.RigidRotor` object
-            Rigid rotor approximation contribution
     """
 
     def __init__(self, vib_wavenumbers, Bav=1.e-44, v0=100., alpha=4):
@@ -225,6 +250,8 @@ class QRRHOVib:
         """Calculates the scaled wavenumber determining mixture of RRHO to
         add.
 
+        :math:`\\omega = \\frac {1}{1 + (\\frac{\\nu_0}{\\nu})^\\alpha}`
+
         Parameters
         ----------
             wavenumber : float
@@ -238,6 +265,8 @@ class QRRHOVib:
     
     def _get_scaled_inertia(self, mu):
         """Calculates the scaled moment of inertia.
+
+        :math:`\\mu'=\\frac {\\mu B_{av}} {\\mu + B_{av}}`
 
         Parameters
         ----------
@@ -263,6 +292,13 @@ class QRRHOVib:
     def get_CvoR(self, T):
         """Calculates the dimensionless heat capacity at constant volume
 
+        :math:`\\frac {C_{v}^{qRRHO}}{R} = \\sum_{i}\\omega_i\\frac{C_{v,i}
+        ^{RRHO}}{R} + \\frac{1}{2}(1-\\omega_i)`
+
+        :math:`\\frac{C_{v}^{RRHO}}{R} = \\sum_{i}\\exp \\bigg(-\\frac{
+        \\Theta_i}{T}\\bigg) \\bigg(\\frac{\\Theta_i}{T}\\frac{1}{1-\\exp(-
+        \\frac{\\Theta_i}{T})}\\bigg)^2`
+
         Parameters
         ----------
             T : float
@@ -282,6 +318,8 @@ class QRRHOVib:
 
     def get_CpoR(self, T):
         """Calculates the dimensionless heat capacity at constant pressure
+
+        :math:`\\frac{C_{P}^{qRRHO}} {R} = \\frac{C_{V}^{qRRHO}} {R}`
 
         Parameters
         ----------
@@ -314,6 +352,13 @@ class QRRHOVib:
     def get_UoRT(self, T):
         """Calculates the imensionless internal energy
 
+        :math:`\\frac {U^{qRRHO}}{RT} = \\sum_{i}\\omega_i\\frac{U^{RRHO}}{RT} 
+        + \\frac{1}{2}(1-\\omega_i)`
+
+        :math:`\\frac {U^{RRHO}}{RT} = \\frac{\\Theta_i}{T} \\bigg(\\frac{1}{2} 
+        + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{\\Theta_i}{T})}
+        \\bigg)`
+
         Parameters
         ----------
             T : float
@@ -332,6 +377,8 @@ class QRRHOVib:
 
     def get_HoRT(self, T):
         """Calculates the dimensionless enthalpy
+
+        :math:`\\frac{H^{qRRHO}} {RT} = \\frac{U^{qRRHO}} {RT}`
 
         Parameters
         ----------
@@ -382,6 +429,16 @@ class QRRHOVib:
     def get_SoR(self, T):
         """Calculates the dimensionless entropy
 
+        :math:`\\frac{S^{qRRHO}}{R}=\\sum_i\\omega_i\\frac{S_i^{H}}{R}+(1-
+        \\omega_i)\\frac{S_i^{RRHO}}{R}`
+
+        :math:`\\frac {S^{RRHO}_i}{R} = \\frac{1}{2} + \\log \\bigg(\\bigg[
+        \\frac{8\\pi^3\\mu'_ik_BT}{h^2}\\bigg]^{\\frac{1}{2}}\\bigg)`
+
+        :math:`\\frac {S^{H}_i}{R}=\\bigg(\\frac{\\Theta_i}{T}\\bigg)\\frac{1}
+        {\\exp(\\frac{\\Theta_i}{T})-1}-\\log\\bigg(1-\\exp(\\frac{-\\Theta_i}
+        {T})\\bigg)`
+
         Parameters
         ----------
             T : float
@@ -401,6 +458,9 @@ class QRRHOVib:
     def get_AoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
 
+        :math:`\\frac{A^{qRRHO}}{RT} = \\frac{U^{qRRHO}}{RT}-
+        \\frac{S^{qRRHO}}{R}`
+
         Parameters
         ----------
             T : float
@@ -415,6 +475,9 @@ class QRRHOVib:
     def get_GoRT(self, T):
         """Calculates the dimensionless Gibbs energy
 
+        :math:`\\frac{G^{qRRHO}}{RT} = \\frac{H^{qRRHO}}{RT}-
+        \\frac{S^{qRRHO}}{R}`
+
         Parameters
         ----------
             T : float
@@ -425,3 +488,25 @@ class QRRHOVib:
                 Vibrational dimensionless Gibbs energy
         """
         return self.get_HoRT(T=T) - self.get_SoR(T=T)
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__),
+                'vib_wavenumbers': list(self.vib_wavenumbers),
+                'Bav': self.Bav,
+                'v0': self.v0,
+                'alpha': self.alpha}
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        return cls(**json_obj)

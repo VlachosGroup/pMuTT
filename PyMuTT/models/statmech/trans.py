@@ -5,7 +5,9 @@ from PyMuTT import constants as c
 from PyMuTT import get_molecular_weight
 
 class IdealTrans:
-    """Translational mode using ideal gas assumption
+    """Translational mode using ideal gas assumption. Equations found in
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -25,6 +27,8 @@ class IdealTrans:
 
     def get_V(self, T, P):
         """Calculates the molar volume of an ideal gas at T and P
+
+        :math:`V_m=\\frac{RT}{P}`
 
         Parameters
         ----------
@@ -50,7 +54,8 @@ class IdealTrans:
             T : float
                 Temperature in K
             P : float, optional
-                Pressure or pressure-like quantity. Default is 1 bar
+                Pressure (bar) or pressure-like quantity. 
+                Default is atmospheric pressure
         Returns
         -------
             q_trans : float
@@ -112,15 +117,16 @@ class IdealTrans:
     def get_SoR(self, T, P=c.P0('bar')):
         """Calculates the dimensionless entropy
 
-        :math:`\\frac{S^{trans}}{R} = 1 + \\ln {\\frac {q_{trans}}{N_A}} 
-        + \\frac{U}{RT}`
+        :math:`\\frac{S^{trans}}{R}=1+\\frac{n_{degrees}}{2}+\\log\\bigg(\\big(
+        \\frac{2\\pi mk_bT}{h^2})^\\frac{n_{degrees}}{2}\\frac{RT}{PN_a}\\bigg)`
 
         Parameters
         ----------
             T : float
                 Temperature in K
             P : float, optional
-                Pressure or pressure-like quantity. Default is 1 bar
+                Pressure (bar) or pressure-like quantity. 
+                Default is atmospheric pressure
 
         Returns
         -------
@@ -130,8 +136,8 @@ class IdealTrans:
         V = self.get_V(T=T, P=P)
         unit_mass = self.molecular_weight*c.convert_unit(from_='g',to='kg')/c.Na
         return 1. + float(self.n_degrees)/2. \
-              + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2)**(float(self.n_degrees)/2.) \
-                       *V/c.Na)
+              + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2) \
+              **(float(self.n_degrees)/2.)*V/c.Na)
 
     def get_AoRT(self, T, P=c.P0('bar')):
         """Calculates the dimensionless Helmholtz energy
@@ -143,7 +149,8 @@ class IdealTrans:
             T : float
                 Temperature in K
             P : float, optional
-                Pressure or pressure-like quantity. Default is 1 bar
+                Pressure (bar) or pressure-like quantity. 
+                Default is atmospheric pressure
         Returns
         -------
             AoRT_trans : float
@@ -161,10 +168,31 @@ class IdealTrans:
             T : float
                 Temperature in K
             P : float, optional
-                Pressure or pressure-like quantity. Default is 1 bar
+                Pressure (bar) or pressure-like quantity. 
+                Default is atmospheric pressure
         Returns
         -------
             GoR_trans : float
                 Translational dimensionless Gibbs energy 
         """
         return self.get_HoRT()-self.get_SoR(T=T, P=P)
+    
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__),
+                'n_degrees': self.n_degrees, 
+                'molecular_weight': self.molecular_weight}
+    
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        return cls(**json_obj)

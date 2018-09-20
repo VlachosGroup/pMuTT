@@ -80,6 +80,7 @@ class HinderedThermo:
     def __init__(self, vib_energies, trans_barrier_energy, rot_barrier_energy,
                  sitedensity, rotationalminima, potentialenergy=0.0, mass=None,
                  inertia=None, atoms=None, symmetrynumber=1):
+        warn('Class replaced with StatMech class.', DeprecationWarning)
         self.model = thermochemistry.HinderedThermo(
             vib_energies=vib_energies,
             trans_barrier_energy=trans_barrier_energy,

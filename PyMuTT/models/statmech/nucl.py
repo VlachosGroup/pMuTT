@@ -4,6 +4,9 @@ class IdealNucl:
     """Nuclear modes. Assumes no change in any chemical reaction and hence
     does not affect thermodynamic quantities."""
 
+    def __init__(self):
+        pass
+
     def get_q(self):
         """Calculates the partition function
 
@@ -83,3 +86,21 @@ class IdealNucl:
                 Nuclear dimensionless Gibbs energy
         """
         return 0.
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__)}
+    
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        return cls(**json_obj)

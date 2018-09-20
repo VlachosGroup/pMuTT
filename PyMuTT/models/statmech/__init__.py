@@ -8,25 +8,50 @@ import inspect
 import numpy as np
 from PyMuTT import _pass_expected_arguments
 from PyMuTT.models.statmech import trans, vib, elec, rot
+from PyMuTT.io_ import jsonio as json_PyMuTT
 
 class EmptyMode:
-    """Placeholder mode that returns 0 for all functions."""
+    """Placeholder mode that returns 1 for partition function and
+    0 for all functions other thermodynamic properties."""
+    def __init__(self):
+        pass
+
     def get_q(self):
         return 1.
+
     def get_CvoR(self):
         return 0.
+
     def get_CpoR(self):
         return 0.
+
     def get_UoRT(self):
         return 0.
+
     def get_HoRT(self):
         return 0.
+
     def get_SoR(self):
         return 0.
+
     def get_AoRT(self):
         return 0.
+
     def get_GoRT(self):
         return 0.
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__)}
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        return cls()
 
 class StatMech:
     """Base class for statistical mechanic models.
@@ -85,7 +110,7 @@ class StatMech:
         Parameters
         ----------
             kwargs : key-word arguments
-                Parametres passed to each mode
+                Parameters passed to each mode
             verbose : bool, optional
                 If False, returns the product of partition functions. If True,
                 returns contributions of each mode
@@ -317,6 +342,42 @@ class StatMech:
         else:
             return np.sum(GoRT)
 
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__),
+                'trans_model': self.trans_model.to_dict(),
+                'vib_model': self.vib_model.to_dict(),
+                'rot_model': self.rot_model.to_dict(),
+                'elec_model': self.elec_model.to_dict(),
+                'nucl_model': self.nucl_model.to_dict()}
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        trans_model = json_PyMuTT.json_to_PyMuTT(json_obj['trans_model'])
+        vib_model = json_PyMuTT.json_to_PyMuTT(json_obj['vib_model'])
+        rot_model = json_PyMuTT.json_to_PyMuTT(json_obj['rot_model'])
+        elec_model = json_PyMuTT.json_to_PyMuTT(json_obj['elec_model'])
+        nucl_model = json_PyMuTT.json_to_PyMuTT(json_obj['nucl_model'])
+
+        return cls(trans_model=trans_model, 
+                   vib_model=vib_model, 
+                   rot_model=rot_model,
+                   elec_model=elec_model,
+                   nucl_model=nucl_model)
+
+
+
+
 presets = {
     'idealgas': {
         'trans_model': trans.IdealTrans,
@@ -324,13 +385,14 @@ presets = {
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.IdealElec,
         'rot_model': rot.RigidRotor,
-        'required': ['molecular_weight', 'vib_wavenumbers', 'potentialenergy', 
-                     'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'],
+        'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 
+                     'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'),
+        'optional': ('atoms')
         },
     'harmonic': {
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.IdealElec,
-        'required': ['vib_wavenumber', 'potentialenergy', 'spin'],
+        'required': ('vib_wavenumber', 'potentialenergy', 'spin'),
     },
 }
 """Commonly used models. The 'required' and 'optional' fields indicate

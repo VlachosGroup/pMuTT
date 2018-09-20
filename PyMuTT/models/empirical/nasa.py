@@ -10,6 +10,7 @@ import numpy as np
 from scipy.stats import variation
 from warnings import warn
 from PyMuTT import constants as c
+from PyMuTT.io_.jsonio import json_to_PyMuTT
 from PyMuTT.models.empirical import BaseThermo
 
 
@@ -50,8 +51,8 @@ class Nasa(BaseThermo):
                  HoRT_ref=None, SoR_ref=None, **kwargs):
         super().__init__(T_ref=T_ref, HoRT_ref=HoRT_ref, **kwargs)
         # A ssign polynomial coefficients
-        self.a_low = a_low
-        self.a_high = a_high
+        self.a_low = np.array(a_low)
+        self.a_high = np.array(a_high)
 
         # Assign temperatures
         if T_low is not None:
@@ -444,6 +445,37 @@ class Nasa(BaseThermo):
 
         self.a_low[6] = a7_low
         self.a_high[6] = a7_high + S_offset
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = super().to_dict()
+        obj_dict['class'] = str(self.__class__)
+        obj_dict['a_low'] = list(self.a_low)
+        obj_dict['a_high'] = list(self.a_high)
+        obj_dict['T_low'] = self.T_low
+        obj_dict['T_mid'] = self.T_mid
+        obj_dict['T_high'] = self.T_high
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        # Reconstruct statmech model
+        json_obj['statmech_model'] = \
+                json_to_PyMuTT(json_obj['statmech_model'])
+        json_obj['references'] = \
+                json_to_PyMuTT(json_obj['references'])
+
+        return cls(**json_obj)
 
 
 def get_nasa_CpoR(a, T):

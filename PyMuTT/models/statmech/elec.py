@@ -4,14 +4,20 @@ import numpy as np
 from PyMuTT import constants as c
 
 class IdealElec:
-    """elecronic modes using the ideal gas assumption.
+    """Electronic modes using the ideal gas assumption. Equations found in
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    John Wiley & Sons, 2010.
     
     Attributes
     ----------
         potentialenergy : float, optional
             Potential energy in eV. Default is 0
         spin : float, optional
-            elecron spin. Default is 0
+            The total electron spin. Default is 0
+            
+            - 0 for molecules in which all electrons are paired
+            - 0.5 for a free radical with a single unpaired electron
+            - 1.0 for a triplet with two unpaired electrons, such as O :sub:`2`
     """
 
     def __init__(self, potentialenergy=0., spin=0.):
@@ -22,18 +28,20 @@ class IdealElec:
     def get_q(self, T, ignore_q_elec=False):
         """Calculates the partition function
 
+        :math:`q^{elec}=\\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
+
         Parameters
         ----------
             T : float
                 Temperature in K
             ignore_q_elec : bool, optional
-                Ignore the contribution of elecronic mode to partition function
+                Ignore the contribution of electronic mode to partition function
                 . Often necessary since DFT's value for potentialenergy is
                 very negative causing q_elec to go to infinity.
         Returns
         -------
             q_elec : float
-                elecronic partition function
+                Electronic partition function
         """
         if ignore_q_elec:
             return 1.
@@ -43,25 +51,31 @@ class IdealElec:
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
 
+        :math:`\\frac{C_V^{elec}}{R}=0`
+
         Returns
         -------
             CvoR_elec : float
-                elecronic dimensionless heat capacity at constant volume
+                electronic dimensionless heat capacity at constant volume
         """
-        return 0
+        return 0.
 
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
 
+        :math:`\\frac{C_V^{elec}}{R}=\\frac{C_P^{elec}}{R}`
+
         Returns
         -------
             CpoR_elec : float
-                elecronic dimensionless heat capacity at constant pressure
+                Electronic dimensionless heat capacity at constant pressure
         """
         return self.get_CvoR()
     
     def get_UoRT(self, T):
         """Calculates the imensionless internal energy
+
+        :math:`\\frac{U^{elec}}{RT}=\\frac{E}{RT}`
 
         Parameters
         ----------
@@ -70,12 +84,14 @@ class IdealElec:
         Returns
         -------
             UoRT_elec : float
-                elecronic dimensionless internal energy
+                Electronic dimensionless internal energy
         """
         return self.potentialenergy/c.kb('eV/K')/T
 
     def get_HoRT(self, T):
         """Calculates the dimensionless enthalpy
+
+        :math:`\\frac{H^{elec}}{RT}=\\frac{U^{elec}}{RT}`
 
         Parameters
         ----------
@@ -84,22 +100,26 @@ class IdealElec:
         Returns
         -------
             HoRT_elec : float
-                elecronic dimensionless enthalpy
+                Electronic dimensionless enthalpy
         """
         return self.get_UoRT(T=T)
 
     def get_SoR(self):
         """Calculates the dimensionless entropy
 
+        :math:`\\frac{S^{elec}}{R}=\\log \\omega`
+
         Returns
         -------
             SoR_elec : float
-                elecronic dimensionless entropy
+                Electronic dimensionless entropy
         """
         return np.log(self._degeneracy)
 
     def get_AoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
+
+        :math:`\\frac{A^{elec}}{RT}=\\frac{U^{elec}}{RT}-\\frac{S^{elec}}{R}`
 
         Parameters
         ----------
@@ -108,12 +128,14 @@ class IdealElec:
         Returns
         -------
             AoRT_elec : float
-                elecronic dimensionless Helmholtz energy
+                Electronic dimensionless Helmholtz energy
         """
         return self.get_UoRT(T=T) - self.get_SoR()
 
     def get_GoRT(self, T):
         """Calculates the dimensionless Gibbs energy
+
+        :math:`\\frac{G^{elec}}{RT}=\\frac{H^{elec}}{RT}-\\frac{S^{elec}}{R}`
 
         Parameters
         ----------
@@ -122,6 +144,26 @@ class IdealElec:
         Returns
         -------
             GoRT_elec : float
-                elecronic dimensionless Gibbs energy
+                Electronic dimensionless Gibbs energy
         """
         return self.get_HoRT(T=T) - self.get_SoR()
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__),
+                'potentialenergy': self.potentialenergy, 
+                'spin': self.spin}
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        return cls(**json_obj)

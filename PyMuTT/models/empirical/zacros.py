@@ -6,6 +6,7 @@ Operations related to the Zacros wrapper
 """
 
 import numpy as np
+from ase.io import write
 from PyMuTT import constants as c
 from PyMuTT import get_molecular_weight as mw
 from PyMuTT.models.empirical import BaseThermo
@@ -55,3 +56,29 @@ class Zacros(BaseThermo):
             self.MW = mw(self.elements)*c.convert_unit(from_='g', to='kg')/c.Na
             self.q_trans2D = self.A_st * (2*np.pi*self.MW*c.kb('J/K') *
                                           c.T0('K'))/c.h('J s')**2
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = super().to_dict()
+        obj_dict['class'] = str(self.__class__)
+        obj_dict['A_st'] = self.A_st
+        obj_dict['geometry'] = self.geometry
+        # TODO Need to find a way to seralize an atoms object. write() can write
+        # to a JSON file but not sure how to get the str representation
+        # obj_dict['atoms'] = write()
+        obj_dict['symmetrynumber'] = self.symmetrynumber
+        obj_dict['inertia'] = list(self.inertia)
+        obj_dict['etotal'] = self.etotal
+        obj_dict['vib_energies'] = list(self.vib_energies)
+        obj_dict['theta'] = list(self.theta)
+        obj_dict['zpe'] = self.zpe
+        obj_dict['q_vib'] = self.q_vib
+        obj_dict['I3'] = self.I3
+        obj_dict['q_rot'] = self.q_rot
+        obj_dict['MW'] = self.MW
+        obj_dict['q_trans2D'] = self.q_trans2D

@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 from PyMuTT import _pass_expected_arguments
 from PyMuTT import constants as c
-
+from PyMuTT.io_.jsonio import json_to_PyMuTT
 
 class BaseThermo:
     """The Thermodynamic Parent class.
@@ -563,3 +563,45 @@ class BaseThermo:
                     G_offset[i]
                 GoRT_empirical[i] = self.get_GoRT(Ts=T)
         return (Ts, GoRT_statmech, GoRT_empirical)
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = {'class': str(self.__class__),
+                    'name': self.name,
+                    'phase': self.phase,
+                    'elements': self.elements,
+                    'T_ref': self.T_ref,
+                    'notes': self.notes,
+                    'HoRT_dft': self.HoRT_dft,
+                    'HoRT_ref': self.HoRT_ref}
+        try:
+            obj_dict['references'] = self.references.to_dict()
+        except AttributeError:
+            obj_dict['references'] = self.references
+
+        try:
+            obj_dict['statmech_model'] = self.statmech_model.to_dict()
+        except AttributeError:
+            obj_dict['statmech_model'] = self.statmech_model
+
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        try:
+            del json_obj['class']
+        except KeyError:
+            pass
+
+        # Reconstruct statmech model
+        json_obj['statmech_model'] = \
+                json_to_PyMuTT(json_obj['statmech_model'])
+        json_obj['references'] = \
+                json_to_PyMuTT(json_obj['references'])
+
+        return cls(**json_obj)

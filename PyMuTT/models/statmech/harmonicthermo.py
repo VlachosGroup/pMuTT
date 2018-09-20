@@ -5,6 +5,7 @@ PyMuTT.models.statmech.harmonicthermo
 Vlachos group code for Harmonic approximation.
 """
 
+from warnings import warn
 import numpy as np
 from ase import thermochemistry
 from PyMuTT import constants as c
@@ -32,7 +33,10 @@ class HarmonicThermo:
     .. _`ase.thermochemistry.HarmonicThermo`: https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html#ase.thermochemistry.HarmonicThermo
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    def __init__(self, vib_energies, potentialenergy=0.0):
+    def __init__(self, vib_energies, potentialenergy=0.0):  
+        warn('Class replaced with StatMech class. To replicate HarmonicThermo '
+             'behavior, use PyMuTT.models.statmech.presents.',
+             DeprecationWarning)
         self.model = thermochemistry.HarmonicThermo(
                 vib_energies=vib_energies,
                 potentialenergy=potentialenergy)
