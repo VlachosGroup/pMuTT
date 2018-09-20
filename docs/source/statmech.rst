@@ -7,7 +7,7 @@ StatMech Base Class
 ===================
 The ``StatMech`` class stores the classes associated with each mode. Each mode has methods that specifies how to
 calculate thermodynamic quantities, such as partition functions, heat capacities, internal energy, enthalpy, entropy,
- Helmholtz energy and Gibbs energy. 
+Helmholtz energy and Gibbs energy.
 
  .. autoclass:: PyMuTT.models.statmech.StatMech
    :members:

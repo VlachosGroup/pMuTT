@@ -305,7 +305,7 @@ class Nasa(BaseThermo):
                         Ts_index = np.where(Ts > self.T_mid[x])[0][0]
                         Ts = np.insert(Ts, Ts_index, self.T_mid[x])
             # Calculate CpoR for the list of Ts
-            CpoR = self.thermo_model.get_CpoR(Ts=Ts)
+            CpoR = [self.statmech_model.get_CpoR(T=T) for T in Ts]
 
         # Get reference temperature
         if T_ref is None:
