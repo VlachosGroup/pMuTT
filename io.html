@@ -83,8 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#excel">Excel</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-PyMuTT.io_.excel">Docstrings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.excel">Excel</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dft-input-example">DFT Input Example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nasa-polynomial-input-example">NASA Polynomial Input Example</a></li>
@@ -93,9 +92,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Docstrings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reading-thermdat">Reading Thermdat</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.jsonio">JSON</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-new-pymutt-classes">Creating New PyMuTT Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#decoding">Decoding</a></li>
 </ul>
 </li>
 </ul>
@@ -173,11 +179,9 @@
   <div class="section" id="input-and-output">
 <span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
 <p>Input and output to different forms is an active area of development for PyMuTT</p>
-<div class="section" id="excel">
-<h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-PyMuTT.io_.excel">
-<span id="docstrings"></span><h3>Docstrings<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h3>
-<p><a href="#id6"><span class="problematic" id="id7">PyMuTT.io_</span></a>.excel</p>
+<span id="excel"></span><h2>Excel<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id5"><span class="problematic" id="id6">PyMuTT.io_</span></a>.excel</p>
 <p>Read from/write to xlsx files of particular format.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.excel.read_excel">
@@ -457,7 +461,6 @@ output_structure[‘elements’][element]</li>
 </table>
 </dd></dl>
 
-</div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="dft-input-example">
@@ -771,9 +774,8 @@ output_structure[‘elements’][element]</li>
 </div>
 <div class="section" id="thermdat">
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id4">
-<h3>Docstrings<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">PyMuTT.io_</span></a>.thermdat</p>
+<p>This is the output format used for Chemkin. A list of NASA objects can be written to a thermdat file.</p>
+<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id7"><span class="problematic" id="id8">PyMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.thermdat.read_thermdat">
@@ -826,9 +828,8 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </table>
 </dd></dl>
 
-</div>
-<div class="section" id="id5">
-<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Examples<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.thermdat.read_thermdat</span></code>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_thermdat">PyMuTT.examples.read_nasa_from_thermdat</a></p>
@@ -873,6 +874,244 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </div>
 <p>And a sample plot is shown below</p>
 <img alt="_images/read_nasa_from_thermdat_example_O2.png" src="_images/read_nasa_from_thermdat_example_O2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="module-PyMuTT.io_.jsonio">
+<span id="json"></span><h2>JSON<a class="headerlink" href="#module-PyMuTT.io_.jsonio" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.io_.jsonio.PyMuTTEncoder">
+<em class="property">class </em><code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">PyMuTTEncoder</code><span class="sig-paren">(</span><em>*</em>, <em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.PyMuTTEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes PyMuTT objects to JSON format. The object (and complex subobjects
+) must have the method: <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code>.</p>
+<dl class="method">
+<dt id="PyMuTT.io_.jsonio.PyMuTTEncoder.default">
+<code class="descname">default</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.PyMuTTEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement this method in a subclass such that it returns
+a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
+(to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
+<p>For example, to support arbitrary iterators, you could
+implement default like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">iterable</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="c1"># Let the base class default method raise the TypeError</span>
+    <span class="k">return</span> <span class="n">JSONEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.io_.jsonio.json_to_PyMuTT">
+<code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">json_to_PyMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.json_to_PyMuTT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object hook to convert json to PyMuTT objects. Any complex object should
+be in the <code class="docutils literal notranslate"><span class="pre">type_to_class_dict</span></code> in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio.type_to_class</span></code>
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<em>Type supported by JSON</em>) – JSON object to be converted to PyMuTT object. If this is a complex
+PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj</strong> – Parsed PyMuTT object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyMuTT object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.io_.jsonio.remove_class">
+<code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">remove_class</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.remove_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the ‘class’ entry from the JSON object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON object with ‘class’ entry</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>json_obj</strong> – JSON object without ‘class’ entry</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.io_.jsonio.type_to_class">
+<code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">type_to_class</code><span class="sig-paren">(</span><em>class_str</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.type_to_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts between type of object and PyMuTT classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>class_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output of str(PyMuTT_obj.__class__)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>class</strong> – Class corresponding to class_str</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">class</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Saving PyMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">PyMuTTEncoder</span></code> in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">PyMuTTEncoder</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">PyMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">PyMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Loading PyMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">json_to_PyMuTT</span></code> object hook in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">json_to_PyMuTT</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">PyMuTT_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_PyMuTT</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>JSON writes in a human-readable syntax. An example showing two <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects in JSON format is shown below.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+ <span class="p">{</span>
+  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;PyMuTT.models.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;T_ref&quot;</span><span class="p">:</span> <span class="mf">298.15</span><span class="p">,</span>
+  <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;L 1/90&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;HoRT_dft&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;HoRT_ref&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
+   <span class="mf">3.1682671</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">0.00327931884</span><span class="p">,</span>
+   <span class="mf">6.64306396e-06</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">6.12806624e-09</span><span class="p">,</span>
+   <span class="mf">2.11265971e-12</span><span class="p">,</span>
+   <span class="mf">29122.2592</span><span class="p">,</span>
+   <span class="mf">2.05193346</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;a_high&quot;</span><span class="p">:</span> <span class="p">[</span>
+   <span class="mf">2.56942078</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">8.59741137e-05</span><span class="p">,</span>
+   <span class="mf">4.19484589e-08</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">1.00177799e-11</span><span class="p">,</span>
+   <span class="mf">1.22833691e-15</span><span class="p">,</span>
+   <span class="mf">29217.5791</span><span class="p">,</span>
+   <span class="mf">4.78433864</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
+  <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
+  <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+ <span class="p">},</span>
+ <span class="p">{</span>
+  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;PyMuTT.models.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;T_ref&quot;</span><span class="p">:</span> <span class="mf">298.15</span><span class="p">,</span>
+  <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;TPIS89&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;HoRT_dft&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;HoRT_ref&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
+   <span class="mf">3.78245636</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">0.00299673416</span><span class="p">,</span>
+   <span class="mf">9.84730201e-06</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">9.68129509e-09</span><span class="p">,</span>
+   <span class="mf">3.24372837e-12</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">1063.94356</span><span class="p">,</span>
+   <span class="mf">3.65767573</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;a_high&quot;</span><span class="p">:</span> <span class="p">[</span>
+   <span class="mf">3.28253784</span><span class="p">,</span>
+   <span class="mf">0.00148308754</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">7.57966669e-07</span><span class="p">,</span>
+   <span class="mf">2.09470555e-10</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">2.16717794e-14</span><span class="p">,</span>
+   <span class="o">-</span><span class="mf">1088.45772</span><span class="p">,</span>
+   <span class="mf">5.45323129</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
+  <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
+  <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+ <span class="p">}]</span>
+</pre></div>
+</div>
+<div class="section" id="creating-new-pymutt-classes">
+<h3>Creating New PyMuTT Classes<a class="headerlink" href="#creating-new-pymutt-classes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="encoding">
+<h4>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h4>
+<p>To ensure your new class can be encoded using the <code class="docutils literal notranslate"><span class="pre">PyMuTTEncoder</span></code>, the <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method should be implemented.
+One of the entries of the dictionary should be <code class="docutils literal notranslate"><span class="pre">'class':</span> <span class="pre">str(self.__class__)</span></code> so that it can be decoded later. The
+other elements should be the attributes that can be used to reinitialize the object and must be JSON-supported objects.
+A simple example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
+            <span class="s1">&#39;n_degrees&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_degrees</span><span class="p">,</span>
+            <span class="s1">&#39;molecular_weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If the attributes are not supported by JSON (such as other PyMuTT objects), use their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported
+objects. An example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.StatMech</span></code> is shown below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
+            <span class="s1">&#39;trans_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;vib_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vib_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;rot_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rot_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;elec_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">elec_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;nucl_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nucl_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoding">
+<h4>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h4>
+<p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_PyMuTT</span></code> object hook, add an entry to the dictionary in
+the <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio.type_to_class</span></code> method. The key should be the type of your object in string format (i.e. the result
+of <code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class method to reinitialize your object.
+A simple example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">remove_class</span>
+
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
+    <span class="n">json_obj</span> <span class="o">=</span> <span class="n">remove_class</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">json_obj</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly to encoding, sometimes your object contains PyMuTT objects. You can use the <code class="docutils literal notranslate"><span class="pre">json_to_PyMuTT</span></code> object hook to remake
+these objects. An example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.StatMech</span></code> is shown below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_</span> <span class="k">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_PyMuTT</span>
+
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
+    <span class="n">json_obj</span> <span class="o">=</span> <span class="n">remove_class</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+    <span class="n">trans_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;trans_model&#39;</span><span class="p">])</span>
+    <span class="n">vib_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;vib_model&#39;</span><span class="p">])</span>
+    <span class="n">rot_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;rot_model&#39;</span><span class="p">])</span>
+    <span class="n">elec_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;elec_model&#39;</span><span class="p">])</span>
+    <span class="n">nucl_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;nucl_model&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans_model</span><span class="p">,</span>
+               <span class="n">vib_model</span><span class="o">=</span><span class="n">vib_model</span><span class="p">,</span>
+               <span class="n">rot_model</span><span class="o">=</span><span class="n">rot_model</span><span class="p">,</span>
+               <span class="n">elec_model</span><span class="o">=</span><span class="n">elec_model</span><span class="p">,</span>
+               <span class="n">nucl_model</span><span class="o">=</span><span class="n">nucl_model</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

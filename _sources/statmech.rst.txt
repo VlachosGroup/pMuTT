@@ -172,7 +172,7 @@ nuclear modes become important in the future.
 .. automodule:: PyMuTT.models.statmech.nucl
    :members:
 
-Making your own model
-=====================
+Creating New StatMech Models
+============================
 If you would like to create your own class to be stored by ``StatMech``, it should have the methods: 
 ``get_q``, ``get_CvoR``, ``get_CpoR``, ``get_UoRT``, ``get_HoRT``, ``get_SoR``, ``get_AoRT``, and ``get_GoRT``.
