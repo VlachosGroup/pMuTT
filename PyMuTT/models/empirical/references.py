@@ -8,7 +8,7 @@ references.
 
 from warnings import warn
 import numpy as np
-from PyMuTT.io_.jsonio import json_to_PyMuTT
+from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
 
 class References:
     """Holds reference species to adjust DFT energies to experimental data.
@@ -191,11 +191,7 @@ class References:
     
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = remove_class(json_obj)
         json_obj['references'] = [json_to_PyMuTT(ref_dict) \
                                   for ref_dict in json_obj['references']]
         return cls(**json_obj)

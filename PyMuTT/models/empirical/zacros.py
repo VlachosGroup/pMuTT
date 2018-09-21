@@ -9,6 +9,7 @@ import numpy as np
 from ase.io import write
 from PyMuTT import constants as c
 from PyMuTT import get_molecular_weight as mw
+from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
 from PyMuTT.models.empirical import BaseThermo
 
 
@@ -82,3 +83,14 @@ class Zacros(BaseThermo):
         obj_dict['q_rot'] = self.q_rot
         obj_dict['MW'] = self.MW
         obj_dict['q_trans2D'] = self.q_trans2D
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        json_obj = remove_class(json_obj)
+        # Reconstruct statmech model
+        json_obj['statmech_model'] = \
+                json_to_PyMuTT(json_obj['statmech_model'])
+        json_obj['references'] = \
+                json_to_PyMuTT(json_obj['references'])
+
+        return cls(**json_obj)

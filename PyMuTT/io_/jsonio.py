@@ -5,13 +5,13 @@ class PyMuTTEncoder(json.JSONEncoder):
     """Encodes PyMuTT objects to JSON format. The object (and complex subobjects
     ) must have the method: ``to_dict()``.
     """
-    def default(self, obj):
+    def default(self, o):
         try:
-            obj_dict = obj.to_dict()
+            o_dict = o.to_dict()
         except AttributeError:
-            super().default(obj)
+            super().default(o)
         else:
-            return obj_dict
+            return o_dict
 
 def json_to_PyMuTT(json_obj):
     """Object hook to convert json to PyMuTT objects. Any complex object should
@@ -78,3 +78,21 @@ def type_to_class(class_str):
         "<class 'PyMuTT.models.statmech.nucl.IdealNucl'>": IdealNucl,
     }
     return type_to_class_dict[class_str]
+
+def remove_class(json_obj):
+    """Removes the 'class' entry from the JSON object.
+
+    Parameters
+    ----------
+        json_obj : dict
+            JSON object with 'class' entry
+    Returns
+    -------
+        json_obj : dict
+            JSON object without 'class' entry
+    """
+    try:
+        del json_obj['class']
+    except KeyError:
+        pass
+    return json_obj

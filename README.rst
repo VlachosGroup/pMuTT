@@ -9,14 +9,9 @@ thermodynamic properties such as heat capacity, enthalpy, entropy, and
 Gibbs energy. These properties can be fit to empirical equations and
 written to different formats. 
 
-Documentation available at: https://vlachosgroup.github.io/PyMuTT/
-
-Useful Topics
+Documentation
 -------------
-
--  :ref:`Referencing <referencing>`
--  :ref:`Supported IO operations <io>`
--  :ref:`Examples <examples>`
+See our `documentation page`_ for examples, equations used, and docstrings.
 
 Developers
 ----------
@@ -67,6 +62,7 @@ License
 This project is licensed under the MIT License - see the `LICENSE.md`_
 file for details.
 
+.. _`documentation page`: https://vlachosgroup.github.io/PyMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
 .. _Pandas: https://pandas.pydata.org/
@@ -74,3 +70,4 @@ file for details.
 .. _Matplotlib: https://matplotlib.org/
 .. _tests directory: https://github.com/VlachosGroup/PyMuTT/tree/master/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/PyMuTT/blob/master/LICENSE.md
+.. _`examples using the code`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples

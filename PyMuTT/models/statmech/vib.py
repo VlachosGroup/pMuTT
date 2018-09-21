@@ -2,6 +2,7 @@
 
 import numpy as np
 from PyMuTT import constants as c
+from PyMuTT.io_.jsonio import remove_class
 
 class HarmonicVib:
     """Vibrational modes using the harmonic approximation.Equations found in
@@ -203,11 +204,7 @@ class HarmonicVib:
 
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
 class QRRHOVib:
@@ -504,9 +501,5 @@ class QRRHOVib:
 
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = remove_class(json_obj)
         return cls(**json_obj)

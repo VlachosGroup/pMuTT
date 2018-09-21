@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from PyMuTT.io_.jsonio import remove_class
 
 class IdealNucl:
     """Nuclear modes. Assumes no change in any chemical reaction and hence
@@ -98,9 +99,5 @@ class IdealNucl:
     
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = remove_class(json_obj)
         return cls(**json_obj)

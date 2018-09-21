@@ -10,7 +10,7 @@ import numpy as np
 from scipy.stats import variation
 from warnings import warn
 from PyMuTT import constants as c
-from PyMuTT.io_.jsonio import json_to_PyMuTT
+from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
 from PyMuTT.models.empirical import BaseThermo
 import sys
 
@@ -540,11 +540,7 @@ class Nasa(BaseThermo):
 
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \
                 json_to_PyMuTT(json_obj['statmech_model'])

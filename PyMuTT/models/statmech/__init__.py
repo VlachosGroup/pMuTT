@@ -358,11 +358,7 @@ class StatMech:
 
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = json_PyMuTT.remove_class(json_obj)
         trans_model = json_PyMuTT.json_to_PyMuTT(json_obj['trans_model'])
         vib_model = json_PyMuTT.json_to_PyMuTT(json_obj['vib_model'])
         rot_model = json_PyMuTT.json_to_PyMuTT(json_obj['rot_model'])

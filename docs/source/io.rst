@@ -8,9 +8,6 @@ Input and output to different forms is an active area of development for PyMuTT
 Excel
 =====
 
-Docstrings
-----------
-
 .. automodule:: PyMuTT.io_.excel
    :members:
 
@@ -179,9 +176,7 @@ The above code gives the following output::
 
 Thermdat
 ========
-
-Docstrings
-----------
+This is the output format used for Chemkin. A list of NASA objects can be written to a thermdat file.
 
 .. automodule:: PyMuTT.io_.thermdat
    :members:
@@ -236,6 +231,180 @@ A snippet of the species information printed is shown below::
 And a sample plot is shown below
 
 .. image:: read_nasa_from_thermdat_example_O2.png
+
+JSON
+====
+
+.. automodule:: PyMuTT.io_.jsonio
+   :members:
+
+Examples
+^^^^^^^^
+
+Saving PyMuTT objects can be done by using the ``PyMuTTEncoder`` in ``PyMuTT.io_.jsonio``.
+
+.. code:: python
+
+   from PyMuTT.io_.jsonio import PyMuTTEncoder
+   
+   with open(json_path, 'w') as f_ptr:
+       json.dump(PyMuTT_obj, f_ptr, cls=PyMuTTEncoder, indent=True)
+   
+Loading PyMuTT objects can be done by using the ``json_to_PyMuTT`` object hook in ``PyMuTT.io_.jsonio``.
+
+.. code:: python
+
+   from PyMuTT.io_.jsonio import json_to_PyMuTT
+
+   with open(json_path, 'r') as f_ptr:
+       PyMuTT_obj = json.load(f_ptr, object_hook=json_to_PyMuTT)
+
+Sample JSON File
+^^^^^^^^^^^^^^^^
+
+JSON writes in a human-readable syntax. An example showing two ``Nasa`` objects in JSON format is shown below.::
+
+   [
+    {
+     "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+     "name": "O",
+     "phase": "G",
+     "elements": {
+      "O": 1
+     },
+     "T_ref": 298.15,
+     "notes": "L 1/90",
+     "HoRT_dft": null,
+     "HoRT_ref": null,
+     "references": null,
+     "statmech_model": null,
+     "a_low": [
+      3.1682671,
+      -0.00327931884,
+      6.64306396e-06,
+      -6.12806624e-09,
+      2.11265971e-12,
+      29122.2592,
+      2.05193346
+     ],
+     "a_high": [
+      2.56942078,
+      -8.59741137e-05,
+      4.19484589e-08,
+      -1.00177799e-11,
+      1.22833691e-15,
+      29217.5791,
+      4.78433864
+     ],
+     "T_low": 200.0,
+     "T_mid": 1000.0,
+     "T_high": 3500.0
+    },
+    {
+     "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+     "name": "O2",
+     "phase": "G",
+     "elements": {
+      "O": 2
+     },
+     "T_ref": 298.15,
+     "notes": "TPIS89",
+     "HoRT_dft": null,
+     "HoRT_ref": null,
+     "references": null,
+     "statmech_model": null,
+     "a_low": [
+      3.78245636,
+      -0.00299673416,
+      9.84730201e-06,
+      -9.68129509e-09,
+      3.24372837e-12,
+      -1063.94356,
+      3.65767573
+     ],
+     "a_high": [
+      3.28253784,
+      0.00148308754,
+      -7.57966669e-07,
+      2.09470555e-10,
+      -2.16717794e-14,
+      -1088.45772,
+      5.45323129
+     ],
+     "T_low": 200.0,
+     "T_mid": 1000.0,
+     "T_high": 3500.0
+    }]
+    
+Creating New PyMuTT Classes
+---------------------------
+
+Encoding
+^^^^^^^^
+To ensure your new class can be encoded using the ``PyMuTTEncoder``, the ``to_dict()`` method should be implemented.
+One of the entries of the dictionary should be ``'class': str(self.__class__)`` so that it can be decoded later. The 
+other elements should be the attributes that can be used to reinitialize the object and must be JSON-supported objects.
+A simple example using ``PyMuTT.models.statmech.trans.IdealTrans`` is shown below.
+
+.. code:: python
+
+   def to_dict(self):
+       return {'class': str(self.__class__),
+               'n_degrees': self.n_degrees, 
+               'molecular_weight': self.molecular_weight}
+   
+
+If the attributes are not supported by JSON (such as other PyMuTT objects), use their ``to_dict()`` methods to convert to JSON-supported
+objects. An example using ``PyMuTT.models.statmech.StatMech`` is shown below.
+
+.. code:: python
+
+   def to_dict(self):
+       return {'class': str(self.__class__),
+               'trans_model': self.trans_model.to_dict(),
+               'vib_model': self.vib_model.to_dict(),
+               'rot_model': self.rot_model.to_dict(),
+               'elec_model': self.elec_model.to_dict(),
+               'nucl_model': self.nucl_model.to_dict()}
+
+Decoding
+^^^^^^^^
+To ensure your object can be decoded using the ``json_to_PyMuTT`` object hook, add an entry to the dictionary in 
+the ``PyMuTT.io_.jsonio.type_to_class`` method. The key should be the type of your object in string format (i.e. the result
+of ``str(self.__class__)``). Your class should also have the ``from_dict()`` class method to reinitialize your object. 
+A simple example using ``PyMuTT.models.statmech.trans.IdealTrans`` is shown below.
+
+.. code:: python
+
+   from PyMuTT.io_.jsonio import remove_class
+
+   @classmethod
+   def from_dict(cls, json_obj):
+       json_obj = remove_class(json_obj)
+       return cls(**json_obj)
+
+Similarly to encoding, sometimes your object contains PyMuTT objects. You can use the ``json_to_PyMuTT`` object hook to remake
+these objects. An example using ``PyMuTT.models.statmech.StatMech`` is shown below.
+
+.. code:: python
+
+   from PyMuTT.io_ import jsonio as json_PyMuTT
+
+   @classmethod
+   def from_dict(cls, json_obj):
+       json_obj = remove_class(json_obj)
+       trans_model = json_PyMuTT.json_to_PyMuTT(json_obj['trans_model'])
+       vib_model = json_PyMuTT.json_to_PyMuTT(json_obj['vib_model'])
+       rot_model = json_PyMuTT.json_to_PyMuTT(json_obj['rot_model'])
+       elec_model = json_PyMuTT.json_to_PyMuTT(json_obj['elec_model'])
+       nucl_model = json_PyMuTT.json_to_PyMuTT(json_obj['nucl_model'])
+
+       return cls(trans_model=trans_model, 
+                  vib_model=vib_model, 
+                  rot_model=rot_model,
+                  elec_model=elec_model,
+                  nucl_model=nucl_model)
+
 
 .. _`PyMuTT.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1
 .. _`PyMuTT.examples.read_nasa_from_excel`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_excel 

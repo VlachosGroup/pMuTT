@@ -2,6 +2,7 @@
 
 import numpy as np
 from PyMuTT import constants as c
+from PyMuTT.io_.jsonio import remove_class
 
 class IdealElec:
     """Electronic modes using the ideal gas assumption. Equations found in
@@ -161,9 +162,5 @@ class IdealElec:
 
     @classmethod
     def from_dict(cls, json_obj):
-        try:
-            del json_obj['class']
-        except KeyError:
-            pass
-
+        json_obj = remove_class(json_obj)
         return cls(**json_obj)
