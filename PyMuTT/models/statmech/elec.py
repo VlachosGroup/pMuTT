@@ -162,5 +162,15 @@ class IdealElec:
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            IdealElec : IdealElec object
+        """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)

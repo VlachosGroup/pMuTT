@@ -6,13 +6,15 @@ Operations related to Nasa polynomials
 
 """
 
+import sys
+import inspect
+from pprint import pprint
+from warnings import warn
 import numpy as np
 from scipy.stats import variation
-from warnings import warn
 from PyMuTT import constants as c
 from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
 from PyMuTT.models.empirical import BaseThermo
-import sys
 
 
 class Nasa(BaseThermo):
@@ -47,56 +49,13 @@ class Nasa(BaseThermo):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    def __init__(self, T_low=None, T_mid=None, T_high=None, a_low=np.zeros(7),
-                 a_high=np.zeros(7), Ts=None, CpoR=None, T_ref=c.T0('K'),
-                 HoRT_ref=None, SoR_ref=None, **kwargs):
-        super().__init__(T_ref=T_ref, HoRT_ref=HoRT_ref, **kwargs)
-        # A ssign polynomial coefficients
+    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high, **kwargs):
+        super().__init__(name=name, **kwargs)
+        self.T_low = T_low
+        self.T_mid = T_mid
+        self.T_high = T_high
         self.a_low = np.array(a_low)
         self.a_high = np.array(a_high)
-
-        # Assign temperatures
-        if T_low is not None:
-            self.T_low = T_low
-        else:
-            try:
-                self.T_low = np.min(Ts)
-            except NameError:
-                pass
-
-        if T_high is not None:
-            self.T_high = T_high
-        else:
-            try:
-                self.T_high = np.max(Ts)
-            except NameError:
-                pass
-
-        # Check the form of T_mid to be sure it is a sorted list
-        if T_mid is not None:
-            # If a list, sort it
-            if type(T_mid) == list:
-                self.T_mid = T_mid
-                self.T_mid.sort()
-            # if an ndarray then convert to list and sort
-            elif type(T_mid) == np.ndarray:
-                self.T_mid = np.ndarray.tolist(T_mid)
-                self.T_mid.sort()
-            # If a single value then convert to list
-            else:
-                self.T_mid = [T_mid]
-            # Check if all T_mid's are also in Ts. If not create error
-            # and exit execution
-            if Ts is not None and not all(T in Ts for T in self.T_mid):
-                warn('T_mids not found in Ts')
-                sys.exit()
-        else:
-            self.T_mid = T_mid
-
-        if np.array_equal(a_low, np.zeros(7)) and np.array_equal(a_high,
-                                                                 np.zeros(7)):
-            self.fit(T_low=self.T_low, T_high=self.T_high, Ts=Ts, CpoR=CpoR,
-                     T_ref=T_ref, HoRT_dft=HoRT_ref, SoR_ref=SoR_ref)
 
     def get_a(self, T):
         """Returns the correct polynomial range based on T_low, T_mid and
@@ -230,297 +189,106 @@ class Nasa(BaseThermo):
                 GoRT[i] = get_nasa_GoRT(a=a, T=T)
         return GoRT
 
-    def fit(self, T_low=None, T_high=None, Ts=None, CpoR=None, T_ref=None,
-            HoRT_dft=None, HoRT_ref=None, SoR_ref=None, references=None):
-        """Calculates the NASA polynomials using internal attributes
+    @classmethod
+    def from_data(cls, name, Ts, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
+                  T_mid=None, **kwargs):
+        """Calculates the NASA polynomials using thermodynamic data
 
         Parameters
         ----------
-            T_low : float
-                Lower temperature to fit. If not specified, uses
-                T_low attribute
-            T_high : float
-                High temperature to fit. If not specified, uses
-                T_high attribute
+            name : str
+                Name of the species
             Ts : (N,) `numpy.ndarray`_
                 Temperatures in K used for fitting CpoR.
             CpoR : (N,) `numpy.ndarray`_
-                Dimensionless heat capacity corresponding to T. If not
-                specified, calculates using self.statmech_model.get_CpoR
+                Dimensionless heat capacity corresponding to T.
             T_ref : float
                 Reference temperature in K used fitting empirical coefficients.
-                If not specified, uses T_ref attribute
-            HoRT_dft : float
-                Dimensionless enthalpy calculated using DFT that corresponds
-                to T_ref. If not specified, uses HoRT_dft attribute. If the
-                HoRT_dft attribute is not specified, uses
-                self.statmech_model.get_HoRT
             HoRT_ref : float
-                Dimensionless reference enthalpy that corresponds to T_ref. If
-                this is specified, uses this value when fitting a_low[5] and
-                a_high[5] instead of HoRT_dft and references
+                Dimensionless reference enthalpy that corresponds to T_ref.
             SoR_ref : float
-                Dimensionless entropy that corresponds to T_ref. If not
-                specified, uses self.statmech_model.get_SoR
-            references : ``PyMuTT.models.empirical.References``
-                Contains references to calculate HoRT_ref. If not specified
-                then HoRT_dft will be used without adjustment.
-
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
-        """
-
-        '''
-        Processing inputs
-        '''
-
-        # Get lower temperature bound
-        if T_low is None:
-            T_low = self.T_low
-        else:
-            self.T_low = T_low
-
-        # Get higher temperature bound
-        if T_high is None:
-            T_high = self.T_high
-        else:
-            self.T_high = T_high
-
-        # Get temperatures and heat capacity data
-        if CpoR is not None:
-            if Ts is None:
-                # If heat capacities are specified but temperatures aren't
-                raise ValueError('Must specify temperatures corresponding '
-                                 'to CpoR.')
-        else:
-            # If Ts are not specified then create a list of Ts
-            if Ts is None:
-                Ts = np.linspace(T_low, T_high)
-            # Check if user specified value(s) for T_mid
-            if self.T_mid is not None:
-                # Check to see if specified T_mid's are in Ts and, if not,
-                # insert them into Ts.
-                for x in range(0, len(self.T_mid)):
-                    if np.where(Ts == self.T_mid[x])[0].size == 0:
-                        # Insert T_mid's into Ts and save position
-                        Ts_index = np.where(Ts > self.T_mid[x])[0][0]
-                        Ts = np.insert(Ts, Ts_index, self.T_mid[x])
-            # Calculate CpoR for the list of Ts
-            CpoR = [self.statmech_model.get_CpoR(T=T) for T in Ts]
-
-        # Get reference temperature
-        if T_ref is None:
-            T_ref = self.T_ref
-
-        # Get reference enthalpy
-        if HoRT_dft is None:
-            if self.HoRT_dft is None:
-                self.HoRT_dft = self.statmech_model.get_HoRT(T=T_ref)
-            HoRT_dft = self.HoRT_dft
-
-        # Get reference entropy
-        if SoR_ref is None:
-            SoR_ref = self.statmech_model.get_SoR(T=T_ref)
-
-        # Get references
-        if references is not None:
-            self.references = references
-
-        # Set HoRT_ref
-        # If references specified
-        if HoRT_ref is not None:
-            self.HoRT_ref = HoRT_ref
-        else:
-            if self.references is not None:
-                self.HoRT_ref = HoRT_dft +\
-                    self.references.get_HoRT_offset(self.elements,
-                                                    Ts=self.T_ref)
-            # If dimensionless DFT enthalpy specified
-            elif HoRT_dft is not None:
-                self.HoRT_ref = HoRT_dft
-            HoRT_ref = self.HoRT_ref
-
-        # Reinitialize coefficients
-        self.a_low = np.zeros(7)
-        self.a_high = np.zeros(7)
-
-        '''
-        Processing data
-        '''
-        self.fit_CpoR(Ts=Ts, CpoR=CpoR)
-        self.fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref)
-        self.fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref)
-
-    def fit_CpoR(self, Ts, CpoR):
-        """Fit a[0]-a[4] coefficients in a_low and a_high attributes given the
-        dimensionless heat capacity data
-
-        Parameters
-        ----------
-            Ts : (N,) `numpy.ndarray_`
-                Temperatures in K
-            CpoR : (N,) `numpy.ndarray_`
-                Dimensionless heat capacity
-
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
-        """
-        # If the Cp/R does not vary with temperature (occurs when no
-        # vibrational frequencies are listed)
-        if (np.mean(CpoR) < 1e-6 and np.isnan(variation(CpoR))) or\
-                variation(CpoR) < 1e-3 or all(np.isnan(CpoR)):
-                self.T_mid = Ts[int(len(Ts)/2)]
-                self.a_low = np.zeros(7)
-                self.a_high = np.zeros(7)
-
-        else:
-            # Check if one or more T_mid was specified
-            if self.T_mid is None:
-                # Find the optimum T_mid by checking all Ts
-                max_R2 = -1
-                R2 = np.zeros_like(Ts)
-                R2_prev = 0
-                for i, T_mid in enumerate(Ts):
-                    # Need at least 5 points to fit the polynomial
-                    if i > 5 and i < (len(Ts)-6):
-                        # Separate the temperature and heat capacities into
-                        # low and high range
-                        (R2[i], a_low, a_high) = self._get_CpoR_R2(Ts=Ts,
-                                                                   CpoR=CpoR,
-                                                                   i_mid=i)
-                        # Check if the optimum T_mid has been found by
-                        # determining if the fit R2 value for the current
-                        # T_mid is lower than the previous indicating that
-                        # subsequent guesses will not improve the fit
-                        if R2[i] < R2_prev:
-                            break
-                        R2_prev = R2[i]
-                # Select the optimum T_mid based on the highest fit R2 value
-                max_R2 = max(R2)
-                max_i = np.where(max_R2 == R2)[0][0]
-            else:
-                # Check if more than one T_mid was specified.
-                if len(self.T_mid) > 1:
-                    # Check which T_mid provides the optimum fit
-                    R2 = np.zeros_like(Ts)
-                    R2_prev = 0
-                    for T in self.T_mid:
-                        i = np.where(Ts == T)[0][0]
-                        # Need at least 5 points to fit the polynomial
-                        if i > 5 and i < (len(Ts)-6):
-                            # Separate the temperature and heat capacities into
-                            # low and high range
-                            (R2[i], a_low, a_high) = self._get_CpoR_R2(
-                                    Ts=Ts,
-                                    CpoR=CpoR,
-                                    i_mid=i)
-                            # Check if the optimum T_mid has been found by
-                            # determining if the fit R2 value for the current
-                            # T_mid is lower than the previous indicating that
-                            # subsequent guesses will not improve the fit
-                            if R2[i] < R2_prev:
-                                break
-                            R2_prev = R2[i]
-                    # Select the optimum T_mid based on the highest fit R2
-                    # value
-                    max_R2 = max(R2)
-                    max_i = np.where(max_R2 == R2)[0][0]
-                else:
-                    # Use the provided T_mid to fit CPoR
-                    max_i = np.where(Ts == self.T_mid)[0][0]
-            (max_R2, a_low_rev, a_high_rev) = self._get_CpoR_R2(Ts=Ts,
-                                                                CpoR=CpoR,
-                                                                i_mid=max_i)
-            empty_arr = np.zeros(2)
-            self.T_mid = Ts[max_i]
-            self.a_low = np.concatenate((a_low_rev[::-1], empty_arr))
-            self.a_high = np.concatenate((a_high_rev[::-1], empty_arr))
-
-    def _get_CpoR_R2(self, Ts, CpoR, i_mid):
-        """Calculates the R2 polynomial regression value.
-
-        Parameters
-        ----------
-            Ts : (N,) `numpy.ndarray_`
-                Temperatures (K) to fit the polynomial
-            CpoR : (N,) `numpy.ndarray_`
-                Dimensionless heat capacities that correspond to T array
-            i_mid : int
-                Index that splits T and CpoR arrays into a lower
-                and higher range
+                Dimensionless entropy that corresponds to T_ref. 
+            T_mid : float or iterable of float, optional
+                Guess for T_mid. If float, only uses that value for T_mid. If 
+                list, finds the best fit for each element in the list. If None, 
+                a range of T_mid values are screened between the 6th lowest 
+                and 6th highest value of Ts.
         Returns
         -------
-            R2 : float)
-                R2 value resulting from NASA polynomial fit to T and CpoR
-            p_low : (5,) `numpy.ndarray_`
-                Polynomial corresponding to lower range of data
-            p_high : (5,) `numpy.ndarray_`
-                Polynomial corresponding to high range of data
+            Nasa : Nasa object
+                Nasa object with polynomial terms fitted to data.
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        T_low = Ts[:i_mid]
-        CpoR_low = CpoR[:i_mid]
-        T_high = Ts[i_mid:]
-        CpoR_high = CpoR[i_mid:]
-        # Fit the polynomial
-        p_low = np.polyfit(x=T_low, y=CpoR_low, deg=4)
-        p_high = np.polyfit(x=T_high, y=CpoR_high, deg=4)
+        T_low = min(Ts)
+        T_high = max(Ts)
 
-        # Find the R2
-        CpoR_low_fit = np.polyval(p_low, T_low)
-        CpoR_high_fit = np.polyval(p_high, T_high)
-        CpoR_fit = np.concatenate((CpoR_low_fit, CpoR_high_fit))
-        CpoR_mean = np.mean(CpoR)
-        ss_reg = np.sum((CpoR_fit - CpoR_mean)**2)
-        ss_tot = np.sum((CpoR - CpoR_mean)**2)
-        R2 = ss_reg / ss_tot
+        # Find midpoint temperature, and a[0] through a[4] parameters
+        a_low, a_high, T_mid_out = fit_CpoR(Ts=Ts, CpoR=CpoR, T_mid=T_mid)
+        # Fit a[5] parameter using reference enthalpy
+        a_low[5], a_high[5] = fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, 
+                                       a_low=a_low, a_high=a_high,
+                                       T_mid=T_mid_out)
+        # Fit a[6] parameter using reference entropy
+        a_low[6], a_high[6] = fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, 
+                                      a_low=a_low, a_high=a_high,
+                                      T_mid=T_mid_out)
+        # print('From_data: {}'.format(kwargs))
+        return cls(name=name, T_low=T_low, T_high=T_high, T_mid=T_mid_out, 
+                   a_low=a_low, a_high=a_high, elements=elements, **kwargs)
 
-        return (R2, p_low, p_high)
-
-    def fit_HoRT(self, T_ref, HoRT_ref):
-        """Fit a[5] coefficient in a_low and a_high attributes given the
-        dimensionless enthalpy
-
-        Parameters
-        ----------
-            T_ref : float
-                Reference temperature in K
-            HoRT_ref : float
-                Reference dimensionless enthalpy
-        """
-        T_mid = self.T_mid
-        a6_low = (HoRT_ref - get_nasa_HoRT(a=self.a_low, T=T_ref))*T_ref
-        a6_high = (HoRT_ref - get_nasa_HoRT(a=self.a_high, T=T_ref))*T_ref
-
-        # Correcting for offset
-        H_low_last_T = get_nasa_HoRT(a=self.a_low, T=T_mid) + a6_low/T_mid
-        H_high_first_T = get_nasa_HoRT(a=self.a_high, T=T_mid) + a6_high/T_mid
-        H_offset = H_low_last_T - H_high_first_T
-
-        self.a_low[5] = a6_low
-        self.a_high[5] = T_mid * (a6_high/T_mid + H_offset)
-
-    def fit_SoR(self, T_ref, SoR_ref):
-        """Fit a[6] coefficient in a_low and a_high attributes given the
-        dimensionless entropy
+    @classmethod
+    def from_statmech(cls, name, statmech_model, T_low, T_high, T_mid=None,
+                      references=None, elements=None, **kwargs):
+        """Calculates the NASA polynomials using statistical mechanic models
 
         Parameters
         ----------
-            T_ref : float
-                Reference temperature in K
-            SoR_ref : float
-                Reference dimensionless entropy
+            name : str
+                Name of the species
+            statmech_model : `PyMuTT.models.statmech.StatMech` object or class
+                Statistical Mechanics model to generate data
+            T_low : float
+                Lower limit temerature in K
+            T_high : float
+                Higher limit temperature in K
+            T_mid : float or iterable of float, optional
+                Guess for T_mid. If float, only uses that value for T_mid. If 
+                list, finds the best fit for each element in the list. If None, 
+                a range of T_mid values are screened between the 6th lowest 
+                and 6th highest value of Ts.
+            references : `PyMuTT.models.empirical.references.References` object
+                Reference to adjust enthalpy
+            elements : dict
+                The key is the element symbol and the value is the number of
+                that element in a stoichiometric formula
+            **kwargs : keyword arguments
+                Used to initalize statmech_model or BaseThermo attributes to be
+                stored.
+        Returns
+        -------
+            Nasa : Nasa object
+                Nasa object with polynomial terms fitted to data.
         """
-        T_mid = self.T_mid
-        a7_low = SoR_ref - get_nasa_SoR(a=self.a_low, T=T_ref)
-        a7_high = SoR_ref - get_nasa_SoR(a=self.a_high, T=T_ref)
+        # Initialize the StatMech object
+        if inspect.isclass(statmech_model):
+            statmech_model = statmech_model(**kwargs)
 
-        # Correcting for offset
-        S_low_last_T = get_nasa_SoR(a=self.a_low, T=T_mid) + a7_low
-        S_high_first_T = get_nasa_SoR(a=self.a_high, T=T_mid) + a7_high
-        S_offset = S_low_last_T - S_high_first_T
+        # Generate data
+        Ts = np.linspace(T_low, T_high)
+        CpoR = np.array([statmech_model.get_CpoR(T=T) for T in Ts])
+        T_ref = c.T0('K')
+        HoRT_ref = statmech_model.get_HoRT(T=T_ref)
+        # Add contribution of references
+        if references is not None:
+            HoRT_ref += references.get_HoRT_offset(elements=elements, Ts=T_ref)
+        SoR_ref = statmech_model.get_SoR(T=T_ref)
 
-        self.a_low[6] = a7_low
-        self.a_high[6] = a7_high + S_offset
+        # print('From_statmech: {}'.format(kwargs))
+        return cls.from_data(name=name, Ts=Ts, CpoR=CpoR, T_ref=T_ref, 
+                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, 
+                             statmech_model=statmech_model, elements=elements,
+                             references=references, **kwargs)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -540,6 +308,16 @@ class Nasa(BaseThermo):
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            Nasa : Nasa object
+        """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \
@@ -549,6 +327,175 @@ class Nasa(BaseThermo):
 
         return cls(**json_obj)
 
+def fit_CpoR(Ts, CpoR, T_mid=None):
+    """Fit a[0]-a[4] coefficients in a_low and a_high attributes given the
+    dimensionless heat capacity data
+
+    Parameters
+    ----------
+        Ts : (N,) `numpy.ndarray_`
+            Temperatures in K
+        CpoR : (N,) `numpy.ndarray_`
+            Dimensionless heat capacity
+        T_mid : float or iterable of float, optional
+            Guess for T_mid. If float, only uses that value for T_mid. If 
+            list, finds the best fit for each element in the list. If None, 
+            a range of T_mid values are screened between the lowest value 
+            and highest value of Ts.
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    """
+    # If the Cp/R does not vary with temperature (occurs when no
+    # vibrational frequencies are listed), return default values
+    if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
+        or np.isclose(variation(CpoR), 0.) \
+        or any([np.isnan(x) for x in CpoR]):
+        T_mid = Ts[int(len(Ts)/2)]
+        a_low = np.zeros(7)
+        a_high = np.zeros(7)
+        return a_low, a_high, T_mid
+
+    # If T_mid not specified, generate range between 6th smallest data point
+    # and 6th largest data point
+    if T_mid is None:
+        T_mid = Ts[5:-5]
+
+    # If a single value for T_mid is chosen, convert to a tuple
+    try:
+        iter(T_mid)
+    except TypeError:
+        T_mid = (T_mid,)
+
+    # Initialize parameters for T_mid optimization
+    mse_list = []
+    prev_mse = np.inf
+    all_a_low = []
+    all_a_high = []
+
+    for i, T_m in enumerate(T_mid):
+        # Generate temperature data
+        (mse, a_low, a_high) = _get_CpoR_MSE(Ts=Ts, CpoR=CpoR, T_mid=T_m)
+        mse_list.append(mse)
+        # print('{}\t{}\t{}'.format(i, T_m, mse))
+        all_a_low.append(a_low)
+        all_a_high.append(a_high)
+        # Check if the optimum T_mid has been found by determining if the 
+        # fit MSE value for the current T_mid is higher than the previous 
+        # indicating that subsequent guesses will not improve the fit
+        if mse > prev_mse:
+            break
+        prev_mse = mse
+
+    # Select the optimum T_mid based on the highest fit R2 value
+    min_mse = min(mse_list)
+    min_i = np.where(min_mse == mse_list)[0][0]
+
+    T_mid_out = T_mid[min_i]
+    a_low_rev = all_a_low[min_i]
+    a_high_rev = all_a_high[min_i]
+
+    # Reverse array and append two zeros to end
+    empty_arr = np.zeros(2)
+    a_low_out = np.concatenate((a_low_rev[::-1], empty_arr))
+    a_high_out = np.concatenate((a_high_rev[::-1], empty_arr))
+
+    return a_low_out, a_high_out, T_mid_out
+
+def _get_CpoR_MSE(Ts, CpoR, T_mid):
+    """Calculates the mean squared error of polynomial fit.
+
+    Parameters
+    ----------
+        Ts : (N,) `numpy.ndarray_`
+            Temperatures (K) to fit the polynomial
+        CpoR : (N,) `numpy.ndarray_`
+            Dimensionless heat capacities that correspond to T array
+        i_mid : int
+            Index that splits T and CpoR arrays into a lower
+            and higher range
+    Returns
+    -------
+        R2 : float)
+            R2 value resulting from NASA polynomial fit to T and CpoR
+        p_low : (5,) `numpy.ndarray_`
+            Polynomial corresponding to lower range of data
+        p_high : (5,) `numpy.ndarray_`
+            Polynomial corresponding to high range of data
+
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    """
+    low_condition = (Ts<=T_mid)
+    high_condition = (Ts>=T_mid)
+    T_low = np.extract(condition=low_condition, arr=Ts)
+    T_high = np.extract(condition=high_condition, arr=Ts)
+    CpoR_low = np.extract(condition=low_condition, arr=CpoR)
+    CpoR_high = np.extract(condition=high_condition, arr=CpoR)
+
+    if len(T_low) < 5:
+        warn('Small set of CpoR data between T_low and T_mid. '
+                'Fit may not be desirable.', RuntimeWarning)
+    if len(T_high) < 5:
+        warn('Small set of CpoR data between T_mid and T_high. '
+                'Fit may not be desirable.', RuntimeWarning)
+
+    # Fit the polynomials
+    p_low = np.polyfit(x=T_low, y=CpoR_low, deg=4)
+    p_high = np.polyfit(x=T_high, y=CpoR_high, deg=4)
+
+    # Calculate RMSE
+    CpoR_low_fit = np.polyval(p_low, T_low)
+    CpoR_high_fit = np.polyval(p_high, T_high)
+    CpoR_fit = np.concatenate((CpoR_low_fit, CpoR_high_fit))
+    mse = np.mean([(x-y)**2 for x, y in zip(CpoR, CpoR_fit)])
+
+    return (mse, p_low, p_high)
+
+def fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
+    """Fit a[5] coefficient in a_low and a_high attributes given the
+    dimensionless enthalpy
+
+    Parameters
+    ----------
+        T_ref : float
+            Reference temperature in K
+        HoRT_ref : float
+            Reference dimensionless enthalpy
+        T_mid : float
+            Temperature to fit the offset
+    """
+    a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref))*T_ref
+    a6_high = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref))*T_ref
+
+    # Correcting for offset
+    H_low_last_T = get_nasa_HoRT(a=a_low, T=T_mid) + a6_low_out/T_mid
+    H_high_first_T = get_nasa_HoRT(a=a_high, T=T_mid) + a6_high/T_mid
+    H_offset = H_low_last_T - H_high_first_T
+    a6_high_out = T_mid * (a6_high/T_mid + H_offset)
+
+    return a6_low_out, a6_high_out
+
+def fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
+    """Fit a[6] coefficient in a_low and a_high attributes given the
+    dimensionless entropy
+
+    Parameters
+    ----------
+        T_ref : float
+            Reference temperature in K
+        SoR_ref : float
+            Reference dimensionless entropy
+        T_mid : float
+            Temperature to fit the offset
+    """
+    a7_low_out = SoR_ref - get_nasa_SoR(a=a_low, T=T_ref)
+    a7_high = SoR_ref - get_nasa_SoR(a=a_high, T=T_ref)
+
+    # Correcting for offset
+    S_low_last_T = get_nasa_SoR(a=a_low, T=T_mid) + a7_low_out
+    S_high_first_T = get_nasa_SoR(a=a_high, T=T_mid) + a7_high
+    S_offset = S_low_last_T - S_high_first_T
+    a7_high_out = a7_high + S_offset
+
+    return a7_low_out, a7_high_out
 
 def get_nasa_CpoR(a, T):
     """Calculates the dimensionless heat capacity using NASA polynomial form

@@ -358,6 +358,16 @@ class StatMech:
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            StatMech : StatMech object
+        """
         json_obj = json_PyMuTT.remove_class(json_obj)
         trans_model = json_PyMuTT.json_to_PyMuTT(json_obj['trans_model'])
         vib_model = json_PyMuTT.json_to_PyMuTT(json_obj['vib_model'])
@@ -370,9 +380,6 @@ class StatMech:
                    rot_model=rot_model,
                    elec_model=elec_model,
                    nucl_model=nucl_model)
-
-
-
 
 presets = {
     'idealgas': {

@@ -35,26 +35,16 @@ class BaseThermo:
             Statistical thermodynamic model.
             Object should have the following methods: `get_CpoR`, `get_HoRT`,
             `get_SoR`, `get_GoRT`.
-        T_ref : float
-            Temperature (in K) at which `HoRT_dft` was calculated. Only used
-            for fitting empirical coefficients.
-        HoRT_dft : float
-            Dimensionless enthalpy calculated using DFT that corresponds to
-            `T_ref`. Only used for fitting empirical coefficients.
-        HoRT_ref : float
-            Reference dimensionless enthalpy corresponding to `T_ref`.
         references : `PyMuTT.models.empirical.References.references` object
             Contains references to calculate `HoRT_ref`. If not specified then
             HoRT_dft will be used without adjustment.
         notes : str
             Any additional details you would like to include such as
             computational set up.
-
     """
 
     def __init__(self, name, phase=None, elements=None, statmech_model=None,
-                 T_ref=c.T0('K'), HoRT_dft=None, HoRT_ref=None,
-                 references=None, notes=None, **kwargs):
+                 T_ref=c.T0('K'), references=None, notes=None, **kwargs):
         self.name = name
         self.phase = phase
         self.elements = elements
@@ -70,23 +60,6 @@ class BaseThermo:
         else:
             # If it's an object that has already been initialized
             self.statmech_model = statmech_model
-
-        # Calculate dimensionless DFT energy using thermo model
-        if (HoRT_dft is None) and (self.statmech_model is not None):
-            self.HoRT_dft = self.statmech_model.get_HoRT(T=self.T_ref)
-        else:
-            self.HoRT_dft = HoRT_dft
-
-        # Assign self.HoRT_ref
-        if HoRT_ref is None:
-            if (references is None) or (self.HoRT_dft is None):
-                self.HoRT_ref = self.HoRT_dft
-            else:
-                self.HoRT_ref = self.HoRT_dft +\
-                    references.get_HoRT_offset(elements=elements,
-                                               Ts=self.T_ref)
-        else:
-            self.HoRT_ref = HoRT_ref
 
     def __repr__(self):
         out = ['{} object for Name: {}'.format(self.__class__.__name__,
@@ -481,10 +454,10 @@ class BaseThermo:
         else:
             HoRT_statmech = np.zeros_like(Ts)
             HoRT_empirical = np.zeros_like(Ts)
+            HoRT_empirical = self.get_HoRT(Ts=Ts)
             for i, T in enumerate(Ts):
                 HoRT_statmech[i] = self.statmech_model.get_HoRT(T=T) \
-                                  + H_offset[i]
-                HoRT_empirical[i] = self.get_HoRT(Ts=T)
+                                   + H_offset[i]
         return (Ts, HoRT_statmech, HoRT_empirical)
 
     def compare_SoR(self, Ts=None):
@@ -576,9 +549,7 @@ class BaseThermo:
                     'phase': self.phase,
                     'elements': self.elements,
                     'T_ref': self.T_ref,
-                    'notes': self.notes,
-                    'HoRT_dft': self.HoRT_dft,
-                    'HoRT_ref': self.HoRT_ref}
+                    'notes': self.notes,}
         try:
             obj_dict['references'] = self.references.to_dict()
         except AttributeError:
@@ -593,6 +564,16 @@ class BaseThermo:
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            BaseThermo : BaseThermo object
+        """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \

@@ -67,7 +67,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
     excel_path = os.path.dirname(io)
     thermos_out = []
     for row, row_data in input_data.iterrows():
-        thermo_data = {'vib_energies': []}
+        thermo_data = {}
         for col, cell_data in row_data.iteritems():
             # Special parsing instructions
             if pd.isnull(cell_data):

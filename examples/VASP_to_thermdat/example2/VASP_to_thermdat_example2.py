@@ -3,9 +3,8 @@ import matplotlib.pyplot as plt
 from PyMuTT import constants as c
 from PyMuTT.io_.excel import read_excel
 from PyMuTT.io_.thermdat import write_thermdat
-from PyMuTT.models.empirical import BaseThermo
 from PyMuTT.models.empirical.nasa import Nasa
-from PyMuTT.models.empirical.references import References
+from PyMuTT.models.empirical.references import Reference, References
 
 '''
 User inputs
@@ -27,14 +26,14 @@ T_high = 1500. #K
 thermdat_path = '{}/thermdat'.format(base_path)
 
 #Miscellaneous options
-show_plot = True
+save_plot = True
 
 '''
 Processing References
 '''
 #Import from excel
 refs_data = read_excel(io=refs_path)
-refs = References([BaseThermo(**ref_data) for ref_data in refs_data])
+refs = References([Reference(**ref_data) for ref_data in refs_data])
 
 '''
 Processing Surfaces
@@ -53,13 +52,17 @@ for specie_data in species_data:
         if surface_data['name'] in specie_data['notes']:
             specie_data['potentialenergy'] -= surface_data['potentialenergy']
             break
-species = [Nasa(references=refs, T_low=T_low, T_high=T_high, T_ref=c.T0('K'), **specie_data) for specie_data in species_data]
+species = [Nasa.from_statmech(references=refs, T_low=T_low, T_high=T_high, \
+                              **specie_data) for specie_data in species_data]
 
 '''
 Printing Out Results
 '''
 write_thermdat(nasa_species=species, filename=thermdat_path)
-if show_plot:
+if save_plot:
     for nasa in species:
-        nasa.plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
-    plt.show()
+        nasa.plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', 
+                                         S_units='J/mol/K', G_units='kJ/mol')
+        thermo_plot_path = os.path.join( \
+                *[base_path, 'thermo_plots', '{}.png'.format(nasa.name)])
+        plt.savefig(thermo_plot_path)

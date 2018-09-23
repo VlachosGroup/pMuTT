@@ -7,7 +7,7 @@ from PyMuTT.io_.excel import read_excel
 from PyMuTT.io_.thermdat import write_thermdat
 from PyMuTT.models.empirical import BaseThermo
 from PyMuTT.models.empirical.nasa import Nasa
-from PyMuTT.models.empirical.references import References
+from PyMuTT.models.empirical.references import Reference, References
 
 '''
 User inputs
@@ -34,7 +34,8 @@ Processing References
 '''
 #Import from excel
 refs_input = read_excel(io=refs_path)
-refs = References([BaseThermo(**ref_input) for ref_input in refs_input])
+pprint(refs_input)
+refs = References([Reference(**ref_input) for ref_input in refs_input])
 print('Reference Input:')
 pprint(refs_input)
 print('Reference Data:')
@@ -45,15 +46,23 @@ Processing Input Species
 '''
 #Import from excel
 species_data = read_excel(io=species_path)
-species = [Nasa(references=refs, T_low=T_low, T_high=T_high, T_ref=c.T0('K'), **specie_data) for specie_data in species_data]
+# pprint([specie_data['elements'] for specie_data in species_data])
+species = []
+for specie_data in species_data:
+    species.append(Nasa.from_statmech(references=refs, T_low=T_low, 
+                                      T_high=T_high, **specie_data))
+species = [Nasa.from_statmech(references=refs, T_low=T_low, T_high=T_high, 
+                              **specie_data) for specie_data in species_data]
 print('Species Input:')
 pprint(species)
 
 '''
 Printing Out Results
 '''
-write_thermdat(nasa_species=species, filename=thermdat_path, write_date=write_date)
+write_thermdat(nasa_species=species, filename=thermdat_path, 
+               write_date=write_date)
 if show_plot:
     for specie in species:
-        specie.plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', S_units='J/mol/K', G_units='kJ/mol')
+        specie.plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol', 
+                                           S_units='J/mol/K', G_units='kJ/mol')
     plt.show()

@@ -9,8 +9,8 @@ import warnings
 import numpy as np
 from ase.build import molecule
 from PyMuTT import constants as c
-from PyMuTT.models.empirical import BaseThermo
-from PyMuTT.models.empirical.references import References
+#from PyMuTT.models.empirical import BaseThermo
+from PyMuTT.models.empirical.references import References, Reference
 from PyMuTT.models.statmech import presets, StatMech, trans, rot, vib, elec
 from PyMuTT.models.statmech.idealgasthermo import IdealGasThermo
 
@@ -18,7 +18,7 @@ class TestReferences(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        H2_thermo = BaseThermo(
+        H2_thermo = Reference(
             name = 'H2',
             phase = 'G',
             elements = {'H':2},
@@ -37,7 +37,7 @@ class TestReferences(unittest.TestCase):
             spin = 0,
             atoms = molecule('H2'))
 
-        H2O_thermo = BaseThermo(
+        H2O_thermo = Reference(
             name = 'H2O',
             phase = 'G',
             elements = {'H': 2, 'O': 1},
@@ -56,7 +56,7 @@ class TestReferences(unittest.TestCase):
             spin = 0,
             atoms = molecule('H2O'))
 
-        O2_thermo = BaseThermo(
+        O2_thermo = Reference(
             name = 'H2O',
             phase = 'G',
             elements = {'O': 2},

@@ -204,6 +204,16 @@ class HarmonicVib:
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            HarmonicVib : HarmonicVib object
+        """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
@@ -501,5 +511,15 @@ class QRRHOVib:
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            QRRHOVib : QRRHOVib object
+        """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)

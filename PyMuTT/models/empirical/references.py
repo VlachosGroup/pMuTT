@@ -8,14 +8,60 @@ references.
 
 from warnings import warn
 import numpy as np
+from PyMuTT.models.empirical import BaseThermo
 from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
+
+class Reference(BaseThermo):
+    """Single reference specie used to adjust DFT energies to experimental data.
+
+    Attributes
+    ----------
+        T_ref : float
+            Temperature reference in K
+        HoRT_ref : float
+            Dimensionless enthalpy corresponding to T_ref
+    """
+    
+    def __init__(self, T_ref, HoRT_ref, **kwargs):
+        super().__init__(**kwargs)
+        self.T_ref = T_ref
+        self.HoRT_ref = HoRT_ref
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = super().to_dict()
+        obj_dict['T_ref'] = self.T_ref
+        obj_dict['HoRT_ref'] = self.HoRT_ref
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            Reference : Reference object
+        """
+        json_obj = remove_class(json_obj)
+        # Reconstruct statmech model
+        return cls(**json_obj)
+
 
 class References:
     """Holds reference species to adjust DFT energies to experimental data.
 
     Attributes
     ----------
-        _references : list of ``PyMuTT.models.empirical.basethermo.BaseThermo``
+        _references : list of ``PyMuTT.models.empirical.references.Reference``
             Reference species. Each member of the list should have the
             attributes ``T_ref`` and ``HoRT_ref``
         HoRT_element_offset : dict
@@ -191,6 +237,16 @@ class References:
     
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            References : References object
+        """
         json_obj = remove_class(json_obj)
         json_obj['references'] = [json_to_PyMuTT(ref_dict) \
                                   for ref_dict in json_obj['references']]
