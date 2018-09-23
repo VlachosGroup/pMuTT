@@ -44,11 +44,10 @@ class BaseThermo:
     """
 
     def __init__(self, name, phase=None, elements=None, statmech_model=None,
-                 T_ref=c.T0('K'), references=None, notes=None, **kwargs):
+                 references=None, notes=None, **kwargs):
         self.name = name
         self.phase = phase
         self.elements = elements
-        self.T_ref = T_ref
         self.references = references
         self.notes = notes
 
@@ -548,7 +547,6 @@ class BaseThermo:
                     'name': self.name,
                     'phase': self.phase,
                     'elements': self.elements,
-                    'T_ref': self.T_ref,
                     'notes': self.notes,}
         try:
             obj_dict['references'] = self.references.to_dict()

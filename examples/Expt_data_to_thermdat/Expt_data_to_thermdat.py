@@ -24,7 +24,7 @@ S_units = 'J/mol/K'
 G_units = 'kJ/mol'
 
 #Input the experimental data and fitting to a NASA polynomial
-CH3OH_nasa = Nasa.fit_from_data(name ='CH3OH', Ts=Ts, CpoR=CpoR, T_ref=T_ref, HoRT_ref=HoRT_ref, SoR_ref=SoR_ref)
+CH3OH_nasa = Nasa.from_data(name ='CH3OH', Ts=Ts, CpoR=CpoR, T_ref=T_ref, HoRT_ref=HoRT_ref, SoR_ref=SoR_ref)
 
 #Compare the Nasa polynomial to the input data
 fig, axes = CH3OH_nasa.plot_empirical(Cp_units=Cp_units, H_units=H_units, S_units=S_units, G_units=G_units)

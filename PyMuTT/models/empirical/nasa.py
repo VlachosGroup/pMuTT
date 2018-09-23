@@ -3,7 +3,6 @@
 PyMuTT.models.empirical.nasa
 
 Operations related to Nasa polynomials
-
 """
 
 import sys
@@ -208,6 +207,12 @@ class Nasa(BaseThermo):
                 Dimensionless reference enthalpy that corresponds to T_ref.
             SoR_ref : float
                 Dimensionless entropy that corresponds to T_ref. 
+            elements : dict
+                Composition of the species.
+                Keys of dictionary are elements, values are stoichiometric values
+                in a formula unit.
+                e.g. CH3OH can be represented as:
+                {'C': 1, 'H': 4, 'O': 1,}.                
             T_mid : float or iterable of float, optional
                 Guess for T_mid. If float, only uses that value for T_mid. If 
                 list, finds the best fit for each element in the list. If None, 
@@ -260,8 +265,11 @@ class Nasa(BaseThermo):
             references : `PyMuTT.models.empirical.references.References` object
                 Reference to adjust enthalpy
             elements : dict
-                The key is the element symbol and the value is the number of
-                that element in a stoichiometric formula
+                Composition of the species.
+                Keys of dictionary are elements, values are stoichiometric values
+                in a formula unit.
+                e.g. CH3OH can be represented as:
+                {'C': 1, 'H': 4, 'O': 1,}.                
             **kwargs : keyword arguments
                 Used to initalize statmech_model or BaseThermo attributes to be
                 stored.

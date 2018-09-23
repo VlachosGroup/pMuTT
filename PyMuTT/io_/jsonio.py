@@ -54,7 +54,7 @@ def type_to_class(class_str):
     # import errors. This way the imports are limited to the function.
     from PyMuTT.models.empirical import BaseThermo
     from PyMuTT.models.empirical.nasa import Nasa
-    from PyMuTT.models.empirical.references import References
+    from PyMuTT.models.empirical.references import Reference, References
     from PyMuTT.models.empirical.zacros import Zacros
     from PyMuTT.models.statmech import StatMech, EmptyMode
     from PyMuTT.models.statmech.trans import IdealTrans
@@ -66,6 +66,7 @@ def type_to_class(class_str):
     type_to_class_dict = {
         "<class 'PyMuTT.models.empirical.BaseThermo'>": BaseThermo,
         "<class 'PyMuTT.models.empirical.nasa.Nasa'>": Nasa,
+        "<class 'PyMuTT.models.empirical.references.Reference'>": Reference,
         "<class 'PyMuTT.models.empirical.references.References'>": References,
         "<class 'PyMuTT.models.empirical.zacros.Zacros'>": Zacros,
         "<class 'PyMuTT.models.statmech.StatMech'>": StatMech,

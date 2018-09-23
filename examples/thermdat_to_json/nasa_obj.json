@@ -6,10 +6,7 @@
   "elements": {
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 1/90",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -41,10 +38,7 @@
   "elements": {
    "O": 2
   },
-  "T_ref": 298.15,
   "notes": "TPIS89",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -76,10 +70,7 @@
   "elements": {
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "L 7/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -111,10 +102,7 @@
   "elements": {
    "H": 2
   },
-  "T_ref": 298.15,
   "notes": "TPIS78",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -147,10 +135,7 @@
    "O": 1,
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "RUS 78",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -183,10 +168,7 @@
    "H": 2,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 8/89",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -219,10 +201,7 @@
    "H": 1,
    "O": 2
   },
-  "T_ref": 298.15,
   "notes": "L 5/89",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -255,10 +234,7 @@
    "H": 2,
    "O": 2
   },
-  "T_ref": 298.15,
   "notes": "L 7/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -290,10 +266,7 @@
   "elements": {
    "C": 1
   },
-  "T_ref": 298.15,
   "notes": "L11/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -326,10 +299,7 @@
    "C": 1,
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "TPIS79",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -362,10 +332,7 @@
    "C": 1,
    "H": 2
   },
-  "T_ref": 298.15,
   "notes": "L S/93",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -398,10 +365,7 @@
    "C": 1,
    "H": 2
   },
-  "T_ref": 298.15,
   "notes": "L S/93",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -434,10 +398,7 @@
    "C": 1,
    "H": 3
   },
-  "T_ref": 298.15,
   "notes": "L11/89",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -470,10 +431,7 @@
    "C": 1,
    "H": 4
   },
-  "T_ref": 298.15,
   "notes": "L 8/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -506,10 +464,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "TPIS79",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -542,10 +497,7 @@
    "C": 1,
    "O": 2
   },
-  "T_ref": 298.15,
   "notes": "L 7/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -579,10 +531,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L12/89",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -616,10 +565,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 8/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -653,10 +599,7 @@
    "H": 3,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "GUNL93",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -690,10 +633,7 @@
    "H": 3,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "121686",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -727,10 +667,7 @@
    "H": 4,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 8/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -763,10 +700,7 @@
    "C": 2,
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "L 1/91",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -799,10 +733,7 @@
    "C": 2,
    "H": 2
   },
-  "T_ref": 298.15,
   "notes": "L 1/91",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -835,10 +766,7 @@
    "C": 2,
    "H": 3
   },
-  "T_ref": 298.15,
   "notes": "L 2/92",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -871,10 +799,7 @@
    "C": 2,
    "H": 4
   },
-  "T_ref": 298.15,
   "notes": "L 1/91",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -907,10 +832,7 @@
    "C": 2,
    "H": 5
   },
-  "T_ref": 298.15,
   "notes": "L12/92",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -943,10 +865,7 @@
    "C": 2,
    "H": 6
   },
-  "T_ref": 298.15,
   "notes": "L 8/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -980,10 +899,7 @@
    "H": 2,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 5/90",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1017,10 +933,7 @@
    "C": 2,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "SRIC91",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1054,10 +967,7 @@
    "O": 1,
    "H": 2
   },
-  "T_ref": 298.15,
   "notes": "SRI91",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1091,10 +1001,7 @@
    "C": 1,
    "N": 1
   },
-  "T_ref": 298.15,
   "notes": "41687",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1128,10 +1035,7 @@
    "C": 1,
    "N": 1
   },
-  "T_ref": 298.15,
   "notes": "GRI/98",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1165,10 +1069,7 @@
    "N": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "And93",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1200,10 +1101,7 @@
   "elements": {
    "N": 1
   },
-  "T_ref": 298.15,
   "notes": "L 6/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1236,10 +1134,7 @@
    "N": 2,
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "T07/93",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1272,10 +1167,7 @@
    "N": 2,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 7/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1308,10 +1200,7 @@
    "N": 1,
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "And94",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1344,10 +1233,7 @@
    "N": 1,
    "H": 2
   },
-  "T_ref": 298.15,
   "notes": "And89",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1380,10 +1266,7 @@
    "N": 1,
    "H": 3
   },
-  "T_ref": 298.15,
   "notes": "J 6/77",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1416,10 +1299,7 @@
    "N": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "RUS 78",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1452,10 +1332,7 @@
    "N": 1,
    "O": 2
   },
-  "T_ref": 298.15,
   "notes": "L 7/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1490,10 +1367,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "BDEA94",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1528,10 +1402,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "BDEA94",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1566,10 +1437,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "BDEA94",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1603,10 +1471,7 @@
    "C": 1,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "EA 93",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1639,10 +1504,7 @@
    "C": 1,
    "N": 1
   },
-  "T_ref": 298.15,
   "notes": "HBH92",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1676,10 +1538,7 @@
    "N": 2,
    "H": 1
   },
-  "T_ref": 298.15,
   "notes": "SRI/94",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1711,10 +1570,7 @@
   "elements": {
    "N": 2
   },
-  "T_ref": 298.15,
   "notes": "121286",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1746,10 +1602,7 @@
   "elements": {
    "AR": 1
   },
-  "T_ref": 298.15,
   "notes": "120186",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1782,10 +1635,7 @@
    "C": 3,
    "H": 8
   },
-  "T_ref": 298.15,
   "notes": "L 4/85",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1818,10 +1668,7 @@
    "C": 3,
    "H": 7
   },
-  "T_ref": 298.15,
   "notes": "L 9/84",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1855,10 +1702,7 @@
    "H": 4,
    "O": 1
   },
-  "T_ref": 298.15,
   "notes": "L 8/88",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
@@ -1892,10 +1736,7 @@
    "H": 3,
    "C": 2
   },
-  "T_ref": 298.15,
   "notes": "SAND86",
-  "HoRT_dft": null,
-  "HoRT_ref": null,
   "references": null,
   "statmech_model": null,
   "a_low": [
