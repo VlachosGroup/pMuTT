@@ -238,7 +238,6 @@ class Nasa(BaseThermo):
         a_low[6], a_high[6] = fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, 
                                       a_low=a_low, a_high=a_high,
                                       T_mid=T_mid_out)
-        # print('From_data: {}'.format(kwargs))
         return cls(name=name, T_low=T_low, T_high=T_high, T_mid=T_mid_out, 
                    a_low=a_low, a_high=a_high, elements=elements, **kwargs)
 
@@ -284,6 +283,19 @@ class Nasa(BaseThermo):
 
         # Generate data
         Ts = np.linspace(T_low, T_high)
+        if T_mid is not None:
+        # Check to see if specified T_mid's are in Ts and, if not,
+        # insert them into Ts.
+            # If a single value for T_mid is chosen, convert to a tuple
+            try:
+                iter(T_mid)
+            except TypeError:
+                T_mid = (T_mid,)
+            for x in range(0, len(T_mid)):
+                if np.where(Ts == T_mid[x])[0].size == 0:
+                    # Insert T_mid's into Ts and save position
+                    Ts_index = np.where(Ts > T_mid[x])[0][0]
+                    Ts = np.insert(Ts, Ts_index, T_mid[x])
         CpoR = np.array([statmech_model.get_CpoR(T=T) for T in Ts])
         T_ref = c.T0('K')
         HoRT_ref = statmech_model.get_HoRT(T=T_ref)
@@ -292,9 +304,8 @@ class Nasa(BaseThermo):
             HoRT_ref += references.get_HoRT_offset(elements=elements, Ts=T_ref)
         SoR_ref = statmech_model.get_SoR(T=T_ref)
 
-        # print('From_statmech: {}'.format(kwargs))
         return cls.from_data(name=name, Ts=Ts, CpoR=CpoR, T_ref=T_ref, 
-                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, 
+                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
                              statmech_model=statmech_model, elements=elements,
                              references=references, **kwargs)
 
@@ -378,12 +389,10 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     prev_mse = np.inf
     all_a_low = []
     all_a_high = []
-
     for i, T_m in enumerate(T_mid):
         # Generate temperature data
         (mse, a_low, a_high) = _get_CpoR_MSE(Ts=Ts, CpoR=CpoR, T_mid=T_m)
         mse_list.append(mse)
-        # print('{}\t{}\t{}'.format(i, T_m, mse))
         all_a_low.append(a_low)
         all_a_high.append(a_high)
         # Check if the optimum T_mid has been found by determining if the 
@@ -405,7 +414,6 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     empty_arr = np.zeros(2)
     a_low_out = np.concatenate((a_low_rev[::-1], empty_arr))
     a_high_out = np.concatenate((a_high_rev[::-1], empty_arr))
-
     return a_low_out, a_high_out, T_mid_out
 
 def _get_CpoR_MSE(Ts, CpoR, T_mid):
@@ -432,7 +440,7 @@ def _get_CpoR_MSE(Ts, CpoR, T_mid):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
     low_condition = (Ts<=T_mid)
-    high_condition = (Ts>=T_mid)
+    high_condition = (Ts>T_mid)
     T_low = np.extract(condition=low_condition, arr=Ts)
     T_high = np.extract(condition=high_condition, arr=Ts)
     CpoR_low = np.extract(condition=low_condition, arr=CpoR)
@@ -454,7 +462,10 @@ def _get_CpoR_MSE(Ts, CpoR, T_mid):
     CpoR_high_fit = np.polyval(p_high, T_high)
     CpoR_fit = np.concatenate((CpoR_low_fit, CpoR_high_fit))
     mse = np.mean([(x-y)**2 for x, y in zip(CpoR, CpoR_fit)])
-
+    CpoR_mean = np.mean(CpoR)
+    ss_reg = np.sum((CpoR_fit - CpoR_mean)**2)
+    ss_tot = np.sum((CpoR - CpoR_mean)**2)
+    R2 = ss_reg / ss_tot
     return (mse, p_low, p_high)
 
 def fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
