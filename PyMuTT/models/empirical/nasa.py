@@ -200,7 +200,7 @@ class Nasa(BaseThermo):
             Ts : (N,) `numpy.ndarray`_
                 Temperatures in K used for fitting CpoR.
             CpoR : (N,) `numpy.ndarray`_
-                Dimensionless heat capacity corresponding to T.
+                Dimensionless heat capacity corresponding to Ts.
             T_ref : float
                 Reference temperature in K used fitting empirical coefficients.
             HoRT_ref : float
@@ -270,8 +270,8 @@ class Nasa(BaseThermo):
                 e.g. CH3OH can be represented as:
                 {'C': 1, 'H': 4, 'O': 1,}.                
             **kwargs : keyword arguments
-                Used to initalize statmech_model or BaseThermo attributes to be
-                stored.
+                Used to initalize ``statmech_model`` or ``BaseThermo`` 
+                attributes to be stored.
         Returns
         -------
             Nasa : Nasa object
@@ -389,7 +389,7 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     prev_mse = np.inf
     all_a_low = []
     all_a_high = []
-    for i, T_m in enumerate(T_mid):
+    for T_m in T_mid:
         # Generate temperature data
         (mse, a_low, a_high) = _get_CpoR_MSE(Ts=Ts, CpoR=CpoR, T_mid=T_m)
         mse_list.append(mse)
@@ -462,10 +462,6 @@ def _get_CpoR_MSE(Ts, CpoR, T_mid):
     CpoR_high_fit = np.polyval(p_high, T_high)
     CpoR_fit = np.concatenate((CpoR_low_fit, CpoR_high_fit))
     mse = np.mean([(x-y)**2 for x, y in zip(CpoR, CpoR_fit)])
-    CpoR_mean = np.mean(CpoR)
-    ss_reg = np.sum((CpoR_fit - CpoR_mean)**2)
-    ss_tot = np.sum((CpoR - CpoR_mean)**2)
-    R2 = ss_reg / ss_tot
     return (mse, p_low, p_high)
 
 def fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):

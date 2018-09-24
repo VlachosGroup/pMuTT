@@ -21,13 +21,13 @@ DFT Input Example
 
 This example uses data found in `PyMuTT.examples.VASP_to_thermdat.example1`_. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of ``PyMuTT.io_.read_excel``. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.
 
-+------+-------+------------+------------+--------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
-| name | phase | elements~H | elements~O | thermo_model | T_ref | HoRT_ref     | potentialenergy | geometry  | atoms         | symmetrynumber | spin | vib_wavenumber | vib_wavenumber | vib_wavenumber |
-+======+=======+============+============+==============+=======+==============+=================+===========+===============+================+======+================+================+================+
-| H2   | G     | 2          | 0          | IdealGas     | 298   | 0            | -6.7598         | linear    | .\H2\CONTCAR  | 2              | 0    | 4306.1793      |                |                |
-+------+-------+------------+------------+--------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
-| H2O  | G     | 2          | 1          | IdealGas     | 298   | -97.60604334 | -14.2209        | nonlinear | .\H2O\CONTCAR | 2              | 0    | 3825.434       | 3710.2642      | 1582.432       |
-+------+-------+------------+------------+--------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
++------+-------+------------+------------+----------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
+| name | phase | elements.H | elements.O | statmech_model | T_ref | HoRT_ref     | potentialenergy | geometry  | atoms         | symmetrynumber | spin | vib_wavenumber | vib_wavenumber | vib_wavenumber |
++======+=======+============+============+================+=======+==============+=================+===========+===============+================+======+================+================+================+
+| H2   | G     | 2          | 0          | IdealGas       | 298   | 0            | -6.7598         | linear    | .\H2\CONTCAR  | 2              | 0    | 4306.1793      |                |                |
++------+-------+------------+------------+----------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
+| H2O  | G     | 2          | 1          | IdealGas       | 298   | -97.60604334 | -14.2209        | nonlinear | .\H2O\CONTCAR | 2              | 0    | 3825.434       | 3710.2642      | 1582.432       |
++------+-------+------------+------------+----------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
 
 The ``PyMuTT.io_.excel.read_excel`` function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (\*\*kwargs). This is shown in code below:
 
@@ -35,11 +35,11 @@ The ``PyMuTT.io_.excel.read_excel`` function returns a list of dictionaries. The
 
     from pprint import pprint
     from PyMuTT.io_.excel import read_excel
-    from PyMuTT.models.empirical.references import References
+    from PyMuTT.models.empirical.references import Reference, References
 
     refs_path = './references.xlsx'
     refs_input = read_excel(io=refs_path)
-    refs = References([BaseThermo(**ref_input) for ref_input in refs_input])
+    refs = References([Reference(**ref_input) for ref_input in refs_input])
 
     print('Reference Input:')
     pprint(refs_input)
@@ -54,7 +54,7 @@ The output can be shown below::
       'potentialenergy': -14.2209,
       'spin': 0.0,
       'symmetrynumber': 2.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
       'vib_energies': [0.47429336414391626,
                        0.460014128927786,
                        0.19619656143825398]},
@@ -66,7 +66,7 @@ The output can be shown below::
       'potentialenergy': -6.7598,
       'spin': 0.0,
       'symmetrynumber': 2.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
       'vib_energies': [0.5338981843116086]},
      {'atoms': Atoms(symbols='O2', pbc=True, cell=[20.0, 20.0, 20.0]),
       'elements': {'H': 0, 'O': 2, 'Pt': 0},
@@ -76,13 +76,13 @@ The output can be shown below::
       'potentialenergy': -9.86,
       'spin': 1.0,
       'symmetrynumber': 2.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
       'vib_energies': [0.2733851552365915]},
      {'elements': {'H': 0, 'O': 1, 'Pt': 1},
       'name': 'MO(S)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -90,7 +90,7 @@ The output can be shown below::
       'name': 'MO(B)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -98,13 +98,13 @@ The output can be shown below::
       'name': 'V-MO(S)',
       'phase': 'S',
       'potentialenergy': 7.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': []},
      {'elements': {'H': 0, 'O': 1, 'Pt': 1},
       'name': 'MO_bulk(S)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -112,7 +112,7 @@ The output can be shown below::
       'name': 'MO_bulk(B)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -120,7 +120,7 @@ The output can be shown below::
       'name': 'V-MO_bulk(S)',
       'phase': 'S',
       'potentialenergy': 7.0,
-      'thermo_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'PyMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': []}]
 
 NASA Polynomial Input Example
@@ -128,7 +128,7 @@ NASA Polynomial Input Example
 This example uses data found in `PyMuTT.examples.read_nasa_from_excel`_. Due to the special rules defined for NASA parsing, a group of NASA polynomials can be directly imported using ``PyMuTT.io_.excel.read_excel``.
 
 +------+-------+------------+------------+-------+-------+--------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+--------+
-| name | phase | elements~H | elements~O | T_low | T_mid | T_high | nasa~a_low~0 | nasa~a_low~1 | nasa~a_low~2 | nasa~a_low~3 | nasa~a_low~4 | nasa~a_low~5 | nasa~a_low~6 | nasa~a_high~0 | nasa~a_high~1 | nasa~a_high~2 | nasa~a_high~3 | nasa~a_high~4 | nasa~a_high~5 | nasa~a_high~6 | notes  |
+| name | phase | elements.H | elements.O | T_low | T_mid | T_high | nasa.a_low.0 | nasa.a_low.1 | nasa.a_low.2 | nasa.a_low.3 | nasa.a_low.4 | nasa.a_low.5 | nasa.a_low.6 | nasa.a_high.0 | nasa.a_high.1 | nasa.a_high.2 | nasa.a_high.3 | nasa.a_high.4 | nasa.a_high.5 | nasa.a_high.6 | notes  |
 +======+=======+============+============+=======+=======+========+==============+==============+==============+==============+==============+==============+==============+===============+===============+===============+===============+===============+===============+===============+========+
 | O2   | G     |            | 2          | 200   | 1000  | 3500   | 3.78E+00     | -3.00E-03    | 9.85E-06     | -9.68E-09    | 3.24E-12     | -1.06E+03    | 3.66E+00     | 3.28E+00      | 1.48E-03      | -7.58E-07     | 2.09E-10      | -2.17E-14     | -1.09E+03     | 5.45E+00      | TPIS89 |
 +------+-------+------------+------------+-------+-------+--------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+--------+
@@ -183,7 +183,6 @@ This is the output format used for Chemkin. A list of NASA objects can be writte
 
 Examples
 --------
-
 Reading Thermdat
 ^^^^^^^^^^^^^^^^
 A thermdat file can be read directly by using ``PyMuTT.io_.thermdat.read_thermdat``. The example here can be found in `PyMuTT.examples.read_nasa_from_thermdat`_
@@ -219,7 +218,7 @@ A snippet of the species information printed is shown below::
         T_ref   298.15
         references      None
         notes   120186
-        thermo_model    None
+        statmech_model    None
         HoRT_dft        None
         HoRT_ref        None
         a_low   [   2.5      0.       0.       0.       0.    -745.375    4.366]
@@ -239,8 +238,7 @@ JSON
    :members:
 
 Examples
-^^^^^^^^
-
+--------
 Saving PyMuTT objects can be done by using the ``PyMuTTEncoder`` in ``PyMuTT.io_.jsonio``.
 
 .. code:: python
@@ -260,8 +258,7 @@ Loading PyMuTT objects can be done by using the ``json_to_PyMuTT`` object hook i
        PyMuTT_obj = json.load(f_ptr, object_hook=json_to_PyMuTT)
 
 Sample JSON File
-^^^^^^^^^^^^^^^^
-
+----------------
 JSON writes in a human-readable syntax. An example showing two ``Nasa`` objects in JSON format is shown below.::
 
    [
@@ -335,7 +332,7 @@ JSON writes in a human-readable syntax. An example showing two ``Nasa`` objects 
      "T_mid": 1000.0,
      "T_high": 3500.0
     }]
-    
+
 Creating New PyMuTT Classes
 ---------------------------
 
