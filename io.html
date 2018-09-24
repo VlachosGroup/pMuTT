@@ -99,6 +99,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.jsonio">JSON</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-new-pymutt-classes">Creating New PyMuTT Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#decoding">Decoding</a></li>
@@ -181,7 +183,7 @@
 <p>Input and output to different forms is an active area of development for PyMuTT</p>
 <div class="section" id="module-PyMuTT.io_.excel">
 <span id="excel"></span><h2>Excel<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id5"><span class="problematic" id="id6">PyMuTT.io_</span></a>.excel</p>
+<p><a href="#id6"><span class="problematic" id="id7">PyMuTT.io_</span></a>.excel</p>
 <p>Read from/write to xlsx files of particular format.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.excel.read_excel">
@@ -472,9 +474,9 @@ output_structure[‘elements’][element]</li>
 <col width="4%" />
 <col width="6%" />
 <col width="6%" />
-<col width="8%" />
+<col width="9%" />
 <col width="4%" />
-<col width="8%" />
+<col width="7%" />
 <col width="9%" />
 <col width="6%" />
 <col width="8%" />
@@ -487,9 +489,9 @@ output_structure[‘elements’][element]</li>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">name</th>
 <th class="head">phase</th>
-<th class="head">elements~H</th>
-<th class="head">elements~O</th>
-<th class="head">thermo_model</th>
+<th class="head">elements.H</th>
+<th class="head">elements.O</th>
+<th class="head">statmech_model</th>
 <th class="head">T_ref</th>
 <th class="head">HoRT_ref</th>
 <th class="head">potentialenergy</th>
@@ -540,11 +542,11 @@ output_structure[‘elements’][element]</li>
 <p>The <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.excel.read_excel</span></code> function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in code below:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">PyMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">References</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">refs_path</span> <span class="o">=</span> <span class="s1">&#39;./references.xlsx&#39;</span>
 <span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
-<span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">BaseThermo</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
+<span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference Input:&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">refs_input</span><span class="p">)</span>
@@ -559,7 +561,7 @@ output_structure[‘elements’][element]</li>
   &#39;potentialenergy&#39;: -14.2209,
   &#39;spin&#39;: 0.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.47429336414391626,
                    0.460014128927786,
                    0.19619656143825398]},
@@ -571,7 +573,7 @@ output_structure[‘elements’][element]</li>
   &#39;potentialenergy&#39;: -6.7598,
   &#39;spin&#39;: 0.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.5338981843116086]},
  {&#39;atoms&#39;: Atoms(symbols=&#39;O2&#39;, pbc=True, cell=[20.0, 20.0, 20.0]),
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 2, &#39;Pt&#39;: 0},
@@ -581,13 +583,13 @@ output_structure[‘elements’][element]</li>
   &#39;potentialenergy&#39;: -9.86,
   &#39;spin&#39;: 1.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.2733851552365915]},
  {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 1, &#39;Pt&#39;: 1},
   &#39;name&#39;: &#39;MO(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -595,7 +597,7 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;MO(B)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -603,13 +605,13 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;V-MO(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 7.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: []},
  {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 1, &#39;Pt&#39;: 1},
   &#39;name&#39;: &#39;MO_bulk(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -617,7 +619,7 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;MO_bulk(B)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -625,7 +627,7 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;V-MO_bulk(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 7.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: []}]
 </pre></div>
 </div>
@@ -661,25 +663,25 @@ output_structure[‘elements’][element]</li>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">name</th>
 <th class="head">phase</th>
-<th class="head">elements~H</th>
-<th class="head">elements~O</th>
+<th class="head">elements.H</th>
+<th class="head">elements.O</th>
 <th class="head">T_low</th>
 <th class="head">T_mid</th>
 <th class="head">T_high</th>
-<th class="head">nasa~a_low~0</th>
-<th class="head">nasa~a_low~1</th>
-<th class="head">nasa~a_low~2</th>
-<th class="head">nasa~a_low~3</th>
-<th class="head">nasa~a_low~4</th>
-<th class="head">nasa~a_low~5</th>
-<th class="head">nasa~a_low~6</th>
-<th class="head">nasa~a_high~0</th>
-<th class="head">nasa~a_high~1</th>
-<th class="head">nasa~a_high~2</th>
-<th class="head">nasa~a_high~3</th>
-<th class="head">nasa~a_high~4</th>
-<th class="head">nasa~a_high~5</th>
-<th class="head">nasa~a_high~6</th>
+<th class="head">nasa.a_low.0</th>
+<th class="head">nasa.a_low.1</th>
+<th class="head">nasa.a_low.2</th>
+<th class="head">nasa.a_low.3</th>
+<th class="head">nasa.a_low.4</th>
+<th class="head">nasa.a_low.5</th>
+<th class="head">nasa.a_low.6</th>
+<th class="head">nasa.a_high.0</th>
+<th class="head">nasa.a_high.1</th>
+<th class="head">nasa.a_high.2</th>
+<th class="head">nasa.a_high.3</th>
+<th class="head">nasa.a_high.4</th>
+<th class="head">nasa.a_high.5</th>
+<th class="head">nasa.a_high.6</th>
 <th class="head">notes</th>
 </tr>
 </thead>
@@ -775,7 +777,7 @@ output_structure[‘elements’][element]</li>
 <div class="section" id="thermdat">
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
 <p>This is the output format used for Chemkin. A list of NASA objects can be written to a thermdat file.</p>
-<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id7"><span class="problematic" id="id8">PyMuTT.io_</span></a>.thermdat</p>
+<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">PyMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="PyMuTT.io_.thermdat.read_thermdat">
@@ -862,7 +864,7 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
     <span class="n">T_ref</span>   <span class="mf">298.15</span>
     <span class="n">references</span>      <span class="kc">None</span>
     <span class="n">notes</span>   <span class="mi">120186</span>
-    <span class="n">thermo_model</span>    <span class="kc">None</span>
+    <span class="n">statmech_model</span>    <span class="kc">None</span>
     <span class="n">HoRT_dft</span>        <span class="kc">None</span>
     <span class="n">HoRT_ref</span>        <span class="kc">None</span>
     <span class="n">a_low</span>   <span class="p">[</span>   <span class="mf">2.5</span>      <span class="mf">0.</span>       <span class="mf">0.</span>       <span class="mf">0.</span>       <span class="mf">0.</span>    <span class="o">-</span><span class="mf">745.375</span>    <span class="mf">4.366</span><span class="p">]</span>
@@ -964,6 +966,8 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
 </table>
 </dd></dl>
 
+<div class="section" id="id5">
+<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Saving PyMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">PyMuTTEncoder</span></code> in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio</span></code>.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">PyMuTTEncoder</span>
 
@@ -978,6 +982,9 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
     <span class="n">PyMuTT_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_PyMuTT</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="sample-json-file">
+<h3>Sample JSON File<a class="headerlink" href="#sample-json-file" title="Permalink to this headline">¶</a></h3>
 <p>JSON writes in a human-readable syntax. An example showing two <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects in JSON format is shown below.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
  <span class="p">{</span>
@@ -1051,6 +1058,7 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
  <span class="p">}]</span>
 </pre></div>
+</div>
 </div>
 <div class="section" id="creating-new-pymutt-classes">
 <h3>Creating New PyMuTT Classes<a class="headerlink" href="#creating-new-pymutt-classes" title="Permalink to this headline">¶</a></h3>

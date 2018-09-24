@@ -211,6 +211,24 @@ Helmholtz energy and Gibbs energy.</p>
 <dd><p><cite>PyMuTT.models.statmech.nucl</cite> object – Deals with nuclear modes</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.StatMech.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>StatMech</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">StatMech object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="PyMuTT.models.statmech.StatMech.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.StatMech.get_AoRT" title="Permalink to this definition">¶</a></dt>
@@ -651,6 +669,24 @@ John Wiley &amp; Sons, 2010.</p>
 <dd><p><em>float</em> – Molecular weight of the molecule in g/mol.</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.trans.IdealTrans.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>IdealTrans</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">IdealTrans object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="PyMuTT.models.statmech.trans.IdealTrans.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans.get_AoRT" title="Permalink to this definition">¶</a></dt>
@@ -883,6 +919,24 @@ John Wiley &amp; Sons, 2010.</p>
 <dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.vib.HarmonicVib.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HarmonicVib</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">HarmonicVib object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
@@ -1113,6 +1167,24 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="PyMuTT.models.statmech.vib.QRRHOVib.alpha">
 <code class="descname">alpha</code><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>int, optional</em> – Power to raise ratio of wavenumbers. Default is 4</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.vib.QRRHOVib.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>QRRHOVib</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">QRRHOVib object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -1390,6 +1462,24 @@ John Wiley &amp; Sons, 2010.</p>
 guess geometry</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.rot.RigidRotor.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>RigidRotor</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">RigidRotor object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="PyMuTT.models.statmech.rot.RigidRotor.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_AoRT" title="Permalink to this definition">¶</a></dt>
@@ -1639,6 +1729,24 @@ John Wiley &amp; Sons, 2010.</p>
 </ul>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.elec.IdealElec.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>IdealElec</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">IdealElec object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="PyMuTT.models.statmech.elec.IdealElec.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec.get_AoRT" title="Permalink to this definition">¶</a></dt>
@@ -1821,6 +1929,24 @@ nuclear modes become important in the future.</p>
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.nucl.</code><code class="descname">IdealNucl</code><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Nuclear modes. Assumes no change in any chemical reaction and hence
 does not affect thermodynamic quantities.</p>
+<dl class="classmethod">
+<dt id="PyMuTT.models.statmech.nucl.IdealNucl.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>IdealNucl</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">IdealNucl object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="PyMuTT.models.statmech.nucl.IdealNucl.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.nucl.IdealNucl.get_AoRT" title="Permalink to this definition">¶</a></dt>
