@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from PyMuTT.io_.jsonio import remove_class
 
+
 class IdealNucl:
     """Nuclear modes. Assumes no change in any chemical reaction and hence
     does not affect thermodynamic quantities."""
@@ -37,7 +38,7 @@ class IdealNucl:
                 Nuclear dimensionless heat capacity at constant pressure
         """
         return 0.
-    
+
     def get_UoRT(self):
         """Calculates the imensionless internal energy
 
@@ -90,13 +91,13 @@ class IdealNucl:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
         """
         return {'class': str(self.__class__)}
-    
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.

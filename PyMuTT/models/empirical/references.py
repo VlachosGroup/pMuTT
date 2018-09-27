@@ -11,8 +11,10 @@ import numpy as np
 from PyMuTT.models.empirical import BaseThermo
 from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
 
+
 class Reference(BaseThermo):
-    """Single reference specie used to adjust DFT energies to experimental data.
+    """Single reference specie used to adjust DFT energies to
+    experimental data.
 
     Attributes
     ----------
@@ -21,7 +23,7 @@ class Reference(BaseThermo):
         HoRT_ref : float
             Dimensionless enthalpy corresponding to T_ref
     """
-    
+
     def __init__(self, T_ref, HoRT_ref, **kwargs):
         super().__init__(**kwargs)
         self.T_ref = T_ref
@@ -29,7 +31,7 @@ class Reference(BaseThermo):
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -149,7 +151,7 @@ class References:
                 Rows correspond to reference species. Columns correspond to
                 elements
 
-        
+
         """
         elements = self.get_elements()
         elements_mat = np.zeros((len(self), len(elements)))
@@ -176,7 +178,7 @@ class References:
         self.T_ref = np.mean(T_refs)
 
         HoRT_ref_dft = np.array(
-                [reference.statmech_model.get_HoRT(T=reference.T_ref) 
+                [reference.statmech_model.get_HoRT(T=reference.T_ref)
                     for reference in self])
         HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
         # Offset between the DFT energies and experimentalvalues
@@ -227,14 +229,14 @@ class References:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
         """
         return {'class': self.__class__,
                 'references': [ref.to_dict() for ref in self._references]}
-    
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.
@@ -248,6 +250,6 @@ class References:
             References : References object
         """
         json_obj = remove_class(json_obj)
-        json_obj['references'] = [json_to_PyMuTT(ref_dict) \
+        json_obj['references'] = [json_to_PyMuTT(ref_dict)
                                   for ref_dict in json_obj['references']]
         return cls(**json_obj)

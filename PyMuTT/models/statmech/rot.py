@@ -6,40 +6,41 @@ import numpy as np
 from PyMuTT import constants as c
 from PyMuTT.io_.jsonio import remove_class
 
+
 class RigidRotor:
     """Rotational mode using the rigid rotor assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
 
     Attributes
     ----------
         symmetrynumber : float
-            Symmetry number of molecule. 
+            Symmetry number of molecule.
 
-            ===========    ===============                     
-            Point group    symmetry number                     
-            ===========    ===============                     
-            C1             1                                   
-            Cs             1                                   
-            C2             2                                   
-            C2v            2                                   
-            C3v            3                                   
-            Cinfv          1                                   
-            D2h            4                                   
-            D3h            6                                   
-            D5h            10                                  
-            Dinfh          2                                   
-            D3d            6                                   
-            Td             12                                  
-            Oh             24                                  
-            ===========    ===============                     
+            ===========    ===============
+            Point group    symmetry number
+            ===========    ===============
+            C1             1
+            Cs             1
+            C2             2
+            C2v            2
+            C3v            3
+            Cinfv          1
+            D2h            4
+            D3h            6
+            D5h            10
+            Dinfh          2
+            D3d            6
+            Td             12
+            Oh             24
+            ===========    ===============
                                                
             See DOI for more details: 10.1007/s00214-007-0328-0
         rot_temperatures : list of float, optional
             Rotational temperatures in K
         geometry : str
             Geometry of molecule. Accepted options are:
-            
+
             - monatomic
             - linear
             - nonlinear

@@ -5,9 +5,10 @@ from PyMuTT import constants as c
 from PyMuTT import get_molecular_weight
 from PyMuTT.io_.jsonio import remove_class
 
+
 class IdealTrans:
     """Translational mode using ideal gas assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
 
     Attributes
@@ -55,7 +56,7 @@ class IdealTrans:
             T : float
                 Temperature in K
             P : float, optional
-                Pressure (bar) or pressure-like quantity. 
+                Pressure (bar) or pressure-like quantity.
                 Default is atmospheric pressure
         Returns
         -------
@@ -63,15 +64,16 @@ class IdealTrans:
                 Translational partition function
         """
         V = self.get_V(T=T, P=P)
-        unit_mass = self.molecular_weight*c.convert_unit(from_='g',to='kg')/c.Na
+        unit_mass = self.molecular_weight *\
+            c.convert_unit(from_='g', to='kg')/c.Na
         return V*(2*np.pi*c.kb('J/K')*T*unit_mass/c.h('J s')**2) \
-              **(float(self.n_degrees)/2.)
+            ** (float(self.n_degrees)/2.)
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
 
         :math:`\\frac{Cv^{trans}}{R}=\\frac{n_{degrees}}{2}`
-        
+
         Returns
         -------
             CvoR_trans : float
@@ -83,7 +85,7 @@ class IdealTrans:
         """Calculates the dimensionless heat capacity at constant pressure
 
         :math:`\\frac{Cv^{trans}}{R}=\\frac{Cv^{trans}}{R} + 1`
-        
+
         Returns
         -------
             CpoR_trans : float
@@ -126,19 +128,20 @@ class IdealTrans:
             T : float
                 Temperature in K
             P : float, optional
-                Pressure (bar) or pressure-like quantity. 
+                Pressure (bar) or pressure-like quantity.
                 Default is atmospheric pressure
 
         Returns
         -------
             SoR_trans : float
-                Translational dimensionless entropy 
+                Translational dimensionless entropy
         """
         V = self.get_V(T=T, P=P)
-        unit_mass = self.molecular_weight*c.convert_unit(from_='g',to='kg')/c.Na
+        unit_mass = self.molecular_weight *\
+            c.convert_unit(from_='g', to='kg')/c.Na
         return 1. + float(self.n_degrees)/2. \
-              + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2) \
-              **(float(self.n_degrees)/2.)*V/c.Na)
+            + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2)
+                     ** (float(self.n_degrees)/2.)*V/c.Na)
 
     def get_AoRT(self, T, P=c.P0('bar')):
         """Calculates the dimensionless Helmholtz energy
@@ -150,12 +153,12 @@ class IdealTrans:
             T : float
                 Temperature in K
             P : float, optional
-                Pressure (bar) or pressure-like quantity. 
+                Pressure (bar) or pressure-like quantity.
                 Default is atmospheric pressure
         Returns
         -------
             AoRT_trans : float
-                Translational dimensionless Helmholtz energy 
+                Translational dimensionless Helmholtz energy
         """
         return self.get_UoRT()-self.get_SoR(T=T, P=P)
 
@@ -163,32 +166,32 @@ class IdealTrans:
         """Calculates the dimensionless Gibbs energy
 
         :math:`\\frac{G^{trans}}{RT}=\\frac{H^{trans}}{RT}-\\frac{S^{trans}}{R}`       
-        
+
         Parameters
         ----------
             T : float
                 Temperature in K
             P : float, optional
-                Pressure (bar) or pressure-like quantity. 
+                Pressure (bar) or pressure-like quantity.
                 Default is atmospheric pressure
         Returns
         -------
             GoR_trans : float
-                Translational dimensionless Gibbs energy 
+                Translational dimensionless Gibbs energy
         """
         return self.get_HoRT()-self.get_SoR(T=T, P=P)
-    
+
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
         """
         return {'class': str(self.__class__),
-                'n_degrees': self.n_degrees, 
+                'n_degrees': self.n_degrees,
                 'molecular_weight': self.molecular_weight}
-    
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.

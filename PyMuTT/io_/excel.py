@@ -181,9 +181,10 @@ def set_atoms(path, output_structure, excel_path=None):
         try:
             output_structure['atoms'] = read(os.path.join(excel_path, path))
         except FileNotFoundError:
+            print(path)
             raise FileNotFoundError('If using relative references for atoms '
                                     'files, use a path relative to the '
-                                    'spreadsheet imported.')
+                                    'spreadsheet imported.', path)
     return output_structure
 
 

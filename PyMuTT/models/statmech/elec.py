@@ -4,18 +4,19 @@ import numpy as np
 from PyMuTT import constants as c
 from PyMuTT.io_.jsonio import remove_class
 
+
 class IdealElec:
     """Electronic modes using the ideal gas assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
-    
+
     Attributes
     ----------
         potentialenergy : float, optional
             Potential energy in eV. Default is 0
         spin : float, optional
             The total electron spin. Default is 0
-            
+
             - 0 for molecules in which all electrons are paired
             - 0.5 for a free radical with a single unpaired electron
             - 1.0 for a triplet with two unpaired electrons, such as O :sub:`2`
@@ -36,7 +37,7 @@ class IdealElec:
             T : float
                 Temperature in K
             ignore_q_elec : bool, optional
-                Ignore the contribution of electronic mode to partition function
+                Ignore contribution of electronic mode to partition function
                 . Often necessary since DFT's value for potentialenergy is
                 very negative causing q_elec to go to infinity.
         Returns
@@ -72,7 +73,7 @@ class IdealElec:
                 Electronic dimensionless heat capacity at constant pressure
         """
         return self.get_CvoR()
-    
+
     def get_UoRT(self, T):
         """Calculates the imensionless internal energy
 
@@ -151,13 +152,13 @@ class IdealElec:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
         """
         return {'class': str(self.__class__),
-                'potentialenergy': self.potentialenergy, 
+                'potentialenergy': self.potentialenergy,
                 'spin': self.spin}
 
     @classmethod

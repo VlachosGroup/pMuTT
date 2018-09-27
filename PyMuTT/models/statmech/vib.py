@@ -4,11 +4,12 @@ import numpy as np
 from PyMuTT import constants as c
 from PyMuTT.io_.jsonio import remove_class
 
+
 class HarmonicVib:
     """Vibrational modes using the harmonic approximation.Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics; 
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
-    
+
     Attributes
     ----------
         vib_wavenumbers : list of float
@@ -37,7 +38,7 @@ class HarmonicVib:
         """
         qs = []
         for vib_temperature in self._vib_temperatures:
-            vib_dimless = vib_temperature/T            
+            vib_dimless = vib_temperature/T
             qs.append(np.exp(-vib_dimless/2.)/(1. - np.exp(-vib_dimless)))
         return np.prod(qs)
 
@@ -46,7 +47,7 @@ class HarmonicVib:
 
         :math:`\\frac{C_V^{vib}}{R}=\\sum_i \\bigg(\\frac{\\Theta_{V,i}}{2T}
         \\bigg)^2 \\frac{1}{\\big(\\sinh{\\frac{\\Theta_{V,i}}{2T}}\\big)^2}`
-        
+
         Parameters
         ----------
             T : float
@@ -79,7 +80,7 @@ class HarmonicVib:
                 Vibrational dimensionless heat capacity at constant pressure
         """
         return self.get_CvoR(T=T)
-    
+
     def get_ZPE(self):
         """Calculates the zero point energy
 
@@ -112,7 +113,7 @@ class HarmonicVib:
         for vib_temperature in self._vib_temperatures:
             vib_dimless = vib_temperature/T
             UoRT.append(
-                vib_dimless/2. \
+                vib_dimless/2.
                 + vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)))
         return np.sum(UoRT)
 
@@ -156,7 +157,7 @@ class HarmonicVib:
         for vib_temperature in self._vib_temperatures:
             vib_dimless = vib_temperature/T
             SoR.append(
-                vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)) \
+                vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless))
                 - np.log(1. - np.exp(-vib_dimless)))
         return np.sum(SoR)
 
@@ -194,7 +195,7 @@ class HarmonicVib:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -217,15 +218,16 @@ class HarmonicVib:
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
+
 class QRRHOVib:
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
-    approximation. Equations found in 
+    approximation. Equations found in
 
-    1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J. 
+    1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
     Phys. Chem. C 2015, 119 (4), 1840–1850.
     2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
 
-    
+
     Attributes
     ----------
         vib_wavenumber : list of float
@@ -244,13 +246,13 @@ class QRRHOVib:
         self.v0 = v0
         self.vib_wavenumbers = vib_wavenumbers
         self.alpha = alpha
-        self._vib_temperatures = [c.wavenumber_to_temp(wavenumber) \
+        self._vib_temperatures = [c.wavenumber_to_temp(wavenumber)
                                   for wavenumber in vib_wavenumbers]
-        self._scaled_wavenumbers = [self._get_scaled_wavenumber(vi) \
+        self._scaled_wavenumbers = [self._get_scaled_wavenumber(vi)
                                     for vi in vib_wavenumbers]
-        self._inertia = [c.wavenumber_to_inertia(wavenumber) \
+        self._inertia = [c.wavenumber_to_inertia(wavenumber)
                          for wavenumber in vib_wavenumbers]
-        self._scaled_inertia = [self._get_scaled_inertia(vi) \
+        self._scaled_inertia = [self._get_scaled_inertia(vi)
                                 for vi in vib_wavenumbers]
 
     def _get_scaled_wavenumber(self, wavenumber):
@@ -269,7 +271,7 @@ class QRRHOVib:
                 Scaled wavenumber
         """
         return 1./(1. + (self.v0/wavenumber)**self.alpha)
-    
+
     def _get_scaled_inertia(self, mu):
         """Calculates the scaled moment of inertia.
 
@@ -316,10 +318,11 @@ class QRRHOVib:
                 Vibrational dimensionless heat capacity at constant volume
         """
         CvoR = []
-        for theta_i, w_i in zip(self._vib_temperatures, self._scaled_wavenumbers):
+        for theta_i, w_i in zip(self._vib_temperatures,
+                                self._scaled_wavenumbers):
             vib_dimless = theta_i/T
             CvoR_RRHO = np.exp(-vib_dimless) \
-                       *(vib_dimless/(1. - np.exp(-vib_dimless)))**2
+                * (vib_dimless/(1. - np.exp(-vib_dimless)))**2
             CvoR.append(w_i*CvoR_RRHO + 0.5*(1.-w_i))
         return np.sum(CvoR)
 
@@ -338,10 +341,10 @@ class QRRHOVib:
                 Vibrational dimensionless heat capacity at constant pressure
         """
         return self.get_CvoR(T=T)
-    
+
     def _get_UoRT_RRHO(self, T, vib_temperature):
         """Calculates the dimensionless RRHO contribution to internal energy
-        
+
         Parameters
         ----------
             T : float
@@ -351,7 +354,7 @@ class QRRHOVib:
         Returns
         -------
             UoRT_RRHO : float
-                Dimensionless internal energy of Rigid Rotor Harmonic Oscillator
+               Dimensionless internal energy of Rigid Rotor Harmonic Oscillator
         """
         vib_dimless = vib_temperature/T
         return vib_dimless*(0.5+np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)))
@@ -359,11 +362,11 @@ class QRRHOVib:
     def get_UoRT(self, T):
         """Calculates the imensionless internal energy
 
-        :math:`\\frac {U^{qRRHO}}{RT} = \\sum_{i}\\omega_i\\frac{U^{RRHO}}{RT} 
-        + \\frac{1}{2}(1-\\omega_i)`
+        :math:`\\frac {U^{qRRHO}}{RT} = \\sum_{i}\\omega_i\\frac{U^{RRHO}}{RT}
+         + \\frac{1}{2}(1-\\omega_i)`
 
-        :math:`\\frac {U^{RRHO}}{RT} = \\frac{\\Theta_i}{T} \\bigg(\\frac{1}{2} 
-        + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{\\Theta_i}{T})}
+        :math:`\\frac {U^{RRHO}}{RT} = \\frac{\\Theta_i}{T} \\bigg(\\frac{1}{2}
+         + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{\\Theta_i}{T})}
         \\bigg)`
 
         Parameters
@@ -399,7 +402,7 @@ class QRRHOVib:
         return self.get_UoRT(T=T)
 
     def _get_SoR_H(self, T, vib_temperature):
-        """Calculates the dimensionless harmonic osccilator contribution to 
+        """Calculates the dimensionless harmonic osccilator contribution to
         entropy
 
         Parameters
@@ -414,7 +417,7 @@ class QRRHOVib:
                 Dimensionless entropy of Rigid Rotor Harmonic Oscillator
         """
         return vib_temperature/T/(np.exp(vib_temperature/T)-1) \
-              -np.log(1-np.exp(-vib_temperature/T))
+            - np.log(1-np.exp(-vib_temperature/T))
 
     def _get_SoR_RRHO(self, T, vib_inertia):
         """Calculates the dimensionless RRHO contribution to entropy
@@ -431,7 +434,7 @@ class QRRHOVib:
                 Dimensionless entropy of Rigid Rotor Harmonic Oscillator
         """
         return 0.5 + np.log((8.*np.pi**3*vib_inertia*c.kb('J/K')*T
-                     /c.h('J s')**2)**0.5)
+                            / c.h('J s')**2)**0.5)
 
     def get_SoR(self, T):
         """Calculates the dimensionless entropy
@@ -456,7 +459,9 @@ class QRRHOVib:
                 Vibrational dimensionless entropy
         """
         SoR_QRRHO = []
-        for theta_i, mu_i, w_i in zip(self._vib_temperatures, self._scaled_inertia, self._scaled_wavenumbers):
+        for theta_i, mu_i, w_i in zip(self._vib_temperatures,
+                                      self._scaled_inertia,
+                                      self._scaled_wavenumbers):
             SoR_H = self._get_SoR_H(T=T, vib_temperature=theta_i)
             SoR_RRHO = self._get_SoR_RRHO(T=T, vib_inertia=mu_i)
             SoR_QRRHO.append(w_i*SoR_H + (1.-w_i)*SoR_RRHO)
@@ -498,7 +503,7 @@ class QRRHOVib:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
