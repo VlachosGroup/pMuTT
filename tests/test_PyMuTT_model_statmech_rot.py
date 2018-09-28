@@ -13,12 +13,19 @@ class TestRigidRotor(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.rot_He = rot.RigidRotor(symmetrynumber=1, geometry='monatomic',
-                                   rot_temperatures=[0.])
+                                     rot_temperatures=[0.])
         self.rot_CO2 = rot.RigidRotor(symmetrynumber=2, geometry='linear',
-                                    rot_temperatures=[0.561])
+                                      rot_temperatures=[0.561])
         self.rot_H2O = rot.RigidRotor(symmetrynumber=2, geometry='nonlinear',
-                                    rot_temperatures=[40.1, 20.9, 13.4])
+                                      rot_temperatures=[40.1, 20.9, 13.4])
         self.T = 300 # K
+
+        self.rot_CO2_dict = {
+            'class': "<class 'PyMuTT.models.statmech.rot.RigidRotor'>",
+            'symmetrynumber': 2,
+            'geometry': 'linear',
+            'rot_temperatures': [0.561],
+        }
 
     def test_get_q(self):
         self.assertAlmostEqual(self.rot_He.get_q(T=self.T), 0.)
@@ -59,6 +66,13 @@ class TestRigidRotor(unittest.TestCase):
         self.assertAlmostEqual(self.rot_He.get_GoRT(T=self.T), 0.)
         self.assertAlmostEqual(self.rot_CO2.get_GoRT(T=self.T), -5.588669668)
         self.assertAlmostEqual(self.rot_H2O.get_GoRT(T=self.T), -3.771701374)
+
+    def test_to_dict(self):
+        self.assertEqual(self.rot_CO2.to_dict(), self.rot_CO2_dict)
+
+    def test_from_dict(self):
+        self.assertEqual(rot.RigidRotor.from_dict(self.rot_CO2_dict), 
+                self.rot_CO2)
 
 class TestRotFunc(unittest.TestCase):
     def setUp(self):

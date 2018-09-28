@@ -14,6 +14,10 @@ class TestHarmonicVib(unittest.TestCase):
         self.vib_H2 = vib.HarmonicVib(vib_wavenumbers=[4306.1793])
         self.vib_H2O = vib.HarmonicVib(
                 vib_wavenumbers=[3825.434, 3710.2642, 1582.432])
+        self.vib_H2O_dict = {
+            'class': "<class 'PyMuTT.models.statmech.vib.HarmonicVib'>",
+            'vib_wavenumbers': [3825.434, 3710.2642, 1582.432],
+        }
         self.T = 300. # K
 
     def test_get_q(self):
@@ -52,6 +56,13 @@ class TestHarmonicVib(unittest.TestCase):
         self.assertAlmostEqual(self.vib_H2.get_GoRT(T=self.T), 1.032605543E+01)
         self.assertAlmostEqual(self.vib_H2O.get_GoRT(T=self.T), 2.186442601E+01)
 
+    def test_to_dict(self):
+        self.assertEqual(self.vib_H2O.to_dict(), self.vib_H2O_dict)
+
+    def test_from_dict(self):
+        self.assertEqual(vib.HarmonicVib.from_dict(self.vib_H2O_dict), 
+                self.vib_H2O)
+
 class TestQRRHOVib(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
@@ -59,6 +70,13 @@ class TestQRRHOVib(unittest.TestCase):
         self.vib_H2 = vib.QRRHOVib(vib_wavenumbers=[4306.1793])
         self.vib_H2O = vib.QRRHOVib(
                 vib_wavenumbers=[3825.434, 3710.2642, 1582.432])
+        self.vib_H2O_dict = {
+            'class': "<class 'PyMuTT.models.statmech.vib.QRRHOVib'>",
+            'vib_wavenumbers': [3825.434, 3710.2642, 1582.432],
+            'alpha': 4,
+            'Bav': 1.e-44,
+            'v0': 100,
+        }
         self.T = 300. # K
 
     def test_get_scaled_wavenumber(self):
@@ -110,6 +128,13 @@ class TestQRRHOVib(unittest.TestCase):
     def test_get_GoRT(self):
         self.assertAlmostEqual(self.vib_H2.get_GoRT(T=self.T), 10.3260509635305)
         self.assertAlmostEqual(self.vib_H2O.get_GoRT(T=self.T), 21.864271329132)
+
+    def test_to_dict(self):
+        self.assertEqual(self.vib_H2O.to_dict(), self.vib_H2O_dict)
+
+    def test_from_dict(self):
+        self.assertEqual(vib.QRRHOVib.from_dict(self.vib_H2O_dict), 
+                self.vib_H2O)
 
 if __name__ == '__main__':
     unittest.main()

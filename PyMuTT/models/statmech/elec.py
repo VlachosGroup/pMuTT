@@ -27,6 +27,14 @@ class IdealElec:
         self.spin = spin
         self._degeneracy = 2.*self.spin + 1.
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def get_q(self, T, ignore_q_elec=False):
         """Calculates the partition function
 

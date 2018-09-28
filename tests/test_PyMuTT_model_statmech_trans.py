@@ -19,8 +19,15 @@ class TestIdealTrans(unittest.TestCase):
                                          n_degrees=2)
         self.trans_3D = trans.IdealTrans(molecular_weight=molecular_weight,
                                          n_degrees=3)
+        self.trans_3D_dict = {
+            'class': "<class 'PyMuTT.models.statmech.trans.IdealTrans'>",
+            'molecular_weight': 71.,
+            'n_degrees': 3
+        }
+        
         self.T = 300 # K
         self.P = 0.99768 # bar
+
 
     def test_get_q(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
@@ -81,6 +88,13 @@ class TestIdealTrans(unittest.TestCase):
                                    8.1452364662E+00))
         self.assertTrue(np.isclose(self.trans_3D.get_GoRT(T=self.T, P=self.P), 
                                    -1.7004035007E+01))        
+
+    def test_to_dict(self):
+        self.assertEqual(self.trans_3D.to_dict(), self.trans_3D_dict)
+
+    def test_from_dict(self):
+        self.assertEqual(trans.IdealTrans.from_dict(self.trans_3D_dict), 
+                self.trans_3D)
 
 if __name__ == '__main__':
     unittest.main()

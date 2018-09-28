@@ -60,6 +60,14 @@ class BaseThermo:
             # If it's an object that has already been initialized
             self.statmech_model = statmech_model
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def __repr__(self):
         out = ['{} object for Name: {}'.format(self.__class__.__name__,
                self.name)]

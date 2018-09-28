@@ -10,6 +10,9 @@ class TestIdealNucl(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.nuclear = nucl.IdealNucl()
+        self.nuclear_dict = {
+            'class': "<class 'PyMuTT.models.statmech.nucl.IdealNucl'>"
+        }
 
     def test_get_q(self):
         self.assertEqual(self.nuclear.get_q(), 1.)
@@ -34,6 +37,13 @@ class TestIdealNucl(unittest.TestCase):
 
     def test_get_GoRT(self):
         self.assertEqual(self.nuclear.get_GoRT(), 0.)
+
+    def test_to_dict(self):
+        self.assertEqual(self.nuclear.to_dict(), self.nuclear_dict)
+
+    def test_from_dict(self):
+        self.assertEqual(nucl.IdealNucl.from_dict(self.nuclear_dict), 
+                self.nuclear)
 
 if __name__ == '__main__':
     unittest.main()

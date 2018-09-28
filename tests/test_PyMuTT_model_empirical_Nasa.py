@@ -19,6 +19,21 @@ class TestNasa(unittest.TestCase):
             T_high=5000.
             )
 
+        self.Nasa_direct_dict = {
+            'class': "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+            'name': 'H2O',
+            'elements': {'H': 2, 'O': 1},
+            'phase': 'g',
+            'a_low': [4.04618796E+00, -6.87238823E-04, 2.79722240E-06, -1.42318006E-09, 2.34551159E-13, -3.02826236E+04, -2.50036531E-01],
+            'a_high': [2.41854323E+00, 3.35448922E-03, -9.66398101E-07, 1.34441829E-10, -7.18940063E-15, -2.97582484E+04, 8.37839787E+00],
+            'T_low': 100.,
+            'T_mid': 1610.97,
+            'T_high': 5000.,
+            'notes': None,
+            'references': None,
+            'statmech_model': None,
+        }
+
         self.Nasa_data = Nasa.from_data(
             name='H2O',
             elements = {'H': 2, 'O': 1},
@@ -84,6 +99,12 @@ class TestNasa(unittest.TestCase):
         np.testing.assert_almost_equal(self.Nasa_direct.get_GoRT(Ts=Ts[0]), GoRT_expected[0])
         np.testing.assert_array_almost_equal(self.Nasa_direct.get_GoRT(Ts=Ts), GoRT_expected)
 
+    def test_to_dict(self):
+        self.maxDiff = None
+        self.assertEqual(self.Nasa_direct.to_dict(), self.Nasa_direct_dict)
 
+    def test_from_dict(self):
+        self.assertEqual(Nasa.from_dict(self.Nasa_direct_dict), 
+                self.Nasa_direct)
 if __name__ == '__main__':
     unittest.main()

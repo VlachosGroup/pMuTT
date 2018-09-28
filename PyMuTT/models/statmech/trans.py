@@ -27,6 +27,14 @@ class IdealTrans:
         else:
             self.molecular_weight = molecular_weight
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def get_V(self, T, P):
         """Calculates the molar volume of an ideal gas at T and P
 

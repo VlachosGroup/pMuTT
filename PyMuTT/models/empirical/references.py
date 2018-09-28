@@ -29,6 +29,14 @@ class Reference(BaseThermo):
         self.T_ref = T_ref
         self.HoRT_ref = HoRT_ref
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
 

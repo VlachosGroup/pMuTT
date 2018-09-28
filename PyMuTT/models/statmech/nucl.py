@@ -9,6 +9,14 @@ class IdealNucl:
     def __init__(self):
         pass
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def get_q(self):
         """Calculates the partition function
 

@@ -56,6 +56,14 @@ class Nasa(BaseThermo):
         self.a_low = np.array(a_low)
         self.a_high = np.array(a_high)
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def get_a(self, T):
         """Returns the correct polynomial range based on T_low, T_mid and
         T_high

@@ -21,6 +21,14 @@ class HarmonicVib:
         self._vib_temperatures = [
             c.wavenumber_to_temp(wavenumber) for wavenumber in vib_wavenumbers]
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def get_q(self, T):
         """Calculates the partition function
 
@@ -254,6 +262,14 @@ class QRRHOVib:
                          for wavenumber in vib_wavenumbers]
         self._scaled_inertia = [self._get_scaled_inertia(vi)
                                 for vi in vib_wavenumbers]
+
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
 
     def _get_scaled_wavenumber(self, wavenumber):
         """Calculates the scaled wavenumber determining mixture of RRHO to

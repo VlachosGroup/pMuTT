@@ -61,7 +61,15 @@ class RigidRotor:
             self.geometry = get_geometry_from_atoms(atoms=atoms)
         else:
             self.geometry = geometry
-                    
+
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def get_q(self, T):
         """Calculates the partition function
 
