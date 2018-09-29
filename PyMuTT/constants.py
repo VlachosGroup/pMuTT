@@ -638,19 +638,146 @@ def convert_unit(num = None, from_ = None, to = None):
             num = 1.
         return num * unit_dict[to] / unit_dict[from_]
 
-def wavenumber_to_temp(wavenumber):
-    """Converts wavenumbers (1/cm) to temperatures (K)
+def energy_to_freq(energy):
+    """Converts energy to frequency
 
     Parameters
-    ---------- 
-        wavenumber : float
-            Wavenumber in 1/cm
+    ----------
+        energy : float
+            Energy in J
     Returns
     -------
-        temperature : float
-            Corresponding temperature in K
+        freq : float
+            Frequency in Hz
     """
-    return wavenumber*c('cm/s')*h('J s')/kb('J/K')
+    return energy/h('J s')
+
+def energy_to_temp(energy):
+    """Converts energy to temperature
+
+    Parameters
+    ----------
+        energy : float
+            Energy in J
+    Returns
+    -------
+        temp : float
+            Temperature in K
+    """
+    return energy/kb('J/K')
+
+def energy_to_wavenumber(energy):
+    """Converts energy to wavenumber
+
+    Parameters
+    ----------
+        energy : float
+            Energy in J
+    Returns
+    -------
+        wavenumber : float
+            Wavenumber in 1/cm
+    """
+    return energy/h('J s')/c('cm/s')
+
+def freq_to_energy(freq):
+    """Converts frequency to energy
+
+    Parameters
+    ----------
+        freq : float
+            Frequency in Hz
+    Returns
+    -------
+        energy : float
+            Energy in J
+    """
+    return freq*h('J s')
+
+def freq_to_temp(freq):
+    """Converts frequency to temperature
+
+    Parameters
+    ----------
+        freq : float
+            Frequency in Hz
+    Returns
+    -------
+        temp : float
+            Temperature in K
+    """
+    return freq*h('J s')/kb('J/K')
+
+def freq_to_wavenumber(freq):
+    """Converts frequency to wavenumber
+
+    Parameters
+    ----------
+        freq : float
+            Frequency in Hz
+    Returns
+    -------
+        wavenumber : float
+            Wavenumber in 1/cm
+    """
+    return freq/c('cm/s')
+
+def inertia_to_temp(inertia):
+    """Converts moment of inertia into rotational temperature
+
+    Parameters
+    ----------
+        inertia : float
+            Moment of inertia in kg*m2
+    Returns
+    -------
+        rot_temperature : float
+            Rotational temperature in K
+    """
+    return h('eV s', bar=True)**2/2/kb('eV/K')/inertia \
+           *convert_unit(from_='eV', to='J')
+
+def temp_to_energy(temp):
+    """Converts temperature to energy
+
+    Parameters
+    ----------
+        temp : float
+            Temperature in K
+    Returns
+    -------
+        energy : float
+            Energy in J
+    """
+    return temp*kb('J/K')
+
+def temp_to_freq(temp):
+    """Converts temperature to frequency
+
+    Parameters
+    ----------
+        temp : float
+            Temperature in K
+    Returns
+    -------
+        freq : float
+            Frequency in Hz
+    """
+    return temp*kb('J/K')/h('J s')
+
+def temp_to_wavenumber(temp):
+    """Converts vibrational/rotational temperature to wavenumber
+
+    Parameters
+    ----------
+        temp : float
+            Temperature in K
+    Returns
+    -------
+        wavenumber : float
+            Wavenumber in 1/cm
+    """
+    return temp*kb('J/K')/c('cm/s')/h('J s')
 
 def wavenumber_to_energy(wavenumber):
     """Converts wavenumbers (1/cm) to energies (eV)
@@ -666,6 +793,20 @@ def wavenumber_to_energy(wavenumber):
     """
     return wavenumber*c('cm/s')*h('eV s')
 
+def wavenumber_to_freq(wavenumber):
+    """Converts wavenumber to frequency
+
+    Parameters
+    ----------
+        wavenumber : float
+            Wavenumber in 1/cm
+    Returns
+    -------
+        freq : float
+            Frequency in Hz
+    """
+    return wavenumber*c('cm/s')
+
 def wavenumber_to_inertia(wavenumber):
     """Converts wavenumber (1/cm) to moment of inertia
 
@@ -676,9 +817,23 @@ def wavenumber_to_inertia(wavenumber):
     Returns
     -------
         mu : float
-            Moment of inertia ni kg*m2
+            Moment of inertia in kg*m2
     """
     return h('J s')/(8.*np.pi**2*wavenumber*c('cm/s'))
+
+def wavenumber_to_temp(wavenumber):
+    """Converts wavenumbers (1/cm) to temperatures (K)
+
+    Parameters
+    ---------- 
+        wavenumber : float
+            Wavenumber in 1/cm
+    Returns
+    -------
+        temperature : float
+            Corresponding temperature in K
+    """
+    return wavenumber*c('cm/s')*h('J s')/kb('J/K')
 
 prefixes = {
     'Y': 1.e24,

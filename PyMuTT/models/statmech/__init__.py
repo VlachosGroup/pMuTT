@@ -51,6 +51,16 @@ class EmptyMode:
 
     @classmethod
     def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            EmptyMode : EmptyMode object
+        """
         return cls()
 
 class StatMech:

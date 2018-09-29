@@ -52,6 +52,7 @@ def type_to_class(class_str):
     # Although it is usually inadvisible to import functions within a function,
     # this was done purposefully. Using only a dictionary resulted in circular
     # import errors. This way the imports are limited to the function.
+    from PyMuTT.models.reaction import Reaction
     from PyMuTT.models.empirical import BaseThermo
     from PyMuTT.models.empirical.nasa import Nasa
     from PyMuTT.models.empirical.references import Reference, References
@@ -64,6 +65,7 @@ def type_to_class(class_str):
     from PyMuTT.models.statmech.nucl import IdealNucl
 
     type_to_class_dict = {
+        "<class 'PyMuTT.models.reaction.Reaction'>": Reaction,
         "<class 'PyMuTT.models.empirical.BaseThermo'>": BaseThermo,
         "<class 'PyMuTT.models.empirical.nasa.Nasa'>": Nasa,
         "<class 'PyMuTT.models.empirical.references.Reference'>": Reference,

@@ -288,9 +288,7 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
             continue
         moment_SI = moment*c.convert_unit(from_='amu', to='kg') \
                    *c.convert_unit(from_='A2', to='m2')
-        rot_temperatures.append(
-            c.h('eV s', bar=True)**2/2/c.kb('eV/K')/moment_SI \
-            *c.convert_unit(from_='eV', to='J'))
+        rot_temperatures.append(c.inertia_to_temp(moment_SI))
 
     if geometry == 'monatomic':
         # Expecting all modes to be 0

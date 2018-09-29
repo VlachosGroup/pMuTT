@@ -64,6 +64,48 @@ def _pass_expected_arguments(fn, **kwargs):
     return fn(**expected_arg_val)
 
 
+def _kwargs_allowed(fn):
+    """Checks to see if kwargs is allowed
+
+    Parameters
+    ----------
+        fn : Function or class
+            Function or class you would like to check if kwargs is allowed.
+    Returns
+    -------
+        kwargs_allowed : bool
+            True if kwargs are allowed. False otherwise.
+    """
+    sig = inspect.signature(fn)
+    for param in sig.parameters.values():
+        if param.kind == param.VAR_KEYWORD:
+            return True
+    else:
+        return False
+
+def _force_pass_arguments(fn, **kwargs):
+    """Checks to see if fn accepts kwargs. If it does, pass arguments using
+    kwargs. If not, pass arguments using docstring
+
+    Parameters
+    ----------
+        fn : Function or class
+            Function or class you would like to pass the arguments.
+        verbose : bool, Optional
+            If True, warns when an argument could not be found. Default is True
+        **kwargs :
+            Keyword arguments that contain parameters to pass to fn
+    Returns
+    -------
+        fn_or_class_output :
+        Output of fn that has been fed the expected arguments.
+    """
+    if _kwargs_allowed(fn):
+        return fn(**kwargs)
+    else:
+        return _pass_expected_arguments(fn, **kwargs)
+
+
 def parse_formula(formula):
     """Parses chemical formula into its elements and returns it as a
     dictionary.
