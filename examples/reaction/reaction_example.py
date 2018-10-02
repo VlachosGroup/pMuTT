@@ -53,4 +53,5 @@ ax[2].set_ylabel('S/R')
 
 ax[3].plot(Ts, GoRT_rxn, 'k-')
 ax[3].set_ylabel('G/RT')
+ax[3].set_xlabel('Temperature (K)')
 plt.show()

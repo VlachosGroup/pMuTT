@@ -628,10 +628,10 @@ def _get_q_rxn(initial_state, initial_state_stoich, final_state,
             Partition function between initial state and final state
     """
     q = 1.
-    for product, stoich in zip(final_state, final_state_stoich):
-        q *= _force_pass_arguments(product.get_q, **kwargs)**stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        q /= _force_pass_arguments(reactant.get_q, **kwargs)**stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        q *= _force_pass_arguments(specie.get_q, **kwargs)**stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        q /= _force_pass_arguments(specie.get_q, **kwargs)**stoich
     return q
 
 def _get_CvoR_rxn(initial_state, initial_state_stoich, final_state, 
@@ -656,10 +656,10 @@ def _get_CvoR_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless heat capacity between initial state and final state
     """
     CvoR = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        CvoR += _force_pass_arguments(product.get_CvoR, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        CvoR -= _force_pass_arguments(reactant.get_CvoR, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        CvoR += _force_pass_arguments(specie.get_CvoR, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        CvoR -= _force_pass_arguments(specie.get_CvoR, **kwargs)*stoich
     return CvoR
 
 
@@ -685,10 +685,10 @@ def _get_CpoR_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless heat capacity between initial state and final state
     """
     CpoR = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        CpoR += _force_pass_arguments(product.get_CpoR, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        CpoR -= _force_pass_arguments(reactant.get_CpoR, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        CpoR += _force_pass_arguments(specie.get_CpoR, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        CpoR -= _force_pass_arguments(specie.get_CpoR, **kwargs)*stoich
     return CpoR
 
 
@@ -714,10 +714,10 @@ def _get_UoRT_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless internal energy between initial state and final state
     """
     UoRT = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        UoRT += _force_pass_arguments(product.get_UoRT, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        UoRT -= _force_pass_arguments(reactant.get_UoRT, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        UoRT += _force_pass_arguments(specie.get_UoRT, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        UoRT -= _force_pass_arguments(specie.get_UoRT, **kwargs)*stoich
     return UoRT
 
 
@@ -743,10 +743,10 @@ def _get_HoRT_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless enthalpy between initial state and final state
     """
     HoRT = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        HoRT += _force_pass_arguments(product.get_HoRT, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        HoRT -= _force_pass_arguments(reactant.get_HoRT, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        HoRT += _force_pass_arguments(specie.get_HoRT, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        HoRT -= _force_pass_arguments(specie.get_HoRT, **kwargs)*stoich
     return HoRT
 
 
@@ -772,10 +772,10 @@ def _get_SoR_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless entropy between initial state and final state
     """
     SoR = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        SoR += _force_pass_arguments(product.get_SoR, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        SoR -= _force_pass_arguments(reactant.get_SoR, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        SoR += _force_pass_arguments(specie.get_SoR, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        SoR -= _force_pass_arguments(specie.get_SoR, **kwargs)*stoich
     return SoR
 
 
@@ -801,10 +801,10 @@ def _get_AoRT_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless Helmholtz energy between initial state and final state
     """
     AoRT = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        AoRT += _force_pass_arguments(product.get_AoRT, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        AoRT -= _force_pass_arguments(reactant.get_AoRT, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        AoRT += _force_pass_arguments(specie.get_AoRT, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        AoRT -= _force_pass_arguments(specie.get_AoRT, **kwargs)*stoich
     return AoRT
 
 
@@ -830,8 +830,8 @@ def _get_GoRT_rxn(initial_state, initial_state_stoich, final_state,
             Dimensionless Gibbs energy between initial state and final state
     """
     GoRT = 0.
-    for product, stoich in zip(final_state, final_state_stoich):
-        GoRT += _force_pass_arguments(product.get_GoRT, **kwargs)*stoich
-    for reactant, stoich in zip(initial_state, initial_state_stoich):
-        GoRT -= _force_pass_arguments(reactant.get_GoRT, **kwargs)*stoich
+    for specie, stoich in zip(final_state, final_state_stoich):
+        GoRT += _force_pass_arguments(specie.get_GoRT, **kwargs)*stoich
+    for specie, stoich in zip(initial_state, initial_state_stoich):
+        GoRT -= _force_pass_arguments(specie.get_GoRT, **kwargs)*stoich
     return GoRT
