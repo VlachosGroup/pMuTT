@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
+    <link rel="prev" title="Reaction" href="reactions.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Constants</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
 </ul>
@@ -739,6 +740,114 @@ conversion factor.</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="PyMuTT.constants.energy_to_freq">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">energy_to_freq</code><span class="sig-paren">(</span><em>energy</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.energy_to_freq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts energy to frequency</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>energy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Energy in J</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>freq</strong> – Frequency in Hz</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.energy_to_temp">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">energy_to_temp</code><span class="sig-paren">(</span><em>energy</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.energy_to_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts energy to temperature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>energy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Energy in J</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>temp</strong> – Temperature in K</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.energy_to_wavenumber">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">energy_to_wavenumber</code><span class="sig-paren">(</span><em>energy</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.energy_to_wavenumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts energy to wavenumber</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>energy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Energy in J</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>wavenumber</strong> – Wavenumber in 1/cm</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.freq_to_energy">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">freq_to_energy</code><span class="sig-paren">(</span><em>freq</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.freq_to_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts frequency to energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Frequency in Hz</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>energy</strong> – Energy in J</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.freq_to_temp">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">freq_to_temp</code><span class="sig-paren">(</span><em>freq</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.freq_to_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts frequency to temperature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Frequency in Hz</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>temp</strong> – Temperature in K</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.freq_to_wavenumber">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">freq_to_wavenumber</code><span class="sig-paren">(</span><em>freq</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.freq_to_wavenumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts frequency to wavenumber</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Frequency in Hz</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>wavenumber</strong> – Wavenumber in 1/cm</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="PyMuTT.constants.h">
 <code class="descclassname">PyMuTT.constants.</code><code class="descname">h</code><span class="sig-paren">(</span><em>units</em>, <em>bar=False</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.h" title="Permalink to this definition">¶</a></dt>
 <dd><p>Planck’s constant, h</p>
@@ -789,6 +898,24 @@ conversion factor.</li>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> – If units is not supported.</p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.inertia_to_temp">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">inertia_to_temp</code><span class="sig-paren">(</span><em>inertia</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.inertia_to_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts moment of inertia into rotational temperature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inertia</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Moment of inertia in kg*m2</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>rot_temperature</strong> – Rotational temperature in K</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
 </tr>
 </tbody>
 </table>
@@ -936,6 +1063,60 @@ conversion factor.</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="PyMuTT.constants.temp_to_energy">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">temp_to_energy</code><span class="sig-paren">(</span><em>temp</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.temp_to_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts temperature to energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>temp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>energy</strong> – Energy in J</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.temp_to_freq">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">temp_to_freq</code><span class="sig-paren">(</span><em>temp</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.temp_to_freq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts temperature to frequency</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>temp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>freq</strong> – Frequency in Hz</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PyMuTT.constants.temp_to_wavenumber">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">temp_to_wavenumber</code><span class="sig-paren">(</span><em>temp</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.temp_to_wavenumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts vibrational/rotational temperature to wavenumber</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>temp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>wavenumber</strong> – Wavenumber in 1/cm</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="PyMuTT.constants.wavenumber_to_energy">
 <code class="descclassname">PyMuTT.constants.</code><code class="descname">wavenumber_to_energy</code><span class="sig-paren">(</span><em>wavenumber</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.wavenumber_to_energy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts wavenumbers (1/cm) to energies (eV)</p>
@@ -954,6 +1135,24 @@ conversion factor.</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="PyMuTT.constants.wavenumber_to_freq">
+<code class="descclassname">PyMuTT.constants.</code><code class="descname">wavenumber_to_freq</code><span class="sig-paren">(</span><em>wavenumber</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.wavenumber_to_freq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts wavenumber to frequency</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavenumber</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Wavenumber in 1/cm</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>freq</strong> – Frequency in Hz</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="PyMuTT.constants.wavenumber_to_inertia">
 <code class="descclassname">PyMuTT.constants.</code><code class="descname">wavenumber_to_inertia</code><span class="sig-paren">(</span><em>wavenumber</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.constants.wavenumber_to_inertia" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts wavenumber (1/cm) to moment of inertia</p>
@@ -963,7 +1162,7 @@ conversion factor.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>wavenumber</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Wavenumber in 1/cm</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>mu</strong> – Moment of inertia ni kg*m2</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>mu</strong> – Moment of inertia in kg*m2</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
 </tr>
@@ -1000,7 +1199,7 @@ conversion factor.</li>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="reactions.html" class="btn btn-neutral" title="Reaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

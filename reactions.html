@@ -1,0 +1,842 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reaction &mdash; PyMuTT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Constants" href="constants.html" />
+    <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyMuTT
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reaction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyMuTT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Reaction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/reactions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reaction">
+<span id="reactions"></span><h1>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h1>
+<p>Chemical reactions can be modeled using the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> class.</p>
+<dl class="class">
+<dt id="PyMuTT.models.reaction.Reaction">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a chemical reaction</p>
+<dl class="attribute">
+<dt id="PyMuTT.models.reaction.Reaction.reactants">
+<code class="descname">reactants</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.reactants" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of PyMuTT model objects</em> – Reactants</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.reaction.Reaction.reactants_stoich">
+<code class="descname">reactants_stoich</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.reactants_stoich" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of float</em> – Stoichiometric quantities of reactants</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.reaction.Reaction.products">
+<code class="descname">products</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.products" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of PyMuTT model objects</em> – Products</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.reaction.Reaction.products_stoich">
+<code class="descname">products_stoich</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.products_stoich" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of float</em> – Stoichiometric quantities of products</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.reaction.Reaction.transition_state">
+<code class="descname">transition_state</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.transition_state" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>PyMuTT model object</em> – Transition state specie, optional</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.check_element_balance">
+<code class="descname">check_element_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.check_element_balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the reactants, products and transition state elemental
+composition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – Raised if the reactants, products and/or transition state
+element composition does not agree.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.count_elements">
+<code class="descname">count_elements</code><span class="sig-paren">(</span><em>species</em>, <em>stoich</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.count_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total the number of elements</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>species</strong> (<em>list of PyMuTT model objects</em>) – Species to count the elements</li>
+<li><strong>stoich</strong> (<em>list of float</em>) – Stoichiometric coefficients of each element</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>element_count</strong> – Sum of elements</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">collections.Counter object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="PyMuTT.models.reaction.Reaction.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>Reaction</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Reaction object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_AoRT_act">
+<code class="descname">get_AoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_AoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless Helmholtz energy between reactants (or
+products) and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless Helmholtz energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>AoRT_act</strong> – Change in dimensionless Helmholtz energy between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_CpoR_act">
+<code class="descname">get_CpoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_CpoR_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless heat capacity between reactants (or
+products) and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless heat capacity</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR_act</strong> – Change in dimensionless heat capacity between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_CvoR_act">
+<code class="descname">get_CvoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_CvoR_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless heat capacity between reactants (or
+products) and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless heat capacity</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR_act</strong> – Change in dimensionless heat capacity between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_GoRT_act">
+<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless Gibbs energy between reactants (or
+products) and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless Gibbs energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT_act</strong> – Change in dimensionless Gibbs energy between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_HoRT_act">
+<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless enthalpy between reactants (or products)
+and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless enthalpy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT_act</strong> – Change in dimensionless enthalpy between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_Keq">
+<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets equilibrium constant between reactants and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate equilibrium constant</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_GoRT</strong> – Change in equilibrium constant between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_SoR_act">
+<code class="descname">get_SoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_SoR_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless entropy between reactants (or products)
+and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless entropy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR_act</strong> – Change in dimensionless entropy between reactants and transition
+state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_UoRT_act">
+<code class="descname">get_UoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_UoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless internal energy between reactants (or
+products) and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless internal energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT_act</strong> – Change in dimensionless internal energy between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_AoRT">
+<code class="descname">get_delta_AoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless Helmholtz energy between reactants and
+products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Helmholtz energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_AoRT</strong> – Change in Helmholtz energy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_CpoR">
+<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless heat capacity between reactants and
+products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_CvoR</strong> – Change in heat capacity between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_CvoR">
+<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless heat capacity between reactants and
+products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_CvoR</strong> – Change in heat capacity between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_GoRT">
+<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless Gibbs energy between reactants and
+products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_GoRT</strong> – Change in Gibbs energy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_HoRT">
+<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless enthalpy between reactants and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_HoRT</strong> – Change in enthalpy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_SoR">
+<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless entropy between reactants and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate entropy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_SoR</strong> – Change in entropy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_UoRT">
+<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless internal energy between reactants and
+products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate internal energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_UoRT</strong> – Change in internal energy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_delta_q">
+<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in partition function between reactants and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate partition function</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>delta_q</strong> – Change in partition function between reactants and products</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_q_act">
+<code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in partition function between reactants (or products) and
+transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate partition function</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q_act</strong> – Change in partition function between reactants and transition
+state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we calculate the thermodynamic properties of water formation
+from hydrogen and oxygen. Nasa polynomials are used in this example but any
+PyMuTT model object should be compatible.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">PyMuTT.models</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Initialize reaction</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">H2O_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span> <span class="n">T_mid</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
+                <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+                <span class="n">a_low</span><span class="o">=</span><span class="p">[</span><span class="mf">4.19864056E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.03643410E-03</span><span class="p">,</span> <span class="mf">6.52040211E-06</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.48797062E-09</span><span class="p">,</span> <span class="mf">1.77197817E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.02937267E+04</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.49032208E-01</span><span class="p">],</span>
+                <span class="n">a_high</span><span class="o">=</span><span class="p">[</span><span class="mf">3.03399249E+00</span><span class="p">,</span> <span class="mf">2.17691804E-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.64072518E-07</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.70419870E-11</span><span class="p">,</span> <span class="mf">1.68200992E-14</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.00042971E+04</span><span class="p">,</span> <span class="mf">4.96677010E+00</span><span class="p">])</span>
+<span class="n">H2_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span> <span class="n">T_mid</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
+               <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+               <span class="n">a_low</span><span class="o">=</span><span class="p">[</span><span class="mf">2.34433112E+00</span><span class="p">,</span> <span class="mf">7.98052075E-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.94781510E-05</span><span class="p">,</span> <span class="mf">2.01572094E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.37611761E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.17935173E+02</span><span class="p">,</span> <span class="mf">6.83010238E-01</span><span class="p">],</span>
+               <span class="n">a_high</span><span class="o">=</span><span class="p">[</span><span class="mf">3.33727920E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.94024731E-05</span><span class="p">,</span> <span class="mf">4.99456778E-07</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.79566394E-10</span><span class="p">,</span> <span class="mf">2.00255376E-14</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.50158922E+02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.20502331E+00</span><span class="p">])</span>
+<span class="n">O2_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;O2&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span> <span class="n">T_mid</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
+               <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+               <span class="n">a_low</span><span class="o">=</span><span class="p">[</span><span class="mf">3.78245636E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.99673416E-03</span><span class="p">,</span> <span class="mf">9.84730201E-06</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.68129509E-09</span><span class="p">,</span> <span class="mf">3.24372837E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.06394356E+03</span><span class="p">,</span> <span class="mf">3.65767573E+00</span><span class="p">],</span>
+               <span class="n">a_high</span><span class="o">=</span><span class="p">[</span><span class="mf">3.28253784E+00</span><span class="p">,</span> <span class="mf">1.48308754E-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.57966669E-07</span><span class="p">,</span> <span class="mf">2.09470555E-10</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.16717794E-14</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.08845772E+03</span><span class="p">,</span> <span class="mf">5.45323129E+00</span><span class="p">])</span>
+<span class="n">rxn_nasa</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">Reaction</span><span class="p">(</span>
+                <span class="n">reactants</span><span class="o">=</span><span class="p">[</span><span class="n">H2_nasa</span><span class="p">,</span> <span class="n">O2_nasa</span><span class="p">],</span>
+                <span class="n">reactants_stoich</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+                <span class="n">products</span><span class="o">=</span><span class="p">[</span><span class="n">H2O_nasa</span><span class="p">],</span>
+                <span class="n">products_stoich</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">])</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Check that the equation is balanced</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Get thermodynamics from Reaction</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
+<span class="n">HoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_HoRT</span><span class="p">(</span><span class="n">Ts</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">SoR_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_SoR</span><span class="p">(</span><span class="n">Ts</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">GoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_GoRT</span><span class="p">(</span><span class="n">Ts</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Plot the data</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;H2 + 1/2 O2 --&gt; H2O&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">HoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;H/RT&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">SoR_rxn</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;S/R&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">GoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;G/RT&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="Reactions example" src="_images/reactions_example.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="constants.html" class="btn btn-neutral float-right" title="Constants" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gerhard Wittreich, Jonathan Lym.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

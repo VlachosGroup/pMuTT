@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
 </ul>
@@ -219,6 +220,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#PyMuTT.constants.c">c() (in module PyMuTT.constants)</a>
 </li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.check_element_balance">check_element_balance() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.references.References.clear_offset">clear_offset() (PyMuTT.models.empirical.references.References method)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.BaseThermo.compare_CpoR">compare_CpoR() (PyMuTT.models.empirical.BaseThermo method)</a>
@@ -232,6 +235,8 @@
       <li><a href="empirical.html#PyMuTT.models.empirical.BaseThermo.compare_SoR">compare_SoR() (PyMuTT.models.empirical.BaseThermo method)</a>
 </li>
       <li><a href="constants.html#PyMuTT.constants.convert_unit">convert_unit() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.count_elements">count_elements() (PyMuTT.models.reaction.Reaction method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -249,11 +254,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#PyMuTT.constants.e">e (in module PyMuTT.constants)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#PyMuTT.models.statmech.StatMech.elec_model">elec_model (PyMuTT.models.statmech.StatMech attribute)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.BaseThermo.elements">elements (PyMuTT.models.empirical.BaseThermo attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="constants.html#PyMuTT.constants.energy_to_freq">energy_to_freq() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.energy_to_temp">energy_to_temp() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.energy_to_wavenumber">energy_to_wavenumber() (in module PyMuTT.constants)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -269,6 +280,12 @@
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.nasa.fit_SoR">fit_SoR() (in module PyMuTT.models.empirical.nasa)</a>
 </li>
+      <li><a href="constants.html#PyMuTT.constants.freq_to_energy">freq_to_energy() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.freq_to_temp">freq_to_temp() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.freq_to_wavenumber">freq_to_wavenumber() (in module PyMuTT.constants)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.nasa.Nasa.from_data">from_data() (PyMuTT.models.empirical.nasa.Nasa class method)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.BaseThermo.from_dict">from_dict() (PyMuTT.models.empirical.BaseThermo class method)</a>
@@ -281,6 +298,8 @@
         <li><a href="empirical.html#PyMuTT.models.empirical.references.References.from_dict">(PyMuTT.models.empirical.references.References class method)</a>
 </li>
         <li><a href="empirical.html#PyMuTT.models.empirical.zacros.Zacros.from_dict">(PyMuTT.models.empirical.zacros.Zacros class method)</a>
+</li>
+        <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.from_dict">(PyMuTT.models.reaction.Reaction class method)</a>
 </li>
         <li><a href="statmech.html#PyMuTT.models.statmech.StatMech.from_dict">(PyMuTT.models.statmech.StatMech class method)</a>
 </li>
@@ -327,6 +346,8 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_AoRT">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_AoRT_act">get_AoRT_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.nasa.Nasa.get_CpoR">get_CpoR() (PyMuTT.models.empirical.nasa.Nasa method)</a>
 
       <ul>
@@ -345,6 +366,8 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_CpoR">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_CpoR_act">get_CpoR_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="statmech.html#PyMuTT.models.statmech.elec.IdealElec.get_CvoR">get_CvoR() (PyMuTT.models.statmech.elec.IdealElec method)</a>
 
       <ul>
@@ -361,6 +384,24 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_CvoR">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_CvoR_act">get_CvoR_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_AoRT">get_delta_AoRT() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_CpoR">get_delta_CpoR() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_CvoR">get_delta_CvoR() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_GoRT">get_delta_GoRT() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_HoRT">get_delta_HoRT() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_q">get_delta_q() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_SoR">get_delta_SoR() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_delta_UoRT">get_delta_UoRT() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.references.References.get_elements">get_elements() (PyMuTT.models.empirical.references.References method)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.references.References.get_elements_matrix">get_elements_matrix() (PyMuTT.models.empirical.references.References method)</a>
@@ -385,6 +426,10 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_GoRT">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_GoRT_act">get_GoRT_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.nasa.Nasa.get_HoRT">get_HoRT() (PyMuTT.models.empirical.nasa.Nasa method)</a>
 
       <ul>
@@ -403,9 +448,11 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_HoRT">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_HoRT_act">get_HoRT_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.references.References.get_HoRT_offset">get_HoRT_offset() (PyMuTT.models.empirical.references.References method)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_Keq">get_Keq() (PyMuTT.models.reaction.Reaction method)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.nasa.get_nasa_CpoR">get_nasa_CpoR() (in module PyMuTT.models.empirical.nasa)</a>
 </li>
@@ -431,6 +478,8 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_q">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_q_act">get_q_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="statmech.html#PyMuTT.models.statmech.rot.get_rot_temperatures_from_atoms">get_rot_temperatures_from_atoms() (in module PyMuTT.models.statmech.rot)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.nasa.Nasa.get_SoR">get_SoR() (PyMuTT.models.empirical.nasa.Nasa method)</a>
@@ -451,6 +500,8 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_SoR">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_SoR_act">get_SoR_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="statmech.html#PyMuTT.models.statmech.elec.IdealElec.get_UoRT">get_UoRT() (PyMuTT.models.statmech.elec.IdealElec method)</a>
 
       <ul>
@@ -467,6 +518,8 @@
         <li><a href="statmech.html#PyMuTT.models.statmech.vib.QRRHOVib.get_UoRT">(PyMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.get_UoRT_act">get_UoRT_act() (PyMuTT.models.reaction.Reaction method)</a>
+</li>
       <li><a href="statmech.html#PyMuTT.models.statmech.trans.IdealTrans.get_V">get_V() (PyMuTT.models.statmech.trans.IdealTrans method)</a>
 </li>
       <li><a href="statmech.html#PyMuTT.models.statmech.vib.HarmonicVib.get_ZPE">get_ZPE() (PyMuTT.models.statmech.vib.HarmonicVib method)</a>
@@ -495,11 +548,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#PyMuTT.models.statmech.elec.IdealElec">IdealElec (class in PyMuTT.models.statmech.elec)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#PyMuTT.models.statmech.nucl.IdealNucl">IdealNucl (class in PyMuTT.models.statmech.nucl)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#PyMuTT.models.statmech.trans.IdealTrans">IdealTrans (class in PyMuTT.models.statmech.trans)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.inertia_to_temp">inertia_to_temp() (in module PyMuTT.constants)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -573,14 +628,18 @@
 </li>
       <li><a href="statmech.html#PyMuTT.models.statmech.presets">presets (in module PyMuTT.models.statmech)</a>
 </li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.products">products (PyMuTT.models.reaction.Reaction attribute)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.products_stoich">products_stoich (PyMuTT.models.reaction.Reaction attribute)</a>
+</li>
       <li><a href="constants.html#module-PyMuTT.constants">PyMuTT.constants (module)</a>
 </li>
       <li><a href="io.html#module-PyMuTT.io_.excel">PyMuTT.io_.excel (module)</a>
 </li>
-      <li><a href="io.html#module-PyMuTT.io_.jsonio">PyMuTT.io_.jsonio (module)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="io.html#module-PyMuTT.io_.jsonio">PyMuTT.io_.jsonio (module)</a>
+</li>
       <li><a href="io.html#module-PyMuTT.io_.thermdat">PyMuTT.io_.thermdat (module)</a>
 </li>
       <li><a href="empirical.html#module-PyMuTT.models.empirical">PyMuTT.models.empirical (module)</a>
@@ -619,16 +678,22 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#PyMuTT.constants.R">R() (in module PyMuTT.constants)</a>
 </li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.reactants">reactants (PyMuTT.models.reaction.Reaction attribute)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.reactants_stoich">reactants_stoich (PyMuTT.models.reaction.Reaction attribute)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction">Reaction (class in PyMuTT.models.reaction)</a>
+</li>
       <li><a href="io.html#PyMuTT.io_.excel.read_excel">read_excel() (in module PyMuTT.io_.excel)</a>
 </li>
       <li><a href="io.html#PyMuTT.io_.thermdat.read_thermdat">read_thermdat() (in module PyMuTT.io_.thermdat)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#PyMuTT.models.empirical.references.Reference">Reference (class in PyMuTT.models.empirical.references)</a>
 </li>
       <li><a href="empirical.html#PyMuTT.models.empirical.references.References">References (class in PyMuTT.models.empirical.references)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#PyMuTT.models.empirical.BaseThermo.references">references (PyMuTT.models.empirical.BaseThermo attribute)</a>
 </li>
       <li><a href="io.html#PyMuTT.io_.jsonio.remove_class">remove_class() (in module PyMuTT.io_.jsonio)</a>
@@ -691,6 +756,12 @@
         <li><a href="empirical.html#PyMuTT.models.empirical.references.References.T_ref">(PyMuTT.models.empirical.references.References attribute)</a>
 </li>
       </ul></li>
+      <li><a href="constants.html#PyMuTT.constants.temp_to_energy">temp_to_energy() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.temp_to_freq">temp_to_freq() (in module PyMuTT.constants)</a>
+</li>
+      <li><a href="constants.html#PyMuTT.constants.temp_to_wavenumber">temp_to_wavenumber() (in module PyMuTT.constants)</a>
+</li>
       <li><a href="empirical.html#PyMuTT.models.empirical.BaseThermo.to_dict">to_dict() (PyMuTT.models.empirical.BaseThermo method)</a>
 
       <ul>
@@ -701,6 +772,8 @@
         <li><a href="empirical.html#PyMuTT.models.empirical.references.References.to_dict">(PyMuTT.models.empirical.references.References method)</a>
 </li>
         <li><a href="empirical.html#PyMuTT.models.empirical.zacros.Zacros.to_dict">(PyMuTT.models.empirical.zacros.Zacros method)</a>
+</li>
+        <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.to_dict">(PyMuTT.models.reaction.Reaction method)</a>
 </li>
         <li><a href="statmech.html#PyMuTT.models.statmech.StatMech.to_dict">(PyMuTT.models.statmech.StatMech method)</a>
 </li>
@@ -720,6 +793,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#PyMuTT.models.statmech.StatMech.trans_model">trans_model (PyMuTT.models.statmech.StatMech attribute)</a>
+</li>
+      <li><a href="reactions.html#PyMuTT.models.reaction.Reaction.transition_state">transition_state (PyMuTT.models.reaction.Reaction attribute)</a>
 </li>
       <li><a href="io.html#PyMuTT.io_.jsonio.type_to_class">type_to_class() (in module PyMuTT.io_.jsonio)</a>
 </li>
@@ -749,10 +824,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#PyMuTT.constants.wavenumber_to_energy">wavenumber_to_energy() (in module PyMuTT.constants)</a>
 </li>
-      <li><a href="constants.html#PyMuTT.constants.wavenumber_to_inertia">wavenumber_to_inertia() (in module PyMuTT.constants)</a>
+      <li><a href="constants.html#PyMuTT.constants.wavenumber_to_freq">wavenumber_to_freq() (in module PyMuTT.constants)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="constants.html#PyMuTT.constants.wavenumber_to_inertia">wavenumber_to_inertia() (in module PyMuTT.constants)</a>
+</li>
       <li><a href="constants.html#PyMuTT.constants.wavenumber_to_temp">wavenumber_to_temp() (in module PyMuTT.constants)</a>
 </li>
       <li><a href="io.html#PyMuTT.io_.thermdat.write_thermdat">write_thermdat() (in module PyMuTT.io_.thermdat)</a>

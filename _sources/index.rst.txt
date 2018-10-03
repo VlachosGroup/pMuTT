@@ -15,6 +15,7 @@ Welcome to PyMuTT's documentation!
    io
    empirical
    statmech
+   reactions
    constants
    Return to Github <https://github.com/VlachosGroup/PyMuTT>
 

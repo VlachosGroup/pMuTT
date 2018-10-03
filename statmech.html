@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Constants" href="constants.html" />
+    <link rel="next" title="Reaction" href="reactions.html" />
     <link rel="prev" title="Empirical Models" href="empirical.html" /> 
 
   
@@ -103,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#creating-new-statmech-models">Creating New StatMech Models</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
 </ul>
@@ -1063,7 +1064,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.vib.HarmonicVib.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the imensionless internal energy</p>
+<dd><p>Calculates the dimensionless internal energy</p>
 <p><img class="math" src="_images/math/2990886bb3fe7c1b7efff57f427b404090f268e4.svg" alt="\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}+
 \frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{\Theta_{V,i}}{T}
 \big)}{1-\exp\big(-\frac{\Theta_{V_i}}{T}\big)}\bigg)"/></p>
@@ -1316,7 +1317,7 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.vib.QRRHOVib.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the imensionless internal energy</p>
+<dd><p>Calculates the dimensionless internal energy</p>
 <p><img class="math" src="_images/math/22575ef1cb2c1cccdd79e6d42074cfcc65ae765f.svg" alt="\frac {U^{qRRHO}}{RT} = \sum_{i}\omega_i\frac{U^{RRHO}}{RT}
 + \frac{1}{2}(1-\omega_i)"/></p>
 <p><img class="math" src="_images/math/6e4c3fbbd95d5f42d90863aafacc11cc37a4e12b.svg" alt="\frac {U^{RRHO}}{RT} = \frac{\Theta_i}{T} \bigg(\frac{1}{2}
@@ -1885,7 +1886,7 @@ John Wiley &amp; Sons, 2010.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
-<li><strong>ignore_q_elec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Ignore the contribution of electronic mode to partition function
+<li><strong>ignore_q_elec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Ignore contribution of electronic mode to partition function
 . Often necessary since DFT’s value for potentialenergy is
 very negative causing q_elec to go to infinity.</li>
 </ul>
@@ -2109,7 +2110,7 @@ does not affect thermodynamic quantities.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="constants.html" class="btn btn-neutral float-right" title="Constants" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="reactions.html" class="btn btn-neutral float-right" title="Reaction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="empirical.html" class="btn btn-neutral" title="Empirical Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
