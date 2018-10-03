@@ -62,6 +62,13 @@ License
 This project is licensed under the MIT License - see the `LICENSE.md`_
 file for details.
 
+Contributing
+------------
+
+If you have a suggestion or encounter a bug, please post to our `Issues page`_. If you would 
+like to add a model, please check if there are guidelines for methods and/or attributes on the 
+relevant documentation page.
+
 .. _`documentation page`: https://vlachosgroup.github.io/PyMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
@@ -71,3 +78,4 @@ file for details.
 .. _tests directory: https://github.com/VlachosGroup/PyMuTT/tree/master/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/PyMuTT/blob/master/LICENSE.md
 .. _`examples using the code`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples
+.. _`Issues page`: https://github.com/VlachosGroup/PyMuTT/issues

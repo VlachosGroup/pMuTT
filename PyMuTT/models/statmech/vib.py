@@ -102,7 +102,7 @@ class HarmonicVib:
         return 0.5*c.kb('eV/K')*np.sum(self._vib_temperatures)
 
     def get_UoRT(self, T):
-        """Calculates the imensionless internal energy
+        """Calculates the dimensionless internal energy
 
         :math:`\\frac{U^{vib}}{RT}=\\sum_i \\bigg(\\frac{\\Theta_{V,i}}{2T}+
         \\frac{\\Theta_{V,i}}{T}\\frac{\\exp\\big(-\\frac{\\Theta_{V,i}}{T}
@@ -376,13 +376,13 @@ class QRRHOVib:
         return vib_dimless*(0.5+np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)))
 
     def get_UoRT(self, T):
-        """Calculates the imensionless internal energy
+        """Calculates the dimensionless internal energy
 
         :math:`\\frac {U^{qRRHO}}{RT} = \\sum_{i}\\omega_i\\frac{U^{RRHO}}{RT}
-         + \\frac{1}{2}(1-\\omega_i)`
+        + \\frac{1}{2}(1-\\omega_i)`
 
         :math:`\\frac {U^{RRHO}}{RT} = \\frac{\\Theta_i}{T} \\bigg(\\frac{1}{2}
-         + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{\\Theta_i}{T})}
+        + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{\\Theta_i}{T})}
         \\bigg)`
 
         Parameters
