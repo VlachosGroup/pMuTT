@@ -4,6 +4,7 @@ PyMuTT.test_PyMuTT_model_statmech
 Tests for PyMuTT module
 """
 import unittest
+import numpy as np
 from ase.build import molecule
 from PyMuTT import constants as c
 from PyMuTT.models import reaction as rxn
@@ -155,7 +156,7 @@ class TestStatMech(unittest.TestCase):
     def test_compare_element_balance(self):
         self.assertIsNone(self.rxn_nasa.check_element_balance())
 
-    def test_delta_CvoR(self):
+    def test_get_delta_CvoR(self):
         exp_sm_CvoR = self.H2O_sm.get_CvoR(T=c.T0('K')) \
                       - self.H2_sm.get_CvoR(T=c.T0('K')) \
                       - self.O2_sm.get_CvoR(T=c.T0('K'))*0.5
@@ -167,7 +168,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_CvoR)
 
 
-    def test_delta_CpoR(self):
+    def test_get_delta_CpoR(self):
         exp_nasa_CpoR = self.H2O_nasa.get_CpoR(Ts=c.T0('K')) \
                        - self.H2_nasa.get_CpoR(Ts=c.T0('K')) \
                        - self.O2_nasa.get_CpoR(Ts=c.T0('K'))*0.5
@@ -188,7 +189,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_CpoR)
 
 
-    def test_delta_UoRT(self):
+    def test_get_delta_UoRT(self):
         exp_sm_UoRT = self.H2O_sm.get_UoRT(T=c.T0('K')) \
                       - self.H2_sm.get_UoRT(T=c.T0('K')) \
                       - self.O2_sm.get_UoRT(T=c.T0('K'))*0.5
@@ -200,7 +201,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_UoRT)
 
 
-    def test_delta_HoRT(self):
+    def test_get_delta_HoRT(self):
         exp_nasa_HoRT = self.H2O_nasa.get_HoRT(Ts=c.T0('K')) \
                        - self.H2_nasa.get_HoRT(Ts=c.T0('K')) \
                        - self.O2_nasa.get_HoRT(Ts=c.T0('K'))*0.5
@@ -221,7 +222,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_HoRT)
 
 
-    def test_delta_SoR(self):
+    def test_get_delta_SoR(self):
         exp_nasa_SoR = self.H2O_nasa.get_SoR(Ts=c.T0('K')) \
                       - self.H2_nasa.get_SoR(Ts=c.T0('K')) \
                       - self.O2_nasa.get_SoR(Ts=c.T0('K'))*0.5
@@ -242,7 +243,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_SoR)
 
 
-    def test_delta_AoRT(self):
+    def test_get_delta_AoRT(self):
         exp_sm_AoRT = self.H2O_sm.get_AoRT(T=c.T0('K')) \
                       - self.H2_sm.get_AoRT(T=c.T0('K')) \
                       - self.O2_sm.get_AoRT(T=c.T0('K'))*0.5
@@ -254,7 +255,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_AoRT)
 
 
-    def test_delta_GoRT(self):
+    def test_get_delta_GoRT(self):
         exp_nasa_GoRT = self.H2O_nasa.get_GoRT(Ts=c.T0('K')) \
                        - self.H2_nasa.get_GoRT(Ts=c.T0('K')) \
                        - self.O2_nasa.get_GoRT(Ts=c.T0('K'))*0.5
@@ -275,7 +276,7 @@ class TestStatMech(unittest.TestCase):
                 -exp_sm_GoRT)
 
 
-    def test_CvoR_act(self):
+    def test_get_CvoR_act(self):
         exp_sm_CvoR = self.H2O_TS_sm.get_CvoR(T=c.T0('K')) \
                       - self.H2_sm.get_CvoR(T=c.T0('K')) \
                       - self.O2_sm.get_CvoR(T=c.T0('K'))*0.5
@@ -289,7 +290,7 @@ class TestStatMech(unittest.TestCase):
                 exp_sm_CvoR_rev)
 
 
-    def test_CpoR_act(self):
+    def test_get_CpoR_act(self):
         exp_sm_CpoR = self.H2O_TS_sm.get_CpoR(T=c.T0('K')) \
                       - self.H2_sm.get_CpoR(T=c.T0('K')) \
                       - self.O2_sm.get_CpoR(T=c.T0('K'))*0.5
@@ -303,7 +304,7 @@ class TestStatMech(unittest.TestCase):
                 exp_sm_CpoR_rev)
 
 
-    def test_UoRT_act(self):
+    def test_get_UoRT_act(self):
         exp_sm_UoRT = self.H2O_TS_sm.get_UoRT(T=c.T0('K')) \
                       - self.H2_sm.get_UoRT(T=c.T0('K')) \
                       - self.O2_sm.get_UoRT(T=c.T0('K'))*0.5
@@ -317,7 +318,7 @@ class TestStatMech(unittest.TestCase):
                 exp_sm_UoRT_rev)
 
 
-    def test_HoRT_act(self):
+    def test_get_HoRT_act(self):
         exp_sm_HoRT = self.H2O_TS_sm.get_HoRT(T=c.T0('K')) \
                       - self.H2_sm.get_HoRT(T=c.T0('K')) \
                       - self.O2_sm.get_HoRT(T=c.T0('K'))*0.5
@@ -331,7 +332,7 @@ class TestStatMech(unittest.TestCase):
                 exp_sm_HoRT_rev)
 
 
-    def test_SoR_act(self):
+    def test_get_SoR_act(self):
         exp_sm_SoR = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
                       - self.H2_sm.get_SoR(T=c.T0('K')) \
                       - self.O2_sm.get_SoR(T=c.T0('K'))*0.5
@@ -345,7 +346,7 @@ class TestStatMech(unittest.TestCase):
                 exp_sm_SoR_rev)
 
 
-    def test_AoRT_act(self):
+    def test_get_AoRT_act(self):
         exp_sm_AoRT = self.H2O_TS_sm.get_AoRT(T=c.T0('K')) \
                       - self.H2_sm.get_AoRT(T=c.T0('K')) \
                       - self.O2_sm.get_AoRT(T=c.T0('K'))*0.5
@@ -359,7 +360,7 @@ class TestStatMech(unittest.TestCase):
                 exp_sm_AoRT_rev)
 
 
-    def test_GoRT_act(self):
+    def test_get_GoRT_act(self):
         exp_sm_GoRT = self.H2O_TS_sm.get_GoRT(T=c.T0('K')) \
                       - self.H2_sm.get_GoRT(T=c.T0('K')) \
                       - self.O2_sm.get_GoRT(T=c.T0('K'))*0.5
@@ -371,6 +372,19 @@ class TestStatMech(unittest.TestCase):
         self.assertAlmostEqual(
                 self.rxn_sm.get_GoRT_act(T=c.T0('K'), rev=True),
                 exp_sm_GoRT_rev)
+
+    def test_get_A(self):
+        exp_sm_SoR = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
+                     - self.H2_sm.get_SoR(T=c.T0('K')) \
+                     - self.O2_sm.get_SoR(T=c.T0('K'))*0.5
+        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*np.exp(-exp_sm_SoR)
+        exp_sm_SoR_rev = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
+                         - self.H2O_sm.get_SoR(T=c.T0('K'))
+        exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s')*np.exp(-exp_sm_SoR_rev)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_A(T=c.T0('K')), exp_sm_A)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_A(T=c.T0('K'), rev=True), exp_sm_A_rev)
 
 
     def test_to_dict(self):

@@ -2,6 +2,7 @@
 from collections import Counter
 import numpy as np
 from PyMuTT import _force_pass_arguments
+from PyMuTT import constants as c
 from PyMuTT.io_.jsonio import json_to_PyMuTT, remove_class
 
 class Reaction:
@@ -560,6 +561,27 @@ class Reaction:
                                  final_state=(self.transition_state,), 
                                  final_state_stoich=(1.,),
                                  **kwargs)
+
+    def get_A(self, T=c.T0('K'), rev=False, **kwargs):
+        """Gets preexponential factor between reactants (or products) and 
+        transition state in 1/s
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state 
+                instead of reactants. Default is False
+            T : float, optional
+                Temperature in K. Default is standard temperature.
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless Gibbs energy
+        Returns
+        -------
+            A : float
+                Pre-exponential factor  
+        """
+        return c.kb('J/K')*T/c.h('J s')\
+               *np.exp(-self.get_SoR_act(rev=rev, T=c.T0('K'), **kwargs))
 
     @classmethod
     def from_string(cls, reaction_string, species):
