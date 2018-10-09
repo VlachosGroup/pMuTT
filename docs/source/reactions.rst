@@ -51,23 +51,23 @@ PyMuTT model object should be compatible.
    '''
    Get thermodynamics from Reaction
    '''
-   Ts = np.linspace(200., 3500.)
-   HoRT_rxn = rxn_nasa.get_delta_HoRT(Ts=Ts)
-   SoR_rxn = rxn_nasa.get_delta_SoR(Ts=Ts)
-   GoRT_rxn = rxn_nasa.get_delta_GoRT(Ts=Ts)
+   T = np.linspace(200., 3500.)
+   HoRT_rxn = rxn_nasa.get_delta_HoRT(T=T)
+   SoR_rxn = rxn_nasa.get_delta_SoR(T=T)
+   GoRT_rxn = rxn_nasa.get_delta_GoRT(T=T)
    
    '''
    Plot the data
    '''
    f, ax = plt.subplots(3, sharex=True)
    ax[0].set_title('H2 + 1/2 O2 --> H2O')
-   ax[0].plot(Ts, HoRT_rxn, 'r-')
+   ax[0].plot(T, HoRT_rxn, 'r-')
    ax[0].set_ylabel('H/RT')
    
-   ax[1].plot(Ts, SoR_rxn, 'g-')
+   ax[1].plot(T, SoR_rxn, 'g-')
    ax[1].set_ylabel('S/R')
    
-   ax[2].plot(Ts, GoRT_rxn, 'b-')
+   ax[2].plot(T, GoRT_rxn, 'b-')
    ax[2].set_ylabel('G/RT')
    ax[2].set_xlabel('Temperature (K)')
    plt.show()

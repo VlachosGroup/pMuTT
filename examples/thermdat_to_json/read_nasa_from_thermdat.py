@@ -30,28 +30,28 @@ with open(json_path, 'r') as f_ptr:
 Plotting to ensure the object was written and read correctly
 '''
 for specie, specie_json in zip(species, species_json):
-    Ts = np.linspace(specie.T_low, specie.T_high)
+    T = np.linspace(specie.T_low, specie.T_high)
     plt.figure()
     f, ax = plt.subplots(4, sharex=True)    
     # CpoR Plot
-    ax[0].plot(Ts, specie.get_CpoR(Ts=Ts), 'r-', label='Thermdat')
-    ax[0].plot(Ts, specie_json.get_CpoR(Ts=Ts), 'b*', label='JSON')
+    ax[0].plot(T, specie.get_CpoR(T=T), 'r-', label='Thermdat')
+    ax[0].plot(T, specie_json.get_CpoR(T=T), 'b*', label='JSON')
     ax[0].legend()
     ax[0].set_ylabel('Cp/R')
 
     # HoRT Plot
-    ax[1].plot(Ts, specie.get_HoRT(Ts=Ts), 'r-')
-    ax[1].plot(Ts, specie_json.get_HoRT(Ts=Ts), 'b*')
+    ax[1].plot(T, specie.get_HoRT(T=T), 'r-')
+    ax[1].plot(T, specie_json.get_HoRT(T=T), 'b*')
     ax[1].set_ylabel('H/RT')
 
     # SoR Plot
-    ax[2].plot(Ts, specie.get_SoR(Ts=Ts), 'r-')
-    ax[2].plot(Ts, specie_json.get_SoR(Ts=Ts), 'b*')
+    ax[2].plot(T, specie.get_SoR(T=T), 'r-')
+    ax[2].plot(T, specie_json.get_SoR(T=T), 'b*')
     ax[2].set_ylabel('S/R')
 
     # HoRT Plot
-    ax[3].plot(Ts, specie.get_GoRT(Ts=Ts), 'r-')
-    ax[3].plot(Ts, specie_json.get_GoRT(Ts=Ts), 'b*')
+    ax[3].plot(T, specie.get_GoRT(T=T), 'r-')
+    ax[3].plot(T, specie_json.get_GoRT(T=T), 'b*')
     ax[3].set_ylabel('G/RT')
     ax[3].set_xlabel('T (K)')
     f.savefig(os.path.join(base_path, '{}.png'.format(specie.name)))

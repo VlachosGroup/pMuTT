@@ -169,17 +169,17 @@ class TestStatMech(unittest.TestCase):
 
 
     def test_get_delta_CpoR(self):
-        exp_nasa_CpoR = self.H2O_nasa.get_CpoR(Ts=c.T0('K')) \
-                       - self.H2_nasa.get_CpoR(Ts=c.T0('K')) \
-                       - self.O2_nasa.get_CpoR(Ts=c.T0('K'))*0.5
+        exp_nasa_CpoR = self.H2O_nasa.get_CpoR(T=c.T0('K')) \
+                       - self.H2_nasa.get_CpoR(T=c.T0('K')) \
+                       - self.O2_nasa.get_CpoR(T=c.T0('K'))*0.5
         exp_sm_CpoR = self.H2O_sm.get_CpoR(T=c.T0('K')) \
                       - self.H2_sm.get_CpoR(T=c.T0('K')) \
                       - self.O2_sm.get_CpoR(T=c.T0('K'))*0.5
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_CpoR(Ts=c.T0('K')),
+                self.rxn_nasa.get_delta_CpoR(T=c.T0('K')),
                 exp_nasa_CpoR)
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_CpoR(Ts=c.T0('K'), rev=True),
+                self.rxn_nasa.get_delta_CpoR(T=c.T0('K'), rev=True),
                 -exp_nasa_CpoR)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_CpoR(T=c.T0('K')),
@@ -202,17 +202,17 @@ class TestStatMech(unittest.TestCase):
 
 
     def test_get_delta_HoRT(self):
-        exp_nasa_HoRT = self.H2O_nasa.get_HoRT(Ts=c.T0('K')) \
-                       - self.H2_nasa.get_HoRT(Ts=c.T0('K')) \
-                       - self.O2_nasa.get_HoRT(Ts=c.T0('K'))*0.5
+        exp_nasa_HoRT = self.H2O_nasa.get_HoRT(T=c.T0('K')) \
+                       - self.H2_nasa.get_HoRT(T=c.T0('K')) \
+                       - self.O2_nasa.get_HoRT(T=c.T0('K'))*0.5
         exp_sm_HoRT = self.H2O_sm.get_HoRT(T=c.T0('K')) \
                       - self.H2_sm.get_HoRT(T=c.T0('K')) \
                       - self.O2_sm.get_HoRT(T=c.T0('K'))*0.5
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_HoRT(Ts=c.T0('K')),
+                self.rxn_nasa.get_delta_HoRT(T=c.T0('K')),
                 exp_nasa_HoRT)
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_HoRT(Ts=c.T0('K'), rev=True),
+                self.rxn_nasa.get_delta_HoRT(T=c.T0('K'), rev=True),
                 -exp_nasa_HoRT)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_HoRT(T=c.T0('K')),
@@ -223,17 +223,17 @@ class TestStatMech(unittest.TestCase):
 
 
     def test_get_delta_SoR(self):
-        exp_nasa_SoR = self.H2O_nasa.get_SoR(Ts=c.T0('K')) \
-                      - self.H2_nasa.get_SoR(Ts=c.T0('K')) \
-                      - self.O2_nasa.get_SoR(Ts=c.T0('K'))*0.5
+        exp_nasa_SoR = self.H2O_nasa.get_SoR(T=c.T0('K')) \
+                      - self.H2_nasa.get_SoR(T=c.T0('K')) \
+                      - self.O2_nasa.get_SoR(T=c.T0('K'))*0.5
         exp_sm_SoR = self.H2O_sm.get_SoR(T=c.T0('K')) \
                       - self.H2_sm.get_SoR(T=c.T0('K')) \
                       - self.O2_sm.get_SoR(T=c.T0('K'))*0.5
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_SoR(Ts=c.T0('K')),
+                self.rxn_nasa.get_delta_SoR(T=c.T0('K')),
                 exp_nasa_SoR)
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_SoR(Ts=c.T0('K'), rev=True),
+                self.rxn_nasa.get_delta_SoR(T=c.T0('K'), rev=True),
                 -exp_nasa_SoR)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_SoR(T=c.T0('K')),
@@ -256,17 +256,17 @@ class TestStatMech(unittest.TestCase):
 
 
     def test_get_delta_GoRT(self):
-        exp_nasa_GoRT = self.H2O_nasa.get_GoRT(Ts=c.T0('K')) \
-                       - self.H2_nasa.get_GoRT(Ts=c.T0('K')) \
-                       - self.O2_nasa.get_GoRT(Ts=c.T0('K'))*0.5
+        exp_nasa_GoRT = self.H2O_nasa.get_GoRT(T=c.T0('K')) \
+                       - self.H2_nasa.get_GoRT(T=c.T0('K')) \
+                       - self.O2_nasa.get_GoRT(T=c.T0('K'))*0.5
         exp_sm_GoRT = self.H2O_sm.get_GoRT(T=c.T0('K')) \
                       - self.H2_sm.get_GoRT(T=c.T0('K')) \
                       - self.O2_sm.get_GoRT(T=c.T0('K'))*0.5            
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_GoRT(Ts=c.T0('K')),
+                self.rxn_nasa.get_delta_GoRT(T=c.T0('K')),
                 exp_nasa_GoRT)
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_GoRT(Ts=c.T0('K'), rev=True),
+                self.rxn_nasa.get_delta_GoRT(T=c.T0('K'), rev=True),
                 -exp_nasa_GoRT)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_GoRT(T=c.T0('K')),

@@ -92,12 +92,12 @@ class Nasa(BaseThermo):
                      RuntimeWarning)
             return self.a_high
 
-    def get_CpoR(self, Ts):
+    def get_CpoR(self, T):
         """Calculate the dimensionless heat capacity
 
         Parameters
         ----------
-            Ts : float or (N,)` numpy.ndarray`_
+            T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
         Returns
         -------
@@ -107,23 +107,23 @@ class Nasa(BaseThermo):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
-            iter(Ts)
+            iter(T)
         except TypeError:
-            a = self.get_a(T=Ts)
-            CpoR = get_nasa_CpoR(a=a, T=Ts)
+            a = self.get_a(T=T)
+            CpoR = get_nasa_CpoR(a=a, T=T)
         else:
-            CpoR = np.zeros(len(Ts))
-            for i, T in enumerate(Ts):
-                a = self.get_a(T)
-                CpoR[i] = get_nasa_CpoR(a=a, T=T)
+            CpoR = np.zeros(len(T))
+            for i, T_i in enumerate(T):
+                a = self.get_a(T_i)
+                CpoR[i] = get_nasa_CpoR(a=a, T=T_i)
         return CpoR
 
-    def get_HoRT(self, Ts):
+    def get_HoRT(self, T):
         """Calculate the dimensionless enthalpy
 
         Parameters
         ----------
-            Ts : float or (N,) `numpy.ndarray`_
+            T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
         Returns
         -------
@@ -133,23 +133,23 @@ class Nasa(BaseThermo):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
-            iter(Ts)
+            iter(T)
         except TypeError:
-            a = self.get_a(T=Ts)
-            HoRT = get_nasa_HoRT(a=a, T=Ts)
+            a = self.get_a(T=T)
+            HoRT = get_nasa_HoRT(a=a, T=T)
         else:
-            HoRT = np.zeros_like(Ts)
-            for i, T in enumerate(Ts):
-                a = self.get_a(T=T)
-                HoRT[i] = get_nasa_HoRT(a=a, T=T)
+            HoRT = np.zeros_like(T)
+            for i, T_i in enumerate(T):
+                a = self.get_a(T=T_i)
+                HoRT[i] = get_nasa_HoRT(a=a, T=T_i)
         return HoRT
 
-    def get_SoR(self, Ts):
+    def get_SoR(self, T):
         """Calculate the dimensionless entropy
 
         Parameters
         ----------
-            Ts : float or (N,) `numpy.ndarray`_
+            T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
         Returns
         -------
@@ -159,23 +159,23 @@ class Nasa(BaseThermo):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
-            iter(Ts)
+            iter(T)
         except TypeError:
-            a = self.get_a(T=Ts)
-            SoR = get_nasa_SoR(a=a, T=Ts)
+            a = self.get_a(T=T)
+            SoR = get_nasa_SoR(a=a, T=T)
         else:
-            SoR = np.zeros_like(Ts)
-            for i, T in enumerate(Ts):
-                a = self.get_a(T=T)
-                SoR[i] = get_nasa_SoR(a=a, T=T)
+            SoR = np.zeros_like(T)
+            for i, T_i in enumerate(T):
+                a = self.get_a(T=T_i)
+                SoR[i] = get_nasa_SoR(a=a, T=T_i)
         return SoR
 
-    def get_GoRT(self, Ts):
+    def get_GoRT(self, T):
         """Calculate the dimensionless Gibbs free energy
 
         Parameters
         ----------
-            Ts : float or (N,) `numpy.ndarray`_
+            T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
         Returns
         -------
@@ -185,19 +185,19 @@ class Nasa(BaseThermo):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         try:
-            iter(Ts)
+            iter(T)
         except TypeError:
-            a = self.get_a(T=Ts)
-            GoRT = get_nasa_GoRT(a=a, T=Ts)
+            a = self.get_a(T=T)
+            GoRT = get_nasa_GoRT(a=a, T=T)
         else:
-            GoRT = np.zeros_like(Ts)
-            for i, T in enumerate(Ts):
-                a = self.get_a(T=T)
-                GoRT[i] = get_nasa_GoRT(a=a, T=T)
+            GoRT = np.zeros_like(T)
+            for i, T_i in enumerate(T):
+                a = self.get_a(T=T_i)
+                GoRT[i] = get_nasa_GoRT(a=a, T=T_i)
         return GoRT
 
     @classmethod
-    def from_data(cls, name, Ts, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
+    def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
                   T_mid=None, **kwargs):
         """Calculates the NASA polynomials using thermodynamic data
 
@@ -205,10 +205,10 @@ class Nasa(BaseThermo):
         ----------
             name : str
                 Name of the species
-            Ts : (N,) `numpy.ndarray`_
+            T : (N,) `numpy.ndarray`_
                 Temperatures in K used for fitting CpoR.
             CpoR : (N,) `numpy.ndarray`_
-                Dimensionless heat capacity corresponding to Ts.
+                Dimensionless heat capacity corresponding to T.
             T_ref : float
                 Reference temperature in K used fitting empirical coefficients.
             HoRT_ref : float
@@ -225,7 +225,7 @@ class Nasa(BaseThermo):
                 Guess for T_mid. If float, only uses that value for T_mid. If 
                 list, finds the best fit for each element in the list. If None, 
                 a range of T_mid values are screened between the 6th lowest 
-                and 6th highest value of Ts.
+                and 6th highest value of T.
         Returns
         -------
             Nasa : Nasa object
@@ -233,11 +233,11 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        T_low = min(Ts)
-        T_high = max(Ts)
+        T_low = min(T)
+        T_high = max(T)
 
         # Find midpoint temperature, and a[0] through a[4] parameters
-        a_low, a_high, T_mid_out = fit_CpoR(Ts=Ts, CpoR=CpoR, T_mid=T_mid)
+        a_low, a_high, T_mid_out = fit_CpoR(T=T, CpoR=CpoR, T_mid=T_mid)
         # Fit a[5] parameter using reference enthalpy
         a_low[5], a_high[5] = fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, 
                                        a_low=a_low, a_high=a_high,
@@ -268,7 +268,7 @@ class Nasa(BaseThermo):
                 Guess for T_mid. If float, only uses that value for T_mid. If 
                 list, finds the best fit for each element in the list. If None, 
                 a range of T_mid values are screened between the 6th lowest 
-                and 6th highest value of Ts.
+                and 6th highest value of T.
             references : `PyMuTT.models.empirical.references.References` object
                 Reference to adjust enthalpy
             elements : dict
@@ -290,29 +290,29 @@ class Nasa(BaseThermo):
             statmech_model = statmech_model(**kwargs)
 
         # Generate data
-        Ts = np.linspace(T_low, T_high)
+        T = np.linspace(T_low, T_high)
         if T_mid is not None:
-        # Check to see if specified T_mid's are in Ts and, if not,
-        # insert them into Ts.
+        # Check to see if specified T_mid's are in T and, if not,
+        # insert them into T.
             # If a single value for T_mid is chosen, convert to a tuple
             try:
                 iter(T_mid)
             except TypeError:
                 T_mid = (T_mid,)
             for x in range(0, len(T_mid)):
-                if np.where(Ts == T_mid[x])[0].size == 0:
-                    # Insert T_mid's into Ts and save position
-                    Ts_index = np.where(Ts > T_mid[x])[0][0]
-                    Ts = np.insert(Ts, Ts_index, T_mid[x])
-        CpoR = np.array([statmech_model.get_CpoR(T=T) for T in Ts])
+                if np.where(T == T_mid[x])[0].size == 0:
+                    # Insert T_mid's into T and save position
+                    Ts_index = np.where(T > T_mid[x])[0][0]
+                    T = np.insert(T, Ts_index, T_mid[x])
+        CpoR = np.array([statmech_model.get_CpoR(T=T_i) for T_i in T])
         T_ref = c.T0('K')
         HoRT_ref = statmech_model.get_HoRT(T=T_ref)
         # Add contribution of references
         if references is not None:
-            HoRT_ref += references.get_HoRT_offset(elements=elements, Ts=T_ref)
+            HoRT_ref += references.get_HoRT_offset(elements=elements, T=T_ref)
         SoR_ref = statmech_model.get_SoR(T=T_ref)
 
-        return cls.from_data(name=name, Ts=Ts, CpoR=CpoR, T_ref=T_ref, 
+        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref, 
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
                              statmech_model=statmech_model, elements=elements,
                              references=references, **kwargs)
@@ -354,13 +354,13 @@ class Nasa(BaseThermo):
 
         return cls(**json_obj)
 
-def fit_CpoR(Ts, CpoR, T_mid=None):
+def fit_CpoR(T, CpoR, T_mid=None):
     """Fit a[0]-a[4] coefficients in a_low and a_high attributes given the
     dimensionless heat capacity data
 
     Parameters
     ----------
-        Ts : (N,) `numpy.ndarray_`
+        T : (N,) `numpy.ndarray_`
             Temperatures in K
         CpoR : (N,) `numpy.ndarray_`
             Dimensionless heat capacity
@@ -368,7 +368,7 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
             Guess for T_mid. If float, only uses that value for T_mid. If 
             list, finds the best fit for each element in the list. If None, 
             a range of T_mid values are screened between the lowest value 
-            and highest value of Ts.
+            and highest value of T.
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
     # If the Cp/R does not vary with temperature (occurs when no
@@ -376,7 +376,7 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
         or np.isclose(variation(CpoR), 0.) \
         or any([np.isnan(x) for x in CpoR]):
-        T_mid = Ts[int(len(Ts)/2)]
+        T_mid = T[int(len(T)/2)]
         a_low = np.zeros(7)
         a_high = np.zeros(7)
         return a_low, a_high, T_mid
@@ -384,7 +384,7 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     # If T_mid not specified, generate range between 6th smallest data point
     # and 6th largest data point
     if T_mid is None:
-        T_mid = Ts[5:-5]
+        T_mid = T[5:-5]
 
     # If a single value for T_mid is chosen, convert to a tuple
     try:
@@ -399,7 +399,7 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     all_a_high = []
     for T_m in T_mid:
         # Generate temperature data
-        (mse, a_low, a_high) = _get_CpoR_MSE(Ts=Ts, CpoR=CpoR, T_mid=T_m)
+        (mse, a_low, a_high) = _get_CpoR_MSE(T=T, CpoR=CpoR, T_mid=T_m)
         mse_list.append(mse)
         all_a_low.append(a_low)
         all_a_high.append(a_high)
@@ -424,12 +424,12 @@ def fit_CpoR(Ts, CpoR, T_mid=None):
     a_high_out = np.concatenate((a_high_rev[::-1], empty_arr))
     return a_low_out, a_high_out, T_mid_out
 
-def _get_CpoR_MSE(Ts, CpoR, T_mid):
+def _get_CpoR_MSE(T, CpoR, T_mid):
     """Calculates the mean squared error of polynomial fit.
 
     Parameters
     ----------
-        Ts : (N,) `numpy.ndarray_`
+        T : (N,) `numpy.ndarray_`
             Temperatures (K) to fit the polynomial
         CpoR : (N,) `numpy.ndarray_`
             Dimensionless heat capacities that correspond to T array
@@ -447,10 +447,10 @@ def _get_CpoR_MSE(Ts, CpoR, T_mid):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    low_condition = (Ts<=T_mid)
-    high_condition = (Ts>T_mid)
-    T_low = np.extract(condition=low_condition, arr=Ts)
-    T_high = np.extract(condition=high_condition, arr=Ts)
+    low_condition = (T<=T_mid)
+    high_condition = (T>T_mid)
+    T_low = np.extract(condition=low_condition, arr=T)
+    T_high = np.extract(condition=high_condition, arr=T)
     CpoR_low = np.extract(condition=low_condition, arr=CpoR)
     CpoR_high = np.extract(condition=high_condition, arr=CpoR)
 
