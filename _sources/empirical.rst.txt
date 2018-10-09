@@ -3,24 +3,38 @@
 Empirical Models
 ****************
 
-.. automodule:: PyMuTT.models.empirical
+BaseThermo
+##########
+
+This is the parent class for the empirical models.
+
+.. autoclass:: PyMuTT.models.empirical.BaseThermo
    :members:
    
 Nasa
 ####
    
-.. automodule:: PyMuTT.models.empirical.nasa
+.. autoclass:: PyMuTT.models.empirical.nasa.Nasa
    :members:
+   :inherited-members:
 
 Zacros
 ######
    
-.. automodule:: PyMuTT.models.empirical.zacros
+.. autoclass:: PyMuTT.models.empirical.zacros.Zacros
    :members:
+   :inherited-members:
 
-Referencs
+Reference
 #########
    
-.. automodule:: PyMuTT.models.empirical.references
+.. autoclass:: PyMuTT.models.empirical.references.Reference
+   :members:
+   :inherited-members:
+
+References
+##########
+   
+.. autoclass:: PyMuTT.models.empirical.references.References
    :members:
 

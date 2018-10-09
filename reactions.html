@@ -251,6 +251,33 @@ element composition does not agree.</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="PyMuTT.models.reaction.Reaction.get_A">
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets preexponential factor between reactants (or products) and
+transition state in 1/s</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless Gibbs energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>A</strong> – Pre-exponential factor</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="PyMuTT.models.reaction.Reaction.get_AoRT_act">
 <code class="descname">get_AoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_AoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Helmholtz energy between reactants (or
@@ -746,23 +773,23 @@ PyMuTT model object should be compatible.</p>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Get thermodynamics from Reaction</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
-<span class="n">HoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_HoRT</span><span class="p">(</span><span class="n">Ts</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
-<span class="n">SoR_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_SoR</span><span class="p">(</span><span class="n">Ts</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
-<span class="n">GoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_GoRT</span><span class="p">(</span><span class="n">Ts</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
+<span class="n">HoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_HoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="n">SoR_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_SoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="n">GoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_GoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Plot the data</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;H2 + 1/2 O2 --&gt; H2O&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">HoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">HoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;H/RT&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">SoR_rxn</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">SoR_rxn</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;S/R&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">GoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">GoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;G/RT&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
