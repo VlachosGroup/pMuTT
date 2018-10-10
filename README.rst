@@ -34,8 +34,8 @@ Getting Started
 ---------------
 
 1. Install the dependencies
-2. Download the repository to your local machine
-3. Add to parent folder to PYTHONPATH
+2. `Clone the repository`_ to your local machine
+3. Add the parent folder to PYTHONPATH. `Windows instructions`_
 4. Run the tests by navigating to the `tests directory`_ in a
    command-line interface and inputting the following command:
 
@@ -69,6 +69,8 @@ If you have a suggestion or encounter a bug, please post to our `Issues page`_. 
 like to add a model, please check if there are guidelines for methods and/or attributes on the 
 relevant documentation page.
 
+.. _`Clone the repository`: https://help.github.com/articles/cloning-a-repository/
+.. _`Windows instructions`: https://docs.python.org/3/using/windows.html#excursus-setting-environment-variables
 .. _`documentation page`: https://vlachosgroup.github.io/PyMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
