@@ -201,7 +201,7 @@ class References:
                                     offset in zip(elements,
                                                   HoRT_element_offset)}
 
-    def get_HoRT_offset(self, elements, Ts=None):
+    def get_HoRT_offset(self, elements, T=None):
         """Returns the offset due to the element composition of a specie.
         The offset is defined as follows:
 
@@ -229,11 +229,11 @@ class References:
             except KeyError:
                 warn('References does not have offset value for the '
                      'element: {}.'.format(element), RuntimeWarning)
-        if Ts is None:
+        if T is None:
             return HoRT_offset
         else:
             # Adjust for the temperature
-            return HoRT_offset * self.T_ref/Ts
+            return HoRT_offset * self.T_ref/T
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

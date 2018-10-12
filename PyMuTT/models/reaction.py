@@ -563,7 +563,7 @@ class Reaction:
                                  **kwargs)
 
     def get_A(self, T=c.T0('K'), rev=False, **kwargs):
-        """Gets preexponential factor between reactants (or products) and 
+        """Gets pre-exponential factor between reactants (or products) and 
         transition state in 1/s
 
         Parameters
@@ -574,7 +574,7 @@ class Reaction:
             T : float, optional
                 Temperature in K. Default is standard temperature.
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless Gibbs energy
+                Parameters required to calculate pre-exponential factor
         Returns
         -------
             A : float
