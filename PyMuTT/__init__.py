@@ -3,6 +3,17 @@
 PyMuTT
 """
 
+####
+#
+# setuptools likes to see a name for the package,
+# and it's best-practices to have the __version__
+# present, too:
+#
+name = 'PyMuTT'
+__version__ = '0.1.0'
+#
+####
+
 import re
 import inspect
 from warnings import warn
