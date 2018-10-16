@@ -22,6 +22,7 @@ setuptools_info = {
 	'long_description': long_description,
 	'zip_safe': True,
 	'url': 'https://github.com/VlachosGroup/PyMuTT',
+	'packages': setuptools.find_packages(),
 	'install_requires': [
 		'ASE>=3.16.2',
 		'matplotlib>=2.2.3',
