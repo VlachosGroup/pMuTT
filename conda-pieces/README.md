@@ -37,6 +37,6 @@ The channel is accessed by adding a `--channel` option to your `conda` commands:
 $ conda search --channel=file:///<directory-containing-my_channel>/my_channel/ --override-channels
 Loading channels: done
 # Name                  Version           Build  Channel             
-vlachos-group-mutt           1.0.0          py27_0  my_channel 
+vlachos-group-pmutt          1.0.0          py27_0  my_channel 
 ```
 

@@ -32,11 +32,12 @@ Dependencies
 
 Getting Started
 ---------------
+1. Install using pip
+::
 
-1. Install the dependencies
-2. `Clone the repository`_ to your local machine
-3. Add the parent folder to PYTHONPATH. `Windows instructions`_
-4. Run the tests by navigating to the `tests directory`_ in a
+   pip install pMuTT
+   
+2. Run the tests by navigating to the `tests directory`_ in a
    command-line interface and inputting the following command:
 
 ::
@@ -54,7 +55,7 @@ necessarily be the same.
 
    OK
 
-5. Look at `examples using the code`_
+3. Look at `examples using the code`_
 
 License
 -------
@@ -76,15 +77,13 @@ Questions
 If you are having issues, please post to our `Issues page`_ with the ``help wanted`` or ``question`` tag. We 
 will do our best to assist.
 
-.. _`Clone the repository`: https://help.github.com/articles/cloning-a-repository/
-.. _`Windows instructions`: https://docs.python.org/3/using/windows.html#excursus-setting-environment-variables
 .. _`documentation page`: https://vlachosgroup.github.io/pMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
 .. _Pandas: https://pandas.pydata.org/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
-.. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/tests
+.. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pMuTT/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`examples using the code`: https://github.com/VlachosGroup/pMuTT/tree/master/examples
 .. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues

@@ -8,8 +8,8 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=source
-set BUILDDIR=../../PyMuTT_docs
-set SPHINXPROJ=PyMuTT
+set BUILDDIR=../../pMuTT_docs
+set SPHINXPROJ=pMuTT
 
 if "%1" == "" goto help
 

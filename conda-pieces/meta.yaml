@@ -1,10 +1,10 @@
 package:
-  name: vlachos-group-mutt
+  name: vlachos-group-pmutt
   version: "1.0.0"
 
 source:
   git_rev: "master"
-  git_url: "https://github.com/VlachosGroup/PyMUTT.git"
+  git_url: "https://github.com/VlachosGroup/pMuTT.git"
 
 requirements:
   host:
@@ -19,6 +19,6 @@ requirements:
     - pandas >=0.20.3
 
 about:
-  home: "https://github.com/VlachosGroup/PyMUTT/"
+  home: "https://github.com/VlachosGroup/pMuTT/"
   license: MIT
   license_file: LICENSE.md

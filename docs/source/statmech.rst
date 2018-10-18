@@ -94,15 +94,15 @@ Ideal Gas (idealgas)
 +------------------+-----------------------------------------+
 | Set Attributes   | Default Value                           |
 +==================+=========================================+
-| trans_model      | pMuTT.models.statmech.trans.IdealTrans |
+| trans_model      | pMuTT.models.statmech.trans.IdealTrans  |
 +------------------+-----------------------------------------+
 | n_degrees        | 3                                       |
 +------------------+-----------------------------------------+
-| vib_model        | pMuTT.models.statmech.vib.HarmonicVib  |
+| vib_model        | pMuTT.models.statmech.vib.HarmonicVib   |
 +------------------+-----------------------------------------+
-| elec_model       | pMuTT.models.statmech.elec.IdealElec   |
+| elec_model       | pMuTT.models.statmech.elec.IdealElec    |
 +------------------+-----------------------------------------+
-| rot_model        | pMuTT.models.statmech.rot.RigidRotor   |
+| rot_model        | pMuTT.models.statmech.rot.RigidRotor    |
 +------------------+-----------------------------------------+
 
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -154,9 +154,9 @@ Typically used to model adsorbates.
 +-------------+-----------------------------------------+
 | Parameter   | Default Value                           |
 +=============+=========================================+
-| vib_model   | pMuTT.models.statmech.vib.HarmonicVib  |
+| vib_model   | pMuTT.models.statmech.vib.HarmonicVib   |
 +-------------+-----------------------------------------+
-| elec_model  | pMuTT.models.statmech.elec.IdealElec   |
+| elec_model  | pMuTT.models.statmech.elec.IdealElec    |
 +-------------+-----------------------------------------+
 
 +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
