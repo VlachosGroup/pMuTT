@@ -83,48 +83,73 @@ The ``presets`` dictionary is flexible where you can create a new entry if you w
 
 .. autodata:: PyMuTT.models.statmech.presets
 
-Currently supported presets are described below. The first table shows the parameters already specified, 
-and the second table shows the parameters that are still required.
+Currently supported presets are described below. The first table shows the attributes already specified, 
+and the second table shows the attributes that are still required, and the third table shows the required 
+and optional parameters to calculate a thermodynamic property (where the value in parentheses is the default
+value).
 
 Ideal Gas (idealgas)
 --------------------
 
-+-------------+-----------------------------------------+
-| Parameter   | Default Value                           |
-+=============+=========================================+
-| trans_model | PyMuTT.models.statmech.trans.IdealTrans |
-+-------------+-----------------------------------------+
-| n_degrees   | 3                                       |
-+-------------+-----------------------------------------+
-| vib_model   | PyMuTT.models.statmech.vib.HarmonicVib  |
-+-------------+-----------------------------------------+
-| elec_model  | PyMuTT.models.statmech.elec.IdealElec   |
-+-------------+-----------------------------------------+
-| rot_model   | PyMuTT.models.statmech.rot.RigidRotor   |
-+-------------+-----------------------------------------+
++------------------+-----------------------------------------+
+| Set Attributes   | Default Value                           |
++==================+=========================================+
+| trans_model      | PyMuTT.models.statmech.trans.IdealTrans |
++------------------+-----------------------------------------+
+| n_degrees        | 3                                       |
++------------------+-----------------------------------------+
+| vib_model        | PyMuTT.models.statmech.vib.HarmonicVib  |
++------------------+-----------------------------------------+
+| elec_model       | PyMuTT.models.statmech.elec.IdealElec   |
++------------------+-----------------------------------------+
+| rot_model        | PyMuTT.models.statmech.rot.RigidRotor   |
++------------------+-----------------------------------------+
 
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Required Parameters | Description                                                                                                                                            |
-+=====================+========================================================================================================================================================+
-| molecular_weight    | (float) Molecular weight in g/mol                                                                                                                      |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| vib_wavenumbers     | (list of float) Vibrational wavenumbers in 1/cm                                                                                                        |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| potentialenergy     | (float) Electronic potential energy in eV                                                                                                              |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| spin                | (float) Electron spin                                                                                                                                  |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| geometry            | (str) Geometry of molecule                                                                                                                             |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| rot_temperatures    | (list of float) Rotational temperatures in K                                                                                                           |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| symmetrynumber      | (int) Symmetry number                                                                                                                                  |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| atoms               | (ase.Atoms object) Optional. If this parameter is specified, ``molecular_weight``, ``geometry``, and ``rot_temperatures`` do not have to be specified. |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Required Attributes | Description                                                                                                                                                |
++=====================+============================================================================================================================================================+
+| molecular_weight    | (float) Molecular weight in g/mol                                                                                                                          |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| vib_wavenumbers     | (list of float) Vibrational wavenumbers in 1/cm                                                                                                            |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| potentialenergy     | (float) Electronic potential energy in eV                                                                                                                  |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| spin                | (float) Electron spin. 0 if all electrons are paired (e.g. N2), 0.5 if the specie is a radical (e.g. CH3.), 1 if the specie exists as a triplet (e.g. O2). |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| geometry            | (str) Geometry of molecule                                                                                                                                 |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| rot_temperatures    | (list of float) Rotational temperatures in K                                                                                                               |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| symmetrynumber      | (int) Symmetry number                                                                                                                                      |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| atoms               | (ase.Atoms object) Optional. If this parameter is specified, ``molecular_weight``, ``geometry``, and ``rot_temperatures`` do not have to be specified.     |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
++-------------------------+---------------------+-----------------------+
+| Thermodynamic Quantity  | Expected Parameters | Optional Parameters   |
++=========================+=====================+=======================+
+| :math:`q`               | T                   | ignore_q_elec (False) |
+|                         |                     | P (1.01325 bar)       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_V} {R}` | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_P} {R}` | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {U} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {H} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {S} {R}`   | T                   | P (1.01325 bar)       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {A} {RT}`  | T                   | P (1.01325 bar)       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {G} {RT}`  | T                   | P (1.01325 bar)       |
++-------------------------+---------------------+-----------------------+
 
 Harmonic Approximation (harmonic)
 ---------------------------------
+
+Typically used to model adsorbates.
 
 +-------------+-----------------------------------------+
 | Parameter   | Default Value                           |
@@ -144,24 +169,61 @@ Harmonic Approximation (harmonic)
 | spin                | (float) Electron spin                                                                                                                            |
 +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
++-------------------------+---------------------+-----------------------+
+| Thermodynamic Quantity  | Expected Parameters | Optional Parameters   |
++=========================+=====================+=======================+
+| :math:`q`               | T                   | ignore_q_elec (False) |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_V} {R}` | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_P} {R}` | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {U} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {H} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {S} {R}`   | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {A} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {G} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+
 Translational Models
 ====================
-.. automodule:: PyMuTT.models.statmech.trans
+
+IdealTrans
+----------
+.. autoclass:: PyMuTT.models.statmech.trans.IdealTrans
    :members:
 
 Vibrational Models
 ==================
-.. automodule:: PyMuTT.models.statmech.vib
+
+HarmonicVib
+-----------
+.. autoclass:: PyMuTT.models.statmech.vib.HarmonicVib
+   :members:
+
+QRRHOVib
+--------
+.. autoclass:: PyMuTT.models.statmech.vib.QRRHOVib
    :members:
 
 Rotational Models
 =================
-.. automodule:: PyMuTT.models.statmech.rot
+
+RigidRotor
+----------
+.. autoclass:: PyMuTT.models.statmech.rot.RigidRotor
    :members:
 
 Electronic Models
 =================
-.. automodule:: PyMuTT.models.statmech.elec
+
+IdealElec
+---------
+.. autoclass:: PyMuTT.models.statmech.elec.IdealElec
    :members:
 
 Nuclear Models
@@ -175,4 +237,5 @@ nuclear modes become important in the future.
 Creating New StatMech Models
 ============================
 If you would like to create your own class to be stored by ``StatMech``, it should have the methods: 
-``get_q``, ``get_CvoR``, ``get_CpoR``, ``get_UoRT``, ``get_HoRT``, ``get_SoR``, ``get_AoRT``, and ``get_GoRT``.
+``get_q``, ``get_CvoR``, ``get_CpoR``, ``get_UoRT``, ``get_HoRT``, ``get_SoR``, ``get_AoRT``, ``get_GoRT``,
+``from_dict``, and ``to_dict``.

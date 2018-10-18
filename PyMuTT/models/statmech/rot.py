@@ -127,7 +127,7 @@ class RigidRotor:
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
 
-        :math:`\\frac{C_P^{rot}}{R}=\\frac{C_V^{rot}}{R}` if monatomic
+        :math:`\\frac{C_P^{rot}}{R}=\\frac{C_V^{rot}}{R}`
 
         Returns
         -------
@@ -137,7 +137,7 @@ class RigidRotor:
         return self.get_CvoR()
     
     def get_UoRT(self):
-        """Calculates the imensionless internal energy
+        """Calculates the dimensionless internal energy
 
         :math:`\\frac{U^{rot}}{RT}=0` if monatomic
 
@@ -163,7 +163,7 @@ class RigidRotor:
     def get_HoRT(self):
         """Calculates the dimensionless enthalpy
 
-        :math:`\\frac{U^{rot}}{RT}=\\frac{H^{rot}}{RT}` if monatomic
+        :math:`\\frac{U^{rot}}{RT}=\\frac{H^{rot}}{RT}`
 
         Returns
         -------

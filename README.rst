@@ -65,9 +65,16 @@ file for details.
 Contributing
 ------------
 
-If you have a suggestion or encounter a bug, please post to our `Issues page`_. If you would 
-like to add a model, please check if there are guidelines for methods and/or attributes on the 
-relevant documentation page.
+If you have a suggestion, please post to our `Issues page`_ with the ``enhancement`` tag. Similarly, if you 
+encounter a bug, please post to our `Issues page`_ with the ``bug`` tag. Finally, if you would like to add 
+to the body of code, please check our documentation to make sure the new code is consistent with the relevant 
+page and submit a `pull request`_.
+
+Questions
+---------
+
+If you are having issues, please post to our `Issues page`_ with the ``help wanted`` or ``question`` tag. We 
+will do our best to assist.
 
 .. _`Clone the repository`: https://help.github.com/articles/cloning-a-repository/
 .. _`Windows instructions`: https://docs.python.org/3/using/windows.html#excursus-setting-environment-variables
@@ -81,3 +88,4 @@ relevant documentation page.
 .. _LICENSE.md: https://github.com/VlachosGroup/PyMuTT/blob/master/LICENSE.md
 .. _`examples using the code`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples
 .. _`Issues page`: https://github.com/VlachosGroup/PyMuTT/issues
+.. _`pull request`: https://github.com/VlachosGroup/PyMuTT/pulls
