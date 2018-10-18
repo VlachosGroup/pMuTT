@@ -95,15 +95,29 @@
 <li class="toctree-l3"><a class="reference internal" href="#harmonic-approximation-harmonic">Harmonic Approximation (harmonic)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.trans">Translational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.vib">Vibrational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.rot">Rotational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.models.statmech.elec">Electronic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#translational-models">Translational Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#idealtrans">IdealTrans</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vibrational-models">Vibrational Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#harmonicvib">HarmonicVib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qrrhovib">QRRHOVib</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rotational-models">Rotational Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rigidrotor">RigidRotor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#electronic-models">Electronic Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#idealelec">IdealElec</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#nuclear-models">Nuclear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-new-statmech-models">Creating New StatMech Models</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
 </ul>
@@ -535,17 +549,19 @@ the need to pass all the types of modes:</p>
 parameters that still need to be passed.</p>
 </dd></dl>
 
-<p>Currently supported presets are described below. The first table shows the parameters already specified,
-and the second table shows the parameters that are still required.</p>
+<p>Currently supported presets are described below. The first table shows the attributes already specified,
+and the second table shows the attributes that are still required, and the third table shows the required
+and optional parameters to calculate a thermodynamic property (where the value in parentheses is the default
+value).</p>
 <div class="section" id="ideal-gas-idealgas">
 <h3>Ideal Gas (idealgas)<a class="headerlink" href="#ideal-gas-idealgas" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="76%" />
+<col width="31%" />
+<col width="69%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
+<tr class="row-odd"><th class="head">Set Attributes</th>
 <th class="head">Default Value</th>
 </tr>
 </thead>
@@ -573,7 +589,7 @@ and the second table shows the parameters that are still required.</p>
 <col width="88%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Required Parameters</th>
+<tr class="row-odd"><th class="head">Required Attributes</th>
 <th class="head">Description</th>
 </tr>
 </thead>
@@ -588,7 +604,7 @@ and the second table shows the parameters that are still required.</p>
 <td>(float) Electronic potential energy in eV</td>
 </tr>
 <tr class="row-odd"><td>spin</td>
-<td>(float) Electron spin</td>
+<td>(float) Electron spin. 0 if all electrons are paired (e.g. N2), 0.5 if the specie is a radical (e.g. CH3.), 1 if the specie exists as a triplet (e.g. O2).</td>
 </tr>
 <tr class="row-even"><td>geometry</td>
 <td>(str) Geometry of molecule</td>
@@ -604,9 +620,58 @@ and the second table shows the parameters that are still required.</p>
 </tr>
 </tbody>
 </table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="30%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Thermodynamic Quantity</th>
+<th class="head">Expected Parameters</th>
+<th class="head">Optional Parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img class="math" src="_images/math/911f5b6595c18b96dce8e1310a41aee7bfe50f31.svg" alt="q"/></td>
+<td>T</td>
+<td>ignore_q_elec (False)
+P (1.01325 bar)</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/98876c36d22e0ab300a756378d9974c57a88d6f0.svg" alt="\frac {C_V} {R}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/cba08f51b5797bbca57ad6722080930735580cdd.svg" alt="\frac {C_P} {R}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/5b95c935f617d42835c09c262f76754f01fec1b2.svg" alt="\frac {U} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/a269576375b4f9440da2e0407137f595423b0980.svg" alt="\frac {H} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/9ace27203ccd1960cd7709a97f27025ddc1bb5e1.svg" alt="\frac {S} {R}"/></td>
+<td>T</td>
+<td>P (1.01325 bar)</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/d743442d1b7d1a469752b750813100667a0a8d50.svg" alt="\frac {A} {RT}"/></td>
+<td>T</td>
+<td>P (1.01325 bar)</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/9f28c9a9aeeb6e8f8a361e81cd7416f0f3bcfc91.svg" alt="\frac {G} {RT}"/></td>
+<td>T</td>
+<td>P (1.01325 bar)</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="harmonic-approximation-harmonic">
 <h3>Harmonic Approximation (harmonic)<a class="headerlink" href="#harmonic-approximation-harmonic" title="Permalink to this headline">¶</a></h3>
+<p>Typically used to model adsorbates.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="24%" />
@@ -648,10 +713,59 @@ and the second table shows the parameters that are still required.</p>
 </tr>
 </tbody>
 </table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="30%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Thermodynamic Quantity</th>
+<th class="head">Expected Parameters</th>
+<th class="head">Optional Parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img class="math" src="_images/math/911f5b6595c18b96dce8e1310a41aee7bfe50f31.svg" alt="q"/></td>
+<td>T</td>
+<td>ignore_q_elec (False)</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/98876c36d22e0ab300a756378d9974c57a88d6f0.svg" alt="\frac {C_V} {R}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/cba08f51b5797bbca57ad6722080930735580cdd.svg" alt="\frac {C_P} {R}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/5b95c935f617d42835c09c262f76754f01fec1b2.svg" alt="\frac {U} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/a269576375b4f9440da2e0407137f595423b0980.svg" alt="\frac {H} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/9ace27203ccd1960cd7709a97f27025ddc1bb5e1.svg" alt="\frac {S} {R}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/d743442d1b7d1a469752b750813100667a0a8d50.svg" alt="\frac {A} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/9f28c9a9aeeb6e8f8a361e81cd7416f0f3bcfc91.svg" alt="\frac {G} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<div class="section" id="module-PyMuTT.models.statmech.trans">
-<span id="translational-models"></span><h2>Translational Models<a class="headerlink" href="#module-PyMuTT.models.statmech.trans" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="translational-models">
+<h2>Translational Models<a class="headerlink" href="#translational-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="idealtrans">
+<h3>IdealTrans<a class="headerlink" href="#idealtrans" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="PyMuTT.models.statmech.trans.IdealTrans">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.trans.</code><code class="descname">IdealTrans</code><span class="sig-paren">(</span><em>n_degrees=3</em>, <em>molecular_weight=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.trans.IdealTrans" title="Permalink to this definition">¶</a></dt>
@@ -906,8 +1020,11 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-PyMuTT.models.statmech.vib">
-<span id="vibrational-models"></span><h2>Vibrational Models<a class="headerlink" href="#module-PyMuTT.models.statmech.vib" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="vibrational-models">
+<h2>Vibrational Models<a class="headerlink" href="#vibrational-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="harmonicvib">
+<h3>HarmonicVib<a class="headerlink" href="#harmonicvib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="PyMuTT.models.statmech.vib.HarmonicVib">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
@@ -1137,6 +1254,9 @@ John Wiley &amp; Sons, 2010.</p>
 
 </dd></dl>
 
+</div>
+<div class="section" id="qrrhovib">
+<h3>QRRHOVib<a class="headerlink" href="#qrrhovib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="PyMuTT.models.statmech.vib.QRRHOVib">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.vib.</code><code class="descname">QRRHOVib</code><span class="sig-paren">(</span><em>vib_wavenumbers</em>, <em>Bav=1e-44</em>, <em>v0=100.0</em>, <em>alpha=4</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.vib.QRRHOVib" title="Permalink to this definition">¶</a></dt>
@@ -1372,8 +1492,11 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-PyMuTT.models.statmech.rot">
-<span id="rotational-models"></span><h2>Rotational Models<a class="headerlink" href="#module-PyMuTT.models.statmech.rot" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="rotational-models">
+<h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rigidrotor">
+<h3>RigidRotor<a class="headerlink" href="#rigidrotor" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="PyMuTT.models.statmech.rot.RigidRotor">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.rot.</code><code class="descname">RigidRotor</code><span class="sig-paren">(</span><em>symmetrynumber</em>, <em>rot_temperatures=None</em>, <em>geometry=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor" title="Permalink to this definition">¶</a></dt>
@@ -1504,7 +1627,7 @@ guess geometry</p>
 <dt id="PyMuTT.models.statmech.rot.RigidRotor.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/19dfd50ae3a288229b765f2ad6fea07081ea3876.svg" alt="\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}"/> if monatomic</p>
+<p><img class="math" src="_images/math/19dfd50ae3a288229b765f2ad6fea07081ea3876.svg" alt="\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1559,7 +1682,7 @@ guess geometry</p>
 <dt id="PyMuTT.models.statmech.rot.RigidRotor.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/dd496c4a8151538d71651e6a371b2347e1da93e9.svg" alt="\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}"/> if monatomic</p>
+<p><img class="math" src="_images/math/dd496c4a8151538d71651e6a371b2347e1da93e9.svg" alt="\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1599,7 +1722,7 @@ if monatomic</p>
 <dl class="method">
 <dt id="PyMuTT.models.statmech.rot.RigidRotor.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.RigidRotor.get_UoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the imensionless internal energy</p>
+<dd><p>Calculates the dimensionless internal energy</p>
 <p><img class="math" src="_images/math/b765565725eff9ada5a4d3b2b8ff8c029190a32b.svg" alt="\frac{U^{rot}}{RT}=0"/> if monatomic</p>
 <p><img class="math" src="_images/math/74c9de51a116ef61bb7e872a818ea8d967fc98bb.svg" alt="\frac{U^{rot}}{RT}=1"/> if linear</p>
 <p><img class="math" src="_images/math/d7dbf092fc2ea4a6e5033744645a33e8812b0d85.svg" alt="\frac{U^{rot}}{RT}=1.5"/> if monatomic</p>
@@ -1655,58 +1778,12 @@ if monatomic</p>
 
 </dd></dl>
 
-<dl class="function">
-<dt id="PyMuTT.models.statmech.rot.get_geometry_from_atoms">
-<code class="descclassname">PyMuTT.models.statmech.rot.</code><code class="descname">get_geometry_from_atoms</code><span class="sig-paren">(</span><em>atoms</em>, <em>degree_tol=5.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.get_geometry_from_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Estimate the geometry using the ase.Atoms object</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>atoms</strong> (<em>ase.Atoms object</em>) – Atoms object</li>
-<li><strong>degree_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Degree tolerance in degrees</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>geometry</strong> – Geometry</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="PyMuTT.models.statmech.rot.get_rot_temperatures_from_atoms">
-<code class="descclassname">PyMuTT.models.statmech.rot.</code><code class="descname">get_rot_temperatures_from_atoms</code><span class="sig-paren">(</span><em>atoms</em>, <em>geometry=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.rot.get_rot_temperatures_from_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the rotational temperatures from ase.Atoms object</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>atoms</strong> (<em>ase.Atoms object</em>) – Atoms object</li>
-<li><strong>geometry</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Geometry of molecule. If not specified, it will be guessed from
-Atoms object.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rot_temperatures</strong> – Rotational temperatures</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of float</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
-<div class="section" id="module-PyMuTT.models.statmech.elec">
-<span id="electronic-models"></span><h2>Electronic Models<a class="headerlink" href="#module-PyMuTT.models.statmech.elec" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="electronic-models">
+<h2>Electronic Models<a class="headerlink" href="#electronic-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="idealelec">
+<h3>IdealElec<a class="headerlink" href="#idealelec" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="PyMuTT.models.statmech.elec.IdealElec">
 <em class="property">class </em><code class="descclassname">PyMuTT.models.statmech.elec.</code><code class="descname">IdealElec</code><span class="sig-paren">(</span><em>potentialenergy=0.0</em>, <em>spin=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.statmech.elec.IdealElec" title="Permalink to this definition">¶</a></dt>
@@ -1921,6 +1998,7 @@ very negative causing q_elec to go to infinity.</li>
 </dd></dl>
 
 </div>
+</div>
 <div class="section" id="nuclear-models">
 <h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Permalink to this headline">¶</a></h2>
 <p>Typically these are unimportant for chemical reactions, but the module is present in case
@@ -2098,7 +2176,8 @@ does not affect thermodynamic quantities.</p>
 <div class="section" id="creating-new-statmech-models">
 <h2>Creating New StatMech Models<a class="headerlink" href="#creating-new-statmech-models" title="Permalink to this headline">¶</a></h2>
 <p>If you would like to create your own class to be stored by <code class="docutils literal notranslate"><span class="pre">StatMech</span></code>, it should have the methods:
-<code class="docutils literal notranslate"><span class="pre">get_q</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_AoRT</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">get_q</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_AoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">from_dict</span></code>, and <code class="docutils literal notranslate"><span class="pre">to_dict</span></code>.</p>
 </div>
 </div>
 

@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Constants" href="constants.html" />
+    <link rel="next" title="Equations of State" href="eos.html" />
     <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
 
   
@@ -89,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
 </ul>
@@ -253,7 +254,7 @@ element composition does not agree.</td>
 <dl class="method">
 <dt id="PyMuTT.models.reaction.Reaction.get_A">
 <code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets preexponential factor between reactants (or products) and
+<dd><p>Gets pre-exponential factor between reactants (or products) and
 transition state in 1/s</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -263,7 +264,7 @@ transition state in 1/s</p>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature.</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless Gibbs energy</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor</li>
 </ul>
 </td>
 </tr>
@@ -809,7 +810,7 @@ PyMuTT model object should be compatible.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="constants.html" class="btn btn-neutral float-right" title="Constants" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="eos.html" class="btn btn-neutral float-right" title="Equations of State" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

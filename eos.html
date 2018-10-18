@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Equations of State &mdash; PyMuTT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Constants" href="constants.html" />
+    <link rel="prev" title="Reaction" href="reactions.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyMuTT
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Equations of State</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#idealgas">IdealGas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#van-der-waals">van der Waals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyMuTT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Equations of State</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/eos.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="equations-of-state">
+<span id="id1"></span><h1>Equations of State<a class="headerlink" href="#equations-of-state" title="Permalink to this headline">¶</a></h1>
+<p>Use equations of state to calculate P, V, T, or n.</p>
+<div class="section" id="idealgas">
+<h2>IdealGas<a class="headerlink" href="#idealgas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.models.eos.IdealGasEOS">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.eos.</code><code class="descname">IdealGasEOS</code><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ideal gas equation of state</p>
+<p><img class="math" src="_images/math/aa6b18e81622afa05956a3eb7e41de2b96f38d52.svg" alt="PV=nRT"/></p>
+<dl class="classmethod">
+<dt id="PyMuTT.models.eos.IdealGasEOS.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>IdealElec</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">IdealElec object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.IdealGasEOS.get_P">
+<code class="descname">get_P</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>V=0.02446539540458919</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS.get_P" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the pressure of an ideal gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>P</strong> – Pressure in bar</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.IdealGasEOS.get_T">
+<code class="descname">get_T</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS.get_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the volume of an ideal gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>T</strong> – Temperature in K</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.IdealGasEOS.get_V">
+<code class="descname">get_V</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS.get_V" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the volume of an ideal gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>V</strong> – Volume in m3</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.IdealGasEOS.get_n">
+<code class="descname">get_n</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS.get_n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the volume of an ideal gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>n</strong> – Number of moles in mol</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.IdealGasEOS.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.IdealGasEOS.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="van-der-waals">
+<h2>van der Waals<a class="headerlink" href="#van-der-waals" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS">
+<em class="property">class </em><code class="descclassname">PyMuTT.models.eos.</code><code class="descname">vanDerWaalsEOS</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>van der Waals equation of state</p>
+<p><img class="math" src="_images/math/a0ef15d6fb39ca085f488ba8ea8f6ff07343be01.svg" alt="\bigg(P+a\big(\frac{n}{V}\big)^2 \bigg)\bigg(\frac{V}{n}-b
+\bigg)=RT"/></p>
+<dl class="attribute">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.a">
+<code class="descname">a</code><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.a" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Measure of average attraction between particles in Pa m6</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.b">
+<code class="descname">b</code><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.b" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Volume excluded by a mole of particles in m3/mol</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.from_critical">
+<em class="property">classmethod </em><code class="descname">from_critical</code><span class="sig-paren">(</span><em>Tc</em>, <em>Pc</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.from_critical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the van der Waals object from critical temperature and
+pressure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Tc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Critical temperature in K</li>
+<li><strong>Pc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Critical pressure in bar</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>vanDerWaalsEOS</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">vanDerWaalsEOS object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>IdealElec</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">IdealElec object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_P">
+<code class="descname">get_P</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>V=0.02446539540458919</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_P" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the pressure of a van der Waals gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>P</strong> – Pressure in bar</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_Pc">
+<code class="descname">get_Pc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_Pc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the critical pressure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Pc</strong> – Critical pressure in bar</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_T">
+<code class="descname">get_T</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the volume of a van der Waals gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>T</strong> – Temperature in K</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_Tc">
+<code class="descname">get_Tc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_Tc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the critical temperature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Tc</strong> – Critcial temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_V">
+<code class="descname">get_V</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>n=1.0</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_V" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the volume of a van der Waals gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</li>
+<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
+return the larger volume (gas phase). If False, returns the
+smaller volume (liquid phase).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>V</strong> – Volume in m3</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_Vc">
+<code class="descname">get_Vc</code><span class="sig-paren">(</span><em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_Vc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the critical volume</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles in mol. Default is 1 mol</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>Vc</strong> – Critical volume in m3</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_Vm">
+<code class="descname">get_Vm</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_Vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the molar volume of a van der Waals gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
+return the larger volume (gas phase). If False, returns the
+smaller volume (liquid phase).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Vm</strong> – Volume in m3</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.get_n">
+<code class="descname">get_n</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>T=298.15</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.get_n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the volume of a van der Waals gas</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</li>
+<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
+return the smaller moles (gas phase). If False, returns the
+larger moles (liquid phase).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>n</strong> – Number of moles in mol</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PyMuTT.models.eos.vanDerWaalsEOS.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.eos.vanDerWaalsEOS.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="constants.html" class="btn btn-neutral float-right" title="Constants" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reactions.html" class="btn btn-neutral" title="Reaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gerhard Wittreich, Jonathan Lym.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
