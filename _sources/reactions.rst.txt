@@ -5,7 +5,7 @@ Reaction
 
 Chemical reactions can be modeled using the ``Reaction`` class.
 
-.. autoclass:: PyMuTT.models.reaction.Reaction
+.. autoclass:: pMuTT.models.reaction.Reaction
    :members:
 
 Example
@@ -13,14 +13,14 @@ Example
 
 In this example, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any 
-PyMuTT model object should be compatible.
+pMuTT model object should be compatible.
 
 .. code:: python
 
    import numpy as np
    from matplotlib import pyplot as plt
-   from PyMuTT.models.empirical.nasa import Nasa
-   from PyMuTT.models import reaction as rxn
+   from pMuTT.models.empirical.nasa import Nasa
+   from pMuTT.models import reaction as rxn
    
    '''
    Initialize reaction

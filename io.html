@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; PyMuTT 1.0.0 documentation</title>
+  <title>Input and Output &mdash; pMuTT 1.0.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> PyMuTT
+            <a href="index.html" class="icon icon-home"> pMuTT
           
 
           
@@ -79,11 +79,11 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.excel">Excel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.excel">Excel</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dft-input-example">DFT Input Example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nasa-polynomial-input-example">NASA Polynomial Input Example</a></li>
@@ -98,10 +98,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-PyMuTT.io_.jsonio">JSON</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.jsonio">JSON</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-new-pymutt-classes">Creating New PyMuTT Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-new-pmutt-classes">Creating New pMuTT Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#decoding">Decoding</a></li>
 </ul>
@@ -115,7 +115,7 @@
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
 </ul>
 
             
@@ -130,7 +130,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PyMuTT</a>
+          <a href="index.html">pMuTT</a>
         
       </nav>
 
@@ -182,14 +182,14 @@
             
   <div class="section" id="input-and-output">
 <span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
-<p>Input and output to different forms is an active area of development for PyMuTT</p>
-<div class="section" id="module-PyMuTT.io_.excel">
-<span id="excel"></span><h2>Excel<a class="headerlink" href="#module-PyMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id6"><span class="problematic" id="id7">PyMuTT.io_</span></a>.excel</p>
+<p>Input and output to different forms is an active area of development for pMuTT</p>
+<div class="section" id="module-pMuTT.io_.excel">
+<span id="excel"></span><h2>Excel<a class="headerlink" href="#module-pMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id6"><span class="problematic" id="id7">pMuTT.io_</span></a>.excel</p>
 <p>Read from/write to xlsx files of particular format.</p>
 <dl class="function">
-<dt id="PyMuTT.io_.excel.read_excel">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.read_excel">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an excel file and returns it as a list of dictionaries to
 initialize objects</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -241,8 +241,8 @@ int (i.e. 1.0 –&gt; 1)</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_atoms">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.set_atoms">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the atoms object ans assigns to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -268,8 +268,8 @@ See ase.read for supported formats</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_element">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.set_element">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure[‘elements’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -296,8 +296,8 @@ output_structure[‘elements’][element]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_formula">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_formula" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.set_formula">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_formula" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses stoichiometric formula unit and assigns to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -323,9 +323,9 @@ output_structure[‘elements’]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_nasa_a_high">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a_high parameter for <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code> object</p>
+<dt id="pMuTT.io_.excel.set_nasa_a_high">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a_high parameter for <code class="docutils literal notranslate"><span class="pre">pMuTT.models.empirical.nasa.Nasa</span></code> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -354,9 +354,9 @@ output_structure[‘a_high’]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_nasa_a_low">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a_low parameter for <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code> object</p>
+<dt id="pMuTT.io_.excel.set_nasa_a_low">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a_low parameter for <code class="docutils literal notranslate"><span class="pre">pMuTT.models.empirical.nasa.Nasa</span></code> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -384,8 +384,8 @@ e.g. nasa.a_low.0</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_rot_temperatures">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.set_rot_temperatures">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure[‘rot_temperatures’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -409,8 +409,8 @@ output_structure[‘elements’][element]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_statmech_model">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_statmech_model</code><span class="sig-paren">(</span><em>model</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_statmech_model" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.set_statmech_model">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_statmech_model</code><span class="sig-paren">(</span><em>model</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_statmech_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Imports module and assigns the class to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -441,8 +441,8 @@ output_structure[‘statmech_model’]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.excel.set_vib_wavenumbers">
-<code class="descclassname">PyMuTT.io_.excel.</code><code class="descname">set_vib_wavenumbers</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.excel.set_vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.excel.set_vib_wavenumbers">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_vib_wavenumbers</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure[‘vib_wavenumber’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -469,7 +469,7 @@ output_structure[‘elements’][element]</li>
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="dft-input-example">
 <span id="id3"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
-<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1">PyMuTT.examples.VASP_to_thermdat.example1</a>. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.read_excel</span></code>. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.</p>
+<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1">pMuTT.examples.VASP_to_thermdat.example1</a>. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.read_excel</span></code>. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="3%" />
@@ -541,10 +541,10 @@ output_structure[‘elements’][element]</li>
 </tr>
 </tbody>
 </table>
-<p>The <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.excel.read_excel</span></code> function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in code below:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.excel.read_excel</span></code> function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in code below:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">refs_path</span> <span class="o">=</span> <span class="s1">&#39;./references.xlsx&#39;</span>
 <span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
@@ -563,7 +563,7 @@ output_structure[‘elements’][element]</li>
   &#39;potentialenergy&#39;: -14.2209,
   &#39;spin&#39;: 0.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.47429336414391626,
                    0.460014128927786,
                    0.19619656143825398]},
@@ -575,7 +575,7 @@ output_structure[‘elements’][element]</li>
   &#39;potentialenergy&#39;: -6.7598,
   &#39;spin&#39;: 0.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.5338981843116086]},
  {&#39;atoms&#39;: Atoms(symbols=&#39;O2&#39;, pbc=True, cell=[20.0, 20.0, 20.0]),
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 2, &#39;Pt&#39;: 0},
@@ -585,13 +585,13 @@ output_structure[‘elements’][element]</li>
   &#39;potentialenergy&#39;: -9.86,
   &#39;spin&#39;: 1.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.2733851552365915]},
  {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 1, &#39;Pt&#39;: 1},
   &#39;name&#39;: &#39;MO(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -599,7 +599,7 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;MO(B)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -607,13 +607,13 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;V-MO(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 7.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: []},
  {&#39;elements&#39;: {&#39;H&#39;: 0, &#39;O&#39;: 1, &#39;Pt&#39;: 1},
   &#39;name&#39;: &#39;MO_bulk(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -621,7 +621,7 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;MO_bulk(B)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 0.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.07025434894614345,
                    0.06873635809621279,
                    0.034434367577936324]},
@@ -629,14 +629,14 @@ output_structure[‘elements’][element]</li>
   &#39;name&#39;: &#39;V-MO_bulk(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: 7.0,
-  &#39;statmech_model&#39;: &lt;class &#39;PyMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.models.statmech.harmonicthermo.HarmonicThermo&#39;&gt;,
   &#39;vib_energies&#39;: []}]
 </pre></div>
 </div>
 </div>
 <div class="section" id="nasa-polynomial-input-example">
 <h4>NASA Polynomial Input Example<a class="headerlink" href="#nasa-polynomial-input-example" title="Permalink to this headline">¶</a></h4>
-<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_excel">PyMuTT.examples.read_nasa_from_excel</a>. Due to the special rules defined for NASA parsing, a group of NASA polynomials can be directly imported using <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.excel.read_excel</span></code>.</p>
+<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_excel">pMuTT.examples.read_nasa_from_excel</a>. Due to the special rules defined for NASA parsing, a group of NASA polynomials can be directly imported using <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.excel.read_excel</span></code>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="2%" />
@@ -737,8 +737,8 @@ output_structure[‘elements’][element]</li>
 </tbody>
 </table>
 <p>Using a similar set of statements as the <a class="reference internal" href="#dft-input-example"><span class="std std-ref">DFT Input Example</span></a>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;input_data.xlsx&#39;</span><span class="p">)</span>
 <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nasa</span><span class="p">(</span><span class="o">**</span><span class="n">specie_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">specie_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">]</span>
@@ -779,11 +779,11 @@ output_structure[‘elements’][element]</li>
 <div class="section" id="thermdat">
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
 <p>This is the output format used for Chemkin. A list of NASA objects can be written to a thermdat file.</p>
-<span class="target" id="module-PyMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">PyMuTT.io_</span></a>.thermdat</p>
+<span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
-<dt id="PyMuTT.io_.thermdat.read_thermdat">
-<code class="descclassname">PyMuTT.io_.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.thermdat.read_thermdat">
+<code class="descclassname">pMuTT.io_.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directly read thermdat file that is in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -795,7 +795,7 @@ output_structure[‘elements’][element]</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Nasas</strong></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of <code class="docutils literal notranslate"><span class="pre">pMuTT.models.empirical.nasa.Nasa</span></code></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -809,8 +809,8 @@ output_structure[‘elements’][element]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.thermdat.write_thermdat">
-<code class="descclassname">PyMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em>, <em>supp_data=None</em>, <em>supp_txt=None</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.thermdat.write_thermdat">
+<code class="descclassname">pMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em>, <em>supp_data=None</em>, <em>supp_txt=None</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes thermdats in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -818,7 +818,7 @@ output_structure[‘elements’][element]</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
-<li><strong>nasa_species</strong> (list of <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.empirical.nasa.Nasa</span></code>) – </li>
+<li><strong>nasa_species</strong> (list of <code class="docutils literal notranslate"><span class="pre">pMuTT.models.empirical.nasa.Nasa</span></code>) – </li>
 <li><strong>supp_data</strong> (<em>Additional thermdat entries to include</em><em>, </em><em>optional</em>) – Must be in therndat format.</li>
 <li><strong>supp_txt</strong> (<em>Comment field to preceed nasa_species entries</em><em>, </em><em>optional</em>) – Each line needs to begin with a ! so it is recognized as a
 comment.</li>
@@ -836,12 +836,12 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 <h3>Examples<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
-<p>A thermdat file can be read directly by using <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.thermdat.read_thermdat</span></code>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_thermdat">PyMuTT.examples.read_nasa_from_thermdat</a></p>
+<p>A thermdat file can be read directly by using <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.thermdat.read_thermdat</span></code>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a></p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="c1">#Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat</span>
@@ -881,16 +881,37 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 </div>
-<div class="section" id="module-PyMuTT.io_.jsonio">
-<span id="json"></span><h2>JSON<a class="headerlink" href="#module-PyMuTT.io_.jsonio" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pMuTT.io_.jsonio">
+<span id="json"></span><h2>JSON<a class="headerlink" href="#module-pMuTT.io_.jsonio" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pMuTT.io_.jsonio.json_to_pMuTT">
+<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">json_to_pMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object hook to convert json to pMuTT objects. Any complex object should
+be in the <code class="docutils literal notranslate"><span class="pre">type_to_class_dict</span></code> in <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.type_to_class</span></code>
+function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<em>Type supported by JSON</em>) – JSON object to be converted to pMuTT object. If this is a complex
+pMuTT object, must have the ‘class’ entry in the dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj</strong> – Parsed pMuTT object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pMuTT object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="class">
-<dt id="PyMuTT.io_.jsonio.PyMuTTEncoder">
-<em class="property">class </em><code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">PyMuTTEncoder</code><span class="sig-paren">(</span><em>*</em>, <em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.PyMuTTEncoder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Encodes PyMuTT objects to JSON format. The object (and complex subobjects
+<dt id="pMuTT.io_.jsonio.pMuTTEncoder">
+<em class="property">class </em><code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">pMuTTEncoder</code><span class="sig-paren">(</span><em>*</em>, <em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes pMuTT objects to JSON format. The object (and complex subobjects
 ) must have the method: <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code>.</p>
 <dl class="method">
-<dt id="PyMuTT.io_.jsonio.PyMuTTEncoder.default">
-<code class="descname">default</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.PyMuTTEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.jsonio.pMuTTEncoder.default">
+<code class="descname">default</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.pMuTTEncoder.default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implement this method in a subclass such that it returns
 a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
 (to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
@@ -912,29 +933,8 @@ implement default like this:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.jsonio.json_to_PyMuTT">
-<code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">json_to_PyMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.json_to_PyMuTT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Object hook to convert json to PyMuTT objects. Any complex object should
-be in the <code class="docutils literal notranslate"><span class="pre">type_to_class_dict</span></code> in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio.type_to_class</span></code>
-function.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<em>Type supported by JSON</em>) – JSON object to be converted to PyMuTT object. If this is a complex
-PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj</strong> – Parsed PyMuTT object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyMuTT object</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="PyMuTT.io_.jsonio.remove_class">
-<code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">remove_class</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.remove_class" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io_.jsonio.remove_class">
+<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">remove_class</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.remove_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the ‘class’ entry from the JSON object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -951,14 +951,14 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
 </dd></dl>
 
 <dl class="function">
-<dt id="PyMuTT.io_.jsonio.type_to_class">
-<code class="descclassname">PyMuTT.io_.jsonio.</code><code class="descname">type_to_class</code><span class="sig-paren">(</span><em>class_str</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.io_.jsonio.type_to_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts between type of object and PyMuTT classes.</p>
+<dt id="pMuTT.io_.jsonio.type_to_class">
+<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">type_to_class</code><span class="sig-paren">(</span><em>class_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.type_to_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts between type of object and pMuTT classes.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>class_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output of str(PyMuTT_obj.__class__)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>class_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output of str(pMuTT_obj.__class__)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>class</strong> – Class corresponding to class_str</td>
 </tr>
@@ -970,18 +970,18 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
 
 <div class="section" id="id5">
 <h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>Saving PyMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">PyMuTTEncoder</span></code> in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio</span></code>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">PyMuTTEncoder</span>
+<p>Saving pMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">pMuTTEncoder</span></code> in <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">PyMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">PyMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Loading PyMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">json_to_PyMuTT</span></code> object hook in <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio</span></code>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">json_to_PyMuTT</span>
+<p>Loading pMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook in <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio</span></code>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">json_to_pMuTT</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">PyMuTT_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_PyMuTT</span><span class="p">)</span>
+    <span class="n">pMuTT_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -990,7 +990,7 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
 <p>JSON writes in a human-readable syntax. An example showing two <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects in JSON format is shown below.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
  <span class="p">{</span>
-  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;PyMuTT.models.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.models.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span>
   <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
   <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1025,7 +1025,7 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
  <span class="p">},</span>
  <span class="p">{</span>
-  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;PyMuTT.models.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.models.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span>
   <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
   <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1062,22 +1062,22 @@ PyMuTT object, must have the ‘class’ entry in the dictionary.</td>
 </pre></div>
 </div>
 </div>
-<div class="section" id="creating-new-pymutt-classes">
-<h3>Creating New PyMuTT Classes<a class="headerlink" href="#creating-new-pymutt-classes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="creating-new-pmutt-classes">
+<h3>Creating New pMuTT Classes<a class="headerlink" href="#creating-new-pmutt-classes" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="encoding">
 <h4>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h4>
-<p>To ensure your new class can be encoded using the <code class="docutils literal notranslate"><span class="pre">PyMuTTEncoder</span></code>, the <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method should be implemented.
+<p>To ensure your new class can be encoded using the <code class="docutils literal notranslate"><span class="pre">pMuTTEncoder</span></code>, the <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method should be implemented.
 One of the entries of the dictionary should be <code class="docutils literal notranslate"><span class="pre">'class':</span> <span class="pre">str(self.__class__)</span></code> so that it can be decoded later. The
 other elements should be the attributes that can be used to reinitialize the object and must be JSON-supported objects.
-A simple example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
+A simple example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;n_degrees&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_degrees</span><span class="p">,</span>
             <span class="s1">&#39;molecular_weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>If the attributes are not supported by JSON (such as other PyMuTT objects), use their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported
-objects. An example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.StatMech</span></code> is shown below.</p>
+<p>If the attributes are not supported by JSON (such as other pMuTT objects), use their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported
+objects. An example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.StatMech</span></code> is shown below.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;trans_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
@@ -1090,11 +1090,11 @@ objects. An example using <code class="docutils literal notranslate"><span class
 </div>
 <div class="section" id="decoding">
 <h4>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h4>
-<p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_PyMuTT</span></code> object hook, add an entry to the dictionary in
-the <code class="docutils literal notranslate"><span class="pre">PyMuTT.io_.jsonio.type_to_class</span></code> method. The key should be the type of your object in string format (i.e. the result
+<p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook, add an entry to the dictionary in
+the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.type_to_class</span></code> method. The key should be the type of your object in string format (i.e. the result
 of <code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class method to reinitialize your object.
-A simple example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">remove_class</span>
+A simple example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">remove_class</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1102,18 +1102,18 @@ A simple example using <code class="docutils literal notranslate"><span class="p
     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">json_obj</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Similarly to encoding, sometimes your object contains PyMuTT objects. You can use the <code class="docutils literal notranslate"><span class="pre">json_to_PyMuTT</span></code> object hook to remake
-these objects. An example using <code class="docutils literal notranslate"><span class="pre">PyMuTT.models.statmech.StatMech</span></code> is shown below.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_</span> <span class="k">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_PyMuTT</span>
+<p>Similarly to encoding, sometimes your object contains pMuTT objects. You can use the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook to remake
+these objects. An example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.StatMech</span></code> is shown below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="k">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_pMuTT</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
     <span class="n">json_obj</span> <span class="o">=</span> <span class="n">remove_class</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
-    <span class="n">trans_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;trans_model&#39;</span><span class="p">])</span>
-    <span class="n">vib_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;vib_model&#39;</span><span class="p">])</span>
-    <span class="n">rot_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;rot_model&#39;</span><span class="p">])</span>
-    <span class="n">elec_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;elec_model&#39;</span><span class="p">])</span>
-    <span class="n">nucl_model</span> <span class="o">=</span> <span class="n">json_PyMuTT</span><span class="o">.</span><span class="n">json_to_PyMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;nucl_model&#39;</span><span class="p">])</span>
+    <span class="n">trans_model</span> <span class="o">=</span> <span class="n">json_pMuTT</span><span class="o">.</span><span class="n">json_to_pMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;trans_model&#39;</span><span class="p">])</span>
+    <span class="n">vib_model</span> <span class="o">=</span> <span class="n">json_pMuTT</span><span class="o">.</span><span class="n">json_to_pMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;vib_model&#39;</span><span class="p">])</span>
+    <span class="n">rot_model</span> <span class="o">=</span> <span class="n">json_pMuTT</span><span class="o">.</span><span class="n">json_to_pMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;rot_model&#39;</span><span class="p">])</span>
+    <span class="n">elec_model</span> <span class="o">=</span> <span class="n">json_pMuTT</span><span class="o">.</span><span class="n">json_to_pMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;elec_model&#39;</span><span class="p">])</span>
+    <span class="n">nucl_model</span> <span class="o">=</span> <span class="n">json_pMuTT</span><span class="o">.</span><span class="n">json_to_pMuTT</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;nucl_model&#39;</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans_model</span><span class="p">,</span>
                <span class="n">vib_model</span><span class="o">=</span><span class="n">vib_model</span><span class="p">,</span>

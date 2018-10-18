@@ -1,9 +1,9 @@
-.. PyMuTT documentation master file, created by
+.. pMuTT documentation master file, created by
    sphinx-quickstart on Sat Aug 11 11:56:30 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PyMuTT's documentation!
+Welcome to pMuTT's documentation!
 ==================================
 
 .. toctree::
@@ -18,7 +18,7 @@ Welcome to PyMuTT's documentation!
    reactions
    eos
    constants
-   Return to Github <https://github.com/VlachosGroup/PyMuTT>
+   Return to Github <https://github.com/VlachosGroup/pMuTT>
 
 Indices and tables
 ==================

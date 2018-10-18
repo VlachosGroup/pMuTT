@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reaction &mdash; PyMuTT 1.0.0 documentation</title>
+  <title>Reaction &mdash; pMuTT 1.0.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> PyMuTT
+            <a href="index.html" class="icon icon-home"> pMuTT
           
 
           
@@ -79,7 +79,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
@@ -91,7 +91,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
 </ul>
 
             
@@ -106,7 +106,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PyMuTT</a>
+          <a href="index.html">pMuTT</a>
         
       </nav>
 
@@ -160,42 +160,42 @@
 <span id="reactions"></span><h1>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h1>
 <p>Chemical reactions can be modeled using the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> class.</p>
 <dl class="class">
-<dt id="PyMuTT.models.reaction.Reaction">
-<em class="property">class </em><code class="descclassname">PyMuTT.models.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction">
+<em class="property">class </em><code class="descclassname">pMuTT.models.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a chemical reaction</p>
 <dl class="attribute">
-<dt id="PyMuTT.models.reaction.Reaction.reactants">
-<code class="descname">reactants</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.reactants" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of PyMuTT model objects</em> – Reactants</p>
+<dt id="pMuTT.models.reaction.Reaction.reactants">
+<code class="descname">reactants</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.reactants" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of pMuTT model objects</em> – Reactants</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="PyMuTT.models.reaction.Reaction.reactants_stoich">
-<code class="descname">reactants_stoich</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.reactants_stoich" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.reactants_stoich">
+<code class="descname">reactants_stoich</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.reactants_stoich" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>list of float</em> – Stoichiometric quantities of reactants</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="PyMuTT.models.reaction.Reaction.products">
-<code class="descname">products</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.products" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of PyMuTT model objects</em> – Products</p>
+<dt id="pMuTT.models.reaction.Reaction.products">
+<code class="descname">products</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.products" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of pMuTT model objects</em> – Products</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="PyMuTT.models.reaction.Reaction.products_stoich">
-<code class="descname">products_stoich</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.products_stoich" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.products_stoich">
+<code class="descname">products_stoich</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.products_stoich" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>list of float</em> – Stoichiometric quantities of products</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="PyMuTT.models.reaction.Reaction.transition_state">
-<code class="descname">transition_state</code><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.transition_state" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>PyMuTT model object</em> – Transition state specie, optional</p>
+<dt id="pMuTT.models.reaction.Reaction.transition_state">
+<code class="descname">transition_state</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.transition_state" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>pMuTT model object</em> – Transition state specie, optional</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.check_element_balance">
-<code class="descname">check_element_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.check_element_balance" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.check_element_balance">
+<code class="descname">check_element_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.check_element_balance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the reactants, products and transition state elemental
 composition</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -210,15 +210,15 @@ element composition does not agree.</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.count_elements">
-<code class="descname">count_elements</code><span class="sig-paren">(</span><em>species</em>, <em>stoich</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.count_elements" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.count_elements">
+<code class="descname">count_elements</code><span class="sig-paren">(</span><em>species</em>, <em>stoich</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.count_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total the number of elements</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>species</strong> (<em>list of PyMuTT model objects</em>) – Species to count the elements</li>
+<li><strong>species</strong> (<em>list of pMuTT model objects</em>) – Species to count the elements</li>
 <li><strong>stoich</strong> (<em>list of float</em>) – Stoichiometric coefficients of each element</li>
 </ul>
 </td>
@@ -234,8 +234,8 @@ element composition does not agree.</td>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="PyMuTT.models.reaction.Reaction.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -252,8 +252,8 @@ element composition does not agree.</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_A">
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets pre-exponential factor between reactants (or products) and
 transition state in 1/s</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -279,8 +279,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_AoRT_act">
-<code class="descname">get_AoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_AoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_AoRT_act">
+<code class="descname">get_AoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_AoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Helmholtz energy between reactants (or
 products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -306,8 +306,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_CpoR_act">
-<code class="descname">get_CpoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_CpoR_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_CpoR_act">
+<code class="descname">get_CpoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_CpoR_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between reactants (or
 products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -333,8 +333,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_CvoR_act">
-<code class="descname">get_CvoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_CvoR_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_CvoR_act">
+<code class="descname">get_CvoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_CvoR_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between reactants (or
 products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -360,8 +360,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_GoRT_act">
-<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_GoRT_act">
+<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Gibbs energy between reactants (or
 products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -387,8 +387,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_HoRT_act">
-<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_HoRT_act">
+<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless enthalpy between reactants (or products)
 and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -414,8 +414,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_Keq">
-<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_Keq">
+<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets equilibrium constant between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -439,8 +439,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_SoR_act">
-<code class="descname">get_SoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_SoR_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_SoR_act">
+<code class="descname">get_SoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_SoR_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless entropy between reactants (or products)
 and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -466,8 +466,8 @@ state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_UoRT_act">
-<code class="descname">get_UoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_UoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_UoRT_act">
+<code class="descname">get_UoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_UoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless internal energy between reactants (or
 products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -493,8 +493,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_AoRT">
-<code class="descname">get_delta_AoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_AoRT">
+<code class="descname">get_delta_AoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Helmholtz energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -519,8 +519,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_CpoR">
-<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_CpoR">
+<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -545,8 +545,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_CvoR">
-<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_CvoR">
+<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -571,8 +571,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_GoRT">
-<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_GoRT">
+<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Gibbs energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -597,8 +597,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_HoRT">
-<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_HoRT">
+<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless enthalpy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -622,8 +622,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_SoR">
-<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_SoR">
+<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless entropy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -647,8 +647,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_UoRT">
-<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_UoRT">
+<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless internal energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -673,8 +673,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_delta_q">
-<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_delta_q">
+<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -691,8 +691,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.get_q_act">
-<code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.get_q_act">
+<code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants (or products) and
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -718,8 +718,8 @@ state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="PyMuTT.models.reaction.Reaction.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyMuTT.models.reaction.Reaction.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.Reaction.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -739,11 +739,11 @@ state</p>
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>In this example, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any
-PyMuTT model object should be compatible.</p>
+pMuTT model object should be compatible.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Initialize reaction</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Examples &mdash; PyMuTT 1.0.0 documentation</title>
+  <title>Examples &mdash; pMuTT 1.0.0 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Referencing" href="referencing.html" />
-    <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (PyMuTT)" href="includeme.html" /> 
+    <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" href="includeme.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> PyMuTT
+            <a href="index.html" class="icon icon-home"> pMuTT
           
 
           
@@ -79,7 +79,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (PyMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ab-initio-data-to-empirical-data"><em>Ab-initio</em> Data to Empirical Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#experimental-data-to-empirical-data">Experimental Data to Empirical Data</a></li>
@@ -93,7 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/PyMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
 </ul>
 
             
@@ -108,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PyMuTT</a>
+          <a href="index.html">pMuTT</a>
         
       </nav>
 
@@ -164,7 +164,7 @@
 <h2><em>Ab-initio</em> Data to Empirical Data<a class="headerlink" href="#ab-initio-data-to-empirical-data" title="Permalink to this headline">¶</a></h2>
 <p>If you want a NASA polynomial (or other empirical form) and have <em>ab-initio</em> data.
 In this example, the data was manually inputted into a spreadsheet.
-This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1">PyMuTT.examples.VASP_to_thermdat.example1</a></p>
+This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1">pMuTT.examples.VASP_to_thermdat.example1</a></p>
 <div class="figure">
 <img alt="Flowchart of DFT data to empirical" src="_images/flowchart_dft_to_empirical.png" />
 </div>
@@ -176,7 +176,7 @@ and vibrational wavenumbers whereas <code class="docutils literal notranslate"><
 mentioned parameters and an atoms object, geometry, symmetry number, and spin.</li>
 </ol>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">species_path</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input data imported from Excel&#39;</span><span class="p">)</span>
@@ -194,7 +194,7 @@ This makes it easy to initialize any type of object.:</p>
   &#39;potentialenergy&#39;: -14.2209,
   &#39;spin&#39;: 0.0,
   &#39;symmetrynumber&#39;: 2.0,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;thermo_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.47429336414391626,
                    0.460014128927786,
                    0.19619656143825398]}
@@ -207,8 +207,8 @@ It is typical to use gas-phase molecules since high-accuracy experimental data i
 The references are calculated for each atom type so the number of references should be greater than
 or equal to the number of elements. See the <a class="reference internal" href="referencing.html#referencing"><span class="std std-ref">Referencing</span></a> for more information.</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.models.empirical</span> <span class="k">import</span> <span class="n">BaseThermo</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">References</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical</span> <span class="k">import</span> <span class="n">BaseThermo</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">References</span>
 
 <span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference data imported from Excel&#39;</span><span class="p">)</span>
@@ -229,7 +229,7 @@ or equal to the number of elements. See the <a class="reference internal" href="
   &#39;potentialenergy&#39;: -6.7598,
   &#39;spin&#39;: 0,
   &#39;symmetrynumber&#39;: 2,
-  &#39;thermo_model&#39;: &lt;class &#39;PyMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
+  &#39;thermo_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
   &#39;vib_energies&#39;: [0.5338981843116086]},
 </pre></div>
 </div>
@@ -240,7 +240,7 @@ or equal to the number of elements. See the <a class="reference internal" href="
         <span class="n">T_ref</span><span class="p">:</span> <span class="mi">298</span>
         <span class="n">references</span><span class="p">:</span> <span class="kc">None</span>
         <span class="n">notes</span><span class="p">:</span> <span class="kc">None</span>
-        <span class="n">thermo_model</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">PyMuTT</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">statmech</span><span class="o">.</span><span class="n">idealgasthermo</span><span class="o">.</span><span class="n">IdealGasThermo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000021043554518</span><span class="o">&gt;</span>
+        <span class="n">thermo_model</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">pMuTT</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">statmech</span><span class="o">.</span><span class="n">idealgasthermo</span><span class="o">.</span><span class="n">IdealGasThermo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000021043554518</span><span class="o">&gt;</span>
         <span class="n">HoRT_dft</span><span class="p">:</span> <span class="o">-</span><span class="mf">249.34037553721055</span>
         <span class="n">HoRT_ref</span><span class="p">:</span> <span class="mf">0.0</span>
 </pre></div>
@@ -248,8 +248,8 @@ or equal to the number of elements. See the <a class="reference internal" href="
 <ol class="arabic simple" start="3">
 <li><strong>Fit to the empirical form (e.g. Nasa polynomials)</strong></li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">PyMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
 <span class="n">T_low</span> <span class="o">=</span> <span class="mf">200.</span>
 <span class="n">T_high</span> <span class="o">=</span> <span class="mf">1100.</span>
@@ -259,7 +259,7 @@ or equal to the number of elements. See the <a class="reference internal" href="
 <ol class="arabic simple" start="4">
 <li><strong>Write to the appropriate file (e.g. thermdat)</strong></li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span> <span class="n">write_date</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -323,15 +323,15 @@ or equal to the number of elements. See the <a class="reference internal" href="
 <div class="section" id="experimental-data-to-empirical-data">
 <h2>Experimental Data to Empirical Data<a class="headerlink" href="#experimental-data-to-empirical-data" title="Permalink to this headline">¶</a></h2>
 <p>If you want a NASA polynomial (or other empirical form) and have the heat capacity at various temperatures, enthalpy of formation and entropy of formation.
-This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/blob/master/examples/Expt_data_to_thermdat/Expt_data_to_thermdat.py">PyMuTT.examples.Expt_data_to_thermdat</a>.</p>
+This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/examples/Expt_data_to_thermdat/Expt_data_to_thermdat.py">pMuTT.examples.Expt_data_to_thermdat</a>.</p>
 <p>1. Import the input data. In this example, the data is <a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas">methanol gas-phase data from NIST</a>. This includes:
 - heat capacity and corresponding temperatures
 - enthalpy of formation
 - standard entropy</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">PyMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
-<span class="kn">from</span> <span class="nn">PyMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="c1"># Gas phase heat capacity data (in J/mol/K) for CH3OH from NIST</span>
 <span class="c1"># https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas</span>
@@ -380,11 +380,11 @@ This example can be found under <a class="reference external" href="https://gith
 <div class="section" id="read-nasa-from-thermdat">
 <h2>Read Nasa from Thermdat<a class="headerlink" href="#read-nasa-from-thermdat" title="Permalink to this headline">¶</a></h2>
 <p>If you want to read a thermdat file directly and convert it into a list of Nasa objects.
-This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_thermdat">PyMuTT.examples.read_nasa_from_thermdat</a>.</p>
+This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a>.</p>
 <ol class="arabic simple">
 <li>Read the data from the thermdat file. In this example, a <code class="docutils literal notranslate"><span class="pre">thermdat</span></code> file is located in the same folder as the script.</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
 
 <span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;thermdat&#39;</span><span class="p">)</span>
 </pre></div>
@@ -438,7 +438,7 @@ This example can be found under <a class="reference external" href="https://gith
         <a href="referencing.html" class="btn btn-neutral float-right" title="Referencing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (PyMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -21,4 +21,4 @@ each column represents an element), and θ is the correction for each element.
 
 The equation can be solved using a Least Squares approach. 
 The correction factor can then be added to subsequent species calculated through DFT to ensure consistent references. 
-Referencing is handled by the ``PyMuTT.models.empirical.references.References``.
+Referencing is handled by the ``pMuTT.models.empirical.references.References``.
