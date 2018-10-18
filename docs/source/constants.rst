@@ -3,5 +3,5 @@
 Constants
 *********
 
-.. automodule:: PyMuTT.constants
+.. automodule:: pMuTT.constants
    :members:

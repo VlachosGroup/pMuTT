@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'PyMuTT'
+project = 'pMuTT'
 copyright = '2018, Gerhard Wittreich, Jonathan Lym'
 author = 'Gerhard Wittreich, Jonathan Lym'
 
@@ -108,7 +108,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'PyMuTTdoc'
+htmlhelp_basename = 'pMuTTdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -135,7 +135,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'PyMuTT.tex', 'PyMuTT Documentation',
+    (master_doc, 'pMuTT.tex', 'pMuTT Documentation',
      'Gerhard Wittreich, Jonathan Lym', 'manual'),
 ]
 
@@ -145,7 +145,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pymutt', 'PyMuTT Documentation',
+    (master_doc, 'pymutt', 'pMuTT Documentation',
      [author], 1)
 ]
 
@@ -156,8 +156,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'PyMuTT', 'PyMuTT Documentation',
-     author, 'PyMuTT', 'One line description of project.',
+    (master_doc, 'pMuTT', 'pMuTT Documentation',
+     author, 'pMuTT', 'One line description of project.',
      'Miscellaneous'),
 ]
 

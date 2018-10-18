@@ -1,7 +1,7 @@
 #
 # setup.py
 #
-# Installation script to get setuptools to install PyMuTT into
+# Installation script to get setuptools to install pMuTT into
 # a Python environment.
 #
 
@@ -14,14 +14,14 @@ with open('README.rst', 'r') as fh:
 	long_description = fh.read()
 
 setuptools_info = {
-	'name': 'PyMuTT',
+	'name': 'pMuTT',
 	'version': '1.0.0',
 	'author': 'Vlachos Research Group',
 	'author_email': 'vlachos@udel.edu',
-	'description': 'Python Multiscale Thermochemistry Toolbox (PyMuTT)',
+	'description': 'Python Multiscale Thermochemistry Toolbox (pMuTT)',
 	'long_description': long_description,
 	'zip_safe': True,
-	'url': 'https://github.com/VlachosGroup/PyMuTT',
+	'url': 'https://github.com/VlachosGroup/pMuTT',
 	'packages': setuptools.find_packages(),
 	'install_requires': [
 		'ASE>=3.16.2',

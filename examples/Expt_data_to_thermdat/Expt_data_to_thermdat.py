@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from PyMuTT import constants as c
-from PyMuTT.models.empirical.nasa import Nasa
+from pMuTT import constants as c
+from pMuTT.models.empirical.nasa import Nasa
 
 # Gas phase heat capacity data (in J/mol/K) for CH3OH from NIST
 # https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&Units=SI&Mask=1#Thermo-Gas

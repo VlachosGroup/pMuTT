@@ -1,6 +1,6 @@
 [
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "O",
   "phase": "G",
   "elements": {
@@ -32,7 +32,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "O2",
   "phase": "G",
   "elements": {
@@ -64,7 +64,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "H",
   "phase": "G",
   "elements": {
@@ -96,7 +96,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "H2",
   "phase": "G",
   "elements": {
@@ -128,7 +128,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "OH",
   "phase": "G",
   "elements": {
@@ -161,7 +161,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "H2O",
   "phase": "G",
   "elements": {
@@ -194,7 +194,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HO2",
   "phase": "G",
   "elements": {
@@ -227,7 +227,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "H2O2",
   "phase": "G",
   "elements": {
@@ -260,7 +260,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C",
   "phase": "G",
   "elements": {
@@ -292,7 +292,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH",
   "phase": "G",
   "elements": {
@@ -325,7 +325,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH2",
   "phase": "G",
   "elements": {
@@ -358,7 +358,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH2(S)",
   "phase": "G",
   "elements": {
@@ -391,7 +391,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH3",
   "phase": "G",
   "elements": {
@@ -424,7 +424,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH4",
   "phase": "G",
   "elements": {
@@ -457,7 +457,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CO",
   "phase": "G",
   "elements": {
@@ -490,7 +490,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CO2",
   "phase": "G",
   "elements": {
@@ -523,7 +523,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HCO",
   "phase": "G",
   "elements": {
@@ -557,7 +557,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH2O",
   "phase": "G",
   "elements": {
@@ -591,7 +591,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH2OH",
   "phase": "G",
   "elements": {
@@ -625,7 +625,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH3O",
   "phase": "G",
   "elements": {
@@ -659,7 +659,7 @@
   "T_high": 3000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH3OH",
   "phase": "G",
   "elements": {
@@ -693,7 +693,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C2H",
   "phase": "G",
   "elements": {
@@ -726,7 +726,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C2H2",
   "phase": "G",
   "elements": {
@@ -759,7 +759,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C2H3",
   "phase": "G",
   "elements": {
@@ -792,7 +792,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C2H4",
   "phase": "G",
   "elements": {
@@ -825,7 +825,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C2H5",
   "phase": "G",
   "elements": {
@@ -858,7 +858,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C2H6",
   "phase": "G",
   "elements": {
@@ -891,7 +891,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH2CO",
   "phase": "G",
   "elements": {
@@ -925,7 +925,7 @@
   "T_high": 3500.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HCCO",
   "phase": "G",
   "elements": {
@@ -959,7 +959,7 @@
   "T_high": 4000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HCCOH",
   "phase": "G",
   "elements": {
@@ -993,7 +993,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "H2CN",
   "phase": "G",
   "elements": {
@@ -1027,7 +1027,7 @@
   "T_high": 4000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HCN",
   "phase": "G",
   "elements": {
@@ -1061,7 +1061,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HNO",
   "phase": "G",
   "elements": {
@@ -1095,7 +1095,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "N",
   "phase": "G",
   "elements": {
@@ -1127,7 +1127,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NNH",
   "phase": "G",
   "elements": {
@@ -1160,7 +1160,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "N2O",
   "phase": "G",
   "elements": {
@@ -1193,7 +1193,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NH",
   "phase": "G",
   "elements": {
@@ -1226,7 +1226,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NH2",
   "phase": "G",
   "elements": {
@@ -1259,7 +1259,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NH3",
   "phase": "G",
   "elements": {
@@ -1292,7 +1292,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NO",
   "phase": "G",
   "elements": {
@@ -1325,7 +1325,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NO2",
   "phase": "G",
   "elements": {
@@ -1358,7 +1358,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HCNO",
   "phase": "G",
   "elements": {
@@ -1393,7 +1393,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HOCN",
   "phase": "G",
   "elements": {
@@ -1428,7 +1428,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HNCO",
   "phase": "G",
   "elements": {
@@ -1463,7 +1463,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "NCO",
   "phase": "G",
   "elements": {
@@ -1497,7 +1497,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CN",
   "phase": "G",
   "elements": {
@@ -1530,7 +1530,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "HCNN",
   "phase": "G",
   "elements": {
@@ -1564,7 +1564,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "N2",
   "phase": "G",
   "elements": {
@@ -1596,7 +1596,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "AR",
   "phase": "G",
   "elements": {
@@ -1628,7 +1628,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C3H8",
   "phase": "G",
   "elements": {
@@ -1661,7 +1661,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "C3H7",
   "phase": "G",
   "elements": {
@@ -1694,7 +1694,7 @@
   "T_high": 5000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH3CHO",
   "phase": "G",
   "elements": {
@@ -1728,7 +1728,7 @@
   "T_high": 6000.0
  },
  {
-  "class": "<class 'PyMuTT.models.empirical.nasa.Nasa'>",
+  "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
   "name": "CH2CHO",
   "phase": "G",
   "elements": {

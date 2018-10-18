@@ -1,8 +1,8 @@
-Python Multiscale Thermochemistry Toolbox (PyMuTT)
+Python Multiscale Thermochemistry Toolbox (pMuTT)
 ==================================================
 
-The **Py**\ thon **Mu**\ ltiscale **T**\ hermochemistry **T**\ oolbox
-(PyMuTT) is a Python library for Thermochemistry developed by the
+The **P**\ ython **Mu**\ ltiscale **T**\ hermochemistry **T**\ oolbox
+(pMuTT) is a Python library for Thermochemistry developed by the
 Vlachos Research Group at the University of Delaware. This code was
 originally developed to convert *ab-initio* data from DFT to observable
 thermodynamic properties such as heat capacity, enthalpy, entropy, and
@@ -78,14 +78,14 @@ will do our best to assist.
 
 .. _`Clone the repository`: https://help.github.com/articles/cloning-a-repository/
 .. _`Windows instructions`: https://docs.python.org/3/using/windows.html#excursus-setting-environment-variables
-.. _`documentation page`: https://vlachosgroup.github.io/PyMuTT/
+.. _`documentation page`: https://vlachosgroup.github.io/pMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
 .. _Pandas: https://pandas.pydata.org/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
-.. _tests directory: https://github.com/VlachosGroup/PyMuTT/tree/master/tests
-.. _LICENSE.md: https://github.com/VlachosGroup/PyMuTT/blob/master/LICENSE.md
-.. _`examples using the code`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples
-.. _`Issues page`: https://github.com/VlachosGroup/PyMuTT/issues
-.. _`pull request`: https://github.com/VlachosGroup/PyMuTT/pulls
+.. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/tests
+.. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
+.. _`examples using the code`: https://github.com/VlachosGroup/pMuTT/tree/master/examples
+.. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues
+.. _`pull request`: https://github.com/VlachosGroup/pMuTT/pulls

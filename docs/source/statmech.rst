@@ -9,7 +9,7 @@ The ``StatMech`` class stores the classes associated with each mode. Each mode h
 calculate thermodynamic quantities, such as partition functions, heat capacities, internal energy, enthalpy, entropy,
 Helmholtz energy and Gibbs energy.
 
- .. autoclass:: PyMuTT.models.statmech.StatMech
+ .. autoclass:: pMuTT.models.statmech.StatMech
    :members:
 
 The ``StatMech`` object can be initialized in two ways:
@@ -26,7 +26,7 @@ Example of initialization using objects
 
    import numpy as np
    from ase.build import molecule
-   from PyMuTT.models.statmech import StatMech, trans, vib, rot, elec
+   from pMuTT.models.statmech import StatMech, trans, vib, rot, elec
 
    atoms = molecule('H2O')
    H2O_trans = trans.IdealTrans(n_degrees=3, atoms=atoms)
@@ -45,7 +45,7 @@ Example of initialization using classes and parameters
 
    import numpy as np
    from ase.build import molecule
-   from PyMuTT.models.statmech import StatMech, trans, vib, rot, elec
+   from pMuTT.models.statmech import StatMech, trans, vib, rot, elec
    
    
    H2O_statmech = StatMech(trans_model=trans.IdealTrans,
@@ -62,13 +62,13 @@ Example of initialization using classes and parameters
 Presets
 =======
 If you are using a common model (e.g. the ideal gas model), then you can get the default parameters from 
-the dictionary, ``PyMuTT.models.statmech.presets``. The same H2O StatMech object can be specified without
+the dictionary, ``pMuTT.models.statmech.presets``. The same H2O StatMech object can be specified without
 the need to pass all the types of modes:
 
 .. code:: python
 
    from ase.build import molecule
-   from PyMuTT.models.statmech import StatMech, presets
+   from pMuTT.models.statmech import StatMech, presets
    
    idealgas_defaults = presets['idealgas']
    H2O_new = StatMech(vib_wavenumbers=[3825.434, 3710.2642, 1582.432],
@@ -81,7 +81,7 @@ the need to pass all the types of modes:
 
 The ``presets`` dictionary is flexible where you can create a new entry if you will use a model often.
 
-.. autodata:: PyMuTT.models.statmech.presets
+.. autodata:: pMuTT.models.statmech.presets
 
 Currently supported presets are described below. The first table shows the attributes already specified, 
 and the second table shows the attributes that are still required, and the third table shows the required 
@@ -94,15 +94,15 @@ Ideal Gas (idealgas)
 +------------------+-----------------------------------------+
 | Set Attributes   | Default Value                           |
 +==================+=========================================+
-| trans_model      | PyMuTT.models.statmech.trans.IdealTrans |
+| trans_model      | pMuTT.models.statmech.trans.IdealTrans |
 +------------------+-----------------------------------------+
 | n_degrees        | 3                                       |
 +------------------+-----------------------------------------+
-| vib_model        | PyMuTT.models.statmech.vib.HarmonicVib  |
+| vib_model        | pMuTT.models.statmech.vib.HarmonicVib  |
 +------------------+-----------------------------------------+
-| elec_model       | PyMuTT.models.statmech.elec.IdealElec   |
+| elec_model       | pMuTT.models.statmech.elec.IdealElec   |
 +------------------+-----------------------------------------+
-| rot_model        | PyMuTT.models.statmech.rot.RigidRotor   |
+| rot_model        | pMuTT.models.statmech.rot.RigidRotor   |
 +------------------+-----------------------------------------+
 
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -154,9 +154,9 @@ Typically used to model adsorbates.
 +-------------+-----------------------------------------+
 | Parameter   | Default Value                           |
 +=============+=========================================+
-| vib_model   | PyMuTT.models.statmech.vib.HarmonicVib  |
+| vib_model   | pMuTT.models.statmech.vib.HarmonicVib  |
 +-------------+-----------------------------------------+
-| elec_model  | PyMuTT.models.statmech.elec.IdealElec   |
+| elec_model  | pMuTT.models.statmech.elec.IdealElec   |
 +-------------+-----------------------------------------+
 
 +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -194,7 +194,7 @@ Translational Models
 
 IdealTrans
 ----------
-.. autoclass:: PyMuTT.models.statmech.trans.IdealTrans
+.. autoclass:: pMuTT.models.statmech.trans.IdealTrans
    :members:
 
 Vibrational Models
@@ -202,12 +202,12 @@ Vibrational Models
 
 HarmonicVib
 -----------
-.. autoclass:: PyMuTT.models.statmech.vib.HarmonicVib
+.. autoclass:: pMuTT.models.statmech.vib.HarmonicVib
    :members:
 
 QRRHOVib
 --------
-.. autoclass:: PyMuTT.models.statmech.vib.QRRHOVib
+.. autoclass:: pMuTT.models.statmech.vib.QRRHOVib
    :members:
 
 Rotational Models
@@ -215,7 +215,7 @@ Rotational Models
 
 RigidRotor
 ----------
-.. autoclass:: PyMuTT.models.statmech.rot.RigidRotor
+.. autoclass:: pMuTT.models.statmech.rot.RigidRotor
    :members:
 
 Electronic Models
@@ -223,7 +223,7 @@ Electronic Models
 
 IdealElec
 ---------
-.. autoclass:: PyMuTT.models.statmech.elec.IdealElec
+.. autoclass:: pMuTT.models.statmech.elec.IdealElec
    :members:
 
 Nuclear Models
@@ -231,7 +231,7 @@ Nuclear Models
 Typically these are unimportant for chemical reactions, but the module is present in case
 nuclear modes become important in the future.
 
-.. automodule:: PyMuTT.models.statmech.nucl
+.. automodule:: pMuTT.models.statmech.nucl
    :members:
 
 Creating New StatMech Models

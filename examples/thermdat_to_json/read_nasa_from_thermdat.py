@@ -3,9 +3,9 @@ import json
 import numpy as np
 from pprint import pprint
 from matplotlib import pyplot as plt
-from PyMuTT.io_.thermdat import read_thermdat
-from PyMuTT.io_.jsonio import PyMuTTEncoder, json_to_PyMuTT
-from PyMuTT.models.empirical.nasa import Nasa
+from pMuTT.io_.thermdat import read_thermdat
+from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
+from pMuTT.models.empirical.nasa import Nasa
 
 base_path = os.path.dirname(__file__)
 thermdat_path = os.path.join(base_path, 'thermdat')
@@ -21,10 +21,10 @@ species = read_thermdat(thermdat_path)
 Saving and Loading from JSON
 '''
 with open(json_path, 'w') as f_ptr:
-    json.dump(species, f_ptr, cls=PyMuTTEncoder, indent=True)
+    json.dump(species, f_ptr, cls=pMuTTEncoder, indent=True)
 
 with open(json_path, 'r') as f_ptr:
-    species_json = json.load(f_ptr, object_hook=json_to_PyMuTT)
+    species_json = json.load(f_ptr, object_hook=json_to_pMuTT)
 
 '''
 Plotting to ensure the object was written and read correctly

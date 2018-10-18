@@ -7,7 +7,7 @@ Examples
 ----------------------------------
 If you want a NASA polynomial (or other empirical form) and have *ab-initio* data. 
 In this example, the data was manually inputted into a spreadsheet.
-This example can be found under `PyMuTT.examples.VASP_to_thermdat.example1`_
+This example can be found under `pMuTT.examples.VASP_to_thermdat.example1`_
 
 
 .. figure:: flowchart_dft_to_empirical.png
@@ -22,7 +22,7 @@ This example can be found under `PyMuTT.examples.VASP_to_thermdat.example1`_
 .. code:: python
 
    from pprint import pprint
-   from PyMuTT.io_.excel import read_excel
+   from pMuTT.io_.excel import read_excel
 
    species_data = read_excel(io=species_path)
    print('Input data imported from Excel')
@@ -40,7 +40,7 @@ This makes it easy to initialize any type of object.::
      'potentialenergy': -14.2209,
      'spin': 0.0,
      'symmetrynumber': 2.0,
-     'thermo_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+     'thermo_model': <class 'pMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
      'vib_energies': [0.47429336414391626,
                       0.460014128927786,
                       0.19619656143825398]}
@@ -53,8 +53,8 @@ This makes it easy to initialize any type of object.::
 
 .. code:: python
 
-   from PyMuTT.models.empirical import BaseThermo
-   from PyMuTT.models.empirical.references import References
+   from pMuTT.models.empirical import BaseThermo
+   from pMuTT.models.empirical.references import References
    
    refs_input = read_excel(io=refs_path)
    print('Reference data imported from Excel')
@@ -75,7 +75,7 @@ Similar to above, the result of ``pprint(refs_input)`` for one reference is show
      'potentialenergy': -6.7598,
      'spin': 0,
      'symmetrynumber': 2,
-     'thermo_model': <class 'PyMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+     'thermo_model': <class 'pMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
      'vib_energies': [0.5338981843116086]},
 
 The result for ``pprint(refs)`` for the same reference is shown below.::
@@ -86,7 +86,7 @@ The result for ``pprint(refs)`` for the same reference is shown below.::
            T_ref: 298
            references: None
            notes: None
-           thermo_model: <PyMuTT.models.statmech.idealgasthermo.IdealGasThermo object at 0x0000021043554518>
+           thermo_model: <pMuTT.models.statmech.idealgasthermo.IdealGasThermo object at 0x0000021043554518>
            HoRT_dft: -249.34037553721055
            HoRT_ref: 0.0
 
@@ -94,8 +94,8 @@ The result for ``pprint(refs)`` for the same reference is shown below.::
 
 .. code:: python
 
-   from PyMuTT.models.empirical.nasa import Nasa
-   from PyMuTT import constants as c
+   from pMuTT.models.empirical.nasa import Nasa
+   from pMuTT import constants as c
 
    T_low = 200.
    T_high = 1100.
@@ -105,7 +105,7 @@ The result for ``pprint(refs)`` for the same reference is shown below.::
 
 .. code:: python
 
-   from PyMuTT.io_.thermdat import write_thermdat
+   from pMuTT.io_.thermdat import write_thermdat
    
    write_thermdat(nasa_species=species, filename='thermdat', write_date=True)
 
@@ -166,7 +166,7 @@ The thermdat file produced is shown below.::
 Experimental Data to Empirical Data
 -----------------------------------
 If you want a NASA polynomial (or other empirical form) and have the heat capacity at various temperatures, enthalpy of formation and entropy of formation. 
-This example can be found under `PyMuTT.examples.Expt_data_to_thermdat`_.
+This example can be found under `pMuTT.examples.Expt_data_to_thermdat`_.
 
 1. Import the input data. In this example, the data is `methanol gas-phase data from NIST`_. This includes:
 - heat capacity and corresponding temperatures
@@ -177,8 +177,8 @@ This example can be found under `PyMuTT.examples.Expt_data_to_thermdat`_.
 
    import numpy as np
    import matplotlib.pyplot as plt
-   from PyMuTT import constants as c
-   from PyMuTT.models.empirical.nasa import Nasa
+   from pMuTT import constants as c
+   from pMuTT.models.empirical.nasa import Nasa
 
    # Gas phase heat capacity data (in J/mol/K) for CH3OH from NIST
    # https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&Units=SI&Mask=1#Thermo-Gas
@@ -225,13 +225,13 @@ Read Nasa from Thermdat
 -----------------------
 
 If you want to read a thermdat file directly and convert it into a list of Nasa objects.
-This example can be found under `PyMuTT.examples.read_nasa_from_thermdat`_.
+This example can be found under `pMuTT.examples.read_nasa_from_thermdat`_.
 
 1. Read the data from the thermdat file. In this example, a ``thermdat`` file is located in the same folder as the script.
 
 .. code:: python
 
-   from PyMuTT.io_.thermdat import read_thermdat
+   from pMuTT.io_.thermdat import read_thermdat
    
    species = read_thermdat('thermdat')
 
@@ -273,7 +273,7 @@ The output for O2 is shown below:
 
 .. figure:: read_nasa_from_thermdat_example_O2.png
 
-.. _`PyMuTT.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/VASP_to_thermdat/example1
-.. _`PyMuTT.examples.Expt_data_to_thermdat`: https://github.com/VlachosGroup/PyMuTT/blob/master/examples/Expt_data_to_thermdat/Expt_data_to_thermdat.py
+.. _`pMuTT.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1
+.. _`pMuTT.examples.Expt_data_to_thermdat`: https://github.com/VlachosGroup/pMuTT/blob/master/examples/Expt_data_to_thermdat/Expt_data_to_thermdat.py
 .. _`methanol gas-phase data from NIST`: https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&Units=SI&Mask=1#Thermo-Gas
-.. _`PyMuTT.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/PyMuTT/tree/master/examples/read_nasa_from_thermdat
+.. _`pMuTT.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat

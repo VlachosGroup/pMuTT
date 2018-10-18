@@ -2,12 +2,12 @@ import matplotlib.pyplot as plt
 import os
 from pprint import pprint
 
-from PyMuTT import constants as c
-from PyMuTT.io_.excel import read_excel
-from PyMuTT.io_.thermdat import write_thermdat
-from PyMuTT.models.empirical import BaseThermo
-from PyMuTT.models.empirical.nasa import Nasa
-from PyMuTT.models.empirical.references import Reference, References
+from pMuTT import constants as c
+from pMuTT.io_.excel import read_excel
+from pMuTT.io_.thermdat import write_thermdat
+from pMuTT.models.empirical import BaseThermo
+from pMuTT.models.empirical.nasa import Nasa
+from pMuTT.models.empirical.references import Reference, References
 
 '''
 User inputs

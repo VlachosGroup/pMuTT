@@ -1,8 +1,8 @@
 import os
 from pprint import pprint
 from matplotlib import pyplot as plt
-from PyMuTT.io_.thermdat import read_thermdat
-from PyMuTT.models.empirical.nasa import Nasa
+from pMuTT.io_.thermdat import read_thermdat
+from pMuTT.models.empirical.nasa import Nasa
 
 base_path = os.path.dirname(__file__)
 #Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat
