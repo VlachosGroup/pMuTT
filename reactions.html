@@ -86,7 +86,11 @@
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reaction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialization-using-pmutt-model-objects">Initialization using pMuTT Model Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization-using-reaction-string">Initialization using reaction string</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
@@ -161,7 +165,7 @@
 <p>Chemical reactions can be modeled using the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> class.</p>
 <dl class="class">
 <dt id="pMuTT.models.reaction.Reaction">
-<em class="property">class </em><code class="descclassname">pMuTT.models.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.models.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em>, <em>transition_state_stoich=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a chemical reaction</p>
 <dl class="attribute">
 <dt id="pMuTT.models.reaction.Reaction.reactants">
@@ -190,7 +194,14 @@
 <dl class="attribute">
 <dt id="pMuTT.models.reaction.Reaction.transition_state">
 <code class="descname">transition_state</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.transition_state" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>pMuTT model object</em> – Transition state specie, optional</p>
+<dd><p><em>pMuTT model object, optional</em> – Transition state specie. Default is None</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.models.reaction.Reaction.transition_state_stoich">
+<code class="descname">transition_state_stoich</code><a class="headerlink" href="#pMuTT.models.reaction.Reaction.transition_state_stoich" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of float, optional</em> – Stoichiometric quantities of transition state species.
+Default is None</p>
 </dd></dl>
 
 <dl class="method">
@@ -209,30 +220,6 @@ element composition does not agree.</td>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="pMuTT.models.reaction.Reaction.count_elements">
-<code class="descname">count_elements</code><span class="sig-paren">(</span><em>species</em>, <em>stoich</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.count_elements" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total the number of elements</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>species</strong> (<em>list of pMuTT model objects</em>) – Species to count the elements</li>
-<li><strong>stoich</strong> (<em>list of float</em>) – Stoichiometric coefficients of each element</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>element_count</strong> – Sum of elements</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">collections.Counter object</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="classmethod">
 <dt id="pMuTT.models.reaction.Reaction.from_dict">
 <em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.from_dict" title="Permalink to this definition">¶</a></dt>
@@ -246,6 +233,35 @@ element composition does not agree.</td>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>Reaction</strong></td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Reaction object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pMuTT.models.reaction.Reaction.from_string">
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a reaction object using the reaction string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reaction_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Reaction string.</li>
+<li><strong>species</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dictionary using the names as keys. If you have a list of
+species, use pMuTT.models.pMuTT_list_to_dict to make a dict.</li>
+<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate species. Leading and trailing spaces
+will be trimmed. Default is ‘+’</li>
+<li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate sides of the reaction. Leading and
+trailing spaces will be trimmed. Default is ‘=’</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Reaction</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Reaction object</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -737,9 +753,13 @@ state</p>
 
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>In this example, we calculate the thermodynamic properties of water formation
+<p>In this section, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any
-pMuTT model object should be compatible.</p>
+pMuTT model object should be compatible. Reaction objects can be initialized
+using the pMuTT model objects directly or using a reaction string.</p>
+<div class="section" id="initialization-using-pmutt-model-objects">
+<h3>Initialization using pMuTT Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h3>
+<p>In this example, the Nasa objects are created directly in the script.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
@@ -765,16 +785,44 @@ pMuTT model object should be compatible.</p>
                 <span class="n">reactants_stoich</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
                 <span class="n">products</span><span class="o">=</span><span class="p">[</span><span class="n">H2O_nasa</span><span class="p">],</span>
                 <span class="n">products_stoich</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialization-using-reaction-string">
+<h3>Initialization using reaction string<a class="headerlink" href="#initialization-using-reaction-string" title="Permalink to this headline">¶</a></h3>
+<p>In this example, the Nasa objects are read from a thermdat file and
+are assigned to the Reaction object based on the reaction string. This
+way is more convenient if you’re dealing with large reaction networks.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Check that the equation is balanced</span>
+<span class="sd">Read the thermdat</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">nasa_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s1">&#39;thermdat&#39;</span><span class="p">))</span>
+<span class="c1"># Convert list to dictionary so Reaction.from_string can</span>
+<span class="c1"># assign species quickly</span>
+<span class="n">nasa_dict</span> <span class="o">=</span> <span class="n">pMuTT_list_to_dict</span><span class="p">(</span><span class="n">nasa_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Get thermodynamics from Reaction</span>
+<span class="sd">Create the reaction object</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
+<span class="n">reaction_str</span> <span class="o">=</span> <span class="s1">&#39;H2+0.5O2=H2O&#39;</span>
+<span class="n">rxn_nasa</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="n">reaction_str</span><span class="p">,</span>
+                                    <span class="n">species</span><span class="o">=</span><span class="n">nasa_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After the Reaction object is initialized, you can ensure the equation is balanced.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or calculate thermodynamic properties.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
 <span class="n">HoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_HoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">SoR_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_SoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">GoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_GoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
@@ -798,6 +846,7 @@ pMuTT model object should be compatible.</p>
 </div>
 <div class="figure">
 <img alt="Reactions example" src="_images/reactions_example.png" />
+</div>
 </div>
 </div>
 </div>

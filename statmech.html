@@ -194,36 +194,54 @@ Helmholtz energy and Gibbs energy.</p>
 <blockquote>
 <div><dl class="class">
 <dt id="pMuTT.models.statmech.StatMech">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>trans_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>name=None</em>, <em>trans_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for statistical mechanic models.</p>
+<dl class="attribute">
+<dt id="pMuTT.models.statmech.StatMech.name">
+<code class="descname">name</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str, optional</em> – Name of the specie. Default is None</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.trans_model">
 <code class="descname">trans_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.trans_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.trans</cite> object – Deals with translational modes</p>
+<dd><p><cite>pMuTT.models.statmech.trans</cite> object, optional – Deals with translational modes. Default is
+<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.vib_model">
 <code class="descname">vib_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.vib_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.vib</cite> object – Deals with vibrational modes</p>
+<dd><p><cite>pMuTT.models.statmech.vib</cite> object, optional – Deals with vibrational modes. Default is
+<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.rot_model">
 <code class="descname">rot_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.rot_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.rot</cite> object – Deals with rotational modes</p>
+<dd><p><cite>pMuTT.models.statmech.rot</cite> object, optional – Deals with rotational modes. Default is
+<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.elec_model">
 <code class="descname">elec_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.elec_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.elec</cite> object – Deals with electronic modes</p>
+<dd><p><cite>pMuTT.models.statmech.elec</cite> object, optional – Deals with electronic modes. Default is
+<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.nucl_model">
 <code class="descname">nucl_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.nucl_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.nucl</cite> object – Deals with nuclear modes</p>
+<dd><p><cite>pMuTT.models.statmech.nucl</cite> object – Deals with nuclear modes. Default is
+<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.models.statmech.StatMech.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str, optional</em> – Any additional details you would like to include such as
+computational set up. Default is None</p>
 </dd></dl>
 
 <dl class="classmethod">

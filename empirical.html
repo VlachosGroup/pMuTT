@@ -167,20 +167,20 @@
 <p>This is the parent class for the empirical models.</p>
 <dl class="class">
 <dt id="pMuTT.models.empirical.BaseThermo">
-<em class="property">class </em><code class="descclassname">pMuTT.models.empirical.</code><code class="descname">BaseThermo</code><span class="sig-paren">(</span><em>name</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>references=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.models.empirical.</code><code class="descname">BaseThermo</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>references=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo" title="Permalink to this definition">¶</a></dt>
 <dd><p>The empirical parent class.
 Holds properties of a specie, the statistical-mechanical thermodynamic
 model.</p>
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.BaseThermo.name">
 <code class="descname">name</code><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo.name" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> – Name of the specie.</p>
+<dd><p><em>str, optional</em> – Name of the specie. Default is None</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.BaseThermo.phase">
 <code class="descname">phase</code><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo.phase" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> – Phase of the specie.
+<dd><p><em>str, optional</em> – Phase of the specie. Default is None
 G - gas.
 S - surface.</p>
 </dd></dl>
@@ -188,7 +188,7 @@ S - surface.</p>
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.BaseThermo.elements">
 <code class="descname">elements</code><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo.elements" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dict</em> – Composition of the species.
+<dd><p><em>dict, optional</em> – Composition of the species. Default is None.
 Keys of dictionary are elements, values are stoichiometric values
 in a formula unit.
 e.g. CH3OH can be represented as:
@@ -198,7 +198,7 @@ e.g. CH3OH can be represented as:
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.BaseThermo.statmech_model">
 <code class="descname">statmech_model</code><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo.statmech_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech</cite> object – Statistical thermodynamic model.
+<dd><p><cite>pMuTT.models.statmech</cite> object, optional – Statistical thermodynamic model. Default is None.
 Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT</cite>,
 <cite>get_SoR</cite>, <cite>get_GoRT</cite>.</p>
 </dd></dl>
@@ -206,15 +206,15 @@ Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT<
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.BaseThermo.references">
 <code class="descname">references</code><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo.references" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.empirical.References.references</cite> object – Contains references to calculate <cite>HoRT_ref</cite>. If not specified then
-HoRT_dft will be used without adjustment.</p>
+<dd><p><cite>pMuTT.models.empirical.References.references</cite> object, optional – Contains references to calculate <cite>HoRT_ref</cite>. If not specified then
+HoRT_dft will be used without adjustment. Default is None</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.BaseThermo.notes">
 <code class="descname">notes</code><a class="headerlink" href="#pMuTT.models.empirical.BaseThermo.notes" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> – Any additional details you would like to include such as
-computational set up.</p>
+<dd><p><em>str, optional</em> – Any additional details you would like to include such as
+computational set up. Default is None</p>
 </dd></dl>
 
 <dl class="method">
