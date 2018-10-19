@@ -19,6 +19,8 @@ class TestStatMech(unittest.TestCase):
         # Testing Ideal Gas Model
         CO2 = molecule('CO2')
         CO2_pMuTT_parameters = {
+            'name': 'CO2',
+
             'trans_model': trans.IdealTrans,
             'n_degrees': 3,
             'molecular_weight': get_molecular_weight('CO2'),

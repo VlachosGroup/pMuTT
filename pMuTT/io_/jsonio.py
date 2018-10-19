@@ -50,8 +50,9 @@ def type_to_class(class_str):
     """
 
     # Although it is usually inadvisible to import functions within a function,
-    # this was done purposefully. Using only a dictionary resulted in circular
+    # this was done purposefully. Importing outside the function caused circular
     # import errors. This way the imports are limited to the function.
+    from pMuTT.models.eos import IdealGasEOS, vanDerWaalsEOS
     from pMuTT.models.reaction import Reaction
     from pMuTT.models.empirical import BaseThermo
     from pMuTT.models.empirical.nasa import Nasa
@@ -65,6 +66,8 @@ def type_to_class(class_str):
     from pMuTT.models.statmech.nucl import IdealNucl
 
     type_to_class_dict = {
+        "<class 'pMuTT.models.eos.IdealGasEOS'>": IdealGasEOS,
+        "<class 'pMuTT.models.eos.vanDerWaalsEOS'>": vanDerWaalsEOS,
         "<class 'pMuTT.models.reaction.Reaction'>": Reaction,
         "<class 'pMuTT.models.empirical.BaseThermo'>": BaseThermo,
         "<class 'pMuTT.models.empirical.nasa.Nasa'>": Nasa,

@@ -68,21 +68,33 @@ class StatMech:
 
     Attributes
     ----------
-        trans_model : `pMuTT.models.statmech.trans` object
-            Deals with translational modes
-        vib_model : `pMuTT.models.statmech.vib` object
-            Deals with vibrational modes
-        rot_model : `pMuTT.models.statmech.rot` object
-            Deals with rotational modes
-        elec_model : `pMuTT.models.statmech.elec` object
-            Deals with electronic modes
+        name : str, optional
+            Name of the specie. Default is None
+        trans_model : `pMuTT.models.statmech.trans` object, optional
+            Deals with translational modes. Default is 
+            ``pMuTT.models.statmech.EmptyMode``
+        vib_model : `pMuTT.models.statmech.vib` object, optional
+            Deals with vibrational modes. Default is 
+            ``pMuTT.models.statmech.EmptyMode``
+        rot_model : `pMuTT.models.statmech.rot` object, optional
+            Deals with rotational modes. Default is 
+            ``pMuTT.models.statmech.EmptyMode``
+        elec_model : `pMuTT.models.statmech.elec` object, optional
+            Deals with electronic modes. Default is 
+            ``pMuTT.models.statmech.EmptyMode``
         nucl_model : `pMuTT.models.statmech.nucl` object
-            Deals with nuclear modes
+            Deals with nuclear modes. Default is 
+            ``pMuTT.models.statmech.EmptyMode``
+        notes : str, optional
+            Any additional details you would like to include such as
+            computational set up. Default is None
     """
 
-    def __init__(self, trans_model=EmptyMode(), vib_model=EmptyMode(), 
-                 rot_model=EmptyMode(), elec_model=EmptyMode(), 
-                 nucl_model=EmptyMode(), **kwargs):
+    def __init__(self, name=None, trans_model=EmptyMode(), 
+                 vib_model=EmptyMode(), rot_model=EmptyMode(), 
+                 elec_model=EmptyMode(), nucl_model=EmptyMode(), notes=None, 
+                 **kwargs):
+        self.name = name
 
         # Translational modes
         if inspect.isclass(trans_model):
@@ -113,6 +125,8 @@ class StatMech:
             self.nucl_model = _pass_expected_arguments(nucl_model, **kwargs)
         else:
             self.nucl_model = nucl_model
+        
+        self.notes = notes
 
     def get_q(self, verbose=False, **kwargs):
         """Partition function
@@ -379,17 +393,21 @@ class StatMech:
             StatMech : StatMech object
         """
         json_obj = json_pMuTT.remove_class(json_obj)
+        name = json_obj['name']
         trans_model = json_pMuTT.json_to_pMuTT(json_obj['trans_model'])
         vib_model = json_pMuTT.json_to_pMuTT(json_obj['vib_model'])
         rot_model = json_pMuTT.json_to_pMuTT(json_obj['rot_model'])
         elec_model = json_pMuTT.json_to_pMuTT(json_obj['elec_model'])
         nucl_model = json_pMuTT.json_to_pMuTT(json_obj['nucl_model'])
+        notes = json_obj['notes']
 
-        return cls(trans_model=trans_model, 
+        return cls(name=name,
+                   trans_model=trans_model, 
                    vib_model=vib_model, 
                    rot_model=rot_model,
                    elec_model=elec_model,
-                   nucl_model=nucl_model)
+                   nucl_model=nucl_model,
+                   notes=notes)
 
 presets = {
     'idealgas': {

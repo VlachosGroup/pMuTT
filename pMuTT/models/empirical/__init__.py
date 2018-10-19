@@ -19,31 +19,31 @@ class BaseThermo:
 
     Attributes
     ----------
-        name : str
-            Name of the specie.
-        phase : str
-            Phase of the specie.
+        name : str, optional
+            Name of the specie. Default is None
+        phase : str, optional
+            Phase of the specie. Default is None
             G - gas.
             S - surface.
-        elements : dict
-            Composition of the species.
+        elements : dict, optional
+            Composition of the species. Default is None.
             Keys of dictionary are elements, values are stoichiometric values
             in a formula unit.
             e.g. CH3OH can be represented as:
             {'C': 1, 'H': 4, 'O': 1,}.
-        statmech_model : `pMuTT.models.statmech` object
-            Statistical thermodynamic model.
+        statmech_model : `pMuTT.models.statmech` object, optional
+            Statistical thermodynamic model. Default is None.
             Object should have the following methods: `get_CpoR`, `get_HoRT`,
             `get_SoR`, `get_GoRT`.
-        references : `pMuTT.models.empirical.References.references` object
+        references : `pMuTT.models.empirical.References.references` object, optional
             Contains references to calculate `HoRT_ref`. If not specified then
-            HoRT_dft will be used without adjustment.
-        notes : str
+            HoRT_dft will be used without adjustment. Default is None
+        notes : str, optional
             Any additional details you would like to include such as
-            computational set up.
+            computational set up. Default is None
     """
 
-    def __init__(self, name, phase=None, elements=None, statmech_model=None,
+    def __init__(self, name=None, phase=None, elements=None, statmech_model=None,
                  references=None, notes=None, **kwargs):
         self.name = name
         self.phase = phase
