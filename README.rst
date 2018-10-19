@@ -35,7 +35,7 @@ Getting Started
 1. Install using pip
 ::
 
-   pip install pMuTT
+   pip install --user pMuTT
    
 2. Run the tests by navigating to the `tests directory`_ in a
    command-line interface and inputting the following command:

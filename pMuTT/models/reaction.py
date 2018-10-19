@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collections import Counter
+import re
 import numpy as np
 from pMuTT import _force_pass_arguments
 from pMuTT import constants as c
@@ -18,17 +19,21 @@ class Reaction:
             Products
         products_stoich : list of float
             Stoichiometric quantities of products
-        transition_state : pMuTT model object
-            Transition state specie, optional
+        transition_state : pMuTT model object, optional
+            Transition state specie. Default is None
+        transition_state_stoich : list of float, optional
+            Stoichiometric quantities of transition state species. 
+            Default is None
     """
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
-                 transition_state=None):
+                 transition_state=None, transition_state_stoich=None):
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
         self.products = products
         self.products_stoich = products_stoich
         self.transition_state = transition_state
+        self.transition_state_stoich = transition_state_stoich
 
 
     def __eq__(self, other):
@@ -38,27 +43,6 @@ class Reaction:
             # If other doesn't have to_dict method, is not equal
             return False
         return self.to_dict() == other_dict
-
-
-    def count_elements(self, species, stoich):
-        """Total the number of elements
-
-        Parameters
-        ----------
-            species : list of pMuTT model objects
-                Species to count the elements
-            stoich : list of float
-                Stoichiometric coefficients of each element
-        Returns
-        -------
-            element_count : collections.Counter object
-                Sum of elements
-        """
-        element_count = Counter()
-        for specie, stoich_specie in zip(species, stoich):
-            for element, coeff in specie.elements.items():
-                element_count += Counter({element: coeff*stoich_specie})
-        return element_count
 
 
     def check_element_balance(self):
@@ -71,10 +55,10 @@ class Reaction:
                 Raised if the reactants, products and/or transition state 
                 element composition does not agree.
         """
-        reactant_elements = self.count_elements(self.reactants, 
-                                                self.reactants_stoich)
-        product_elements = self.count_elements(self.products, 
-                                               self.products_stoich)
+        reactant_elements = _count_elements(self.reactants, 
+                                           self.reactants_stoich)
+        product_elements = _count_elements(self.products, 
+                                          self.products_stoich)
         if reactant_elements != product_elements:
             raise ValueError('Number of elements in reactants and products do '
                              'not agree.\nReactant count: {}\n'
@@ -336,14 +320,14 @@ class Reaction:
         if rev:
             return _get_q_rxn(initial_state=self.products, 
                               initial_state_stoich=self.products_stoich,
-                              final_state=(self.transition_state,), 
-                              final_state_stoich=(1.,),
+                              final_state=self.transition_state, 
+                              final_state_stoich=self.transition_state_stoich,
                               **kwargs)
         else:
             return _get_q_rxn(initial_state=self.reactants, 
                               initial_state_stoich=self.reactants_stoich,
-                              final_state=(self.transition_state,), 
-                              final_state_stoich=(1.,),
+                              final_state=self.transition_state, 
+                              final_state_stoich=self.transition_state_stoich,
                               **kwargs)
 
     def get_CvoR_act(self, rev=False, **kwargs):
@@ -366,14 +350,14 @@ class Reaction:
         if rev:
             return _get_CvoR_rxn(initial_state=self.products, 
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
             return _get_CvoR_rxn(initial_state=self.reactants, 
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
 
@@ -397,14 +381,14 @@ class Reaction:
         if rev:
             return _get_CpoR_rxn(initial_state=self.products, 
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
             return _get_CpoR_rxn(initial_state=self.reactants, 
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
 
@@ -428,14 +412,14 @@ class Reaction:
         if rev:
             return _get_UoRT_rxn(initial_state=self.products, 
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
             return _get_UoRT_rxn(initial_state=self.reactants, 
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
 
@@ -459,14 +443,14 @@ class Reaction:
         if rev:
             return _get_HoRT_rxn(initial_state=self.products, 
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
             return _get_HoRT_rxn(initial_state=self.reactants, 
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
 
@@ -490,14 +474,14 @@ class Reaction:
         if rev:
             return _get_SoR_rxn(initial_state=self.products, 
                                 initial_state_stoich=self.products_stoich,
-                                final_state=(self.transition_state,), 
-                                final_state_stoich=(1.,),
+                                final_state=self.transition_state, 
+                                final_state_stoich=self.transition_state_stoich,
                                 **kwargs)
         else:
             return _get_SoR_rxn(initial_state=self.reactants, 
                                 initial_state_stoich=self.reactants_stoich,
-                                final_state=(self.transition_state,), 
-                                final_state_stoich=(1.,),
+                                final_state=self.transition_state, 
+                                final_state_stoich=self.transition_state_stoich,
                                 **kwargs)
 
 
@@ -521,14 +505,14 @@ class Reaction:
         if rev:
             return _get_AoRT_rxn(initial_state=self.products, 
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
             return _get_AoRT_rxn(initial_state=self.reactants, 
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
 
@@ -552,14 +536,14 @@ class Reaction:
         if rev:
             return _get_GoRT_rxn(initial_state=self.products, 
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
             return _get_GoRT_rxn(initial_state=self.reactants, 
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=(self.transition_state,), 
-                                 final_state_stoich=(1.,),
+                                 final_state=self.transition_state, 
+                                 final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
     def get_A(self, T=c.T0('K'), rev=False, **kwargs):
@@ -584,8 +568,41 @@ class Reaction:
                *np.exp(-self.get_SoR_act(rev=rev, T=c.T0('K'), **kwargs))
 
     @classmethod
-    def from_string(cls, reaction_string, species):
-        pass
+    def from_string(cls, reaction_str, species, species_delimiter='+',
+                    reaction_delimiter='='):
+        """Create a reaction object using the reaction string
+
+        Parameters
+        ----------
+            reaction_str : str
+                Reaction string.
+            species : dict
+                Dictionary using the names as keys. If you have a list of 
+                species, use pMuTT.models.pMuTT_list_to_dict to make a dict.
+            species_delimiter : str, optional
+                Delimiter that separate species. Leading and trailing spaces 
+                will be trimmed. Default is '+'
+            reaction_delimiter : str, optional
+                Delimiter that separate sides of the reaction. Leading and 
+                trailing spaces will be trimmed. Default is '='
+        Returns
+        -------
+            Reaction : Reaction object        
+        """
+        (react_names, react_stoich, prod_names, prod_stoich, 
+         ts_names, ts_stoich) = _parse_reaction(
+                reaction_str=reaction_str, 
+                species_delimiter=species_delimiter,
+                reaction_delimiter=reaction_delimiter)
+        reactants = [species[name] for name in react_names]
+        products = [species[name] for name in prod_names]
+        if ts_names is None:
+            ts = None
+        else:
+            ts = [species[name] for name in ts_names]
+        return cls(reactants=reactants, reactants_stoich=react_stoich,
+                   products=products, products_stoich=prod_stoich, 
+                   transition_state=ts, transition_state_stoich=ts_stoich)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -857,3 +874,122 @@ def _get_GoRT_rxn(initial_state, initial_state_stoich, final_state,
     for specie, stoich in zip(initial_state, initial_state_stoich):
         GoRT -= _force_pass_arguments(specie.get_GoRT, **kwargs)*stoich
     return GoRT
+
+def _parse_reaction_side(reaction_str, species_delimiter='+'):
+    """Takes the reactants/products side of a reaction string and parse it
+    into species and stoichiometric amounts
+    
+    Parameters
+    ----------
+        reaction_str : str
+            Reactant or product side of reaction
+        species_delimiters : str
+            Delimiter that separate species. Leading and trailing spaces will 
+            be trimmed. Default is '+'
+
+    Returns
+    -------
+        species : list of str
+            Names of the species
+        stoichiometry : list of int
+            Stoichiometric coefficients
+    """
+    species_str = reaction_str.split(species_delimiter)
+    species = []
+    stoichiometry = []
+    for specie in species_str:
+        # Strip spaces for easier searching
+        specie = specie.strip()
+        # Search for int and float at the start of a string. 
+        # If there is no numbers, returns None.
+        stoich_search = re.search('^\d+\.?\d*', specie)
+        if stoich_search is None:
+            # No stoichiometric coefficient so assign 1.
+            species.append(specie.strip())
+            stoichiometry.append(1.)
+        else:
+            # Stoichiometric coefficient present
+            specie_stoich = stoich_search.group()
+            trim_len = len(specie_stoich)
+            species.append(specie[trim_len:].strip())
+            stoichiometry.append(float(specie_stoich))
+    return (species, stoichiometry)
+    
+
+def _parse_reaction(reaction_str, species_delimiter='+', 
+                    reaction_delimiter='='):
+    """Takes a reaction string and parses it into reactants and products.
+    
+    Parameters
+    ----------
+        reaction_str : str
+            Reaction string. A transition state can be specified by using two 
+            reaction delimiters.
+            e.g. H2 + 0.5O2 = H2O_TS = H2O
+        species_delimiter : str, optional
+            Delimiter that separate species. Leading and trailing spaces will 
+            be trimmed. Default is '+'
+        reaction_delimiter : str, optional
+            Delimiter that separate sides of the reaction. Leading and trailing 
+            spaces will be trimmed. Default is '='
+    Returns
+    -------
+        reactants : list of str
+            Reactant names
+        reactants_stoich : list of float
+            Stoichiometry of reactants
+        products : list of str
+            Product names
+        products_stoich : list of float
+            Stoichiometry of products
+        transition_state : list of str
+            Transition state names. Returns None if reaction does not have a 
+            transition state.
+        transition_state_stoich : list of float
+            Stoichiometry of transition state. Returns None if the reaction 
+            does not have a transition state.
+    """
+    # Separate sides of reaction
+    reaction_sides = reaction_str.split(reaction_delimiter)
+
+    reactants_side = reaction_sides[0]
+    products_side = reaction_sides[-1]
+
+    # Separate the species in each side
+    reactants, reactants_stoich = _parse_reaction_side(
+            reaction_str=reactants_side, species_delimiter=species_delimiter)
+    products, products_stoich = _parse_reaction_side(
+            reaction_str=products_side, species_delimiter=species_delimiter)
+
+    # Check for transition state
+    if len(reaction_sides) > 2:
+        transition_state_side = reaction_sides[1]
+        transition_state, transition_state_stoich = _parse_reaction_side(
+                reaction_str=transition_state_side, 
+                species_delimiter=species_delimiter)
+    else:
+        transition_state = None
+        transition_state_stoich = None
+
+    return (reactants, reactants_stoich, products, products_stoich, 
+            transition_state, transition_state_stoich)
+
+def _count_elements(species, stoich):
+    """Total the number of elements
+
+    Parameters
+    ----------
+        species : list of pMuTT model objects
+            Species to count the elements
+        stoich : list of float
+            Stoichiometric coefficients of each element
+    Returns
+    -------
+        element_count : collections.Counter object
+            Sum of elements
+    """
+    element_count = Counter()
+    for specie, stoich_specie in zip(species, stoich):
+        for element, coeff in specie.elements.items():
+            element_count += Counter({element: coeff*stoich_specie})
+    return element_count
