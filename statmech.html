@@ -103,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#vibrational-models">Vibrational Models</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#harmonicvib">HarmonicVib</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qrrhovib">QRRHOVib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#einsteinvib">EinsteinVib</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#rotational-models">Rotational Models</a><ul>
@@ -1132,7 +1133,7 @@ Default is atmospheric pressure</li>
 <dl class="class">
 <dt id="pMuTT.models.statmech.vib.HarmonicVib">
 <em class="property">class </em><code class="descclassname">pMuTT.models.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vibrational modes using the harmonic approximation.Equations found in
+<dd><p>Vibrational modes using the harmonic approximation. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
@@ -1596,6 +1597,243 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 </div>
+<div class="section" id="einsteinvib">
+<h3>EinsteinVib<a class="headerlink" href="#einsteinvib" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib">
+<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.vib.</code><code class="descname">EinsteinVib</code><span class="sig-paren">(</span><em>einstein_temperature</em>, <em>interaction_energy=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Einstein model of a crystal. Equations found in
+Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+John Wiley &amp; Sons, 2010.</p>
+<dl class="attribute">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.einstein_temperature">
+<code class="descname">einstein_temperature</code><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.einstein_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Einstein temperature (<img class="math" src="_images/math/a1d7d43f05701990d4db629501545984bc31cbd1.svg" alt="\Theta_E"/>) in K</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.interaction_energy">
+<code class="descname">interaction_energy</code><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.interaction_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – Interaction energy (<img class="math" src="_images/math/caedd97e395fc4ff835e69e500e9d1e78fdc61cb.svg" alt="u"/>) per atom in eV. Default is 0 eV</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HarmonicVib</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">HarmonicVib object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><img class="math" src="_images/math/4fdc1992db3e15abbc630581ad7d20400210e2c4.svg" alt="\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>AoRT_vib</strong> – Vibrational dimensionless Helmholtz energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><img class="math" src="_images/math/58308f5a6100f44c8466e3640aa8451132bfa69f.svg" alt="\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=3\bigg(\frac{
+\Theta_E}{T}\bigg)^2\frac{\exp(-\frac{\Theta_E}{T})}{\big(1-
+\exp(\frac{-\Theta_E}{T})\big)^2}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR_vib</strong> – Vibrational dimensionless heat capacity at constant pressure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><img class="math" src="_images/math/6a2d603b642e5525ba2cb9ba2d853bc3e3483569.svg" alt="\frac{C_V^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\bigg)^2
+\frac{\exp(-\frac{\Theta_E}{T})}{\big(1-\exp(\frac{-
+\Theta_E}{T})\big)^2}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CvoR_vib</strong> – Vibrational dimensionless heat capacity at constant volume</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><img class="math" src="_images/math/627ad27c25142e80572d4bd85aef587cd6ddc41e.svg" alt="\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT_vib</strong> – Vibrational dimensionless Gibbs energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><img class="math" src="_images/math/8ad9d14ac3e435607fb36a99da7b19010d258a62.svg" alt="\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}
++3\frac{\Theta_E}{T}\bigg(\frac{1}{\exp{\frac{\Theta_E}{T}-1}}
+\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT_vib</strong> – Vibrational dimensionless enthalpy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><img class="math" src="_images/math/782b838c6d27e0010efe0bf4918443ddef37f196.svg" alt="\frac{S^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\frac{\exp\big(
+\frac{-\Theta_E}{T}\big)}{1-\exp\big(-\frac{\Theta_E}{T}\big)}
+\bigg)-\ln\bigg(1-\exp\big(\frac{-\Theta_E}{T}\big)\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR_vib</strong> – Vibrational dimensionless entropy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless internal energy</p>
+<p><img class="math" src="_images/math/7dc318a12189ff9734923f96f9d2043c166ecca1.svg" alt="\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}+3\frac{\Theta_E}{T}
+\bigg(\frac{1}{\exp{\frac{\Theta_E}{T}-1}}\bigg)"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_vib</strong> – Vibrational dimensionless internal energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_ZPE">
+<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the zero point energy</p>
+<p><img class="math" src="_images/math/83716799b9a6f8b84ebec58bf4dea6d804d13f96.svg" alt="u^0_E=u+\frac{3}{2}\Theta_Ek_B"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ZPE</strong> – Zero point energy in eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<p><img class="math" src="_images/math/30277e67eca80bc58f4aa7fbaceae74b1afe874c.svg" alt="q^{vib}=\exp\bigg({\frac{-N_A u}{k_BT}}\bigg)\bigg(\frac{
+\exp(\frac{-\Theta_E}{2T})}{1-\exp(\frac{-\Theta_E}{T})}\bigg)
+^{3N_A}"/></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>q_vib</strong> – Vibrational partition function</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.statmech.vib.EinsteinVib.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 <div class="section" id="rotational-models">
 <h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Permalink to this headline">¶</a></h2>
@@ -1750,7 +1988,7 @@ guess geometry</p>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><img class="math" src="_images/math/b3cc8df184aaf6ecefd8f4d15f096b5a0a2db708.svg" alt="\frac{C_V^{rot}}{R}=0"/> if monatomic</p>
 <p><img class="math" src="_images/math/9a3ea3c155afb9d37c06e572a810b05b01c213be.svg" alt="\frac{C_V^{rot}}{R}=1"/> if linear</p>
-<p><img class="math" src="_images/math/3b9814b0f5415d3f9bf7dc5984dfbe96e6d7968e.svg" alt="\frac{C_V^{rot}}{R}=1.5"/> if monatomic</p>
+<p><img class="math" src="_images/math/3b9814b0f5415d3f9bf7dc5984dfbe96e6d7968e.svg" alt="\frac{C_V^{rot}}{R}=1.5"/> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1829,7 +2067,7 @@ if nonlinear</p>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><img class="math" src="_images/math/b765565725eff9ada5a4d3b2b8ff8c029190a32b.svg" alt="\frac{U^{rot}}{RT}=0"/> if monatomic</p>
 <p><img class="math" src="_images/math/74c9de51a116ef61bb7e872a818ea8d967fc98bb.svg" alt="\frac{U^{rot}}{RT}=1"/> if linear</p>
-<p><img class="math" src="_images/math/d7dbf092fc2ea4a6e5033744645a33e8812b0d85.svg" alt="\frac{U^{rot}}{RT}=1.5"/> if monatomic</p>
+<p><img class="math" src="_images/math/d7dbf092fc2ea4a6e5033744645a33e8812b0d85.svg" alt="\frac{U^{rot}}{RT}=1.5"/> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

@@ -250,6 +250,11 @@ QRRHOVib
 .. autoclass:: pMuTT.models.statmech.vib.QRRHOVib
    :members:
 
+EinsteinVib
+-----------
+.. autoclass:: pMuTT.models.statmech.vib.EinsteinVib
+   :members:
+   
 Rotational Models
 =================
 
