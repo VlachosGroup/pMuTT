@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#presets">Presets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ideal-gas-idealgas">Ideal Gas (idealgas)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#harmonic-approximation-harmonic">Harmonic Approximation (harmonic)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#electronic-electronic">Electronic (electronic)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#translational-models">Translational Models</a><ul>
@@ -553,20 +554,12 @@ the need to pass all the types of modes:</p>
 <span class="n">idealgas_defaults</span> <span class="o">=</span> <span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]</span>
 <span class="n">H2O_new</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
                    <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">14.2209</span><span class="p">,</span>
-                   <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O),</span>
+                   <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">),</span>
                    <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                    <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                    <span class="o">**</span><span class="n">idealgas_defaults</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary is flexible where you can create a new entry if you will use a model often.</p>
-<dl class="data">
-<dt id="pMuTT.models.statmech.presets">
-<code class="descclassname">pMuTT.models.statmech.</code><code class="descname">presets</code><em class="property"> = {'harmonic': {'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumber', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.models.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}}</em><a class="headerlink" href="#pMuTT.models.statmech.presets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
-parameters that still need to be passed.</p>
-</dd></dl>
-
 <p>Currently supported presets are described below. The first table shows the attributes already specified,
 and the second table shows the attributes that are still required, and the third table shows the required
 and optional parameters to calculate a thermodynamic property (where the value in parentheses is the default
@@ -778,6 +771,99 @@ P (1.01325 bar)</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="electronic-electronic">
+<h3>Electronic (electronic)<a class="headerlink" href="#electronic-electronic" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Default Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>elec_model</td>
+<td>pMuTT.models.statmech.elec.IdealElec</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Required Parameters</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>potentialenergy</td>
+<td>(float) Electronic potential energy in eV</td>
+</tr>
+<tr class="row-odd"><td>spin</td>
+<td>(float) Electron spin</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="30%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Thermodynamic Quantity</th>
+<th class="head">Expected Parameters</th>
+<th class="head">Optional Parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img class="math" src="_images/math/911f5b6595c18b96dce8e1310a41aee7bfe50f31.svg" alt="q"/></td>
+<td>T</td>
+<td>ignore_q_elec (False)</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/98876c36d22e0ab300a756378d9974c57a88d6f0.svg" alt="\frac {C_V} {R}"/></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/cba08f51b5797bbca57ad6722080930735580cdd.svg" alt="\frac {C_P} {R}"/></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/5b95c935f617d42835c09c262f76754f01fec1b2.svg" alt="\frac {U} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/a269576375b4f9440da2e0407137f595423b0980.svg" alt="\frac {H} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/9ace27203ccd1960cd7709a97f27025ddc1bb5e1.svg" alt="\frac {S} {R}"/></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><img class="math" src="_images/math/d743442d1b7d1a469752b750813100667a0a8d50.svg" alt="\frac {A} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><img class="math" src="_images/math/9f28c9a9aeeb6e8f8a361e81cd7416f0f3bcfc91.svg" alt="\frac {G} {RT}"/></td>
+<td>T</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary is flexible where you can create a new entry if you will use a model often.</p>
+<dl class="data">
+<dt id="pMuTT.models.statmech.presets">
+<code class="descclassname">pMuTT.models.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.models.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}}</em><a class="headerlink" href="#pMuTT.models.statmech.presets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
+parameters that still need to be passed.</p>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="translational-models">
@@ -1722,7 +1808,7 @@ guess geometry</p>
 \Theta_{R,i}})+1"/> if linear</p>
 <p><img class="math" src="_images/math/0ff8d87c13dcc111ce76d83558a0cf1b4a29ac64.svg" alt="\frac{S^{rot}}{R}=\log\bigg(\frac{\sqrt\pi }{\sigma}
 \prod_i{(\frac{T^3}{\Theta_{R,i}})^\frac{1}{2}}\bigg)+1.5"/>
-if monatomic</p>
+if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1761,9 +1847,9 @@ if monatomic</p>
 <code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <p><img class="math" src="_images/math/4096cd5d3faf0b373f2d93c7a0fd2f74cb61f73b.svg" alt="q^{rot}=0"/> if monatomic</p>
-<p><img class="math" src="_images/math/f90655bcb53522b2c36b4c78bfd316c555736560.svg" alt="q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_V}"/> if linear</p>
-<p><img class="math" src="_images/math/081a1052f05eae11c3255b6f104b3e2bad40bbd7.svg" alt="q^{rot}=\frac{\sqrt{\pi}}{\sigma}(T^3\prod_i\frac{1}{
-\Theta_{Vi}})^\frac{1}{2}"/> if nonlinear</p>
+<p><img class="math" src="_images/math/9f43cfd0942039ced191bd6ce2346808c247751c.svg" alt="q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_R}"/> if linear</p>
+<p><img class="math" src="_images/math/4f8805ae65180d17f4d391e6c786704f943bf8fb.svg" alt="q^{rot}=\frac{\sqrt{\pi}}{\sigma}(T^3\prod_i\frac{1}{
+\Theta_{Ri}})^\frac{1}{2}"/> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
