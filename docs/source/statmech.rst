@@ -73,15 +73,11 @@ the need to pass all the types of modes:
    idealgas_defaults = presets['idealgas']
    H2O_new = StatMech(vib_wavenumbers=[3825.434, 3710.2642, 1582.432],
                       potentialenergy=-14.2209,
-                      atoms=molecule('H2O),
+                      atoms=molecule('H2O'),
                       spin=0,
                       symmetrynumber=2,
                       **idealgas_defaults)
                       
-
-The ``presets`` dictionary is flexible where you can create a new entry if you will use a model often.
-
-.. autodata:: pMuTT.models.statmech.presets
 
 Currently supported presets are described below. The first table shows the attributes already specified, 
 and the second table shows the attributes that are still required, and the third table shows the required 
@@ -188,6 +184,50 @@ Typically used to model adsorbates.
 +-------------------------+---------------------+-----------------------+
 | :math:`\frac {G} {RT}`  | T                   |                       |
 +-------------------------+---------------------+-----------------------+
+
+
+Electronic (electronic)
+-----------------------
+
++-------------+-----------------------------------------+
+| Parameter   | Default Value                           |
++=============+=========================================+
+| elec_model  | pMuTT.models.statmech.elec.IdealElec    |
++-------------+-----------------------------------------+
+
++---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| Required Parameters | Description                                                                                                                                      |
++=====================+==================================================================================================================================================+
+| potentialenergy     | (float) Electronic potential energy in eV                                                                                                        |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| spin                | (float) Electron spin                                                                                                                            |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+
++-------------------------+---------------------+-----------------------+
+| Thermodynamic Quantity  | Expected Parameters | Optional Parameters   |
++=========================+=====================+=======================+
+| :math:`q`               | T                   | ignore_q_elec (False) |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_V} {R}` |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_P} {R}` |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {U} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {H} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {S} {R}`   |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {A} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {G} {RT}`  | T                   |                       |
++-------------------------+---------------------+-----------------------+
+
+
+The ``presets`` dictionary is flexible where you can create a new entry if you will use a model often.
+
+.. autodata:: pMuTT.models.statmech.presets
+
 
 Translational Models
 ====================

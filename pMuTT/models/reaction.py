@@ -604,6 +604,40 @@ class Reaction:
                    products=products, products_stoich=prod_stoich, 
                    transition_state=ts, transition_state_stoich=ts_stoich)
 
+    def to_str(self, species_delimiter='+', reaction_delimiter = '='):
+        """Writes the Reaction object as a stoichiometric reaction
+
+        Parameters
+        ----------
+            species_delimiter : str, optional
+                Separates species. Default is '+'
+            reaction_delimiter : str, optional
+                Separates reaction sides. Default is '='
+        Returns
+        -------
+            reaction_str : str
+                Reaction string
+        """
+        # Write reactants
+        reaction_str = _write_reaction_side(species=self.reactants,
+                                            stoich=self.reactants_stoich,
+                                            species_delimiter=species_delimiter)
+        reaction_str += reaction_delimiter
+
+        # Write transition state if any
+        if self.transition_state is not None:
+            reaction_str += _write_reaction_side(
+                    species=self.transition_state,
+                    stoich=self.transition_state_stoich,
+                    species_delimiter=species_delimiter)
+            reaction_str += reaction_delimiter
+        
+        # Write products
+        reaction_str += _write_reaction_side(species=self.products,
+                                            stoich=self.products_stoich,
+                                            species_delimiter=species_delimiter)
+        return reaction_str
+
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
         
@@ -973,6 +1007,32 @@ def _parse_reaction(reaction_str, species_delimiter='+',
 
     return (reactants, reactants_stoich, products, products_stoich, 
             transition_state, transition_state_stoich)
+
+
+def _write_reaction_side(species, stoich, species_delimiter='+'):
+    """Writes one section of the reaction string
+
+    Parameters
+    ----------
+        species : list of ``pMuTT.model`` objects
+            Species to write
+        stoich : list of float
+            Stoichiometry corresponding to species
+        species_delimiter : str, optional
+            Delimiter that separates species. Default is '+'
+    Returns
+    -------
+        reaction_str : str
+            One section of the reaction string
+    """
+    for i, (specie, stoich_val) in enumerate(zip(species, stoich)):
+        if i == 0:
+            reaction_str = '{}{}'.format(stoich_val, specie.name)
+        else:
+            reaction_str += '{}{}{}'.format(species_delimiter, stoich_val, 
+                                             specie.name)
+    return reaction_str
+
 
 def _count_elements(species, stoich):
     """Total the number of elements

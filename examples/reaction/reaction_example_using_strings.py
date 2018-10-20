@@ -36,7 +36,7 @@ GoRT_rxn = rxn_nasa.get_delta_GoRT(T=T)
 Plot the data
 '''
 f, ax = plt.subplots(3, sharex=True)
-ax[0].set_title('H2 + 1/2 O2 --> H2O')
+ax[0].set_title(rxn_nasa.to_str())
 ax[0].plot(T, HoRT_rxn, 'r-')
 ax[0].set_ylabel('H/RT')
 

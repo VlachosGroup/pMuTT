@@ -75,10 +75,10 @@ class RigidRotor:
 
         :math:`q^{rot}=0` if monatomic
 
-        :math:`q^{rot}=\\frac{T}{\\sigma}\\prod_i\\frac{1}{\\Theta_V}` if linear
+        :math:`q^{rot}=\\frac{T}{\\sigma}\\prod_i\\frac{1}{\\Theta_R}` if linear
 
         :math:`q^{rot}=\\frac{\\sqrt{\\pi}}{\\sigma}(T^3\\prod_i\\frac{1}{
-        \\Theta_{Vi}})^\\frac{1}{2}` if nonlinear
+        \\Theta_{Ri}})^\\frac{1}{2}` if nonlinear
 
         Parameters
         ----------
