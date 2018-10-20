@@ -107,7 +107,7 @@ class RigidRotor:
 
         :math:`\\frac{C_V^{rot}}{R}=1` if linear
 
-        :math:`\\frac{C_V^{rot}}{R}=1.5` if monatomic
+        :math:`\\frac{C_V^{rot}}{R}=1.5` if nonlinear
 
         Returns
         -------
@@ -143,7 +143,7 @@ class RigidRotor:
 
         :math:`\\frac{U^{rot}}{RT}=1` if linear
 
-        :math:`\\frac{U^{rot}}{RT}=1.5` if monatomic
+        :math:`\\frac{U^{rot}}{RT}=1.5` if nonlinear
 
         Returns
         -------
@@ -182,7 +182,7 @@ class RigidRotor:
 
         :math:`\\frac{S^{rot}}{R}=\\log\\bigg(\\frac{\\sqrt\\pi }{\\sigma}
         \\prod_i{(\\frac{T^3}{\\Theta_{R,i}})^\\frac{1}{2}}\\bigg)+1.5`
-        if monatomic
+        if nonlinear
 
         Parameters
         ----------

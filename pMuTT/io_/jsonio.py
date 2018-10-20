@@ -60,7 +60,7 @@ def type_to_class(class_str):
     from pMuTT.models.empirical.zacros import Zacros
     from pMuTT.models.statmech import StatMech, EmptyMode
     from pMuTT.models.statmech.trans import IdealTrans
-    from pMuTT.models.statmech.vib import HarmonicVib, QRRHOVib
+    from pMuTT.models.statmech.vib import HarmonicVib, QRRHOVib, EinsteinVib
     from pMuTT.models.statmech.rot import RigidRotor
     from pMuTT.models.statmech.elec import IdealElec
     from pMuTT.models.statmech.nucl import IdealNucl
@@ -79,6 +79,7 @@ def type_to_class(class_str):
         "<class 'pMuTT.models.statmech.trans.IdealTrans'>": IdealTrans,
         "<class 'pMuTT.models.statmech.vib.HarmonicVib'>": HarmonicVib,
         "<class 'pMuTT.models.statmech.vib.QRRHOVib'>": QRRHOVib,
+        "<class 'pMuTT.models.statmech.vib.EinsteinVib'>": EinsteinVib,
         "<class 'pMuTT.models.statmech.rot.RigidRotor'>": RigidRotor,
         "<class 'pMuTT.models.statmech.elec.IdealElec'>": IdealElec,
         "<class 'pMuTT.models.statmech.nucl.IdealNucl'>": IdealNucl,
