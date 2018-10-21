@@ -1719,9 +1719,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/8ad9d14ac3e435607fb36a99da7b19010d258a62.svg" alt="\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}
-+3\frac{\Theta_E}{T}\bigg(\frac{1}{\exp{\frac{\Theta_E}{T}-1}}
-\bigg)"/></p>
+<p><img class="math" src="_images/math/d4800226317eb776450ef41ecdb355d75411852a.svg" alt="\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}
++3\frac{\Theta_E}{T}\bigg(\frac{\exp(-\frac{\Theta_E}{T})}{1-
+\exp(-\frac{\Theta_E}{T})}\bigg)"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1761,8 +1761,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
-<p><img class="math" src="_images/math/7dc318a12189ff9734923f96f9d2043c166ecca1.svg" alt="\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}+3\frac{\Theta_E}{T}
-\bigg(\frac{1}{\exp{\frac{\Theta_E}{T}-1}}\bigg)"/></p>
+<p><img class="math" src="_images/math/478055233ce3bf7117b9f12a4c926c526dbb0a5e.svg" alt="\frac{U^{vib}}{RT}=\frac{u^0_E}{k_BT}+3\frac{\Theta_E}{T}
+\bigg(\frac{\exp(-\frac{\Theta_E}{T})}{1-\exp(-\frac{\Theta_E}
+{T})}\bigg)"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1798,9 +1799,8 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_q">
 <code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><img class="math" src="_images/math/30277e67eca80bc58f4aa7fbaceae74b1afe874c.svg" alt="q^{vib}=\exp\bigg({\frac{-N_A u}{k_BT}}\bigg)\bigg(\frac{
-\exp(\frac{-\Theta_E}{2T})}{1-\exp(\frac{-\Theta_E}{T})}\bigg)
-^{3N_A}"/></p>
+<p><img class="math" src="_images/math/f1d7ccf0bbc2067f985a18577b444d0a7011a38c.svg" alt="q^{vib}=\exp\bigg({\frac{-u}{k_BT}}\bigg)\bigg(\frac{
+\exp(-\frac{\Theta_E}{2T})}{1-\exp(\frac{-\Theta_E}{T})}\bigg)"/></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
