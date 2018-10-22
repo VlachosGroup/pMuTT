@@ -25,11 +25,11 @@ def read_reactions(filename, species=None):
         Reactants   : list of reactants found in reactions
         React_obj   : list of NASA polynomials for each Reactant
                       If species object list is supplied
-        React_stoic : list of reaction stiociometries for Reactants
+        React_stoic : list of reaction stoichiometries for Reactants
         Products    : list of products found in reactions
         Prod_obj    : list of NASA polynomials for each Product
                       If species object list is supplied
-        Prod_stoic  : list of reaction stiociometries for Products
+        Prod_stoic  : list of reaction stoichiometries for Products
     Raises
     ------
         FileNotFoundError

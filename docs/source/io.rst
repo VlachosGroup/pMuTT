@@ -402,6 +402,12 @@ these objects. An example using ``pMuTT.models.statmech.StatMech`` is shown belo
                   elec_model=elec_model,
                   nucl_model=nucl_model)
 
+Chemkin
+=======
+
+.. automodule:: pMuTT.io_.chemkin
+   :members:
+
 
 .. _`pMuTT.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1
 .. _`pMuTT.examples.read_nasa_from_excel`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_excel 

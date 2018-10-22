@@ -56,6 +56,7 @@ def type_to_class(class_str):
     from pMuTT.models.reaction import Reaction
     from pMuTT.models.empirical import BaseThermo
     from pMuTT.models.empirical.nasa import Nasa
+    from pMuTT.models.empirical.shomate import Shomate
     from pMuTT.models.empirical.references import Reference, References
     from pMuTT.models.empirical.zacros import Zacros
     from pMuTT.models.statmech import StatMech, EmptyMode
@@ -71,6 +72,7 @@ def type_to_class(class_str):
         "<class 'pMuTT.models.reaction.Reaction'>": Reaction,
         "<class 'pMuTT.models.empirical.BaseThermo'>": BaseThermo,
         "<class 'pMuTT.models.empirical.nasa.Nasa'>": Nasa,
+        "<class 'pMuTT.models.empirical.shomate.Shomate'>": Shomate,
         "<class 'pMuTT.models.empirical.references.Reference'>": Reference,
         "<class 'pMuTT.models.empirical.references.References'>": References,
         "<class 'pMuTT.models.empirical.zacros.Zacros'>": Zacros,

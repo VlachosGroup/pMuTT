@@ -68,7 +68,7 @@ class Reaction:
                                                         product_elements))
 
         if self.transition_state is not None:
-            TS_elements = self.count_elements((self.transition_state,), (1.,))
+            TS_elements = _count_elements((self.transition_state,), (1.,))
             if reactant_elements != TS_elements:
                 raise ValueError('Number of elements in reactants and '
                                  'transition state do not agree.\n'
