@@ -279,7 +279,7 @@ def _read_line4(line, nasa_data):
     return nasa_data
 
 
-def write_thermdat(filename, nasa_species, write_date=True, supp_data= None,
+def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
                    supp_txt=None, newline='\n'):
     """Writes thermdats in the Chemkin format
 
