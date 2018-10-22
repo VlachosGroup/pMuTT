@@ -41,9 +41,9 @@ class Nasa(BaseThermo):
             Middle temperature bound (in K)
         T_high : float
             High temperature bound (in K)
-        a_low : (7,) `numpy.ndarray_`
+        a_low : (7,) `numpy.ndarray`_
             NASA polynomial to use between T_low and T_mid
-        a_high : (7,) `numpy.ndarray_`
+        a_high : (7,) `numpy.ndarray`_
             NASA polynomial to use between T_mid and T_high
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
@@ -237,13 +237,13 @@ class Nasa(BaseThermo):
         T_high = max(T)
 
         # Find midpoint temperature, and a[0] through a[4] parameters
-        a_low, a_high, T_mid_out = fit_CpoR(T=T, CpoR=CpoR, T_mid=T_mid)
+        a_low, a_high, T_mid_out = _fit_CpoR(T=T, CpoR=CpoR, T_mid=T_mid)
         # Fit a[5] parameter using reference enthalpy
-        a_low[5], a_high[5] = fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, 
+        a_low[5], a_high[5] = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, 
                                        a_low=a_low, a_high=a_high,
                                        T_mid=T_mid_out)
         # Fit a[6] parameter using reference entropy
-        a_low[6], a_high[6] = fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, 
+        a_low[6], a_high[6] = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, 
                                       a_low=a_low, a_high=a_high,
                                       T_mid=T_mid_out)
         return cls(name=name, T_low=T_low, T_high=T_high, T_mid=T_mid_out, 
@@ -354,21 +354,31 @@ class Nasa(BaseThermo):
 
         return cls(**json_obj)
 
-def fit_CpoR(T, CpoR, T_mid=None):
+def _fit_CpoR(T, CpoR, T_mid=None):
     """Fit a[0]-a[4] coefficients in a_low and a_high attributes given the
     dimensionless heat capacity data
 
     Parameters
     ----------
-        T : (N,) `numpy.ndarray_`
+        T : (N,) `numpy.ndarray`_
             Temperatures in K
-        CpoR : (N,) `numpy.ndarray_`
+        CpoR : (N,) `numpy.ndarray`_
             Dimensionless heat capacity
         T_mid : float or iterable of float, optional
             Guess for T_mid. If float, only uses that value for T_mid. If 
             list, finds the best fit for each element in the list. If None, 
             a range of T_mid values are screened between the lowest value 
             and highest value of T.
+    Returns
+    -------
+        a_low : (7,) `numpy.ndarray`_
+            Lower coefficients of NASA polynomial
+        a_high : (7,) `numpy.ndarray`_
+            Higher coefficients of NASA polynomial
+        T_mid : float
+            Temperature in K used to split the CpoR data
+
+
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
     # If the Cp/R does not vary with temperature (occurs when no
@@ -429,20 +439,20 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
 
     Parameters
     ----------
-        T : (N,) `numpy.ndarray_`
+        T : (N,) `numpy.ndarray`_
             Temperatures (K) to fit the polynomial
-        CpoR : (N,) `numpy.ndarray_`
+        CpoR : (N,) `numpy.ndarray`_
             Dimensionless heat capacities that correspond to T array
         i_mid : int
             Index that splits T and CpoR arrays into a lower
             and higher range
     Returns
     -------
-        R2 : float)
-            R2 value resulting from NASA polynomial fit to T and CpoR
-        p_low : (5,) `numpy.ndarray_`
+        mse : float
+            Mean squared error resulting from NASA polynomial fit to T and CpoR
+        p_low : (5,) `numpy.ndarray`_
             Polynomial corresponding to lower range of data
-        p_high : (5,) `numpy.ndarray_`
+        p_high : (5,) `numpy.ndarray`_
             Polynomial corresponding to high range of data
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
@@ -472,7 +482,7 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
     mse = np.mean([(x-y)**2 for x, y in zip(CpoR, CpoR_fit)])
     return (mse, p_low, p_high)
 
-def fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
+def _fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
     """Fit a[5] coefficient in a_low and a_high attributes given the
     dimensionless enthalpy
 
@@ -484,6 +494,12 @@ def fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
             Reference dimensionless enthalpy
         T_mid : float
             Temperature to fit the offset
+    Returns
+    -------
+        a6_low_out : float
+            Lower a6 value for NASA polynomial
+        a6_high_out : float
+            Higher a6 value for NASA polynomial
     """
     a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref))*T_ref
     a6_high = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref))*T_ref
@@ -496,7 +512,7 @@ def fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
 
     return a6_low_out, a6_high_out
 
-def fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
+def _fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
     """Fit a[6] coefficient in a_low and a_high attributes given the
     dimensionless entropy
 
@@ -508,6 +524,12 @@ def fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
             Reference dimensionless entropy
         T_mid : float
             Temperature to fit the offset
+    Returns
+    -------
+        a7_low_out : float
+            Lower a7 value for NASA polynomial
+        a7_high_out : float
+            Higher a7 value for NASA polynomial
     """
     a7_low_out = SoR_ref - get_nasa_SoR(a=a_low, T=T_ref)
     a7_high = SoR_ref - get_nasa_SoR(a=a_high, T=T_ref)
@@ -525,7 +547,7 @@ def get_nasa_CpoR(a, T):
 
     Parameters
     ----------
-        a : (7,) `numpy.ndarray_`
+        a : (7,) `numpy.ndarray`_
             Coefficients of NASA polynomial
         T : float
             Temperature in K
@@ -545,7 +567,7 @@ def get_nasa_HoRT(a, T):
 
     Parameters
     ----------
-        a : (7,) `numpy.ndarray_`
+        a : (7,) `numpy.ndarray`_
             Coefficients of NASA polynomial
         T : float
             Temperature in K
@@ -565,7 +587,7 @@ def get_nasa_SoR(a, T):
 
     Parameters
     ----------
-        a : (7,) `numpy.ndarray_`
+        a : (7,) `numpy.ndarray`_
             Coefficients of NASA polynomial
         T : float
             Temperature in K
@@ -586,14 +608,14 @@ def get_nasa_GoRT(a, T):
 
     Parameters
     ----------
-        a : (7,) `numpy.ndarray_`
+        a : (7,) `numpy.ndarray`_
             Coefficients of NASA polynomial
         T : float
             Temperature in K
     Returns
     -------
         GoRT : float
-            Dimensionless entropy
+            Dimensionless Gibbs energy
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """

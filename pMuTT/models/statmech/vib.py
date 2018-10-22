@@ -565,9 +565,8 @@ class EinsteinVib:
     def get_q(self, T):
         """Calculates the partition function
 
-        :math:`q^{vib}=\\exp\\bigg({\\frac{-N_A u}{k_BT}}\\bigg)\\bigg(\\frac{
-        \\exp(\\frac{-\\Theta_E}{2T})}{1-\\exp(\\frac{-\\Theta_E}{T})}\\bigg)
-        ^{3N_A}`
+        :math:`q^{vib}=\\exp\\bigg({\\frac{-u}{k_BT}}\\bigg)\\bigg(\\frac{
+        \\exp(-\\frac{\\Theta_E}{2T})}{1-\\exp(\\frac{-\\Theta_E}{T})}\\bigg)`
 
         Parameters
         ----------
@@ -637,8 +636,9 @@ class EinsteinVib:
     def get_UoRT(self, T):
         """Calculates the dimensionless internal energy
 
-        :math:`\\frac{U^{vib}}{RT}=\\frac{N_A u^0_E}{k_BT}+3\\frac{\\Theta_E}{T}
-        \\bigg(\\frac{1}{\\exp{\\frac{\\Theta_E}{T}-1}}\\bigg)`
+        :math:`\\frac{U^{vib}}{RT}=\\frac{u^0_E}{k_BT}+3\\frac{\\Theta_E}{T}
+        \\bigg(\\frac{\\exp(-\\frac{\\Theta_E}{T})}{1-\\exp(-\\frac{\\Theta_E}
+        {T})}\\bigg)`
 
         Parameters
         ----------
@@ -657,8 +657,8 @@ class EinsteinVib:
         """Calculates the dimensionless enthalpy
 
         :math:`\\frac{H^{vib}}{RT}=\\frac{U^{vib}}{RT}=\\frac{N_A u^0_E}{k_BT}
-        +3\\frac{\\Theta_E}{T}\\bigg(\\frac{1}{\\exp{\\frac{\\Theta_E}{T}-1}}
-        \\bigg)`
+        +3\\frac{\\Theta_E}{T}\\bigg(\\frac{\\exp(-\\frac{\\Theta_E}{T})}{1-
+        \\exp(-\\frac{\\Theta_E}{T})}\\bigg)`
 
         Parameters
         ----------
