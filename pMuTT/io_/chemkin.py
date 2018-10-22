@@ -16,7 +16,7 @@ def read_reactions(filename, species=None):
         filename : str
             Input filename for Chemkin surf or gas .inp file
         species : obj
-            List of NASA object containing thermodynamic properties for
+            List of NASA objects containing thermodynamic properties for
             all Reactants and Products in Reactions
             default = None. Will not return React_obj and Prod_obj
     Returns
@@ -24,11 +24,11 @@ def read_reactions(filename, species=None):
         Reactions   : list of reactions
         Reactants   : list of reactants found in reactions
         React_obj   : list of NASA polynomials for each Reactant
-                      If species file is supplied
+                      If species object list is supplied
         React_stoic : list of reaction stiociometries for Reactants
         Products    : list of products found in reactions
         Prod_obj    : list of NASA polynomials for each Product
-                      If species file is supplied
+                      If species object list is supplied
         Prod_stoic  : list of reaction stiociometries for Products
     Raises
     ------
