@@ -2,6 +2,8 @@
 from collections import Counter
 import re
 import numpy as np
+import matplotlib
+from matplotlib import pyplot as plt
 from pMuTT import _force_pass_arguments
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
@@ -679,6 +681,213 @@ class Reaction:
                 json_obj['transition_state'])
         return cls(**json_obj)
 
+
+class PhaseDiagram:
+    """Generate phase diagrams based on reactions specified.
+
+    Attributes
+    ----------
+        reactions : list of ``pMuTT.models.reaction.Reaction`` objects
+            Formation reactions for each phase. Reactions should be written 
+            with consistent reference species to obtain meaningful data.
+        norm_factors : (N,) `numpy.ndarray`_ of float, optional
+            Used for normalizing Gibbs energies. These factors could be 
+            surface areas when calculating surface energies or if the 
+            reactions stoichiometry is not consistent. Default is an array of 
+            1. It should have the same length as reactions.
+
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    """
+
+    def __init__(self, reactions, norm_factors=None):
+        self.reactions=reactions
+        if norm_factors is None:
+            self.norm_factors=np.ones(len(reactions))
+        else:
+            self.norm_factors=norm_factors
+
+    def get_GoRT_1D(self, x_name, x_values, G_units=None, **kwargs):
+        """Calculates the Gibbs free energy for all the reactions for 1 varying 
+        parameter
+
+        Parameters
+        ----------
+            x_name : str
+                Name of variable to vary
+            x_values : iterable object
+                x values to use 
+            G_units : str, optional
+                Units for G. If None, uses GoRT. Default is None
+            kwargs : keyword arguments
+                Other variables to use in the calculation
+        Returns
+        -------
+            GoRT : (M, N) `numpy.ndarray`_ of float
+                GoRT values. The first index corresponds to the number of 
+                reactions. The second index corresponds to the conditions 
+                specified by x_values.
+            stable_phases : (N,) `numpy.ndarray`_ of int
+                Each element of the array corresponds to the index of the most 
+                stable phase at the x_values.
+        """
+        GoRT = np.zeros(shape=(len(self.reactions), len(x_values)))
+        for i, (reaction, norm_factor) in enumerate(zip(self.reactions, 
+                                                        self.norm_factors)):
+            for j, x in enumerate(x_values):
+                kwargs[x_name] = x
+                GoRT[i, j] = reaction.get_delta_GoRT(**kwargs)/norm_factor
+
+                # Add unit corrections
+                if G_units is not None:
+                    GoRT[i, j] *= c.R('{}/K'.format(G_units))*kwargs['T']
+        stable_phases = np.nanargmin(GoRT, axis=1)
+        return (GoRT, stable_phases)
+    
+    def plot_1D(self, x_name, x_values, G_units=None, **kwargs):
+        """Make a 1D phase diagram.
+
+        Parameters
+        ----------
+            x_name : str
+                Name of variable to vary
+            x_values : iterable object
+                x values to use 
+            G_units : str, optional
+                Units for G. If None, uses GoRT. Default is None
+            kwargs : keyword arguments
+                Other variables to use in the calculation
+        Returns
+        -------
+            figure : `matplotlib.figure.Figure`_
+                Figure
+            ax : `matplotlib.axes.Axes.axis`_
+                Axes of the plots.
+ 
+        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
+        """
+        fig, ax = plt.subplots()         
+        GoRT, stable_phases = self.get_GoRT_1D(x_name=x_name, x_values=x_values, 
+                                               G_units=G_units, **kwargs)
+        for GoRT_rxn, rxn in zip(GoRT, self.reactions):
+            plt.plot(x_values, GoRT_rxn, label=rxn.to_str())
+        ax.legend()
+        ax.set_xlabel(x_name)
+        if G_units is None:
+            ax.set_ylabel('G/RT')
+        else:
+            ax.set_ylabel('G ({})'.format(G_units))
+        return (fig, ax)
+
+    def get_GoRT_2D(self, x1_name, x1_values, x2_name, x2_values, G_units=None, 
+                    **kwargs):
+        """Calculates the Gibbs free energy for all the reactions for two 
+        varying parameters
+
+        Parameters
+        ----------
+            x1_name : str
+                Name of first variable to vary
+            x1_values : iterable object
+                x1 values to use 
+            x2_name : str
+                Name of first variable to vary
+            x2_values : iterable object
+                x2 values to use 
+            G_units : str, optional
+                Units for G. If None, uses GoRT. Default is None
+            kwargs : keyword arguments
+                Other variables to use in the calculation
+        Returns
+        -------
+            GoRT : (M, N, O) `numpy.ndarray`_ of float
+                GoRT values. The first index corresponds to the number of 
+                reactions. The second index corresponds to the conditions 
+                specified by x_values.
+            stable_phases : (N, O) `numpy.ndarray`_ of int
+                Each element of the array corresponds to the index of the most 
+                stable phase at the x_values.
+        """
+        GoRT = np.zeros(
+                shape=(len(self.reactions), len(x1_values), len(x2_values)))
+        for i, (reaction, norm_factor) in enumerate(zip(self.reactions, 
+                                                        self.norm_factors)):
+            for j, x1 in enumerate(x1_values):
+                kwargs[x1_name] = x1
+                for k, x2 in enumerate(x2_values):
+                    kwargs[x2_name] = x2
+                    GoRT[i, j, k] = \
+                            reaction.get_delta_GoRT(**kwargs)/norm_factor
+                    # Add unit corrections
+                    if G_units is not None:
+                        GoRT[i, j, k] *= c.R('{}/K'.format(G_units))*kwargs['T']
+        # Take a transpose
+        GoRT_T = GoRT.transpose((1, 2, 0))
+        stable_phases = np.zeros((len(x1_values), len(x2_values)))
+        for i, GoRT_row in enumerate(GoRT_T):
+            stable_phases[i, :] = np.nanargmin(GoRT_row, axis=1)
+        
+        return GoRT, stable_phases
+
+    def plot_2D(self, x1_name, x1_values, x2_name, x2_values, G_units=None, 
+                **kwargs):
+        """Make a 2D phase diagram.
+
+        Parameters
+        ----------
+            x1_name : str
+                Name of first variable to vary
+            x1_values : iterable object
+                x1 values to use 
+            x2_name : str
+                Name of first variable to vary
+            x2_values : iterable object
+                x2 values to use 
+            G_units : str, optional
+                Units for G. If None, uses GoRT. Default is None
+            kwargs : keyword arguments
+                Other variables to use in the calculation
+        Returns
+        -------
+            figure : `matplotlib.figure.Figure`_
+                Figure
+            ax : `matplotlib.axes.Axes.axis`_
+                Axes of the plots.
+            c : `matplotlib.collections.QuadMesh`_
+                Heatmap plot
+            cbar : `matplotlib.colorbar.Colorbar`_
+                Colorbar for plot
+
+        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
+        .. _`matplotlib.collections.QuadMesh`: https://matplotlib.org/api/collections_api.html#matplotlib.collections.QuadMesh
+        .. _`matplotlib.colorbar.Colorbar`: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.colorbar.html
+        """
+        # Process input data
+        x2_mesh, x1_mesh = np.meshgrid(x2_values, x1_values)
+        GoRT, stable_phases = self.get_GoRT_2D(x1_name=x1_name, 
+                                               x1_values=x1_values,
+                                               x2_name=x2_name, 
+                                               x2_values=x2_values, 
+                                               G_units=G_units, **kwargs)
+
+        fig, ax = plt.subplots()
+        # Choosing color palette
+        cmap = plt.get_cmap('viridis')
+        norm = matplotlib.colors.BoundaryNorm(np.arange(len(self.reactions)+1), 
+                                              cmap.N)
+        # Create colormap
+        c = plt.pcolormesh(x1_mesh, x2_mesh, stable_phases, cmap=cmap, 
+                           norm=norm, vmin=0, vmax=len(self.reactions))
+        # Set colorbar
+        cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions))+0.5)
+        cbar.ax.set_yticklabels(
+                [reaction.to_str() for reaction in self.reactions])
+        # Set axis labels
+        ax.set_xlabel(x1_name)
+        ax.set_ylabel(x2_name)
+        return (fig, ax, c, cbar)
+
 def _get_q_rxn(initial_state, initial_state_stoich, final_state, 
                final_state_stoich, **kwargs):
     """Helper function to calculate partition function
@@ -706,6 +915,7 @@ def _get_q_rxn(initial_state, initial_state_stoich, final_state,
     for specie, stoich in zip(initial_state, initial_state_stoich):
         q /= _force_pass_arguments(specie.get_q, **kwargs)**stoich
     return q
+
 
 def _get_CvoR_rxn(initial_state, initial_state_stoich, final_state, 
                   final_state_stoich, **kwargs):
@@ -908,6 +1118,7 @@ def _get_GoRT_rxn(initial_state, initial_state_stoich, final_state,
     for specie, stoich in zip(initial_state, initial_state_stoich):
         GoRT -= _force_pass_arguments(specie.get_GoRT, **kwargs)*stoich
     return GoRT
+
 
 def _parse_reaction_side(reaction_str, species_delimiter='+'):
     """Takes the reactants/products side of a reaction string and parse it
