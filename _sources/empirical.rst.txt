@@ -11,10 +11,17 @@ This is the parent class for the empirical models.
 .. autoclass:: pMuTT.models.empirical.BaseThermo
    :members:
    
-Nasa
+NASA
 ####
    
 .. autoclass:: pMuTT.models.empirical.nasa.Nasa
+   :members:
+   :inherited-members:
+
+Shomate
+#######
+
+.. autoclass:: pMuTT.models.empirical.shomate.Shomate
    :members:
    :inherited-members:
 

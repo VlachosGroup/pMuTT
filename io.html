@@ -108,6 +108,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.chemkin">Chemkin</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -1124,6 +1125,50 @@ these objects. An example using <code class="docutils literal notranslate"><span
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="module-pMuTT.io_.chemkin">
+<span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id10"><span class="problematic" id="id11">pMuTT.io_</span></a>.chemkin</p>
+<p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.read_reactions">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input filename for Chemkin surf or gas .inp file</li>
+<li><strong>species</strong> (<em>obj</em>) – List of NASA objects containing thermodynamic properties for
+all Reactants and Products in Reactions
+default = None. Will not return React_obj and Prod_obj</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><strong>Reactions</strong> (<em>list of reactions</em>)</li>
+<li><strong>Reactants</strong> (<em>list of reactants found in reactions</em>)</li>
+<li><strong>React_obj</strong> (<em>list of NASA polynomials for each Reactant</em>) – If species object list is supplied</li>
+<li><strong>React_stoic</strong> (<em>list of reaction stoichiometries for Reactants</em>)</li>
+<li><strong>Products</strong> (<em>list of products found in reactions</em>)</li>
+<li><strong>Prod_obj</strong> (<em>list of NASA polynomials for each Product</em>) – If species object list is supplied</li>
+<li><strong>Prod_stoic</strong> (<em>list of reaction stoichiometries for Products</em>)</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – If the surf.inp or gas.inp file isn’t found.</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> – If the species file does not exist</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> – If the species list is incorrect format</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 </div>
 

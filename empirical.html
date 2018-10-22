@@ -85,7 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Empirical Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#basethermo">BaseThermo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nasa">Nasa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nasa">NASA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shomate">Shomate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#zacros">Zacros</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
@@ -473,7 +474,7 @@ specified, dimensionless units used.</li>
 
 </div>
 <div class="section" id="nasa">
-<h2>Nasa<a class="headerlink" href="#nasa" title="Permalink to this headline">¶</a></h2>
+<h2>NASA<a class="headerlink" href="#nasa" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pMuTT.models.empirical.nasa.Nasa">
 <em class="property">class </em><code class="descclassname">pMuTT.models.empirical.nasa.</code><code class="descname">Nasa</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_mid</em>, <em>T_high</em>, <em>a_low</em>, <em>a_high</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.nasa.Nasa" title="Permalink to this definition">¶</a></dt>
@@ -509,13 +510,13 @@ Inherits from pMuTT.models.empirical.BaseThermo</p>
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.nasa.Nasa.a_low">
 <code class="descname">a_low</code><a class="headerlink" href="#pMuTT.models.empirical.nasa.Nasa.a_low" title="Permalink to this definition">¶</a></dt>
-<dd><p>(7,) <cite>numpy.ndarray_</cite> – NASA polynomial to use between T_low and T_mid</p>
+<dd><p>(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> – NASA polynomial to use between T_low and T_mid</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.nasa.Nasa.a_high">
 <code class="descname">a_high</code><a class="headerlink" href="#pMuTT.models.empirical.nasa.Nasa.a_high" title="Permalink to this definition">¶</a></dt>
-<dd><p>(7,) <cite>numpy.ndarray_</cite> – NASA polynomial to use between T_mid and T_high</p>
+<dd><p>(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> – NASA polynomial to use between T_mid and T_high</p>
 </dd></dl>
 
 <dl class="method">
@@ -923,6 +924,423 @@ specified, dimensionless units used.</li>
 <dl class="method">
 <dt id="pMuTT.models.empirical.nasa.Nasa.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.nasa.Nasa.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="shomate">
+<h2>Shomate<a class="headerlink" href="#shomate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pMuTT.models.empirical.shomate.Shomate">
+<em class="property">class </em><code class="descclassname">pMuTT.models.empirical.shomate.</code><code class="descname">Shomate</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_high</em>, <em>a</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the information for an individual Shomate specie
+Inherits from pMuTT.models.empirical.BaseThermo</p>
+<p>The thermodynamic properties are calculated using the following form:</p>
+<p><img class="math" src="_images/math/1d0dd1c5a2d2a033d91696f111d5986241d3854a.svg" alt="\frac{c_P}{R}=\frac{1}{R}\bigg(A+Bt+Ct^2+Dt^3+\frac{E}{t^2}
+\bigg)"/>
+<img class="math" src="_images/math/a0cf08c8b82bba81c741f3d77e52f864a31c1a7a.svg" alt="\frac{H}{RT}=\frac{1}{RT}\bigg(At+B\frac{t^2}{2}+C\frac{t^3}{3}
++D\frac{t^4}{4}-\frac{E}{t}+F\bigg)"/>
+<img class="math" src="_images/math/e1483e107584829723887a57b2d5f3f9b719b963.svg" alt="\frac{S}{R}=\frac{1}{R}\bigg(A\ln(t)+Bt+C\frac{t^2}{2}+D
+\frac{t^3}{3}-\frac{E}{2t^2}+G\bigg)"/></p>
+<p>where <img class="math" src="_images/math/fc32c7cff112ed0150f9b11f33341eff887e9740.svg" alt="t=\frac{T}{1000}"/> in K</p>
+<dl class="attribute">
+<dt id="pMuTT.models.empirical.shomate.Shomate.T_low">
+<code class="descname">T_low</code><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.T_low" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – Lower temperature bound (in K)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.models.empirical.shomate.Shomate.T_high">
+<code class="descname">T_high</code><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.T_high" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – High temperature bound (in K)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.models.empirical.shomate.Shomate.a">
+<code class="descname">a</code><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>(8,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> – Shomate polynomial to use between T_low and T_high</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.compare_CpoR">
+<code class="descname">compare_CpoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.compare_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the dimensionless heat capacity of the statistical model
+and the empirical model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float, optional) – Temperatures (in K) to calculate CpoR. If None, generates a
+list of temperatures between self.T_low and self.T_high</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
+<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_empirical</strong> (((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.compare_GoRT">
+<code class="descname">compare_GoRT</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.compare_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the dimensionless Gibbs energy of the statistical model and
+the empirical model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float, optional) – Temperatures (in K) to calculate CpoR. If None, generates a
+list of temperatures between self.T_low and self.T_high</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
+<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_empirical</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.compare_HoRT">
+<code class="descname">compare_HoRT</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.compare_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the dimensionless enthalpy of the statistical model and
+the empirical model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float, optional) – Temperatures (in K) to calculate CpoR. If None, generates a
+list of temperatures between self.T_low and self.T_high</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
+<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_empirical</strong> (((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.compare_SoR">
+<code class="descname">compare_SoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.compare_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the dimensionless entropy of the statistical model and the
+empirical model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float, optional) – Temperatures (in K) to calculate CpoR. If None, generates a
+list of temperatures between self.T_low and self.T_high</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
+<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_empirical</strong> (((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pMuTT.models.empirical.shomate.Shomate.from_data">
+<em class="property">classmethod </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>name</em>, <em>T</em>, <em>CpoR</em>, <em>T_ref</em>, <em>HoRT_ref</em>, <em>SoR_ref</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Shomate polynomials using thermodynamic data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the species</li>
+<li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperatures in K used for fitting CpoR.</li>
+<li><strong>CpoR</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Dimensionless heat capacity corresponding to T.</li>
+<li><strong>T_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Reference temperature in K used fitting empirical coefficients.</li>
+<li><strong>HoRT_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless reference enthalpy that corresponds to T_ref.</li>
+<li><strong>SoR_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Dimensionless entropy that corresponds to T_ref.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shomate</strong> – Shomate object with polynomial terms fitted to data.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Shomate object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pMuTT.models.empirical.shomate.Shomate.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>shomate</strong></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Shomate object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pMuTT.models.empirical.shomate.Shomate.from_statmech">
+<em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.from_statmech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Shomate polynomial using statistical mechanic models</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the species</li>
+<li><strong>statmech_model</strong> (<cite>pMuTT.models.statmech.StatMech</cite> object or class) – Statistical Mechanics model to generate data</li>
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower limit temerature in K</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Higher limit temperature in K</li>
+<li><strong>references</strong> (<cite>pMuTT.models.empirical.references.References</cite> object) – Reference to adjust enthalpy</li>
+<li><strong>**kwargs</strong> (<em>keyword arguments</em>) – Used to initalize <code class="docutils literal notranslate"><span class="pre">statmech_model</span></code> or <code class="docutils literal notranslate"><span class="pre">BaseThermo</span></code>
+attributes to be stored.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shomate</strong> – Shomate object with polynomial terms fitted to data.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Shomate object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the dimensionless heat capacity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR</strong> – Dimensionless heat capacity</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the dimensionless Gibbs free energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT</strong> – Dimensionless Gibbs free energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the dimensionless enthalpy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT</strong> – Dimensionless enthalpy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the dimensionless entropy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR</strong> – Dimensionless entropy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.plot_empirical">
+<code class="descname">plot_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.plot_empirical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
+using empirical relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified,
+<code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used.</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified,
+<code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used.</li>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>
+for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for accepted
+units but omit the ‘/K’ (e.g. J/mol). If not specified,
+dimensionless units used.</li>
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for accepted
+units. If not specified, dimensionless units used.</li>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>
+for accepted units but omit the ‘/K’ (e.g. J/mol). If not
+specified, dimensionless units used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Figure</li>
+<li><strong>axes</strong> (tuple of <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>) – Axes of the plots.
+0. Cp
+1. H
+2. S
+3. G</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.plot_statmech">
+<code class="descname">plot_statmech</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.plot_statmech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
+using empirical relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified,
+<code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified,
+<code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used</li>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>
+for accepted units. If not specified, dimensionless units used.</li>
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for
+accepted units but omit the ‘/K’ (e.g. J/mol). If not
+specified, dimensionless units used.</li>
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for
+accepted units. If not specified, dimensionless units used.</li>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>
+for accepted units but omit the ‘/K’ (e.g. J/mol). If not
+specified, dimensionless units used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Figure</li>
+<li><strong>axes</strong> (tuple of <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>) – Axes of the plots.
+0. Cp
+1. H
+2. S
+3. G</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.plot_statmech_and_empirical">
+<code class="descname">plot_statmech_and_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.plot_statmech_and_empirical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
+using empirical relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_low</span></code>
+attribute used</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
+attribute used</li>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for
+accepted units. If not specified, dimensionless units used.</li>
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for accepted
+units but omit the ‘/K’ (e.g. J/mol). If not specified,
+dimensionless units used.</li>
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code> for accepted
+units. If not specified, dimensionless units used.</li>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>
+for accepted units but omit the ‘/K’ (e.g. J/mol). If not
+specified, dimensionless units used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Figure</li>
+<li><strong>axes</strong> (tuple of <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>) – Axes of the plots.
+0. Cp
+1. H
+2. S
+3. G</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.models.empirical.shomate.Shomate.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
