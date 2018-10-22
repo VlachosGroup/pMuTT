@@ -734,7 +734,7 @@ def inertia_to_temp(inertia):
         rot_temperature : float
             Rotational temperature in K
     """
-    return h('eV s', bar=True)**2/2/kb('eV/K')/inertia \
+    return h('eV s', bar=True)**2/2./kb('eV/K')/inertia \
            *convert_unit(from_='eV', to='J')
 
 def temp_to_energy(temp):

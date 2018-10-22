@@ -40,6 +40,9 @@ def read_thermdat(filename):
             # Skip the end line
             if 'END' in line:
                 continue
+            # Skip blank lines
+            if line == '\n':
+                continue
             # Skip comment lines
             if line[0] == '!':
                 continue

@@ -6,7 +6,7 @@ from pMuTT.io_.jsonio import remove_class
 
 
 class HarmonicVib:
-    """Vibrational modes using the harmonic approximation.Equations found in
+    """Vibrational modes using the harmonic approximation. Equations found in
     Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
 
@@ -17,9 +17,9 @@ class HarmonicVib:
     """
 
     def __init__(self, vib_wavenumbers=[]):
-        self.vib_wavenumbers = vib_wavenumbers
-        self._vib_temperatures = [
-            c.wavenumber_to_temp(wavenumber) for wavenumber in vib_wavenumbers]
+        self.vib_wavenumbers = np.array(vib_wavenumbers)
+        self._vib_temperatures = np.array([
+            c.wavenumber_to_temp(wavenumber) for wavenumber in vib_wavenumbers])
 
     def __eq__(self, other):
         try:
@@ -44,10 +44,8 @@ class HarmonicVib:
             q_vib : float
                 Vibrational partition function
         """
-        qs = []
-        for vib_temperature in self._vib_temperatures:
-            vib_dimless = vib_temperature/T
-            qs.append(np.exp(-vib_dimless/2.)/(1. - np.exp(-vib_dimless)))
+        vib_dimless = self._vib_temperatures/T
+        qs = np.array(np.exp(-vib_dimless/2.)/(1. - np.exp(-vib_dimless)))
         return np.prod(qs)
 
     def get_CvoR(self, T):
@@ -65,11 +63,9 @@ class HarmonicVib:
             CvoR_vib : float
                 Vibrational dimensionless heat capacity at constant volume
         """
-        CvoR = []
-        for vib_temperature in self._vib_temperatures:
-            vib_dimless = vib_temperature/T
-            CvoR.append((0.5*vib_dimless)**2*(1./np.sinh(vib_dimless/2.))**2)
-        return np.sum(CvoR)
+        vib_dimless = self._vib_temperatures/T
+        CvoRs = np.array([(0.5*vib_dimless)**2*(1./np.sinh(vib_dimless/2.))**2])
+        return np.sum(CvoRs)
 
     def get_CpoR(self, T):
         """Calculates the dimensionless heat capacity at constant pressure
@@ -117,12 +113,9 @@ class HarmonicVib:
             UoRT_vib : float
                 Vibrational dimensionless internal energy
         """
-        UoRT = []
-        for vib_temperature in self._vib_temperatures:
-            vib_dimless = vib_temperature/T
-            UoRT.append(
-                vib_dimless/2.
-                + vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)))
+        vib_dimless = self._vib_temperatures/T
+        UoRT = np.array([vib_dimless/2. + vib_dimless*np.exp(-vib_dimless) \
+                                          /(1.-np.exp(-vib_dimless))])
         return np.sum(UoRT)
 
     def get_HoRT(self, T):
@@ -161,12 +154,10 @@ class HarmonicVib:
             SoR_vib : float
                 Vibrational dimensionless entropy
         """
-        SoR = []
-        for vib_temperature in self._vib_temperatures:
-            vib_dimless = vib_temperature/T
-            SoR.append(
-                vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless))
-                - np.log(1. - np.exp(-vib_dimless)))
+        vib_dimless = self._vib_temperatures/T
+        SoR = np.array([
+                vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)) \
+                - np.log(1. - np.exp(-vib_dimless))])
         return np.sum(SoR)
 
     def get_AoRT(self, T):
@@ -544,3 +535,244 @@ class QRRHOVib:
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
+
+
+class EinsteinVib:
+    """Einstein model of a crystal. Equations found in
+    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+    John Wiley & Sons, 2010.
+
+    Attributes
+    ----------
+        einstein_temperature : float
+            Einstein temperature (:math:`\\Theta_E`) in K
+        interaction_energy : float, optional
+            Interaction energy (:math:`u`) per atom in eV. Default is 0 eV
+    """
+
+    def __init__(self, einstein_temperature, interaction_energy=0.):
+        self.einstein_temperature = einstein_temperature
+        self.interaction_energy = interaction_energy
+
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
+    def get_q(self, T):
+        """Calculates the partition function
+
+        :math:`q^{vib}=\\exp\\bigg({\\frac{-N_A u}{k_BT}}\\bigg)\\bigg(\\frac{
+        \\exp(\\frac{-\\Theta_E}{2T})}{1-\\exp(\\frac{-\\Theta_E}{T})}\\bigg)
+        ^{3N_A}`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            q_vib : float
+                Vibrational partition function
+        """
+        u = self.interaction_energy
+        theta_E = self.einstein_temperature
+        return np.exp(-u/c.kb('eV/K')/T) \
+               *(np.exp(-theta_E/2./T)/(1.-np.exp(-theta_E/T)))
+
+
+    def get_CvoR(self, T):
+        """Calculates the dimensionless heat capacity at constant volume
+
+        :math:`\\frac{C_V^{vib}}{R}=3\\bigg(\\frac{\\Theta_E}{T}\\bigg)^2 
+        \\frac{\\exp(-\\frac{\\Theta_E}{T})}{\\big(1-\\exp(\\frac{-
+        \\Theta_E}{T})\\big)^2}`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            CvoR_vib : float
+                Vibrational dimensionless heat capacity at constant volume
+        """
+        theta_E = self.einstein_temperature
+        return 3.*(theta_E/T)**2*np.exp(-theta_E/T)/(1-np.exp(-theta_E/T))**2
+
+    def get_CpoR(self, T):
+        """Calculates the dimensionless heat capacity at constant pressure
+
+        :math:`\\frac{C_P^{vib}}{R}=\\frac{C_V^{vib}}{R}=3\\bigg(\\frac{
+        \\Theta_E}{T}\\bigg)^2\\frac{\\exp(-\\frac{\\Theta_E}{T})}{\\big(1-
+        \\exp(\\frac{-\\Theta_E}{T})\\big)^2}`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            CpoR_vib : float
+                Vibrational dimensionless heat capacity at constant pressure
+        """
+        return self.get_CvoR(T=T)
+
+    def get_ZPE(self):
+        """Calculates the zero point energy
+
+        :math:`u^0_E=u+\\frac{3}{2}\\Theta_Ek_B`
+
+        Returns
+        -------
+            ZPE : float
+                Zero point energy in eV
+        """
+        return self.interaction_energy \
+               + 1.5*self.einstein_temperature*c.kb('eV/K')
+
+    def get_UoRT(self, T):
+        """Calculates the dimensionless internal energy
+
+        :math:`\\frac{U^{vib}}{RT}=\\frac{N_A u^0_E}{k_BT}+3\\frac{\\Theta_E}{T}
+        \\bigg(\\frac{1}{\\exp{\\frac{\\Theta_E}{T}-1}}\\bigg)`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            UoRT_vib : float
+                Vibrational dimensionless internal energy
+        """
+        theta_E = self.einstein_temperature
+        return self.get_ZPE()/c.kb('eV/K')/T \
+               + 3.*theta_E/T*np.exp(-theta_E/T)/(1. - np.exp(-theta_E/T))
+
+    def get_HoRT(self, T):
+        """Calculates the dimensionless enthalpy
+
+        :math:`\\frac{H^{vib}}{RT}=\\frac{U^{vib}}{RT}=\\frac{N_A u^0_E}{k_BT}
+        +3\\frac{\\Theta_E}{T}\\bigg(\\frac{1}{\\exp{\\frac{\\Theta_E}{T}-1}}
+        \\bigg)`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            HoRT_vib : float
+                Vibrational dimensionless enthalpy
+        """
+        return self.get_UoRT(T=T)
+
+    def get_SoR(self, T):
+        """Calculates the dimensionless entropy
+
+        :math:`\\frac{S^{vib}}{R}=3\\bigg(\\frac{\\Theta_E}{T}\\frac{\\exp\\big(
+        \\frac{-\\Theta_E}{T}\\big)}{1-\\exp\\big(-\\frac{\\Theta_E}{T}\\big)}
+        \\bigg)-\\ln\\bigg(1-\\exp\\big(\\frac{-\\Theta_E}{T}\\big)\\bigg)`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            SoR_vib : float
+                Vibrational dimensionless entropy
+        """
+        theta_E = self.einstein_temperature
+        exp_term = np.exp(-theta_E/T)
+        return 3.*(theta_E/T*exp_term/(1. - exp_term) - np.log(1. - exp_term))
+
+    def get_AoRT(self, T):
+        """Calculates the dimensionless Helmholtz energy
+
+        :math:`\\frac{A^{vib}}{RT}=\\frac{U^{vib}}{RT}-\\frac{S^{vib}}{R}`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            AoRT_vib : float
+                Vibrational dimensionless Helmholtz energy
+        """
+        return self.get_UoRT(T=T) - self.get_SoR(T=T)
+
+    def get_GoRT(self, T):
+        """Calculates the dimensionless Gibbs energy
+
+        :math:`\\frac{G^{vib}}{RT}=\\frac{H^{vib}}{RT}-\\frac{S^{vib}}{R}`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            GoRT_vib : float
+                Vibrational dimensionless Gibbs energy
+        """
+        return self.get_HoRT(T=T) - self.get_SoR(T=T)
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+
+        Returns
+        -------
+            obj_dict : dict
+        """
+        return {'class': str(self.__class__),
+                'einstein_temperature': self.einstein_temperature,
+                'interaction_energy': self.interaction_energy}
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            HarmonicVib : HarmonicVib object
+        """
+        json_obj = remove_class(json_obj)
+        return cls(**json_obj)
+
+def debye_to_einstein(debye_temperature):
+    """Converts Debye temperature to Einstein temperature
+
+    Parameters
+    ----------
+        debye_temperature : float
+            Debye temperature in K
+    Returns
+    -------
+        einstein_temperature : float
+            Einstein temperature in K
+    """
+    return (np.pi/6.)**(1./3.)*debye_temperature
+
+def einstein_to_debye(einstein_temperature):
+    """Converts Einstein temperature to Debye temperature
+
+    Parameters
+    ----------
+        einstein_temperature : float
+            Einstein temperature in K
+    Returns
+    -------
+        debye_temperature : float
+            Debye temperature in K
+    """
+    return einstein_temperature/(np.pi/6.)**(1./3.)

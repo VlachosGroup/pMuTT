@@ -11,9 +11,15 @@ Chemical reactions can be modeled using the ``Reaction`` class.
 Example
 -------
 
-In this example, we calculate the thermodynamic properties of water formation
+In this section, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any 
-pMuTT model object should be compatible.
+pMuTT model object should be compatible. Reaction objects can be initialized 
+using the pMuTT model objects directly or using a reaction string.
+
+Initialization using pMuTT Model Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this example, the Nasa objects are created directly in the script.
 
 .. code:: python
 
@@ -43,19 +49,53 @@ pMuTT model object should be compatible.
                    products=[H2O_nasa],
                    products_stoich=[1.])
    
-   '''
-   Check that the equation is balanced
-   '''
-   rxn_nasa.check_element_balance()
+Initialization using reaction string
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this example, the Nasa objects are read from a thermdat file and 
+are assigned to the Reaction object based on the reaction string. This 
+way is more convenient if you're dealing with large reaction networks.
+
+.. code:: python
+
+   import os
+   import numpy as np
+   from matplotlib import pyplot as plt
+   from pMuTT.io_.thermdat import read_thermdat
+   from pMuTT.models import pMuTT_list_to_dict
+   from pMuTT.models import reaction as rxn
    
    '''
-   Get thermodynamics from Reaction
+   Read the thermdat
    '''
+   base_path = os.path.dirname(__file__)
+   nasa_list = read_thermdat(os.path.join(base_path, 'thermdat'))
+   # Convert list to dictionary so Reaction.from_string can 
+   # assign species quickly
+   nasa_dict = pMuTT_list_to_dict(nasa_list, key='name')
+   
+   '''
+   Create the reaction object
+   '''
+   reaction_str = 'H2+0.5O2=H2O'
+   rxn_nasa = rxn.Reaction.from_string(reaction_str=reaction_str, 
+                                       species=nasa_dict)
+
+After the Reaction object is initialized, you can ensure the equation is balanced.
+
+.. code:: python
+
+   rxn_nasa.check_element_balance()
+
+Or calculate thermodynamic properties.
+
+.. code:: python
+
    T = np.linspace(200., 3500.)
    HoRT_rxn = rxn_nasa.get_delta_HoRT(T=T)
    SoR_rxn = rxn_nasa.get_delta_SoR(T=T)
    GoRT_rxn = rxn_nasa.get_delta_GoRT(T=T)
-   
+
    '''
    Plot the data
    '''

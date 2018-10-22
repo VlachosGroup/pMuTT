@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.test_pMuTT_model_statmech
+pMuTT.test_pMuTT_model_reaction
 Tests for pMuTT module
 """
 import unittest
@@ -11,7 +11,7 @@ from pMuTT.models import reaction as rxn
 from pMuTT.models.empirical.nasa import Nasa
 from pMuTT.models.statmech import StatMech, presets
 
-class TestStatMech(unittest.TestCase):
+class TestReaction(unittest.TestCase):
     def setUp(self):
         '''Reactions using Nasa polynomial'''
         self.H2O_nasa = Nasa(name='H2O', T_low=200., T_mid=1000., T_high=3500.,
@@ -150,7 +150,15 @@ class TestStatMech(unittest.TestCase):
                 reactants_stoich=[1., 0.5],
                 products=[self.H2O_sm],
                 products_stoich=[1.],
-                transition_state=self.H2O_TS_sm)
+                transition_state=[self.H2O_TS_sm],
+                transition_state_stoich=[1.])
+
+        self.species_dict = {
+            'H2O': self.H2O_sm,
+            'H2': self.H2_sm,
+            'O2': self.O2_sm,
+            'H2O_TS': self.H2O_TS_sm
+        }
 
 
     def test_compare_element_balance(self):
@@ -386,6 +394,11 @@ class TestStatMech(unittest.TestCase):
         self.assertAlmostEqual(
                 self.rxn_sm.get_A(T=c.T0('K'), rev=True), exp_sm_A_rev)
 
+    def test_from_string(self):
+        reaction_str = 'H2+0.5O2=H2O_TS=H2O'
+        self.assertEqual(rxn.Reaction.from_string(reaction_str=reaction_str, 
+                                                  species=self.species_dict),
+                         self.rxn_sm)
 
     def test_to_dict(self):
         self.assertEqual(self.rxn_nasa.to_dict(), self.rxn_nasa_dict)
@@ -395,6 +408,28 @@ class TestStatMech(unittest.TestCase):
         self.assertEqual(rxn.Reaction.from_dict(self.rxn_nasa_dict), 
                 self.rxn_nasa)
 
+class TestHelperReaction(unittest.TestCase):
+    def test__parse_reaction(self):
+        reaction_str = 'H2+0.5O2=H2O'
+        expected_output = (['H2', 'O2'], [1., 0.5], ['H2O'], [1.], None, None)
+        self.assertTupleEqual(rxn._parse_reaction(reaction_str=reaction_str),
+                              expected_output)
+        reaction_str = ' H2 + 0.5 O2 = H2O '
+        expected_output = (['H2', 'O2'], [1., 0.5], ['H2O'], [1.], None, None)
+        self.assertTupleEqual(rxn._parse_reaction(reaction_str=reaction_str),
+                              expected_output)
+        reaction_str = ' H2 + 0.5 O2 = H2O_TS = H2O '
+        expected_output = (['H2', 'O2'], [1., 0.5], ['H2O'], [1.], 
+                           ['H2O_TS'], [1.])
+        self.assertTupleEqual(rxn._parse_reaction(reaction_str=reaction_str),
+                              expected_output)
+    
+    def test__parse_reaction_side(self):
+        reaction_str = 'H2+0.5O2'
+        expected_output = (['H2', 'O2'], [1., 0.5])
+        self.assertTupleEqual(
+                rxn._parse_reaction_side(reaction_str=reaction_str),
+                expected_output)
 
 if __name__ == '__main__':
     unittest.main()

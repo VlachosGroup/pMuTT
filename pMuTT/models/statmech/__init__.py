@@ -423,8 +423,12 @@ presets = {
     'harmonic': {
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.IdealElec,
-        'required': ('vib_wavenumber', 'potentialenergy', 'spin'),
+        'required': ('vib_wavenumbers', 'potentialenergy', 'spin'),
     },
+    'electronic': {
+        'elec_model': elec.IdealElec,
+        'required': ('potentialenergy', 'spin'),
+    }
 }
 """Commonly used models. The 'required' and 'optional' fields indicate
 parameters that still need to be passed."""
