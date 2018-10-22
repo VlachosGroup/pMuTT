@@ -8,7 +8,7 @@ import re
 from pMuTT.models import pMuTT_list_to_dict
 
 
-def read_reactions(filename, species):
+def read_reactions(filename, species=None):
     """Directly read reactions from Chemkin gas.inp or surf.inp files
 
     Parameters
@@ -18,14 +18,17 @@ def read_reactions(filename, species):
         species : obj
             List of NASA object containing thermodynamic properties for
             all Reactants and Products in Reactions
+            default = None. Will not return React_obj and Prod_obj
     Returns
     -------
         Reactions   : list of reactions
         Reactants   : list of reactants found in reactions
         React_obj   : list of NASA polynomials for each Reactant
+                      If species file is supplied
         React_stoic : list of reaction stiociometries for Reactants
         Products    : list of products found in reactions
         Prod_obj    : list of NASA polynomials for each Product
+                      If species file is supplied
         Prod_stoic  : list of reaction stiociometries for Products
     Raises
     ------
@@ -36,7 +39,8 @@ def read_reactions(filename, species):
         AttributeError
             If the species list is incorrect format
     """
-    species_dict = pMuTT_list_to_dict(species)
+    if species is not None:
+        species_dict = pMuTT_list_to_dict(species)
 
     rxns = []
     with open(filename, 'r') as lines:
@@ -59,6 +63,7 @@ def read_reactions(filename, species):
         Products.append(re.split(r' *\+ *| +', Prods)[0:-3])
         R = []
         RS = []
+        Rx = []
         for RR in Reactants[-1]:
             stoic = re.findall(r'^[0-9]*', RR)[0]
             if stoic == '':
@@ -66,11 +71,15 @@ def read_reactions(filename, species):
             else:
                 RR = RR.replace(stoic, "")
                 stoic = int(stoic)
+            Rx.append(RR)
             RS.append(stoic)
-            R.append(species_dict[RR])
+            if species is not None:
+                R.append(species_dict[RR])
+        Reactants[-1] = Rx
         React_stoic.append(RS)
         P = []
         PS = []
+        Px = []
         for PP in Products[-1]:
             stoic = re.findall(r'^[0-9]*', PP)[0]
             if stoic == '':
@@ -78,13 +87,19 @@ def read_reactions(filename, species):
             else:
                 PP = PP.replace(stoic, "")
                 stoic = int(stoic)
+            Px.append(PP)
             PS.append(stoic)
-            P.append(species_dict[PP])
+            if species is not None:
+                P.append(species_dict[PP])
+        Products[-1] = Px
         Prod_stoic.append(PS)
         React_obj.append(R)
         Prod_obj.append(P)
     Reactions = []
     for rxn, Prods in zip(rxns, Products):
-        Reactions.append(rxn[0:rxn.index(Prods[-1]) + len(Prods[-1])])
-    return(Reactions, Reactants, React_obj, React_stoic,
-           Products, Prod_obj, Prod_stoic)
+        Reactions.append(rxn[0:rxn.rindex(Prods[-1]) + len(Prods[-1])])
+    if species is not None:
+        return(Reactions, Reactants, React_obj, React_stoic,
+               Products, Prod_obj, Prod_stoic)
+    else:
+        return(Reactions, Reactants, React_stoic, Products, Prod_stoic)
