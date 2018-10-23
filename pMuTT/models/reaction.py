@@ -46,6 +46,8 @@ class Reaction:
             return False
         return self.to_dict() == other_dict
 
+    def __str__(self):
+        return self.to_str()
 
     def check_element_balance(self):
         """Checks the reactants, products and transition state elemental 

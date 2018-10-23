@@ -72,6 +72,12 @@ Questions
 If you are having issues, please post to our `Issues page`_ with the ``help wanted`` or ``question`` tag. We 
 will do our best to assist.
 
+Special Thanks
+--------------
+
+-  Dr. Jeffrey Frey (pip and conda compatibility)
+-  Jaynell Keely (Logo design)
+
 .. _`documentation page`: https://vlachosgroup.github.io/pMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
