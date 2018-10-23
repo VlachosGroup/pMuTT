@@ -32,28 +32,23 @@ Dependencies
 
 Getting Started
 ---------------
-1. Install using pip
-::
+1. Install using pip::
 
-   pip install --user pMuTT
+    pip install --user pMuTT
    
 2. Run the tests by navigating to the `tests directory`_ in a
-   command-line interface and inputting the following command:
+   command-line interface and inputting the following command::
 
-::
-
-   python -m unittest
+    python -m unittest
 
 The expected output is shown below. The number of tests will not
-necessarily be the same.
+necessarily be the same. ::
 
-::
+    .........................
+    ----------------------------------------------------------------------
+    Ran 25 tests in 0.020s
 
-   .........................
-   ----------------------------------------------------------------------
-   Ran 25 tests in 0.020s
-
-   OK
+    OK
 
 3. Look at `examples using the code`_
 
