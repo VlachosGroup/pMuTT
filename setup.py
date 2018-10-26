@@ -37,7 +37,6 @@ setuptools_info = {
 		"Intended Audience :: Science/Research",
 		"Topic :: Scientific/Engineering :: Chemistry",
 	    ],
-	'test_suite': 'pMuTT.tests'
     }
 
 if sys.version_info[0] >= 3:
