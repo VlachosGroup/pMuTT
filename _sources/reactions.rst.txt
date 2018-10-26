@@ -1,5 +1,8 @@
 .. _reactions:
 
+Reactions
+*********
+
 Reaction
 ========
 

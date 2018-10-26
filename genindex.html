@@ -89,9 +89,11 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
 </ul>
 
@@ -508,6 +510,10 @@
         <li><a href="statmech.html#pMuTT.models.statmech.vib.QRRHOVib.get_GoRT">(pMuTT.models.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram.get_GoRT_1D">get_GoRT_1D() (pMuTT.models.reaction.PhaseDiagram method)</a>
+</li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram.get_GoRT_2D">get_GoRT_2D() (pMuTT.models.reaction.PhaseDiagram method)</a>
+</li>
       <li><a href="reactions.html#pMuTT.models.reaction.Reaction.get_GoRT_act">get_GoRT_act() (pMuTT.models.reaction.Reaction method)</a>
 </li>
       <li><a href="empirical.html#pMuTT.models.empirical.nasa.Nasa.get_HoRT">get_HoRT() (pMuTT.models.empirical.nasa.Nasa method)</a>
@@ -730,6 +736,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#pMuTT.models.empirical.nasa.Nasa">Nasa (class in pMuTT.models.empirical.nasa)</a>
 </li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram.norm_factors">norm_factors (pMuTT.models.reaction.PhaseDiagram attribute)</a>
+</li>
       <li><a href="empirical.html#pMuTT.models.empirical.BaseThermo.notes">notes (pMuTT.models.empirical.BaseThermo attribute)</a>
 
       <ul>
@@ -747,6 +755,12 @@
       <li><a href="constants.html#pMuTT.constants.P0">P0() (in module pMuTT.constants)</a>
 </li>
       <li><a href="empirical.html#pMuTT.models.empirical.BaseThermo.phase">phase (pMuTT.models.empirical.BaseThermo attribute)</a>
+</li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram">PhaseDiagram (class in pMuTT.models.reaction)</a>
+</li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram.plot_1D">plot_1D() (pMuTT.models.reaction.PhaseDiagram method)</a>
+</li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram.plot_2D">plot_2D() (pMuTT.models.reaction.PhaseDiagram method)</a>
 </li>
       <li><a href="empirical.html#pMuTT.models.empirical.BaseThermo.plot_empirical">plot_empirical() (pMuTT.models.empirical.BaseThermo method)</a>
 
@@ -832,14 +846,16 @@
 </li>
       <li><a href="reactions.html#pMuTT.models.reaction.Reaction">Reaction (class in pMuTT.models.reaction)</a>
 </li>
+      <li><a href="phase_diagram.html#pMuTT.models.reaction.PhaseDiagram.reactions">reactions (pMuTT.models.reaction.PhaseDiagram attribute)</a>
+</li>
       <li><a href="io.html#pMuTT.io_.excel.read_excel">read_excel() (in module pMuTT.io_.excel)</a>
 </li>
       <li><a href="io.html#pMuTT.io_.chemkin.read_reactions">read_reactions() (in module pMuTT.io_.chemkin)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.thermdat.read_thermdat">read_thermdat() (in module pMuTT.io_.thermdat)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="io.html#pMuTT.io_.thermdat.read_thermdat">read_thermdat() (in module pMuTT.io_.thermdat)</a>
+</li>
       <li><a href="empirical.html#pMuTT.models.empirical.references.Reference">Reference (class in pMuTT.models.empirical.references)</a>
 </li>
       <li><a href="empirical.html#pMuTT.models.empirical.references.References">References (class in pMuTT.models.empirical.references)</a>
@@ -1078,10 +1094,6 @@
   <style>
     /* Sidebar header (and topbar for mobile) */
     .wy-side-nav-search, .wy-nav-top {
-      background: #000000;
-    }
-    /* Sidebar */
-    .wy-nav-side {
       background: #000000;
     }
   </style>

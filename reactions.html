@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reaction &mdash; pMuTT 1.0.0 documentation</title>
+  <title>Reactions &mdash; pMuTT 1.0.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Equations of State" href="eos.html" />
+    <link rel="next" title="Phase Diagrams" href="phase_diagram.html" />
     <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
 
   
@@ -90,16 +90,21 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Reaction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#example">Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#initialization-using-pmutt-model-objects">Initialization using pMuTT Model Objects</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#initialization-using-reaction-string">Initialization using reaction string</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reactions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reaction">Reaction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialization-using-pmutt-model-objects">Initialization using pMuTT Model Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialization-using-reaction-string">Initialization using reaction string</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
 </ul>
 
@@ -146,7 +151,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Reaction</li>
+      <li>Reactions</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -165,8 +170,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="reaction">
-<span id="reactions"></span><h1>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="reactions">
+<span id="id1"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reaction">
+<h2>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h2>
 <p>Chemical reactions can be modeled using the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> class.</p>
 <dl class="class">
 <dt id="pMuTT.models.reaction.Reaction">
@@ -781,13 +788,13 @@ state</p>
 </dd></dl>
 
 <div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>In this section, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any
 pMuTT model object should be compatible. Reaction objects can be initialized
 using the pMuTT model objects directly or using a reaction string.</p>
 <div class="section" id="initialization-using-pmutt-model-objects">
-<h3>Initialization using pMuTT Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h3>
+<h4>Initialization using pMuTT Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h4>
 <p>In this example, the Nasa objects are created directly in the script.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -818,7 +825,7 @@ using the pMuTT model objects directly or using a reaction string.</p>
 </div>
 </div>
 <div class="section" id="initialization-using-reaction-string">
-<h3>Initialization using reaction string<a class="headerlink" href="#initialization-using-reaction-string" title="Permalink to this headline">¶</a></h3>
+<h4>Initialization using reaction string<a class="headerlink" href="#initialization-using-reaction-string" title="Permalink to this headline">¶</a></h4>
 <p>In this example, the Nasa objects are read from a thermdat file and
 are assigned to the Reaction object based on the reaction string. This
 way is more convenient if you’re dealing with large reaction networks.</p>
@@ -879,6 +886,7 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 </div>
 </div>
 </div>
+</div>
 
 
            </div>
@@ -888,7 +896,7 @@ way is more convenient if you’re dealing with large reaction networks.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="eos.html" class="btn btn-neutral float-right" title="Equations of State" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="phase_diagram.html" class="btn btn-neutral float-right" title="Phase Diagrams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -947,10 +955,6 @@ way is more convenient if you’re dealing with large reaction networks.</p>
   <style>
     /* Sidebar header (and topbar for mobile) */
     .wy-side-nav-search, .wy-nav-top {
-      background: #000000;
-    }
-    /* Sidebar */
-    .wy-nav-side {
       background: #000000;
     }
   </style>

@@ -16,8 +16,10 @@ Welcome to pMuTT's documentation!
    empirical
    statmech
    reactions
+   phase_diagram
    eos
    constants
+   release_notes
    Return to Github <https://github.com/VlachosGroup/pMuTT>
 
 Indices and tables

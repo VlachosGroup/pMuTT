@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Referencing &mdash; pMuTT 1.0.0 documentation</title>
+  <title>Release Notes &mdash; pMuTT 1.0.0 documentation</title>
   
 
   
@@ -30,8 +30,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Input and Output" href="io.html" />
-    <link rel="prev" title="Examples" href="examples.html" /> 
+    <link rel="prev" title="Constants" href="constants.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -86,7 +85,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
@@ -94,7 +93,10 @@
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-1-0">Version 1.1.0</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
 </ul>
 
@@ -141,13 +143,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Referencing</li>
+      <li>Release Notes</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/referencing.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/release_notes.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,24 +162,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="referencing">
-<span id="id1"></span><h1>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline">¶</a></h1>
-<p>Enthalpies calculated using VASP (and some other computational methods)
-have different references than standard references (i.e. the enthalpy of formation
-of pure substances, like O:sub:<cite>2</cite> or Pt, is not necessarily zero). This difference
-makes it difficult to ensure thermodynamic consistency for our mechanisms since we
-may be mixing experimental gas thermodynamics with computational surface thermodynamics.
-In order to make the references consistent, we find a correction factor for each element
-by solving the equation:</p>
-<p><img class="math" src="_images/math/4f7a5ac2a41e290d558a9df9597fcd9540d0a5fa.svg" alt="\underline {\underline {H}}^{expt}_{[M \times N]} = \underline {\underline {H}}^{DFT}_{[M \times N]} + \underline {\underline {x}}_{[M \times N]} \underline{\theta}_{[N]}"/></p>
-<p>where M is the number of reference species, N is the number of elements,
-H:sup:<cite>expt</cite> is the experimental standard enthalpies,
-H:sup:DFT is the standard enthalpies calculated using DFT,
-x is a matrix that describes the composition of the references (each row represents a specie,
-each column represents an element), and θ is the correction for each element.</p>
-<p>The equation can be solved using a Least Squares approach.
-The correction factor can then be added to subsequent species calculated through DFT to ensure consistent references.
-Referencing is handled by the <code class="docutils literal notranslate"><span class="pre">pMuTT.models.empirical.references.References</span></code>.</p>
+  <div class="section" id="release-notes">
+<span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="version-1-1-0">
+<h2>Version 1.1.0<a class="headerlink" href="#version-1-1-0" title="Permalink to this headline">¶</a></h2>
+<p>Oct. 26, 2018</p>
+<ul class="simple">
+<li>Updated Reaction class to parse strings</li>
+<li>New Shomate class</li>
+<li>New eos module (Equations of state)</li>
+<li>New PhaseDiagram class</li>
+<li>New EinsteinVib class</li>
+<li>New functions to read species and reactions from Chemkin surf.inp and gas.inp files</li>
+</ul>
+</div>
 </div>
 
 
@@ -188,10 +186,8 @@ Referencing is handled by the <code class="docutils literal notranslate"><span c
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="io.html" class="btn btn-neutral float-right" title="Input and Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="examples.html" class="btn btn-neutral" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="constants.html" class="btn btn-neutral" title="Constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
