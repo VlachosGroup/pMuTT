@@ -6,7 +6,6 @@ Operations related to the Zacros wrapper
 """
 
 import numpy as np
-from ase.io import write
 from pMuTT import constants as c
 from pMuTT import get_molecular_weight as mw
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
@@ -18,10 +17,10 @@ class Zacros(BaseThermo):
     Inherits from pMuTT.models.empirical.BaseThermo
     """
     def __init__(self, A_st=None, atoms=None, symmetrynumber=None,
-                 inertia=None, geometry=None, vib_energies=None,
+                 inertia=None, geometry=None, vib_wavenumbers=None,
                  potentialenergy=None, **kwargs):
         super().__init__(atoms=atoms, symmetrynumber=symmetrynumber,
-                         geometry=geometry, vib_energies=vib_energies,
+                         geometry=geometry, vib_wavenumbers=vib_wavenumbers,
                          potentialenergy=potentialenergy, **kwargs)
         self.A_st = A_st
         self.atoms = atoms
@@ -29,11 +28,11 @@ class Zacros(BaseThermo):
         self.symmetrynumber = symmetrynumber
         self.inertia = inertia
         self.etotal = potentialenergy
-        self.vib_energies = vib_energies
-        self.theta = np.array(vib_energies) / c.kb('eV/K')
-        self.zpe = sum(np.array(vib_energies)/2.) *\
+        self.vib_energies = np.array(vib_wavenumbers)/8065.5
+        self.theta = np.array(self.vib_energies) / c.kb('eV/K')
+        self.zpe = sum(np.array(self.vib_energies)/2.) *\
             c.convert_unit(from_='eV', to='kcal')*c.Na
-        if np.sum(vib_energies) != 0:
+        if np.sum(self.vib_energies) != 0:
             self.q_vib = np.product(np.divide(1, (1 - np.exp(-self.theta /
                                                              c.T0('K')))))
         if self.phase == 'G':
