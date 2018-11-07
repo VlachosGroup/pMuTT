@@ -28,7 +28,7 @@ class Zacros(BaseThermo):
         self.symmetrynumber = symmetrynumber
         self.inertia = inertia
         self.etotal = potentialenergy
-        self.vib_energies = np.array(vib_wavenumbers)/8065.5
+        self.vib_energies = c.wavenumber_to_energy(np.array(vib_wavenumbers))
         self.theta = np.array(self.vib_energies) / c.kb('eV/K')
         self.zpe = sum(np.array(self.vib_energies)/2.) *\
             c.convert_unit(from_='eV', to='kcal')*c.Na
