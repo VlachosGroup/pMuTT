@@ -337,8 +337,12 @@ def get_shomate_HoRT(a, T):
     T = np.array(T)
     t = T/1000.
     t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.] 
-                     for x in t])
-    return np.dot(t_arr, a)/(c.R('kJ/mol/K')*T)
+                     for x in t])        
+    HoRT = np.dot(t_arr, a)/(c.R('kJ/mol/K')*T)
+    if len(HoRT) == 1:
+        return HoRT[0]
+    else:
+        return HoRT
 
 def get_shomate_SoR(a, T):
     """Calculates the dimensionless entropy using Shomate polynomial form
@@ -364,7 +368,11 @@ def get_shomate_SoR(a, T):
     t = T/1000.
     t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.] 
                      for x in t])
-    return np.dot(t_arr, a)/c.R('J/mol/K')
+    SoR = np.dot(t_arr, a)/c.R('J/mol/K')
+    if len(SoR) == 1:
+        return SoR[0]
+    else:
+        return SoR
 
 
 def get_shomate_GoRT(a, T):

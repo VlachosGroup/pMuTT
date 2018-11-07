@@ -128,7 +128,7 @@ class BaseThermo:
         Heat Capacity
         '''
         ax[0].set_title('Specie: {}'.format(self.name))
-        Cp_plot = np.array([self.get_CpoR(T=T_i) for T_i in T])
+        Cp_plot = self.get_CpoR(T=T)
         if Cp_units is None:
             ax[0].set_ylabel('Cp/R')
         else:
@@ -139,7 +139,7 @@ class BaseThermo:
         '''
         Enthalpy
         '''
-        H_plot = np.array([self.get_HoRT(T=T_i) for T_i in T])
+        H_plot = self.get_HoRT(T=T)
         if H_units is None:
             ax[1].set_ylabel('H/RT')
         else:
@@ -150,7 +150,7 @@ class BaseThermo:
         '''
         Entropy
         '''
-        S_plot = np.array([self.get_SoR(T=T_i) for T_i in T])
+        S_plot = self.get_SoR(T=T)
         if S_units is None:
             ax[2].set_ylabel('S/R')
         else:
@@ -162,7 +162,7 @@ class BaseThermo:
         Gibbs energy
         '''
         ax[3].set_xlabel('Temperature (K)')
-        G_plot = np.array([self.get_GoRT(T=T_i) for T_i in T])
+        G_plot = self.get_GoRT(T=T)
         if G_units is None:
             ax[3].set_ylabel('G/RT')
         else:
@@ -235,7 +235,7 @@ class BaseThermo:
         '''
         Enthalpy
         '''
-        H_plot = np.array([self.statmech_model.get_HoRT(T=T_i) for T_i in T])
+        H_plot = self.statmech_model.get_HoRT(T=T)
         if self.references is not None:
             H_plot += self.references.get_HoRT_offset(elements=self.elements,
                                                       T=T)
@@ -250,7 +250,7 @@ class BaseThermo:
         '''
         Entropy
         '''
-        S_plot = np.array([self.statmech_model.get_SoR(T=T) for T_i in T])
+        S_plot = self.statmech_model.get_SoR(T=T)
         if S_units is None:
             ax[2].set_ylabel('S/R')
         else:
@@ -262,7 +262,7 @@ class BaseThermo:
         Gibbs energy
         '''
         ax[3].set_xlabel('Temperature (K)')
-        G_plot = np.array([self.statmech_model.get_GoRT(T=T_i) for T_i in T])
+        G_plot = self.statmech_model.get_GoRT(T=T)
         if self.references is not None:
             G_plot += self.references.get_HoRT_offset(elements=self.elements,
                                                       T=T)
