@@ -1,0 +1,21 @@
+{
+ "class": "<class 'pMuTT.models.empirical.shomate.Shomate'>",
+ "name": "CH3OH",
+ "phase": null,
+ "elements": null,
+ "notes": null,
+ "references": null,
+ "statmech_model": null,
+ "a": [
+  20.559062051378444,
+  95.61493492328495,
+  -31.306096957035635,
+  3.514060046069981,
+  0.025109140306619166,
+  -215.02560486141684,
+  237.77377186255637,
+  205.0
+ ],
+ "T_low": 50.0,
+ "T_high": 3000.0
+}
