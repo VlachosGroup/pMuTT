@@ -4,7 +4,7 @@ import re
 import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
-from pMuTT import _force_pass_arguments
+from pMuTT import _force_pass_arguments, _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
@@ -30,6 +30,19 @@ class Reaction:
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
                  transition_state=None, transition_state_stoich=None):
+        # If any of the entries were not iterable, assign them to a list
+        if not _is_iterable(reactants):
+            reactants = [reactants]
+        if not _is_iterable(reactants_stoich):
+            reactants_stoich = [reactants_stoich]
+        if not _is_iterable(products):
+            products = [products]
+        if not _is_iterable(products_stoich):
+            products_stoich = [products_stoich]
+        if not _is_iterable(transition_state):
+            transition_state = [transition_state]
+        if not _is_iterable(transition_state_stoich):
+            transition_state_stoich = [transition_state_stoich]
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
         self.products = products
@@ -66,16 +79,17 @@ class Reaction:
         if reactant_elements != product_elements:
             raise ValueError('Number of elements in reactants and products do '
                              'not agree.\nReactant count: {}\n'
-                             'Product count: {}'.format(reactant_elements, \
+                             'Product count: {}'.format(reactant_elements, 
                                                         product_elements))
 
-        if self.transition_state is not None:
-            TS_elements = _count_elements((self.transition_state,), (1.,))
+        if self.transition_state != [None]:
+            TS_elements = _count_elements(self.transition_state, 
+                                          self.transition_state_stoich)
             if reactant_elements != TS_elements:
                 raise ValueError('Number of elements in reactants and '
                                  'transition state do not agree.\n'
                                  'Reactant count: {}\n'
-                                 'Product count: {}'.format(reactant_elements, \
+                                 'Product count: {}'.format(reactant_elements,
                                                             TS_elements))
 
 

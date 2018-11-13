@@ -11,6 +11,7 @@ from pprint import pprint
 from warnings import warn
 import numpy as np
 from scipy.stats import variation
+from pMuTT import _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 from pMuTT.models.empirical import BaseThermo
@@ -106,16 +107,15 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        try:
-            iter(T)
-        except TypeError:
-            a = self.get_a(T=T)
-            CpoR = get_nasa_CpoR(a=a, T=T)
-        else:
+        if _is_iterable(T):
             CpoR = np.zeros(len(T))
             for i, T_i in enumerate(T):
                 a = self.get_a(T_i)
                 CpoR[i] = get_nasa_CpoR(a=a, T=T_i)
+        else:
+            a = self.get_a(T=T)
+            CpoR = get_nasa_CpoR(a=a, T=T)
+
         return CpoR
 
     def get_HoRT(self, T):
@@ -132,16 +132,14 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        try:
-            iter(T)
-        except TypeError:
-            a = self.get_a(T=T)
-            HoRT = get_nasa_HoRT(a=a, T=T)
-        else:
+        if _is_iterable(T):
             HoRT = np.zeros_like(T)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 HoRT[i] = get_nasa_HoRT(a=a, T=T_i)
+        else:
+            a = self.get_a(T=T)
+            HoRT = get_nasa_HoRT(a=a, T=T)
         return HoRT
 
     def get_SoR(self, T):
@@ -158,16 +156,14 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        try:
-            iter(T)
-        except TypeError:
-            a = self.get_a(T=T)
-            SoR = get_nasa_SoR(a=a, T=T)
-        else:
+        if _is_iterable(T):
             SoR = np.zeros_like(T)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 SoR[i] = get_nasa_SoR(a=a, T=T_i)
+        else:
+            a = self.get_a(T=T)
+            SoR = get_nasa_SoR(a=a, T=T)
         return SoR
 
     def get_GoRT(self, T):
@@ -184,16 +180,14 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        try:
-            iter(T)
-        except TypeError:
-            a = self.get_a(T=T)
-            GoRT = get_nasa_GoRT(a=a, T=T)
-        else:
+        if _is_iterable(T):
             GoRT = np.zeros_like(T)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 GoRT[i] = get_nasa_GoRT(a=a, T=T_i)
+        else:
+            a = self.get_a(T=T)
+            GoRT = get_nasa_GoRT(a=a, T=T)
         return GoRT
 
     @classmethod
@@ -295,9 +289,7 @@ class Nasa(BaseThermo):
         # Check to see if specified T_mid's are in T and, if not,
         # insert them into T.
             # If a single value for T_mid is chosen, convert to a tuple
-            try:
-                iter(T_mid)
-            except TypeError:
+            if not _is_iterable(T_mid):
                 T_mid = (T_mid,)
             for x in range(0, len(T_mid)):
                 if np.where(T == T_mid[x])[0].size == 0:
@@ -397,9 +389,7 @@ def _fit_CpoR(T, CpoR, T_mid=None):
         T_mid = T[5:-5]
 
     # If a single value for T_mid is chosen, convert to a tuple
-    try:
-        iter(T_mid)
-    except TypeError:
+    if not _is_iterable(T_mid):
         T_mid = (T_mid,)
 
     # Initialize parameters for T_mid optimization

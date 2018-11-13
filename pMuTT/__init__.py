@@ -116,6 +116,30 @@ def _force_pass_arguments(fn, **kwargs):
     else:
         return _pass_expected_arguments(fn, **kwargs)
 
+def _is_iterable(val):
+    """
+    Checks if the input if an iterable. This function will return False if a 
+    string is passed due to its use in pMuTT.
+
+    Parameters
+    ----------
+        val : iterable or non-iterable
+            Value to check if iterable
+    Returns
+    -------
+        is_iterable : bool
+            True if iterable. False if not iterable or string.
+    """
+    if isinstance(val, str):
+        return False
+    else:
+        # If it's not a string, check if it's iterable
+        try:
+            iter(val)
+        except TypeError:
+            return False
+        else:
+            return True
 
 def parse_formula(formula):
     """Parses chemical formula into its elements and returns it as a

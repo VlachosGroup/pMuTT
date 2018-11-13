@@ -116,7 +116,7 @@ class TestReaction(unittest.TestCase):
                      'references': None,
                      'statmech_model': None}],
                 'reactants_stoich': [1.0, 0.5],
-                'transition_state': None}
+                'transition_state': [None]}
 
         '''Reactions using StatMech'''
         ideal_gas_param = presets['idealgas']
@@ -401,6 +401,7 @@ class TestReaction(unittest.TestCase):
                          self.rxn_sm)
 
     def test_to_dict(self):
+        self.maxDiff = None
         self.assertEqual(self.rxn_nasa.to_dict(), self.rxn_nasa_dict)
 
 

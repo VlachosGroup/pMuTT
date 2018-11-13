@@ -9,6 +9,7 @@ import inspect
 import numpy as np
 from scipy.optimize import curve_fit
 from scipy.stats import variation
+from pMuTT import _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 from pMuTT.models.empirical import BaseThermo
@@ -304,9 +305,7 @@ def get_shomate_CpoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    try:
-        iter(T)
-    except TypeError:
+    if not _is_iterable(T):
         T = [T]
     T = np.array(T)
     t = T/1000.
@@ -330,19 +329,21 @@ def get_shomate_HoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    try:
-        iter(T)
-    except TypeError:
+    if _is_iterable(T):
+        T_iterable = True
+    else:
+        T_iterable = False
         T = [T]
+
     T = np.array(T)
     t = T/1000.
     t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.] 
                      for x in t])        
     HoRT = np.dot(t_arr, a)/(c.R('kJ/mol/K')*T)
-    if len(HoRT) == 1:
-        return HoRT[0]
-    else:
+    if T_iterable:
         return HoRT
+    else:
+        return HoRT[0]        
 
 def get_shomate_SoR(a, T):
     """Calculates the dimensionless entropy using Shomate polynomial form
@@ -360,19 +361,20 @@ def get_shomate_SoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    try:
-        iter(T)
-    except TypeError:
+    if _is_iterable(T):
+        T_iterable = True
+    else:
+        T_iterable = False
         T = [T]
     T = np.array(T)
     t = T/1000.
     t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.] 
                      for x in t])
     SoR = np.dot(t_arr, a)/c.R('J/mol/K')
-    if len(SoR) == 1:
-        return SoR[0]
-    else:
+    if T_iterable:
         return SoR
+    else:
+        return SoR[0]
 
 
 def get_shomate_GoRT(a, T):
