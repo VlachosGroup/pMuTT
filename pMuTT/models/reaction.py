@@ -583,7 +583,7 @@ class Reaction:
                 Pre-exponential factor  
         """
         return c.kb('J/K')*T/c.h('J s')\
-               *np.exp(-self.get_SoR_act(rev=rev, T=c.T0('K'), **kwargs))
+               *np.exp(self.get_SoR_act(rev=rev, T=c.T0('K'), **kwargs))
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
