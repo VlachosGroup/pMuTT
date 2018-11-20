@@ -8,6 +8,7 @@ from pMuTT import _force_pass_arguments, _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
+
 class Reaction:
     """Represents a chemical reaction
 
@@ -24,7 +25,7 @@ class Reaction:
         transition_state : pMuTT model object, optional
             Transition state specie. Default is None
         transition_state_stoich : list of float, optional
-            Stoichiometric quantities of transition state species. 
+            Stoichiometric quantities of transition state species.
             Default is None
     """
 
@@ -50,7 +51,6 @@ class Reaction:
         self.transition_state = transition_state
         self.transition_state_stoich = transition_state_stoich
 
-
     def __eq__(self, other):
         try:
             other_dict = other.to_dict()
@@ -63,27 +63,27 @@ class Reaction:
         return self.to_str()
 
     def check_element_balance(self):
-        """Checks the reactants, products and transition state elemental 
+        """Checks the reactants, products and transition state elemental
         composition
 
         Raises
         ------
             ValueError
-                Raised if the reactants, products and/or transition state 
+                Raised if the reactants, products and/or transition state
                 element composition does not agree.
         """
-        reactant_elements = _count_elements(self.reactants, 
-                                           self.reactants_stoich)
-        product_elements = _count_elements(self.products, 
-                                          self.products_stoich)
+        reactant_elements = _count_elements(self.reactants,
+                                            self.reactants_stoich)
+        product_elements = _count_elements(self.products,
+                                           self.products_stoich)
         if reactant_elements != product_elements:
             raise ValueError('Number of elements in reactants and products do '
                              'not agree.\nReactant count: {}\n'
-                             'Product count: {}'.format(reactant_elements, 
+                             'Product count: {}'.format(reactant_elements,
                                                         product_elements))
 
         if self.transition_state != [None]:
-            TS_elements = _count_elements(self.transition_state, 
+            TS_elements = _count_elements(self.transition_state,
                                           self.transition_state_stoich)
             if reactant_elements != TS_elements:
                 raise ValueError('Number of elements in reactants and '
@@ -91,7 +91,6 @@ class Reaction:
                                  'Reactant count: {}\n'
                                  'Product count: {}'.format(reactant_elements,
                                                             TS_elements))
-
 
     def get_delta_q(self, rev=False, **kwargs):
         """Gets change in partition function between reactants and products
@@ -105,10 +104,10 @@ class Reaction:
             delta_q : float
                 Change in partition function between reactants and products
         """
-        delta_q = _get_q_rxn(initial_state=self.reactants, 
+        delta_q = _get_q_rxn(initial_state=self.reactants,
                              initial_state_stoich=self.reactants_stoich,
-                             final_state=self.products, 
-                             final_state_stoich=self.products_stoich, 
+                             final_state=self.products,
+                             final_state_stoich=self.products_stoich,
                              **kwargs)
         if rev:
             return 1./delta_q
@@ -116,13 +115,13 @@ class Reaction:
             return delta_q
 
     def get_delta_CvoR(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants and 
+        """Gets change in dimensionless heat capacity between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate heat capacity
@@ -131,25 +130,24 @@ class Reaction:
             delta_CvoR : float
                 Change in heat capacity between reactants and products
         """
-        delta_CvoR = _get_CvoR_rxn(initial_state=self.reactants, 
+        delta_CvoR = _get_CvoR_rxn(initial_state=self.reactants,
                                    initial_state_stoich=self.reactants_stoich,
-                                   final_state=self.products, 
-                                   final_state_stoich=self.products_stoich, 
+                                   final_state=self.products,
+                                   final_state_stoich=self.products_stoich,
                                    **kwargs)
         if rev:
             return -delta_CvoR
         else:
             return delta_CvoR
 
-
     def get_delta_CpoR(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants and 
+        """Gets change in dimensionless heat capacity between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate heat capacity
@@ -158,25 +156,24 @@ class Reaction:
             delta_CvoR : float
                 Change in heat capacity between reactants and products
         """
-        delta_CpoR = _get_CpoR_rxn(initial_state=self.reactants, 
+        delta_CpoR = _get_CpoR_rxn(initial_state=self.reactants,
                                    initial_state_stoich=self.reactants_stoich,
-                                   final_state=self.products, 
-                                   final_state_stoich=self.products_stoich, 
+                                   final_state=self.products,
+                                   final_state_stoich=self.products_stoich,
                                    **kwargs)
         if rev:
             return -delta_CpoR
         else:
             return delta_CpoR
 
-
     def get_delta_UoRT(self, rev=False, **kwargs):
-        """Gets change in dimensionless internal energy between reactants and 
+        """Gets change in dimensionless internal energy between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate internal energy
@@ -185,16 +182,15 @@ class Reaction:
             delta_UoRT : float
                 Change in internal energy between reactants and products
         """
-        delta_UoRT =  _get_UoRT_rxn(initial_state=self.reactants, 
-                                    initial_state_stoich=self.reactants_stoich,
-                                    final_state=self.products, 
-                                    final_state_stoich=self.products_stoich, 
-                                    **kwargs)
+        delta_UoRT = _get_UoRT_rxn(initial_state=self.reactants,
+                                   initial_state_stoich=self.reactants_stoich,
+                                   final_state=self.products,
+                                   final_state_stoich=self.products_stoich,
+                                   **kwargs)
         if rev:
             return -delta_UoRT
         else:
             return delta_UoRT
-
 
     def get_delta_HoRT(self, rev=False, **kwargs):
         """Gets change in dimensionless enthalpy between reactants and products
@@ -202,7 +198,7 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate enthalpy
@@ -211,11 +207,11 @@ class Reaction:
             delta_HoRT : float
                 Change in enthalpy between reactants and products
         """
-        delta_HoRT =  _get_HoRT_rxn(initial_state=self.reactants, 
-                                    initial_state_stoich=self.reactants_stoich,
-                                    final_state=self.products, 
-                                    final_state_stoich=self.products_stoich, 
-                                    **kwargs)
+        delta_HoRT = _get_HoRT_rxn(initial_state=self.reactants,
+                                   initial_state_stoich=self.reactants_stoich,
+                                   final_state=self.products,
+                                   final_state_stoich=self.products_stoich,
+                                   **kwargs)
         if rev:
             return -delta_HoRT
         else:
@@ -227,7 +223,7 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate entropy
@@ -235,26 +231,25 @@ class Reaction:
         -------
             delta_SoR : float
                 Change in entropy between reactants and products
-        """        
-        delta_SoR =  _get_SoR_rxn(initial_state=self.reactants, 
-                                  initial_state_stoich=self.reactants_stoich,
-                                  final_state=self.products, 
-                                  final_state_stoich=self.products_stoich, 
-                                  **kwargs)
+        """
+        delta_SoR = _get_SoR_rxn(initial_state=self.reactants,
+                                 initial_state_stoich=self.reactants_stoich,
+                                 final_state=self.products,
+                                 final_state_stoich=self.products_stoich,
+                                 **kwargs)
         if rev:
             return -delta_SoR
         else:
             return delta_SoR
 
-
     def get_delta_AoRT(self, rev=False, **kwargs):
-        """Gets change in dimensionless Helmholtz energy between reactants and 
+        """Gets change in dimensionless Helmholtz energy between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate Helmholtz energy
@@ -262,26 +257,25 @@ class Reaction:
         -------
             delta_AoRT : float
                 Change in Helmholtz energy between reactants and products
-        """          
-        delta_AoRT = _get_AoRT_rxn(initial_state=self.reactants, 
+        """
+        delta_AoRT = _get_AoRT_rxn(initial_state=self.reactants,
                                    initial_state_stoich=self.reactants_stoich,
-                                   final_state=self.products, 
-                                   final_state_stoich=self.products_stoich, 
+                                   final_state=self.products,
+                                   final_state_stoich=self.products_stoich,
                                    **kwargs)
         if rev:
             return -delta_AoRT
         else:
             return delta_AoRT
 
-
     def get_delta_GoRT(self, rev=False, **kwargs):
-        """Gets change in dimensionless Gibbs energy between reactants and 
+        """Gets change in dimensionless Gibbs energy between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate Gibbs energy
@@ -289,12 +283,12 @@ class Reaction:
         -------
             delta_GoRT : float
                 Change in Gibbs energy between reactants and products
-        """        
-        delta_GoRT =  _get_GoRT_rxn(initial_state=self.reactants, 
-                                    initial_state_stoich=self.reactants_stoich,
-                                    final_state=self.products, 
-                                    final_state_stoich=self.products_stoich, 
-                                    **kwargs)
+        """
+        delta_GoRT = _get_GoRT_rxn(initial_state=self.reactants,
+                                   initial_state_stoich=self.reactants_stoich,
+                                   final_state=self.products,
+                                   final_state_stoich=self.products_stoich,
+                                   **kwargs)
         if rev:
             return -delta_GoRT
         else:
@@ -306,7 +300,7 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate equilibrium constant
@@ -317,15 +311,14 @@ class Reaction:
         """
         return np.exp(-self.get_delta_GoRT(rev=rev, **kwargs))
 
-    
     def get_q_act(self, rev=False, **kwargs):
-        """Gets change in partition function between reactants (or products) and 
-        transition state
+        """Gets change in partition function between reactants (or products)
+        and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate partition function
@@ -336,242 +329,236 @@ class Reaction:
                 state
         """
         if rev:
-            return _get_q_rxn(initial_state=self.products, 
+            return _get_q_rxn(initial_state=self.products,
                               initial_state_stoich=self.products_stoich,
-                              final_state=self.transition_state, 
+                              final_state=self.transition_state,
                               final_state_stoich=self.transition_state_stoich,
                               **kwargs)
         else:
-            return _get_q_rxn(initial_state=self.reactants, 
+            return _get_q_rxn(initial_state=self.reactants,
                               initial_state_stoich=self.reactants_stoich,
-                              final_state=self.transition_state, 
+                              final_state=self.transition_state,
                               final_state_stoich=self.transition_state_stoich,
                               **kwargs)
 
     def get_CvoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants (or 
+        """Gets change in dimensionless heat capacity between reactants (or
         products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless heat capacity
         Returns
         -------
             CvoR_act : float
-                Change in dimensionless heat capacity between reactants and 
+                Change in dimensionless heat capacity between reactants and
                 transition state
         """
         if rev:
-            return _get_CvoR_rxn(initial_state=self.products, 
+            return _get_CvoR_rxn(initial_state=self.products,
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
-            return _get_CvoR_rxn(initial_state=self.reactants, 
+            return _get_CvoR_rxn(initial_state=self.reactants,
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
-
     def get_CpoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants (or 
+        """Gets change in dimensionless heat capacity between reactants (or
         products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless heat capacity
         Returns
         -------
             CpoR_act : float
-                Change in dimensionless heat capacity between reactants and 
+                Change in dimensionless heat capacity between reactants and
                 transition state
         """
         if rev:
-            return _get_CpoR_rxn(initial_state=self.products, 
+            return _get_CpoR_rxn(initial_state=self.products,
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
-            return _get_CpoR_rxn(initial_state=self.reactants, 
+            return _get_CpoR_rxn(initial_state=self.reactants,
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
-
     def get_UoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless internal energy between reactants (or 
+        """Gets change in dimensionless internal energy between reactants (or
         products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless internal energy
         Returns
         -------
             UoRT_act : float
-                Change in dimensionless internal energy between reactants and 
+                Change in dimensionless internal energy between reactants and
                 transition state
         """
         if rev:
-            return _get_UoRT_rxn(initial_state=self.products, 
+            return _get_UoRT_rxn(initial_state=self.products,
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
-            return _get_UoRT_rxn(initial_state=self.reactants, 
+            return _get_UoRT_rxn(initial_state=self.reactants,
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
-
     def get_HoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless enthalpy between reactants (or products) 
-        and transition state
+        """Gets change in dimensionless enthalpy between reactants
+        (or products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless enthalpy
         Returns
         -------
             HoRT_act : float
-                Change in dimensionless enthalpy between reactants and 
+                Change in dimensionless enthalpy between reactants and
                 transition state
         """
         if rev:
-            return _get_HoRT_rxn(initial_state=self.products, 
+            return _get_HoRT_rxn(initial_state=self.products,
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
-            return _get_HoRT_rxn(initial_state=self.reactants, 
+            return _get_HoRT_rxn(initial_state=self.reactants,
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
-
     def get_SoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless entropy between reactants (or products) 
+        """Gets change in dimensionless entropy between reactants (or products)
         and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless entropy
         Returns
         -------
             SoR_act : float
-                Change in dimensionless entropy between reactants and transition
-                state
+                Change in dimensionless entropy between reactants and
+                transition state
         """
         if rev:
-            return _get_SoR_rxn(initial_state=self.products, 
+            return _get_SoR_rxn(initial_state=self.products,
                                 initial_state_stoich=self.products_stoich,
-                                final_state=self.transition_state, 
+                                final_state=self.transition_state,
                                 final_state_stoich=self.transition_state_stoich,
                                 **kwargs)
         else:
-            return _get_SoR_rxn(initial_state=self.reactants, 
+            return _get_SoR_rxn(initial_state=self.reactants,
                                 initial_state_stoich=self.reactants_stoich,
-                                final_state=self.transition_state, 
+                                final_state=self.transition_state,
                                 final_state_stoich=self.transition_state_stoich,
                                 **kwargs)
 
-
     def get_AoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless Helmholtz energy between reactants (or 
+        """Gets change in dimensionless Helmholtz energy between reactants (or
         products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless Helmholtz energy
         Returns
         -------
             AoRT_act : float
-                Change in dimensionless Helmholtz energy between reactants and 
+                Change in dimensionless Helmholtz energy between reactants and
                 transition state
         """
         if rev:
-            return _get_AoRT_rxn(initial_state=self.products, 
+            return _get_AoRT_rxn(initial_state=self.products,
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
-            return _get_AoRT_rxn(initial_state=self.reactants, 
+            return _get_AoRT_rxn(initial_state=self.reactants,
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
-
     def get_GoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless Gibbs energy between reactants (or 
+        """Gets change in dimensionless Gibbs energy between reactants (or
         products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless Gibbs energy
         Returns
         -------
             GoRT_act : float
-                Change in dimensionless Gibbs energy between reactants and 
+                Change in dimensionless Gibbs energy between reactants and
                 transition state
         """
         if rev:
-            return _get_GoRT_rxn(initial_state=self.products, 
+            return _get_GoRT_rxn(initial_state=self.products,
                                  initial_state_stoich=self.products_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
         else:
-            return _get_GoRT_rxn(initial_state=self.reactants, 
+            return _get_GoRT_rxn(initial_state=self.reactants,
                                  initial_state_stoich=self.reactants_stoich,
-                                 final_state=self.transition_state, 
+                                 final_state=self.transition_state,
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
     def get_A(self, T=c.T0('K'), rev=False, **kwargs):
-        """Gets pre-exponential factor between reactants (or products) and 
+        """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             T : float, optional
                 Temperature in K. Default is standard temperature.
@@ -580,10 +567,10 @@ class Reaction:
         Returns
         -------
             A : float
-                Pre-exponential factor  
+                Pre-exponential factor
         """
         return c.kb('J/K')*T/c.h('J s')\
-               *np.exp(self.get_SoR_act(rev=rev, T=c.T0('K'), **kwargs))
+            * np.exp(self.get_SoR_act(rev=rev, T=c.T0('K'), **kwargs))
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
@@ -595,21 +582,21 @@ class Reaction:
             reaction_str : str
                 Reaction string.
             species : dict
-                Dictionary using the names as keys. If you have a list of 
+                Dictionary using the names as keys. If you have a list of
                 species, use pMuTT.models.pMuTT_list_to_dict to make a dict.
             species_delimiter : str, optional
-                Delimiter that separate species. Leading and trailing spaces 
+                Delimiter that separate species. Leading and trailing spaces
                 will be trimmed. Default is '+'
             reaction_delimiter : str, optional
-                Delimiter that separate sides of the reaction. Leading and 
+                Delimiter that separate sides of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
         Returns
         -------
-            Reaction : Reaction object        
+            Reaction : Reaction object
         """
-        (react_names, react_stoich, prod_names, prod_stoich, 
+        (react_names, react_stoich, prod_names, prod_stoich,
          ts_names, ts_stoich) = _parse_reaction(
-                reaction_str=reaction_str, 
+                reaction_str=reaction_str,
                 species_delimiter=species_delimiter,
                 reaction_delimiter=reaction_delimiter)
         reactants = [species[name] for name in react_names]
@@ -619,10 +606,10 @@ class Reaction:
         else:
             ts = [species[name] for name in ts_names]
         return cls(reactants=reactants, reactants_stoich=react_stoich,
-                   products=products, products_stoich=prod_stoich, 
+                   products=products, products_stoich=prod_stoich,
                    transition_state=ts, transition_state_stoich=ts_stoich)
 
-    def to_str(self, species_delimiter='+', reaction_delimiter = '='):
+    def to_str(self, species_delimiter='+', reaction_delimiter='='):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -649,16 +636,16 @@ class Reaction:
                     stoich=self.transition_state_stoich,
                     species_delimiter=species_delimiter)
             reaction_str += reaction_delimiter
-        
+
         # Write products
         reaction_str += _write_reaction_side(species=self.products,
-                                            stoich=self.products_stoich,
-                                            species_delimiter=species_delimiter)
+                                             stoich=self.products_stoich,
+                                             species_delimiter=species_delimiter)
         return reaction_str
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -668,7 +655,7 @@ class Reaction:
             'reactants': [reactant.to_dict() for reactant in self.reactants],
             'reactants_stoich': list(self.reactants_stoich),
             'products': [product.to_dict() for product in self.products],
-            'products_stoich': list(self.products_stoich)}            
+            'products_stoich': list(self.products_stoich)}
         try:
             obj_dict['transition_state'] = self.transition_state.to_dict()
         except AttributeError:
@@ -689,10 +676,10 @@ class Reaction:
             Reaction : Reaction object
         """
         json_obj = remove_class(json_obj)
-        json_obj['reactants'] = [json_to_pMuTT(reactant) 
+        json_obj['reactants'] = [json_to_pMuTT(reactant)
                                  for reactant in json_obj['reactants']]
-        json_obj['products'] = [json_to_pMuTT(product) 
-                                 for product in json_obj['products']]
+        json_obj['products'] = [json_to_pMuTT(product)
+                                for product in json_obj['products']]
         json_obj['transition_state'] = json_to_pMuTT(
                 json_obj['transition_state'])
         return cls(**json_obj)
@@ -704,26 +691,26 @@ class PhaseDiagram:
     Attributes
     ----------
         reactions : list of ``pMuTT.models.reaction.Reaction`` objects
-            Formation reactions for each phase. Reactions should be written 
+            Formation reactions for each phase. Reactions should be written
             with consistent reference species to obtain meaningful data.
         norm_factors : (N,) `numpy.ndarray`_ of float, optional
-            Used for normalizing Gibbs energies. These factors could be 
-            surface areas when calculating surface energies or if the 
-            reactions stoichiometry is not consistent. Default is an array of 
+            Used for normalizing Gibbs energies. These factors could be
+            surface areas when calculating surface energies or if the
+            reactions stoichiometry is not consistent. Default is an array of
             1. It should have the same length as reactions.
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
 
     def __init__(self, reactions, norm_factors=None):
-        self.reactions=reactions
+        self.reactions = reactions
         if norm_factors is None:
-            self.norm_factors=np.ones(len(reactions))
+            self.norm_factors = np.ones(len(reactions))
         else:
-            self.norm_factors=norm_factors
+            self.norm_factors = norm_factors
 
     def get_GoRT_1D(self, x_name, x_values, G_units=None, **kwargs):
-        """Calculates the Gibbs free energy for all the reactions for 1 varying 
+        """Calculates the Gibbs free energy for all the reactions for 1 varying
         parameter
 
         Parameters
@@ -731,7 +718,7 @@ class PhaseDiagram:
             x_name : str
                 Name of variable to vary
             x_values : iterable object
-                x values to use 
+                x values to use
             G_units : str, optional
                 Units for G. If None, uses GoRT. Default is None
             kwargs : keyword arguments
@@ -739,15 +726,15 @@ class PhaseDiagram:
         Returns
         -------
             GoRT : (M, N) `numpy.ndarray`_ of float
-                GoRT values. The first index corresponds to the number of 
-                reactions. The second index corresponds to the conditions 
+                GoRT values. The first index corresponds to the number of
+                reactions. The second index corresponds to the conditions
                 specified by x_values.
             stable_phases : (N,) `numpy.ndarray`_ of int
-                Each element of the array corresponds to the index of the most 
+                Each element of the array corresponds to the index of the most
                 stable phase at the x_values.
         """
         GoRT = np.zeros(shape=(len(self.reactions), len(x_values)))
-        for i, (reaction, norm_factor) in enumerate(zip(self.reactions, 
+        for i, (reaction, norm_factor) in enumerate(zip(self.reactions,
                                                         self.norm_factors)):
             for j, x in enumerate(x_values):
                 kwargs[x_name] = x
@@ -758,7 +745,7 @@ class PhaseDiagram:
                     GoRT[i, j] *= c.R('{}/K'.format(G_units))*kwargs['T']
         stable_phases = np.nanargmin(GoRT, axis=1)
         return (GoRT, stable_phases)
-    
+
     def plot_1D(self, x_name, x_values, G_units=None, **kwargs):
         """Make a 1D phase diagram.
 
@@ -767,7 +754,7 @@ class PhaseDiagram:
             x_name : str
                 Name of variable to vary
             x_values : iterable object
-                x values to use 
+                x values to use
             G_units : str, optional
                 Units for G. If None, uses GoRT. Default is None
             kwargs : keyword arguments
@@ -778,12 +765,13 @@ class PhaseDiagram:
                 Figure
             ax : `matplotlib.axes.Axes.axis`_
                 Axes of the plots.
- 
+
         .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
         .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
-        fig, ax = plt.subplots()         
-        GoRT, stable_phases = self.get_GoRT_1D(x_name=x_name, x_values=x_values, 
+        fig, ax = plt.subplots()
+        GoRT, stable_phases = self.get_GoRT_1D(x_name=x_name,
+                                               x_values=x_values,
                                                G_units=G_units, **kwargs)
         for GoRT_rxn, rxn in zip(GoRT, self.reactions):
             plt.plot(x_values, GoRT_rxn, label=rxn.to_str())
@@ -795,9 +783,9 @@ class PhaseDiagram:
             ax.set_ylabel('G ({})'.format(G_units))
         return (fig, ax)
 
-    def get_GoRT_2D(self, x1_name, x1_values, x2_name, x2_values, G_units=None, 
-                    **kwargs):
-        """Calculates the Gibbs free energy for all the reactions for two 
+    def get_GoRT_2D(self, x1_name, x1_values, x2_name, x2_values,
+                    G_units=None, **kwargs):
+        """Calculates the Gibbs free energy for all the reactions for two
         varying parameters
 
         Parameters
@@ -805,11 +793,11 @@ class PhaseDiagram:
             x1_name : str
                 Name of first variable to vary
             x1_values : iterable object
-                x1 values to use 
+                x1 values to use
             x2_name : str
                 Name of first variable to vary
             x2_values : iterable object
-                x2 values to use 
+                x2 values to use
             G_units : str, optional
                 Units for G. If None, uses GoRT. Default is None
             kwargs : keyword arguments
@@ -817,35 +805,36 @@ class PhaseDiagram:
         Returns
         -------
             GoRT : (M, N, O) `numpy.ndarray`_ of float
-                GoRT values. The first index corresponds to the number of 
-                reactions. The second index corresponds to the conditions 
+                GoRT values. The first index corresponds to the number of
+                reactions. The second index corresponds to the conditions
                 specified by x_values.
             stable_phases : (N, O) `numpy.ndarray`_ of int
-                Each element of the array corresponds to the index of the most 
+                Each element of the array corresponds to the index of the most
                 stable phase at the x_values.
         """
         GoRT = np.zeros(
                 shape=(len(self.reactions), len(x1_values), len(x2_values)))
-        for i, (reaction, norm_factor) in enumerate(zip(self.reactions, 
+        for i, (reaction, norm_factor) in enumerate(zip(self.reactions,
                                                         self.norm_factors)):
             for j, x1 in enumerate(x1_values):
                 kwargs[x1_name] = x1
                 for k, x2 in enumerate(x2_values):
                     kwargs[x2_name] = x2
                     GoRT[i, j, k] = \
-                            reaction.get_delta_GoRT(**kwargs)/norm_factor
+                        reaction.get_delta_GoRT(**kwargs)/norm_factor
                     # Add unit corrections
                     if G_units is not None:
-                        GoRT[i, j, k] *= c.R('{}/K'.format(G_units))*kwargs['T']
+                        GoRT[i, j, k] *=\
+                            c.R('{}/K'.format(G_units))*kwargs['T']
         # Take a transpose
         GoRT_T = GoRT.transpose((1, 2, 0))
         stable_phases = np.zeros((len(x1_values), len(x2_values)))
         for i, GoRT_row in enumerate(GoRT_T):
             stable_phases[i, :] = np.nanargmin(GoRT_row, axis=1)
-        
+
         return GoRT, stable_phases
 
-    def plot_2D(self, x1_name, x1_values, x2_name, x2_values, G_units=None, 
+    def plot_2D(self, x1_name, x1_values, x2_name, x2_values, G_units=None,
                 **kwargs):
         """Make a 2D phase diagram.
 
@@ -854,11 +843,11 @@ class PhaseDiagram:
             x1_name : str
                 Name of first variable to vary
             x1_values : iterable object
-                x1 values to use 
+                x1 values to use
             x2_name : str
                 Name of first variable to vary
             x2_values : iterable object
-                x2 values to use 
+                x2 values to use
             G_units : str, optional
                 Units for G. If None, uses GoRT. Default is None
             kwargs : keyword arguments
@@ -881,19 +870,19 @@ class PhaseDiagram:
         """
         # Process input data
         x2_mesh, x1_mesh = np.meshgrid(x2_values, x1_values)
-        GoRT, stable_phases = self.get_GoRT_2D(x1_name=x1_name, 
+        GoRT, stable_phases = self.get_GoRT_2D(x1_name=x1_name,
                                                x1_values=x1_values,
-                                               x2_name=x2_name, 
-                                               x2_values=x2_values, 
+                                               x2_name=x2_name,
+                                               x2_values=x2_values,
                                                G_units=G_units, **kwargs)
 
         fig, ax = plt.subplots()
         # Choosing color palette
         cmap = plt.get_cmap('viridis')
-        norm = matplotlib.colors.BoundaryNorm(np.arange(len(self.reactions)+1), 
+        norm = matplotlib.colors.BoundaryNorm(np.arange(len(self.reactions)+1),
                                               cmap.N)
         # Create colormap
-        c = plt.pcolormesh(x1_mesh, x2_mesh, stable_phases, cmap=cmap, 
+        c = plt.pcolormesh(x1_mesh, x2_mesh, stable_phases, cmap=cmap,
                            norm=norm, vmin=0, vmax=len(self.reactions))
         # Set colorbar
         cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions))+0.5)
@@ -904,7 +893,7 @@ class PhaseDiagram:
         ax.set_ylabel(x2_name)
         return (fig, ax, c, cbar)
 
-def _get_q_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_q_rxn(initial_state, initial_state_stoich, final_state,
                final_state_stoich, **kwargs):
     """Helper function to calculate partition function
 
@@ -933,7 +922,7 @@ def _get_q_rxn(initial_state, initial_state_stoich, final_state,
     return q
 
 
-def _get_CvoR_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_CvoR_rxn(initial_state, initial_state_stoich, final_state,
                   final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless heat capacity
 
@@ -962,7 +951,7 @@ def _get_CvoR_rxn(initial_state, initial_state_stoich, final_state,
     return CvoR
 
 
-def _get_CpoR_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_CpoR_rxn(initial_state, initial_state_stoich, final_state,
                   final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless heat capacity
 
@@ -991,7 +980,7 @@ def _get_CpoR_rxn(initial_state, initial_state_stoich, final_state,
     return CpoR
 
 
-def _get_UoRT_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_UoRT_rxn(initial_state, initial_state_stoich, final_state,
                   final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless internal energy
 
@@ -1020,7 +1009,7 @@ def _get_UoRT_rxn(initial_state, initial_state_stoich, final_state,
     return UoRT
 
 
-def _get_HoRT_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_HoRT_rxn(initial_state, initial_state_stoich, final_state,
                   final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless enthalpy
 
@@ -1049,7 +1038,7 @@ def _get_HoRT_rxn(initial_state, initial_state_stoich, final_state,
     return HoRT
 
 
-def _get_SoR_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_SoR_rxn(initial_state, initial_state_stoich, final_state,
                  final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless entropy
 
@@ -1078,7 +1067,7 @@ def _get_SoR_rxn(initial_state, initial_state_stoich, final_state,
     return SoR
 
 
-def _get_AoRT_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_AoRT_rxn(initial_state, initial_state_stoich, final_state,
                   final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless Helholtz energy
 
@@ -1097,7 +1086,8 @@ def _get_AoRT_rxn(initial_state, initial_state_stoich, final_state,
     Returns
     -------
         AoRT : float
-            Dimensionless Helmholtz energy between initial state and final state
+            Dimensionless Helmholtz energy between initial state and
+            final state
     """
     AoRT = 0.
     for specie, stoich in zip(final_state, final_state_stoich):
@@ -1107,7 +1097,7 @@ def _get_AoRT_rxn(initial_state, initial_state_stoich, final_state,
     return AoRT
 
 
-def _get_GoRT_rxn(initial_state, initial_state_stoich, final_state, 
+def _get_GoRT_rxn(initial_state, initial_state_stoich, final_state,
                   final_state_stoich, **kwargs):
     """Helper function to calculate dimensionless Gibbs energy
 
@@ -1139,13 +1129,13 @@ def _get_GoRT_rxn(initial_state, initial_state_stoich, final_state,
 def _parse_reaction_side(reaction_str, species_delimiter='+'):
     """Takes the reactants/products side of a reaction string and parse it
     into species and stoichiometric amounts
-    
+
     Parameters
     ----------
         reaction_str : str
             Reactant or product side of reaction
         species_delimiters : str
-            Delimiter that separate species. Leading and trailing spaces will 
+            Delimiter that separate species. Leading and trailing spaces will
             be trimmed. Default is '+'
 
     Returns
@@ -1161,9 +1151,9 @@ def _parse_reaction_side(reaction_str, species_delimiter='+'):
     for specie in species_str:
         # Strip spaces for easier searching
         specie = specie.strip()
-        # Search for int and float at the start of a string. 
+        # Search for int and float at the start of a string.
         # If there is no numbers, returns None.
-        stoich_search = re.search('^\d+\.?\d*', specie)
+        stoich_search = re.search(r'^\d+\.?\d*', specie)
         if stoich_search is None:
             # No stoichiometric coefficient so assign 1.
             species.append(specie.strip())
@@ -1175,23 +1165,23 @@ def _parse_reaction_side(reaction_str, species_delimiter='+'):
             species.append(specie[trim_len:].strip())
             stoichiometry.append(float(specie_stoich))
     return (species, stoichiometry)
-    
 
-def _parse_reaction(reaction_str, species_delimiter='+', 
+
+def _parse_reaction(reaction_str, species_delimiter='+',
                     reaction_delimiter='='):
     """Takes a reaction string and parses it into reactants and products.
-    
+
     Parameters
     ----------
         reaction_str : str
-            Reaction string. A transition state can be specified by using two 
+            Reaction string. A transition state can be specified by using two
             reaction delimiters.
             e.g. H2 + 0.5O2 = H2O_TS = H2O
         species_delimiter : str, optional
-            Delimiter that separate species. Leading and trailing spaces will 
+            Delimiter that separate species. Leading and trailing spaces will
             be trimmed. Default is '+'
         reaction_delimiter : str, optional
-            Delimiter that separate sides of the reaction. Leading and trailing 
+            Delimiter that separate sides of the reaction. Leading and trailing
             spaces will be trimmed. Default is '='
     Returns
     -------
@@ -1204,10 +1194,10 @@ def _parse_reaction(reaction_str, species_delimiter='+',
         products_stoich : list of float
             Stoichiometry of products
         transition_state : list of str
-            Transition state names. Returns None if reaction does not have a 
+            Transition state names. Returns None if reaction does not have a
             transition state.
         transition_state_stoich : list of float
-            Stoichiometry of transition state. Returns None if the reaction 
+            Stoichiometry of transition state. Returns None if the reaction
             does not have a transition state.
     """
     # Separate sides of reaction
@@ -1226,13 +1216,13 @@ def _parse_reaction(reaction_str, species_delimiter='+',
     if len(reaction_sides) > 2:
         transition_state_side = reaction_sides[1]
         transition_state, transition_state_stoich = _parse_reaction_side(
-                reaction_str=transition_state_side, 
+                reaction_str=transition_state_side,
                 species_delimiter=species_delimiter)
     else:
         transition_state = None
         transition_state_stoich = None
 
-    return (reactants, reactants_stoich, products, products_stoich, 
+    return (reactants, reactants_stoich, products, products_stoich,
             transition_state, transition_state_stoich)
 
 
@@ -1256,8 +1246,8 @@ def _write_reaction_side(species, stoich, species_delimiter='+'):
         if i == 0:
             reaction_str = '{}{}'.format(stoich_val, specie.name)
         else:
-            reaction_str += '{}{}{}'.format(species_delimiter, stoich_val, 
-                                             specie.name)
+            reaction_str += '{}{}{}'.format(species_delimiter, stoich_val,
+                                            specie.name)
     return reaction_str
 
 
