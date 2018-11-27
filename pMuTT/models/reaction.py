@@ -306,8 +306,8 @@ class Reaction:
                 Parameters required to calculate equilibrium constant
         Returns
         -------
-            delta_GoRT : float
-                Change in equilibrium constant between reactants and products
+            K : float
+                Equilibrium constant between reactants and products
         """
         return np.exp(-self.get_delta_GoRT(rev=rev, **kwargs))
 
