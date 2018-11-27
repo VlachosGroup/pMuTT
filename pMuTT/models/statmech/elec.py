@@ -35,7 +35,7 @@ class IdealElec:
             return False
         return self.to_dict() == other_dict
 
-    def get_q(self, T, ignore_q_elec=False):
+    def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function
 
         :math:`q^{elec}=\\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
