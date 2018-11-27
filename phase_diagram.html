@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Phase Diagrams &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Phase Diagrams &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -163,7 +163,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="phase-diagrams">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="phase-diagrams">
 <span id="phase-diagram"></span><h1>Phase Diagrams<a class="headerlink" href="#phase-diagrams" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="phasediagram">
 <h2>PhaseDiagram<a class="headerlink" href="#phasediagram" title="Permalink to this headline">¶</a></h2>
@@ -359,7 +378,7 @@ stable phase at the x_values.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -370,6 +389,7 @@ stable phase at the x_values.</li>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

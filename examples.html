@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Examples &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Examples &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -165,7 +165,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="examples">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="examples">
 <span id="id1"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="ab-initio-data-to-empirical-data">
 <h2><em>Ab-initio</em> Data to Empirical Data<a class="headerlink" href="#ab-initio-data-to-empirical-data" title="Permalink to this headline">¶</a></h2>
@@ -182,11 +201,11 @@ For example, the <code class="docutils literal notranslate"><span class="pre">Ha
 and vibrational wavenumbers whereas <code class="docutils literal notranslate"><span class="pre">IdealGasThermo</span></code> requires the previously
 mentioned parameters and an atoms object, geometry, symmetry number, and spin.</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">species_path</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input data imported from Excel&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Input data imported from Excel&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">species_data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -214,14 +233,14 @@ It is typical to use gas-phase molecules since high-accuracy experimental data i
 The references are calculated for each atom type so the number of references should be greater than
 or equal to the number of elements. See the <a class="reference internal" href="referencing.html#referencing"><span class="std std-ref">Referencing</span></a> for more information.</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical</span> <span class="k">import</span> <span class="n">BaseThermo</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">References</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical</span> <span class="kn">import</span> <span class="n">BaseThermo</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="kn">import</span> <span class="n">References</span>
 
 <span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference data imported from Excel&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reference data imported from Excel&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">refs_input</span><span class="p">)</span>
 <span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">BaseThermo</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference data&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reference data&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">refs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -255,8 +274,8 @@ or equal to the number of elements. See the <a class="reference internal" href="
 <ol class="arabic simple" start="3">
 <li><strong>Fit to the empirical form (e.g. Nasa polynomials)</strong></li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
 <span class="n">T_low</span> <span class="o">=</span> <span class="mf">200.</span>
 <span class="n">T_high</span> <span class="o">=</span> <span class="mf">1100.</span>
@@ -266,9 +285,9 @@ or equal to the number of elements. See the <a class="reference internal" href="
 <ol class="arabic simple" start="4">
 <li><strong>Write to the appropriate file (e.g. thermdat)</strong></li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">write_thermdat</span>
 
-<span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span> <span class="n">write_date</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span> <span class="n">write_date</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The thermdat file produced is shown below.:</p>
@@ -316,7 +335,7 @@ or equal to the number of elements. See the <a class="reference internal" href="
 <ol class="arabic simple" start="5">
 <li><strong>(Optional) Compare the statistical mechanic model to empirical fit.</strong></li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
     <span class="n">specie</span><span class="o">.</span><span class="n">plot_thermo_model_and_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span> <span class="n">H_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">,</span> <span class="n">S_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span> <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
@@ -335,10 +354,10 @@ This example can be found under <a class="reference external" href="https://gith
 - heat capacity and corresponding temperatures
 - enthalpy of formation
 - standard entropy</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
 
 <span class="c1"># Gas phase heat capacity data (in J/mol/K) for CH3OH from NIST</span>
 <span class="c1"># https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas</span>
@@ -358,14 +377,14 @@ This example can be found under <a class="reference external" href="https://gith
 <ol class="arabic simple" start="2">
 <li>Fit to a NASA polynomial</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Input the experimental data and fitting to a NASA polynomial</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Input the experimental data and fitting to a NASA polynomial</span>
 <span class="n">CH3OH_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span><span class="s1">&#39;CH3OH&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_ref</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_ref</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
 <li>(Optional) Compare the Nasa polynomial to the experimental data</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units to plot the figure</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units to plot the figure</span>
 <span class="n">Cp_units</span> <span class="o">=</span> <span class="s1">&#39;J/mol/K&#39;</span>
 <span class="n">H_units</span> <span class="o">=</span> <span class="s1">&#39;kJ/mol&#39;</span>
 <span class="n">S_units</span> <span class="o">=</span> <span class="s1">&#39;J/mol/K&#39;</span>
@@ -391,7 +410,7 @@ This example can be found under <a class="reference external" href="https://gith
 <ol class="arabic simple">
 <li>Read the data from the thermdat file. In this example, a <code class="docutils literal notranslate"><span class="pre">thermdat</span></code> file is located in the same folder as the script.</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
 
 <span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;thermdat&#39;</span><span class="p">)</span>
 </pre></div>
@@ -399,7 +418,7 @@ This example can be found under <a class="reference external" href="https://gith
 <ol class="arabic simple" start="2">
 <li>(Optional) Print out the parameters to ensure it was read properly</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -423,7 +442,7 @@ This example can be found under <a class="reference external" href="https://gith
 <ol class="arabic simple" start="3">
 <li>(Optional) Plot each species to ensure reasonable values. The below example shows how to print out a single species.</li>
 </ol>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -476,7 +495,7 @@ This example can be found under <a class="reference external" href="https://gith
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -487,6 +506,7 @@ This example can be found under <a class="reference external" href="https://gith
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

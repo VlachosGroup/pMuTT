@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -193,7 +193,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="statistical-thermodynamic-models">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="statistical-thermodynamic-models">
 <span id="statmech"></span><h1>Statistical Thermodynamic Models<a class="headerlink" href="#statistical-thermodynamic-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="statmech-base-class">
 <h2>StatMech Base Class<a class="headerlink" href="#statmech-base-class" title="Permalink to this headline">¶</a></h2>
@@ -514,9 +533,9 @@ mode are as follows:
 <p>The examples below give an equivalent result:</p>
 <div class="section" id="example-of-initialization-using-objects">
 <h3>Example of initialization using objects<a class="headerlink" href="#example-of-initialization-using-objects" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 <span class="n">atoms</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">)</span>
 <span class="n">H2O_trans</span> <span class="o">=</span> <span class="n">trans</span><span class="o">.</span><span class="n">IdealTrans</span><span class="p">(</span><span class="n">n_degrees</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">)</span>
@@ -532,9 +551,9 @@ mode are as follows:
 </div>
 <div class="section" id="example-of-initialization-using-classes-and-parameters">
 <h3>Example of initialization using classes and parameters<a class="headerlink" href="#example-of-initialization-using-classes-and-parameters" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 
 <span class="n">H2O_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans</span><span class="o">.</span><span class="n">IdealTrans</span><span class="p">,</span>
@@ -556,8 +575,8 @@ mode are as follows:
 <p>If you are using a common model (e.g. the ideal gas model), then you can get the default parameters from
 the dictionary, <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.presets</span></code>. The same H2O StatMech object can be specified without
 the need to pass all the types of modes:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
 
 <span class="n">idealgas_defaults</span> <span class="o">=</span> <span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]</span>
 <span class="n">H2O_new</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
@@ -652,36 +671,36 @@ value).</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><img class="math" src="_images/math/911f5b6595c18b96dce8e1310a41aee7bfe50f31.svg" alt="q"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(q\)</span></td>
 <td>T</td>
 <td>ignore_q_elec (False)
 P (1.01325 bar)</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/98876c36d22e0ab300a756378d9974c57a88d6f0.svg" alt="\frac {C_V} {R}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {C_V} {R}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/cba08f51b5797bbca57ad6722080930735580cdd.svg" alt="\frac {C_P} {R}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {C_P} {R}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/5b95c935f617d42835c09c262f76754f01fec1b2.svg" alt="\frac {U} {RT}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {U} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/a269576375b4f9440da2e0407137f595423b0980.svg" alt="\frac {H} {RT}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {H} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/9ace27203ccd1960cd7709a97f27025ddc1bb5e1.svg" alt="\frac {S} {R}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {S} {R}\)</span></td>
 <td>T</td>
 <td>P (1.01325 bar)</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/d743442d1b7d1a469752b750813100667a0a8d50.svg" alt="\frac {A} {RT}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {A} {RT}\)</span></td>
 <td>T</td>
 <td>P (1.01325 bar)</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/9f28c9a9aeeb6e8f8a361e81cd7416f0f3bcfc91.svg" alt="\frac {G} {RT}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {G} {RT}\)</span></td>
 <td>T</td>
 <td>P (1.01325 bar)</td>
 </tr>
@@ -745,35 +764,35 @@ P (1.01325 bar)</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><img class="math" src="_images/math/911f5b6595c18b96dce8e1310a41aee7bfe50f31.svg" alt="q"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(q\)</span></td>
 <td>T</td>
 <td>ignore_q_elec (False)</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/98876c36d22e0ab300a756378d9974c57a88d6f0.svg" alt="\frac {C_V} {R}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {C_V} {R}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/cba08f51b5797bbca57ad6722080930735580cdd.svg" alt="\frac {C_P} {R}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {C_P} {R}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/5b95c935f617d42835c09c262f76754f01fec1b2.svg" alt="\frac {U} {RT}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {U} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/a269576375b4f9440da2e0407137f595423b0980.svg" alt="\frac {H} {RT}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {H} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/9ace27203ccd1960cd7709a97f27025ddc1bb5e1.svg" alt="\frac {S} {R}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {S} {R}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/d743442d1b7d1a469752b750813100667a0a8d50.svg" alt="\frac {A} {RT}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {A} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/9f28c9a9aeeb6e8f8a361e81cd7416f0f3bcfc91.svg" alt="\frac {G} {RT}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {G} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
@@ -830,35 +849,35 @@ P (1.01325 bar)</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><img class="math" src="_images/math/911f5b6595c18b96dce8e1310a41aee7bfe50f31.svg" alt="q"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(q\)</span></td>
 <td>T</td>
 <td>ignore_q_elec (False)</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/98876c36d22e0ab300a756378d9974c57a88d6f0.svg" alt="\frac {C_V} {R}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {C_V} {R}\)</span></td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/cba08f51b5797bbca57ad6722080930735580cdd.svg" alt="\frac {C_P} {R}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {C_P} {R}\)</span></td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/5b95c935f617d42835c09c262f76754f01fec1b2.svg" alt="\frac {U} {RT}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {U} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/a269576375b4f9440da2e0407137f595423b0980.svg" alt="\frac {H} {RT}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {H} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/9ace27203ccd1960cd7709a97f27025ddc1bb5e1.svg" alt="\frac {S} {R}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {S} {R}\)</span></td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><img class="math" src="_images/math/d743442d1b7d1a469752b750813100667a0a8d50.svg" alt="\frac {A} {RT}"/></td>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {A} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><img class="math" src="_images/math/9f28c9a9aeeb6e8f8a361e81cd7416f0f3bcfc91.svg" alt="\frac {G} {RT}"/></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {G} {RT}\)</span></td>
 <td>T</td>
 <td>&#160;</td>
 </tr>
@@ -918,7 +937,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
-<p><img class="math" src="_images/math/ab985e388fac316d08f412909359a866a3939092.svg" alt="\frac{A^{trans}}{RT}=\frac{U^{trans}}{RT}-\frac{S^{trans}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{trans}}{RT}=\frac{U^{trans}}{RT}-\frac{S^{trans}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -944,7 +963,7 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/5496cec576ffaea04254044cc8ae29d18b0c7f49.svg" alt="\frac{Cv^{trans}}{R}=\frac{Cv^{trans}}{R} + 1"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{Cv^{trans}}{R}=\frac{Cv^{trans}}{R} + 1\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -961,7 +980,7 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_CvoR">
 <code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
-<p><img class="math" src="_images/math/0218bcb0f0ff5584f98c236ae40d444f5454fdb2.svg" alt="\frac{Cv^{trans}}{R}=\frac{n_{degrees}}{2}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{Cv^{trans}}{R}=\frac{n_{degrees}}{2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -978,7 +997,7 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
-<p><img class="math" src="_images/math/fb04cb843d9632a4e088de231a8400a30c15671f.svg" alt="\frac{G^{trans}}{RT}=\frac{H^{trans}}{RT}-\frac{S^{trans}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{trans}}{RT}=\frac{H^{trans}}{RT}-\frac{S^{trans}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1004,7 +1023,7 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/b151a20081de4de7f95aa0c1d761792b73e52dd4.svg" alt="\frac{H^{trans}}{RT}=\frac{U^{trans}}{RT} + 1"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{H^{trans}}{RT}=\frac{U^{trans}}{RT} + 1\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1021,8 +1040,8 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
-<p><img class="math" src="_images/math/47971fa10a2b971d187507515ecb525a78aaaa10.svg" alt="\frac{S^{trans}}{R}=1+\frac{n_{degrees}}{2}+\log\bigg(\big(
-\frac{2\pi mk_bT}{h^2})^\frac{n_{degrees}}{2}\frac{RT}{PN_a}\bigg)"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{S^{trans}}{R}=1+\frac{n_{degrees}}{2}+\log\bigg(\big(
+\frac{2\pi mk_bT}{h^2})^\frac{n_{degrees}}{2}\frac{RT}{PN_a}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1048,7 +1067,7 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
-<p><img class="math" src="_images/math/139ea2f9fb4519aef5f13b6fbe20529879fe937d.svg" alt="\frac{U^{trans}}{RT}=\frac{n_{degrees}}{2}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{trans}}{RT}=\frac{n_{degrees}}{2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1065,7 +1084,7 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_V">
 <code class="descname">get_V</code><span class="sig-paren">(</span><em>T</em>, <em>P</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_V" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the molar volume of an ideal gas at T and P</p>
-<p><img class="math" src="_images/math/c8037499c1d4bcade86a92f8807d23527c2a7606.svg" alt="V_m=\frac{RT}{P}"/></p>
+<p><span class="math notranslate nohighlight">\(V_m=\frac{RT}{P}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1090,8 +1109,8 @@ Default is atmospheric pressure</li>
 <dt id="pMuTT.models.statmech.trans.IdealTrans.get_q">
 <code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><img class="math" src="_images/math/34828a644c13d03c8b291543f0a3ef6900dcf53b.svg" alt="q_{trans} = \bigg(\frac{2\pi \sum_{i}^{atoms}m_ikT}{h^2}
-\bigg)^\frac {n_{degrees}} {2}V"/></p>
+<p><span class="math notranslate nohighlight">\(q_{trans} = \bigg(\frac{2\pi \sum_{i}^{atoms}m_ikT}{h^2}
+\bigg)^\frac {n_{degrees}} {2}V\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1171,7 +1190,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
-<p><img class="math" src="_images/math/4fdc1992db3e15abbc630581ad7d20400210e2c4.svg" alt="\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1190,9 +1209,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/ae2955238d050da86d795e1976224b9f9921d46c.svg" alt="\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{
+<p><span class="math notranslate nohighlight">\(\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{
 \Theta_{V,i}}{2T}\bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}
-{2T}}\big)^2}"/></p>
+{2T}}\big)^2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1211,8 +1230,8 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_CvoR">
 <code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
-<p><img class="math" src="_images/math/6a633ba03d941b140d634cdee3bbec8e803592ec.svg" alt="\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}
-\bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}{2T}}\big)^2}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}
+\bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}{2T}}\big)^2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1231,7 +1250,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
-<p><img class="math" src="_images/math/627ad27c25142e80572d4bd85aef587cd6ddc41e.svg" alt="\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1250,10 +1269,10 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/5e3d7a51c505e82572d4556bcf186a95da332808.svg" alt="\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{
+<p><span class="math notranslate nohighlight">\(\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{
 \Theta_{V,i}}{2T}+\frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{
 \Theta_{V,i}}{T}\big)}{1-\exp\big(-\frac{\Theta_{V_i}}{T}\big)}
-\bigg)"/></p>
+\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1272,10 +1291,10 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
-<p><img class="math" src="_images/math/a49222f24368c79bde6d690b9f06ef6ae9425501.svg" alt="\frac{S^{vib}}{R}=\sum_i \frac{\Theta_{V,i}}{T}\frac{\exp
+<p><span class="math notranslate nohighlight">\(\frac{S^{vib}}{R}=\sum_i \frac{\Theta_{V,i}}{T}\frac{\exp
 \big(-\frac{\Theta_{V,i}}{T}\big)}{1-\exp\big(-\frac{
 \Theta_{V,i}}{T}\big)}-\ln \bigg(1-\exp\big(-\frac{
-\Theta_{V,i}}{T}\big)\bigg)"/></p>
+\Theta_{V,i}}{T}\big)\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1294,9 +1313,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
-<p><img class="math" src="_images/math/2990886bb3fe7c1b7efff57f427b404090f268e4.svg" alt="\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}+
+<p><span class="math notranslate nohighlight">\(\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}+
 \frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{\Theta_{V,i}}{T}
-\big)}{1-\exp\big(-\frac{\Theta_{V_i}}{T}\big)}\bigg)"/></p>
+\big)}{1-\exp\big(-\frac{\Theta_{V_i}}{T}\big)}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1315,7 +1334,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_ZPE">
 <code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the zero point energy</p>
-<p><img class="math" src="_images/math/f9ed93122d36603e38722acfba243105742cb2f6.svg" alt="ZPE=\frac{1}{2}h\sum_i \Theta_{V,i}"/></p>
+<p><span class="math notranslate nohighlight">\(ZPE=\frac{1}{2}h\sum_i \Theta_{V,i}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1332,8 +1351,8 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_q">
 <code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><img class="math" src="_images/math/0c8b154acbc39bb01e75214b6f1d05c6d5fc2a29.svg" alt="q^{vib}=\prod_i \frac{\exp({-\frac{\Theta_{V,i}}{2T}})}
-{1-\exp({-\frac{\Theta_{V,i}}{T}})}"/></p>
+<p><span class="math notranslate nohighlight">\(q^{vib}=\prod_i \frac{\exp({-\frac{\Theta_{V,i}}{2T}})}
+{1-\exp({-\frac{\Theta_{V,i}}{T}})}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1424,8 +1443,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
-<p><img class="math" src="_images/math/0af9184456e21f1028a171d972b77f12e591d09d.svg" alt="\frac{A^{qRRHO}}{RT} = \frac{U^{qRRHO}}{RT}-
-\frac{S^{qRRHO}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{qRRHO}}{RT} = \frac{U^{qRRHO}}{RT}-
+\frac{S^{qRRHO}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1444,7 +1463,7 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/dfc75fa92d2052242fb820bf27cab707c878174d.svg" alt="\frac{C_{P}^{qRRHO}} {R} = \frac{C_{V}^{qRRHO}} {R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{C_{P}^{qRRHO}} {R} = \frac{C_{V}^{qRRHO}} {R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1463,11 +1482,11 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_CvoR">
 <code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
-<p><img class="math" src="_images/math/4f513014ef1716477f57098a1da630d45016a166.svg" alt="\frac {C_{v}^{qRRHO}}{R} = \sum_{i}\omega_i\frac{C_{v,i}
-^{RRHO}}{R} + \frac{1}{2}(1-\omega_i)"/></p>
-<p><img class="math" src="_images/math/5f7468674e6986ae3a5c24200a17040605c45def.svg" alt="\frac{C_{v}^{RRHO}}{R} = \sum_{i}\exp \bigg(-\frac{
+<p><span class="math notranslate nohighlight">\(\frac {C_{v}^{qRRHO}}{R} = \sum_{i}\omega_i\frac{C_{v,i}
+^{RRHO}}{R} + \frac{1}{2}(1-\omega_i)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{C_{v}^{RRHO}}{R} = \sum_{i}\exp \bigg(-\frac{
 \Theta_i}{T}\bigg) \bigg(\frac{\Theta_i}{T}\frac{1}{1-\exp(-
-\frac{\Theta_i}{T})}\bigg)^2"/></p>
+\frac{\Theta_i}{T})}\bigg)^2\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1486,8 +1505,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
-<p><img class="math" src="_images/math/d5adf3c42ab9d7c6feb9c3aac5f49cd75d25b391.svg" alt="\frac{G^{qRRHO}}{RT} = \frac{H^{qRRHO}}{RT}-
-\frac{S^{qRRHO}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{qRRHO}}{RT} = \frac{H^{qRRHO}}{RT}-
+\frac{S^{qRRHO}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1506,7 +1525,7 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/32a0a62c52844f12d899ed93cc061b3f36966740.svg" alt="\frac{H^{qRRHO}} {RT} = \frac{U^{qRRHO}} {RT}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{H^{qRRHO}} {RT} = \frac{U^{qRRHO}} {RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1525,13 +1544,13 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
-<p><img class="math" src="_images/math/c03f429b67fb37d0fd4dfde33f48881da93c68be.svg" alt="\frac{S^{qRRHO}}{R}=\sum_i\omega_i\frac{S_i^{H}}{R}+(1-
-\omega_i)\frac{S_i^{RRHO}}{R}"/></p>
-<p><img class="math" src="_images/math/916433ea5b0b8b52cd5eab3747313429c9722b7e.svg" alt="\frac {S^{RRHO}_i}{R} = \frac{1}{2} + \log \bigg(\bigg[
-\frac{8\pi^3\mu'_ik_BT}{h^2}\bigg]^{\frac{1}{2}}\bigg)"/></p>
-<p><img class="math" src="_images/math/9922eb477f5b4b1720cca1db7bd3d6fc0d115c17.svg" alt="\frac {S^{H}_i}{R}=\bigg(\frac{\Theta_i}{T}\bigg)\frac{1}
+<p><span class="math notranslate nohighlight">\(\frac{S^{qRRHO}}{R}=\sum_i\omega_i\frac{S_i^{H}}{R}+(1-
+\omega_i)\frac{S_i^{RRHO}}{R}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac {S^{RRHO}_i}{R} = \frac{1}{2} + \log \bigg(\bigg[
+\frac{8\pi^3\mu'_ik_BT}{h^2}\bigg]^{\frac{1}{2}}\bigg)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac {S^{H}_i}{R}=\bigg(\frac{\Theta_i}{T}\bigg)\frac{1}
 {\exp(\frac{\Theta_i}{T})-1}-\log\bigg(1-\exp(\frac{-\Theta_i}
-{T})\bigg)"/></p>
+{T})\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1550,11 +1569,11 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.models.statmech.vib.QRRHOVib.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
-<p><img class="math" src="_images/math/22575ef1cb2c1cccdd79e6d42074cfcc65ae765f.svg" alt="\frac {U^{qRRHO}}{RT} = \sum_{i}\omega_i\frac{U^{RRHO}}{RT}
-+ \frac{1}{2}(1-\omega_i)"/></p>
-<p><img class="math" src="_images/math/6e4c3fbbd95d5f42d90863aafacc11cc37a4e12b.svg" alt="\frac {U^{RRHO}}{RT} = \frac{\Theta_i}{T} \bigg(\frac{1}{2}
+<p><span class="math notranslate nohighlight">\(\frac {U^{qRRHO}}{RT} = \sum_{i}\omega_i\frac{U^{RRHO}}{RT}
++ \frac{1}{2}(1-\omega_i)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac {U^{RRHO}}{RT} = \frac{\Theta_i}{T} \bigg(\frac{1}{2}
 + \frac{\exp(-\frac{\Theta_i}{T})}{1-\exp(-\frac{\Theta_i}{T})}
-\bigg)"/></p>
+\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1615,13 +1634,13 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.einstein_temperature">
 <code class="descname">einstein_temperature</code><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.einstein_temperature" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Einstein temperature (<img class="math" src="_images/math/a1d7d43f05701990d4db629501545984bc31cbd1.svg" alt="\Theta_E"/>) in K</p>
+<dd><p><em>float</em> – Einstein temperature (<span class="math notranslate nohighlight">\(\Theta_E\)</span>) in K</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.interaction_energy">
 <code class="descname">interaction_energy</code><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.interaction_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – Interaction energy (<img class="math" src="_images/math/caedd97e395fc4ff835e69e500e9d1e78fdc61cb.svg" alt="u"/>) per atom in eV. Default is 0 eV</p>
+<dd><p><em>float, optional</em> – Interaction energy (<span class="math notranslate nohighlight">\(u\)</span>) per atom in eV. Default is 0 eV</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1646,7 +1665,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
-<p><img class="math" src="_images/math/4fdc1992db3e15abbc630581ad7d20400210e2c4.svg" alt="\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1665,9 +1684,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/58308f5a6100f44c8466e3640aa8451132bfa69f.svg" alt="\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=3\bigg(\frac{
+<p><span class="math notranslate nohighlight">\(\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=3\bigg(\frac{
 \Theta_E}{T}\bigg)^2\frac{\exp(-\frac{\Theta_E}{T})}{\big(1-
-\exp(\frac{-\Theta_E}{T})\big)^2}"/></p>
+\exp(\frac{-\Theta_E}{T})\big)^2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1686,9 +1705,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_CvoR">
 <code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
-<p><img class="math" src="_images/math/6a2d603b642e5525ba2cb9ba2d853bc3e3483569.svg" alt="\frac{C_V^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\bigg)^2
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\bigg)^2
 \frac{\exp(-\frac{\Theta_E}{T})}{\big(1-\exp(\frac{-
-\Theta_E}{T})\big)^2}"/></p>
+\Theta_E}{T})\big)^2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1707,7 +1726,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
-<p><img class="math" src="_images/math/627ad27c25142e80572d4bd85aef587cd6ddc41e.svg" alt="\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1726,9 +1745,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/d4800226317eb776450ef41ecdb355d75411852a.svg" alt="\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}
+<p><span class="math notranslate nohighlight">\(\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}
 +3\frac{\Theta_E}{T}\bigg(\frac{\exp(-\frac{\Theta_E}{T})}{1-
-\exp(-\frac{\Theta_E}{T})}\bigg)"/></p>
+\exp(-\frac{\Theta_E}{T})}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1747,9 +1766,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
-<p><img class="math" src="_images/math/782b838c6d27e0010efe0bf4918443ddef37f196.svg" alt="\frac{S^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\frac{\exp\big(
+<p><span class="math notranslate nohighlight">\(\frac{S^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\frac{\exp\big(
 \frac{-\Theta_E}{T}\big)}{1-\exp\big(-\frac{\Theta_E}{T}\big)}
-\bigg)-\ln\bigg(1-\exp\big(\frac{-\Theta_E}{T}\big)\bigg)"/></p>
+\bigg)-\ln\bigg(1-\exp\big(\frac{-\Theta_E}{T}\big)\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1768,9 +1787,9 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
-<p><img class="math" src="_images/math/478055233ce3bf7117b9f12a4c926c526dbb0a5e.svg" alt="\frac{U^{vib}}{RT}=\frac{u^0_E}{k_BT}+3\frac{\Theta_E}{T}
+<p><span class="math notranslate nohighlight">\(\frac{U^{vib}}{RT}=\frac{u^0_E}{k_BT}+3\frac{\Theta_E}{T}
 \bigg(\frac{\exp(-\frac{\Theta_E}{T})}{1-\exp(-\frac{\Theta_E}
-{T})}\bigg)"/></p>
+{T})}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1789,7 +1808,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_ZPE">
 <code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the zero point energy</p>
-<p><img class="math" src="_images/math/83716799b9a6f8b84ebec58bf4dea6d804d13f96.svg" alt="u^0_E=u+\frac{3}{2}\Theta_Ek_B"/></p>
+<p><span class="math notranslate nohighlight">\(u^0_E=u+\frac{3}{2}\Theta_Ek_B\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1806,8 +1825,8 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.EinsteinVib.get_q">
 <code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><img class="math" src="_images/math/f1d7ccf0bbc2067f985a18577b444d0a7011a38c.svg" alt="q^{vib}=\exp\bigg({\frac{-u}{k_BT}}\bigg)\bigg(\frac{
-\exp(-\frac{\Theta_E}{2T})}{1-\exp(\frac{-\Theta_E}{T})}\bigg)"/></p>
+<p><span class="math notranslate nohighlight">\(q^{vib}=\exp\bigg({\frac{-u}{k_BT}}\bigg)\bigg(\frac{
+\exp(-\frac{\Theta_E}{2T})}{1-\exp(\frac{-\Theta_E}{T})}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1957,7 +1976,7 @@ guess geometry</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
-<p><img class="math" src="_images/math/49320154ef774b07b90d6834980fb52914cc470a.svg" alt="\frac{A^{rot}}{RT}=\frac{U^{rot}}{RT}-\frac{S^{rot}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{rot}}{RT}=\frac{U^{rot}}{RT}-\frac{S^{rot}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1976,7 +1995,7 @@ guess geometry</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/19dfd50ae3a288229b765f2ad6fea07081ea3876.svg" alt="\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1993,9 +2012,9 @@ guess geometry</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_CvoR">
 <code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
-<p><img class="math" src="_images/math/b3cc8df184aaf6ecefd8f4d15f096b5a0a2db708.svg" alt="\frac{C_V^{rot}}{R}=0"/> if monatomic</p>
-<p><img class="math" src="_images/math/9a3ea3c155afb9d37c06e572a810b05b01c213be.svg" alt="\frac{C_V^{rot}}{R}=1"/> if linear</p>
-<p><img class="math" src="_images/math/3b9814b0f5415d3f9bf7dc5984dfbe96e6d7968e.svg" alt="\frac{C_V^{rot}}{R}=1.5"/> if nonlinear</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=0\)</span> if monatomic</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=1\)</span> if linear</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=1.5\)</span> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2012,7 +2031,7 @@ guess geometry</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
-<p><img class="math" src="_images/math/b2b3e57e2d6458fb992c6dd0b85e815aca91cfb6.svg" alt="\frac{G^{rot}}{RT}=\frac{H^{rot}}{RT}-\frac{S^{rot}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{rot}}{RT}=\frac{H^{rot}}{RT}-\frac{S^{rot}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2031,7 +2050,7 @@ guess geometry</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/dd496c4a8151538d71651e6a371b2347e1da93e9.svg" alt="\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2048,11 +2067,11 @@ guess geometry</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
-<p><img class="math" src="_images/math/86ab4d737e3f5666c1163fbd7c48a9f803c9f225.svg" alt="\frac{S^{rot}}{R}=0"/> if monatomic</p>
-<p><img class="math" src="_images/math/1fa071c44c9ab411d504a17e3e0b50351a1c4482.svg" alt="\frac{S}{R}=\log(\frac{T}{\sigma}\prod_i \frac{1}{
-\Theta_{R,i}})+1"/> if linear</p>
-<p><img class="math" src="_images/math/0ff8d87c13dcc111ce76d83558a0cf1b4a29ac64.svg" alt="\frac{S^{rot}}{R}=\log\bigg(\frac{\sqrt\pi }{\sigma}
-\prod_i{(\frac{T^3}{\Theta_{R,i}})^\frac{1}{2}}\bigg)+1.5"/>
+<p><span class="math notranslate nohighlight">\(\frac{S^{rot}}{R}=0\)</span> if monatomic</p>
+<p><span class="math notranslate nohighlight">\(\frac{S}{R}=\log(\frac{T}{\sigma}\prod_i \frac{1}{
+\Theta_{R,i}})+1\)</span> if linear</p>
+<p><span class="math notranslate nohighlight">\(\frac{S^{rot}}{R}=\log\bigg(\frac{\sqrt\pi }{\sigma}
+\prod_i{(\frac{T^3}{\Theta_{R,i}})^\frac{1}{2}}\bigg)+1.5\)</span>
 if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2072,9 +2091,9 @@ if nonlinear</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
-<p><img class="math" src="_images/math/b765565725eff9ada5a4d3b2b8ff8c029190a32b.svg" alt="\frac{U^{rot}}{RT}=0"/> if monatomic</p>
-<p><img class="math" src="_images/math/74c9de51a116ef61bb7e872a818ea8d967fc98bb.svg" alt="\frac{U^{rot}}{RT}=1"/> if linear</p>
-<p><img class="math" src="_images/math/d7dbf092fc2ea4a6e5033744645a33e8812b0d85.svg" alt="\frac{U^{rot}}{RT}=1.5"/> if nonlinear</p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=0\)</span> if monatomic</p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=1\)</span> if linear</p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=1.5\)</span> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2091,10 +2110,10 @@ if nonlinear</p>
 <dt id="pMuTT.models.statmech.rot.RigidRotor.get_q">
 <code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><img class="math" src="_images/math/4096cd5d3faf0b373f2d93c7a0fd2f74cb61f73b.svg" alt="q^{rot}=0"/> if monatomic</p>
-<p><img class="math" src="_images/math/9f43cfd0942039ced191bd6ce2346808c247751c.svg" alt="q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_R}"/> if linear</p>
-<p><img class="math" src="_images/math/4f8805ae65180d17f4d391e6c786704f943bf8fb.svg" alt="q^{rot}=\frac{\sqrt{\pi}}{\sigma}(T^3\prod_i\frac{1}{
-\Theta_{Ri}})^\frac{1}{2}"/> if nonlinear</p>
+<p><span class="math notranslate nohighlight">\(q^{rot}=0\)</span> if monatomic</p>
+<p><span class="math notranslate nohighlight">\(q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_R}\)</span> if linear</p>
+<p><span class="math notranslate nohighlight">\(q^{rot}=\frac{\sqrt{\pi}}{\sigma}(T^3\prod_i\frac{1}{
+\Theta_{Ri}})^\frac{1}{2}\)</span> if nonlinear</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2178,7 +2197,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_AoRT">
 <code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
-<p><img class="math" src="_images/math/b9fe60bdedf07e7aa673c451028a9c6802827c1f.svg" alt="\frac{A^{elec}}{RT}=\frac{U^{elec}}{RT}-\frac{S^{elec}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{elec}}{RT}=\frac{U^{elec}}{RT}-\frac{S^{elec}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2197,7 +2216,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><img class="math" src="_images/math/ebcd215cdae28ef3b26d59df8c00603af5c85d08.svg" alt="\frac{C_V^{elec}}{R}=\frac{C_P^{elec}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{elec}}{R}=\frac{C_P^{elec}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2214,7 +2233,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_CvoR">
 <code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
-<p><img class="math" src="_images/math/228fff39b542f7b35cf12f58a1e5c77ef7dc2fd9.svg" alt="\frac{C_V^{elec}}{R}=0"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{elec}}{R}=0\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2231,7 +2250,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_GoRT">
 <code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
-<p><img class="math" src="_images/math/64748b4e1731bd51d6de11ea875413144c383df7.svg" alt="\frac{G^{elec}}{RT}=\frac{H^{elec}}{RT}-\frac{S^{elec}}{R}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{elec}}{RT}=\frac{H^{elec}}{RT}-\frac{S^{elec}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2250,7 +2269,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_HoRT">
 <code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
-<p><img class="math" src="_images/math/25295999ee69df3171847e2145cd46e85311a03e.svg" alt="\frac{H^{elec}}{RT}=\frac{U^{elec}}{RT}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{H^{elec}}{RT}=\frac{U^{elec}}{RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2269,7 +2288,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_SoR">
 <code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
-<p><img class="math" src="_images/math/9b0ace822491a8c50034a4053c693fa93d87fa5a.svg" alt="\frac{S^{elec}}{R}=\log \omega"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{S^{elec}}{R}=\log \omega\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2286,7 +2305,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_UoRT">
 <code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the imensionless internal energy</p>
-<p><img class="math" src="_images/math/7ae708b30ed1fd3367cec7b1d1de61c289d11685.svg" alt="\frac{U^{elec}}{RT}=\frac{E}{RT}"/></p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{elec}}{RT}=\frac{E}{RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2303,9 +2322,9 @@ John Wiley &amp; Sons, 2010.</p>
 
 <dl class="method">
 <dt id="pMuTT.models.statmech.elec.IdealElec.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>ignore_q_elec=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_q" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>ignore_q_elec=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><img class="math" src="_images/math/96e5fbfbbd2695b3e4fa165174f35b3a76b47482.svg" alt="q^{elec}=\omega_i \exp\bigg(-\frac{E}{RT}\bigg)"/></p>
+<p><span class="math notranslate nohighlight">\(q^{elec}=\omega_i \exp\bigg(-\frac{E}{RT}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2314,7 +2333,8 @@ John Wiley &amp; Sons, 2010.</p>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>ignore_q_elec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Ignore contribution of electronic mode to partition function
 . Often necessary since DFT’s value for potentialenergy is
-very negative causing q_elec to go to infinity.</li>
+very negative causing q_elec to go to infinity. Default is
+True</li>
 </ul>
 </td>
 </tr>
@@ -2572,7 +2592,7 @@ does not affect thermodynamic quantities.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -2583,6 +2603,7 @@ does not affect thermodynamic quantities.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

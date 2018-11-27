@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Equations of State &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Equations of State &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -164,7 +164,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="equations-of-state">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="equations-of-state">
 <span id="id1"></span><h1>Equations of State<a class="headerlink" href="#equations-of-state" title="Permalink to this headline">¶</a></h1>
 <p>Use equations of state to calculate P, V, T, or n.</p>
 <div class="section" id="idealgas">
@@ -173,7 +192,7 @@
 <dt id="pMuTT.models.eos.IdealGasEOS">
 <em class="property">class </em><code class="descclassname">pMuTT.models.eos.</code><code class="descname">IdealGasEOS</code><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ideal gas equation of state</p>
-<p><img class="math" src="_images/math/aa6b18e81622afa05956a3eb7e41de2b96f38d52.svg" alt="PV=nRT"/></p>
+<p><span class="math notranslate nohighlight">\(PV=nRT\)</span></p>
 <dl class="classmethod">
 <dt id="pMuTT.models.eos.IdealGasEOS.from_dict">
 <em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.from_dict" title="Permalink to this definition">¶</a></dt>
@@ -317,8 +336,8 @@
 <dt id="pMuTT.models.eos.vanDerWaalsEOS">
 <em class="property">class </em><code class="descclassname">pMuTT.models.eos.</code><code class="descname">vanDerWaalsEOS</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS" title="Permalink to this definition">¶</a></dt>
 <dd><p>van der Waals equation of state</p>
-<p><img class="math" src="_images/math/a0ef15d6fb39ca085f488ba8ea8f6ff07343be01.svg" alt="\bigg(P+a\big(\frac{n}{V}\big)^2 \bigg)\bigg(\frac{V}{n}-b
-\bigg)=RT"/></p>
+<p><span class="math notranslate nohighlight">\(\bigg(P+a\big(\frac{n}{V}\big)^2 \bigg)\bigg(\frac{V}{n}-b
+\bigg)=RT\)</span></p>
 <dl class="attribute">
 <dt id="pMuTT.models.eos.vanDerWaalsEOS.a">
 <code class="descname">a</code><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.a" title="Permalink to this definition">¶</a></dt>
@@ -620,7 +639,7 @@ larger moles (liquid phase).</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -631,6 +650,7 @@ larger moles (liquid phase).</li>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

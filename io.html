@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Input and Output &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -188,7 +188,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="input-and-output">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="input-and-output">
 <span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
 <p>Input and output to different forms is an active area of development for pMuTT</p>
 <div class="section" id="module-pMuTT.io_.excel">
@@ -550,15 +569,15 @@ output_structure[‘elements’][element]</li>
 </tbody>
 </table>
 <p>The <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.excel.read_excel</span></code> function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in code below:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">refs_path</span> <span class="o">=</span> <span class="s1">&#39;./references.xlsx&#39;</span>
 <span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
 <span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference Input:&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reference Input:&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">refs_input</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -745,8 +764,8 @@ output_structure[‘elements’][element]</li>
 </tbody>
 </table>
 <p>Using a similar set of statements as the <a class="reference internal" href="#dft-input-example"><span class="std std-ref">DFT Input Example</span></a>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;input_data.xlsx&#39;</span><span class="p">)</span>
 <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nasa</span><span class="p">(</span><span class="o">**</span><span class="n">specie_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">specie_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">]</span>
@@ -845,22 +864,22 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.thermdat.read_thermdat</span></code>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
 
 <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="c1">#Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat</span>
-<span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/thermdat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_path</span><span class="p">))</span>
+<span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;{}/thermdat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_path</span><span class="p">))</span>
 
 <span class="c1">#Printing information related to each specie</span>
 <span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">specie</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Name: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">specie</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">specie</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">{}</span><span class="se">\t</span><span class="s1">{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
 
 <span class="c1">#Plot an example of an imported NASA polynomial</span>
 <span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">()</span>
@@ -979,14 +998,14 @@ implement default like this:</p>
 <div class="section" id="id5">
 <h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Saving pMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">pMuTTEncoder</span></code> in <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio</span></code>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">pMuTTEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Loading pMuTT objects can be done by using the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook in <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio</span></code>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">json_to_pMuTT</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">json_to_pMuTT</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">pMuTT_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
@@ -1078,7 +1097,7 @@ implement default like this:</p>
 One of the entries of the dictionary should be <code class="docutils literal notranslate"><span class="pre">'class':</span> <span class="pre">str(self.__class__)</span></code> so that it can be decoded later. The
 other elements should be the attributes that can be used to reinitialize the object and must be JSON-supported objects.
 A simple example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;n_degrees&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_degrees</span><span class="p">,</span>
             <span class="s1">&#39;molecular_weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">}</span>
@@ -1086,7 +1105,7 @@ A simple example using <code class="docutils literal notranslate"><span class="p
 </div>
 <p>If the attributes are not supported by JSON (such as other pMuTT objects), use their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported
 objects. An example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.StatMech</span></code> is shown below.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;trans_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
             <span class="s1">&#39;vib_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vib_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
@@ -1102,7 +1121,7 @@ objects. An example using <code class="docutils literal notranslate"><span class
 the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.type_to_class</span></code> method. The key should be the type of your object in string format (i.e. the result
 of <code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class method to reinitialize your object.
 A simple example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.trans.IdealTrans</span></code> is shown below.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">remove_class</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">remove_class</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1112,7 +1131,7 @@ A simple example using <code class="docutils literal notranslate"><span class="p
 </div>
 <p>Similarly to encoding, sometimes your object contains pMuTT objects. You can use the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook to remake
 these objects. An example using <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.StatMech</span></code> is shown below.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="k">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_pMuTT</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="kn">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_pMuTT</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1221,7 +1240,7 @@ default = None. Will not return React_obj and Prod_obj</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -1232,6 +1251,7 @@ default = None. Will not return React_obj and Prod_obj</li>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

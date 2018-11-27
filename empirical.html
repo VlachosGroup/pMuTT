@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Empirical Models &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Empirical Models &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -168,7 +168,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="empirical-models">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="empirical-models">
 <span id="empirical"></span><h1>Empirical Models<a class="headerlink" href="#empirical-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="basethermo">
 <h2>BaseThermo<a class="headerlink" href="#basethermo" title="Permalink to this headline">¶</a></h2>
@@ -488,14 +507,14 @@ specified, dimensionless units used.</li>
 <dd><p>Stores the information for an individual nasa specie
 Inherits from pMuTT.models.empirical.BaseThermo</p>
 <p>The thermodynamic properties are calculated using the following form:</p>
-<p><img class="math" src="_images/math/fa0854d7318c34538ff6c4dd13c740561e7d6194.svg" alt="\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3}
-+ a_{5} T^{4}"/></p>
-<p><img class="math" src="_images/math/ba62e6f4430f98bf79a959bb7f768fed97be2413.svg" alt="\frac {H} {RT} = a_{1} + a_{2} \frac {T} {2} + a_{3}
+<p><span class="math notranslate nohighlight">\(\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3}
++ a_{5} T^{4}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac {H} {RT} = a_{1} + a_{2} \frac {T} {2} + a_{3}
 \frac {T^{2}} {3} + a_{4} \frac {T^{3}} {4} + a_{5}
-\frac {T^{4}} {5} + a_{6} \frac {1} {T}"/></p>
-<p><img class="math" src="_images/math/dcefdde3eb7c9137112f86b91fe9a7d984ec27d4.svg" alt="\frac {S} {R} = a_{1} \ln {T} + a_{2} T + a_{3}
+\frac {T^{4}} {5} + a_{6} \frac {1} {T}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac {S} {R} = a_{1} \ln {T} + a_{2} T + a_{3}
 \frac {T^{2}} {2} + a_{4} \frac {T^{3}} {3} + a_{5}
-\frac {T^{4}} {4} + a_{7}"/></p>
+\frac {T^{4}} {4} + a_{7}\)</span></p>
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.nasa.Nasa.T_low">
 <code class="descname">T_low</code><a class="headerlink" href="#pMuTT.models.empirical.nasa.Nasa.T_low" title="Permalink to this definition">¶</a></dt>
@@ -955,13 +974,13 @@ specified, dimensionless units used.</li>
 <dd><p>Stores the information for an individual Shomate specie
 Inherits from pMuTT.models.empirical.BaseThermo</p>
 <p>The thermodynamic properties are calculated using the following form:</p>
-<p><img class="math" src="_images/math/1d0dd1c5a2d2a033d91696f111d5986241d3854a.svg" alt="\frac{c_P}{R}=\frac{1}{R}\bigg(A+Bt+Ct^2+Dt^3+\frac{E}{t^2}
-\bigg)"/>
-<img class="math" src="_images/math/a0cf08c8b82bba81c741f3d77e52f864a31c1a7a.svg" alt="\frac{H}{RT}=\frac{1}{RT}\bigg(At+B\frac{t^2}{2}+C\frac{t^3}{3}
-+D\frac{t^4}{4}-\frac{E}{t}+F\bigg)"/>
-<img class="math" src="_images/math/e1483e107584829723887a57b2d5f3f9b719b963.svg" alt="\frac{S}{R}=\frac{1}{R}\bigg(A\ln(t)+Bt+C\frac{t^2}{2}+D
-\frac{t^3}{3}-\frac{E}{2t^2}+G\bigg)"/></p>
-<p>where <img class="math" src="_images/math/fc32c7cff112ed0150f9b11f33341eff887e9740.svg" alt="t=\frac{T}{1000}"/> in K</p>
+<p><span class="math notranslate nohighlight">\(\frac{c_P}{R}=\frac{1}{R}\bigg(A+Bt+Ct^2+Dt^3+\frac{E}{t^2}
+\bigg)\)</span>
+<span class="math notranslate nohighlight">\(\frac{H}{RT}=\frac{1}{RT}\bigg(At+B\frac{t^2}{2}+C\frac{t^3}{3}
++D\frac{t^4}{4}-\frac{E}{t}+F\bigg)\)</span>
+<span class="math notranslate nohighlight">\(\frac{S}{R}=\frac{1}{R}\bigg(A\ln(t)+Bt+C\frac{t^2}{2}+D
+\frac{t^3}{3}-\frac{E}{2t^2}+G\bigg)\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(t=\frac{T}{1000}\)</span> in K</p>
 <dl class="attribute">
 <dt id="pMuTT.models.empirical.shomate.Shomate.T_low">
 <code class="descname">T_low</code><a class="headerlink" href="#pMuTT.models.empirical.shomate.Shomate.T_low" title="Permalink to this definition">¶</a></dt>
@@ -1368,7 +1387,7 @@ specified, dimensionless units used.</li>
 <h2>Zacros<a class="headerlink" href="#zacros" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pMuTT.models.empirical.zacros.Zacros">
-<em class="property">class </em><code class="descclassname">pMuTT.models.empirical.zacros.</code><code class="descname">Zacros</code><span class="sig-paren">(</span><em>A_st=None</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>inertia=None</em>, <em>geometry=None</em>, <em>vib_energies=None</em>, <em>potentialenergy=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.zacros.Zacros" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.models.empirical.zacros.</code><code class="descname">Zacros</code><span class="sig-paren">(</span><em>A_st=None</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>inertia=None</em>, <em>geometry=None</em>, <em>vib_wavenumbers=None</em>, <em>potentialenergy=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.empirical.zacros.Zacros" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores the information for an individual nasa specie
 Inherits from pMuTT.models.empirical.BaseThermo</p>
 <dl class="method">
@@ -2084,7 +2103,7 @@ elements</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -2095,6 +2114,7 @@ elements</td>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

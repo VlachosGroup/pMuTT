@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pMuTT 1.1.0 documentation</title>
+  <title>Reactions &mdash; pMuTT 1.1.2 documentation</title>
   
 
   
@@ -170,7 +170,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="reactions">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="reactions">
 <span id="id1"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="reaction">
 <h2>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h2>
@@ -388,6 +407,33 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.models.reaction.Reaction.get_EoRT_act">
+<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets dimensionless activation energy between reactants
+(or products) and transition state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless activation energy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>EoRT_act</strong> – Dimensionless activation energy between reactants and
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.models.reaction.Reaction.get_GoRT_act">
 <code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Gibbs energy between reactants (or
@@ -417,8 +463,8 @@ transition state</p>
 <dl class="method">
 <dt id="pMuTT.models.reaction.Reaction.get_HoRT_act">
 <code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless enthalpy between reactants (or products)
-and transition state</p>
+<dd><p>Gets change in dimensionless enthalpy between reactants
+(or products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -456,7 +502,7 @@ instead of reactants. Default is False</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_GoRT</strong> – Change in equilibrium constant between reactants and products</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>K</strong> – Equilibrium constant between reactants and products</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -482,8 +528,8 @@ instead of reactants. Default is False</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR_act</strong> – Change in dimensionless entropy between reactants and transition
-state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR_act</strong> – Change in dimensionless entropy between reactants and
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -719,10 +765,36 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.models.reaction.Reaction.get_k">
+<code class="descname">get_k</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the rate constant in 1/s</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>k</strong> – Rate constant in 1/s</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.models.reaction.Reaction.get_q_act">
 <code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in partition function between reactants (or products) and
-transition state</p>
+<dd><p>Gets change in partition function between reactants (or products)
+and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -796,10 +868,10 @@ using the pMuTT model objects directly or using a reaction string.</p>
 <div class="section" id="initialization-using-pmutt-model-objects">
 <h4>Initialization using pMuTT Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h4>
 <p>In this example, the Nasa objects are created directly in the script.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Initialize reaction</span>
@@ -829,12 +901,12 @@ using the pMuTT model objects directly or using a reaction string.</p>
 <p>In this example, the Nasa objects are read from a thermdat file and
 are assigned to the Reaction object based on the reaction string. This
 way is more convenient if you’re dealing with large reaction networks.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="kn">import</span> <span class="n">pMuTT_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pMuTT.models</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Read the thermdat</span>
@@ -854,11 +926,11 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 </pre></div>
 </div>
 <p>After the Reaction object is initialized, you can ensure the equation is balanced.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Or calculate thermodynamic properties.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
 <span class="n">HoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_HoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">SoR_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_SoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">GoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_GoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
@@ -866,7 +938,7 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Plot the data</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;H2 + 1/2 O2 --&gt; H2O&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">HoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;H/RT&#39;</span><span class="p">)</span>
@@ -930,7 +1002,7 @@ way is more convenient if you’re dealing with large reaction networks.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.0',
+            VERSION:'1.1.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -941,6 +1013,7 @@ way is more convenient if you’re dealing with large reaction networks.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
