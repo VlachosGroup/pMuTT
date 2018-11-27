@@ -24,12 +24,15 @@ class TestIdealElec(unittest.TestCase):
     def test_get_q(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.elec_H2.get_q(T=self.T), 
-                        3.5968135E+113))
-        self.assertTrue(np.isclose(self.elec_OH.get_q(T=self.T), 
-                        1.6543631E+127))
-        self.assertTrue(np.isclose(self.elec_O2.get_q(T=self.T), 
-                        1.4398714E+166))        
+        self.assertTrue(np.isclose(
+                            self.elec_H2.get_q(T=self.T, ignore_q_elec=False), 
+                            3.5968135E+113))
+        self.assertTrue(np.isclose(
+                            self.elec_OH.get_q(T=self.T, ignore_q_elec=False), 
+                            1.6543631E+127))
+        self.assertTrue(np.isclose(
+                            self.elec_O2.get_q(T=self.T, ignore_q_elec=False), 
+                            1.4398714E+166))        
 
     def test_get_CvoR(self):
         self.assertEqual(self.elec_H2.get_CvoR(), 0.)

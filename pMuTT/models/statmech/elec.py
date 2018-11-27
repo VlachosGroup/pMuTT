@@ -47,7 +47,8 @@ class IdealElec:
             ignore_q_elec : bool, optional
                 Ignore contribution of electronic mode to partition function
                 . Often necessary since DFT's value for potentialenergy is
-                very negative causing q_elec to go to infinity.
+                very negative causing q_elec to go to infinity. Default is 
+                True
         Returns
         -------
             q_elec : float

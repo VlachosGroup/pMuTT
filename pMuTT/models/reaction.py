@@ -461,6 +461,25 @@ class Reaction:
                                  final_state_stoich=self.transition_state_stoich,
                                  **kwargs)
 
+    def get_EoRT_act(self, rev=False, **kwargs):
+        """Gets dimensionless activation energy between reactants
+        (or products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless activation energy
+        Returns
+        -------
+            EoRT_act : float
+                Dimensionless activation energy between reactants and 
+                transition state
+        """
+        return self.get_HoRT_act(rev=rev, **kwargs)
+
     def get_SoR_act(self, rev=False, **kwargs):
         """Gets change in dimensionless entropy between reactants (or products)
         and transition state
@@ -569,8 +588,34 @@ class Reaction:
             A : float
                 Pre-exponential factor
         """
-        return np.e**2*c.kb('J/K')*T/c.h('J s')\
-            * np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs))
+        # Calculate molecularity (e.g. unimolecular, bimolecular)
+        if rev:
+            m = _get_molecularity(self.products_stoich)
+        else:
+            m = _get_molecularity(self.reactants_stoich)
+
+        return np.exp(m)*c.kb('J/K')*T/c.h('J s') \
+               *np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs))
+
+    def get_k(self, T=c.T0('K'), rev=False, **kwargs):
+        """Calculates the rate constant in 1/s
+        
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            T : float, optional
+                Temperature in K. Default is standard temperature.
+            kwargs : keyword arguments
+                Parameters required to calculate pre-exponential factor            
+        Returns
+        -------
+            k : float
+                Rate constant in 1/s
+        """
+        return self.get_A(T=T, rev=rev, **kwargs) \
+               *np.exp(-self.get_EoRT_act(T=T, rev=rev, **kwargs))
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
@@ -1270,3 +1315,17 @@ def _count_elements(species, stoich):
         for element, coeff in specie.elements.items():
             element_count += Counter({element: coeff*stoich_specie})
     return element_count
+
+def _get_molecularity(stoich):
+    """Calculate the molecularity (e.g. unimolecular, bimolecular)
+
+    Parameters
+    ----------
+        stoich : list of float
+            Stoichiometric coefficients of each specie
+    Returns
+    -------
+        m : int
+            Molecularity of reaction
+    """
+    return np.sum(stoich)

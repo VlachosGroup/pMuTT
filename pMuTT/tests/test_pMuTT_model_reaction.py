@@ -385,10 +385,12 @@ class TestReaction(unittest.TestCase):
         exp_sm_SoR = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
                      - self.H2_sm.get_SoR(T=c.T0('K')) \
                      - self.O2_sm.get_SoR(T=c.T0('K'))*0.5
-        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*np.exp(exp_sm_SoR)
+        exp_sm_A = np.exp(1.5)*c.kb('J/K')*c.T0('K')/c.h('J s') \
+                   *np.exp(exp_sm_SoR)
         exp_sm_SoR_rev = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
                          - self.H2O_sm.get_SoR(T=c.T0('K'))
-        exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s')*np.exp(exp_sm_SoR_rev)
+        exp_sm_A_rev = np.exp(1.)*c.kb('J/K')*c.T0('K')/c.h('J s') \
+                       *np.exp(exp_sm_SoR_rev)
         self.assertAlmostEqual(
                 self.rxn_sm.get_A(T=c.T0('K')), exp_sm_A)
         self.assertAlmostEqual(
