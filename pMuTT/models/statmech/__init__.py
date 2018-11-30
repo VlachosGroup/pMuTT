@@ -430,6 +430,14 @@ presets = {
     'electronic': {
         'elec_model': elec.IdealElec,
         'required': ('potentialenergy', 'spin'),
+    },
+    'placeholder': {
+        'trans_model': EmptyMode,
+        'vib_model': EmptyMode,
+        'elec_model': EmptyMode,
+        'rot_model': EmptyMode,
+        'nucl_model': EmptyMode,
+        'required': (),
     }
 }
 """Commonly used models. The 'required' and 'optional' fields indicate
