@@ -10,6 +10,7 @@ from pMuTT import _pass_expected_arguments
 from pMuTT.models.statmech import trans, vib, elec, rot
 from pMuTT.io_ import jsonio as json_pMuTT
 
+
 class EmptyMode:
     """Placeholder mode that returns 1 for partition function and
     0 for all functions other thermodynamic properties."""
@@ -42,7 +43,7 @@ class EmptyMode:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -63,6 +64,7 @@ class EmptyMode:
         """
         return cls()
 
+
 class StatMech:
     """Base class for statistical mechanic models.
 
@@ -71,28 +73,28 @@ class StatMech:
         name : str, optional
             Name of the specie. Default is None
         trans_model : `pMuTT.models.statmech.trans` object, optional
-            Deals with translational modes. Default is 
+            Deals with translational modes. Default is
             ``pMuTT.models.statmech.EmptyMode``
         vib_model : `pMuTT.models.statmech.vib` object, optional
-            Deals with vibrational modes. Default is 
+            Deals with vibrational modes. Default is
             ``pMuTT.models.statmech.EmptyMode``
         rot_model : `pMuTT.models.statmech.rot` object, optional
-            Deals with rotational modes. Default is 
+            Deals with rotational modes. Default is
             ``pMuTT.models.statmech.EmptyMode``
         elec_model : `pMuTT.models.statmech.elec` object, optional
-            Deals with electronic modes. Default is 
+            Deals with electronic modes. Default is
             ``pMuTT.models.statmech.EmptyMode``
         nucl_model : `pMuTT.models.statmech.nucl` object
-            Deals with nuclear modes. Default is 
+            Deals with nuclear modes. Default is
             ``pMuTT.models.statmech.EmptyMode``
         notes : str, optional
             Any additional details you would like to include such as
             computational set up. Default is None
     """
 
-    def __init__(self, name=None, trans_model=EmptyMode(), 
-                 vib_model=EmptyMode(), rot_model=EmptyMode(), 
-                 elec_model=EmptyMode(), nucl_model=EmptyMode(), notes=None, 
+    def __init__(self, name=None, trans_model=EmptyMode(),
+                 vib_model=EmptyMode(), rot_model=EmptyMode(),
+                 elec_model=EmptyMode(), nucl_model=EmptyMode(), notes=None,
                  **kwargs):
         self.name = name
 
@@ -101,7 +103,7 @@ class StatMech:
             self.trans_model = _pass_expected_arguments(trans_model, **kwargs)
         else:
             self.trans_model = trans_model
-        
+
         # Vibrational modes
         if inspect.isclass(vib_model):
             self.vib_model = _pass_expected_arguments(vib_model, **kwargs)
@@ -125,7 +127,7 @@ class StatMech:
             self.nucl_model = _pass_expected_arguments(nucl_model, **kwargs)
         else:
             self.nucl_model = nucl_model
-        
+
         self.notes = notes
 
     def get_q(self, verbose=False, **kwargs):
@@ -151,7 +153,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_q, **kwargs),
             _pass_expected_arguments(self.elec_model.get_q, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_q, **kwargs))
-        
+
         if verbose:
             return q
         else:
@@ -180,12 +182,11 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_CvoR, **kwargs),
             _pass_expected_arguments(self.elec_model.get_CvoR, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_CvoR, **kwargs))
-        
+
         if verbose:
             return CvoR
         else:
             return np.sum(CvoR)
-
 
     def get_CpoR(self, verbose=False, **kwargs):
         """Dimensionless heat capacity (constant P)
@@ -210,7 +211,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_CpoR, **kwargs),
             _pass_expected_arguments(self.elec_model.get_CpoR, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_CpoR, **kwargs))
-        
+
         if verbose:
             return CpoR
         else:
@@ -240,7 +241,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_UoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_UoRT, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_UoRT, **kwargs))
-        
+
         if verbose:
             return UoRT
         else:
@@ -270,7 +271,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_HoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_HoRT, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_HoRT, **kwargs))
-        
+
         if verbose:
             return HoRT
         else:
@@ -300,7 +301,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_SoR, **kwargs),
             _pass_expected_arguments(self.elec_model.get_SoR, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_SoR, **kwargs))
-        
+
         if verbose:
             return SoR
         else:
@@ -330,7 +331,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_AoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_AoRT, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_AoRT, **kwargs))
-        
+
         if verbose:
             return AoRT
         else:
@@ -360,7 +361,7 @@ class StatMech:
             _pass_expected_arguments(self.rot_model.get_GoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_GoRT, **kwargs),
             _pass_expected_arguments(self.nucl_model.get_GoRT, **kwargs))
-        
+
         if verbose:
             return GoRT
         else:
@@ -368,7 +369,7 @@ class StatMech:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -402,12 +403,13 @@ class StatMech:
         notes = json_obj['notes']
 
         return cls(name=name,
-                   trans_model=trans_model, 
-                   vib_model=vib_model, 
+                   trans_model=trans_model,
+                   vib_model=vib_model,
                    rot_model=rot_model,
                    elec_model=elec_model,
                    nucl_model=nucl_model,
                    notes=notes)
+
 
 presets = {
     'idealgas': {
@@ -416,7 +418,7 @@ presets = {
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.IdealElec,
         'rot_model': rot.RigidRotor,
-        'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 
+        'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy',
                      'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'),
         'optional': ('atoms')
         },

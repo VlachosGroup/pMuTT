@@ -471,11 +471,12 @@ class Reaction:
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless activation energy
+                Parameters required to calculate dimensionless activation
+                energy
         Returns
         -------
             EoRT_act : float
-                Dimensionless activation energy between reactants and 
+                Dimensionless activation energy between reactants and
                 transition state
         """
         return self.get_HoRT_act(rev=rev, **kwargs)
@@ -595,11 +596,11 @@ class Reaction:
             m = _get_molecularity(self.reactants_stoich)
 
         return np.exp(m)*c.kb('J/K')*T/c.h('J s') \
-               *np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs))
+            * np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs))
 
     def get_k(self, T=c.T0('K'), rev=False, **kwargs):
         """Calculates the rate constant in 1/s
-        
+
         Parameters
         ----------
             rev : bool, optional
@@ -608,14 +609,14 @@ class Reaction:
             T : float, optional
                 Temperature in K. Default is standard temperature.
             kwargs : keyword arguments
-                Parameters required to calculate pre-exponential factor            
+                Parameters required to calculate pre-exponential factor
         Returns
         -------
             k : float
                 Rate constant in 1/s
         """
         return self.get_A(T=T, rev=rev, **kwargs) \
-               *np.exp(-self.get_EoRT_act(T=T, rev=rev, **kwargs))
+            * np.exp(-self.get_EoRT_act(T=T, rev=rev, **kwargs))
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
@@ -937,6 +938,7 @@ class PhaseDiagram:
         ax.set_xlabel(x1_name)
         ax.set_ylabel(x2_name)
         return (fig, ax, c, cbar)
+
 
 def _get_q_rxn(initial_state, initial_state_stoich, final_state,
                final_state_stoich, **kwargs):
@@ -1315,6 +1317,7 @@ def _count_elements(species, stoich):
         for element, coeff in specie.elements.items():
             element_count += Counter({element: coeff*stoich_specie})
     return element_count
+
 
 def _get_molecularity(stoich):
     """Calculate the molecularity (e.g. unimolecular, bimolecular)

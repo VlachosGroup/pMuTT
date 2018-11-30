@@ -35,7 +35,7 @@ class IdealElec:
             return False
         return self.to_dict() == other_dict
 
-    def get_q(self, T, ignore_q_elec=True):
+    def get_q(self, T, ignore_q_elec=False):
         """Calculates the partition function
 
         :math:`q^{elec}=\\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
@@ -47,7 +47,7 @@ class IdealElec:
             ignore_q_elec : bool, optional
                 Ignore contribution of electronic mode to partition function
                 . Often necessary since DFT's value for potentialenergy is
-                very negative causing q_elec to go to infinity. Default is 
+                very negative causing q_elec to go to infinity. Default is
                 True
         Returns
         -------
@@ -57,7 +57,7 @@ class IdealElec:
         if ignore_q_elec:
             return 1.
         else:
-            return self._degeneracy*np.exp(-self.get_UoRT(T=T))
+            return self._degeneracy*(1 + np.exp(self.get_UoRT(T=T)))
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
@@ -97,7 +97,7 @@ class IdealElec:
             UoRT_elec : float
                 Electronic dimensionless internal energy
         """
-        return self.potentialenergy/c.kb('eV/K')/T
+        return (self.potentialenergy)/c.kb('eV/K')/T
 
     def get_HoRT(self, T):
         """Calculates the dimensionless enthalpy
