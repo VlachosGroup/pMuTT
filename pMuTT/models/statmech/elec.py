@@ -35,7 +35,7 @@ class IdealElec:
             return False
         return self.to_dict() == other_dict
 
-    def get_q(self, T, ignore_q_elec=False):
+    def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function
 
         :math:`q^{elec}=\\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
@@ -47,7 +47,7 @@ class IdealElec:
             ignore_q_elec : bool, optional
                 Ignore contribution of electronic mode to partition function
                 . Often necessary since DFT's value for potentialenergy is
-                very negative causing q_elec to go to infinity.
+                very negative causing q_elec to go to infinity. Default is True
         Returns
         -------
             q_elec : float
