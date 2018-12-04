@@ -62,7 +62,6 @@ class IdealElec:
                 Epsilon = self.D0/c.kb('eV/K')/T
             else:
                 Epsilon = np.abs(self.get_UoRT(T=T))
-            print(Epsilon, (1 + np.exp(-Epsilon)))
             return self._degeneracy*(1 + np.exp(-Epsilon))
 
     def get_CvoR(self):
