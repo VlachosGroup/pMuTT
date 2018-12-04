@@ -22,8 +22,9 @@ class IdealElec:
             - 1.0 for a triplet with two unpaired electrons, such as O :sub:`2`
     """
 
-    def __init__(self, potentialenergy=0., spin=0.):
+    def __init__(self, potentialenergy=0., spin=0., D0=None):
         self.potentialenergy = potentialenergy
+        self.D0 = D0
         self.spin = spin
         self._degeneracy = 2.*self.spin + 1.
 
@@ -57,7 +58,12 @@ class IdealElec:
         if ignore_q_elec:
             return 1.
         else:
-            return self._degeneracy*(1 + np.exp(self.get_UoRT(T=T)))
+            if self.D0 is not None:
+                Epsilon = self.D0/c.kb('eV/K')/T
+            else:
+                Epsilon = np.abs(self.get_UoRT(T=T))
+            print(Epsilon, (1 + np.exp(-Epsilon)))
+            return self._degeneracy*(1 + np.exp(-Epsilon))
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume

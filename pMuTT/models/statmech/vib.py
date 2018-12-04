@@ -88,7 +88,7 @@ class HarmonicVib:
     def get_ZPE(self):
         """Calculates the zero point energy
 
-        :math:`ZPE=\\frac{1}{2}h\\sum_i \\Theta_{V,i}`
+        :math:`ZPE=\\frac{1}{2}k_b\\sum_i \\Theta_{V,i}`
 
         Returns
         -------
