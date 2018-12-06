@@ -16,8 +16,8 @@ See our `documentation page`_ for examples, equations used, and docstrings.
 Developers
 ----------
 
--  Gerhard Wittreich, P.E. (wittregr@udel.edu)
 -  Jonathan Lym (jlym@udel.edu)
+-  Gerhard Wittreich, P.E. (wittregr@udel.edu)
 
 Dependencies
 ------------
