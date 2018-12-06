@@ -116,7 +116,9 @@ class TestReaction(unittest.TestCase):
                      'references': None,
                      'statmech_model': None}],
                 'reactants_stoich': [1.0, 0.5],
-                'transition_state': None}
+                'transition_state': [None],
+                'transition_state_stoich': [None],
+                'bep': None}
 
         '''Reactions using StatMech'''
         ideal_gas_param = presets['idealgas']

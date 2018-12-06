@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from collections import Counter
+import inspect
 import re
 import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
-from pMuTT import _force_pass_arguments
+from pMuTT import _force_pass_arguments, _pass_expected_arguments, _is_iterable
 from pMuTT import constants as c
+from pMuTT.models.reaction.bep import BEP
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
 class Reaction:
@@ -27,8 +29,10 @@ class Reaction:
             Stoichiometric quantities of transition state species. 
             Default is None
         bep : ``pMuTT.models.reaction.bep.BEP`` object, optional
-            BEP to calculate activation energy from enthalpy of reactants 
-            and/or products
+            Bronsted Evans Polyani relationship. Default is None
+        kwargs : keyword arguments
+            BEP parameters. See ``pMuTT.models.reaction.bep.BEP`` documentation 
+            for expected parameters
     Notes
     -----
         Specie specific parameters can be passed by having a key named 
@@ -55,14 +59,33 @@ class Reaction:
     """
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
-                 transition_state=None, transition_state_stoich=None, bep=None):
+                 transition_state=None, transition_state_stoich=None, 
+                 bep=None, **kwargs):
+        # If any of the entries were not iterable, assign them to a list
+        if not _is_iterable(reactants):
+            reactants = [reactants]
+        if not _is_iterable(reactants_stoich):
+            reactants_stoich = [reactants_stoich]
+        if not _is_iterable(products):
+            products = [products]
+        if not _is_iterable(products_stoich):
+            products_stoich = [products_stoich]
+        if not _is_iterable(transition_state):
+            transition_state = [transition_state]
+        if not _is_iterable(transition_state_stoich):
+            transition_state_stoich = [transition_state_stoich]
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
         self.products = products
         self.products_stoich = products_stoich
         self.transition_state = transition_state
         self.transition_state_stoich = transition_state_stoich
-        self.bep = bep
+        if inspect.isclass(bep):
+            kwargs['reaction'] = self
+            self.bep = _pass_expected_arguments(bep, **kwargs)
+        else:
+            self.bep = bep
+
 
 
     def __eq__(self, other):
@@ -96,8 +119,9 @@ class Reaction:
                              'Product count: {}'.format(reactant_elements, \
                                                         product_elements))
 
-        if self.transition_state is not None:
-            TS_elements = _count_elements((self.transition_state,), (1.,))
+        if None not in self.transition_state:
+            TS_elements = _count_elements(self.transition_state, 
+                                          self.transition_state_stoich)
             if reactant_elements != TS_elements:
                 raise ValueError('Number of elements in reactants and '
                                  'transition state do not agree.\n'
@@ -711,6 +735,50 @@ class Reaction:
                                                 **kwargs)
         return HoRT_act
 
+    def get_EoRT_act(self, rev=False, method='any', **kwargs):
+        """Gets dimensionless activation energy between reactants
+        (or products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            method : str, optional
+                Method to use to calculate dimensionless activation energy. 
+                Accepted options:
+
+                - 'any' (uses whichever is available. ``self.transition_state`` 
+                is used preferentially over ``self.BEP``)
+                - 'bep' (uses ``self.bep``)
+                - 'ts' or 'transition_state' (uses ``self.transition_state``)
+
+                Default is 'any'
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless activation
+                energy
+        Returns
+        -------
+            EoRT_act : float
+                Dimensionless activation energy between reactants and
+                transition state
+        """
+        method = method.lower()
+        if method == 'any':
+            if None not in self.transition_state:
+                return self.get_HoRT_act(rev=rev, **kwargs)
+            else:
+                return self.bep.get_EoRT_act(rev=rev, **kwargs)
+        elif method == 'bep':
+            return self.bep.get_EoRT_act(rev=rev, **kwargs)
+        elif method == 'transition state' or method == 'ts':
+            return self.get_HoRT_act(rev=rev, **kwargs)
+        else:
+            raise ValueError(('Method "{}" not supported. See documentation '
+                              'of '
+                              '``pMuTT.models.reaction.Reaction.get_EoRT_act`` '
+                              'for supported options.'.format(method)))
+
 
     def get_SoR_act(self, rev=False, **kwargs):
         """Gets change in dimensionless entropy between reactants (or products) 
@@ -948,7 +1016,7 @@ class Reaction:
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='='):
+                    reaction_delimiter='=', **kwargs):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -964,6 +1032,9 @@ class Reaction:
             reaction_delimiter : str, optional
                 Delimiter that separate states of the reaction. Leading and 
                 trailing spaces will be trimmed. Default is '='
+            kwargs : keyword arguments
+                BEP parameters. See ``pMuTT.models.reaction.bep.BEP`` 
+                documentation for expected parameters
         Returns
         -------
             Reaction : Reaction object        
@@ -981,7 +1052,8 @@ class Reaction:
             ts = [species[name] for name in ts_names]
         return cls(reactants=reactants, reactants_stoich=react_stoich,
                    products=products, products_stoich=prod_stoich, 
-                   transition_state=ts, transition_state_stoich=ts_stoich)
+                   transition_state=ts, transition_state_stoich=ts_stoich,
+                   **kwargs)
 
     def to_str(self, species_delimiter='+', reaction_delimiter = '='):
         """Writes the Reaction object as a stoichiometric reaction
@@ -1004,12 +1076,11 @@ class Reaction:
         reaction_str += reaction_delimiter
 
         # Write transition state if any
-        if self.transition_state is not None:
-            reaction_str += _write_reaction_state(
-                    species=self.transition_state,
-                    stoich=self.transition_state_stoich,
-                    species_delimiter=species_delimiter)
-            reaction_str += reaction_delimiter
+        reaction_str += _write_reaction_state(
+                species=self.transition_state,
+                stoich=self.transition_state_stoich,
+                species_delimiter=species_delimiter)
+        reaction_str += reaction_delimiter
         
         # Write products
         reaction_str += _write_reaction_state(species=self.products,
@@ -1029,11 +1100,22 @@ class Reaction:
             'reactants': [reactant.to_dict() for reactant in self.reactants],
             'reactants_stoich': list(self.reactants_stoich),
             'products': [product.to_dict() for product in self.products],
-            'products_stoich': list(self.products_stoich)}            
+            'products_stoich': list(self.products_stoich),
+            }   
         try:
-            obj_dict['transition_state'] = self.transition_state.to_dict()
-        except AttributeError:
+            obj_dict['transition_state'] = [ts.to_dict() \
+                    for ts in self.transition_state]
+        except (AttributeError, TypeError):
             obj_dict['transition_state'] = self.transition_state
+            obj_dict['transition_state_stoich'] = self.transition_state_stoich
+        else:
+            obj_dict['transition_state_stoich'] = \
+                    list(self.transition_state_stoich)
+        
+        try:
+            obj_dict['bep'] = self.bep.to_dict()
+        except (AttributeError, TypeError):
+            obj_dict['bep'] = self.bep
 
         return obj_dict
 
@@ -1056,7 +1138,12 @@ class Reaction:
                                  for product in json_obj['products']]
         json_obj['transition_state'] = json_to_pMuTT(
                 json_obj['transition_state'])
-        return cls(**json_obj)
+        json_obj['bep'] = json_to_pMuTT(json_obj['bep'])
+
+        reaction = cls(**json_obj)
+        if reaction.bep is not None:
+            reaction.bep.set_descriptor(reaction=reaction)
+        return reaction
 
 class Reactions:
     """Contains multiple reactions. Serves as a parent class for other objects
@@ -1224,6 +1311,9 @@ def _write_reaction_state(species, stoich, species_delimiter='+'):
             One section of the reaction string
     """
     for i, (specie, stoich_val) in enumerate(zip(species, stoich)):
+        if specie is None:
+            reaction_str = ''
+            break
         if i == 0:
             reaction_str = '{}{}'.format(stoich_val, specie.name)
         else:
