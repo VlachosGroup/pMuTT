@@ -75,31 +75,37 @@ class TestReferences(unittest.TestCase):
             atoms = molecule('O2'))
         self.references = References(references = [H2_thermo, H2O_thermo, O2_thermo])
 
-    def test_get_elements(self):
-        self.assertEqual(self.references.get_elements(), ('H', 'O'))
+    def test_get_descriptors(self):
+        self.assertEqual(self.references.get_descriptors(), ('H', 'O'))
 
     def test_get_elements_matrix(self):
         elements_matrix = np.array([
             [2, 0],
             [2, 1],
             [0, 2]])
-        np.testing.assert_array_equal(self.references.get_elements_matrix(), elements_matrix)
+        np.testing.assert_array_equal(self.references.get_descriptors_matrix(), 
+                                      elements_matrix)
 
     def test_calc_offset(self):
         expected_element_offset = {'H': -123.10868373, 'O': -186.72503046}
-        calculated_element_offset = self.references.HoRT_element_offset
+        calculated_element_offset = self.references.offset
 
         #Assess whether the keys are the same
-        self.assertSetEqual(set(expected_element_offset.keys()), set(calculated_element_offset.keys()))
+        self.assertSetEqual(set(expected_element_offset.keys()), 
+                            set(calculated_element_offset.keys()))
         #Assess whether the values assigned to the keys are the close
         for element in expected_element_offset.keys():
-            self.assertAlmostEqual(expected_element_offset[element], calculated_element_offset[element])
+            self.assertAlmostEqual(expected_element_offset[element], 
+                                   calculated_element_offset[element])
 
     def test_get_specie_offset(self):
         elements = {'H': 2, 'O': 2}
-        self.assertAlmostEqual(self.references.get_HoRT_offset(elements=elements), 619.6674284923677)
+        self.assertAlmostEqual(
+                self.references.get_HoRT_offset(descriptors=elements), 
+                619.6674284923677)
         with self.assertWarns(RuntimeWarning):
-            self.assertEqual(self.references.get_HoRT_offset(elements={'non-referenced element': 1}), 0.)
+            self.assertEqual(self.references.get_HoRT_offset(
+                    descriptors={'non-referenced element': 1}), 0.)
 
 
 if __name__ == '__main__':

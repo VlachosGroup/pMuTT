@@ -237,8 +237,8 @@ class BaseThermo:
         '''
         H_plot = self.statmech_model.get_HoRT(T=T)
         if self.references is not None:
-            H_plot += self.references.get_HoRT_offset(elements=self.elements,
-                                                      T=T)
+            H_plot += self.references.get_HoRT_offset(
+                    descriptors=getattr(self, self.references.descriptor), T=T)
 
         if H_units is None:
             ax[1].set_ylabel('H/RT')
@@ -264,8 +264,8 @@ class BaseThermo:
         ax[3].set_xlabel('Temperature (K)')
         G_plot = self.statmech_model.get_GoRT(T=T)
         if self.references is not None:
-            G_plot += self.references.get_HoRT_offset(elements=self.elements,
-                                                      T=T)
+            G_plot += self.references.get_HoRT_offset(
+                    descriptors=getattr(self, self.references.descriptor), T=T)
 
         if G_units is None:
             ax[3].set_ylabel('G/RT')
@@ -449,8 +449,8 @@ class BaseThermo:
             T = np.linspace(self.T_low, self.T_high)
 
         if self.references is not None:
-            H_offset = self.references.get_HoRT_offset(elements=self.elements,
-                                                       T=T)
+            H_offset = self.references.get_HoRT_offset(
+                    descriptors=getattr(self, self.references.descriptor), T=T)
         else:
             H_offset = np.zeros_like(T)
 
@@ -530,8 +530,8 @@ class BaseThermo:
             T = np.linspace(self.T_low, self.T_high)
 
         if self.references is not None:
-            G_offset = self.references.get_HoRT_offset(elements=self.elements,
-                                                       T=T)
+            G_offset = self.references.get_HoRT_offset(
+                    descriptors=getattr(self, self.references.descriptor), T=T)
         else:
             G_offset = np.zeros_like(T)
 

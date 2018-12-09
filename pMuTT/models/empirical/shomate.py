@@ -176,7 +176,13 @@ class Shomate(BaseThermo):
         HoRT_ref = statmech_model.get_HoRT(T=T_ref)
         # Add contribution of references
         if references is not None:
-            HoRT_ref += references.get_HoRT_offset(elements=elements, T=T_ref)
+            descriptor_name = references.descriptor
+            if descriptor_name == 'elements':
+                descriptors = elements
+            else:
+                descriptors = kwargs[descriptor]
+            HoRT_ref += references.get_HoRT_offset(descriptors=descriptors, 
+                                                   T=T_ref)
         SoR_ref = statmech_model.get_SoR(T=T_ref)
 
         return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref, 

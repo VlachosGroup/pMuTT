@@ -71,23 +71,22 @@ class References:
 
     Attributes
     ----------
-        _references : list of ``pMuTT.models.empirical.references.Reference``
-            Reference species. Each member of the list should have the
-            attributes ``T_ref`` and ``HoRT_ref``
-        HoRT_element_offset : dict
-            Dimensionless enthalpy offset for each element
+        offset : dict
+            Dimensionless enthalpy offset for each descriptor
+        references : list of ``pMuTT.models.empirical.references.Reference``, optional
+            Reference species. Use the ``.from_references`` class method to 
+            generate ``offset`` attribute from species. Each member of the list 
+            should have the attributes ``T_ref`` and ``HoRT_ref``
         T_ref : float
             Reference temperature in K
-
-    Notes
-    -----
-        List-like methods (such as ``append``, ``extend``) will affect
-        the ``_references`` attribute.
     """
-    def __init__(self, references):
-        self._references = references
-        self.HoRT_element_offset = {}
-        self.fit_HoRT_offset()
+    def __init__(self, offset=None, references=None, descriptor='elements'):
+        self.offset = offset
+        self.references = references
+        self.descriptor = descriptor
+        # If offset not specified but references is specified
+        if self.offset is None and self.references is not None:
+            self.fit_HoRT_offset()
 
     def __iter__(self):
         """Iterates over references attribute
@@ -96,32 +95,32 @@ class References:
         ------
             reference : ``pMuTT.models.empirical.basethermo.BaseThermo``
         """
-        for reference in self._references:
+        for reference in self.references:
             yield reference
 
     def __len__(self):
-        return len(self._references)
+        return len(self.references)
 
     def __setitem__(self, index, reference):
-        self._references[index] = reference
+        self.references[index] = reference
 
     def __getitem__(self, index):
-        return self._references[index]
+        return self.references[index]
 
     def append(self, obj):
-        self._references.append(obj)
+        self.references.append(obj)
 
     def extend(self, seq):
-        self._references.extend(seq)
+        self.references.extend(seq)
 
     def insert(self, obj):
-        self._references.insert(obj)
+        self.references.insert(obj)
 
     def pop(self, obj=-1):
-        self._references.pop(obj)
+        self.references.pop(obj)
 
     def remove(self, obj):
-        self._references.remove(obj)
+        self.references.remove(obj)
 
     def index(self, name):
         for i, reference in enumerate(self):
@@ -131,52 +130,51 @@ class References:
             return None
 
     def clear_offset(self):
-        """Removes all entries from element offset dictionary."""
-        self.HoRT_element_offset.clear()
+        """Removes all entries from descriptor offset dictionary."""
+        self.HoRT_descriptor_offset.clear()
 
-    def get_elements(self):
-        """Returns the elements in references.
+    def get_descriptors(self):
+        """Returns the descriptors in references.
 
         Returns
         -------
-            elements : tuple
-                Unique elements in reference species
+            descriptors : tuple
+                Unique descriptors in reference species
         """
-        unique_elements = []
-        for reference in self:
-            for element in reference.elements.keys():
-                if element not in unique_elements:
-                    unique_elements.append(element)
-        return tuple(sorted(unique_elements))
+        unique_descriptors = []
+        for reference in self.references:
+            for desc in getattr(reference, self.descriptor).keys():
+                if desc not in unique_descriptors:
+                    unique_descriptors.append(desc)
+        return tuple(sorted(unique_descriptors))
 
-    def get_elements_matrix(self):
-        """Creates the elements matrix required for calculating the offset.
-        The elements are sorted in alphabetical order.
+    def get_descriptors_matrix(self):
+        """Creates the descriptors matrix required for calculating the offset.
+        The descriptors are sorted in alphabetical order.
 
         Returns
         -------
-            Element matrix : (M,N) `numpy.ndarray`_
+            descriptor matrix : (M,N) `numpy.ndarray`_
                 Rows correspond to reference species. Columns correspond to
-                elements
-
-
+                descriptors
         """
-        elements = self.get_elements()
-        elements_mat = np.zeros((len(self), len(elements)))
+        descriptors = self.get_descriptors()
+        descriptors_mat = np.zeros((len(self.references), len(descriptors)))
         for i, reference in enumerate(self):
-            for j, element in enumerate(elements):
+            for j, descriptor_name in enumerate(descriptors):
                 try:
-                    elements_mat[i, j] = reference.elements[element]
+                    descriptors_mat[i, j] = \
+                            getattr(reference, self.descriptor)[descriptor_name]
                 except KeyError:
-                    # If element not in dictionary
-                    elements_mat[i, j] = 0.
-        return elements_mat
+                    # If descriptor not in dictionary
+                    descriptors_mat[i, j] = 0.
+        return descriptors_mat
 
     def fit_HoRT_offset(self):
-        """Calculate the elemental offset between DFT and formation energies
+        """Calculate the descriptoral offset between DFT and formation energies
         using reference species."""
-        elements = self.get_elements()
-        elements_mat = self.get_elements_matrix()
+        descriptors = self.get_descriptors()
+        descriptors_mat = self.get_descriptors_matrix()
 
         T_refs = np.array([reference.T_ref for reference in self])
         # If any of the T_ref values are not close to the others.
@@ -193,25 +191,24 @@ class References:
         # for reference species
         ref_offset = HoRT_ref_dft - HoRT_ref_exp
         # Offset between the DFT energies and experimental values for
-        # each element
-        HoRT_element_offset = np.linalg.lstsq(elements_mat, ref_offset,
-                                              rcond=None)[0]
-        # Convert HoRT_element_offset to a dictionary
-        self.HoRT_element_offset = {element: offset for element,
-                                    offset in zip(elements,
-                                                  HoRT_element_offset)}
+        # each descriptor
+        offset = np.linalg.lstsq(descriptors_mat, ref_offset,
+                                                 rcond=None)[0]
+        # Convert offset to a dictionary
+        self.offset = {descriptor: val for descriptor, val \
+                                           in zip(descriptors, offset)}
 
-    def get_HoRT_offset(self, elements, T=None):
-        """Returns the offset due to the element composition of a specie.
+    def get_HoRT_offset(self, descriptors, T=None):
+        """Returns the offset due to the descriptor composition of a specie.
         The offset is defined as follows:
 
-        HoRT_exp = HoRT_dft + offset
+        :math:`HoRT_{exp} = HoRT_{dft} + offset`
 
         Parameters
         ----------
-            elements : dict
-                Dictionary where the keys are elements and the values are the
-                number of each element in a formula unit
+            descriptors : dict
+                Dictionary where the keys are decriptors and the values are the
+                number of each descriptor in a formula unit
             Ts : float or (N,) numpy.ndarray_
                 Temperatures in K. If not specified, adjusts using ``T_ref``
         Returns
@@ -223,12 +220,12 @@ class References:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         HoRT_offset = 0.
-        for element, coefficient in elements.items():
+        for descriptor, coefficient in descriptors.items():
             try:
-                HoRT_offset -= self.HoRT_element_offset[element] * coefficient
+                HoRT_offset -= self.offset[descriptor]*coefficient
             except KeyError:
                 warn('References does not have offset value for the '
-                     'element: {}.'.format(element), RuntimeWarning)
+                     'descriptor: {}.'.format(descriptor), RuntimeWarning)
         if T is None:
             return HoRT_offset
         else:
@@ -242,8 +239,14 @@ class References:
         -------
             obj_dict : dict
         """
-        return {'class': self.__class__,
-                'references': [ref.to_dict() for ref in self._references]}
+        obj_dict =  {'class': self.__class__,
+                     'offset': self.offset.tolist(),
+                     'descriptor': self.descriptor}
+        try:
+            obj_dict['references'] = [ref.to_dict() for ref in self.references]
+        except (AttributeError, TypeError):
+            obj_dict['references'] = self.references
+        return obj_dict
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -258,6 +261,7 @@ class References:
             References : References object
         """
         json_obj = remove_class(json_obj)
+        json_obj['offset'] = np.array(json_obj['offset'])
         json_obj['references'] = [json_to_pMuTT(ref_dict)
                                   for ref_dict in json_obj['references']]
         return cls(**json_obj)

@@ -33,7 +33,7 @@ Processing References
 '''
 #Import from excel
 refs_data = read_excel(io=refs_path)
-refs = References([Reference(**ref_data) for ref_data in refs_data])
+refs = References(references=[Reference(**ref_data) for ref_data in refs_data])
 
 '''
 Processing Surfaces

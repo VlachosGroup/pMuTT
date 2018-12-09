@@ -35,11 +35,13 @@ Processing References
 #Import from excel
 refs_input = read_excel(io=refs_path)
 pprint(refs_input)
-refs = References([Reference(**ref_input) for ref_input in refs_input])
+refs = References(
+        references=[Reference(**ref_input) for ref_input in refs_input],
+        descriptor='elements')
 print('Reference Input:')
 pprint(refs_input)
 print('Reference Data:')
-pprint(refs[0])
+pprint(refs.references[0])
 
 '''
 Processing Input Species
