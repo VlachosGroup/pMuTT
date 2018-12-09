@@ -11,8 +11,6 @@ pMuTT
 #
 name = 'pMuTT'
 __version__ = '1.1.2'
-#
-####
 
 import re
 import inspect

@@ -1,0 +1,113 @@
+{
+ "class": "<class 'pMuTT.models.reaction.Reaction'>",
+ "reactants": [
+  {
+   "class": "<class 'pMuTT.models.statmech.StatMech'>",
+   "name": "H2",
+   "trans_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "vib_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "rot_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "elec_model": {
+    "class": "<class 'pMuTT.models.statmech.elec.IdealElec'>",
+    "potentialenergy": 0.05138514057889999,
+    "spin": 0.0
+   },
+   "nucl_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "notes": null
+  },
+  {
+   "class": "<class 'pMuTT.models.statmech.StatMech'>",
+   "name": "O2",
+   "trans_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "vib_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "rot_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "elec_model": {
+    "class": "<class 'pMuTT.models.statmech.elec.IdealElec'>",
+    "potentialenergy": 0.10277028115779999,
+    "spin": 0.0
+   },
+   "nucl_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "notes": null
+  }
+ ],
+ "reactants_stoich": [
+  1.0,
+  0.5
+ ],
+ "products": [
+  {
+   "class": "<class 'pMuTT.models.statmech.StatMech'>",
+   "name": "H2O",
+   "trans_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "vib_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "rot_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "elec_model": {
+    "class": "<class 'pMuTT.models.statmech.elec.IdealElec'>",
+    "potentialenergy": 0.07707771086835,
+    "spin": 0.0
+   },
+   "nucl_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "notes": null
+  }
+ ],
+ "products_stoich": [
+  1.0
+ ],
+ "transition_state": [
+  {
+   "class": "<class 'pMuTT.models.statmech.StatMech'>",
+   "name": "H2O",
+   "trans_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "vib_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "rot_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "elec_model": {
+    "class": "<class 'pMuTT.models.statmech.elec.IdealElec'>",
+    "potentialenergy": 0.12846285144724998,
+    "spin": 0.0
+   },
+   "nucl_model": {
+    "class": "<class 'pMuTT.models.statmech.EmptyMode'>"
+   },
+   "notes": null
+  }
+ ],
+ "transition_state_stoich": [
+  1.0
+ ],
+ "bep": {
+  "class": "<class 'pMuTT.models.reaction.bep.BEP'>",
+  "slope": 10.0,
+  "intercept": 20.0,
+  "descriptor": "delta"
+ }
+}

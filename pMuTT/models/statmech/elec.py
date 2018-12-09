@@ -14,6 +14,9 @@ class IdealElec:
     ----------
         potentialenergy : float, optional
             Potential energy in eV. Default is 0
+        D0 : float, optional
+            Bond strength in eV. Preferentially used when calculating partition 
+            coefficient.
         spin : float, optional
             The total electron spin. Default is 0
 
@@ -36,7 +39,7 @@ class IdealElec:
             return False
         return self.to_dict() == other_dict
 
-    def get_q(self, T, ignore_q_elec=False):
+    def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function
 
         :math:`q^{elec}=\\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
@@ -48,8 +51,7 @@ class IdealElec:
             ignore_q_elec : bool, optional
                 Ignore contribution of electronic mode to partition function
                 . Often necessary since DFT's value for potentialenergy is
-                very negative causing q_elec to go to infinity. Default is
-                True
+                very negative causing q_elec to go to infinity. Default is True
         Returns
         -------
             q_elec : float
@@ -61,7 +63,7 @@ class IdealElec:
             if self.D0 is not None:
                 Epsilon = self.D0/c.kb('eV/K')/T
             else:
-                Epsilon = np.abs(self.get_UoRT(T=T))
+                Epsilon = self.get_UoRT(T=T)
             return self._degeneracy*(1 + np.exp(-Epsilon))
 
     def get_CvoR(self):

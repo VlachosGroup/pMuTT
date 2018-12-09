@@ -72,20 +72,20 @@ class StatMech:
     ----------
         name : str, optional
             Name of the specie. Default is None
-        trans_model : `pMuTT.models.statmech.trans` object, optional
-            Deals with translational modes. Default is
+        trans_model : ``pMuTT.models.statmech.trans`` object, optional
+            Deals with translational modes. Default is 
             ``pMuTT.models.statmech.EmptyMode``
-        vib_model : `pMuTT.models.statmech.vib` object, optional
-            Deals with vibrational modes. Default is
+        vib_model : ``pMuTT.models.statmech.vib`` object, optional
+            Deals with vibrational modes. Default is 
             ``pMuTT.models.statmech.EmptyMode``
-        rot_model : `pMuTT.models.statmech.rot` object, optional
-            Deals with rotational modes. Default is
+        rot_model : ``pMuTT.models.statmech.rot`` object, optional
+            Deals with rotational modes. Default is 
             ``pMuTT.models.statmech.EmptyMode``
-        elec_model : `pMuTT.models.statmech.elec` object, optional
-            Deals with electronic modes. Default is
+        elec_model : ``pMuTT.models.statmech.elec`` object, optional
+            Deals with electronic modes. Default is 
             ``pMuTT.models.statmech.EmptyMode``
-        nucl_model : `pMuTT.models.statmech.nucl` object
-            Deals with nuclear modes. Default is
+        nucl_model : ``pMuTT.models.statmech.nucl`` object
+            Deals with nuclear modes. Default is 
             ``pMuTT.models.statmech.EmptyMode``
         notes : str, optional
             Any additional details you would like to include such as
@@ -375,11 +375,13 @@ class StatMech:
             obj_dict : dict
         """
         return {'class': str(self.__class__),
+                'name': self.name,
                 'trans_model': self.trans_model.to_dict(),
                 'vib_model': self.vib_model.to_dict(),
                 'rot_model': self.rot_model.to_dict(),
                 'elec_model': self.elec_model.to_dict(),
-                'nucl_model': self.nucl_model.to_dict()}
+                'nucl_model': self.nucl_model.to_dict(),
+                'notes': self.notes}
 
     @classmethod
     def from_dict(cls, json_obj):
