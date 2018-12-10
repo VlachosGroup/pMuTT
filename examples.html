@@ -86,9 +86,8 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#ab-initio-data-to-empirical-data"><em>Ab-initio</em> Data to Empirical Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#experimental-data-to-empirical-data">Experimental Data to Empirical Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#read-nasa-from-thermdat">Read Nasa from Thermdat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#experimental-to-empirical">Experimental to Empirical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excel-to-empirical-data">Excel to Empirical Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
@@ -186,270 +185,25 @@
 </style>
 <div class="section" id="examples">
 <span id="id1"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="ab-initio-data-to-empirical-data">
-<h2><em>Ab-initio</em> Data to Empirical Data<a class="headerlink" href="#ab-initio-data-to-empirical-data" title="Permalink to this headline">¶</a></h2>
-<p>If you want a NASA polynomial (or other empirical form) and have <em>ab-initio</em> data.
-In this example, the data was manually inputted into a spreadsheet.
-This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1">pMuTT.examples.VASP_to_thermdat.example1</a></p>
-<div class="figure">
-<img alt="Flowchart of DFT data to empirical" src="_images/flowchart_dft_to_empirical.png" />
+<p>This page and its subpages show some examples using the
+pMuTT code. All the codes listed here are available in
+the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter">examples folder</a> as Jupyter notebooks (<em>.ipynb) and ordinary
+Python scripts (</em>.py).</p>
+<div class="section" id="experimental-to-empirical">
+<h2>Experimental to Empirical<a class="headerlink" href="#experimental-to-empirical" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.html"><span class="doc">Webpage</span></a></li>
+<li><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb">Jupyter Notebook</a></li>
+<li><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.py">Python Script</a></li>
+</ul>
 </div>
-<ol class="arabic simple">
-<li><strong>Read the ab-initio data.</strong>
-Different thermodynamic models will require different inputs.
-For example, the <code class="docutils literal notranslate"><span class="pre">HarmonicThermo</span></code> model only requires potentialenergy
-and vibrational wavenumbers whereas <code class="docutils literal notranslate"><span class="pre">IdealGasThermo</span></code> requires the previously
-mentioned parameters and an atoms object, geometry, symmetry number, and spin.</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
-
-<span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">species_path</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Input data imported from Excel&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">species_data</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>One element of species_data is shown below.
-Note that <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> returns a dictionary instead of any type of object.
-This makes it easy to initialize any type of object.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{&#39;atoms&#39;: Atoms(symbols=&#39;OH2&#39;, pbc=True, cell=[20.0, 21.0, 22.0]),
-  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;O&#39;: 1, &#39;Pt&#39;: 0},
-  &#39;geometry&#39;: &#39;nonlinear&#39;,
-  &#39;name&#39;: &#39;H2O&#39;,
-  &#39;phase&#39;: &#39;G&#39;,
-  &#39;potentialenergy&#39;: -14.2209,
-  &#39;spin&#39;: 0.0,
-  &#39;symmetrynumber&#39;: 2.0,
-  &#39;thermo_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
-  &#39;vib_energies&#39;: [0.47429336414391626,
-                   0.460014128927786,
-                   0.19619656143825398]}
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li><strong>(Optional) Read the references data.</strong>
-Reference data is needed to adjust DFT enthalpies to real-world enthalpies.
-It is typical to use gas-phase molecules since high-accuracy experimental data is readily available.
-The references are calculated for each atom type so the number of references should be greater than
-or equal to the number of elements. See the <a class="reference internal" href="referencing.html#referencing"><span class="std std-ref">Referencing</span></a> for more information.</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical</span> <span class="kn">import</span> <span class="n">BaseThermo</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.references</span> <span class="kn">import</span> <span class="n">References</span>
-
-<span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reference data imported from Excel&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">refs_input</span><span class="p">)</span>
-<span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">BaseThermo</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reference data&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">refs</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Similar to above, the result of <code class="docutils literal notranslate"><span class="pre">pprint(refs_input)</span></code> for one reference is shown below.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{&#39;HoRT_ref&#39;: 0.0,
-  &#39;T_ref&#39;: 298,
-  &#39;atoms&#39;: Atoms(symbols=&#39;H2&#39;, pbc=True, cell=[20.0, 21.0, 22.0]),
-  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;O&#39;: 0},
-  &#39;geometry&#39;: &#39;linear&#39;,
-  &#39;name&#39;: &#39;H2&#39;,
-  &#39;phase&#39;: &#39;G&#39;,
-  &#39;potentialenergy&#39;: -6.7598,
-  &#39;spin&#39;: 0,
-  &#39;symmetrynumber&#39;: 2,
-  &#39;thermo_model&#39;: &lt;class &#39;pMuTT.models.statmech.idealgasthermo.IdealGasThermo&#39;&gt;,
-  &#39;vib_energies&#39;: [0.5338981843116086]},
-</pre></div>
-</div>
-<p>The result for <code class="docutils literal notranslate"><span class="pre">pprint(refs)</span></code> for the same reference is shown below.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BaseThermo</span> <span class="nb">object</span> <span class="k">for</span> <span class="n">Name</span><span class="p">:</span> <span class="n">H2</span>
-        <span class="n">phase</span><span class="p">:</span> <span class="n">G</span>
-        <span class="n">elements</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-        <span class="n">T_ref</span><span class="p">:</span> <span class="mi">298</span>
-        <span class="n">references</span><span class="p">:</span> <span class="kc">None</span>
-        <span class="n">notes</span><span class="p">:</span> <span class="kc">None</span>
-        <span class="n">thermo_model</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">pMuTT</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">statmech</span><span class="o">.</span><span class="n">idealgasthermo</span><span class="o">.</span><span class="n">IdealGasThermo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000021043554518</span><span class="o">&gt;</span>
-        <span class="n">HoRT_dft</span><span class="p">:</span> <span class="o">-</span><span class="mf">249.34037553721055</span>
-        <span class="n">HoRT_ref</span><span class="p">:</span> <span class="mf">0.0</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li><strong>Fit to the empirical form (e.g. Nasa polynomials)</strong></li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
-
-<span class="n">T_low</span> <span class="o">=</span> <span class="mf">200.</span>
-<span class="n">T_high</span> <span class="o">=</span> <span class="mf">1100.</span>
-<span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="n">T_high</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">T0</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">specie_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">specie_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">]</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="4">
-<li><strong>Write to the appropriate file (e.g. thermdat)</strong></li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">write_thermdat</span>
-
-<span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span> <span class="n">write_date</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The thermdat file produced is shown below.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">THERMO</span> <span class="n">ALL</span>
-       <span class="mi">100</span>       <span class="mi">500</span>      <span class="mi">1500</span>
-<span class="n">H2O</span>             <span class="mi">20180824</span><span class="n">H</span>   <span class="mi">2</span><span class="n">O</span>   <span class="mi">1</span>          <span class="n">G200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">493.9</span>         <span class="mi">1</span>
- <span class="mf">3.65264072E+00</span> <span class="mf">1.06108515E-03</span> <span class="mf">3.83455580E-08</span> <span class="mf">3.84923664E-10</span><span class="o">-</span><span class="mf">2.13953966E-13</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">3.02204928E+04</span> <span class="mf">1.60236266E+00</span> <span class="mf">3.99524709E+00</span> <span class="mf">5.18551442E-04</span><span class="o">-</span><span class="mf">5.53026360E-06</span>    <span class="mi">3</span>
- <span class="mf">1.85895538E-08</span><span class="o">-</span><span class="mf">1.55138452E-11</span><span class="o">-</span><span class="mf">3.02807840E+04</span><span class="o">-</span><span class="mf">7.89384507E-02</span>                   <span class="mi">4</span>
-<span class="n">H2</span>              <span class="mi">20180824</span><span class="n">H</span>   <span class="mi">2</span>               <span class="n">G200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">677.6</span>         <span class="mi">1</span>
- <span class="mf">3.47458128E+00</span> <span class="mf">3.33323856E-04</span><span class="o">-</span><span class="mf">1.07413869E-06</span> <span class="mf">1.23229932E-09</span><span class="o">-</span><span class="mf">3.87505553E-13</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">1.04411622E+03</span><span class="o">-</span><span class="mf">4.17284186E+00</span> <span class="mf">3.50368711E+00</span><span class="o">-</span><span class="mf">5.09520583E-05</span> <span class="mf">2.59076698E-07</span>    <span class="mi">3</span>
-<span class="o">-</span><span class="mf">5.76347123E-10</span> <span class="mf">4.75276554E-13</span><span class="o">-</span><span class="mf">1.04320885E+03</span><span class="o">-</span><span class="mf">4.26615761E+00</span>                   <span class="mi">4</span>
-<span class="n">O2</span>              <span class="mi">20180824</span><span class="n">O</span>   <span class="mi">2</span>               <span class="n">G200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">604.1</span>         <span class="mi">1</span>
- <span class="mf">3.81428705E+00</span><span class="o">-</span><span class="mf">2.43962827E-03</span> <span class="mf">5.76514137E-06</span><span class="o">-</span><span class="mf">4.29570548E-09</span> <span class="mf">1.11527700E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">5.09263346E+03</span> <span class="mf">3.47144761E+00</span> <span class="mf">3.42023428E+00</span> <span class="mf">1.11878623E-03</span><span class="o">-</span><span class="mf">5.58175407E-06</span>    <span class="mi">3</span>
- <span class="mf">1.12396705E-08</span><span class="o">-</span><span class="mf">6.69234827E-12</span><span class="o">-</span><span class="mf">5.06166125E+03</span> <span class="mf">5.03398906E+00</span>                   <span class="mi">4</span>
-<span class="n">MO</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20180824</span><span class="n">O</span>   <span class="mi">1</span><span class="n">Pt</span>  <span class="mi">1</span>          <span class="n">S200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">604.1</span>         <span class="mi">1</span>
- <span class="mf">7.58148263E-01</span> <span class="mf">6.93537690E-03</span><span class="o">-</span><span class="mf">9.09332498E-06</span> <span class="mf">5.64388225E-09</span><span class="o">-</span><span class="mf">1.36222297E-12</span>    <span class="mi">2</span>
- <span class="mf">5.46713976E+04</span><span class="o">-</span><span class="mf">4.75898748E+00</span><span class="o">-</span><span class="mf">1.85092759E+00</span> <span class="mf">2.48466946E-02</span><span class="o">-</span><span class="mf">5.62021000E-05</span>    <span class="mi">3</span>
- <span class="mf">6.17887348E-08</span><span class="o">-</span><span class="mf">2.68761443E-11</span> <span class="mf">5.49823404E+04</span> <span class="mf">6.44810333E+00</span>                   <span class="mi">4</span>
-<span class="n">MO</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>           <span class="mi">20180824</span><span class="n">Pt</span>  <span class="mi">1</span>               <span class="n">S200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">604.1</span>         <span class="mi">1</span>
- <span class="mf">7.58148263E-01</span> <span class="mf">6.93537690E-03</span><span class="o">-</span><span class="mf">9.09332498E-06</span> <span class="mf">5.64388225E-09</span><span class="o">-</span><span class="mf">1.36222297E-12</span>    <span class="mi">2</span>
- <span class="mf">7.87256857E+02</span><span class="o">-</span><span class="mf">4.75898748E+00</span><span class="o">-</span><span class="mf">1.85092759E+00</span> <span class="mf">2.48466946E-02</span><span class="o">-</span><span class="mf">5.62021000E-05</span>    <span class="mi">3</span>
- <span class="mf">6.17887348E-08</span><span class="o">-</span><span class="mf">2.68761443E-11</span> <span class="mf">1.09819962E+03</span> <span class="mf">6.44810333E+00</span>                   <span class="mi">4</span>
-<span class="n">V</span><span class="o">-</span><span class="n">MO</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>         <span class="mi">20180824</span><span class="n">Pt</span>  <span class="mi">1</span>               <span class="n">S200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">659.2</span>         <span class="mi">1</span>
- <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">2</span>
- <span class="mf">8.12316548E+04</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">3</span>
- <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">8.12316548E+04</span> <span class="mf">0.00000000E+00</span>                   <span class="mi">4</span>
-<span class="n">MO_bulk</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20180824</span><span class="n">O</span>   <span class="mi">1</span><span class="n">Pt</span>  <span class="mi">1</span>          <span class="n">S200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">604.1</span>         <span class="mi">1</span>
- <span class="mf">7.58148263E-01</span> <span class="mf">6.93537690E-03</span><span class="o">-</span><span class="mf">9.09332498E-06</span> <span class="mf">5.64388225E-09</span><span class="o">-</span><span class="mf">1.36222297E-12</span>    <span class="mi">2</span>
- <span class="mf">5.46713976E+04</span><span class="o">-</span><span class="mf">4.75898748E+00</span><span class="o">-</span><span class="mf">1.85092759E+00</span> <span class="mf">2.48466946E-02</span><span class="o">-</span><span class="mf">5.62021000E-05</span>    <span class="mi">3</span>
- <span class="mf">6.17887348E-08</span><span class="o">-</span><span class="mf">2.68761443E-11</span> <span class="mf">5.49823404E+04</span> <span class="mf">6.44810333E+00</span>                   <span class="mi">4</span>
-<span class="n">MO_bulk</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>      <span class="mi">20180824</span><span class="n">Pt</span>  <span class="mi">1</span>               <span class="n">S200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">604.1</span>         <span class="mi">1</span>
- <span class="mf">7.58148263E-01</span> <span class="mf">6.93537690E-03</span><span class="o">-</span><span class="mf">9.09332498E-06</span> <span class="mf">5.64388225E-09</span><span class="o">-</span><span class="mf">1.36222297E-12</span>    <span class="mi">2</span>
- <span class="mf">7.87256857E+02</span><span class="o">-</span><span class="mf">4.75898748E+00</span><span class="o">-</span><span class="mf">1.85092759E+00</span> <span class="mf">2.48466946E-02</span><span class="o">-</span><span class="mf">5.62021000E-05</span>    <span class="mi">3</span>
- <span class="mf">6.17887348E-08</span><span class="o">-</span><span class="mf">2.68761443E-11</span> <span class="mf">1.09819962E+03</span> <span class="mf">6.44810333E+00</span>                   <span class="mi">4</span>
-<span class="n">V</span><span class="o">-</span><span class="n">MO_bulk</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>    <span class="mi">20180824</span><span class="n">Pt</span>  <span class="mi">1</span>               <span class="n">S200</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">659.2</span>         <span class="mi">1</span>
- <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">2</span>
- <span class="mf">8.12316548E+04</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">3</span>
- <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">8.12316548E+04</span> <span class="mf">0.00000000E+00</span>                   <span class="mi">4</span>
-<span class="n">END</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="5">
-<li><strong>(Optional) Compare the statistical mechanic model to empirical fit.</strong></li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
-    <span class="n">specie</span><span class="o">.</span><span class="n">plot_thermo_model_and_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span> <span class="n">H_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">,</span> <span class="n">S_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span> <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="figure">
-<img alt="_images/H2_VASP_to_thermdat_example.png" src="_images/H2_VASP_to_thermdat_example.png" />
-</div>
-</div>
-<div class="section" id="experimental-data-to-empirical-data">
-<h2>Experimental Data to Empirical Data<a class="headerlink" href="#experimental-data-to-empirical-data" title="Permalink to this headline">¶</a></h2>
-<p>If you want a NASA polynomial (or other empirical form) and have the heat capacity at various temperatures, enthalpy of formation and entropy of formation.
-This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/examples/Expt_data_to_thermdat/Expt_data_to_thermdat.py">pMuTT.examples.Expt_data_to_thermdat</a>.</p>
-<p>1. Import the input data. In this example, the data is <a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas">methanol gas-phase data from NIST</a>. This includes:
-- heat capacity and corresponding temperatures
-- enthalpy of formation
-- standard entropy</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
-
-<span class="c1"># Gas phase heat capacity data (in J/mol/K) for CH3OH from NIST</span>
-<span class="c1"># https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1300</span><span class="p">,</span> <span class="mi">1400</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1750</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2250</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2750</span><span class="p">,</span> <span class="mi">3000</span><span class="p">])</span>
-<span class="n">Cp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.00</span><span class="p">,</span> <span class="mf">36.95</span><span class="p">,</span> <span class="mf">38.64</span><span class="p">,</span> <span class="mf">39.71</span><span class="p">,</span> <span class="mf">42.59</span><span class="p">,</span> <span class="mf">44.06</span><span class="p">,</span> <span class="mf">44.17</span><span class="p">,</span> <span class="mf">51.63</span><span class="p">,</span> <span class="mf">59.7</span><span class="p">,</span> <span class="mf">67.19</span><span class="p">,</span> <span class="mf">73.86</span><span class="p">,</span> <span class="mf">79.76</span><span class="p">,</span> <span class="mf">84.95</span><span class="p">,</span> <span class="mf">89.54</span><span class="p">,</span> <span class="mf">93.57</span><span class="p">,</span> <span class="mf">97.12</span><span class="p">,</span> <span class="mf">100.24</span><span class="p">,</span> <span class="mf">102.98</span><span class="p">,</span> <span class="mf">105.4</span><span class="p">,</span> <span class="mf">110.2</span><span class="p">,</span> <span class="mf">113.8</span><span class="p">,</span> <span class="mf">116.5</span><span class="p">,</span> <span class="mf">118.6</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">121</span><span class="p">])</span>
-<span class="n">CpoR</span> <span class="o">=</span> <span class="n">Cp</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
-
-<span class="c1">#Enthalpy of Formation for CH3OH (in kJ/mol) from NIST</span>
-<span class="n">T_ref</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">T0</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
-<span class="n">H_ref</span> <span class="o">=</span> <span class="o">-</span><span class="mf">205.</span>
-<span class="n">HoRT_ref</span> <span class="o">=</span> <span class="n">H_ref</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;kJ/mol/K&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">T_ref</span>
-<span class="c1">#Standard molar entropy (in J/mol/K) from Wikipedia, https://en.wikipedia.org/wiki/Methanol_(data_page)</span>
-<span class="n">S_ref</span> <span class="o">=</span> <span class="mf">239.9</span>
-<span class="n">SoR_ref</span> <span class="o">=</span> <span class="n">S_ref</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li>Fit to a NASA polynomial</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Input the experimental data and fitting to a NASA polynomial</span>
-<span class="n">CH3OH_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span><span class="s1">&#39;CH3OH&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_ref</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_ref</span><span class="p">)</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li>(Optional) Compare the Nasa polynomial to the experimental data</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units to plot the figure</span>
-<span class="n">Cp_units</span> <span class="o">=</span> <span class="s1">&#39;J/mol/K&#39;</span>
-<span class="n">H_units</span> <span class="o">=</span> <span class="s1">&#39;kJ/mol&#39;</span>
-<span class="n">S_units</span> <span class="o">=</span> <span class="s1">&#39;J/mol/K&#39;</span>
-<span class="n">G_units</span> <span class="o">=</span> <span class="s1">&#39;kJ/mol&#39;</span>
-
-<span class="c1">#Compare the Nasa polynomial to the input data</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">CH3OH_nasa</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="n">Cp_units</span><span class="p">,</span> <span class="n">H_units</span><span class="o">=</span><span class="n">H_units</span><span class="p">,</span> <span class="n">S_units</span><span class="o">=</span><span class="n">S_units</span><span class="p">,</span> <span class="n">G_units</span><span class="o">=</span><span class="n">G_units</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Cp</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">S_ref</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span> <span class="o">-</span> <span class="n">T_ref</span> <span class="o">*</span> <span class="n">S_ref</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">convert_unit</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;kJ&#39;</span><span class="p">),</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="figure">
-<img alt="_images/expt_data_to_thermdat_example.png" src="_images/expt_data_to_thermdat_example.png" />
-</div>
-</div>
-<div class="section" id="read-nasa-from-thermdat">
-<h2>Read Nasa from Thermdat<a class="headerlink" href="#read-nasa-from-thermdat" title="Permalink to this headline">¶</a></h2>
-<p>If you want to read a thermdat file directly and convert it into a list of Nasa objects.
-This example can be found under <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a>.</p>
-<ol class="arabic simple">
-<li>Read the data from the thermdat file. In this example, a <code class="docutils literal notranslate"><span class="pre">thermdat</span></code> file is located in the same folder as the script.</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
-
-<span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;thermdat&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li>(Optional) Print out the parameters to ensure it was read properly</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>A snippet of the output is shown below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Nasa</span> <span class="nb">object</span> <span class="k">for</span> <span class="n">Name</span><span class="p">:</span> <span class="n">O2</span>
-       <span class="n">phase</span><span class="p">:</span> <span class="n">G</span>
-       <span class="n">elements</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
-       <span class="n">T_ref</span><span class="p">:</span> <span class="mf">298.15</span>
-       <span class="n">references</span><span class="p">:</span> <span class="kc">None</span>
-       <span class="n">notes</span><span class="p">:</span> <span class="n">TPIS89</span>
-       <span class="n">thermo_model</span><span class="p">:</span> <span class="kc">None</span>
-       <span class="n">HoRT_dft</span><span class="p">:</span> <span class="kc">None</span>
-       <span class="n">HoRT_ref</span><span class="p">:</span> <span class="kc">None</span>
-       <span class="n">a_low</span><span class="p">:</span> <span class="p">[</span> <span class="mf">3.78245636e+00</span> <span class="o">-</span><span class="mf">2.99673416e-03</span>  <span class="mf">9.84730201e-06</span> <span class="o">-</span><span class="mf">9.68129509e-09</span> <span class="mf">3.24372837e-12</span> <span class="o">-</span><span class="mf">1.06394356e+03</span>  <span class="mf">3.65767573e+00</span><span class="p">]</span>
-       <span class="n">a_high</span><span class="p">:</span> <span class="p">[</span> <span class="mf">3.28253784e+00</span>  <span class="mf">1.48308754e-03</span> <span class="o">-</span><span class="mf">7.57966669e-07</span>  <span class="mf">2.09470555e-10</span> <span class="o">-</span><span class="mf">2.16717794e-14</span> <span class="o">-</span><span class="mf">1.08845772e+03</span>  <span class="mf">5.45323129e+00</span><span class="p">]</span>
-       <span class="n">T_low</span><span class="p">:</span> <span class="mf">200.0</span>
-       <span class="n">T_high</span><span class="p">:</span> <span class="mf">3500.0</span>
-       <span class="n">T_mid</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li>(Optional) Plot each species to ensure reasonable values. The below example shows how to print out a single species.</li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>The output for O2 is shown below:</p>
-<div class="figure">
-<img alt="_images/read_nasa_from_thermdat_example_O2.png" src="_images/read_nasa_from_thermdat_example_O2.png" />
-</div>
+<div class="section" id="excel-to-empirical-data">
+<h2>Excel to Empirical Data<a class="headerlink" href="#excel-to-empirical-data" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="examples_jupyter/excel_to_empirical/excel_to_empirical.html"><span class="doc">Webpage</span></a></li>
+<li><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb">Jupyter Notebook</a></li>
+<li><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.py">Python Script</a></li>
+</ul>
 </div>
 </div>
 

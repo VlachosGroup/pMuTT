@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.1.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pMuTT
+          
+
+          
+            
+            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pMuTT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Experimental Data to Empirical Object</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Experimental-Data-to-Empirical-Object">
+<h1>Experimental Data to Empirical Object<a class="headerlink" href="#Experimental-Data-to-Empirical-Object" title="Permalink to this headline">¶</a></h1>
+<p>In this example, we will take experimental data (heat capacity, enthalpy
+of formation, and standard entropy) and convert it to a Shomate
+polynomial. We will then showcase some of the features of the object
+(such as calculating thermodynamic data). Note that even though we use a
+Shomate object in this example, the pMuTT Nasa object has the same
+functionality.</p>
+<div class="section" id="Topics-Covered">
+<h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Using pMuTT’s constants for unit conversions</li>
+<li>Create a Shomate object from experimental data</li>
+<li>Calculate thermodynamic properties using the Shomate object</li>
+<li>Plot the shape of the Shomate curve</li>
+<li>Save the Shomate object as a JSON file</li>
+</ul>
+</div>
+<div class="section" id="Import-Experimental-Data">
+<h2>Import Experimental Data<a class="headerlink" href="#Import-Experimental-Data" title="Permalink to this headline">¶</a></h2>
+<p>First, we need to initialize the experimental data. We will need: 1. A
+range of temperatures in K 2. Dimensionless heat capacities
+corresponding to the temperatures in (1) 3. A reference temperature in K
+4. A dimensionless enthalpy corresponding to the reference temperature
+in (3) 5. A dimensionless entropy corresponding to the reference
+temperature in (3)</p>
+<p>For this example, we will be thermodynamic data for methanol. Heat
+capacities and standard enthalpy were found on the <a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas">NIST
+webbook</a>.
+The standard entropy was found on
+[Wikipedia](<a class="reference external" href="https://en.wikipedia.org/wiki/Methanol_(data_page%29">https://en.wikipedia.org/wiki/Methanol_(data_page%29</a>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span>
+              <span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1300</span><span class="p">,</span> <span class="mi">1400</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1750</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span>
+              <span class="mi">2250</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2750</span><span class="p">,</span> <span class="mi">3000</span><span class="p">])</span> <span class="c1"># K</span>
+<span class="n">Cp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">34.00</span><span class="p">,</span> <span class="mf">36.95</span><span class="p">,</span> <span class="mf">38.64</span><span class="p">,</span> <span class="mf">39.71</span><span class="p">,</span> <span class="mf">42.59</span><span class="p">,</span> <span class="mf">44.06</span><span class="p">,</span> <span class="mf">44.17</span><span class="p">,</span> <span class="mf">51.63</span><span class="p">,</span> <span class="mf">59.7</span><span class="p">,</span>
+               <span class="mf">67.19</span><span class="p">,</span> <span class="mf">73.86</span><span class="p">,</span> <span class="mf">79.76</span><span class="p">,</span> <span class="mf">84.95</span><span class="p">,</span> <span class="mf">89.54</span><span class="p">,</span> <span class="mf">93.57</span><span class="p">,</span> <span class="mf">97.12</span><span class="p">,</span> <span class="mf">100.24</span><span class="p">,</span>
+               <span class="mf">102.98</span><span class="p">,</span> <span class="mf">105.4</span><span class="p">,</span> <span class="mf">110.2</span><span class="p">,</span> <span class="mf">113.8</span><span class="p">,</span> <span class="mf">116.5</span><span class="p">,</span> <span class="mf">118.6</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">121</span><span class="p">])</span> <span class="c1"># J/mol/K</span>
+<span class="n">CpoR</span> <span class="o">=</span> <span class="n">Cp</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
+
+<span class="n">T_ref</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">T0</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<span class="n">H_ref</span> <span class="o">=</span> <span class="o">-</span><span class="mf">205.</span> <span class="c1"># kJ/mol</span>
+<span class="n">HoRT_ref</span> <span class="o">=</span> <span class="n">H_ref</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;kJ/mol/K&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">T_ref</span>
+
+<span class="n">S_ref</span> <span class="o">=</span> <span class="mf">239.9</span> <span class="c1"># J/mol/K</span>
+<span class="n">SoR_ref</span> <span class="o">=</span> <span class="n">S_ref</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">pMuTT.constants</span></code> module contains functions for standard
+constants for easy use such as the molar gas constant
+(<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>) and standard temperature
+(<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.T_ref</span></code>). The functions take a unit as an argument so
+that the code is more readable.</p>
+</div>
+<div class="section" id="Fitting-the-Shomate-polynomial-to-the-experimental-data">
+<h2>Fitting the Shomate polynomial to the experimental data<a class="headerlink" href="#Fitting-the-Shomate-polynomial-to-the-experimental-data" title="Permalink to this headline">¶</a></h2>
+<p>The Shomate polynomial can be created easily by feeding the data to the
+<code class="docutils literal notranslate"><span class="pre">from_data</span></code> method as shown below.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.models.empirical.shomate</span> <span class="k">import</span> <span class="n">Shomate</span>
+
+<span class="n">CH3OH_shomate</span> <span class="o">=</span> <span class="n">Shomate</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;CH3OH&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR</span><span class="p">,</span>
+                                  <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_ref</span><span class="p">,</span>
+                                  <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_ref</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">CH3OH_shomate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Shomate object for Name: CH3OH
+        phase: None
+        elements: None
+        references: None
+        notes: None
+        statmech_model: None
+        T_low: 50.0
+        T_high: 3000.0
+        a: [ 2.05590621e+01  9.56149349e+01 -3.13060970e+01  3.51406005e+00
+  2.51091403e-02 -2.15025605e+02  2.37773772e+02  2.05000000e+02]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Calculating-thermodynamic-properties">
+<h2>Calculating thermodynamic properties<a class="headerlink" href="#Calculating-thermodynamic-properties" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve fit our Shomate polynomial to experimental data, we can
+calculate thermodynamic quantities for a range of temperatures. Let’s
+compare our Shomate’s estimates to the experimental data fed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">CpoR_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_CpoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="n">HoRT_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_HoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_ref</span><span class="p">)</span>
+<span class="n">SoR_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_SoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_ref</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Compare-the-Shomate-polynomial-to-the-experimental-data">
+<h2>Compare the Shomate polynomial to the experimental data<a class="headerlink" href="#Compare-the-Shomate-polynomial-to-the-experimental-data" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve calculated the Shomate estimates for heat capacity,
+enthalpy and entropy, we can compare the experimental values to the
+computational values.</p>
+<div class="section" id="Compare-using-a-table">
+<h3>Compare using a table<a class="headerlink" href="#Compare-using-a-table" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T(K)</span><span class="se">\t</span><span class="s1">Cp/R expt</span><span class="se">\t</span><span class="s1">Cp/R shomate&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">T_i</span><span class="p">,</span> <span class="n">CpoR1</span><span class="p">,</span> <span class="n">CpoR2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="p">,</span> <span class="n">CpoR_shomate</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_i</span><span class="p">,</span> <span class="n">CpoR1</span><span class="p">,</span> <span class="n">CpoR2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T(K)</span><span class="se">\t</span><span class="s1">H/RT expt</span><span class="se">\t</span><span class="s1">H/RT shomate</span><span class="se">\t</span><span class="s1">S/R expt</span><span class="se">\t</span><span class="s1">S/R shomate&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">HoRT_ref</span><span class="p">,</span> <span class="n">HoRT_shomate</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="p">,</span> <span class="n">SoR_shomate</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+T(K)    Cp/R expt       Cp/R shomate
+50.0    4.089261457491201       4.2462937803011
+100.0   4.444065025126467       3.887435076040005
+150.0   4.647325374042942       4.248590732545086
+200.0   4.776016837558106       4.700924303679724
+273.15  5.122401337486773       5.382028015721733
+298.15  5.299201759325363       5.611831494722603
+300.0   5.3124317228643045      5.628731751319061
+400.0   6.209663795596198       6.516104928119512
+500.0   7.180262029771315       7.346201774978482
+600.0   8.081102274377464       8.11677659235667
+700.0   8.883319154420592       8.82872687988886
+800.0   9.592926289691125       9.483904139246727
+900.0   10.217140023937574      10.084517295924769
+1000.0  10.769190320698888      10.632930019579186
+1100.0  11.253888075807401      11.131580481743772
+1200.0  11.680855080927808      11.582945774034377
+1300.0  12.056104955850529      11.989524682643335
+1400.0  12.385651320365998      12.353828743086146
+1500.0  12.676710518222723      12.678377320000502
+1750.0  13.254018018103835      13.332392406127097
+2000.0  13.686998643014666      13.793235457514909
+2250.0  14.011734111697793      14.100477078044996
+2500.0  14.264306142895778      14.29371263066431
+2750.0  14.432687497027768      14.412549398620191
+3000.0  14.552959892836334      14.49660089237314
+T(K)    H/RT expt       H/RT shomate    S/R expt        S/R shomate
+298.15  -82.6960963969672       -82.6960963969672       28.853347754474683      28.853347754474683
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Compare-using-a-plot">
+<h3>Compare using a plot<a class="headerlink" href="#Compare-using-a-plot" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
+                                         <span class="n">H_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">,</span>
+                                         <span class="n">S_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
+                                         <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span class="c1"># Add experimental data to plot</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Cp</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">S_ref</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span> <span class="o">-</span> <span class="n">T_ref</span> <span class="o">*</span> <span class="n">S_ref</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">convert_unit</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;kJ&#39;</span><span class="p">),</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add legend to plot</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Shomate&#39;</span><span class="p">,</span> <span class="s1">&#39;Expt&#39;</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Shomate&#39;</span><span class="p">,</span> <span class="s1">&#39;Expt&#39;</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Shomate&#39;</span><span class="p">,</span> <span class="s1">&#39;Expt&#39;</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Shomate&#39;</span><span class="p">,</span> <span class="s1">&#39;Expt&#39;</span><span class="p">])</span>
+
+<span class="c1"># Adjust figure size so it&#39;s viewable</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_jupyter_expt_data_to_empirical_expt_data_to_empirical_object_10_0.png" src="../../_images/examples_jupyter_expt_data_to_empirical_expt_data_to_empirical_object_10_0.png" />
+</div>
+</div>
+<p>Note that in this code’s section, we showcase the
+<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.convert_unit</span></code> function. Similarly to the <code class="docutils literal notranslate"><span class="pre">c.R</span></code> and
+<code class="docutils literal notranslate"><span class="pre">c.T0</span></code> functions shown above, this helps to increase code readability.</p>
+</div>
+</div>
+<div class="section" id="Save-the-Shomate-polynomial-as-a-JSON-file">
+<h2>Save the Shomate polynomial as a JSON file<a class="headerlink" href="#Save-the-Shomate-polynomial-as-a-JSON-file" title="Permalink to this headline">¶</a></h2>
+<p>If we would like to save our Shomate object, we can save it in JSON
+format with the help of the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.pMuTTEncoder</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CH3OH_shomate.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">CH3OH_shomate</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This block will save the Shomate object to <code class="docutils literal notranslate"><span class="pre">CH3OH_shomate.json</span></code>. Upon
+opening, the file will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.models.empirical.shomate.Shomate&#39;&gt;&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CH3OH&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="mf">20.559062051378444</span><span class="p">,</span>
+  <span class="mf">95.61493492328495</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">31.306096957035635</span><span class="p">,</span>
+  <span class="mf">3.514060046069981</span><span class="p">,</span>
+  <span class="mf">0.025109140306619166</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">215.02560486141684</span><span class="p">,</span>
+  <span class="mf">237.77377186255637</span><span class="p">,</span>
+  <span class="mf">205.0</span>
+ <span class="p">],</span>
+ <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">50.0</span><span class="p">,</span>
+ <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3000.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Loading-the-Shomate-polynomial-from-a-JSON-file">
+<h2>Loading the Shomate polynomial from a JSON file<a class="headerlink" href="#Loading-the-Shomate-polynomial-from-a-JSON-file" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve saved the Shomate object, we can open it using
+<code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.json_to_pMuTT</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">json_to_pMuTT</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CH3OH_shomate.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">CH3OH_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">CH3OH_json</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Shomate object for Name: CH3OH
+        phase: None
+        elements: None
+        references: None
+        notes: None
+        statmech_model: None
+        T_low: 50.0
+        T_high: 3000.0
+        a: [20.559062051378444, 95.61493492328495, -31.306096957035635, 3.514060046069981, 0.025109140306619166, -215.02560486141684, 237.77377186255637, 205.0]
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gerhard Wittreich, Jonathan Lym.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+  </style>
+
+
+</body>
+</html>

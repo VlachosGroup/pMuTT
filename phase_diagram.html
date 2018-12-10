@@ -190,19 +190,19 @@
 The reactions should be balanced and have the same reactant references to give
 meaningful data.</p>
 <dl class="class">
-<dt id="pMuTT.models.reaction.PhaseDiagram">
-<em class="property">class </em><code class="descclassname">pMuTT.models.reaction.</code><code class="descname">PhaseDiagram</code><span class="sig-paren">(</span><em>reactions</em>, <em>norm_factors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram">
+<em class="property">class </em><code class="descclassname">pMuTT.models.reaction.phasediagram.</code><code class="descname">PhaseDiagram</code><span class="sig-paren">(</span><em>reactions</em>, <em>norm_factors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate phase diagrams based on reactions specified.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.reaction.PhaseDiagram.reactions">
-<code class="descname">reactions</code><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram.reactions" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram.reactions">
+<code class="descname">reactions</code><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram.reactions" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of <code class="docutils literal notranslate"><span class="pre">pMuTT.models.reaction.Reaction</span></code> objects – Formation reactions for each phase. Reactions should be written
 with consistent reference species to obtain meaningful data.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.reaction.PhaseDiagram.norm_factors">
-<code class="descname">norm_factors</code><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram.norm_factors" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram.norm_factors">
+<code class="descname">norm_factors</code><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram.norm_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>(N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float, optional – Used for normalizing Gibbs energies. These factors could be
 surface areas when calculating surface energies or if the
 reactions stoichiometry is not consistent. Default is an array of
@@ -210,8 +210,8 @@ reactions stoichiometry is not consistent. Default is an array of
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.reaction.PhaseDiagram.get_GoRT_1D">
-<code class="descname">get_GoRT_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram.get_GoRT_1D" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram.get_GoRT_1D">
+<code class="descname">get_GoRT_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram.get_GoRT_1D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Gibbs free energy for all the reactions for 1 varying
 parameter</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -241,8 +241,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.reaction.PhaseDiagram.get_GoRT_2D">
-<code class="descname">get_GoRT_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram.get_GoRT_2D" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram.get_GoRT_2D">
+<code class="descname">get_GoRT_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram.get_GoRT_2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Gibbs free energy for all the reactions for two
 varying parameters</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -274,8 +274,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.reaction.PhaseDiagram.plot_1D">
-<code class="descname">plot_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram.plot_1D" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram.plot_1D">
+<code class="descname">plot_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram.plot_1D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a 1D phase diagram.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -301,8 +301,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.reaction.PhaseDiagram.plot_2D">
-<code class="descname">plot_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.PhaseDiagram.plot_2D" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.models.reaction.phasediagram.PhaseDiagram.plot_2D">
+<code class="descname">plot_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.reaction.phasediagram.PhaseDiagram.plot_2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a 2D phase diagram.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

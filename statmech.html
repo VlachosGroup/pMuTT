@@ -233,35 +233,35 @@ Helmholtz energy and Gibbs energy.</p>
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.trans_model">
 <code class="descname">trans_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.trans_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.trans</cite> object, optional – Deals with translational modes. Default is
+<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.trans</span></code> object, optional – Deals with translational modes. Default is
 <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.vib_model">
 <code class="descname">vib_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.vib_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.vib</cite> object, optional – Deals with vibrational modes. Default is
+<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.vib</span></code> object, optional – Deals with vibrational modes. Default is
 <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.rot_model">
 <code class="descname">rot_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.rot_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.rot</cite> object, optional – Deals with rotational modes. Default is
+<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.rot</span></code> object, optional – Deals with rotational modes. Default is
 <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.elec_model">
 <code class="descname">elec_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.elec_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.elec</cite> object, optional – Deals with electronic modes. Default is
+<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.elec</span></code> object, optional – Deals with electronic modes. Default is
 <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.models.statmech.StatMech.nucl_model">
 <code class="descname">nucl_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.nucl_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.models.statmech.nucl</cite> object – Deals with nuclear modes. Default is
+<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.nucl</span></code> object – Deals with nuclear modes. Default is
 <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
 </dd></dl>
 
@@ -886,7 +886,7 @@ P (1.01325 bar)</td>
 <p>The <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary is flexible where you can create a new entry if you will use a model often.</p>
 <dl class="data">
 <dt id="pMuTT.models.statmech.presets">
-<code class="descclassname">pMuTT.models.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.models.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}}</em><a class="headerlink" href="#pMuTT.models.statmech.presets" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.models.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.models.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}, 'placeholder': {'trans_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'required': ()}}</em><a class="headerlink" href="#pMuTT.models.statmech.presets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
 parameters that still need to be passed.</p>
 </dd></dl>
@@ -1334,7 +1334,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.vib.HarmonicVib.get_ZPE">
 <code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the zero point energy</p>
-<p><span class="math notranslate nohighlight">\(ZPE=\frac{1}{2}h\sum_i \Theta_{V,i}\)</span></p>
+<p><span class="math notranslate nohighlight">\(ZPE=\frac{1}{2}k_b\sum_i \Theta_{V,i}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2154,7 +2154,7 @@ if nonlinear</p>
 <h3>IdealElec<a class="headerlink" href="#idealelec" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="pMuTT.models.statmech.elec.IdealElec">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.elec.</code><code class="descname">IdealElec</code><span class="sig-paren">(</span><em>potentialenergy=0.0</em>, <em>spin=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.elec.</code><code class="descname">IdealElec</code><span class="sig-paren">(</span><em>potentialenergy=0.0</em>, <em>spin=0.0</em>, <em>D0=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Electronic modes using the ideal gas assumption. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
@@ -2162,6 +2162,13 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.models.statmech.elec.IdealElec.potentialenergy">
 <code class="descname">potentialenergy</code><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.potentialenergy" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – Potential energy in eV. Default is 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.models.statmech.elec.IdealElec.D0">
+<code class="descname">D0</code><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.D0" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – Bond strength in eV. Preferentially used when calculating partition
+coefficient.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -2333,8 +2340,7 @@ John Wiley &amp; Sons, 2010.</p>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>ignore_q_elec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Ignore contribution of electronic mode to partition function
 . Often necessary since DFT’s value for potentialenergy is
-very negative causing q_elec to go to infinity. Default is
-True</li>
+very negative causing q_elec to go to infinity. Default is True</li>
 </ul>
 </td>
 </tr>
