@@ -67,9 +67,10 @@ pprint(refs_input)
 
 from pMuTT.models.empirical.references import Reference, References
 
-refs = References([Reference(**ref_input) 
-                   for ref_input in refs_input])
-print(refs.HoRT_element_offset)
+refs = References(descriptor='elements', 
+                  references=[Reference(**ref_input) 
+                              for ref_input in refs_input])
+print(refs.offset)
 
 
 # The ``References`` object calculated the offset between C, H, and O.

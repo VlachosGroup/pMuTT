@@ -117,3 +117,18 @@ Or calculate thermodynamic properties.
 
 .. figure:: reactions_example.png
    :alt: Reactions example
+
+Reactions
+=========
+
+.. autoclass:: pMuTT.models.reaction.Reactions
+   :members:
+
+BEP
+===
+
+Bronsted Evans Polyani relationships can be added to ``Reaction`` objects so 
+the activation energy can be estimated using the change in enthalpy.
+
+.. autoclass:: pMuTT.models.reaction.bep.BEP
+   :members:

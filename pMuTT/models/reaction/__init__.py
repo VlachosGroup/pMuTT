@@ -33,6 +33,7 @@ class Reaction:
         kwargs : keyword arguments
             BEP parameters. See ``pMuTT.models.reaction.bep.BEP`` documentation 
             for expected parameters
+
     Notes
     -----
         Specie specific parameters can be passed by having a key named 
@@ -41,21 +42,23 @@ class Reaction:
         e.g. For the reaction: H2 + 0.5O2 = H2O, the pressures can be specified 
         independently using the following dictionary. In this example arbitrary 
         values were used so the quantity evaluated may be meaningless.
-        ::
-        kwargs = {
-            'T': 298.,
-            'specie': {
-                'H2': {
-                    'P': 2.,
-                },
-                'O2': {
-                    'P': 1.,
-                },
-                'H2O': {
-                    'P': 1.,
+        
+        .. code:: python
+        
+            kwargs = {
+                'T': 298.,
+                'specie': {
+                    'H2': {
+                        'P': 2.,
+                    },
+                    'O2': {
+                        'P': 1.,
+                    },
+                    'H2O': {
+                        'P': 1.,
+                    }
                 }
             }
-        }
     """
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
@@ -137,6 +140,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -160,6 +164,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -184,6 +189,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -209,6 +215,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -233,6 +240,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -258,6 +266,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -281,6 +290,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -304,6 +314,7 @@ class Reaction:
         ----------
             state : str
                 state to calculate quantity. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -749,11 +760,11 @@ class Reaction:
                 Accepted options:
 
                 - 'any' (uses whichever is available. ``self.transition_state`` 
-                is used preferentially over ``self.BEP``)
+                  is used preferentially over ``self.BEP``)
                 - 'bep' (uses ``self.bep``)
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
 
-                Default is 'any'
+                Default is 'any'.
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless activation
                 energy
@@ -911,6 +922,7 @@ class Reaction:
         ----------
             state : str
                 Thermodynamic state. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -943,6 +955,7 @@ class Reaction:
         ----------
             state : str
                 Thermodynamic state. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
@@ -986,11 +999,13 @@ class Reaction:
         ----------
             initial_state : str
                 Thermodynamic state. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
             final_state : str
                 Thermodynamic state. Supported options:
+
                 - 'reactants'
                 - 'products'
                 - 'transition state'
