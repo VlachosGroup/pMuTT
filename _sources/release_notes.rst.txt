@@ -3,6 +3,16 @@
 Release Notes
 *************
 
+Version 1.1.3
+-------------
+Dec. 11, 2018
+
+- Added ``BEP`` class
+- Restructured ``Reaction`` class so reaction states (i.e. reactants, products, transition states) can be calculated separately
+- Updated ``References`` class to be able reference any attribute
+- Added ``placeholder`` entry to presets dictionary to represent an empty species
+- Added correction factor to calculate partition coefficient, q, in ``IdealElec`` class
+
 Version 1.1.2
 -------------
 Nov. 27, 2018
@@ -23,9 +33,9 @@ Version 1.1.0
 -------------
 Oct. 26, 2018
 
-- Updated Reaction class to parse strings
-- New Shomate class
-- New eos module (Equations of state)
-- New PhaseDiagram class
-- New EinsteinVib class
+- Updated ``Reaction`` class to parse strings
+- New ``Shomate`` class
+- New ``eos`` module (Equations of state)
+- New ``PhaseDiagram`` class
+- New ``EinsteinVib`` class
 - New functions to read species and reactions from Chemkin surf.inp and gas.inp files
