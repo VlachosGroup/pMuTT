@@ -15,7 +15,7 @@ class IdealElec:
         potentialenergy : float, optional
             Potential energy in eV. Default is 0
         D0 : float, optional
-            Bond strength in eV. Preferentially used when calculating partition 
+            Bond strength in eV. Preferentially used when calculating partition
             coefficient.
         spin : float, optional
             The total electron spin. Default is 0
@@ -42,7 +42,7 @@ class IdealElec:
     def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function
 
-        :math:`q^{elec}=\\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
+        :math:`q^{elec}=1 + \\omega_i \\exp\\bigg(-\\frac{E}{RT}\\bigg)`
 
         Parameters
         ----------
