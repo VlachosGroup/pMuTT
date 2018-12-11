@@ -1,0 +1,1896 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{excel\_to\_empirical}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Excel to Empirical}\label{excel-to-empirical}
+
+In this example, we will read \emph{ab-initio} data from an Excel
+spreadsheet and create a Nasa object from it. Even though we use a Nasa
+object here, the Shomate class also has the ability to be generated from
+a StatMech model.
+
+\subsection{Topics Covered}\label{topics-covered}
+
+\begin{itemize}
+\tightlist
+\item
+  Reading \emph{ab-initio} data from an Excel file
+\item
+  Initialize Reference objects and a References object
+\item
+  Generate a Nasa object using StatMech models
+\item
+  Write Nasa object to a thermdat file
+\end{itemize}
+
+\subsection{Files Required}\label{files-required}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{references.xlsx} (Excel spreadsheet containing \emph{ab-initio}
+  and experimental data for reference species)
+\item
+  \url{input.xlsx} (Excel spreadsheet containing \emph{ab-initio} data
+  for the species you would like to generate Nasa objects
+\item
+  files containing atomic coordinates (files that can be read using
+  ase.io.read. These files are only necessary if using rotational and
+  translational modes (which tend to only be relevant for gas-phase
+  species). For this example, we are using CONTCAR files.
+\end{itemize}
+
+\subsection{\texorpdfstring{Importing the \emph{ab-initio} data from
+Excel}{Importing the ab-initio data from Excel}}\label{importing-the-ab-initio-data-from-excel}
+
+First, we will import data from the \texttt{input.xlsx} spreadsheet. The
+contents of the spreadsheet are shown below.
+
+    \begin{longtable}[]{@{}lllllllllllllllllllllllllllllllllllllllllll@{}}
+\toprule
+\begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+name\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+phase\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+elements.C\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+elements.H\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+elements.O\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+statmech\_model\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+potentialenergy\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.01\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+H2\_cus(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-6.98609748\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3066.979319\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1520.963162\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+846.589184\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+537.019612\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+469.648212\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+444.089371\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+H2Obr(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-14.813281\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3732.4315\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3615.316915\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1533.760861\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+451.030069\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+429.209457\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+389.942902\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+204.875732\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+162.988907\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+113.146516\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+H2Ocus(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-15.4204017\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3732.4315\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3615.316915\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1533.760861\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+451.030069\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+429.209457\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+389.942902\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+204.875732\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+162.988907\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+113.146516\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+H\_cus(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-3.47020748\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1868.8092\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+681.336865\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+578.20889\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+HObr(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-11.577085\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3678.377186\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+851.655046\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+573.216546\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+418.298492\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+374.446393\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+204.720161\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+Obr(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-7.519858\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+537.116485\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+439.995941\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+256.38412\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+IPA(S)\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+S\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+Harmonic\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+-64.935392\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3072.824921\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3056.583116\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3049.635786\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3038.996872\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3031.532711\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+3008.868219\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+2969.688478\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+2956.451871\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1460.613697\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1454.472854\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1435.981201\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1432.413496\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1413.554005\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1366.129117\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1353.211574\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1327.903925\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1321.25272\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1148.721745\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1130.053472\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+1098.855825\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+933.64652\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+921.005746\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+903.030098\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+825.727381\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+809.440337\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+535.60253\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+414.794848\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+378.193102\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+295.278829\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+237.586784\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+230.560246\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+171.110789\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+129.36901\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+77.415076\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+64.350293\strut
+\end{minipage} & \begin{minipage}[t]{0.01\columnwidth}\raggedright\strut
+56.879635\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    To import the data, we use the \texttt{pMuTT.io\_.excel.read\_excel}
+function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{pprint} \PY{k}{import} \PY{n}{pprint}
+        \PY{k+kn}{from} \PY{n+nn}{pMuTT}\PY{n+nn}{.}\PY{n+nn}{io\PYZus{}}\PY{n+nn}{.}\PY{n+nn}{excel} \PY{k}{import} \PY{n}{read\PYZus{}excel}
+        
+        \PY{n}{species\PYZus{}data} \PY{o}{=} \PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{n}{io}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pprint}\PY{p}{(}\PY{n}{species\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[\{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 2, 'O': 0\},
+  'name': 'H2\_cus(S)',
+  'phase': 'S',
+  'potentialenergy': -6.9860974799998985,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3066.979319,
+                      1520.963162,
+                      846.589184,
+                      537.019612,
+                      469.648212,
+                      444.089371]\},
+ \{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 2, 'O': 1\},
+  'name': 'H2Obr(S)',
+  'phase': 'S',
+  'potentialenergy': -14.81328099999996,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3732.4315,
+                      3615.316915,
+                      1533.760861,
+                      451.030069,
+                      429.209457,
+                      389.942902,
+                      204.875732,
+                      162.988907,
+                      113.146516]\},
+ \{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 2, 'O': 1\},
+  'name': 'H2Ocus(S)',
+  'phase': 'S',
+  'potentialenergy': -15.420401699999957,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3732.4315,
+                      3615.316915,
+                      1533.760861,
+                      451.030069,
+                      429.209457,
+                      389.942902,
+                      204.875732,
+                      162.988907,
+                      113.146516]\},
+ \{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 1, 'O': 0\},
+  'name': 'H\_cus(S)',
+  'phase': 'S',
+  'potentialenergy': -3.470207479999999,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [1868.8092, 681.336865, 578.20889]\},
+ \{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 1, 'O': 1\},
+  'name': 'HObr(S)',
+  'phase': 'S',
+  'potentialenergy': -11.577084999999897,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3678.377186,
+                      851.655046,
+                      573.216546,
+                      418.298492,
+                      374.446393,
+                      204.720161]\},
+ \{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 0, 'O': 1\},
+  'name': 'Obr(S)',
+  'phase': 'S',
+  'potentialenergy': -7.519857999999886,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [537.116485, 439.995941, 256.38412]\},
+ \{'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 3, 'H': 8, 'O': 1\},
+  'name': 'IPA(S)',
+  'phase': 'S',
+  'potentialenergy': -64.93539200000009,
+  'required': ('vib\_wavenumbers', 'potentialenergy', 'spin'),
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3072.824921,
+                      3056.583116,
+                      3049.635786,
+                      3038.996872,
+                      3031.532711,
+                      3008.868219,
+                      2969.688478,
+                      2956.451871,
+                      1460.613697,
+                      1454.472854,
+                      1435.981201,
+                      1432.413496,
+                      1413.554005,
+                      1366.129117,
+                      1353.211574,
+                      1327.903925,
+                      1321.25272,
+                      1148.721745,
+                      1130.053472,
+                      1098.855825,
+                      933.64652,
+                      921.005746,
+                      903.030098,
+                      825.727381,
+                      809.440337,
+                      535.60253,
+                      414.794848,
+                      378.193102,
+                      295.278829,
+                      237.586784,
+                      230.560246,
+                      171.110789,
+                      129.36901,
+                      77.415076,
+                      64.350293,
+                      56.879635]\}]
+
+    \end{Verbatim}
+
+    Note that the output of \texttt{read\_excel} is a list of dictionaries.
+Each dictionary in the list corresponds to the data to initialize the
+objects.
+
+    \subsection{\texorpdfstring{Importing the \emph{ab-initio} references
+data from
+Excel}{Importing the ab-initio references data from Excel}}\label{importing-the-ab-initio-references-data-from-excel}
+
+Before initializing the Nasa objects, we have to adjust the enthalpies
+from the DFT reference to the standard reference (i.e. pure species have
+an enthalpy of 0 at 298 K and 1 atm). The references.xlsx file contains
+the following information.
+
+    \begin{longtable}[]{@{}lllllllllllllllllllllllllllllllllllllllllllllllllllllllll@{}}
+\toprule
+\begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+﻿name\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+phase\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+elements.C\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+elements.H\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+elements.O\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+statmech\_model\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+T\_ref\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+HoRT\_ref\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+potentialenergy\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+atoms\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+symmetrynumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+spin\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+vib\_wavenumber\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+IPA\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+G\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+IdealGas\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+298\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+-110.1077991\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+-63.6353\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+./CONTCAR\_IPA\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3695.6947\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3058.1512\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3056.3031\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3037.6154\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3027.4596\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2977.8791\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2962.0141\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2959.4138\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1455.9381\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1446.9241\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1432.5845\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1430.694\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1365.4299\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1359.4158\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1345.7613\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1312.957\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1258.3806\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1144.4464\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1121.8044\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1043.2856\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+936.5137\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+910.6527\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+894.8818\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+802.0075\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+459.1458\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+414.8802\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+355.2703\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+261.3417\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+250.5753\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+219.2591\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+H2O\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+G\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+IdealGas\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+298\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+-97.60604334\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+-14.2209\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+./CONTCAR\_H2O\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3825.434\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+3710.2642\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+1582.432\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+H2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+G\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+IdealGas\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+298\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+-6.7598\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+./CONTCAR\_H2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+4306.1793\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.00\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    Note that these species contain extra fields, such as \texttt{atoms},
+\texttt{symmetrynumber}, and \texttt{spin} since the \texttt{IdealGas}
+statistical mechanical model will be used. The \texttt{T\_ref} and
+\texttt{HoRT\_ref} are extra fields that are necessary for reference
+species.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{refs\PYZus{}input} \PY{o}{=} \PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{n}{io}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{references.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pprint}\PY{p}{(}\PY{n}{refs\PYZus{}input}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[\{'HoRT\_ref': -110.10779908717083,
+  'T\_ref': 298,
+  'atoms': Atoms(symbols='H6C5O2', pbc=True, cell=[12.843615942469413, 9.254207587944354, 28.20143514534594]),
+  'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 3, 'H': 8, 'O': 1\},
+  'n\_degrees': 3,
+  'name': 'IPA',
+  'optional': 'atoms',
+  'phase': 'G',
+  'potentialenergy': -63.6353,
+  'required': ('molecular\_weight',
+               'vib\_wavenumbers',
+               'potentialenergy',
+               'spin',
+               'geometry',
+               'rot\_temperatures',
+               'symmetrynumber'),
+  'rot\_model': <class 'pMuTT.models.statmech.rot.RigidRotor'>,
+  'spin': 0,
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'symmetrynumber': 1,
+  'trans\_model': <class 'pMuTT.models.statmech.trans.IdealTrans'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3695.6947,
+                      3058.1512,
+                      3056.3031,
+                      3037.6154,
+                      3027.4596,
+                      2977.8791,
+                      2962.0141,
+                      2959.4138,
+                      1455.9381,
+                      1446.9241,
+                      1432.5845,
+                      1430.694,
+                      1365.4299,
+                      1359.4158,
+                      1345.7613,
+                      1312.957,
+                      1258.3806,
+                      1144.4464,
+                      1121.8044,
+                      1043.2856,
+                      936.5137,
+                      910.6527,
+                      894.8818,
+                      802.0075,
+                      459.1458,
+                      414.8802,
+                      355.2703,
+                      261.3417,
+                      250.5753,
+                      219.2591]\},
+ \{'HoRT\_ref': -97.60604333597571,
+  'T\_ref': 298,
+  'atoms': Atoms(symbols='OH2', pbc=True, cell=[20.0, 21.526478, 20.596309]),
+  'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 2, 'O': 1\},
+  'n\_degrees': 3,
+  'name': 'H2O',
+  'optional': 'atoms',
+  'phase': 'G',
+  'potentialenergy': -14.2209,
+  'required': ('molecular\_weight',
+               'vib\_wavenumbers',
+               'potentialenergy',
+               'spin',
+               'geometry',
+               'rot\_temperatures',
+               'symmetrynumber'),
+  'rot\_model': <class 'pMuTT.models.statmech.rot.RigidRotor'>,
+  'spin': 0,
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'symmetrynumber': 2,
+  'trans\_model': <class 'pMuTT.models.statmech.trans.IdealTrans'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [3825.434, 3710.2642, 1582.432]\},
+ \{'HoRT\_ref': 0.0,
+  'T\_ref': 298,
+  'atoms': Atoms(symbols='H2', pbc=True, cell=[20.0, 20.0, 20.737166]),
+  'elec\_model': <class 'pMuTT.models.statmech.elec.IdealElec'>,
+  'elements': \{'C': 0, 'H': 2, 'O': 0\},
+  'n\_degrees': 3,
+  'name': 'H2',
+  'optional': 'atoms',
+  'phase': 'G',
+  'potentialenergy': -6.7598,
+  'required': ('molecular\_weight',
+               'vib\_wavenumbers',
+               'potentialenergy',
+               'spin',
+               'geometry',
+               'rot\_temperatures',
+               'symmetrynumber'),
+  'rot\_model': <class 'pMuTT.models.statmech.rot.RigidRotor'>,
+  'spin': 0,
+  'statmech\_model': <class 'pMuTT.models.statmech.StatMech'>,
+  'symmetrynumber': 2,
+  'trans\_model': <class 'pMuTT.models.statmech.trans.IdealTrans'>,
+  'vib\_model': <class 'pMuTT.models.statmech.vib.HarmonicVib'>,
+  'vib\_wavenumbers': [4306.1793]\}]
+
+    \end{Verbatim}
+
+    Now that we've imported the data, we can make a \texttt{References}
+object, which is made of \texttt{Reference} objects using the following
+syntax.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{pMuTT}\PY{n+nn}{.}\PY{n+nn}{models}\PY{n+nn}{.}\PY{n+nn}{empirical}\PY{n+nn}{.}\PY{n+nn}{references} \PY{k}{import} \PY{n}{Reference}\PY{p}{,} \PY{n}{References}
+        
+        \PY{n}{refs} \PY{o}{=} \PY{n}{References}\PY{p}{(}\PY{n}{descriptor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{elements}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{references}\PY{o}{=}\PY{p}{[}\PY{n}{Reference}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{ref\PYZus{}input}\PY{p}{)} 
+                                      \PY{k}{for} \PY{n}{ref\PYZus{}input} \PY{o+ow}{in} \PY{n}{refs\PYZus{}input}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{refs}\PY{o}{.}\PY{n}{offset}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'C': -357.2594948011859, 'H': -124.67018779818414, 'O': -180.8192643991904\}
+
+    \end{Verbatim}
+
+    The \texttt{References} object calculated the offset between C, H, and
+O.
+
+    \subsection{Initialize the Nasa
+objects}\label{initialize-the-nasa-objects}
+
+The \texttt{from\_statmech} method allows us to initialize the Nasa
+objects from the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{pMuTT}\PY{n+nn}{.}\PY{n+nn}{models}\PY{n+nn}{.}\PY{n+nn}{empirical}\PY{n+nn}{.}\PY{n+nn}{nasa} \PY{k}{import} \PY{n}{Nasa}
+        
+        \PY{n}{T\PYZus{}low} \PY{o}{=} \PY{l+m+mf}{300.} \PY{c+c1}{\PYZsh{} K}
+        \PY{n}{T\PYZus{}high} \PY{o}{=} \PY{l+m+mf}{1100.} \PY{c+c1}{\PYZsh{} K}
+        
+        \PY{n}{species} \PY{o}{=} \PY{p}{[}\PY{n}{Nasa}\PY{o}{.}\PY{n}{from\PYZus{}statmech}\PY{p}{(}\PY{n}{references}\PY{o}{=}\PY{n}{refs}\PY{p}{,} \PY{n}{T\PYZus{}low}\PY{o}{=}\PY{n}{T\PYZus{}low}\PY{p}{,} \PY{n}{T\PYZus{}high}\PY{o}{=}\PY{n}{T\PYZus{}high}\PY{p}{,} 
+                                      \PY{o}{*}\PY{o}{*}\PY{n}{specie\PYZus{}data}\PY{p}{)} \PY{k}{for} \PY{n}{specie\PYZus{}data} \PY{o+ow}{in} \PY{n}{species\PYZus{}data}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Printing an example of a Nasa species}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{species}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Nasa object for Name: H2\_cus(S)
+	phase: S
+	elements: \{'C': 0, 'H': 2, 'O': 0\}
+	references: <pMuTT.models.empirical.references.References object at 0x000002288CD2A3C8>
+	notes: None
+	statmech\_model: <pMuTT.models.statmech.StatMech object at 0x0000022890ACD358>
+	T\_low: 300.0
+	T\_mid: 610.204081632653
+	T\_high: 1100.0
+	a\_low: [-2.37252750e+00  2.60714871e-02 -4.73583826e-05  4.61096590e-08
+ -1.83624246e-11 -1.68126562e+03  8.63949434e+00]
+	a\_high: [-1.32355622e-01  1.17210568e-02 -1.21067695e-05  6.77414609e-09
+ -1.56703390e-12 -1.96714519e+03 -1.13778416e+00]
+
+    \end{Verbatim}
+
+    \subsection{Writing Nasa objects to a Thermdat
+file}\label{writing-nasa-objects-to-a-thermdat-file}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{pMuTT}\PY{n+nn}{.}\PY{n+nn}{io\PYZus{}}\PY{n+nn}{.}\PY{n+nn}{thermdat} \PY{k}{import} \PY{n}{write\PYZus{}thermdat}
+        
+        \PY{n}{write\PYZus{}thermdat}\PY{p}{(}\PY{n}{nasa\PYZus{}species}\PY{o}{=}\PY{n}{species}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{thermdat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                       \PY{n}{write\PYZus{}date}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+THERMO ALL
+       100       500      1500
+H2_cus(S)       20181106H   2               S300.0     1100.0    610.2         1
+-1.32355622E-01 1.17210568E-02-1.21067695E-05 6.77414609E-09-1.56703390E-12    2
+-1.96714519E+03-1.13778416E+00-2.37252750E+00 2.60714871E-02-4.73583826E-05    3
+ 4.61096590E-08-1.83624246E-11-1.68126562E+03 8.63949434E+00                   4
+H2Obr(S)        20181106H   2O   1          S300.0     1100.0    561.2         1
+ 3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
+-3.65073462E+04-1.59589792E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
+ 8.80731362E-08-4.17597362E-11-3.61771342E+04-3.41520582E+00                   4
+H2Ocus(S)       20181106H   2O   1          S300.0     1100.0    561.2         1
+ 3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
+-4.35526918E+04-1.59589792E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
+ 8.80731362E-08-4.17597362E-11-4.32224798E+04-3.41520582E+00                   4
+H_cus(S)        20181106H   1               S300.0     1100.0    544.9         1
+-4.56626289E-01 6.52756961E-03-5.72385869E-06 2.56064809E-09-4.74217654E-13    2
+-8.86598312E+02 1.29145407E+00-1.70971795E+00 1.57880872E-02-3.17011214E-05    3
+ 3.53093929E-08-1.61102148E-11-7.49187896E+02 6.57564204E+00                   4
+HObr(S)         20181106H   1O   1          S300.0     1100.0    610.2         1
+ 1.32317902E+00 1.07943705E-02-1.40435635E-05 9.13293283E-09-2.29632826E-12    2
+-3.92614463E+04-7.89440118E+00-1.90464381E+00 3.13120166E-02-6.40095247E-05    3
+ 6.43701568E-08-2.56553082E-11-3.88467774E+04 6.21680636E+00                   4
+Obr(S)          20181106O   1               S300.0     1100.0    561.2         1
+ 1.10929486E+00 6.02227730E-03-8.09582034E-06 5.13595359E-09-1.26396875E-12    2
+-3.27394702E+04-6.27416658E+00-1.46028728E+00 2.43280424E-02-5.80735069E-05    3
+ 6.69898412E-08-3.04663321E-11-3.24443213E+04 4.66839332E+00                   4
+IPA(S)          20181106C   3H   8O   1     S300.0     1100.0    544.9         1
+-2.41027713E+00 6.03014873E-02-5.21384920E-05 2.61809899E-08-5.76980678E-12    2
+-4.86845128E+04 1.14685801E+01 6.36065045E+00-8.82654398E-03 1.52433654E-04    3
+-2.43446336E-07 1.27830717E-10-4.95747767E+04-2.48996210E+01                   4
+END
+\end{verbatim}
+
+    \subsection{Checking the fit of the Nasa
+object}\label{checking-the-fit-of-the-nasa-object}
+
+To see if the Nasa object's predictions of the thermodynamic data
+matches the statistical mechanical model inputted, use the
+\texttt{plot\_statmech\_and\_empirical} method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{species}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot\PYZus{}statmech\PYZus{}and\PYZus{}empirical}\PY{p}{(}\PY{n}{Cp\PYZus{}units}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J/mol/K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                           \PY{n}{H\PYZus{}units}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kJ/mol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                           \PY{n}{S\PYZus{}units}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J/mol/K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                           \PY{n}{G\PYZus{}units}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kJ/mol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
