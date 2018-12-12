@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Equations of State &mdash; pMuTT 1.1.3 documentation</title>
+  <title>Equations of State &mdash; pMuTT 1.2.0 documentation</title>
   
 
   
@@ -189,13 +189,13 @@
 <div class="section" id="idealgas">
 <h2>IdealGas<a class="headerlink" href="#idealgas" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.models.eos.IdealGasEOS">
-<em class="property">class </em><code class="descclassname">pMuTT.models.eos.</code><code class="descname">IdealGasEOS</code><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.IdealGasEOS">
+<em class="property">class </em><code class="descclassname">pMuTT.eos.</code><code class="descname">IdealGasEOS</code><a class="headerlink" href="#pMuTT.eos.IdealGasEOS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ideal gas equation of state</p>
 <p><span class="math notranslate nohighlight">\(PV=nRT\)</span></p>
 <dl class="classmethod">
-<dt id="pMuTT.models.eos.IdealGasEOS.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.IdealGasEOS.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.IdealGasEOS.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -212,8 +212,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.IdealGasEOS.get_P">
-<code class="descname">get_P</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>V=0.02446539540458919</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.get_P" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.IdealGasEOS.get_P">
+<code class="descname">get_P</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>V=0.02446539540458919</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.IdealGasEOS.get_P" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the pressure of an ideal gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -237,8 +237,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.IdealGasEOS.get_T">
-<code class="descname">get_T</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.get_T" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.IdealGasEOS.get_T">
+<code class="descname">get_T</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.IdealGasEOS.get_T" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the temperature of an ideal gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -262,8 +262,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.IdealGasEOS.get_V">
-<code class="descname">get_V</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.get_V" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.IdealGasEOS.get_V">
+<code class="descname">get_V</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.IdealGasEOS.get_V" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the volume of an ideal gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -287,9 +287,9 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.IdealGasEOS.get_n">
-<code class="descname">get_n</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.get_n" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the number of moles of an ideal gas</p>
+<dt id="pMuTT.eos.IdealGasEOS.get_n">
+<code class="descname">get_n</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.IdealGasEOS.get_n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the moles of an ideal gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -312,8 +312,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.IdealGasEOS.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.IdealGasEOS.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.IdealGasEOS.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.IdealGasEOS.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -333,26 +333,26 @@
 <div class="section" id="van-der-waals">
 <h2>van der Waals<a class="headerlink" href="#van-der-waals" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS">
-<em class="property">class </em><code class="descclassname">pMuTT.models.eos.</code><code class="descname">vanDerWaalsEOS</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS">
+<em class="property">class </em><code class="descclassname">pMuTT.eos.</code><code class="descname">vanDerWaalsEOS</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS" title="Permalink to this definition">¶</a></dt>
 <dd><p>van der Waals equation of state</p>
 <p><span class="math notranslate nohighlight">\(\bigg(P+a\big(\frac{n}{V}\big)^2 \bigg)\bigg(\frac{V}{n}-b
 \bigg)=RT\)</span></p>
 <dl class="attribute">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.a">
-<code class="descname">a</code><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.a" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.a">
+<code class="descname">a</code><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.a" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float</em> – Measure of average attraction between particles in Pa m6/mol</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.b">
-<code class="descname">b</code><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.b" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.b">
+<code class="descname">b</code><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.b" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float</em> – Volume excluded by a mole of particles in m3/mol</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.from_critical">
-<em class="property">classmethod </em><code class="descname">from_critical</code><span class="sig-paren">(</span><em>Tc</em>, <em>Pc</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.from_critical" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.from_critical">
+<em class="property">classmethod </em><code class="descname">from_critical</code><span class="sig-paren">(</span><em>Tc</em>, <em>Pc</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.from_critical" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the van der Waals object from critical temperature and
 pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -376,8 +376,8 @@ pressure</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -394,8 +394,8 @@ pressure</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_P">
-<code class="descname">get_P</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>V=0.02446539540458919</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_P" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_P">
+<code class="descname">get_P</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>V=0.02446539540458919</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_P" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the pressure of a van der Waals gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -419,8 +419,8 @@ pressure</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_Pc">
-<code class="descname">get_Pc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_Pc" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_Pc">
+<code class="descname">get_Pc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_Pc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the critical pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -435,8 +435,8 @@ pressure</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_T">
-<code class="descname">get_T</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_T" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_T">
+<code class="descname">get_T</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_T" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the temperature of a van der Waals gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -460,8 +460,8 @@ pressure</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_Tc">
-<code class="descname">get_Tc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_Tc" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_Tc">
+<code class="descname">get_Tc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_Tc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the critical temperature</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -476,8 +476,8 @@ pressure</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_V">
-<code class="descname">get_V</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>n=1.0</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_V" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_V">
+<code class="descname">get_V</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>n=1.0</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_V" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the volume of a van der Waals gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -504,8 +504,8 @@ smaller volume (liquid phase).</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_Vc">
-<code class="descname">get_Vc</code><span class="sig-paren">(</span><em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_Vc" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_Vc">
+<code class="descname">get_Vc</code><span class="sig-paren">(</span><em>n=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_Vc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the critical volume</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -522,8 +522,8 @@ smaller volume (liquid phase).</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_Vm">
-<code class="descname">get_Vm</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_Vm" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_Vm">
+<code class="descname">get_Vm</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>P=1.01325</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_Vm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the molar volume of a van der Waals gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -549,9 +549,9 @@ smaller volume (liquid phase).</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.get_n">
-<code class="descname">get_n</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>T=298.15</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.get_n" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the number of moles of a van der Waals gas</p>
+<dt id="pMuTT.eos.vanDerWaalsEOS.get_n">
+<code class="descname">get_n</code><span class="sig-paren">(</span><em>V=0.02446539540458919</em>, <em>P=1.01325</em>, <em>T=298.15</em>, <em>gas_phase=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.get_n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the moles of a van der Waals gas</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -577,8 +577,8 @@ larger moles (liquid phase).</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.eos.vanDerWaalsEOS.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.eos.vanDerWaalsEOS.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.eos.vanDerWaalsEOS.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.eos.vanDerWaalsEOS.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -639,7 +639,7 @@ larger moles (liquid phase).</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.3',
+            VERSION:'1.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Referencing &mdash; pMuTT 1.1.3 documentation</title>
+  <title>Referencing &mdash; pMuTT 1.2.0 documentation</title>
   
 
   
@@ -183,20 +183,20 @@
 <span id="id1"></span><h1>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline">¶</a></h1>
 <p>Enthalpies calculated using VASP (and some other computational methods)
 have different references than standard references (i.e. the enthalpy of formation
-of pure substances, like O:sub:<cite>2</cite> or Pt, is not necessarily zero). This difference
+of pure substances, like O<sub>2</sub> or Pt, is not necessarily zero). This difference
 makes it difficult to ensure thermodynamic consistency for our mechanisms since we
 may be mixing experimental gas thermodynamics with computational surface thermodynamics.
 In order to make the references consistent, we find a correction factor for each element
 by solving the equation:</p>
 <p><span class="math notranslate nohighlight">\(\underline {\underline {H}}^{expt}_{[M \times N]} = \underline {\underline {H}}^{DFT}_{[M \times N]} + \underline {\underline {x}}_{[M \times N]} \underline{\theta}_{[N]}\)</span></p>
 <p>where M is the number of reference species, N is the number of elements,
-H:sup:<cite>expt</cite> is the experimental standard enthalpies,
-H:sup:DFT is the standard enthalpies calculated using DFT,
+H<sup>expt</sup> is the experimental standard enthalpies,
+H<sup>DFT</sup> is the standard enthalpies calculated using DFT,
 x is a matrix that describes the composition of the references (each row represents a specie,
 each column represents an element), and θ is the correction for each element.</p>
 <p>The equation can be solved using a Least Squares approach.
 The correction factor can then be added to subsequent species calculated through DFT to ensure consistent references.
-Referencing is handled by the <code class="docutils literal notranslate"><span class="pre">pMuTT.models.empirical.references.References</span></code>.</p>
+Referencing is handled by the <a class="reference internal" href="empirical.html#pMuTT.empirical.references.References" title="pMuTT.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a>.</p>
 </div>
 
 
@@ -241,7 +241,7 @@ Referencing is handled by the <code class="docutils literal notranslate"><span c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.3',
+            VERSION:'1.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

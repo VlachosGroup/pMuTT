@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.1.3 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.0 documentation</title>
   
 
   
@@ -99,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#ideal-gas-idealgas">Ideal Gas (idealgas)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#harmonic-approximation-harmonic">Harmonic Approximation (harmonic)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#electronic-electronic">Electronic (electronic)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#placeholder-placeholder">Placeholder (placeholder)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#translational-models">Translational Models</a><ul>
@@ -221,60 +222,60 @@ calculate thermodynamic quantities, such as partition functions, heat capacities
 Helmholtz energy and Gibbs energy.</p>
 <blockquote>
 <div><dl class="class">
-<dt id="pMuTT.models.statmech.StatMech">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>name=None</em>, <em>trans_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;pMuTT.models.statmech.EmptyMode object&gt;</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>name=None</em>, <em>trans_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for statistical mechanic models.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.name">
-<code class="descname">name</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.name" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.name">
+<code class="descname">name</code><a class="headerlink" href="#pMuTT.statmech.StatMech.name" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>str, optional</em> – Name of the specie. Default is None</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.trans_model">
-<code class="descname">trans_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.trans_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.trans</span></code> object, optional – Deals with translational modes. Default is
-<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
+<dt id="pMuTT.statmech.StatMech.trans_model">
+<code class="descname">trans_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.trans_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#trans"><span class="std std-ref">pMuTT.statmech.trans</span></a> object, optional – Deals with translational modes. Default is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.vib_model">
-<code class="descname">vib_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.vib_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.vib</span></code> object, optional – Deals with vibrational modes. Default is
-<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
+<dt id="pMuTT.statmech.StatMech.vib_model">
+<code class="descname">vib_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.vib_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#vib"><span class="std std-ref">pMuTT.statmech.vib</span></a> object, optional – Deals with vibrational modes. Default is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.rot_model">
-<code class="descname">rot_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.rot_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.rot</span></code> object, optional – Deals with rotational modes. Default is
-<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
+<dt id="pMuTT.statmech.StatMech.rot_model">
+<code class="descname">rot_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.rot_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#rot"><span class="std std-ref">pMuTT.statmech.rot</span></a> object, optional – Deals with rotational modes. Default is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.elec_model">
-<code class="descname">elec_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.elec_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.elec</span></code> object, optional – Deals with electronic modes. Default is
-<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
+<dt id="pMuTT.statmech.StatMech.elec_model">
+<code class="descname">elec_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.elec_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#elec"><span class="std std-ref">pMuTT.statmech.elec</span></a> object, optional – Deals with electronic modes. Default is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.nucl_model">
-<code class="descname">nucl_model</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.nucl_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.nucl</span></code> object – Deals with nuclear modes. Default is
-<code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.EmptyMode</span></code></p>
+<dt id="pMuTT.statmech.StatMech.nucl_model">
+<code class="descname">nucl_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.nucl_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#nucl"><span class="std std-ref">pMuTT.statmech.nucl</span></a> object – Deals with nuclear modes. Default is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.StatMech.notes">
-<code class="descname">notes</code><a class="headerlink" href="#pMuTT.models.statmech.StatMech.notes" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pMuTT.statmech.StatMech.notes" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>str, optional</em> – Any additional details you would like to include such as
 computational set up. Default is None</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.StatMech.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -291,8 +292,8 @@ computational set up. Default is None</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless Helmholtz energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -318,8 +319,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless heat capacity (constant P)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -345,8 +346,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless heat capacity (constant V)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -372,8 +373,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -399,8 +400,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -426,8 +427,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -453,8 +454,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless internal energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -480,8 +481,8 @@ to each mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Partition function</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -507,8 +508,8 @@ mode are as follows:
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.StatMech.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.StatMech.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.StatMech.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -535,7 +536,7 @@ mode are as follows:
 <h3>Example of initialization using objects<a class="headerlink" href="#example-of-initialization-using-objects" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 <span class="n">atoms</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">)</span>
 <span class="n">H2O_trans</span> <span class="o">=</span> <span class="n">trans</span><span class="o">.</span><span class="n">IdealTrans</span><span class="p">(</span><span class="n">n_degrees</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">)</span>
@@ -553,7 +554,7 @@ mode are as follows:
 <h3>Example of initialization using classes and parameters<a class="headerlink" href="#example-of-initialization-using-classes-and-parameters" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 
 <span class="n">H2O_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans</span><span class="o">.</span><span class="n">IdealTrans</span><span class="p">,</span>
@@ -573,10 +574,10 @@ mode are as follows:
 <div class="section" id="presets">
 <h2>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">¶</a></h2>
 <p>If you are using a common model (e.g. the ideal gas model), then you can get the default parameters from
-the dictionary, <code class="docutils literal notranslate"><span class="pre">pMuTT.models.statmech.presets</span></code>. The same H2O StatMech object can be specified without
+the dictionary, <code class="docutils literal notranslate"><span class="pre">pMuTT.statmech.presets</span></code>. The same H2O StatMech object can be specified without
 the need to pass all the types of modes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.models.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+<span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
 
 <span class="n">idealgas_defaults</span> <span class="o">=</span> <span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]</span>
 <span class="n">H2O_new</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
@@ -605,19 +606,19 @@ value).</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>trans_model</td>
-<td>pMuTT.models.statmech.trans.IdealTrans</td>
+<td>pMuTT.statmech.trans.IdealTrans</td>
 </tr>
 <tr class="row-odd"><td>n_degrees</td>
 <td>3</td>
 </tr>
 <tr class="row-even"><td>vib_model</td>
-<td>pMuTT.models.statmech.vib.HarmonicVib</td>
+<td>pMuTT.statmech.vib.HarmonicVib</td>
 </tr>
 <tr class="row-odd"><td>elec_model</td>
-<td>pMuTT.models.statmech.elec.IdealElec</td>
+<td>pMuTT.statmech.elec.IdealElec</td>
 </tr>
 <tr class="row-even"><td>rot_model</td>
-<td>pMuTT.models.statmech.rot.RigidRotor</td>
+<td>pMuTT.statmech.rot.RigidRotor</td>
 </tr>
 </tbody>
 </table>
@@ -722,10 +723,10 @@ P (1.01325 bar)</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>vib_model</td>
-<td>pMuTT.models.statmech.vib.HarmonicVib</td>
+<td>pMuTT.statmech.vib.HarmonicVib</td>
 </tr>
 <tr class="row-odd"><td>elec_model</td>
-<td>pMuTT.models.statmech.elec.IdealElec</td>
+<td>pMuTT.statmech.elec.IdealElec</td>
 </tr>
 </tbody>
 </table>
@@ -766,7 +767,7 @@ P (1.01325 bar)</td>
 <tbody valign="top">
 <tr class="row-even"><td><span class="math notranslate nohighlight">\(q\)</span></td>
 <td>T</td>
-<td>ignore_q_elec (False)</td>
+<td>ignore_q_elec (True)</td>
 </tr>
 <tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {C_V} {R}\)</span></td>
 <td>T</td>
@@ -813,7 +814,7 @@ P (1.01325 bar)</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>elec_model</td>
-<td>pMuTT.models.statmech.elec.IdealElec</td>
+<td>pMuTT.statmech.elec.IdealElec</td>
 </tr>
 </tbody>
 </table>
@@ -851,7 +852,7 @@ P (1.01325 bar)</td>
 <tbody valign="top">
 <tr class="row-even"><td><span class="math notranslate nohighlight">\(q\)</span></td>
 <td>T</td>
-<td>ignore_q_elec (False)</td>
+<td>ignore_q_elec (True)</td>
 </tr>
 <tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {C_V} {R}\)</span></td>
 <td>&#160;</td>
@@ -883,10 +884,104 @@ P (1.01325 bar)</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="placeholder-placeholder">
+<h3>Placeholder (placeholder)<a class="headerlink" href="#placeholder-placeholder" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Default Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>trans_model</td>
+<td>pMuTT.statmech.EmptyMode</td>
+</tr>
+<tr class="row-odd"><td>vib_model</td>
+<td>pMuTT.statmech.EmptyMode</td>
+</tr>
+<tr class="row-even"><td>rot_model</td>
+<td>pMuTT.statmech.EmptyMode</td>
+</tr>
+<tr class="row-odd"><td>elec_model</td>
+<td>pMuTT.statmech.EmptyMode</td>
+</tr>
+<tr class="row-even"><td>nucl_model</td>
+<td>pMuTT.statmech.EmptyMode</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Required Parameters</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>N/A</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="30%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Thermodynamic Quantity</th>
+<th class="head">Expected Parameters</th>
+<th class="head">Optional Parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(q\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {C_V} {R}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {C_P} {R}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {U} {RT}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {H} {RT}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {S} {R}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac {A} {RT}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac {G} {RT}\)</span></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
 <p>The <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary is flexible where you can create a new entry if you will use a model often.</p>
 <dl class="data">
-<dt id="pMuTT.models.statmech.presets">
-<code class="descclassname">pMuTT.models.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.models.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.models.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}, 'placeholder': {'trans_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'elec_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'rot_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.models.statmech.EmptyMode'&gt;, 'required': ()}}</em><a class="headerlink" href="#pMuTT.models.statmech.presets" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.presets">
+<code class="descclassname">pMuTT.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}, 'placeholder': {'trans_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'elec_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'rot_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'required': ()}}</em><a class="headerlink" href="#pMuTT.statmech.presets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
 parameters that still need to be passed.</p>
 </dd></dl>
@@ -894,30 +989,30 @@ parameters that still need to be passed.</p>
 </div>
 </div>
 <div class="section" id="translational-models">
-<h2>Translational Models<a class="headerlink" href="#translational-models" title="Permalink to this headline">¶</a></h2>
+<span id="trans"></span><h2>Translational Models<a class="headerlink" href="#translational-models" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="idealtrans">
 <h3>IdealTrans<a class="headerlink" href="#idealtrans" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="pMuTT.models.statmech.trans.IdealTrans">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.trans.</code><code class="descname">IdealTrans</code><span class="sig-paren">(</span><em>n_degrees=3</em>, <em>molecular_weight=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.trans.</code><code class="descname">IdealTrans</code><span class="sig-paren">(</span><em>n_degrees=3</em>, <em>molecular_weight=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translational mode using ideal gas assumption. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.n_degrees">
-<code class="descname">n_degrees</code><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.n_degrees" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.n_degrees">
+<code class="descname">n_degrees</code><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.n_degrees" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>int, optional</em> – Number of degrees of freedom. Default is 3</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.molecular_weight">
-<code class="descname">molecular_weight</code><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.molecular_weight" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.molecular_weight">
+<code class="descname">molecular_weight</code><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.molecular_weight" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float</em> – Molecular weight of the molecule in g/mol.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -934,8 +1029,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{trans}}{RT}=\frac{U^{trans}}{RT}-\frac{S^{trans}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -960,8 +1055,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{Cv^{trans}}{R}=\frac{Cv^{trans}}{R} + 1\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -977,8 +1072,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{Cv^{trans}}{R}=\frac{n_{degrees}}{2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -994,8 +1089,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{trans}}{RT}=\frac{H^{trans}}{RT}-\frac{S^{trans}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1020,8 +1115,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{H^{trans}}{RT}=\frac{U^{trans}}{RT} + 1\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1037,8 +1132,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{trans}}{R}=1+\frac{n_{degrees}}{2}+\log\bigg(\big(
 \frac{2\pi mk_bT}{h^2})^\frac{n_{degrees}}{2}\frac{RT}{PN_a}\bigg)\)</span></p>
@@ -1064,8 +1159,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{trans}}{RT}=\frac{n_{degrees}}{2}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1081,8 +1176,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_V">
-<code class="descname">get_V</code><span class="sig-paren">(</span><em>T</em>, <em>P</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_V" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_V">
+<code class="descname">get_V</code><span class="sig-paren">(</span><em>T</em>, <em>P</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_V" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the molar volume of an ideal gas at T and P</p>
 <p><span class="math notranslate nohighlight">\(V_m=\frac{RT}{P}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1106,8 +1201,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>P=1.01325</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q_{trans} = \bigg(\frac{2\pi \sum_{i}^{atoms}m_ikT}{h^2}
 \bigg)^\frac {n_{degrees}} {2}V\)</span></p>
@@ -1133,8 +1228,8 @@ Default is atmospheric pressure</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.trans.IdealTrans.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.trans.IdealTrans.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.trans.IdealTrans.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1153,24 +1248,24 @@ Default is atmospheric pressure</li>
 </div>
 </div>
 <div class="section" id="vibrational-models">
-<h2>Vibrational Models<a class="headerlink" href="#vibrational-models" title="Permalink to this headline">¶</a></h2>
+<span id="vib"></span><h2>Vibrational Models<a class="headerlink" href="#vibrational-models" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="harmonicvib">
 <h3>HarmonicVib<a class="headerlink" href="#harmonicvib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vibrational modes using the harmonic approximation. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.vib_wavenumbers">
-<code class="descname">vib_wavenumbers</code><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.vib_wavenumbers">
+<code class="descname">vib_wavenumbers</code><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1187,8 +1282,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1206,8 +1301,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{
 \Theta_{V,i}}{2T}\bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}
@@ -1227,8 +1322,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{vib}}{R}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}
 \bigg)^2 \frac{1}{\big(\sinh{\frac{\Theta_{V,i}}{2T}}\big)^2}\)</span></p>
@@ -1247,8 +1342,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1266,8 +1361,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{
 \Theta_{V,i}}{2T}+\frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{
@@ -1288,8 +1383,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{vib}}{R}=\sum_i \frac{\Theta_{V,i}}{T}\frac{\exp
 \big(-\frac{\Theta_{V,i}}{T}\big)}{1-\exp\big(-\frac{
@@ -1310,8 +1405,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{vib}}{RT}=\sum_i \bigg(\frac{\Theta_{V,i}}{2T}+
 \frac{\Theta_{V,i}}{T}\frac{\exp\big(-\frac{\Theta_{V,i}}{T}
@@ -1331,8 +1426,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_ZPE">
-<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_ZPE">
+<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the zero point energy</p>
 <p><span class="math notranslate nohighlight">\(ZPE=\frac{1}{2}k_b\sum_i \Theta_{V,i}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1348,8 +1443,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q^{vib}=\prod_i \frac{\exp({-\frac{\Theta_{V,i}}{2T}})}
 {1-\exp({-\frac{\Theta_{V,i}}{T}})}\)</span></p>
@@ -1368,8 +1463,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.HarmonicVib.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.HarmonicVib.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.HarmonicVib.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1389,41 +1484,41 @@ John Wiley &amp; Sons, 2010.</p>
 <div class="section" id="qrrhovib">
 <h3>QRRHOVib<a class="headerlink" href="#qrrhovib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.vib.</code><code class="descname">QRRHOVib</code><span class="sig-paren">(</span><em>vib_wavenumbers</em>, <em>Bav=1e-44</em>, <em>v0=100.0</em>, <em>alpha=4</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">QRRHOVib</code><span class="sig-paren">(</span><em>vib_wavenumbers</em>, <em>Bav=1e-44</em>, <em>v0=100.0</em>, <em>alpha=4</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
 approximation. Equations found in</p>
 <p>1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
 Phys. Chem. C 2015, 119 (4), 1840–1850.
 2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.vib_wavenumber">
-<code class="descname">vib_wavenumber</code><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.vib_wavenumber" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.vib_wavenumber">
+<code class="descname">vib_wavenumber</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.vib_wavenumber" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.Bav">
-<code class="descname">Bav</code><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.Bav" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.Bav">
+<code class="descname">Bav</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.Bav" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – Average molecular moment of inertia as a limiting value of small
 wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.v0">
-<code class="descname">v0</code><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.v0" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.v0">
+<code class="descname">v0</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.v0" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – Wavenumber to scale vibrations. Default is 100 cm <sup>-1</sup></p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.alpha">
-<code class="descname">alpha</code><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.alpha" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.alpha">
+<code class="descname">alpha</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>int, optional</em> – Power to raise ratio of wavenumbers. Default is 4</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1440,8 +1535,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{qRRHO}}{RT} = \frac{U^{qRRHO}}{RT}-
 \frac{S^{qRRHO}}{R}\)</span></p>
@@ -1460,8 +1555,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_{P}^{qRRHO}} {R} = \frac{C_{V}^{qRRHO}} {R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1479,8 +1574,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac {C_{v}^{qRRHO}}{R} = \sum_{i}\omega_i\frac{C_{v,i}
 ^{RRHO}}{R} + \frac{1}{2}(1-\omega_i)\)</span></p>
@@ -1502,8 +1597,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{qRRHO}}{RT} = \frac{H^{qRRHO}}{RT}-
 \frac{S^{qRRHO}}{R}\)</span></p>
@@ -1522,8 +1617,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{H^{qRRHO}} {RT} = \frac{U^{qRRHO}} {RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1541,8 +1636,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{qRRHO}}{R}=\sum_i\omega_i\frac{S_i^{H}}{R}+(1-
 \omega_i)\frac{S_i^{RRHO}}{R}\)</span></p>
@@ -1566,8 +1661,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac {U^{qRRHO}}{RT} = \sum_{i}\omega_i\frac{U^{RRHO}}{RT}
 + \frac{1}{2}(1-\omega_i)\)</span></p>
@@ -1589,8 +1684,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1605,8 +1700,8 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.QRRHOVib.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.QRRHOVib.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.QRRHOVib.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1626,26 +1721,26 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <div class="section" id="einsteinvib">
 <h3>EinsteinVib<a class="headerlink" href="#einsteinvib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.vib.</code><code class="descname">EinsteinVib</code><span class="sig-paren">(</span><em>einstein_temperature</em>, <em>interaction_energy=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">EinsteinVib</code><span class="sig-paren">(</span><em>einstein_temperature</em>, <em>interaction_energy=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Einstein model of a crystal. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.einstein_temperature">
-<code class="descname">einstein_temperature</code><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.einstein_temperature" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.einstein_temperature">
+<code class="descname">einstein_temperature</code><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.einstein_temperature" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float</em> – Einstein temperature (<span class="math notranslate nohighlight">\(\Theta_E\)</span>) in K</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.interaction_energy">
-<code class="descname">interaction_energy</code><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.interaction_energy" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.interaction_energy">
+<code class="descname">interaction_energy</code><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.interaction_energy" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – Interaction energy (<span class="math notranslate nohighlight">\(u\)</span>) per atom in eV. Default is 0 eV</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1662,8 +1757,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{vib}}{RT}=\frac{U^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1681,8 +1776,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_P^{vib}}{R}=\frac{C_V^{vib}}{R}=3\bigg(\frac{
 \Theta_E}{T}\bigg)^2\frac{\exp(-\frac{\Theta_E}{T})}{\big(1-
@@ -1702,8 +1797,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\bigg)^2
 \frac{\exp(-\frac{\Theta_E}{T})}{\big(1-\exp(\frac{-
@@ -1723,8 +1818,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{vib}}{RT}=\frac{H^{vib}}{RT}-\frac{S^{vib}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1742,8 +1837,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{H^{vib}}{RT}=\frac{U^{vib}}{RT}=\frac{N_A u^0_E}{k_BT}
 +3\frac{\Theta_E}{T}\bigg(\frac{\exp(-\frac{\Theta_E}{T})}{1-
@@ -1763,8 +1858,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{vib}}{R}=3\bigg(\frac{\Theta_E}{T}\frac{\exp\big(
 \frac{-\Theta_E}{T}\big)}{1-\exp\big(-\frac{\Theta_E}{T}\big)}
@@ -1784,8 +1879,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{vib}}{RT}=\frac{u^0_E}{k_BT}+3\frac{\Theta_E}{T}
 \bigg(\frac{\exp(-\frac{\Theta_E}{T})}{1-\exp(-\frac{\Theta_E}
@@ -1805,8 +1900,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_ZPE">
-<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_ZPE">
+<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the zero point energy</p>
 <p><span class="math notranslate nohighlight">\(u^0_E=u+\frac{3}{2}\Theta_Ek_B\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1822,8 +1917,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q^{vib}=\exp\bigg({\frac{-u}{k_BT}}\bigg)\bigg(\frac{
 \exp(-\frac{\Theta_E}{2T})}{1-\exp(\frac{-\Theta_E}{T})}\bigg)\)</span></p>
@@ -1842,8 +1937,8 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.vib.EinsteinVib.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.vib.EinsteinVib.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.vib.EinsteinVib.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1862,18 +1957,18 @@ John Wiley &amp; Sons, 2010.</p>
 </div>
 </div>
 <div class="section" id="rotational-models">
-<h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Permalink to this headline">¶</a></h2>
+<span id="rot"></span><h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="rigidrotor">
 <h3>RigidRotor<a class="headerlink" href="#rigidrotor" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="pMuTT.models.statmech.rot.RigidRotor">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.rot.</code><code class="descname">RigidRotor</code><span class="sig-paren">(</span><em>symmetrynumber</em>, <em>rot_temperatures=None</em>, <em>geometry=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.rot.</code><code class="descname">RigidRotor</code><span class="sig-paren">(</span><em>symmetrynumber</em>, <em>rot_temperatures=None</em>, <em>geometry=None</em>, <em>atoms=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rotational mode using the rigid rotor assumption. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.symmetrynumber">
-<code class="descname">symmetrynumber</code><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.symmetrynumber" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.symmetrynumber">
+<code class="descname">symmetrynumber</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.symmetrynumber" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float</em> – Symmetry number of molecule.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -1931,14 +2026,14 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.rot_temperatures">
-<code class="descname">rot_temperatures</code><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.rot_temperatures" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.rot_temperatures">
+<code class="descname">rot_temperatures</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.rot_temperatures" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>list of float, optional</em> – Rotational temperatures in K</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.geometry">
-<code class="descname">geometry</code><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.geometry" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.geometry">
+<code class="descname">geometry</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.geometry" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>str</em> – Geometry of molecule. Accepted options are:</p>
 <ul class="simple">
 <li>monatomic</li>
@@ -1948,15 +2043,15 @@ John Wiley &amp; Sons, 2010.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.atoms">
-<code class="descname">atoms</code><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.atoms" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.atoms">
+<code class="descname">atoms</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>ase.Atoms object, optional</em> – An atoms object can be used to calculate rot_temperatures and
 guess geometry</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1973,8 +2068,8 @@ guess geometry</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{rot}}{RT}=\frac{U^{rot}}{RT}-\frac{S^{rot}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1992,8 +2087,8 @@ guess geometry</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2009,8 +2104,8 @@ guess geometry</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=1\)</span> if linear</p>
@@ -2028,8 +2123,8 @@ guess geometry</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{rot}}{RT}=\frac{H^{rot}}{RT}-\frac{S^{rot}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2047,8 +2142,8 @@ guess geometry</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2064,8 +2159,8 @@ guess geometry</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{rot}}{R}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(\frac{S}{R}=\log(\frac{T}{\sigma}\prod_i \frac{1}{
@@ -2088,8 +2183,8 @@ if nonlinear</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=1\)</span> if linear</p>
@@ -2107,8 +2202,8 @@ if nonlinear</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q^{rot}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_R}\)</span> if linear</p>
@@ -2129,8 +2224,8 @@ if nonlinear</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.rot.RigidRotor.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.rot.RigidRotor.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.rot.RigidRotor.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2149,31 +2244,31 @@ if nonlinear</p>
 </div>
 </div>
 <div class="section" id="electronic-models">
-<h2>Electronic Models<a class="headerlink" href="#electronic-models" title="Permalink to this headline">¶</a></h2>
+<span id="elec"></span><h2>Electronic Models<a class="headerlink" href="#electronic-models" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="idealelec">
 <h3>IdealElec<a class="headerlink" href="#idealelec" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="pMuTT.models.statmech.elec.IdealElec">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.elec.</code><code class="descname">IdealElec</code><span class="sig-paren">(</span><em>potentialenergy=0.0</em>, <em>spin=0.0</em>, <em>D0=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.elec.</code><code class="descname">IdealElec</code><span class="sig-paren">(</span><em>potentialenergy=0.0</em>, <em>spin=0.0</em>, <em>D0=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Electronic modes using the ideal gas assumption. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.elec.IdealElec.potentialenergy">
-<code class="descname">potentialenergy</code><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.potentialenergy" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.potentialenergy">
+<code class="descname">potentialenergy</code><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.potentialenergy" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – Potential energy in eV. Default is 0</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.elec.IdealElec.D0">
-<code class="descname">D0</code><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.D0" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.D0">
+<code class="descname">D0</code><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.D0" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – Bond strength in eV. Preferentially used when calculating partition
 coefficient.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.models.statmech.elec.IdealElec.spin">
-<code class="descname">spin</code><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.spin" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.spin">
+<code class="descname">spin</code><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.spin" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float, optional</em> – The total electron spin. Default is 0</p>
 <ul class="simple">
 <li>0 for molecules in which all electrons are paired</li>
@@ -2183,8 +2278,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.elec.IdealElec.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2201,8 +2296,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{elec}}{RT}=\frac{U^{elec}}{RT}-\frac{S^{elec}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2220,8 +2315,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{elec}}{R}=\frac{C_P^{elec}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2237,8 +2332,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{elec}}{R}=0\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2254,8 +2349,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{elec}}{RT}=\frac{H^{elec}}{RT}-\frac{S^{elec}}{R}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2273,8 +2368,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{H^{elec}}{RT}=\frac{U^{elec}}{RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2292,8 +2387,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{elec}}{R}=\log \omega\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2309,8 +2404,8 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the imensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{elec}}{RT}=\frac{E}{RT}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2328,10 +2423,10 @@ coefficient.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>ignore_q_elec=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>ignore_q_elec=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
-<p><span class="math notranslate nohighlight">\(q^{elec}=\omega_i \exp\bigg(-\frac{E}{RT}\bigg)\)</span></p>
+<p><span class="math notranslate nohighlight">\(q^{elec}=1 + \omega_i \exp\bigg(-\frac{E}{RT}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2355,8 +2450,8 @@ very negative causing q_elec to go to infinity. Default is True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.elec.IdealElec.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.elec.IdealElec.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.elec.IdealElec.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2375,17 +2470,17 @@ very negative causing q_elec to go to infinity. Default is True</li>
 </div>
 </div>
 <div class="section" id="nuclear-models">
-<h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Permalink to this headline">¶</a></h2>
+<span id="nucl"></span><h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Permalink to this headline">¶</a></h2>
 <p>Typically these are unimportant for chemical reactions, but the module is present in case
 nuclear modes become important in the future.</p>
-<span class="target" id="module-pMuTT.models.statmech.nucl"></span><dl class="class">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl">
-<em class="property">class </em><code class="descclassname">pMuTT.models.statmech.nucl.</code><code class="descname">IdealNucl</code><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-pMuTT.statmech.nucl"></span><dl class="class">
+<dt id="pMuTT.statmech.nucl.IdealNucl">
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.nucl.</code><code class="descname">IdealNucl</code><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Nuclear modes. Assumes no change in any chemical reaction and hence
 does not affect thermodynamic quantities.</p>
 <dl class="classmethod">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2402,8 +2497,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_AoRT">
-<code class="descname">get_AoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_AoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_AoRT">
+<code class="descname">get_AoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_AoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2418,8 +2513,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2434,8 +2529,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_CvoR">
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2450,8 +2545,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2466,8 +2561,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2482,8 +2577,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2498,8 +2593,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the imensionless internal energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2514,8 +2609,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.get_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.get_q">
+<code class="descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2530,8 +2625,8 @@ does not affect thermodynamic quantities.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.models.statmech.nucl.IdealNucl.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.models.statmech.nucl.IdealNucl.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.statmech.nucl.IdealNucl.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.nucl.IdealNucl.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2550,9 +2645,19 @@ does not affect thermodynamic quantities.</p>
 </div>
 <div class="section" id="creating-new-statmech-models">
 <h2>Creating New StatMech Models<a class="headerlink" href="#creating-new-statmech-models" title="Permalink to this headline">¶</a></h2>
-<p>If you would like to create your own class to be stored by <code class="docutils literal notranslate"><span class="pre">StatMech</span></code>, it should have the methods:
-<code class="docutils literal notranslate"><span class="pre">get_q</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_AoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>,
-<code class="docutils literal notranslate"><span class="pre">from_dict</span></code>, and <code class="docutils literal notranslate"><span class="pre">to_dict</span></code>.</p>
+<p>If you would like to create your own class to be stored by <a class="reference internal" href="#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>, it should have the methods:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">get_q</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_AoRT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">from_dict</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">to_dict</span></code></li>
+</ul>
 </div>
 </div>
 
@@ -2598,7 +2703,7 @@ does not affect thermodynamic quantities.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.3',
+            VERSION:'1.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
