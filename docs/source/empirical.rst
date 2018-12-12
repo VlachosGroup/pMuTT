@@ -8,40 +8,40 @@ BaseThermo
 
 This is the parent class for the empirical models.
 
-.. autoclass:: pMuTT.models.empirical.BaseThermo
+.. autoclass:: pMuTT.empirical.BaseThermo
    :members:
    
 NASA
 ####
    
-.. autoclass:: pMuTT.models.empirical.nasa.Nasa
+.. autoclass:: pMuTT.empirical.nasa.Nasa
    :members:
    :inherited-members:
 
 Shomate
 #######
 
-.. autoclass:: pMuTT.models.empirical.shomate.Shomate
+.. autoclass:: pMuTT.empirical.shomate.Shomate
    :members:
    :inherited-members:
 
 Zacros
 ######
    
-.. autoclass:: pMuTT.models.empirical.zacros.Zacros
+.. autoclass:: pMuTT.empirical.zacros.Zacros
    :members:
    :inherited-members:
 
 Reference
 #########
    
-.. autoclass:: pMuTT.models.empirical.references.Reference
+.. autoclass:: pMuTT.empirical.references.Reference
    :members:
    :inherited-members:
 
 References
 ##########
    
-.. autoclass:: pMuTT.models.empirical.references.References
+.. autoclass:: pMuTT.empirical.references.References
    :members:
 

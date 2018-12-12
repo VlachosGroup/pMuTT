@@ -7,9 +7,9 @@ import unittest
 import numpy as np
 from ase.build import molecule
 from pMuTT import constants as c
-from pMuTT.models.reaction import Reaction
-from pMuTT.models.reaction.bep import BEP
-from pMuTT.models.statmech import StatMech, presets
+from pMuTT.reaction import Reaction
+from pMuTT.reaction.bep import BEP
+from pMuTT.statmech import StatMech, presets
 
 class TestBEP(unittest.TestCase):
     def setUp(self):

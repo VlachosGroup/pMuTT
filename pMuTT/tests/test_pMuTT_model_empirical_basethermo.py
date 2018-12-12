@@ -7,8 +7,8 @@ Created on Fri Jul 7 12:31:00 2018
 import unittest
 import numpy as np
 from ase.build import molecule
-from pMuTT.models.statmech import StatMech, presets
-from pMuTT.models.empirical import BaseThermo
+from pMuTT.statmech import StatMech, presets
+from pMuTT.empirical import BaseThermo
 
 class TestBaseThermo(unittest.TestCase):
     def setUp(self):

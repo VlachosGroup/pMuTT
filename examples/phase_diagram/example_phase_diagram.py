@@ -1,9 +1,9 @@
 import numpy as np 
 import matplotlib
 from matplotlib import pyplot as plt
-from pMuTT.models.empirical.nasa import Nasa
-from pMuTT.models.reaction import Reaction 
-from pMuTT.models.reaction.phasediagram import PhaseDiagram
+from pMuTT.empirical.nasa import Nasa
+from pMuTT.reaction import Reaction 
+from pMuTT.reaction.phasediagram import PhaseDiagram
 
 '''Temperature data'''
 T_ref = 298.

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.empirical.shomate
+pMuTT.empirical.shomate
 
 Operations related to Shomate polynomials
 """
@@ -12,11 +12,11 @@ from scipy.stats import variation
 from pMuTT import _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
-from pMuTT.models.empirical import BaseThermo
+from pMuTT.empirical import BaseThermo
 
 class Shomate(BaseThermo):
     """Stores the information for an individual Shomate specie
-    Inherits from pMuTT.models.empirical.BaseThermo
+    Inherits from :class:`~pMuTT.empirical.BaseThermo`
 
     The thermodynamic properties are calculated using the following form:
 
@@ -149,13 +149,13 @@ class Shomate(BaseThermo):
         ----------
             name : str
                 Name of the species
-            statmech_model : `pMuTT.models.statmech.StatMech` object or class
+            statmech_model : `pMuTT.statmech.StatMech` object or class
                 Statistical Mechanics model to generate data
             T_low : float
                 Lower limit temerature in K
             T_high : float
                 Higher limit temperature in K
-            references : `pMuTT.models.empirical.references.References` object
+            references : `pMuTT.empirical.references.References` object
                 Reference to adjust enthalpy
             **kwargs : keyword arguments
                 Used to initalize ``statmech_model`` or ``BaseThermo`` 

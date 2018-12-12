@@ -2,8 +2,8 @@ import unittest
 import warnings
 import numpy as np
 from ase.build import molecule
-from pMuTT.models.statmech import presets, StatMech, trans, rot, vib, elec
-from pMuTT.models.empirical.nasa import Nasa
+from pMuTT.statmech import presets, StatMech, trans, rot, vib, elec
+from pMuTT.empirical.nasa import Nasa
 
 class TestNasa(unittest.TestCase):
     def setUp(self):
@@ -20,7 +20,7 @@ class TestNasa(unittest.TestCase):
             )
 
         self.Nasa_direct_dict = {
-            'class': "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+            'class': "<class 'pMuTT.empirical.nasa.Nasa'>",
             'name': 'H2O',
             'elements': {'H': 2, 'O': 1},
             'phase': 'g',

@@ -11,7 +11,7 @@ from ase.thermochemistry import IdealGasThermo
 
 from pMuTT import get_molecular_weight, _pass_expected_arguments
 from pMuTT import constants as c
-from pMuTT.models.statmech import trans, rot, elec, vib, StatMech
+from pMuTT.statmech import trans, rot, elec, vib, StatMech
 
 class TestStatMech(unittest.TestCase):
     def setUp(self):

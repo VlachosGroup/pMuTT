@@ -26,7 +26,7 @@ author = 'Gerhard Wittreich, Jonathan Lym'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.1.3'
+release = '1.2.0'
 
 
 # -- General configuration ---------------------------------------------------

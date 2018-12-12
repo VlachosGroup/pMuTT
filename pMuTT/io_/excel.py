@@ -11,9 +11,9 @@ import os
 from ase.io import read
 from pMuTT import constants as c
 from pMuTT import parse_formula, get_molecular_weight
-from pMuTT.models.statmech import presets, StatMech
-from pMuTT.models.statmech.rot import get_geometry_from_atoms
-from pMuTT.models.statmech.rot import get_rot_temperatures_from_atoms
+from pMuTT.statmech import presets, StatMech
+from pMuTT.statmech.rot import get_geometry_from_atoms
+from pMuTT.statmech.rot import get_rot_temperatures_from_atoms
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
@@ -212,7 +212,7 @@ def set_statmech_model(model, output_structure):
         output_structure.update(presets[model])
     except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pMuTT.models.statmech for supported '
+                         'of presets in pMuTT.statmech for supported '
                          'models.'.format(model))
     return output_structure
 
@@ -261,7 +261,7 @@ def set_rot_temperatures(value, output_structure):
     return output_structure
 
 def set_nasa_a_low(header, value, output_structure, delimiter='.'):
-    """Parses a_low parameter for ``pMuTT.models.empirical.nasa.Nasa`` object
+    """Parses a_low parameter for :class:`~pMuTT.empirical.nasa.Nasa` object
 
     Parameters
     ----------
@@ -292,7 +292,7 @@ def set_nasa_a_low(header, value, output_structure, delimiter='.'):
 
 
 def set_nasa_a_high(header, value, output_structure, delimiter='.'):
-    """Parses a_high parameter for ``pMuTT.models.empirical.nasa.Nasa`` object
+    """Parses a_high parameter for :class:`~pMuTT.empirical.nasa.Nasa` object
 
     Parameters
     ----------

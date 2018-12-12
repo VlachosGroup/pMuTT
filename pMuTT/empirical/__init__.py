@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.empirical
+pMuTT.empirical
 
 Empirical models.
 """
@@ -31,11 +31,11 @@ class BaseThermo:
             in a formula unit.
             e.g. CH3OH can be represented as:
             {'C': 1, 'H': 4, 'O': 1,}.
-        statmech_model : `pMuTT.models.statmech` object, optional
+        statmech_model : `pMuTT.statmech` object, optional
             Statistical thermodynamic model. Default is None.
             Object should have the following methods: `get_CpoR`, `get_HoRT`,
             `get_SoR`, `get_GoRT`.
-        references : `pMuTT.models.empirical.References.references` object, optional
+        references : `pMuTT.empirical.References.references` object, optional
             Contains references to calculate `HoRT_ref`. If not specified then
             HoRT_dft will be used without adjustment. Default is None
         notes : str, optional
@@ -90,17 +90,17 @@ class BaseThermo:
                 Upper temperature in K. If not specified,
                 ``T_high`` attribute used.
             Cp_units : str
-                Units to plot heat capacity. See ``pMuTT.constants.R``
+                Units to plot heat capacity. See :func:`~pMuTT.constants.R`
                 for accepted units. If not specified, dimensionless units used.
             H_units : str
-                Units to plot enthalpy. See ``pMuTT.constants.R`` for accepted
+                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol). If not specified,
                 dimensionless units used.
             S_units : str
-                Units to plot entropy. See ``pMuTT.constants.R`` for accepted
-                units. If not specified, dimensionless units used.
+                Units to plot entropy. See :func:`~pMuTT.constants.R` for 
+                accepted units. If not specified, dimensionless units used.
             G_units : str
-                Units to plot Gibbs free energy. See ``pMuTT.constants.R``
+                Units to plot Gibbs free energy. See :func:`~pMuTT.constants.R`
                 for accepted units but omit the '/K' (e.g. J/mol). If not
                 specified, dimensionless units used.
         Returns
@@ -186,17 +186,17 @@ class BaseThermo:
                 Upper temperature in K. If not specified,
                 ``T_high`` attribute used
             Cp_units : str
-                Units to plot heat capacity. See ``pMuTT.constants.R``
+                Units to plot heat capacity. See :func:`~pMuTT.constants.R`
                 for accepted units. If not specified, dimensionless units used.
             H_units : str
-                Units to plot enthalpy. See ``pMuTT.constants.R`` for
+                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for
                 accepted units but omit the '/K' (e.g. J/mol). If not
                 specified, dimensionless units used.
             S_units : str
-                Units to plot entropy. See ``pMuTT.constants.R`` for
+                Units to plot entropy. See :func:`~pMuTT.constants.R` for
                 accepted units. If not specified, dimensionless units used.
             G_units : str
-                Units to plot Gibbs free energy. See ``pMuTT.constants.R``
+                Units to plot Gibbs free energy. See :func:`~pMuTT.constants.R`
                 for accepted units but omit the '/K' (e.g. J/mol). If not
                 specified, dimensionless units used.
         Returns
@@ -291,17 +291,17 @@ class BaseThermo:
                 Upper temperature in K. If not specified, ``T_high``
                 attribute used
             Cp_units : str
-                Units to plot heat capacity. See ``pMuTT.constants.R`` for
+                Units to plot heat capacity. See :func:`~pMuTT.constants.R` for
                 accepted units. If not specified, dimensionless units used.
             H_units : str
-                Units to plot enthalpy. See ``pMuTT.constants.R`` for accepted
-                units but omit the '/K' (e.g. J/mol). If not specified,
+                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for 
+                accepted units but omit the '/K' (e.g. J/mol). If not specified,
                 dimensionless units used.
             S_units : str
-                Units to plot entropy. See ``pMuTT.constants.R`` for accepted
-                units. If not specified, dimensionless units used.
+                Units to plot entropy. See :func:`~pMuTT.constants.R` for 
+                accepted units. If not specified, dimensionless units used.
             G_units : str
-                Units to plot Gibbs free energy. See ``pMuTT.constants.R``
+                Units to plot Gibbs free energy. See :func:`~pMuTT.constants.R`
                 for accepted units but omit the '/K' (e.g. J/mol). If not
                 specified, dimensionless units used.
         Returns

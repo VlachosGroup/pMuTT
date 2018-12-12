@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.statmech
+pMuTT.statmech
 Vlachos group code for thermodynamic models.
 Created on Fri Jul 7 12:40:00 2018
 """
 import inspect
 import numpy as np
 from pMuTT import _pass_expected_arguments
-from pMuTT.models.statmech import trans, vib, elec, rot
+from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.io_ import jsonio as json_pMuTT
 
 
@@ -72,21 +72,21 @@ class StatMech:
     ----------
         name : str, optional
             Name of the specie. Default is None
-        trans_model : ``pMuTT.models.statmech.trans`` object, optional
+        trans_model : :ref:`pMuTT.statmech.trans <trans>` object, optional
             Deals with translational modes. Default is 
-            ``pMuTT.models.statmech.EmptyMode``
-        vib_model : ``pMuTT.models.statmech.vib`` object, optional
+            :class:`~pMuTT.statmech.EmptyMode`
+        vib_model : :ref:`pMuTT.statmech.vib <vib>` object, optional
             Deals with vibrational modes. Default is 
-            ``pMuTT.models.statmech.EmptyMode``
-        rot_model : ``pMuTT.models.statmech.rot`` object, optional
+            :class:`~pMuTT.statmech.EmptyMode`
+        rot_model : :ref:`pMuTT.statmech.rot <rot>` object, optional
             Deals with rotational modes. Default is 
-            ``pMuTT.models.statmech.EmptyMode``
-        elec_model : ``pMuTT.models.statmech.elec`` object, optional
+            :class:`~pMuTT.statmech.EmptyMode`
+        elec_model : :ref:`pMuTT.statmech.elec <elec>` object, optional
             Deals with electronic modes. Default is 
-            ``pMuTT.models.statmech.EmptyMode``
-        nucl_model : ``pMuTT.models.statmech.nucl`` object
+            :class:`~pMuTT.statmech.EmptyMode`
+        nucl_model : :ref:`pMuTT.statmech.nucl <nucl>` object
             Deals with nuclear modes. Default is 
-            ``pMuTT.models.statmech.EmptyMode``
+            :class:`~pMuTT.statmech.EmptyMode`
         notes : str, optional
             Any additional details you would like to include such as
             computational set up. Default is None

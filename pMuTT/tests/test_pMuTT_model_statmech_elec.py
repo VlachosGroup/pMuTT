@@ -5,7 +5,7 @@ Tests for pMuTT module
 """
 import unittest
 import numpy as np
-from pMuTT.models.statmech import elec
+from pMuTT.statmech import elec
 
 class TestIdealElec(unittest.TestCase):
     def setUp(self):
@@ -14,7 +14,7 @@ class TestIdealElec(unittest.TestCase):
         self.elec_OH = elec.IdealElec(potentialenergy=-7.554949, spin=0.5)
         self.elec_O2 = elec.IdealElec(potentialenergy=-9.862407, spin=1.)
         self.elec_O2_dict = {
-            'class': "<class 'pMuTT.models.statmech.elec.IdealElec'>",
+            'class': "<class 'pMuTT.statmech.elec.IdealElec'>",
             'potentialenergy': -9.862407,
             'spin': 1.
         }

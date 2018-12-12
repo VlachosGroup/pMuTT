@@ -2,8 +2,8 @@ import os
 import numpy as np
 from matplotlib import pyplot as plt
 from pMuTT.io_.thermdat import read_thermdat
-from pMuTT.models import pMuTT_list_to_dict
-from pMuTT.models import reaction as rxn
+from pMuTT import pMuTT_list_to_dict
+from pMuTT import reaction as rxn
 
 '''
 Read the thermdat

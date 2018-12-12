@@ -6,7 +6,7 @@ Tests for pMuTT module
 import unittest
 import numpy as np
 from pMuTT import constants as c
-from pMuTT.models.statmech import vib
+from pMuTT.statmech import vib
 
 class TestHarmonicVib(unittest.TestCase):
     def setUp(self):
@@ -16,7 +16,7 @@ class TestHarmonicVib(unittest.TestCase):
         self.vib_H2O = vib.HarmonicVib(
                 vib_wavenumbers=[3825.434, 3710.2642, 1582.432])
         self.vib_H2O_dict = {
-            'class': "<class 'pMuTT.models.statmech.vib.HarmonicVib'>",
+            'class': "<class 'pMuTT.statmech.vib.HarmonicVib'>",
             'vib_wavenumbers': [3825.434, 3710.2642, 1582.432],
         }
         self.T = 300. #K
@@ -81,7 +81,7 @@ class TestQRRHOVib(unittest.TestCase):
         self.vib_H2O = vib.QRRHOVib(
                 vib_wavenumbers=[3825.434, 3710.2642, 1582.432])
         self.vib_H2O_dict = {
-            'class': "<class 'pMuTT.models.statmech.vib.QRRHOVib'>",
+            'class': "<class 'pMuTT.statmech.vib.QRRHOVib'>",
             'vib_wavenumbers': [3825.434, 3710.2642, 1582.432],
             'alpha': 4,
             'Bav': 1.e-44,
@@ -168,7 +168,7 @@ class TestEinsteinVib(unittest.TestCase):
         self.vib_Ag = vib.EinsteinVib(einstein_temperature=173.28913505677, 
                                       interaction_energy=0.5)
         self.vib_Ag_dict = {
-            'class': "<class 'pMuTT.models.statmech.vib.EinsteinVib'>",
+            'class': "<class 'pMuTT.statmech.vib.EinsteinVib'>",
             'einstein_temperature': 173.28913505677,
             'interaction_energy': 0.5
         }

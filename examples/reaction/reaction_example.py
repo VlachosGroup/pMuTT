@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from pMuTT.models.empirical.nasa import Nasa
-from pMuTT.models import reaction as rxn
+from pMuTT.empirical.nasa import Nasa
+from pMuTT import reaction as rxn
 
 '''
 Initialize reaction

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.empirical.references
+pMuTT.empirical.references
 
 Operations related to referencing DFT energy to enthalpies of experimental
 references.
@@ -8,7 +8,7 @@ references.
 
 from warnings import warn
 import numpy as np
-from pMuTT.models.empirical import BaseThermo
+from pMuTT.empirical import BaseThermo
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
 
@@ -73,10 +73,9 @@ class References:
     ----------
         offset : dict
             Dimensionless enthalpy offset for each descriptor
-        references : list of ``pMuTT.models.empirical.references.Reference``, optional
-            Reference species. Use the ``.from_references`` class method to 
-            generate ``offset`` attribute from species. Each member of the list 
-            should have the attributes ``T_ref`` and ``HoRT_ref``
+        references : list of :class:`~pMuTT.empirical.references.Reference`, optional
+            Reference species. Each member of the list should have the 
+            attributes ``T_ref`` and ``HoRT_ref``
         T_ref : float
             Reference temperature in K
     """
@@ -93,7 +92,7 @@ class References:
 
         Yields
         ------
-            reference : ``pMuTT.models.empirical.basethermo.BaseThermo``
+            reference : :class:`~pMuTT.empirical.references.Reference`
         """
         for reference in self.references:
             yield reference

@@ -1,9 +1,9 @@
 [
  {
-  "class": "<class 'pMuTT.models.reaction.Reaction'>",
+  "class": "<class 'pMuTT.reaction.Reaction'>",
   "reactants": [
    {
-    "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
     "name": "H2",
     "phase": "G",
     "elements": {
@@ -35,7 +35,7 @@
     "T_high": 3500.0
    },
    {
-    "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
     "name": "O2",
     "phase": "G",
     "elements": {
@@ -73,7 +73,7 @@
   ],
   "products": [
    {
-    "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
     "name": "H2O",
     "phase": "G",
     "elements": {
@@ -109,13 +109,19 @@
   "products_stoich": [
    1.0
   ],
-  "transition_state": null
+  "transition_state": [
+   null
+  ],
+  "transition_state_stoich": [
+   null
+  ],
+  "bep": null
  },
  {
-  "class": "<class 'pMuTT.models.reaction.Reaction'>",
+  "class": "<class 'pMuTT.reaction.Reaction'>",
   "reactants": [
    {
-    "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
     "name": "H2",
     "phase": "G",
     "elements": {
@@ -147,7 +153,7 @@
     "T_high": 3500.0
    },
    {
-    "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
     "name": "O2",
     "phase": "G",
     "elements": {
@@ -185,7 +191,7 @@
   ],
   "products": [
    {
-    "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
     "name": "H2O",
     "phase": "G",
     "elements": {
@@ -221,6 +227,12 @@
   "products_stoich": [
    1.0
   ],
-  "transition_state": null
+  "transition_state": [
+   null
+  ],
+  "transition_state_stoich": [
+   null
+  ],
+  "bep": null
  }
 ]

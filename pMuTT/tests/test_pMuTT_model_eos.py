@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from ase.build import molecule
 from pMuTT import constants as c
-from pMuTT.models.eos import IdealGasEOS, vanDerWaalsEOS
+from pMuTT.eos import IdealGasEOS, vanDerWaalsEOS
 
 class TestIdealGas(unittest.TestCase):
     def setUp(self):

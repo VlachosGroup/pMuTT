@@ -10,7 +10,7 @@ pMuTT
 # present, too:
 #
 name = 'pMuTT'
-__version__ = '1.1.2'
+__version__ = '1.2.0'
 
 import re
 import inspect
@@ -188,3 +188,20 @@ def get_molecular_weight(elements):
         molecular_weight += c.atomic_weight[element] * coefficient
 
     return molecular_weight
+
+def pMuTT_list_to_dict(pMuTT_list, key='name'):
+    """Converts a pMuTT list to a dictionary using a specified attribute. This 
+    allows for quicker searching.
+    
+    Parameters
+    ----------
+        pMuTT_list : list of objects
+            List of pMuTT objects to convert
+        key : str
+            Name of attribute used as the keys for the dictionary
+    Returns
+    -------
+        pMuTT_dict : dict
+            Dictionary of pMuTT objects
+    """
+    return {getattr(obj, key): obj for obj in pMuTT_list}

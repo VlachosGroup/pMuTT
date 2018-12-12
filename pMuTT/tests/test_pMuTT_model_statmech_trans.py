@@ -5,7 +5,7 @@ Tests for pMuTT module
 """
 import unittest
 import numpy as np
-from pMuTT.models.statmech import trans
+from pMuTT.statmech import trans
 
 class TestIdealTrans(unittest.TestCase):
     def setUp(self):
@@ -20,7 +20,7 @@ class TestIdealTrans(unittest.TestCase):
         self.trans_3D = trans.IdealTrans(molecular_weight=molecular_weight,
                                          n_degrees=3)
         self.trans_3D_dict = {
-            'class': "<class 'pMuTT.models.statmech.trans.IdealTrans'>",
+            'class': "<class 'pMuTT.statmech.trans.IdealTrans'>",
             'molecular_weight': 71.,
             'n_degrees': 3
         }
