@@ -8,9 +8,31 @@ Input and output to different forms is an active area of development for pMuTT
 Excel
 =====
 
-.. automodule:: pMuTT.io_.excel
-   :members:
+.. autofunction:: pMuTT.io_.excel.read_excel
 
+Special Rules
+-------------
+
+Special rules can be defined in the :func:`~pMuTT.io_.excel.read_excel` 
+function to process inputs differently. Currently supported special rules are 
+listed below.
+
+.. autofunction:: pMuTT.io_.excel.set_element
+
+.. autofunction:: pMuTT.io_.excel.set_formula
+
+.. autofunction:: pMuTT.io_.excel.set_atoms
+
+.. autofunction:: pMuTT.io_.excel.set_statmech_model
+
+.. autofunction:: pMuTT.io_.excel.set_vib_wavenumbers
+
+.. autofunction:: pMuTT.io_.excel.set_rot_temperatures
+
+.. autofunction:: pMuTT.io_.excel.set_nasa_a_low
+
+.. autofunction:: pMuTT.io_.excel.set_nasa_a_high
+   
 Examples
 --------
 
@@ -19,7 +41,15 @@ Examples
 DFT Input Example
 ^^^^^^^^^^^^^^^^^^
 
-This example uses data found in `pMuTT.examples.VASP_to_thermdat.example1`_. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of ``pMuTT.io_.read_excel``. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.
+This example uses data found in `pMuTT.examples.VASP_to_thermdat.example1`_. 
+Below, we show the contents of the references.xlsx spreadsheet. The first row 
+corresponds to header labels. The headers may have special processing rules, 
+which can be found in the docstring of :func:`~pMuTT.io_.read_excel`. If no 
+special rules are defined, then the output dictionary will use the header as a 
+key and field as a value. The second row (only shown in the Excel file) is a 
+description of the header. A good description should include units, and 
+supported options if the field is discrete. The subsequent rows describe 
+the interested species.
 
 +------+-------+------------+------------+----------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
 | name | phase | elements.H | elements.O | statmech_model | T_ref | HoRT_ref     | potentialenergy | geometry  | atoms         | symmetrynumber | spin | vib_wavenumber | vib_wavenumber | vib_wavenumber |
@@ -29,13 +59,16 @@ This example uses data found in `pMuTT.examples.VASP_to_thermdat.example1`_. Bel
 | H2O  | G     | 2          | 1          | IdealGas       | 298   | -97.60604334 | -14.2209        | nonlinear | .\H2O\CONTCAR | 2              | 0    | 3825.434       | 3710.2642      | 1582.432       |
 +------+-------+------------+------------+----------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
 
-The ``pMuTT.io_.excel.read_excel`` function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (\*\*kwargs). This is shown in code below:
+The :func:`~pMuTT.io_.excel.read_excel` function returns a list of dictionaries. 
+The dictionaries contain field-to-value pairings that can be used to initilize 
+objects using the keyword argument syntax (\*\*kwargs). This is shown in code 
+below:
 
 .. code:: python
 
     from pprint import pprint
     from pMuTT.io_.excel import read_excel
-    from pMuTT.models.empirical.references import Reference, References
+    from pMuTT.empirical.references import Reference, References
 
     refs_path = './references.xlsx'
     refs_input = read_excel(io=refs_path)
@@ -54,7 +87,7 @@ The output can be shown below::
       'potentialenergy': -14.2209,
       'spin': 0.0,
       'symmetrynumber': 2.0,
-      'statmech_model': <class 'pMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.idealgasthermo.IdealGasThermo'>,
       'vib_energies': [0.47429336414391626,
                        0.460014128927786,
                        0.19619656143825398]},
@@ -66,7 +99,7 @@ The output can be shown below::
       'potentialenergy': -6.7598,
       'spin': 0.0,
       'symmetrynumber': 2.0,
-      'statmech_model': <class 'pMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.idealgasthermo.IdealGasThermo'>,
       'vib_energies': [0.5338981843116086]},
      {'atoms': Atoms(symbols='O2', pbc=True, cell=[20.0, 20.0, 20.0]),
       'elements': {'H': 0, 'O': 2, 'Pt': 0},
@@ -76,13 +109,13 @@ The output can be shown below::
       'potentialenergy': -9.86,
       'spin': 1.0,
       'symmetrynumber': 2.0,
-      'statmech_model': <class 'pMuTT.models.statmech.idealgasthermo.IdealGasThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.idealgasthermo.IdealGasThermo'>,
       'vib_energies': [0.2733851552365915]},
      {'elements': {'H': 0, 'O': 1, 'Pt': 1},
       'name': 'MO(S)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'statmech_model': <class 'pMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -90,7 +123,7 @@ The output can be shown below::
       'name': 'MO(B)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'statmech_model': <class 'pMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -98,13 +131,13 @@ The output can be shown below::
       'name': 'V-MO(S)',
       'phase': 'S',
       'potentialenergy': 7.0,
-      'statmech_model': <class 'pMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': []},
      {'elements': {'H': 0, 'O': 1, 'Pt': 1},
       'name': 'MO_bulk(S)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'statmech_model': <class 'pMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -112,7 +145,7 @@ The output can be shown below::
       'name': 'MO_bulk(B)',
       'phase': 'S',
       'potentialenergy': 0.0,
-      'statmech_model': <class 'pMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': [0.07025434894614345,
                        0.06873635809621279,
                        0.034434367577936324]},
@@ -120,12 +153,14 @@ The output can be shown below::
       'name': 'V-MO_bulk(S)',
       'phase': 'S',
       'potentialenergy': 7.0,
-      'statmech_model': <class 'pMuTT.models.statmech.harmonicthermo.HarmonicThermo'>,
+      'statmech_model': <class 'pMuTT.statmech.harmonicthermo.HarmonicThermo'>,
       'vib_energies': []}]
 
 NASA Polynomial Input Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This example uses data found in `pMuTT.examples.read_nasa_from_excel`_. Due to the special rules defined for NASA parsing, a group of NASA polynomials can be directly imported using ``pMuTT.io_.excel.read_excel``.
+This example uses data found in `pMuTT.examples.read_nasa_from_excel`_. Due to 
+the special rules defined for NASA parsing, a group of NASA polynomials can be 
+directly imported using :func:`~pMuTT.io_.excel.read_excel`.
 
 +------+-------+------------+------------+-------+-------+--------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+--------+
 | name | phase | elements.H | elements.O | T_low | T_mid | T_high | nasa.a_low.0 | nasa.a_low.1 | nasa.a_low.2 | nasa.a_low.3 | nasa.a_low.4 | nasa.a_low.5 | nasa.a_low.6 | nasa.a_high.0 | nasa.a_high.1 | nasa.a_high.2 | nasa.a_high.3 | nasa.a_high.4 | nasa.a_high.5 | nasa.a_high.6 | notes  |
@@ -140,7 +175,7 @@ Using a similar set of statements as the :ref:`DFT-Input-Example`.
 .. code:: python
 
     from pMuTT.io_.excel import read_excel
-    from pMuTT.models.empirical.nasa import Nasa
+    from pMuTT.empirical.nasa import Nasa
     
     species_data = read_excel('input_data.xlsx')
     species = [Nasa(**specie_data) for specie_data in species_data]
@@ -176,7 +211,8 @@ The above code gives the following output::
 
 Thermdat
 ========
-This is the output format used for Chemkin. A list of NASA objects can be written to a thermdat file.
+This is the output format used for Chemkin. A list of NASA objects can be 
+written to a thermdat file.
 
 .. automodule:: pMuTT.io_.thermdat
    :members:
@@ -185,7 +221,9 @@ Examples
 --------
 Reading Thermdat
 ^^^^^^^^^^^^^^^^
-A thermdat file can be read directly by using ``pMuTT.io_.thermdat.read_thermdat``. The example here can be found in `pMuTT.examples.read_nasa_from_thermdat`_
+A thermdat file can be read directly by using 
+:func:`~pMuTT.io_.thermdat.read_thermdat`. The example here can be found in 
+`pMuTT.examples.read_nasa_from_thermdat`_
 
 .. code:: python
 
@@ -193,7 +231,7 @@ A thermdat file can be read directly by using ``pMuTT.io_.thermdat.read_thermdat
     from pprint import pprint
     from matplotlib import pyplot as plt
     from pMuTT.io_.thermdat import read_thermdat
-    from pMuTT.models.empirical.nasa import Nasa
+    from pMuTT.empirical.nasa import Nasa
 
     base_path = os.path.dirname(__file__)
     #Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat
@@ -239,7 +277,8 @@ JSON
 
 Examples
 --------
-Saving pMuTT objects can be done by using the ``pMuTTEncoder`` in ``pMuTT.io_.jsonio``.
+Saving pMuTT objects can be done by using 
+:func:`~pMuTT.io_.jsonio.pMuTTEncoder`.
 
 .. code:: python
 
@@ -248,7 +287,8 @@ Saving pMuTT objects can be done by using the ``pMuTTEncoder`` in ``pMuTT.io_.js
    with open(json_path, 'w') as f_ptr:
        json.dump(pMuTT_obj, f_ptr, cls=pMuTTEncoder, indent=True)
    
-Loading pMuTT objects can be done by using the ``json_to_pMuTT`` object hook in ``pMuTT.io_.jsonio``.
+Loading pMuTT objects can be done by using the object hook: 
+:func:`~pMuTT.io_.jsonio.json_to_pMuTT`.
 
 .. code:: python
 
@@ -259,11 +299,12 @@ Loading pMuTT objects can be done by using the ``json_to_pMuTT`` object hook in 
 
 Sample JSON File
 ----------------
-JSON writes in a human-readable syntax. An example showing two ``Nasa`` objects in JSON format is shown below.::
+JSON writes in a human-readable syntax. An example showing two 
+:class:`~pMuTT.empirical.nasa.Nasa` objects in JSON format is shown below.::
 
    [
     {
-     "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+     "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
      "name": "O",
      "phase": "G",
      "elements": {
@@ -298,7 +339,7 @@ JSON writes in a human-readable syntax. An example showing two ``Nasa`` objects 
      "T_high": 3500.0
     },
     {
-     "class": "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+     "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
      "name": "O2",
      "phase": "G",
      "elements": {
@@ -338,10 +379,12 @@ Creating New pMuTT Classes
 
 Encoding
 ^^^^^^^^
-To ensure your new class can be encoded using the ``pMuTTEncoder``, the ``to_dict()`` method should be implemented.
-One of the entries of the dictionary should be ``'class': str(self.__class__)`` so that it can be decoded later. The 
-other elements should be the attributes that can be used to reinitialize the object and must be JSON-supported objects.
-A simple example using ``pMuTT.models.statmech.trans.IdealTrans`` is shown below.
+To ensure your new class can be encoded using the ``pMuTTEncoder``, the 
+``to_dict()`` method should be implemented. One of the entries of the 
+dictionary should be ``'class': str(self.__class__)`` so that it can be decoded 
+later. The other elements should be the attributes that can be used to 
+reinitialize the object and must be JSON-supported objects. A simple example 
+using :class:`~pMuTT.statmech.trans.IdealTrans` is shown below.
 
 .. code:: python
 
@@ -351,8 +394,9 @@ A simple example using ``pMuTT.models.statmech.trans.IdealTrans`` is shown below
                'molecular_weight': self.molecular_weight}
    
 
-If the attributes are not supported by JSON (such as other pMuTT objects), use their ``to_dict()`` methods to convert to JSON-supported
-objects. An example using ``pMuTT.models.statmech.StatMech`` is shown below.
+If the attributes are not supported by JSON (such as other pMuTT objects), use 
+their ``to_dict()`` methods to convert to JSON-supported objects. An example 
+using :class:`~pMuTT.statmech.StatMech` is shown below.
 
 .. code:: python
 
@@ -366,10 +410,12 @@ objects. An example using ``pMuTT.models.statmech.StatMech`` is shown below.
 
 Decoding
 ^^^^^^^^
-To ensure your object can be decoded using the ``json_to_pMuTT`` object hook, add an entry to the dictionary in 
-the ``pMuTT.io_.jsonio.type_to_class`` method. The key should be the type of your object in string format (i.e. the result
-of ``str(self.__class__)``). Your class should also have the ``from_dict()`` class method to reinitialize your object. 
-A simple example using ``pMuTT.models.statmech.trans.IdealTrans`` is shown below.
+To ensure your object can be decoded using the ``json_to_pMuTT`` object hook, 
+add an entry to the dictionary in the ``pMuTT.io_.jsonio.type_to_class`` method.
+The key should be the type of your object in string format (i.e. the result of 
+``str(self.__class__)``). Your class should also have the ``from_dict()`` class 
+method to reinitialize your object. A simple example using 
+:class:`~pMuTT.statmech.trans.IdealTrans` is shown below.
 
 .. code:: python
 
@@ -380,8 +426,9 @@ A simple example using ``pMuTT.models.statmech.trans.IdealTrans`` is shown below
        json_obj = remove_class(json_obj)
        return cls(**json_obj)
 
-Similarly to encoding, sometimes your object contains pMuTT objects. You can use the ``json_to_pMuTT`` object hook to remake
-these objects. An example using ``pMuTT.models.statmech.StatMech`` is shown below.
+Similarly to encoding, sometimes your object contains pMuTT objects. You can 
+use the ``json_to_pMuTT`` object hook to remake these objects. An example using 
+:class:`~pMuTT.statmech.StatMech` is shown below.
 
 .. code:: python
 

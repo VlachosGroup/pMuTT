@@ -5,9 +5,9 @@ from pprint import pprint
 from pMuTT import constants as c
 from pMuTT.io_.excel import read_excel
 from pMuTT.io_.thermdat import write_thermdat
-from pMuTT.models.empirical import BaseThermo
-from pMuTT.models.empirical.nasa import Nasa
-from pMuTT.models.empirical.references import Reference, References
+from pMuTT.empirical import BaseThermo
+from pMuTT.empirical.nasa import Nasa
+from pMuTT.empirical.references import Reference, References
 
 '''
 User inputs

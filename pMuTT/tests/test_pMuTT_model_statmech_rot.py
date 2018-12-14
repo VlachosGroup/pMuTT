@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 from ase import Atoms
 from ase.build import molecule
-from pMuTT.models.statmech import rot
+from pMuTT.statmech import rot
 
 class TestRigidRotor(unittest.TestCase):
     def setUp(self):
@@ -21,7 +21,7 @@ class TestRigidRotor(unittest.TestCase):
         self.T = 300 # K
 
         self.rot_CO2_dict = {
-            'class': "<class 'pMuTT.models.statmech.rot.RigidRotor'>",
+            'class': "<class 'pMuTT.statmech.rot.RigidRotor'>",
             'symmetrynumber': 2,
             'geometry': 'linear',
             'rot_temperatures': [0.561],

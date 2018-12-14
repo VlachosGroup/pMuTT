@@ -4,14 +4,14 @@ pMuTT.test_pMuTT_model_statmech_nucl
 Tests for pMuTT module
 """
 import unittest
-from pMuTT.models.statmech import nucl
+from pMuTT.statmech import nucl
 
 class TestIdealNucl(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.nuclear = nucl.IdealNucl()
         self.nuclear_dict = {
-            'class': "<class 'pMuTT.models.statmech.nucl.IdealNucl'>"
+            'class': "<class 'pMuTT.statmech.nucl.IdealNucl'>"
         }
 
     def test_get_q(self):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.empirical.nasa
+pMuTT.empirical.nasa
 
 Operations related to Nasa polynomials
 """
@@ -14,12 +14,12 @@ from scipy.stats import variation
 from pMuTT import _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
-from pMuTT.models.empirical import BaseThermo
+from pMuTT.empirical import BaseThermo
 
 
 class Nasa(BaseThermo):
     """Stores the information for an individual nasa specie
-    Inherits from pMuTT.models.empirical.BaseThermo
+    Inherits from :class:`~pMuTT.empirical.BaseThermo`
 
     The thermodynamic properties are calculated using the following form:
 
@@ -252,7 +252,7 @@ class Nasa(BaseThermo):
         ----------
             name : str
                 Name of the species
-            statmech_model : `pMuTT.models.statmech.StatMech` object or class
+            statmech_model : `pMuTT.statmech.StatMech` object or class
                 Statistical Mechanics model to generate data
             T_low : float
                 Lower limit temerature in K
@@ -263,7 +263,7 @@ class Nasa(BaseThermo):
                 list, finds the best fit for each element in the list. If None, 
                 a range of T_mid values are screened between the 6th lowest 
                 and 6th highest value of T.
-            references : `pMuTT.models.empirical.references.References` object
+            references : `pMuTT.empirical.references.References` object
                 Reference to adjust enthalpy
             elements : dict
                 Composition of the species.

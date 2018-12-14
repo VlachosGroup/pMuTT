@@ -3,14 +3,16 @@ import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
 from pMuTT import constants as c
+from pMuTT.reaction import Reactions
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
-class PhaseDiagram:
-    """Generate phase diagrams based on reactions specified.
+class PhaseDiagram(Reactions):
+    """Generate phase diagrams based on reactions specified. Inherits from 
+    :class:`~pMuTT.reaction.Reactions`
 
     Attributes
     ----------
-        reactions : list of ``pMuTT.models.reaction.Reaction`` objects
+        reactions : list of :class:`~pMuTT.reaction.Reaction` objects
             Formation reactions for each phase. Reactions should be written 
             with consistent reference species to obtain meaningful data.
         norm_factors : (N,) `numpy.ndarray`_ of float, optional
@@ -23,11 +25,40 @@ class PhaseDiagram:
     """
 
     def __init__(self, reactions, norm_factors=None):
-        self.reactions=reactions
+        super().__init__(reactions=reactions)
         if norm_factors is None:
             self.norm_factors=np.ones(len(reactions))
         else:
             self.norm_factors=norm_factors
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+        
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = super().to_dict()
+        obj_dict['class'] = str(self.__class__),
+
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            PhaseDiagram : PhaseDiagram object
+        """
+        json_obj = remove_class(json_obj)
+        json_obj['reactions'] = [json_to_pMuTT(reaction) 
+                                 for reaction in json_obj['reactions']]
+        return cls(**json_obj)
 
     def get_GoRT_1D(self, x_name, x_values, G_units=None, **kwargs):
         """Calculates the Gibbs free energy for all the reactions for 1 varying 
@@ -93,7 +124,7 @@ class PhaseDiagram:
         GoRT, stable_phases = self.get_GoRT_1D(x_name=x_name, x_values=x_values, 
                                                G_units=G_units, **kwargs)
         for GoRT_rxn, rxn in zip(GoRT, self.reactions):
-            plt.plot(x_values, GoRT_rxn, label=rxn.to_str())
+            plt.plot(x_values, GoRT_rxn, label=rxn.to_string())
         ax.legend()
         ax.set_xlabel(x_name)
         if G_units is None:
@@ -205,7 +236,7 @@ class PhaseDiagram:
         # Set colorbar
         cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions))+0.5)
         cbar.ax.set_yticklabels(
-                [reaction.to_str() for reaction in self.reactions])
+                [reaction.to_string() for reaction in self.reactions])
         # Set axis labels
         ax.set_xlabel(x1_name)
         ax.set_ylabel(x2_name)

@@ -86,6 +86,6 @@ Special Thanks
 .. _Matplotlib: https://matplotlib.org/
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pMuTT/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
-.. _`examples using the code`: https://github.com/VlachosGroup/pMuTT/tree/master/examples
+.. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html
 .. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues
 .. _`pull request`: https://github.com/VlachosGroup/pMuTT/pulls

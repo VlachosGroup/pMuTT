@@ -1,7 +1,7 @@
 import os
 from pprint import pprint
 from pMuTT.io_.excel import read_excel
-from pMuTT.models.empirical.nasa import Nasa
+from pMuTT.empirical.nasa import Nasa
 
 base_path = os.path.dirname(__file__)
 #Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat

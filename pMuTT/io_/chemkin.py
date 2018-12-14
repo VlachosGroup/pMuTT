@@ -5,7 +5,7 @@ pMuTT.io_.chemkin
 Reads reactions lists from Chemkin gas.inp and surf.inp files
 """
 import re
-from pMuTT.models import pMuTT_list_to_dict
+from pMuTT import pMuTT_list_to_dict
 
 
 def read_reactions(filename, species=None):

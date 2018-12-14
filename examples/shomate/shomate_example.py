@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from pMuTT.models.empirical.shomate import Shomate
+from pMuTT.empirical.shomate import Shomate
 
 T_low = 298.
 T_high = 1000.

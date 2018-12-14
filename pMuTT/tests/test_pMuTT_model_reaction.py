@@ -7,9 +7,9 @@ import unittest
 import numpy as np
 from ase.build import molecule
 from pMuTT import constants as c
-from pMuTT.models import reaction as rxn
-from pMuTT.models.empirical.nasa import Nasa
-from pMuTT.models.statmech import StatMech, presets
+from pMuTT import reaction as rxn
+from pMuTT.empirical.nasa import Nasa
+from pMuTT.statmech import StatMech, presets
 
 class TestReaction(unittest.TestCase):
     def setUp(self):
@@ -33,7 +33,7 @@ class TestReaction(unittest.TestCase):
                 products_stoich=[1.])
 
         self.rxn_nasa_dict ={
-               'class': "<class 'pMuTT.models.reaction.Reaction'>",
+               'class': "<class 'pMuTT.reaction.Reaction'>",
                'products': [
                     {'T_high': 3500.0,
                      'T_low': 200.0,
@@ -54,7 +54,7 @@ class TestReaction(unittest.TestCase):
                         1.77197817e-12,
                         -30293.7267,
                         -0.849032208],
-                     'class': "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+                     'class': "<class 'pMuTT.empirical.nasa.Nasa'>",
                      'elements': {'H': 2, 'O': 1},
                      'name': 'H2O',
                      'notes': None,
@@ -82,7 +82,7 @@ class TestReaction(unittest.TestCase):
                         -7.37611761e-12,
                         -917.935173,
                         0.683010238],
-                     'class': "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+                     'class': "<class 'pMuTT.empirical.nasa.Nasa'>",
                      'elements': {'H': 2},
                      'name': 'H2',
                      'notes': None,
@@ -108,7 +108,7 @@ class TestReaction(unittest.TestCase):
                         3.24372837e-12,
                         -1063.94356,
                         3.65767573],
-                     'class': "<class 'pMuTT.models.empirical.nasa.Nasa'>",
+                     'class': "<class 'pMuTT.empirical.nasa.Nasa'>",
                      'elements': {'O': 2},
                      'name': 'O2',
                      'notes': None,

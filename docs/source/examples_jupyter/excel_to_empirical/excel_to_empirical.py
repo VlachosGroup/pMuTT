@@ -65,7 +65,7 @@ pprint(refs_input)
 # In[3]:
 
 
-from pMuTT.models.empirical.references import Reference, References
+from pMuTT.empirical.references import Reference, References
 
 refs = References(descriptor='elements', 
                   references=[Reference(**ref_input) 
@@ -81,7 +81,7 @@ print(refs.offset)
 # In[4]:
 
 
-from pMuTT.models.empirical.nasa import Nasa
+from pMuTT.empirical.nasa import Nasa
 
 T_low = 300. # K
 T_high = 1100. # K

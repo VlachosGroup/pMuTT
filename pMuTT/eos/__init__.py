@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.eos
+pMuTT.eos
 Vlachos group code to model equations of state.
 Created on Tues Jul 10 12:40:00 2018
 """
@@ -57,7 +57,7 @@ class IdealGasEOS:
         return n*c.R('m3 bar/mol/K')*T/V
 
     def get_T(self, V=c.V0('m3'), P=c.P0('bar'), n=1.):
-        """Calculates the volume of an ideal gas
+        """Calculates the temperature of an ideal gas
 
         Parameters
         ----------
@@ -75,7 +75,7 @@ class IdealGasEOS:
         return P*V/c.R('m3 bar/mol/K')/n
 
     def get_n(self, V=c.V0('m3'), P=c.P0('bar'), T=c.T0('K')):
-        """Calculates the volume of an ideal gas
+        """Calculates the moles of an ideal gas
 
         Parameters
         ----------
@@ -204,7 +204,7 @@ class vanDerWaalsEOS:
                *c.convert_unit(from_='Pa', to='bar')
 
     def get_T(self, V=c.V0('m3'), P=c.P0('bar'), n=1.):
-        """Calculates the volume of a van der Waals gas
+        """Calculates the temperature of a van der Waals gas
 
         Parameters
         ----------
@@ -224,7 +224,7 @@ class vanDerWaalsEOS:
                *(Vm - self.b)/c.R('J/mol/K')
 
     def get_n(self, V=c.V0('m3'), P=c.P0('bar'), T=c.T0('K'), gas_phase=True):
-        """Calculates the volume of a van der Waals gas
+        """Calculates the moles of a van der Waals gas
 
         Parameters
         ----------

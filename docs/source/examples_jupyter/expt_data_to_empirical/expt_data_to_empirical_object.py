@@ -51,7 +51,7 @@ SoR_ref = S_ref/c.R('J/mol/K')
 # In[2]:
 
 
-from pMuTT.models.empirical.shomate import Shomate
+from pMuTT.empirical.shomate import Shomate
 
 CH3OH_shomate = Shomate.from_data(name='CH3OH', T=T, CpoR=CpoR,
                                   T_ref=T_ref, HoRT_ref=HoRT_ref,
@@ -129,7 +129,7 @@ with open('CH3OH_shomate.json', 'w') as f_ptr:
 # This block will save the Shomate object to ``CH3OH_shomate.json``. Upon opening, the file will look like this:
 # ```
 # {
-#  "class": "<class 'pMuTT.models.empirical.shomate.Shomate'>",
+#  "class": "<class 'pMuTT.empirical.shomate.Shomate'>",
 #  "name": "CH3OH",
 #  "phase": null,
 #  "elements": null,

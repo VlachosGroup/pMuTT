@@ -2,8 +2,8 @@ import unittest
 import warnings
 import numpy as np
 from ase.build import molecule
-from pMuTT.models.statmech import presets, StatMech, trans, rot, vib, elec
-from pMuTT.models.empirical.shomate import Shomate
+from pMuTT.statmech import presets, StatMech, trans, rot, vib, elec
+from pMuTT.empirical.shomate import Shomate
 
 class TestShomate(unittest.TestCase):
     def setUp(self):
@@ -18,7 +18,7 @@ class TestShomate(unittest.TestCase):
         )
 
         self.Shomate_direct_dict = {
-            'class': "<class 'pMuTT.models.empirical.shomate.Shomate'>",
+            'class': "<class 'pMuTT.empirical.shomate.Shomate'>",
             'name': 'H2O',
             'phase': None,
             'elements': {'H': 2, 'O': 1},

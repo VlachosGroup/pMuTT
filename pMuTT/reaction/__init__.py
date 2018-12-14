@@ -7,7 +7,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 from pMuTT import _force_pass_arguments, _pass_expected_arguments, _is_iterable
 from pMuTT import constants as c
-from pMuTT.models.reaction.bep import BEP
+from pMuTT.reaction.bep import BEP
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
 class Reaction:
@@ -28,10 +28,10 @@ class Reaction:
         transition_state_stoich : list of float, optional
             Stoichiometric quantities of transition state species. 
             Default is None
-        bep : ``pMuTT.models.reaction.bep.BEP`` object, optional
+        bep : :class:`~pMuTT.reaction.bep.BEP` object, optional
             Bronsted Evans Polyani relationship. Default is None
         kwargs : keyword arguments
-            BEP parameters. See ``pMuTT.models.reaction.bep.BEP`` documentation 
+            BEP parameters. See :class:`~pMuTT.reaction.bep.BEP` documentation 
             for expected parameters
 
     Notes
@@ -100,7 +100,7 @@ class Reaction:
         return self.to_dict() == other_dict
 
     def __str__(self):
-        return self.to_str()
+        return self.to_string()
 
     def check_element_balance(self):
         """Checks the reactants, products and transition state elemental 
@@ -787,7 +787,7 @@ class Reaction:
         else:
             raise ValueError(('Method "{}" not supported. See documentation '
                               'of '
-                              '``pMuTT.models.reaction.Reaction.get_EoRT_act`` '
+                              '``pMuTT.reaction.Reaction.get_EoRT_act`` '
                               'for supported options.'.format(method)))
 
 
@@ -928,7 +928,7 @@ class Reaction:
                 - 'transition state'
         Returns
         -------
-            species : list of ``pMuTT.model`` objects
+            species : list of ``pMuTT`` specie objects
                 Species for the specified state
             species_stoich : list of float
                 Stoichiometry corresponding to the species
@@ -1040,7 +1040,7 @@ class Reaction:
                 Reaction string.
             species : dict
                 Dictionary using the names as keys. If you have a list of 
-                species, use pMuTT.models.pMuTT_list_to_dict to make a dict.
+                species, use pMuTT.pMuTT_list_to_dict to make a dict.
             species_delimiter : str, optional
                 Delimiter that separate species. Leading and trailing spaces 
                 will be trimmed. Default is '+'
@@ -1048,7 +1048,7 @@ class Reaction:
                 Delimiter that separate states of the reaction. Leading and 
                 trailing spaces will be trimmed. Default is '='
             kwargs : keyword arguments
-                BEP parameters. See ``pMuTT.models.reaction.bep.BEP`` 
+                BEP parameters. See :class:`~pMuTT.reaction.bep.BEP` 
                 documentation for expected parameters
         Returns
         -------
@@ -1070,7 +1070,7 @@ class Reaction:
                    transition_state=ts, transition_state_stoich=ts_stoich,
                    **kwargs)
 
-    def to_str(self, species_delimiter='+', reaction_delimiter = '='):
+    def to_string(self, species_delimiter='+', reaction_delimiter = '='):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1165,7 +1165,7 @@ class Reactions:
 
     Attributes
     ----------
-        reactions : list of ``pMuTT.models.reaction`` objects
+        reactions : list of :class:`~pMuTT.reaction.Reaction` objects
     """
     def __init__(self, reactions):
         self.reactions = list(reactions)
@@ -1201,7 +1201,7 @@ class Reactions:
                 JSON representation
         Returns
         -------
-            Reaction : Reaction object
+            Reactions : Reactions object
         """
         json_obj = remove_class(json_obj)
         json_obj['reactions'] = [json_to_pMuTT(reaction) 
@@ -1314,7 +1314,7 @@ def _write_reaction_state(species, stoich, species_delimiter='+'):
 
     Parameters
     ----------
-        species : list of ``pMuTT.model`` objects
+        species : list of ``pMuTT`` specie objects
             Species to write
         stoich : list of float
             Stoichiometry corresponding to species

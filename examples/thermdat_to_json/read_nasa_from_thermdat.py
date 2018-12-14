@@ -5,7 +5,7 @@ from pprint import pprint
 from matplotlib import pyplot as plt
 from pMuTT.io_.thermdat import read_thermdat
 from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
-from pMuTT.models.empirical.nasa import Nasa
+from pMuTT.empirical.nasa import Nasa
 
 base_path = os.path.dirname(__file__)
 thermdat_path = os.path.join(base_path, 'thermdat')

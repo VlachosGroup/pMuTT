@@ -7,7 +7,7 @@ Read from/write to thermdat files.
 
 import numpy as np
 from datetime import datetime
-from pMuTT.models.empirical.nasa import Nasa
+from pMuTT.empirical.nasa import Nasa
 
 
 def read_thermdat(filename):
@@ -19,7 +19,7 @@ def read_thermdat(filename):
             Input filename
     Returns
     -------
-        Nasas : list of ``pMuTT.models.empirical.nasa.Nasa``
+        Nasas : list of :class:`~pMuTT.empirical.nasa.Nasa`
     Raises
     ------
         FileNotFoundError
@@ -287,7 +287,8 @@ def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
     ----------
         filename : str
             Output file name
-        nasa_species : list of ``pMuTT.models.empirical.nasa.Nasa``
+        nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa
+            List of species to populate thermdat
         supp_data : Additional thermdat entries to include, optional
             Must be in therndat format.
         supp_txt : Comment field to preceed nasa_species entries, optional
@@ -326,7 +327,7 @@ def _write_line1(thermdat_file, nasa_specie, write_date=True):
     ----------
         thermdat_file : file object
             Thermdat file that is being written to
-        nasa_specie : ``pMuTT.models.empirical.thermdat.Thermdat``
+        nasa_specie : :class:`~pMuTT.empirical.nasa.Nasa`
             Nasa specie to take information from
         write_date : bool, optional
             Whether or not the date should be written. If False, writes the
@@ -391,7 +392,7 @@ def _write_line2(thermdat_file, nasa_specie, float_string):
     ----------
         thermdat_file : file object
             Thermdat file that is being written to
-        nasa_specie : ``pMuTT.models.empirical.thermdat.Thermdat``
+        nasa_specie : :class:`~pMuTT.empirical.nasa.Nasa`
             Nasa specie to take information from
         float_string : str
             float format
@@ -413,7 +414,7 @@ def _write_line3(thermdat_file, nasa_specie, float_string):
     ----------
         thermdat_file : file object
             Thermdat file that is being written to
-        nasa_specie : ``pMuTT.models.empirical.thermdat.Thermdat``
+        nasa_specie : :class:`~pMuTT.empirical.nasa.Nasa`
             Nasa specie to take information from
         float_string : str
             float format
@@ -438,7 +439,7 @@ def _write_line4(thermdat_file, nasa_specie, float_string):
     ----------
         thermdat_file : file object
             Thermdat file that is being written to
-        nasa_specie : ``pMuTT.models.empirical.thermdat.Thermdat``
+        nasa_specie : :class:`~pMuTT.empirical.nasa.Nasa`
             Nasa specie to take information from
         float_string : str
             float format
@@ -468,11 +469,3 @@ def _insert_space(end_index, string):
     """
     string += ' ' * (end_index - len(string))
     return string
-
-
-def thermdat_to_json(filename, thermdats):
-    raise(NotImplementedError)
-
-
-def json_to_thermdats(filename):
-    raise(NotImplementedError)

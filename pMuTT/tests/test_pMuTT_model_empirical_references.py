@@ -9,9 +9,9 @@ import warnings
 import numpy as np
 from ase.build import molecule
 from pMuTT import constants as c
-#from pMuTT.models.empirical import BaseThermo
-from pMuTT.models.empirical.references import References, Reference
-from pMuTT.models.statmech import presets, StatMech, trans, rot, vib, elec
+#from pMuTT.empirical import BaseThermo
+from pMuTT.empirical.references import References, Reference
+from pMuTT.statmech import presets, StatMech, trans, rot, vib, elec
 
 class TestReferences(unittest.TestCase):
     def setUp(self):

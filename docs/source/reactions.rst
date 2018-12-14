@@ -6,9 +6,10 @@ Reactions
 Reaction
 ========
 
-Chemical reactions can be modeled using the ``Reaction`` class.
+Chemical reactions can be modeled using the :class:`pMuTT.reaction.Reaction` 
+class.
 
-.. autoclass:: pMuTT.models.reaction.Reaction
+.. autoclass:: pMuTT.reaction.Reaction
    :members:
 
 Example
@@ -28,8 +29,8 @@ In this example, the Nasa objects are created directly in the script.
 
    import numpy as np
    from matplotlib import pyplot as plt
-   from pMuTT.models.empirical.nasa import Nasa
-   from pMuTT.models import reaction as rxn
+   from pMuTT.empirical.nasa import Nasa
+   from pMuTT import reaction as rxn
    
    '''
    Initialize reaction
@@ -65,8 +66,8 @@ way is more convenient if you're dealing with large reaction networks.
    import numpy as np
    from matplotlib import pyplot as plt
    from pMuTT.io_.thermdat import read_thermdat
-   from pMuTT.models import pMuTT_list_to_dict
-   from pMuTT.models import reaction as rxn
+   from pMuTT import pMuTT_list_to_dict
+   from pMuTT import reaction as rxn
    
    '''
    Read the thermdat
@@ -84,7 +85,8 @@ way is more convenient if you're dealing with large reaction networks.
    rxn_nasa = rxn.Reaction.from_string(reaction_str=reaction_str, 
                                        species=nasa_dict)
 
-After the Reaction object is initialized, you can ensure the equation is balanced.
+After the Reaction object is initialized, you can ensure the equation is 
+balanced.
 
 .. code:: python
 
@@ -121,14 +123,15 @@ Or calculate thermodynamic properties.
 Reactions
 =========
 
-.. autoclass:: pMuTT.models.reaction.Reactions
+.. autoclass:: pMuTT.reaction.Reactions
    :members:
 
 BEP
 ===
 
-Bronsted Evans Polyani relationships can be added to ``Reaction`` objects so 
-the activation energy can be estimated using the change in enthalpy.
+Bronsted Evans Polyani relationships can be added to 
+:class:`~pMuTT.reaction.Reaction` objects so the activation energy can be 
+estimated using the change in enthalpy.
 
-.. autoclass:: pMuTT.models.reaction.bep.BEP
+.. autoclass:: pMuTT.reaction.bep.BEP
    :members:

@@ -11,9 +11,9 @@ import os
 from ase.io import read
 from pMuTT import constants as c
 from pMuTT import parse_formula, get_molecular_weight
-from pMuTT.models.statmech import presets, StatMech
-from pMuTT.models.statmech.rot import get_geometry_from_atoms
-from pMuTT.models.statmech.rot import get_rot_temperatures_from_atoms
+from pMuTT.statmech import presets, StatMech
+from pMuTT.statmech.rot import get_geometry_from_atoms
+from pMuTT.statmech.rot import get_rot_temperatures_from_atoms
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
@@ -46,19 +46,18 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
     -------
         excel_data : list of dict
             Can be used to initialize objects with the **kwargs syntax
-
     Notes
     -----
         Special rules exist for the following column headings
 
-        - element
-        - formula
-        - atoms
-        - statmech_model
-        - vib_wavenumber
-        - rot_temperatures
-        - nasa.a_low
-        - nasa.a_high
+        - element (:func:`~pMuTT.io_.excel.set_element`)
+        - formula (:func:`~pMuTT.io_.excel.set_formula`)
+        - atoms (:func:`~pMuTT.io_.excel.set_atoms`)
+        - statmech_model (:func:`~pMuTT.io_.excel.set_statmech_model`)
+        - vib_wavenumber (:func:`~pMuTT.io_.excel.set_vib_wavenumbers`)
+        - rot_temperature (:func:`~pMuTT.io_.excel.set_rot_temperatures`)
+        - nasa.a_low (:func:`~pMuTT.io_.excel.set_nasa_a_low`)
+        - nasa.a_high (:func:`~pMuTT.io_.excel.set_nasa_a_high`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
@@ -88,7 +87,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
             elif 'vib_wavenumber' in col:
                 thermo_data = set_vib_wavenumbers(value=cell_data,
                                                  output_structure=thermo_data)
-            elif 'rot_temperatures' in col:
+            elif 'rot_temperature' in col:
                 thermo_data = set_rot_temperatures(value=cell_data,
                                                    output_structure=thermo_data)
             elif 'nasa' in col:
@@ -212,7 +211,7 @@ def set_statmech_model(model, output_structure):
         output_structure.update(presets[model])
     except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pMuTT.models.statmech for supported '
+                         'of presets in pMuTT.statmech for supported '
                          'models.'.format(model))
     return output_structure
 
@@ -261,7 +260,7 @@ def set_rot_temperatures(value, output_structure):
     return output_structure
 
 def set_nasa_a_low(header, value, output_structure, delimiter='.'):
-    """Parses a_low parameter for ``pMuTT.models.empirical.nasa.Nasa`` object
+    """Parses a_low parameter for :class:`~pMuTT.empirical.nasa.Nasa` object
 
     Parameters
     ----------
@@ -292,7 +291,7 @@ def set_nasa_a_low(header, value, output_structure, delimiter='.'):
 
 
 def set_nasa_a_high(header, value, output_structure, delimiter='.'):
-    """Parses a_high parameter for ``pMuTT.models.empirical.nasa.Nasa`` object
+    """Parses a_high parameter for :class:`~pMuTT.empirical.nasa.Nasa` object
 
     Parameters
     ----------

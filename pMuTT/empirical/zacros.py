@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.models.empirical.zacros
+pMuTT.empirical.zacros
 
 Operations related to the Zacros wrapper
 """
@@ -9,12 +9,12 @@ import numpy as np
 from pMuTT import constants as c
 from pMuTT import get_molecular_weight as mw
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
-from pMuTT.models.empirical import BaseThermo
+from pMuTT.empirical import BaseThermo
 
 
 class Zacros(BaseThermo):
     """Stores the information for an individual nasa specie
-    Inherits from pMuTT.models.empirical.BaseThermo
+    Inherits from pMuTT.empirical.BaseThermo
     """
     def __init__(self, A_st=None, atoms=None, symmetrynumber=None,
                  inertia=None, geometry=None, vib_wavenumbers=None,

@@ -10,7 +10,7 @@ class BEP:
             Slope of BEP relationship. 
         intercept : float
             Intercept of BEP relationship in dimensionless units.
-        reaction : ``pMuTT.models.reaction.Reaction`` object, optional
+        reaction : :class:`~pMuTT.reaction.Reaction` object, optional
             Reaction related to BEP. The Reaction does not need to be supplied 
             immediately
         descriptor : str, optional
@@ -35,7 +35,7 @@ class BEP:
 
         Parameters
         ----------
-            reaction : ``pMuTT.models.reaction.Reaction`` object, optional
+            reaction : :class:`~pMuTT.reaction.Reaction` object, optional
                 Reaction related to BEP. If specified, overwrites the value 
                 held by BEP object
             descriptor : str, optional
@@ -84,7 +84,7 @@ class BEP:
                             **kwargs)
         else:
             raise ValueError(('Descriptor "{}" not supported. See documentation'
-                              ' of pMuTT.models.reaction.bep.BEP for supported '
+                              ' of pMuTT.reaction.bep.BEP for supported '
                               'options.'.format(self.descriptor)))
 
     def __eq__(self, other):
