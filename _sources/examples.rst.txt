@@ -52,4 +52,22 @@ Topics Covered
   :class:`~pMuTT.reaction.Reaction` object
 - Save the :class:`~pMuTT.reaction.Reaction` object as a ``JSON`` file
 
+Phase Diagram
+-------------
+- `Webpage <examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
+- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
+- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.py>`_
+
+Topics Covered
+^^^^^^^^^^^^^^
+
+- Create :class:`~pMuTT.empirical.nasa.Nasa` and 
+  :class:`~pMuTT.statmech.StatMech` objects 
+- Initialize :class:`~pMuTT.reaction.Reaction` objects to describe the 
+  formation reaction of FeOx species
+- Generate a 1D phase diagram by varying T
+- Generate a 2D phase diagram by varying T and P
+- Save the :class:`~pMuTT.reaction.phasediagram.PhaseDiagram` object as a 
+  ``JSON`` file
+
 .. _`examples folder`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter
