@@ -6,7 +6,8 @@ Reactions
 Reaction
 ========
 
-Chemical reactions can be modeled using the :class:`pMuTT.reaction.Reaction` class.
+Chemical reactions can be modeled using the :class:`pMuTT.reaction.Reaction` 
+class.
 
 .. autoclass:: pMuTT.reaction.Reaction
    :members:
@@ -84,7 +85,8 @@ way is more convenient if you're dealing with large reaction networks.
    rxn_nasa = rxn.Reaction.from_string(reaction_str=reaction_str, 
                                        species=nasa_dict)
 
-After the Reaction object is initialized, you can ensure the equation is balanced.
+After the Reaction object is initialized, you can ensure the equation is 
+balanced.
 
 .. code:: python
 
@@ -127,8 +129,9 @@ Reactions
 BEP
 ===
 
-Bronsted Evans Polyani relationships can be added to :class:`~pMuTT.reaction.Reaction` objects so 
-the activation energy can be estimated using the change in enthalpy.
+Bronsted Evans Polyani relationships can be added to 
+:class:`~pMuTT.reaction.Reaction` objects so the activation energy can be 
+estimated using the change in enthalpy.
 
 .. autoclass:: pMuTT.reaction.bep.BEP
    :members:

@@ -100,7 +100,7 @@ class Reaction:
         return self.to_dict() == other_dict
 
     def __str__(self):
-        return self.to_str()
+        return self.to_string()
 
     def check_element_balance(self):
         """Checks the reactants, products and transition state elemental 
@@ -1070,7 +1070,7 @@ class Reaction:
                    transition_state=ts, transition_state_stoich=ts_stoich,
                    **kwargs)
 
-    def to_str(self, species_delimiter='+', reaction_delimiter = '='):
+    def to_string(self, species_delimiter='+', reaction_delimiter = '='):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1201,7 +1201,7 @@ class Reactions:
                 JSON representation
         Returns
         -------
-            Reaction : Reaction object
+            Reactions : Reactions object
         """
         json_obj = remove_class(json_obj)
         json_obj['reactions'] = [json_to_pMuTT(reaction) 

@@ -124,7 +124,7 @@ class PhaseDiagram(Reactions):
         GoRT, stable_phases = self.get_GoRT_1D(x_name=x_name, x_values=x_values, 
                                                G_units=G_units, **kwargs)
         for GoRT_rxn, rxn in zip(GoRT, self.reactions):
-            plt.plot(x_values, GoRT_rxn, label=rxn.to_str())
+            plt.plot(x_values, GoRT_rxn, label=rxn.to_string())
         ax.legend()
         ax.set_xlabel(x_name)
         if G_units is None:
@@ -236,7 +236,7 @@ class PhaseDiagram(Reactions):
         # Set colorbar
         cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions))+0.5)
         cbar.ax.set_yticklabels(
-                [reaction.to_str() for reaction in self.reactions])
+                [reaction.to_string() for reaction in self.reactions])
         # Set axis labels
         ax.set_xlabel(x1_name)
         ax.set_ylabel(x2_name)
