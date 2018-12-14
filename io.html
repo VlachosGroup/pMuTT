@@ -88,7 +88,8 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.excel">Excel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#excel">Excel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#special-rules">Special Rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dft-input-example">DFT Input Example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nasa-polynomial-input-example">NASA Polynomial Input Example</a></li>
@@ -97,14 +98,14 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reading-thermdat">Reading Thermdat</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.jsonio">JSON</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-new-pmutt-classes">Creating New pMuTT Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
@@ -210,10 +211,8 @@
 <div class="section" id="input-and-output">
 <span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
 <p>Input and output to different forms is an active area of development for pMuTT</p>
-<div class="section" id="module-pMuTT.io_.excel">
-<span id="excel"></span><h2>Excel<a class="headerlink" href="#module-pMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id6"><span class="problematic" id="id7">pMuTT.io_</span></a>.excel</p>
-<p>Read from/write to xlsx files of particular format.</p>
+<div class="section" id="excel">
+<h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="pMuTT.io_.excel.read_excel">
 <code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
@@ -256,44 +255,22 @@ int (i.e. 1.0 –&gt; 1)</li>
 <p class="rubric">Notes</p>
 <p>Special rules exist for the following column headings</p>
 <ul class="simple">
-<li>element</li>
-<li>formula</li>
-<li>atoms</li>
-<li>statmech_model</li>
-<li>vib_wavenumber</li>
-<li>rot_temperatures</li>
-<li>nasa.a_low</li>
-<li>nasa.a_high</li>
+<li>element (<a class="reference internal" href="#pMuTT.io_.excel.set_element" title="pMuTT.io_.excel.set_element"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_element()</span></code></a>)</li>
+<li>formula (<a class="reference internal" href="#pMuTT.io_.excel.set_formula" title="pMuTT.io_.excel.set_formula"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_formula()</span></code></a>)</li>
+<li>atoms (<a class="reference internal" href="#pMuTT.io_.excel.set_atoms" title="pMuTT.io_.excel.set_atoms"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_atoms()</span></code></a>)</li>
+<li>statmech_model (<a class="reference internal" href="#pMuTT.io_.excel.set_statmech_model" title="pMuTT.io_.excel.set_statmech_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_statmech_model()</span></code></a>)</li>
+<li>vib_wavenumber (<a class="reference internal" href="#pMuTT.io_.excel.set_vib_wavenumbers" title="pMuTT.io_.excel.set_vib_wavenumbers"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers()</span></code></a>)</li>
+<li>rot_temperature (<a class="reference internal" href="#pMuTT.io_.excel.set_rot_temperatures" title="pMuTT.io_.excel.set_rot_temperatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_rot_temperatures()</span></code></a>)</li>
+<li>nasa.a_low (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_low" title="pMuTT.io_.excel.set_nasa_a_low"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_low()</span></code></a>)</li>
+<li>nasa.a_high (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_high" title="pMuTT.io_.excel.set_nasa_a_high"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_high()</span></code></a>)</li>
 </ul>
 </dd></dl>
 
-<dl class="function">
-<dt id="pMuTT.io_.excel.set_atoms">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the atoms object ans assigns to output_structure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location to import atoms object. If relative references used,
-the path should be relative to excel_path.
-See ase.read for supported formats</li>
-<li><strong>excel_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location where excel path is located</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘atoms’]</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with atoms added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="special-rules">
+<h3>Special Rules<a class="headerlink" href="#special-rules" title="Permalink to this headline">¶</a></h3>
+<p>Special rules can be defined in the <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>
+function to process inputs differently. Currently supported special rules are
+listed below.</p>
 <dl class="function">
 <dt id="pMuTT.io_.excel.set_element">
 <code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
@@ -350,82 +327,23 @@ output_structure[‘elements’]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_nasa_a_high">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a_high parameter for <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
+<dt id="pMuTT.io_.excel.set_atoms">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the atoms object ans assigns to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
-Assumes zero index and header takes the format:</p>
-<p>nasa[delimiter]a_high[delimiter][index]
-e.g. nasa.a_high.0</p>
-</li>
-<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_high value</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
-output_structure[‘a_high’]</li>
-<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location to import atoms object. If relative references used,
+the path should be relative to excel_path.
+See ase.read for supported formats</li>
+<li><strong>excel_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location where excel path is located</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘atoms’]</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_high value added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="pMuTT.io_.excel.set_nasa_a_low">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a_low parameter for <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
-Assumes zero index and header takes the format:</p>
-<p>nasa[delimiter]a_low[delimiter][index]
-e.g. nasa.a_low.0</p>
-</li>
-<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_low value</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘a_low’]</li>
-<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_low value added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="pMuTT.io_.excel.set_rot_temperatures">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses element header and assigns to output_structure[‘rot_temperatures’]</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
-<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
-output_structure[‘elements’][element]</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new vibration added</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with atoms added</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
@@ -492,11 +410,106 @@ output_structure[‘elements’][element]</li>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_rot_temperatures">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses element header and assigns to output_structure[‘rot_temperatures’]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new vibration added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_nasa_a_low">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a_low parameter for <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
+Assumes zero index and header takes the format:</p>
+<p>nasa[delimiter]a_low[delimiter][index]
+e.g. nasa.a_low.0</p>
+</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_low value</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘a_low’]</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_low value added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_nasa_a_high">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a_high parameter for <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
+Assumes zero index and header takes the format:</p>
+<p>nasa[delimiter]a_high[delimiter][index]
+e.g. nasa.a_high.0</p>
+</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_high value</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘a_high’]</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_high value added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="dft-input-example">
 <span id="id3"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
-<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1">pMuTT.examples.VASP_to_thermdat.example1</a>. Below, we show the contents of the references.xlsx spreadsheet. The first row corresponds to header labels. The headers may have special processing rules, which can be found in the docstring of <code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code>. If no special rules are defined, then the output dictionary will use the header as a key and field as a value. The second row (only shown in the Excel file) is a description of the header. A good description should include units, and supported options if the field is discrete. The subsequent rows describe the interested species.</p>
+<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1">pMuTT.examples.VASP_to_thermdat.example1</a>.
+Below, we show the contents of the references.xlsx spreadsheet. The first row
+corresponds to header labels. The headers may have special processing rules,
+which can be found in the docstring of <code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code>. If no
+special rules are defined, then the output dictionary will use the header as a
+key and field as a value. The second row (only shown in the Excel file) is a
+description of the header. A good description should include units, and
+supported options if the field is discrete. The subsequent rows describe
+the interested species.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="3%" />
@@ -568,7 +581,10 @@ output_structure[‘elements’][element]</li>
 </tr>
 </tbody>
 </table>
-<p>The <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> function returns a list of dictionaries. The dictionaries contain field-to-value pairings that can be used to initilize objects using the keyword argument syntax (**kwargs). This is shown in code below:</p>
+<p>The <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> function returns a list of dictionaries.
+The dictionaries contain field-to-value pairings that can be used to initilize
+objects using the keyword argument syntax (**kwargs). This is shown in code
+below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
 <span class="kn">from</span> <span class="nn">pMuTT.empirical.references</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
@@ -663,7 +679,9 @@ output_structure[‘elements’][element]</li>
 </div>
 <div class="section" id="nasa-polynomial-input-example">
 <h4>NASA Polynomial Input Example<a class="headerlink" href="#nasa-polynomial-input-example" title="Permalink to this headline">¶</a></h4>
-<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_excel">pMuTT.examples.read_nasa_from_excel</a>. Due to the special rules defined for NASA parsing, a group of NASA polynomials can be directly imported using <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p>
+<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_excel">pMuTT.examples.read_nasa_from_excel</a>. Due to
+the special rules defined for NASA parsing, a group of NASA polynomials can be
+directly imported using <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="2%" />
@@ -805,7 +823,8 @@ output_structure[‘elements’][element]</li>
 </div>
 <div class="section" id="thermdat">
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
-<p>This is the output format used for Chemkin. A list of NASA objects can be written to a thermdat file.</p>
+<p>This is the output format used for Chemkin. A list of NASA objects can be
+written to a thermdat file.</p>
 <span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
@@ -845,7 +864,7 @@ output_structure[‘elements’][element]</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
-<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) – </li>
+<li><strong>nasa_species</strong> (list of :class:<a href="#id4"><span class="problematic" id="id5">`</span></a>~pMuTT.empirical.nasa.Nasa) – List of species to populate thermdat</li>
 <li><strong>supp_data</strong> (<em>Additional thermdat entries to include</em><em>, </em><em>optional</em>) – Must be in therndat format.</li>
 <li><strong>supp_txt</strong> (<em>Comment field to preceed nasa_species entries</em><em>, </em><em>optional</em>) – Each line needs to begin with a ! so it is recognized as a
 comment.</li>
@@ -859,11 +878,13 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </table>
 </dd></dl>
 
-<div class="section" id="id4">
-<h3>Examples<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
-<p>A thermdat file can be read directly by using <a class="reference internal" href="#pMuTT.io_.thermdat.read_thermdat" title="pMuTT.io_.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. The example here can be found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a></p>
+<p>A thermdat file can be read directly by using
+<a class="reference internal" href="#pMuTT.io_.thermdat.read_thermdat" title="pMuTT.io_.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. The example here can be found in
+<a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -995,16 +1016,18 @@ implement default like this:</p>
 </table>
 </dd></dl>
 
-<div class="section" id="id5">
-<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>Saving pMuTT objects can be done by using <a class="reference internal" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="pMuTT.io_.jsonio.pMuTTEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTTEncoder()</span></code></a>.</p>
+<div class="section" id="id7">
+<h3>Examples<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>Saving pMuTT objects can be done by using
+<a class="reference internal" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="pMuTT.io_.jsonio.pMuTTEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTTEncoder()</span></code></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">pMuTTEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Loading pMuTT objects can be done by using the object hook: <a class="reference internal" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="pMuTT.io_.jsonio.json_to_pMuTT"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pMuTT()</span></code></a>.</p>
+<p>Loading pMuTT objects can be done by using the object hook:
+<a class="reference internal" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="pMuTT.io_.jsonio.json_to_pMuTT"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pMuTT()</span></code></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">json_to_pMuTT</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
@@ -1014,7 +1037,8 @@ implement default like this:</p>
 </div>
 <div class="section" id="sample-json-file">
 <h3>Sample JSON File<a class="headerlink" href="#sample-json-file" title="Permalink to this headline">¶</a></h3>
-<p>JSON writes in a human-readable syntax. An example showing two <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects in JSON format is shown below.:</p>
+<p>JSON writes in a human-readable syntax. An example showing two
+<a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects in JSON format is shown below.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
  <span class="p">{</span>
   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
@@ -1093,18 +1117,21 @@ implement default like this:</p>
 <h3>Creating New pMuTT Classes<a class="headerlink" href="#creating-new-pmutt-classes" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="encoding">
 <h4>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h4>
-<p>To ensure your new class can be encoded using the <code class="docutils literal notranslate"><span class="pre">pMuTTEncoder</span></code>, the <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method should be implemented.
-One of the entries of the dictionary should be <code class="docutils literal notranslate"><span class="pre">'class':</span> <span class="pre">str(self.__class__)</span></code> so that it can be decoded later. The
-other elements should be the attributes that can be used to reinitialize the object and must be JSON-supported objects.
-A simple example using <a class="reference internal" href="statmech.html#pMuTT.statmech.trans.IdealTrans" title="pMuTT.statmech.trans.IdealTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealTrans</span></code></a> is shown below.</p>
+<p>To ensure your new class can be encoded using the <code class="docutils literal notranslate"><span class="pre">pMuTTEncoder</span></code>, the
+<code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method should be implemented. One of the entries of the
+dictionary should be <code class="docutils literal notranslate"><span class="pre">'class':</span> <span class="pre">str(self.__class__)</span></code> so that it can be decoded
+later. The other elements should be the attributes that can be used to
+reinitialize the object and must be JSON-supported objects. A simple example
+using <a class="reference internal" href="statmech.html#pMuTT.statmech.trans.IdealTrans" title="pMuTT.statmech.trans.IdealTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealTrans</span></code></a> is shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;n_degrees&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_degrees</span><span class="p">,</span>
             <span class="s1">&#39;molecular_weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>If the attributes are not supported by JSON (such as other pMuTT objects), use their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported
-objects. An example using <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
+<p>If the attributes are not supported by JSON (such as other pMuTT objects), use
+their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported objects. An example
+using <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;trans_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
@@ -1117,10 +1144,12 @@ objects. An example using <a class="reference internal" href="statmech.html#pMuT
 </div>
 <div class="section" id="decoding">
 <h4>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h4>
-<p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook, add an entry to the dictionary in
-the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.type_to_class</span></code> method. The key should be the type of your object in string format (i.e. the result
-of <code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class method to reinitialize your object.
-A simple example using <a class="reference internal" href="statmech.html#pMuTT.statmech.trans.IdealTrans" title="pMuTT.statmech.trans.IdealTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealTrans</span></code></a> is shown below.</p>
+<p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook,
+add an entry to the dictionary in the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.type_to_class</span></code> method.
+The key should be the type of your object in string format (i.e. the result of
+<code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class
+method to reinitialize your object. A simple example using
+<a class="reference internal" href="statmech.html#pMuTT.statmech.trans.IdealTrans" title="pMuTT.statmech.trans.IdealTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealTrans</span></code></a> is shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">remove_class</span>
 
 <span class="nd">@classmethod</span>
@@ -1129,8 +1158,9 @@ A simple example using <a class="reference internal" href="statmech.html#pMuTT.s
     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">json_obj</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Similarly to encoding, sometimes your object contains pMuTT objects. You can use the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook to remake
-these objects. An example using <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
+<p>Similarly to encoding, sometimes your object contains pMuTT objects. You can
+use the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook to remake these objects. An example using
+<a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="kn">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_pMuTT</span>
 
 <span class="nd">@classmethod</span>

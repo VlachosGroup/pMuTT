@@ -195,7 +195,8 @@
 <span id="id1"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="reaction">
 <h2>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h2>
-<p>Chemical reactions can be modeled using the <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">pMuTT.reaction.Reaction</span></code></a> class.</p>
+<p>Chemical reactions can be modeled using the <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">pMuTT.reaction.Reaction</span></code></a>
+class.</p>
 <dl class="class">
 <dt id="pMuTT.reaction.Reaction">
 <em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em>, <em>transition_state_stoich=None</em>, <em>bep=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
@@ -1168,8 +1169,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.to_str">
-<code class="descname">to_str</code><span class="sig-paren">(</span><em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.to_str" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.reaction.Reaction.to_string">
+<code class="descname">to_string</code><span class="sig-paren">(</span><em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.to_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the Reaction object as a stoichiometric reaction</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1259,7 +1260,8 @@ way is more convenient if you’re dealing with large reaction networks.</p>
                                     <span class="n">species</span><span class="o">=</span><span class="n">nasa_dict</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After the Reaction object is initialized, you can ensure the equation is balanced.</p>
+<p>After the Reaction object is initialized, you can ensure the equation is
+balanced.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1314,9 +1316,9 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>Reaction</strong></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>Reactions</strong></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Reaction object</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Reactions object</td>
 </tr>
 </tbody>
 </table>
@@ -1343,8 +1345,9 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 </div>
 <div class="section" id="bep">
 <h2>BEP<a class="headerlink" href="#bep" title="Permalink to this headline">¶</a></h2>
-<p>Bronsted Evans Polyani relationships can be added to <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects so
-the activation energy can be estimated using the change in enthalpy.</p>
+<p>Bronsted Evans Polyani relationships can be added to
+<a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects so the activation energy can be
+estimated using the change in enthalpy.</p>
 <dl class="class">
 <dt id="pMuTT.reaction.bep.BEP">
 <em class="property">class </em><code class="descclassname">pMuTT.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>reaction=None</em>, <em>descriptor='delta'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
