@@ -73,8 +73,9 @@ class References:
     ----------
         offset : dict
             Dimensionless enthalpy offset for each descriptor
-        references : list of :class:`~pMuTT.empirical.references.Reference`, optional
-            Reference species. Each member of the list should have the 
+        references : list of :class:`~pMuTT.empirical.references.Reference`,
+        optional
+            Reference species. Each member of the list should have the
             attributes ``T_ref`` and ``HoRT_ref``
         T_ref : float
             Reference temperature in K
@@ -163,7 +164,8 @@ class References:
             for j, descriptor_name in enumerate(descriptors):
                 try:
                     descriptors_mat[i, j] = \
-                            getattr(reference, self.descriptor)[descriptor_name]
+                        getattr(reference,
+                                self.descriptor)[descriptor_name]
                 except KeyError:
                     # If descriptor not in dictionary
                     descriptors_mat[i, j] = 0.
@@ -192,10 +194,10 @@ class References:
         # Offset between the DFT energies and experimental values for
         # each descriptor
         offset = np.linalg.lstsq(descriptors_mat, ref_offset,
-                                                 rcond=None)[0]
+                                 rcond=None)[0]
         # Convert offset to a dictionary
-        self.offset = {descriptor: val for descriptor, val \
-                                           in zip(descriptors, offset)}
+        self.offset = {descriptor: val for descriptor, val
+                       in zip(descriptors, offset)}
 
     def get_HoRT_offset(self, descriptors, T=None):
         """Returns the offset due to the descriptor composition of a specie.
@@ -238,9 +240,9 @@ class References:
         -------
             obj_dict : dict
         """
-        obj_dict =  {'class': self.__class__,
-                     'offset': self.offset.tolist(),
-                     'descriptor': self.descriptor}
+        obj_dict = {'class': self.__class__,
+                    'offset': self.offset.tolist(),
+                    'descriptor': self.descriptor}
         try:
             obj_dict['references'] = [ref.to_dict() for ref in self.references]
         except (AttributeError, TypeError):

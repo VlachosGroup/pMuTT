@@ -14,6 +14,7 @@ from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 from pMuTT.empirical import BaseThermo
 
+
 class Shomate(BaseThermo):
     """Stores the information for an individual Shomate specie
     Inherits from :class:`~pMuTT.empirical.BaseThermo`
@@ -26,7 +27,7 @@ class Shomate(BaseThermo):
     +D\\frac{t^4}{4}-\\frac{E}{t}+F\\bigg)`
     :math:`\\frac{S}{R}=\\frac{1}{R}\\bigg(A\\ln(t)+Bt+C\\frac{t^2}{2}+D
     \\frac{t^3}{3}-\\frac{E}{2t^2}+G\\bigg)`
-    
+
     where :math:`t=\\frac{T}{1000}` in K
 
     Attributes
@@ -125,7 +126,7 @@ class Shomate(BaseThermo):
             HoRT_ref : float
                 Dimensionless reference enthalpy that corresponds to T_ref.
             SoR_ref : float
-                Dimensionless entropy that corresponds to T_ref. 
+                Dimensionless entropy that corresponds to T_ref.
         Returns
         -------
             shomate : Shomate object
@@ -141,8 +142,8 @@ class Shomate(BaseThermo):
         return cls(name=name, T_low=T_low, T_high=T_high, a=a, **kwargs)
 
     @classmethod
-    def from_statmech(cls, name, statmech_model, T_low, T_high, references=None,
-                      elements=None, **kwargs):
+    def from_statmech(cls, name, statmech_model, T_low, T_high,
+                      references=None, elements=None, **kwargs):
         """Calculates the Shomate polynomial using statistical mechanic models
 
         Parameters
@@ -158,7 +159,7 @@ class Shomate(BaseThermo):
             references : `pMuTT.empirical.references.References` object
                 Reference to adjust enthalpy
             **kwargs : keyword arguments
-                Used to initalize ``statmech_model`` or ``BaseThermo`` 
+                Used to initalize ``statmech_model`` or ``BaseThermo``
                 attributes to be stored.
         Returns
         -------
@@ -181,18 +182,18 @@ class Shomate(BaseThermo):
                 descriptors = elements
             else:
                 descriptors = kwargs[descriptor]
-            HoRT_ref += references.get_HoRT_offset(descriptors=descriptors, 
+            HoRT_ref += references.get_HoRT_offset(descriptors=descriptors,
                                                    T=T_ref)
         SoR_ref = statmech_model.get_SoR(T=T_ref)
 
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref, 
+        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref,
                              statmech_model=statmech_model, elements=elements,
                              references=references, **kwargs)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -219,11 +220,12 @@ class Shomate(BaseThermo):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \
-                json_to_pMuTT(json_obj['statmech_model'])
+            json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
-                json_to_pMuTT(json_obj['references'])
+            json_to_pMuTT(json_obj['references'])
 
         return cls(**json_obj)
+
 
 def _fit_CpoR(T, CpoR):
     """Fit a[0]-a[4] coefficients given the dimensionless heat capacity data
@@ -244,13 +246,14 @@ def _fit_CpoR(T, CpoR):
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
     if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
-        or np.isclose(variation(CpoR), 0.) \
-        or any([np.isnan(x) for x in CpoR]):
+       or np.isclose(variation(CpoR), 0.) \
+       or any([np.isnan(x) for x in CpoR]):
         return np.zeros(7)
     else:
         [a, pcov] = curve_fit(_shomate_CpoR, T, np.array(CpoR))
         a = np.append(a, [0., 0., 0.])
         return a
+
 
 def _fit_HoRT(T_ref, HoRT_ref, a):
     """Fit a[5] coefficient in a_low and a_high attributes given the
@@ -275,6 +278,7 @@ def _fit_HoRT(T_ref, HoRT_ref, a):
     a[7] = - get_shomate_HoRT(T=c.T0('K'), a=a)*c.R('kJ/mol/K')*c.T0('K')
     return a
 
+
 def _fit_SoR(T_ref, SoR_ref, a):
     """Fit a[6] coefficient in a_low and a_high attributes given the
     dimensionless entropy
@@ -294,6 +298,7 @@ def _fit_SoR(T_ref, SoR_ref, a):
     """
     a[6] = (SoR_ref - get_shomate_SoR(T=T_ref, a=a))*c.R('J/mol/K')
     return a
+
 
 def get_shomate_CpoR(a, T):
     """Calculates the dimensionless heat capacity using Shomate polynomial form
@@ -343,13 +348,14 @@ def get_shomate_HoRT(a, T):
 
     T = np.array(T)
     t = T/1000.
-    t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.] 
-                     for x in t])        
+    t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.]
+                     for x in t])
     HoRT = np.dot(t_arr, a)/(c.R('kJ/mol/K')*T)
     if T_iterable:
         return HoRT
     else:
-        return HoRT[0]        
+        return HoRT[0]
+
 
 def get_shomate_SoR(a, T):
     """Calculates the dimensionless entropy using Shomate polynomial form
@@ -374,7 +380,7 @@ def get_shomate_SoR(a, T):
         T = [T]
     T = np.array(T)
     t = T/1000.
-    t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.] 
+    t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.]
                      for x in t])
     SoR = np.dot(t_arr, a)/c.R('J/mol/K')
     if T_iterable:
@@ -401,6 +407,7 @@ def get_shomate_GoRT(a, T):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
     return get_shomate_HoRT(a=a, T=T) - get_shomate_SoR(a=a, T=T)
+
 
 def _shomate_CpoR(T, A, B, C, D, E):
     """
