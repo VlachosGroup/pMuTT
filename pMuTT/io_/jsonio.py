@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 
+
 class pMuTTEncoder(json.JSONEncoder):
     """Encodes pMuTT objects to JSON format. The object (and complex subobjects
     ) must have the method: to_dict().
@@ -13,9 +14,10 @@ class pMuTTEncoder(json.JSONEncoder):
         else:
             return o_dict
 
+
 def json_to_pMuTT(json_obj):
     """Object hook to convert json to pMuTT objects. Any complex object should
-    be in the :data:`~pMuTT.io_.jsonio.type_to_class.type_to_class_dict` 
+    be in the :data:`~pMuTT.io_.jsonio.type_to_class.type_to_class_dict`
     dictionary.
 
     Parameters
@@ -36,6 +38,7 @@ def json_to_pMuTT(json_obj):
         obj = class_name.from_dict(json_obj)
         return obj
 
+
 def type_to_class(class_str):
     """Converts between type of object and pMuTT classes.
 
@@ -50,8 +53,8 @@ def type_to_class(class_str):
     """
 
     # Although it is usually inadvisible to import functions within a function,
-    # this was done purposefully. Importing outside the function caused circular
-    # import errors. This way the imports are limited to the function.
+    # this was done purposefully. Importing outside the function caused
+    # circular import errors. This way the imports are limited to the function.
     from pMuTT.eos import IdealGasEOS, vanDerWaalsEOS
     from pMuTT.reaction import Reaction, Reactions
     from pMuTT.reaction.bep import BEP
@@ -90,6 +93,7 @@ def type_to_class(class_str):
         "<class 'pMuTT.statmech.nucl.IdealNucl'>": IdealNucl,
     }
     return type_to_class_dict[class_str]
+
 
 def remove_class(json_obj):
     """Removes the 'class' entry from the JSON object.

@@ -17,7 +17,8 @@ from pMuTT.statmech.rot import get_rot_temperatures_from_atoms
 from pMuTT.io_.vasp import set_vib_wavenumbers_from_outcar
 
 
-def read_excel(io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0., **kwargs):
+def read_excel(io, skiprows=[1], header=0, delimiter='.',
+               min_frequency_cutoff=0., **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
     initialize objects
 
@@ -31,7 +32,8 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0
         header : int, optional
             Location to find header names (0-index). Default is 0
         min_frequency_cutoff : float, optional
-            Minimum frequency cutoff (cm-1). Frequencies > min_frequency_cutoff read from OUTCAR.
+            Minimum frequency cutoff (cm-1). Frequencies > min_frequency_cutoff
+            read from OUTCAR.
             Default 0
         delimiter : str, optional
             Delimiter to parse column names. Default is '.'
@@ -256,7 +258,8 @@ def set_vib_wavenumbers(value, output_structure):
 
 
 def set_rot_temperatures(value, output_structure):
-    """Parses element header and assigns to output_structure['rot_temperatures']
+    """Parses element header and assigns to output_structure
+    ['rot_temperatures']
 
     Parameters
     ----------
@@ -276,13 +279,14 @@ def set_rot_temperatures(value, output_structure):
         output_structure['rot_temperatures'] = [value]
     return output_structure
 
+
 def set_nasa_a_low(header, value, output_structure, delimiter='.'):
     """Parses a_low parameter for :class:`~pMuTT.empirical.nasa.Nasa` object
 
     Parameters
     ----------
         header : str
-            Name of the header. Used to determine coefficient. 
+            Name of the header. Used to determine coefficient.
             Assumes zero index and header takes the format:
 
             nasa[delimiter]a_low[delimiter][index]
@@ -313,7 +317,7 @@ def set_nasa_a_high(header, value, output_structure, delimiter='.'):
     Parameters
     ----------
         header : str
-            Name of the header. Used to determine coefficient. 
+            Name of the header. Used to determine coefficient.
             Assumes zero index and header takes the format:
 
             nasa[delimiter]a_high[delimiter][index]

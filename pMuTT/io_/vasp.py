@@ -16,7 +16,8 @@ def take_vib_wavenumber_from_line(in_line):
     :return: vib_wavenumber: float
                              vibrational wavenumber in cm-1
     """
-    pattern = re.compile(r'(\d+\.?\d+) cm-1')  # pattern for numerical frequency in cm-1
+    pattern = re.compile(r'(\d+\.?\d+) cm-1')
+    # pattern for numerical frequency in cm-1
     m = pattern.search(in_line)
     try:
         vib_wavenumber = float(m[1])
@@ -26,7 +27,8 @@ def take_vib_wavenumber_from_line(in_line):
         raise e
 
 
-def set_vib_wavenumbers_from_outcar(in_file, output_structure, min_frequency_cutoff):
+def set_vib_wavenumbers_from_outcar(in_file, output_structure,
+                                    min_frequency_cutoff):
     """
 
     :param in_file: str
@@ -35,7 +37,8 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure, min_frequency_cut
                              Structure to assign value. Will assign to
                              output_structure['elements'][element]
            min_frequency_cutoff: float
-                              Frequencies > min_frequency_cutoff (cm-1) read from OUTCAR
+                              Frequencies > min_frequency_cutoff (cm-1)
+                              read from OUTCAR
     :return: output_structure: dict
                                output_structure with new vibration added
 
