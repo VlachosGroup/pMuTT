@@ -160,7 +160,7 @@ class HarmonicVib:
                 - np.log(1. - np.exp(-vib_dimless))])
         return np.sum(SoR)
 
-    def get_AoRT(self, T):
+    def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{vib}}{RT}=\\frac{U^{vib}}{RT}-\\frac{S^{vib}}{R}`
@@ -171,7 +171,7 @@ class HarmonicVib:
                 Temperature in K
         Returns
         -------
-            AoRT_vib : float
+            FoRT_vib : float
                 Vibrational dimensionless Helmholtz energy
         """
         return self.get_UoRT(T=T) - self.get_SoR(T=T)
@@ -474,7 +474,7 @@ class QRRHOVib:
             SoR_QRRHO.append(w_i*SoR_H + (1.-w_i)*SoR_RRHO)
         return np.sum(SoR_QRRHO)
 
-    def get_AoRT(self, T):
+    def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{qRRHO}}{RT} = \\frac{U^{qRRHO}}{RT}-
@@ -486,7 +486,7 @@ class QRRHOVib:
                 Temperature in K
         Returns
         -------
-            AoRT_vib : float
+            FoRT_vib : float
                 Vibrational dimensionless Helmholtz energy
         """
         return self.get_UoRT(T=T) - self.get_SoR(T=T)
@@ -691,7 +691,7 @@ class EinsteinVib:
         exp_term = np.exp(-theta_E/T)
         return 3.*(theta_E/T*exp_term/(1. - exp_term) - np.log(1. - exp_term))
 
-    def get_AoRT(self, T):
+    def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{vib}}{RT}=\\frac{U^{vib}}{RT}-\\frac{S^{vib}}{R}`
@@ -702,7 +702,7 @@ class EinsteinVib:
                 Temperature in K
         Returns
         -------
-            AoRT_vib : float
+            FoRT_vib : float
                 Vibrational dimensionless Helmholtz energy
         """
         return self.get_UoRT(T=T) - self.get_SoR(T=T)

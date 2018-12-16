@@ -361,7 +361,7 @@ If you would like to create your own class to be stored by
 - ``get_UoRT``
 - ``get_HoRT``
 - ``get_SoR``
-- ``get_AoRT``
+- ``get_FoRT``
 - ``get_GoRT``
 - ``from_dict``
 - ``to_dict``

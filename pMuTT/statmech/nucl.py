@@ -77,12 +77,12 @@ class IdealNucl:
         """
         return 0.
 
-    def get_AoRT(self):
+    def get_FoRT(self):
         """Calculates the dimensionless Helmholtz energy
 
         Returns
         -------
-            AoRT_nucl : float
+            FoRT_nucl : float
                 Nuclear dimensionless Helmholtz energy
         """
         return 0.

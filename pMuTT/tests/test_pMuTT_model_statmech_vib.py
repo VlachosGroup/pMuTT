@@ -54,10 +54,10 @@ class TestHarmonicVib(unittest.TestCase):
                                2.32489026469e-08)
         self.assertAlmostEqual(self.vib_H2O.get_SoR(T=self.T), 0.00434769)
 
-    def test_get_AoRT(self):
-        self.assertAlmostEqual(self.vib_H2.get_AoRT(T=self.T), 
+    def test_get_FoRT(self):
+        self.assertAlmostEqual(self.vib_H2.get_FoRT(T=self.T), 
                                1.032605543E+01)
-        self.assertAlmostEqual(self.vib_H2O.get_AoRT(T=self.T), 
+        self.assertAlmostEqual(self.vib_H2O.get_FoRT(T=self.T), 
                                2.186442601E+01)
         
     def test_get_GoRT(self):
@@ -142,10 +142,10 @@ class TestQRRHOVib(unittest.TestCase):
         self.assertAlmostEqual(self.vib_H2O.get_SoR(T=self.T), 
                                0.00444131527822)
 
-    def test_get_AoRT(self):
-        self.assertAlmostEqual(self.vib_H2.get_AoRT(T=self.T), 
+    def test_get_FoRT(self):
+        self.assertAlmostEqual(self.vib_H2.get_FoRT(T=self.T), 
                                10.3260509635305)
-        self.assertAlmostEqual(self.vib_H2O.get_AoRT(T=self.T), 
+        self.assertAlmostEqual(self.vib_H2O.get_FoRT(T=self.T), 
                                21.864271329132)
         
     def test_get_GoRT(self):
@@ -195,8 +195,8 @@ class TestEinsteinVib(unittest.TestCase):
     def test_get_SoR(self):
         self.assertAlmostEqual(self.vib_Ag.get_SoR(T=self.T), 4.6878251875495)
 
-    def test_get_AoRT(self):
-        self.assertAlmostEqual(self.vib_Ag.get_AoRT(T=self.T), 17.7359990231372)
+    def test_get_FoRT(self):
+        self.assertAlmostEqual(self.vib_Ag.get_FoRT(T=self.T), 17.7359990231372)
         
     def test_get_GoRT(self):
         self.assertAlmostEqual(self.vib_Ag.get_GoRT(T=self.T), 17.7359990231372)

@@ -151,7 +151,7 @@ class IdealTrans:
             + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2)
                      ** (float(self.n_degrees)/2.)*V/c.Na)
 
-    def get_AoRT(self, T, P=c.P0('bar')):
+    def get_FoRT(self, T, P=c.P0('bar')):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{trans}}{RT}=\\frac{U^{trans}}{RT}-\\frac{S^{trans}}{R}`
@@ -165,7 +165,7 @@ class IdealTrans:
                 Default is atmospheric pressure
         Returns
         -------
-            AoRT_trans : float
+            FoRT_trans : float
                 Translational dimensionless Helmholtz energy
         """
         return self.get_UoRT()-self.get_SoR(T=T, P=P)

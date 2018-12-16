@@ -35,7 +35,7 @@ class EmptyMode:
     def get_SoR(self):
         return 0.
 
-    def get_AoRT(self):
+    def get_FoRT(self):
         return 0.
 
     def get_GoRT(self):
@@ -307,7 +307,7 @@ class StatMech:
         else:
             return np.sum(SoR)
 
-    def get_AoRT(self, verbose=False, **kwargs):
+    def get_FoRT(self, verbose=False, **kwargs):
         """Dimensionless Helmholtz energy
 
         Parameters
@@ -319,23 +319,23 @@ class StatMech:
                 contribution of each mode.
         Returns
         -------
-            AoRT : float or tuple
+            FoRT : float or tuple
                 Dimensionless Helmoltz energy. If tuple returned, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
         """
 
-        AoRT = (
-            _pass_expected_arguments(self.trans_model.get_AoRT, **kwargs),
-            _pass_expected_arguments(self.vib_model.get_AoRT, **kwargs),
-            _pass_expected_arguments(self.rot_model.get_AoRT, **kwargs),
-            _pass_expected_arguments(self.elec_model.get_AoRT, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_AoRT, **kwargs))
+        FoRT = (
+            _pass_expected_arguments(self.trans_model.get_FoRT, **kwargs),
+            _pass_expected_arguments(self.vib_model.get_FoRT, **kwargs),
+            _pass_expected_arguments(self.rot_model.get_FoRT, **kwargs),
+            _pass_expected_arguments(self.elec_model.get_FoRT, **kwargs),
+            _pass_expected_arguments(self.nucl_model.get_FoRT, **kwargs))
 
         if verbose:
-            return AoRT
+            return FoRT
         else:
-            return np.sum(AoRT)
+            return np.sum(FoRT)
 
     def get_GoRT(self, verbose=False, **kwargs):
         """Dimensionless Gibbs energy

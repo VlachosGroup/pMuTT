@@ -23,8 +23,10 @@ class Shomate(BaseThermo):
 
     :math:`\\frac{c_P}{R}=\\frac{1}{R}\\bigg(A+Bt+Ct^2+Dt^3+\\frac{E}{t^2}
     \\bigg)`
+
     :math:`\\frac{H}{RT}=\\frac{1}{RT}\\bigg(At+B\\frac{t^2}{2}+C\\frac{t^3}{3}
     +D\\frac{t^4}{4}-\\frac{E}{t}+F\\bigg)`
+
     :math:`\\frac{S}{R}=\\frac{1}{R}\\bigg(A\\ln(t)+Bt+C\\frac{t^2}{2}+D
     \\frac{t^3}{3}-\\frac{E}{2t^2}+G\\bigg)`
 
