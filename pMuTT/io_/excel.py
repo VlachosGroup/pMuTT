@@ -14,8 +14,10 @@ from pMuTT import parse_formula, get_molecular_weight
 from pMuTT.statmech import presets, StatMech
 from pMuTT.statmech.rot import get_geometry_from_atoms
 from pMuTT.statmech.rot import get_rot_temperatures_from_atoms
+from pMuTT.io_.vasp import set_vib_wavenumbers_from_outcar
 
-def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
+
+def read_excel(io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0., **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
     initialize objects
 
@@ -28,6 +30,9 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
             Default is [1] so comments can be put in that row
         header : int, optional
             Location to find header names (0-index). Default is 0
+        min_frequency_cutoff : float, optional
+            Minimum frequency cutoff (cm-1). Frequencies > min_frequency_cutoff read from OUTCAR.
+            Default 0
         delimiter : str, optional
             Delimiter to parse column names. Default is '.'
         **kwargs: keyword arguments
@@ -67,6 +72,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
     thermos_out = []
     for row, row_data in input_data.iterrows():
         thermo_data = {}
+        vib_set_by_outcar = False
         for col, cell_data in row_data.iteritems():
             # Special parsing instructions
             if pd.isnull(cell_data):
@@ -85,8 +91,19 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', **kwargs):
                 thermo_data = set_statmech_model(model=cell_data,
                                                output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
+                if vib_set_by_outcar:
+                    continue  # vib_wavenumber already set from outcar
                 thermo_data = set_vib_wavenumbers(value=cell_data,
-                                                 output_structure=thermo_data)
+                                                  output_structure=thermo_data)
+            elif 'vib_outcar' in col:
+                try:
+                    thermo_data = set_vib_wavenumbers_from_outcar(in_file=cell_data,
+                                                                  output_structure=thermo_data,
+                                                                  min_frequency_cutoff=min_frequency_cutoff)
+                except FileNotFoundError as e:
+                    raise e
+                else:
+                    vib_set_by_outcar = True
             elif 'rot_temperature' in col:
                 thermo_data = set_rot_temperatures(value=cell_data,
                                                    output_structure=thermo_data)
