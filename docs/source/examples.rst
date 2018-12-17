@@ -8,7 +8,6 @@ codes listed here are available in the `examples folder`_ as Jupyter notebooks
 
 Experimental to Empirical
 -------------------------
-- `Webpage <examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb>`_
 - `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb>`_
 - `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.py>`_
 
@@ -24,7 +23,6 @@ Topics Covered
 
 Excel to Empirical Data
 -----------------------
-- `Webpage <examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb>`_
 - `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb>`_
 - `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.py>`_
 
@@ -38,7 +36,6 @@ Topics Covered
 
 Reaction
 --------
-- `Webpage <examples_jupyter/reactions/reactions.ipynb>`_
 - `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.ipynb>`_
 - `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.py>`_
 
@@ -54,7 +51,6 @@ Topics Covered
 
 Phase Diagram
 -------------
-- `Webpage <examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
 - `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
 - `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.py>`_
 

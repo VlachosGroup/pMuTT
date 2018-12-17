@@ -262,21 +262,21 @@ class TestReaction(unittest.TestCase):
                                                          T=c.T0('K')),
                                exp_SoR_TS)
 
-    def test_get_AoRT_state(self):
-        exp_AoRT_react = self.H2_sm.get_AoRT(T=c.T0('K')) \
-                         + self.O2_sm.get_AoRT(T=c.T0('K'))*0.5
-        exp_AoRT_prod = self.H2O_sm.get_AoRT(T=c.T0('K'))
-        exp_AoRT_TS = self.H2O_TS_sm.get_AoRT(T=c.T0('K'))
+    def test_get_FoRT_state(self):
+        exp_FoRT_react = self.H2_sm.get_FoRT(T=c.T0('K')) \
+                         + self.O2_sm.get_FoRT(T=c.T0('K'))*0.5
+        exp_FoRT_prod = self.H2O_sm.get_FoRT(T=c.T0('K'))
+        exp_FoRT_TS = self.H2O_TS_sm.get_FoRT(T=c.T0('K'))
 
-        self.assertAlmostEqual(self.rxn_sm.get_AoRT_state(state='reactants', 
+        self.assertAlmostEqual(self.rxn_sm.get_FoRT_state(state='reactants', 
                                                           T=c.T0('K')),
-                               exp_AoRT_react)
-        self.assertAlmostEqual(self.rxn_sm.get_AoRT_state(state='products', 
+                               exp_FoRT_react)
+        self.assertAlmostEqual(self.rxn_sm.get_FoRT_state(state='products', 
                                                           T=c.T0('K')),
-                               exp_AoRT_prod)
-        self.assertAlmostEqual(self.rxn_sm.get_AoRT_state(state='transition state', 
+                               exp_FoRT_prod)
+        self.assertAlmostEqual(self.rxn_sm.get_FoRT_state(state='transition state', 
                                                           T=c.T0('K')),
-                               exp_AoRT_TS)
+                               exp_FoRT_TS)
 
     def test_get_GoRT_state(self):
         exp_GoRT_react = self.H2_sm.get_GoRT(T=c.T0('K')) \
@@ -381,16 +381,16 @@ class TestReaction(unittest.TestCase):
                 -exp_sm_SoR)
 
 
-    def test_get_delta_AoRT(self):
-        exp_sm_AoRT = self.H2O_sm.get_AoRT(T=c.T0('K')) \
-                      - self.H2_sm.get_AoRT(T=c.T0('K')) \
-                      - self.O2_sm.get_AoRT(T=c.T0('K'))*0.5
+    def test_get_delta_FoRT(self):
+        exp_sm_FoRT = self.H2O_sm.get_FoRT(T=c.T0('K')) \
+                      - self.H2_sm.get_FoRT(T=c.T0('K')) \
+                      - self.O2_sm.get_FoRT(T=c.T0('K'))*0.5
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_AoRT(T=c.T0('K')),
-                exp_sm_AoRT)
+                self.rxn_sm.get_delta_FoRT(T=c.T0('K')),
+                exp_sm_FoRT)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_AoRT(T=c.T0('K'), rev=True),
-                -exp_sm_AoRT)
+                self.rxn_sm.get_delta_FoRT(T=c.T0('K'), rev=True),
+                -exp_sm_FoRT)
 
 
     def test_get_delta_GoRT(self):
@@ -484,18 +484,18 @@ class TestReaction(unittest.TestCase):
                 exp_sm_SoR_rev)
 
 
-    def test_get_AoRT_act(self):
-        exp_sm_AoRT = self.H2O_TS_sm.get_AoRT(T=c.T0('K')) \
-                      - self.H2_sm.get_AoRT(T=c.T0('K')) \
-                      - self.O2_sm.get_AoRT(T=c.T0('K'))*0.5
-        exp_sm_AoRT_rev = self.H2O_TS_sm.get_AoRT(T=c.T0('K')) \
-                          - self.H2O_sm.get_AoRT(T=c.T0('K'))
+    def test_get_FoRT_act(self):
+        exp_sm_FoRT = self.H2O_TS_sm.get_FoRT(T=c.T0('K')) \
+                      - self.H2_sm.get_FoRT(T=c.T0('K')) \
+                      - self.O2_sm.get_FoRT(T=c.T0('K'))*0.5
+        exp_sm_FoRT_rev = self.H2O_TS_sm.get_FoRT(T=c.T0('K')) \
+                          - self.H2O_sm.get_FoRT(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_AoRT_act(T=c.T0('K')),
-                exp_sm_AoRT)
+                self.rxn_sm.get_FoRT_act(T=c.T0('K')),
+                exp_sm_FoRT)
         self.assertAlmostEqual(
-                self.rxn_sm.get_AoRT_act(T=c.T0('K'), rev=True),
-                exp_sm_AoRT_rev)
+                self.rxn_sm.get_FoRT_act(T=c.T0('K'), rev=True),
+                exp_sm_FoRT_rev)
 
 
     def test_get_GoRT_act(self):

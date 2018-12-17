@@ -59,7 +59,7 @@ class Zacros(BaseThermo):
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -68,8 +68,8 @@ class Zacros(BaseThermo):
         obj_dict['class'] = str(self.__class__)
         obj_dict['A_st'] = self.A_st
         obj_dict['geometry'] = self.geometry
-        # TODO Need to find a way to seralize an atoms object. write() can write
-        # to a JSON file but not sure how to get the str representation
+        # TODO Need to find a way to seralize an atoms object. write() can
+        # write to a JSON file but not sure how to get the str representation
         # obj_dict['atoms'] = write()
         obj_dict['symmetrynumber'] = self.symmetrynumber
         obj_dict['inertia'] = list(self.inertia)
@@ -106,8 +106,8 @@ class Zacros(BaseThermo):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \
-                json_to_pMuTT(json_obj['statmech_model'])
+            json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
-                json_to_pMuTT(json_obj['references'])
+            json_to_pMuTT(json_obj['references'])
 
         return cls(**json_obj)

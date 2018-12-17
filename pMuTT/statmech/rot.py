@@ -205,7 +205,7 @@ class RigidRotor:
             raise ValueError(
                 'Geometry, {}, not supported.'.format(self.geometry))
 
-    def get_AoRT(self, T):
+    def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{rot}}{RT}=\\frac{U^{rot}}{RT}-\\frac{S^{rot}}{R}`
@@ -216,7 +216,7 @@ class RigidRotor:
                 Temperature in K
         Returns
         -------
-            AoRT_rot : float
+            FoRT_rot : float
                 Rotational dimensionless Helmholtz energy
         """
         return self.get_UoRT()-self.get_SoR(T=T)

@@ -32,8 +32,8 @@ class TestIdealNucl(unittest.TestCase):
     def test_get_SoR(self):
         self.assertEqual(self.nuclear.get_SoR(), 0.)
 
-    def test_get_AoRT(self):
-        self.assertEqual(self.nuclear.get_AoRT(), 0.)
+    def test_get_FoRT(self):
+        self.assertEqual(self.nuclear.get_FoRT(), 0.)
 
     def test_get_GoRT(self):
         self.assertEqual(self.nuclear.get_GoRT(), 0.)

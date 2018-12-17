@@ -57,10 +57,10 @@ class TestRigidRotor(unittest.TestCase):
         self.assertAlmostEqual(self.rot_CO2.get_SoR(T=self.T), 6.588669668)
         self.assertAlmostEqual(self.rot_H2O.get_SoR(T=self.T), 5.271701374)
         
-    def test_get_AoRT(self):
-        self.assertAlmostEqual(self.rot_He.get_AoRT(T=self.T), 0.)
-        self.assertAlmostEqual(self.rot_CO2.get_AoRT(T=self.T), -5.588669668)
-        self.assertAlmostEqual(self.rot_H2O.get_AoRT(T=self.T), -3.771701374)
+    def test_get_FoRT(self):
+        self.assertAlmostEqual(self.rot_He.get_FoRT(T=self.T), 0.)
+        self.assertAlmostEqual(self.rot_CO2.get_FoRT(T=self.T), -5.588669668)
+        self.assertAlmostEqual(self.rot_H2O.get_FoRT(T=self.T), -3.771701374)
         
     def test_get_GoRT(self):
         self.assertAlmostEqual(self.rot_He.get_GoRT(T=self.T), 0.)

@@ -88,9 +88,9 @@ class TestStatMech(unittest.TestCase):
         calc_SoR_CO2 = self.CO2_pMuTT.get_SoR(T=self.T0, V=self.V0)
         self.assertTrue(np.isclose(expected_SoR_CO2, calc_SoR_CO2))
         
-    def test_get_AoRT(self):
+    def test_get_FoRT(self):
         self.assertAlmostEqual(
-            self.CO2_pMuTT.get_AoRT(T=self.T0, V=self.V0), 
+            self.CO2_pMuTT.get_FoRT(T=self.T0, V=self.V0), 
                 -900.5899966269182)
         
     def test_get_GoRT(self):

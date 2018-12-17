@@ -5,9 +5,7 @@ pMuTT.empirical.nasa
 Operations related to Nasa polynomials
 """
 
-import sys
 import inspect
-from pprint import pprint
 from warnings import warn
 import numpy as np
 from scipy.stats import variation
@@ -208,17 +206,17 @@ class Nasa(BaseThermo):
             HoRT_ref : float
                 Dimensionless reference enthalpy that corresponds to T_ref.
             SoR_ref : float
-                Dimensionless entropy that corresponds to T_ref. 
+                Dimensionless entropy that corresponds to T_ref.
             elements : dict
                 Composition of the species.
-                Keys of dictionary are elements, values are stoichiometric values
-                in a formula unit.
+                Keys of dictionary are elements, values are stoichiometric
+                values in a formula unit.
                 e.g. CH3OH can be represented as:
-                {'C': 1, 'H': 4, 'O': 1,}.                
+                {'C': 1, 'H': 4, 'O': 1,}.
             T_mid : float or iterable of float, optional
-                Guess for T_mid. If float, only uses that value for T_mid. If 
-                list, finds the best fit for each element in the list. If None, 
-                a range of T_mid values are screened between the 6th lowest 
+                Guess for T_mid. If float, only uses that value for T_mid. If
+                list, finds the best fit for each element in the list. If None,
+                a range of T_mid values are screened between the 6th lowest
                 and 6th highest value of T.
         Returns
         -------
@@ -233,14 +231,14 @@ class Nasa(BaseThermo):
         # Find midpoint temperature, and a[0] through a[4] parameters
         a_low, a_high, T_mid_out = _fit_CpoR(T=T, CpoR=CpoR, T_mid=T_mid)
         # Fit a[5] parameter using reference enthalpy
-        a_low[5], a_high[5] = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, 
+        a_low[5], a_high[5] = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref,
+                                        a_low=a_low, a_high=a_high,
+                                        T_mid=T_mid_out)
+        # Fit a[6] parameter using reference entropy
+        a_low[6], a_high[6] = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref,
                                        a_low=a_low, a_high=a_high,
                                        T_mid=T_mid_out)
-        # Fit a[6] parameter using reference entropy
-        a_low[6], a_high[6] = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, 
-                                      a_low=a_low, a_high=a_high,
-                                      T_mid=T_mid_out)
-        return cls(name=name, T_low=T_low, T_high=T_high, T_mid=T_mid_out, 
+        return cls(name=name, T_low=T_low, T_high=T_high, T_mid=T_mid_out,
                    a_low=a_low, a_high=a_high, elements=elements, **kwargs)
 
     @classmethod
@@ -259,20 +257,20 @@ class Nasa(BaseThermo):
             T_high : float
                 Higher limit temperature in K
             T_mid : float or iterable of float, optional
-                Guess for T_mid. If float, only uses that value for T_mid. If 
-                list, finds the best fit for each element in the list. If None, 
-                a range of T_mid values are screened between the 6th lowest 
+                Guess for T_mid. If float, only uses that value for T_mid. If
+                list, finds the best fit for each element in the list. If None,
+                a range of T_mid values are screened between the 6th lowest
                 and 6th highest value of T.
             references : `pMuTT.empirical.references.References` object
                 Reference to adjust enthalpy
             elements : dict
                 Composition of the species.
-                Keys of dictionary are elements, values are stoichiometric values
-                in a formula unit.
+                Keys of dictionary are elements, values are stoichiometric
+                values in a formula unit.
                 e.g. CH3OH can be represented as:
-                {'C': 1, 'H': 4, 'O': 1,}.                
+                {'C': 1, 'H': 4, 'O': 1,}.
             kwargs : keyword arguments
-                Used to initalize ``statmech_model`` or ``BaseThermo`` 
+                Used to initalize ``statmech_model`` or ``BaseThermo``
                 attributes to be stored.
         Returns
         -------
@@ -286,8 +284,8 @@ class Nasa(BaseThermo):
         # Generate data
         T = np.linspace(T_low, T_high)
         if T_mid is not None:
-        # Check to see if specified T_mid's are in T and, if not,
-        # insert them into T.
+            # Check to see if specified T_mid's are in T and, if not,
+            # insert them into T.
             # If a single value for T_mid is chosen, convert to a tuple
             if not _is_iterable(T_mid):
                 T_mid = (T_mid,)
@@ -306,18 +304,18 @@ class Nasa(BaseThermo):
                 descriptors = elements
             else:
                 descriptors = kwargs[descriptor_name]
-            HoRT_ref += references.get_HoRT_offset(descriptors=descriptors, 
+            HoRT_ref += references.get_HoRT_offset(descriptors=descriptors,
                                                    T=T_ref)
         SoR_ref = statmech_model.get_SoR(T=T_ref)
 
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref, 
+        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
                              statmech_model=statmech_model, elements=elements,
                              references=references, **kwargs)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -346,11 +344,12 @@ class Nasa(BaseThermo):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \
-                json_to_pMuTT(json_obj['statmech_model'])
+            json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
-                json_to_pMuTT(json_obj['references'])
+            json_to_pMuTT(json_obj['references'])
 
         return cls(**json_obj)
+
 
 def _fit_CpoR(T, CpoR, T_mid=None):
     """Fit a[0]-a[4] coefficients in a_low and a_high attributes given the
@@ -363,9 +362,9 @@ def _fit_CpoR(T, CpoR, T_mid=None):
         CpoR : (N,) `numpy.ndarray`_
             Dimensionless heat capacity
         T_mid : float or iterable of float, optional
-            Guess for T_mid. If float, only uses that value for T_mid. If 
-            list, finds the best fit for each element in the list. If None, 
-            a range of T_mid values are screened between the lowest value 
+            Guess for T_mid. If float, only uses that value for T_mid. If
+            list, finds the best fit for each element in the list. If None,
+            a range of T_mid values are screened between the lowest value
             and highest value of T.
     Returns
     -------
@@ -382,8 +381,8 @@ def _fit_CpoR(T, CpoR, T_mid=None):
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
     if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
-        or np.isclose(variation(CpoR), 0.) \
-        or any([np.isnan(x) for x in CpoR]):
+       or np.isclose(variation(CpoR), 0.) \
+       or any([np.isnan(x) for x in CpoR]):
         T_mid = T[int(len(T)/2)]
         a_low = np.zeros(7)
         a_high = np.zeros(7)
@@ -409,8 +408,8 @@ def _fit_CpoR(T, CpoR, T_mid=None):
         mse_list.append(mse)
         all_a_low.append(a_low)
         all_a_high.append(a_high)
-        # Check if the optimum T_mid has been found by determining if the 
-        # fit MSE value for the current T_mid is higher than the previous 
+        # Check if the optimum T_mid has been found by determining if the
+        # fit MSE value for the current T_mid is higher than the previous
         # indicating that subsequent guesses will not improve the fit
         if mse > prev_mse:
             break
@@ -429,6 +428,7 @@ def _fit_CpoR(T, CpoR, T_mid=None):
     a_low_out = np.concatenate((a_low_rev[::-1], empty_arr))
     a_high_out = np.concatenate((a_high_rev[::-1], empty_arr))
     return a_low_out, a_high_out, T_mid_out
+
 
 def _get_CpoR_MSE(T, CpoR, T_mid):
     """Calculates the mean squared error of polynomial fit.
@@ -453,8 +453,8 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    low_condition = (T<=T_mid)
-    high_condition = (T>T_mid)
+    low_condition = (T <= T_mid)
+    high_condition = (T > T_mid)
     T_low = np.extract(condition=low_condition, arr=T)
     T_high = np.extract(condition=high_condition, arr=T)
     CpoR_low = np.extract(condition=low_condition, arr=CpoR)
@@ -462,10 +462,10 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
 
     if len(T_low) < 5:
         warn('Small set of CpoR data between T_low and T_mid. '
-                'Fit may not be desirable.', RuntimeWarning)
+             'Fit may not be desirable.', RuntimeWarning)
     if len(T_high) < 5:
         warn('Small set of CpoR data between T_mid and T_high. '
-                'Fit may not be desirable.', RuntimeWarning)
+             'Fit may not be desirable.', RuntimeWarning)
 
     # Fit the polynomials
     p_low = np.polyfit(x=T_low, y=CpoR_low, deg=4)
@@ -477,6 +477,7 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
     CpoR_fit = np.concatenate((CpoR_low_fit, CpoR_high_fit))
     mse = np.mean([(x-y)**2 for x, y in zip(CpoR, CpoR_fit)])
     return (mse, p_low, p_high)
+
 
 def _fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
     """Fit a[5] coefficient in a_low and a_high attributes given the
@@ -508,6 +509,7 @@ def _fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
 
     return a6_low_out, a6_high_out
 
+
 def _fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
     """Fit a[6] coefficient in a_low and a_high attributes given the
     dimensionless entropy
@@ -537,6 +539,7 @@ def _fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
     a7_high_out = a7_high + S_offset
 
     return a7_low_out, a7_high_out
+
 
 def get_nasa_CpoR(a, T):
     """Calculates the dimensionless heat capacity using NASA polynomial form
