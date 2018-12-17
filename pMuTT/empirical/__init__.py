@@ -12,6 +12,7 @@ from pMuTT import _pass_expected_arguments
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
+
 class BaseThermo:
     """The empirical parent class.
     Holds properties of a specie, the statistical-mechanical thermodynamic
@@ -43,8 +44,8 @@ class BaseThermo:
             computational set up. Default is None
     """
 
-    def __init__(self, name=None, phase=None, elements=None, statmech_model=None,
-                 references=None, notes=None, **kwargs):
+    def __init__(self, name=None, phase=None, elements=None,
+                 statmech_model=None, references=None, notes=None, **kwargs):
         self.name = name
         self.phase = phase
         self.elements = elements
@@ -93,11 +94,11 @@ class BaseThermo:
                 Units to plot heat capacity. See :func:`~pMuTT.constants.R`
                 for accepted units. If not specified, dimensionless units used.
             H_units : str
-                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for accepted
-                units but omit the '/K' (e.g. J/mol). If not specified,
-                dimensionless units used.
+                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for
+                accepted units but omit the '/K' (e.g. J/mol). If not
+                specified, dimensionless units used.
             S_units : str
-                Units to plot entropy. See :func:`~pMuTT.constants.R` for 
+                Units to plot entropy. See :func:`~pMuTT.constants.R` for
                 accepted units. If not specified, dimensionless units used.
             G_units : str
                 Units to plot Gibbs free energy. See :func:`~pMuTT.constants.R`
@@ -173,7 +174,7 @@ class BaseThermo:
         return f, ax
 
     def plot_statmech(self, T_low=None, T_high=None, Cp_units=None,
-                          H_units=None, S_units=None, G_units=None):
+                      H_units=None, S_units=None, G_units=None):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
 
@@ -277,8 +278,8 @@ class BaseThermo:
         return f, ax
 
     def plot_statmech_and_empirical(self, T_low=None, T_high=None,
-                                        Cp_units=None, H_units=None,
-                                        S_units=None, G_units=None):
+                                    Cp_units=None, H_units=None,
+                                    S_units=None, G_units=None):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
 
@@ -294,11 +295,11 @@ class BaseThermo:
                 Units to plot heat capacity. See :func:`~pMuTT.constants.R` for
                 accepted units. If not specified, dimensionless units used.
             H_units : str
-                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for 
-                accepted units but omit the '/K' (e.g. J/mol). If not specified,
-                dimensionless units used.
+                Units to plot enthalpy. See :func:`~pMuTT.constants.R` for
+                accepted units but omit the '/K' (e.g. J/mol). If not
+                specified, dimensionless units used.
             S_units : str
-                Units to plot entropy. See :func:`~pMuTT.constants.R` for 
+                Units to plot entropy. See :func:`~pMuTT.constants.R` for
                 accepted units. If not specified, dimensionless units used.
             G_units : str
                 Units to plot Gibbs free energy. See :func:`~pMuTT.constants.R`
@@ -457,7 +458,7 @@ class BaseThermo:
         try:
             iter(T)
         except TypeError:
-            HoRT_statmech = np.array([self.statmech_model.get_HoRT(T=T_i) \
+            HoRT_statmech = np.array([self.statmech_model.get_HoRT(T=T_i)
                                       + H_offset for T_i in T])
             HoRT_empirical = self.get_HoRT(T=T)
         else:
@@ -495,7 +496,7 @@ class BaseThermo:
         try:
             iter(T)
         except TypeError:
-            SoR_statmech = np.array([self.statmech_model.get_SoR(T=T_i) \
+            SoR_statmech = np.array([self.statmech_model.get_SoR(T=T_i)
                                      for T_i in T])
             SoR_empirical = self.get_SoR(T=T)
         else:
@@ -551,7 +552,7 @@ class BaseThermo:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -560,7 +561,7 @@ class BaseThermo:
                     'name': self.name,
                     'phase': self.phase,
                     'elements': self.elements,
-                    'notes': self.notes,}
+                    'notes': self.notes, }
         try:
             obj_dict['references'] = self.references.to_dict()
         except AttributeError:
@@ -588,8 +589,8 @@ class BaseThermo:
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = \
-                json_to_pMuTT(json_obj['statmech_model'])
+            json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
-                json_to_pMuTT(json_obj['references'])
+            json_to_pMuTT(json_obj['references'])
 
         return cls(**json_obj)

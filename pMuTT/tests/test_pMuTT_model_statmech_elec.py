@@ -75,20 +75,20 @@ class TestIdealElec(unittest.TestCase):
         self.assertAlmostEqual(self.elec_OH.get_SoR(), np.log(2.))
         self.assertAlmostEqual(self.elec_O2.get_SoR(), np.log(3.))
 
-    def test_get_AoRT(self):
-        self.assertTrue(np.isclose(self.elec_H2.get_AoRT(T=self.T),
+    def test_get_FoRT(self):
+        self.assertTrue(np.isclose(self.elec_H2.get_FoRT(T=self.T),
                         -2.614722E+02))
-        self.assertTrue(np.isclose(self.elec_OH.get_AoRT(T=self.T),
+        self.assertTrue(np.isclose(self.elec_OH.get_FoRT(T=self.T),
                         -2.929317E+02))
-        self.assertTrue(np.isclose(self.elec_O2.get_AoRT(T=self.T),
+        self.assertTrue(np.isclose(self.elec_O2.get_FoRT(T=self.T),
                         -3.825937E+02))
 
     def test_get_GoRT(self):
-        self.assertTrue(np.isclose(self.elec_H2.get_AoRT(T=self.T),
+        self.assertTrue(np.isclose(self.elec_H2.get_FoRT(T=self.T),
                         -2.614722E+02))
-        self.assertTrue(np.isclose(self.elec_OH.get_AoRT(T=self.T),
+        self.assertTrue(np.isclose(self.elec_OH.get_FoRT(T=self.T),
                         -2.929317E+02))
-        self.assertTrue(np.isclose(self.elec_O2.get_AoRT(T=self.T),
+        self.assertTrue(np.isclose(self.elec_O2.get_FoRT(T=self.T),
                         -3.825937E+02))
 
     def test_to_dict(self):

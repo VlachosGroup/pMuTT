@@ -69,14 +69,14 @@ class TestIdealTrans(unittest.TestCase):
         self.assertTrue(np.isclose(self.trans_3D.get_SoR(T=self.T, P=self.P), 
                                    1.9504035007E+01))        
 
-    def test_get_AoRT(self):
+    def test_get_FoRT(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_AoRT(T=self.T, P=self.P), 
+        self.assertTrue(np.isclose(self.trans_1D.get_FoRT(T=self.T, P=self.P), 
                                    3.2294507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_AoRT(T=self.T, P=self.P), 
+        self.assertTrue(np.isclose(self.trans_2D.get_FoRT(T=self.T, P=self.P), 
                                    7.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_AoRT(T=self.T, P=self.P), 
+        self.assertTrue(np.isclose(self.trans_3D.get_FoRT(T=self.T, P=self.P), 
                                    -1.8004035007E+01))        
 
     def test_get_GoRT(self):

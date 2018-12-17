@@ -283,7 +283,7 @@ class Reaction:
         return self._get_state_quantity(state=state, method_name='get_SoR', 
                                         **kwargs)
 
-    def get_AoRT_state(self, state, **kwargs):
+    def get_FoRT_state(self, state, **kwargs):
         """Gets dimensionless Helmholtz energy at a state
 
         Parameters
@@ -301,10 +301,10 @@ class Reaction:
                 different species.
         Returns
         -------
-            AoRT : float
+            FoRT : float
                 Dimensionless Helmoltz energy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_AoRT', 
+        return self._get_state_quantity(state=state, method_name='get_FoRT', 
                                         **kwargs)
 
     def get_GoRT_state(self, state, **kwargs):
@@ -510,7 +510,7 @@ class Reaction:
                                                   **kwargs)
         return delta_SoR
 
-    def get_delta_AoRT(self, rev=False, **kwargs):
+    def get_delta_FoRT(self, rev=False, **kwargs):
         """Gets change in dimensionless Helmholtz energy between reactants and 
         products
 
@@ -525,20 +525,20 @@ class Reaction:
                 species.
         Returns
         -------
-            delta_AoRT : float
+            delta_FoRT : float
                 Change in Helmholtz energy between reactants and products
         """
         if rev:
-            delta_AoRT = self._get_delta_quantity(initial_state='products', 
+            delta_FoRT = self._get_delta_quantity(initial_state='products', 
                                                   final_state='reactants', 
-                                                  method_name='get_AoRT', 
+                                                  method_name='get_FoRT', 
                                                   **kwargs)
         else:
-            delta_AoRT = self._get_delta_quantity(initial_state='reactants', 
+            delta_FoRT = self._get_delta_quantity(initial_state='reactants', 
                                                   final_state='products', 
-                                                  method_name='get_AoRT', 
+                                                  method_name='get_FoRT', 
                                                   **kwargs)
-        return delta_AoRT
+        return delta_FoRT
 
     def get_delta_GoRT(self, rev=False, **kwargs):
         """Gets change in dimensionless Gibbs energy between reactants and 
@@ -823,7 +823,7 @@ class Reaction:
         return SoR_act
 
 
-    def get_AoRT_act(self, rev=False, **kwargs):
+    def get_FoRT_act(self, rev=False, **kwargs):
         """Gets change in dimensionless Helmholtz energy between reactants (or 
         products) and transition state
 
@@ -838,21 +838,21 @@ class Reaction:
                 different species.
         Returns
         -------
-            AoRT_act : float
+            FoRT_act : float
                 Change in dimensionless Helmholtz energy between reactants and 
                 transition state
         """
         if rev:
-            AoRT_act = self._get_delta_quantity(initial_state='products', 
+            FoRT_act = self._get_delta_quantity(initial_state='products', 
                                                 final_state='transition state', 
-                                                method_name='get_AoRT', 
+                                                method_name='get_FoRT', 
                                                 **kwargs)
         else:
-            AoRT_act = self._get_delta_quantity(initial_state='reactants', 
+            FoRT_act = self._get_delta_quantity(initial_state='reactants', 
                                                 final_state='transition state', 
-                                                method_name='get_AoRT', 
+                                                method_name='get_FoRT', 
                                                 **kwargs)
-        return AoRT_act
+        return FoRT_act
 
 
     def get_GoRT_act(self, rev=False, **kwargs):

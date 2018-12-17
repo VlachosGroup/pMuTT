@@ -134,7 +134,7 @@ class IdealElec:
         """
         return np.log(self._degeneracy)
 
-    def get_AoRT(self, T):
+    def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
 
         :math:`\\frac{A^{elec}}{RT}=\\frac{U^{elec}}{RT}-\\frac{S^{elec}}{R}`
@@ -145,7 +145,7 @@ class IdealElec:
                 Temperature in K
         Returns
         -------
-            AoRT_elec : float
+            FoRT_elec : float
                 Electronic dimensionless Helmholtz energy
         """
         return self.get_UoRT(T=T) - self.get_SoR()

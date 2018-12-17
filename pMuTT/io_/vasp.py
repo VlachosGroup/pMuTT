@@ -20,6 +20,7 @@ def take_vib_wavenumber_from_line(in_line):
     vib_wavenumber: float
             vibrational wavenumber in cm-1
     """
+
     pattern = re.compile(r'(\d+\.?\d+) cm-1')  # pattern for frequency in cm-1
     m = pattern.search(in_line)
     try:
@@ -32,6 +33,7 @@ def take_vib_wavenumber_from_line(in_line):
 
 def set_vib_wavenumbers_from_outcar(in_file, output_structure,
                                     min_frequency_cutoff):
+
     """Parses OUTCAR files and assigns to output_structure['vib_wavenumber']
 
     Parameters
@@ -48,7 +50,6 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
     -------
         output_structure: dict
             output_structure with new vibration added
-
     """
     if not os.path.isfile(in_file):
         raise FileNotFoundError('invalid outcar filename: {}'.format(in_file))
