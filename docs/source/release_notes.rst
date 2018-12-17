@@ -3,6 +3,19 @@
 Release Notes
 *************
 
+Version 1.2.1
+-------------
+Dec. 17, 2018
+
+- Added ``vib_outcar`` special rule for :func:`~pMuTT.io_.excel.read_excel` and
+  :func:`~pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar` to get vibrational 
+  frequencies directly from OUTCAR file.
+- Added ``get_X`` methods to :class:`~pMuTT.empirical.nasa.Nasa`, 
+  :class:`~pMuTT.empirical.shomate.Shomate`, :class:`~pMuTT.statmech.StatMech` 
+  and :class:`~pMuTT.reaction.Reaction` to directly calculate thermodynamic 
+  properties (such as H, S, F, G) with the appropriate units
+- Changed symbol for Hemlholtz energy from A to F
+
 Version 1.2.0
 -------------
 Dec. 12, 2018

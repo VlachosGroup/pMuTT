@@ -449,6 +449,17 @@ use the ``json_to_pMuTT`` object hook to remake these objects. An example using
                   elec_model=elec_model,
                   nucl_model=nucl_model)
 
+VASP
+====
+
+.. autofunction:: pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar
+
+Gaussian
+========
+
+.. automodule:: pMuTT.io_.gaussian
+   :members:
+
 Chemkin
 =======
 

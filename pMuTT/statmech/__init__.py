@@ -300,7 +300,7 @@ class StatMech:
         else:
             return np.sum(UoRT)
 
-    def get_U(self, units, T, verbose=False, **kwargs):
+    def get_U(self, units, T=c.T0('K'), verbose=False, **kwargs):
         """Calculate the internal energy
 
         Parameters
@@ -357,7 +357,7 @@ class StatMech:
         else:
             return np.sum(HoRT)
 
-    def get_H(self, units, T, verbose=False, **kwargs):
+    def get_H(self, units, T=c.T0('K'), verbose=False, **kwargs):
         """Calculate the enthalpy
 
         Parameters
@@ -468,7 +468,7 @@ class StatMech:
         else:
             return np.sum(FoRT)
 
-    def get_F(self, units, T, verbose=False, **kwargs):
+    def get_F(self, units, T=c.T0('K'), verbose=False, **kwargs):
         """Calculate the Helmholtz energy
 
         Parameters
@@ -525,7 +525,7 @@ class StatMech:
         else:
             return np.sum(GoRT)
 
-    def get_G(self, units, T, verbose=False, **kwargs):
+    def get_G(self, units, T=c.T0('K'), verbose=False, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters

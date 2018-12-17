@@ -47,18 +47,23 @@ class RigidRotor:
         atoms : ase.Atoms object, optional
             An atoms object can be used to calculate rot_temperatures and
             guess geometry
+        degree_tol : float
+            Degree tolerance to estimate geometry. Only required if estimating
+            geometry or rot_temperatures
     """
 
     def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None, 
-                 atoms=None):
+                 atoms=None, degree_tol=5.):
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
-            self.rot_temperatures = get_rot_temperatures_from_atoms(atoms=atoms)
+            self.rot_temperatures = get_rot_temperatures_from_atoms(
+                    atoms=atoms, degree_tol=degree_tol)
         else:
             self.rot_temperatures = rot_temperatures
 
         if geometry is None and atoms is not None:
-            self.geometry = get_geometry_from_atoms(atoms=atoms)
+            self.geometry = get_geometry_from_atoms(
+                    atoms=atoms, degree_tol=degree_tol)
         else:
             self.geometry = geometry
 
@@ -264,7 +269,7 @@ class RigidRotor:
         json_obj = remove_class(json_obj)
         return cls(**json_obj)        
 
-def get_rot_temperatures_from_atoms(atoms, geometry=None):
+def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     """Calculate the rotational temperatures from ase.Atoms object
 
     Parameters
@@ -274,13 +279,15 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
         geometry : str, optional
             Geometry of molecule. If not specified, it will be guessed from
             Atoms object.
+        degree_tol : float, optional
+            Degree tolerance in degrees. Default is 5 degrees
     Returns
     -------
         rot_temperatures : list of float
             Rotational temperatures
     """
     if geometry is None:
-        geometry = get_geometry_from_atoms(atoms)
+        geometry = get_geometry_from_atoms(atoms=atoms, degree_tol=degree_tol)
 
     rot_temperatures = []
     for moment in atoms.get_moments_of_inertia():
@@ -314,8 +321,8 @@ def get_geometry_from_atoms(atoms, degree_tol=5.):
     ----------
         atoms : ase.Atoms object
             Atoms object
-        degree_tol : float
-            Degree tolerance in degrees
+        degree_tol : float, optional
+            Degree tolerance in degrees. Default is 5 degrees
     Returns
     -------
         geometry : str

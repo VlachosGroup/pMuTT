@@ -65,6 +65,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - rot_temperature (:func:`~pMuTT.io_.excel.set_rot_temperatures`)
         - nasa.a_low (:func:`~pMuTT.io_.excel.set_nasa_a_low`)
         - nasa.a_high (:func:`~pMuTT.io_.excel.set_nasa_a_high`)
+        - vib_outcar (:func:`~pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """

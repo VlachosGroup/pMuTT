@@ -14,11 +14,11 @@ def take_vib_wavenumber_from_line(in_line):
     Parameters
     ----------
     in_line: str
-            line containing frequency in OUTCAR
+        Line containing frequency in OUTCAR
     Returns
     -------
     vib_wavenumber: float
-            vibrational wavenumber in cm-1
+        Vibrational wavenumber in cm-1
     """
 
     pattern = re.compile(r'(\d+\.?\d+) cm-1')  # pattern for frequency in cm-1
@@ -49,18 +49,18 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
     Returns
     -------
         output_structure: dict
-            output_structure with new vibration added
+            Output_structure with new vibration added
+    Raises
+    ------
+        FileNotFoundError
+            Raised if in_file does not exist
     """
     if not os.path.isfile(in_file):
-        raise FileNotFoundError('invalid outcar filename: {}'.format(in_file))
+        raise FileNotFoundError('Invalid OUTCAR filename: {}'.format(in_file))
     real_vib_wavenumbers = list()
     real_pattern = re.compile(r'f[ ]*=')  # pattern for real frequencies
-    try:
-        with open(in_file, "r") as out_fp:
-            outcar_contents = out_fp.readlines()
-    except Exception as e:
-        # Unknown error opening file
-        raise e
+    with open(in_file, "r") as out_fp:
+        outcar_contents = out_fp.readlines()
     for line in outcar_contents:
         if real_pattern.search(line):
             try:
