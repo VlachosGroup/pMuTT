@@ -96,14 +96,11 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0
                 thermo_data = set_vib_wavenumbers(value=cell_data,
                                                   output_structure=thermo_data)
             elif 'vib_outcar' in col:
-                try:
-                    thermo_data = set_vib_wavenumbers_from_outcar(in_file=cell_data,
-                                                                  output_structure=thermo_data,
-                                                                  min_frequency_cutoff=min_frequency_cutoff)
-                except FileNotFoundError as e:
-                    raise e
-                else:
-                    vib_set_by_outcar = True
+                thermo_data = set_vib_wavenumbers_from_outcar(
+                    in_file=cell_data,
+                    output_structure=thermo_data,
+                    min_frequency_cutoff=min_frequency_cutoff)
+                vib_set_by_outcar = True
             elif 'rot_temperature' in col:
                 thermo_data = set_rot_temperatures(value=cell_data,
                                                    output_structure=thermo_data)
