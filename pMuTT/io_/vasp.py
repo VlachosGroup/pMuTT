@@ -9,14 +9,18 @@ import re
 
 
 def take_vib_wavenumber_from_line(in_line):
-    """
+    """Parses in_line for real frequencies
 
-    :param in_line: str
-                    line containing frequency in OUTCAR
-    :return: vib_wavenumber: float
-                             vibrational wavenumber in cm-1
+    Parameters
+    ----------
+    in_line: str
+            line containing frequency in OUTCAR
+    Returns
+    -------
+    vib_wavenumber: float
+            vibrational wavenumber in cm-1
     """
-    pattern = re.compile(r'(\d+\.?\d+) cm-1')  # pattern for numerical frequency in cm-1
+    pattern = re.compile(r'(\d+\.?\d+) cm-1')  # pattern for frequency in cm-1
     m = pattern.search(in_line)
     try:
         vib_wavenumber = float(m[1])
@@ -26,18 +30,24 @@ def take_vib_wavenumber_from_line(in_line):
         raise e
 
 
-def set_vib_wavenumbers_from_outcar(in_file, output_structure, min_frequency_cutoff):
-    """
+def set_vib_wavenumbers_from_outcar(in_file, output_structure,
+                                    min_frequency_cutoff):
+    """Parses OUTCAR files and assigns to output_structure['vib_wavenumber']
 
-    :param in_file: str
-                    OUTCAR file of frequency jobs
-           output_structure: dict
-                             Structure to assign value. Will assign to
-                             output_structure['elements'][element]
-           min_frequency_cutoff: float
-                              Frequencies > min_frequency_cutoff (cm-1) read from OUTCAR
-    :return: output_structure: dict
-                               output_structure with new vibration added
+    Parameters
+    ----------
+        in_file: str
+            OUTCAR file of frequency jobs
+        output_structure: dict
+            Structure to assign value. Will assign to
+            output_structure['elements'][element]
+        min_frequency_cutoff: float
+            Frequencies > min_frequency_cutoff (cm-1)
+            read from OUTCAR
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new vibration added
 
     """
     if not os.path.isfile(in_file):
