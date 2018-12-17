@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pMuTT 1.2.0 documentation</title>
+  <title>Index &mdash; pMuTT 1.2.1 documentation</title>
   
 
   
@@ -305,9 +305,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.D0">D0 (pMuTT.statmech.elec.IdealElec attribute)</a>
 </li>
+      <li><a href="io.html#pMuTT.io_.jsonio.pMuTTEncoder.default">default() (pMuTT.io_.jsonio.pMuTTEncoder method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="io.html#pMuTT.io_.jsonio.pMuTTEncoder.default">default() (pMuTT.io_.jsonio.pMuTTEncoder method)</a>
+      <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.degree_tol">degree_tol (pMuTT.statmech.rot.RigidRotor attribute)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.descriptor">descriptor (pMuTT.reaction.bep.BEP attribute)</a>
 </li>
@@ -425,27 +427,17 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_A">get_A() (pMuTT.reaction.Reaction method)</a>
 </li>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_AoRT">get_AoRT() (pMuTT.statmech.elec.IdealElec method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_Cp">get_Cp() (pMuTT.empirical.nasa.Nasa method)</a>
 
       <ul>
-        <li><a href="statmech.html#pMuTT.statmech.StatMech.get_AoRT">(pMuTT.statmech.StatMech method)</a>
+        <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_Cp">(pMuTT.empirical.shomate.Shomate method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_AoRT">(pMuTT.statmech.nucl.IdealNucl method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_AoRT">(pMuTT.statmech.rot.RigidRotor method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_AoRT">(pMuTT.statmech.trans.IdealTrans method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_AoRT">(pMuTT.statmech.vib.EinsteinVib method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.vib.HarmonicVib.get_AoRT">(pMuTT.statmech.vib.HarmonicVib method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib.get_AoRT">(pMuTT.statmech.vib.QRRHOVib method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.get_Cp">(pMuTT.statmech.StatMech method)</a>
 </li>
       </ul></li>
-      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_AoRT_act">get_AoRT_act() (pMuTT.reaction.Reaction method)</a>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_Cp_act">get_Cp_act() (pMuTT.reaction.Reaction method)</a>
 </li>
-      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_AoRT_state">get_AoRT_state() (pMuTT.reaction.Reaction method)</a>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_Cp_state">get_Cp_state() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_CpoR">get_CpoR() (pMuTT.empirical.nasa.Nasa method)</a>
 
@@ -473,6 +465,12 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_CpoR_state">get_CpoR_state() (pMuTT.reaction.Reaction method)</a>
 </li>
+      <li><a href="statmech.html#pMuTT.statmech.StatMech.get_Cv">get_Cv() (pMuTT.statmech.StatMech method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_Cv_act">get_Cv_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_Cv_state">get_Cv_state() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_CvoR">get_CvoR() (pMuTT.statmech.elec.IdealElec method)</a>
 
       <ul>
@@ -495,19 +493,33 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_CvoR_state">get_CvoR_state() (pMuTT.reaction.Reaction method)</a>
 </li>
-      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_AoRT">get_delta_AoRT() (pMuTT.reaction.Reaction method)</a>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_Cp">get_delta_Cp() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_CpoR">get_delta_CpoR() (pMuTT.reaction.Reaction method)</a>
 </li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_Cv">get_delta_Cv() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_CvoR">get_delta_CvoR() (pMuTT.reaction.Reaction method)</a>
 </li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_F">get_delta_F() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_FoRT">get_delta_FoRT() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_G">get_delta_G() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_GoRT">get_delta_GoRT() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_H">get_delta_H() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_HoRT">get_delta_HoRT() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_q">get_delta_q() (pMuTT.reaction.Reaction method)</a>
 </li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_S">get_delta_S() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_SoR">get_delta_SoR() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_U">get_delta_U() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_delta_UoRT">get_delta_UoRT() (pMuTT.reaction.Reaction method)</a>
 </li>
@@ -515,12 +527,54 @@
 </li>
       <li><a href="empirical.html#pMuTT.empirical.references.References.get_descriptors_matrix">get_descriptors_matrix() (pMuTT.empirical.references.References method)</a>
 </li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_E_act">get_E_act() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.get_EoRT_act">get_EoRT_act() (pMuTT.reaction.bep.BEP method)</a>
 
       <ul>
         <li><a href="reactions.html#pMuTT.reaction.Reaction.get_EoRT_act">(pMuTT.reaction.Reaction method)</a>
 </li>
       </ul></li>
+      <li><a href="statmech.html#pMuTT.statmech.StatMech.get_F">get_F() (pMuTT.statmech.StatMech method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_F_act">get_F_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_F_state">get_F_state() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_FoRT">get_FoRT() (pMuTT.statmech.elec.IdealElec method)</a>
+
+      <ul>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.get_FoRT">(pMuTT.statmech.StatMech method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_FoRT">(pMuTT.statmech.nucl.IdealNucl method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_FoRT">(pMuTT.statmech.rot.RigidRotor method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_FoRT">(pMuTT.statmech.trans.IdealTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_FoRT">(pMuTT.statmech.vib.EinsteinVib method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.HarmonicVib.get_FoRT">(pMuTT.statmech.vib.HarmonicVib method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib.get_FoRT">(pMuTT.statmech.vib.QRRHOVib method)</a>
+</li>
+      </ul></li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_FoRT_act">get_FoRT_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_FoRT_state">get_FoRT_state() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_G">get_G() (pMuTT.empirical.nasa.Nasa method)</a>
+
+      <ul>
+        <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_G">(pMuTT.empirical.shomate.Shomate method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.get_G">(pMuTT.statmech.StatMech method)</a>
+</li>
+      </ul></li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_G_act">get_G_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_G_state">get_G_state() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_GoRT">get_GoRT() (pMuTT.empirical.nasa.Nasa method)</a>
 
       <ul>
@@ -543,6 +597,8 @@
         <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib.get_GoRT">(pMuTT.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.get_GoRT_1D">get_GoRT_1D() (pMuTT.reaction.phasediagram.PhaseDiagram method)</a>
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.get_GoRT_2D">get_GoRT_2D() (pMuTT.reaction.phasediagram.PhaseDiagram method)</a>
@@ -551,8 +607,18 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_GoRT_state">get_GoRT_state() (pMuTT.reaction.Reaction method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_H">get_H() (pMuTT.empirical.nasa.Nasa method)</a>
+
+      <ul>
+        <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_H">(pMuTT.empirical.shomate.Shomate method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.get_H">(pMuTT.statmech.StatMech method)</a>
+</li>
+      </ul></li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_H_act">get_H_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_H_state">get_H_state() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_HoRT">get_HoRT() (pMuTT.empirical.nasa.Nasa method)</a>
 
       <ul>
@@ -619,6 +685,18 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_q_state">get_q_state() (pMuTT.reaction.Reaction method)</a>
 </li>
+      <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_S">get_S() (pMuTT.empirical.nasa.Nasa method)</a>
+
+      <ul>
+        <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_S">(pMuTT.empirical.shomate.Shomate method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.get_S">(pMuTT.statmech.StatMech method)</a>
+</li>
+      </ul></li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_S_act">get_S_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_S_state">get_S_state() (pMuTT.reaction.Reaction method)</a>
+</li>
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_SoR">get_SoR() (pMuTT.empirical.nasa.Nasa method)</a>
 
       <ul>
@@ -652,6 +730,12 @@
 </li>
       </ul></li>
       <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.get_Tc">get_Tc() (pMuTT.eos.vanDerWaalsEOS method)</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.StatMech.get_U">get_U() (pMuTT.statmech.StatMech method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_U_act">get_U_act() (pMuTT.reaction.Reaction method)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_U_state">get_U_state() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_UoRT">get_UoRT() (pMuTT.statmech.elec.IdealElec method)</a>
 
@@ -802,6 +886,10 @@
       <li><a href="empirical.html#pMuTT.empirical.references.References.offset">offset (pMuTT.empirical.references.References attribute)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="empirical.html#pMuTT.empirical.references.References.optional">optional (pMuTT.empirical.references.References attribute)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
@@ -841,8 +929,6 @@
         <li><a href="empirical.html#pMuTT.empirical.zacros.Zacros.plot_statmech">(pMuTT.empirical.zacros.Zacros method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#pMuTT.empirical.BaseThermo.plot_statmech_and_empirical">plot_statmech_and_empirical() (pMuTT.empirical.BaseThermo method)</a>
 
       <ul>
@@ -855,9 +941,13 @@
         <li><a href="empirical.html#pMuTT.empirical.zacros.Zacros.plot_statmech_and_empirical">(pMuTT.empirical.zacros.Zacros method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#module-pMuTT.constants">pMuTT.constants (module)</a>
 </li>
       <li><a href="io.html#module-pMuTT.io_.chemkin">pMuTT.io_.chemkin (module)</a>
+</li>
+      <li><a href="io.html#module-pMuTT.io_.gaussian">pMuTT.io_.gaussian (module)</a>
 </li>
       <li><a href="io.html#module-pMuTT.io_.jsonio">pMuTT.io_.jsonio (module)</a>
 </li>
@@ -909,13 +999,27 @@
         <li><a href="reactions.html#pMuTT.reaction.Reactions.reactions">(pMuTT.reaction.Reactions attribute)</a>
 </li>
       </ul></li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_electronic_and_zpe">read_electronic_and_zpe() (in module pMuTT.io_.gaussian)</a>
+</li>
       <li><a href="io.html#pMuTT.io_.excel.read_excel">read_excel() (in module pMuTT.io_.excel)</a>
+</li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_frequencies">read_frequencies() (in module pMuTT.io_.gaussian)</a>
+</li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_molecular_mass">read_molecular_mass() (in module pMuTT.io_.gaussian)</a>
+</li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_pattern">read_pattern() (in module pMuTT.io_.gaussian)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pMuTT.io_.chemkin.read_reactions">read_reactions() (in module pMuTT.io_.chemkin)</a>
 </li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_rot_symmetry_num">read_rot_symmetry_num() (in module pMuTT.io_.gaussian)</a>
+</li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_rotational_temperatures">read_rotational_temperatures() (in module pMuTT.io_.gaussian)</a>
+</li>
       <li><a href="io.html#pMuTT.io_.thermdat.read_thermdat">read_thermdat() (in module pMuTT.io_.thermdat)</a>
+</li>
+      <li><a href="io.html#pMuTT.io_.gaussian.read_zpe">read_zpe() (in module pMuTT.io_.gaussian)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.references.Reference">Reference (class in pMuTT.empirical.references)</a>
 </li>
@@ -955,11 +1059,13 @@
 </li>
       <li><a href="io.html#pMuTT.io_.excel.set_rot_temperatures">set_rot_temperatures() (in module pMuTT.io_.excel)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pMuTT.io_.excel.set_statmech_model">set_statmech_model() (in module pMuTT.io_.excel)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pMuTT.io_.excel.set_vib_wavenumbers">set_vib_wavenumbers() (in module pMuTT.io_.excel)</a>
+</li>
+      <li><a href="io.html#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar">set_vib_wavenumbers_from_outcar() (in module pMuTT.io_.vasp)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate">Shomate (class in pMuTT.empirical.shomate)</a>
 </li>
@@ -1146,7 +1252,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2.0',
+            VERSION:'1.2.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

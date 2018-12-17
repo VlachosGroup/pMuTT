@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.0 documentation</title>
+  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.1 documentation</title>
   
 
   
@@ -452,9 +452,9 @@ compare our Shomate’s estimates to the experimental data fed.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">CpoR_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_CpoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
-<span class="n">HoRT_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_HoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_ref</span><span class="p">)</span>
-<span class="n">SoR_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_SoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_ref</span><span class="p">)</span>
+<span></span><span class="n">Cp_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_Cp</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
+<span class="n">H_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span class="n">S_shomate</span> <span class="o">=</span> <span class="n">CH3OH_shomate</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -472,12 +472,18 @@ computational values.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T(K)</span><span class="se">\t</span><span class="s1">Cp/R expt</span><span class="se">\t</span><span class="s1">Cp/R shomate&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">T_i</span><span class="p">,</span> <span class="n">CpoR1</span><span class="p">,</span> <span class="n">CpoR2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="p">,</span> <span class="n">CpoR_shomate</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_i</span><span class="p">,</span> <span class="n">CpoR1</span><span class="p">,</span> <span class="n">CpoR2</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T(K)</span><span class="se">\t</span><span class="s1">Cp expt (J/mol/K)</span><span class="se">\t</span><span class="s1">Cp shomate (J/mol/K)&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">T_i</span><span class="p">,</span> <span class="n">Cp1</span><span class="p">,</span> <span class="n">Cp2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Cp</span><span class="p">,</span> <span class="n">Cp_shomate</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_i</span><span class="p">,</span> <span class="n">Cp1</span><span class="p">,</span> <span class="n">Cp2</span><span class="p">))</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T(K)</span><span class="se">\t</span><span class="s1">H/RT expt</span><span class="se">\t</span><span class="s1">H/RT shomate</span><span class="se">\t</span><span class="s1">S/R expt</span><span class="se">\t</span><span class="s1">S/R shomate&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">HoRT_ref</span><span class="p">,</span> <span class="n">HoRT_shomate</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="p">,</span> <span class="n">SoR_shomate</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T_ref: </span><span class="si">{}</span><span class="s1"> K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_ref</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H expt: </span><span class="si">{}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_ref</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H shomate: </span><span class="si">{}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_shomate</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S expt: </span><span class="si">{}</span><span class="s1"> J/mol/K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_ref</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S shomate: </span><span class="si">{}</span><span class="s1"> J/mol/K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_shomate</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -486,34 +492,40 @@ computational values.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-T(K)    Cp/R expt       Cp/R shomate
-50.0    4.089261457491201       4.2462937803011
-100.0   4.444065025126467       3.887435076040005
-150.0   4.647325374042942       4.248590732545086
-200.0   4.776016837558106       4.700924303679724
-273.15  5.122401337486773       5.382028015721733
-298.15  5.299201759325363       5.611831494722603
-300.0   5.3124317228643045      5.628731751319061
-400.0   6.209663795596198       6.516104928119512
-500.0   7.180262029771315       7.346201774978482
-600.0   8.081102274377464       8.11677659235667
-700.0   8.883319154420592       8.82872687988886
-800.0   9.592926289691125       9.483904139246727
-900.0   10.217140023937574      10.084517295924769
-1000.0  10.769190320698888      10.632930019579186
-1100.0  11.253888075807401      11.131580481743772
-1200.0  11.680855080927808      11.582945774034377
-1300.0  12.056104955850529      11.989524682643335
-1400.0  12.385651320365998      12.353828743086146
-1500.0  12.676710518222723      12.678377320000502
-1750.0  13.254018018103835      13.332392406127097
-2000.0  13.686998643014666      13.793235457514909
-2250.0  14.011734111697793      14.100477078044996
-2500.0  14.264306142895778      14.29371263066431
-2750.0  14.432687497027768      14.412549398620191
-3000.0  14.552959892836334      14.49660089237314
-T(K)    H/RT expt       H/RT shomate    S/R expt        S/R shomate
-298.15  -82.6960963969672       -82.6960963969672       28.853347754474683      28.853347754474683
+T(K)    Cp expt (J/mol/K)       Cp shomate (J/mol/K)
+50.0    34.0    35.30563893530353
+100.0   36.95   32.321922664844564
+150.0   38.64   35.32473685239867
+200.0   39.71   39.085646145788054
+273.15  42.59   44.74865557919212
+298.15  44.06   46.65934736724499
+300.0   44.17   46.79986387132593
+400.0   51.63   54.17789247743157
+500.0   59.7    61.07969934074723
+600.0   67.19   67.48661268273052
+700.0   73.86   73.40609472801535
+800.0   79.76   78.8535397128205
+900.0   84.95   83.8473136593712
+1000.0  89.54   88.40706920400436
+1100.0  93.57   92.55307842592322
+1200.0  97.12   96.30593700378871
+1300.0  100.24  99.68642099494576
+1400.0  102.98  102.71541246047428
+1500.0  105.4   105.41385855637591
+1750.0  110.2   110.85164069856901
+2000.0  113.8   114.68330172344231
+2250.0  116.5   117.23784982622658
+2500.0  118.6   118.84449906041064
+2750.0  120.0   119.83256259034175
+3000.0  121.0   120.5314053562806
+-
+T_ref: 298.15 K
+-
+H expt: -205.0 kJ/mol
+H shomate: -205.0 kJ/mol
+-
+S expt: 239.9 J/mol/K
+S shomate: 239.9 J/mol/K
 </pre></div></div>
 </div>
 </div>
@@ -673,7 +685,7 @@ Shomate object for Name: CH3OH
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.2.0',
+            VERSION:'1.2.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

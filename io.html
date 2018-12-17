@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pMuTT 1.2.0 documentation</title>
+  <title>Input and Output &mdash; pMuTT 1.2.1 documentation</title>
   
 
   
@@ -114,6 +114,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#vasp">VASP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.gaussian">Gaussian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.chemkin">Chemkin</a></li>
 </ul>
 </li>
@@ -215,7 +217,7 @@
 <h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="pMuTT.io_.excel.read_excel">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0.0, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an excel file and returns it as a list of dictionaries to
 initialize objects</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -227,6 +229,9 @@ initialize objects</p>
 <li><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed).
 Default is [1] so comments can be put in that row</li>
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</li>
+<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Minimum frequency cutoff (cm-1). Frequencies &gt; min_frequency_cutoff
+read from OUTCAR.
+Default 0</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</li>
 <li><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some
 potentially useful parameters include:</p>
@@ -263,6 +268,7 @@ int (i.e. 1.0 –&gt; 1)</li>
 <li>rot_temperature (<a class="reference internal" href="#pMuTT.io_.excel.set_rot_temperatures" title="pMuTT.io_.excel.set_rot_temperatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_rot_temperatures()</span></code></a>)</li>
 <li>nasa.a_low (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_low" title="pMuTT.io_.excel.set_nasa_a_low"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_low()</span></code></a>)</li>
 <li>nasa.a_high (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_high" title="pMuTT.io_.excel.set_nasa_a_high"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_high()</span></code></a>)</li>
+<li>vib_outcar (<a class="reference internal" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a>)</li>
 </ul>
 </dd></dl>
 
@@ -413,7 +419,8 @@ output_structure[‘elements’][element]</li>
 <dl class="function">
 <dt id="pMuTT.io_.excel.set_rot_temperatures">
 <code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses element header and assigns to output_structure[‘rot_temperatures’]</p>
+<dd><p>Parses element header and assigns to output_structure
+[‘rot_temperatures’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1182,6 +1189,181 @@ use the <code class="docutils literal notranslate"><span class="pre">json_to_pMu
 </div>
 </div>
 </div>
+<div class="section" id="vasp">
+<h2>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar">
+<code class="descclassname">pMuTT.io_.vasp.</code><code class="descname">set_vib_wavenumbers_from_outcar</code><span class="sig-paren">(</span><em>in_file</em>, <em>output_structure</em>, <em>min_frequency_cutoff</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses OUTCAR files and assigns to output_structure[‘vib_wavenumber’]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – OUTCAR file of frequency jobs</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
+<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Frequencies &gt; min_frequency_cutoff (cm-1)
+read from OUTCAR</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – Output_structure with new vibration added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – Raised if in_file does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_.gaussian">
+<span id="gaussian"></span><h2>Gaussian<a class="headerlink" href="#module-pMuTT.io_.gaussian" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_electronic_and_zpe">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_electronic_and_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_electronic_and_zpe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the electronic energy and zero-point energy from the
+Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>electronic_and_zero_point_energy</strong> – Electronic and zero point energy in Hartree/particle</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_frequencies">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_frequencies</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_frequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the frequencies from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>frequencies</strong> – Frequencies in 1/cm</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_molecular_mass">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_molecular_mass</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_molecular_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the molecular mass from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>molecular_mass</strong> – Molecular mass in amu</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_pattern">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_pattern</code><span class="sig-paren">(</span><em>filename</em>, <em>pattern</em>, <em>group=0</em>, <em>return_immediately=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the pattern from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Regular expression pattern</li>
+<li><strong>group</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Group to return. Default is 0</li>
+<li><strong>return_immediately</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns after the first instance. If False, reads the
+whole file. Default is True</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out_values</strong> – Value(s) corresponding to pattern.
+- str if return_immediately is True
+- list if return_immediately is False
+If the pattern is not found, returns an empty list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a> or list of str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_rot_symmetry_num">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_rot_symmetry_num</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_rot_symmetry_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the rotational symmetry number from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>rot_symmetry_num</strong> – Rotational symmetry number</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_rotational_temperatures">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_rotational_temperatures</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_rotational_temperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the rotational temperatures from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>rotational_temperatures</strong> – Rotational temperatures in K</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_zpe">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_zpe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the zero-point energy from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>zero_point_energy</strong> – Zero point energy in Hartree/particle</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="module-pMuTT.io_.chemkin">
 <span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
 <p><a href="#id10"><span class="problematic" id="id11">pMuTT.io_</span></a>.chemkin</p>
@@ -1270,7 +1452,7 @@ default = None. Will not return React_obj and Prod_obj</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2.0',
+            VERSION:'1.2.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
