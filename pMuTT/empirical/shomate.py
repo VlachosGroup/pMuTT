@@ -63,6 +63,25 @@ class Shomate(BaseThermo):
         """
         return get_shomate_CpoR(a=self.a, T=T)
 
+    def get_Cp(self, T, units):
+        """Calculate the heat capacity
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+        Returns
+        -------
+            Cp : float or (N,) `numpy.ndarray`_
+                Heat capacity
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_CpoR(T=T)*c.R(units)
+
     def get_HoRT(self, T):
         """Calculate the dimensionless enthalpy
 
@@ -78,6 +97,25 @@ class Shomate(BaseThermo):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return get_shomate_HoRT(a=self.a, T=T)
+
+    def get_H(self, T, units):
+        """Calculate the enthalpy
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+        Returns
+        -------
+            H : float or (N,) `numpy.ndarray`_
+                Enthalpy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_HoRT(T=T)*T*c.R('{}/K'.format(units))
 
     def get_SoR(self, T):
         """Calculate the dimensionless entropy
@@ -95,6 +133,25 @@ class Shomate(BaseThermo):
         """
         return get_shomate_SoR(a=self.a, T=T)
 
+    def get_S(self, T, units):
+        """Calculate the entropy
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+        Returns
+        -------
+            S : float or (N,) `numpy.ndarray`_
+                Entropy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_SoR(T=T)*c.R(units)
+
     def get_GoRT(self, T):
         """Calculate the dimensionless Gibbs free energy
 
@@ -110,6 +167,25 @@ class Shomate(BaseThermo):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return get_shomate_GoRT(a=self.a, T=T)
+
+    def get_G(self, T, units):
+        """Calculate the Gibbs energy
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+        Returns
+        -------
+            G : float or (N,) `numpy.ndarray`_
+                Gibbs energy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_GoRT(T=T)*T*c.R('{}/K'.format(units))
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, **kwargs):
