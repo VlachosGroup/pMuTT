@@ -259,7 +259,7 @@ class Shomate(BaseThermo):
             if descriptor_name == 'elements':
                 descriptors = elements
             else:
-                descriptors = kwargs[descriptor]
+                descriptors = kwargs[descriptor_name]
             HoRT_ref += references.get_HoRT_offset(descriptors=descriptors,
                                                    T=T_ref)
         SoR_ref = statmech_model.get_SoR(T=T_ref)

@@ -241,7 +241,7 @@ class References:
             obj_dict : dict
         """
         obj_dict = {'class': self.__class__,
-                    'offset': self.offset.tolist(),
+                    'offset': self.offset,
                     'descriptor': self.descriptor}
         try:
             obj_dict['references'] = [ref.to_dict() for ref in self.references]
