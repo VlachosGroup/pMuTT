@@ -74,19 +74,19 @@ class StatMech:
         name : str, optional
             Name of the specie. Default is None
         trans_model : :ref:`pMuTT.statmech.trans <trans>` object, optional
-            Deals with translational modes. Default is 
+            Deals with translational modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         vib_model : :ref:`pMuTT.statmech.vib <vib>` object, optional
-            Deals with vibrational modes. Default is 
+            Deals with vibrational modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         rot_model : :ref:`pMuTT.statmech.rot <rot>` object, optional
-            Deals with rotational modes. Default is 
+            Deals with rotational modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         elec_model : :ref:`pMuTT.statmech.elec <elec>` object, optional
-            Deals with electronic modes. Default is 
+            Deals with electronic modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         nucl_model : :ref:`pMuTT.statmech.nucl <nucl>` object
-            Deals with nuclear modes. Default is 
+            Deals with nuclear modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         notes : str, optional
             Any additional details you would like to include such as
@@ -323,7 +323,7 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_UoRT(verbose=verbose, T=T, **kwargs)*T \
-               *c.R('{}/K'.format(units))
+            * c.R('{}/K'.format(units))
 
     def get_HoRT(self, verbose=False, **kwargs):
         """Dimensionless enthalpy
@@ -380,7 +380,7 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_HoRT(verbose=verbose, T=T, **kwargs)*T \
-               *c.R('{}/K'.format(units))
+            * c.R('{}/K'.format(units))
 
     def get_SoR(self, verbose=False, **kwargs):
         """Dimensionless entropy
@@ -491,7 +491,7 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_FoRT(verbose=verbose, T=T, **kwargs)*T \
-               *c.R('{}/K'.format(units))
+            * c.R('{}/K'.format(units))
 
     def get_GoRT(self, verbose=False, **kwargs):
         """Dimensionless Gibbs energy
@@ -548,7 +548,7 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_GoRT(verbose=verbose, T=T, **kwargs)*T \
-               *c.R('{}/K'.format(units))
+            * c.R('{}/K'.format(units))
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

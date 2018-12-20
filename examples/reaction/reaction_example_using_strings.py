@@ -16,7 +16,7 @@ nasa_dict = pMuTT_list_to_dict(nasa_list, key='name')
 Create the reaction object
 '''
 reaction_str = 'H2+0.5O2=H2O'
-rxn_nasa = rxn.Reaction.from_string(reaction_str=reaction_str, 
+rxn_nasa = rxn.Reaction.from_string(reaction_str=reaction_str,
                                     species=nasa_dict)
 
 '''

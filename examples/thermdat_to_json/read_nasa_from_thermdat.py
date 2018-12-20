@@ -1,11 +1,9 @@
 import os
 import json
 import numpy as np
-from pprint import pprint
 from matplotlib import pyplot as plt
 from pMuTT.io_.thermdat import read_thermdat
 from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
-from pMuTT.empirical.nasa import Nasa
 
 base_path = os.path.dirname(__file__)
 thermdat_path = os.path.join(base_path, 'thermdat')
@@ -14,7 +12,8 @@ json_path = os.path.join(base_path, 'nasa_obj.json')
 '''
 Loading thermdat file
 '''
-#Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat
+# Thermdat file from
+# http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat
 species = read_thermdat(thermdat_path)
 
 '''
@@ -32,7 +31,7 @@ Plotting to ensure the object was written and read correctly
 for specie, specie_json in zip(species, species_json):
     T = np.linspace(specie.T_low, specie.T_high)
     plt.figure()
-    f, ax = plt.subplots(4, sharex=True)    
+    f, ax = plt.subplots(4, sharex=True)
     # CpoR Plot
     ax[0].plot(T, specie.get_CpoR(T=T), 'r-', label='Thermdat')
     ax[0].plot(T, specie_json.get_CpoR(T=T), 'b*', label='JSON')

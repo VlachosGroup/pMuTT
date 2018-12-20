@@ -9,6 +9,7 @@ from ase import Atoms
 from ase.build import molecule
 from pMuTT.statmech import rot
 
+
 class TestRigidRotor(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
@@ -18,7 +19,7 @@ class TestRigidRotor(unittest.TestCase):
                                       rot_temperatures=[0.561])
         self.rot_H2O = rot.RigidRotor(symmetrynumber=2, geometry='nonlinear',
                                       rot_temperatures=[40.1, 20.9, 13.4])
-        self.T = 300 # K
+        self.T = 300  # K
 
         self.rot_CO2_dict = {
             'class': "<class 'pMuTT.statmech.rot.RigidRotor'>",
@@ -56,12 +57,12 @@ class TestRigidRotor(unittest.TestCase):
         self.assertAlmostEqual(self.rot_He.get_SoR(T=self.T), 0.)
         self.assertAlmostEqual(self.rot_CO2.get_SoR(T=self.T), 6.588669668)
         self.assertAlmostEqual(self.rot_H2O.get_SoR(T=self.T), 5.271701374)
-        
+
     def test_get_FoRT(self):
         self.assertAlmostEqual(self.rot_He.get_FoRT(T=self.T), 0.)
         self.assertAlmostEqual(self.rot_CO2.get_FoRT(T=self.T), -5.588669668)
         self.assertAlmostEqual(self.rot_H2O.get_FoRT(T=self.T), -3.771701374)
-        
+
     def test_get_GoRT(self):
         self.assertAlmostEqual(self.rot_He.get_GoRT(T=self.T), 0.)
         self.assertAlmostEqual(self.rot_CO2.get_GoRT(T=self.T), -5.588669668)
@@ -71,8 +72,9 @@ class TestRigidRotor(unittest.TestCase):
         self.assertEqual(self.rot_CO2.to_dict(), self.rot_CO2_dict)
 
     def test_from_dict(self):
-        self.assertEqual(rot.RigidRotor.from_dict(self.rot_CO2_dict), 
-                self.rot_CO2)
+        self.assertEqual(rot.RigidRotor.from_dict(self.rot_CO2_dict),
+                         self.rot_CO2)
+
 
 class TestRotFunc(unittest.TestCase):
     def setUp(self):
@@ -86,11 +88,12 @@ class TestRotFunc(unittest.TestCase):
 
     def test_get_rot_temperatures_from_atoms(self):
         self.assertListEqual(
-            rot.get_rot_temperatures_from_atoms(self.He, geometry='monatomic'), 
-                                                [0.])
+                rot.get_rot_temperatures_from_atoms(self.He,
+                                                    geometry='monatomic'),
+                [0.])
 
-        rot_Ts_CO2 = rot.get_rot_temperatures_from_atoms(self.CO2, 
-            geometry='linear')
+        rot_Ts_CO2 = rot.get_rot_temperatures_from_atoms(self.CO2,
+                                                         geometry='linear')
         self.assertTrue(len(rot_Ts_CO2), 1)
         self.assertTrue(np.isclose(rot_Ts_CO2[0], 0.545566039279433))
 
@@ -101,7 +104,7 @@ class TestRotFunc(unittest.TestCase):
         for rot_T in rot_Ts_H2O:
             self.assertTrue(any(np.isclose(rot_T, exp_rot_T)
                             for exp_rot_T in exp_rot_Ts_H2O))
-        
+
     def test_get_geometry_from_atoms(self):
         self.assertEqual(rot.get_geometry_from_atoms(self.He), 'monatomic')
         self.assertEqual(rot.get_geometry_from_atoms(self.CO2), 'linear')
@@ -109,6 +112,7 @@ class TestRotFunc(unittest.TestCase):
         self.assertEqual(rot.get_geometry_from_atoms(self.CH4), 'nonlinear')
         self.assertEqual(rot.get_geometry_from_atoms(self.NH3), 'nonlinear')
         self.assertEqual(rot.get_geometry_from_atoms(self.CO), 'linear')
+
 
 if __name__ == '__main__':
     unittest.main()

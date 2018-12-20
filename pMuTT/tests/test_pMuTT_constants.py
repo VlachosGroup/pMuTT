@@ -8,6 +8,7 @@ import unittest
 from pMuTT import constants as c
 import numpy as np
 
+
 class TestConstants(unittest.TestCase):
 
     def test_R(self):
@@ -16,8 +17,8 @@ class TestConstants(unittest.TestCase):
             c.R('arbitrary unit')
 
     def test_h(self):
-        self.assertEqual(c.h('J s', bar = False), 6.626070040e-34)
-        self.assertEqual(c.h('J s', bar = True), 6.626070040e-34/(2.*np.pi))
+        self.assertEqual(c.h('J s', bar=False), 6.626070040e-34)
+        self.assertEqual(c.h('J s', bar=True), 6.626070040e-34/(2.*np.pi))
         with self.assertRaises(KeyError):
             c.h('arbitrary unit')
 
@@ -52,14 +53,14 @@ class TestConstants(unittest.TestCase):
             c.T0('arbitrary unit')
 
     def test_convert_unit(self):
-        self.assertEqual(c.convert_unit(num = 0., from_ = 'C', to = 'K'), 273.15)
-        self.assertEqual(c.convert_unit(from_ = 'm', to = 'cm'), 100.)
+        self.assertEqual(c.convert_unit(num=0., from_='C', to='K'), 273.15)
+        self.assertEqual(c.convert_unit(from_='m', to='cm'), 100.)
         with self.assertRaises(ValueError):
-            c.convert_unit(from_ = 'cm', to = 'J')
+            c.convert_unit(from_='cm', to='J')
         with self.assertRaises(ValueError):
-            c.convert_unit(from_ = 'arbitrary unit', to = 'J')
+            c.convert_unit(from_='arbitrary unit', to='J')
         with self.assertRaises(ValueError):
-            c.convert_unit(from_ = 'cm', to = 'arbitrary unit')
+            c.convert_unit(from_='cm', to='arbitrary unit')
 
     def test_wavenumber_to_temp(self):
         self.assertAlmostEqual(c.wavenumber_to_temp(1.), 1.4387773538277204)
@@ -68,8 +69,9 @@ class TestConstants(unittest.TestCase):
         self.assertAlmostEqual(c.wavenumber_to_energy(1.), 1.239841974E-04)
 
     def test_wavenumber_to_inertia(self):
-        self.assertTrue( \
+        self.assertTrue(
                 np.isclose(c.wavenumber_to_inertia(1.), 2.799275137826E-46))
+
 
 if __name__ == '__main__':
     unittest.main()

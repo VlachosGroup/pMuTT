@@ -6,19 +6,16 @@ Created on Fri Jul 7 12:31:00 2018
 """
 import unittest
 import pMuTT
-import numpy as np
-from ase.build import molecule
-from ase.thermochemistry import IdealGasThermo
+
 
 class TestpMuTT(unittest.TestCase):
     def test_parse_formula(self):
-        elements_dict = {'Ca': 1, 'Ti': 1, 'O': 3,}
+        elements_dict = {'Ca': 1, 'Ti': 1, 'O': 3, }
         self.assertEqual(pMuTT.parse_formula('CaTiO3'), elements_dict)
-        elements_dict = {'H': 1, 'F': 1,}
+        elements_dict = {'H': 1, 'F': 1, }
         self.assertEqual(pMuTT.parse_formula('HF'), elements_dict)
-        elements_dict = {'H': 8, 'C': 3,}
+        elements_dict = {'H': 8, 'C': 3, }
         self.assertEqual(pMuTT.parse_formula('CH3CH2CH3'), elements_dict)
-        
 
     def test_get_molecular_weight(self):
         elements_dict = {
@@ -39,31 +36,42 @@ class TestpMuTT(unittest.TestCase):
     def test_get_expected_arguments(self):
         def sum_fn(num1, num2):
             return num1 + num2
-        self.assertEqual(pMuTT._get_expected_arguments(sum_fn), ('num1', 'num2'))
+        self.assertEqual(pMuTT._get_expected_arguments(sum_fn),
+                         ('num1', 'num2'))
 
         class sum_class:
             def __init__(self, num1, num2):
                 self.num1 = num1
                 self.num2 = num2
+
             def get_sum(self):
                 return self.num1 + self.num2
-        self.assertEqual(pMuTT._get_expected_arguments(sum_class), ('self', 'num1', 'num2'))
+        self.assertEqual(pMuTT._get_expected_arguments(sum_class),
+                         ('self', 'num1', 'num2'))
 
     def test_pass_expected_arguments(self):
         def sum_fn(num1, num2):
             return num1 + num2
-        self.assertEqual(pMuTT._pass_expected_arguments(sum_fn, **{'num1': 1, 'num2': 2}), 3)
+        self.assertEqual(pMuTT._pass_expected_arguments
+                         (sum_fn, **{'num1': 1, 'num2': 2}), 3)
 
         class sum_class:
             def __init__(self, num1, num2):
                 self.num1 = num1
                 self.num2 = num2
+
             def get_sum(self):
                 return self.num1 + self.num2
+
             def __eq__(self, other):
                 return self.__dict__ == other.__dict__
-        self.assertEqual(pMuTT._pass_expected_arguments(sum_class, **{'num1': 1, 'num2': 2}), sum_class(num1 = 1, num2 = 2))
-        self.assertEqual(pMuTT._pass_expected_arguments(sum_class, **{'num1': 1, 'num2': 2, 'num3': 3}), sum_class(num1 = 1, num2 = 2))
+        self.assertEqual(pMuTT._pass_expected_arguments
+                         (sum_class, **{'num1': 1, 'num2': 2}),
+                         sum_class(num1=1, num2=2))
+        self.assertEqual(pMuTT._pass_expected_arguments
+                         (sum_class, **{'num1': 1, 'num2': 2, 'num3': 3}),
+                         sum_class(num1=1, num2=2))
+
 
 if __name__ == '__main__':
     unittest.main()

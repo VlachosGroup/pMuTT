@@ -19,7 +19,8 @@ class HarmonicVib:
     def __init__(self, vib_wavenumbers=[]):
         self.vib_wavenumbers = np.array(vib_wavenumbers)
         self._vib_temperatures = np.array([
-            c.wavenumber_to_temp(wavenumber) for wavenumber in vib_wavenumbers])
+            c.wavenumber_to_temp(wavenumber) for wavenumber in
+            vib_wavenumbers])
 
     def __eq__(self, other):
         try:
@@ -64,7 +65,8 @@ class HarmonicVib:
                 Vibrational dimensionless heat capacity at constant volume
         """
         vib_dimless = self._vib_temperatures/T
-        CvoRs = np.array([(0.5*vib_dimless)**2*(1./np.sinh(vib_dimless/2.))**2])
+        CvoRs = np.array([(0.5*vib_dimless)**2 *
+                          (1./np.sinh(vib_dimless/2.))**2])
         return np.sum(CvoRs)
 
     def get_CpoR(self, T):
@@ -114,8 +116,8 @@ class HarmonicVib:
                 Vibrational dimensionless internal energy
         """
         vib_dimless = self._vib_temperatures/T
-        UoRT = np.array([vib_dimless/2. + vib_dimless*np.exp(-vib_dimless) \
-                                          /(1.-np.exp(-vib_dimless))])
+        UoRT = np.array([vib_dimless/2. + vib_dimless*np.exp(-vib_dimless)
+                        / (1.-np.exp(-vib_dimless))])
         return np.sum(UoRT)
 
     def get_HoRT(self, T):
@@ -156,7 +158,7 @@ class HarmonicVib:
         """
         vib_dimless = self._vib_temperatures/T
         SoR = np.array([
-                vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)) \
+                vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless))
                 - np.log(1. - np.exp(-vib_dimless))])
         return np.sum(SoR)
 
@@ -580,13 +582,12 @@ class EinsteinVib:
         u = self.interaction_energy
         theta_E = self.einstein_temperature
         return np.exp(-u/c.kb('eV/K')/T) \
-               *(np.exp(-theta_E/2./T)/(1.-np.exp(-theta_E/T)))
-
+            * (np.exp(-theta_E/2./T)/(1. - np.exp(-theta_E/T)))
 
     def get_CvoR(self, T):
         """Calculates the dimensionless heat capacity at constant volume
 
-        :math:`\\frac{C_V^{vib}}{R}=3\\bigg(\\frac{\\Theta_E}{T}\\bigg)^2 
+        :math:`\\frac{C_V^{vib}}{R}=3\\bigg(\\frac{\\Theta_E}{T}\\bigg)^2
         \\frac{\\exp(-\\frac{\\Theta_E}{T})}{\\big(1-\\exp(\\frac{-
         \\Theta_E}{T})\\big)^2}`
 
@@ -631,7 +632,7 @@ class EinsteinVib:
                 Zero point energy in eV
         """
         return self.interaction_energy \
-               + 1.5*self.einstein_temperature*c.kb('eV/K')
+            + 1.5*self.einstein_temperature*c.kb('eV/K')
 
     def get_UoRT(self, T):
         """Calculates the dimensionless internal energy
@@ -651,7 +652,7 @@ class EinsteinVib:
         """
         theta_E = self.einstein_temperature
         return self.get_ZPE()/c.kb('eV/K')/T \
-               + 3.*theta_E/T*np.exp(-theta_E/T)/(1. - np.exp(-theta_E/T))
+            + 3.*theta_E/T*np.exp(-theta_E/T)/(1. - np.exp(-theta_E/T))
 
     def get_HoRT(self, T):
         """Calculates the dimensionless enthalpy
@@ -749,6 +750,7 @@ class EinsteinVib:
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
+
 def debye_to_einstein(debye_temperature):
     """Converts Debye temperature to Einstein temperature
 
@@ -762,6 +764,7 @@ def debye_to_einstein(debye_temperature):
             Einstein temperature in K
     """
     return (np.pi/6.)**(1./3.)*debye_temperature
+
 
 def einstein_to_debye(einstein_temperature):
     """Converts Einstein temperature to Debye temperature

@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from pMuTT.io_.jsonio import remove_class
 
+
 class BEP:
     """Represents a Bronsted Evans Polyani relationship
 
     Attributes
     ----------
         slope : float
-            Slope of BEP relationship. 
+            Slope of BEP relationship.
         intercept : float
             Intercept of BEP relationship in dimensionless units.
         reaction : :class:`~pMuTT.reaction.Reaction` object, optional
-            Reaction related to BEP. The Reaction does not need to be supplied 
+            Reaction related to BEP. The Reaction does not need to be supplied
             immediately
         descriptor : str, optional
             Descriptor to calculate the activation energy. Supported options:
@@ -21,7 +22,7 @@ class BEP:
             - 'products' (H_products)
             Default is delta.
         _descriptor : method
-            Method taken from reaction to calculate enthalpy. This attribute is 
+            Method taken from reaction to calculate enthalpy. This attribute is
             not supplied to constructor.
     """
 
@@ -36,16 +37,16 @@ class BEP:
         Parameters
         ----------
             reaction : :class:`~pMuTT.reaction.Reaction` object, optional
-                Reaction related to BEP. If specified, overwrites the value 
+                Reaction related to BEP. If specified, overwrites the value
                 held by BEP object
             descriptor : str, optional
-                Descriptor to calculate the activation energy. Supported 
+                Descriptor to calculate the activation energy. Supported
                 options:
                 - 'delta' (H_products - H_reactants)
                 - 'rev_delta' (H_reactants - H_products)
                 - 'reactants' (H_reactants)
                 - 'products' (H_products)
-                If specified, overwites the value held by BEP object. 
+                If specified, overwites the value held by BEP object.
         """
         try:
             self.reaction
@@ -71,21 +72,21 @@ class BEP:
             self._descriptor = None
         elif self.descriptor == 'delta':
             self._descriptor = \
-                    lambda **kwargs: self.reaction.get_delta_HoRT(rev=False, 
+                    lambda **kwargs: self.reaction.get_delta_HoRT(rev=False,
                                                                   **kwargs)
         elif self.descriptor == 'rev_delta':
             self._descriptor = \
-                    lambda **kwargs: self.reaction.get_delta_HoRT(rev=True, 
+                    lambda **kwargs: self.reaction.get_delta_HoRT(rev=True,
                                                                   **kwargs)
         elif self.descriptor == 'reactants' or descriptor == 'products':
             self._descriptor = \
                     lambda **kwargs: self.reaction.get_HoRT_state(
-                            state=descriptor, 
+                            state=descriptor,
                             **kwargs)
         else:
-            raise ValueError(('Descriptor "{}" not supported. See documentation'
-                              ' of pMuTT.reaction.bep.BEP for supported '
-                              'options.'.format(self.descriptor)))
+            raise ValueError(('Descriptor "{}" not supported. See '
+                              'documentation of pMuTT.reaction.bep.BEP for '
+                              'supported options.'.format(self.descriptor)))
 
     def __eq__(self, other):
         try:
@@ -101,7 +102,7 @@ class BEP:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate the descriptor
@@ -111,7 +112,7 @@ class BEP:
                 Dimensionless activation energy
         """
         if self.descriptor == 'rev_delta':
-            # If the descriptor is for the reverse reaction, the slope has to 
+            # If the descriptor is for the reverse reaction, the slope has to
             # be modified
             if rev:
                 return self.slope*self._descriptor(**kwargs) + self.intercept
@@ -127,7 +128,7 @@ class BEP:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict

@@ -9,7 +9,7 @@ T = np.linspace(T_low, T_high)
 
 '''Initializing a Shomate polynomial directly'''
 shomate_H2 = Shomate(name='H2', T_low=T_low, T_high=T_high,
-                     a=np.array([33.066178, -11.363417, 11.432816, -2.772874, 
+                     a=np.array([33.066178, -11.363417, 11.432816, -2.772874,
                                  -0.158558, -9.980797, 172.707974, 0.]))
 fig1, ax1 = shomate_H2.plot_empirical()
 ax1[0].set_title('Directly inputting polynomial')

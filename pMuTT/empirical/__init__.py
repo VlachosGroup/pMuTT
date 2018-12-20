@@ -8,7 +8,6 @@ Empirical models.
 import inspect
 from matplotlib import pyplot as plt
 import numpy as np
-from pMuTT import _pass_expected_arguments
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 

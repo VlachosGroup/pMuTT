@@ -9,11 +9,8 @@ import numpy as np
 import pandas as pd
 import os
 from ase.io import read
-from pMuTT import constants as c
-from pMuTT import parse_formula, get_molecular_weight
+from pMuTT import parse_formula
 from pMuTT.statmech import presets, StatMech
-from pMuTT.statmech.rot import get_geometry_from_atoms
-from pMuTT.statmech.rot import get_rot_temperatures_from_atoms
 from pMuTT.io_.vasp import set_vib_wavenumbers_from_outcar
 
 
@@ -92,7 +89,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                                         output_structure=thermo_data)
             elif 'statmech_model' in col:
                 thermo_data = set_statmech_model(model=cell_data,
-                                               output_structure=thermo_data)
+                                                 output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
                 if vib_set_by_outcar:
                     continue  # vib_wavenumber already set from outcar

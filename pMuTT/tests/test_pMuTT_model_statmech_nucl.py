@@ -6,6 +6,7 @@ Tests for pMuTT module
 import unittest
 from pMuTT.statmech import nucl
 
+
 class TestIdealNucl(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
@@ -42,8 +43,9 @@ class TestIdealNucl(unittest.TestCase):
         self.assertEqual(self.nuclear.to_dict(), self.nuclear_dict)
 
     def test_from_dict(self):
-        self.assertEqual(nucl.IdealNucl.from_dict(self.nuclear_dict), 
-                self.nuclear)
+        self.assertEqual(nucl.IdealNucl.from_dict(self.nuclear_dict),
+                         self.nuclear)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,17 +1,14 @@
 #!/usr/bin/env python
 
-# The format to execute this file is qRRO_Pbeta.py #1 #2 #3. #1 is the filename, #2 and #3 are desired T & P.
-import sys
-import os
-import ast
-import shutil as sh
+# The format to execute this file is qRRO_Pbeta.py #1 #2 #3. #1 is the
+# filename, #2 and #3 are desired T & P.
+
 from argparse import ArgumentParser as AP
 import re
-import numpy as np
 import math
 
 
-parser = AP(description='Extract thermal correction from Gaussain output' )
+parser = AP(description='Extract thermal correction from Gaussain output')
 
 
 parser.add_argument('filename', type=str, default=None,
@@ -21,49 +18,42 @@ parser.add_argument('-t', '--temperature',
                     default='180', type=float,
                     help='Temperature for thermal correction')
 
-parser.add_argument('-p', '--pressure',default=1.0,
+parser.add_argument('-p', '--pressure', default=1.0,
                     type=float, help='Pressure for thermal correction')
 
-#parser.add_argument('-a', '--adsorbate',default=None, type=str,nargs='+', help='Name of the adsorbed molecules')
+# parser.add_argument('-a', '--adsorbate',default=None, type=str,nargs='+',
+# help='Name of the adsorbed molecules')
 
 
-parser.add_argument('-n', '--number',default=0, type=int, help='Number of adsorbed molecules on the zeolite surface')
+parser.add_argument('-n', '--number', default=0, type=int,
+                    help='Number of adsorbed molecules on the zeolite surface')
 
-parser.add_argument('-m1', '--mass1',default=0,
-                    type=int, help='Mass of the first adsorbate in atomic unit')
+parser.add_argument('-m1', '--mass1', default=0, type=int,
+                    help='Mass of the first adsorbate in atomic unit')
 
-parser.add_argument('-m2', '--mass2',default=0,
-                    type=int, help='Total mass of the second adsorbate in atomic unit')
+parser.add_argument('-m2', '--mass2', default=0, type=int,
+                    help='Total mass of the second adsorbate in atomic unit')
 
-parser.add_argument('-f', '--frequency',default=1.0,
-                    type=float, help='frequency scale factor')
+parser.add_argument('-f', '--frequency', default=1.0, type=float,
+                    help='frequency scale factor')
 
 args = parser.parse_args()
 
 file = args.filename
-f = open(file,'r')
-F=[]
-#E = []
+f = open(file, 'r')
+F = []
+# E = []
 for line in f:
         if re.search('Zero-point correction=(.*?)\(', line):
             z = float(re.search('Zero-point correction=(.*?)\(', line).groups()[0])
 
-        if re.search('Sum of electronic and zero-point Energies=(.*)',line):
+        if re.search('Sum of electronic and zero-point Energies=(.*)', line):
             epz = float(re.search('Sum of electronic and zero-point Energies=(.*)',line).groups()[0])
-        
-       # if re.search('Sum of electronic and thermal Energies=(.*)',line):
-       #     ept = float(re.search('Sum of electronic and thermal Energies=(.*)',line).groups()[0])
-       # 
-       # if re.search('Sum of electronic and thermal Enthalpies=(.*)',line):
-       #     eph = float(re.search('Sum of electronic and thermal Enthalpies=(.*)',line) .groups()[0])
-       # 
-       # if re.search('Sum of electronic and thermal Free Energies=(.*)',line):
-       #     epg = float(re.search('Sum of electronic and thermal Free Energies=(.*)',line).groups()[0])
 
     # Get all the frequencies in the unit of cm^-1.
         if re.search('Frequencies -- (.*)',line):
 
-            a = re.search('Frequencies -- (.*)',line)
+            a = re.search('Frequencies -- (.*)', line)
             l = (a.groups()[0]).split()
             #l = list(map(float,l))
             l = [float(i) for i in l]
@@ -76,7 +66,7 @@ for line in f:
         #    w_0 = float(re.search('Charge =  0 Multiplicity =(.*)',line) .groups()[0])
         
         if re.search('Rotational temperatures \(Kelvin\)(.*)',line):
-            R_t = (re.search('Rotational temperatures \(Kelvin\)(.*)',line) .groups()[0]).split()   
+            R_t = (re.search('Rotational temperatures \(Kelvin\)(.*)', line) .groups()[0]).split()   
             R_t = [float(i) for i in R_t]
             #print (R_t)
 
