@@ -3,6 +3,16 @@
 Release Notes
 *************
 
+Git Master Branch
+-----------------
+`Github Master Branch`_
+
+- Fixed bug related to :class:`~pMuTT.empirical.references.References` and 
+  :class:`~pMuTT.empirical.references.Reference` objects not JSON-write 
+  compatible.
+- Fixed bug related to referencing in :class:`~pMuTT.empirical.shomate.Shomate`
+  class
+
 Version 1.2.1
 -------------
 Dec. 17, 2018
@@ -58,3 +68,5 @@ Oct. 26, 2018
 - New :class:`~pMuTT.reaction.phasediagram.PhaseDiagram` class
 - New :class:`~pMuTT.statmech.vib.EinsteinVib` class
 - New :func:`~pMuTT.io_.chemkin.read_reactions` function to read species and reactions from Chemkin surf.inp and gas.inp files
+
+.. _`Github Master Branch`: https://github.com/VlachosGroup/pMuTT/commits/master
