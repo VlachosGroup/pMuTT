@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pMuTT 1.2.1 documentation</title>
+  <title>Input and Output &mdash; pMuTT 1.2.2 documentation</title>
   
 
   
@@ -104,7 +104,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.jsonio">JSON</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#json">JSON</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id7">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-new-pmutt-classes">Creating New pMuTT Classes</a><ul>
@@ -217,7 +217,7 @@
 <h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="pMuTT.io_.excel.read_excel">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0.0, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0.0, include_imaginary=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an excel file and returns it as a list of dictionaries to
 initialize objects</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -229,9 +229,11 @@ initialize objects</p>
 <li><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed).
 Default is [1] so comments can be put in that row</li>
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</li>
-<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Minimum frequency cutoff (cm-1). Frequencies &gt; min_frequency_cutoff
-read from OUTCAR.
-Default 0</li>
+<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
+Only frequencies greater than min_frequency_cutoff are read from
+OUTCAR. Default is 0 cm-1</li>
+<li><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Whether or not imaginary
+frequencies should be included. Default is False</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</li>
 <li><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some
 potentially useful parameters include:</p>
@@ -936,9 +938,11 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 </div>
-<div class="section" id="module-pMuTT.io_.jsonio">
-<span id="json"></span><h2>JSON<a class="headerlink" href="#module-pMuTT.io_.jsonio" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="json">
+<h2>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.json.org/">JavaScript Object Notation (JSON)</a> is a format that is easily read and written by
+both humans and machines. All pMuTT objects are JSON compatible.</p>
+<span class="target" id="module-pMuTT.io_.jsonio"></span><dl class="function">
 <dt id="pMuTT.io_.jsonio.json_to_pMuTT">
 <code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">json_to_pMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Object hook to convert json to pMuTT objects. Any complex object should
@@ -1193,8 +1197,10 @@ use the <code class="docutils literal notranslate"><span class="pre">json_to_pMu
 <h2>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar">
-<code class="descclassname">pMuTT.io_.vasp.</code><code class="descname">set_vib_wavenumbers_from_outcar</code><span class="sig-paren">(</span><em>in_file</em>, <em>output_structure</em>, <em>min_frequency_cutoff</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses OUTCAR files and assigns to output_structure[‘vib_wavenumber’]</p>
+<code class="descclassname">pMuTT.io_.vasp.</code><code class="descname">set_vib_wavenumbers_from_outcar</code><span class="sig-paren">(</span><em>in_file</em>, <em>output_structure</em>, <em>min_frequency_cutoff=0.0</em>, <em>include_imaginary=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses OUTCAR files for vibrational frequencies and assigns to
+output_structure[‘vib_wavenumber’]. Imaginary frequencies are represented
+by negative numbers.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1203,8 +1209,9 @@ use the <code class="docutils literal notranslate"><span class="pre">json_to_pMu
 <li><strong>in_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – OUTCAR file of frequency jobs</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘elements’][element]</li>
-<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Frequencies &gt; min_frequency_cutoff (cm-1)
-read from OUTCAR</li>
+<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Only frequencies less than min_frequency_cutoff (in cm-1)
+are read from OUTCAR. Default is 0 cm-1</li>
+<li><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether imaginary frequencies should be included. Default is False.</li>
 </ul>
 </td>
 </tr>
@@ -1430,7 +1437,7 @@ default = None. Will not return React_obj and Prod_obj</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Gerhard Wittreich, Jonathan Lym.
+        &copy; Copyright 2018, Vlachos Research Group.
 
     </p>
   </div>
@@ -1452,7 +1459,7 @@ default = None. Will not return React_obj and Prod_obj</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2.1',
+            VERSION:'1.2.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

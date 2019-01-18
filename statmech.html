@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.1 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.2 documentation</title>
   
 
   
@@ -1237,7 +1237,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.statmech.trans.IdealTrans.get_CpoR">
 <code class="descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
-<p><span class="math notranslate nohighlight">\(\frac{Cv^{trans}}{R}=\frac{Cv^{trans}}{R} + 1\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{Cp^{trans}}{R}=\frac{Cv^{trans}}{R} + 1\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1458,7 +1458,7 @@ Default is atmospheric pressure</li>
 <h3>HarmonicVib<a class="headerlink" href="#harmonicvib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="pMuTT.statmech.vib.HarmonicVib">
-<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">HarmonicVib</code><span class="sig-paren">(</span><em>vib_wavenumbers=[]</em>, <em>imaginary_substitute=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vibrational modes using the harmonic approximation. Equations found in
 Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p>
@@ -1466,6 +1466,14 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.statmech.vib.HarmonicVib.vib_wavenumbers">
 <code class="descname">vib_wavenumbers</code><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.statmech.vib.HarmonicVib.imaginary_substitute">
+<code class="descname">imaginary_substitute</code><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.imaginary_substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – If this value is set, imaginary frequencies are substituted with
+this value for calculations. Otherwise, imaginary frequencies are
+ignored. Default is None</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1690,7 +1698,7 @@ John Wiley &amp; Sons, 2010.</p>
 <h3>QRRHOVib<a class="headerlink" href="#qrrhovib" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="pMuTT.statmech.vib.QRRHOVib">
-<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">QRRHOVib</code><span class="sig-paren">(</span><em>vib_wavenumbers</em>, <em>Bav=1e-44</em>, <em>v0=100.0</em>, <em>alpha=4</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.vib.</code><code class="descname">QRRHOVib</code><span class="sig-paren">(</span><em>vib_wavenumbers</em>, <em>Bav=1e-44</em>, <em>v0=100.0</em>, <em>alpha=4</em>, <em>imaginary_substitute=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
 approximation. Equations found in</p>
 <p>1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
@@ -1719,6 +1727,14 @@ wavenumbers. Default is 1.e-44 kg m2</p>
 <dt id="pMuTT.statmech.vib.QRRHOVib.alpha">
 <code class="descname">alpha</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>int, optional</em> – Power to raise ratio of wavenumbers. Default is 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.statmech.vib.QRRHOVib.imaginary_substitute">
+<code class="descname">imaginary_substitute</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.imaginary_substitute" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em> – If this value is set, imaginary frequencies are substituted with
+this value for calculations. Otherwise, imaginary frequencies are
+ignored. Default is None</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -2942,7 +2958,7 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Gerhard Wittreich, Jonathan Lym.
+        &copy; Copyright 2018, Vlachos Research Group.
 
     </p>
   </div>
@@ -2964,7 +2980,7 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2.1',
+            VERSION:'1.2.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

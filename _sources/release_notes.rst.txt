@@ -3,10 +3,26 @@
 Release Notes
 *************
 
-Git Master Branch
------------------
-`Github Master Branch`_
+Development Branch
+------------------
+`Development Branch`_
 
+Version 1.2.2
+-------------
+Jan. 18, 2019
+
+- Added option to extract imaginary frequencies from OUTCAR files
+- Added support for imaginary frequencies for 
+  :class:`~pMuTT.statmech.vib.HarmonicVib` and 
+  :class:`~pMuTT.statmech.vib.QRRHOVib` classes
+- Restructured :class:`~pMuTT.statmech.vib.HarmonicVib` and 
+  :class:`~pMuTT.statmech.vib.QRRHOVib` classes to calculate vibrational 
+  temperatures, scaled wavenumbers and scaled inertia when methods are called 
+  (rather than at initialization) to prevent incorrect calculations due to 
+  changes in the vibrational wavenumbers.
+- Fixed unit test names
+- Added ``get_species`` to :class:`~pMuTT.reaction.Reaction` and 
+  :class:`~pMuTT.reaction.Reactions`
 - Fixed bug related to :class:`~pMuTT.empirical.references.References` and 
   :class:`~pMuTT.empirical.references.Reference` objects not JSON-write 
   compatible.
@@ -69,4 +85,4 @@ Oct. 26, 2018
 - New :class:`~pMuTT.statmech.vib.EinsteinVib` class
 - New :func:`~pMuTT.io_.chemkin.read_reactions` function to read species and reactions from Chemkin surf.inp and gas.inp files
 
-.. _`Github Master Branch`: https://github.com/VlachosGroup/pMuTT/commits/master
+.. _`Development Branch`: https://github.com/VlachosGroup/pMuTT/commits/development

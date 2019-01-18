@@ -271,6 +271,8 @@ And a sample plot is shown below
 
 JSON
 ====
+`JavaScript Object Notation (JSON)`_ is a format that is easily read and written by
+both humans and machines. All pMuTT objects are JSON compatible.
 
 .. automodule:: pMuTT.io_.jsonio
    :members:
@@ -470,3 +472,4 @@ Chemkin
 .. _`pMuTT.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/VASP_to_thermdat/example1
 .. _`pMuTT.examples.read_nasa_from_excel`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_excel 
 .. _`pMuTT.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat 
+.. _`JavaScript Object Notation (JSON)`: https://www.json.org/
