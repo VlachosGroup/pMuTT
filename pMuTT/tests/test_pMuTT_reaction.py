@@ -133,26 +133,30 @@ class TestReaction(unittest.TestCase):
 
         '''Reactions using StatMech'''
         ideal_gas_param = presets['idealgas']
-        self.H2O_sm = StatMech(atoms=molecule('H2O'),
+        self.H2O_sm = StatMech(name='H2O',
+                               atoms=molecule('H2O'),
                                symmetrynumber=2,
                                vib_wavenumbers=[3825.434, 3710.2642, 1582.432],
                                potentialenergy=-6.7598,
                                spin=0.,
                                **ideal_gas_param)
-        self.H2_sm = StatMech(atoms=molecule('H2'),
+        self.H2_sm = StatMech(name='H2',
+                              atoms=molecule('H2'),
                               symmetrynumber=2,
                               vib_wavenumbers=[4306.1793],
                               potentialenergy=-14.2209,
                               spin=0.,
                               **ideal_gas_param)
-        self.O2_sm = StatMech(atoms=molecule('O2'),
+        self.O2_sm = StatMech(name='O2',
+                              atoms=molecule('O2'),
                               symmetrynumber=2,
                               vib_wavenumbers=[1556.],
                               potentialenergy=-9.862407,
                               spin=1.,
                               **ideal_gas_param)
         # This is an arbitrary transition state for testing
-        self.H2O_TS_sm = StatMech(atoms=molecule('H2O'),
+        self.H2O_TS_sm = StatMech(name='H2O_TS',
+                                  atoms=molecule('H2O'),
                                   symmetrynumber=1.,
                                   vib_wavenumbers=[4000., 3900., 1600.],
                                   potentialenergy=-5.7598,
@@ -172,9 +176,14 @@ class TestReaction(unittest.TestCase):
             'O2': self.O2_sm,
             'H2O_TS': self.H2O_TS_sm
         }
+        self.maxDiff = None
 
     def test_compare_element_balance(self):
         self.assertIsNone(self.rxn_nasa.check_element_balance())
+
+    def test_get_species(self):
+        self.assertDictEqual(self.rxn_sm.get_species(key='name'), 
+                             self.species_dict)
 
     def test_get_q_state(self):
         exp_q_react = self.H2_sm.get_q(T=c.T0('K')) \
@@ -888,7 +897,6 @@ class TestReaction(unittest.TestCase):
                          self.rxn_sm)
 
     def test_to_dict(self):
-        self.maxDiff = None
         self.assertEqual(self.rxn_nasa.to_dict(), self.rxn_nasa_dict)
 
     def test_from_dict(self):

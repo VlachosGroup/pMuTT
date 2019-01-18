@@ -31,11 +31,11 @@ class TestVasp(unittest.TestCase):
             vasp.set_vib_wavenumbers_from_outcar(incorrect_file, out_dict,
                                                  cutoff)
 
-    def test_take_vib_wavenumber_from_line(self):
+    def test_get_vib_wavenumber_from_line(self):
         expected_frequency = 3821.717493
         sample_line = '   1 f  =  114.572212 THz   719.878437 2PiTHz ' \
                       '3821.717493 cm-1   473.832750 meV'
-        self.assertEqual(vasp.take_vib_wavenumber_from_line(sample_line),
+        self.assertEqual(vasp.get_vib_wavenumber_from_line(sample_line),
                          expected_frequency)
 
 

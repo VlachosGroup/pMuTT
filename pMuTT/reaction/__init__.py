@@ -128,6 +128,37 @@ class Reaction:
                                  'Product count: {}'.format(reactant_elements,
                                                             TS_elements))
 
+    def get_species(self, include_TS=True, key='name'):
+        """Returns the unique species included in the reaction.
+
+        Parameters
+        ----------
+            include_TS : bool, optional
+                Whether transition states should be included. Default is True
+            key : str, optional
+                Attribute to use as the key in the output dictionary. Default is
+                name
+        Returns
+        -------
+            species : dict
+                Unique species in the reaction
+        """
+        species = {}
+        # Add reactants
+        for specie in self.reactants:
+            species[getattr(specie, key)] = specie
+        # Add products
+        for specie in self.products:
+            species[getattr(specie, key)] = specie
+        # Add transition state if desired
+        if include_TS \
+           and self.transition_state is not None \
+           and None not in self.transition_state:
+            for specie in self.transition_state:
+                species[getattr(specie, key)] = specie
+
+        return species
+
     def get_q_state(self, state, **kwargs):
         """Gets partition function at a state
 
@@ -939,7 +970,7 @@ class Reaction:
         Returns
         -------
             Keq : float
-                Change in equilibrium constant between reactants and products
+                Equilibrium constant between reactants and products
         """
         return np.exp(-self.get_delta_GoRT(rev=rev, **kwargs))
 
@@ -1241,7 +1272,7 @@ class Reaction:
                               'for supported options.'.format(method)))
 
     def get_E_act(self, units, T, rev=False, method='any', **kwargs):
-        """Gets change in activation energy between reactants (or products)
+        """Gets activation energy between reactants (or products)
         and transition state
 
         Parameters
@@ -1271,7 +1302,7 @@ class Reaction:
         Returns
         -------
             E_act : float
-                Change in activation energy between reactants (or products) and
+                Activation energy between reactants (or products) and
                 transition state
         """
         return self.get_EoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
@@ -1736,6 +1767,28 @@ class Reactions:
             return False
         return self.to_dict() == other_dict
 
+    def get_species(self, include_TS=True, key='name'):
+        """Returns the unique species included in the reactions.
+
+        Parameters
+        ----------
+            include_TS : bool, optional
+                Whether transition states should be included. Default is True
+            key : str, optional
+                Attribute to use as the key in the output dictionary. Default is
+                name
+        Returns
+        -------
+            species : dict
+                Unique species in the reactions
+        """
+        species = {}
+        for reaction in self.reactions:
+            # Merge the old dictionary with the new dictionary
+            species.update(reaction.get_species(include_TS=include_TS, 
+                                                key=key))
+        return species
+
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
         
@@ -1794,7 +1847,7 @@ def _parse_reaction_state(reaction_str, species_delimiter='+'):
         specie = specie.strip()
         # Search for int and float at the start of a string.
         # If there is no numbers, returns None.
-        stoich_search = re.search('^\d+\.?\d*', specie)
+        stoich_search = re.search(r'^\d+\.?\d*', specie)
         if stoich_search is None:
             # No stoichiometric coefficient so assign 1.
             species.append(specie.strip())

@@ -8,7 +8,7 @@ import os
 import re
 
 
-def take_vib_wavenumber_from_line(in_line):
+def get_vib_wavenumber_from_line(in_line):
     """Parses in_line for real frequencies
 
     Parameters
@@ -32,9 +32,11 @@ def take_vib_wavenumber_from_line(in_line):
 
 
 def set_vib_wavenumbers_from_outcar(in_file, output_structure,
-                                    min_frequency_cutoff):
-
-    """Parses OUTCAR files and assigns to output_structure['vib_wavenumber']
+                                    min_frequency_cutoff=0., 
+                                    include_imaginary=False):
+    """Parses OUTCAR files for vibrational frequencies and assigns to 
+    output_structure['vib_wavenumber']. Imaginary frequencies are represented 
+    by negative numbers.
 
     Parameters
     ----------
@@ -43,9 +45,11 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
         output_structure: dict
             Structure to assign value. Will assign to
             output_structure['elements'][element]
-        min_frequency_cutoff: float
-            Frequencies > min_frequency_cutoff (cm-1)
-            read from OUTCAR
+        min_frequency_cutoff: float, optional
+            Only frequencies less than min_frequency_cutoff (in cm-1)
+            are read from OUTCAR. Default is 0 cm-1
+        include_imaginary: bool, optional
+            Whether imaginary frequencies should be included. Default is False.
     Returns
     -------
         output_structure: dict
@@ -57,20 +61,34 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
     """
     if not os.path.isfile(in_file):
         raise FileNotFoundError('Invalid OUTCAR filename: {}'.format(in_file))
-    real_vib_wavenumbers = list()
+
+    vib_wavenumbers = list()
     real_pattern = re.compile(r'f[ ]*=')  # pattern for real frequencies
+    if include_imaginary:
+        # pattern for imaginary frequencies
+        imag_pattern  = re.compile(r'f/i[ ]*=')
+
     with open(in_file, "r") as out_fp:
         outcar_contents = out_fp.readlines()
     for line in outcar_contents:
-        if real_pattern.search(line):
+        if real_pattern.search(line) is not None:
             try:
-                vib_wavenumber = take_vib_wavenumber_from_line(line)
+                vib_wavenumber = get_vib_wavenumber_from_line(line)
             except TypeError:
                 pass  # if no frequency in line continue
             else:
                 if vib_wavenumber > min_frequency_cutoff:
-                    real_vib_wavenumbers.append(vib_wavenumber)
-    if not real_vib_wavenumbers:
+                    vib_wavenumbers.append(vib_wavenumber)
+        elif include_imaginary and imag_pattern.search(line) is not None:
+            try:
+                vib_wavenumber = get_vib_wavenumber_from_line(line)
+            except TypeError:
+                pass  # if no frequency in line continue
+            else:
+                vib_wavenumbers.append(-vib_wavenumber)
+
+
+    if len(vib_wavenumbers) == 0:
         print('no frequencies found in file')
-    output_structure['vib_wavenumbers'] = real_vib_wavenumbers
+    output_structure['vib_wavenumbers'] = vib_wavenumbers
     return output_structure

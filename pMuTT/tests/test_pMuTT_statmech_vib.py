@@ -17,6 +17,7 @@ class TestHarmonicVib(unittest.TestCase):
         self.vib_H2O_dict = {
             'class': "<class 'pMuTT.statmech.vib.HarmonicVib'>",
             'vib_wavenumbers': [3825.434, 3710.2642, 1582.432],
+            'imaginary_substitute': None
         }
         self.T = 300.  # K
 
@@ -86,6 +87,7 @@ class TestQRRHOVib(unittest.TestCase):
             'alpha': 4,
             'Bav': 1.e-44,
             'v0': 100,
+            'imaginary_substitute': None
         }
         self.T = 300.  # K
 
