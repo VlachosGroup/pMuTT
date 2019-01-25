@@ -58,7 +58,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
     -----
         Special rules exist for the following column headings
 
-        - element (:func:`~pMuTT.io_.excel.set_element`)
+        - element.[element_symbol] (:func:`~pMuTT.io_.excel.set_element`)
         - formula (:func:`~pMuTT.io_.excel.set_formula`)
         - atoms (:func:`~pMuTT.io_.excel.set_atoms`)
         - statmech_model (:func:`~pMuTT.io_.excel.set_statmech_model`)
@@ -231,7 +231,7 @@ def set_statmech_model(model, output_structure):
         output_structure.update(presets[model])
     except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pMuTT.statmech for supported '
+                         'of presets in pMuTT.statmech.presets for supported '
                          'models.'.format(model))
     return output_structure
 

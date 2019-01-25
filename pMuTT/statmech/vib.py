@@ -241,8 +241,8 @@ class QRRHOVib:
 
     1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
     Phys. Chem. C 2015, 119 (4), 1840–1850.
+ 
     2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
-
 
     Attributes
     ----------
