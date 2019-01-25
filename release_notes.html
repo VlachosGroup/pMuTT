@@ -198,7 +198,7 @@
 <h2>Version 1.2.2<a class="headerlink" href="#version-1-2-2" title="Permalink to this headline">¶</a></h2>
 <p>Jan. 18, 2019</p>
 <ul class="simple">
-<li>Added option to extract imaginary frequencies from OUTCAR files</li>
+<li>Added option to extract imaginary frequencies from VASP’s OUTCAR files</li>
 <li>Added support for imaginary frequencies for
 <a class="reference internal" href="statmech.html#pMuTT.statmech.vib.HarmonicVib" title="pMuTT.statmech.vib.HarmonicVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicVib</span></code></a> and
 <a class="reference internal" href="statmech.html#pMuTT.statmech.vib.QRRHOVib" title="pMuTT.statmech.vib.QRRHOVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">QRRHOVib</span></code></a> classes</li>
@@ -223,7 +223,7 @@ class</li>
 <ul class="simple">
 <li>Added <code class="docutils literal notranslate"><span class="pre">vib_outcar</span></code> special rule for <a class="reference internal" href="io.html#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> and
 <a class="reference internal" href="io.html#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a> to get vibrational
-frequencies directly from OUTCAR file.</li>
+frequencies directly from VASP’s OUTCAR file.</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">get_X</span></code> methods to <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>,
 <a class="reference internal" href="empirical.html#pMuTT.empirical.shomate.Shomate" title="pMuTT.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>, <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
 and <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> to directly calculate thermodynamic
@@ -243,28 +243,39 @@ properties (such as H, S, F, G) with the appropriate units</li>
 <p>Dec. 11, 2018</p>
 <ul class="simple">
 <li>Added <a class="reference internal" href="reactions.html#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> class</li>
-<li>Restructured <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class so reaction states (i.e. reactants, products, transition states) can be calculated separately</li>
-<li>Updated <a class="reference internal" href="empirical.html#pMuTT.empirical.references.References" title="pMuTT.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a> class to be able reference any attribute</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> entry to <a class="reference internal" href="statmech.html#pMuTT.statmech.presets" title="pMuTT.statmech.presets"><code class="xref py py-data docutils literal notranslate"><span class="pre">presets</span></code></a> dictionary to represent an empty species</li>
-<li>Added correction factor to calculate partition coefficient, q, in <a class="reference internal" href="statmech.html#pMuTT.statmech.elec.IdealElec" title="pMuTT.statmech.elec.IdealElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code></a> class</li>
+<li>Restructured <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class so reaction states (i.e.
+reactants, products, transition states) can be calculated separately</li>
+<li>Updated <a class="reference internal" href="empirical.html#pMuTT.empirical.references.References" title="pMuTT.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a> class to be able
+reference any attribute</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> entry to <a class="reference internal" href="statmech.html#pMuTT.statmech.presets" title="pMuTT.statmech.presets"><code class="xref py py-data docutils literal notranslate"><span class="pre">presets</span></code></a> dictionary to
+represent an empty species</li>
+<li>Added correction factor to calculate partition coefficient, q, in
+<a class="reference internal" href="statmech.html#pMuTT.statmech.elec.IdealElec" title="pMuTT.statmech.elec.IdealElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code></a> class</li>
 </ul>
 </div>
 <div class="section" id="version-1-1-2">
 <h2>Version 1.1.2<a class="headerlink" href="#version-1-1-2" title="Permalink to this headline">¶</a></h2>
 <p>Nov. 27, 2018</p>
 <ul class="simple">
-<li>Fixed bugs in <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class for calculating pre-exponential factors</li>
-<li>Added methods in <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to calculate rate constants and activation energy (currently, this just calculates the difference in enthalpy between the reactant/product and the transition state)</li>
-<li>Quality of life improvements such as allowing <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class inputs to be a single pMuTT object instead of expecting a list</li>
+<li>Fixed bugs in <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class for calculating
+pre-exponential factors</li>
+<li>Added methods in <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to calculate rate
+constants and activation energy (currently, this just calculates the
+difference in enthalpy between the reactant/product and the transition state)</li>
+<li>Quality of life improvements such as allowing
+<a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class inputs to be a single pMuTT object
+instead of expecting a list</li>
 </ul>
 </div>
 <div class="section" id="version-1-1-1">
 <h2>Version 1.1.1<a class="headerlink" href="#version-1-1-1" title="Permalink to this headline">¶</a></h2>
 <p>Nov. 7, 2018</p>
 <ul class="simple">
-<li>Fixed bugs in <a class="reference internal" href="empirical.html#pMuTT.empirical.shomate.Shomate" title="pMuTT.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class for <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code> and <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code> where one temperature would return a 1x1 vector
-instead of a float</li>
-<li>Fixed bug in <a class="reference internal" href="empirical.html#pMuTT.empirical.zacros.Zacros" title="pMuTT.empirical.zacros.Zacros"><code class="xref py py-class docutils literal notranslate"><span class="pre">Zacros</span></code></a> class where it expected vibrational energies instead of wavenumbers.</li>
+<li>Fixed bugs in <a class="reference internal" href="empirical.html#pMuTT.empirical.shomate.Shomate" title="pMuTT.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class for <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>
+and <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code> where one temperature would return a 1x1 vector instead of a
+float</li>
+<li>Fixed bug in <a class="reference internal" href="empirical.html#pMuTT.empirical.zacros.Zacros" title="pMuTT.empirical.zacros.Zacros"><code class="xref py py-class docutils literal notranslate"><span class="pre">Zacros</span></code></a> class where it expected
+vibrational energies instead of wavenumbers.</li>
 </ul>
 </div>
 <div class="section" id="version-1-1-0">
@@ -273,10 +284,12 @@ instead of a float</li>
 <ul class="simple">
 <li>Updated <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to parse strings</li>
 <li>New <a class="reference internal" href="empirical.html#pMuTT.empirical.shomate.Shomate" title="pMuTT.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class</li>
-<li>New equation of state classes: <a class="reference internal" href="eos.html#pMuTT.eos.IdealGasEOS" title="pMuTT.eos.IdealGasEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealGasEOS</span></code></a>, <a class="reference internal" href="eos.html#pMuTT.eos.vanDerWaalsEOS" title="pMuTT.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
+<li>New equation of state classes: <a class="reference internal" href="eos.html#pMuTT.eos.IdealGasEOS" title="pMuTT.eos.IdealGasEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealGasEOS</span></code></a>,
+<a class="reference internal" href="eos.html#pMuTT.eos.vanDerWaalsEOS" title="pMuTT.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
 <li>New <a class="reference internal" href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram" title="pMuTT.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</li>
 <li>New <a class="reference internal" href="statmech.html#pMuTT.statmech.vib.EinsteinVib" title="pMuTT.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</li>
-<li>New <a class="reference internal" href="io.html#pMuTT.io_.chemkin.read_reactions" title="pMuTT.io_.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and reactions from Chemkin surf.inp and gas.inp files</li>
+<li>New <a class="reference internal" href="io.html#pMuTT.io_.chemkin.read_reactions" title="pMuTT.io_.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
+reactions from Chemkin surf.inp and gas.inp files</li>
 </ul>
 </div>
 </div>

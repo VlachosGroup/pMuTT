@@ -98,14 +98,14 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reading-thermdat">Reading Thermdat</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#json">JSON</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-new-pmutt-classes">Creating New pMuTT Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
@@ -262,7 +262,7 @@ int (i.e. 1.0 –&gt; 1)</li>
 <p class="rubric">Notes</p>
 <p>Special rules exist for the following column headings</p>
 <ul class="simple">
-<li>element (<a class="reference internal" href="#pMuTT.io_.excel.set_element" title="pMuTT.io_.excel.set_element"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_element()</span></code></a>)</li>
+<li>element.[element_symbol] (<a class="reference internal" href="#pMuTT.io_.excel.set_element" title="pMuTT.io_.excel.set_element"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_element()</span></code></a>)</li>
 <li>formula (<a class="reference internal" href="#pMuTT.io_.excel.set_formula" title="pMuTT.io_.excel.set_formula"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_formula()</span></code></a>)</li>
 <li>atoms (<a class="reference internal" href="#pMuTT.io_.excel.set_atoms" title="pMuTT.io_.excel.set_atoms"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_atoms()</span></code></a>)</li>
 <li>statmech_model (<a class="reference internal" href="#pMuTT.io_.excel.set_statmech_model" title="pMuTT.io_.excel.set_statmech_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_statmech_model()</span></code></a>)</li>
@@ -834,7 +834,7 @@ directly imported using <a class="reference internal" href="#pMuTT.io_.excel.rea
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
 <p>This is the output format used for Chemkin. A list of NASA objects can be
 written to a thermdat file.</p>
-<span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.thermdat</p>
+<span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id6"><span class="problematic" id="id7">pMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="pMuTT.io_.thermdat.read_thermdat">
@@ -873,7 +873,7 @@ written to a thermdat file.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
-<li><strong>nasa_species</strong> (list of :class:<a href="#id4"><span class="problematic" id="id5">`</span></a>~pMuTT.empirical.nasa.Nasa) – List of species to populate thermdat</li>
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) – List of species to populate thermdat</li>
 <li><strong>supp_data</strong> (<em>Additional thermdat entries to include</em><em>, </em><em>optional</em>) – Must be in therndat format.</li>
 <li><strong>supp_txt</strong> (<em>Comment field to preceed nasa_species entries</em><em>, </em><em>optional</em>) – Each line needs to begin with a ! so it is recognized as a
 comment.</li>
@@ -887,8 +887,8 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </table>
 </dd></dl>
 
-<div class="section" id="id6">
-<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Examples<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using
@@ -1027,8 +1027,8 @@ implement default like this:</p>
 </table>
 </dd></dl>
 
-<div class="section" id="id7">
-<h3>Examples<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Saving pMuTT objects can be done by using
 <a class="reference internal" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="pMuTT.io_.jsonio.pMuTTEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTTEncoder()</span></code></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">pMuTTEncoder</span>
@@ -1373,7 +1373,7 @@ If the pattern is not found, returns an empty list</p>
 </div>
 <div class="section" id="module-pMuTT.io_.chemkin">
 <span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id10"><span class="problematic" id="id11">pMuTT.io_</span></a>.chemkin</p>
+<p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.chemkin</p>
 <p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
 <dl class="function">
 <dt id="pMuTT.io_.chemkin.read_reactions">

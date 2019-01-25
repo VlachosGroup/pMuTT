@@ -60,6 +60,8 @@ Example of initialization using classes and parameters
                            potentialenergy=-14.2209,
                            spin=0)
 
+.. _presets:
+
 Presets
 =======
 If you are using a common model (e.g. the ideal gas model), then you can get 
