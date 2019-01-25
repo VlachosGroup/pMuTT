@@ -340,6 +340,59 @@ class Reaction:
         return self.get_UoRT_state(state=state, T=T, **kwargs)*T \
             * c.R('{}/K'.format(units))
 
+    def get_EoRT_state(self, state, **kwargs):
+        """Gets dimensionless electronic energy at a state
+
+        Parameters
+        ----------
+            state : str
+                state to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless electronic
+                energy. See class docstring to see how to pass specific
+                parameters to different species.
+        Returns
+        -------
+            EoRT : float
+                Dimensionless electronic energy of the reaction state.
+        """
+        return self._get_state_quantity(state=state, method_name='get_EoRT',
+                                        **kwargs)
+
+    def get_E_state(self, state, units, T, **kwargs):
+        """Gets the electronic energy at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : keyword arguments
+                Parameters required to calculate electronic energy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            E : float
+                Electronic energy of the reaction state
+        """
+        return self.get_EoRT_state(state=state, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
     def get_HoRT_state(self, state, **kwargs):
         """Gets dimensionless enthalpy at a state
 
@@ -738,6 +791,61 @@ class Reaction:
                 Change in internal energy between reactants and products
         """
         return self.get_delta_UoRT(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
+    def get_delta_EoRT(self, rev=False, **kwargs):
+        """Gets change in dimensionless electronic energy between reactants and
+        products
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate electronic energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_EoRT : float
+                Change in electronic energy between reactants and products
+        """
+        if rev:
+            delta_EoRT = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_EoRT',
+                                                  **kwargs)
+        else:
+            delta_EoRT = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_EoRT',
+                                                  **kwargs)
+        return delta_EoRT
+
+    def get_delta_E(self, units, T, rev=False, **kwargs):
+        """Gets change in electronic energy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate electronic energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_E : float
+                Change in electronic energy between reactants and products
+        """
+        return self.get_delta_EoRT(rev=rev, T=T, **kwargs)*T \
             * c.R('{}/K'.format(units))
 
     def get_delta_HoRT(self, rev=False, **kwargs):
@@ -1171,6 +1279,62 @@ class Reaction:
         return self.get_UoRT_act(rev=rev, T=T, **kwargs)*T \
             * c.R('{}/K'.format(units))
 
+    def get_EoRT_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless electronic energy between reactants (or
+        products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless electronic
+                energy. See class docstring to see how to pass specific
+                parameters to different species.
+        Returns
+        -------
+            EoRT_act : float
+                Change in dimensionless electronic energy between reactants
+                (or products) and transition state
+        """
+        if rev:
+            EoRT_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_EoRT',
+                                                **kwargs)
+        else:
+            EoRT_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_EoRT',
+                                                **kwargs)
+        return EoRT_act
+
+    def get_E_act(self, units, T, rev=False, **kwargs):
+        """Gets change in electronic energy between reactants (or products) and
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate electronic energy. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            E_act : float
+                Change in electronic energy between reactants (or products) and
+                transition state
+        """
+        return self.get_EoRT_act(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
     def get_HoRT_act(self, rev=False, **kwargs):
         """Gets change in dimensionless enthalpy between reactants
         (or products) and transition state
@@ -1227,7 +1391,7 @@ class Reaction:
         return self.get_HoRT_act(rev=rev, T=T, **kwargs)*T \
             * c.R('{}/K'.format(units))
 
-    def get_EoRT_act(self, rev=False, method='any', **kwargs):
+    def get_EaoRT_act(self, rev=False, method='any', **kwargs):
         """Gets dimensionless activation energy between reactants
         (or products) and transition state
 
@@ -1271,7 +1435,7 @@ class Reaction:
                               '``pMuTT.reaction.Reaction.get_EoRT_act`` '
                               'for supported options.'.format(method)))
 
-    def get_E_act(self, units, T, rev=False, method='any', **kwargs):
+    def get_Ea_act(self, units, T, rev=False, method='any', **kwargs):
         """Gets activation energy between reactants (or products)
         and transition state
 
@@ -1305,7 +1469,7 @@ class Reaction:
                 Activation energy between reactants (or products) and
                 transition state
         """
-        return self.get_EoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
+        return self.get_EaoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
             * c.R('{}/K'.format(units))
 
     def get_SoR_act(self, rev=False, **kwargs):
