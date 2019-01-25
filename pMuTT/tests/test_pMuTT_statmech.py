@@ -78,6 +78,16 @@ class TestStatMech(unittest.TestCase):
                 self.CO2_pMuTT.get_Cp(T=self.T0, V=self.V0, units='J/mol/K'),
                 3.9422622359004853*c.R('J/mol/K'))
 
+    def test_get_EoRT(self):
+        np.testing.assert_almost_equal(
+                self.CO2_pMuTT.get_EoRT(T=self.T0),
+                -894.97476277965)
+
+    def test_get_E(self):
+        np.testing.assert_almost_equal(
+            self.CO2_pMuTT.get_E(T=self.T0, units='J/mol'),
+            -894.97476277965*c.R('J/mol/K')*self.T0)
+
     def test_get_UoRT(self):
         np.testing.assert_almost_equal(
                 self.CO2_pMuTT.get_UoRT(T=self.T0, V=self.V0),

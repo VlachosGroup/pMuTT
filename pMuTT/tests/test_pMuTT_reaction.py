@@ -273,6 +273,42 @@ class TestReaction(unittest.TestCase):
                                                         units=units),
                                exp_Cp_TS)
 
+    def test_get_EoRT_state(self):
+        exp_EoRT_react = self.H2_sm.get_EoRT(T=c.T0('K')) \
+                         + self.O2_sm.get_EoRT(T=c.T0('K'))*0.5
+        exp_EoRT_prod = self.H2O_sm.get_EoRT(T=c.T0('K'))
+        exp_EoRT_TS = self.H2O_TS_sm.get_EoRT(T=c.T0('K'))
+
+        self.assertAlmostEqual(self.rxn_sm.get_EoRT_state(state='reactants',
+                                                          T=c.T0('K')),
+                               exp_EoRT_react)
+        self.assertAlmostEqual(self.rxn_sm.get_EoRT_state(state='products',
+                                                          T=c.T0('K')),
+                               exp_EoRT_prod)
+        self.assertAlmostEqual(self.rxn_sm.get_EoRT_state(state='transition state',
+                                                          T=c.T0('K')),
+                               exp_EoRT_TS)
+
+    def test_get_E_state(self):
+        units = 'J/mol'
+        exp_E_react = self.H2_sm.get_E(T=c.T0('K'), units=units) \
+            + self.O2_sm.get_E(T=c.T0('K'), units=units)*0.5
+        exp_E_prod = self.H2O_sm.get_E(T=c.T0('K'), units=units)
+        exp_E_TS = self.H2O_TS_sm.get_E(T=c.T0('K'), units=units)
+
+        self.assertAlmostEqual(self.rxn_sm.get_E_state(state='reactants',
+                                                       T=c.T0('K'),
+                                                       units=units),
+                               exp_E_react)
+        self.assertAlmostEqual(self.rxn_sm.get_E_state(state='products',
+                                                       T=c.T0('K'),
+                                                       units=units),
+                               exp_E_prod)
+        self.assertAlmostEqual(self.rxn_sm.get_E_state(state='transition state',
+                                                       T=c.T0('K'),
+                                                       units=units),
+                               exp_E_TS)
+
     def test_get_UoRT_state(self):
         exp_UoRT_react = self.H2_sm.get_UoRT(T=c.T0('K')) \
                          + self.O2_sm.get_UoRT(T=c.T0('K'))*0.5
@@ -517,6 +553,29 @@ class TestReaction(unittest.TestCase):
                 self.rxn_sm.get_delta_Cp(T=c.T0('K'), units=units, rev=True),
                 -exp_sm_Cp)
 
+    def test_get_delta_EoRT(self):
+        exp_sm_EoRT = self.H2O_sm.get_EoRT(T=c.T0('K')) \
+                      - self.H2_sm.get_EoRT(T=c.T0('K')) \
+                      - self.O2_sm.get_EoRT(T=c.T0('K'))*0.5
+        self.assertAlmostEqual(
+                self.rxn_sm.get_delta_EoRT(T=c.T0('K')),
+                exp_sm_EoRT)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_delta_EoRT(T=c.T0('K'), rev=True),
+                -exp_sm_EoRT)
+
+    def test_get_delta_E(self):
+        units = 'J/mol'
+        exp_sm_E = self.H2O_sm.get_E(T=c.T0('K'), units=units) \
+            - self.H2_sm.get_E(T=c.T0('K'), units=units) \
+            - self.O2_sm.get_E(T=c.T0('K'), units=units)*0.5
+        self.assertAlmostEqual(
+                self.rxn_sm.get_delta_E(T=c.T0('K'), units=units),
+                exp_sm_E)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_delta_E(T=c.T0('K'), rev=True, units=units),
+                -exp_sm_E)
+
     def test_get_delta_UoRT(self):
         exp_sm_UoRT = self.H2O_sm.get_UoRT(T=c.T0('K')) \
                       - self.H2_sm.get_UoRT(T=c.T0('K')) \
@@ -739,6 +798,33 @@ class TestReaction(unittest.TestCase):
         self.assertAlmostEqual(
                 self.rxn_sm.get_Cp_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_Cp_rev)
+
+    def test_get_EoRT_act(self):
+        exp_sm_EoRT = self.H2O_TS_sm.get_EoRT(T=c.T0('K')) \
+            - self.H2_sm.get_EoRT(T=c.T0('K')) \
+            - self.O2_sm.get_EoRT(T=c.T0('K'))*0.5
+        exp_sm_EoRT_rev = self.H2O_TS_sm.get_EoRT(T=c.T0('K')) \
+            - self.H2O_sm.get_EoRT(T=c.T0('K'))
+        self.assertAlmostEqual(
+                self.rxn_sm.get_EoRT_act(T=c.T0('K')),
+                exp_sm_EoRT)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_EoRT_act(T=c.T0('K'), rev=True),
+                exp_sm_EoRT_rev)
+
+    def test_get_E_act(self):
+        units = 'J/mol'
+        exp_sm_E = self.H2O_TS_sm.get_E(T=c.T0('K'), units=units) \
+            - self.H2_sm.get_E(T=c.T0('K'), units=units) \
+            - self.O2_sm.get_E(T=c.T0('K'), units=units)*0.5
+        exp_sm_E_rev = self.H2O_TS_sm.get_E(T=c.T0('K'), units=units) \
+            - self.H2O_sm.get_E(T=c.T0('K'), units=units)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_E_act(T=c.T0('K'), units=units),
+                exp_sm_E)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_E_act(T=c.T0('K'), rev=True, units=units),
+                exp_sm_E_rev)
 
     def test_get_UoRT_act(self):
         exp_sm_UoRT = self.H2O_TS_sm.get_UoRT(T=c.T0('K')) \

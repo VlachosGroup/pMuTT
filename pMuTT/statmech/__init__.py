@@ -268,6 +268,46 @@ class StatMech:
         """
         return self.get_CpoR(verbose=verbose, **kwargs)*c.R(units)
 
+    def get_EoRT(self, T=c.T0('K'), **kwargs):
+        """Dimensionless electronic energy
+
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : key-word arguments
+                Parameters passed to electronic mode
+        Returns
+        -------
+            EoRT : float or (N,) `numpy.ndarray`_
+                Dimensionless electronic energy.
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        kwargs['T'] = T
+        return _pass_expected_arguments(self.elec_model.get_UoRT, **kwargs)
+
+    def get_E(self, units, T=c.T0('K'), **kwargs):
+        """Calculate the electronic energy
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            E : float or (N,) `numpy.ndarray`_
+                Electronic energy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_EoRT(T=T, **kwargs)*T*c.R('{}/K'.format(units))
+
     def get_UoRT(self, verbose=False, **kwargs):
         """Dimensionless internal energy
 
@@ -311,8 +351,8 @@ class StatMech:
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
-            T : float
-                Temperature in K
+            T : float, optional
+                Temperature in K. Default is 298.15 K
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -368,8 +408,8 @@ class StatMech:
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
-            T : float
-                Temperature in K
+            T : float, optional
+                Temperature in K. Default is 298.15 K
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -479,8 +519,8 @@ class StatMech:
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
-            T : float
-                Temperature in K
+            T : float, optional
+                Temperature in K. Default is 298.15 K
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -536,8 +576,8 @@ class StatMech:
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
-            T : float
-                Temperature in K
+            T : float, optional
+                Temperature in K. Default is 298.15 K
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -598,6 +638,7 @@ class StatMech:
 
 presets = {
     'idealgas': {
+        'statmech_model': StatMech,
         'trans_model': trans.IdealTrans,
         'n_degrees': 3,
         'vib_model': vib.HarmonicVib,
@@ -608,15 +649,18 @@ presets = {
         'optional': ('atoms')
         },
     'harmonic': {
+        'statmech_model': StatMech,
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.IdealElec,
         'required': ('vib_wavenumbers', 'potentialenergy', 'spin'),
     },
     'electronic': {
+        'statmech_model': StatMech,
         'elec_model': elec.IdealElec,
         'required': ('potentialenergy', 'spin'),
     },
     'placeholder': {
+        'statmech_model': StatMech,
         'trans_model': EmptyMode,
         'vib_model': EmptyMode,
         'elec_model': EmptyMode,
