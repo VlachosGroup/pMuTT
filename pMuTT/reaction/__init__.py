@@ -2181,7 +2181,7 @@ def _get_specie_kwargs(specie_name, **kwargs):
     specie_specific = specie_kwargs.pop('specie', None)
     # See if there was an entry for the specific species
     try:
-        specie_kwargs.update(specie_specific[name])
+        specie_kwargs.update(specie_specific[specie_name])
     except (KeyError, TypeError, NameError):
         pass
     return specie_kwargs
