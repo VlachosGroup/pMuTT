@@ -3,6 +3,7 @@ from collections import Counter
 import inspect
 import re
 import numpy as np
+from scipy import interpolate
 from matplotlib import pyplot as plt
 from pMuTT import _force_pass_arguments, _pass_expected_arguments, _is_iterable
 from pMuTT import constants as c
@@ -1134,7 +1135,7 @@ class Reaction:
         elif method == 'bep':
             return self.bep.get_EoRT_act(rev=rev, **kwargs)
         elif method == 'transition state' or method == 'ts':
-            return self.get_HoRT_act(rev=rev, activation=True, **kwargs)
+            return self.get_delta_HoRT(rev=rev, activation=True, **kwargs)
         else:
             raise ValueError(('Method "{}" not supported. See documentation '
                               'of '
@@ -1496,6 +1497,147 @@ class Reactions:
                                                 key=key))
         return species
 
+    def plot_coordinate_diagram(self, method_name, include_TS=True, ref_index=0,
+                                ref_state='reactants', x_scale_TS=0.75, 
+                                y_scale_TS=0.75, figure=None, axes=None,
+                                plt_kwargs={}, **kwargs):
+        """Plots a reaction coordinate diagram.
+
+        Parameters
+        ----------
+            method_name : str
+                Name of method to use to calculate quantity. Calculates any
+                quantity as long as the relevant objects have the same method
+                name
+            include_TS : bool, optional
+                Whether transition states should be included. Default is True
+            ref_index : int, optional
+                Reaction index to use to reference states. Default is the first 
+                reaction (i.e. ref_index = 0)
+            ref_state : str, optional
+                State of the reference to use. Supported options include:
+
+                - reactants (default)
+                - products
+                - transition state
+                - ts (same as transition state)
+            x_scale_TS : float, optional
+                Value between 0 and 1 that controls curvature of transition 
+                state peaks. Higher values produce sharper peaks. Default is
+                0.75
+            y_scale_TS : float, optional
+                Value between 0 and 1 that controls curvature of transition 
+                state peaks. Higher values produce sharper peaks. Default is
+                0.75
+            figure : `matplotlib.figure.Figure`_
+                Add plot to this figure. If not specified, one will be generated
+            ax : `matplotlib.axes.Axes.axis`_, optional
+                Adds plot to this axis. If not specified, one will be generated
+            kwargs : keyword arguments
+                Extra arguments that will be fed to 
+                `matplotlib.pyplot.subplots`_
+        Returns
+        -------
+            figure : `matplotlib.figure.Figure`_
+                Figure
+            axes : tuple of `matplotlib.axes.Axes.axis`_
+                Axes of the plot.
+
+        .. _`matplotlib.pyplot.subplots`: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html
+        .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
+        .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
+        """
+
+        x_offset = 1.
+
+        x_plot = []
+        y_plot = []
+        x_labels = []
+        x_label_pos = []
+        x = 0.
+
+        ref = self.reactions[ref_index]._get_state_quantity(
+                method_name=method_name, state=ref_state, **kwargs)
+
+        for i, reaction in enumerate(self.reactions):
+            '''First state is the reactants of reaction 0.'''
+            if i == 0:
+                y_react = reaction._get_state_quantity(method_name=method_name,
+                                                       state='reactants',
+                                                       **kwargs) \
+                    - ref
+                x_plot.extend([x, x+x_offset])
+                y_plot.extend([y_react, y_react])
+                x_labels.append(_write_reaction_state(
+                        species=reaction.reactants,
+                        stoich=reaction.reactants_stoich))
+                x_label_pos.append(x + x_offset/2.)                
+                x += x_offset
+
+            # Calculating y value for product in case we need it to fit the 
+            # transition state curve
+            y_product = reaction._get_state_quantity(method_name=method_name,
+                                                     state='products',
+                                                     **kwargs) \
+                        - ref
+
+            '''Calculate properties for TS if necessary'''
+            if include_TS and None not in reaction.transition_state:
+                x += x_offset
+                y_TS = reaction._get_state_quantity(method_name=method_name,
+                                                    state='transition state',
+                                                    **kwargs) \
+                       - ref
+                '''Calculate data to fit spline'''
+                x_fit = np.array([x-x_offset,
+                                  x-x_offset*(1.-x_scale_TS),
+                                  x,
+                                  x+x_offset*(1.-x_scale_TS),
+                                  x+x_offset])
+                y_fit = np.array([y_plot[-1],
+                                  (y_TS-y_plot[-1])*y_scale_TS+y_plot[-1],
+                                  y_TS,
+                                  (y_TS-y_product)*y_scale_TS+y_product,
+                                  y_product])
+                tck = interpolate.splrep(x_fit, y_fit, k=2)
+                '''Calculate new x and y points from spline fit'''
+                x_spline = np.linspace(x-x_offset, x+x_offset)
+                y_spline = interpolate.splev(x_spline, tck)
+
+                x_plot.extend(x_spline)
+                y_plot.extend(y_spline)
+                x_labels.append(_write_reaction_state(
+                    species=reaction.transition_state, 
+                    stoich=reaction.transition_state_stoich))
+                x_label_pos.append(x)
+            x += x_offset
+
+            '''Calculate properties for product'''
+            x_plot.extend([x, x+x_offset])
+            y_plot.extend([y_product, y_product])
+            x_labels.append(_write_reaction_state(
+                    species=reaction.products,
+                    stoich=reaction.products_stoich))
+            x_label_pos.append(x + x_offset/2.)                
+            x += x_offset
+        
+        if figure is None:
+            figure, ax = plt.subplots(1, 1, **plt_kwargs)
+        ax.plot(x_plot, y_plot)
+        ax.set_xticks(x_label_pos)
+        ax.set_xticklabels(x_labels, rotation='vertical')
+
+        # Setting the y label
+        y_label = method_name.replace('get_', '')
+        try:
+            units = kwargs['units']
+        except KeyError:
+            ax.set_ylabel(y_label)
+        else:
+            ax.set_ylabel('{} ({})'.format(y_label, units))
+        plt.tight_layout()
+        return figure, ax
+
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
         
@@ -1647,11 +1789,15 @@ def _write_reaction_state(species, stoich, species_delimiter='+'):
         if specie is None:
             reaction_str = ''
             break
-        if i == 0:
-            reaction_str = '{}{}'.format(stoich_val, specie.name)
+        if np.isclose(stoich_val, 1.):
+            specie_str = specie.name
         else:
-            reaction_str += '{}{}{}'.format(species_delimiter, stoich_val,
-                                            specie.name)
+            specie_str = '{}{}'.format(stoich_val, specie.name)
+
+        if i == 0:
+            reaction_str = specie_str
+        else:
+            reaction_str += '{}{}'.format(species_delimiter, specie_str)
     return reaction_str
 
 
