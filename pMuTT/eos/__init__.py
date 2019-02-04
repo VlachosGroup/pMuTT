@@ -10,9 +10,10 @@ import numpy as np
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import remove_class
 
+
 class IdealGasEOS:
     """Ideal gas equation of state
-    
+
     :math:`PV=nRT`
     """
 
@@ -116,9 +117,10 @@ class IdealGasEOS:
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
+
 class vanDerWaalsEOS:
     """van der Waals equation of state
-    
+
     :math:`\\bigg(P+a\\big(\\frac{n}{V}\\big)^2 \\bigg)\\bigg(\\frac{V}{n}-b
     \\bigg)=RT`
 
@@ -144,8 +146,8 @@ class vanDerWaalsEOS:
             P : float, optional
                 Pressure in bar. Default is standard pressure
             gas_phase : bool, optional
-                Relevant if system is in vapor-liquid equilibrium. If True, 
-                return the larger volume (gas phase). If False, returns the 
+                Relevant if system is in vapor-liquid equilibrium. If True,
+                return the larger volume (gas phase). If False, returns the
                 smaller volume (liquid phase).
         Returns
         -------
@@ -173,8 +175,8 @@ class vanDerWaalsEOS:
             n : float, optional
                 Number of moles (in mol). Default is 1 mol
             gas_phase : bool, optional
-                Relevant if system is in vapor-liquid equilibrium. If True, 
-                return the larger volume (gas phase). If False, returns the 
+                Relevant if system is in vapor-liquid equilibrium. If True,
+                return the larger volume (gas phase). If False, returns the
                 smaller volume (liquid phase).
         Returns
         -------
@@ -201,7 +203,7 @@ class vanDerWaalsEOS:
         """
         Vm = V/n
         return (c.R('J/mol/K')*T/(Vm - self.b) - self.a*(1./Vm)**2) \
-               *c.convert_unit(from_='Pa', to='bar')
+            * c.convert_unit(from_='Pa', to='bar')
 
     def get_T(self, V=c.V0('m3'), P=c.P0('bar'), n=1.):
         """Calculates the temperature of a van der Waals gas
@@ -221,7 +223,7 @@ class vanDerWaalsEOS:
         """
         Vm = V/n
         return (P*c.convert_unit(from_='bar', to='Pa') + self.a/Vm**2) \
-               *(Vm - self.b)/c.R('J/mol/K')
+            * (Vm - self.b)/c.R('J/mol/K')
 
     def get_n(self, V=c.V0('m3'), P=c.P0('bar'), T=c.T0('K'), gas_phase=True):
         """Calculates the moles of a van der Waals gas
@@ -235,8 +237,8 @@ class vanDerWaalsEOS:
             T : float, optional
                 Temperature in K. Default is standard temperature
             gas_phase : bool, optional
-                Relevant if system is in vapor-liquid equilibrium. If True, 
-                return the smaller moles (gas phase). If False, returns the 
+                Relevant if system is in vapor-liquid equilibrium. If True,
+                return the smaller moles (gas phase). If False, returns the
                 larger moles (liquid phase).
         Returns
         -------
@@ -281,7 +283,7 @@ class vanDerWaalsEOS:
 
     @classmethod
     def from_critical(cls, Tc, Pc):
-        """Creates the van der Waals object from critical temperature and 
+        """Creates the van der Waals object from critical temperature and
         pressure
 
         Parameters
@@ -324,4 +326,3 @@ class vanDerWaalsEOS:
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
-

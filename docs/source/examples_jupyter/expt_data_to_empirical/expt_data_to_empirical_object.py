@@ -43,7 +43,7 @@ S_ref = 239.9 # J/mol/K
 SoR_ref = S_ref/c.R('J/mol/K')
 
 
-# Note that the ``pMuTT.constants`` module contains functions for standard constants for easy use such as the molar gas constant (``pMuTT.constants.R``) and standard temperature (``pMuTT.constants.T_ref``). The functions take a unit as an argument so that the code is more readable.
+# Note that the ``pMuTT.constants`` module contains functions for standard constants for easy use such as the molar gas constant (``pMuTT.constants.R``) and standard temperature (``~pMuTT.constants.T_ref``). The functions take a unit as an argument so that the code is more readable.
 
 # ## Fitting the Shomate polynomial to the experimental data
 # The Shomate polynomial can be created easily by feeding the data to the ``from_data`` method as shown below.
@@ -65,9 +65,9 @@ print(CH3OH_shomate)
 # In[3]:
 
 
-CpoR_shomate = CH3OH_shomate.get_CpoR(T=T)
-HoRT_shomate = CH3OH_shomate.get_HoRT(T=T_ref)
-SoR_shomate = CH3OH_shomate.get_SoR(T=T_ref)
+Cp_shomate = CH3OH_shomate.get_Cp(T=T, units='J/mol/K')
+H_shomate = CH3OH_shomate.get_H(T=T_ref, units='kJ/mol')
+S_shomate = CH3OH_shomate.get_S(T=T_ref, units='J/mol/K')
 
 
 # ## Compare the Shomate polynomial to the experimental data
@@ -78,12 +78,18 @@ SoR_shomate = CH3OH_shomate.get_SoR(T=T_ref)
 # In[4]:
 
 
-print('T(K)\tCp/R expt\tCp/R shomate')
-for T_i, CpoR1, CpoR2 in zip(T, CpoR, CpoR_shomate):
-    print('{}\t{}\t{}'.format(T_i, CpoR1, CpoR2))
+print('T(K)\tCp expt (J/mol/K)\tCp shomate (J/mol/K)')
+for T_i, Cp1, Cp2 in zip(T, Cp, Cp_shomate):
+    print('{}\t{}\t{}'.format(T_i, Cp1, Cp2))
 
-print('T(K)\tH/RT expt\tH/RT shomate\tS/R expt\tS/R shomate')
-print('{}\t{}\t{}\t{}\t{}'.format(T_ref, HoRT_ref, HoRT_shomate, SoR_ref, SoR_shomate))
+print('-')
+print('T_ref: {} K'.format(T_ref))
+print('-')
+print('H expt: {} kJ/mol'.format(H_ref))
+print('H shomate: {} kJ/mol'.format(H_shomate))
+print('-')
+print('S expt: {} J/mol/K'.format(S_ref))
+print('S shomate: {} J/mol/K'.format(S_shomate))
 
 
 # ### Compare using a plot

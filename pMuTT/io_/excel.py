@@ -9,16 +9,14 @@ import numpy as np
 import pandas as pd
 import os
 from ase.io import read
-from pMuTT import constants as c
-from pMuTT import parse_formula, get_molecular_weight
+from pMuTT import parse_formula
 from pMuTT.statmech import presets, StatMech
-from pMuTT.statmech.rot import get_geometry_from_atoms
-from pMuTT.statmech.rot import get_rot_temperatures_from_atoms
 from pMuTT.io_.vasp import set_vib_wavenumbers_from_outcar
 
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.',
-               min_frequency_cutoff=0., **kwargs):
+               min_frequency_cutoff=0., include_imaginary=False,
+               **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
     initialize objects
 
@@ -32,9 +30,12 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         header : int, optional
             Location to find header names (0-index). Default is 0
         min_frequency_cutoff : float, optional
-            Minimum frequency cutoff (cm-1). Frequencies > min_frequency_cutoff
-            read from OUTCAR.
-            Default 0
+            Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
+            Only frequencies greater than min_frequency_cutoff are read from 
+            OUTCAR. Default is 0 cm-1
+        include_imaginary : bool, optional
+            Applies for the vib_outcar header. Whether or not imaginary 
+            frequencies should be included. Default is False
         delimiter : str, optional
             Delimiter to parse column names. Default is '.'
         **kwargs: keyword arguments
@@ -57,7 +58,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
     -----
         Special rules exist for the following column headings
 
-        - element (:func:`~pMuTT.io_.excel.set_element`)
+        - element.[element_symbol] (:func:`~pMuTT.io_.excel.set_element`)
         - formula (:func:`~pMuTT.io_.excel.set_formula`)
         - atoms (:func:`~pMuTT.io_.excel.set_atoms`)
         - statmech_model (:func:`~pMuTT.io_.excel.set_statmech_model`)
@@ -65,6 +66,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - rot_temperature (:func:`~pMuTT.io_.excel.set_rot_temperatures`)
         - nasa.a_low (:func:`~pMuTT.io_.excel.set_nasa_a_low`)
         - nasa.a_high (:func:`~pMuTT.io_.excel.set_nasa_a_high`)
+        - vib_outcar (:func:`~pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
@@ -78,6 +80,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         for col, cell_data in row_data.iteritems():
             # Special parsing instructions
             if pd.isnull(cell_data):
+                # Skip empty cells
                 continue
             elif 'element' in col:
                 thermo_data = set_element(header=col, value=cell_data,
@@ -91,21 +94,19 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                                         output_structure=thermo_data)
             elif 'statmech_model' in col:
                 thermo_data = set_statmech_model(model=cell_data,
-                                               output_structure=thermo_data)
+                                                 output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
                 if vib_set_by_outcar:
                     continue  # vib_wavenumber already set from outcar
                 thermo_data = set_vib_wavenumbers(value=cell_data,
                                                   output_structure=thermo_data)
             elif 'vib_outcar' in col:
-                try:
-                    thermo_data = set_vib_wavenumbers_from_outcar(in_file=cell_data,
-                                                                  output_structure=thermo_data,
-                                                                  min_frequency_cutoff=min_frequency_cutoff)
-                except FileNotFoundError as e:
-                    raise e
-                else:
-                    vib_set_by_outcar = True
+                thermo_data = set_vib_wavenumbers_from_outcar(
+                    in_file=cell_data,
+                    output_structure=thermo_data,
+                    min_frequency_cutoff=min_frequency_cutoff,
+                    include_imaginary=include_imaginary)
+                vib_set_by_outcar = True
             elif 'rot_temperature' in col:
                 thermo_data = set_rot_temperatures(value=cell_data,
                                                    output_structure=thermo_data)
@@ -230,7 +231,7 @@ def set_statmech_model(model, output_structure):
         output_structure.update(presets[model])
     except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pMuTT.statmech for supported '
+                         'of presets in pMuTT.statmech.presets for supported '
                          'models.'.format(model))
     return output_structure
 

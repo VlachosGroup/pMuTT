@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pMuTT'
-copyright = '2018, Gerhard Wittreich, Jonathan Lym'
-author = 'Gerhard Wittreich, Jonathan Lym'
+copyright = '2018, Vlachos Research Group'
+author = 'Vlachos Research Group'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.0'
+release = '1.2.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -138,7 +138,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'pMuTT.tex', 'pMuTT Documentation',
-     'Gerhard Wittreich, Jonathan Lym', 'manual'),
+     'Vlachos Research Group', 'manual'),
 ]
 
 

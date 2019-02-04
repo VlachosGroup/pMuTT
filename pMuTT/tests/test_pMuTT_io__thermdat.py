@@ -7,6 +7,7 @@ import unittest
 import pMuTT.io_.thermdat as thermdat
 import numpy as np
 
+
 class TestThermdat(unittest.TestCase):
     def test__get_fields(self):
         lines = [
@@ -16,20 +17,24 @@ class TestThermdat(unittest.TestCase):
             '\n  test 200 ## %^& test100',
             '\n test 200 ## %^& test100 \n']
 
-        #Default delimiter and remove fields
+        # Default delimiter and remove fields
         expected_fields = ['test', '200', '##', '%^&', 'test100']
         for line in lines:
             self.assertListEqual(thermdat._get_fields(line), expected_fields)
 
-        #Changed delimiter to '#'
+        # Changed delimiter to '#'
         expected_fields = ['test200', '%^&test100']
         for line in lines:
-            self.assertListEqual(thermdat._get_fields(line, delimiter='#', remove_fields=['', '\n', ' ']), expected_fields)
+            self.assertListEqual(thermdat._get_fields(line, delimiter='#',
+                                                      remove_fields=['', '\n', ' ']),
+                                 expected_fields)
 
-        #Added 'test' to remove_fields
+        # Added 'test' to remove_fields
         expected_fields = ['200', '##', '%^&', '100']
         for line in lines:
-            self.assertListEqual(thermdat._get_fields(line, remove_fields = ['', '\n', 'test']), expected_fields)
+            self.assertListEqual(thermdat._get_fields(line,
+                                                      remove_fields = ['', '\n', 'test']),
+                                 expected_fields)
 
     def test__is_temperature_header(self):
         false_lines = [
@@ -121,8 +126,10 @@ class TestThermdat(unittest.TestCase):
             ' 3.65264072E+00 1.06108515E-03 3.83455580E-08 3.84923664E-10-2.13953966E-13    2',
             '  3.652641E+00   1.061085E-03   3.834556E-08   3.849237E-10  -2.139540E-13     2']
         expected_values = [
-            np.array([3.65264072E+00, 1.06108515E-03, 3.83455580E-08, 3.84923664E-10, -2.13953966E-13, 0., 0.]),
-            np.array([3.652641E+00, 1.061085E-03, 3.834556E-08, 3.849237E-10, -2.139540E-13, 0., 0.])
+            np.array([3.65264072E+00, 1.06108515E-03, 3.83455580E-08,
+                      3.84923664E-10, -2.13953966E-13, 0., 0.]),
+            np.array([3.652641E+00, 1.061085E-03, 3.834556E-08, 3.849237E-10,
+                      -2.139540E-13, 0., 0.])
         ]
 
         for line, expected_value in zip(lines, expected_values):
@@ -138,12 +145,17 @@ class TestThermdat(unittest.TestCase):
             np.array([0., 0., 0., 0., 0., 3.652641E+00, 1.061085E-03])
         ]
         expected_a_low_values = [
-            np.array([3.83455580E-08, 3.84923664E-10, -2.13953966E-13, 0., 0., 0., 0.]),
-            np.array([3.834556E-08, 3.849237E-10, -2.139540E-13, 0., 0., 0., 0.])
+            np.array([3.83455580E-08, 3.84923664E-10, -2.13953966E-13,
+                      0., 0., 0., 0.]),
+            np.array([3.834556E-08, 3.849237E-10, -2.139540E-13,
+                      0., 0., 0., 0.])
         ]
 
-        for line, expected_a_high_value, expected_a_low_value in zip(lines, expected_a_high_values, expected_a_low_values):
-            data = thermdat._read_line3(line, nasa_data={'a_high': np.zeros(7)})
+        for line, expected_a_high_value, expected_a_low_value in zip(lines,
+                                                                     expected_a_high_values,
+                                                                     expected_a_low_values):
+            data = thermdat._read_line3(line,
+                                        nasa_data={'a_high': np.zeros(7)})
             np.testing.assert_allclose(data['a_high'], expected_a_high_value)
             np.testing.assert_allclose(data['a_low'], expected_a_low_value)
 
@@ -152,13 +164,16 @@ class TestThermdat(unittest.TestCase):
             ' 3.65264072E+00 1.06108515E-03 3.83455580E-08 3.84923664E-10                   4',
             '  3.652641E+00   1.061085E-03   3.834556E-08   3.849237E-10                    4']
         expected_values = [
-            np.array([0., 0., 0., 3.65264072E+00, 1.06108515E-03, 3.83455580E-08, 3.84923664E-10]),
-            np.array([0., 0., 0., 3.652641E+00, 1.061085E-03, 3.834556E-08, 3.849237E-10])
+            np.array([0., 0., 0., 3.65264072E+00, 1.06108515E-03,
+                      3.83455580E-08, 3.84923664E-10]),
+            np.array([0., 0., 0., 3.652641E+00, 1.061085E-03,
+                      3.834556E-08, 3.849237E-10])
         ]
 
         for line, expected_value in zip(lines, expected_values):
             data = thermdat._read_line4(line, nasa_data={'a_low': np.zeros(7)})
             np.testing.assert_allclose(data['a_low'], expected_value)
+
 
 if __name__ == '__main__':
     unittest.main()

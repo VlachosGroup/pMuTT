@@ -8,16 +8,20 @@ import os
 import re
 
 
-def take_vib_wavenumber_from_line(in_line):
+def get_vib_wavenumber_from_line(in_line):
+    """Parses in_line for real frequencies
+
+    Parameters
+    ----------
+    in_line: str
+        Line containing frequency in OUTCAR
+    Returns
+    -------
+    vib_wavenumber: float
+        Vibrational wavenumber in cm-1
     """
 
-    :param in_line: str
-                    line containing frequency in OUTCAR
-    :return: vib_wavenumber: float
-                             vibrational wavenumber in cm-1
-    """
-    pattern = re.compile(r'(\d+\.?\d+) cm-1')
-    # pattern for numerical frequency in cm-1
+    pattern = re.compile(r'(\d+\.?\d+) cm-1')  # pattern for frequency in cm-1
     m = pattern.search(in_line)
     try:
         vib_wavenumber = float(m[1])
@@ -28,41 +32,63 @@ def take_vib_wavenumber_from_line(in_line):
 
 
 def set_vib_wavenumbers_from_outcar(in_file, output_structure,
-                                    min_frequency_cutoff):
-    """
+                                    min_frequency_cutoff=0., 
+                                    include_imaginary=False):
+    """Parses OUTCAR files for vibrational frequencies and assigns to 
+    output_structure['vib_wavenumber']. Imaginary frequencies are represented 
+    by negative numbers.
 
-    :param in_file: str
-                    OUTCAR file of frequency jobs
-           output_structure: dict
-                             Structure to assign value. Will assign to
-                             output_structure['elements'][element]
-           min_frequency_cutoff: float
-                              Frequencies > min_frequency_cutoff (cm-1)
-                              read from OUTCAR
-    :return: output_structure: dict
-                               output_structure with new vibration added
-
+    Parameters
+    ----------
+        in_file: str
+            OUTCAR file of frequency jobs
+        output_structure: dict
+            Structure to assign value. Will assign to
+            output_structure['elements'][element]
+        min_frequency_cutoff: float, optional
+            Only frequencies less than min_frequency_cutoff (in cm-1)
+            are read from OUTCAR. Default is 0 cm-1
+        include_imaginary: bool, optional
+            Whether imaginary frequencies should be included. Default is False.
+    Returns
+    -------
+        output_structure: dict
+            Output_structure with new vibration added
+    Raises
+    ------
+        FileNotFoundError
+            Raised if in_file does not exist
     """
     if not os.path.isfile(in_file):
-        raise FileNotFoundError('invalid outcar filename: {}'.format(in_file))
-    real_vib_wavenumbers = list()
+        raise FileNotFoundError('Invalid OUTCAR filename: {}'.format(in_file))
+
+    vib_wavenumbers = list()
     real_pattern = re.compile(r'f[ ]*=')  # pattern for real frequencies
-    try:
-        with open(in_file, "r") as out_fp:
-            outcar_contents = out_fp.readlines()
-    except Exception as e:
-        # Unknown error opening file
-        raise e
+    if include_imaginary:
+        # pattern for imaginary frequencies
+        imag_pattern  = re.compile(r'f/i[ ]*=')
+
+    with open(in_file, "r") as out_fp:
+        outcar_contents = out_fp.readlines()
     for line in outcar_contents:
-        if real_pattern.search(line):
+        if real_pattern.search(line) is not None:
             try:
-                vib_wavenumber = take_vib_wavenumber_from_line(line)
+                vib_wavenumber = get_vib_wavenumber_from_line(line)
             except TypeError:
                 pass  # if no frequency in line continue
             else:
                 if vib_wavenumber > min_frequency_cutoff:
-                    real_vib_wavenumbers.append(vib_wavenumber)
-    if not real_vib_wavenumbers:
+                    vib_wavenumbers.append(vib_wavenumber)
+        elif include_imaginary and imag_pattern.search(line) is not None:
+            try:
+                vib_wavenumber = get_vib_wavenumber_from_line(line)
+            except TypeError:
+                pass  # if no frequency in line continue
+            else:
+                vib_wavenumbers.append(-vib_wavenumber)
+
+
+    if len(vib_wavenumbers) == 0:
         print('no frequencies found in file')
-    output_structure['vib_wavenumbers'] = real_vib_wavenumbers
+    output_structure['vib_wavenumbers'] = vib_wavenumbers
     return output_structure

@@ -34,7 +34,7 @@ class RigidRotor:
             Td             12
             Oh             24
             ===========    ===============
-                                               
+
             See DOI for more details: 10.1007/s00214-007-0328-0
         rot_temperatures : list of float, optional
             Rotational temperatures in K
@@ -47,18 +47,23 @@ class RigidRotor:
         atoms : ase.Atoms object, optional
             An atoms object can be used to calculate rot_temperatures and
             guess geometry
+        degree_tol : float
+            Degree tolerance to estimate geometry. Only required if estimating
+            geometry or rot_temperatures
     """
 
-    def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None, 
-                 atoms=None):
+    def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None,
+                 atoms=None, degree_tol=5.):
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
-            self.rot_temperatures = get_rot_temperatures_from_atoms(atoms=atoms)
+            self.rot_temperatures = get_rot_temperatures_from_atoms(
+                    atoms=atoms, degree_tol=degree_tol)
         else:
             self.rot_temperatures = rot_temperatures
 
         if geometry is None and atoms is not None:
-            self.geometry = get_geometry_from_atoms(atoms=atoms)
+            self.geometry = get_geometry_from_atoms(
+                    atoms=atoms, degree_tol=degree_tol)
         else:
             self.geometry = geometry
 
@@ -95,11 +100,11 @@ class RigidRotor:
             return T/self.symmetrynumber/np.prod(self.rot_temperatures)
         elif self.geometry == 'nonlinear':
             return np.sqrt(np.pi)/self.symmetrynumber \
-                  *(T**3/np.prod(self.rot_temperatures))**0.5
+                * (T**3/np.prod(self.rot_temperatures))**0.5
         else:
             raise ValueError(
                 'Geometry, {}, not supported.'.format(self.geometry))
-        
+
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
 
@@ -135,7 +140,7 @@ class RigidRotor:
                 Rotational dimensionless heat capacity at constant pressure
         """
         return self.get_CvoR()
-    
+
     def get_UoRT(self):
         """Calculates the dimensionless internal energy
 
@@ -196,11 +201,11 @@ class RigidRotor:
         if self.geometry == 'monatomic':
             return 0.
         elif self.geometry == 'linear':
-            return np.log(T/self.symmetrynumber \
-                  /np.prod(self.rot_temperatures)) + 1.
+            return np.log(T/self.symmetrynumber
+                          / np.prod(self.rot_temperatures)) + 1.
         elif self.geometry == 'nonlinear':
-            return np.log(np.sqrt(np.pi)/self.symmetrynumber \
-                  *(T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
+            return np.log(np.sqrt(np.pi)/self.symmetrynumber
+                          * (T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
         else:
             raise ValueError(
                 'Geometry, {}, not supported.'.format(self.geometry))
@@ -239,13 +244,13 @@ class RigidRotor:
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
         """
         return {'class': str(self.__class__),
-                'symmetrynumber': self.symmetrynumber, 
+                'symmetrynumber': self.symmetrynumber,
                 'geometry': self.geometry,
                 'rot_temperatures': list(self.rot_temperatures)}
 
@@ -262,9 +267,10 @@ class RigidRotor:
             RigidRotor : RigidRotor object
         """
         json_obj = remove_class(json_obj)
-        return cls(**json_obj)        
+        return cls(**json_obj)
 
-def get_rot_temperatures_from_atoms(atoms, geometry=None):
+
+def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     """Calculate the rotational temperatures from ase.Atoms object
 
     Parameters
@@ -274,20 +280,22 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
         geometry : str, optional
             Geometry of molecule. If not specified, it will be guessed from
             Atoms object.
+        degree_tol : float, optional
+            Degree tolerance in degrees. Default is 5 degrees
     Returns
     -------
         rot_temperatures : list of float
             Rotational temperatures
     """
     if geometry is None:
-        geometry = get_geometry_from_atoms(atoms)
+        geometry = get_geometry_from_atoms(atoms=atoms, degree_tol=degree_tol)
 
     rot_temperatures = []
     for moment in atoms.get_moments_of_inertia():
         if np.isclose(0., moment):
             continue
         moment_SI = moment*c.convert_unit(from_='amu', to='kg') \
-                   *c.convert_unit(from_='A2', to='m2')
+            * c.convert_unit(from_='A2', to='m2')
         rot_temperatures.append(c.inertia_to_temp(moment_SI))
 
     if geometry == 'monatomic':
@@ -298,7 +306,8 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
         # Expecting one mode to be 0 and the other modes to be identical
         if not np.isclose(rot_temperatures[0], rot_temperatures[1]):
             warn('Expected rot_temperatures for linear specie, {}, to be '
-                 'similar. Values found were:{}'.format(atoms,rot_temperatures))
+                 'similar. Values found were:{}'
+                 .format(atoms, rot_temperatures))
         return [max(rot_temperatures)]
     elif geometry == 'nonlinear':
         # Expecting 3 modes. May or may not be equal
@@ -306,7 +315,8 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None):
     else:
         raise ValueError(
             'Geometry, {}, not supported.'.format(geometry))
-    
+
+
 def get_geometry_from_atoms(atoms, degree_tol=5.):
     """Estimate the geometry using the ase.Atoms object
 
@@ -314,8 +324,8 @@ def get_geometry_from_atoms(atoms, degree_tol=5.):
     ----------
         atoms : ase.Atoms object
             Atoms object
-        degree_tol : float
-            Degree tolerance in degrees
+        degree_tol : float, optional
+            Degree tolerance in degrees. Default is 5 degrees
     Returns
     -------
         geometry : str

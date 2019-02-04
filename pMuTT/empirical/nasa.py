@@ -21,15 +21,15 @@ class Nasa(BaseThermo):
 
     The thermodynamic properties are calculated using the following form:
 
-    :math:`\\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3} 
+    :math:`\\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3}
     + a_{5} T^{4}`
 
-    :math:`\\frac {H} {RT} = a_{1} + a_{2} \\frac {T} {2} + a_{3} 
-    \\frac {T^{2}} {3} + a_{4} \\frac {T^{3}} {4} + a_{5} 
+    :math:`\\frac {H} {RT} = a_{1} + a_{2} \\frac {T} {2} + a_{3}
+    \\frac {T^{2}} {3} + a_{4} \\frac {T^{3}} {4} + a_{5}
     \\frac {T^{4}} {5} + a_{6} \\frac {1} {T}`
 
-    :math:`\\frac {S} {R} = a_{1} \\ln {T} + a_{2} T + a_{3} 
-    \\frac {T^{2}} {2} + a_{4} \\frac {T^{3}} {3} + a_{5}  
+    :math:`\\frac {S} {R} = a_{1} \\ln {T} + a_{2} T + a_{3}
+    \\frac {T^{2}} {2} + a_{4} \\frac {T^{3}} {3} + a_{5}
     \\frac {T^{4}} {4} + a_{7}`
 
     Attributes
@@ -116,6 +116,25 @@ class Nasa(BaseThermo):
 
         return CpoR
 
+    def get_Cp(self, T, units):
+        """Calculate the heat capacity
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+        Returns
+        -------
+            Cp : float or (N,) `numpy.ndarray`_
+                Heat capacity
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_CpoR(T=T)*c.R(units)
+
     def get_HoRT(self, T):
         """Calculate the dimensionless enthalpy
 
@@ -139,6 +158,25 @@ class Nasa(BaseThermo):
             a = self.get_a(T=T)
             HoRT = get_nasa_HoRT(a=a, T=T)
         return HoRT
+
+    def get_H(self, T, units):
+        """Calculate the enthalpy
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+        Returns
+        -------
+            H : float or (N,) `numpy.ndarray`_
+                Enthalpy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_HoRT(T=T)*T*c.R('{}/K'.format(units))
 
     def get_SoR(self, T):
         """Calculate the dimensionless entropy
@@ -164,6 +202,25 @@ class Nasa(BaseThermo):
             SoR = get_nasa_SoR(a=a, T=T)
         return SoR
 
+    def get_S(self, T, units):
+        """Calculate the entropy
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+        Returns
+        -------
+            S : float or (N,) `numpy.ndarray`_
+                Entropy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_SoR(T=T)*c.R(units)
+
     def get_GoRT(self, T):
         """Calculate the dimensionless Gibbs free energy
 
@@ -187,6 +244,25 @@ class Nasa(BaseThermo):
             a = self.get_a(T=T)
             GoRT = get_nasa_GoRT(a=a, T=T)
         return GoRT
+
+    def get_G(self, T, units):
+        """Calculate the Gibbs energy
+
+        Parameters
+        ----------
+            T : float or (N,) `numpy.ndarray`_
+                Temperature(s) in K
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+        Returns
+        -------
+            G : float or (N,) `numpy.ndarray`_
+                Gibbs energy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_GoRT(T=T)*T*c.R('{}/K'.format(units))
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,

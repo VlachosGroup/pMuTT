@@ -92,7 +92,7 @@ class IdealTrans:
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
 
-        :math:`\\frac{Cv^{trans}}{R}=\\frac{Cv^{trans}}{R} + 1`
+        :math:`\\frac{Cp^{trans}}{R}=\\frac{Cv^{trans}}{R} + 1`
 
         Returns
         -------

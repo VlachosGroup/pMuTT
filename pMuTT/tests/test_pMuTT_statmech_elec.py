@@ -7,6 +7,7 @@ import unittest
 import numpy as np
 from pMuTT.statmech import elec
 
+
 class TestIdealElec(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
@@ -19,30 +20,30 @@ class TestIdealElec(unittest.TestCase):
             'spin': 1.
         }
 
-        self.T = 300 # K
+        self.T = 300  # K
 
     def test_get_q(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.elec_H2.get_q(T=self.T, 
-                                                      ignore_q_elec=False), 
+        self.assertTrue(np.isclose(self.elec_H2.get_q(T=self.T,
+                                                      ignore_q_elec=False),
                         3.5968135E+113))
         self.assertTrue(np.isclose(self.elec_OH.get_q(T=self.T,
-                                                      ignore_q_elec=False), 
+                                                      ignore_q_elec=False),
                         1.6543631E+127))
         self.assertTrue(np.isclose(self.elec_O2.get_q(T=self.T,
-                                                      ignore_q_elec=False), 
-                        1.4398714E+166))        
+                                                      ignore_q_elec=False),
+                        1.4398714E+166))
 
-        self.assertTrue(np.isclose(self.elec_H2.get_q(T=self.T, 
-                                                      ignore_q_elec=True), 
+        self.assertTrue(np.isclose(self.elec_H2.get_q(T=self.T,
+                                                      ignore_q_elec=True),
                         1.))
         self.assertTrue(np.isclose(self.elec_OH.get_q(T=self.T,
-                                                      ignore_q_elec=True), 
+                                                      ignore_q_elec=True),
                         1.))
         self.assertTrue(np.isclose(self.elec_O2.get_q(T=self.T,
-                                                      ignore_q_elec=True), 
-                        1.))        
+                                                      ignore_q_elec=True),
+                        1.))
 
     def test_get_CvoR(self):
         self.assertEqual(self.elec_H2.get_CvoR(), 0.)
@@ -95,8 +96,9 @@ class TestIdealElec(unittest.TestCase):
         self.assertEqual(self.elec_O2.to_dict(), self.elec_O2_dict)
 
     def test_from_dict(self):
-        self.assertEqual(elec.IdealElec.from_dict(self.elec_O2_dict), 
-                self.elec_O2)
+        self.assertEqual(elec.IdealElec.from_dict(self.elec_O2_dict),
+                         self.elec_O2)
+
 
 if __name__ == '__main__':
     unittest.main()

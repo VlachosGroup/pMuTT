@@ -3,10 +3,8 @@ from pMuTT.reaction.bep import BEP
 from pMuTT.statmech import StatMech, presets
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
-import numpy as np
 import os
 import json
-from pprint import pprint
 
 os.chdir(os.path.dirname(__file__))
 T = c.T0('K')
@@ -14,13 +12,13 @@ T = c.T0('K')
 dim_factor = c.R('eV/K')*T
 
 species = {
-    'H2': StatMech(name='H2', potentialenergy=2.*dim_factor, 
+    'H2': StatMech(name='H2', potentialenergy=2.*dim_factor,
                    **presets['electronic']),
-    'O2': StatMech(name='O2', potentialenergy=4.*dim_factor, 
+    'O2': StatMech(name='O2', potentialenergy=4.*dim_factor,
                    **presets['electronic']),
-    'H2O': StatMech(name='H2O', potentialenergy=3.*dim_factor, 
+    'H2O': StatMech(name='H2O', potentialenergy=3.*dim_factor,
                     **presets['electronic']),
-    'H2O_TS': StatMech(name='H2O', potentialenergy=5.*dim_factor, 
+    'H2O_TS': StatMech(name='H2O', potentialenergy=5.*dim_factor,
                        **presets['electronic']),
 }
 

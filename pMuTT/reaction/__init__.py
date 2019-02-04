@@ -3,12 +3,10 @@ from collections import Counter
 import inspect
 import re
 import numpy as np
-import matplotlib
-from matplotlib import pyplot as plt
 from pMuTT import _force_pass_arguments, _pass_expected_arguments, _is_iterable
 from pMuTT import constants as c
-from pMuTT.reaction.bep import BEP
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+
 
 class Reaction:
     """Represents a chemical reaction
@@ -26,25 +24,25 @@ class Reaction:
         transition_state : pMuTT model object, optional
             Transition state specie. Default is None
         transition_state_stoich : list of float, optional
-            Stoichiometric quantities of transition state species. 
+            Stoichiometric quantities of transition state species.
             Default is None
         bep : :class:`~pMuTT.reaction.bep.BEP` object, optional
             Bronsted Evans Polyani relationship. Default is None
         kwargs : keyword arguments
-            BEP parameters. See :class:`~pMuTT.reaction.bep.BEP` documentation 
+            BEP parameters. See :class:`~pMuTT.reaction.bep.BEP` documentation
             for expected parameters
 
     Notes
     -----
-        Specie specific parameters can be passed by having a key named 
+        Specie specific parameters can be passed by having a key named
         'specie' mapping onto a dictionary whose keys are the species names.
 
-        e.g. For the reaction: H2 + 0.5O2 = H2O, the pressures can be specified 
-        independently using the following dictionary. In this example arbitrary 
+        e.g. For the reaction: H2 + 0.5O2 = H2O, the pressures can be specified
+        independently using the following dictionary. In this example arbitrary
         values were used so the quantity evaluated may be meaningless.
-        
+
         .. code:: python
-        
+
             kwargs = {
                 'T': 298.,
                 'specie': {
@@ -62,7 +60,7 @@ class Reaction:
     """
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
-                 transition_state=None, transition_state_stoich=None, 
+                 transition_state=None, transition_state_stoich=None,
                  bep=None, **kwargs):
         # If any of the entries were not iterable, assign them to a list
         if not _is_iterable(reactants):
@@ -89,8 +87,6 @@ class Reaction:
         else:
             self.bep = bep
 
-
-
     def __eq__(self, other):
         try:
             other_dict = other.to_dict()
@@ -103,35 +99,65 @@ class Reaction:
         return self.to_string()
 
     def check_element_balance(self):
-        """Checks the reactants, products and transition state elemental 
+        """Checks the reactants, products and transition state elemental
         composition
 
         Raises
         ------
             ValueError
-                Raised if the reactants, products and/or transition state 
+                Raised if the reactants, products and/or transition state
                 element composition does not agree.
         """
-        reactant_elements = _count_elements(self.reactants, 
-                                           self.reactants_stoich)
-        product_elements = _count_elements(self.products, 
-                                          self.products_stoich)
+        reactant_elements = _count_elements(self.reactants,
+                                            self.reactants_stoich)
+        product_elements = _count_elements(self.products,
+                                           self.products_stoich)
         if reactant_elements != product_elements:
             raise ValueError('Number of elements in reactants and products do '
                              'not agree.\nReactant count: {}\n'
-                             'Product count: {}'.format(reactant_elements, \
+                             'Product count: {}'.format(reactant_elements,
                                                         product_elements))
 
         if None not in self.transition_state:
-            TS_elements = _count_elements(self.transition_state, 
+            TS_elements = _count_elements(self.transition_state,
                                           self.transition_state_stoich)
             if reactant_elements != TS_elements:
                 raise ValueError('Number of elements in reactants and '
                                  'transition state do not agree.\n'
                                  'Reactant count: {}\n'
-                                 'Product count: {}'.format(reactant_elements, \
+                                 'Product count: {}'.format(reactant_elements,
                                                             TS_elements))
 
+    def get_species(self, include_TS=True, key='name'):
+        """Returns the unique species included in the reaction.
+
+        Parameters
+        ----------
+            include_TS : bool, optional
+                Whether transition states should be included. Default is True
+            key : str, optional
+                Attribute to use as the key in the output dictionary. Default is
+                name
+        Returns
+        -------
+            species : dict
+                Unique species in the reaction
+        """
+        species = {}
+        # Add reactants
+        for specie in self.reactants:
+            species[getattr(specie, key)] = specie
+        # Add products
+        for specie in self.products:
+            species[getattr(specie, key)] = specie
+        # Add transition state if desired
+        if include_TS \
+           and self.transition_state is not None \
+           and None not in self.transition_state:
+            for specie in self.transition_state:
+                species[getattr(specie, key)] = specie
+
+        return species
 
     def get_q_state(self, state, **kwargs):
         """Gets partition function at a state
@@ -146,15 +172,15 @@ class Reaction:
                 - 'transition state'
                 - 'ts'
             kwargs : keyword arguments
-                Parameters with the conditions to calculate partition function. 
-                See class docstring to see how to pass specific parameters to 
+                Parameters with the conditions to calculate partition function.
+                See class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             q : float
                 Partition function of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_q', 
+        return self._get_state_quantity(state=state, method_name='get_q',
                                         **kwargs)
 
     def get_CvoR_state(self, state, **kwargs):
@@ -170,17 +196,43 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless heat capacity at 
-                constant volume. See class docstring to see how to pass 
+                Parameters required to calculate dimensionless heat capacity at
+                constant volume. See class docstring to see how to pass
                 specific parameters to different species.
         Returns
         -------
             CvoR : float
-                Dimensionless heat capacity at constant volume of the reaction 
+                Dimensionless heat capacity at constant volume of the reaction
                 state
         """
-        return self._get_state_quantity(state=state, method_name='get_CvoR', 
+        return self._get_state_quantity(state=state, method_name='get_CvoR',
                                         **kwargs)
+
+    def get_Cv_state(self, state, units, **kwargs):
+        """Gets the heat capacity at constant volume at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : keyword arguments
+                Parameters required to calculate heat capacity at constant
+                volume. See class docstring to see how to pass specific
+                parameters to different species.
+        Returns
+        -------
+            Cv : float
+                Heat capacity at constant volume of the reaction state
+        """
+        return self.get_CvoR_state(state=state, **kwargs)*c.R(units)
 
     def get_CpoR_state(self, state, **kwargs):
         """Gets dimensionless heat capacity at constant pressure at a state
@@ -195,18 +247,44 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless heat capacity at 
-                constant pressure. See class docstring to see how to pass 
+                Parameters required to calculate dimensionless heat capacity at
+                constant pressure. See class docstring to see how to pass
                 specific parameters to different species.
 
         Returns
         -------
             CpoR : float
-                Dimensionless heat capacity at constant pressure of the reaction 
-                state
+                Dimensionless heat capacity at constant pressure
+                of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_CpoR', 
+        return self._get_state_quantity(state=state, method_name='get_CpoR',
                                         **kwargs)
+
+    def get_Cp_state(self, state, units, **kwargs):
+        """Gets the heat capacity at constant pressure at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : keyword arguments
+                Parameters required to calculate heat capacity at constant
+                pressure. See class docstring to see how to pass specific
+                parameters to different species.
+        Returns
+        -------
+            Cp : float
+                Heat capacity at constant pressure of the reaction state
+        """
+        return self.get_CpoR_state(state=state, **kwargs)*c.R(units)
 
     def get_UoRT_state(self, state, **kwargs):
         """Gets dimensionless internal energy at a state
@@ -221,17 +299,46 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless internal energy. 
-                See class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless internal energy.
+                See class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             UoRT : float
-                Dimensionless internal energy of the reaction state. 
+                Dimensionless internal energy of the reaction state.
 
         """
-        return self._get_state_quantity(state=state, method_name='get_UoRT', 
+        return self._get_state_quantity(state=state, method_name='get_UoRT',
                                         **kwargs)
+
+    def get_U_state(self, state, units, T, **kwargs):
+        """Gets the internal energy at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : keyword arguments
+                Parameters required to calculate internal energy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            U : float
+                Internal energy of the reaction state
+        """
+        return self.get_UoRT_state(state=state, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_HoRT_state(self, state, **kwargs):
         """Gets dimensionless enthalpy at a state
@@ -246,18 +353,47 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless enthalpy. See 
-                class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless enthalpy. See
+                class docstring to see how to pass specific parameters to
                 different species.
 
         Returns
         -------
             HoRT : float
-                Dimensionless heat capacity at constant pressure of the reaction 
-                state. 
+                Dimensionless heat capacity at constant pressure
+                of the reaction state.
         """
-        return self._get_state_quantity(state=state, method_name='get_HoRT', 
+        return self._get_state_quantity(state=state, method_name='get_HoRT',
                                         **kwargs)
+
+    def get_H_state(self, state, units, T, **kwargs):
+        """Gets the enthalpy at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            H : float
+                Enthalpy of the reaction state
+        """
+        return self.get_HoRT_state(state=state, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_SoR_state(self, state, **kwargs):
         """Gets dimensionless entropy at a state
@@ -272,16 +408,42 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless entropy. See 
-                class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless entropy. See
+                class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             SoR : float
                 Dimensionless entropy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_SoR', 
+        return self._get_state_quantity(state=state, method_name='get_SoR',
                                         **kwargs)
+
+    def get_S_state(self, state, units, **kwargs):
+        """Gets the entropy at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : keyword arguments
+                Parameters required to calculate entropy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            S : float
+                Entropy of the reaction state
+        """
+        return self.get_SoR_state(state=state, **kwargs)*c.R(units)
 
     def get_FoRT_state(self, state, **kwargs):
         """Gets dimensionless Helmholtz energy at a state
@@ -296,16 +458,46 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless Helmholtz energy. 
-                See class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless
+                Helmholtz energy.
+                See class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             FoRT : float
                 Dimensionless Helmoltz energy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_FoRT', 
+        return self._get_state_quantity(state=state, method_name='get_FoRT',
                                         **kwargs)
+
+    def get_F_state(self, state, units, T, **kwargs):
+        """Gets the Helholtz energy at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : keyword arguments
+                Parameters required to calculate Helholtz energy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            F : float
+                Helmholtz energy of the reaction state
+        """
+        return self.get_FoRT_state(state=state, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_GoRT_state(self, state, **kwargs):
         """Gets dimensionless Gibbs energy at a state
@@ -320,17 +512,45 @@ class Reaction:
                 - 'transition state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless Gibbs energy. 
-                See class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless Gibbs energy.
+                See class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             GoRT : float
                 Dimensionless Gibbs energy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_GoRT', 
+        return self._get_state_quantity(state=state, method_name='get_GoRT',
                                         **kwargs)
 
+    def get_G_state(self, state, units, T, **kwargs):
+        """Gets the Gibbs energy at a state
+
+        Parameters
+        ----------
+            state : str
+                State to calculate quantity. Supported options:
+
+                - 'reactants'
+                - 'products'
+                - 'transition state'
+                - 'ts' (same as transition state)
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            G : float
+                Gibbs energy of the reaction state
+        """
+        return self.get_GoRT_state(state=state, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_delta_q(self, rev=False, **kwargs):
         """Gets change in partition function between reactants and products
@@ -338,11 +558,11 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate partition function. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate partition function. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -350,27 +570,27 @@ class Reaction:
                 Change in partition function between reactants and products
         """
         if rev:
-            delta_q = self._get_delta_quantity(initial_state='products', 
-                                               final_state='reactants', 
+            delta_q = self._get_delta_quantity(initial_state='products',
+                                               final_state='reactants',
                                                method_name='get_q', **kwargs)
         else:
-            delta_q = self._get_delta_quantity(initial_state='reactants', 
-                                               final_state='products', 
+            delta_q = self._get_delta_quantity(initial_state='reactants',
+                                               final_state='products',
                                                method_name='get_q', **kwargs)
         return delta_q
 
     def get_delta_CvoR(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants and 
-        products
+        """Gets change in dimensionless heat capacity (constant V)
+        between reactants and products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate heat capacity. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate heat capacity. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -378,30 +598,52 @@ class Reaction:
                 Change in heat capacity between reactants and products
         """
         if rev:
-            delta_CvoR = self._get_delta_quantity(initial_state='products', 
-                                                  final_state='reactants', 
-                                                  method_name='get_CvoR', 
+            delta_CvoR = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_CvoR',
                                                   **kwargs)
         else:
-            delta_CvoR = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_CvoR', 
+            delta_CvoR = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_CvoR',
                                                   **kwargs)
         return delta_CvoR
 
+    def get_delta_Cv(self, units, rev=False, **kwargs):
+        """Gets change in heat capacity (constant V) between reactants and
+        products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate heat capacity. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_Cv : float
+                Change in heat capacity between reactants and products
+        """
+        return self.get_delta_CvoR(rev=rev, **kwargs)*c.R(units)
 
     def get_delta_CpoR(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants and 
+        """Gets change in dimensionless heat capacity between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate heat capacity. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate heat capacity. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -409,30 +651,52 @@ class Reaction:
                 Change in heat capacity between reactants and products
         """
         if rev:
-            delta_CpoR = self._get_delta_quantity(initial_state='products', 
-                                                  final_state='reactants', 
-                                                  method_name='get_CpoR', 
+            delta_CpoR = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_CpoR',
                                                   **kwargs)
         else:
-            delta_CpoR = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_CpoR', 
+            delta_CpoR = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_CpoR',
                                                   **kwargs)
         return delta_CpoR
 
+    def get_delta_Cp(self, units, rev=False, **kwargs):
+        """Gets change in heat capacity (constant P) between reactants and
+        products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate heat capacity. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_Cp : float
+                Change in heat capacity between reactants and products
+        """
+        return self.get_delta_CpoR(rev=rev, **kwargs)*c.R(units)
 
     def get_delta_UoRT(self, rev=False, **kwargs):
-        """Gets change in dimensionless internal energy between reactants and 
+        """Gets change in dimensionless internal energy between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate internal energy. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate internal energy. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -440,17 +704,41 @@ class Reaction:
                 Change in internal energy between reactants and products
         """
         if rev:
-            delta_UoRT = self._get_delta_quantity(initial_state='products', 
-                                                  final_state='reactants', 
-                                                  method_name='get_UoRT', 
+            delta_UoRT = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_UoRT',
                                                   **kwargs)
         else:
-            delta_UoRT = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_UoRT', 
+            delta_UoRT = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_UoRT',
                                                   **kwargs)
         return delta_UoRT
 
+    def get_delta_U(self, units, T, rev=False, **kwargs):
+        """Gets change in internal energy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate internal energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_U : float
+                Change in internal energy between reactants and products
+        """
+        return self.get_delta_UoRT(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_delta_HoRT(self, rev=False, **kwargs):
         """Gets change in dimensionless enthalpy between reactants and products
@@ -458,11 +746,11 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate enthalpy. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate enthalpy. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -470,16 +758,41 @@ class Reaction:
                 Change in enthalpy between reactants and products
         """
         if rev:
-            delta_HoRT = self._get_delta_quantity(initial_state='products', 
-                                                  final_state='reactants', 
-                                                  method_name='get_HoRT', 
+            delta_HoRT = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_HoRT',
                                                   **kwargs)
         else:
-            delta_HoRT = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_HoRT', 
+            delta_HoRT = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_HoRT',
                                                   **kwargs)
         return delta_HoRT
+
+    def get_delta_H(self, units, T, rev=False, **kwargs):
+        """Gets change in enthalpy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_H : float
+                Change in enthalpy between reactants and products
+        """
+        return self.get_delta_HoRT(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_delta_SoR(self, rev=False, **kwargs):
         """Gets change in dimensionless entropy between reactants and products
@@ -487,11 +800,11 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate entropy. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate entropy. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -499,29 +812,51 @@ class Reaction:
                 Change in entropy between reactants and products
         """
         if rev:
-            delta_SoR = self._get_delta_quantity(initial_state='products', 
-                                                 final_state='reactants', 
-                                                 method_name='get_SoR', 
+            delta_SoR = self._get_delta_quantity(initial_state='products',
+                                                 final_state='reactants',
+                                                 method_name='get_SoR',
                                                  **kwargs)
         else:
-            delta_SoR = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_SoR', 
-                                                  **kwargs)
+            delta_SoR = self._get_delta_quantity(initial_state='reactants',
+                                                 final_state='products',
+                                                 method_name='get_SoR',
+                                                 **kwargs)
         return delta_SoR
 
+    def get_delta_S(self, units, rev=False, **kwargs):
+        """Gets change in entropy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate entropy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_S : float
+                Change in entropy between reactants and products
+        """
+        return self.get_delta_SoR(rev=rev, **kwargs)*c.R(units)
+
     def get_delta_FoRT(self, rev=False, **kwargs):
-        """Gets change in dimensionless Helmholtz energy between reactants and 
+        """Gets change in dimensionless Helmholtz energy between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate Helmholtz energy. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate Helmholtz energy. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -529,29 +864,54 @@ class Reaction:
                 Change in Helmholtz energy between reactants and products
         """
         if rev:
-            delta_FoRT = self._get_delta_quantity(initial_state='products', 
-                                                  final_state='reactants', 
-                                                  method_name='get_FoRT', 
+            delta_FoRT = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_FoRT',
                                                   **kwargs)
         else:
-            delta_FoRT = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_FoRT', 
+            delta_FoRT = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_FoRT',
                                                   **kwargs)
         return delta_FoRT
 
+    def get_delta_F(self, units, T, rev=False, **kwargs):
+        """Gets change in Helmholtz energy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate Helmholtz energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_F : float
+                Change in Helmholtz energy between reactants and products
+        """
+        return self.get_delta_FoRT(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
     def get_delta_GoRT(self, rev=False, **kwargs):
-        """Gets change in dimensionless Gibbs energy between reactants and 
+        """Gets change in dimensionless Gibbs energy between reactants and
         products
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate Gibbs energy. See class 
-                docstring to see how to pass specific parameters to different 
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
                 species.
         Returns
         -------
@@ -559,16 +919,41 @@ class Reaction:
                 Change in Gibbs energy between reactants and products
         """
         if rev:
-            delta_GoRT = self._get_delta_quantity(initial_state='products', 
-                                                  final_state='reactants', 
-                                                  method_name='get_GoRT', 
+            delta_GoRT = self._get_delta_quantity(initial_state='products',
+                                                  final_state='reactants',
+                                                  method_name='get_GoRT',
                                                   **kwargs)
         else:
-            delta_GoRT = self._get_delta_quantity(initial_state='reactants', 
-                                                  final_state='products', 
-                                                  method_name='get_GoRT', 
+            delta_GoRT = self._get_delta_quantity(initial_state='reactants',
+                                                  final_state='products',
+                                                  method_name='get_GoRT',
                                                   **kwargs)
         return delta_GoRT
+
+    def get_delta_G(self, units, T, rev=False, **kwargs):
+        """Gets change in Gibbs energy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_G : float
+                Change in Gibbs energy between reactants and products
+        """
+        return self.get_delta_GoRT(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_Keq(self, rev=False, **kwargs):
         """Gets equilibrium constant between reactants and products
@@ -576,175 +961,271 @@ class Reaction:
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate equilibrium constant. See class 
-                docstring to see how to pass specific parameters to different 
-                species.
+                Parameters required to calculate equilibrium constant. See
+                class docstring to see how to pass specific parameters to
+                different species.
         Returns
         -------
-            delta_GoRT : float
-                Change in equilibrium constant between reactants and products
+            Keq : float
+                Equilibrium constant between reactants and products
         """
         return np.exp(-self.get_delta_GoRT(rev=rev, **kwargs))
 
-    
     def get_q_act(self, rev=False, **kwargs):
-        """Gets change in partition function between reactants (or products) and 
-        transition state
-
-        Parameters
-        ----------
-            rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
-                instead of reactants. Default is False
-            kwargs : keyword arguments
-                Parameters required to calculate partition function. See class 
-                docstring to see how to pass specific parameters to different 
-                species.
-        Returns
-        -------
-            q_act : float
-                Change in partition function between reactants and transition
-                state
-        """
-        if rev:
-            q_act = self._get_delta_quantity(initial_state='products', 
-                                             final_state='transition state', 
-                                             method_name='get_q', 
-                                             **kwargs)
-        else:
-            q_act = self._get_delta_quantity(initial_state='reactants', 
-                                             final_state='transition state', 
-                                             method_name='get_q', 
-                                             **kwargs)
-        return q_act
-
-    def get_CvoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants (or 
-        products) and transition state
-
-        Parameters
-        ----------
-            rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
-                instead of reactants. Default is False
-            kwargs : keyword arguments
-                Parameters required to calculate dimensionless heat capacity.
-                See class docstring to see how to pass specific parameters to 
-                different species.
-        Returns
-        -------
-            CvoR_act : float
-                Change in dimensionless heat capacity between reactants and 
-                transition state
-        """
-        if rev:
-            CvoR_act = self._get_delta_quantity(initial_state='products', 
-                                                final_state='transition state', 
-                                                method_name='get_CvoR', 
-                                                **kwargs)
-        else:
-            CvoR_act = self._get_delta_quantity(initial_state='reactants', 
-                                                final_state='transition state', 
-                                                method_name='get_CvoR', 
-                                                **kwargs)
-        return CvoR_act
-
-
-    def get_CpoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants (or 
-        products) and transition state
-
-        Parameters
-        ----------
-            rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
-                instead of reactants. Default is False
-            kwargs : keyword arguments
-                Parameters required to calculate dimensionless heat capacity. 
-                See class docstring to see how to pass specific parameters to 
-                different species.
-        Returns
-        -------
-            CpoR_act : float
-                Change in dimensionless heat capacity between reactants and 
-                transition state
-        """
-        if rev:
-            CpoR_act = self._get_delta_quantity(initial_state='products', 
-                                                final_state='transition state', 
-                                                method_name='get_CpoR', 
-                                                **kwargs)
-        else:
-            CpoR_act = self._get_delta_quantity(initial_state='reactants', 
-                                                final_state='transition state', 
-                                                method_name='get_CpoR', 
-                                                **kwargs)
-        return CpoR_act
-
-    def get_UoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless internal energy between reactants (or 
-        products) and transition state
-
-        Parameters
-        ----------
-            rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
-                instead of reactants. Default is False
-            kwargs : keyword arguments
-                Parameters required to calculate dimensionless internal energy. 
-                See class docstring to see how to pass specific parameters to 
-                different species.
-        Returns
-        -------
-            UoRT_act : float
-                Change in dimensionless internal energy between reactants and 
-                transition state
-        """
-        if rev:
-            UoRT_act = self._get_delta_quantity(initial_state='products', 
-                                                final_state='transition state', 
-                                                method_name='get_UoRT', 
-                                                **kwargs)
-        else:
-            UoRT_act = self._get_delta_quantity(initial_state='reactants', 
-                                                final_state='transition state', 
-                                                method_name='get_UoRT', 
-                                                **kwargs)
-        return UoRT_act
-
-    def get_HoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless enthalpy between reactants (or products) 
+        """Gets change in partition function between reactants (or products)
         and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless enthalpy. See 
-                class docstring to see how to pass specific parameters to 
+                Parameters required to calculate partition function. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            q_act : float
+                Change in partition function between reactants (or products)
+                and transition state
+        """
+        if rev:
+            q_act = self._get_delta_quantity(initial_state='products',
+                                             final_state='transition state',
+                                             method_name='get_q',
+                                             **kwargs)
+        else:
+            q_act = self._get_delta_quantity(initial_state='reactants',
+                                             final_state='transition state',
+                                             method_name='get_q',
+                                             **kwargs)
+        return q_act
+
+    def get_CvoR_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless heat capacity between reactants (or
+        products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless heat capacity.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            CvoR_act : float
+                Change in dimensionless heat capacity between reactants (or
+                products) and transition state
+        """
+        if rev:
+            CvoR_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_CvoR',
+                                                **kwargs)
+        else:
+            CvoR_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_CvoR',
+                                                **kwargs)
+        return CvoR_act
+
+    def get_Cv_act(self, units, rev=False, **kwargs):
+        """Gets change in heat capacity between reactants (or
+        products) and transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate heat capacity.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            Cv_act : float
+                Change in heat capacity between reactants (or products) and
+                transition state
+        """
+        return self.get_CvoR_act(rev=rev, **kwargs)*c.R(units)
+
+    def get_CpoR_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless heat capacity between reactants (or
+        products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless heat capacity.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            CpoR_act : float
+                Change in dimensionless heat capacity between reactants (or
+                products) and transition state
+        """
+        if rev:
+            CpoR_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_CpoR',
+                                                **kwargs)
+        else:
+            CpoR_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_CpoR',
+                                                **kwargs)
+        return CpoR_act
+
+    def get_Cp_act(self, units, rev=False, **kwargs):
+        """Gets change in heat capacity between reactants (or products) and
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate heat capacity. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            Cp_act : float
+                Change in heat capacity between reactants (or products) and
+                transition state
+        """
+        return self.get_CpoR_act(rev=rev, **kwargs)*c.R(units)
+
+    def get_UoRT_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless internal energy between reactants (or
+        products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless internal energy.
+                See class docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            UoRT_act : float
+                Change in dimensionless internal energy between reactants
+                (or products) and transition state
+        """
+        if rev:
+            UoRT_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_UoRT',
+                                                **kwargs)
+        else:
+            UoRT_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_UoRT',
+                                                **kwargs)
+        return UoRT_act
+
+    def get_U_act(self, units, T, rev=False, **kwargs):
+        """Gets change in internal energy between reactants (or products) and
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate internal energy. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            U_act : float
+                Change in internal energy between reactants (or products) and
+                transition state
+        """
+        return self.get_UoRT_act(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
+    def get_HoRT_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless enthalpy between reactants
+        (or products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless enthalpy. See
+                class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             HoRT_act : float
-                Change in dimensionless enthalpy between reactants and 
-                transition state
+                Change in dimensionless enthalpy between reactants
+                (or products) and transition state
         """
         if rev:
-            HoRT_act = self._get_delta_quantity(initial_state='products', 
-                                                final_state='transition state', 
-                                                method_name='get_HoRT', 
+            HoRT_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_HoRT',
                                                 **kwargs)
         else:
-            HoRT_act = self._get_delta_quantity(initial_state='reactants', 
-                                                final_state='transition state', 
-                                                method_name='get_HoRT', 
+            HoRT_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_HoRT',
                                                 **kwargs)
         return HoRT_act
+
+    def get_H_act(self, units, T, rev=False, **kwargs):
+        """Gets change in enthalpy between reactants (or products) and
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            H_act : float
+                Change in enthalpy between reactants (or products) and
+                transition state
+        """
+        return self.get_HoRT_act(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_EoRT_act(self, rev=False, method='any', **kwargs):
         """Gets dimensionless activation energy between reactants
@@ -756,10 +1237,10 @@ class Reaction:
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             method : str, optional
-                Method to use to calculate dimensionless activation energy. 
+                Method to use to calculate dimensionless activation energy.
                 Accepted options:
 
-                - 'any' (uses whichever is available. ``self.transition_state`` 
+                - 'any' (uses whichever is available. ``self.transition_state``
                   is used preferentially over ``self.BEP``)
                 - 'bep' (uses ``self.bep``)
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
@@ -771,8 +1252,8 @@ class Reaction:
         Returns
         -------
             EoRT_act : float
-                Dimensionless activation energy between reactants and
-                transition state
+                Dimensionless activation energy between reactants (or products)
+                and transition state
         """
         method = method.lower()
         if method == 'any':
@@ -790,121 +1271,229 @@ class Reaction:
                               '``pMuTT.reaction.Reaction.get_EoRT_act`` '
                               'for supported options.'.format(method)))
 
+    def get_E_act(self, units, T, rev=False, method='any', **kwargs):
+        """Gets activation energy between reactants (or products)
+        and transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            method : str, optional
+                Method to use to calculate activation energy.
+                Accepted options:
+
+                - 'any' (uses whichever is available. ``self.transition_state``
+                  is used preferentially over ``self.BEP``)
+                - 'bep' (uses ``self.bep``)
+                - 'ts' or 'transition_state' (uses ``self.transition_state``)
+
+                Default is 'any'.
+            kwargs : keyword arguments
+                Parameters required to calculate activation energy. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            E_act : float
+                Activation energy between reactants (or products) and
+                transition state
+        """
+        return self.get_EoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_SoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless entropy between reactants (or products) 
+        """Gets change in dimensionless entropy between reactants (or products)
         and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless entropy. See 
-                class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless entropy. See
+                class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             SoR_act : float
-                Change in dimensionless entropy between reactants and transition
-                state
+                Change in dimensionless entropy between reactants (or products)
+                and transition state
         """
         if rev:
-            SoR_act = self._get_delta_quantity(initial_state='products', 
-                                               final_state='transition state', 
-                                               method_name='get_SoR', 
+            SoR_act = self._get_delta_quantity(initial_state='products',
+                                               final_state='transition state',
+                                               method_name='get_SoR',
                                                **kwargs)
         else:
-            SoR_act = self._get_delta_quantity(initial_state='reactants', 
-                                               final_state='transition state', 
-                                               method_name='get_SoR', 
+            SoR_act = self._get_delta_quantity(initial_state='reactants',
+                                               final_state='transition state',
+                                               method_name='get_SoR',
                                                **kwargs)
         return SoR_act
 
-
-    def get_FoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless Helmholtz energy between reactants (or 
-        products) and transition state
+    def get_S_act(self, units, rev=False, **kwargs):
+        """Gets change in entropy between reactants (or products) and
+        transition state
 
         Parameters
         ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless Helmholtz energy. 
-                See class docstring to see how to pass specific parameters to 
+                Parameters required to calculate entropy. See class
+                docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
-            FoRT_act : float
-                Change in dimensionless Helmholtz energy between reactants and 
+            S_act : float
+                Change in entropy between reactants (or products) and
                 transition state
         """
-        if rev:
-            FoRT_act = self._get_delta_quantity(initial_state='products', 
-                                                final_state='transition state', 
-                                                method_name='get_FoRT', 
-                                                **kwargs)
-        else:
-            FoRT_act = self._get_delta_quantity(initial_state='reactants', 
-                                                final_state='transition state', 
-                                                method_name='get_FoRT', 
-                                                **kwargs)
-        return FoRT_act
+        return self.get_SoR_act(rev=rev, **kwargs)*c.R(units)
 
-
-    def get_GoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless Gibbs energy between reactants (or 
+    def get_FoRT_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless Helmholtz energy between reactants (or
         products) and transition state
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate dimensionless Gibbs energy. 
-                See class docstring to see how to pass specific parameters to 
+                Parameters required to calculate dimensionless Helmholtz
+                energy. See class docstring to see how to pass specific
+                parameters to different species.
+        Returns
+        -------
+            FoRT_act : float
+                Change in dimensionless Helmholtz energy between reactants
+                (or products) and transition state
+        """
+        if rev:
+            FoRT_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_FoRT',
+                                                **kwargs)
+        else:
+            FoRT_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_FoRT',
+                                                **kwargs)
+        return FoRT_act
+
+    def get_F_act(self, units, T, rev=False, **kwargs):
+        """Gets change in Helmholtz energy between reactants (or products) and
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate Helmholtz energy. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            F_act : float
+                Change in Helmholtz energy between reactants (or products) and
+                transition state
+        """
+        return self.get_FoRT_act(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
+    def get_GoRT_act(self, rev=False, **kwargs):
+        """Gets change in dimensionless Gibbs energy between reactants (or
+        products) and transition state
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate dimensionless Gibbs energy.
+                See class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             GoRT_act : float
-                Change in dimensionless Gibbs energy between reactants and 
-                transition state
+                Change in dimensionless Gibbs energy between reactants (or
+                products) and transition state
         """
         if rev:
-            GoRT_act = self._get_delta_quantity(initial_state='products', 
-                                                final_state='transition state', 
-                                                method_name='get_GoRT', 
+            GoRT_act = self._get_delta_quantity(initial_state='products',
+                                                final_state='transition state',
+                                                method_name='get_GoRT',
                                                 **kwargs)
         else:
-            GoRT_act = self._get_delta_quantity(initial_state='reactants', 
-                                                final_state='transition state', 
-                                                method_name='get_GoRT', 
+            GoRT_act = self._get_delta_quantity(initial_state='reactants',
+                                                final_state='transition state',
+                                                method_name='get_GoRT',
                                                 **kwargs)
         return GoRT_act
 
+    def get_G_act(self, units, T, rev=False, **kwargs):
+        """Gets change in Gibbs energy between reactants (or products) and
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to
+                different species.
+        Returns
+        -------
+            G_act : float
+                Change in Gibbs energy between reactants (or products) and
+                transition state
+        """
+        return self.get_GoRT_act(rev=rev, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
+
     def get_A(self, T=c.T0('K'), rev=False, **kwargs):
-        """Gets pre-exponential factor between reactants (or products) and 
+        """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
 
         Parameters
         ----------
             rev : bool, optional
-                Reverse direction. If True, uses products as initial state 
+                Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             T : float, optional
                 Temperature in K. Default is standard temperature.
             kwargs : keyword arguments
-                Parameters required to calculate pre-exponential factor. See 
-                class docstring to see how to pass specific parameters to 
+                Parameters required to calculate pre-exponential factor. See
+                class docstring to see how to pass specific parameters to
                 different species.
         Returns
         -------
             A : float
-                Pre-exponential factor  
+                Pre-exponential factor
         """
         # Calculate molecularity (e.g. unimolecular, bimolecular)
         if rev:
@@ -913,11 +1502,11 @@ class Reaction:
             m = _get_molecularity(self.reactants_stoich)
 
         return c.kb('J/K')*T/c.h('J s')\
-               *np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs)+m)
+            * np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs)+m)
 
     def _parse_state(self, state):
         """Helper method to get the relevant species and stoichiometry
-        
+
         Parameters
         ----------
             state : str
@@ -960,12 +1549,12 @@ class Reaction:
                 - 'products'
                 - 'transition state'
             method_name : str
-                Name of method to use to calculate quantity. Calculates any 
-                quantity as long as the relevant objects' have the same method 
+                Name of method to use to calculate quantity. Calculates any
+                quantity as long as the relevant objects' have the same method
                 name
             kwargs : keyword arguments
-                Arguments required to calculate the thermodynamic quantity of 
-                interest. 
+                Arguments required to calculate the thermodynamic quantity of
+                interest.
         Returns
         -------
             state_quantity : float
@@ -990,9 +1579,9 @@ class Reaction:
                         _force_pass_arguments(method, **specie_kwargs)*stoich
         return state_quantity
 
-    def _get_delta_quantity(self, initial_state, final_state, method_name, 
+    def _get_delta_quantity(self, initial_state, final_state, method_name,
                             **kwargs):
-        """Helper method to calculate the change in thermodynamic quantity 
+        """Helper method to calculate the change in thermodynamic quantity
         between states
 
         Parameters
@@ -1010,18 +1599,18 @@ class Reaction:
                 - 'products'
                 - 'transition state'
             method_name : str
-                Name of method to use to calculate quantity. Calculates any 
-                quantity as long as the relevant objects' have the same method 
+                Name of method to use to calculate quantity. Calculates any
+                quantity as long as the relevant objects' have the same method
                 name
         Returns
         -------
             delta_quantity : float
                 Change in thermodynamic quantity between particular states
         """
-        initial_quantity = self._get_state_quantity(state=initial_state, 
+        initial_quantity = self._get_state_quantity(state=initial_state,
                                                     method_name=method_name,
                                                     **kwargs)
-        final_quantity = self._get_state_quantity(state=final_state, 
+        final_quantity = self._get_state_quantity(state=final_state,
                                                   method_name=method_name,
                                                   **kwargs)
         if method_name == 'get_q':
@@ -1039,24 +1628,24 @@ class Reaction:
             reaction_str : str
                 Reaction string.
             species : dict
-                Dictionary using the names as keys. If you have a list of 
+                Dictionary using the names as keys. If you have a list of
                 species, use pMuTT.pMuTT_list_to_dict to make a dict.
             species_delimiter : str, optional
-                Delimiter that separate species. Leading and trailing spaces 
+                Delimiter that separate species. Leading and trailing spaces
                 will be trimmed. Default is '+'
             reaction_delimiter : str, optional
-                Delimiter that separate states of the reaction. Leading and 
+                Delimiter that separate states of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
             kwargs : keyword arguments
-                BEP parameters. See :class:`~pMuTT.reaction.bep.BEP` 
+                BEP parameters. See :class:`~pMuTT.reaction.bep.BEP`
                 documentation for expected parameters
         Returns
         -------
-            Reaction : Reaction object        
+            Reaction : Reaction object
         """
-        (react_names, react_stoich, prod_names, prod_stoich, 
+        (react_names, react_stoich, prod_names, prod_stoich,
          ts_names, ts_stoich) = _parse_reaction(
-                reaction_str=reaction_str, 
+                reaction_str=reaction_str,
                 species_delimiter=species_delimiter,
                 reaction_delimiter=reaction_delimiter)
         reactants = [species[name] for name in react_names]
@@ -1066,11 +1655,11 @@ class Reaction:
         else:
             ts = [species[name] for name in ts_names]
         return cls(reactants=reactants, reactants_stoich=react_stoich,
-                   products=products, products_stoich=prod_stoich, 
+                   products=products, products_stoich=prod_stoich,
                    transition_state=ts, transition_state_stoich=ts_stoich,
                    **kwargs)
 
-    def to_string(self, species_delimiter='+', reaction_delimiter = '='):
+    def to_string(self, species_delimiter='+', reaction_delimiter='='):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1086,8 +1675,8 @@ class Reaction:
         """
         # Write reactants
         reaction_str = _write_reaction_state(species=self.reactants,
-                                            stoich=self.reactants_stoich,
-                                            species_delimiter=species_delimiter)
+                                             stoich=self.reactants_stoich,
+                                             species_delimiter=species_delimiter)
         reaction_str += reaction_delimiter
 
         # Write transition state if any
@@ -1096,16 +1685,16 @@ class Reaction:
                 stoich=self.transition_state_stoich,
                 species_delimiter=species_delimiter)
         reaction_str += reaction_delimiter
-        
+
         # Write products
         reaction_str += _write_reaction_state(species=self.products,
-                                            stoich=self.products_stoich,
-                                            species_delimiter=species_delimiter)
+                                              stoich=self.products_stoich,
+                                              species_delimiter=species_delimiter)
         return reaction_str
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict
@@ -1116,17 +1705,16 @@ class Reaction:
             'reactants_stoich': list(self.reactants_stoich),
             'products': [product.to_dict() for product in self.products],
             'products_stoich': list(self.products_stoich),
-            }   
+            }
         try:
-            obj_dict['transition_state'] = [ts.to_dict() \
-                    for ts in self.transition_state]
+            obj_dict['transition_state'] = [ts.to_dict()
+                                            for ts in self.transition_state]
         except (AttributeError, TypeError):
             obj_dict['transition_state'] = self.transition_state
             obj_dict['transition_state_stoich'] = self.transition_state_stoich
         else:
             obj_dict['transition_state_stoich'] = \
                     list(self.transition_state_stoich)
-        
         try:
             obj_dict['bep'] = self.bep.to_dict()
         except (AttributeError, TypeError):
@@ -1147,10 +1735,10 @@ class Reaction:
             Reaction : Reaction object
         """
         json_obj = remove_class(json_obj)
-        json_obj['reactants'] = [json_to_pMuTT(reactant) 
+        json_obj['reactants'] = [json_to_pMuTT(reactant)
                                  for reactant in json_obj['reactants']]
-        json_obj['products'] = [json_to_pMuTT(product) 
-                                 for product in json_obj['products']]
+        json_obj['products'] = [json_to_pMuTT(product)
+                                for product in json_obj['products']]
         json_obj['transition_state'] = json_to_pMuTT(
                 json_obj['transition_state'])
         json_obj['bep'] = json_to_pMuTT(json_obj['bep'])
@@ -1159,6 +1747,7 @@ class Reaction:
         if reaction.bep is not None:
             reaction.bep.set_descriptor(reaction=reaction)
         return reaction
+
 
 class Reactions:
     """Contains multiple reactions. Serves as a parent class for other objects
@@ -1177,6 +1766,28 @@ class Reactions:
             # If other doesn't have to_dict method, is not equal
             return False
         return self.to_dict() == other_dict
+
+    def get_species(self, include_TS=True, key='name'):
+        """Returns the unique species included in the reactions.
+
+        Parameters
+        ----------
+            include_TS : bool, optional
+                Whether transition states should be included. Default is True
+            key : str, optional
+                Attribute to use as the key in the output dictionary. Default is
+                name
+        Returns
+        -------
+            species : dict
+                Unique species in the reactions
+        """
+        species = {}
+        for reaction in self.reactions:
+            # Merge the old dictionary with the new dictionary
+            species.update(reaction.get_species(include_TS=include_TS, 
+                                                key=key))
+        return species
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -1204,7 +1815,7 @@ class Reactions:
             Reactions : Reactions object
         """
         json_obj = remove_class(json_obj)
-        json_obj['reactions'] = [json_to_pMuTT(reaction) 
+        json_obj['reactions'] = [json_to_pMuTT(reaction)
                                  for reaction in json_obj['reactions']]
         return cls(**json_obj)
 
@@ -1212,13 +1823,13 @@ class Reactions:
 def _parse_reaction_state(reaction_str, species_delimiter='+'):
     """Takes the reactants/products state of a reaction string and parse it
     into species and stoichiometric amounts
-    
+
     Parameters
     ----------
         reaction_str : str
             Reactant or product state of reaction
         species_delimiters : str
-            Delimiter that separate species. Leading and trailing spaces will 
+            Delimiter that separate species. Leading and trailing spaces will
             be trimmed. Default is '+'
 
     Returns
@@ -1234,9 +1845,9 @@ def _parse_reaction_state(reaction_str, species_delimiter='+'):
     for specie in species_str:
         # Strip spaces for easier searching
         specie = specie.strip()
-        # Search for int and float at the start of a string. 
+        # Search for int and float at the start of a string.
         # If there is no numbers, returns None.
-        stoich_search = re.search('^\d+\.?\d*', specie)
+        stoich_search = re.search(r'^\d+\.?\d*', specie)
         if stoich_search is None:
             # No stoichiometric coefficient so assign 1.
             species.append(specie.strip())
@@ -1248,24 +1859,24 @@ def _parse_reaction_state(reaction_str, species_delimiter='+'):
             species.append(specie[trim_len:].strip())
             stoichiometry.append(float(specie_stoich))
     return (species, stoichiometry)
-    
 
-def _parse_reaction(reaction_str, species_delimiter='+', 
+
+def _parse_reaction(reaction_str, species_delimiter='+',
                     reaction_delimiter='='):
     """Takes a reaction string and parses it into reactants and products.
-    
+
     Parameters
     ----------
         reaction_str : str
-            Reaction string. A transition state can be specified by using two 
+            Reaction string. A transition state can be specified by using two
             reaction delimiters.
             e.g. H2 + 0.5O2 = H2O_TS = H2O
         species_delimiter : str, optional
-            Delimiter that separate species. Leading and trailing spaces will 
+            Delimiter that separate species. Leading and trailing spaces will
             be trimmed. Default is '+'
         reaction_delimiter : str, optional
-            Delimiter that separate states of the reaction. Leading and trailing 
-            spaces will be trimmed. Default is '='
+            Delimiter that separate states of the reaction. Leading and
+            trailing spaces will be trimmed. Default is '='
     Returns
     -------
         reactants : list of str
@@ -1277,10 +1888,10 @@ def _parse_reaction(reaction_str, species_delimiter='+',
         products_stoich : list of float
             Stoichiometry of products
         transition_state : list of str
-            Transition state names. Returns None if reaction does not have a 
+            Transition state names. Returns None if reaction does not have a
             transition state.
         transition_state_stoich : list of float
-            Stoichiometry of transition state. Returns None if the reaction 
+            Stoichiometry of transition state. Returns None if the reaction
             does not have a transition state.
     """
     # Separate states of reaction
@@ -1299,13 +1910,13 @@ def _parse_reaction(reaction_str, species_delimiter='+',
     if len(reaction_states) > 2:
         transition_state_state = reaction_states[1]
         transition_state, transition_state_stoich = _parse_reaction_state(
-                reaction_str=transition_state_state, 
+                reaction_str=transition_state_state,
                 species_delimiter=species_delimiter)
     else:
         transition_state = None
         transition_state_stoich = None
 
-    return (reactants, reactants_stoich, products, products_stoich, 
+    return (reactants, reactants_stoich, products, products_stoich,
             transition_state, transition_state_stoich)
 
 
@@ -1332,8 +1943,8 @@ def _write_reaction_state(species, stoich, species_delimiter='+'):
         if i == 0:
             reaction_str = '{}{}'.format(stoich_val, specie.name)
         else:
-            reaction_str += '{}{}{}'.format(species_delimiter, stoich_val, 
-                                             specie.name)
+            reaction_str += '{}{}{}'.format(species_delimiter, stoich_val,
+                                            specie.name)
     return reaction_str
 
 
@@ -1357,6 +1968,7 @@ def _count_elements(species, stoich):
             element_count += Counter({element: coeff*stoich_specie})
     return element_count
 
+
 def _get_molecularity(stoich):
     """Calculate the molecularity (e.g. unimolecular, biomolecular)
 
@@ -1371,6 +1983,7 @@ def _get_molecularity(stoich):
     """
     return np.sum(stoich)
 
+
 def _get_specie_kwargs(specie_name, **kwargs):
     """Gets the keyword arguments specific to a specie
 
@@ -1379,8 +1992,8 @@ def _get_specie_kwargs(specie_name, **kwargs):
         specie_name : str
             Name of the specie
         kwargs : keyword arguments
-            Parameters with the conditions. Specie specific parameters can be 
-            passed by having a key named 'specie' mapping onto a dictionary 
+            Parameters with the conditions. Specie specific parameters can be
+            passed by having a key named 'specie' mapping onto a dictionary
             whose keys are the species names.
 
             e.g. For the reaction: H2 + 0.5O2 = H2O

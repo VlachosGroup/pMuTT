@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # # Reactions
-# In this example, we will initialize a reaction that represents the formation of water from its elements (i.e. H2 + 0.5O2 -> H2O) and calculate reaction properties.
+# In this example, we will initialize a reaction that represents the formation of water from its elements (i.e. H2 + 0.5O2 -> H2O) and calculate reaction properties. Note that in this example, we will make arbitrary transition state species and BEP relationships so the values calculated are not representative of real-world reactions.
 # 
 # ## Topics Covered
 # - Read a thermdat file and convert it to a dictionary of ``Nasa`` objects
@@ -97,8 +97,8 @@ print('Creating Reaction object using custom string notation: {}'.format(rxn))
 from pMuTT import constants as c
 
 T = 298.
-dH_298 = rxn.get_delta_HoRT(T=T)*c.R('kJ/mol/K')*T
-dS_298 = rxn.get_delta_SoR(T=T)*c.R('J/mol/K')
+dH_298 = rxn.get_delta_H(T=T, units='kJ/mol')
+dS_298 = rxn.get_delta_S(T=T, units='J/mol/K')
 
 print('Calculated using Reaction object:')
 print('Delta H: {} kJ/mol'.format(dH_298))
@@ -120,25 +120,25 @@ print('Delta S: {} J/mol/K'.format(188.84-130.68-0.5*205.152))
 
 
 # Forward direction properties (i.e. reactants to transition state)
-H_TS = rxn.get_HoRT_act(T=T)*c.R('kJ/mol/K')*T
-Ea = rxn.get_EoRT_act(T=T)*c.R('kJ/mol/K')*T
+H_TS = rxn.get_H_act(T=T, units='kJ/mol')
+Ea = rxn.get_E_act(T=T, units='kJ/mol')
 A = rxn.get_A(T=T)
 
 # Take these values with a grain of salt since we arbitrarily 
 # specified our transition state
 print('Forward properties')
-print('Enthalpy of activation: {} kJ/mol/K'.format(H_TS))
-print('Activation Energy: {} kJ/mol/K'.format(Ea))
+print('Enthalpy of activation: {} kJ/mol'.format(H_TS))
+print('Activation Energy: {} kJ/mol'.format(Ea))
 print('Pre-exponential factor: {} 1/s'.format(A))
 print('\n')
 # Reverse direction properties (i.e. products to transition state)
-H_TS_rev = rxn.get_HoRT_act(T=T, rev=True)*c.R('kJ/mol/K')*T
-Ea_rev = rxn.get_EoRT_act(T=T, rev=True)*c.R('kJ/mol/K')*T
+H_TS_rev = rxn.get_HoRT_act(T=T, rev=True, units='kJ/mol')
+Ea_rev = rxn.get_EoRT_act(T=T, rev=True, units='kJ/mol')
 A_rev = rxn.get_A(T=T, rev=True)
 
 print('Reverse properties')
-print('Enthalpy of activation: {} kJ/mol/K'.format(H_TS_rev))
-print('Activation Energy: {} kJ/mol/K'.format(Ea_rev))
+print('Enthalpy of activation: {} kJ/mol'.format(H_TS_rev))
+print('Activation Energy: {} kJ/mol'.format(Ea_rev))
 print('Pre-exponential factor: {} 1/s'.format(A_rev))
 
 
@@ -154,14 +154,14 @@ rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = H2O_TS = H2O', species=spe
                            descriptor='delta', slope=0.2, intercept=100.,
                            bep=BEP)
 
-Ea_TS = rxn.get_EoRT_act(T=T, method='ts')*c.R('kJ/mol/K')*T
-Ea_BEP = rxn.get_EoRT_act(T=T, method='bep')*c.R('kJ/mol/K')*T
-Ea_any = rxn.get_EoRT_act(T=T, method='any')*c.R('kJ/mol/K')*T
+Ea_TS = rxn.get_E_act(T=T, method='ts', units='kJ/mol')
+Ea_BEP = rxn.get_E_act(T=T, method='bep', units='kJ/mol')
+Ea_any = rxn.get_E_act(T=T, method='any', units='kJ/mol')
 
 print('Activation energies using different methods')
-print('Transition State: {} kJ/mol/K'.format(Ea_TS))
-print('BEP: {} kJ/mol/K'.format(Ea_BEP))
-print('Any: {} kJ/mol/K'.format(Ea_any))
+print('Transition State: {} kJ/mol'.format(Ea_TS))
+print('BEP: {} kJ/mol'.format(Ea_BEP))
+print('Any: {} kJ/mol'.format(Ea_any))
 
 
 # Note that setting method to 'any' uses the transition state preferentially.
@@ -184,12 +184,12 @@ with open('reaction.json', 'r') as f_ptr:
     rxn_io = json.load(f_ptr, object_hook=json_to_pMuTT)
 
 # (Optional) Print your rxn to show it was loaded correctly
-dH_298_io = rxn_io.get_delta_HoRT(T=T)*c.R('kJ/mol/K')*T
-Ea_io = rxn_io.get_EoRT_act(T=T)*c.R('kJ/mol/K')*T
+dH_298_io = rxn_io.get_delta_H(T=T, units='kJ/mol')
+Ea_io = rxn_io.get_E_act(T=T, units='kJ/mol')
 
 print(rxn_io)
 print('Delta H: {} kJ/mol'.format(dH_298_io))
-print('Activation Energy: {} kJ/mol/K'.format(Ea_io))
+print('Activation Energy: {} kJ/mol'.format(Ea_io))
 
 
 # Here is the resulting JSON file.

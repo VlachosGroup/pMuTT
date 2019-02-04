@@ -61,16 +61,28 @@ file for details.
 Contributing
 ------------
 
-If you have a suggestion, please post to our `Issues page`_ with the ``enhancement`` tag. Similarly, if you 
-encounter a bug, please post to our `Issues page`_ with the ``bug`` tag. Finally, if you would like to add 
-to the body of code, please check our documentation to make sure the new code is consistent with the relevant 
-page and submit a `pull request`_.
+If you have a suggestion or find a bug, please post to our `Issues page`_ with 
+the ``enhancement`` or ``bug`` tag respectively.
+
+Finally, if you would like to add to the body of code, please:
+
+- fork the development branch
+- make the desired changes
+- write the appropriate unit tests
+- submit a `pull request`_.
 
 Questions
 ---------
 
-If you are having issues, please post to our `Issues page`_ with the ``help wanted`` or ``question`` tag. We 
-will do our best to assist.
+If you are having issues, please post to our `Issues page`_ with the 
+``help wanted`` or ``question`` tag. We will do our best to assist.
+
+Funding
+-------
+
+This material is based upon work supported by the Department of Energy's Office 
+of Energy Efficient and Renewable Energy's Advanced Manufacturing Office under 
+Award Number DE-EE0007888-9.5.
 
 Special Thanks
 --------------

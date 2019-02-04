@@ -131,7 +131,7 @@ class References:
 
     def clear_offset(self):
         """Removes all entries from descriptor offset dictionary."""
-        self.HoRT_descriptor_offset.clear()
+        self.offset.clear()
 
     def get_descriptors(self):
         """Returns the descriptors in references.
@@ -240,8 +240,8 @@ class References:
         -------
             obj_dict : dict
         """
-        obj_dict = {'class': self.__class__,
-                    'offset': self.offset.tolist(),
+        obj_dict = {'class': str(self.__class__),
+                    'offset': self.offset,
                     'descriptor': self.descriptor}
         try:
             obj_dict['references'] = [ref.to_dict() for ref in self.references]

@@ -16,28 +16,24 @@ NASA
    
 .. autoclass:: pMuTT.empirical.nasa.Nasa
    :members:
-   :inherited-members:
 
 Shomate
 #######
 
 .. autoclass:: pMuTT.empirical.shomate.Shomate
    :members:
-   :inherited-members:
 
 Zacros
 ######
    
 .. autoclass:: pMuTT.empirical.zacros.Zacros
    :members:
-   :inherited-members:
 
 Reference
 #########
    
 .. autoclass:: pMuTT.empirical.references.Reference
    :members:
-   :inherited-members:
 
 References
 ##########

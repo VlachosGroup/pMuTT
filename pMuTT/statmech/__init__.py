@@ -7,6 +7,7 @@ Created on Fri Jul 7 12:40:00 2018
 import inspect
 import numpy as np
 from pMuTT import _pass_expected_arguments
+from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.io_ import jsonio as json_pMuTT
 
@@ -73,19 +74,19 @@ class StatMech:
         name : str, optional
             Name of the specie. Default is None
         trans_model : :ref:`pMuTT.statmech.trans <trans>` object, optional
-            Deals with translational modes. Default is 
+            Deals with translational modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         vib_model : :ref:`pMuTT.statmech.vib <vib>` object, optional
-            Deals with vibrational modes. Default is 
+            Deals with vibrational modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         rot_model : :ref:`pMuTT.statmech.rot <rot>` object, optional
-            Deals with rotational modes. Default is 
+            Deals with rotational modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         elec_model : :ref:`pMuTT.statmech.elec <elec>` object, optional
-            Deals with electronic modes. Default is 
+            Deals with electronic modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         nucl_model : :ref:`pMuTT.statmech.nucl <nucl>` object
-            Deals with nuclear modes. Default is 
+            Deals with nuclear modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
         notes : str, optional
             Any additional details you would like to include such as
@@ -142,17 +143,19 @@ class StatMech:
                 returns contributions of each mode
         Returns
         -------
-            q : float or tuple
-                Partition function. If tuple returned, contribution to each
+            q : float or (N,) `numpy.ndarray`_
+                Partition function. If verbose is True, contribution to each
                 mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        q = (
+        q = np.array([
             _pass_expected_arguments(self.trans_model.get_q, **kwargs),
             _pass_expected_arguments(self.vib_model.get_q, **kwargs),
             _pass_expected_arguments(self.rot_model.get_q, **kwargs),
             _pass_expected_arguments(self.elec_model.get_q, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_q, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_q, **kwargs)])
 
         if verbose:
             return q
@@ -164,58 +167,106 @@ class StatMech:
 
         Parameters
         ----------
-            kwargs : key-word arguments
-                Parameters passed to each mode
             verbose : bool, optional
                 If False, returns the total heat capacity. If True, returns
                 contribution of each mode.
+            kwargs : key-word arguments
+                Parameters passed to each mode
         Returns
         -------
-            CvoR : float or tuple
-                Dimensionless heat capacity. If tuple returned, contribution
+            CvoR : float or (N,) `numpy.ndarray`_
+                Dimensionless heat capacity. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        CvoR = (
+        CvoR = np.array([
             _pass_expected_arguments(self.trans_model.get_CvoR, **kwargs),
             _pass_expected_arguments(self.vib_model.get_CvoR, **kwargs),
             _pass_expected_arguments(self.rot_model.get_CvoR, **kwargs),
             _pass_expected_arguments(self.elec_model.get_CvoR, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_CvoR, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_CvoR, **kwargs)])
 
         if verbose:
             return CvoR
         else:
             return np.sum(CvoR)
 
+    def get_Cv(self, units, verbose=False, **kwargs):
+        """Calculate the heat capacity (constant V)
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the total heat capacity. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            Cv : float or (N,) `numpy.ndarray`_
+                Heat capacity
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_CvoR(verbose=verbose, **kwargs)*c.R(units)
+
     def get_CpoR(self, verbose=False, **kwargs):
         """Dimensionless heat capacity (constant P)
 
         Parameters
         ----------
-            kwargs : key-word arguments
-                Parameters passed to each mode
             verbose : bool, optional
                 If False, returns the total heat capacity. If True, returns
                 contribution of each mode.
+            kwargs : key-word arguments
+                Parameters passed to each mode
         Returns
         -------
-            CpoR : float or tuple
-                Dimensionless heat capacity. If tuple returned, contribution
+            CpoR : float or (N,) `numpy.ndarray`_
+                Dimensionless heat capacity. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        CpoR = (
+        CpoR = np.array([
             _pass_expected_arguments(self.trans_model.get_CpoR, **kwargs),
             _pass_expected_arguments(self.vib_model.get_CpoR, **kwargs),
             _pass_expected_arguments(self.rot_model.get_CpoR, **kwargs),
             _pass_expected_arguments(self.elec_model.get_CpoR, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_CpoR, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_CpoR, **kwargs)])
 
         if verbose:
             return CpoR
         else:
             return np.sum(CpoR)
+
+    def get_Cp(self, units, verbose=False, **kwargs):
+        """Calculate the heat capacity (constant P)
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the total heat capacity. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            Cp : float or (N,) `numpy.ndarray`_
+                Heat capacity
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_CpoR(verbose=verbose, **kwargs)*c.R(units)
 
     def get_UoRT(self, verbose=False, **kwargs):
         """Dimensionless internal energy
@@ -229,23 +280,50 @@ class StatMech:
                 contribution of each mode.
         Returns
         -------
-            UoRT : float or tuple
-                Dimensionless internal energy. If tuple returned, contribution
+            UoRT : float or (N,) `numpy.ndarray`_
+                Dimensionless internal energy. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
 
-        UoRT = (
+        UoRT = np.array([
             _pass_expected_arguments(self.trans_model.get_UoRT, **kwargs),
             _pass_expected_arguments(self.vib_model.get_UoRT, **kwargs),
             _pass_expected_arguments(self.rot_model.get_UoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_UoRT, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_UoRT, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_UoRT, **kwargs)])
 
         if verbose:
             return UoRT
         else:
             return np.sum(UoRT)
+
+    def get_U(self, units, T=c.T0('K'), verbose=False, **kwargs):
+        """Calculate the internal energy
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the internal energy. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            U : float or (N,) `numpy.ndarray`_
+                Internal energy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_UoRT(verbose=verbose, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_HoRT(self, verbose=False, **kwargs):
         """Dimensionless enthalpy
@@ -259,23 +337,50 @@ class StatMech:
                 contribution of each mode.
         Returns
         -------
-            HoRT : float or tuple
-                Dimensionless enthalpy. If tuple returned, contribution
+            HoRT : float or (N,) `numpy.ndarray`_
+                Dimensionless enthalpy. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
 
-        HoRT = (
+        HoRT = np.array([
             _pass_expected_arguments(self.trans_model.get_HoRT, **kwargs),
             _pass_expected_arguments(self.vib_model.get_HoRT, **kwargs),
             _pass_expected_arguments(self.rot_model.get_HoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_HoRT, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_HoRT, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_HoRT, **kwargs)])
 
         if verbose:
             return HoRT
         else:
             return np.sum(HoRT)
+
+    def get_H(self, units, T=c.T0('K'), verbose=False, **kwargs):
+        """Calculate the enthalpy
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the enthalpy. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            H : float or (N,) `numpy.ndarray`_
+                Enthalpy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_HoRT(verbose=verbose, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_SoR(self, verbose=False, **kwargs):
         """Dimensionless entropy
@@ -289,23 +394,47 @@ class StatMech:
                 contribution of each mode.
         Returns
         -------
-            SoR : float or tuple
-                Dimensionless entropy. If tuple returned, contribution
+            SoR : float or (N,) `numpy.ndarray`_
+                Dimensionless entropy. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
 
-        SoR = (
+        SoR = np.array([
             _pass_expected_arguments(self.trans_model.get_SoR, **kwargs),
             _pass_expected_arguments(self.vib_model.get_SoR, **kwargs),
             _pass_expected_arguments(self.rot_model.get_SoR, **kwargs),
             _pass_expected_arguments(self.elec_model.get_SoR, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_SoR, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_SoR, **kwargs)])
 
         if verbose:
             return SoR
         else:
             return np.sum(SoR)
+
+    def get_S(self, units, verbose=False, **kwargs):
+        """Calculate the entropy
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the entropy. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            S : float or (N,) `numpy.ndarray`_
+                Entropy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_SoR(verbose=verbose, **kwargs)*c.R(units)
 
     def get_FoRT(self, verbose=False, **kwargs):
         """Dimensionless Helmholtz energy
@@ -319,23 +448,50 @@ class StatMech:
                 contribution of each mode.
         Returns
         -------
-            FoRT : float or tuple
-                Dimensionless Helmoltz energy. If tuple returned, contribution
+            FoRT : float or (N,) `numpy.ndarray`_
+                Dimensionless Helmoltz energy. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
 
-        FoRT = (
+        FoRT = np.array([
             _pass_expected_arguments(self.trans_model.get_FoRT, **kwargs),
             _pass_expected_arguments(self.vib_model.get_FoRT, **kwargs),
             _pass_expected_arguments(self.rot_model.get_FoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_FoRT, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_FoRT, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_FoRT, **kwargs)])
 
         if verbose:
             return FoRT
         else:
             return np.sum(FoRT)
+
+    def get_F(self, units, T=c.T0('K'), verbose=False, **kwargs):
+        """Calculate the Helmholtz energy
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the Helmholtz energy. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            F : float or (N,) `numpy.ndarray`_
+                Helmholtz energy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_FoRT(verbose=verbose, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def get_GoRT(self, verbose=False, **kwargs):
         """Dimensionless Gibbs energy
@@ -349,23 +505,50 @@ class StatMech:
                 contribution of each mode.
         Returns
         -------
-            GoRT : float or tuple
-                Dimensionless Gibbs energy. If tuple returned, contribution
+            GoRT : float or (N,) `numpy.ndarray`_
+                Dimensionless Gibbs energy. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
 
-        GoRT = (
+        GoRT = np.array([
             _pass_expected_arguments(self.trans_model.get_GoRT, **kwargs),
             _pass_expected_arguments(self.vib_model.get_GoRT, **kwargs),
             _pass_expected_arguments(self.rot_model.get_GoRT, **kwargs),
             _pass_expected_arguments(self.elec_model.get_GoRT, **kwargs),
-            _pass_expected_arguments(self.nucl_model.get_GoRT, **kwargs))
+            _pass_expected_arguments(self.nucl_model.get_GoRT, **kwargs)])
 
         if verbose:
             return GoRT
         else:
             return np.sum(GoRT)
+
+    def get_G(self, units, T=c.T0('K'), verbose=False, **kwargs):
+        """Calculate the Gibbs energy
+
+        Parameters
+        ----------
+            verbose : bool, optional
+                If False, returns the Gibbs energy. If True, returns
+                contribution of each mode.
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            kwargs : key-word arguments
+                Parameters passed to each mode
+        Returns
+        -------
+            G : float or (N,) `numpy.ndarray`_
+                Gibbs energy
+
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        """
+        return self.get_GoRT(verbose=verbose, T=T, **kwargs)*T \
+            * c.R('{}/K'.format(units))
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
