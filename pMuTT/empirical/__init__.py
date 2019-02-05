@@ -31,12 +31,12 @@ class BaseThermo:
             in a formula unit.
             e.g. CH3OH can be represented as:
             {'C': 1, 'H': 4, 'O': 1,}.
-        statmech_model : `pMuTT.statmech` object, optional
+        statmech_model : ``pMuTT.statmech`` object, optional
             Statistical thermodynamic model. Default is None.
-            Object should have the following methods: `get_CpoR`, `get_HoRT`,
-            `get_SoR`, `get_GoRT`.
-        references : `pMuTT.empirical.References.references` object, optional
-            Contains references to calculate `HoRT_ref`. If not specified then
+            Object should have the following methods: ``get_CpoR``,
+            ``get_HoRT``, ``get_SoR``, ``get_GoRT``.
+        references : ``pMuTT.empirical.References.references`` object, optional
+            Contains references to calculate ``HoRT_ref``. If not specified then
             HoRT_dft will be used without adjustment. Default is None
         notes : str, optional
             Any additional details you would like to include such as
