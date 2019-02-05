@@ -1497,10 +1497,13 @@ class Reactions:
                                                 key=key))
         return species
 
-    def plot_coordinate_diagram(self, method_name, include_TS=True, ref_index=0,
-                                ref_state='reactants', x_scale_TS=0.75, 
-                                y_scale_TS=0.75, figure=None, axes=None,
-                                plt_kwargs={}, **kwargs):
+    def plot_coordinate_diagram(self, method_name, ref_index=0,
+                                ref_state='reactants', x_offset=1.,
+                                include_TS=True, x_scale_TS=0.5, y_scale_TS=0.5, 
+                                include_TS_labels=True, y_TS_label_offset=0.1, 
+                                x_TS_label_offset=0., TS_label_format='.2f',
+                                figure=None, axes=None, plt_kwargs={}, 
+                                **reaction_kwargs):
         """Plots a reaction coordinate diagram.
 
         Parameters
@@ -1508,9 +1511,8 @@ class Reactions:
             method_name : str
                 Name of method to use to calculate quantity. Calculates any
                 quantity as long as the relevant objects have the same method
-                name
-            include_TS : bool, optional
-                Whether transition states should be included. Default is True
+                name. Some examples include: ``get_HoRT``, ``get_H``,
+                ``get_EoRT``, ``get_E``
             ref_index : int, optional
                 Reaction index to use to reference states. Default is the first 
                 reaction (i.e. ref_index = 0)
@@ -1521,21 +1523,45 @@ class Reactions:
                 - products
                 - transition state
                 - ts (same as transition state)
+            x_offset : float, optional
+                Spacing between reaction states. Shape of curve likely does not
+                change with this parameter since the x axis would rescale
+                appropriately
+            include_TS : bool, optional
+                Whether transition states should be included. Default is True
             x_scale_TS : float, optional
                 Value between 0 and 1 that controls curvature of transition 
                 state peaks. Higher values produce sharper peaks. Default is
-                0.75
+                0.5
             y_scale_TS : float, optional
                 Value between 0 and 1 that controls curvature of transition 
                 state peaks. Higher values produce sharper peaks. Default is
-                0.75
+                0.5
+            include_TS_labels : bool, optional
+                If True, adds a label to the peaks indicating the difference 
+                between the reactants and the transition state. Default is True
+            y_TS_label_offset : float, optional
+                Vertical value to offset TS_label from the TS position. This
+                value scales with the difference between major ticks. Negative 
+                values will shift the label downwards. Default is 0.10
+            x_TS_label_offset : float, optional
+                Horizontal value to offset TS_label from the TS_position. This
+                value scales with the x_offset value. Negative values will shift
+                the label rightward. Default is 0 (i.e. labels are directly
+                above peaks by default)
+            TS_label_format : str, optional
+                String format to print TS_labels. Uses the `str.format`_ syntax.
+                Default is '.2f' (i.e. a floating point value rounded to the 
+                second decimal place)
             figure : `matplotlib.figure.Figure`_
                 Add plot to this figure. If not specified, one will be generated
             ax : `matplotlib.axes.Axes.axis`_, optional
                 Adds plot to this axis. If not specified, one will be generated
-            kwargs : keyword arguments
+            plt_kwargs : dict, optional
                 Extra arguments that will be fed to 
                 `matplotlib.pyplot.subplots`_
+            reaction_kwargs : keyword arguments
+                Extra arguments that will be fed to the reactions
         Returns
         -------
             figure : `matplotlib.figure.Figure`_
@@ -1546,25 +1572,33 @@ class Reactions:
         .. _`matplotlib.pyplot.subplots`: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html
         .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
         .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
+        .. _`str.format`: https://docs.python.org/3/library/stdtypes.html#str.format
         """
-
+        # Amount separating species.
         x_offset = 1.
-
+        # Values that will be plot
         x_plot = []
         y_plot = []
+        # Labels and locations of the species on the x axis
         x_labels = []
         x_label_pos = []
-        x = 0.
+        # Transition state positions and labels
+        if include_TS and include_TS_labels:
+            TS_labels = []
+            x_TS_label_pos = []
+            y_TS_label_pos = []
 
+        x = 0.
+        # Calculate reference value
         ref = self.reactions[ref_index]._get_state_quantity(
-                method_name=method_name, state=ref_state, **kwargs)
+                method_name=method_name, state=ref_state, **reaction_kwargs)
 
         for i, reaction in enumerate(self.reactions):
             '''First state is the reactants of reaction 0.'''
             if i == 0:
                 y_react = reaction._get_state_quantity(method_name=method_name,
                                                        state='reactants',
-                                                       **kwargs) \
+                                                       **reaction_kwargs) \
                     - ref
                 x_plot.extend([x, x+x_offset])
                 y_plot.extend([y_react, y_react])
@@ -1578,7 +1612,7 @@ class Reactions:
             # transition state curve
             y_product = reaction._get_state_quantity(method_name=method_name,
                                                      state='products',
-                                                     **kwargs) \
+                                                     **reaction_kwargs) \
                         - ref
 
             '''Calculate properties for TS if necessary'''
@@ -1586,7 +1620,7 @@ class Reactions:
                 x += x_offset
                 y_TS = reaction._get_state_quantity(method_name=method_name,
                                                     state='transition state',
-                                                    **kwargs) \
+                                                    **reaction_kwargs) \
                        - ref
                 '''Calculate data to fit spline'''
                 x_fit = np.array([x-x_offset,
@@ -1604,12 +1638,26 @@ class Reactions:
                 x_spline = np.linspace(x-x_offset, x+x_offset)
                 y_spline = interpolate.splev(x_spline, tck)
 
+                '''Add new data to the appropriate lists'''
                 x_plot.extend(x_spline)
                 y_plot.extend(y_spline)
                 x_labels.append(_write_reaction_state(
                     species=reaction.transition_state, 
                     stoich=reaction.transition_state_stoich))
                 x_label_pos.append(x)
+
+                '''Record transition state labels if necessary'''
+                if include_TS_labels:
+                    TS_labels.append(reaction._get_delta_quantity(
+                            method_name=method_name,
+                            initial_state='reactants',
+                            final_state='transition state',
+                            **reaction_kwargs))
+                    x_TS_label_pos.append(x + x_TS_label_offset*x_offset)
+                    # Add TS y values for now. Correct later we know the graph's
+                    # scale
+                    y_TS_label_pos.append(y_TS)
+
             x += x_offset
 
             '''Calculate properties for product'''
@@ -1621,22 +1669,37 @@ class Reactions:
             x_label_pos.append(x + x_offset/2.)                
             x += x_offset
         
-        if figure is None:
-            figure, ax = plt.subplots(1, 1, **plt_kwargs)
-        ax.plot(x_plot, y_plot)
-        ax.set_xticks(x_label_pos)
-        ax.set_xticklabels(x_labels, rotation='vertical')
+        ''' Plot the diagram'''
+        # Create a new plot if necessary
+        if axes is None:
+            figure, axes = plt.subplots(1, 1, **plt_kwargs)
+        axes.plot(x_plot, y_plot)
+        axes.set_xticks(x_label_pos)
+        axes.set_xticklabels(x_labels, rotation='vertical')
+        axes.set_xlabel('Reaction Coordinate')
 
         # Setting the y label
         y_label = method_name.replace('get_', '')
         try:
-            units = kwargs['units']
+            units = reaction_kwargs['units']
         except KeyError:
-            ax.set_ylabel(y_label)
+            axes.set_ylabel(y_label)
         else:
-            ax.set_ylabel('{} ({})'.format(y_label, units))
+            axes.set_ylabel('{} ({})'.format(y_label, units))
+
+        # Adding transition state labels
+        if include_TS and include_TS_labels:
+            y_ticks = axes.get_yticks()
+            y_perb = np.ptp(y_ticks)/len(y_ticks)*y_TS_label_offset
+            y_TS_label_pos = [y + y_perb for y in y_TS_label_pos]
+            label_field = '{:%s}' % TS_label_format
+            for TS_label, x_pos, y_pos in zip(TS_labels, x_TS_label_pos, 
+                                              y_TS_label_pos):
+                axes.text(x=x_pos, y=y_pos, s=label_field.format(TS_label),
+                          horizontalalignment='center')
+
         plt.tight_layout()
-        return figure, ax
+        return figure, axes
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
