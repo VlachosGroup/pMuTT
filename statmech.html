@@ -230,49 +230,105 @@ Helmholtz energy and Gibbs energy.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.name">
 <code class="descname">name</code><a class="headerlink" href="#pMuTT.statmech.StatMech.name" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str, optional</em> – Name of the specie. Default is None</p>
+<dd><p>Name of the specie. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.trans_model">
 <code class="descname">trans_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.trans_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#trans"><span class="std std-ref">pMuTT.statmech.trans</span></a> object, optional – Deals with translational modes. Default is
+<dd><p>Deals with translational modes. Default is
 <a class="reference internal" href="#pMuTT.statmech.EmptyMode" title="pMuTT.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#trans"><span class="std std-ref">pMuTT.statmech.trans</span></a> object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.vib_model">
 <code class="descname">vib_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.vib_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#vib"><span class="std std-ref">pMuTT.statmech.vib</span></a> object, optional – Deals with vibrational modes. Default is
+<dd><p>Deals with vibrational modes. Default is
 <a class="reference internal" href="#pMuTT.statmech.EmptyMode" title="pMuTT.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#vib"><span class="std std-ref">pMuTT.statmech.vib</span></a> object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.rot_model">
 <code class="descname">rot_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.rot_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#rot"><span class="std std-ref">pMuTT.statmech.rot</span></a> object, optional – Deals with rotational modes. Default is
+<dd><p>Deals with rotational modes. Default is
 <a class="reference internal" href="#pMuTT.statmech.EmptyMode" title="pMuTT.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#rot"><span class="std std-ref">pMuTT.statmech.rot</span></a> object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.elec_model">
 <code class="descname">elec_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.elec_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#elec"><span class="std std-ref">pMuTT.statmech.elec</span></a> object, optional – Deals with electronic modes. Default is
+<dd><p>Deals with electronic modes. Default is
 <a class="reference internal" href="#pMuTT.statmech.EmptyMode" title="pMuTT.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#elec"><span class="std std-ref">pMuTT.statmech.elec</span></a> object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.nucl_model">
 <code class="descname">nucl_model</code><a class="headerlink" href="#pMuTT.statmech.StatMech.nucl_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference internal" href="#nucl"><span class="std std-ref">pMuTT.statmech.nucl</span></a> object – Deals with nuclear modes. Default is
+<dd><p>Deals with nuclear modes. Default is
 <a class="reference internal" href="#pMuTT.statmech.EmptyMode" title="pMuTT.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#nucl"><span class="std std-ref">pMuTT.statmech.nucl</span></a> object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.notes">
 <code class="descname">notes</code><a class="headerlink" href="#pMuTT.statmech.StatMech.notes" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str, optional</em> – Any additional details you would like to include such as
+<dd><p>Any additional details you would like to include such as
 computational set up. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1186,7 +1242,7 @@ specified, <code class="docutils literal notranslate"><span class="pre">molecula
 will use a model often.</p>
 <dl class="data">
 <dt id="pMuTT.statmech.presets">
-<code class="descclassname">pMuTT.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin')}, 'idealgas': {'trans_model': &lt;class 'pMuTT.statmech.trans.IdealTrans'&gt;, 'n_degrees': 3, 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;, 'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'rot_model': &lt;class 'pMuTT.statmech.rot.RigidRotor'&gt;, 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'optional': 'atoms'}, 'placeholder': {'trans_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'elec_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'rot_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'required': ()}}</em><a class="headerlink" href="#pMuTT.statmech.presets" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin'), 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;}, 'idealgas': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'n_degrees': 3, 'optional': 'atoms', 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'rot_model': &lt;class 'pMuTT.statmech.rot.RigidRotor'&gt;, 'trans_model': &lt;class 'pMuTT.statmech.trans.IdealTrans'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;}, 'placeholder': {'elec_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'required': (), 'rot_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'trans_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;}}</em><a class="headerlink" href="#pMuTT.statmech.presets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
 parameters that still need to be passed.</p>
 </dd></dl>
@@ -1206,13 +1262,29 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.trans.IdealTrans.n_degrees">
 <code class="descname">n_degrees</code><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.n_degrees" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>int, optional</em> – Number of degrees of freedom. Default is 3</p>
+<dd><p>Number of degrees of freedom. Default is 3</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.trans.IdealTrans.molecular_weight">
 <code class="descname">molecular_weight</code><a class="headerlink" href="#pMuTT.statmech.trans.IdealTrans.molecular_weight" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Molecular weight of the molecule in g/mol.</p>
+<dd><p>Molecular weight of the molecule in g/mol.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1465,15 +1537,31 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.HarmonicVib.vib_wavenumbers">
 <code class="descname">vib_wavenumbers</code><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
+<dd><p>Vibrational wavenumbers in 1/cm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.HarmonicVib.imaginary_substitute">
 <code class="descname">imaginary_substitute</code><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.imaginary_substitute" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – If this value is set, imaginary frequencies are substituted with
+<dd><p>If this value is set, imaginary frequencies are substituted with
 this value for calculations. Otherwise, imaginary frequencies are
 ignored. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1676,6 +1764,15 @@ ignored. Default is None</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.statmech.vib.HarmonicVib.print_calc_wavenumbers">
+<code class="descname">print_calc_wavenumbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.print_calc_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the wavenumbers that will be used in a thermodynamic
+calculation. If <code class="docutils literal notranslate"><span class="pre">self.imaginary_substitute</span></code> is a float, then imaginary
+frequencies are replaced with that value. Otherwise, imaginary
+frequencies are ignored.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.statmech.vib.HarmonicVib.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
@@ -1709,34 +1806,74 @@ Phys. Chem. C 2015, 119 (4), 1840–1850.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.QRRHOVib.vib_wavenumber">
 <code class="descname">vib_wavenumber</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.vib_wavenumber" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of float</em> – Vibrational wavenumbers in 1/cm</p>
+<dd><p>Vibrational wavenumbers in 1/cm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.QRRHOVib.Bav">
 <code class="descname">Bav</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.Bav" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – Average molecular moment of inertia as a limiting value of small
+<dd><p>Average molecular moment of inertia as a limiting value of small
 wavenumbers. Default is 1.e-44 kg m2</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.QRRHOVib.v0">
 <code class="descname">v0</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.v0" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – Wavenumber to scale vibrations. Default is 100 cm <sup>-1</sup></p>
+<dd><p>Wavenumber to scale vibrations. Default is 100 cm <sup>-1</sup></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.QRRHOVib.alpha">
 <code class="descname">alpha</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.alpha" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>int, optional</em> – Power to raise ratio of wavenumbers. Default is 4</p>
+<dd><p>Power to raise ratio of wavenumbers. Default is 4</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.QRRHOVib.imaginary_substitute">
 <code class="descname">imaginary_substitute</code><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.imaginary_substitute" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – If this value is set, imaginary frequencies are substituted with
+<dd><p>If this value is set, imaginary frequencies are substituted with
 this value for calculations. Otherwise, imaginary frequencies are
 ignored. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1923,6 +2060,15 @@ ignored. Default is None</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.statmech.vib.QRRHOVib.print_calc_wavenumbers">
+<code class="descname">print_calc_wavenumbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.print_calc_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the wavenumbers that will be used in a thermodynamic
+calculation. If <code class="docutils literal notranslate"><span class="pre">self.imaginary_substitute</span></code> is a float, then imaginary
+frequencies are replaced with that value. Otherwise, imaginary
+frequencies are ignored.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.statmech.vib.QRRHOVib.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
@@ -1952,13 +2098,29 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.EinsteinVib.einstein_temperature">
 <code class="descname">einstein_temperature</code><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.einstein_temperature" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Einstein temperature (<span class="math notranslate nohighlight">\(\Theta_E\)</span>) in K</p>
+<dd><p>Einstein temperature (<span class="math notranslate nohighlight">\(\Theta_E\)</span>) in K</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.vib.EinsteinVib.interaction_energy">
 <code class="descname">interaction_energy</code><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.interaction_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – Interaction energy (<span class="math notranslate nohighlight">\(u\)</span>) per atom in eV. Default is 0 eV</p>
+<dd><p>Interaction energy (<span class="math notranslate nohighlight">\(u\)</span>) per atom in eV. Default is 0 eV</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -2192,7 +2354,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.rot.RigidRotor.symmetrynumber">
 <code class="descname">symmetrynumber</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.symmetrynumber" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Symmetry number of molecule.</p>
+<dd><p>Symmetry number of molecule.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="42%" />
@@ -2246,37 +2408,77 @@ John Wiley &amp; Sons, 2010.</p>
 </tbody>
 </table>
 <p>See DOI for more details: 10.1007/s00214-007-0328-0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.rot.RigidRotor.rot_temperatures">
 <code class="descname">rot_temperatures</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.rot_temperatures" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list of float, optional</em> – Rotational temperatures in K</p>
+<dd><p>Rotational temperatures in K</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of float, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.rot.RigidRotor.geometry">
 <code class="descname">geometry</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.geometry" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> – Geometry of molecule. Accepted options are:</p>
+<dd><p>Geometry of molecule. Accepted options are:</p>
 <ul class="simple">
 <li>monatomic</li>
 <li>linear</li>
 <li>nonlinear</li>
 </ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.rot.RigidRotor.atoms">
 <code class="descname">atoms</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.atoms" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>ase.Atoms object, optional</em> – An atoms object can be used to calculate rot_temperatures and
+<dd><p>An atoms object can be used to calculate rot_temperatures and
 guess geometry</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">ase.Atoms object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.rot.RigidRotor.degree_tol">
 <code class="descname">degree_tol</code><a class="headerlink" href="#pMuTT.statmech.rot.RigidRotor.degree_tol" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Degree tolerance to estimate geometry. Only required if estimating
+<dd><p>Degree tolerance to estimate geometry. Only required if estimating
 geometry or rot_temperatures</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -2486,25 +2688,49 @@ John Wiley &amp; Sons, 2010.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.elec.IdealElec.potentialenergy">
 <code class="descname">potentialenergy</code><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.potentialenergy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – Potential energy in eV. Default is 0</p>
+<dd><p>Potential energy in eV. Default is 0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.elec.IdealElec.D0">
 <code class="descname">D0</code><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.D0" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – Bond strength in eV. Preferentially used when calculating partition
+<dd><p>Bond strength in eV. Preferentially used when calculating partition
 coefficient.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.statmech.elec.IdealElec.spin">
 <code class="descname">spin</code><a class="headerlink" href="#pMuTT.statmech.elec.IdealElec.spin" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float, optional</em> – The total electron spin. Default is 0</p>
+<dd><p>The total electron spin. Default is 0</p>
 <ul class="simple">
 <li>0 for molecules in which all electrons are paired</li>
 <li>0.5 for a free radical with a single unpaired electron</li>
 <li>1.0 for a triplet with two unpaired electrons, such as O <sub>2</sub></li>
 </ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -2960,7 +3186,7 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group.
+        &copy; Copyright 2018, Vlachos Research Group
 
     </p>
   </div>
@@ -2979,21 +3205,14 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.2.2',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

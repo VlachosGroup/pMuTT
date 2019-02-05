@@ -193,6 +193,32 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/commits/development">Development Branch</a></p>
+<ul class="simple">
+<li>Renamed private methods <code class="docutils literal notranslate"><span class="pre">_get_delta_quantity</span></code> and <code class="docutils literal notranslate"><span class="pre">_get_state_quantity</span></code> to
+public methods <code class="docutils literal notranslate"><span class="pre">get_delta_quantity</span></code> and <code class="docutils literal notranslate"><span class="pre">get_state_quantity</span></code> in
+<a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class</li>
+<li>Added generic method <code class="docutils literal notranslate"><span class="pre">get_quantity</span></code> to <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
+class so any method can be evaluated. It takes the parameters <code class="docutils literal notranslate"><span class="pre">raise_error</span></code>
+and <code class="docutils literal notranslate"><span class="pre">raise_warning</span></code> so the user has the ability to ignore modes if they do
+not have the desired properties</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">plot_coordinate_diagram</span></code> method to the
+<a class="reference internal" href="reactions.html#pMuTT.reaction.Reactions" title="pMuTT.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a> class to plot coordinate diagrams.</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code> and <code class="docutils literal notranslate"><span class="pre">get_E</span></code> methods to <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
+class to calculate electronic contribution to thermodynamic properties</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">get_EoRT_state</span></code> and <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code> methods to
+<a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> to calculate electronic contribution to
+reaction properties</li>
+<li>Removed <code class="docutils literal notranslate"><span class="pre">get_X_act</span></code> methods from the <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a>
+class. Instead, an optional parameter, <code class="docutils literal notranslate"><span class="pre">activation</span></code>, is added to
+<code class="docutils literal notranslate"><span class="pre">get_delta_X</span></code> methods to specify the difference between the
+reactants/products and the transition state. Note that <code class="docutils literal notranslate"><span class="pre">get_E_act</span></code> and
+<code class="docutils literal notranslate"><span class="pre">get_EoRT_act</span></code> are still available to calculate activation energy (and these
+methods handle if a BEP relationship is available).</li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.symmetry_dict</span></code> to allow easy look up of common
+symmetry numbers</li>
+<li>Fixed bug where specie-specific arguments were not passed correctly for
+<a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class</li>
+</ul>
 </div>
 <div class="section" id="version-1-2-2">
 <h2>Version 1.2.2<a class="headerlink" href="#version-1-2-2" title="Permalink to this headline">¶</a></h2>
@@ -312,7 +338,7 @@ reactions from Chemkin surf.inp and gas.inp files</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group.
+        &copy; Copyright 2018, Vlachos Research Group
 
     </p>
   </div>
@@ -331,21 +357,14 @@ reactions from Chemkin surf.inp and gas.inp files</li>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.2.2',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

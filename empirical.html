@@ -201,47 +201,95 @@ model.</p>
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.name">
 <code class="descname">name</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.name" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str, optional</em> – Name of the specie. Default is None</p>
+<dd><p>Name of the specie. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.phase">
 <code class="descname">phase</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.phase" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str, optional</em> – Phase of the specie. Default is None
+<dd><p>Phase of the specie. Default is None
 G - gas.
 S - surface.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.elements">
 <code class="descname">elements</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.elements" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dict, optional</em> – Composition of the species. Default is None.
+<dd><p>Composition of the species. Default is None.
 Keys of dictionary are elements, values are stoichiometric values
 in a formula unit.
 e.g. CH3OH can be represented as:
 {‘C’: 1, ‘H’: 4, ‘O’: 1,}.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.statmech_model">
 <code class="descname">statmech_model</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.statmech_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.statmech</cite> object, optional – Statistical thermodynamic model. Default is None.
+<dd><p>Statistical thermodynamic model. Default is None.
 Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT</cite>,
 <cite>get_SoR</cite>, <cite>get_GoRT</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><cite>pMuTT.statmech</cite> object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.references">
 <code class="descname">references</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.references" title="Permalink to this definition">¶</a></dt>
-<dd><p><cite>pMuTT.empirical.References.references</cite> object, optional – Contains references to calculate <cite>HoRT_ref</cite>. If not specified then
+<dd><p>Contains references to calculate <cite>HoRT_ref</cite>. If not specified then
 HoRT_dft will be used without adjustment. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><cite>pMuTT.empirical.References.references</cite> object, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.notes">
 <code class="descname">notes</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.notes" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str, optional</em> – Any additional details you would like to include such as
+<dd><p>Any additional details you would like to include such as
 computational set up. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -518,31 +566,71 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.BaseThermo" t
 <dl class="attribute">
 <dt id="pMuTT.empirical.nasa.Nasa.T_low">
 <code class="descname">T_low</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.T_low" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Lower temperature bound (in K)</p>
+<dd><p>Lower temperature bound (in K)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.nasa.Nasa.T_mid">
 <code class="descname">T_mid</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.T_mid" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Middle temperature bound (in K)</p>
+<dd><p>Middle temperature bound (in K)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.nasa.Nasa.T_high">
 <code class="descname">T_high</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.T_high" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – High temperature bound (in K)</p>
+<dd><p>High temperature bound (in K)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.nasa.Nasa.a_low">
 <code class="descname">a_low</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.a_low" title="Permalink to this definition">¶</a></dt>
-<dd><p>(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> – NASA polynomial to use between T_low and T_mid</p>
+<dd><p>NASA polynomial to use between T_low and T_mid</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.nasa.Nasa.a_high">
 <code class="descname">a_high</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.a_high" title="Permalink to this definition">¶</a></dt>
-<dd><p>(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> – NASA polynomial to use between T_mid and T_high</p>
+<dd><p>NASA polynomial to use between T_mid and T_high</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -866,19 +954,43 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.BaseThermo" t
 <dl class="attribute">
 <dt id="pMuTT.empirical.shomate.Shomate.T_low">
 <code class="descname">T_low</code><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.T_low" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Lower temperature bound (in K)</p>
+<dd><p>Lower temperature bound (in K)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.shomate.Shomate.T_high">
 <code class="descname">T_high</code><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.T_high" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – High temperature bound (in K)</p>
+<dd><p>High temperature bound (in K)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.shomate.Shomate.a">
 <code class="descname">a</code><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.a" title="Permalink to this definition">¶</a></dt>
-<dd><p>(8,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> – Shomate polynomial to use between T_low and T_high</p>
+<dd><p>Shomate polynomial to use between T_low and T_high</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(8,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1201,13 +1313,29 @@ experimental data.</p>
 <dl class="attribute">
 <dt id="pMuTT.empirical.references.Reference.T_ref">
 <code class="descname">T_ref</code><a class="headerlink" href="#pMuTT.empirical.references.Reference.T_ref" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Temperature reference in K</p>
+<dd><p>Temperature reference in K</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.references.Reference.HoRT_ref">
 <code class="descname">HoRT_ref</code><a class="headerlink" href="#pMuTT.empirical.references.Reference.HoRT_ref" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Dimensionless enthalpy corresponding to T_ref</p>
+<dd><p>Dimensionless enthalpy corresponding to T_ref</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -1256,13 +1384,28 @@ experimental data.</p>
 <dl class="attribute">
 <dt id="pMuTT.empirical.references.References.offset">
 <code class="descname">offset</code><a class="headerlink" href="#pMuTT.empirical.references.References.offset" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dict</em> – Dimensionless enthalpy offset for each descriptor</p>
+<dd><p>Dimensionless enthalpy offset for each descriptor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.empirical.references.References.references">
 <code class="descname">references</code><a class="headerlink" href="#pMuTT.empirical.references.References.references" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of <a class="reference internal" href="#pMuTT.empirical.references.Reference" title="pMuTT.empirical.references.Reference"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code></a>,</p>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="#pMuTT.empirical.references.Reference" title="pMuTT.empirical.references.Reference"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code></a>,</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -1275,7 +1418,15 @@ attributes <code class="docutils literal notranslate"><span class="pre">T_ref</s
 <dl class="attribute">
 <dt id="pMuTT.empirical.references.References.T_ref">
 <code class="descname">T_ref</code><a class="headerlink" href="#pMuTT.empirical.references.References.T_ref" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> – Reference temperature in K</p>
+<dd><p>Reference temperature in K</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -1412,7 +1563,7 @@ descriptors</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group.
+        &copy; Copyright 2018, Vlachos Research Group
 
     </p>
   </div>
@@ -1431,21 +1582,14 @@ descriptors</td>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.2.2',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

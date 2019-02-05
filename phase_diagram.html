@@ -197,17 +197,33 @@ have the same reactant references to give meaningful data.</p>
 <dl class="attribute">
 <dt id="pMuTT.reaction.phasediagram.PhaseDiagram.reactions">
 <code class="descname">reactions</code><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.reactions" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects – Formation reactions for each phase. Reactions should be written
+<dd><p>Formation reactions for each phase. Reactions should be written
 with consistent reference species to obtain meaningful data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="pMuTT.reaction.phasediagram.PhaseDiagram.norm_factors">
 <code class="descname">norm_factors</code><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.norm_factors" title="Permalink to this definition">¶</a></dt>
-<dd><p>(N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float, optional – Used for normalizing Gibbs energies. These factors could be
+<dd><p>Used for normalizing Gibbs energies. These factors could be
 surface areas when calculating surface energies or if the
 reactions stoichiometry is not consistent. Default is an array of
 1. It should have the same length as reactions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float, optional</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -391,7 +407,7 @@ stable phase at the x_values.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group.
+        &copy; Copyright 2018, Vlachos Research Group
 
     </p>
   </div>
@@ -410,21 +426,14 @@ stable phase at the x_values.</li>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.2.2',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

@@ -7,6 +7,31 @@ Development Branch
 ------------------
 `Development Branch`_
 
+- Renamed private methods ``_get_delta_quantity`` and ``_get_state_quantity`` to
+  public methods ``get_delta_quantity`` and ``get_state_quantity`` in
+  :class:`~pMuTT.reaction.Reaction` class
+- Added generic method ``get_quantity`` to :class:`~pMuTT.statmech.StatMech`
+  class so any method can be evaluated. It takes the parameters ``raise_error``
+  and ``raise_warning`` so the user has the ability to ignore modes if they do
+  not have the desired properties
+- Added ``plot_coordinate_diagram`` method to the 
+  :class:`~pMuTT.reaction.Reactions` class to plot coordinate diagrams.
+- Added ``get_EoRT`` and ``get_E`` methods to :class:`~pMuTT.statmech.StatMech`
+  class to calculate electronic contribution to thermodynamic properties
+- Added ``get_EoRT_state`` and ``get_delta_EoRT`` methods to 
+  :class:`~pMuTT.reaction.Reaction` to calculate electronic contribution to
+  reaction properties
+- Removed ``get_X_act`` methods from the :class:`~pMuTT.reaction.Reaction`
+  class. Instead, an optional parameter, ``activation``, is added to 
+  ``get_delta_X`` methods to specify the difference between the
+  reactants/products and the transition state. Note that ``get_E_act`` and 
+  ``get_EoRT_act`` are still available to calculate activation energy (and these
+  methods handle if a BEP relationship is available).
+- Added ``pMuTT.constants.symmetry_dict`` to allow easy look up of common
+  symmetry numbers
+- Fixed bug where specie-specific arguments were not passed correctly for
+  :class:`~pMuTT.reaction.Reaction` class
+
 Version 1.2.2
 -------------
 Jan. 18, 2019

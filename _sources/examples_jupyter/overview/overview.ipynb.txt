@@ -1105,8 +1105,7 @@
     "                       **presets['idealgas']),\n",
     "    '*': StatMech(potentialenergy=-224.13045381,\n",
     "                  **presets['electronic']),\n",
-    "    'H2O*': StatMech(potentialenergy=-238.4713854,\n",
-    "                     vib_wavenumbers=[3797.255519, \n",
+    "    'H2O*no          vib_wavenumbers=[3797.255519, \n",
     "                                      3658.895695,\n",
     "                                      1530.600295,\n",
     "                                      266.366130,\n",
@@ -1147,7 +1146,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.5"
+   "version": "3.7.2"
   }
  },
  "nbformat": 4,
