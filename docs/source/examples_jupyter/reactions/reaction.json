@@ -111,7 +111,7 @@
  "transition_state": [
   {
    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
-   "name": "H2O",
+   "name": "H2O_TS",
    "phase": "G",
    "elements": {
     "H": 2,
