@@ -182,8 +182,8 @@ class Reaction:
             q : float
                 Partition function of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_q',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_q',
+                                       **kwargs)
 
     def get_CvoR_state(self, state, **kwargs):
         """Gets dimensionless heat capacity at constant volume at a state
@@ -207,8 +207,8 @@ class Reaction:
                 Dimensionless heat capacity at constant volume of the reaction
                 state
         """
-        return self._get_state_quantity(state=state, method_name='get_CvoR',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_CvoR',
+                                       **kwargs)
 
     def get_Cv_state(self, state, units, **kwargs):
         """Gets the heat capacity at constant volume at a state
@@ -259,8 +259,8 @@ class Reaction:
                 Dimensionless heat capacity at constant pressure
                 of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_CpoR',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_CpoR',
+                                       **kwargs)
 
     def get_Cp_state(self, state, units, **kwargs):
         """Gets the heat capacity at constant pressure at a state
@@ -310,8 +310,8 @@ class Reaction:
                 Dimensionless internal energy of the reaction state.
 
         """
-        return self._get_state_quantity(state=state, method_name='get_UoRT',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_UoRT',
+                                       **kwargs)
 
     def get_U_state(self, state, units, T, **kwargs):
         """Gets the internal energy at a state
@@ -363,8 +363,8 @@ class Reaction:
             EoRT : float
                 Dimensionless electronic energy of the reaction state.
         """
-        return self._get_state_quantity(state=state, method_name='get_EoRT',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_EoRT',
+                                       **kwargs)
 
     def get_E_state(self, state, units, T, **kwargs):
         """Gets the electronic energy at a state
@@ -418,8 +418,8 @@ class Reaction:
                 Dimensionless heat capacity at constant pressure
                 of the reaction state.
         """
-        return self._get_state_quantity(state=state, method_name='get_HoRT',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_HoRT',
+                                       **kwargs)
 
     def get_H_state(self, state, units, T, **kwargs):
         """Gets the enthalpy at a state
@@ -471,8 +471,8 @@ class Reaction:
             SoR : float
                 Dimensionless entropy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_SoR',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_SoR',
+                                       **kwargs)
 
     def get_S_state(self, state, units, **kwargs):
         """Gets the entropy at a state
@@ -522,8 +522,8 @@ class Reaction:
             FoRT : float
                 Dimensionless Helmoltz energy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_FoRT',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_FoRT',
+                                       **kwargs)
 
     def get_F_state(self, state, units, T, **kwargs):
         """Gets the Helholtz energy at a state
@@ -575,8 +575,8 @@ class Reaction:
             GoRT : float
                 Dimensionless Gibbs energy of the reaction state
         """
-        return self._get_state_quantity(state=state, method_name='get_GoRT',
-                                        **kwargs)
+        return self.get_state_quantity(state=state, method_name='get_GoRT',
+                                       **kwargs)
 
     def get_G_state(self, state, units, T, **kwargs):
         """Gets the Gibbs energy at a state
@@ -628,9 +628,9 @@ class Reaction:
                 Change in partition function between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_q = self._get_delta_quantity(initial_state=initial_state,
-                                            final_state=final_state,
-                                            method_name='get_q', **kwargs)
+        delta_q = self.get_delta_quantity(initial_state=initial_state,
+                                          final_state=final_state,
+                                          method_name='get_q', **kwargs)
         return delta_q
 
     def get_delta_CvoR(self, rev=False, activation=False, **kwargs):
@@ -655,10 +655,10 @@ class Reaction:
                 Change in heat capacity between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_CvoR = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_CvoR',
-                                              **kwargs)
+        delta_CvoR = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_CvoR',
+                                             **kwargs)
         return delta_CvoR
 
     def get_delta_Cv(self, units, rev=False, activation=False, **kwargs):
@@ -710,10 +710,10 @@ class Reaction:
                 Change in heat capacity between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_CpoR = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_CpoR',
-                                              **kwargs)
+        delta_CpoR = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_CpoR',
+                                             **kwargs)
         return delta_CpoR
 
     def get_delta_Cp(self, units, rev=False, activation=False, **kwargs):
@@ -765,10 +765,10 @@ class Reaction:
                 Change in internal energy between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_UoRT = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_UoRT',
-                                              **kwargs)
+        delta_UoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_UoRT',
+                                             **kwargs)
         return delta_UoRT
 
     def get_delta_U(self, units, T, rev=False, activation=False, **kwargs):
@@ -821,10 +821,10 @@ class Reaction:
                 Change in electronic energy between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_EoRT = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_EoRT',
-                                              **kwargs)
+        delta_EoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_EoRT',
+                                             **kwargs)
         return delta_EoRT
 
     def get_delta_E(self, units, T, rev=False, activation=False, **kwargs):
@@ -876,10 +876,10 @@ class Reaction:
                 Change in enthalpy between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_HoRT = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_HoRT',
-                                              **kwargs)
+        delta_HoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_HoRT',
+                                             **kwargs)
         return delta_HoRT
 
     def get_delta_H(self, units, T, rev=False, activation=False, **kwargs):
@@ -931,10 +931,10 @@ class Reaction:
                 Change in entropy between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_SoR = self._get_delta_quantity(initial_state=initial_state,
-                                             final_state=final_state,
-                                             method_name='get_SoR',
-                                             **kwargs)
+        delta_SoR = self.get_delta_quantity(initial_state=initial_state,
+                                            final_state=final_state,
+                                            method_name='get_SoR',
+                                            **kwargs)
         return delta_SoR
 
     def get_delta_S(self, units, rev=False, activation=False, **kwargs):
@@ -985,10 +985,10 @@ class Reaction:
                 Change in Helmholtz energy between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_FoRT = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_FoRT',
-                                              **kwargs)
+        delta_FoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_FoRT',
+                                             **kwargs)
         return delta_FoRT
 
     def get_delta_F(self, units, T, rev=False, activation=False, **kwargs):
@@ -1041,10 +1041,10 @@ class Reaction:
                 Change in Gibbs energy between reactants and products
         """
         initial_state, final_state = _get_states(rev=rev, activation=activation)
-        delta_GoRT = self._get_delta_quantity(initial_state=initial_state,
-                                              final_state=final_state,
-                                              method_name='get_GoRT',
-                                              **kwargs)
+        delta_GoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_GoRT',
+                                             **kwargs)
         return delta_GoRT
 
     def get_delta_G(self, units, T, rev=False, activation=False, **kwargs):
@@ -1242,7 +1242,7 @@ class Reaction:
                     'Thermodynamic state {} not supported'.format(state))
         return (species, species_stoich)
 
-    def _get_state_quantity(self, state, method_name, **kwargs):
+    def get_state_quantity(self, state, method_name, **kwargs):
         """Helper method to calculate the thermodynamic quantity of the state
 
         Parameters
@@ -1284,7 +1284,7 @@ class Reaction:
                         _force_pass_arguments(method, **specie_kwargs)*stoich
         return state_quantity
 
-    def _get_delta_quantity(self, initial_state, final_state, method_name,
+    def get_delta_quantity(self, initial_state, final_state, method_name,
                             **kwargs):
         """Helper method to calculate the change in thermodynamic quantity
         between states
@@ -1315,12 +1315,12 @@ class Reaction:
             delta_quantity : float
                 Change in thermodynamic quantity between particular states
         """
-        initial_quantity = self._get_state_quantity(state=initial_state,
-                                                    method_name=method_name,
-                                                    **kwargs)
-        final_quantity = self._get_state_quantity(state=final_state,
-                                                  method_name=method_name,
-                                                  **kwargs)
+        initial_quantity = self.get_state_quantity(state=initial_state,
+                                                   method_name=method_name,
+                                                   **kwargs)
+        final_quantity = self.get_state_quantity(state=final_state,
+                                                 method_name=method_name,
+                                                 **kwargs)
         if method_name == 'get_q':
             return final_quantity/initial_quantity
         else:
@@ -1590,15 +1590,15 @@ class Reactions:
 
         x = 0.
         # Calculate reference value
-        ref = self.reactions[ref_index]._get_state_quantity(
+        ref = self.reactions[ref_index].get_state_quantity(
                 method_name=method_name, state=ref_state, **reaction_kwargs)
 
         for i, reaction in enumerate(self.reactions):
             '''First state is the reactants of reaction 0.'''
             if i == 0:
-                y_react = reaction._get_state_quantity(method_name=method_name,
-                                                       state='reactants',
-                                                       **reaction_kwargs) \
+                y_react = reaction.get_state_quantity(method_name=method_name,
+                                                      state='reactants',
+                                                      **reaction_kwargs) \
                     - ref
                 x_plot.extend([x, x+x_offset])
                 y_plot.extend([y_react, y_react])
@@ -1610,17 +1610,17 @@ class Reactions:
 
             # Calculating y value for product in case we need it to fit the 
             # transition state curve
-            y_product = reaction._get_state_quantity(method_name=method_name,
-                                                     state='products',
-                                                     **reaction_kwargs) \
+            y_product = reaction.get_state_quantity(method_name=method_name,
+                                                    state='products',
+                                                    **reaction_kwargs) \
                         - ref
 
             '''Calculate properties for TS if necessary'''
             if include_TS and None not in reaction.transition_state:
                 x += x_offset
-                y_TS = reaction._get_state_quantity(method_name=method_name,
-                                                    state='transition state',
-                                                    **reaction_kwargs) \
+                y_TS = reaction.get_state_quantity(method_name=method_name,
+                                                   state='transition state',
+                                                   **reaction_kwargs) \
                        - ref
                 '''Calculate data to fit spline'''
                 x_fit = np.array([x-x_offset,
@@ -1648,7 +1648,7 @@ class Reactions:
 
                 '''Record transition state labels if necessary'''
                 if include_TS_labels:
-                    TS_labels.append(reaction._get_delta_quantity(
+                    TS_labels.append(reaction.get_delta_quantity(
                             method_name=method_name,
                             initial_state='reactants',
                             final_state='transition state',
