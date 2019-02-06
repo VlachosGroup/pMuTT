@@ -372,14 +372,16 @@ class StatMech:
         return self.get_CpoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs)*c.R(units)
 
-    def get_EoRT(self, T=c.T0('K'), raise_error=True, raise_warning=True,
-                 **kwargs):
+    def get_EoRT(self, T=c.T0('K'), include_ZPE=False, 
+                 raise_error=True, raise_warning=True, **kwargs):
         """Dimensionless electronic energy
 
         Parameters
         ----------
             T : float, optional
                 Temperature in K. Default is 298.15 K
+            include_ZPE : bool, optional
+                If True, includes the zero point energy. Default is False
             raise_error : bool, optional
                 If True, raises an error if any of the modes do not have the 
                 quantity of interest. Default is True
@@ -395,13 +397,21 @@ class StatMech:
                 Dimensionless electronic energy.
         """
         kwargs['T'] = T
-        return _get_mode_quantity(mode=self.elec_model, method_name='get_UoRT',
+        EoRT = _get_mode_quantity(mode=self.elec_model, 
+                                  method_name='get_UoRT',
                                   raise_error=raise_error, 
-                                  raise_warning=raise_warning, default_value=0.,
-                                  **kwargs)
+                                  raise_warning=raise_warning,
+                                  default_value=0., **kwargs)
+        if include_ZPE:
+            EoRT += _get_mode_quantity(mode=self.vib_model, 
+                                       method_name='get_ZPE',
+                                       raise_error=raise_error, 
+                                       raise_warning=raise_warning,
+                                       default_value=0., **kwargs)/c.R('eV/K')/T
+        return EoRT            
 
     def get_E(self, units, T=c.T0('K'), raise_error=True, raise_warning=True,
-              **kwargs):
+              include_ZPE=False, **kwargs):
         """Calculate the electronic energy
 
         Parameters
@@ -411,6 +421,8 @@ class StatMech:
                 units but omit the '/K' (e.g. J/mol).
             T : float, optional
                 Temperature in K. Default is 298.15 K
+            include_ZPE : bool, optional
+                If True, includes the zero point energy. Default is False
             raise_error : bool, optional
                 If True, raises an error if any of the modes do not have the 
                 quantity of interest. Default is True
@@ -426,7 +438,8 @@ class StatMech:
                 Electronic energy
         """
         return self.get_EoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
+                             raise_warning=raise_warning, 
+                             include_ZPE=include_ZPE, **kwargs) \
                *T*c.R('{}/K'.format(units))
 
     def get_UoRT(self, verbose=False, raise_error=True, raise_warning=True,
