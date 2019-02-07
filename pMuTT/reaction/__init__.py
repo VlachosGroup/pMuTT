@@ -342,7 +342,7 @@ class Reaction:
         return self.get_UoRT_state(state=state, T=T, **kwargs)*T \
             * c.R('{}/K'.format(units))
 
-    def get_EoRT_state(self, state, **kwargs):
+    def get_EoRT_state(self, state, include_ZPE=False, **kwargs):
         """Gets dimensionless electronic energy at a state
 
         Parameters
@@ -354,6 +354,8 @@ class Reaction:
                 - 'products'
                 - 'transition state'
                 - 'ts' (same as transition state)
+            include_ZPE : bool, optional
+                If True, includes the zero point energy. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless electronic
                 energy. See class docstring to see how to pass specific
@@ -364,9 +366,10 @@ class Reaction:
                 Dimensionless electronic energy of the reaction state.
         """
         return self.get_state_quantity(state=state, method_name='get_EoRT',
-                                       **kwargs)
+                                       include_ZPE=include_ZPE, **kwargs)
 
-    def get_E_state(self, state, units, T, **kwargs):
+    def get_E_state(self, state, units, T=c.T0('K'), include_ZPE=False,
+                    **kwargs):
         """Gets the electronic energy at a state
 
         Parameters
@@ -383,6 +386,8 @@ class Reaction:
                 units but omit the '/K' (e.g. J/mol).
             T : float
                 Temperature in K
+            include_ZPE : bool, optional
+                If True, includes the zero point energy. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate electronic energy.
                 See class docstring to see how to pass specific parameters to
@@ -392,8 +397,9 @@ class Reaction:
             E : float
                 Electronic energy of the reaction state
         """
-        return self.get_EoRT_state(state=state, T=T, **kwargs)*T \
-            * c.R('{}/K'.format(units))
+        return self.get_EoRT_state(state=state, T=T, include_ZPE=include_ZPE, 
+                                   **kwargs) \
+               *T*c.R('{}/K'.format(units))
 
     def get_HoRT_state(self, state, **kwargs):
         """Gets dimensionless enthalpy at a state
