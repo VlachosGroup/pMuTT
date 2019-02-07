@@ -369,6 +369,27 @@ class QRRHOVib:
         """
         return self.get_CvoR(T=T)
 
+    def get_ZPE(self):
+        """Calculates the zero point energy
+
+        :math:`ZPE=\\frac{1}{2}k_b\\sum_i \\omega_i\\Theta_{V,i}`
+
+        Returns
+        -------
+            zpe : float
+                Zero point energy in eV
+        """
+        zpe = []
+        valid_wavenumbers = _get_valid_vib_wavenumbers(
+                wavenumbers=self.vib_wavenumbers,
+                substitute=self.imaginary_substitute)
+        vib_temperatures = c.wavenumber_to_temp(valid_wavenumbers)
+        scaled_wavenumbers = self._get_scaled_wavenumber(valid_wavenumbers)
+
+        for theta_i, w_i in zip(vib_temperatures, scaled_wavenumbers):
+            zpe = 0.5*c.kb('eV/K')*theta_i*w_i
+        return np.sum(zpe)
+
     def _get_UoRT_RRHO(self, T, vib_temperature):
         """Calculates the dimensionless RRHO contribution to internal energy
 
@@ -392,9 +413,9 @@ class QRRHOVib:
         :math:`\\frac {U^{qRRHO}}{RT} = \\sum_{i}\\omega_i\\frac{U^{RRHO}}{RT}
         + \\frac{1}{2}(1-\\omega_i)`
 
-        :math:`\\frac {U^{RRHO}}{RT} = \\frac{\\Theta_i}{T} \\bigg(\\frac{1}{2}
-        + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{\\Theta_i}{T})}
-        \\bigg)`
+        :math:`\\frac {U^{RRHO}_{i}}{RT} = \\frac{\\Theta_i}{T} \\bigg(
+        \\frac{1}{2} + \\frac{\\exp(-\\frac{\\Theta_i}{T})}{1-\\exp(-\\frac{
+        \\Theta_i}{T})}\\bigg)`
 
         Parameters
         ----------
