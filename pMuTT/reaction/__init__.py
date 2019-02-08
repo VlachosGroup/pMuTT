@@ -1373,7 +1373,8 @@ class Reaction:
                    transition_state=ts, transition_state_stoich=ts_stoich,
                    **kwargs)
 
-    def to_string(self, species_delimiter='+', reaction_delimiter='='):
+    def to_string(self, species_delimiter='+', reaction_delimiter='=',
+                  include_TS=True):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1382,6 +1383,8 @@ class Reaction:
                 Separates species. Default is '+'
             reaction_delimiter : str, optional
                 Separates reaction states. Default is '='
+            include_TS : bool, optional
+                If True, includes transition states in output. Default is True
         Returns
         -------
             reaction_str : str
@@ -1394,11 +1397,12 @@ class Reaction:
         reaction_str += reaction_delimiter
 
         # Write transition state if any
-        reaction_str += _write_reaction_state(
-                species=self.transition_state,
-                stoich=self.transition_state_stoich,
-                species_delimiter=species_delimiter)
-        reaction_str += reaction_delimiter
+        if include_TS and None not in self.transition_state:
+            reaction_str += _write_reaction_state(
+                    species=self.transition_state,
+                    stoich=self.transition_state_stoich,
+                    species_delimiter=species_delimiter)
+            reaction_str += reaction_delimiter
 
         # Write products
         reaction_str += _write_reaction_state(species=self.products,
@@ -1480,6 +1484,13 @@ class Reactions:
             # If other doesn't have to_dict method, is not equal
             return False
         return self.to_dict() == other_dict
+
+    def __iter__(self):
+        for reaction in self.reactions:
+            yield reaction
+
+    def __len__(self):
+        return len(self.reactions)
 
     def get_species(self, include_TS=True, key='name'):
         """Returns the unique species included in the reactions.
