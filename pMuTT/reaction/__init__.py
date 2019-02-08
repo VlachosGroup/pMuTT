@@ -5,7 +5,8 @@ import re
 import numpy as np
 from scipy import interpolate
 from matplotlib import pyplot as plt
-from pMuTT import _force_pass_arguments, _pass_expected_arguments, _is_iterable
+from pMuTT import (_force_pass_arguments, _pass_expected_arguments, 
+    _is_iterable, _get_specie_kwargs)
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
@@ -1915,46 +1916,6 @@ def _get_molecularity(stoich):
             Molecularity of reaction
     """
     return np.sum(stoich)
-
-
-def _get_specie_kwargs(specie_name, **kwargs):
-    """Gets the keyword arguments specific to a specie
-
-    Parameters
-    ----------
-        specie_name : str
-            Name of the specie
-        kwargs : keyword arguments
-            Parameters with the conditions. Specie specific parameters can be
-            passed by having a key named 'specie' mapping onto a dictionary
-            whose keys are the species names.
-
-            e.g. For the reaction: H2 + 0.5O2 = H2O
-            kwargs = {
-                'T': 298.,
-                'specie': {
-                    'H2': {
-                        'P': 1.,
-                    },
-                    'O2': {
-                        'P': 0.5,
-                    },
-                }
-            }
-    Returns
-    -------
-        specie_kwargs : dict
-            Dictionary containing the specie-specific kwargs
-    """
-    specie_kwargs = kwargs.copy()
-    specie_specific = specie_kwargs.pop('specie', None)
-    # See if there was an entry for the specific species
-    try:
-        specie_kwargs.update(specie_specific[specie_name])
-    except (KeyError, TypeError, NameError):
-        pass
-    return specie_kwargs
-
 
 def _get_states(rev, activation):
     """Determines the initial state and the final state based on boolean inputs

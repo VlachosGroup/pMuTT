@@ -7,9 +7,11 @@ Created on Fri Jul 7 12:40:00 2018
 import inspect
 import warnings
 import numpy as np
-from pMuTT import _pass_expected_arguments
+from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
+    _get_specie_kwargs, _apply_operation)
 from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
+from pMuTT.mixture import _get_mix_quantity
 from pMuTT.io_ import jsonio as json_pMuTT
 
 
@@ -89,6 +91,8 @@ class StatMech:
         nucl_model : :ref:`pMuTT.statmech.nucl <nucl>` object
             Deals with nuclear modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
+        mix_models : list of ``pMuTT.mixture`` objects, optional
+            Mixture models that calculate excess properties.
         notes : str, optional
             Any additional details you would like to include such as
             computational set up. Default is None
@@ -96,8 +100,8 @@ class StatMech:
 
     def __init__(self, name=None, trans_model=EmptyMode(),
                  vib_model=EmptyMode(), rot_model=EmptyMode(),
-                 elec_model=EmptyMode(), nucl_model=EmptyMode(), notes=None,
-                 **kwargs):
+                 elec_model=EmptyMode(), nucl_model=EmptyMode(),
+                 mix_models=None, notes=None, **kwargs):
         self.name = name
 
         # Translational modes
@@ -132,6 +136,15 @@ class StatMech:
 
         self.notes = notes
 
+        # Assign mixing models
+        # TODO Mixing models can not be initialized by passing the class
+        # because all the models will have the same attributes. Figure out a way
+        # to pass them. Perhaps have a dictionary that contains the attributes
+        # separated by species
+        if not _is_iterable(mix_models):
+            mix_models = [mix_models]
+        self.mix_models = mix_models 
+
     def get_quantity(self, method_name, raise_error=True, raise_warning=True, 
                      operation='sum', verbose=False, **kwargs):
         """Generic method to get any quantity from modes.
@@ -163,7 +176,7 @@ class StatMech:
         Returns
         -------
             quantity : float or (N,) `numpy.ndarray`_
-                Dimensionless Gibbs energy. If verbose is True, contribution
+                Desired quantity. If verbose is True, contribution
                 to each mode are as follows:
                 [trans, vib, rot, elec, nucl]
 
@@ -205,15 +218,19 @@ class StatMech:
                                raise_warning=raise_warning, 
                                default_value=default_value,
                                **kwargs)])
-        # Return value
-        if verbose:
-            return quantity
-        elif operation == 'sum':
-            return np.sum(quantity)
-        elif operation == 'prod':
-            return np.prod(quantity)
-        else:
-            raise ValueError('Operation: {} not supported'.format(operation))
+        # Calculate contribution from mixing models if any
+        mix_quantity = _get_mix_quantity(mix_models=self.mix_models,
+                                         method_name=method_name,
+                                         raise_error=raise_error,
+                                         raise_warning=raise_warning,
+                                         default_value=default_value,
+                                         verbose=verbose,
+                                         **kwargs)
+        # Add mixing quantities onto quantity
+        quantity = np.concatenate([quantity, mix_quantity])
+        quantity = _apply_operation(quantity, verbose=verbose, 
+                                    operation=operation)
+        return quantity
 
     def get_q(self, verbose=False, raise_error=True, raise_warning=True,
               **kwargs):
@@ -778,14 +795,19 @@ class StatMech:
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'name': self.name,
-                'trans_model': self.trans_model.to_dict(),
-                'vib_model': self.vib_model.to_dict(),
-                'rot_model': self.rot_model.to_dict(),
-                'elec_model': self.elec_model.to_dict(),
-                'nucl_model': self.nucl_model.to_dict(),
-                'notes': self.notes}
+        obj_dict = {
+            'class': str(self.__class__),
+            'name': self.name,
+            'trans_model': self.trans_model.to_dict(),
+            'vib_model': self.vib_model.to_dict(),
+            'rot_model': self.rot_model.to_dict(),
+            'elec_model': self.elec_model.to_dict(),
+            'nucl_model': self.nucl_model.to_dict(),
+            'notes': self.notes}
+        if None not in self.mix_models:
+            obj_dict['mix_models'] = [mix_model.to_dict() for mix_model in 
+                                                              self.mix_models]
+        return obj_dict
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -852,50 +874,3 @@ presets = {
 }
 """Commonly used models. The 'required' and 'optional' fields indicate
 parameters that still need to be passed."""
-
-def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
-                       default_value=0., **kwargs):
-    """Calculate the quantity from that mode.
-
-    Parameters
-    ----------
-        mode : ``pMuTT.statmech`` object
-            Trans, Vib, Rot, Elec, or Nucl StatMech model
-        method_name : str
-            Name of method to use to calculate quantity.
-        raise_error : bool, optional
-            If True, raises an error if any of the modes do not have the 
-            quantity of interest. Default is True
-        raise_warning : bool, optional
-            Only relevant if raise_error is False. Raises a warning if any
-            of the modes do not have the quantity of interest. Default is
-            True
-        default_value : float, optional
-            Default value if the object does not contain the method
-        verbose : bool, optional
-            If False, returns the total Gibbs energy. If True, returns
-            contribution of each mode.
-        kwargs : key-word arguments
-            Parameters passed to each mode
-    Returns
-    -------
-        quantity : float
-            Quantity of the mode.
-    Raises
-    ------
-        AttributeError
-            If raise_error is True and the mode does not have the method_name
-    """
-    try:
-        method = getattr(mode, method_name)
-    except AttributeError as e:
-        if raise_error:
-            raise e
-        elif raise_warning:
-            warnings.warn(e, RuntimeWarning)
-        quantity = default_value
-    else:
-        quantity = _pass_expected_arguments(method, **kwargs)
-    return quantity
-        
-

@@ -34,8 +34,16 @@ class CovEffect:
         self.slopes = slopes
         self._set_intercepts()
 
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
     def insert(self, interval, slope):
-        """Inserts the a new interval for the piecewise function.
+        """Inserts the a new interval and slope for the piecewise function
 
         Parameters
         ----------
@@ -52,7 +60,7 @@ class CovEffect:
         self._set_intercepts()
 
     def pop(self, i):
-        """Inserts the a new interval for the piecewise function.
+        """Removes the interval and slope specified by an index
 
         Parameters
         ----------
@@ -71,40 +79,6 @@ class CovEffect:
         self.slopes.pop(i)
         self._set_intercepts()
 
-    def get_HoRT(self, x=0., T=c.T0('K')):
-        """Calculates the excess enthalpy of mixing
-
-        Parameters
-        ----------
-            x : float, optional
-                Coverage (in ML) of species j. Default is 0
-            T : float, optional
-                Temperature in K. Default is 298.15 K
-        Returns
-        -------
-            HoRT : float
-                Dimensionless excess enthalpy
-        """
-        i = np.argmax(x < np.array(self.intervals))-1
-        HoRT = (self.slopes[i]*x + self._intercepts[i])/(c.R('kcal/mol/K')*T)
-        return HoRT
-
-    def get_GoRT(self, x=0., T=c.T0('K')):
-        """Calculates the excess Gibbs energy of mixing
-
-        Parameters
-        ----------
-            x : float, optional
-                Coverage (in ML) of species j. Default is 0
-            T : float, optional
-                Temperature in K. Default is 298.15 K
-        Returns
-        -------
-            GoRT : float
-                Dimensionless excess Gibbs energy
-        """
-        return self.get_HoRT(x=x, T=T)
-
     def _set_intercepts(self):
         """Calculates the intercepts using the intervals and slopes"""
         self._intercepts = []
@@ -118,6 +92,84 @@ class CovEffect:
                 H = prev_slope*interval + prev_intercept
                 # Calculate intercept of new area of curve
                 self._intercepts.append(H - slope*interval)
+
+    def get_UoRT(self, x=0., T=c.T0('K')):
+        """Calculates the excess internal energy
+
+        Parameters
+        ----------
+            x : float, optional
+                Coverage (in ML) of species j. Default is 0
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            UoRT : float
+                Dimensionless internal energy
+        """
+        i = np.argmax(x < np.array(self.intervals))-1
+        UoRT = (self.slopes[i]*x + self._intercepts[i])/(c.R('kcal/mol/K')*T)
+        return UoRT
+
+    def get_HoRT(self, x=0., T=c.T0('K')):
+        """Calculates the excess enthalpy
+
+        Parameters
+        ----------
+            x : float, optional
+                Coverage (in ML) of species j. Default is 0
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            HoRT : float
+                Dimensionless excess enthalpy
+        """
+        return self.get_UoRT(x=x, T=T)
+
+    def get_FoRT(self, x=0., T=c.T0('K')):
+        """Calculates the excess Helmholtz energy
+
+        Parameters
+        ----------
+            x : float, optional
+                Coverage (in ML) of species j. Default is 0
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            FoRT : float
+                Dimensionless excess Helmholtz energy
+        """
+        return self.get_UoRT(x=x, T=T) - self.get_SoR()
+
+    def get_GoRT(self, x=0., T=c.T0('K')):
+        """Calculates the excess Gibbs energy
+
+        Parameters
+        ----------
+            x : float, optional
+                Coverage (in ML) of species j. Default is 0
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            GoRT : float
+                Dimensionless excess Gibbs energy
+        """
+        return self.get_HoRT(x=x, T=T) - self.get_SoR()
+
+    def get_q(self):
+        return 1.
+
+    def get_CvoR(self):
+        return 0.
+
+    def get_CpoR(self):
+        return 0.
+
+    def get_SoR(self):
+        return 0.
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

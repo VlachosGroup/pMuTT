@@ -677,7 +677,7 @@ class EinsteinVib:
     def get_ZPE(self):
         """Calculates the zero point energy
 
-        :math:`u^0_E=u+\\frac{3}{2}\\Theta_Ek_B`
+        :math:`u^0_E=u+\\frac{3}{2}\\Theta_E k_B`
 
         Returns
         -------
