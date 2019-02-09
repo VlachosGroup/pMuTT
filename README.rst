@@ -27,7 +27,8 @@ Dependencies
    calculate thermodynamic properties
 -  `Numpy`_: Used for vector and matrix operations
 -  `Pandas`_: Used to import data from Excel files
--  `SciPy`_: Used for fitting heat capacities.
+-  `SciPy`_: Used for fitting heat capacities and generating smooth curves for
+             reaction coordinate diagram
 -  `Matplotlib`_: Used for plotting thermodynamic data
 
 Getting Started

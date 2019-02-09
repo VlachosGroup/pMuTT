@@ -5,7 +5,8 @@ import re
 import numpy as np
 from scipy import interpolate
 from matplotlib import pyplot as plt
-from pMuTT import _force_pass_arguments, _pass_expected_arguments, _is_iterable
+from pMuTT import (_force_pass_arguments, _pass_expected_arguments, 
+    _is_iterable, _get_specie_kwargs)
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
@@ -65,17 +66,18 @@ class Reaction:
                  transition_state=None, transition_state_stoich=None,
                  bep=None, **kwargs):
         # If any of the entries were not iterable, assign them to a list
-        if not _is_iterable(reactants):
+        if not _is_iterable(reactants) and reactants is not None:
             reactants = [reactants]
-        if not _is_iterable(reactants_stoich):
+        if not _is_iterable(reactants_stoich) and reactants_stoich is not None:
             reactants_stoich = [reactants_stoich]
-        if not _is_iterable(products):
+        if not _is_iterable(products) and products is not None:
             products = [products]
-        if not _is_iterable(products_stoich):
+        if not _is_iterable(products_stoich) and products_stoich is not None:
             products_stoich = [products_stoich]
-        if not _is_iterable(transition_state):
+        if not _is_iterable(transition_state) and transition_state is not None:
             transition_state = [transition_state]
-        if not _is_iterable(transition_state_stoich):
+        if not _is_iterable(transition_state_stoich) \
+           and transition_state_stoich is not None:
             transition_state_stoich = [transition_state_stoich]
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
@@ -120,7 +122,7 @@ class Reaction:
                              'Product count: {}'.format(reactant_elements,
                                                         product_elements))
 
-        if None not in self.transition_state:
+        if self.transition_state is not None:
             TS_elements = _count_elements(self.transition_state,
                                           self.transition_state_stoich)
             if reactant_elements != TS_elements:
@@ -153,9 +155,7 @@ class Reaction:
         for specie in self.products:
             species[getattr(specie, key)] = specie
         # Add transition state if desired
-        if include_TS \
-           and self.transition_state is not None \
-           and None not in self.transition_state:
+        if include_TS and self.transition_state is not None:
             for specie in self.transition_state:
                 species[getattr(specie, key)] = specie
 
@@ -1134,7 +1134,7 @@ class Reaction:
         """
         method = method.lower()
         if method == 'any':
-            if None not in self.transition_state:
+            if self.transition_state is not None:
                 return self.get_delta_HoRT(rev=rev, activation=True, **kwargs)
             else:
                 return self.bep.get_EoRT_act(rev=rev, **kwargs)
@@ -1281,6 +1281,11 @@ class Reaction:
         for specie, stoich in zip(species, stoich):
             # Process the inputs and methods for each specie
             specie_kwargs = _get_specie_kwargs(specie.name, **kwargs)
+            try:
+                specie_kwargs['specie'] = kwargs['specie']
+            except KeyError:
+                pass
+
             method = getattr(specie, method_name)
             if method_name == 'get_q':
                 state_quantity *= \
@@ -1373,7 +1378,8 @@ class Reaction:
                    transition_state=ts, transition_state_stoich=ts_stoich,
                    **kwargs)
 
-    def to_string(self, species_delimiter='+', reaction_delimiter='='):
+    def to_string(self, species_delimiter='+', reaction_delimiter='=',
+                  include_TS=True):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1382,6 +1388,8 @@ class Reaction:
                 Separates species. Default is '+'
             reaction_delimiter : str, optional
                 Separates reaction states. Default is '='
+            include_TS : bool, optional
+                If True, includes transition states in output. Default is True
         Returns
         -------
             reaction_str : str
@@ -1394,11 +1402,12 @@ class Reaction:
         reaction_str += reaction_delimiter
 
         # Write transition state if any
-        reaction_str += _write_reaction_state(
-                species=self.transition_state,
-                stoich=self.transition_state_stoich,
-                species_delimiter=species_delimiter)
-        reaction_str += reaction_delimiter
+        if include_TS and self.transition_state is not None:
+            reaction_str += _write_reaction_state(
+                    species=self.transition_state,
+                    stoich=self.transition_state_stoich,
+                    species_delimiter=species_delimiter)
+            reaction_str += reaction_delimiter
 
         # Write products
         reaction_str += _write_reaction_state(species=self.products,
@@ -1414,21 +1423,42 @@ class Reaction:
             obj_dict : dict
         """
         obj_dict = {
-            'class': str(self.__class__),
-            'reactants': [reactant.to_dict() for reactant in self.reactants],
-            'reactants_stoich': list(self.reactants_stoich),
-            'products': [product.to_dict() for product in self.products],
-            'products_stoich': list(self.products_stoich),
-            }
-        try:
-            obj_dict['transition_state'] = [ts.to_dict()
-                                            for ts in self.transition_state]
-        except (AttributeError, TypeError):
-            obj_dict['transition_state'] = self.transition_state
-            obj_dict['transition_state_stoich'] = self.transition_state_stoich
+            'class': str(self.__class__)}
+        # Reactants
+        if _is_iterable(self.reactants):
+            obj_dict['reactants'] = \
+                    [reactant.to_dict() for reactant in self.reactants]
         else:
+            obj_dict['reactants'] = self.reactants
+        # Reactants stoichiometry
+        if _is_iterable(self.reactants_stoich):
+            obj_dict['reactants_stoich'] = list(self.reactants_stoich)
+        else:
+            obj_dict['reactants_stoich'] = self.reactants_stoich
+        # Products
+        if _is_iterable(self.products):
+            obj_dict['products'] = \
+                    [product.to_dict() for product in self.products]
+        else:
+            obj_dict['products'] = self.products
+        # Product stoichiometry
+        if _is_iterable(self.products_stoich):
+            obj_dict['products_stoich'] = list(self.products_stoich)
+        else:
+            obj_dict['products_stoich'] = self.products_stoich
+        # Transition state
+        if _is_iterable(self.transition_state):
+            obj_dict['transition_state'] = \
+                    [ts.to_dict() for ts in self.transition_state]
+        else:
+            obj_dict['transition_state'] = self.transition_state
+        # Transition state stoich
+        if _is_iterable(self.transition_state_stoich):
             obj_dict['transition_state_stoich'] = \
                     list(self.transition_state_stoich)
+        else:
+            obj_dict['transition_state_stoich'] = self.transition_state_stoich
+        # BEP
         try:
             obj_dict['bep'] = self.bep.to_dict()
         except (AttributeError, TypeError):
@@ -1480,6 +1510,13 @@ class Reactions:
             # If other doesn't have to_dict method, is not equal
             return False
         return self.to_dict() == other_dict
+
+    def __iter__(self):
+        for reaction in self.reactions:
+            yield reaction
+
+    def __len__(self):
+        return len(self.reactions)
 
     def get_species(self, include_TS=True, key='name'):
         """Returns the unique species included in the reactions.
@@ -1622,7 +1659,7 @@ class Reactions:
                         - ref
 
             '''Calculate properties for TS if necessary'''
-            if include_TS and None not in reaction.transition_state:
+            if include_TS and reaction.transition_state is not None:
                 x += x_offset
                 y_TS = reaction.get_state_quantity(method_name=method_name,
                                                    state='transition state',
@@ -1904,46 +1941,6 @@ def _get_molecularity(stoich):
             Molecularity of reaction
     """
     return np.sum(stoich)
-
-
-def _get_specie_kwargs(specie_name, **kwargs):
-    """Gets the keyword arguments specific to a specie
-
-    Parameters
-    ----------
-        specie_name : str
-            Name of the specie
-        kwargs : keyword arguments
-            Parameters with the conditions. Specie specific parameters can be
-            passed by having a key named 'specie' mapping onto a dictionary
-            whose keys are the species names.
-
-            e.g. For the reaction: H2 + 0.5O2 = H2O
-            kwargs = {
-                'T': 298.,
-                'specie': {
-                    'H2': {
-                        'P': 1.,
-                    },
-                    'O2': {
-                        'P': 0.5,
-                    },
-                }
-            }
-    Returns
-    -------
-        specie_kwargs : dict
-            Dictionary containing the specie-specific kwargs
-    """
-    specie_kwargs = kwargs.copy()
-    specie_specific = specie_kwargs.pop('specie', None)
-    # See if there was an entry for the specific species
-    try:
-        specie_kwargs.update(specie_specific[specie_name])
-    except (KeyError, TypeError, NameError):
-        pass
-    return specie_kwargs
-
 
 def _get_states(rev, activation):
     """Determines the initial state and the final state based on boolean inputs

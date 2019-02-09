@@ -71,7 +71,8 @@ class TestReaction(unittest.TestCase):
                      'notes': None,
                      'phase': None,
                      'references': None,
-                     'statmech_model': None}],
+                     'statmech_model': None,
+                     'mix_models': None}],
                      'products_stoich': [1.0],
                      'reactants': [
                     {'T_high': 3500.0,
@@ -99,7 +100,8 @@ class TestReaction(unittest.TestCase):
                      'notes': None,
                      'phase': None,
                      'references': None,
-                     'statmech_model': None},
+                     'statmech_model': None,
+                     'mix_models': None},
                     {'T_high': 3500.0,
                      'T_low': 200.0,
                      'T_mid': 1000.0,
@@ -125,10 +127,11 @@ class TestReaction(unittest.TestCase):
                      'notes': None,
                      'phase': None,
                      'references': None,
-                     'statmech_model': None}],
+                     'statmech_model': None,
+                     'mix_models': None}],
                 'reactants_stoich': [1.0, 0.5],
-                'transition_state': [None],
-                'transition_state_stoich': [None],
+                'transition_state': None,
+                'transition_state_stoich': None,
                 'bep': None}
 
         '''Reactions using StatMech'''
