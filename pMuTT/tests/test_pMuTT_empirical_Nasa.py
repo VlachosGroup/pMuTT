@@ -41,6 +41,7 @@ class TestNasa(unittest.TestCase):
             'notes': None,
             'references': None,
             'statmech_model': None,
+            'mix_models': None,
         }
 
         self.Nasa_data = Nasa.from_data(

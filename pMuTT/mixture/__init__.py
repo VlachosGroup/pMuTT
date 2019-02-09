@@ -29,7 +29,8 @@ def _get_mix_quantity(mix_models, method_name, raise_error=True,
         default_value : float, optional
             Default value if the object does not contain the method. Default is
             0
-                    
+        kwargs : key-word arguments
+            Arguments to calculate mixture model properties, if any                    
     Returns
     -------
         mix_quantity : (N,) `numpy.ndarray`_
@@ -38,6 +39,10 @@ def _get_mix_quantity(mix_models, method_name, raise_error=True,
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
+    # Return default value if no mixture models exist
+    if mix_models is None:
+        return np.array([default_value])
+
     # Calculate contribution from mixing models if any
     mix_quantity = np.full_like(a=mix_models, fill_value=default_value)
     for i, mix_model in enumerate(mix_models):

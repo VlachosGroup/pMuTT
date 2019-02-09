@@ -141,7 +141,7 @@ class StatMech:
         # because all the models will have the same attributes. Figure out a way
         # to pass them. Perhaps have a dictionary that contains the attributes
         # separated by species
-        if not _is_iterable(mix_models):
+        if not _is_iterable(mix_models) and mix_models is not None:
             mix_models = [mix_models]
         self.mix_models = mix_models 
 
@@ -192,32 +192,33 @@ class StatMech:
             raise ValueError('Operation: {} not supported'.format(operation))
 
         # Calculate the quantity for each mode
+        specie_kwargs = _get_specie_kwargs(specie_name=self.name, **kwargs)
         quantity = np.array([
             _get_mode_quantity(mode=self.trans_model, method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning, 
                                default_value=default_value,
-                               **kwargs),
+                               **specie_kwargs),
             _get_mode_quantity(mode=self.vib_model, method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning, 
                                default_value=default_value,
-                               **kwargs),
+                               **specie_kwargs),
             _get_mode_quantity(mode=self.rot_model, method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning, 
                                default_value=default_value,
-                               **kwargs),
+                               **specie_kwargs),
             _get_mode_quantity(mode=self.elec_model, method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning, 
                                default_value=default_value,
-                               **kwargs),
+                               **specie_kwargs),
             _get_mode_quantity(mode=self.nucl_model, method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning, 
                                default_value=default_value,
-                               **kwargs)])
+                               **specie_kwargs)])
         # Calculate contribution from mixing models if any
         mix_quantity = _get_mix_quantity(mix_models=self.mix_models,
                                          method_name=method_name,
@@ -396,7 +397,9 @@ class StatMech:
         Parameters
         ----------
             T : float, optional
-                Temperature in K. Default is 298.15 K
+                Temperature in K. If the electronic mode is
+                :class:`~pMuTT.statmech.elec.IdealElec`, then the output is
+                insensitive to this input. Default is 298.15 K
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
             raise_error : bool, optional
@@ -437,7 +440,9 @@ class StatMech:
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
             T : float, optional
-                Temperature in K. Default is 298.15 K
+                Temperature in K. If the electronic mode is
+                :class:`~pMuTT.statmech.elec.IdealElec`, then the output is
+                insensitive to this input. Default is 298.15 K
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
             raise_error : bool, optional
@@ -804,9 +809,13 @@ class StatMech:
             'elec_model': self.elec_model.to_dict(),
             'nucl_model': self.nucl_model.to_dict(),
             'notes': self.notes}
-        if None not in self.mix_models:
-            obj_dict['mix_models'] = [mix_model.to_dict() for mix_model in 
-                                                              self.mix_models]
+
+        if _is_iterable(self.mix_models):
+            obj_dict['mix_models'] = \
+                    [mix_model.to_dict() for mix_model in self.mix_models]
+        else:
+            obj_dict['mix_models'] = self.mix_models
+
         return obj_dict
 
     @classmethod
