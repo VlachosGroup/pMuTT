@@ -1117,10 +1117,12 @@ class Reaction:
                 Method to use to calculate dimensionless activation energy.
                 Accepted options:
 
-                - 'any' (uses whichever is available. ``self.transition_state``
-                  is used preferentially over ``self.BEP``)
+                - 'any' (uses whichever is available. First uses transition
+                  state theory, then BEPs, then the reaction enthalpy)
                 - 'bep' (uses ``self.bep``)
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
+                - 'enthalpy' (uses the enthalpy of the reaction. If the reaction
+                  is exothermic, returns 0)
 
                 Default is 'any'.
             kwargs : keyword arguments
@@ -1133,20 +1135,28 @@ class Reaction:
                 and transition state
         """
         method = method.lower()
+        # Assign the appropriate method is 'any' was specified
         if method == 'any':
             if self.transition_state is not None:
-                return self.get_delta_HoRT(rev=rev, activation=True, **kwargs)
+                method = 'transition_state'
+            elif self.bep is not None:
+                method = 'bep'
             else:
-                return self.bep.get_EoRT_act(rev=rev, **kwargs)
+                method = 'enthalpy'
+        
+        if method == 'transition_state' or method == 'ts':
+            EoRT = self.get_delta_HoRT(rev=rev, activation=True, **kwargs)
         elif method == 'bep':
-            return self.bep.get_EoRT_act(rev=rev, **kwargs)
-        elif method == 'transition state' or method == 'ts':
-            return self.get_delta_HoRT(rev=rev, activation=True, **kwargs)
+            EoRT = self.bep.get_EoRT_act(rev=rev, **kwargs)
+        elif method == 'enthalpy':
+            EoRT = np.max([0., self.get_delta_HoRT(rev=rev, activation=False,
+                                                   **kwargs)])
         else:
             raise ValueError(('Method "{}" not supported. See documentation '
                               'of '
                               '``pMuTT.reaction.Reaction.get_EoRT_act`` '
                               'for supported options.'.format(method)))
+        return EoRT
 
     def get_E_act(self, units, T, rev=False, method='any', **kwargs):
         """Gets activation energy between reactants (or products)
@@ -1379,7 +1389,7 @@ class Reaction:
                    **kwargs)
 
     def to_string(self, species_delimiter='+', reaction_delimiter='=',
-                  include_TS=True):
+                  stoich_format='.2f', include_TS=True):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1388,6 +1398,9 @@ class Reaction:
                 Separates species. Default is '+'
             reaction_delimiter : str, optional
                 Separates reaction states. Default is '='
+            stoich_format : float, optional
+                Format to write stoichiometric numbers. Default is '.2f' (float
+                rounded to 2 decimal places)
             include_TS : bool, optional
                 If True, includes transition states in output. Default is True
         Returns
@@ -1398,7 +1411,8 @@ class Reaction:
         # Write reactants
         reaction_str = _write_reaction_state(species=self.reactants,
                                              stoich=self.reactants_stoich,
-                                             species_delimiter=species_delimiter)
+                                             species_delimiter=species_delimiter,
+                                             stoich_format=stoich_format)
         reaction_str += reaction_delimiter
 
         # Write transition state if any
@@ -1406,13 +1420,15 @@ class Reaction:
             reaction_str += _write_reaction_state(
                     species=self.transition_state,
                     stoich=self.transition_state_stoich,
-                    species_delimiter=species_delimiter)
+                    species_delimiter=species_delimiter,
+                    stoich_format=stoich_format)
             reaction_str += reaction_delimiter
 
         # Write products
-        reaction_str += _write_reaction_state(species=self.products,
-                                              stoich=self.products_stoich,
-                                              species_delimiter=species_delimiter)
+        reaction_str += _write_reaction_state(
+                species=self.products, stoich=self.products_stoich,
+                species_delimiter=species_delimiter,
+                stoich_format=stoich_format)
         return reaction_str
 
     def to_dict(self):
@@ -1492,6 +1508,123 @@ class Reaction:
             reaction.bep.set_descriptor(reaction=reaction)
         return reaction
 
+
+class ChemkinReaction(Reaction):
+    """Chemkin reaction. Has additional attributes to support input and output
+
+    Attribues
+    ---------
+        beta : float, optional
+            Power to raise the temperature in the rate expression. Default is 1
+        is_adsorption : bool, optional
+            If True, the reaction represents an adsorption. Default is False
+        sticking_coeff : float, optional
+            Sticking coefficient. Only relevant if ``is_adsorption`` is True
+    """
+
+    def __init__(self, beta=1., is_adsorption=False, sticking_coeff=0.5,
+                 **kwargs):
+        super().__init__(**kwargs)
+        self.beta = beta
+        self.is_adsorption = is_adsorption
+        # Sticking coefficient not relevant for non-adsorption reaction
+        if not self.is_adsorption:
+            sticking_coeff = None
+        self.sticking_coeff = sticking_coeff
+        self.gas_phase = self._is_gas_phase()
+
+    def _is_gas_phase(self):
+        """Determines if a reaction is gas phase
+        
+        Returns
+        -------
+            gas_phase : bool
+               True if all the reactants are gas phase
+        """
+        return all([specie.phase == 'G' for specie in self.reactants])
+
+    def _get_n_surf(self):
+        """Counts the number of surface reactants
+
+        Returns
+        -------
+            n_surf : int
+                Number of surface species
+        """
+        n_surf = 0
+        for specie, stoich in zip(self.reactants, self.reactants_stoich):
+            # Skip species without catalyst site
+            if specie.cat_site is None:
+                continue
+            # Skip bulk species
+            if specie.cat_site.bulk_specie == specie.name:
+                continue
+            # Skip non-surface species
+            if specie.phase != 'S':
+                continue
+            n_surf += stoich
+        return n_surf
+
+    def get_A(self, include_entropy=True, T=c.T0('K'), **kwargs):
+        """Calculates the preexponential factor in the Chemkin format
+        
+        Parameters
+        ----------
+        include_entropy : bool, optional
+            If True, includes the activation entropy. Default is True
+        T : float, optional
+            Temperature in K. Default is 298.15 K
+        """
+        if self.transition_state is None or not include_entropy:
+            A = c.kb('J/K')/c.h('J s')
+        else:
+            A = super().get_A(T=T, **kwargs)/T
+
+        # If this is a surface reaction, adjust for site density
+        if not self.gas_phase:
+            # Uses site with highest site density
+            site_dens = []
+            for reactant in self.reactants:
+                # Skip species without a catalyst site
+                try:
+                    site_den = reactant.cat_site.site_density
+                except AttributeError:
+                    continue
+                # Skip bulk species
+                if reactant.name == reactant.cat_site.bulk_specie:
+                    continue
+                site_dens.append(site_den)             
+
+            max_site_den = np.max(site_dens)
+            n_surf = self._get_n_surf()
+            A = A/max_site_den**(n_surf-1)
+        return A
+
+    def get_delta_GoRT(self, rev=False, activation=False, **kwargs):
+        """Calculates the dimensionless Gibbs energy. If there is no transition
+        state species, calculates the delta dimensionless Gibbs energy
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            activation : bool, optional
+                If True, uses the transition state as the final state. Default
+                is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_GoRT : float
+                Change in Gibbs energy between reactants and products
+        """
+        if self.transition_state is None:
+            activation = False
+        return super().get_delta_GoRT(rev=rev, activation=activation, **kwargs)
+        
 
 class Reactions:
     """Contains multiple reactions. Serves as a parent class for other objects
@@ -1783,7 +1916,7 @@ def _parse_reaction_state(reaction_str, species_delimiter='+'):
     ----------
         reaction_str : str
             Reactant or product state of reaction
-        species_delimiters : str
+        species_delimiter : str
             Delimiter that separate species. Leading and trailing spaces will
             be trimmed. Default is '+'
 
@@ -1875,7 +2008,8 @@ def _parse_reaction(reaction_str, species_delimiter='+',
             transition_state, transition_state_stoich)
 
 
-def _write_reaction_state(species, stoich, species_delimiter='+'):
+def _write_reaction_state(species, stoich, species_delimiter='+',
+                          stoich_format='.2f'):
     """Writes one section of the reaction string
 
     Parameters
@@ -1886,20 +2020,28 @@ def _write_reaction_state(species, stoich, species_delimiter='+'):
             Stoichiometry corresponding to species
         species_delimiter : str, optional
             Delimiter that separates species. Default is '+'
+        stoich_format : float, optional
+            Format to write stoichiometric numbers. Default is '.2f' (float
+            rounded to 2 decimal places)
     Returns
     -------
         reaction_str : str
             One section of the reaction string
     """
+    # Return blank string if no species present for the reaction state
+    if species is None:
+        return ''
+
+    stoich_field = '{:%s}' % stoich_format
     for i, (specie, stoich_val) in enumerate(zip(species, stoich)):
-        if specie is None:
-            reaction_str = ''
-            break
+        # If the coefficient is 1, just write the specie name
         if np.isclose(stoich_val, 1.):
             specie_str = specie.name
         else:
+            stoich_val = stoich_field.format(stoich_val)
             specie_str = '{}{}'.format(stoich_val, specie.name)
 
+        # Specie delimiter only written after the first specie
         if i == 0:
             reaction_str = specie_str
         else:
