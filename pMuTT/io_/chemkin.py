@@ -234,7 +234,7 @@ def write_gas(species, filename='gas.inp', T=c.T0('K'), reactions=[],
     for specie in species:
         for element in specie.elements.keys():
             unique_elements.add(element)
-        if specie.phase == 'G':
+        if specie.phase.upper() == 'G':
             gas_species.append(specie.name)
     unique_elements = list(unique_elements)
 
@@ -284,7 +284,7 @@ def write_surf(species, filename='surf.inp', T=c.T0('K'), reactions=[],
     unique_cat_sites = []
     for specie in species:
         # Skip gas phase species
-        if specie.phase == 'G':
+        if specie.phase.upper() == 'G':
             continue
         # Skip the bulk species
         if specie.cat_site.bulk_specie == specie.name:

@@ -67,7 +67,8 @@ class Nasa(BaseThermo):
         else:
             self.cat_site = cat_site
         if self.cat_site is None:
-            self.n_sites = n_sites
+            n_sites = None
+        self.n_sites = n_sites
 
     def __eq__(self, other):
         try:
@@ -525,6 +526,11 @@ class Nasa(BaseThermo):
         obj_dict['T_low'] = self.T_low
         obj_dict['T_mid'] = self.T_mid
         obj_dict['T_high'] = self.T_high
+        try:
+            obj_dict['cat_site'] = self.cat_site.to_dict()
+        except AttributeError:
+            obj_dict['cat_site'] = None
+        obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
     @classmethod
@@ -541,12 +547,10 @@ class Nasa(BaseThermo):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = \
-            json_to_pMuTT(json_obj['statmech_model'])
-        json_obj['references'] = \
-            json_to_pMuTT(json_obj['references'])
+        json_obj['statmech_model'] = json_to_pMuTT(json_obj['statmech_model'])
+        json_obj['references'] = json_to_pMuTT(json_obj['references'])
+        json_obj['cat_site'] = json_to_pMuTT(json_obj['cat_site'])
         json_obj['mix_models'] = json_to_pMuTT(json_obj['mix_models'])
-        
         return cls(**json_obj)
 
 

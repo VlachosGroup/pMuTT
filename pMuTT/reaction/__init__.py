@@ -1624,7 +1624,21 @@ class ChemkinReaction(Reaction):
         if self.transition_state is None:
             activation = False
         return super().get_delta_GoRT(rev=rev, activation=activation, **kwargs)
-        
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = super().to_dict()
+        obj_dict['beta'] = self.beta
+        obj_dict['is_adsorption'] = self.is_adsorption
+        obj_dict['sticking_coeff'] = self.sticking_coeff
+        obj_dict['gas_phase'] = self.gas_phase
+        return obj_dict
+
 
 class Reactions:
     """Contains multiple reactions. Serves as a parent class for other objects
@@ -1647,6 +1661,9 @@ class Reactions:
     def __iter__(self):
         for reaction in self.reactions:
             yield reaction
+
+    def __getitem__(self, key):
+        return self.reactions[key]
 
     def __len__(self):
         return len(self.reactions)
