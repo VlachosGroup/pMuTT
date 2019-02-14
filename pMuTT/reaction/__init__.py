@@ -136,8 +136,8 @@ class Reaction:
             include_TS : bool, optional
                 Whether transition states should be included. Default is True
             key : str, optional
-                Attribute to use as the key in the output dictionary. Default is
-                name
+                Attribute to use as the key in the output dictionary. Default
+                is name
         Returns
         -------
             species : dict
@@ -1785,13 +1785,13 @@ class Reactions:
         species = {}
         for reaction in self.reactions:
             # Merge the old dictionary with the new dictionary
-            species.update(reaction.get_species(include_TS=include_TS, 
+            species.update(reaction.get_species(include_TS=include_TS,
                                                 key=key))
         return species
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
-        
+
         Returns
         -------
             obj_dict : dict

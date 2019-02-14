@@ -304,11 +304,11 @@ def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
         f_ptr.write('THERMO ALL\n       100       500      1500\n')
         if supp_data is not None:
             f_ptr.write(supp_data)
-            if supp_data[-1] is not '\n':
+            if supp_data[-1] != '\n':
                 f_ptr.write('\n')
         if supp_txt is not None:
             f_ptr.write(supp_txt)
-            if supp_txt[-1] is not '\n':
+            if supp_txt[-1] != '\n':
                 f_ptr.write('\n')
         float_string = '%.8E'
         for nasa_specie in nasa_species:

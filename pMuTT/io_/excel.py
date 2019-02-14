@@ -31,10 +31,10 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             Location to find header names (0-index). Default is 0
         min_frequency_cutoff : float, optional
             Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
-            Only frequencies greater than min_frequency_cutoff are read from 
+            Only frequencies greater than min_frequency_cutoff are read from
             OUTCAR. Default is 0 cm-1
         include_imaginary : bool, optional
-            Applies for the vib_outcar header. Whether or not imaginary 
+            Applies for the vib_outcar header. Whether or not imaginary
             frequencies should be included. Default is False
         delimiter : str, optional
             Delimiter to parse column names. Default is '.'
