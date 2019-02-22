@@ -518,12 +518,13 @@ class TestReaction(unittest.TestCase):
         exp_sm_CvoR_rev_TS = self.H2O_TS_sm.get_CvoR(T=c.T0('K')) \
                              - self.H2O_sm.get_CvoR(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_CvoR(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_CvoR(T=c.T0('K'), act=True),
                 exp_sm_CvoR_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_CvoR(T=c.T0('K'), 
-                                           rev=True,
-                                           activation=True),
+                self.rxn_sm.get_delta_CvoR(T=c.T0('K'), rev=True, act=True),
+                exp_sm_CvoR_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_CvoR_act(T=c.T0('K'), rev=True),
                 exp_sm_CvoR_rev_TS)
 
 
@@ -545,12 +546,14 @@ class TestReaction(unittest.TestCase):
         exp_sm_Cv_rev_TS = self.H2O_TS_sm.get_Cv(T=c.T0('K'), units=units) \
                            - self.H2O_sm.get_Cv(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_Cv(T=c.T0('K'), activation=True, 
-                                         units=units),
+                self.rxn_sm.get_delta_Cv(T=c.T0('K'), act=True, units=units),
                 exp_sm_Cv_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_Cv(T=c.T0('K'), rev=True, units=units,
-                                         activation=True),
+                                         act=True),
+                exp_sm_Cv_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_Cv_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_Cv_rev_TS)
 
 
@@ -562,17 +565,14 @@ class TestReaction(unittest.TestCase):
             - self.H2_sm.get_CpoR(T=c.T0('K')) \
             - self.O2_sm.get_CpoR(T=c.T0('K'))*0.5
         self.assertAlmostEqual(
-                self.rxn_nasa.get_delta_CpoR(T=c.T0('K')),
-                exp_nasa_CpoR)
+                self.rxn_nasa.get_delta_CpoR(T=c.T0('K')), exp_nasa_CpoR)
         self.assertAlmostEqual(
                 self.rxn_nasa.get_delta_CpoR(T=c.T0('K'), rev=True),
                 -exp_nasa_CpoR)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_CpoR(T=c.T0('K')),
-                exp_sm_CpoR)
+                self.rxn_sm.get_delta_CpoR(T=c.T0('K')), exp_sm_CpoR)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_CpoR(T=c.T0('K'), rev=True),
-                -exp_sm_CpoR)
+                self.rxn_sm.get_delta_CpoR(T=c.T0('K'), rev=True), -exp_sm_CpoR)
         
         exp_sm_CpoR_TS = self.H2O_TS_sm.get_CpoR(T=c.T0('K')) \
                          - self.H2_sm.get_CpoR(T=c.T0('K')) \
@@ -580,11 +580,13 @@ class TestReaction(unittest.TestCase):
         exp_sm_CpoR_rev_TS = self.H2O_TS_sm.get_CpoR(T=c.T0('K')) \
                              - self.H2O_sm.get_CpoR(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_CpoR(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_CpoR(T=c.T0('K'), act=True),
                 exp_sm_CpoR_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_CpoR(T=c.T0('K'), rev=True,
-                                           activation=True),
+                self.rxn_sm.get_delta_CpoR(T=c.T0('K'), rev=True, act=True),
+                exp_sm_CpoR_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_CpoR_act(T=c.T0('K'), rev=True),
                 exp_sm_CpoR_rev_TS)
 
     def test_get_delta_Cp(self):
@@ -614,12 +616,15 @@ class TestReaction(unittest.TestCase):
         exp_sm_Cp_rev_TS = self.H2O_TS_sm.get_Cp(T=c.T0('K'), units=units) \
                            - self.H2O_sm.get_Cp(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_Cp(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_Cp(T=c.T0('K'), act=True, 
                                          units=units),
                 exp_sm_Cp_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_Cp(T=c.T0('K'), rev=True,
-                                         activation=True, units=units),
+                self.rxn_sm.get_delta_Cp(T=c.T0('K'), rev=True, act=True, 
+                                         units=units),
+                exp_sm_Cp_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_Cp_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_Cp_rev_TS)
 
     def test_get_delta_EoRT(self):
@@ -639,11 +644,11 @@ class TestReaction(unittest.TestCase):
         exp_sm_EoRT_rev_TS = self.H2O_TS_sm.get_EoRT(T=c.T0('K')) \
                              - self.H2O_sm.get_EoRT(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_EoRT(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_EoRT(T=c.T0('K'), act=True),
                 exp_sm_EoRT_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_EoRT(T=c.T0('K'), rev=True,
-                                           activation=True),
+                                           act=True),
                 exp_sm_EoRT_rev_TS)
 
     def test_get_delta_E(self):
@@ -664,12 +669,12 @@ class TestReaction(unittest.TestCase):
         exp_sm_E_rev_TS = self.H2O_TS_sm.get_E(T=c.T0('K'), units=units) \
                           - self.H2O_sm.get_E(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_E(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_E(T=c.T0('K'), act=True, 
                                         units=units),
                 exp_sm_E_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_E(T=c.T0('K'), rev=True,
-                                        activation=True, units=units),
+                                        act=True, units=units),
                 exp_sm_E_rev_TS)
 
     def test_get_delta_UoRT(self):
@@ -689,11 +694,13 @@ class TestReaction(unittest.TestCase):
         exp_sm_UoRT_rev_TS = self.H2O_TS_sm.get_UoRT(T=c.T0('K')) \
                              - self.H2O_sm.get_UoRT(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_UoRT(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_UoRT(T=c.T0('K'), act=True),
                 exp_sm_UoRT_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_UoRT(T=c.T0('K'), rev=True,
-                                           activation=True),
+                self.rxn_sm.get_delta_UoRT(T=c.T0('K'), rev=True, act=True),
+                exp_sm_UoRT_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_UoRT_act(T=c.T0('K'), rev=True),
                 exp_sm_UoRT_rev_TS)
 
 
@@ -715,12 +722,15 @@ class TestReaction(unittest.TestCase):
         exp_sm_U_rev_TS = self.H2O_TS_sm.get_U(T=c.T0('K'), units=units) \
                           - self.H2O_sm.get_U(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_U(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_U(T=c.T0('K'), act=True, 
                                          units=units),
                 exp_sm_U_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_U(T=c.T0('K'), rev=True,
-                                         activation=True, units=units),
+                self.rxn_sm.get_delta_U(T=c.T0('K'), rev=True, act=True,
+                                        units=units),
+                exp_sm_U_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_U_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_U_rev_TS)
 
 
@@ -750,11 +760,13 @@ class TestReaction(unittest.TestCase):
         exp_sm_HoRT_rev_TS = self.H2O_TS_sm.get_HoRT(T=c.T0('K')) \
                              - self.H2O_sm.get_HoRT(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_HoRT(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_HoRT(T=c.T0('K'), act=True),
                 exp_sm_HoRT_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_HoRT(T=c.T0('K'), rev=True,
-                                           activation=True),
+                self.rxn_sm.get_delta_HoRT(T=c.T0('K'), rev=True, act=True),
+                exp_sm_HoRT_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_HoRT_act(T=c.T0('K'), rev=True),
                 exp_sm_HoRT_rev_TS)
 
 
@@ -785,12 +797,15 @@ class TestReaction(unittest.TestCase):
         exp_sm_H_rev_TS = self.H2O_TS_sm.get_H(T=c.T0('K'), units=units) \
                            - self.H2O_sm.get_H(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_H(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_H(T=c.T0('K'), act=True, 
                                          units=units),
                 exp_sm_H_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_H(T=c.T0('K'), rev=True,
-                                         activation=True, units=units),
+                                         act=True, units=units),
+                exp_sm_H_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_H_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_H_rev_TS)
 
     def test_get_delta_SoR(self):
@@ -819,11 +834,14 @@ class TestReaction(unittest.TestCase):
         exp_sm_SoR_rev_TS = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
                             - self.H2O_sm.get_SoR(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_SoR(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_SoR(T=c.T0('K'), act=True),
                 exp_sm_SoR_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_SoR(T=c.T0('K'), rev=True,
-                                          activation=True),
+                                          act=True),
+                exp_sm_SoR_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_SoR_act(T=c.T0('K'), rev=True),
                 exp_sm_SoR_rev_TS)
 
     def test_get_delta_S(self):
@@ -853,12 +871,15 @@ class TestReaction(unittest.TestCase):
         exp_sm_S_rev_TS = self.H2O_TS_sm.get_S(T=c.T0('K'), units=units) \
                            - self.H2O_sm.get_S(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_S(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_S(T=c.T0('K'), act=True, 
                                          units=units),
                 exp_sm_S_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_S(T=c.T0('K'), rev=True,
-                                         activation=True, units=units),
+                                         act=True, units=units),
+                exp_sm_S_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_S_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_S_rev_TS)
 
     def test_get_delta_FoRT(self):
@@ -878,11 +899,13 @@ class TestReaction(unittest.TestCase):
         exp_sm_FoRT_rev_TS = self.H2O_TS_sm.get_FoRT(T=c.T0('K')) \
                              - self.H2O_sm.get_FoRT(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_FoRT(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_FoRT(T=c.T0('K'), act=True),
                 exp_sm_FoRT_TS)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_FoRT(T=c.T0('K'), rev=True,
-                                           activation=True),
+                self.rxn_sm.get_delta_FoRT(T=c.T0('K'), rev=True, act=True),
+                exp_sm_FoRT_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_FoRT_act(T=c.T0('K'), rev=True),
                 exp_sm_FoRT_rev_TS)
 
     def test_get_delta_F(self):
@@ -903,12 +926,15 @@ class TestReaction(unittest.TestCase):
         exp_sm_F_rev_TS = self.H2O_TS_sm.get_F(T=c.T0('K'), units=units) \
                            - self.H2O_sm.get_F(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_F(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_F(T=c.T0('K'), act=True, 
                                          units=units),
                 exp_sm_F_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_F(T=c.T0('K'), rev=True,
-                                         activation=True, units=units),
+                                         act=True, units=units),
+                exp_sm_F_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_F_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_F_rev_TS)
 
     def test_get_delta_GoRT(self):
@@ -937,11 +963,14 @@ class TestReaction(unittest.TestCase):
         exp_sm_GoRT_rev_TS = self.H2O_TS_sm.get_GoRT(T=c.T0('K')) \
                              - self.H2O_sm.get_GoRT(T=c.T0('K'))
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_GoRT(T=c.T0('K'), activation=True),
+                self.rxn_sm.get_delta_GoRT(T=c.T0('K'), act=True),
                 exp_sm_GoRT_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_GoRT(T=c.T0('K'), rev=True,
-                                           activation=True),
+                                           act=True),
+                exp_sm_GoRT_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_GoRT_act(T=c.T0('K'), rev=True),
                 exp_sm_GoRT_rev_TS)
 
 
@@ -972,12 +1001,15 @@ class TestReaction(unittest.TestCase):
         exp_sm_G_rev_TS = self.H2O_TS_sm.get_G(T=c.T0('K'), units=units) \
                            - self.H2O_sm.get_G(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
-                self.rxn_sm.get_delta_G(T=c.T0('K'), activation=True, 
+                self.rxn_sm.get_delta_G(T=c.T0('K'), act=True, 
                                          units=units),
                 exp_sm_G_TS)
         self.assertAlmostEqual(
                 self.rxn_sm.get_delta_G(T=c.T0('K'), rev=True,
-                                         activation=True, units=units),
+                                         act=True, units=units),
+                exp_sm_G_rev_TS)
+        self.assertAlmostEqual(
+                self.rxn_sm.get_G_act(T=c.T0('K'), rev=True, units=units),
                 exp_sm_G_rev_TS)
 
     def test_get_EoRT_act(self):
