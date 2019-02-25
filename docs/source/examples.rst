@@ -6,6 +6,30 @@ This page and its subpages show some examples using the pMuTT code. All the
 codes listed here are available in the `examples folder`_ as Jupyter notebooks 
 (*.ipynb) and ordinary Python scripts (*.py). 
 
+Overview
+--------
+
+- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.ipynb>`_
+- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.py>`_
+
+
+Topics Covered
+^^^^^^^^^^^^^^
+
+- Using constants and converting units using the :mod:`~pMuTT.constants` module
+- Initializing :class:`~pMuTT.statmech.StatMech` objects by specifying all modes
+  and by using :ref:`presets`
+- Initializing empirical objects such as :class:`~pMuTT.empirical.nasa.Nasa`
+  objects using a :class:`~pMuTT.statmech.StatMech` object or from a previously
+  generated Nasa polynomial
+- Initializing :class:`~pMuTT.empirical.references.Reference` and
+  :class:`~pMuTT.empirical.references.References` objects to adjust DFT's
+  reference to more traditional references
+- Input (via Excel) and output :class:`~pMuTT.empirical.nasa.Nasa` polynomials
+  to thermdat format
+- Initializing :class:`~pMuTT.reaction.Reaction` objects from strings
+
+
 Experimental to Empirical
 -------------------------
 - `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb>`_
