@@ -8,7 +8,7 @@ import inspect
 import warnings
 import numpy as np
 from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-    _get_specie_kwargs, _apply_operation)
+    _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.mixture import _get_mix_quantity
@@ -231,8 +231,8 @@ class StatMech:
                                          **kwargs)
         # Add mixing quantities onto quantity
         quantity = np.concatenate([quantity, mix_quantity])
-        quantity = _apply_operation(quantity, verbose=verbose, 
-                                    operation=operation)
+        quantity = _apply_numpy_operation(quantity, verbose=verbose, 
+                                          operation=operation)
         return quantity
 
     def get_q(self, verbose=False, raise_error=True, raise_warning=True,

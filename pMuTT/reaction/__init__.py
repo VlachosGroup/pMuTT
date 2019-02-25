@@ -6,7 +6,7 @@ import numpy as np
 from scipy import interpolate
 from matplotlib import pyplot as plt
 from pMuTT import (_force_pass_arguments, _pass_expected_arguments, 
-    _is_iterable, _get_specie_kwargs)
+    _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
@@ -1732,7 +1732,7 @@ class Reaction:
                    **kwargs)
 
     def to_string(self, species_delimiter='+', reaction_delimiter='=',
-                  stoich_format='.2f', include_TS=True):
+                  stoich_format='.2f', include_TS=True, key='name'):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1746,6 +1746,8 @@ class Reaction:
                 rounded to 2 decimal places)
             include_TS : bool, optional
                 If True, includes transition states in output. Default is True
+            key : str, optional
+                Attribute to use to print out species. Default is name
         Returns
         -------
             reaction_str : str
@@ -1755,7 +1757,8 @@ class Reaction:
         reaction_str = _write_reaction_state(species=self.reactants,
                                              stoich=self.reactants_stoich,
                                              species_delimiter=species_delimiter,
-                                             stoich_format=stoich_format)
+                                             stoich_format=stoich_format,
+                                             key=key)
         reaction_str += reaction_delimiter
 
         # Write transition state if any
@@ -1764,14 +1767,16 @@ class Reaction:
                     species=self.transition_state,
                     stoich=self.transition_state_stoich,
                     species_delimiter=species_delimiter,
-                    stoich_format=stoich_format)
+                    stoich_format=stoich_format,
+                    key=key)
             reaction_str += reaction_delimiter
 
         # Write products
         reaction_str += _write_reaction_state(
                 species=self.products, stoich=self.products_stoich,
                 species_delimiter=species_delimiter,
-                stoich_format=stoich_format)
+                stoich_format=stoich_format,
+                key=key)
         return reaction_str
 
     def to_dict(self):
@@ -1908,7 +1913,8 @@ class ChemkinReaction(Reaction):
             n_surf += stoich
         return n_surf
 
-    def get_A(self, include_entropy=True, T=c.T0('K'), **kwargs):
+    def get_A(self, sden_operation, include_entropy=True, T=c.T0('K'), 
+              **kwargs):
         """Calculates the preexponential factor in the Chemkin format
         
         Parameters
@@ -1938,10 +1944,38 @@ class ChemkinReaction(Reaction):
                     continue
                 site_dens.append(site_den)             
 
-            max_site_den = np.min(site_dens)
+            # Apply the operation to the site densities
+            eff_site_den = _apply_numpy_operation(quantity=site_dens,
+                                                  operation=sden_operation,
+                                                  verbose=False)
             n_surf = self._get_n_surf()
-            A = A/max_site_den**(n_surf-1)
+            A = A/eff_site_den**(n_surf-1)
         return A
+
+    def get_HoRT_act(self, rev=False, **kwargs):
+        """Calculates the dimensionless enthalpy. If there is no transition
+        state species, calculates the delta dimensionless Gibbs energy
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            HoRT_act : float
+                Change in Gibbs energy between reactants/products and the
+                transition state
+        """
+        if self.transition_state is None:
+            act = False
+        else:
+            act = True
+        return np.max([0., super().get_delta_HoRT(rev=rev, act=act, **kwargs)])
 
     def get_delta_GoRT(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
@@ -1961,14 +1995,15 @@ class ChemkinReaction(Reaction):
                 species.
         Returns
         -------
-            delta_GoRT : float
-                Change in Gibbs energy between reactants and products
+            GoRT_act : float
+                Change in Gibbs energy between reactants/products and the
+                transition state
         """
         if self.transition_state is None:
             act = False
-        return np.max([0., super().get_delta_GoRT(rev=rev, 
-                                                 act=act,
-                                                 **kwargs)])
+        else:
+            act = True
+        return np.max([0., super().get_delta_GoRT(rev=rev, act=act, **kwargs)])
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -2300,14 +2335,25 @@ def _parse_reaction_state(reaction_str, species_delimiter='+'):
         stoich_search = re.search(r'^\d+\.?\d*', specie)
         if stoich_search is None:
             # No stoichiometric coefficient so assign 1.
-            species.append(specie.strip())
-            stoichiometry.append(1.)
+            specie = specie.strip()
+            specie_stoich = 1.
+            # species.append(specie.strip())
+            # stoichiometry.append(1.)
         else:
             # Stoichiometric coefficient present
             specie_stoich = stoich_search.group()
             trim_len = len(specie_stoich)
-            species.append(specie[trim_len:].strip())
-            stoichiometry.append(float(specie_stoich))
+            specie = specie[trim_len:].strip()
+            specie_stoich = float(specie_stoich)
+        # If the specie already exists, add its coefficient to existing amount.
+        # Otherwise, append the new specie and its stoichiometry
+        try:
+            i = species.index(specie)
+        except ValueError:
+            species.append(specie)
+            stoichiometry.append(specie_stoich)
+        else:
+            stoichiometry[i] += specie_stoich
     return (species, stoichiometry)
 
 
@@ -2371,7 +2417,7 @@ def _parse_reaction(reaction_str, species_delimiter='+',
 
 
 def _write_reaction_state(species, stoich, species_delimiter='+',
-                          stoich_format='.2f'):
+                          stoich_format='.2f', key='name'):
     """Writes one section of the reaction string
 
     Parameters
@@ -2385,6 +2431,8 @@ def _write_reaction_state(species, stoich, species_delimiter='+',
         stoich_format : float, optional
             Format to write stoichiometric numbers. Default is '.2f' (float
             rounded to 2 decimal places)
+        key : str, optional
+            Attribute to display species. Default is name
     Returns
     -------
         reaction_str : str
@@ -2398,10 +2446,10 @@ def _write_reaction_state(species, stoich, species_delimiter='+',
     for i, (specie, stoich_val) in enumerate(zip(species, stoich)):
         # If the coefficient is 1, just write the specie name
         if np.isclose(stoich_val, 1.):
-            specie_str = specie.name
+            specie_str = getattr(specie, key)
         else:
             stoich_val = stoich_field.format(stoich_val)
-            specie_str = '{}{}'.format(stoich_val, specie.name)
+            specie_str = '{}{}'.format(stoich_val, getattr(specie, key))
 
         # Specie delimiter only written after the first specie
         if i == 0:

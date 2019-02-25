@@ -30,6 +30,7 @@ class CatSite:
             obj_dict : dict
         """
         return {'class': str(self.__class__),
+                'name': self.name,
                 'site_density': self.site_density,
                 'density': self.density,
                 'bulk_specie': self.bulk_specie,}

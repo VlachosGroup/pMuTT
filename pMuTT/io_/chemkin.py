@@ -106,27 +106,32 @@ def read_reactions(filename, species=None):
     else:
         return(Reactions, Reactants, React_stoic, Products, Prod_stoic)
 
-def write_EAs(reactions, conditions, filename='EAs.inp', 
-              method_name='get_EoRT_act', float_format=' .2E',
-              species_delimiter='+', reaction_delimiter='<=>',
-              stoich_format='.0f', newline='\n', column_delimiter='  '):
-    """Writes the EAs.inp file for Chemkin
+def write_EA(reactions, conditions, write_gas_phase=False, 
+             filename='EAs.inp', act_method_name='get_EoRT_act', 
+             float_format=' .2E', species_delimiter='+', 
+             reaction_delimiter='<=>', stoich_format='.0f', newline='\n',
+             column_delimiter='  '):
+    """Writes the EAs.inp or EAg.inp file for Chemkin
 
     Parameters
     ---------- 
-        reactions : :class:`~pMuTT.reaction.Reactions` object
+        reactions : list of :class:`~pMuTT.reaction.ChemkinReaction` objects
             Reactions to write
         conditions : list of dicts
             Conditions to evaluate each reaction. The key of the dictionaries
             should be a relevant quantity to evaluate the reaction (e.g. T, P)
+        write_gas_phase : bool, optional
+            If True, only gas phase reactions are written (including
+            adsorption). If False, only surface phase reactions are written.
+            Default is False
         filename : str, optional
             Filename for the EAs.inp file. Default is 'EAs.inp'
         method_name : str, optional
             Method to use to calculate values. Typical values are:
 
             - 'get_EoRT_act' (default)
-            - 'get_delta_HoRT'
-            - 'get_delta_GoRT'
+            - 'get_HoRT_act'
+            - 'get_GoRT_act'
 
         float_format : float, optional
             Format to write numbers. Default is ' .2E' (scientific notation
@@ -139,7 +144,18 @@ def write_EAs(reactions, conditions, filename='EAs.inp',
         column_delimiter : str, optional
             Delimiter for columns. Default is '  '
     """
-    n_reactions = len(reactions)
+    valid_reactions = []
+    for reaction in reactions:
+        # Skip gas-phase reactions if we want surface phase
+        if not write_gas_phase and reaction.gas_phase:
+            continue
+        # Skip surface-phase reactions if we want gas phase
+        if write_gas_phase and not reaction.gas_phase:
+            continue
+        valid_reactions.append(reaction)
+        
+
+    n_reactions = len(valid_reactions)
     # Add initial comment help line and number of reactions
     lines = [
         _get_filestamp(),
@@ -151,13 +167,13 @@ def write_EAs(reactions, conditions, filename='EAs.inp',
          'species should'),
         ('!be included in the reaction string with a stoichiometric '
          'coefficient equal to'),
-        ('!the number of times the species appears in the reaction. ',
+        ('!the number of times the species appears in the reaction. '
          'If not using'),
         '!MultiInput, then only the first value is used.',
         '  {}  !Number of reactions'.format(n_reactions)]
 
     # Find length to pad reactions
-    max_rxn_len = _get_max_reaction_len(reactions=reactions,
+    max_rxn_len = _get_max_reaction_len(reactions=valid_reactions,
                                         species_delimiter=species_delimiter,
                                         reaction_delimiter=reaction_delimiter,
                                         stoich_format=stoich_format,
@@ -168,50 +184,30 @@ def write_EAs(reactions, conditions, filename='EAs.inp',
     float_field = '{:%s}' % float_format
     str_field = '{:%d}' % rxn_padding
 
-    # Add comment line showing column numbers
-    column_line = '!{}'.format(' '*(rxn_padding-1))
-    float_field_len = len(float_field.format(np.pi))+len(column_delimiter)
-    column_field = '{:> %d}' % float_field_len
-    for i in range(len(conditions)):
-        column_line += column_field.format(i+1)
+    column_line = _write_column_line(padding=rxn_padding, 
+                                     column_delimiter=column_delimiter,
+                                     float_format=float_format,
+                                     n_conditions=len(conditions))
     lines.append(column_line)
 
     # Add line for each reaction step
-    for reaction in reactions:
+    for reaction in valid_reactions:
         line = [str_field.format(
                     reaction.to_string(species_delimiter=species_delimiter,
                                        reaction_delimiter=reaction_delimiter,
                                        stoich_format=stoich_format,
                                        include_TS=False))]
         for condition in conditions:
-            method = getattr(reaction, method_name)
-
-            # If the transition state does not exist
-            if reaction.transition_state is None:
-                # If function is get_delta_HoRT or get_delta_GoRT, and the 
-                # transition state does not exist, specify this is not a 
-                # transition state calculation
-                if 'delta' in method_name:
-                    condition['activation'] = False
-                quantity = _force_pass_arguments(method, **condition)
-                # If using enthalpies, activation energies have to be positive
-                if method_name == 'get_delta_HoRT':
-                    quantity = np.max([0., quantity])
-            else:
-                # If function is get_delta_HoRT or get_delta_GoRT, specify this
-                # is a transition state calculation
-                if 'delta' in method_name:
-                    condition['activation'] = True
-                quantity = _force_pass_arguments(method, **condition)
-
+            method = getattr(reaction, act_method_name)
+            quantity = _force_pass_arguments(method, **condition)
             line.append(float_field.format(quantity))
         lines.append(column_delimiter.join(line))
     lines.append('EOF')
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
-def write_gas(species, filename='gas.inp', T=c.T0('K'), reactions=[],
-              species_delimiter=' + ', reaction_delimiter=' <=> ',
+def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
+              species_delimiter='+', reaction_delimiter='=',
               act_method_name='get_E_act', act_unit='kcal/mol', 
               float_format=' .3E', stoich_format='.0f', newline='\n',
               column_delimiter='  ', **kwargs):
@@ -219,7 +215,7 @@ def write_gas(species, filename='gas.inp', T=c.T0('K'), reactions=[],
 
     Parameters
     ----------
-        species : list of :class:`~pMuTT.empirical.nasa.Nasa objects
+        nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa objects
             Surface and gas species used in Chemkin mechanism. Used to write
             elements section
         filename : str, optional
@@ -231,7 +227,7 @@ def write_gas(species, filename='gas.inp', T=c.T0('K'), reactions=[],
     # Get unique elements and gas-phase species
     unique_elements = set()
     gas_species = []
-    for specie in species:
+    for specie in nasa_species:
         for element in specie.elements.keys():
             unique_elements.add(element)
         if specie.phase.upper() == 'G':
@@ -245,7 +241,8 @@ def write_gas(species, filename='gas.inp', T=c.T0('K'), reactions=[],
             reaction_delimiter=reaction_delimiter, include_TS=False,
             stoich_format=stoich_format, act_method_name=act_method_name,
             act_unit=act_unit, float_format=float_format, 
-            column_delimiter=column_delimiter, T=T, **kwargs)
+            column_delimiter=column_delimiter, T=T, sden_operation=None,
+            **kwargs)
     # Collect all the lines into a list
     lines = [
         _get_filestamp(),
@@ -274,15 +271,55 @@ def write_gas(species, filename='gas.inp', T=c.T0('K'), reactions=[],
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
-def write_surf(species, filename='surf.inp', T=c.T0('K'), reactions=[],
-               species_delimiter=' + ', reaction_delimiter=' <=> ',
+def write_surf(nasa_species, sden_operation='sum', 
+               filename='surf.inp', T=c.T0('K'), reactions=[],
+               species_delimiter='+', reaction_delimiter='=',
                act_method_name='get_E_act', act_unit='kcal/mol', 
-               float_format=' .3E', stoich_format='.0f', newline='\n',
+               float_format=' .3E', stoich_format='.0f', newline='\n', 
                column_delimiter='  ', use_mw_correction=True, **kwargs):
+    """Writes the surf.inp Chemkin file
+    
+    Parameters
+    ----------
+        nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa` objects
+            Surface used in Chemkin mechanism. If gas-phase species are present,
+            they will be ignored
+        filename : str, optional
+            Filename for surf.inp file. Default is 'surf.inp'
+        T : float, optional
+            Temperature to calculate activation energy. Default is 298.15 K
+        reactions : list of :class:`~pMuTT.reaction.ChemkinReaction` objects
+            Chemkin reactions to write in surf.inp file. Purely gas-phase
+            reactions will be ignored
+        species_delimiter : str, optional
+            Delimiter to separate species when writing reactions. Default is '+'
+        reaction_delimiter : str, optional
+            Delimiter to separate reaction sides. Default is '='
+        act_method_name : str, optional
+            Name of method to use to calculate activation function
+        act_unit : str, optional
+            Units to calculate activation energy. Default is 'kcal/mol'
+        float_format : str, optional
+            String format to print floating numbers. Default is ' .3E' (i.e.
+            scientific notation rounded to 3 decimal places with a leading space
+            for positive numbers)
+        stoich_format : str, optional
+            String format to print stoichiometric coefficients. Default is '.0f'
+            (i.e. integers)
+        newline : str, optional
+            Newline character. Default is the Linux newline character
+        column_delimiter : str, optional
+            Delimiter to separate columns. Default is '  '
+        use_mw_correction : bool, optional
+            If True, uses the Motz-Wise corrections. Default is True
+        kwargs : keyword arguments
+            Parameters needed to calculate activation energy and preexponential
+            factor
+    """
     # Organize species by their catalyst sites
     cat_adsorbates = {}
     unique_cat_sites = []
-    for specie in species:
+    for specie in nasa_species:
         # Skip gas phase species
         if specie.phase.upper() == 'G':
             continue
@@ -324,7 +361,8 @@ def write_surf(species, filename='surf.inp', T=c.T0('K'), reactions=[],
                 reaction_delimiter=reaction_delimiter, include_TS=False,
                 stoich_format=stoich_format, act_method_name=act_method_name,
                 act_unit=act_unit, float_format=float_format, 
-                column_delimiter=column_delimiter, T=T, **kwargs)
+                column_delimiter=column_delimiter, T=T, 
+                sden_operation=sden_operation, **kwargs)
 
     # Preparing reaction line header
     mw_field = '{:<5}'
@@ -365,7 +403,7 @@ def write_surf(species, filename='surf.inp', T=c.T0('K'), reactions=[],
                   '!  sticking coefficient if adsorption reaction',
                   '!- Beta (power to raise T in rate constant expression)',
                   ('!- Ea (Activation Energy or Gibbs energy of activation in '
-                   'kcal/mol'),
+                   'specified units'),
                   ('!Adsorption reactions can be represented using the STICK '
                    'keyword'),
                   'REACTIONS{2}{0}{2}{1}'.format(mw_str, act_unit_str, 
@@ -376,6 +414,132 @@ def write_surf(species, filename='surf.inp', T=c.T0('K'), reactions=[],
     # Write the file
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
+
+def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None, 
+                 filename='T_flow.inp', float_format='.3E', newline='\n',
+                 column_delimiter='  '):
+    """Writes the T_flow.inp Chemkin file
+
+    Parameters
+    ----------
+    T : list of float
+        Temperatures in K. If not specified
+    P : list of float
+        Pressures in atm. If not specified, data will be taken from
+        conditions
+    Q : list of float
+        Volumetric flow rate in cm3/s
+    filename : str, optional
+        Name of the file. Default is T_flow.inp
+    float_format : str, optional
+        Format to write floating point numbers. Default is '.3E' (i.e.
+        scientific notation rounded to 3 decimal places)
+    newline : str, optional
+        Newline character. Default is the Linux newline character
+    column_delimiter : str, optional
+        Delimiter for columns. Default is '  '
+    """
+    line_field = '{:%s}{}{:%s}{}{:%s}{}{:%s}  !{:<3}' % (float_format,
+                                                         float_format,
+                                                         float_format,
+                                                         float_format)
+    lines = [
+        _get_filestamp(),
+        '!Conditions for each reaction run',
+        '!Only used when MultiInput in tube.inp is set to "T"',
+        '!T[K]    {0}P[atm]   {0}Q[cm3/s] {0}abyv[cm-1]{0}Run #'.format(
+            column_delimiter)]
+    for i, (T_i, P_i, Q_i, abyv_i) in enumerate(zip(T, P, Q, abyv)):
+        lines.append(line_field.format(T_i, column_delimiter, 
+                                       P_i, column_delimiter,
+                                       Q_i, column_delimiter,
+                                       abyv_i, i+1))
+    with open(filename, 'w', newline=newline) as f_ptr:
+        f_ptr.write('\n'.join(lines))
+
+def write_tube_mole(mole_frac_conditions, nasa_species, 
+                    filename='tube_mole.inp', float_format=' .3f', newline='\n',
+                    column_delimiter='  '):
+    """Write tube_mole.inp Chemkin file
+    
+    Parameters
+    ----------
+    mole_frac_conditions : list of dict
+        Each dictionary should have the keys as the name of the species and the
+        value as the initial mole fraction
+    nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa` objects
+        Nasa species to find phase information
+    filename : str, optional
+        Name of the file. Default is 'tube_mole.inp'
+    float_format : str, optional
+        Format to write floating point numbers. Default is '.3E' (i.e.
+        scientific notation rounded to 3 decimal places)
+    newline : str, optional
+        Newline character. Default is the Linux newline character
+    column_delimiter : str, optional
+        Delimiter for columns. Default is '  '
+    """
+    # Prepare the float field for printing mole fractions
+    float_field = '{:%s}' % float_format
+
+    # Get relevant species
+    unique_specie_names = set()
+    for mole_fracs in mole_frac_conditions:
+        for specie_name in mole_fracs.keys():
+            unique_specie_names.add(specie_name)
+    # Convert nasa_species to a dict for quicker lookup
+    unique_species = [specie for specie in nasa_species 
+                      if specie.name in unique_specie_names]
+
+    # Find length to pad species
+    max_species_len = _get_max_species_len(species=unique_species,
+                                           ignore_gas_phase=False,
+                                           include_phase=True)
+    species_padding = max_species_len + len(column_delimiter)
+
+    column_line = _write_column_line(padding=species_padding, 
+                                     column_delimiter=column_delimiter,
+                                     float_format=float_format,
+                                     n_conditions=len(mole_frac_conditions))
+    species_lines = []
+    for specie in unique_species:
+        specie_line = _get_specie_str(specie=specie, 
+                                      include_phase=True).ljust(species_padding)
+        print(specie_line)
+        for condition in mole_frac_conditions:
+            # If the mole fraction was not specified, assumed to be 0
+            try:
+                float_str = float_field.format(condition[specie.name])
+            except KeyError:
+                float_str = float_field.format(0.)
+            specie_line = '{}{}{}'.format(specie_line, column_delimiter, 
+                                          float_str)
+        species_lines.append(specie_line)
+
+
+    lines = [
+        _get_filestamp(),
+        "!Specify the 'species/phase/' pair /(in quotes!)/ and the associated",
+        ("!composition values. If the composition does not sum to 1 for each "
+         "phase or"),
+        ("!site type, it will be renormalized to 1. At the end of a " 
+         "calculation, a"),
+        ("!file containing the complete composition and mass flux "
+         "(the last entry) will"),
+        ("!be generated. This file's format is completely compatible with the "
+         "current"),
+        "!input file and can be used to restart that calculation.",
+        ("0       itube_restart -- will be >0 if a restart file is used or 0 "
+         "for the first run"),
+        '{:<3}    Number of nonzero species'.format(len(unique_species)),
+        column_line,
+    ]
+    lines.extend(species_lines)
+    lines.append('EOF')
+
+    with open(filename, 'w', newline=newline) as f_ptr:
+        f_ptr.write('\n'.join(lines))
+
 
 def _get_filestamp():
     """Writes a comment indicating when the file was written by pMuTT"""
@@ -415,15 +579,83 @@ def _get_max_reaction_len(reactions, species_delimiter, reaction_delimiter,
         max_len = max(rxns_len)
     return max_len
 
+def _get_specie_str(specie, include_phase):
+    """Gets the specie string
+
+    Parameters
+    ----------
+        specie : :class:`~pMuTT.empirical.nasa.Nasa` object
+            Specie to use
+        include_phase : bool, optional
+            If True, includes the reaction phase. Default is True
+    Returns
+    -------
+        specie_str : str
+            Species string
+    """
+    if include_phase:
+        if specie.phase.upper() == 'G':
+            phase = '/GAS/'
+        elif specie.cat_site is not None:
+            phase = '/{}/'.format(specie.cat_site.name)
+        else:
+            raise ValueError('Must specify phase or catalyst site to include '
+                             'phase')
+    else:
+        phase = ''
+    return "'{}{}'".format(specie.name, phase)
+
+def _get_max_species_len(species, ignore_gas_phase=False, include_phase=True):
+    """Calculate the maximum species length
+
+    Parameters
+    ----------
+        species : list of :class:`~pMuTT.empirical.nasa.Nasa` objects
+            Species to consider
+        ignore_gas_phase : bool, optional
+            If True, ignores the gas-phase species. Default is False
+        include_phase : bool, optional
+            If True, includes the reaction phase. Default is True
+    Returns
+    -------
+        max_len : int
+            Maximum length of species
+    """
+    species_len = []
+    for specie in species:
+        if ignore_gas_phase and specie.phase == 'G':
+            continue
+        specie_str = _get_specie_str(specie=specie, include_phase=include_phase)
+        species_len.append(len(specie_str))
+    return np.max(species_len)
+
 def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter, 
                           include_TS, stoich_format, act_method_name, act_unit, 
-                          float_format, column_delimiter,
+                          float_format, column_delimiter, sden_operation,
                           **kwargs):
     """Write the reaction lines in the Chemkin format
 
     Parameters
     ----------
-
+        reactions : list of :class:`~pMuTT.reaction.ChemkinReaction` objects
+            Chemkin reactions to write in surf.inp file
+        species_delimiter : str
+            Delimiter to separate species when writing reactions
+        reaction_delimiter : str
+            Delimiter to separate reaction sides
+        act_method_name : str
+            Name of method to use to calculate activation function
+        act_unit : str
+            Units to calculate activation energy
+        float_format : str
+            String format to print floating numbers
+        stoich_format : str
+            String format to print stoichiometric coefficients
+        column_delimiter : str
+            Delimiter to separate columns
+        kwargs : keyword arguments
+            Parameters needed to calculate activation energy and preexponential
+            factor
     Returns
     -------
         reaction_lines : str
@@ -433,17 +665,16 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             reactions=reactions, species_delimiter=species_delimiter,
             reaction_delimiter=reaction_delimiter, stoich_format=stoich_format,
             include_TS=include_TS)
-    reaction_field = '{:<%s}' % max_reaction_len
     float_field = '{:%s}' % float_format
 
     reaction_lines = []
     for reaction in reactions:
         # Get reaction string
-        reaction_str = reaction_field.format(
-                reaction.to_string(species_delimiter=species_delimiter,
-                                   reaction_delimiter=reaction_delimiter,
-                                   stoich_format=stoich_format,
-                                   include_TS=include_TS))
+        reaction_str = reaction.to_string(
+                species_delimiter=species_delimiter,
+                reaction_delimiter=reaction_delimiter,
+                stoich_format=stoich_format,
+                include_TS=include_TS).ljust(max_reaction_len)
         # Calculate preexponential factor
         if reaction.is_adsorption:
             A = reaction.sticking_coeff
@@ -453,7 +684,8 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
                 include_entropy = False
             else:
                 include_entropy = True
-            A = reaction.get_A(include_entropy=include_entropy, **kwargs)
+            A = reaction.get_A(include_entropy=include_entropy,
+                               sden_operation=sden_operation, **kwargs)
         A_str = float_field.format(A)
 
         # Format beta value
@@ -477,3 +709,30 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             reaction_line = '{}\nSTICK'.format(reaction_line)
         reaction_lines.append(reaction_line)
     return reaction_lines
+
+def _write_column_line(padding, column_delimiter, float_format,
+                       n_conditions):
+    """Writes the run # in column format
+    
+    Parameters
+    ----------
+        padding : str
+            Padding to offset first entry
+        column_delimiter : str
+            Column delimiter
+        float_format : str
+            Floating point format to use
+        n_conditions : int
+            Number of conditions
+    Returns
+    -------
+        column_line : str
+            Column line to be printed
+    """
+    float_field = '{:%s}' % float_format
+    column_line = '!'.ljust(padding)
+    float_field_len = len(float_field.format(np.pi)+column_delimiter)
+    column_field = '{:> %d}' % float_field_len
+    for i in range(n_conditions):
+        column_line += column_field.format(i+1)
+    return column_line
