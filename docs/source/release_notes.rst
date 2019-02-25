@@ -7,6 +7,10 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.3
+-------------
+Feb. 25, 2019
+
 - Added ``smiles`` attribute to :class:`~pMuTT.statmech.StatMech` and 
   :class:`~pMuTT.empirical.BaseThermo` classes
 - Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files
