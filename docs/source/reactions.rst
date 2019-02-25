@@ -120,6 +120,14 @@ Or calculate thermodynamic properties.
 .. figure:: reactions_example.png
    :alt: Reactions example
 
+ChemkinReaction
+===============
+This is a child class of :class:`~pMuTT.reaction.Reaction` but has additional
+attributes for reading and writting Chemkin files.
+
+.. autoclass:: pMuTT.reaction.ChemkinReaction
+   :members:
+
 Reactions
 =========
 

@@ -234,6 +234,14 @@ class HarmonicVib:
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
+    def print_calc_wavenumbers(self):
+        """Prints the wavenumbers that will be used in a thermodynamic
+        calculation. If ``self.imaginary_substitute`` is a float, then imaginary
+        frequencies are replaced with that value. Otherwise, imaginary
+        frequencies are ignored."""
+        print(_get_valid_vib_wavenumbers(wavenumbers=self.vib_wavenumbers,
+                                         substitute=self.imaginary_substitute))
+
 
 class QRRHOVib:
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
@@ -570,6 +578,13 @@ class QRRHOVib:
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
 
+    def print_calc_wavenumbers(self):
+        """Prints the wavenumbers that will be used in a thermodynamic
+        calculation. If ``self.imaginary_substitute`` is a float, then imaginary
+        frequencies are replaced with that value. Otherwise, imaginary
+        frequencies are ignored."""
+        print(_get_valid_vib_wavenumbers(wavenumbers=self.vib_wavenumbers,
+                                         substitute=self.imaginary_substitute))
 
 class EinsteinVib:
     """Einstein model of a crystal. Equations found in
