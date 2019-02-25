@@ -15,7 +15,9 @@ Welcome to pMuTT's documentation!
    io
    empirical
    statmech
+   mixture
    reactions
+   chemkin
    phase_diagram
    eos
    constants

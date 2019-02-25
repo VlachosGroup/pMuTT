@@ -8,7 +8,7 @@ import inspect
 import warnings
 import numpy as np
 from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-    _get_specie_kwargs, _apply_operation)
+    _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.mixture import _get_mix_quantity
@@ -93,6 +93,8 @@ class StatMech:
             :class:`~pMuTT.statmech.EmptyMode`
         mix_models : list of ``pMuTT.mixture`` objects, optional
             Mixture models that calculate excess properties.
+        smiles : str, optional
+            Smiles representation of species
         notes : str, optional
             Any additional details you would like to include such as
             computational set up. Default is None
@@ -101,8 +103,10 @@ class StatMech:
     def __init__(self, name=None, trans_model=EmptyMode(),
                  vib_model=EmptyMode(), rot_model=EmptyMode(),
                  elec_model=EmptyMode(), nucl_model=EmptyMode(),
-                 mix_models=None, notes=None, **kwargs):
+                 mix_models=None, smiles=None, notes=None, **kwargs):
         self.name = name
+        self.smiles = smiles
+        self.notes = notes
 
         # Translational modes
         if inspect.isclass(trans_model):
@@ -133,8 +137,6 @@ class StatMech:
             self.nucl_model = _pass_expected_arguments(nucl_model, **kwargs)
         else:
             self.nucl_model = nucl_model
-
-        self.notes = notes
 
         # Assign mixing models
         # TODO Mixing models can not be initialized by passing the class
@@ -229,8 +231,8 @@ class StatMech:
                                          **kwargs)
         # Add mixing quantities onto quantity
         quantity = np.concatenate([quantity, mix_quantity])
-        quantity = _apply_operation(quantity, verbose=verbose, 
-                                    operation=operation)
+        quantity = _apply_numpy_operation(quantity, verbose=verbose, 
+                                          operation=operation)
         return quantity
 
     def get_q(self, verbose=False, raise_error=True, raise_warning=True,
@@ -808,6 +810,7 @@ class StatMech:
             'rot_model': self.rot_model.to_dict(),
             'elec_model': self.elec_model.to_dict(),
             'nucl_model': self.nucl_model.to_dict(),
+            'smiles': self.smiles,
             'notes': self.notes}
 
         if _is_iterable(self.mix_models):

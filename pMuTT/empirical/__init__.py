@@ -41,6 +41,8 @@ class BaseThermo:
             HoRT_dft will be used without adjustment. Default is None
         mix_models : list of ``pMuTT.mixture`` objects, optional
             Mixture models that calculate excess properties.
+        smiles : str, optional
+            Smiles representation of species. Default is None
         notes : str, optional
             Any additional details you would like to include such as
             computational set up. Default is None
@@ -48,11 +50,12 @@ class BaseThermo:
 
     def __init__(self, name=None, phase=None, elements=None,
                  statmech_model=None, references=None, mix_models=None,
-                 notes=None, **kwargs):
+                 smiles=None, notes=None, **kwargs):
         self.name = name
         self.phase = phase
         self.elements = elements
         self.references = references
+        self.smiles = smiles
         self.notes = notes
 
         # Assign self.statmech_model
@@ -574,7 +577,8 @@ class BaseThermo:
                     'name': self.name,
                     'phase': self.phase,
                     'elements': self.elements,
-                    'notes': self.notes, }
+                    'notes': self.notes,
+                    'smiles': self.smiles,}
         try:
             obj_dict['references'] = self.references.to_dict()
         except AttributeError:

@@ -9,7 +9,7 @@ import inspect
 from warnings import warn
 import numpy as np
 from scipy.stats import variation
-from pMuTT import _is_iterable
+from pMuTT import _is_iterable, _pass_expected_arguments
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 from pMuTT.empirical import BaseThermo
@@ -45,16 +45,30 @@ class Nasa(BaseThermo):
             NASA polynomial to use between T_low and T_mid
         a_high : (7,) `numpy.ndarray`_
             NASA polynomial to use between T_mid and T_high
+        cat_site : Site object, optional
+            Catalyst site for adsorption. Default is None
+        n_sites : int, optional
+            Number of catalyst sites occupied by species. If cat_site is not
+            assigned, then n_sites is None. If cat_site is specified, the 
+            default is 1
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high, **kwargs):
+    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high, cat_site=None,
+                 n_sites=1, **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_mid = T_mid
         self.T_high = T_high
         self.a_low = np.array(a_low)
         self.a_high = np.array(a_high)
+        if inspect.isclass(cat_site):
+            self.cat_site = _pass_expected_arguments(cat_site, **kwargs)
+        else:
+            self.cat_site = cat_site
+        if self.cat_site is None:
+            n_sites = None
+        self.n_sites = n_sites
 
     def __eq__(self, other):
         try:
@@ -512,6 +526,11 @@ class Nasa(BaseThermo):
         obj_dict['T_low'] = self.T_low
         obj_dict['T_mid'] = self.T_mid
         obj_dict['T_high'] = self.T_high
+        try:
+            obj_dict['cat_site'] = self.cat_site.to_dict()
+        except AttributeError:
+            obj_dict['cat_site'] = None
+        obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
     @classmethod
@@ -528,12 +547,10 @@ class Nasa(BaseThermo):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = \
-            json_to_pMuTT(json_obj['statmech_model'])
-        json_obj['references'] = \
-            json_to_pMuTT(json_obj['references'])
+        json_obj['statmech_model'] = json_to_pMuTT(json_obj['statmech_model'])
+        json_obj['references'] = json_to_pMuTT(json_obj['references'])
+        json_obj['cat_site'] = json_to_pMuTT(json_obj['cat_site'])
         json_obj['mix_models'] = json_to_pMuTT(json_obj['mix_models'])
-        
         return cls(**json_obj)
 
 

@@ -221,37 +221,29 @@ def _get_specie_kwargs(specie_name, **kwargs):
         pass
     return specie_kwargs
 
-def _apply_operation(quantity, verbose, operation):
+def _apply_numpy_operation(quantity, operation, verbose=False):
     """Apply operation to quantity
 
     Parameters
     ----------
         quantity : (N,) np.ndarray
             Array with the quantity of interest
-        verbose : bool
-            If True, returns quantity with no further operations
         operation : str
-            Operation to perform. Currently supported formats are:
-
-            - sum
-            - prod
+            Numpy operation to perform
+        verbose : bool, optional
+            If True, returns quantity with no further operations. Default is
+            False
     Returns
     -------
         quantity : float or (N,) np.ndarray
             Quantity of interest in the desired format
-    Raises
-    ------
-        ValueError
-            Raised if unsupported operation provided
     """
     if verbose:
-        return quantity
-    elif operation == 'sum':
-        return np.sum(quantity)
-    elif operation == 'prod':
-        return np.prod(quantity)
+        out_quantity = quantity
     else:
-        raise ValueError('Operation: {} not supported'.format(operation))
+        np_method = getattr(np, operation)
+        out_quantity = np_method(quantity)
+    return out_quantity
 
 
 def parse_formula(formula):

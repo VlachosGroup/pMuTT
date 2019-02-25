@@ -5,7 +5,7 @@ Created on Fri Feb 8 14:30:00 2018
 """
 
 import numpy as np
-from pMuTT import _get_specie_kwargs, _apply_operation, _get_mode_quantity
+from pMuTT import _get_specie_kwargs, _apply_numpy_operation, _get_mode_quantity
 
 def _get_mix_quantity(mix_models, method_name, raise_error=True,
                       raise_warning=True, default_value=0., **kwargs):
