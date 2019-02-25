@@ -13,6 +13,7 @@ from pMuTT import _is_iterable
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 from pMuTT.empirical import BaseThermo
+from pMuTT.mixture import _get_mix_quantity
 
 
 class Shomate(BaseThermo):
@@ -47,13 +48,22 @@ class Shomate(BaseThermo):
         self.T_high = T_high
         self.a = a
 
-    def get_CpoR(self, T):
+    def get_CpoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless heat capacity
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             CpoR : float or (N,) `numpy.ndarray`_
@@ -61,9 +71,30 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return get_shomate_CpoR(a=self.a, T=T)
+        # Convert T to 1D numpy format
+        if not _is_iterable(T):
+            T = [T]
+        T = np.array(T)
 
-    def get_Cp(self, T, units):
+        # Calculate pure properties
+        CpoR = get_shomate_CpoR(a=self.a, T=T)
+        # Calculate mixing properties
+        for T_i in T:
+            CpoR_mix = _get_mix_quantity(mix_models=self.mix_models,
+                                        method_name='get_CpoR',
+                                        raise_error=raise_error,
+                                        raise_warning=raise_warning,
+                                        default_value=0.,
+                                        T=T_i, **kwargs)
+        # Add mixing quantity in appropriate format
+        if len(T) == 1:
+            CpoR += CpoR_mix[0]
+        else:
+            CpoR += CpoR_mix
+        return CpoR
+
+
+    def get_Cp(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the heat capacity
 
         Parameters
@@ -73,6 +104,15 @@ class Shomate(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units.
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             Cp : float or (N,) `numpy.ndarray`_
@@ -80,15 +120,25 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_CpoR(T=T)*c.R(units)
+        return self.get_CpoR(T=T, raise_error=raise_error, 
+                             raise_warning=raise_warning, **kwargs)*c.R(units)
 
-    def get_HoRT(self, T):
+    def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             HoRT : float or (N,) `numpy.ndarray`_
@@ -96,9 +146,29 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return get_shomate_HoRT(a=self.a, T=T)
+        # Convert T to 1D numpy format
+        if not _is_iterable(T):
+            T = [T]
+        T = np.array(T)
 
-    def get_H(self, T, units):
+        # Calculate pure properties
+        HoRT = get_shomate_HoRT(a=self.a, T=T)
+        # Calculate mixing properties
+        for T_i in T:
+            HoRT_mix = _get_mix_quantity(mix_models=self.mix_models,
+                                         method_name='get_HoRT',
+                                         raise_error=raise_error,
+                                         raise_warning=raise_warning,
+                                         default_value=0.,
+                                         T=T_i, **kwargs)
+        # Add mixing quantity in appropriate format
+        if len(T) == 1:
+            HoRT += HoRT_mix[0]
+        else:
+            HoRT += HoRT_mix
+        return HoRT
+
+    def get_H(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the enthalpy
 
         Parameters
@@ -108,6 +178,15 @@ class Shomate(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             H : float or (N,) `numpy.ndarray`_
@@ -115,15 +194,26 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_HoRT(T=T)*T*c.R('{}/K'.format(units))
+        return self.get_HoRT(T=T, raise_error=raise_error,
+                             raise_warning=raise_warning, **kwargs) \
+               *T*c.R('{}/K'.format(units))
 
-    def get_SoR(self, T):
+    def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             SoR : float or (N,) `numpy.ndarray`_
@@ -131,9 +221,29 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return get_shomate_SoR(a=self.a, T=T)
+        # Convert T to 1D numpy format
+        if not _is_iterable(T):
+            T = [T]
+        T = np.array(T)
 
-    def get_S(self, T, units):
+        # Calculate pure properties
+        SoR = get_shomate_SoR(a=self.a, T=T)
+        # Calculate mixing properties
+        for T_i in T:
+            SoR_mix = _get_mix_quantity(mix_models=self.mix_models,
+                                         method_name='get_SoR',
+                                         raise_error=raise_error,
+                                         raise_warning=raise_warning,
+                                         default_value=0.,
+                                         T=T_i, **kwargs)
+        # Add mixing quantity in appropriate format
+        if len(T) == 1:
+            SoR += SoR_mix[0]
+        else:
+            SoR += SoR_mix
+        return SoR
+
+    def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -143,6 +253,15 @@ class Shomate(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units.
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             S : float or (N,) `numpy.ndarray`_
@@ -152,13 +271,22 @@ class Shomate(BaseThermo):
         """
         return self.get_SoR(T=T)*c.R(units)
 
-    def get_GoRT(self, T):
+    def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             GoRT : float or (N,) `numpy.ndarray`_
@@ -166,9 +294,12 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return get_shomate_GoRT(a=self.a, T=T)
+        return self.get_HoRT(T=T, raise_error=raise_error, 
+                             raise_warning=raise_warning, **kwargs) \
+               - self.get_SoR(T=T, raise_error=raise_error, 
+                              raise_warning=raise_warning, **kwargs)
 
-    def get_G(self, T, units):
+    def get_G(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -178,6 +309,15 @@ class Shomate(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             G : float or (N,) `numpy.ndarray`_
@@ -185,7 +325,9 @@ class Shomate(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_GoRT(T=T)*T*c.R('{}/K'.format(units))
+        return self.get_GoRT(T=T, raise_error=raise_error, 
+                             raise_warning=raise_warning, **kwargs) \
+               *T*c.R('{}/K'.format(units))
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, **kwargs):
@@ -301,6 +443,7 @@ class Shomate(BaseThermo):
             json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
             json_to_pMuTT(json_obj['references'])
+        json_obj['mix_models'] = json_to_pMuTT(json_obj['mix_models'])
 
         return cls(**json_obj)
 
@@ -328,7 +471,7 @@ def _fit_CpoR(T, CpoR):
        or any([np.isnan(x) for x in CpoR]):
         return np.zeros(7)
     else:
-        [a, pcov] = curve_fit(_shomate_CpoR, T, np.array(CpoR))
+        [a, _] = curve_fit(_shomate_CpoR, T, np.array(CpoR))
         a = np.append(a, [0., 0., 0.])
         return a
 
@@ -352,8 +495,10 @@ def _fit_HoRT(T_ref, HoRT_ref, a):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    a[5] = (HoRT_ref - get_shomate_HoRT(T=T_ref, a=a))*c.R('kJ/mol/K')*T_ref
-    a[7] = - get_shomate_HoRT(T=c.T0('K'), a=a)*c.R('kJ/mol/K')*c.T0('K')
+    a[5] = (HoRT_ref - get_shomate_HoRT(T=np.array([T_ref]), a=a)) \
+           *c.R('kJ/mol/K')*T_ref
+    a[7] = -get_shomate_HoRT(T=np.array([c.T0('K')]), a=a) \
+           *c.R('kJ/mol/K')*c.T0('K')
     return a
 
 
@@ -374,7 +519,7 @@ def _fit_SoR(T_ref, SoR_ref, a):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    a[6] = (SoR_ref - get_shomate_SoR(T=T_ref, a=a))*c.R('J/mol/K')
+    a[6] = (SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a))*c.R('J/mol/K')
     return a
 
 
@@ -385,7 +530,7 @@ def get_shomate_CpoR(a, T):
     ----------
         a : (8,) `numpy.ndarray`_
             Coefficients of Shomate polynomial
-        T : float or iterable
+        T : iterable
             Temperature in K
     Returns
     -------
@@ -394,9 +539,6 @@ def get_shomate_CpoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    if not _is_iterable(T):
-        T = [T]
-    T = np.array(T)
     t = T/1000.
     t_arr = np.array([[1., x, x**2, x**3, 1./x**2, 0., 0., 0.] for x in t])
     return np.dot(t_arr, a)/c.R('J/mol/K')
@@ -409,7 +551,7 @@ def get_shomate_HoRT(a, T):
     ----------
         a : (8,) `numpy.ndarray`_
             Coefficients of Shomate polynomial
-        T : float or iterable
+        T : iterable
             Temperature in K
     Returns
     -------
@@ -418,22 +560,11 @@ def get_shomate_HoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    if _is_iterable(T):
-        T_iterable = True
-    else:
-        T_iterable = False
-        T = [T]
-
-    T = np.array(T)
     t = T/1000.
     t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.]
                      for x in t])
     HoRT = np.dot(t_arr, a)/(c.R('kJ/mol/K')*T)
-    if T_iterable:
-        return HoRT
-    else:
-        return HoRT[0]
-
+    return HoRT
 
 def get_shomate_SoR(a, T):
     """Calculates the dimensionless entropy using Shomate polynomial form
@@ -442,7 +573,7 @@ def get_shomate_SoR(a, T):
     ----------
         a : (8,) `numpy.ndarray`_
             Coefficients of Shomate polynomial
-        T : float or iterable
+        T : iterable
             Temperature in K
     Returns
     -------
@@ -451,21 +582,11 @@ def get_shomate_SoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    if _is_iterable(T):
-        T_iterable = True
-    else:
-        T_iterable = False
-        T = [T]
-    T = np.array(T)
     t = T/1000.
     t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.]
                      for x in t])
     SoR = np.dot(t_arr, a)/c.R('J/mol/K')
-    if T_iterable:
-        return SoR
-    else:
-        return SoR[0]
-
+    return SoR
 
 def get_shomate_GoRT(a, T):
     """Calculates the dimensionless Gibbs free energy using Shomate
@@ -475,7 +596,7 @@ def get_shomate_GoRT(a, T):
     ----------
         a : (8,) `numpy.ndarray`_
             Coefficients of Shomate polynomial
-        T : float or iterable
+        T : iterable
             Temperature in K
     Returns
     -------
@@ -503,4 +624,7 @@ def _shomate_CpoR(T, A, B, C, D, E):
             Dimensionless heat capacity
     """
     a = np.array([A, B, C, D, E, 0., 0., 0.])
+    if not _is_iterable(T):
+        T = [T]
+    T = np.array(T)
     return get_shomate_CpoR(a=a, T=T)

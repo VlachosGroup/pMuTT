@@ -11,6 +11,7 @@
    "notes": "TPIS78",
    "references": null,
    "statmech_model": null,
+   "mix_models": null,
    "a_low": [
     2.34433112,
     0.00798052075,
@@ -43,6 +44,7 @@
    "notes": "TPIS89",
    "references": null,
    "statmech_model": null,
+   "mix_models": null,
    "a_low": [
     3.78245636,
     -0.00299673416,
@@ -82,6 +84,7 @@
    "notes": "L 8/89",
    "references": null,
    "statmech_model": null,
+   "mix_models": null,
    "a_low": [
     4.19864056,
     -0.0020364341,
@@ -111,7 +114,7 @@
  "transition_state": [
   {
    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
-   "name": "H2O",
+   "name": "H2O_TS",
    "phase": "G",
    "elements": {
     "H": 2,
@@ -120,6 +123,7 @@
    "notes": "L 8/89",
    "references": null,
    "statmech_model": null,
+   "mix_models": null,
    "a_low": [
     4.19864056,
     -0.0020364341,

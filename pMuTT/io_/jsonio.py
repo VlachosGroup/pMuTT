@@ -69,6 +69,8 @@ def type_to_class(class_str):
     from pMuTT.statmech.rot import RigidRotor
     from pMuTT.statmech.elec import IdealElec
     from pMuTT.statmech.nucl import IdealNucl
+    from pMuTT.mixture.cov import CovEffect
+    from pMuTT.chemkin import CatSite
 
     type_to_class_dict = {
         "<class 'pMuTT.eos.IdealGasEOS'>": IdealGasEOS,
@@ -91,6 +93,8 @@ def type_to_class(class_str):
         "<class 'pMuTT.statmech.rot.RigidRotor'>": RigidRotor,
         "<class 'pMuTT.statmech.elec.IdealElec'>": IdealElec,
         "<class 'pMuTT.statmech.nucl.IdealNucl'>": IdealNucl,
+        "<class 'pMuTT.mixture.cov.CovEffect'>": CovEffect,
+        "<class 'pMuTT.chemkin.CatSite'>": CatSite,
     }
     return type_to_class_dict[class_str]
 

@@ -9,10 +9,11 @@ import inspect
 from warnings import warn
 import numpy as np
 from scipy.stats import variation
-from pMuTT import _is_iterable
+from pMuTT import _is_iterable, _pass_expected_arguments
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 from pMuTT.empirical import BaseThermo
+from pMuTT.mixture import _get_mix_quantity
 
 
 class Nasa(BaseThermo):
@@ -44,16 +45,30 @@ class Nasa(BaseThermo):
             NASA polynomial to use between T_low and T_mid
         a_high : (7,) `numpy.ndarray`_
             NASA polynomial to use between T_mid and T_high
+        cat_site : Site object, optional
+            Catalyst site for adsorption. Default is None
+        n_sites : int, optional
+            Number of catalyst sites occupied by species. If cat_site is not
+            assigned, then n_sites is None. If cat_site is specified, the 
+            default is 1
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high, **kwargs):
+    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high, cat_site=None,
+                 n_sites=1, **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_mid = T_mid
         self.T_high = T_high
         self.a_low = np.array(a_low)
         self.a_high = np.array(a_high)
+        if inspect.isclass(cat_site):
+            self.cat_site = _pass_expected_arguments(cat_site, **kwargs)
+        else:
+            self.cat_site = cat_site
+        if self.cat_site is None:
+            n_sites = None
+        self.n_sites = n_sites
 
     def __eq__(self, other):
         try:
@@ -91,13 +106,22 @@ class Nasa(BaseThermo):
                      RuntimeWarning)
             return self.a_high
 
-    def get_CpoR(self, T):
+    def get_CpoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless heat capacity
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             CpoR : float or (N,) `numpy.ndarray`_
@@ -109,14 +133,25 @@ class Nasa(BaseThermo):
             CpoR = np.zeros(len(T))
             for i, T_i in enumerate(T):
                 a = self.get_a(T_i)
-                CpoR[i] = get_nasa_CpoR(a=a, T=T_i)
+                CpoR[i] = get_nasa_CpoR(a=a, T=T_i) \
+                          + np.sum(_get_mix_quantity(self.mix_models, 
+                                                    method_name='get_CpoR',
+                                                    raise_error=raise_error,
+                                                    raise_warning=raise_warning,
+                                                    default_value=0.,
+                                                    T=T_i, **kwargs))
         else:
             a = self.get_a(T=T)
-            CpoR = get_nasa_CpoR(a=a, T=T)
-
+            CpoR = get_nasa_CpoR(a=a, T=T) \
+                   + np.sum(_get_mix_quantity(self.mix_models, 
+                                    method_name='get_CpoR',
+                                    raise_error=raise_error,
+                                    raise_warning=raise_warning,
+                                    default_value=0.,
+                                    T=T, **kwargs))
         return CpoR
 
-    def get_Cp(self, T, units):
+    def get_Cp(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the heat capacity
 
         Parameters
@@ -126,6 +161,15 @@ class Nasa(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units.
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             Cp : float or (N,) `numpy.ndarray`_
@@ -135,13 +179,22 @@ class Nasa(BaseThermo):
         """
         return self.get_CpoR(T=T)*c.R(units)
 
-    def get_HoRT(self, T):
+    def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             HoRT : float or (N,) `numpy.ndarray`_
@@ -153,13 +206,25 @@ class Nasa(BaseThermo):
             HoRT = np.zeros_like(T)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
-                HoRT[i] = get_nasa_HoRT(a=a, T=T_i)
+                HoRT[i] = get_nasa_HoRT(a=a, T=T_i) \
+                          + np.sum(_get_mix_quantity(mix_models=self.mix_models, 
+                                                     method_name='get_HoRT',
+                                                     raise_error=raise_error,
+                                                     raise_warning=raise_warning,
+                                                     default_value=0.,
+                                                     T=T_i, **kwargs))
         else:
             a = self.get_a(T=T)
-            HoRT = get_nasa_HoRT(a=a, T=T)
+            HoRT = get_nasa_HoRT(a=a, T=T) \
+                   + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                                              method_name='get_HoRT',
+                                              raise_error=raise_error,
+                                              raise_warning=raise_warning,
+                                              default_value=0.,
+                                              T=T, **kwargs))
         return HoRT
 
-    def get_H(self, T, units):
+    def get_H(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the enthalpy
 
         Parameters
@@ -169,6 +234,15 @@ class Nasa(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             H : float or (N,) `numpy.ndarray`_
@@ -176,15 +250,26 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_HoRT(T=T)*T*c.R('{}/K'.format(units))
+        return self.get_HoRT(T=T, raise_error=raise_error,
+                             raise_warning=raise_warning, **kwargs) \
+               *T*c.R('{}/K'.format(units))
 
-    def get_SoR(self, T):
+    def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             SoR : float or (N,) `numpy.ndarray`_
@@ -196,13 +281,25 @@ class Nasa(BaseThermo):
             SoR = np.zeros_like(T)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
-                SoR[i] = get_nasa_SoR(a=a, T=T_i)
+                SoR[i] = get_nasa_SoR(a=a, T=T_i) \
+                         + np.sum(_get_mix_quantity(mix_models=self.mix_models, 
+                                                    method_name='get_SoR',
+                                                    raise_error=raise_error,
+                                                    raise_warning=raise_warning,
+                                                    default_value=0.,
+                                                    T=T_i, **kwargs))
         else:
             a = self.get_a(T=T)
-            SoR = get_nasa_SoR(a=a, T=T)
+            SoR = get_nasa_SoR(a=a, T=T) \
+                  + np.sum(_get_mix_quantity(mix_models=self.mix_models, 
+                                             method_name='get_SoR',
+                                             raise_error=raise_error,
+                                             raise_warning=raise_warning,
+                                             default_value=0.,
+                                             T=T, **kwargs))
         return SoR
 
-    def get_S(self, T, units):
+    def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -212,6 +309,15 @@ class Nasa(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units.
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             S : float or (N,) `numpy.ndarray`_
@@ -219,15 +325,25 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_SoR(T=T)*c.R(units)
+        return self.get_SoR(T=T, raise_error=raise_error, 
+                            raise_warning=raise_warning, **kwargs)*c.R(units)
 
-    def get_GoRT(self, T):
+    def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
 
         Parameters
         ----------
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             GoRT : float or (N,) `numpy.ndarray`_
@@ -235,17 +351,13 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        if _is_iterable(T):
-            GoRT = np.zeros_like(T)
-            for i, T_i in enumerate(T):
-                a = self.get_a(T=T_i)
-                GoRT[i] = get_nasa_GoRT(a=a, T=T_i)
-        else:
-            a = self.get_a(T=T)
-            GoRT = get_nasa_GoRT(a=a, T=T)
+        GoRT = self.get_HoRT(T, raise_error=raise_error, 
+                             raise_warning=raise_warning, **kwargs) \
+               - self.get_SoR(T, raise_error=raise_error, 
+                              raise_warning=raise_warning, **kwargs)
         return GoRT
 
-    def get_G(self, T, units):
+    def get_G(self, T, units, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -255,6 +367,15 @@ class Nasa(BaseThermo):
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
+            raise_error : bool, optional
+                If True, raises an error if any of the modes do not have the 
+                quantity of interest. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if any
+                of the modes do not have the quantity of interest. Default is
+                True
+            kwargs : key-word arguments
+                Arguments to calculate mixture model properties, if any
         Returns
         -------
             G : float or (N,) `numpy.ndarray`_
@@ -262,7 +383,9 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_GoRT(T=T)*T*c.R('{}/K'.format(units))
+        return self.get_GoRT(T=T, raise_error=raise_error, 
+                             raise_warning=raise_warning, **kwargs) \
+               *T*c.R('{}/K'.format(units))
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
@@ -403,6 +526,11 @@ class Nasa(BaseThermo):
         obj_dict['T_low'] = self.T_low
         obj_dict['T_mid'] = self.T_mid
         obj_dict['T_high'] = self.T_high
+        try:
+            obj_dict['cat_site'] = self.cat_site.to_dict()
+        except AttributeError:
+            obj_dict['cat_site'] = None
+        obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
     @classmethod
@@ -419,11 +547,10 @@ class Nasa(BaseThermo):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = \
-            json_to_pMuTT(json_obj['statmech_model'])
-        json_obj['references'] = \
-            json_to_pMuTT(json_obj['references'])
-
+        json_obj['statmech_model'] = json_to_pMuTT(json_obj['statmech_model'])
+        json_obj['references'] = json_to_pMuTT(json_obj['references'])
+        json_obj['cat_site'] = json_to_pMuTT(json_obj['cat_site'])
+        json_obj['mix_models'] = json_to_pMuTT(json_obj['mix_models'])
         return cls(**json_obj)
 
 
@@ -675,23 +802,3 @@ def get_nasa_SoR(a, T):
     """
     T_arr = np.array([np.log(T), T, (T**2)/2., (T**3)/3., (T**4)/4., 0., 1.])
     return np.dot(a, T_arr)
-
-
-def get_nasa_GoRT(a, T):
-    """Calculates the dimensionless Gibbs free energy using NASA
-    polynomial form
-
-    Parameters
-    ----------
-        a : (7,) `numpy.ndarray`_
-            Coefficients of NASA polynomial
-        T : float
-            Temperature in K
-    Returns
-    -------
-        GoRT : float
-            Dimensionless Gibbs energy
-
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
-    """
-    return get_nasa_HoRT(a=a, T=T)-get_nasa_SoR(a=a, T=T)

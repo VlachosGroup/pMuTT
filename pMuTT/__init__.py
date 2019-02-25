@@ -9,12 +9,14 @@ pMuTT
 # and it's best-practices to have the __version__
 # present, too:
 #
+name = 'pMuTT'
+__version__ = '1.2.3'
+
 import re
 import inspect
+from warnings import warn
+import numpy as np
 from pMuTT import constants as c
-
-name = 'pMuTT'
-__version__ = '1.2.2'
 
 
 def _get_expected_arguments(fn):
@@ -139,6 +141,112 @@ def _is_iterable(val):
             return False
         else:
             return True
+            
+def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
+                       default_value=0., **kwargs):
+    """Calculate the quantity from that mode.
+
+    Parameters
+    ----------
+        mode : ``pMuTT.statmech`` object
+            Trans, Vib, Rot, Elec, or Nucl StatMech model
+        method_name : str
+            Name of method to use to calculate quantity.
+        raise_error : bool, optional
+            If True, raises an error if any of the modes do not have the 
+            quantity of interest. Default is True
+        raise_warning : bool, optional
+            Only relevant if raise_error is False. Raises a warning if any
+            of the modes do not have the quantity of interest. Default is
+            True
+        default_value : float, optional
+            Default value if the object does not contain the method. Default is
+            0
+        kwargs : key-word arguments
+            Parameters passed to each mode
+    Returns
+    -------
+        quantity : float
+            Quantity of the mode.
+    Raises
+    ------
+        AttributeError
+            If raise_error is True and the mode does not have the method_name
+    """
+    try:
+        method = getattr(mode, method_name)
+    except AttributeError as e:
+        if raise_error:
+            raise e
+        elif raise_warning:
+            warn(e, RuntimeWarning)
+        quantity = default_value
+    else:
+        quantity = _pass_expected_arguments(method, **kwargs)
+    return quantity
+
+def _get_specie_kwargs(specie_name, **kwargs):
+    """Gets the keyword arguments specific to a specie
+
+    Parameters
+    ----------
+        specie_name : str
+            Name of the specie
+        kwargs : keyword arguments
+            Parameters with the conditions. Specie specific parameters can be
+            passed by having a key named 'specie' mapping onto a dictionary
+            whose keys are the species names.
+
+            e.g. For the reaction: H2 + 0.5O2 = H2O
+            kwargs = {
+                'T': 298.,
+                'specie': {
+                    'H2': {
+                        'P': 1.,
+                    },
+                    'O2': {
+                        'P': 0.5,
+                    },
+                }
+            }
+    Returns
+    -------
+        specie_kwargs : dict
+            Dictionary containing the specie-specific kwargs
+    """
+    specie_kwargs = kwargs.copy()
+    specie_specific = specie_kwargs.pop('specie', None)
+    # See if there was an entry for the specific species
+    try:
+        specie_kwargs.update(specie_specific[specie_name])
+    except (KeyError, TypeError, NameError):
+        pass
+    return specie_kwargs
+
+def _apply_numpy_operation(quantity, operation, verbose=False):
+    """Apply operation to quantity
+
+    Parameters
+    ----------
+        quantity : (N,) np.ndarray
+            Array with the quantity of interest
+        operation : str
+            Numpy operation to perform
+        verbose : bool, optional
+            If True, returns quantity with no further operations. Default is
+            False
+    Returns
+    -------
+        quantity : float or (N,) np.ndarray
+            Quantity of interest in the desired format
+    """
+    if verbose:
+        out_quantity = quantity
+    else:
+        np_method = getattr(np, operation)
+        out_quantity = np_method(quantity)
+    return out_quantity
+
 
 
 def parse_formula(formula):

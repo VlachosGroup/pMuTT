@@ -18,7 +18,6 @@ class TestBaseThermo(unittest.TestCase):
             name='H2O',
             elements={'H': 2, 'O': 1},
             phase='g',
-            statmech_model=StatMech,
             potentialenergy=-14.2209,
             atoms=molecule('H2O'),
             symmetrynumber=2,
