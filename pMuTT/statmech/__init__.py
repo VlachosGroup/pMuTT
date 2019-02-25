@@ -177,10 +177,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            quantity : float or (N,) `numpy.ndarray`_
-                Desired quantity. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            quantity : float or (N+5,) `numpy.ndarray`_
+                Desired quantity. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -255,10 +255,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            q : float or (N,) `numpy.ndarray`_
-                Partition function. If verbose is True, contribution to each
-                mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            q : float or (N+5,) `numpy.ndarray`_
+                Partition function. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -286,10 +286,11 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            CvoR : float or (N,) `numpy.ndarray`_
-                Dimensionless heat capacity. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            CvoR : float or (N+5,) `numpy.ndarray`_
+                Dimensionless heat capacity. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -321,8 +322,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            Cv : float or (N,) `numpy.ndarray`_
-                Heat capacity
+            Cv : float or (N+5,) `numpy.ndarray`_
+                Heat capacity. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -349,10 +352,11 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            CpoR : float or (N,) `numpy.ndarray`_
-                Dimensionless heat capacity. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            CpoR : float or (N+5,) `numpy.ndarray`_
+                Dimensionless heat capacity. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -384,8 +388,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            Cp : float or (N,) `numpy.ndarray`_
-                Heat capacity
+            Cp : float or (N+5,) `numpy.ndarray`_
+                Heat capacity. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -416,7 +422,7 @@ class StatMech:
         Returns
         -------
             EoRT : float
-                Dimensionless electronic energy.
+                Dimensionless electronic energy
         """
         kwargs['T'] = T
         EoRT = _get_mode_quantity(mode=self.elec_model, 
@@ -486,10 +492,11 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            UoRT : float or (N,) `numpy.ndarray`_
-                Dimensionless internal energy. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            UoRT : float or (N+5,) `numpy.ndarray`_
+                Dimensionless internal energy. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -523,8 +530,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            U : float or (N,) `numpy.ndarray`_
-                Internal energy
+            U : float or (N+5,) `numpy.ndarray`_
+                Internal energy. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -552,10 +561,11 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            HoRT : float or (N,) `numpy.ndarray`_
-                Dimensionless enthalpy. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            HoRT : float or (N+5,) `numpy.ndarray`_
+                Dimensionless enthalpy. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -589,8 +599,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            H : float or (N,) `numpy.ndarray`_
-                Enthalpy
+            H : float or (N+5,) `numpy.ndarray`_
+                Enthalpy. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -618,10 +630,10 @@ class StatMech:
                 True
         Returns
         -------
-            SoR : float or (N,) `numpy.ndarray`_
-                Dimensionless entropy. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            SoR : float or (N+5,) `numpy.ndarray`_
+                Dimensionless entropy. N represents the number of mixing models.
+                If verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -654,8 +666,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            S : float or (N,) `numpy.ndarray`_
-                Entropy
+            S : float or (N+5,) `numpy.ndarray`_
+                Entropy. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -682,10 +696,11 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            FoRT : float or (N,) `numpy.ndarray`_
-                Dimensionless Helmoltz energy. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            FoRT : float or (N+5,) `numpy.ndarray`_
+                Dimensionless Helmoltz energy. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -720,8 +735,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            F : float or (N,) `numpy.ndarray`_
-                Helmholtz energy
+            F : float or (N+5,) `numpy.ndarray`_
+                Helmholtz energy. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -749,10 +766,11 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            GoRT : float or (N,) `numpy.ndarray`_
-                Dimensionless Gibbs energy. If verbose is True, contribution
-                to each mode are as follows:
-                [trans, vib, rot, elec, nucl]
+            GoRT : float or (N+5,) `numpy.ndarray`_
+                Dimensionless Gibbs energy. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
@@ -786,8 +804,10 @@ class StatMech:
                 Parameters passed to each mode
         Returns
         -------
-            G : float or (N,) `numpy.ndarray`_
-                Gibbs energy
+            G : float or (N+5,) `numpy.ndarray`_
+                Gibbs energy. N represents the number of mixing models. If
+                verbose is True, contribution to each mode are as follows:
+                [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """

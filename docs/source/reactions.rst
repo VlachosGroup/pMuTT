@@ -122,6 +122,7 @@ Or calculate thermodynamic properties.
 
 ChemkinReaction
 ===============
+
 This is a child class of :class:`~pMuTT.reaction.Reaction` but has additional
 attributes for reading and writting Chemkin files.
 

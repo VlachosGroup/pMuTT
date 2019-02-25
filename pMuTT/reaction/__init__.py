@@ -1860,14 +1860,20 @@ class Reaction:
 class ChemkinReaction(Reaction):
     """Chemkin reaction. Has additional attributes to support input and output
 
-    Attribues
-    ---------
+    Attributes
+    ----------
         beta : float, optional
             Power to raise the temperature in the rate expression. Default is 1
         is_adsorption : bool, optional
             If True, the reaction represents an adsorption. Default is False
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True
+        gas_phase : bool
+            True if the reaction has only gas-phase species. This attribute is
+            determined based on the reactants and products
+        kwargs : keyword arguments
+            Keyword arguments used to initialize the reactants, transition state
+            and products
     """
 
     def __init__(self, beta=1., is_adsorption=False, sticking_coeff=0.5,
@@ -1913,16 +1919,20 @@ class ChemkinReaction(Reaction):
             n_surf += stoich
         return n_surf
 
-    def get_A(self, sden_operation, include_entropy=True, T=c.T0('K'), 
+    def get_A(self, sden_operation='sum', include_entropy=True, T=c.T0('K'), 
               **kwargs):
         """Calculates the preexponential factor in the Chemkin format
         
         Parameters
         ----------
+        sden_operation : str, optional
+            Site density operation to use. Default is 'sum'
         include_entropy : bool, optional
             If True, includes the act entropy. Default is True
         T : float, optional
             Temperature in K. Default is 298.15 K
+        kwargs : keyword arguments
+            Parameters required to calculate pre-exponential factor
         """
         if self.transition_state is None or not include_entropy:
             A = c.kb('J/K')/c.h('J s')
