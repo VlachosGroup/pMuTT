@@ -88,7 +88,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture.html">Mixture Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
@@ -2341,25 +2343,9 @@ the following information.</p>
 <col width="2%" />
 <col width="2%" />
 <col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">﻿
-n
+<tr class="row-odd"><th class="head">n
 a
 m
 e</th>
@@ -2881,21 +2867,6 @@ m
 b
 e
 r</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
-<th class="head">&#160;</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -2927,10 +2898,7 @@ s</td>
 1
 0
 7
-7
-9
-9
-1</p>
+8</p>
 </td>
 <td><ul class="first simple">
 <li></li>
@@ -3214,21 +3182,6 @@ A</td>
 5
 9
 1</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>H
 2
@@ -3259,9 +3212,7 @@ s</td>
 6
 0
 4
-3
-3
-4</p>
+3</p>
 </td>
 <td><ul class="first simple">
 <li></li>
@@ -3339,21 +3290,6 @@ O</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>H
 2</td>
@@ -3402,21 +3338,6 @@ H
 7
 9
 3</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -3594,7 +3515,7 @@ which is made of <code class="docutils literal notranslate"><span class="pre">Re
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;C&#39;: -357.2594948011859, &#39;H&#39;: -124.67018779818414, &#39;O&#39;: -180.8192643991904}
+{&#39;C&#39;: -357.259494801186, &#39;H&#39;: -124.67018779818417, &#39;O&#39;: -180.81926439919044}
 </pre></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">References</span></code> object calculated the offset between C, H, and O.</p>
@@ -3629,9 +3550,9 @@ from the data.</p>
 Nasa object for Name: H2_cus(S)
         phase: S
         elements: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 0}
-        references: &lt;pMuTT.empirical.references.References object at 0x000002019F43B710&gt;
+        references: &lt;pMuTT.empirical.references.References object at 0x0000023DAAA20978&gt;
         notes: None
-        statmech_model: &lt;pMuTT.statmech.StatMech object at 0x000002019F8DE8D0&gt;
+        statmech_model: &lt;pMuTT.statmech.StatMech object at 0x0000023DAD14A208&gt;
         T_low: 300.0
         T_mid: 610.204081632653
         T_high: 1100.0

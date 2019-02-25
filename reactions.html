@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Phase Diagrams" href="phase_diagram.html" />
-    <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
+    <link rel="next" title="Chemkin" href="chemkin.html" />
+    <link rel="prev" title="Mixture Models" href="mixture.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reactions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#reaction">Reaction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
@@ -99,10 +100,12 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#chemkinreaction">ChemkinReaction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">Reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bep">BEP</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
@@ -434,8 +437,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_Cp_act">
 <code class="descname">get_Cp_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Cp_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in heat capacity between reactants (or products) and
-transition state</p>
+<dd><p>Gets change in heat capacity (constant P) between reactants/products
+and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -446,12 +449,12 @@ units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
-docstring to see how to pass specific parameters to
-different species.</li>
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cp_act</strong> – Change in heat capacity between reactants (or products) and
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_Cp</strong> – Change in heat capacity between reactants/products and the
 transition state</p>
 </td>
 </tr>
@@ -500,8 +503,8 @@ parameters to different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_CpoR_act">
 <code class="descname">get_CpoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_CpoR_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless heat capacity between reactants (or
-products) and transition state</p>
+<dd><p>Gets change in dimensionless heat capacity between reactants/products
+and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -509,14 +512,14 @@ products) and transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless heat capacity.
-See class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR_act</strong> – Change in dimensionless heat capacity between reactants (or
-products) and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR_act</strong> – Change in heat capacity between reactants/products and the
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -563,8 +566,8 @@ of the reaction state</p>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_Cv_act">
 <code class="descname">get_Cv_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Cv_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in heat capacity between reactants (or
-products) and transition state</p>
+<dd><p>Gets change in heat capacity (constant V) between reactants/products
+and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -574,14 +577,13 @@ products) and transition state</p>
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity.
-See class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cv_act</strong> – Change in heat capacity between reactants (or products) and
-transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cv_act</strong> – Change in heat capacity between reactants and products</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -629,8 +631,8 @@ parameters to different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_CvoR_act">
 <code class="descname">get_CvoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_CvoR_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless heat capacity between reactants (or
-products) and transition state</p>
+<dd><p>Gets change in dimensionless heat capacity (constant V)
+between reactants/products and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -638,14 +640,14 @@ products) and transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless heat capacity.
-See class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR_act</strong> – Change in dimensionless heat capacity between reactants (or
-products) and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR_act</strong> – Change in heat capacity between reactants/products and
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -692,7 +694,7 @@ state</p>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_E_act">
 <code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>method='any'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets activation energy between reactants (or products)
+<dd><p>Gets act energy between reactants (or products)
 and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -704,7 +706,7 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate activation energy.
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate act energy.
 Accepted options:</p>
 <ul>
 <li>’any’ (uses whichever is available. <code class="docutils literal notranslate"><span class="pre">self.transition_state</span></code>
@@ -714,14 +716,51 @@ is used preferentially over <code class="docutils literal notranslate"><span cla
 </ul>
 <p>Default is ‘any’.</p>
 </li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate activation energy. See class
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate act energy. See class
 docstring to see how to pass specific parameters to
 different species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>E_act</strong> – Activation energy between reactants (or products) and
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>E_act</strong> – act energy between reactants (or products) and
 transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.Reaction.get_E_state">
+<code class="descname">get_E_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T=298.15</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the electronic energy at a state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>State to calculate quantity. Supported options:</p>
+<ul>
+<li>’reactants’</li>
+<li>’products’</li>
+<li>’transition state’</li>
+<li>’ts’ (same as transition state)</li>
+</ul>
+</li>
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate electronic energy.
+See class docstring to see how to pass specific parameters to
+different species.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>E</strong> – Electronic energy of the reaction state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -734,7 +773,7 @@ transition state</p>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_EoRT_act">
 <code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>method='any'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets dimensionless activation energy between reactants
+<dd><p>Gets dimensionless act energy between reactants
 (or products) and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -743,23 +782,59 @@ transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate dimensionless activation energy.
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate dimensionless act energy.
 Accepted options:</p>
 <ul>
-<li>’any’ (uses whichever is available. <code class="docutils literal notranslate"><span class="pre">self.transition_state</span></code>
-is used preferentially over <code class="docutils literal notranslate"><span class="pre">self.BEP</span></code>)</li>
+<li>’any’ (uses whichever is available. First uses transition
+state theory, then BEPs, then the reaction enthalpy)</li>
 <li>’bep’ (uses <code class="docutils literal notranslate"><span class="pre">self.bep</span></code>)</li>
 <li>’ts’ or ‘transition_state’ (uses <code class="docutils literal notranslate"><span class="pre">self.transition_state</span></code>)</li>
+<li>’enthalpy’ (uses the enthalpy of the reaction. If the reaction
+is exothermic, returns 0)</li>
 </ul>
 <p>Default is ‘any’.</p>
 </li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless activation
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless act
 energy</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>EoRT_act</strong> – Dimensionless activation energy between reactants (or products)
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>EoRT_act</strong> – Dimensionless act energy between reactants (or products)
 and transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.Reaction.get_EoRT_state">
+<code class="descname">get_EoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets dimensionless electronic energy at a state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>state to calculate quantity. Supported options:</p>
+<ul>
+<li>’reactants’</li>
+<li>’products’</li>
+<li>’transition state’</li>
+<li>’ts’ (same as transition state)</li>
+</ul>
+</li>
+<li><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless electronic
+energy. See class docstring to see how to pass specific
+parameters to different species.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>EoRT</strong> – Dimensionless electronic energy of the reaction state.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -772,7 +847,7 @@ and transition state</p>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_F_act">
 <code class="descname">get_F_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_F_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in Helmholtz energy between reactants (or products) and
+<dd><p>Gets change in Helmholtz energy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -781,15 +856,16 @@ transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Helmholtz energy. See class
-docstring to see how to pass specific parameters to
-different species.</li>
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>F_act</strong> – Change in Helmholtz energy between reactants (or products) and
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>F_act</strong> – Change in Helmholtz energy between reactants/products and the
 transition state</p>
 </td>
 </tr>
@@ -839,8 +915,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_FoRT_act">
 <code class="descname">get_FoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_FoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless Helmholtz energy between reactants (or
-products) and transition state</p>
+<dd><p>Gets change in dimensionless Helmholtz energy between
+reactants/products and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -848,14 +924,14 @@ products) and transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless Helmholtz
-energy. See class docstring to see how to pass specific
-parameters to different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Helmholtz energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>FoRT_act</strong> – Change in dimensionless Helmholtz energy between reactants
-(or products) and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>FoRT_act</strong> – Change in Helmholtz energy between reactants/products and the
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -902,7 +978,7 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_G_act">
 <code class="descname">get_G_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_G_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in Gibbs energy between reactants (or products) and
+<dd><p>Gets change in Gibbs energy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -911,15 +987,16 @@ transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
-docstring to see how to pass specific parameters to
-different species.</li>
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>G_act</strong> – Change in Gibbs energy between reactants (or products) and
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>G_act</strong> – Change in Gibbs energy between reactants/products and the
 transition state</p>
 </td>
 </tr>
@@ -969,8 +1046,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_GoRT_act">
 <code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless Gibbs energy between reactants (or
-products) and transition state</p>
+<dd><p>Gets change in dimensionless Gibbs energy between reactants/products
+and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -978,14 +1055,14 @@ products) and transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless Gibbs energy.
-See class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT_act</strong> – Change in dimensionless Gibbs energy between reactants (or
-products) and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT_act</strong> – Change in Gibbs energy between reactants/products and the
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1031,8 +1108,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_H_act">
 <code class="descname">get_H_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_H_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in enthalpy between reactants (or products) and
-transition state</p>
+<dd><p>Gets change in enthalpy between reactants/products and the transition
+state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1040,16 +1117,17 @@ transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy. See class
-docstring to see how to pass specific parameters to
-different species.</li>
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>H_act</strong> – Change in enthalpy between reactants (or products) and
-transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>H_act</strong> – Change in enthalpy between reactants/products and the transition
+state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1098,8 +1176,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_HoRT_act">
 <code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless enthalpy between reactants
-(or products) and transition state</p>
+<dd><p>Gets change in dimensionless enthalpy between reactants/products and
+the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1107,14 +1185,14 @@ different species.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless enthalpy. See
-class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT_act</strong> – Change in dimensionless enthalpy between reactants
-(or products) and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT_act</strong> – Change in enthalpy between reactants/products and the
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1160,7 +1238,7 @@ of the reaction state.</p>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_Keq">
-<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets equilibrium constant between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1169,6 +1247,8 @@ of the reaction state.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate equilibrium constant. See
 class docstring to see how to pass specific parameters to
 different species.</li>
@@ -1188,25 +1268,25 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_S_act">
 <code class="descname">get_S_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_S_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in entropy between reactants (or products) and
-transition state</p>
+<dd><p>Gets change in entropy between reactants/products and the transition
+state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
-units but omit the ‘/K’ (e.g. J/mol).</li>
+units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate entropy. See class
-docstring to see how to pass specific parameters to
-different species.</li>
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>S_act</strong> – Change in entropy between reactants (or products) and
-transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>S_act</strong> – Change in entropy between reactants/products and the transition
+state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1254,8 +1334,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_SoR_act">
 <code class="descname">get_SoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_SoR_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless entropy between reactants (or products)
-and transition state</p>
+<dd><p>Gets change in dimensionless entropy between reactants/products and
+the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1263,14 +1343,14 @@ and transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless entropy. See
-class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate entropy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR_act</strong> – Change in dimensionless entropy between reactants (or products)
-and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR_act</strong> – Change in entropy between reactants/products and the transition
+state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1316,7 +1396,7 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_U_act">
 <code class="descname">get_U_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_U_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in internal energy between reactants (or products) and
+<dd><p>Gets change in internal energy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1325,15 +1405,16 @@ transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate internal energy. See class
-docstring to see how to pass specific parameters to
-different species.</li>
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>U_act</strong> – Change in internal energy between reactants (or products) and
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>U_act</strong> – Change in internal energy between reactants/products and the
 transition state</p>
 </td>
 </tr>
@@ -1383,8 +1464,8 @@ different species.</li>
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_UoRT_act">
 <code class="descname">get_UoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_UoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in dimensionless internal energy between reactants (or
-products) and transition state</p>
+<dd><p>Gets change in dimensionless internal energy between
+reactants/products and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1392,14 +1473,14 @@ products) and transition state</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless internal energy.
-See class docstring to see how to pass specific parameters to
-different species.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate internal energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT_act</strong> – Change in dimensionless internal energy between reactants
-(or products) and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT_act</strong> – Change in internal energy between reactants/products and the
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1444,7 +1525,7 @@ different species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_Cp">
-<code class="descname">get_delta_Cp</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_Cp" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_Cp</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in heat capacity (constant P) between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1456,6 +1537,8 @@ products</p>
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1474,7 +1557,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_CpoR">
-<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1484,6 +1567,8 @@ products</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1502,7 +1587,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_Cv">
-<code class="descname">get_delta_Cv</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_Cv" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_Cv</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_Cv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in heat capacity (constant V) between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1514,6 +1599,8 @@ products</p>
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1532,7 +1619,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_CvoR">
-<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity (constant V)
 between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1542,6 +1629,8 @@ between reactants and products</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1559,8 +1648,70 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.reaction.Reaction.get_delta_E">
+<code class="descname">get_delta_E</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in electronic energy between reactants and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate electronic energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_E</strong> – Change in electronic energy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.Reaction.get_delta_EoRT">
+<code class="descname">get_delta_EoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_EoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets change in dimensionless electronic energy between reactants and
+products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate electronic energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_EoRT</strong> – Change in electronic energy between reactants and products</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_F">
-<code class="descname">get_delta_F</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_F" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_F</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_F" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in Helmholtz energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1572,6 +1723,8 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Helmholtz energy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1590,7 +1743,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_FoRT">
-<code class="descname">get_delta_FoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_FoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_FoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_FoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Helmholtz energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1600,6 +1753,8 @@ products</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Helmholtz energy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1618,7 +1773,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_G">
-<code class="descname">get_delta_G</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_G" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_G</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in Gibbs energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1630,6 +1785,8 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1648,7 +1805,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_GoRT">
-<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Gibbs energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1658,6 +1815,8 @@ products</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1676,7 +1835,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_H">
-<code class="descname">get_delta_H</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_H" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_H</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in enthalpy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1688,6 +1847,8 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1706,7 +1867,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_HoRT">
-<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless enthalpy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1715,6 +1876,8 @@ species.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1733,7 +1896,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_S">
-<code class="descname">get_delta_S</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_S" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_S</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in entropy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1744,6 +1907,8 @@ species.</li>
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate entropy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1762,7 +1927,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_SoR">
-<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless entropy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1771,6 +1936,8 @@ species.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate entropy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1789,7 +1956,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_U">
-<code class="descname">get_delta_U</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_U" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_U</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_U" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in internal energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1801,6 +1968,8 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate internal energy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1819,7 +1988,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_UoRT">
-<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless internal energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1829,6 +1998,8 @@ products</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate internal energy. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1847,7 +2018,7 @@ species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_delta_q">
-<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1856,6 +2027,8 @@ species.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate partition function. See class
 docstring to see how to pass specific parameters to different
 species.</li>
@@ -1873,10 +2046,52 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.reaction.Reaction.get_delta_quantity">
+<code class="descname">get_delta_quantity</code><span class="sig-paren">(</span><em>initial_state</em>, <em>final_state</em>, <em>method_name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_quantity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method to calculate the change in thermodynamic quantity
+between states</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>initial_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Thermodynamic state. Supported options:</p>
+<ul>
+<li>’reactants’</li>
+<li>’products’</li>
+<li>’transition state’</li>
+</ul>
+</li>
+<li><strong>final_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Thermodynamic state. Supported options:</p>
+<ul>
+<li>’reactants’</li>
+<li>’products’</li>
+<li>’transition state’</li>
+</ul>
+</li>
+<li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
+quantity as long as the relevant objects have the same method
+name</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Arguments passed to evaluate the quantity of the reactants and
+products</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>delta_quantity</strong> – Change in thermodynamic quantity between particular states</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_q_act">
 <code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in partition function between reactants (or products)
-and transition state</p>
+<dd><p>Gets change in partition function between reactants/products and the
+transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1890,8 +2105,8 @@ species.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q_act</strong> – Change in partition function between reactants (or products)
-and transition state</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q_act</strong> – Change in partition function between reactants/products and the
+transition state</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -1944,8 +2159,8 @@ different species.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether transition states should be included. Default is True</li>
-<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use as the key in the output dictionary. Default is
-name</li>
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use as the key in the output dictionary. Default
+is name</li>
 </ul>
 </td>
 </tr>
@@ -1953,6 +2168,40 @@ name</li>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.Reaction.get_state_quantity">
+<code class="descname">get_state_quantity</code><span class="sig-paren">(</span><em>state</em>, <em>method_name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_state_quantity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method to calculate the thermodynamic quantity of the state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Thermodynamic state. Supported options:</p>
+<ul>
+<li>’reactants’</li>
+<li>’products’</li>
+<li>’transition state’</li>
+</ul>
+</li>
+<li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
+quantity as long as the relevant objects have the same method
+name</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Arguments required to calculate the thermodynamic quantity of
+interest.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>state_quantity</strong> – Thermodynamic quantity of particular state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -1977,7 +2226,7 @@ name</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.to_string">
-<code class="descname">to_string</code><span class="sig-paren">(</span><em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.to_string" title="Permalink to this definition">¶</a></dt>
+<code class="descname">to_string</code><span class="sig-paren">(</span><em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>stoich_format='.2f'</em>, <em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.to_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the Reaction object as a stoichiometric reaction</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1986,6 +2235,10 @@ name</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Separates species. Default is ‘+’</li>
 <li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Separates reaction states. Default is ‘=’</li>
+<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write stoichiometric numbers. Default is ‘.2f’ (float
+rounded to 2 decimal places)</li>
+<li><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes transition states in output. Default is True</li>
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use to print out species. Default is name</li>
 </ul>
 </td>
 </tr>
@@ -2101,6 +2354,185 @@ balanced.</p>
 </div>
 </div>
 </div>
+<div class="section" id="chemkinreaction">
+<h2>ChemkinReaction<a class="headerlink" href="#chemkinreaction" title="Permalink to this headline">¶</a></h2>
+<p>This is a child class of <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> but has additional
+attributes for reading and writting Chemkin files.</p>
+<dl class="class">
+<dt id="pMuTT.reaction.ChemkinReaction">
+<em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">ChemkinReaction</code><span class="sig-paren">(</span><em>beta=1.0</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chemkin reaction. Has additional attributes to support input and output</p>
+<dl class="attribute">
+<dt id="pMuTT.reaction.ChemkinReaction.beta">
+<code class="descname">beta</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power to raise the temperature in the rate expression. Default is 1</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.reaction.ChemkinReaction.is_adsorption">
+<code class="descname">is_adsorption</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.is_adsorption" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the reaction represents an adsorption. Default is False</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.reaction.ChemkinReaction.sticking_coeff">
+<code class="descname">sticking_coeff</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.sticking_coeff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.reaction.ChemkinReaction.gas_phase">
+<code class="descname">gas_phase</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.gas_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the reaction has only gas-phase species. This attribute is
+determined based on the reactants and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.reaction.ChemkinReaction.kwargs">
+<code class="descname">kwargs</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyword arguments used to initialize the reactants, transition state
+and products</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">keyword arguments</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.ChemkinReaction.get_A">
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='sum'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the preexponential factor in the Chemkin format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sden_operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Site density operation to use. Default is ‘sum’</li>
+<li><strong>include_entropy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the act entropy. Default is True</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.ChemkinReaction.get_HoRT_act">
+<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy. If there is no transition
+state species, calculates the delta dimensionless Gibbs energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT_act</strong> – Change in Gibbs energy between reactants/products and the
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.ChemkinReaction.get_delta_GoRT">
+<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy. If there is no transition
+state species, calculates the delta dimensionless Gibbs energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>act</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the transition state as the final state. Default
+is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
+docstring to see how to pass specific parameters to different
+species.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT_act</strong> – Change in Gibbs energy between reactants/products and the
+transition state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.ChemkinReaction.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="id2">
 <h2>Reactions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -2157,6 +2589,70 @@ name</li>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.Reactions.plot_coordinate_diagram">
+<code class="descname">plot_coordinate_diagram</code><span class="sig-paren">(</span><em>method_name</em>, <em>ref_index=0</em>, <em>ref_state='reactants'</em>, <em>x_offset=1.0</em>, <em>include_TS=True</em>, <em>x_scale_TS=0.5</em>, <em>y_scale_TS=0.5</em>, <em>include_TS_labels=True</em>, <em>y_TS_label_offset=0.1</em>, <em>x_TS_label_offset=0.0</em>, <em>TS_label_format='.2f'</em>, <em>figure=None</em>, <em>axes=None</em>, <em>plt_kwargs={}</em>, <em>**reaction_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.plot_coordinate_diagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a reaction coordinate diagram.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
+quantity as long as the relevant objects have the same method
+name. Some examples include: <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_H</span></code>,
+<code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_E</span></code></li>
+<li><strong>ref_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Reaction index to use to reference states. Default is the first
+reaction (i.e. ref_index = 0)</li>
+<li><strong>ref_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>State of the reference to use. Supported options include:</p>
+<ul>
+<li>reactants (default)</li>
+<li>products</li>
+<li>transition state</li>
+<li>ts (same as transition state)</li>
+</ul>
+</li>
+<li><strong>x_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Spacing between reaction states. Shape of curve likely does not
+change with this parameter since the x axis would rescale
+appropriately</li>
+<li><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether transition states should be included. Default is True</li>
+<li><strong>x_scale_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Value between 0 and 1 that controls curvature of transition
+state peaks. Higher values produce sharper peaks. Default is
+0.5</li>
+<li><strong>y_scale_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Value between 0 and 1 that controls curvature of transition
+state peaks. Higher values produce sharper peaks. Default is
+0.5</li>
+<li><strong>include_TS_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds a label to the peaks indicating the difference
+between the reactants and the transition state. Default is True</li>
+<li><strong>y_TS_label_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Vertical value to offset TS_label from the TS position. This
+value scales with the difference between major ticks. Negative
+values will shift the label downwards. Default is 0.10</li>
+<li><strong>x_TS_label_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Horizontal value to offset TS_label from the TS_position. This
+value scales with the x_offset value. Negative values will shift
+the label rightward. Default is 0 (i.e. labels are directly
+above peaks by default)</li>
+<li><strong>TS_label_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print TS_labels. Uses the <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str.format">str.format</a> syntax.
+Default is ‘.2f’ (i.e. a floating point value rounded to the
+second decimal place)</li>
+<li><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Add plot to this figure. If not specified, one will be generated</li>
+<li><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>, optional) – Adds plot to this axis. If not specified, one will be generated</li>
+<li><strong>plt_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Extra arguments that will be fed to
+<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html">matplotlib.pyplot.subplots</a></li>
+<li><strong>reaction_kwargs</strong> (<em>keyword arguments</em>) – Extra arguments that will be fed to the reactions</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Figure</li>
+<li><strong>axes</strong> (tuple of <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>) – Axes of the plot.</li>
+</ul>
+</p>
 </td>
 </tr>
 </tbody>
@@ -2365,10 +2861,10 @@ If specified, overwites the value held by BEP object.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="phase_diagram.html" class="btn btn-neutral float-right" title="Phase Diagrams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="chemkin.html" class="btn btn-neutral float-right" title="Chemkin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mixture.html" class="btn btn-neutral" title="Mixture Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

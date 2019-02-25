@@ -7,6 +7,20 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.3
+-------------
+Feb. 25, 2019
+
+- Added ``smiles`` attribute to :class:`~pMuTT.statmech.StatMech` and 
+  :class:`~pMuTT.empirical.BaseThermo` classes
+- Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files
+- Added :class:`~pMuTT.mixture.cov.CovEffect` class to model coverage effects
+  and integrated it with :class:`~pMuTT.statmech.StatMech` and 
+  :class:`~pMuTT.empirical.BaseThermo` classes
+- Added ``include_ZPE`` parameter to ``get_EoRT``, ``get_E``, ``get_delta_EoRT``
+  and ``get_delta_E`` for the :class:`~pMuTT.statmech.StatMech` class and
+  :class:`~pMuTT.reaction.Reaction` class to add zero-point energy in
+  calculations
 - Renamed private methods ``_get_delta_quantity`` and ``_get_state_quantity`` to
   public methods ``get_delta_quantity`` and ``get_state_quantity`` in
   :class:`~pMuTT.reaction.Reaction` class
@@ -21,12 +35,9 @@ Development Branch
 - Added ``get_EoRT_state`` and ``get_delta_EoRT`` methods to 
   :class:`~pMuTT.reaction.Reaction` to calculate electronic contribution to
   reaction properties
-- Removed ``get_X_act`` methods from the :class:`~pMuTT.reaction.Reaction`
-  class. Instead, an optional parameter, ``activation``, is added to 
-  ``get_delta_X`` methods to specify the difference between the
-  reactants/products and the transition state. Note that ``get_E_act`` and 
-  ``get_EoRT_act`` are still available to calculate activation energy (and these
-  methods handle if a BEP relationship is available).
+- Added an optional parameter, ``activation``, to ``get_delta_X`` methods to 
+  specify the difference between the reactants/products and the transition
+  state. 
 - Added ``pMuTT.constants.symmetry_dict`` to allow easy look up of common
   symmetry numbers
 - Fixed bug where specie-specific arguments were not passed correctly for

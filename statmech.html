@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reactions" href="reactions.html" />
+    <link rel="next" title="Mixture Models" href="mixture.html" />
     <link rel="prev" title="Empirical Models" href="empirical.html" /> 
 
   
@@ -125,7 +125,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#creating-new-statmech-models">Creating New StatMech Models</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
@@ -225,7 +227,7 @@ Helmholtz energy and Gibbs energy.</p>
 <blockquote>
 <div><dl class="class">
 <dt id="pMuTT.statmech.StatMech">
-<em class="property">class </em><code class="descclassname">pMuTT.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>name=None</em>, <em>trans_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.statmech.</code><code class="descname">StatMech</code><span class="sig-paren">(</span><em>name=None</em>, <em>trans_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>vib_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>rot_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>elec_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>nucl_model=&lt;pMuTT.statmech.EmptyMode object&gt;</em>, <em>mix_models=None</em>, <em>smiles=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for statistical mechanic models.</p>
 <dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.name">
@@ -317,6 +319,34 @@ Helmholtz energy and Gibbs energy.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="pMuTT.statmech.StatMech.mix_models">
+<code class="descname">mix_models</code><a class="headerlink" href="#pMuTT.statmech.StatMech.mix_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mixture models that calculate excess properties.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <code class="docutils literal notranslate"><span class="pre">pMuTT.mixture</span></code> objects, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.statmech.StatMech.smiles">
+<code class="descname">smiles</code><a class="headerlink" href="#pMuTT.statmech.StatMech.smiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smiles representation of species</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="pMuTT.statmech.StatMech.notes">
 <code class="descname">notes</code><a class="headerlink" href="#pMuTT.statmech.StatMech.notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Any additional details you would like to include such as
@@ -351,25 +381,32 @@ computational set up. Default is None</p>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_Cp">
-<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>units</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_Cp" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>units</em>, <em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
-contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cp</strong> – Heat capacity</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cp</strong> – Heat capacity. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -378,7 +415,7 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless heat capacity (constant P)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -387,16 +424,22 @@ units.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
 contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR</strong> – Dimensionless heat capacity. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR</strong> – Dimensionless heat capacity. N represents the number of mixing
+models. If verbose is True, contribution to each mode are as
+follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -405,25 +448,32 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_Cv">
-<code class="descname">get_Cv</code><span class="sig-paren">(</span><em>units</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_Cv" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_Cv</code><span class="sig-paren">(</span><em>units</em>, <em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_Cv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
-contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cv</strong> – Heat capacity</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Cv</strong> – Heat capacity. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -432,7 +482,7 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_CvoR">
-<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_CvoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless heat capacity (constant V)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -441,16 +491,88 @@ units.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
 contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR</strong> – Dimensionless heat capacity. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CvoR</strong> – Dimensionless heat capacity. N represents the number of mixing
+models. If verbose is True, contribution to each mode are as
+follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.statmech.StatMech.get_E">
+<code class="descname">get_E</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the electronic energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. If the electronic mode is
+<a class="reference internal" href="#pMuTT.statmech.elec.IdealElec" title="pMuTT.statmech.elec.IdealElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code></a>, then the output is
+insensitive to this input. Default is 298.15 K</li>
+<li><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>E</strong> – Electronic energy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.statmech.StatMech.get_EoRT">
+<code class="descname">get_EoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>include_ZPE=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_EoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionless electronic energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. If the electronic mode is
+<a class="reference internal" href="#pMuTT.statmech.elec.IdealElec" title="pMuTT.statmech.elec.IdealElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code></a>, then the output is
+insensitive to this input. Default is 298.15 K</li>
+<li><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to electronic mode</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>EoRT</strong> – Dimensionless electronic energy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -459,26 +581,33 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_F">
-<code class="descname">get_F</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_F" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_F</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_F" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the Helmholtz energy. If True, returns
-contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
-<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the Helmholtz energy. If True, returns
+contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>F</strong> – Helmholtz energy</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>F</strong> – Helmholtz energy. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -487,25 +616,31 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_FoRT">
-<code class="descname">get_FoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_FoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_FoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_FoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless Helmholtz energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Helmholtz energy. If True, returns
 contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>FoRT</strong> – Dimensionless Helmoltz energy. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>FoRT</strong> – Dimensionless Helmoltz energy. N represents the number of mixing
+models. If verbose is True, contribution to each mode are as
+follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -514,7 +649,7 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_G">
-<code class="descname">get_G</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_G" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_G</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -525,15 +660,22 @@ to each mode are as follows:
 contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
-<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>G</strong> – Gibbs energy</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>G</strong> – Gibbs energy. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -542,25 +684,31 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
 contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless Gibbs energy. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless Gibbs energy. N represents the number of mixing
+models. If verbose is True, contribution to each mode are as
+follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -569,26 +717,33 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_H">
-<code class="descname">get_H</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_H" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_H</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the enthalpy. If True, returns
-contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
-<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the enthalpy. If True, returns
+contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>H</strong> – Enthalpy</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>H</strong> – Enthalpy. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -597,25 +752,31 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total enthalpy. If True, returns
 contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless enthalpy. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless enthalpy. N represents the number of mixing
+models. If verbose is True, contribution to each mode are as
+follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -624,25 +785,32 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_S">
-<code class="descname">get_S</code><span class="sig-paren">(</span><em>units</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_S" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_S</code><span class="sig-paren">(</span><em>units</em>, <em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the entropy. If True, returns
-contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the entropy. If True, returns
+contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>S</strong> – Entropy</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>S</strong> – Entropy. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -651,25 +819,30 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_SoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total entropy. If True, returns
 contribution of each mode.</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy. N represents the number of mixing models.
+If verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -678,26 +851,33 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_U">
-<code class="descname">get_U</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_U" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_U</code><span class="sig-paren">(</span><em>units</em>, <em>T=298.15</em>, <em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_U" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the internal energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the internal energy. If True, returns
-contribution of each mode.</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
-<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the internal energy. If True, returns
+contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
 <li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>U</strong> – Internal energy</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>U</strong> – Internal energy. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -706,25 +886,31 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless internal energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total internal energy. If True, returns
 contribution of each mode.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT</strong> – Dimensionless internal energy. If verbose is True, contribution
-to each mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT</strong> – Dimensionless internal energy. N represents the number of mixing
+models. If verbose is True, contribution to each mode are as
+follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -733,25 +919,72 @@ to each mode are as follows:
 
 <dl class="method">
 <dt id="pMuTT.statmech.StatMech.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_q" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Partition function</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 <li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the product of partition functions. If True,
 returns contributions of each mode</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q</strong> – Partition function. If verbose is True, contribution to each
-mode are as follows:
-[trans, vib, rot, elec, nucl]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q</strong> – Partition function. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.statmech.StatMech.get_quantity">
+<code class="descname">get_quantity</code><span class="sig-paren">(</span><em>method_name</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>operation='sum'</em>, <em>verbose=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.StatMech.get_quantity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic method to get any quantity from modes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
+quantity as long as the relevant objects have the same method
+name</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Operation to apply when combining the modes. Supported options
+include:</p>
+<ul>
+<li>sum (Default)</li>
+<li>prod</li>
+</ul>
+</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
+contribution of each mode.</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>quantity</strong> – Desired quantity. N represents the number of mixing models. If
+verbose is True, contribution to each mode are as follows:
+[trans, vib, rot, elec, nucl, mixing_models (if any)]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N+5,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -823,7 +1056,7 @@ mode are as follows:
 </div>
 </div>
 <div class="section" id="presets">
-<span id="id15"></span><h2>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">¶</a></h2>
+<span id="id16"></span><h2>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">¶</a></h2>
 <p>If you are using a common model (e.g. the ideal gas model), then you can get
 the default parameters from the dictionary, <code class="docutils literal notranslate"><span class="pre">pMuTT.statmech.presets</span></code>.
 The same H2O StatMech object can be specified without the need to pass all the
@@ -1242,7 +1475,7 @@ specified, <code class="docutils literal notranslate"><span class="pre">molecula
 will use a model often.</p>
 <dl class="data">
 <dt id="pMuTT.statmech.presets">
-<code class="descclassname">pMuTT.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin')}, 'harmonic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin'), 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;}, 'idealgas': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'n_degrees': 3, 'optional': 'atoms', 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'rot_model': &lt;class 'pMuTT.statmech.rot.RigidRotor'&gt;, 'trans_model': &lt;class 'pMuTT.statmech.trans.IdealTrans'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;}, 'placeholder': {'elec_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'required': (), 'rot_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'trans_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;}}</em><a class="headerlink" href="#pMuTT.statmech.presets" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.statmech.</code><code class="descname">presets</code><em class="property"> = {'electronic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('potentialenergy', 'spin'), 'statmech_model': &lt;class 'pMuTT.statmech.StatMech'&gt;}, 'harmonic': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'required': ('vib_wavenumbers', 'potentialenergy', 'spin'), 'statmech_model': &lt;class 'pMuTT.statmech.StatMech'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;}, 'idealgas': {'elec_model': &lt;class 'pMuTT.statmech.elec.IdealElec'&gt;, 'n_degrees': 3, 'optional': 'atoms', 'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy', 'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'), 'rot_model': &lt;class 'pMuTT.statmech.rot.RigidRotor'&gt;, 'statmech_model': &lt;class 'pMuTT.statmech.StatMech'&gt;, 'trans_model': &lt;class 'pMuTT.statmech.trans.IdealTrans'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.vib.HarmonicVib'&gt;}, 'placeholder': {'elec_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'nucl_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'required': (), 'rot_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'statmech_model': &lt;class 'pMuTT.statmech.StatMech'&gt;, 'trans_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;, 'vib_model': &lt;class 'pMuTT.statmech.EmptyMode'&gt;}}</em><a class="headerlink" href="#pMuTT.statmech.presets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commonly used models. The ‘required’ and ‘optional’ fields indicate
 parameters that still need to be passed.</p>
 </dd></dl>
@@ -2026,9 +2259,9 @@ ignored. Default is None</p>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac {U^{qRRHO}}{RT} = \sum_{i}\omega_i\frac{U^{RRHO}}{RT}
 + \frac{1}{2}(1-\omega_i)\)</span></p>
-<p><span class="math notranslate nohighlight">\(\frac {U^{RRHO}}{RT} = \frac{\Theta_i}{T} \bigg(\frac{1}{2}
-+ \frac{\exp(-\frac{\Theta_i}{T})}{1-\exp(-\frac{\Theta_i}{T})}
-\bigg)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac {U^{RRHO}_{i}}{RT} = \frac{\Theta_i}{T} \bigg(
+\frac{1}{2} + \frac{\exp(-\frac{\Theta_i}{T})}{1-\exp(-\frac{
+\Theta_i}{T})}\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2038,6 +2271,23 @@ ignored. Default is None</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>UoRT_vib</strong> – Vibrational dimensionless internal energy</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.statmech.vib.QRRHOVib.get_ZPE">
+<code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.QRRHOVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the zero point energy</p>
+<p><span class="math notranslate nohighlight">\(ZPE=\frac{1}{2}k_b\sum_i \omega_i\Theta_{V,i}\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>zpe</strong> – Zero point energy in eV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
 </tr>
 </tbody>
 </table>
@@ -2288,7 +2538,7 @@ John Wiley &amp; Sons, 2010.</p>
 <dt id="pMuTT.statmech.vib.EinsteinVib.get_ZPE">
 <code class="descname">get_ZPE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.EinsteinVib.get_ZPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the zero point energy</p>
-<p><span class="math notranslate nohighlight">\(u^0_E=u+\frac{3}{2}\Theta_Ek_B\)</span></p>
+<p><span class="math notranslate nohighlight">\(u^0_E=u+\frac{3}{2}\Theta_E k_B\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -3174,7 +3424,7 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="reactions.html" class="btn btn-neutral float-right" title="Reactions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mixture.html" class="btn btn-neutral float-right" title="Mixture Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="empirical.html" class="btn btn-neutral" title="Empirical Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

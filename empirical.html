@@ -98,7 +98,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
@@ -194,7 +196,7 @@
 <p>This is the parent class for the empirical models.</p>
 <dl class="class">
 <dt id="pMuTT.empirical.BaseThermo">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.</code><code class="descname">BaseThermo</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>references=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.BaseThermo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.empirical.</code><code class="descname">BaseThermo</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>references=None</em>, <em>mix_models=None</em>, <em>smiles=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.BaseThermo" title="Permalink to this definition">¶</a></dt>
 <dd><p>The empirical parent class.
 Holds properties of a specie, the statistical-mechanical thermodynamic
 model.</p>
@@ -250,13 +252,13 @@ e.g. CH3OH can be represented as:
 <dt id="pMuTT.empirical.BaseThermo.statmech_model">
 <code class="descname">statmech_model</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.statmech_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Statistical thermodynamic model. Default is None.
-Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT</cite>,
-<cite>get_SoR</cite>, <cite>get_GoRT</cite>.</p>
+Object should have the following methods: <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>,
+<code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><cite>pMuTT.statmech</cite> object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">pMuTT.statmech</span></code> object, optional</td>
 </tr>
 </tbody>
 </table>
@@ -265,13 +267,41 @@ Object should have the following methods: <cite>get_CpoR</cite>, <cite>get_HoRT<
 <dl class="attribute">
 <dt id="pMuTT.empirical.BaseThermo.references">
 <code class="descname">references</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.references" title="Permalink to this definition">¶</a></dt>
-<dd><p>Contains references to calculate <cite>HoRT_ref</cite>. If not specified then
+<dd><p>Contains references to calculate <code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code>. If not specified then
 HoRT_dft will be used without adjustment. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><cite>pMuTT.empirical.References.references</cite> object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">pMuTT.empirical.References.references</span></code> object, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.empirical.BaseThermo.mix_models">
+<code class="descname">mix_models</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.mix_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mixture models that calculate excess properties.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <code class="docutils literal notranslate"><span class="pre">pMuTT.mixture</span></code> objects, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.empirical.BaseThermo.smiles">
+<code class="descname">smiles</code><a class="headerlink" href="#pMuTT.empirical.BaseThermo.smiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smiles representation of species. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
 </tr>
 </tbody>
 </table>
@@ -551,7 +581,7 @@ specified, dimensionless units used.</li>
 <h2>NASA<a class="headerlink" href="#nasa" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pMuTT.empirical.nasa.Nasa">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.nasa.</code><code class="descname">Nasa</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_mid</em>, <em>T_high</em>, <em>a_low</em>, <em>a_high</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.empirical.nasa.</code><code class="descname">Nasa</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_mid</em>, <em>T_high</em>, <em>a_low</em>, <em>a_high</em>, <em>cat_site=None</em>, <em>n_sites=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores the information for an individual nasa specie
 Inherits from <a class="reference internal" href="#pMuTT.empirical.BaseThermo" title="pMuTT.empirical.BaseThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseThermo</span></code></a></p>
 <p>The thermodynamic properties are calculated using the following form:</p>
@@ -628,6 +658,36 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.BaseThermo" t
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(7,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.empirical.nasa.Nasa.cat_site">
+<code class="descname">cat_site</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.cat_site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Catalyst site for adsorption. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Site object, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.empirical.nasa.Nasa.n_sites">
+<code class="descname">n_sites</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.n_sites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of catalyst sites occupied by species. If cat_site is not
+assigned, then n_sites is None. If cat_site is specified, the
+default is 1</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, optional</td>
 </tr>
 </tbody>
 </table>
@@ -728,7 +788,7 @@ attributes to be stored.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_Cp">
-<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_Cp" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -738,6 +798,12 @@ attributes to be stored.</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -753,17 +819,28 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR</strong> – Dimensionless heat capacity</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR</strong> – Dimensionless heat capacity</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -771,7 +848,7 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_G">
-<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_G" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -781,6 +858,12 @@ units.</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -796,17 +879,28 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless Gibbs free energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT</strong> – Dimensionless Gibbs free energy</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless Gibbs free energy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -814,7 +908,7 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_H">
-<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_H" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -824,6 +918,12 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -839,17 +939,28 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT</strong> – Dimensionless enthalpy</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless enthalpy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -857,7 +968,7 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_S">
-<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_S" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -867,6 +978,12 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -882,17 +999,28 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.nasa.Nasa.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_SoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR</strong> – Dimensionless entropy</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1070,7 +1198,7 @@ attributes to be stored.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_Cp">
-<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_Cp" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1080,6 +1208,12 @@ attributes to be stored.</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -1095,17 +1229,28 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>CpoR</strong> – Dimensionless heat capacity</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CpoR</strong> – Dimensionless heat capacity</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1113,7 +1258,7 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_G">
-<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_G" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1123,6 +1268,12 @@ units.</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -1138,17 +1289,28 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless Gibbs free energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT</strong> – Dimensionless Gibbs free energy</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless Gibbs free energy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1156,7 +1318,7 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_H">
-<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_H" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1166,6 +1328,12 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -1181,17 +1349,28 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>HoRT</strong> – Dimensionless enthalpy</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless enthalpy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1199,7 +1378,7 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_S">
-<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_S" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1209,6 +1388,12 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
 <li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
 </ul>
 </td>
 </tr>
@@ -1224,17 +1409,28 @@ units.</li>
 
 <dl class="method">
 <dt id="pMuTT.empirical.shomate.Shomate.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_SoR" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+quantity of interest. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+of the modes do not have the quantity of interest. Default is
+True</li>
+<li><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR</strong> – Dimensionless entropy</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>

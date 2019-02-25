@@ -88,7 +88,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture.html">Mixture Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
@@ -343,7 +345,8 @@ div.nboutput div.output_area.stderr {
 </style>
 <div class="section" id="Overview-of-pMuTT’s-Core-Functionality">
 <h1>Overview of pMuTT’s Core Functionality<a class="headerlink" href="#Overview-of-pMuTT’s-Core-Functionality" title="Permalink to this headline">¶</a></h1>
-<p>Originally written for Version 1.2.1 Last Updated for Version 1.2.1</p>
+<p>Originally written for Version 1.2.1</p>
+<p>Last Updated for Version 1.2.3</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -702,6 +705,7 @@ instead.</p>
               &#39;rot_temperatures&#39;,
               &#39;symmetrynumber&#39;),
  &#39;rot_model&#39;: &lt;class &#39;pMuTT.statmech.rot.RigidRotor&#39;&gt;,
+ &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.IdealTrans&#39;&gt;,
  &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;}
 </pre></div></div>
@@ -959,7 +963,6 @@ here</a>.</p>
 
 <span class="n">ethane_ref</span> <span class="o">=</span> <span class="n">Reference</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ethane&#39;</span><span class="p">,</span>
                        <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
-                       <span class="n">statmech_model</span><span class="o">=</span><span class="n">StatMech</span><span class="p">,</span>
                        <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;C2H6&#39;</span><span class="p">),</span>
                        <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3050.5296</span><span class="p">,</span> <span class="mf">3049.8428</span><span class="p">,</span> <span class="mf">3025.2714</span><span class="p">,</span>
                                         <span class="mf">3024.4304</span><span class="p">,</span> <span class="mf">2973.5455</span><span class="p">,</span> <span class="mf">2971.9261</span><span class="p">,</span>
@@ -976,7 +979,6 @@ here</a>.</p>
 
 <span class="n">propane_ref</span> <span class="o">=</span> <span class="n">Reference</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;propane&#39;</span><span class="p">,</span>
                         <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>
-                        <span class="n">statmech_model</span><span class="o">=</span><span class="n">StatMech</span><span class="p">,</span>
                         <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;C3H8&#39;</span><span class="p">),</span>
                         <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3040.9733</span><span class="p">,</span> <span class="mf">3038.992</span><span class="p">,</span> <span class="mf">3036.8071</span><span class="p">,</span>
                                          <span class="mf">3027.6062</span><span class="p">,</span> <span class="mf">2984.8436</span><span class="p">,</span> <span class="mf">2966.1692</span><span class="p">,</span>
@@ -1004,7 +1006,7 @@ here</a>.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;C&#39;: -355.08622107800994, &#39;H&#39;: -125.24484586807145}
+{&#39;C&#39;: -355.08622107801045, &#39;H&#39;: -125.24484586807125}
 </pre></div></div>
 </div>
 <p>Passing the <code class="docutils literal notranslate"><span class="pre">References</span></code> object when we make our <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> object
@@ -1060,8 +1062,8 @@ special rules that depend on the header name.</p>
 <span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 
 <span class="c1"># Find the location of Jupyter notebook</span>
-<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t. Using pathlib can</span>
-<span class="c1"># overcome this limiation</span>
+<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
+<span class="c1"># Using pathlib can overcome this limiation</span>
 <span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 
 <span class="c1"># The Excel spreadsheet is located in the same folder as the Jupyter notebook</span>
@@ -1191,7 +1193,7 @@ special rules that depend on the header name.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;C&#39;: -355.0863427122927, &#39;H&#39;: -125.24480503027164}
+{&#39;C&#39;: -355.0863427122925, &#39;H&#39;: -125.24480503027165}
 </pre></div></div>
 </div>
 <p>Butane can be initialized in a similar way.</p>
@@ -1387,7 +1389,8 @@ calculating any thermodynamic property)</li>
                        <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]),</span>
     <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">224.13045381</span><span class="p">,</span>
                   <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;electronic&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;H2O*no          vib_wavenumbers=[3797.255519,</span>
+    <span class="s1">&#39;H2O*&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">238.4713854</span><span class="p">,</span>
+                     <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3797.255519</span><span class="p">,</span>
                                       <span class="mf">3658.895695</span><span class="p">,</span>
                                       <span class="mf">1530.600295</span><span class="p">,</span>
                                       <span class="mf">266.366130</span><span class="p">,</span>
