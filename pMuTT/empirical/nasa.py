@@ -49,13 +49,13 @@ class Nasa(BaseThermo):
             Catalyst site for adsorption. Default is None
         n_sites : int, optional
             Number of catalyst sites occupied by species. If cat_site is not
-            assigned, then n_sites is None. If cat_site is specified, the 
+            assigned, then n_sites is None. If cat_site is specified, the
             default is 1
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
     """
-    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high, cat_site=None,
-                 n_sites=1, **kwargs):
+    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high,
+                 cat_site=None, n_sites=1, **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_mid = T_mid
@@ -114,7 +114,7 @@ class Nasa(BaseThermo):
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -134,21 +134,21 @@ class Nasa(BaseThermo):
             for i, T_i in enumerate(T):
                 a = self.get_a(T_i)
                 CpoR[i] = get_nasa_CpoR(a=a, T=T_i) \
-                          + np.sum(_get_mix_quantity(self.mix_models, 
-                                                    method_name='get_CpoR',
-                                                    raise_error=raise_error,
-                                                    raise_warning=raise_warning,
-                                                    default_value=0.,
-                                                    T=T_i, **kwargs))
+                    + np.sum(_get_mix_quantity(self.mix_models,
+                                               method_name='get_CpoR',
+                                               raise_error=raise_error,
+                                               raise_warning=raise_warning,
+                                               default_value=0.,
+                                               T=T_i, **kwargs))
         else:
             a = self.get_a(T=T)
             CpoR = get_nasa_CpoR(a=a, T=T) \
-                   + np.sum(_get_mix_quantity(self.mix_models, 
-                                    method_name='get_CpoR',
-                                    raise_error=raise_error,
-                                    raise_warning=raise_warning,
-                                    default_value=0.,
-                                    T=T, **kwargs))
+                + np.sum(_get_mix_quantity(self.mix_models, 
+                                           method_name='get_CpoR',
+                                           raise_error=raise_error,
+                                           raise_warning=raise_warning,
+                                           default_value=0.,
+                                           T=T, **kwargs))
         return CpoR
 
     def get_Cp(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -162,7 +162,7 @@ class Nasa(BaseThermo):
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -187,7 +187,7 @@ class Nasa(BaseThermo):
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -207,21 +207,21 @@ class Nasa(BaseThermo):
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 HoRT[i] = get_nasa_HoRT(a=a, T=T_i) \
-                          + np.sum(_get_mix_quantity(mix_models=self.mix_models, 
-                                                     method_name='get_HoRT',
-                                                     raise_error=raise_error,
-                                                     raise_warning=raise_warning,
-                                                     default_value=0.,
-                                                     T=T_i, **kwargs))
+                    + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                                               method_name='get_HoRT',
+                                               raise_error=raise_error,
+                                               raise_warning=raise_warning,
+                                               default_value=0.,
+                                               T=T_i, **kwargs))
         else:
             a = self.get_a(T=T)
             HoRT = get_nasa_HoRT(a=a, T=T) \
-                   + np.sum(_get_mix_quantity(mix_models=self.mix_models,
-                                              method_name='get_HoRT',
-                                              raise_error=raise_error,
-                                              raise_warning=raise_warning,
-                                              default_value=0.,
-                                              T=T, **kwargs))
+                + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                                           method_name='get_HoRT',
+                                           raise_error=raise_error,
+                                           raise_warning=raise_warning,
+                                           default_value=0.,
+                                           T=T, **kwargs))
         return HoRT
 
     def get_H(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -235,7 +235,7 @@ class Nasa(BaseThermo):
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -262,7 +262,7 @@ class Nasa(BaseThermo):
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -282,21 +282,21 @@ class Nasa(BaseThermo):
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 SoR[i] = get_nasa_SoR(a=a, T=T_i) \
-                         + np.sum(_get_mix_quantity(mix_models=self.mix_models, 
-                                                    method_name='get_SoR',
-                                                    raise_error=raise_error,
-                                                    raise_warning=raise_warning,
-                                                    default_value=0.,
-                                                    T=T_i, **kwargs))
+                    + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                                               method_name='get_SoR',
+                                               raise_error=raise_error,
+                                               raise_warning=raise_warning,
+                                               default_value=0.,
+                                               T=T_i, **kwargs))
         else:
             a = self.get_a(T=T)
             SoR = get_nasa_SoR(a=a, T=T) \
-                  + np.sum(_get_mix_quantity(mix_models=self.mix_models, 
-                                             method_name='get_SoR',
-                                             raise_error=raise_error,
-                                             raise_warning=raise_warning,
-                                             default_value=0.,
-                                             T=T, **kwargs))
+                + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                                           method_name='get_SoR',
+                                           raise_error=raise_error,
+                                           raise_warning=raise_warning,
+                                           default_value=0.,
+                                           T=T, **kwargs))
         return SoR
 
     def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -310,7 +310,7 @@ class Nasa(BaseThermo):
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -325,7 +325,7 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_SoR(T=T, raise_error=raise_error, 
+        return self.get_SoR(T=T, raise_error=raise_error,
                             raise_warning=raise_warning, **kwargs)*c.R(units)
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
@@ -336,7 +336,7 @@ class Nasa(BaseThermo):
             T : float or (N,) `numpy.ndarray`_
                 Temperature(s) in K
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -351,9 +351,9 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        GoRT = self.get_HoRT(T, raise_error=raise_error, 
+        GoRT = self.get_HoRT(T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
-               - self.get_SoR(T, raise_error=raise_error, 
+               - self.get_SoR(T, raise_error=raise_error,
                               raise_warning=raise_warning, **kwargs)
         return GoRT
 
@@ -368,7 +368,7 @@ class Nasa(BaseThermo):
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -383,9 +383,9 @@ class Nasa(BaseThermo):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_GoRT(T=T, raise_error=raise_error, 
+        return self.get_GoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,

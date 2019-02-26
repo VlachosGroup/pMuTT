@@ -5,10 +5,9 @@ Vlachos group code for thermodynamic models.
 Created on Fri Jul 7 12:40:00 2018
 """
 import inspect
-import warnings
 import numpy as np
 from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-    _get_specie_kwargs, _apply_numpy_operation)
+                   _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.mixture import _get_mix_quantity
@@ -140,14 +139,14 @@ class StatMech:
 
         # Assign mixing models
         # TODO Mixing models can not be initialized by passing the class
-        # because all the models will have the same attributes. Figure out a way
-        # to pass them. Perhaps have a dictionary that contains the attributes
-        # separated by species
+        # because all the models will have the same attributes. Figure out
+        # a way to pass them. Perhaps have a dictionary that contains the
+        # attributes separated by species
         if not _is_iterable(mix_models) and mix_models is not None:
             mix_models = [mix_models]
-        self.mix_models = mix_models 
+        self.mix_models = mix_models
 
-    def get_quantity(self, method_name, raise_error=True, raise_warning=True, 
+    def get_quantity(self, method_name, raise_error=True, raise_warning=True,
                      operation='sum', verbose=False, **kwargs):
         """Generic method to get any quantity from modes.
 
@@ -158,7 +157,7 @@ class StatMech:
                 quantity as long as the relevant objects have the same method
                 name
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -167,7 +166,7 @@ class StatMech:
             operation : str, optional
                 Operation to apply when combining the modes. Supported options
                 include:
-                
+
                 - sum (Default)
                 - prod
             verbose : bool, optional
@@ -198,27 +197,27 @@ class StatMech:
         quantity = np.array([
             _get_mode_quantity(mode=self.trans_model, method_name=method_name,
                                raise_error=raise_error,
-                               raise_warning=raise_warning, 
+                               raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
             _get_mode_quantity(mode=self.vib_model, method_name=method_name,
                                raise_error=raise_error,
-                               raise_warning=raise_warning, 
+                               raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
             _get_mode_quantity(mode=self.rot_model, method_name=method_name,
                                raise_error=raise_error,
-                               raise_warning=raise_warning, 
+                               raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
             _get_mode_quantity(mode=self.elec_model, method_name=method_name,
                                raise_error=raise_error,
-                               raise_warning=raise_warning, 
+                               raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
             _get_mode_quantity(mode=self.nucl_model, method_name=method_name,
                                raise_error=raise_error,
-                               raise_warning=raise_warning, 
+                               raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs)])
         # Calculate contribution from mixing models if any
@@ -231,7 +230,7 @@ class StatMech:
                                          **kwargs)
         # Add mixing quantities onto quantity
         quantity = np.concatenate([quantity, mix_quantity])
-        quantity = _apply_numpy_operation(quantity, verbose=verbose, 
+        quantity = _apply_numpy_operation(quantity, verbose=verbose,
                                           operation=operation)
         return quantity
 
@@ -245,7 +244,7 @@ class StatMech:
                 If False, returns the product of partition functions. If True,
                 returns contributions of each mode
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -256,8 +255,8 @@ class StatMech:
         Returns
         -------
             q : float or (N+5,) `numpy.ndarray`_
-                Partition function. N represents the number of mixing models. If
-                verbose is True, contribution to each mode are as follows:
+                Partition function. N represents the number of mixing models.
+                If verbose is True, contribution to each mode are as follows:
                 [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
@@ -276,7 +275,7 @@ class StatMech:
                 If False, returns the total heat capacity. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -295,12 +294,12 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_CvoR', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
 
-    def get_Cv(self, units, verbose=False, raise_error=True, raise_warning=True,
-               **kwargs):
+    def get_Cv(self, units, verbose=False, raise_error=True,
+               raise_warning=True, **kwargs):
         """Calculate the heat capacity (constant V)
 
         Parameters
@@ -312,7 +311,7 @@ class StatMech:
                 If False, returns the total heat capacity. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -329,7 +328,7 @@ class StatMech:
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
-        return self.get_CvoR(verbose=verbose, raise_error=raise_error, 
+        return self.get_CvoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs)*c.R(units)
 
     def get_CpoR(self, verbose=False, raise_error=True, raise_warning=True,
@@ -342,7 +341,7 @@ class StatMech:
                 If False, returns the total heat capacity. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -361,12 +360,12 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_CpoR', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
 
-    def get_Cp(self, units, verbose=False, raise_error=True, raise_warning=True,
-               **kwargs):
+    def get_Cp(self, units, verbose=False, raise_error=True,
+               raise_warning=True, **kwargs):
         """Calculate the heat capacity (constant P)
 
         Parameters
@@ -378,7 +377,7 @@ class StatMech:
                 If False, returns the total heat capacity. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -398,7 +397,7 @@ class StatMech:
         return self.get_CpoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs)*c.R(units)
 
-    def get_EoRT(self, T=c.T0('K'), include_ZPE=False, 
+    def get_EoRT(self, T=c.T0('K'), include_ZPE=False,
                  raise_error=True, raise_warning=True, **kwargs):
         """Dimensionless electronic energy
 
@@ -411,7 +410,7 @@ class StatMech:
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -425,18 +424,19 @@ class StatMech:
                 Dimensionless electronic energy
         """
         kwargs['T'] = T
-        EoRT = _get_mode_quantity(mode=self.elec_model, 
+        EoRT = _get_mode_quantity(mode=self.elec_model,
                                   method_name='get_UoRT',
-                                  raise_error=raise_error, 
+                                  raise_error=raise_error,
                                   raise_warning=raise_warning,
                                   default_value=0., **kwargs)
         if include_ZPE:
-            EoRT += _get_mode_quantity(mode=self.vib_model, 
+            EoRT += _get_mode_quantity(mode=self.vib_model,
                                        method_name='get_ZPE',
-                                       raise_error=raise_error, 
+                                       raise_error=raise_error,
                                        raise_warning=raise_warning,
-                                       default_value=0., **kwargs)/c.R('eV/K')/T
-        return EoRT            
+                                       default_value=0.,
+                                       **kwargs)/c.R('eV/K')/T
+        return EoRT
 
     def get_E(self, units, T=c.T0('K'), raise_error=True, raise_warning=True,
               include_ZPE=False, **kwargs):
@@ -454,7 +454,7 @@ class StatMech:
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -468,9 +468,9 @@ class StatMech:
                 Electronic energy
         """
         return self.get_EoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, 
+                             raise_warning=raise_warning,
                              include_ZPE=include_ZPE, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     def get_UoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  **kwargs):
@@ -482,7 +482,7 @@ class StatMech:
                 If False, returns the total internal energy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -493,15 +493,15 @@ class StatMech:
         Returns
         -------
             UoRT : float or (N+5,) `numpy.ndarray`_
-                Dimensionless internal energy. N represents the number of mixing
-                models. If verbose is True, contribution to each mode are as
-                follows:
+                Dimensionless internal energy. N represents the number of
+                mixing models. If verbose is True, contribution to each mode
+                are as follows:
                 [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_UoRT', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
 
@@ -520,7 +520,7 @@ class StatMech:
                 If False, returns the internal energy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -539,7 +539,7 @@ class StatMech:
         """
         return self.get_UoRT(verbose=verbose, T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     def get_HoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  **kwargs):
@@ -551,7 +551,7 @@ class StatMech:
                 If False, returns the total enthalpy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -570,7 +570,7 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_HoRT', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
 
@@ -589,7 +589,7 @@ class StatMech:
                 If False, returns the enthalpy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -608,7 +608,7 @@ class StatMech:
         """
         return self.get_HoRT(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, T=T, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     def get_SoR(self, verbose=False, raise_error=True, raise_warning=True,
                 **kwargs):
@@ -622,7 +622,7 @@ class StatMech:
             kwargs : key-word arguments
                 Parameters passed to each mode
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -631,19 +631,18 @@ class StatMech:
         Returns
         -------
             SoR : float or (N+5,) `numpy.ndarray`_
-                Dimensionless entropy. N represents the number of mixing models.
-                If verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                Dimensionless entropy. N represents the number of mixing
+                models. If verbose is True, contribution to each mode are as
+                follows: [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_SoR', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
 
-
-    def get_S(self, units, verbose=False, raise_error=True, 
+    def get_S(self, units, verbose=False, raise_error=True,
               raise_warning=True, **kwargs):
         """Calculate the entropy
 
@@ -656,7 +655,7 @@ class StatMech:
                 If False, returns the entropy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -686,7 +685,7 @@ class StatMech:
                 If False, returns the total Helmholtz energy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -697,18 +696,17 @@ class StatMech:
         Returns
         -------
             FoRT : float or (N+5,) `numpy.ndarray`_
-                Dimensionless Helmoltz energy. N represents the number of mixing
-                models. If verbose is True, contribution to each mode are as
-                follows:
+                Dimensionless Helmoltz energy. N represents the number of
+                mixing models. If verbose is True, contribution to each mode
+                are as follows:
                 [trans, vib, rot, elec, nucl, mixing_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_FoRT', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
-
 
     def get_F(self, units, T=c.T0('K'), verbose=False, raise_error=True,
               raise_warning=True, **kwargs):
@@ -725,7 +723,7 @@ class StatMech:
                 If False, returns the Helmholtz energy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -744,7 +742,7 @@ class StatMech:
         """
         return self.get_FoRT(verbose=verbose, T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     def get_GoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  **kwargs):
@@ -756,7 +754,7 @@ class StatMech:
                 If False, returns the total Gibbs energy. If True, returns
                 contribution of each mode.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -775,7 +773,7 @@ class StatMech:
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_GoRT', operation='sum',
-                                 raise_error=raise_error, 
+                                 raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose, **kwargs)
 
@@ -794,7 +792,7 @@ class StatMech:
             T : float, optional
                 Temperature in K. Default is 298.15 K
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -813,7 +811,7 @@ class StatMech:
         """
         return self.get_GoRT(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, T=T, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
