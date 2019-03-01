@@ -9,6 +9,7 @@ import numpy as np
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import remove_class
 
+
 class CovEffect:
     """Models enthalpic contribution to coverage effect between two species
 
@@ -48,7 +49,7 @@ class CovEffect:
         Parameters
         ----------
             interval : float
-                Interval to insert. It will automatically be inserted in the 
+                Interval to insert. It will automatically be inserted in the
                 intervals list in the position so that piecewise function
                 remains continuous
             slope : float
@@ -82,7 +83,8 @@ class CovEffect:
     def _set_intercepts(self):
         """Calculates the intercepts using the intervals and slopes"""
         self._intercepts = []
-        for i, (interval, slope) in enumerate(zip(self.intervals, self.slopes)):
+        for i, (interval, slope) in enumerate(zip(self.intervals,
+                                                  self.slopes)):
             if i == 0:
                 self._intercepts.append(0.)
             else:

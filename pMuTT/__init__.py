@@ -93,6 +93,7 @@ def _kwargs_allowed(fn):
     else:
         return False
 
+
 def _force_pass_arguments(fn, **kwargs):
     """Checks to see if fn accepts kwargs. If it does, pass arguments using
     kwargs. If not, pass arguments using docstring
@@ -115,9 +116,10 @@ def _force_pass_arguments(fn, **kwargs):
     else:
         return _pass_expected_arguments(fn, **kwargs)
 
+
 def _is_iterable(val):
     """
-    Checks if the input if an iterable. This function will return False if a 
+    Checks if the input if an iterable. This function will return False if a
     string is passed due to its use in pMuTT.
 
     Parameters
@@ -139,7 +141,8 @@ def _is_iterable(val):
             return False
         else:
             return True
-            
+
+
 def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
                        default_value=0., **kwargs):
     """Calculate the quantity from that mode.
@@ -151,7 +154,7 @@ def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
         method_name : str
             Name of method to use to calculate quantity.
         raise_error : bool, optional
-            If True, raises an error if any of the modes do not have the 
+            If True, raises an error if any of the modes do not have the
             quantity of interest. Default is True
         raise_warning : bool, optional
             Only relevant if raise_error is False. Raises a warning if any
@@ -182,6 +185,7 @@ def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
     else:
         quantity = _pass_expected_arguments(method, **kwargs)
     return quantity
+
 
 def _get_specie_kwargs(specie_name, **kwargs):
     """Gets the keyword arguments specific to a specie
@@ -220,6 +224,7 @@ def _get_specie_kwargs(specie_name, **kwargs):
     except (KeyError, TypeError, NameError):
         pass
     return specie_kwargs
+
 
 def _apply_numpy_operation(quantity, operation, verbose=False):
     """Apply operation to quantity
@@ -296,10 +301,11 @@ def get_molecular_weight(elements):
 
     return molecular_weight
 
+
 def pMuTT_list_to_dict(pMuTT_list, key='name'):
-    """Converts a pMuTT list to a dictionary using a specified attribute. This 
+    """Converts a pMuTT list to a dictionary using a specified attribute. This
     allows for quicker searching.
-    
+
     Parameters
     ----------
         pMuTT_list : list of objects

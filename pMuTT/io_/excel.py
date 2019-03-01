@@ -31,10 +31,10 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             Location to find header names (0-index). Default is 0
         min_frequency_cutoff : float, optional
             Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
-            Only frequencies greater than min_frequency_cutoff are read from 
+            Only frequencies greater than min_frequency_cutoff are read from
             OUTCAR. Default is 0 cm-1
         include_imaginary : bool, optional
-            Applies for the vib_outcar header. Whether or not imaginary 
+            Applies for the vib_outcar header. Whether or not imaginary
             frequencies should be included. Default is False
         delimiter : str, optional
             Delimiter to parse column names. Default is '.'
@@ -58,7 +58,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
     -----
         Special rules exist for the following column headings
 
-        - element (:func:`~pMuTT.io_.excel.set_element`)
+        - element.[element_symbol] (:func:`~pMuTT.io_.excel.set_element`)
         - formula (:func:`~pMuTT.io_.excel.set_formula`)
         - atoms (:func:`~pMuTT.io_.excel.set_atoms`)
         - statmech_model (:func:`~pMuTT.io_.excel.set_statmech_model`)
@@ -231,7 +231,7 @@ def set_statmech_model(model, output_structure):
         output_structure.update(presets[model])
     except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pMuTT.statmech for supported '
+                         'of presets in pMuTT.statmech.presets for supported '
                          'models.'.format(model))
     return output_structure
 

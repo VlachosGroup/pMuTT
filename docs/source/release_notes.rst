@@ -7,6 +7,42 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.3
+-------------
+Feb. 25, 2019
+
+- Added ``smiles`` attribute to :class:`~pMuTT.statmech.StatMech` and 
+  :class:`~pMuTT.empirical.BaseThermo` classes
+- Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files
+- Added :class:`~pMuTT.mixture.cov.CovEffect` class to model coverage effects
+  and integrated it with :class:`~pMuTT.statmech.StatMech` and 
+  :class:`~pMuTT.empirical.BaseThermo` classes
+- Added ``include_ZPE`` parameter to ``get_EoRT``, ``get_E``, ``get_delta_EoRT``
+  and ``get_delta_E`` for the :class:`~pMuTT.statmech.StatMech` class and
+  :class:`~pMuTT.reaction.Reaction` class to add zero-point energy in
+  calculations
+- Renamed private methods ``_get_delta_quantity`` and ``_get_state_quantity`` to
+  public methods ``get_delta_quantity`` and ``get_state_quantity`` in
+  :class:`~pMuTT.reaction.Reaction` class
+- Added generic method ``get_quantity`` to :class:`~pMuTT.statmech.StatMech`
+  class so any method can be evaluated. It takes the parameters ``raise_error``
+  and ``raise_warning`` so the user has the ability to ignore modes if they do
+  not have the desired properties
+- Added ``plot_coordinate_diagram`` method to the 
+  :class:`~pMuTT.reaction.Reactions` class to plot coordinate diagrams.
+- Added ``get_EoRT`` and ``get_E`` methods to :class:`~pMuTT.statmech.StatMech`
+  class to calculate electronic contribution to thermodynamic properties
+- Added ``get_EoRT_state`` and ``get_delta_EoRT`` methods to 
+  :class:`~pMuTT.reaction.Reaction` to calculate electronic contribution to
+  reaction properties
+- Added an optional parameter, ``activation``, to ``get_delta_X`` methods to 
+  specify the difference between the reactants/products and the transition
+  state. 
+- Added ``pMuTT.constants.symmetry_dict`` to allow easy look up of common
+  symmetry numbers
+- Fixed bug where specie-specific arguments were not passed correctly for
+  :class:`~pMuTT.reaction.Reaction` class
+
 Version 1.2.2
 -------------
 Jan. 18, 2019

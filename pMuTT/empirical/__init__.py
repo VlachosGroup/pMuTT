@@ -37,8 +37,8 @@ class BaseThermo:
             Object should have the following methods: ``get_CpoR``,
             ``get_HoRT``, ``get_SoR``, ``get_GoRT``.
         references : ``pMuTT.empirical.References.references`` object, optional
-            Contains references to calculate ``HoRT_ref``. If not specified then
-            HoRT_dft will be used without adjustment. Default is None
+            Contains references to calculate ``HoRT_ref``. If not specified
+            then HoRT_dft will be used without adjustment. Default is None
         mix_models : list of ``pMuTT.mixture`` objects, optional
             Mixture models that calculate excess properties.
         smiles : str, optional
@@ -69,13 +69,12 @@ class BaseThermo:
 
         # Assign mixing models
         # TODO Mixing models can not be initialized by passing the class
-        # because all the models will have the same attributes. Figure out a way
-        # to pass them. Perhaps have a dictionary that contains the attributes
-        # separated by species
+        # because all the models will have the same attributes. Figure out a
+        # way to pass them. Perhaps have a dictionary that contains the
+        # attributes separated by species
         if not _is_iterable(mix_models) and mix_models is not None:
             mix_models = [mix_models]
-        self.mix_models = mix_models 
-
+        self.mix_models = mix_models
 
     def __eq__(self, other):
         try:
@@ -578,7 +577,7 @@ class BaseThermo:
                     'phase': self.phase,
                     'elements': self.elements,
                     'notes': self.notes,
-                    'smiles': self.smiles,}
+                    'smiles': self.smiles, }
         try:
             obj_dict['references'] = self.references.to_dict()
         except AttributeError:
