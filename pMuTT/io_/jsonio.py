@@ -111,8 +111,6 @@ def remove_class(json_obj):
         json_obj : dict
             JSON object without 'class' entry
     """
-    try:
-        del json_obj['class']
-    except KeyError:
-        pass
+    json_obj.pop('class', None)
+    json_obj.pop('_id', None)
     return json_obj

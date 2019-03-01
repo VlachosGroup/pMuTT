@@ -29,6 +29,8 @@ setuptools_info = {
 		'numpy>=1.15.1',
 		'scipy>=1.1.0',
 		'pandas>=0.20.3',
+		'pymongo>=3.7.2',
+		'dnspython>=1.16.0'
 	    ],
 	'classifiers': [
 		"Programming Language :: Python :: 3",
