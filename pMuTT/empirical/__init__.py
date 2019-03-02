@@ -13,7 +13,7 @@ from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
 
 
-class BaseThermo:
+class EmpiricalBase:
     """The empirical parent class.
     Holds properties of a specie, the statistical-mechanical thermodynamic
     model.
@@ -573,6 +573,7 @@ class BaseThermo:
             obj_dict : dict
         """
         obj_dict = {'class': str(self.__class__),
+                    'type': 'empiricalbase',
                     'name': self.name,
                     'phase': self.phase,
                     'elements': self.elements,
@@ -605,7 +606,7 @@ class BaseThermo:
                 JSON representation
         Returns
         -------
-            BaseThermo : BaseThermo object
+            EmpiricalBase : EmpiricalBase object
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model

@@ -7,16 +7,20 @@ Development Branch
 ------------------
 `Development Branch`_
 
+- Renamed `pMuTT.empirical.BaseThermo` to 
+  :class:`~pMuTT.empirical.EmpiricalBase`
+- Added `pMuTT.io_.db` module to interface with databases
+
 Version 1.2.3
 -------------
 Feb. 25, 2019
 
 - Added ``smiles`` attribute to :class:`~pMuTT.statmech.StatMech` and 
-  :class:`~pMuTT.empirical.BaseThermo` classes
+  :class:`~pMuTT.empirical.EmpiricalBase` classes
 - Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files
 - Added :class:`~pMuTT.mixture.cov.CovEffect` class to model coverage effects
   and integrated it with :class:`~pMuTT.statmech.StatMech` and 
-  :class:`~pMuTT.empirical.BaseThermo` classes
+  :class:`~pMuTT.empirical.EmpiricalBase` classes
 - Added ``include_ZPE`` parameter to ``get_EoRT``, ``get_E``, ``get_delta_EoRT``
   and ``get_delta_E`` for the :class:`~pMuTT.statmech.StatMech` class and
   :class:`~pMuTT.reaction.Reaction` class to add zero-point energy in

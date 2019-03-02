@@ -1448,8 +1448,17 @@ class Reaction:
                                            **kwargs))
 
     def get_EoRT_act(self, rev=False, method='any', **kwargs):
-        """Gets dimensionless act energy between reactants
+        """Gets dimensionless Arrhenius activation energy between reactants
         (or products) and transition state
+
+        If the transition state method is used, the enthalpy of activation is
+        converted to activation energy using the following:
+
+        :math:`\\frac {E_a}{RT} = \\frac {\\Delta H^{TS}}{RT} +
+        (1-\\Delta n^{TS})`
+
+        where :math:`\\Delta n^{TS}` is the change in the number of molecules 
+        on forming the transition state.
 
         Parameters
         ----------
@@ -1488,7 +1497,15 @@ class Reaction:
                 method = 'enthalpy'
 
         if method == 'transition_state' or method == 'ts':
-            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs)
+            # Find molecularity of the reaction
+            m_FS = _get_molecularity(self.transition_state_stoich)
+            if rev:
+                m_IS = _get_molecularity(self.products_stoich)
+            else:
+                m_IS = _get_molecularity(self.reactants_stoich)
+            del_m = m_FS - m_IS
+            # Calculate H_TS and convert to Arrhenius activation energy
+            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
         elif method == 'bep':
             EoRT = self.bep.get_EoRT_act(rev=rev, **kwargs)
         elif method == 'enthalpy':
@@ -1541,6 +1558,9 @@ class Reaction:
     def get_A(self, T=c.T0('K'), rev=False, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
+
+        :math:`A = \\frac {k_B T} {h} \\exp\\bigg(\\frac {\\Delta S^{TS}}{R}+m
+        \\bigg)`
 
         Parameters
         ----------

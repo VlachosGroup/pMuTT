@@ -198,7 +198,7 @@ class CovEffect:
                 JSON representation
         Returns
         -------
-            BaseThermo : BaseThermo object
+            EmpiricalBase : EmpiricalBase object
         """
         json_obj = remove_class(json_obj)
         # Recalculate the intercepts to ensure range is smooth

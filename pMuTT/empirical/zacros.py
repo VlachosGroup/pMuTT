@@ -9,13 +9,13 @@ import numpy as np
 from pMuTT import constants as c
 from pMuTT import get_molecular_weight as mw
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
-from pMuTT.empirical import BaseThermo
+from pMuTT.empirical import EmpiricalBase
 """ Test"""
 
 
-class Zacros(BaseThermo):
+class Zacros(EmpiricalBase):
     """Stores the information for an individual nasa specie
-    Inherits from pMuTT.empirical.BaseThermo
+    Inherits from pMuTT.empirical.EmpiricalBase
     """
     def __init__(self, A_st=None, atoms=None, symmetrynumber=None,
                  inertia=None, geometry=None, vib_wavenumbers=None,

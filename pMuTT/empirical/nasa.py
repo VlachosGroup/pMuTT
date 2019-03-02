@@ -12,13 +12,13 @@ from scipy.stats import variation
 from pMuTT import _is_iterable, _pass_expected_arguments
 from pMuTT import constants as c
 from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
-from pMuTT.empirical import BaseThermo
+from pMuTT.empirical import EmpiricalBase
 from pMuTT.mixture import _get_mix_quantity
 
 
-class Nasa(BaseThermo):
+class Nasa(EmpiricalBase):
     """Stores the information for an individual nasa specie
-    Inherits from :class:`~pMuTT.empirical.BaseThermo`
+    Inherits from :class:`~pMuTT.empirical.EmpiricalBase`
 
     The thermodynamic properties are calculated using the following form:
 
@@ -469,7 +469,7 @@ class Nasa(BaseThermo):
                 e.g. CH3OH can be represented as:
                 {'C': 1, 'H': 4, 'O': 1,}.
             kwargs : keyword arguments
-                Used to initalize ``statmech_model`` or ``BaseThermo``
+                Used to initalize ``statmech_model`` or ``EmpiricalBase``
                 attributes to be stored.
         Returns
         -------
@@ -521,6 +521,7 @@ class Nasa(BaseThermo):
         """
         obj_dict = super().to_dict()
         obj_dict['class'] = str(self.__class__)
+        obj_dict['type'] = 'nasa'
         obj_dict['a_low'] = list(self.a_low)
         obj_dict['a_high'] = list(self.a_high)
         obj_dict['T_low'] = self.T_low
