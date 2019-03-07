@@ -32,16 +32,20 @@ class HarmonicVib:
             return False
         return self.to_dict() == other_dict
 
-    def get_q(self, T):
+    def get_q(self, T, include_ZPE=True):
         """Calculates the partition function
 
         :math:`q^{vib}=\\prod_i \\frac{\\exp({-\\frac{\\Theta_{V,i}}{2T}})}
-        {1-\\exp({-\\frac{\\Theta_{V,i}}{T}})}`
+        {1-\\exp({-\\frac{\\Theta_{V,i}}{T}})}` if include_ZPE = True
+        :math:`q^{vib}=\\prod_i \\frac{1}
+        {1-\\exp({-\\frac{\\Theta_{V,i}}{T}})}` if include_ZPE = False            
 
         Parameters
         ----------
             T : float
                 Temperature in K
+            include_ZPE : bool, optional
+                If True, includes the zero-point energy term
         Returns
         -------
             q_vib : float
@@ -50,7 +54,10 @@ class HarmonicVib:
         vib_dimless = _get_vib_dimless(T=T,
                                        wavenumbers=self.vib_wavenumbers,
                                        substitute=self.imaginary_substitute)
-        qs = np.array(np.exp(-vib_dimless/2.)/(1. - np.exp(-vib_dimless)))
+        if include_ZPE:
+            qs = np.array(np.exp(-vib_dimless/2.)/(1. - np.exp(-vib_dimless)))
+        else:
+            qs = np.array(1./(1. - np.exp(-vib_dimless)))
         return np.prod(qs)
 
     def get_CvoR(self, T):

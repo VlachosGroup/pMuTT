@@ -1447,7 +1447,7 @@ class Reaction:
         return np.exp(-self.get_delta_GoRT(rev=rev, act=act,
                                            **kwargs))
 
-    def get_EoRT_act(self, rev=False, method='any', **kwargs):
+    def get_EoRT_act(self, rev=False, method='any', del_m=None, **kwargs):
         """Gets dimensionless Arrhenius activation energy between reactants
         (or products) and transition state
 
@@ -1477,6 +1477,13 @@ class Reaction:
                   reaction is exothermic, returns 0)
 
                 Default is 'any'.
+            del_m : int, optional
+                Change in molecularity of gas-phase species in the reaction.
+                Condensed-phase and unimolecular gas-phase reactions should have
+                a value of 0. Bimolecular gas-phase reactions should have a 
+                value of -1. If not specified, m will be calculated 
+                (assuming all species in the initial state and transition state
+                are gas phase).
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless act
                 energy
@@ -1498,12 +1505,13 @@ class Reaction:
 
         if method == 'transition_state' or method == 'ts':
             # Find molecularity of the reaction
-            m_FS = _get_molecularity(self.transition_state_stoich)
-            if rev:
-                m_IS = _get_molecularity(self.products_stoich)
-            else:
-                m_IS = _get_molecularity(self.reactants_stoich)
-            del_m = m_FS - m_IS
+            if del_m is None:
+                m_FS = _get_molecularity(self.transition_state_stoich)
+                if rev:
+                    m_IS = _get_molecularity(self.products_stoich)
+                else:
+                    m_IS = _get_molecularity(self.reactants_stoich)
+                del_m = m_FS - m_IS
             # Calculate H_TS and convert to Arrhenius activation energy
             EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
         elif method == 'bep':
@@ -1518,7 +1526,8 @@ class Reaction:
                               'for supported options.'.format(method)))
         return EoRT
 
-    def get_E_act(self, units, T, rev=False, method='any', **kwargs):
+    def get_E_act(self, units, T, rev=False, method='any', del_m=None,
+                  **kwargs):
         """Gets act energy between reactants (or products)
         and transition state
 
@@ -1542,6 +1551,13 @@ class Reaction:
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
 
                 Default is 'any'.
+            del_m : int, optional
+                Change in molecularity of gas-phase species in the reaction.
+                Condensed-phase and unimolecular gas-phase reactions should have
+                a value of 0. Bimolecular gas-phase reactions should have a 
+                value of -1. If not specified, m will be calculated 
+                (assuming all species in the initial state and transition state
+                are gas phase).
             kwargs : keyword arguments
                 Parameters required to calculate act energy. See class
                 docstring to see how to pass specific parameters to
@@ -1552,10 +1568,10 @@ class Reaction:
                 act energy between reactants (or products) and
                 transition state
         """
-        return self.get_EoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
-            * c.R('{}/K'.format(units))
+        return self.get_EoRT_act(rev=rev, method=method, T=T, del_m=del_m,
+                                 **kwargs)*T*c.R('{}/K'.format(units))
 
-    def get_A(self, T=c.T0('K'), rev=False, **kwargs):
+    def get_A(self, T=c.T0('K'), rev=False, m=None, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
 
@@ -1569,6 +1585,13 @@ class Reaction:
                 instead of reactants. Default is False
             T : float, optional
                 Temperature in K. Default is standard temperature.
+            m : int, optional
+                Molecularity of gas-phase species in the reaction.
+                Condensed-phase reactions and unimolecular gas-phase reactions
+                should have a value of 1. Bimolecular gas-phase reactions 
+                should have a value of 2. If not specified, m will be 
+                calculated (assuming all species in the initial state are
+                gas phase). 
             kwargs : keyword arguments
                 Parameters required to calculate pre-exponential factor. See
                 class docstring to see how to pass specific parameters to
@@ -1579,10 +1602,11 @@ class Reaction:
                 Pre-exponential factor
         """
         # Calculate molecularity (e.g. unimolecular, bimolecular)
-        if rev:
-            m = _get_molecularity(self.products_stoich)
-        else:
-            m = _get_molecularity(self.reactants_stoich)
+        if m is None:
+            if rev:
+                m = _get_molecularity(self.products_stoich)
+            else:
+                m = _get_molecularity(self.reactants_stoich)
 
         return c.kb('J/K')*T/c.h('J s') \
             * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T,
