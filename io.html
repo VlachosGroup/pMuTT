@@ -836,7 +836,7 @@ directly imported using <a class="reference internal" href="#pMuTT.io_.excel.rea
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
 <p>This is the output format used for Chemkin. A list of NASA objects can be
 written to a thermdat file.</p>
-<span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.thermdat</p>
+<span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id6"><span class="problematic" id="id7">pMuTT.io_</span></a>.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="pMuTT.io_.thermdat.read_thermdat">
@@ -1375,7 +1375,7 @@ If the pattern is not found, returns an empty list</p>
 </div>
 <div class="section" id="module-pMuTT.io_.chemkin">
 <span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id10"><span class="problematic" id="id11">pMuTT.io_</span></a>.chemkin</p>
+<p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.chemkin</p>
 <p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
 <dl class="function">
 <dt id="pMuTT.io_.chemkin.read_reactions">
@@ -1461,10 +1461,10 @@ positive)</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>T</strong> (<em>list of float</em>) – Temperatures in K. If not specified</li>
-<li><strong>P</strong> (<em>list of float</em>) – Pressures in atm. If not specified, data will be taken from
-conditions</li>
+<li><strong>T</strong> (<em>list of float</em>) – Temperatures in K</li>
+<li><strong>P</strong> (<em>list of float</em>) – Pressures in atm</li>
 <li><strong>Q</strong> (<em>list of float</em>) – Volumetric flow rate in cm3/s</li>
+<li><strong>abyv</strong> (<em>list of float</em>) – Catalyst area to reactor volume ratio in 1/cm</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the file. Default is T_flow.inp</li>
 <li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Format to write floating point numbers. Default is ‘.3E’ (i.e.
 scientific notation rounded to 3 decimal places)</li>
@@ -1486,7 +1486,7 @@ scientific notation rounded to 3 decimal places)</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>nasa_species</strong> (list of :class:<a href="#id6"><span class="problematic" id="id7">`</span></a>~pMuTT.empirical.nasa.Nasa objects) – Surface and gas species used in Chemkin mechanism. Used to write
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface and gas species used in Chemkin mechanism. Used to write
 elements section</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – File name for gas.inp file. Default is ‘gas.inp’</li>
 <li><strong>reactions</strong> (<a class="reference internal" href="reactions.html#pMuTT.reaction.Reactions" title="pMuTT.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a> object, optional) – Reactions in mechanism. Reactions with only gas-phase species will
@@ -1500,28 +1500,29 @@ be written to this file</li>
 
 <dl class="function">
 <dt id="pMuTT.io_.chemkin.write_surf">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='sum'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='min'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the surf.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface used in Chemkin mechanism. If gas-phase species are present,
-they will be ignored</li>
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface used in Chemkin mechanism. If gas-phase species are
+present, they will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
 <li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
-<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions. Default is ‘+’</li>
+<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
+Default is ‘+’</li>
 <li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate reaction sides. Default is ‘=’</li>
 <li><strong>act_method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function</li>
 <li><strong>act_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Units to calculate activation energy. Default is ‘kcal/mol’</li>
 <li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print floating numbers. Default is ‘ .3E’ (i.e.
-scientific notation rounded to 3 decimal places with a leading space
-for positive numbers)</li>
-<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print stoichiometric coefficients. Default is ‘.0f’
-(i.e. integers)</li>
+scientific notation rounded to 3 decimal places with a leading
+space for positive numbers)</li>
+<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print stoichiometric coefficients.
+Default is ‘.0f’ (i.e. integers)</li>
 <li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
 <li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate columns. Default is ‘  ‘</li>
 <li><strong>use_mw_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the Motz-Wise corrections. Default is True</li>

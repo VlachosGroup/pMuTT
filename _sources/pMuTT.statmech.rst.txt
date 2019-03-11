@@ -1,0 +1,54 @@
+pMuTT\.statmech package
+=======================
+
+Submodules
+----------
+
+pMuTT\.statmech\.elec module
+----------------------------
+
+.. automodule:: pMuTT.statmech.elec
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pMuTT\.statmech\.nucl module
+----------------------------
+
+.. automodule:: pMuTT.statmech.nucl
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pMuTT\.statmech\.rot module
+---------------------------
+
+.. automodule:: pMuTT.statmech.rot
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pMuTT\.statmech\.trans module
+-----------------------------
+
+.. automodule:: pMuTT.statmech.trans
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pMuTT\.statmech\.vib module
+---------------------------
+
+.. automodule:: pMuTT.statmech.vib
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: pMuTT.statmech
+    :members:
+    :undoc-members:
+    :show-inheritance:

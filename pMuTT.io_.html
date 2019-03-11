@@ -1,0 +1,1076 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pMuTT.io_ package &mdash; pMuTT 1.2.4 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pMuTT
+          
+
+          
+            
+            <img src="_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemkin.html">Chemkin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pMuTT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>pMuTT.io_ package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pMuTT.io_.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pmutt-io-package">
+<h1>pMuTT.io_ package<a class="headerlink" href="#pmutt-io-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pMuTT.io_.chemkin">
+<span id="pmutt-io-chemkin-module"></span><h2>pMuTT.io_.chemkin module<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id5"><span class="problematic" id="id6">pMuTT.io_</span></a>.chemkin</p>
+<p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.read_reactions">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input filename for Chemkin surf or gas .inp file</li>
+<li><strong>species</strong> (list of <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – List of NASA objects containing thermodynamic properties for
+all Reactants and Products in Reactions
+default = None. Will not return React_obj and Prod_obj</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><strong>Reactions</strong> (<em>list of reactions</em>)</li>
+<li><strong>Reactants</strong> (<em>list of reactants found in reactions</em>)</li>
+<li><strong>React_obj</strong> (<em>list of NASA polynomials for each Reactant</em>) – If species object list is supplied</li>
+<li><strong>React_stoic</strong> (<em>list of reaction stoichiometries for Reactants</em>)</li>
+<li><strong>Products</strong> (<em>list of products found in reactions</em>)</li>
+<li><strong>Prod_obj</strong> (<em>list of NASA polynomials for each Product</em>) – If species object list is supplied</li>
+<li><strong>Prod_stoic</strong> (<em>list of reaction stoichiometries for Products</em>)</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – If the surf.inp or gas.inp file isn’t found.</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> – If the species file does not exist</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> – If the species list is incorrect format</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_EA">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_EA</code><span class="sig-paren">(</span><em>reactions</em>, <em>conditions</em>, <em>write_gas_phase=False</em>, <em>filename='EAs.inp'</em>, <em>act_method_name='get_EoRT_act'</em>, <em>float_format=' .2E'</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='&lt;=&gt;'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the EAs.inp or EAg.inp file for Chemkin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>reactions</strong> (list of <a class="reference internal" href="pMuTT.reaction.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
+should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
+<li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
+adsorption). If False, only surface phase reactions are written.
+Default is False</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for the EAs.inp file. Default is ‘EAs.inp’</li>
+<li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate values. Typical values are:</p>
+<ul>
+<li>’get_EoRT_act’ (default)</li>
+<li>’get_HoRT_act’</li>
+<li>’get_GoRT_act’</li>
+</ul>
+</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write numbers. Default is ‘ .2E’ (scientific notation
+rounded to 2 decimal places with a preceding space if the value is
+positive)</li>
+<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write stoichiometric numbers. Default is ‘.0f’ (integer)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character to use. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter for columns. Default is ‘  ‘</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_T_flow">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_T_flow</code><span class="sig-paren">(</span><em>T=None</em>, <em>P=None</em>, <em>Q=None</em>, <em>abyv=None</em>, <em>conditions=None</em>, <em>filename='T_flow.inp'</em>, <em>float_format='.3E'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_T_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the T_flow.inp Chemkin file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>T</strong> (<em>list of float</em>) – Temperatures in K. If not specified</li>
+<li><strong>P</strong> (<em>list of float</em>) – Pressures in atm. If not specified, data will be taken from
+conditions</li>
+<li><strong>Q</strong> (<em>list of float</em>) – Volumetric flow rate in cm3/s</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the file. Default is T_flow.inp</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Format to write floating point numbers. Default is ‘.3E’ (i.e.
+scientific notation rounded to 3 decimal places)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter for columns. Default is ‘  ‘</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_gas">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_gas</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>filename='gas.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_gas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the gas.inp Chemkin file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nasa_species</strong> (list of :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>~pMuTT.empirical.nasa.Nasa objects) – Surface and gas species used in Chemkin mechanism. Used to write
+elements section</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – File name for gas.inp file. Default is ‘gas.inp’</li>
+<li><strong>reactions</strong> (<a class="reference internal" href="reactions.html#pMuTT.reaction.Reactions" title="pMuTT.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a> object, optional) – Reactions in mechanism. Reactions with only gas-phase species will
+be written to this file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_surf">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='sum'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the surf.inp Chemkin file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface used in Chemkin mechanism. If gas-phase species are present,
+they will be ignored</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="pMuTT.reaction.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+reactions will be ignored</li>
+<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions. Default is ‘+’</li>
+<li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate reaction sides. Default is ‘=’</li>
+<li><strong>act_method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function</li>
+<li><strong>act_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Units to calculate activation energy. Default is ‘kcal/mol’</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print floating numbers. Default is ‘ .3E’ (i.e.
+scientific notation rounded to 3 decimal places with a leading space
+for positive numbers)</li>
+<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print stoichiometric coefficients. Default is ‘.0f’
+(i.e. integers)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate columns. Default is ‘  ‘</li>
+<li><strong>use_mw_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the Motz-Wise corrections. Default is True</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed to calculate activation energy and preexponential
+factor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_tube_mole">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_tube_mole</code><span class="sig-paren">(</span><em>mole_frac_conditions</em>, <em>nasa_species</em>, <em>filename='tube_mole.inp'</em>, <em>float_format=' .3f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_tube_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write tube_mole.inp Chemkin file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mole_frac_conditions</strong> (<em>list of dict</em>) – Each dictionary should have the keys as the name of the species and the
+value as the initial mole fraction</li>
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Nasa species to find phase information</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the file. Default is ‘tube_mole.inp’</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Format to write floating point numbers. Default is ‘.3E’ (i.e.
+scientific notation rounded to 3 decimal places)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter for columns. Default is ‘  ‘</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_.db">
+<span id="pmutt-io-db-module"></span><h2>pMuTT.io_.db module<a class="headerlink" href="#module-pMuTT.io_.db" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id7"><span class="problematic" id="id8">pMuTT.io_</span></a>.db</p>
+<p>Read from/write to databases</p>
+</div>
+<div class="section" id="module-pMuTT.io_.excel">
+<span id="pmutt-io-excel-module"></span><h2>pMuTT.io_.excel module<a class="headerlink" href="#module-pMuTT.io_.excel" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id9"><span class="problematic" id="id10">pMuTT.io_</span></a>.excel</p>
+<p>Read from/write to xlsx files of particular format.</p>
+<dl class="function">
+<dt id="pMuTT.io_.excel.read_excel">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0.0, include_imaginary=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads an excel file and returns it as a list of dictionaries to
+initialize objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>io</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the Excel spreadsheet</li>
+<li><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed).
+Default is [1] so comments can be put in that row</li>
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</li>
+<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
+Only frequencies greater than min_frequency_cutoff are read from
+OUTCAR. Default is 0 cm-1</li>
+<li><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Whether or not imaginary
+frequencies should be included. Default is False</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</li>
+<li><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some
+potentially useful parameters include:</p>
+<ul>
+<li>sheet_name (str): Specify the name of the sheet you’re reading</li>
+<li>converters: Specify how to process certain columns</li>
+<li>dtype (dict): Expected data type. Will be guessed if
+not specified</li>
+<li>na_values (scalar, str, list-like, or dict): What strings to
+interpret as NaN</li>
+<li>convert_float (bool): Converts integral floats to
+int (i.e. 1.0 –&gt; 1)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>excel_data</strong> – Can be used to initialize objects with the <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs syntax</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Special rules exist for the following column headings</p>
+<ul class="simple">
+<li>element (<a class="reference internal" href="#pMuTT.io_.excel.set_element" title="pMuTT.io_.excel.set_element"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_element()</span></code></a>)</li>
+<li>formula (<a class="reference internal" href="#pMuTT.io_.excel.set_formula" title="pMuTT.io_.excel.set_formula"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_formula()</span></code></a>)</li>
+<li>atoms (<a class="reference internal" href="#pMuTT.io_.excel.set_atoms" title="pMuTT.io_.excel.set_atoms"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_atoms()</span></code></a>)</li>
+<li>statmech_model (<a class="reference internal" href="#pMuTT.io_.excel.set_statmech_model" title="pMuTT.io_.excel.set_statmech_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_statmech_model()</span></code></a>)</li>
+<li>vib_wavenumber (<a class="reference internal" href="#pMuTT.io_.excel.set_vib_wavenumbers" title="pMuTT.io_.excel.set_vib_wavenumbers"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers()</span></code></a>)</li>
+<li>rot_temperature (<a class="reference internal" href="#pMuTT.io_.excel.set_rot_temperatures" title="pMuTT.io_.excel.set_rot_temperatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_rot_temperatures()</span></code></a>)</li>
+<li>nasa.a_low (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_low" title="pMuTT.io_.excel.set_nasa_a_low"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_low()</span></code></a>)</li>
+<li>nasa.a_high (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_high" title="pMuTT.io_.excel.set_nasa_a_high"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_high()</span></code></a>)</li>
+<li>vib_outcar (<a class="reference internal" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a>)</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_atoms">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the atoms object ans assigns to output_structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location to import atoms object. If relative references used,
+the path should be relative to excel_path.
+See ase.read for supported formats</li>
+<li><strong>excel_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location where excel path is located</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘atoms’]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with atoms added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_element">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses element header and assigns to output_structure[‘elements’]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String containing the element name. Element symbol should be at
+the end. e.g. ‘element.O’</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Amount found in formula</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Delimiter for element. Element symbol should be at the end</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new element added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_formula">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses stoichiometric formula unit and assigns to output_structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>formula</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Stoichiometric formula unit. e.g. H2O
+Note that an element cannot be specified multiple times.
+e.g. CH3OH is not supported</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new elements added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_nasa_a_high">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a_high parameter for <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
+Assumes zero index and header takes the format:</p>
+<p>nasa[delimiter]a_high[delimiter][index]
+e.g. nasa.a_high.0</p>
+</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_high value</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘a_high’]</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_high value added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_nasa_a_low">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a_low parameter for <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
+Assumes zero index and header takes the format:</p>
+<p>nasa[delimiter]a_low[delimiter][index]
+e.g. nasa.a_low.0</p>
+</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – a_low value</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘a_low’]</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – How to parse header to find the coefficient</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_low value added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_rot_temperatures">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses element header and assigns to output_structure
+[‘rot_temperatures’]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new vibration added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_statmech_model">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_statmech_model</code><span class="sig-paren">(</span><em>model</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_statmech_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports module and assigns the class to output_structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>Thermodynamic model to import. Presets:</p>
+<blockquote>
+<div><ul>
+<li>IdealGas</li>
+<li>Harmonic</li>
+</ul>
+</div></blockquote>
+</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘statmech_model’]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.excel.set_vib_wavenumbers">
+<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_vib_wavenumbers</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses element header and assigns to output_structure[‘vib_wavenumber’]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new vibration added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_.gaussian">
+<span id="pmutt-io-gaussian-module"></span><h2>pMuTT.io_.gaussian module<a class="headerlink" href="#module-pMuTT.io_.gaussian" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_electronic_and_zpe">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_electronic_and_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_electronic_and_zpe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the electronic energy and zero-point energy from the
+Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>electronic_and_zero_point_energy</strong> – Electronic and zero point energy in Hartree/particle</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_frequencies">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_frequencies</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_frequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the frequencies from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>frequencies</strong> – Frequencies in 1/cm</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_molecular_mass">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_molecular_mass</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_molecular_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the molecular mass from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>molecular_mass</strong> – Molecular mass in amu</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_pattern">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_pattern</code><span class="sig-paren">(</span><em>filename</em>, <em>pattern</em>, <em>group=0</em>, <em>return_immediately=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the pattern from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Regular expression pattern</li>
+<li><strong>group</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Group to return. Default is 0</li>
+<li><strong>return_immediately</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, returns after the first instance. If False, reads the
+whole file. Default is True</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out_values</strong> – Value(s) corresponding to pattern.
+- str if return_immediately is True
+- list if return_immediately is False
+If the pattern is not found, returns an empty list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a> or list of str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_rot_symmetry_num">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_rot_symmetry_num</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_rot_symmetry_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the rotational symmetry number from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>rot_symmetry_num</strong> – Rotational symmetry number</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_rotational_temperatures">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_rotational_temperatures</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_rotational_temperatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the rotational temperatures from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>rotational_temperatures</strong> – Rotational temperatures in K</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.gaussian.read_zpe">
+<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_zpe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the zero-point energy from the Gaussian log file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Log file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>zero_point_energy</strong> – Zero point energy in Hartree/particle</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_.jsonio">
+<span id="pmutt-io-jsonio-module"></span><h2>pMuTT.io_.jsonio module<a class="headerlink" href="#module-pMuTT.io_.jsonio" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pMuTT.io_.jsonio.json_to_pMuTT">
+<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">json_to_pMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object hook to convert json to pMuTT objects. Any complex object should
+be in the <code class="xref py py-data docutils literal notranslate"><span class="pre">type_to_class_dict</span></code>
+dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<em>Type supported by JSON</em>) – JSON object to be converted to pMuTT object. If this is a complex
+pMuTT object, must have the ‘class’ entry in the dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj</strong> – Parsed pMuTT object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pMuTT object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="pMuTT.io_.jsonio.pMuTTEncoder">
+<em class="property">class </em><code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">pMuTTEncoder</code><span class="sig-paren">(</span><em>*</em>, <em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">json.encoder.JSONEncoder</span></code></p>
+<p>Encodes pMuTT objects to JSON format. The object (and complex subobjects
+) must have the method: to_dict().</p>
+<dl class="method">
+<dt id="pMuTT.io_.jsonio.pMuTTEncoder.default">
+<code class="descname">default</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.pMuTTEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement this method in a subclass such that it returns
+a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
+(to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
+<p>For example, to support arbitrary iterators, you could
+implement default like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">iterable</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="c1"># Let the base class default method raise the TypeError</span>
+    <span class="k">return</span> <span class="n">JSONEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.jsonio.remove_class">
+<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">remove_class</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.remove_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the ‘class’ entry from the JSON object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON object with ‘class’ entry</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>json_obj</strong> – JSON object without ‘class’ entry</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.jsonio.type_to_class">
+<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">type_to_class</code><span class="sig-paren">(</span><em>class_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.type_to_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts between type of object and pMuTT classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>class_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output of str(pMuTT_obj.__class__)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>class</strong> – Class corresponding to class_str</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">class</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_.thermdat">
+<span id="pmutt-io-thermdat-module"></span><h2>pMuTT.io_.thermdat module<a class="headerlink" href="#module-pMuTT.io_.thermdat" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id11"><span class="problematic" id="id12">pMuTT.io_</span></a>.thermdat</p>
+<p>Read from/write to thermdat files.</p>
+<dl class="function">
+<dt id="pMuTT.io_.thermdat.read_thermdat">
+<code class="descclassname">pMuTT.io_.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly read thermdat file that is in the Chemkin format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input filename</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Nasas</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – If the file isn’t found.</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a> – Invalid line number found.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.thermdat.write_thermdat">
+<code class="descclassname">pMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em>, <em>supp_data=None</em>, <em>supp_txt=None</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes thermdats in the Chemkin format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="pMuTT.empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) – List of species to populate thermdat</li>
+<li><strong>supp_data</strong> (<em>Additional thermdat entries to include</em><em>, </em><em>optional</em>) – Must be in therndat format.</li>
+<li><strong>supp_txt</strong> (<em>Comment field to preceed nasa_species entries</em><em>, </em><em>optional</em>) – Each line needs to begin with a ! so it is recognized as a
+comment.</li>
+<li><strong>write_date</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether or not the date should be written. If False, writes the
+first 8 characters of <code class="docutils literal notranslate"><span class="pre">notes</span></code> attribute. Defaults to True</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character to use. Default is the Unix convention (n)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_.vasp">
+<span id="pmutt-io-vasp-module"></span><h2>pMuTT.io_.vasp module<a class="headerlink" href="#module-pMuTT.io_.vasp" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id13"><span class="problematic" id="id14">pMuTT.io_</span></a>.vasp
+Description: methods to read from vasp outcar files</p>
+<dl class="function">
+<dt id="pMuTT.io_.vasp.get_vib_wavenumber_from_line">
+<code class="descclassname">pMuTT.io_.vasp.</code><code class="descname">get_vib_wavenumber_from_line</code><span class="sig-paren">(</span><em>in_line</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.vasp.get_vib_wavenumber_from_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses in_line for real frequencies</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>in_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Line containing frequency in OUTCAR</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>vib_wavenumber</strong> – Vibrational wavenumber in cm-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar">
+<code class="descclassname">pMuTT.io_.vasp.</code><code class="descname">set_vib_wavenumbers_from_outcar</code><span class="sig-paren">(</span><em>in_file</em>, <em>output_structure</em>, <em>min_frequency_cutoff=0.0</em>, <em>include_imaginary=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses OUTCAR files for vibrational frequencies and assigns to
+output_structure[‘vib_wavenumber’]. Imaginary frequencies are represented
+by negative numbers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – OUTCAR file of frequency jobs</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘elements’][element]</li>
+<li><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Only frequencies less than min_frequency_cutoff (in cm-1)
+are read from OUTCAR. Default is 0 cm-1</li>
+<li><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether imaginary frequencies should be included. Default is False.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – Output_structure with new vibration added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – Raised if in_file does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pMuTT.io_">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pMuTT.io_" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id15"><span class="problematic" id="id16">pMuTT.io_</span></a>
+Vlachos group code to read from/write to different formats.
+Created on Fri Jul 7 12:40:00 2018</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+  </style>
+
+
+</body>
+</html>
