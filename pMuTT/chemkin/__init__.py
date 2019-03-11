@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pMuTT.io_.jsonio import remove_class
 
+
 class CatSite:
     """Catalyst site for Chemkin
 
@@ -33,7 +34,7 @@ class CatSite:
                 'name': self.name,
                 'site_density': self.site_density,
                 'density': self.density,
-                'bulk_specie': self.bulk_specie,}
+                'bulk_specie': self.bulk_specie, }
 
     @classmethod
     def from_dict(cls, json_obj):
