@@ -215,7 +215,7 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
 
     Parameters
     ----------
-        nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa objects
+        nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa` objects
             Surface and gas species used in Chemkin mechanism. Used to write
             elements section
         filename : str, optional
@@ -271,11 +271,11 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
-def write_surf(nasa_species, sden_operation='sum', 
+def write_surf(nasa_species, sden_operation='min',
                filename='surf.inp', T=c.T0('K'), reactions=[],
                species_delimiter='+', reaction_delimiter='=',
-               act_method_name='get_E_act', act_unit='kcal/mol', 
-               float_format=' .3E', stoich_format='.0f', newline='\n', 
+               act_method_name='get_E_act', act_unit='kcal/mol',
+               float_format=' .3E', stoich_format='.0f', newline='\n',
                column_delimiter='  ', use_mw_correction=True, **kwargs):
     """Writes the surf.inp Chemkin file
     
@@ -423,12 +423,13 @@ def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
     Parameters
     ----------
     T : list of float
-        Temperatures in K. If not specified
+        Temperatures in K
     P : list of float
-        Pressures in atm. If not specified, data will be taken from
-        conditions
+        Pressures in atm
     Q : list of float
         Volumetric flow rate in cm3/s
+    abyv : list of float
+        Catalyst area to reactor volume ratio in 1/cm
     filename : str, optional
         Name of the file. Default is T_flow.inp
     float_format : str, optional
@@ -680,7 +681,8 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             A = reaction.sticking_coeff
         else:
             # If using delta_G, take out entropic contribution in A
-            if 'get_delta_G' in act_method_name:
+            if act_method_name in ('get_GoRT_act', 'get_G_act', 
+                                   'get_delta_GoRT', 'get_delta_G'):
                 include_entropy = False
             else:
                 include_entropy = True

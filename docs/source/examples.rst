@@ -73,6 +73,18 @@ Topics Covered
   :class:`~pMuTT.reaction.Reaction` object
 - Save the :class:`~pMuTT.reaction.Reaction` object as a ``JSON`` file
 
+Chemkin_IO
+----------
+- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.ipynb>`_
+- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.py>`_
+
+Topics Covered
+^^^^^^^^^^^^^^
+- Read species *ab-initio* data, reactions, and catalyst sites from a
+  spreadsheet
+- Write the thermdat, gas.inp, surf.inp, T_flow.inp, EAg.inp, EAs.inp, 
+  tube_mole.inp files
+
 Phase Diagram
 -------------
 - `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_

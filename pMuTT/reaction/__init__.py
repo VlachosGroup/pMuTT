@@ -1987,7 +1987,7 @@ class ChemkinReaction(Reaction):
             act = True
         return np.max([0., super().get_delta_HoRT(rev=rev, act=act, **kwargs)])
 
-    def get_delta_GoRT(self, rev=False, act=False, **kwargs):
+    def get_GoRT_act(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
         state species, calculates the delta dimensionless Gibbs energy
 
