@@ -15,7 +15,7 @@ with open('README.rst', 'r') as fh:
 
 setuptools_info = {
 	'name': 'pMuTT',
-	'version': '1.2.3',
+	'version': '1.2.4',
 	'author': 'Vlachos Research Group',
 	'author_email': 'vlachos@udel.edu',
 	'description': 'Python Multiscale Thermochemistry Toolbox (pMuTT)',
