@@ -7,6 +7,12 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.4
+-------------
+Mar. 11, 2019
+
+- Hotfix to correct Chemkin IO behavior
+
 Version 1.2.3
 -------------
 Feb. 25, 2019

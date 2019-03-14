@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Chemkin Input and Output &mdash; pMuTT 1.2.3 documentation</title>
+  <title>Chemkin Input and Output &mdash; pMuTT 1.2.4 documentation</title>
   
 
   
@@ -358,23 +358,1549 @@ tube_mole.inp files</li>
 </div>
 <div class="section" id="Input-Spreadsheet">
 <h2>Input Spreadsheet<a class="headerlink" href="#Input-Spreadsheet" title="Permalink to this headline">¶</a></h2>
-<p>All the data will be imported from the <code class="docutils literal notranslate"><span class="pre">NH3_Input_data.xlsx</span></code> file.
-There are four sheets: 1. <code class="docutils literal notranslate"><span class="pre">cat_sites</span></code> contains catalyst site
+<p>All the data will be imported from the
+<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
+file. There are four sheets: 1. <code class="docutils literal notranslate"><span class="pre">cat_sites</span></code> contains catalyst site
 properties for the adsorbed species 2. <code class="docutils literal notranslate"><span class="pre">refs</span></code> contains <em>ab-initio</em> and
 experimental data for a handful of gas species to calculate references
 3. <code class="docutils literal notranslate"><span class="pre">species</span></code> contains <em>ab-initio</em> data for each specie 4.
 <code class="docutils literal notranslate"><span class="pre">reactions</span></code> contains elementary steps</p>
 <p>The contents are displayed below</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
+<p><strong>Catalytic Sites</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="32%" />
+<col width="20%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">site_density</th>
+<th class="head">density</th>
+<th class="head">bulk_specie</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>RU0001</td>
+<td>2.1671E-09</td>
+<td>12.2</td>
+<td>RU(B)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>References</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="7%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">n
+a
+m
+e</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+N</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+H</th>
+<th class="head">r
+e
+f</th>
+<th class="head">Ho
+RT
+_r
+ef</th>
+<th class="head">pot
+ent
+ial
+ene
+rgy</th>
+<th class="head">sym
+met
+ryn
+umb
+er</th>
+<th class="head">sta
+tme
+<a href="#id1"><span class="problematic" id="id2">ch_</span></a>
+mod
+el</th>
+<th class="head">ato
+ms</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>N
+2</td>
+<td>2</td>
+<td>0</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>0</td>
+<td>-16
+.63</td>
+<td>2</td>
+<td>Ide
+alG
+as</td>
+<td>./N
+2/C
+ONT
+CAR</td>
+<td>274
+4</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>N
+H
+3</td>
+<td>1</td>
+<td>3</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>-1
+8.
+38
+02
+53
+11</td>
+<td>-19
+.54</td>
+<td>3</td>
+<td>Ide
+alG
+as</td>
+<td>./N
+H3/
+CON
+TCA
+R</td>
+<td>353
+4</td>
+<td>346
+4</td>
+<td>176
+5</td>
+<td>113
+9</td>
+</tr>
+<tr class="row-even"><td>H
+2</td>
+<td>0</td>
+<td>2</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>0</td>
+<td>-6.
+770
+0</td>
+<td>2</td>
+<td>Ide
+alG
+as</td>
+<td>./H
+2/C
+ONT
+CAR</td>
+<td>434
+2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Species</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">n
+a
+m
+e</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+N</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+H</th>
+<th class="head">p
+h
+a
+s
+e</th>
+<th class="head">s
+t
+a
+t
+m
+e
+c
+h
+_
+m
+o
+d
+e
+l</th>
+<th class="head">s
+y
+m
+m
+e
+t
+r
+y
+n
+u
+m
+b
+e
+r</th>
+<th class="head">a
+t
+o
+m
+s</th>
+<th class="head">p
+o
+t
+e
+n
+t
+i
+a
+l
+e
+n
+e
+r
+g
+y</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>N
+2</td>
+<td>2</td>
+<td>0</td>
+<td>G</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
+<td>2</td>
+<td>N
+2
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+6
+3</p>
+</td>
+<td>2
+7
+4
+4
+.
+0
+0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>N
+H
+3</td>
+<td>1</td>
+<td>3</td>
+<td>G</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
+<td>3</td>
+<td>N
+H
+3
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+9
+.
+5
+4</p>
+</td>
+<td>3
+5
+3
+4
+.
+0
+0</td>
+<td>3
+4
+6
+4
+.
+0
+0</td>
+<td>1
+7
+6
+5
+.
+0
+0</td>
+<td>1
+1
+3
+9
+.
+0
+0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>H
+2</td>
+<td>0</td>
+<td>2</td>
+<td>G</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
+<td>2</td>
+<td>H
+2
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">7
+7</p>
+</td>
+<td>4
+3
+4
+2
+.
+0
+0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>N
+2
+(
+S
+)</td>
+<td>2</td>
+<td>0</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+7
+.
+2
+4</p>
+</td>
+<td>2
+1
+9
+7
+.
+1
+9</td>
+<td>3
+6
+0
+.
+4
+2</td>
+<td>3
+4
+7
+.
+3
+4</td>
+<td>3
+3
+5
+.
+6
+7</td>
+<td>6
+2
+.
+0
+8</td>
+<td>3
+2
+.
+1
+8</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>1</td>
+<td>0</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">3
+4</p>
+</td>
+<td>5
+4
+9
+.
+1
+1</td>
+<td>5
+3
+8
+.
+5
+6</td>
+<td>5
+0
+4
+.
+3
+2</td>
+<td>4
+7
+5
+.
+8
+1</td>
+<td>4
+5
+9
+.
+0
+8</td>
+<td>4
+1
+0
+.
+0
+2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>0</td>
+<td>1</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">0
+0</p>
+</td>
+<td>1
+0
+0
+3
+.
+5
+1</td>
+<td>6
+2
+5
+.
+5
+5</td>
+<td>6
+1
+6
+.
+2
+9</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>N
+H
+3
+(
+S
+)</td>
+<td>1</td>
+<td>3</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">2
+0
+.
+4
+3</p>
+</td>
+<td>3
+4
+9
+1
+.
+0
+9</td>
+<td>3
+4
+8
+8
+.
+8
+2</td>
+<td>3
+3
+6
+4
+.
+5
+2</td>
+<td>1
+5
+8
+3
+.
+5
+2</td>
+<td>1
+5
+8
+2
+.
+0
+7</td>
+<td>1
+1
+2
+4
+.
+2
+2</td>
+<td>5
+7
+0
+.
+2
+1</td>
+<td>5
+6
+7
+.
+2
+2</td>
+<td>3
+3
+3
+.
+0
+9</td>
+<td>1
+2
+2
+.
+8
+6</td>
+<td>8
+3
+.
+8
+3</td>
+<td>7
+0
+.
+6
+3</td>
+</tr>
+<tr class="row-odd"><td>N
+H
+2
+(
+S
+)</td>
+<td>1</td>
+<td>2</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+5
+9</p>
+</td>
+<td>3
+4
+6
+9
+.
+3
+0</td>
+<td>3
+3
+8
+1
+.
+0
+5</td>
+<td>1
+5
+0
+3
+.
+0
+2</td>
+<td>6
+9
+8
+.
+8
+7</td>
+<td>6
+2
+5
+.
+6
+0</td>
+<td>6
+1
+5
+.
+9
+4</td>
+<td>4
+7
+5
+.
+1
+3</td>
+<td>2
+9
+8
+.
+1
+2</td>
+<td>1
+5
+3
+.
+2
+5</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>N
+H
+(
+S
+)</td>
+<td>1</td>
+<td>1</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+3
+.
+2
+1</p>
+</td>
+<td>3
+4
+0
+3
+.
+1
+3</td>
+<td>7
+1
+8
+.
+1
+8</td>
+<td>7
+1
+0
+.
+5
+8</td>
+<td>5
+2
+8
+.
+5
+3</td>
+<td>4
+1
+5
+.
+2
+0</td>
+<td>4
+1
+0
+.
+1
+3</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>T
+S
+1
+_
+N
+H
+3
+(
+S
+)</td>
+<td>1</td>
+<td>3</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+9
+.
+5
+3</p>
+</td>
+<td>3
+4
+5
+3
+.
+4
+1</td>
+<td>3
+3
+5
+5
+.
+6
+7</td>
+<td>1
+7
+2
+3
+.
+8
+5</td>
+<td>1
+4
+8
+7
+.
+9
+5</td>
+<td>9
+5
+9
+.
+1
+5</td>
+<td>8
+8
+8
+.
+9
+5</td>
+<td>5
+9
+4
+.
+0
+9</td>
+<td>4
+2
+8
+.
+4
+3</td>
+<td>2
+2
+7
+.
+0
+3</td>
+<td>2
+0
+6
+.
+0
+5</td>
+<td>1
+4
+2
+.
+1
+4</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>T
+S
+2
+_
+N
+H
+2
+(
+S
+)</td>
+<td>1</td>
+<td>2</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+0
+9</p>
+</td>
+<td>3
+4
+2
+6
+.
+4
+4</td>
+<td>1
+2
+9
+3
+.
+7
+2</td>
+<td>9
+2
+2
+.
+8
+3</td>
+<td>6
+6
+0
+.
+9
+7</td>
+<td>5
+2
+5
+.
+6
+0</td>
+<td>4
+9
+6
+.
+8
+4</td>
+<td>3
+3
+0
+.
+6
+7</td>
+<td>2
+9
+0
+.
+2
+8</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>T
+S
+3
+_
+N
+H
+(
+S
+)</td>
+<td>1</td>
+<td>1</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+2
+.
+9
+1</p>
+</td>
+<td>1
+2
+0
+1
+.
+6
+0</td>
+<td>4
+9
+1
+.
+5
+7</td>
+<td>4
+6
+2
+.
+0
+2</td>
+<td>4
+0
+2
+.
+1
+6</td>
+<td>2
+4
+2
+.
+1
+4</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>T
+S
+4
+_
+N
+2
+(
+S
+)</td>
+<td>2</td>
+<td>0</td>
+<td>S</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+5
+4</p>
+</td>
+<td>4
+8
+5
+.
+6
+1</td>
+<td>3
+9
+2
+.
+9
+8</td>
+<td>3
+8
+6
+.
+1
+9</td>
+<td>2
+8
+0
+.
+9
+4</td>
+<td>1
+6
+8
+.
+4
+3</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>R
+U
+(
+S
+)</td>
+<td>0</td>
+<td>0</td>
+<td>S</td>
+<td>P
+l
+a
+c
+e
+h
+o
+l
+d
+e
+r</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>R
+U
+(
+B
+)</td>
+<td>0</td>
+<td>0</td>
+<td>S</td>
+<td>P
+l
+a
+c
+e
+h
+o
+l
+d
+e
+r</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reactions</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="78%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">reaction_str</th>
+<th class="head">is_adsorption</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>H2 + 2RU(S) = 2H(S) + 2RU(B)</td>
+<td>TRUE</td>
+</tr>
+<tr class="row-odd"><td>N2 + RU(S) = N2(S) + RU(B)</td>
+<td>TRUE</td>
+</tr>
+<tr class="row-even"><td>NH3 + RU(S) = NH3(S) + RU(B)</td>
+<td>TRUE</td>
+</tr>
+<tr class="row-odd"><td>NH3(S) + RU(S)= TS1_NH3(S) = NH2(S) + H(S) + RU(B)</td>
+<td>FALSE</td>
+</tr>
+<tr class="row-even"><td>NH2(S) + RU(S) = TS2_NH2(S) = NH(S) + H(S) + RU(B)</td>
+<td>FALSE</td>
+</tr>
+<tr class="row-odd"><td>NH(S) + RU(S) = TS3_NH(S) = N(S) + H(S) + RU(B)</td>
+<td>FALSE</td>
+</tr>
+<tr class="row-even"><td>2N(S) + RU(B) = TS4_N2(S) = N2(S) + RU(S)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="Reading-data">
 <h2>Reading data<a class="headerlink" href="#Reading-data" title="Permalink to this headline">¶</a></h2>
@@ -399,7 +1925,7 @@ the references.</p>
 <span class="c1"># Using pathlib can overcome this limiation</span>
 <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
-<span class="n">excel_path</span> <span class="o">=</span> <span class="s1">&#39;NH3_Input_data.xlsx&#39;</span>
+<span class="n">excel_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_data.xlsx&#39;</span>
 
 <span class="n">cat_site_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;cat_sites&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">cat_site</span> <span class="o">=</span> <span class="n">CatSite</span><span class="p">(</span><span class="o">**</span><span class="n">cat_site_data</span><span class="p">)</span>
@@ -489,6 +2015,8 @@ C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.p
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
+<p>The warning above is typical when empirical objects are fitting to
+<code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects with the <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> preset.</p>
 </div>
 <div class="section" id="Reading-reactions">
 <h3>Reading reactions<a class="headerlink" href="#Reading-reactions" title="Permalink to this headline">¶</a></h3>
@@ -518,7 +2046,8 @@ C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.p
 <div class="section" id="Writing-Chemkin-files">
 <h2>Writing Chemkin files<a class="headerlink" href="#Writing-Chemkin-files" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have all the required objects, we can write the output
-files.</p>
+files. All outputs can be found in the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/outputs">./outputs
+folder</a>.</p>
 <div class="section" id="Writing-thermdat">
 <h3>Writing thermdat<a class="headerlink" href="#Writing-thermdat" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
@@ -529,9 +2058,75 @@ files.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
-<span class="n">write_thermdat</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
+<span class="n">write_thermdat</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/thermdat&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<p>The thermdat file written in shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">THERMO</span> <span class="n">ALL</span>
+       <span class="mi">100</span>       <span class="mi">500</span>      <span class="mi">1500</span>
+<span class="n">N2</span>              <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">523.4</span>         <span class="mi">1</span>
+ <span class="mf">3.75207309E+00</span><span class="o">-</span><span class="mf">1.30159027E-03</span> <span class="mf">1.83848785E-06</span><span class="o">-</span><span class="mf">1.17413430E-10</span><span class="o">-</span><span class="mf">3.65391117E-13</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.67464905E+02</span> <span class="mf">2.01171161E+00</span> <span class="mf">3.41792195E+00</span> <span class="mf">8.91688129E-04</span><span class="o">-</span><span class="mf">3.46864753E-06</span>    <span class="mi">3</span>
+ <span class="mf">5.44691795E-09</span><span class="o">-</span><span class="mf">2.46804017E-12</span><span class="o">-</span><span class="mf">1.27217456E+02</span> <span class="mf">3.45609372E+00</span>                   <span class="mi">4</span>
+<span class="n">NH3</span>             <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">533.6</span>         <span class="mi">1</span>
+ <span class="mf">3.29427463E+00</span> <span class="mf">2.57481517E-03</span> <span class="mf">5.20883059E-07</span><span class="o">-</span><span class="mf">1.00678313E-09</span> <span class="mf">3.59356180E-13</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">8.39739662E+03</span> <span class="mf">3.58202003E+00</span> <span class="mf">4.57124680E+00</span><span class="o">-</span><span class="mf">6.89724277E-03</span> <span class="mf">2.70972941E-05</span>    <span class="mi">3</span>
+<span class="o">-</span><span class="mf">3.44331645E-08</span> <span class="mf">1.62568430E-11</span><span class="o">-</span><span class="mf">8.53630325E+03</span><span class="o">-</span><span class="mf">1.79552658E+00</span>                   <span class="mi">4</span>
+<span class="n">H2</span>              <span class="mi">20190314</span><span class="n">H</span>   <span class="mi">2</span>               <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">574.6</span>         <span class="mi">1</span>
+ <span class="mf">3.37903251E+00</span> <span class="mf">7.92301907E-04</span><span class="o">-</span><span class="mf">1.88662952E-06</span> <span class="mf">1.85974220E-09</span><span class="o">-</span><span class="mf">5.68447254E-13</span>    <span class="mi">2</span>
+ <span class="mf">1.70231785E+03</span><span class="o">-</span><span class="mf">3.76701177E+00</span> <span class="mf">3.50717925E+00</span><span class="o">-</span><span class="mf">8.50397135E-05</span> <span class="mf">3.79570576E-07</span>    <span class="mi">3</span>
+<span class="o">-</span><span class="mf">7.57943298E-10</span> <span class="mf">5.72423558E-13</span> <span class="mf">1.68725520E+03</span><span class="o">-</span><span class="mf">4.31675916E+00</span>                   <span class="mi">4</span>
+<span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
+ <span class="mf">3.42605836E+00</span> <span class="mf">5.03710708E-03</span><span class="o">-</span><span class="mf">6.92689694E-06</span> <span class="mf">6.03246113E-09</span><span class="o">-</span><span class="mf">2.18862675E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">7.10922368E+03</span><span class="o">-</span><span class="mf">1.39236755E+01</span> <span class="mf">4.40553502E-01</span> <span class="mf">2.97759950E-02</span><span class="o">-</span><span class="mf">8.47698148E-05</span>    <span class="mi">3</span>
+ <span class="mf">1.16195177E-07</span><span class="o">-</span><span class="mf">6.12938589E-11</span><span class="o">-</span><span class="mf">6.81726811E+03</span><span class="o">-</span><span class="mf">1.67561821E+00</span>                   <span class="mi">4</span>
+<span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">502.9</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">8.29107669E-01</span> <span class="mf">2.64469843E-02</span><span class="o">-</span><span class="mf">4.38832016E-05</span> <span class="mf">3.47600781E-08</span><span class="o">-</span><span class="mf">1.07819310E-11</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.10025913E+04</span> <span class="mf">5.84749603E-01</span><span class="o">-</span><span class="mf">5.23174593E+00</span> <span class="mf">6.11537184E-02</span><span class="o">-</span><span class="mf">1.47762309E-04</span>    <span class="mi">3</span>
+ <span class="mf">1.74618161E-07</span><span class="o">-</span><span class="mf">8.21997526E-11</span><span class="o">-</span><span class="mf">1.05502378E+04</span> <span class="mf">1.88654280E+01</span>                   <span class="mi">4</span>
+<span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mi">20190314</span><span class="n">H</span>   <span class="mi">1</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">461.9</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">2.11302416E+00</span> <span class="mf">1.72572991E-02</span><span class="o">-</span><span class="mf">2.60046478E-05</span> <span class="mf">1.92388088E-08</span><span class="o">-</span><span class="mf">5.68363784E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">6.07693323E+03</span> <span class="mf">8.35415551E+00</span><span class="o">-</span><span class="mf">1.41307531E+00</span> <span class="mf">1.00687718E-02</span> <span class="mf">1.09758988E-06</span>    <span class="mi">3</span>
+<span class="o">-</span><span class="mf">2.55216914E-08</span> <span class="mf">2.17566538E-11</span><span class="o">-</span><span class="mf">6.12970520E+03</span> <span class="mf">5.64702945E+00</span>                   <span class="mi">4</span>
+<span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">461.9</span>         <span class="mi">1</span>
+ <span class="mf">1.58312977E+00</span> <span class="mf">1.57753291E-02</span><span class="o">-</span><span class="mf">1.71587153E-05</span> <span class="mf">1.15414255E-08</span><span class="o">-</span><span class="mf">3.21958978E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.42569335E+04</span><span class="o">-</span><span class="mf">6.35113154E+00</span> <span class="mf">1.16759533E+00</span> <span class="mf">2.05732170E-02</span><span class="o">-</span><span class="mf">3.66958772E-05</span>    <span class="mi">3</span>
+ <span class="mf">4.56112325E-08</span><span class="o">-</span><span class="mf">2.49628744E-11</span><span class="o">-</span><span class="mf">1.42313136E+04</span><span class="o">-</span><span class="mf">4.80541265E+00</span>                   <span class="mi">4</span>
+<span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">2</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">523.4</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">6.86530719E-01</span> <span class="mf">2.43298826E-02</span><span class="o">-</span><span class="mf">3.68705157E-05</span> <span class="mf">2.88483783E-08</span><span class="o">-</span><span class="mf">8.86963660E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.19475429E+04</span> <span class="mf">1.03190122E+00</span><span class="o">-</span><span class="mf">2.56305506E+00</span> <span class="mf">3.84726874E-02</span><span class="o">-</span><span class="mf">7.73503504E-05</span>    <span class="mi">3</span>
+ <span class="mf">8.09903199E-08</span><span class="o">-</span><span class="mf">3.43595838E-11</span><span class="o">-</span><span class="mf">1.17458710E+04</span> <span class="mf">8.90805309E+00</span>                   <span class="mi">4</span>
+<span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">1</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">543.9</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">1.33660645E+00</span> <span class="mf">2.33106600E-02</span><span class="o">-</span><span class="mf">3.77180253E-05</span> <span class="mf">2.97486446E-08</span><span class="o">-</span><span class="mf">9.12157176E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.48903408E+04</span> <span class="mf">3.58875312E+00</span><span class="o">-</span><span class="mf">3.73687435E+00</span> <span class="mf">4.05226889E-02</span><span class="o">-</span><span class="mf">8.44226964E-05</span>    <span class="mi">3</span>
+ <span class="mf">8.65932632E-08</span><span class="o">-</span><span class="mf">3.53036247E-11</span><span class="o">-</span><span class="mf">1.46202194E+04</span> <span class="mf">1.37781593E+01</span>                   <span class="mi">4</span>
+<span class="n">TS1_NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">451.7</span>         <span class="mi">1</span>
+ <span class="mf">5.21221040E-02</span> <span class="mf">2.11615812E-02</span><span class="o">-</span><span class="mf">2.49542203E-05</span> <span class="mf">1.66204937E-08</span><span class="o">-</span><span class="mf">4.59897868E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">5.86628985E+03</span><span class="o">-</span><span class="mf">1.43112446E+00</span> <span class="mf">4.96418515E-02</span> <span class="mf">2.15674671E-02</span><span class="o">-</span><span class="mf">2.75604959E-05</span>    <span class="mi">3</span>
+ <span class="mf">2.23225323E-08</span><span class="o">-</span><span class="mf">8.79255935E-12</span><span class="o">-</span><span class="mf">5.87008224E+03</span><span class="o">-</span><span class="mf">1.46494399E+00</span>                   <span class="mi">4</span>
+<span class="n">TS2_NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">2</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">1.48538501E+00</span> <span class="mf">2.67287608E-02</span><span class="o">-</span><span class="mf">3.86606417E-05</span> <span class="mf">2.81558194E-08</span><span class="o">-</span><span class="mf">8.15140597E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">8.43975871E+03</span> <span class="mf">4.23478568E+00</span><span class="o">-</span><span class="mf">2.58881424E+00</span> <span class="mf">3.43781302E-02</span><span class="o">-</span><span class="mf">5.87419101E-05</span>    <span class="mi">3</span>
+ <span class="mf">5.18321984E-08</span><span class="o">-</span><span class="mf">1.87340797E-11</span><span class="o">-</span><span class="mf">8.31127804E+03</span> <span class="mf">8.95651586E+00</span>                   <span class="mi">4</span>
+<span class="n">TS3_NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">1</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">1.24242592E-01</span> <span class="mf">1.65859456E-02</span><span class="o">-</span><span class="mf">2.43704704E-05</span> <span class="mf">1.77594067E-08</span><span class="o">-</span><span class="mf">5.19878424E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.39060398E+04</span><span class="o">-</span><span class="mf">1.18117850E+00</span><span class="o">-</span><span class="mf">1.80701218E+00</span> <span class="mf">3.07479132E-02</span><span class="o">-</span><span class="mf">6.96816870E-05</span>    <span class="mi">3</span>
+ <span class="mf">8.30020912E-08</span><span class="o">-</span><span class="mf">4.08170225E-11</span><span class="o">-</span><span class="mf">1.37437409E+04</span> <span class="mf">5.69757432E+00</span>                   <span class="mi">4</span>
+<span class="n">TS4_N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
+ <span class="mf">1.52431744E+00</span> <span class="mf">1.40315985E-02</span><span class="o">-</span><span class="mf">2.40821843E-05</span> <span class="mf">1.96281604E-08</span><span class="o">-</span><span class="mf">6.24114074E-12</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">1.24945441E+02</span><span class="o">-</span><span class="mf">8.60931129E+00</span><span class="o">-</span><span class="mf">1.75107618E+00</span> <span class="mf">4.12189598E-02</span><span class="o">-</span><span class="mf">1.09828935E-04</span>    <span class="mi">3</span>
+ <span class="mf">1.41320046E-07</span><span class="o">-</span><span class="mf">7.17404084E-11</span> <span class="mf">1.95040067E+02</span> <span class="mf">4.82355594E+00</span>                   <span class="mi">4</span>
+<span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190314</span>                    <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
+ <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">2</span>
+ <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">3</span>
+ <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>                   <span class="mi">4</span>
+<span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>           <span class="mi">20190314</span>                    <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
+ <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">2</span>
+ <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">3</span>
+ <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>                   <span class="mi">4</span>
+<span class="n">END</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="Writing-gas.inp-and-surf.inp">
@@ -544,10 +2139,94 @@ files.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="k">import</span> <span class="n">chemkin</span> <span class="k">as</span> <span class="n">ck_io</span>
 
-<span class="n">ck_io</span><span class="o">.</span><span class="n">write_gas</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;gas.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
-<span class="n">ck_io</span><span class="o">.</span><span class="n">write_surf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;surf.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_gas</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/gas.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_surf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/surf.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<blockquote>
+<div>Note that <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> is ‘get_GoRT_act’. We use this formalism</div></blockquote>
+<p>here since we do not include entropic effects in the preexponential
+factor.</p>
+<p>The gas.inp file written is shown below. Note there are no gas-phase
+reactions.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">!File generated by pMuTT on 2019-03-14 11:04:35.953210</span>
+<span class="c">!Elements present in gas and surface species</span>
+<span class="n">ELEMENTS</span>
+<span class="n">N</span>
+<span class="n">H</span>
+<span class="k">END</span>
+
+<span class="c">!Gas-phase species</span>
+<span class="n">SPECIES</span>
+<span class="n">N2</span>
+<span class="n">NH3</span>
+<span class="n">H2</span>
+<span class="k">END</span>
+
+<span class="c">!Gas-phase reactions. The rate constant expression is:</span>
+<span class="c">!k = kb/h * (T)^beta * exp(-Ea/RT)</span>
+<span class="c">!Each line has 4 columns:</span>
+<span class="c">!- Reaction reactants and products separated by &lt;=&gt;</span>
+<span class="c">!- Preexponential factor, kb/h</span>
+<span class="c">!- Beta (power to raise T in rate constant expression)</span>
+<span class="c">!- Ea (Activation Energy or Gibbs energy of activation in kcal/mol</span>
+<span class="n">REACTIONS</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+<p>The surf.inp file written in shown below.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">!File generated by pMuTT on 2019-03-14 11:04:35.964181</span>
+<span class="c">!Surface species</span>
+<span class="c">!Each catalyst site has the following format:</span>
+<span class="c">!SITE/[Site name]/      SDEN/[Site density in mol/cm2]/</span>
+<span class="c">![Adsorbate Name]/[# of Sites occupied]/ (for every adsorbate)</span>
+<span class="c">!BULK [Bulk name]/[Bulk density in g/cm3]</span>
+<span class="n">SITE</span><span class="o">/</span><span class="n">RU0001</span><span class="o">/</span>       <span class="n">SDEN</span><span class="o">/</span><span class="mf">2.16710E-09</span><span class="o">/</span>
+
+  <span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">TS1_NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">TS2_NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">TS3_NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">TS4_N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+  <span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+
+<span class="n">BULK</span> <span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="mf">2.2</span><span class="o">/</span>
+<span class="k">END</span>
+
+<span class="c">!Gas-phase reactions.</span>
+<span class="c">!The reaction line has the following format:</span>
+<span class="c">!REACTIONS  MW[ON/OFF]   [Ea units]</span>
+<span class="c">!where MW stands for Motz-Wise corrections and if the Ea</span>
+<span class="c">!units are left blank, then the activation energy should be dimensionless (i.e. E/RT)</span>
+<span class="c">!The rate constant expression is:</span>
+<span class="c">!k = kb/h/site_den^(n-1) * (T)^beta * exp(-Ea/RT)</span>
+<span class="c">!where site_den is the site density and is the number of surface species (including empty sites)</span>
+<span class="c">!Each line has 4 columns:</span>
+<span class="c">!- Reaction reactants and products separated by =</span>
+<span class="c">!- Preexponential factor, kb/h/site_den^(n-1), or</span>
+<span class="c">!  sticking coefficient if adsorption reaction</span>
+<span class="c">!- Beta (power to raise T in rate constant expression)</span>
+<span class="c">!- Ea (Activation Energy or Gibbs energy of activation in specified units</span>
+<span class="c">!Adsorption reactions can be represented using the STICK keyword</span>
+<span class="n">REACTIONS</span>  <span class="n">MWON</span>
+<span class="n">H2</span><span class="o">+</span><span class="mi">2</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">=</span><span class="mi">2</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>           <span class="mf">5.000E-01</span>   <span class="mf">1.000E+00</span>   <span class="mf">0.000E+00</span>
+<span class="n">STICK</span>
+<span class="n">N2</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">=</span><span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>             <span class="mf">5.000E-01</span>   <span class="mf">1.000E+00</span>   <span class="mf">0.000E+00</span>
+<span class="n">STICK</span>
+<span class="n">NH3</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">=</span><span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>           <span class="mf">5.000E-01</span>   <span class="mf">1.000E+00</span>   <span class="mf">0.000E+00</span>
+<span class="n">STICK</span>
+<span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">=</span><span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>   <span class="mf">9.615E+18</span>   <span class="mf">1.000E+00</span>   <span class="mf">2.972E+01</span>
+<span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">=</span><span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>    <span class="mf">9.615E+18</span>   <span class="mf">1.000E+00</span>   <span class="mf">1.199E+01</span>
+<span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">=</span><span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>      <span class="mf">9.615E+18</span>   <span class="mf">1.000E+00</span>   <span class="mf">3.203E+00</span>
+<span class="mi">2</span><span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">=</span><span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mf">9.615E+18</span>   <span class="mf">1.000E+00</span>   <span class="mf">7.317E+01</span>
+<span class="k">END</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="Writing-T_flow.inp">
@@ -564,9 +2243,19 @@ files.</p>
 <span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">]</span> <span class="c1"># Standard volumetric flow rate in cm3</span>
 <span class="n">abyv</span><span class="o">=</span> <span class="p">[</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">50.</span><span class="p">,</span> <span class="mf">25.</span><span class="p">]</span> <span class="c1"># Catalyst surface area to reactor volume in 1/cm</span>
 
-<span class="n">ck_io</span><span class="o">.</span><span class="n">write_T_flow</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;T_flow.inp&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="n">Q</span><span class="p">,</span> <span class="n">abyv</span><span class="o">=</span><span class="n">abyv</span><span class="p">)</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_T_flow</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/T_flow.inp&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="n">Q</span><span class="p">,</span> <span class="n">abyv</span><span class="o">=</span><span class="n">abyv</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<p>The T_flow.inp file written is shown below.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">!File generated by pMuTT on 2019-03-14 11:04:35.974154</span>
+<span class="c">!Conditions for each reaction run</span>
+<span class="c">!Only used when MultiInput in tube.inp is set to &quot;T&quot;</span>
+<span class="c">!T[K]      P[atm]     Q[cm3/s]   abyv[cm-1]  Run #</span>
+<span class="mf">3.000E+02</span>  <span class="mf">1.000E+00</span>  <span class="mf">1.000E+01</span>  <span class="mf">1.000E+02</span>  <span class="c">!1</span>
+<span class="mf">4.000E+02</span>  <span class="mf">2.000E+00</span>  <span class="mf">2.000E+01</span>  <span class="mf">5.000E+01</span>  <span class="c">!2</span>
+<span class="mf">5.000E+02</span>  <span class="mf">3.000E+00</span>  <span class="mf">3.000E+01</span>  <span class="mf">2.500E+01</span>  <span class="c">!3</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="Writing-EAg.inp-and-EAs.inp">
@@ -588,18 +2277,100 @@ files.</p>
         <span class="s1">&#39;abyv&#39;</span><span class="p">:</span> <span class="n">abyv</span><span class="p">}</span>
     <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
 
-<span class="n">ck_io</span><span class="o">.</span><span class="n">write_EA</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;EAs.inp&#39;</span><span class="p">,</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_EA</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/EAs.inp&#39;</span><span class="p">,</span>
                <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span>
                <span class="n">write_gas_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">,</span>
                <span class="n">conditions</span><span class="o">=</span><span class="n">conditions</span><span class="p">)</span>
-<span class="n">ck_io</span><span class="o">.</span><span class="n">write_EA</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;EAg.inp&#39;</span><span class="p">,</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_EA</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/EAg.inp&#39;</span><span class="p">,</span>
                <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span>
                <span class="n">write_gas_phase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">,</span>
                <span class="n">conditions</span><span class="o">=</span><span class="n">conditions</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<p>Reminder that we use <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> as ‘get_GoRT_act’ for the
+<a class="reference external" href="#act_method_name_explanation">reason described above</a>.</p>
+<p>The EAg.inp file is shown below.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">!File generated by pMuTT on 2019-03-14 11:04:36.004074</span>
+<span class="c">!The first line is the number of reactions. Subsequent lines follow the format</span>
+<span class="c">!of rxn (from surf.out) followed by the EA/RT value at each run condition.</span>
+<span class="c">!There may be one slight deviation from surf.out: any repeated species should</span>
+<span class="c">!be included in the reaction string with a stoichiometric coefficient equal to</span>
+<span class="c">!the number of times the species appears in the reaction. If not using</span>
+<span class="c">!MultiInput, then only the first value is used.</span>
+  <span class="mi">0</span>  <span class="c">!Number of reactions</span>
+<span class="c">!           1          2          3</span>
+<span class="n">EOF</span>
+</pre></div>
+</div>
+<p>The EAs.inp file is shown below.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">!File generated by pMuTT on 2019-03-14 11:04:35.990111</span>
+<span class="c">!The first line is the number of reactions. Subsequent lines follow the format</span>
+<span class="c">!of rxn (from surf.out) followed by the EA/RT value at each run condition.</span>
+<span class="c">!There may be one slight deviation from surf.out: any repeated species should</span>
+<span class="c">!be included in the reaction string with a stoichiometric coefficient equal to</span>
+<span class="c">!the number of times the species appears in the reaction. If not using</span>
+<span class="c">!MultiInput, then only the first value is used.</span>
+  <span class="mi">7</span>  <span class="c">!Number of reactions</span>
+<span class="c">!                                           1          2          3</span>
+<span class="n">H2</span><span class="o">+</span><span class="mi">2</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="mi">2</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>             <span class="mf">0.00E+00</span>   <span class="mf">0.00E+00</span>   <span class="mf">0.00E+00</span>
+<span class="n">N2</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>               <span class="mf">0.00E+00</span>   <span class="mf">0.00E+00</span>   <span class="mf">2.47E+00</span>
+<span class="n">NH3</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>             <span class="mf">0.00E+00</span>   <span class="mf">1.59E+00</span>   <span class="mf">4.45E+00</span>
+<span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>     <span class="mf">2.95E+01</span>   <span class="mf">2.28E+01</span>   <span class="mf">1.88E+01</span>
+<span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>      <span class="mf">1.19E+01</span>   <span class="mf">9.12E+00</span>   <span class="mf">7.46E+00</span>
+<span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>        <span class="mf">3.18E+00</span>   <span class="mf">2.23E+00</span>   <span class="mf">1.65E+00</span>
+<span class="mi">2</span><span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">&lt;=&gt;</span><span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">+</span><span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mf">7.27E+01</span>   <span class="mf">5.49E+01</span>   <span class="mf">4.45E+01</span>
+<span class="n">EOF</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Writing-tube_mole.inp">
+<h3>Writing tube_mole.inp<a class="headerlink" href="#Writing-tube_mole.inp" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Generating a list of conditions to input</span>
+<span class="n">mole_frac_conditions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x_N2</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">x_H2</span> <span class="o">=</span> <span class="n">x_N2</span><span class="o">*</span><span class="mf">3.</span>
+    <span class="n">x_NH3</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">x_N2</span> <span class="o">-</span> <span class="n">x_H2</span>
+    <span class="n">mole_fractions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N2&#39;</span><span class="p">:</span> <span class="n">x_N2</span><span class="p">,</span> <span class="s1">&#39;H2&#39;</span><span class="p">:</span> <span class="n">x_H2</span><span class="p">,</span> <span class="s1">&#39;NH3&#39;</span><span class="p">:</span> <span class="n">x_NH3</span><span class="p">,</span> <span class="s1">&#39;RU(S)&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">}</span>
+    <span class="n">mole_frac_conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mole_fractions</span><span class="p">)</span>
+
+<span class="c1"># Write the tube_mole.inp file</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_tube_mole</span><span class="p">(</span><span class="n">mole_frac_conditions</span><span class="o">=</span><span class="n">mole_frac_conditions</span><span class="p">,</span>
+                      <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
+                      <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/tube_mole.inp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;N2/GAS/&#39;
+&#39;NH3/GAS/&#39;
+&#39;H2/GAS/&#39;
+&#39;RU(S)/RU0001/&#39;
+</pre></div></div>
+</div>
+<p>The tube_mole.inp file is shown below.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">!File generated by pMuTT on 2019-03-14 11:04:35.974154</span>
+<span class="c">!Conditions for each reaction run</span>
+<span class="c">!Only used when MultiInput in tube.inp is set to &quot;T&quot;</span>
+<span class="c">!T[K]      P[atm]     Q[cm3/s]   abyv[cm-1]  Run #</span>
+<span class="mf">3.000E+02</span>  <span class="mf">1.000E+00</span>  <span class="mf">1.000E+01</span>  <span class="mf">1.000E+02</span>  <span class="c">!1</span>
+<span class="mf">4.000E+02</span>  <span class="mf">2.000E+00</span>  <span class="mf">2.000E+01</span>  <span class="mf">5.000E+01</span>  <span class="c">!2</span>
+<span class="mf">5.000E+02</span>  <span class="mf">3.000E+00</span>  <span class="mf">3.000E+01</span>  <span class="mf">2.500E+01</span>  <span class="c">!3</span>
+</pre></div>
 </div>
 </div>
 </div>
