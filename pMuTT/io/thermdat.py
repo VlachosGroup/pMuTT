@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.io_.thermdat
+pMuTT.io.thermdat
 
 Read from/write to thermdat files.
 """

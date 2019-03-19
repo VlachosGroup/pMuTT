@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.io_.db
+pMuTT.io.db
 
 Read from/write to databases
 """
 
 from pymongo import MongoClient
-from pMuTT.io_.jsonio import json_to_pMuTT
+from pMuTT.io.jsonio import json_to_pMuTT
 
 class PMRester:
     """User-friendly REST interface with the database

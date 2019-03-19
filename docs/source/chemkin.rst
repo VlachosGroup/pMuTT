@@ -19,6 +19,6 @@ Objects
 Input and Output
 ----------------
 
-.. automodule:: pMuTT.io_.chemkin
+.. automodule:: pMuTT.io.chemkin
    :members:
 

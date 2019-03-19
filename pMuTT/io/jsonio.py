@@ -17,7 +17,7 @@ class pMuTTEncoder(json.JSONEncoder):
 
 def json_to_pMuTT(json_obj):
     """Object hook to convert json to pMuTT objects. Any complex object should
-    be in the :data:`~pMuTT.io_.jsonio.type_to_class.type_to_class_dict`
+    be in the :data:`~pMuTT.io.jsonio.type_to_class.type_to_class_dict`
     dictionary.
 
     Parameters

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.io_.chemkin
+pMuTT.io.chemkin
 
 Reads reactions lists from Chemkin gas.inp and surf.inp files
 """
@@ -274,7 +274,7 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
         f_ptr.write('\n'.join(lines))
 
 
-def write_surf(nasa_species, sden_operation='sum',
+def write_surf(nasa_species, sden_operation='min',
                filename='surf.inp', T=c.T0('K'), reactions=[],
                species_delimiter='+', reaction_delimiter='=',
                act_method_name='get_E_act', act_unit='kcal/mol',
@@ -690,7 +690,7 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             A = reaction.sticking_coeff
         else:
             # If using delta_G, take out entropic contribution in A
-            if 'get_delta_G' in act_method_name:
+            if act_method_name in ('get_G_act', 'get_GoRT_act'):
                 include_entropy = False
             else:
                 include_entropy = True

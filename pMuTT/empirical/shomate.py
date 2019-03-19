@@ -11,7 +11,7 @@ from scipy.optimize import curve_fit
 from scipy.stats import variation
 from pMuTT import _is_iterable
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.jsonio import json_to_pMuTT, remove_class
 from pMuTT.empirical import EmpiricalBase
 from pMuTT.mixture import _get_mix_quantity
 

@@ -8,7 +8,7 @@ Operations related to the Zacros wrapper
 import numpy as np
 from pMuTT import constants as c
 from pMuTT import get_molecular_weight as mw
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.jsonio import json_to_pMuTT, remove_class
 from pMuTT.empirical import EmpiricalBase
 """ Test"""
 

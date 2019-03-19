@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 from pMuTT import (_force_pass_arguments, _pass_expected_arguments,
                    _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.jsonio import json_to_pMuTT, remove_class
 
 
 class Reaction:
@@ -1609,8 +1609,7 @@ class Reaction:
                 m = _get_molecularity(self.reactants_stoich)
 
         return c.kb('J/K')*T/c.h('J s') \
-            * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T,
-                                        **kwargs)+m)
+            * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs)+m)
 
     def _parse_state(self, state):
         """Helper method to get the relevant species and stoichiometry
@@ -1963,14 +1962,14 @@ class ChemkinReaction(Reaction):
             n_surf += stoich
         return n_surf
 
-    def get_A(self, sden_operation='sum', include_entropy=True, T=c.T0('K'),
+    def get_A(self, sden_operation='min', include_entropy=True, T=c.T0('K'),
               **kwargs):
         """Calculates the preexponential factor in the Chemkin format
 
         Parameters
         ----------
         sden_operation : str, optional
-            Site density operation to use. Default is 'sum'
+            Site density operation to use. Default is 'min'
         include_entropy : bool, optional
             If True, includes the act entropy. Default is True
         T : float, optional
@@ -1987,7 +1986,7 @@ class ChemkinReaction(Reaction):
         if not self.gas_phase:
             # Uses site with highest site density
             site_dens = []
-            for reactant in self.reactants:
+            for reactant, stoich in zip(self.reactants, self.reactants_stoich):
                 # Skip species without a catalyst site
                 try:
                     site_den = reactant.cat_site.site_density
@@ -1996,7 +1995,7 @@ class ChemkinReaction(Reaction):
                 # Skip bulk species
                 if reactant.name == reactant.cat_site.bulk_specie:
                     continue
-                site_dens.append(site_den)
+                site_dens.extend([site_den]*int(stoich))
 
             # Apply the operation to the site densities
             eff_site_den = _apply_numpy_operation(quantity=site_dens,
@@ -2031,7 +2030,7 @@ class ChemkinReaction(Reaction):
             act = True
         return np.max([0., super().get_delta_HoRT(rev=rev, act=act, **kwargs)])
 
-    def get_delta_GoRT(self, rev=False, act=False, **kwargs):
+    def get_GoRT_act(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
         state species, calculates the delta dimensionless Gibbs energy
 
@@ -2057,7 +2056,9 @@ class ChemkinReaction(Reaction):
             act = False
         else:
             act = True
-        return np.max([0., super().get_delta_GoRT(rev=rev, act=act, **kwargs)])
+        return np.max([0., 
+                       super().get_delta_GoRT(rev=rev, act=act, **kwargs),
+                       super().get_delta_GoRT(rev=rev, act=False, **kwargs)])
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

@@ -4,7 +4,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 from pMuTT import constants as c
 from pMuTT.reaction import Reactions
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.jsonio import json_to_pMuTT, remove_class
 
 
 class PhaseDiagram(Reactions):

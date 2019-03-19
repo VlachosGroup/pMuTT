@@ -9,7 +9,7 @@ Development Branch
 
 - Renamed `pMuTT.empirical.BaseThermo` to 
   :class:`~pMuTT.empirical.EmpiricalBase`
-- Added `pMuTT.io_.db` module to interface with databases
+- Added `pMuTT.io.db` module to interface with databases
 
 Version 1.2.3
 -------------
@@ -73,8 +73,8 @@ Version 1.2.1
 -------------
 Dec. 17, 2018
 
-- Added ``vib_outcar`` special rule for :func:`~pMuTT.io_.excel.read_excel` and
-  :func:`~pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar` to get vibrational 
+- Added ``vib_outcar`` special rule for :func:`~pMuTT.io.excel.read_excel` and
+  :func:`~pMuTT.io.vasp.set_vib_wavenumbers_from_outcar` to get vibrational 
   frequencies directly from VASP's OUTCAR file.
 - Added ``get_X`` methods to :class:`~pMuTT.empirical.nasa.Nasa`, 
   :class:`~pMuTT.empirical.shomate.Shomate`, :class:`~pMuTT.statmech.StatMech` 
@@ -135,7 +135,7 @@ Oct. 26, 2018
   :class:`~pMuTT.eos.vanDerWaalsEOS`
 - New :class:`~pMuTT.reaction.phasediagram.PhaseDiagram` class
 - New :class:`~pMuTT.statmech.vib.EinsteinVib` class
-- New :func:`~pMuTT.io_.chemkin.read_reactions` function to read species and
+- New :func:`~pMuTT.io.chemkin.read_reactions` function to read species and
   reactions from Chemkin surf.inp and gas.inp files
 
 .. _`Development Branch`: https://github.com/VlachosGroup/pMuTT/commits/development

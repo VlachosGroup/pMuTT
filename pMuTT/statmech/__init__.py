@@ -11,7 +11,7 @@ from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
 from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.mixture import _get_mix_quantity
-from pMuTT.io_ import jsonio as json_pMuTT
+from pMuTT.io import jsonio as json_pMuTT
 
 
 class EmptyMode:
