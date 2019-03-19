@@ -141,7 +141,8 @@ def _is_iterable(val):
             return False
         else:
             return True
-            
+
+
 def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
                        default_value=0., **kwargs):
     """Calculate the quantity from that mode.
@@ -153,7 +154,7 @@ def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
         method_name : str
             Name of method to use to calculate quantity.
         raise_error : bool, optional
-            If True, raises an error if any of the modes do not have the 
+            If True, raises an error if any of the modes do not have the
             quantity of interest. Default is True
         raise_warning : bool, optional
             Only relevant if raise_error is False. Raises a warning if any
@@ -184,6 +185,7 @@ def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
     else:
         quantity = _pass_expected_arguments(method, **kwargs)
     return quantity
+
 
 def _get_specie_kwargs(specie_name, **kwargs):
     """Gets the keyword arguments specific to a specie
@@ -223,6 +225,7 @@ def _get_specie_kwargs(specie_name, **kwargs):
         pass
     return specie_kwargs
 
+
 def _apply_numpy_operation(quantity, operation, verbose=False):
     """Apply operation to quantity
 
@@ -246,7 +249,6 @@ def _apply_numpy_operation(quantity, operation, verbose=False):
         np_method = getattr(np, operation)
         out_quantity = np_method(quantity)
     return out_quantity
-
 
 
 def parse_formula(formula):
@@ -316,3 +318,26 @@ def pMuTT_list_to_dict(pMuTT_list, key='name'):
             Dictionary of pMuTT objects
     """
     return {getattr(obj, key): obj for obj in pMuTT_list}
+
+def format_conditions(**kwargs):
+    """Converts an arbitrary number of lists to a list of dictionaries. Useful
+    for specifying the conditions in pMuTT.io.chemkin.write_EA
+
+    Parameters
+    ----------
+        kwargs - keyword arguments
+            Lists of the conditions where each index corresponds to a run
+    Returns
+    -------
+        conditions - list of dict
+            A list where each element is a dictionary containing the conditions
+            for a specific run
+    """
+    conditions = []
+    for cond_name, cond_values in kwargs.items():
+        for i, cond_value in enumerate(cond_values):
+            try:
+                conditions[i][cond_name] = cond_value
+            except (IndexError, KeyError):
+                conditions.append({cond_name: cond_value})
+    return conditions

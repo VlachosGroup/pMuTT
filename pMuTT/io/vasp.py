@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.io_.vasp
+pMuTT.io.vasp
 Description: methods to read from vasp outcar files
 """
 

@@ -5,10 +5,10 @@ import re
 import numpy as np
 from scipy import interpolate
 from matplotlib import pyplot as plt
-from pMuTT import (_force_pass_arguments, _pass_expected_arguments, 
-    _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
+from pMuTT import (_force_pass_arguments, _pass_expected_arguments,
+                   _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
 class Reaction:
@@ -397,9 +397,9 @@ class Reaction:
             E : float
                 Electronic energy of the reaction state
         """
-        return self.get_EoRT_state(state=state, T=T, include_ZPE=include_ZPE, 
+        return self.get_EoRT_state(state=state, T=T, include_ZPE=include_ZPE,
                                    **kwargs) \
-               *T*c.R('{}/K'.format(units))
+            * T*c.R('{}/K'.format(units))
 
     def get_HoRT_state(self, state, **kwargs):
         """Gets dimensionless enthalpy at a state
@@ -692,7 +692,7 @@ class Reaction:
                 Change in heat capacity between reactants and products
         """
         return self.get_delta_CvoR(rev=rev, act=act, **kwargs) \
-               *c.R(units)
+            * c.R(units)
 
     def get_delta_CpoR(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless heat capacity between reactants and
@@ -747,7 +747,7 @@ class Reaction:
                 Change in heat capacity between reactants and products
         """
         return self.get_delta_CpoR(rev=rev, act=act, **kwargs) \
-               *c.R(units)
+            * c.R(units)
 
     def get_delta_UoRT(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless internal energy between reactants and
@@ -858,7 +858,7 @@ class Reaction:
             delta_E : float
                 Change in electronic energy between reactants and products
         """
-        return self.get_delta_EoRT(rev=rev, act=act, T=T, 
+        return self.get_delta_EoRT(rev=rev, act=act, T=T,
                                    **kwargs)*T*c.R('{}/K'.format(units))
 
     def get_delta_HoRT(self, rev=False, act=False, **kwargs):
@@ -913,7 +913,7 @@ class Reaction:
             delta_H : float
                 Change in enthalpy between reactants and products
         """
-        return self.get_delta_HoRT(rev=rev, T=T, act=act, 
+        return self.get_delta_HoRT(rev=rev, T=T, act=act,
                                    **kwargs)*T*c.R('{}/K'.format(units))
 
     def get_delta_SoR(self, rev=False, act=False, **kwargs):
@@ -967,7 +967,7 @@ class Reaction:
                 Change in entropy between reactants and products
         """
         return self.get_delta_SoR(rev=rev, act=act, **kwargs) \
-               *c.R(units)
+            * c.R(units)
 
     def get_delta_FoRT(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless Helmholtz energy between reactants and
@@ -1022,7 +1022,7 @@ class Reaction:
             delta_F : float
                 Change in Helmholtz energy between reactants and products
         """
-        return self.get_delta_FoRT(rev=rev, T=T, act=act, 
+        return self.get_delta_FoRT(rev=rev, T=T, act=act,
                                    **kwargs)*T*c.R('{}/K'.format(units))
 
     def get_delta_GoRT(self, rev=False, act=False, **kwargs):
@@ -1082,7 +1082,7 @@ class Reaction:
                                    **kwargs)*T*c.R('{}/K'.format(units))
 
     def get_q_act(self, rev=False, **kwargs):
-        """Gets change in partition function between reactants/products and the 
+        """Gets change in partition function between reactants/products and the
         transition state
 
         Parameters
@@ -1147,8 +1147,8 @@ class Reaction:
         return self.get_delta_Cv(units=units, rev=rev, act=True, **kwargs)
 
     def get_CpoR_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless heat capacity between reactants/products
-        and the transition state
+        """Gets change in dimensionless heat capacity between
+        reactants/products and the transition state
 
         Parameters
         ----------
@@ -1192,7 +1192,7 @@ class Reaction:
         return self.get_delta_Cp(units=units, rev=rev, act=True, **kwargs)
 
     def get_UoRT_act(self, rev=False, **kwargs):
-        """Gets change in dimensionless internal energy between 
+        """Gets change in dimensionless internal energy between
         reactants/products and the transition state
 
         Parameters
@@ -1233,7 +1233,7 @@ class Reaction:
         Returns
         -------
             U_act : float
-                Change in internal energy between reactants/products and the 
+                Change in internal energy between reactants/products and the
                 transition state
         """
         return self.get_delta_U(units=units, T=T, rev=rev, act=True, **kwargs)
@@ -1254,14 +1254,14 @@ class Reaction:
         Returns
         -------
             HoRT_act : float
-                Change in enthalpy between reactants/products and the 
+                Change in enthalpy between reactants/products and the
                 transition state
         """
         return self.get_delta_HoRT(rev=rev, act=True, **kwargs)
 
     def get_H_act(self, units, T, rev=False, **kwargs):
-        """Gets change in enthalpy between reactants/products and the transition
-        state
+        """Gets change in enthalpy between reactants/products and the
+        transition state
 
         Parameters
         ----------
@@ -1280,8 +1280,8 @@ class Reaction:
         Returns
         -------
             H_act : float
-                Change in enthalpy between reactants/products and the transition
-                state
+                Change in enthalpy between reactants/products and the
+                transition state
         """
         return self.get_delta_H(units=units, T=T, rev=rev, act=True, **kwargs)
 
@@ -1346,7 +1346,7 @@ class Reaction:
         Returns
         -------
             FoRT_act : float
-                Change in Helmholtz energy between reactants/products and the 
+                Change in Helmholtz energy between reactants/products and the
                 transition state
         """
         return self.get_delta_FoRT(rev=rev, act=True, **kwargs)
@@ -1447,9 +1447,18 @@ class Reaction:
         return np.exp(-self.get_delta_GoRT(rev=rev, act=act,
                                            **kwargs))
 
-    def get_EoRT_act(self, rev=False, method='any', **kwargs):
-        """Gets dimensionless act energy between reactants
+    def get_EoRT_act(self, rev=False, method='any', del_m=None, **kwargs):
+        """Gets dimensionless Arrhenius activation energy between reactants
         (or products) and transition state
+
+        If the transition state method is used, the enthalpy of activation is
+        converted to activation energy using the following:
+
+        :math:`\\frac {E_a}{RT} = \\frac {\\Delta H^{TS}}{RT} +
+        (1-\\Delta n^{TS})`
+
+        where :math:`\\Delta n^{TS}` is the change in the number of molecules 
+        on forming the transition state.
 
         Parameters
         ----------
@@ -1464,10 +1473,17 @@ class Reaction:
                   state theory, then BEPs, then the reaction enthalpy)
                 - 'bep' (uses ``self.bep``)
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
-                - 'enthalpy' (uses the enthalpy of the reaction. If the reaction
-                  is exothermic, returns 0)
+                - 'enthalpy' (uses the enthalpy of the reaction. If the
+                  reaction is exothermic, returns 0)
 
                 Default is 'any'.
+            del_m : int, optional
+                Change in molecularity of gas-phase species in the reaction.
+                Condensed-phase and unimolecular gas-phase reactions should have
+                a value of 0. Bimolecular gas-phase reactions should have a 
+                value of -1. If not specified, m will be calculated 
+                (assuming all species in the initial state and transition state
+                are gas phase).
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless act
                 energy
@@ -1486,9 +1502,18 @@ class Reaction:
                 method = 'bep'
             else:
                 method = 'enthalpy'
-        
+
         if method == 'transition_state' or method == 'ts':
-            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs)
+            # Find molecularity of the reaction
+            if del_m is None:
+                m_FS = _get_molecularity(self.transition_state_stoich)
+                if rev:
+                    m_IS = _get_molecularity(self.products_stoich)
+                else:
+                    m_IS = _get_molecularity(self.reactants_stoich)
+                del_m = m_FS - m_IS
+            # Calculate H_TS and convert to Arrhenius activation energy
+            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
         elif method == 'bep':
             EoRT = self.bep.get_EoRT_act(rev=rev, **kwargs)
         elif method == 'enthalpy':
@@ -1501,7 +1526,8 @@ class Reaction:
                               'for supported options.'.format(method)))
         return EoRT
 
-    def get_E_act(self, units, T, rev=False, method='any', **kwargs):
+    def get_E_act(self, units, T, rev=False, method='any', del_m=None,
+                  **kwargs):
         """Gets act energy between reactants (or products)
         and transition state
 
@@ -1525,6 +1551,13 @@ class Reaction:
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
 
                 Default is 'any'.
+            del_m : int, optional
+                Change in molecularity of gas-phase species in the reaction.
+                Condensed-phase and unimolecular gas-phase reactions should have
+                a value of 0. Bimolecular gas-phase reactions should have a 
+                value of -1. If not specified, m will be calculated 
+                (assuming all species in the initial state and transition state
+                are gas phase).
             kwargs : keyword arguments
                 Parameters required to calculate act energy. See class
                 docstring to see how to pass specific parameters to
@@ -1535,12 +1568,15 @@ class Reaction:
                 act energy between reactants (or products) and
                 transition state
         """
-        return self.get_EoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
-            * c.R('{}/K'.format(units))
+        return self.get_EoRT_act(rev=rev, method=method, T=T, del_m=del_m,
+                                 **kwargs)*T*c.R('{}/K'.format(units))
 
-    def get_A(self, T=c.T0('K'), rev=False, **kwargs):
+    def get_A(self, T=c.T0('K'), rev=False, m=None, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
+
+        :math:`A = \\frac {k_B T} {h} \\exp\\bigg(\\frac {\\Delta S^{TS}}{R}+m
+        \\bigg)`
 
         Parameters
         ----------
@@ -1549,6 +1585,13 @@ class Reaction:
                 instead of reactants. Default is False
             T : float, optional
                 Temperature in K. Default is standard temperature.
+            m : int, optional
+                Molecularity of gas-phase species in the reaction.
+                Condensed-phase reactions and unimolecular gas-phase reactions
+                should have a value of 1. Bimolecular gas-phase reactions 
+                should have a value of 2. If not specified, m will be 
+                calculated (assuming all species in the initial state are
+                gas phase). 
             kwargs : keyword arguments
                 Parameters required to calculate pre-exponential factor. See
                 class docstring to see how to pass specific parameters to
@@ -1559,14 +1602,14 @@ class Reaction:
                 Pre-exponential factor
         """
         # Calculate molecularity (e.g. unimolecular, bimolecular)
-        if rev:
-            m = _get_molecularity(self.products_stoich)
-        else:
-            m = _get_molecularity(self.reactants_stoich)
+        if m is None:
+            if rev:
+                m = _get_molecularity(self.products_stoich)
+            else:
+                m = _get_molecularity(self.reactants_stoich)
 
         return c.kb('J/K')*T/c.h('J s') \
-               *np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, 
-                                          **kwargs)+m)
+            * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs)+m)
 
     def _parse_state(self, state):
         """Helper method to get the relevant species and stoichiometry
@@ -1649,7 +1692,7 @@ class Reaction:
         return state_quantity
 
     def get_delta_quantity(self, initial_state, final_state, method_name,
-                            **kwargs):
+                           **kwargs):
         """Helper method to calculate the change in thermodynamic quantity
         between states
 
@@ -1672,7 +1715,7 @@ class Reaction:
                 quantity as long as the relevant objects have the same method
                 name
             kwargs : keyword arguments
-                Arguments passed to evaluate the quantity of the reactants and 
+                Arguments passed to evaluate the quantity of the reactants and
                 products
         Returns
         -------
@@ -1860,14 +1903,20 @@ class Reaction:
 class ChemkinReaction(Reaction):
     """Chemkin reaction. Has additional attributes to support input and output
 
-    Attribues
-    ---------
+    Attributes
+    ----------
         beta : float, optional
             Power to raise the temperature in the rate expression. Default is 1
         is_adsorption : bool, optional
             If True, the reaction represents an adsorption. Default is False
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True
+        gas_phase : bool
+            True if the reaction has only gas-phase species. This attribute is
+            determined based on the reactants and products
+        kwargs : keyword arguments
+            Keyword arguments used to initialize the reactants, transition
+            state and products
     """
 
     def __init__(self, beta=1., is_adsorption=False, sticking_coeff=0.5,
@@ -1883,7 +1932,7 @@ class ChemkinReaction(Reaction):
 
     def _is_gas_phase(self):
         """Determines if a reaction is gas phase
-        
+
         Returns
         -------
             gas_phase : bool
@@ -1913,16 +1962,20 @@ class ChemkinReaction(Reaction):
             n_surf += stoich
         return n_surf
 
-    def get_A(self, sden_operation, include_entropy=True, T=c.T0('K'), 
+    def get_A(self, sden_operation='min', include_entropy=True, T=c.T0('K'),
               **kwargs):
         """Calculates the preexponential factor in the Chemkin format
-        
+
         Parameters
         ----------
+        sden_operation : str, optional
+            Site density operation to use. Default is 'min'
         include_entropy : bool, optional
             If True, includes the act entropy. Default is True
         T : float, optional
             Temperature in K. Default is 298.15 K
+        kwargs : keyword arguments
+            Parameters required to calculate pre-exponential factor
         """
         if self.transition_state is None or not include_entropy:
             A = c.kb('J/K')/c.h('J s')
@@ -1933,7 +1986,7 @@ class ChemkinReaction(Reaction):
         if not self.gas_phase:
             # Uses site with highest site density
             site_dens = []
-            for reactant in self.reactants:
+            for reactant, stoich in zip(self.reactants, self.reactants_stoich):
                 # Skip species without a catalyst site
                 try:
                     site_den = reactant.cat_site.site_density
@@ -1942,7 +1995,7 @@ class ChemkinReaction(Reaction):
                 # Skip bulk species
                 if reactant.name == reactant.cat_site.bulk_specie:
                     continue
-                site_dens.append(site_den)             
+                site_dens.extend([site_den]*int(stoich))
 
             # Apply the operation to the site densities
             eff_site_den = _apply_numpy_operation(quantity=site_dens,
@@ -1977,7 +2030,7 @@ class ChemkinReaction(Reaction):
             act = True
         return np.max([0., super().get_delta_HoRT(rev=rev, act=act, **kwargs)])
 
-    def get_delta_GoRT(self, rev=False, act=False, **kwargs):
+    def get_GoRT_act(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
         state species, calculates the delta dimensionless Gibbs energy
 
@@ -2003,7 +2056,9 @@ class ChemkinReaction(Reaction):
             act = False
         else:
             act = True
-        return np.max([0., super().get_delta_GoRT(rev=rev, act=act, **kwargs)])
+        return np.max([0., 
+                       super().get_delta_GoRT(rev=rev, act=act, **kwargs),
+                       super().get_delta_GoRT(rev=rev, act=False, **kwargs)])
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -2056,8 +2111,8 @@ class Reactions:
             include_TS : bool, optional
                 Whether transition states should be included. Default is True
             key : str, optional
-                Attribute to use as the key in the output dictionary. Default is
-                name
+                Attribute to use as the key in the output dictionary.
+                Default is name
         Returns
         -------
             species : dict
@@ -2072,11 +2127,11 @@ class Reactions:
 
     def plot_coordinate_diagram(self, method_name, ref_index=0,
                                 ref_state='reactants', x_offset=1.,
-                                include_TS=True, x_scale_TS=0.5, y_scale_TS=0.5, 
-                                include_TS_labels=True, y_TS_label_offset=0.1, 
-                                x_TS_label_offset=0., TS_label_format='.2f',
-                                figure=None, axes=None, plt_kwargs={}, 
-                                **reaction_kwargs):
+                                include_TS=True, x_scale_TS=0.5,
+                                y_scale_TS=0.5, include_TS_labels=True,
+                                y_TS_label_offset=0.1, x_TS_label_offset=0.,
+                                TS_label_format='.2f', figure=None, axes=None,
+                                plt_kwargs={}, **reaction_kwargs):
         """Plots a reaction coordinate diagram.
 
         Parameters
@@ -2087,7 +2142,7 @@ class Reactions:
                 name. Some examples include: ``get_HoRT``, ``get_H``,
                 ``get_EoRT``, ``get_E``
             ref_index : int, optional
-                Reaction index to use to reference states. Default is the first 
+                Reaction index to use to reference states. Default is the first
                 reaction (i.e. ref_index = 0)
             ref_state : str, optional
                 State of the reference to use. Supported options include:
@@ -2103,35 +2158,36 @@ class Reactions:
             include_TS : bool, optional
                 Whether transition states should be included. Default is True
             x_scale_TS : float, optional
-                Value between 0 and 1 that controls curvature of transition 
+                Value between 0 and 1 that controls curvature of transition
                 state peaks. Higher values produce sharper peaks. Default is
                 0.5
             y_scale_TS : float, optional
-                Value between 0 and 1 that controls curvature of transition 
+                Value between 0 and 1 that controls curvature of transition
                 state peaks. Higher values produce sharper peaks. Default is
                 0.5
             include_TS_labels : bool, optional
-                If True, adds a label to the peaks indicating the difference 
+                If True, adds a label to the peaks indicating the difference
                 between the reactants and the transition state. Default is True
             y_TS_label_offset : float, optional
                 Vertical value to offset TS_label from the TS position. This
-                value scales with the difference between major ticks. Negative 
+                value scales with the difference between major ticks. Negative
                 values will shift the label downwards. Default is 0.10
             x_TS_label_offset : float, optional
                 Horizontal value to offset TS_label from the TS_position. This
-                value scales with the x_offset value. Negative values will shift
-                the label rightward. Default is 0 (i.e. labels are directly
-                above peaks by default)
+                value scales with the x_offset value. Negative values will
+                shift the label rightward. Default is 0 (i.e. labels are
+                directly above peaks by default)
             TS_label_format : str, optional
-                String format to print TS_labels. Uses the `str.format`_ syntax.
-                Default is '.2f' (i.e. a floating point value rounded to the 
-                second decimal place)
+                String format to print TS_labels. Uses the
+                `str.format`_ syntax. Default is '.2f' (i.e. a floating point
+                value rounded to the second decimal place)
             figure : `matplotlib.figure.Figure`_
-                Add plot to this figure. If not specified, one will be generated
+                Add plot to this figure. If not specified, one will be
+                generated
             ax : `matplotlib.axes.Axes.axis`_, optional
                 Adds plot to this axis. If not specified, one will be generated
             plt_kwargs : dict, optional
-                Extra arguments that will be fed to 
+                Extra arguments that will be fed to
                 `matplotlib.pyplot.subplots`_
             reaction_kwargs : keyword arguments
                 Extra arguments that will be fed to the reactions
@@ -2178,23 +2234,21 @@ class Reactions:
                 x_labels.append(_write_reaction_state(
                         species=reaction.reactants,
                         stoich=reaction.reactants_stoich))
-                x_label_pos.append(x + x_offset/2.)                
+                x_label_pos.append(x + x_offset/2.)
                 x += x_offset
 
-            # Calculating y value for product in case we need it to fit the 
+            # Calculating y value for product in case we need it to fit the
             # transition state curve
             y_product = reaction.get_state_quantity(method_name=method_name,
                                                     state='products',
-                                                    **reaction_kwargs) \
-                        - ref
+                                                    **reaction_kwargs) - ref
 
             '''Calculate properties for TS if necessary'''
             if include_TS and reaction.transition_state is not None:
                 x += x_offset
                 y_TS = reaction.get_state_quantity(method_name=method_name,
                                                    state='transition state',
-                                                   **reaction_kwargs) \
-                       - ref
+                                                   **reaction_kwargs) - ref
                 '''Calculate data to fit spline'''
                 x_fit = np.array([x-x_offset,
                                   x-x_offset*(1.-x_scale_TS),
@@ -2215,7 +2269,7 @@ class Reactions:
                 x_plot.extend(x_spline)
                 y_plot.extend(y_spline)
                 x_labels.append(_write_reaction_state(
-                    species=reaction.transition_state, 
+                    species=reaction.transition_state,
                     stoich=reaction.transition_state_stoich))
                 x_label_pos.append(x)
 
@@ -2227,8 +2281,8 @@ class Reactions:
                             final_state='transition state',
                             **reaction_kwargs))
                     x_TS_label_pos.append(x + x_TS_label_offset*x_offset)
-                    # Add TS y values for now. Correct later we know the graph's
-                    # scale
+                    # Add TS y values for now. Correct later we know the
+                    # graph's scale
                     y_TS_label_pos.append(y_TS)
 
             x += x_offset
@@ -2239,9 +2293,9 @@ class Reactions:
             x_labels.append(_write_reaction_state(
                     species=reaction.products,
                     stoich=reaction.products_stoich))
-            x_label_pos.append(x + x_offset/2.)                
+            x_label_pos.append(x + x_offset/2.)
             x += x_offset
-        
+
         ''' Plot the diagram'''
         # Create a new plot if necessary
         if axes is None:
@@ -2266,7 +2320,7 @@ class Reactions:
             y_perb = np.ptp(y_ticks)/len(y_ticks)*y_TS_label_offset
             y_TS_label_pos = [y + y_perb for y in y_TS_label_pos]
             label_field = '{:%s}' % TS_label_format
-            for TS_label, x_pos, y_pos in zip(TS_labels, x_TS_label_pos, 
+            for TS_label, x_pos, y_pos in zip(TS_labels, x_TS_label_pos,
                                               y_TS_label_pos):
                 axes.text(x=x_pos, y=y_pos, s=label_field.format(TS_label),
                           horizontalalignment='center')
@@ -2493,6 +2547,7 @@ def _get_molecularity(stoich):
             Molecularity of reaction
     """
     return np.sum(stoich)
+
 
 def _get_states(rev, act):
     """Determines the initial state and the final state based on boolean inputs

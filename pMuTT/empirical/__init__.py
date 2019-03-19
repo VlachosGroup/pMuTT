@@ -10,10 +10,10 @@ from matplotlib import pyplot as plt
 import numpy as np
 from pMuTT import _is_iterable
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
-class BaseThermo:
+class EmpiricalBase:
     """The empirical parent class.
     Holds properties of a specie, the statistical-mechanical thermodynamic
     model.
@@ -37,8 +37,8 @@ class BaseThermo:
             Object should have the following methods: ``get_CpoR``,
             ``get_HoRT``, ``get_SoR``, ``get_GoRT``.
         references : ``pMuTT.empirical.References.references`` object, optional
-            Contains references to calculate ``HoRT_ref``. If not specified then
-            HoRT_dft will be used without adjustment. Default is None
+            Contains references to calculate ``HoRT_ref``. If not specified
+            then HoRT_dft will be used without adjustment. Default is None
         mix_models : list of ``pMuTT.mixture`` objects, optional
             Mixture models that calculate excess properties.
         smiles : str, optional
@@ -69,13 +69,12 @@ class BaseThermo:
 
         # Assign mixing models
         # TODO Mixing models can not be initialized by passing the class
-        # because all the models will have the same attributes. Figure out a way
-        # to pass them. Perhaps have a dictionary that contains the attributes
-        # separated by species
+        # because all the models will have the same attributes. Figure out a
+        # way to pass them. Perhaps have a dictionary that contains the
+        # attributes separated by species
         if not _is_iterable(mix_models) and mix_models is not None:
             mix_models = [mix_models]
-        self.mix_models = mix_models 
-
+        self.mix_models = mix_models
 
     def __eq__(self, other):
         try:
@@ -574,11 +573,12 @@ class BaseThermo:
             obj_dict : dict
         """
         obj_dict = {'class': str(self.__class__),
+                    'type': 'empiricalbase',
                     'name': self.name,
                     'phase': self.phase,
                     'elements': self.elements,
                     'notes': self.notes,
-                    'smiles': self.smiles,}
+                    'smiles': self.smiles, }
         try:
             obj_dict['references'] = self.references.to_dict()
         except AttributeError:
@@ -606,7 +606,7 @@ class BaseThermo:
                 JSON representation
         Returns
         -------
-            BaseThermo : BaseThermo object
+            EmpiricalBase : EmpiricalBase object
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model

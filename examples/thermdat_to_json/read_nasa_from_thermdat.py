@@ -3,7 +3,7 @@ import json
 import numpy as np
 from matplotlib import pyplot as plt
 from pMuTT.io_.thermdat import read_thermdat
-from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
+from pMuTT.io_.json import pMuTTEncoder, json_to_pMuTT
 
 base_path = os.path.dirname(__file__)
 thermdat_path = os.path.join(base_path, 'thermdat')

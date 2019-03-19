@@ -8,11 +8,11 @@ references.
 
 from warnings import warn
 import numpy as np
-from pMuTT.empirical import BaseThermo
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.empirical import EmpiricalBase
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
-class Reference(BaseThermo):
+class Reference(EmpiricalBase):
     """Single reference specie used to adjust DFT energies to
     experimental data.
 

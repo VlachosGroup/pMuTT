@@ -28,8 +28,10 @@ Dependencies
 -  `Numpy`_: Used for vector and matrix operations
 -  `Pandas`_: Used to import data from Excel files
 -  `SciPy`_: Used for fitting heat capacities and generating smooth curves for
-             reaction coordinate diagram
+   reaction coordinate diagram
 -  `Matplotlib`_: Used for plotting thermodynamic data
+-  `PyMongo`_: Used to read/write to databases
+-  `dnspython`_: Used to connect to databases
 
 Getting Started
 ---------------
@@ -97,6 +99,8 @@ Special Thanks
 .. _Pandas: https://pandas.pydata.org/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
+.. _PyMongo: http://api.mongodb.com/python/current/
+.. _dnspython: http://www.dnspython.org/
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pMuTT/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html

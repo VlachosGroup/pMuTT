@@ -75,7 +75,8 @@ class TestReaction(unittest.TestCase):
                      'mix_models': None,
                      'cat_site': None,
                      'n_sites': None,
-                     'smiles': None,}],
+                     'smiles': None,
+                     'type': 'nasa'}],
                      'products_stoich': [1.0],
                      'reactants': [
                     {'T_high': 3500.0,
@@ -107,7 +108,8 @@ class TestReaction(unittest.TestCase):
                      'mix_models': None,
                      'cat_site': None,
                      'n_sites': None,
-                     'smiles': None,},
+                     'smiles': None,
+                     'type': 'nasa'},
                     {'T_high': 3500.0,
                      'T_low': 200.0,
                      'T_mid': 1000.0,
@@ -137,7 +139,8 @@ class TestReaction(unittest.TestCase):
                      'mix_models': None,
                      'cat_site': None,
                      'n_sites': None,
-                     'smiles': None,}],
+                     'smiles': None,
+                     'type': 'nasa'}],
                 'reactants_stoich': [1.0, 0.5],
                 'transition_state': None,
                 'transition_state_stoich': None,
@@ -1015,9 +1018,9 @@ class TestReaction(unittest.TestCase):
     def test_get_EoRT_act(self):
         exp_sm_EoRT = self.H2O_TS_sm.get_HoRT(T=c.T0('K')) \
             - self.H2_sm.get_HoRT(T=c.T0('K')) \
-            - self.O2_sm.get_HoRT(T=c.T0('K'))*0.5
+            - self.O2_sm.get_HoRT(T=c.T0('K'))*0.5 + 1.5
         exp_sm_EoRT_rev = self.H2O_TS_sm.get_HoRT(T=c.T0('K')) \
-            - self.H2O_sm.get_HoRT(T=c.T0('K'))
+            - self.H2O_sm.get_HoRT(T=c.T0('K')) + 1.
         self.assertAlmostEqual(
                 self.rxn_sm.get_EoRT_act(T=c.T0('K')),
                 exp_sm_EoRT)
@@ -1029,9 +1032,11 @@ class TestReaction(unittest.TestCase):
         units = 'J/mol'
         exp_sm_E = self.H2O_TS_sm.get_H(T=c.T0('K'), units=units) \
             - self.H2_sm.get_H(T=c.T0('K'), units=units) \
-            - self.O2_sm.get_H(T=c.T0('K'), units=units)*0.5
+            - self.O2_sm.get_H(T=c.T0('K'), units=units)*0.5 + 1.5 \
+            *c.R('{}/K'.format(units))*c.T0('K')
         exp_sm_E_rev = self.H2O_TS_sm.get_H(T=c.T0('K'), units=units) \
-            - self.H2O_sm.get_H(T=c.T0('K'), units=units)
+            - self.H2O_sm.get_H(T=c.T0('K'), units=units) + 1. \
+            *c.R('{}/K'.format(units))*c.T0('K')
         self.assertAlmostEqual(
                 self.rxn_sm.get_E_act(T=c.T0('K'), units=units),
                 exp_sm_E)

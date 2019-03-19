@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Tests for pMuTT.io_.thermdat module
+Tests for pMuTT.io.thermdat module
 Created on Fri Jul 7 12:31:00 2018
 """
 import unittest
-import pMuTT.io_.thermdat as thermdat
+import pMuTT.io.thermdat as thermdat
 import numpy as np
 
 
