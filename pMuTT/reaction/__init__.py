@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 from pMuTT import (_force_pass_arguments, _pass_expected_arguments,
                    _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
-from pMuTT.io.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
 class Reaction:

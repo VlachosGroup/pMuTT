@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from pMuTT.io.jsonio import remove_class
+from pMuTT.io.json import remove_class
 
 
 class IdealNucl:

@@ -2,7 +2,7 @@ from pMuTT.reaction import Reaction
 from pMuTT.reaction.bep import BEP
 from pMuTT.statmech import StatMech, presets
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
+from pMuTT.io_.json import pMuTTEncoder, json_to_pMuTT
 import os
 import json
 

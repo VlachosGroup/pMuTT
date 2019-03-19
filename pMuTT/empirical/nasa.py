@@ -11,7 +11,7 @@ import numpy as np
 from scipy.stats import variation
 from pMuTT import _is_iterable, _pass_expected_arguments
 from pMuTT import constants as c
-from pMuTT.io.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 from pMuTT.empirical import EmpiricalBase
 from pMuTT.mixture import _get_mix_quantity
 

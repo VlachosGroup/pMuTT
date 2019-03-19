@@ -9,7 +9,7 @@ references.
 from warnings import warn
 import numpy as np
 from pMuTT.empirical import EmpiricalBase
-from pMuTT.io.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
 class Reference(EmpiricalBase):

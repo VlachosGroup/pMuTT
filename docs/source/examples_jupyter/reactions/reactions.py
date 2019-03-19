@@ -173,7 +173,7 @@ print('Any: {} kJ/mol'.format(Ea_any))
 
 
 import json
-from pMuTT.io_.jsonio import pMuTTEncoder, json_to_pMuTT
+from pMuTT.io_.json import pMuTTEncoder, json_to_pMuTT
 
 # Saving
 with open('reaction.json', 'w') as f_ptr:

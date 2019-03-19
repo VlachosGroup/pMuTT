@@ -274,27 +274,27 @@ JSON
 `JavaScript Object Notation (JSON)`_ is a format that is easily read and written by
 both humans and machines. All pMuTT objects are JSON compatible.
 
-.. automodule:: pMuTT.io.jsonio
+.. automodule:: pMuTT.io.json
    :members:
 
 Examples
 --------
 Saving pMuTT objects can be done by using 
-:func:`~pMuTT.io.jsonio.pMuTTEncoder`.
+:func:`~pMuTT.io.json.pMuTTEncoder`.
 
 .. code:: python
 
-   from pMuTT.io.jsonio import pMuTTEncoder
+   from pMuTT.io.json import pMuTTEncoder
    
    with open(json_path, 'w') as f_ptr:
        json.dump(pMuTT_obj, f_ptr, cls=pMuTTEncoder, indent=True)
    
 Loading pMuTT objects can be done by using the object hook: 
-:func:`~pMuTT.io.jsonio.json_to_pMuTT`.
+:func:`~pMuTT.io.json.json_to_pMuTT`.
 
 .. code:: python
 
-   from pMuTT.io.jsonio import json_to_pMuTT
+   from pMuTT.io.json import json_to_pMuTT
 
    with open(json_path, 'r') as f_ptr:
        pMuTT_obj = json.load(f_ptr, object_hook=json_to_pMuTT)
@@ -413,7 +413,7 @@ using :class:`~pMuTT.statmech.StatMech` is shown below.
 Decoding
 ^^^^^^^^
 To ensure your object can be decoded using the ``json_to_pMuTT`` object hook, 
-add an entry to the dictionary in the ``pMuTT.io.jsonio.type_to_class`` method.
+add an entry to the dictionary in the ``pMuTT.io.json.type_to_class`` method.
 The key should be the type of your object in string format (i.e. the result of 
 ``str(self.__class__)``). Your class should also have the ``from_dict()`` class 
 method to reinitialize your object. A simple example using 
@@ -421,7 +421,7 @@ method to reinitialize your object. A simple example using
 
 .. code:: python
 
-   from pMuTT.io.jsonio import remove_class
+   from pMuTT.io.json import remove_class
 
    @classmethod
    def from_dict(cls, json_obj):
@@ -434,7 +434,7 @@ use the ``json_to_pMuTT`` object hook to remake these objects. An example using
 
 .. code:: python
 
-   from pMuTT.io import jsonio as json_pMuTT
+   from pMuTT.io import json as json_pMuTT
 
    @classmethod
    def from_dict(cls, json_obj):

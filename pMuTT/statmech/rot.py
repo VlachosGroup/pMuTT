@@ -4,7 +4,7 @@ import itertools
 from warnings import warn
 import numpy as np
 from pMuTT import constants as c
-from pMuTT.io.jsonio import remove_class
+from pMuTT.io.json import remove_class
 
 
 class RigidRotor:

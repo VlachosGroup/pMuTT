@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 from pMuTT import _is_iterable
 from pMuTT import constants as c
-from pMuTT.io.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
 class EmpiricalBase:

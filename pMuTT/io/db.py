@@ -6,7 +6,7 @@ Read from/write to databases
 """
 
 from pymongo import MongoClient
-from pMuTT.io.jsonio import json_to_pMuTT
+from pMuTT.io.json import json_to_pMuTT
 
 class PMRester:
     """User-friendly REST interface with the database
