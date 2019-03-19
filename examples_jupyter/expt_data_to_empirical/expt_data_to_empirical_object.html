@@ -19,32 +19,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -215,18 +219,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -266,9 +270,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -276,7 +280,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -326,6 +330,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -342,15 +380,15 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Experimental-Data-to-Empirical-Object">
 <h1>Experimental Data to Empirical Object<a class="headerlink" href="#Experimental-Data-to-Empirical-Object" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will take experimental data (heat capacity, enthalpy
-of formation, and standard entropy) and convert it to a Shomate
-polynomial. We will then showcase some of the features of the object
-(such as calculating thermodynamic data). Note that even though we use a
-Shomate object in this example, the pMuTT Nasa object has the same
-functionality.</p>
+<p>In this example, we will take experimental data (heat capacity, enthalpy of formation, and standard entropy) and convert it to a Shomate polynomial. We will then showcase some of the features of the object (such as calculating thermodynamic data). Note that even though we use a Shomate object in this example, the pMuTT Nasa object has the same functionality.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -363,20 +401,10 @@ functionality.</p>
 </div>
 <div class="section" id="Import-Experimental-Data">
 <h2>Import Experimental Data<a class="headerlink" href="#Import-Experimental-Data" title="Permalink to this headline">¶</a></h2>
-<p>First, we need to initialize the experimental data. We will need: 1. A
-range of temperatures in K 2. Dimensionless heat capacities
-corresponding to the temperatures in (1) 3. A reference temperature in K
-4. A dimensionless enthalpy corresponding to the reference temperature
-in (3) 5. A dimensionless entropy corresponding to the reference
-temperature in (3)</p>
-<p>For this example, we will be thermodynamic data for methanol. Heat
-capacities and standard enthalpy were found on the <a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas">NIST
-webbook</a>.
-The standard entropy was found on
-[Wikipedia](<a class="reference external" href="https://en.wikipedia.org/wiki/Methanol_(data_page%29">https://en.wikipedia.org/wiki/Methanol_(data_page%29</a>).</p>
+<p>First, we need to initialize the experimental data. We will need: 1. A range of temperatures in K 2. Dimensionless heat capacities corresponding to the temperatures in (1) 3. A reference temperature in K 4. A dimensionless enthalpy corresponding to the reference temperature in (3) 5. A dimensionless entropy corresponding to the reference temperature in (3)</p>
+<p>For this example, we will be thermodynamic data for methanol. Heat capacities and standard enthalpy were found on the <a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C67561&amp;Units=SI&amp;Mask=1#Thermo-Gas">NIST webbook</a>. The standard entropy was found on [Wikipedia](<a class="reference external" href="https://en.wikipedia.org/wiki/Methanol_(data_page%29">https://en.wikipedia.org/wiki/Methanol_(data_page%29</a>).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -400,19 +428,13 @@ The standard entropy was found on
 </pre></div>
 </div>
 </div>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">pMuTT.constants</span></code> module contains functions for standard
-constants for easy use such as the molar gas constant
-(<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>) and standard temperature
-(<code class="docutils literal notranslate"><span class="pre">~pMuTT.constants.T_ref</span></code>). The functions take a unit as an argument
-so that the code is more readable.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">pMuTT.constants</span></code> module contains functions for standard constants for easy use such as the molar gas constant (<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>) and standard temperature (<code class="docutils literal notranslate"><span class="pre">~pMuTT.constants.T_ref</span></code>). The functions take a unit as an argument so that the code is more readable.</p>
 </div>
 <div class="section" id="Fitting-the-Shomate-polynomial-to-the-experimental-data">
 <h2>Fitting the Shomate polynomial to the experimental data<a class="headerlink" href="#Fitting-the-Shomate-polynomial-to-the-experimental-data" title="Permalink to this headline">¶</a></h2>
-<p>The Shomate polynomial can be created easily by feeding the data to the
-<code class="docutils literal notranslate"><span class="pre">from_data</span></code> method as shown below.</p>
+<p>The Shomate polynomial can be created easily by feeding the data to the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method as shown below.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -445,12 +467,9 @@ Shomate object for Name: CH3OH
 </div>
 <div class="section" id="Calculating-thermodynamic-properties">
 <h2>Calculating thermodynamic properties<a class="headerlink" href="#Calculating-thermodynamic-properties" title="Permalink to this headline">¶</a></h2>
-<p>Now that we’ve fit our Shomate polynomial to experimental data, we can
-calculate thermodynamic quantities for a range of temperatures. Let’s
-compare our Shomate’s estimates to the experimental data fed.</p>
+<p>Now that we’ve fit our Shomate polynomial to experimental data, we can calculate thermodynamic quantities for a range of temperatures. Let’s compare our Shomate’s estimates to the experimental data fed.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -463,14 +482,11 @@ compare our Shomate’s estimates to the experimental data fed.</p>
 </div>
 <div class="section" id="Compare-the-Shomate-polynomial-to-the-experimental-data">
 <h2>Compare the Shomate polynomial to the experimental data<a class="headerlink" href="#Compare-the-Shomate-polynomial-to-the-experimental-data" title="Permalink to this headline">¶</a></h2>
-<p>Now that we’ve calculated the Shomate estimates for heat capacity,
-enthalpy and entropy, we can compare the experimental values to the
-computational values.</p>
+<p>Now that we’ve calculated the Shomate estimates for heat capacity, enthalpy and entropy, we can compare the experimental values to the computational values.</p>
 <div class="section" id="Compare-using-a-table">
 <h3>Compare using a table<a class="headerlink" href="#Compare-using-a-table" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -534,8 +550,7 @@ S shomate: 239.9 J/mol/K
 <div class="section" id="Compare-using-a-plot">
 <h3>Compare using a plot<a class="headerlink" href="#Compare-using-a-plot" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -567,18 +582,14 @@ S shomate: 239.9 J/mol/K
 <img alt="../../_images/examples_jupyter_expt_data_to_empirical_expt_data_to_empirical_object_10_0.png" src="../../_images/examples_jupyter_expt_data_to_empirical_expt_data_to_empirical_object_10_0.png" />
 </div>
 </div>
-<p>Note that in this code’s section, we showcase the
-<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.convert_unit</span></code> function. Similarly to the <code class="docutils literal notranslate"><span class="pre">c.R</span></code> and
-<code class="docutils literal notranslate"><span class="pre">c.T0</span></code> functions shown above, this helps to increase code readability.</p>
+<p>Note that in this code’s section, we showcase the <code class="docutils literal notranslate"><span class="pre">pMuTT.constants.convert_unit</span></code> function. Similarly to the <code class="docutils literal notranslate"><span class="pre">c.R</span></code> and <code class="docutils literal notranslate"><span class="pre">c.T0</span></code> functions shown above, this helps to increase code readability.</p>
 </div>
 </div>
 <div class="section" id="Save-the-Shomate-polynomial-as-a-JSON-file">
 <h2>Save the Shomate polynomial as a JSON file<a class="headerlink" href="#Save-the-Shomate-polynomial-as-a-JSON-file" title="Permalink to this headline">¶</a></h2>
-<p>If we would like to save our Shomate object, we can save it in JSON
-format with the help of the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.pMuTTEncoder</span></code>.</p>
+<p>If we would like to save our Shomate object, we can save it in JSON format with the help of the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.pMuTTEncoder</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -590,8 +601,7 @@ format with the help of the <code class="docutils literal notranslate"><span cla
 </pre></div>
 </div>
 </div>
-<p>This block will save the Shomate object to <code class="docutils literal notranslate"><span class="pre">CH3OH_shomate.json</span></code>. Upon
-opening, the file will look like this:</p>
+<p>This block will save the Shomate object to <code class="docutils literal notranslate"><span class="pre">CH3OH_shomate.json</span></code>. Upon opening, the file will look like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.shomate.Shomate&#39;&gt;&quot;</span><span class="p">,</span>
  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CH3OH&quot;</span><span class="p">,</span>
@@ -618,11 +628,9 @@ opening, the file will look like this:</p>
 </div>
 <div class="section" id="Loading-the-Shomate-polynomial-from-a-JSON-file">
 <h2>Loading the Shomate polynomial from a JSON file<a class="headerlink" href="#Loading-the-Shomate-polynomial-from-a-JSON-file" title="Permalink to this headline">¶</a></h2>
-<p>Now that we’ve saved the Shomate object, we can open it using
-<code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.json_to_pMuTT</span></code>.</p>
+<p>Now that we’ve saved the Shomate object, we can open it using <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.json_to_pMuTT</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -682,26 +690,16 @@ Shomate object for Name: CH3OH
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

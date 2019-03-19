@@ -19,34 +19,38 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Chemkin" href="chemkin.html" />
     <link rel="prev" title="Mixture Models" href="mixture.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -192,6 +196,11 @@
 
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
 }
 </style>
 <div class="section" id="reactions">
@@ -407,9 +416,11 @@ documentation for expected parameters</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>m=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets pre-exponential factor between reactants (or products) and
 transition state in 1/s</p>
+<p><span class="math notranslate nohighlight">\(A = \frac {k_B T} {h} \exp\bigg(\frac {\Delta S^{TS}}{R}+m
+\bigg)\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -418,6 +429,12 @@ transition state in 1/s</p>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature.</li>
+<li><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Molecularity of gas-phase species in the reaction.
+Condensed-phase reactions and unimolecular gas-phase reactions
+should have a value of 1. Bimolecular gas-phase reactions
+should have a value of 2. If not specified, m will be
+calculated (assuming all species in the initial state are
+gas phase).</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor. See
 class docstring to see how to pass specific parameters to
 different species.</li>
@@ -693,7 +710,7 @@ state</p>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_E_act">
-<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>method='any'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>method='any'</em>, <em>del_m=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets act energy between reactants (or products)
 and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -716,6 +733,12 @@ is used preferentially over <code class="docutils literal notranslate"><span cla
 </ul>
 <p>Default is ‘any’.</p>
 </li>
+<li><strong>del_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Change in molecularity of gas-phase species in the reaction.
+Condensed-phase and unimolecular gas-phase reactions should have
+a value of 0. Bimolecular gas-phase reactions should have a
+value of -1. If not specified, m will be calculated
+(assuming all species in the initial state and transition state
+are gas phase).</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate act energy. See class
 docstring to see how to pass specific parameters to
 different species.</li>
@@ -772,9 +795,15 @@ different species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_EoRT_act">
-<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>method='any'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets dimensionless act energy between reactants
+<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>method='any'</em>, <em>del_m=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets dimensionless Arrhenius activation energy between reactants
 (or products) and transition state</p>
+<p>If the transition state method is used, the enthalpy of activation is
+converted to activation energy using the following:</p>
+<p><span class="math notranslate nohighlight">\(\frac {E_a}{RT} = \frac {\Delta H^{TS}}{RT} +
+(1-\Delta n^{TS})\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\Delta n^{TS}\)</span> is the change in the number of molecules
+on forming the transition state.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -794,6 +823,12 @@ reaction is exothermic, returns 0)</li>
 </ul>
 <p>Default is ‘any’.</p>
 </li>
+<li><strong>del_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Change in molecularity of gas-phase species in the reaction.
+Condensed-phase and unimolecular gas-phase reactions should have
+a value of 0. Bimolecular gas-phase reactions should have a
+value of -1. If not specified, m will be calculated
+(assuming all species in the initial state and transition state
+are gas phase).</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless act
 energy</li>
 </ul>
@@ -2436,14 +2471,14 @@ state and products</p>
 
 <dl class="method">
 <dt id="pMuTT.reaction.ChemkinReaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='sum'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the preexponential factor in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sden_operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Site density operation to use. Default is ‘sum’</li>
+<li><strong>sden_operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Site density operation to use. Default is ‘min’</li>
 <li><strong>include_entropy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the act entropy. Default is True</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor</li>
@@ -2688,6 +2723,7 @@ estimated using the change in enthalpy.</p>
 <dt id="pMuTT.reaction.bep.BEP">
 <em class="property">class </em><code class="descclassname">pMuTT.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>reaction=None</em>, <em>descriptor='delta'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a Bronsted Evans Polyani relationship</p>
+<p><span class="math notranslate nohighlight">\(\frac{E_a}{RT} = \alpha \frac{H}{RT} + \beta\)</span></p>
 <dl class="attribute">
 <dt id="pMuTT.reaction.bep.BEP.slope">
 <code class="descname">slope</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.slope" title="Permalink to this definition">¶</a></dt>
@@ -2735,10 +2771,10 @@ immediately</p>
 <dt id="pMuTT.reaction.bep.BEP.descriptor">
 <code class="descname">descriptor</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.descriptor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Descriptor to calculate the activation energy. Supported options:
-- ‘delta’ (H_products - H_reactants)
-- ‘rev_delta’ (H_reactants - H_products)
-- ‘reactants’ (H_reactants)
-- ‘products’ (H_products)
+- ‘delta’ (HoRT_products - HoRT_reactants)
+- ‘rev_delta’ (HoRT_reactants - HoRT_products)
+- ‘reactants’ (HoRT_reactants)
+- ‘products’ (HoRT_products)
 Default is delta.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2786,7 +2822,8 @@ not supplied to constructor.</p>
 <dl class="method">
 <dt id="pMuTT.reaction.bep.BEP.get_EoRT_act">
 <code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate dimensionless activation energy using BEP relationship</p>
+<dd><p>Calculate dimensionless Arrhenius activation energy using BEP
+relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2821,10 +2858,10 @@ instead of reactants. Default is False</li>
 held by BEP object</li>
 <li><strong>descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Descriptor to calculate the activation energy. Supported
 options:
-- ‘delta’ (H_products - H_reactants)
-- ‘rev_delta’ (H_reactants - H_products)
-- ‘reactants’ (H_reactants)
-- ‘products’ (H_products)
+- ‘delta’ (HoRT_products - HoRT_reactants)
+- ‘rev_delta’ (HoRT_reactants - HoRT_products)
+- ‘reactants’ (HoRT_reactants)
+- ‘products’ (HoRT_products)
 If specified, overwites the value held by BEP object.</li>
 </ul>
 </td>
@@ -2865,7 +2902,7 @@ If specified, overwites the value held by BEP object.</li>
         <a href="chemkin.html" class="btn btn-neutral float-right" title="Chemkin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mixture.html" class="btn btn-neutral" title="Mixture Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mixture.html" class="btn btn-neutral float-left" title="Mixture Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -2891,26 +2928,16 @@ If specified, overwites the value held by BEP object.</li>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

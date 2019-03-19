@@ -19,33 +19,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Constants" href="constants.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -100,7 +104,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-4">Version 1.2.4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-3">Version 1.2.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-2">Version 1.2.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-2-1">Version 1.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-1">Version 1.2.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#contributors">Contributors</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-0">Version 1.2.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-1-3">Version 1.1.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-1-2">Version 1.1.2</a></li>
@@ -191,12 +198,22 @@
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="release-notes">
 <span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/commits/development">Development Branch</a></p>
+<ul class="simple">
+<li>Renamed <code class="docutils literal notranslate"><span class="pre">pMuTT.io_</span></code> module to <code class="docutils literal notranslate"><span class="pre">pMuTT.io</span></code></li>
+<li>Renamed <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio</span></code> module to <code class="docutils literal notranslate"><span class="pre">pMuTT.io.json</span></code></li>
+<li>Added preliminary IO support for MongoDB in module: <code class="docutils literal notranslate"><span class="pre">pMuTT.io.db</span></code></li>
+</ul>
 </div>
 <div class="section" id="version-1-2-4">
 <h2>Version 1.2.4<a class="headerlink" href="#version-1-2-4" title="Permalink to this headline">¶</a></h2>
@@ -210,11 +227,11 @@
 <p>Feb. 25, 2019</p>
 <ul class="simple">
 <li>Added <code class="docutils literal notranslate"><span class="pre">smiles</span></code> attribute to <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
-<a class="reference internal" href="empirical.html#pMuTT.empirical.BaseThermo" title="pMuTT.empirical.BaseThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseThermo</span></code></a> classes</li>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseThermo</span></code> classes</li>
 <li>Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files</li>
 <li>Added <a class="reference internal" href="mixture.html#pMuTT.mixture.cov.CovEffect" title="pMuTT.mixture.cov.CovEffect"><code class="xref py py-class docutils literal notranslate"><span class="pre">CovEffect</span></code></a> class to model coverage effects
 and integrated it with <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
-<a class="reference internal" href="empirical.html#pMuTT.empirical.BaseThermo" title="pMuTT.empirical.BaseThermo"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseThermo</span></code></a> classes</li>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseThermo</span></code> classes</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">include_ZPE</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_E</span></code>, <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code>
 and <code class="docutils literal notranslate"><span class="pre">get_delta_E</span></code> for the <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> class and
 <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to add zero-point energy in
@@ -269,8 +286,8 @@ class</li>
 <h2>Version 1.2.1<a class="headerlink" href="#version-1-2-1" title="Permalink to this headline">¶</a></h2>
 <p>Dec. 17, 2018</p>
 <ul class="simple">
-<li>Added <code class="docutils literal notranslate"><span class="pre">vib_outcar</span></code> special rule for <a class="reference internal" href="io.html#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> and
-<a class="reference internal" href="io.html#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a> to get vibrational
+<li>Added <code class="docutils literal notranslate"><span class="pre">vib_outcar</span></code> special rule for <code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code> to get vibrational
 frequencies directly from VASP’s OUTCAR file.</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">get_X</span></code> methods to <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>,
 <a class="reference internal" href="empirical.html#pMuTT.empirical.shomate.Shomate" title="pMuTT.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>, <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
@@ -278,6 +295,12 @@ and <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" 
 properties (such as H, S, F, G) with the appropriate units</li>
 <li>Changed symbol for Hemlholtz energy from A to F</li>
 </ul>
+<div class="section" id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Himaghna Bhattacharjee (<a class="reference external" href="https://github.com/himaghna">himaghna</a>)</li>
+</ul>
+</div>
 </div>
 <div class="section" id="version-1-2-0">
 <h2>Version 1.2.0<a class="headerlink" href="#version-1-2-0" title="Permalink to this headline">¶</a></h2>
@@ -336,7 +359,7 @@ vibrational energies instead of wavenumbers.</li>
 <a class="reference internal" href="eos.html#pMuTT.eos.vanDerWaalsEOS" title="pMuTT.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
 <li>New <a class="reference internal" href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram" title="pMuTT.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</li>
 <li>New <a class="reference internal" href="statmech.html#pMuTT.statmech.vib.EinsteinVib" title="pMuTT.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</li>
-<li>New <a class="reference internal" href="io.html#pMuTT.io_.chemkin.read_reactions" title="pMuTT.io_.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
+<li>New <code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code> function to read species and
 reactions from Chemkin surf.inp and gas.inp files</li>
 </ul>
 </div>
@@ -351,7 +374,7 @@ reactions from Chemkin surf.inp and gas.inp files</li>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="constants.html" class="btn btn-neutral" title="Constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="constants.html" class="btn btn-neutral float-left" title="Constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -377,26 +400,16 @@ reactions from Chemkin surf.inp and gas.inp files</li>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

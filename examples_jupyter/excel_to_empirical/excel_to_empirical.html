@@ -19,32 +19,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -215,18 +219,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -266,9 +270,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -276,7 +280,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -326,6 +330,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -342,13 +380,15 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Excel-to-Empirical">
 <h1>Excel to Empirical<a class="headerlink" href="#Excel-to-Empirical" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will read <em>ab-initio</em> data from an Excel spreadsheet
-and create a Nasa object from it. Even though we use a Nasa object here,
-the Shomate class also has the ability to be generated from a StatMech
-model.</p>
+<p>In this example, we will read <em>ab-initio</em> data from an Excel spreadsheet and create a Nasa object from it. Even though we use a Nasa object here, the Shomate class also has the ability to be generated from a StatMech model.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -361,24 +401,18 @@ model.</p>
 <div class="section" id="Files-Required">
 <h2>Files Required<a class="headerlink" href="#Files-Required" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="references.xlsx">references.xlsx</a> (Excel spreadsheet containing
-<em>ab-initio</em> and experimental data for reference species)</li>
-<li><a class="reference external" href="input.xlsx">input.xlsx</a> (Excel spreadsheet containing <em>ab-initio</em>
-data for the species you would like to generate Nasa objects</li>
-<li>files containing atomic coordinates (files that can be read using
-ase.io.read. These files are only necessary if using rotational and
-translational modes (which tend to only be relevant for gas-phase
-species). For this example, we are using CONTCAR files.</li>
+<li><a class="reference external" href="references.xlsx">references.xlsx</a> (Excel spreadsheet containing <em>ab-initio</em> and experimental data for reference species)</li>
+<li><a class="reference external" href="input.xlsx">input.xlsx</a> (Excel spreadsheet containing <em>ab-initio</em> data for the species you would like to generate Nasa objects</li>
+<li>files containing atomic coordinates (files that can be read using ase.io.read. These files are only necessary if using rotational and translational modes (which tend to only be relevant for gas-phase species). For this example, we are using CONTCAR files.</li>
 </ul>
 </div>
 <div class="section" id="Importing-the-ab-initio-data-from-Excel">
 <h2>Importing the <em>ab-initio</em> data from Excel<a class="headerlink" href="#Importing-the-ab-initio-data-from-Excel" title="Permalink to this headline">¶</a></h2>
-<p>First, we will import data from the <code class="docutils literal notranslate"><span class="pre">input.xlsx</span></code> spreadsheet. The
-contents of the spreadsheet are shown below.</p>
+<p>First, we will import data from the <code class="docutils literal notranslate"><span class="pre">input.xlsx</span></code> spreadsheet. The contents of the spreadsheet are shown below.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="2%" />
-<col width="2%" />
+<col width="1%" />
 <col width="2%" />
 <col width="2%" />
 <col width="2%" />
@@ -422,675 +456,115 @@ contents of the spreadsheet are shown below.</p>
 <col width="2%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">n
-a
-m
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">ph
+as
 e</th>
-<th class="head">p
-h
-a
-s
-e</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-C</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-H</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-O</th>
-<th class="head">s
-t
-a
-t
-m
-e
-c
-h
-_
-m
-o
-d
-e
-l</th>
-<th class="head">p
-o
-t
-e
-n
-t
-i
-a
-l
-e
-n
-e
-r
-g
-y</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
+<th class="head">elemen
+ts.C</th>
+<th class="head">elemen
+ts.H</th>
+<th class="head">elemen
+ts.O</th>
+<th class="head"><a href="#id1"><span class="problematic" id="id2">statmech_</span></a>
+model</th>
+<th class="head">potential
+energy</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>H
-2
-_
-c
-u
-s
-(
-S
-)</td>
+<tr class="row-even"><td>H2_cu
+s(S)</td>
 <td>S</td>
 <td>0</td>
 <td>2</td>
 <td>0</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">9
-8
-6
-0
-9
-7
-4
-8</p>
-</td>
-<td>3
-0
-6
-6
-.
-9
-7
-9
-3
-1
-9</td>
-<td>1
-5
-2
-0
-.
-9
-6
-3
-1
-6
-2</td>
-<td>8
-4
-6
-.
-5
-8
-9
-1
-8
+<td>Harmonic</td>
+<td>-6.986097
+48</td>
+<td>3066.9793
+19</td>
+<td>1520.9631
+62</td>
+<td>846.58918
 4</td>
-<td>5
-3
-7
-.
-0
-1
-9
-6
-1
+<td>537.01961
 2</td>
-<td>4
-6
-9
-.
-6
-4
-8
-2
-1
+<td>469.64821
 2</td>
-<td>4
-4
-4
-.
-0
-8
-9
-3
-7
+<td>444.08937
 1</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -1123,129 +597,31 @@ c</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>H
-2
-O
-b
-r
-(
-S
-)</td>
+<tr class="row-odd"><td>H2Obr
+(S)</td>
 <td>S</td>
 <td>0</td>
 <td>2</td>
 <td>1</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-4
-.
-8
-1
-3
-2
-8
-1</p>
-</td>
-<td>3
-7
-3
-2
-.
-4
-3
-1
-5</td>
-<td>3
-6
-1
-5
-.
-3
-1
-6
-9
-1
-5</td>
-<td>1
-5
-3
-3
-.
-7
-6
-0
-8
-6
+<td>Harmonic</td>
+<td>-14.81328
 1</td>
-<td>4
-5
-1
-.
-0
-3
-0
-0
-6
+<td>3732.4315</td>
+<td>3615.3169
+15</td>
+<td>1533.7608
+61</td>
+<td>451.03006
 9</td>
-<td>4
-2
-9
-.
-2
-0
-9
-4
-5
+<td>429.20945
 7</td>
-<td>3
-8
-9
-.
-9
-4
-2
-9
-0
+<td>389.94290
 2</td>
-<td>2
-0
-4
-.
-8
-7
-5
-7
-3
+<td>204.87573
 2</td>
-<td>1
-6
-2
-.
-9
-8
-8
-9
-0
+<td>162.98890
 7</td>
-<td>1
-1
-3
-.
-1
-4
-6
-5
-1
+<td>113.14651
 6</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -1275,131 +651,31 @@ c</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>H
-2
-O
-c
-u
-s
-(
-S
-)</td>
+<tr class="row-even"><td>H2Ocu
+s(S)</td>
 <td>S</td>
 <td>0</td>
 <td>2</td>
 <td>1</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-5
-.
-4
-2
-0
-4
-0
-1
-7</p>
-</td>
-<td>3
-7
-3
-2
-.
-4
-3
-1
-5</td>
-<td>3
-6
-1
-5
-.
-3
-1
-6
-9
-1
-5</td>
-<td>1
-5
-3
-3
-.
-7
-6
-0
-8
-6
-1</td>
-<td>4
-5
-1
-.
-0
-3
-0
-0
-6
+<td>Harmonic</td>
+<td>-15.42040
+17</td>
+<td>3732.4315</td>
+<td>3615.3169
+15</td>
+<td>1533.7608
+61</td>
+<td>451.03006
 9</td>
-<td>4
-2
-9
-.
-2
-0
-9
-4
-5
+<td>429.20945
 7</td>
-<td>3
-8
-9
-.
-9
-4
-2
-9
-0
+<td>389.94290
 2</td>
-<td>2
-0
-4
-.
-8
-7
-5
-7
-3
+<td>204.87573
 2</td>
-<td>1
-6
-2
-.
-9
-8
-8
-9
-0
+<td>162.98890
 7</td>
-<td>1
-1
-3
-.
-1
-4
-6
-5
-1
+<td>113.14651
 6</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -1429,64 +705,19 @@ c</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>c
-u
-s
-(
-S
-)</td>
+<tr class="row-odd"><td>H_cus
+(S)</td>
 <td>S</td>
 <td>0</td>
 <td>1</td>
 <td>0</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">4
-7
-0
-2
-0
-7
-4
-8</p>
-</td>
-<td>1
-8
-6
-8
-.
-8
-0
-9
-2</td>
-<td>6
-8
-1
-.
-3
-3
-6
-8
-6
+<td>Harmonic</td>
+<td>-3.470207
+48</td>
+<td>1868.8092</td>
+<td>681.33686
 5</td>
-<td>5
-7
-8
-.
-2
-0
-8
-8
-9</td>
+<td>578.20889</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -1521,98 +752,26 @@ c</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>H
-O
-b
-r
-(
-S
-)</td>
+<tr class="row-even"><td>HObr(
+S)</td>
 <td>S</td>
 <td>0</td>
 <td>1</td>
 <td>1</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-1
-.
-5
-7
-7
-0
-8
-5</p>
-</td>
-<td>3
-6
-7
-8
-.
-3
-7
-7
-1
-8
+<td>Harmonic</td>
+<td>-11.57708
+5</td>
+<td>3678.3771
+86</td>
+<td>851.65504
 6</td>
-<td>8
-5
-1
-.
-6
-5
-5
-0
-4
+<td>573.21654
 6</td>
-<td>5
-7
-3
-.
-2
-1
-6
-5
-4
-6</td>
-<td>4
-1
-8
-.
-2
-9
-8
-4
-9
+<td>418.29849
 2</td>
-<td>3
-7
-4
-.
-4
-4
-6
-3
-9
+<td>374.44639
 3</td>
-<td>2
-0
-4
-.
-7
-2
-0
-1
-6
+<td>204.72016
 1</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -1645,63 +804,19 @@ c</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>O
-b
-r
-(
-S
+<tr class="row-odd"><td>Obr(S
 )</td>
 <td>S</td>
 <td>0</td>
 <td>0</td>
 <td>1</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">5
-1
-9
-8
-5
-8</p>
-</td>
-<td>5
-3
-7
-.
-1
-1
-6
-4
-8
+<td>Harmonic</td>
+<td>-7.519858</td>
+<td>537.11648
 5</td>
-<td>4
-3
-9
-.
-9
-9
-5
-9
-4
+<td>439.99594
 1</td>
-<td>2
-5
-6
-.
-3
-8
-4
-1
-2</td>
+<td>256.38412</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -1736,417 +851,87 @@ c</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>I
-P
-A
-(
-S
+<tr class="row-even"><td>IPA(S
 )</td>
 <td>S</td>
 <td>3</td>
 <td>8</td>
 <td>1</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">6
-4
-.
-9
-3
-5
-3
-9
-2</p>
-</td>
-<td>3
-0
-7
-2
-.
-8
-2
-4
-9
-2
-1</td>
-<td>3
-0
-5
-6
-.
-5
-8
-3
-1
-1
-6</td>
-<td>3
-0
-4
-9
-.
-6
-3
-5
-7
-8
-6</td>
-<td>3
-0
-3
-8
-.
-9
-9
-6
-8
-7
+<td>Harmonic</td>
+<td>-64.93539
 2</td>
-<td>3
-0
-3
-1
-.
-5
-3
-2
-7
-1
-1</td>
-<td>3
-0
-0
-8
-.
-8
-6
-8
-2
-1
-9</td>
-<td>2
-9
-6
-9
-.
-6
-8
-8
-4
-7
+<td>3072.8249
+21</td>
+<td>3056.5831
+16</td>
+<td>3049.6357
+86</td>
+<td>3038.9968
+72</td>
+<td>3031.5327
+11</td>
+<td>3008.8682
+19</td>
+<td>2969.6884
+78</td>
+<td>2956.4518
+71</td>
+<td>1460.6136
+97</td>
+<td>1454.4728
+54</td>
+<td>1435.9812
+01</td>
+<td>1432.4134
+96</td>
+<td>1413.5540
+05</td>
+<td>1366.1291
+17</td>
+<td>1353.2115
+74</td>
+<td>1327.9039
+25</td>
+<td>1321.2527
+2</td>
+<td>1148.7217
+45</td>
+<td>1130.0534
+72</td>
+<td>1098.8558
+25</td>
+<td>933.64652</td>
+<td>921.00574
+6</td>
+<td>903.03009
 8</td>
-<td>2
-9
-5
-6
-.
-4
-5
-1
-8
-7
+<td>825.72738
 1</td>
-<td>1
-4
-6
-0
-.
-6
-1
-3
-6
-9
+<td>809.44033
 7</td>
-<td>1
-4
-5
-4
-.
-4
-7
-2
-8
-5
-4</td>
-<td>1
-4
-3
-5
-.
-9
-8
-1
-2
-0
-1</td>
-<td>1
-4
-3
-2
-.
-4
-1
-3
-4
-9
-6</td>
-<td>1
-4
-1
-3
-.
-5
-5
-4
-0
-0
-5</td>
-<td>1
-3
-6
-6
-.
-1
-2
-9
-1
-1
-7</td>
-<td>1
-3
-5
-3
-.
-2
-1
-1
-5
-7
-4</td>
-<td>1
-3
-2
-7
-.
-9
-0
-3
-9
-2
-5</td>
-<td>1
-3
-2
-1
-.
-2
-5
-2
-7
-2</td>
-<td>1
-1
-4
-8
-.
-7
-2
-1
-7
-4
-5</td>
-<td>1
-1
-3
-0
-.
-0
-5
-3
-4
-7
-2</td>
-<td>1
-0
-9
-8
-.
-8
-5
-5
-8
-2
-5</td>
-<td>9
-3
-3
-.
-6
-4
-6
-5
-2</td>
-<td>9
-2
-1
-.
-0
-0
-5
-7
-4
-6</td>
-<td>9
-0
-3
-.
-0
-3
-0
-0
-9
+<td>535.60253</td>
+<td>414.79484
 8</td>
-<td>8
-2
-5
-.
-7
-2
-7
-3
-8
-1</td>
-<td>8
-0
-9
-.
-4
-4
-0
-3
-3
-7</td>
-<td>5
-3
-5
-.
-6
-0
-2
-5
-3</td>
-<td>4
-1
-4
-.
-7
-9
-4
-8
-4
-8</td>
-<td>3
-7
-8
-.
-1
-9
-3
-1
-0
+<td>378.19310
 2</td>
-<td>2
-9
-5
-.
-2
-7
-8
-8
-2
+<td>295.27882
 9</td>
-<td>2
-3
-7
-.
-5
-8
-6
-7
-8
+<td>237.58678
 4</td>
-<td>2
-3
-0
-.
-5
-6
-0
-2
-4
+<td>230.56024
 6</td>
-<td>1
-7
-1
-.
-1
-1
-0
-7
-8
+<td>171.11078
 9</td>
-<td>1
-2
-9
-.
-3
-6
-9
-0
-1</td>
-<td>7
-7
-.
-4
-1
-5
-0
-7
-6</td>
-<td>6
-4
-.
-3
-5
-0
-2
-9
-3</td>
-<td>5
-6
-.
-8
-7
-9
-6
-3
-5</td>
+<td>129.36901</td>
+<td>77.415076</td>
+<td>64.350293</td>
+<td>56.879635</td>
 </tr>
 </tbody>
 </table>
 <p>To import the data, we use the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.excel.read_excel</span></code> function.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2289,584 +1074,146 @@ c</td>
                       56.879635]}]
 </pre></div></div>
 </div>
-<p>Note that the output of <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> is a list of dictionaries. Each
-dictionary in the list corresponds to the data to initialize the
-objects.</p>
+<p>Note that the output of <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> is a list of dictionaries. Each dictionary in the list corresponds to the data to initialize the objects.</p>
 </div>
 <div class="section" id="Importing-the-ab-initio-references-data-from-Excel">
 <h2>Importing the <em>ab-initio</em> references data from Excel<a class="headerlink" href="#Importing-the-ab-initio-references-data-from-Excel" title="Permalink to this headline">¶</a></h2>
-<p>Before initializing the Nasa objects, we have to adjust the enthalpies
-from the DFT reference to the standard reference (i.e.&nbsp;pure species have
-an enthalpy of 0 at 298 K and 1 atm). The references.xlsx file contains
-the following information.</p>
+<p>Before initializing the Nasa objects, we have to adjust the enthalpies from the DFT reference to the standard reference (i.e.&nbsp;pure species have an enthalpy of 0 at 298 K and 1 atm). The references.xlsx file contains the following information.</p>
 <table border="1" class="docutils">
 <colgroup>
+<col width="1%" />
+<col width="1%" />
 <col width="2%" />
 <col width="2%" />
 <col width="2%" />
+<col width="3%" />
+<col width="1%" />
 <col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
-<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="1%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">n
 a
 m
 e</th>
-<th class="head">p
-h
-a
-s
+<th class="head">ph
+as
 e</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-C</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-H</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-O</th>
-<th class="head">s
-t
-a
-t
-m
-e
-c
-h
-_
-m
-o
-d
-e
-l</th>
-<th class="head">r
-e
+<th class="head">elemen
+ts.C</th>
+<th class="head">elemen
+ts.H</th>
+<th class="head">elemen
+ts.O</th>
+<th class="head"><a href="#id3"><span class="problematic" id="id4">statmech_</span></a>
+model</th>
+<th class="head"><a href="#id5"><span class="problematic" id="id6">T_</span></a>
+re
 f</th>
-<th class="head">H
-o
-R
-T
-_
-r
-e
-f</th>
-<th class="head">p
-o
-t
-e
-n
-t
-i
-a
-l
-e
-n
-e
-r
-g
-y</th>
-<th class="head">a
-t
-o
-m
-s</th>
-<th class="head">s
-y
-m
-m
-e
-t
-r
-y
-n
-u
-m
-b
-e
-r</th>
+<th class="head">HoRT_r
+ef</th>
+<th class="head">potentiale
+nergy</th>
+<th class="head">atoms</th>
+<th class="head">symmetryn
+umber</th>
 <th class="head">s
 p
 i
 n</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
+<th class="head">vib_waven
+umber</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -2877,311 +1224,46 @@ A</td>
 <td>3</td>
 <td>8</td>
 <td>1</td>
-<td>I
-d
-e
-a
-l
-G
-a
-s</td>
-<td>2
-9
+<td>IdealGas</td>
+<td>29
 8</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-1
-0
-.
-1
-0
-7
-8</p>
-</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">6
-3
-.
-6
-3
-5
-3</p>
-</td>
-<td>C
-O
-N
-T
-C
-A
-R
-_
-I
-P
-A</td>
+<td>-110.1
+078</td>
+<td>-63.6353</td>
+<td>./CONTCAR
+_IPA</td>
 <td>1</td>
 <td>0</td>
-<td>3
-6
-9
-5
-.
-6
-9
-4
-7</td>
-<td>3
-0
-5
-8
-.
-1
-5
-1
-2</td>
-<td>3
-0
-5
-6
-.
-3
-0
-3
-1</td>
-<td>3
-0
-3
-7
-.
-6
-1
-5
-4</td>
-<td>3
-0
-2
-7
-.
-4
-5
-9
-6</td>
-<td>2
-9
-7
-7
-.
-8
-7
-9
-1</td>
-<td>2
-9
-6
-2
-.
-0
-1
-4
-1</td>
-<td>2
-9
-5
-9
-.
-4
-1
-3
-8</td>
-<td>1
-4
-5
-5
-.
-9
-3
-8
-1</td>
-<td>1
-4
-4
-6
-.
-9
-2
-4
-1</td>
-<td>1
-4
-3
-2
-.
-5
-8
-4
-5</td>
-<td>1
-4
-3
-0
-.
-6
-9
-4</td>
-<td>1
-3
-6
-5
-.
-4
-2
-9
-9</td>
-<td>1
-3
-5
-9
-.
-4
-1
-5
-8</td>
-<td>1
-3
-4
-5
-.
-7
-6
-1
-3</td>
-<td>1
-3
-1
-2
-.
-9
-5
-7</td>
-<td>1
-2
-5
-8
-.
-3
-8
-0
-6</td>
-<td>1
-1
-4
-4
-.
-4
-4
-6
-4</td>
-<td>1
-1
-2
-1
-.
-8
-0
-4
-4</td>
-<td>1
-0
-4
-3
-.
-2
-8
-5
-6</td>
-<td>9
-3
-6
-.
-5
-1
-3
-7</td>
-<td>9
-1
-0
-.
-6
-5
-2
-7</td>
-<td>8
-9
-4
-.
-8
-8
-1
-8</td>
-<td>8
-0
-2
-.
-0
-0
-7
-5</td>
-<td>4
-5
-9
-.
-1
-4
-5
-8</td>
-<td>4
-1
-4
-.
-8
-8
-0
-2</td>
-<td>3
-5
-5
-.
-2
-7
-0
-3</td>
-<td>2
-6
-1
-.
-3
-4
-1
-7</td>
-<td>2
-5
-0
-.
-5
-7
-5
-3</td>
-<td>2
-1
-9
-.
-2
-5
-9
-1</td>
+<td>3695.6947</td>
+<td>3058.1512</td>
+<td>3056.3031</td>
+<td>3037.6154</td>
+<td>3027.4596</td>
+<td>2977.8791</td>
+<td>2962.0141</td>
+<td>2959.4138</td>
+<td>1455.9381</td>
+<td>1446.9241</td>
+<td>1432.5845</td>
+<td>1430.694</td>
+<td>1365.4299</td>
+<td>1359.4158</td>
+<td>1345.7613</td>
+<td>1312.957</td>
+<td>1258.3806</td>
+<td>1144.4464</td>
+<td>1121.8044</td>
+<td>1043.2856</td>
+<td>936.5137</td>
+<td>910.6527</td>
+<td>894.8818</td>
+<td>802.0075</td>
+<td>459.1458</td>
+<td>414.8802</td>
+<td>355.2703</td>
+<td>261.3417</td>
+<td>250.5753</td>
+<td>219.2591</td>
 </tr>
 <tr class="row-odd"><td>H
 2
@@ -3190,79 +1272,19 @@ O</td>
 <td>0</td>
 <td>2</td>
 <td>1</td>
-<td>I
-d
-e
-a
-l
-G
-a
-s</td>
-<td>2
-9
+<td>IdealGas</td>
+<td>29
 8</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">9
-7
-.
-6
-0
-6
-0
-4
-3</p>
-</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-4
-.
-2
-2
-0
-9</p>
-</td>
-<td>C
-O
-N
-T
-C
-A
-R
-_
-H
-2
-O</td>
+<td>-97.60
+6043</td>
+<td>-14.2209</td>
+<td>./CONTCAR
+_H2O</td>
 <td>2</td>
 <td>0</td>
-<td>3
-8
-2
-5
-.
-4
-3
-4</td>
-<td>3
-7
-1
-0
-.
-2
-6
-4
-2</td>
-<td>1
-5
-8
-2
-.
-4
-3
-2</td>
+<td>3825.434</td>
+<td>3710.2642</td>
+<td>1582.432</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -3297,47 +1319,16 @@ O</td>
 <td>0</td>
 <td>2</td>
 <td>0</td>
-<td>I
-d
-e
-a
-l
-G
-a
-s</td>
-<td>2
-9
+<td>IdealGas</td>
+<td>29
 8</td>
 <td>0</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">7
-5
-9
-8</p>
-</td>
-<td>C
-O
-N
-T
-C
-A
-R
-_
-H
-2</td>
+<td>-6.7598</td>
+<td>./CONTCAR
+_H2</td>
 <td>2</td>
 <td>0</td>
-<td>4
-3
-0
-6
-.
-1
-7
-9
-3</td>
+<td>4306.1793</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -3370,13 +1361,9 @@ H
 </tr>
 </tbody>
 </table>
-<p>Note that these species contain extra fields, such as <code class="docutils literal notranslate"><span class="pre">atoms</span></code>,
-<code class="docutils literal notranslate"><span class="pre">symmetrynumber</span></code>, and <code class="docutils literal notranslate"><span class="pre">spin</span></code> since the <code class="docutils literal notranslate"><span class="pre">IdealGas</span></code> statistical
-mechanical model will be used. The <code class="docutils literal notranslate"><span class="pre">T_ref</span></code> and <code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code> are extra
-fields that are necessary for reference species.</p>
+<p>Note that these species contain extra fields, such as <code class="docutils literal notranslate"><span class="pre">atoms</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetrynumber</span></code>, and <code class="docutils literal notranslate"><span class="pre">spin</span></code> since the <code class="docutils literal notranslate"><span class="pre">IdealGas</span></code> statistical mechanical model will be used. The <code class="docutils literal notranslate"><span class="pre">T_ref</span></code> and <code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code> are extra fields that are necessary for reference species.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3493,11 +1480,9 @@ fields that are necessary for reference species.</p>
   &#39;vib_wavenumbers&#39;: [4306.1793]}]
 </pre></div></div>
 </div>
-<p>Now that we’ve imported the data, we can make a <code class="docutils literal notranslate"><span class="pre">References</span></code> object,
-which is made of <code class="docutils literal notranslate"><span class="pre">Reference</span></code> objects using the following syntax.</p>
+<p>Now that we’ve imported the data, we can make a <code class="docutils literal notranslate"><span class="pre">References</span></code> object, which is made of <code class="docutils literal notranslate"><span class="pre">Reference</span></code> objects using the following syntax.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3522,11 +1507,9 @@ which is made of <code class="docutils literal notranslate"><span class="pre">Re
 </div>
 <div class="section" id="Initialize-the-Nasa-objects">
 <h2>Initialize the Nasa objects<a class="headerlink" href="#Initialize-the-Nasa-objects" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method allows us to initialize the Nasa objects
-from the data.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method allows us to initialize the Nasa objects from the data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3566,8 +1549,7 @@ Nasa object for Name: H2_cus(S)
 <div class="section" id="Writing-Nasa-objects-to-a-Thermdat-file">
 <h2>Writing Nasa objects to a Thermdat file<a class="headerlink" href="#Writing-Nasa-objects-to-a-Thermdat-file" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3614,12 +1596,9 @@ Nasa object for Name: H2_cus(S)
 </div>
 <div class="section" id="Checking-the-fit-of-the-Nasa-object">
 <h2>Checking the fit of the Nasa object<a class="headerlink" href="#Checking-the-fit-of-the-Nasa-object" title="Permalink to this headline">¶</a></h2>
-<p>To see if the Nasa object’s predictions of the thermodynamic data
-matches the statistical mechanical model inputted, use the
-<code class="docutils literal notranslate"><span class="pre">plot_statmech_and_empirical</span></code> method.</p>
+<p>To see if the Nasa object’s predictions of the thermodynamic data matches the statistical mechanical model inputted, use the <code class="docutils literal notranslate"><span class="pre">plot_statmech_and_empirical</span></code> method.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3669,26 +1648,16 @@ matches the statistical mechanical model inputted, use the
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

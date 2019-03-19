@@ -19,32 +19,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -215,18 +219,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -266,9 +270,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -276,7 +280,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -326,6 +330,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -342,43 +380,36 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Reactions">
 <h1>Reactions<a class="headerlink" href="#Reactions" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will initialize a reaction that represents the
-formation of water from its elements (i.e.&nbsp;H2 + 0.5O2 -&gt; H2O) and
-calculate reaction properties. Note that in this example, we will make
-arbitrary transition state species and BEP relationships so the values
-calculated are not representative of real-world reactions.</p>
+<p>In this example, we will initialize a reaction that represents the formation of water from its elements (i.e.&nbsp;H2 + 0.5O2 -&gt; H2O) and calculate reaction properties. Note that in this example, we will make arbitrary transition state species and BEP relationships so the values calculated are not representative of real-world reactions.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Read a thermdat file and convert it to a dictionary of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code>
-objects</li>
+<li>Read a thermdat file and convert it to a dictionary of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects</li>
 <li>Initialize a <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object manually and from strings</li>
 <li>Add a BEP relationship to a <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object</li>
-<li>Calculate thermodynamic and kinetic properties using the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code>
-object</li>
+<li>Calculate thermodynamic and kinetic properties using the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object</li>
 <li>Save the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object as a <code class="docutils literal notranslate"><span class="pre">JSON</span></code> file</li>
 </ul>
 </div>
 <div class="section" id="Files-Required">
 <h2>Files Required<a class="headerlink" href="#Files-Required" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="thermdat">thermdat</a> Thermdat file used to initialize <code class="docutils literal notranslate"><span class="pre">Nasa</span></code>
-species</li>
+<li><a class="reference external" href="thermdat">thermdat</a> Thermdat file used to initialize <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> species</li>
 </ul>
 </div>
 <div class="section" id="Initialize-Species-Used-For-Reaction">
 <h2>Initialize Species Used For Reaction<a class="headerlink" href="#Initialize-Species-Used-For-Reaction" title="Permalink to this headline">¶</a></h2>
-<p>First, we need to describe our species as pMuTT objects. For this
-example, we will be importing the thermdat from the <a class="reference external" href="http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat">combustion database
-by
-Berkeley</a>.
-We will store the species in a dictionary for code clarity later on.</p>
+<p>First, we need to describe our species as pMuTT objects. For this example, we will be importing the thermdat from the <a class="reference external" href="http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat">combustion database by Berkeley</a>. We will store the species in a dictionary for code clarity later on.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -446,13 +477,9 @@ We will store the species in a dictionary for code clarity later on.</p>
  -2.16717794e-14 -1.08845772e+03  5.45323129e+00]}
 </pre></div></div>
 </div>
-<p>To calculate transition state properties, we will need to represent the
-transition state species as a pMuTT object. For this example, we will
-create a new <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> object based on the H2O entry but modify the a6
-parameter arbitrarily to give it a higher enthalpy.</p>
+<p>To calculate transition state properties, we will need to represent the transition state species as a pMuTT object. For this example, we will create a new <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> object based on the H2O entry but modify the a6 parameter arbitrarily to give it a higher enthalpy.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -542,11 +569,9 @@ parameter arbitrarily to give it a higher enthalpy.</p>
 </div>
 <div class="section" id="Initialize-Reaction-Manually">
 <h2>Initialize Reaction Manually<a class="headerlink" href="#Initialize-Reaction-Manually" title="Permalink to this headline">¶</a></h2>
-<p>Let us initialize the reaction manually. You will have to feed the
-reactants, transition states, products and their stoichiometries.</p>
+<p>Let us initialize the reaction manually. You will have to feed the reactants, transition states, products and their stoichiometries.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -571,11 +596,9 @@ Creating Reaction object manually: H2+ 0.50O2=H2O_TS=H2O
 </div>
 <div class="section" id="Initialize-Reaction-Using-Strings">
 <h2>Initialize Reaction Using Strings<a class="headerlink" href="#Initialize-Reaction-Using-Strings" title="Permalink to this headline">¶</a></h2>
-<p>Initializing manually is cumbersome and prone to error. Instead, we can
-use <code class="docutils literal notranslate"><span class="pre">.from_string()</span></code> to initialize the reaction more easily.</p>
+<p>Initializing manually is cumbersome and prone to error. Instead, we can use <code class="docutils literal notranslate"><span class="pre">.from_string()</span></code> to initialize the reaction more easily.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -606,12 +629,9 @@ Creating Reaction object using custom string notation: H2+ 0.50O2=H2O_TS=H2O
 </div>
 <div class="section" id="Calculate-Thermodynamic-Reaction-Properties">
 <h2>Calculate Thermodynamic Reaction Properties<a class="headerlink" href="#Calculate-Thermodynamic-Reaction-Properties" title="Permalink to this headline">¶</a></h2>
-<p>With the reaction object specified, we can now calculate reaction
-properties. Let us calculate the standard formation enthalpy and
-standard entropy.</p>
+<p>With the reaction object specified, we can now calculate reaction properties. Let us calculate the standard formation enthalpy and standard entropy.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -646,23 +666,14 @@ Delta H: -241.826 kJ/mol
 Delta S: -44.416 J/mol/K
 </pre></div></div>
 </div>
-<p>A <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object can only calculate properties its reactants,
-transition state, and products can calculate. In this example, we
-represented our species as <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects so we can only calculate
-change in heat capacity (ΔCp), enthalpy (ΔH), entropy (ΔS), and Gibbs
-energy (ΔG).</p>
-<p>If you used <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects instead of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects, you can
-calculate a wider variety of properties.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object can only calculate properties its reactants, transition state, and products can calculate. In this example, we represented our species as <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects so we can only calculate change in heat capacity (ΔCp), enthalpy (ΔH), entropy (ΔS), and Gibbs energy (ΔG).</p>
+<p>If you used <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects instead of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects, you can calculate a wider variety of properties.</p>
 </div>
 <div class="section" id="Calculate-Kinetic-Reaction-Properties">
 <h2>Calculate Kinetic Reaction Properties<a class="headerlink" href="#Calculate-Kinetic-Reaction-Properties" title="Permalink to this headline">¶</a></h2>
-<p>Since we added a transition state to the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object, we can
-calculate kinetic properties such as the activation energy (Ea) and the
-pre-exponential factor (A). Since we arbitrarily made a transition state
-species, take the printed value with a grain of salt</p>
+<p>Since we added a transition state to the <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object, we can calculate kinetic properties such as the activation energy (Ea) and the pre-exponential factor (A). Since we arbitrarily made a transition state species, take the printed value with a grain of salt</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -710,12 +721,9 @@ Pre-exponential factor: 1.688e+13 1/s
 </div>
 <div class="section" id="Calculating-Activation-Energy-Using-BEP-Relationships">
 <h2>Calculating Activation Energy Using BEP Relationships<a class="headerlink" href="#Calculating-Activation-Energy-Using-BEP-Relationships" title="Permalink to this headline">¶</a></h2>
-<p>A <code class="docutils literal notranslate"><span class="pre">BEP</span></code> object can be used instead of a transition state species to
-calculate activation energies. Again, we will arbitrarily create a BEP
-relationship.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">BEP</span></code> object can be used instead of a transition state species to calculate activation energies. Again, we will arbitrarily create a BEP relationship.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -747,16 +755,13 @@ BEP: 199.41 kJ/mol
 Any: -241.41 kJ/mol
 </pre></div></div>
 </div>
-<p>Note that setting method to ‘any’ uses the transition state
-preferentially.</p>
+<p>Note that setting method to ‘any’ uses the transition state preferentially.</p>
 </div>
 <div class="section" id="Saving-and-Loading-our-Reaction-as-JSON">
 <h2>Saving and Loading our Reaction as JSON<a class="headerlink" href="#Saving-and-Loading-our-Reaction-as-JSON" title="Permalink to this headline">¶</a></h2>
-<p>Similarly to pMuTT objects, <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects can be saved to and
-read from JSON format.</p>
+<p>Similarly to pMuTT objects, <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects can be saved to and read from JSON format.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -952,14 +957,9 @@ Activation Energy: -241.41 kJ/mol
 </div>
 <div class="section" id="Plotting-Reaction-Coordinate-Diagrams">
 <h2>Plotting Reaction Coordinate Diagrams<a class="headerlink" href="#Plotting-Reaction-Coordinate-Diagrams" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">pMuTT.reaction.Reactions.plot_coordinate_diagram</span></code> allows users to
-plot reaction coordinate diagrams in a semi-automated way. For this
-example, we will use the synthesis of NH3 on Ru. The thermdat file was
-taken from the <a class="reference external" href="https://github.com/VlachosGroup/NH3-Matlab-Microkinetic-Model">NH3 MATLAB Microkinetic Model available on
-Github</a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pMuTT.reaction.Reactions.plot_coordinate_diagram</span></code> allows users to plot reaction coordinate diagrams in a semi-automated way. For this example, we will use the synthesis of NH3 on Ru. The thermdat file was taken from the <a class="reference external" href="https://github.com/VlachosGroup/NH3-Matlab-Microkinetic-Model">NH3 MATLAB Microkinetic Model available on Github</a>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1016,8 +1016,7 @@ Github</a>.</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1056,26 +1055,16 @@ Github</a>.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */
