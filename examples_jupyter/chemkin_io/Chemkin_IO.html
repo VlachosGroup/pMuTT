@@ -19,36 +19,32 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -219,18 +215,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #307FC1;
+    color: #303F9F;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #BF5B3D;
+    color: #D84315;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 5ex;
+    min-width: 8ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -270,9 +266,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #cfcfcf;
     border-radius: 2px;
-    background: #f5f5f5;
+    background: #f7f7f7;
 }
 
 /* override MathJax center alignment in output cells */
@@ -280,7 +276,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.imgmath center alignment in output cells */
+/* override sphinx.ext.pngmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -330,40 +326,6 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
-/* Some additional styling taken form the Jupyter notebook CSS */
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-div.rendered_html th {
-  font-weight: bold;
-}
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -380,26 +342,29 @@ div.rendered_html tbody tr:hover {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <div class="section" id="Chemkin-Input-and-Output">
 <h1>Chemkin Input and Output<a class="headerlink" href="#Chemkin-Input-and-Output" title="Permalink to this headline">¶</a></h1>
-<p>This notebook describes pMuTT’s functionality to read and write Chemkin files. We will use the NH3 formation mechanism as a case study.</p>
+<p>This notebook describes pMuTT’s functionality to read and write Chemkin
+files. We will use the NH3 formation mechanism as a case study.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Read species <em>ab-initio</em> data, reactions, and catalyst sites from a spreadsheet</li>
-<li>Write the thermdat, gas.inp, surf.inp, T_flow.inp, EAg.inp, EAs.inp, tube_mole.inp files</li>
+<li>Read species <em>ab-initio</em> data, reactions, and catalyst sites from a
+spreadsheet</li>
+<li>Write the thermdat, gas.inp, surf.inp, T_flow.inp, EAg.inp, EAs.inp,
+tube_mole.inp files</li>
 </ul>
 </div>
 <div class="section" id="Input-Spreadsheet">
 <h2>Input Spreadsheet<a class="headerlink" href="#Input-Spreadsheet" title="Permalink to this headline">¶</a></h2>
-<p>All the data will be imported from the <code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__ file. There are four sheets: 1. <code class="docutils literal notranslate"><span class="pre">cat_sites</span></code> contains catalyst site properties for the adsorbed species 2. <code class="docutils literal notranslate"><span class="pre">refs</span></code> contains <em>ab-initio</em> and experimental data for a handful of gas species to calculate references 3. <code class="docutils literal notranslate"><span class="pre">species</span></code> contains <em>ab-initio</em> data for each specie 4. <code class="docutils literal notranslate"><span class="pre">reactions</span></code> contains
-elementary steps</p>
+<p>All the data will be imported from the
+<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
+file. There are four sheets: 1. <code class="docutils literal notranslate"><span class="pre">cat_sites</span></code> contains catalyst site
+properties for the adsorbed species 2. <code class="docutils literal notranslate"><span class="pre">refs</span></code> contains <em>ab-initio</em> and
+experimental data for a handful of gas species to calculate references
+3. <code class="docutils literal notranslate"><span class="pre">species</span></code> contains <em>ab-initio</em> data for each specie 4.
+<code class="docutils literal notranslate"><span class="pre">reactions</span></code> contains elementary steps</p>
 <p>The contents are displayed below</p>
 <p><strong>Catalytic Sites</strong></p>
 <table border="1" class="docutils">
@@ -427,75 +392,180 @@ elementary steps</p>
 <p><strong>References</strong></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="3%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
 <col width="7%" />
-<col width="7%" />
-<col width="4%" />
-<col width="8%" />
-<col width="10%" />
 <col width="9%" />
 <col width="9%" />
-<col width="8%" />
+<col width="9%" />
+<col width="9%" />
 <col width="9%" />
 <col width="9%" />
 <col width="9%" />
 <col width="9%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">name</th>
-<th class="head">elements.N</th>
-<th class="head">elements.H</th>
-<th class="head">T_ref</th>
-<th class="head">HoRT_ref</th>
-<th class="head">potentialenergy</th>
-<th class="head">symmetrynumber</th>
-<th class="head">statmech_model</th>
-<th class="head">atoms</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
+<tr class="row-odd"><th class="head">n
+a
+m
+e</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+N</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+H</th>
+<th class="head">r
+e
+f</th>
+<th class="head">Ho
+RT
+_r
+ef</th>
+<th class="head">pot
+ent
+ial
+ene
+rgy</th>
+<th class="head">sym
+met
+ryn
+umb
+er</th>
+<th class="head">sta
+tme
+<a href="#id1"><span class="problematic" id="id2">ch_</span></a>
+mod
+el</th>
+<th class="head">ato
+ms</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
+<th class="head">vib
+_wa
+ven
+umb
+er</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>N2</td>
+<tr class="row-even"><td>N
+2</td>
 <td>2</td>
 <td>0</td>
-<td>298.15</td>
+<td>2
+9
+8
+.
+1
+5</td>
 <td>0</td>
-<td>-16.63</td>
+<td>-16
+.63</td>
 <td>2</td>
-<td>IdealGas</td>
-<td>./N2/CONTCAR</td>
-<td>2744</td>
+<td>Ide
+alG
+as</td>
+<td>./N
+2/C
+ONT
+CAR</td>
+<td>274
+4</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>NH3</td>
+<tr class="row-odd"><td>N
+H
+3</td>
 <td>1</td>
 <td>3</td>
-<td>298.15</td>
-<td>-18.38025311</td>
-<td>-19.54</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>-1
+8.
+38
+02
+53
+11</td>
+<td>-19
+.54</td>
 <td>3</td>
-<td>IdealGas</td>
-<td>./NH3/CONTCAR</td>
-<td>3534</td>
-<td>3464</td>
-<td>1765</td>
-<td>1139</td>
+<td>Ide
+alG
+as</td>
+<td>./N
+H3/
+CON
+TCA
+R</td>
+<td>353
+4</td>
+<td>346
+4</td>
+<td>176
+5</td>
+<td>113
+9</td>
 </tr>
-<tr class="row-even"><td>H2</td>
+<tr class="row-even"><td>H
+2</td>
 <td>0</td>
 <td>2</td>
-<td>298.15</td>
+<td>2
+9
+8
+.
+1
+5</td>
 <td>0</td>
-<td>-6.7700</td>
+<td>-6.
+770
+0</td>
 <td>2</td>
-<td>IdealGas</td>
-<td>./H2/CONTCAR</td>
-<td>4342</td>
+<td>Ide
+alG
+as</td>
+<td>./H
+2/C
+ONT
+CAR</td>
+<td>434
+2</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -505,14 +575,14 @@ elementary steps</p>
 <p><strong>Species</strong></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="2%" />
 <col width="5%" />
 <col width="5%" />
 <col width="5%" />
-<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
 <col width="5%" />
 <col width="5%" />
 <col width="5%" />
@@ -527,38 +597,294 @@ elementary steps</p>
 <col width="5%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">name</th>
-<th class="head">elements.N</th>
-<th class="head">elements.H</th>
-<th class="head">phase</th>
-<th class="head">statmech_model</th>
-<th class="head">symmetrynumber</th>
-<th class="head">atoms</th>
-<th class="head">potentialenergy</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
-<th class="head">vib_wavenumber</th>
+<tr class="row-odd"><th class="head">n
+a
+m
+e</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+N</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+H</th>
+<th class="head">p
+h
+a
+s
+e</th>
+<th class="head">s
+t
+a
+t
+m
+e
+c
+h
+_
+m
+o
+d
+e
+l</th>
+<th class="head">s
+y
+m
+m
+e
+t
+r
+y
+n
+u
+m
+b
+e
+r</th>
+<th class="head">a
+t
+o
+m
+s</th>
+<th class="head">p
+o
+t
+e
+n
+t
+i
+a
+l
+e
+n
+e
+r
+g
+y</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>N2</td>
+<tr class="row-even"><td>N
+2</td>
 <td>2</td>
 <td>0</td>
 <td>G</td>
-<td>IdealGas</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
 <td>2</td>
-<td>./N2/CONTCAR</td>
-<td>-16.63</td>
-<td>2744.00</td>
+<td>N
+2
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+6
+3</p>
+</td>
+<td>2
+7
+4
+4
+.
+0
+0</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -571,18 +897,69 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>NH3</td>
+<tr class="row-odd"><td>N
+H
+3</td>
 <td>1</td>
 <td>3</td>
 <td>G</td>
-<td>IdealGas</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
 <td>3</td>
-<td>./NH3/CONTCAR</td>
-<td>-19.54</td>
-<td>3534.00</td>
-<td>3464.00</td>
-<td>1765.00</td>
-<td>1139.00</td>
+<td>N
+H
+3
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+9
+.
+5
+4</p>
+</td>
+<td>3
+5
+3
+4
+.
+0
+0</td>
+<td>3
+4
+6
+4
+.
+0
+0</td>
+<td>1
+7
+6
+5
+.
+0
+0</td>
+<td>1
+1
+3
+9
+.
+0
+0</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -592,15 +969,43 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>H2</td>
+<tr class="row-even"><td>H
+2</td>
 <td>0</td>
 <td>2</td>
 <td>G</td>
-<td>IdealGas</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
 <td>2</td>
-<td>./H2/CONTCAR</td>
-<td>-6.77</td>
-<td>4342.00</td>
+<td>H
+2
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">7
+7</p>
+</td>
+<td>4
+3
+4
+2
+.
+0
+0</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -613,20 +1018,68 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>N2(S)</td>
+<tr class="row-odd"><td>N
+2
+(
+S
+)</td>
 <td>2</td>
 <td>0</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-17.24</td>
-<td>2197.19</td>
-<td>360.42</td>
-<td>347.34</td>
-<td>335.67</td>
-<td>62.08</td>
-<td>32.18</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+7
+.
+2
+4</p>
+</td>
+<td>2
+1
+9
+7
+.
+1
+9</td>
+<td>3
+6
+0
+.
+4
+2</td>
+<td>3
+4
+7
+.
+3
+4</td>
+<td>3
+3
+5
+.
+6
+7</td>
+<td>6
+2
+.
+0
+8</td>
+<td>3
+2
+.
+1
+8</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -634,20 +1087,62 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>N(S)</td>
+<tr class="row-even"><td>&#160;</td>
 <td>1</td>
 <td>0</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-9.34</td>
-<td>549.11</td>
-<td>538.56</td>
-<td>504.32</td>
-<td>475.81</td>
-<td>459.08</td>
-<td>410.02</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">3
+4</p>
+</td>
+<td>5
+4
+9
+.
+1
+1</td>
+<td>5
+3
+8
+.
+5
+6</td>
+<td>5
+0
+4
+.
+3
+2</td>
+<td>4
+7
+5
+.
+8
+1</td>
+<td>4
+5
+9
+.
+0
+8</td>
+<td>4
+1
+0
+.
+0
+2</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -655,17 +1150,45 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>H(S)</td>
+<tr class="row-odd"><td>&#160;</td>
 <td>0</td>
 <td>1</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-4.00</td>
-<td>1003.51</td>
-<td>625.55</td>
-<td>616.29</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">0
+0</p>
+</td>
+<td>1
+0
+0
+3
+.
+5
+1</td>
+<td>6
+2
+5
+.
+5
+5</td>
+<td>6
+1
+6
+.
+2
+9</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -676,62 +1199,264 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>NH3(S)</td>
+<tr class="row-even"><td>N
+H
+3
+(
+S
+)</td>
 <td>1</td>
 <td>3</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-20.43</td>
-<td>3491.09</td>
-<td>3488.82</td>
-<td>3364.52</td>
-<td>1583.52</td>
-<td>1582.07</td>
-<td>1124.22</td>
-<td>570.21</td>
-<td>567.22</td>
-<td>333.09</td>
-<td>122.86</td>
-<td>83.83</td>
-<td>70.63</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">2
+0
+.
+4
+3</p>
+</td>
+<td>3
+4
+9
+1
+.
+0
+9</td>
+<td>3
+4
+8
+8
+.
+8
+2</td>
+<td>3
+3
+6
+4
+.
+5
+2</td>
+<td>1
+5
+8
+3
+.
+5
+2</td>
+<td>1
+5
+8
+2
+.
+0
+7</td>
+<td>1
+1
+2
+4
+.
+2
+2</td>
+<td>5
+7
+0
+.
+2
+1</td>
+<td>5
+6
+7
+.
+2
+2</td>
+<td>3
+3
+3
+.
+0
+9</td>
+<td>1
+2
+2
+.
+8
+6</td>
+<td>8
+3
+.
+8
+3</td>
+<td>7
+0
+.
+6
+3</td>
 </tr>
-<tr class="row-odd"><td>NH2(S)</td>
+<tr class="row-odd"><td>N
+H
+2
+(
+S
+)</td>
 <td>1</td>
 <td>2</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-16.59</td>
-<td>3469.30</td>
-<td>3381.05</td>
-<td>1503.02</td>
-<td>698.87</td>
-<td>625.60</td>
-<td>615.94</td>
-<td>475.13</td>
-<td>298.12</td>
-<td>153.25</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+5
+9</p>
+</td>
+<td>3
+4
+6
+9
+.
+3
+0</td>
+<td>3
+3
+8
+1
+.
+0
+5</td>
+<td>1
+5
+0
+3
+.
+0
+2</td>
+<td>6
+9
+8
+.
+8
+7</td>
+<td>6
+2
+5
+.
+6
+0</td>
+<td>6
+1
+5
+.
+9
+4</td>
+<td>4
+7
+5
+.
+1
+3</td>
+<td>2
+9
+8
+.
+1
+2</td>
+<td>1
+5
+3
+.
+2
+5</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>NH(S)</td>
+<tr class="row-even"><td>N
+H
+(
+S
+)</td>
 <td>1</td>
 <td>1</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-13.21</td>
-<td>3403.13</td>
-<td>718.18</td>
-<td>710.58</td>
-<td>528.53</td>
-<td>415.20</td>
-<td>410.13</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+3
+.
+2
+1</p>
+</td>
+<td>3
+4
+0
+3
+.
+1
+3</td>
+<td>7
+1
+8
+.
+1
+8</td>
+<td>7
+1
+0
+.
+5
+8</td>
+<td>5
+2
+8
+.
+5
+3</td>
+<td>4
+1
+5
+.
+2
+0</td>
+<td>4
+1
+0
+.
+1
+3</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -739,61 +1464,259 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>TS1_NH3(S)</td>
+<tr class="row-odd"><td>T
+S
+1
+_
+N
+H
+3
+(
+S
+)</td>
 <td>1</td>
 <td>3</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-19.53</td>
-<td>3453.41</td>
-<td>3355.67</td>
-<td>1723.85</td>
-<td>1487.95</td>
-<td>959.15</td>
-<td>888.95</td>
-<td>594.09</td>
-<td>428.43</td>
-<td>227.03</td>
-<td>206.05</td>
-<td>142.14</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+9
+.
+5
+3</p>
+</td>
+<td>3
+4
+5
+3
+.
+4
+1</td>
+<td>3
+3
+5
+5
+.
+6
+7</td>
+<td>1
+7
+2
+3
+.
+8
+5</td>
+<td>1
+4
+8
+7
+.
+9
+5</td>
+<td>9
+5
+9
+.
+1
+5</td>
+<td>8
+8
+8
+.
+9
+5</td>
+<td>5
+9
+4
+.
+0
+9</td>
+<td>4
+2
+8
+.
+4
+3</td>
+<td>2
+2
+7
+.
+0
+3</td>
+<td>2
+0
+6
+.
+0
+5</td>
+<td>1
+4
+2
+.
+1
+4</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>TS2_NH2(S)</td>
+<tr class="row-even"><td>T
+S
+2
+_
+N
+H
+2
+(
+S
+)</td>
 <td>1</td>
 <td>2</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-16.09</td>
-<td>3426.44</td>
-<td>1293.72</td>
-<td>922.83</td>
-<td>660.97</td>
-<td>525.60</td>
-<td>496.84</td>
-<td>330.67</td>
-<td>290.28</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+0
+9</p>
+</td>
+<td>3
+4
+2
+6
+.
+4
+4</td>
+<td>1
+2
+9
+3
+.
+7
+2</td>
+<td>9
+2
+2
+.
+8
+3</td>
+<td>6
+6
+0
+.
+9
+7</td>
+<td>5
+2
+5
+.
+6
+0</td>
+<td>4
+9
+6
+.
+8
+4</td>
+<td>3
+3
+0
+.
+6
+7</td>
+<td>2
+9
+0
+.
+2
+8</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>TS3_NH(S)</td>
+<tr class="row-odd"><td>T
+S
+3
+_
+N
+H
+(
+S
+)</td>
 <td>1</td>
 <td>1</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-12.91</td>
-<td>1201.60</td>
-<td>491.57</td>
-<td>462.02</td>
-<td>402.16</td>
-<td>242.14</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+2
+.
+9
+1</p>
+</td>
+<td>1
+2
+0
+1
+.
+6
+0</td>
+<td>4
+9
+1
+.
+5
+7</td>
+<td>4
+6
+2
+.
+0
+2</td>
+<td>4
+0
+2
+.
+1
+6</td>
+<td>2
+4
+2
+.
+1
+4</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -802,19 +1725,67 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>TS4_N2(S)</td>
+<tr class="row-even"><td>T
+S
+4
+_
+N
+2
+(
+S
+)</td>
 <td>2</td>
 <td>0</td>
 <td>S</td>
-<td>Harmonic</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>-16.54</td>
-<td>485.61</td>
-<td>392.98</td>
-<td>386.19</td>
-<td>280.94</td>
-<td>168.43</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+5
+4</p>
+</td>
+<td>4
+8
+5
+.
+6
+1</td>
+<td>3
+9
+2
+.
+9
+8</td>
+<td>3
+8
+6
+.
+1
+9</td>
+<td>2
+8
+0
+.
+9
+4</td>
+<td>1
+6
+8
+.
+4
+3</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -823,11 +1794,25 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>RU(S)</td>
+<tr class="row-odd"><td>R
+U
+(
+S
+)</td>
 <td>0</td>
 <td>0</td>
 <td>S</td>
-<td>Placeholder</td>
+<td>P
+l
+a
+c
+e
+h
+o
+l
+d
+e
+r</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -844,11 +1829,25 @@ elementary steps</p>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>RU(B)</td>
+<tr class="row-even"><td>R
+U
+(
+B
+)</td>
 <td>0</td>
 <td>0</td>
 <td>S</td>
-<td>Placeholder</td>
+<td>P
+l
+a
+c
+e
+h
+o
+l
+d
+e
+r</td>
 <td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
@@ -905,11 +1904,13 @@ elementary steps</p>
 </div>
 <div class="section" id="Reading-data">
 <h2>Reading data<a class="headerlink" href="#Reading-data" title="Permalink to this headline">¶</a></h2>
-<p>Before we can initialize our species, we need the catalytic sites and the references.</p>
+<p>Before we can initialize our species, we need the catalytic sites and
+the references.</p>
 <div class="section" id="Reading-Catalytic-Sites">
 <h3>Reading Catalytic Sites<a class="headerlink" href="#Reading-Catalytic-Sites" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -950,7 +1951,8 @@ elementary steps</p>
 <div class="section" id="Reading-reference-species">
 <h3>Reading reference species<a class="headerlink" href="#Reading-reference-species" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -981,7 +1983,8 @@ elementary steps</p>
 <div class="section" id="Reading-species">
 <h3>Reading species<a class="headerlink" href="#Reading-species" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1006,18 +2009,20 @@ elementary steps</p>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="stderr output_area docutils container">
 <div class="highlight"><pre>
 C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
-<p>The warning above is typical when empirical objects are fitting to <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects with the <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> preset.</p>
+<p>The warning above is typical when empirical objects are fitting to
+<code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects with the <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> preset.</p>
 </div>
 <div class="section" id="Reading-reactions">
 <h3>Reading reactions<a class="headerlink" href="#Reading-reactions" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1040,11 +2045,14 @@ C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.p
 </div>
 <div class="section" id="Writing-Chemkin-files">
 <h2>Writing Chemkin files<a class="headerlink" href="#Writing-Chemkin-files" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have all the required objects, we can write the output files. All outputs can be found in the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/outputs">./outputs folder</a>.</p>
+<p>Now that we have all the required objects, we can write the output
+files. All outputs can be found in the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/outputs">./outputs
+folder</a>.</p>
 <div class="section" id="Writing-thermdat">
 <h3>Writing thermdat<a class="headerlink" href="#Writing-thermdat" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1123,7 +2131,25 @@ C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.p
 </div>
 <div class="section" id="Writing-gas.inp-and-surf.inp">
 <h3>Writing gas.inp and surf.inp<a class="headerlink" href="#Writing-gas.inp-and-surf.inp" title="Permalink to this headline">¶</a></h3>
-<p>The gas.inp file written is shown below. Note there are no gas-phase reactions.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="k">import</span> <span class="n">chemkin</span> <span class="k">as</span> <span class="n">ck_io</span>
+
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_gas</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/gas.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_surf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/surf.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<blockquote>
+<div>Note that <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> is ‘get_GoRT_act’. We use this formalism</div></blockquote>
+<p>here since we do not include entropic effects in the preexponential
+factor.</p>
+<p>The gas.inp file written is shown below. Note there are no gas-phase
+reactions.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:35.953210
 !Elements present in gas and surface species
 ELEMENTS
@@ -1206,7 +2232,8 @@ END
 <div class="section" id="Writing-T_flow.inp">
 <h3>Writing T_flow.inp<a class="headerlink" href="#Writing-T_flow.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1234,7 +2261,8 @@ END
 <div class="section" id="Writing-EAg.inp-and-EAs.inp">
 <h3>Writing EAg.inp and EAs.inp<a class="headerlink" href="#Writing-EAg.inp-and-EAs.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1262,7 +2290,8 @@ END
 </pre></div>
 </div>
 </div>
-<p>Reminder that we use <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> as ‘get_GoRT_act’ for the <a class="reference external" href="#act_method_name_explanation">reason described above</a>.</p>
+<p>Reminder that we use <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> as ‘get_GoRT_act’ for the
+<a class="reference external" href="#act_method_name_explanation">reason described above</a>.</p>
 <p>The EAg.inp file is shown below.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:36.004074
 !The first line is the number of reactions. Subsequent lines follow the format
@@ -1300,7 +2329,8 @@ EOF
 <div class="section" id="Writing-tube_mole.inp">
 <h3>Writing tube_mole.inp<a class="headerlink" href="#Writing-tube_mole.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1351,7 +2381,8 @@ EOF
 </pre></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1391,16 +2422,25 @@ EOF
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

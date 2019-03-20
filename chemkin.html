@@ -19,38 +19,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Phase Diagrams" href="phase_diagram.html" />
     <link rel="prev" title="Reactions" href="reactions.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -98,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Chemkin</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#objects">Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#input-and-output">Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.chemkin">Input and Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
@@ -188,11 +184,6 @@
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <div class="section" id="chemkin">
 <span id="id1"></span><h1>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this headline">¶</a></h1>
@@ -271,9 +262,9 @@ be supported in the commercial version.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>EmpiricalBase</strong></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>BaseThermo</strong></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">EmpiricalBase object</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">BaseThermo object</td>
 </tr>
 </tbody>
 </table>
@@ -375,14 +366,14 @@ state and products</p>
 
 <dl class="method">
 <dt id="pMuTT.reaction.ChemkinReaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='sum'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the preexponential factor in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sden_operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Site density operation to use. Default is ‘min’</li>
+<li><strong>sden_operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Site density operation to use. Default is ‘sum’</li>
 <li><strong>include_entropy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the act entropy. Default is True</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor</li>
@@ -472,8 +463,192 @@ transition state</p>
 </dd></dl>
 
 </div>
-<div class="section" id="input-and-output">
-<h2>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pMuTT.io_.chemkin">
+<span id="input-and-output"></span><h2>Input and Output<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id2"><span class="problematic" id="id3">pMuTT.io_</span></a>.chemkin</p>
+<p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.read_reactions">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input filename for Chemkin surf or gas .inp file</li>
+<li><strong>species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – List of NASA objects containing thermodynamic properties for
+all Reactants and Products in Reactions
+default = None. Will not return React_obj and Prod_obj</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><strong>Reactions</strong> (<em>list of reactions</em>)</li>
+<li><strong>Reactants</strong> (<em>list of reactants found in reactions</em>)</li>
+<li><strong>React_obj</strong> (<em>list of NASA polynomials for each Reactant</em>) – If species object list is supplied</li>
+<li><strong>React_stoic</strong> (<em>list of reaction stoichiometries for Reactants</em>)</li>
+<li><strong>Products</strong> (<em>list of products found in reactions</em>)</li>
+<li><strong>Prod_obj</strong> (<em>list of NASA polynomials for each Product</em>) – If species object list is supplied</li>
+<li><strong>Prod_stoic</strong> (<em>list of reaction stoichiometries for Products</em>)</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – If the surf.inp or gas.inp file isn’t found.</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> – If the species file does not exist</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> – If the species list is incorrect format</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_EA">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_EA</code><span class="sig-paren">(</span><em>reactions</em>, <em>conditions</em>, <em>write_gas_phase=False</em>, <em>filename='EAs.inp'</em>, <em>act_method_name='get_EoRT_act'</em>, <em>float_format=' .2E'</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='&lt;=&gt;'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the EAs.inp or EAg.inp file for Chemkin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
+should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
+<li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
+adsorption). If False, only surface phase reactions are written.
+Default is False</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for the EAs.inp file. Default is ‘EAs.inp’</li>
+<li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate values. Typical values are:</p>
+<ul>
+<li>’get_EoRT_act’ (default)</li>
+<li>’get_HoRT_act’</li>
+<li>’get_GoRT_act’</li>
+</ul>
+</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write numbers. Default is ‘ .2E’ (scientific notation
+rounded to 2 decimal places with a preceding space if the value is
+positive)</li>
+<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write stoichiometric numbers. Default is ‘.0f’ (integer)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character to use. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter for columns. Default is ‘  ‘</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_T_flow">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_T_flow</code><span class="sig-paren">(</span><em>T=None</em>, <em>P=None</em>, <em>Q=None</em>, <em>abyv=None</em>, <em>conditions=None</em>, <em>filename='T_flow.inp'</em>, <em>float_format='.3E'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_T_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the T_flow.inp Chemkin file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>T</strong> (<em>list of float</em>) – Temperatures in K</li>
+<li><strong>P</strong> (<em>list of float</em>) – Pressures in atm</li>
+<li><strong>Q</strong> (<em>list of float</em>) – Volumetric flow rate in cm3/s</li>
+<li><strong>abyv</strong> (<em>list of float</em>) – Catalyst area to reactor volume ratio in 1/cm</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the file. Default is T_flow.inp</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Format to write floating point numbers. Default is ‘.3E’ (i.e.
+scientific notation rounded to 3 decimal places)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter for columns. Default is ‘  ‘</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_gas">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_gas</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>filename='gas.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_gas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the gas.inp Chemkin file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface and gas species used in Chemkin mechanism. Used to write
+elements section</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – File name for gas.inp file. Default is ‘gas.inp’</li>
+<li><strong>reactions</strong> (<a class="reference internal" href="reactions.html#pMuTT.reaction.Reactions" title="pMuTT.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a> object, optional) – Reactions in mechanism. Reactions with only gas-phase species will
+be written to this file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_surf">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='min'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the surf.inp Chemkin file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface used in Chemkin mechanism. If gas-phase species are
+present, they will be ignored</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+reactions will be ignored</li>
+<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
+Default is ‘+’</li>
+<li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate reaction sides. Default is ‘=’</li>
+<li><strong>act_method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function</li>
+<li><strong>act_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Units to calculate activation energy. Default is ‘kcal/mol’</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print floating numbers. Default is ‘ .3E’ (i.e.
+scientific notation rounded to 3 decimal places with a leading
+space for positive numbers)</li>
+<li><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print stoichiometric coefficients.
+Default is ‘.0f’ (i.e. integers)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate columns. Default is ‘  ‘</li>
+<li><strong>use_mw_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the Motz-Wise corrections. Default is True</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed to calculate activation energy and preexponential
+factor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pMuTT.io_.chemkin.write_tube_mole">
+<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_tube_mole</code><span class="sig-paren">(</span><em>mole_frac_conditions</em>, <em>nasa_species</em>, <em>filename='tube_mole.inp'</em>, <em>float_format=' .3f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_tube_mole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write tube_mole.inp Chemkin file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mole_frac_conditions</strong> (<em>list of dict</em>) – Each dictionary should have the keys as the name of the species and the
+value as the initial mole fraction</li>
+<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Nasa species to find phase information</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the file. Default is ‘tube_mole.inp’</li>
+<li><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Format to write floating point numbers. Default is ‘.3E’ (i.e.
+scientific notation rounded to 3 decimal places)</li>
+<li><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</li>
+<li><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter for columns. Default is ‘  ‘</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 </div>
 
@@ -488,7 +663,7 @@ transition state</p>
         <a href="phase_diagram.html" class="btn btn-neutral float-right" title="Phase Diagrams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="reactions.html" class="btn btn-neutral float-left" title="Reactions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="reactions.html" class="btn btn-neutral" title="Reactions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -514,16 +689,25 @@ transition state</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

@@ -19,36 +19,32 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -219,18 +215,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #307FC1;
+    color: #303F9F;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #BF5B3D;
+    color: #D84315;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 5ex;
+    min-width: 8ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -270,9 +266,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #cfcfcf;
     border-radius: 2px;
-    background: #f5f5f5;
+    background: #f7f7f7;
 }
 
 /* override MathJax center alignment in output cells */
@@ -280,7 +276,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.imgmath center alignment in output cells */
+/* override sphinx.ext.pngmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -330,40 +326,6 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
-/* Some additional styling taken form the Jupyter notebook CSS */
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-div.rendered_html th {
-  font-weight: bold;
-}
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -380,20 +342,17 @@ div.rendered_html tbody tr:hover {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <div class="section" id="Phase-Diagram">
 <h1>Phase Diagram<a class="headerlink" href="#Phase-Diagram" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will generate a 1D and 2D phase diagram for FeOx species.</p>
+<p>In this example, we will generate a 1D and 2D phase diagram for FeOx
+species.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Create <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> and <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects</li>
-<li>Initialize <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects to describe the formation reaction of FeOx species</li>
+<li>Initialize <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects to describe the formation reaction of
+FeOx species</li>
 <li>Generate a 1D phase diagram by varying T</li>
 <li>Generate a 2D phase diagram by varying T and P</li>
 <li>Save the <code class="docutils literal notranslate"><span class="pre">PhaseDiagram</span></code> object as a <code class="docutils literal notranslate"><span class="pre">JSON</span></code> file</li>
@@ -401,10 +360,15 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Create-Species-for-Phase-Diagram">
 <h2>Create Species for Phase Diagram<a class="headerlink" href="#Create-Species-for-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
-<p>We will be considering three iron oxide species: FeO, Fe3O4, and Fe2O3. All the empirical data (from NIST) will be converted to <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects. O2, on the other hand, will be a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object so that it will be dependent on pressure.</p>
-<p>If you are unfamiliar with initializing objects using experimental data, see the Experimental to Empirical example.</p>
+<p>We will be considering three iron oxide species: FeO, Fe3O4, and Fe2O3.
+All the empirical data (from NIST) will be converted to <code class="docutils literal notranslate"><span class="pre">Nasa</span></code>
+objects. O2, on the other hand, will be a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object so that it
+will be dependent on pressure.</p>
+<p>If you are unfamiliar with initializing objects using experimental data,
+see the Experimental to Empirical example.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -585,9 +549,13 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Create-Reactions-for-Phase-Diagram">
 <h2>Create Reactions for Phase Diagram<a class="headerlink" href="#Create-Reactions-for-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
-<p>The reactions will be initialized and put in a list. Notice that the stiochiometric coefficient of O2 in all reactions is 1 to ensure consistency. If you are unfamiliar with initializing reactions, see the reactions example.</p>
+<p>The reactions will be initialized and put in a list. Notice that the
+stiochiometric coefficient of O2 in all reactions is 1 to ensure
+consistency. If you are unfamiliar with initializing reactions, see the
+reactions example.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -607,7 +575,8 @@ div.rendered_html tbody tr:hover {
 <h2>Create PhaseDiagram Object<a class="headerlink" href="#Create-PhaseDiagram-Object" title="Permalink to this headline">¶</a></h2>
 <p>Now we have everything we need to create the <code class="docutils literal notranslate"><span class="pre">PhaseDiagram</span></code> object.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -621,7 +590,8 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Creating-a-1D-Phase-Diagram">
 <h2>Creating a 1D Phase Diagram<a class="headerlink" href="#Creating-a-1D-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -639,7 +609,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -658,7 +629,8 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Creating-a-2D-Phase-Diagram">
 <h2>Creating a 2D Phase Diagram<a class="headerlink" href="#Creating-a-2D-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -683,7 +655,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -699,7 +672,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -738,16 +712,25 @@ div.rendered_html tbody tr:hover {
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

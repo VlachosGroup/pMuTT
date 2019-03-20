@@ -19,36 +19,32 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -219,18 +215,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #307FC1;
+    color: #303F9F;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #BF5B3D;
+    color: #D84315;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 5ex;
+    min-width: 8ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -270,9 +266,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #cfcfcf;
     border-radius: 2px;
-    background: #f5f5f5;
+    background: #f7f7f7;
 }
 
 /* override MathJax center alignment in output cells */
@@ -280,7 +276,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.imgmath center alignment in output cells */
+/* override sphinx.ext.pngmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -330,40 +326,6 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
-/* Some additional styling taken form the Jupyter notebook CSS */
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-div.rendered_html th {
-  font-weight: bold;
-}
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -380,11 +342,6 @@ div.rendered_html tbody tr:hover {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <div class="section" id="Overview-of-pMuTT’s-Core-Functionality">
 <h1>Overview of pMuTT’s Core Functionality<a class="headerlink" href="#Overview-of-pMuTT’s-Core-Functionality" title="Permalink to this headline">¶</a></h1>
@@ -394,9 +351,12 @@ div.rendered_html tbody tr:hover {
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Using constants and converting units using the <code class="docutils literal notranslate"><span class="pre">constants</span></code> module</li>
-<li>Initializing <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects by specifying all modes and by using <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary</li>
-<li>Initializing empirical objects such as <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects using a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object or from a previously generated Nasa polynomial</li>
-<li>Initializing <code class="docutils literal notranslate"><span class="pre">Reference</span></code> and <code class="docutils literal notranslate"><span class="pre">References</span></code> objects to adjust DFT’s reference to more traditional references</li>
+<li>Initializing <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects by specifying all modes and by
+using <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary</li>
+<li>Initializing empirical objects such as <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects using a
+<code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object or from a previously generated Nasa polynomial</li>
+<li>Initializing <code class="docutils literal notranslate"><span class="pre">Reference</span></code> and <code class="docutils literal notranslate"><span class="pre">References</span></code> objects to adjust DFT’s
+reference to more traditional references</li>
 <li>Input (via Excel) and output <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> polynomials to thermdat format</li>
 <li>Initializing <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects from strings</li>
 </ul>
@@ -411,9 +371,13 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Constants">
 <h2>Constants<a class="headerlink" href="#Constants" title="Permalink to this headline">¶</a></h2>
-<p>pMuTT has a wide variety of constants to increase readability of the code. See <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/constants.html#constants">Constants page</a> in the documentation for supported units.</p>
+<p>pMuTT has a wide variety of constants to increase readability of the
+code. See <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/constants.html#constants">Constants
+page</a>
+in the documentation for supported units.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -630,8 +594,13 @@ convert_unit(num=None, from_=None, to=None)
 </div>
 <div class="section" id="StatMech-Objects">
 <h2>StatMech Objects<a class="headerlink" href="#StatMech-Objects" title="Permalink to this headline">¶</a></h2>
-<p>Molecules show translational, vibrational, rotational, electronic, and nuclear modes.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech">https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech</a>&gt;`__ object allows us to specify translational, vibrational, rotational, electronic and nuclear modes independently, which gives flexibility in what behavior you would like.</p>
+<p>Molecules show translational, vibrational, rotational, electronic, and
+nuclear modes.</p>
+<p>The
+<code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech">https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech</a>&gt;`__
+object allows us to specify translational, vibrational, rotational,
+electronic and nuclear modes independently, which gives flexibility in
+what behavior you would like.</p>
 <p>For this example, we will use a butane molecule as an ideal gas:</p>
 <ul class="simple">
 <li>translations with no interaction between molecules</li>
@@ -641,7 +610,8 @@ convert_unit(num=None, from_=None, to=None)
 <li>ground state nuclear structure).</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -698,9 +668,15 @@ S_butane(T=298) = 328.33 J/mol/K
 </div>
 <div class="section" id="Presets">
 <h3>Presets<a class="headerlink" href="#Presets" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">`presets</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#presets">https://vlachosgroup.github.io/pMuTT/statmech.html#presets</a>&gt;`__ dictionary stores commonly used models to ease the initialization of <code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech">https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech</a>&gt;`__ objects. The same water molecule before can be initialized this way instead.</p>
+<p>The
+<code class="docutils literal notranslate"><span class="pre">`presets</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#presets">https://vlachosgroup.github.io/pMuTT/statmech.html#presets</a>&gt;`__
+dictionary stores commonly used models to ease the initialization of
+<code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech">https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech</a>&gt;`__
+objects. The same water molecule before can be initialized this way
+instead.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -735,7 +711,8 @@ S_butane(T=298) = 328.33 J/mol/K
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -777,9 +754,14 @@ S_butane(T=298) = 328.33 J/mol/K
 </div>
 <div class="section" id="Empty-Modes">
 <h3>Empty Modes<a class="headerlink" href="#Empty-Modes" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">`EmptyMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode</a>&gt;`__ is a special object returns 1 for the partition function and 0 for all other thermodynamic properties. This is useful if you do not want any contribution from a mode.</p>
+<p>The
+<code class="docutils literal notranslate"><span class="pre">`EmptyMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode</a>&gt;`__
+is a special object returns 1 for the partition function and 0 for all
+other thermodynamic properties. This is useful if you do not want any
+contribution from a mode.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -810,15 +792,24 @@ G/RT = 0.0
 </div>
 <div class="section" id="Empirical-Objects">
 <h2>Empirical Objects<a class="headerlink" href="#Empirical-Objects" title="Permalink to this headline">¶</a></h2>
-<p>Empirical forms are polynomials that are fit to experimental or <em>ab-initio data</em>. These forms are useful because they can be evaluated relatively quickly, so that downstream software is not hindered by evaluation of thermochemical properties. However, note that <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects can calculate more properties than the currently supported empirical objects.</p>
+<p>Empirical forms are polynomials that are fit to experimental or
+<em>ab-initio data</em>. These forms are useful because they can be evaluated
+relatively quickly, so that downstream software is not hindered by
+evaluation of thermochemical properties. However, note that <code class="docutils literal notranslate"><span class="pre">StatMech</span></code>
+objects can calculate more properties than the currently supported
+empirical objects.</p>
 <div class="section" id="NASA-polynomial">
 <h3>NASA polynomial<a class="headerlink" href="#NASA-polynomial" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">`NASA</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#nasa">https://vlachosgroup.github.io/pMuTT/empirical.html#nasa</a>&gt;`__ format is used for our microkinetic modeling software, Chemkin.</p>
+<p>The
+<code class="docutils literal notranslate"><span class="pre">`NASA</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#nasa">https://vlachosgroup.github.io/pMuTT/empirical.html#nasa</a>&gt;`__
+format is used for our microkinetic modeling software, Chemkin.</p>
 <div class="section" id="Initializing-Nasa-from-StatMech">
 <h4>Initializing Nasa from StatMech<a class="headerlink" href="#Initializing-Nasa-from-StatMech" title="Permalink to this headline">¶</a></h4>
-<p>Below, we initialize the NASA polynomial from the <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object we created earlier.</p>
+<p>Below, we initialize the NASA polynomial from the <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object we
+created earlier.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -847,13 +838,20 @@ H_butane(T=298) = -6765.8 kJ/mol
 S_butane(T=298) = 328.33 J/mol/K
 </pre></div></div>
 </div>
-<p>Although it is not covered here, you can also generate empirical objects from experimental data using the <code class="docutils literal notranslate"><span class="pre">.from_data</span></code> method. See <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/examples.html#experimental-to-empirical">Experimental to Empirical</a> example.</p>
+<p>Although it is not covered here, you can also generate empirical objects
+from experimental data using the <code class="docutils literal notranslate"><span class="pre">.from_data</span></code> method. See
+<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/examples.html#experimental-to-empirical">Experimental to
+Empirical</a>
+example.</p>
 </div>
 <div class="section" id="Initializing-Nasa-Directly">
 <h4>Initializing Nasa Directly<a class="headerlink" href="#Initializing-Nasa-Directly" title="Permalink to this headline">¶</a></h4>
-<p>We can also initialize the NASA polynomial if we have the polynomials. Using an entry from the <a class="reference external" href="https://rmg.mit.edu/database/thermo/libraries/DFT_QCI_thermo/215/">Reaction Mechanism Generator (RMG) database</a>.</p>
+<p>We can also initialize the NASA polynomial if we have the polynomials.
+Using an entry from the <a class="reference external" href="https://rmg.mit.edu/database/thermo/libraries/DFT_QCI_thermo/215/">Reaction Mechanism Generator (RMG)
+database</a>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -896,9 +894,12 @@ H_butane(T=298) = -125.7 kJ/mol
 S_butane(T=298) = 308.34 J/mol/K
 </pre></div></div>
 </div>
-<p>Compare the results between <code class="docutils literal notranslate"><span class="pre">butane_nasa</span></code> and <code class="docutils literal notranslate"><span class="pre">butane_nasa_direct</span></code> to the <a class="reference external" href="https://en.wikipedia.org/wiki/Butane_(data_page)">Wikipedia page for butane</a>.</p>
+<p>Compare the results between <code class="docutils literal notranslate"><span class="pre">butane_nasa</span></code> and <code class="docutils literal notranslate"><span class="pre">butane_nasa_direct</span></code>
+to the <a class="reference external" href="https://en.wikipedia.org/wiki/Butane_(data_page)">Wikipedia page for
+butane</a>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -926,12 +927,17 @@ S_nasa_direct = 308.34 J/mol/K
 S_wiki = 310.23 J/mol/K
 </pre></div></div>
 </div>
-<p>Notice the values are very different for <code class="docutils literal notranslate"><span class="pre">H_nasa</span></code>. This discrepancy is due to:</p>
+<p>Notice the values are very different for <code class="docutils literal notranslate"><span class="pre">H_nasa</span></code>. This discrepancy is
+due to:</p>
 <ul class="simple">
 <li>different references</li>
 <li>error in DFT</li>
 </ul>
-<p>We can account for this discrepancy by using the <code class="docutils literal notranslate"><span class="pre">`Reference</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference">https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference</a>&gt;`__ and <code class="docutils literal notranslate"><span class="pre">`References</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References">https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References</a>&gt;`__ objects.</p>
+<p>We can account for this discrepancy by using the
+<code class="docutils literal notranslate"><span class="pre">`Reference</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference">https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference</a>&gt;`__
+and
+<code class="docutils literal notranslate"><span class="pre">`References</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References">https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References</a>&gt;`__
+objects.</p>
 </div>
 </div>
 <div class="section" id="Referencing">
@@ -941,10 +947,15 @@ S_wiki = 310.23 J/mol/K
 <li>enthalpy at some reference temperature (<code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code> and <code class="docutils literal notranslate"><span class="pre">T_ref</span></code>)</li>
 <li>a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object</li>
 </ul>
-<p>In general, use references that are similar to molecules in your mechanism. Also, the number of reference molecules must be equation to the number of elements (or other descriptor) in the mechanism. <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/referencing.html">Full description of referencing scheme here</a>.</p>
+<p>In general, use references that are similar to molecules in your
+mechanism. Also, the number of reference molecules must be equation to
+the number of elements (or other descriptor) in the mechanism. <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/referencing.html">Full
+description of referencing scheme
+here</a>.</p>
 <p>In this example, we will use ethane and propane as references.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -998,9 +1009,11 @@ S_wiki = 310.23 J/mol/K
 {&#39;C&#39;: -355.08622107801045, &#39;H&#39;: -125.24484586807125}
 </pre></div></div>
 </div>
-<p>Passing the <code class="docutils literal notranslate"><span class="pre">References</span></code> object when we make our <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> object produces a value closer to the one listed above.</p>
+<p>Passing the <code class="docutils literal notranslate"><span class="pre">References</span></code> object when we make our <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> object
+produces a value closer to the one listed above.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1032,9 +1045,15 @@ S_butane(T=298) = 328.33 J/mol/K
 <h2>Input and Output<a class="headerlink" href="#Input-and-Output" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Excel">
 <h3>Excel<a class="headerlink" href="#Excel" title="Permalink to this headline">¶</a></h3>
-<p>Encoding each object in Python can be tedious and so you can read from Excel spreadsheets using <code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel">https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel</a>&gt;`__. Note that this function returns a list of dictionaries. This output allows you to initialize whichever object you want. There are also special rules that depend on the header name.</p>
+<p>Encoding each object in Python can be tedious and so you can read from
+Excel spreadsheets using
+<code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel">https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel</a>&gt;`__.
+Note that this function returns a list of dictionaries. This output
+allows you to initialize whichever object you want. There are also
+special rules that depend on the header name.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1155,7 +1174,8 @@ S_butane(T=298) = 328.33 J/mol/K
 </div>
 <p>Initialize using **kwargs syntax.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1178,7 +1198,8 @@ S_butane(T=298) = 328.33 J/mol/K
 </div>
 <p>Butane can be initialized in a similar way.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1210,9 +1231,13 @@ S_butane(T=298) = 328.39 J/mol/K
 </div>
 <div class="section" id="Thermdat">
 <h3>Thermdat<a class="headerlink" href="#Thermdat" title="Permalink to this headline">¶</a></h3>
-<p>The thermdat format uses NASA polynomials to represent several species. It has a very particular format so doing it manually is error-prone. You can write a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects to thermdat format using <code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat</a>&gt;`__.</p>
+<p>The thermdat format uses NASA polynomials to represent several species.
+It has a very particular format so doing it manually is error-prone. You
+can write a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects to thermdat format using
+<code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat</a>&gt;`__.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1255,14 +1280,18 @@ butane          20190122C   4H  10          G298.0     800.0     502.9         1
 -1.98482876E+00 5.99910769E-02-4.67983727E-05 2.14853318E-08-4.31005098E-12    2
 -8.15415828E+05 3.48691129E+01 9.98107805E+00-3.50556935E-02 2.38938732E-04    3
 -3.63709779E-07 1.92062158E-10-8.16632302E+05-1.47065846E+01                   4
-END<p>Similarly, <code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat</a>&gt;`__ reads thermdat files.</p>
+END<p>Similarly,
+<code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat</a>&gt;`__
+reads thermdat files.</p>
 </div>
 </div>
 <div class="section" id="Reactions">
 <h2>Reactions<a class="headerlink" href="#Reactions" title="Permalink to this headline">¶</a></h2>
-<p>You can also evaluate reactions properties. The most straightforward way to do this is to initialize using strings.</p>
+<p>You can also evaluate reactions properties. The most straightforward way
+to do this is to initialize using strings.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1298,14 +1327,16 @@ S_rxn(T=298) = -44.42 J/mol/K
 </div>
 <div class="section" id="Exercise">
 <h2>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h2>
-<p>Write a script to calculate the Enthalpy of adsorption (in kcal/mol) of H2O on Cu(111) at T = 298 K. Some important details are given below.</p>
+<p>Write a script to calculate the Enthalpy of adsorption (in kcal/mol) of
+H2O on Cu(111) at T = 298 K. Some important details are given below.</p>
 <div class="section" id="Information-Required">
 <h3>Information Required<a class="headerlink" href="#Information-Required" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="H2O:">
 <h4>H2O:<a class="headerlink" href="#H2O:" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>ideal gas</li>
-<li>atoms: You can use “ase.build.molecule” to generate a water molecule like we did with ethane, propane, and butane.</li>
+<li>atoms: You can use “ase.build.molecule” to generate a water molecule
+like we did with ethane, propane, and butane.</li>
 <li>vibrational wavenumbers (1/cm): 3825.434, 3710.2642, 1582.432</li>
 <li>potential energy (eV): -14.22393533</li>
 <li>spin: 0</li>
@@ -1324,7 +1355,11 @@ S_rxn(T=298) = -44.42 J/mol/K
 <ul class="simple">
 <li>electronic and harmonic vibration modes</li>
 <li>potential energy (eV): -238.4713854</li>
-<li>vibrational wavenumbers (1/cm): 3797.255519, 3658.895695, 1530.600295, 266.366130, 138.907356, 63.899768, 59.150454, 51.256019, -327.384554 (negative numbers represent imaginary frequencies. The default behavior of pMuTT is to ignore these frequencies when calculating any thermodynamic property)</li>
+<li>vibrational wavenumbers (1/cm): 3797.255519, 3658.895695,
+1530.600295, 266.366130, 138.907356, 63.899768, 59.150454, 51.256019,
+-327.384554 (negative numbers represent imaginary frequencies. The
+default behavior of pMuTT is to ignore these frequencies when
+calculating any thermodynamic property)</li>
 </ul>
 </div>
 <div class="section" id="Reaction:">
@@ -1335,7 +1370,8 @@ S_rxn(T=298) = -44.42 J/mol/K
 <div class="section" id="Solution:">
 <h3>Solution:<a class="headerlink" href="#Solution:" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1381,7 +1417,8 @@ del_H = -2.18 kcal/mol
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1421,16 +1458,25 @@ del_H = -2.18 kcal/mol
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */
