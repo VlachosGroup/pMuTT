@@ -273,10 +273,6 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
-<<<<<<< HEAD:pMuTT/io/chemkin.py
-
-=======
->>>>>>> master:pMuTT/io_/chemkin.py
 def write_surf(nasa_species, sden_operation='min',
                filename='surf.inp', T=c.T0('K'), reactions=[],
                species_delimiter='+', reaction_delimiter='=',
