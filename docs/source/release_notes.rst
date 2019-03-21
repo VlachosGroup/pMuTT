@@ -7,6 +7,16 @@ Development Branch
 ------------------
 `Development Branch`_
 
+
+Version 1.2.5
+-------------
+Mar. 21, 2019
+
+- Renamed ``pMuTT.io_`` module to ``pMuTT.io``
+- Renamed ``pMuTT.io_.jsonio`` module to ``pMuTT.io.json``
+- Added preliminary IO support for MongoDB in module: ``pMuTT.io.db``
+- Bug fixes for Chemkin IO behavior
+
 Version 1.2.4
 -------------
 Mar. 11, 2019
@@ -84,6 +94,10 @@ Dec. 17, 2018
   properties (such as H, S, F, G) with the appropriate units
 - Changed symbol for Hemlholtz energy from A to F
 
+Contributors
+^^^^^^^^^^^^
+- Himaghna Bhattacharjee (himaghna_)
+
 Version 1.2.0
 -------------
 Dec. 12, 2018
@@ -141,3 +155,4 @@ Oct. 26, 2018
   reactions from Chemkin surf.inp and gas.inp files
 
 .. _`Development Branch`: https://github.com/VlachosGroup/pMuTT/commits/development
+.. _himaghna: https://github.com/himaghna
