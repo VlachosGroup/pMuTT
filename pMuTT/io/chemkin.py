@@ -459,6 +459,7 @@ def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
                                        P_i, column_delimiter,
                                        Q_i, column_delimiter,
                                        abyv_i, i+1))
+    lines.append('EOF')
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
