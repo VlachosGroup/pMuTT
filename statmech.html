@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.4 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.5 documentation</title>
   
 
   
@@ -1978,19 +1978,27 @@ ignored. Default is None</p>
 
 <dl class="method">
 <dt id="pMuTT.statmech.vib.HarmonicVib.get_q">
-<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_q" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_q</code><span class="sig-paren">(</span><em>T</em>, <em>include_ZPE=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.statmech.vib.HarmonicVib.get_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q^{vib}=\prod_i \frac{\exp({-\frac{\Theta_{V,i}}{2T}})}
-{1-\exp({-\frac{\Theta_{V,i}}{T}})}\)</span></p>
+{1-\exp({-\frac{\Theta_{V,i}}{T}})}\)</span> if include_ZPE = True
+<span class="math notranslate nohighlight">\(q^{vib}=\prod_i \frac{1}
+{1-\exp({-\frac{\Theta_{V,i}}{T}})}\)</span> if include_ZPE = False</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
+<li><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero-point energy term</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>q_vib</strong> – Vibrational partition function</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q_vib</strong> – Vibrational partition function</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3461,6 +3469,7 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Excel to Empirical &mdash; pMuTT 1.2.4 documentation</title>
+  <title>Excel to Empirical &mdash; pMuTT 1.2.5 documentation</title>
   
 
   
@@ -2143,7 +2143,7 @@ c</td>
 </tr>
 </tbody>
 </table>
-<p>To import the data, we use the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.excel.read_excel</span></code> function.</p>
+<p>To import the data, we use the <code class="docutils literal notranslate"><span class="pre">pMuTT.io.excel.read_excel</span></code> function.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
@@ -2151,7 +2151,7 @@ c</td>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="s1">&#39;input.xlsx&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">species_data</span><span class="p">)</span>
@@ -3571,7 +3571,7 @@ Nasa object for Name: H2_cus(S)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span>
                <span class="n">write_date</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -3677,6 +3677,7 @@ matches the statistical mechanical model inputted, use the
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

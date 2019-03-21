@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview of pMuTT’s Core Functionality &mdash; pMuTT 1.2.4 documentation</title>
+  <title>Overview of pMuTT’s Core Functionality &mdash; pMuTT 1.2.5 documentation</title>
   
 
   
@@ -1047,7 +1047,7 @@ S_butane(T=298) = 328.33 J/mol/K
 <h3>Excel<a class="headerlink" href="#Excel" title="Permalink to this headline">¶</a></h3>
 <p>Encoding each object in Python can be tedious and so you can read from
 Excel spreadsheets using
-<code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel">https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel</a>&gt;`__.
+<code class="docutils literal notranslate"><span class="pre">`pMuTT.io.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io.excel.read_excel">https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io.excel.read_excel</a>&gt;`__.
 Note that this function returns a list of dictionaries. This output
 allows you to initialize whichever object you want. There are also
 special rules that depend on the header name.</p>
@@ -1059,7 +1059,7 @@ special rules that depend on the header name.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
@@ -1234,14 +1234,14 @@ S_butane(T=298) = 328.39 J/mol/K
 <p>The thermdat format uses NASA polynomials to represent several species.
 It has a very particular format so doing it manually is error-prone. You
 can write a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects to thermdat format using
-<code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat</a>&gt;`__.</p>
+<code class="docutils literal notranslate"><span class="pre">`pMuTT.io.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.write_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.write_thermdat</a>&gt;`__.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="c1"># Make Nasa objects from previously defined ethane and propane</span>
 <span class="n">ethane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ethane&#39;</span><span class="p">,</span>
@@ -1281,7 +1281,7 @@ butane          20190122C   4H  10          G298.0     800.0     502.9         1
 -8.15415828E+05 3.48691129E+01 9.98107805E+00-3.50556935E-02 2.38938732E-04    3
 -3.63709779E-07 1.92062158E-10-8.16632302E+05-1.47065846E+01                   4
 END<p>Similarly,
-<code class="docutils literal notranslate"><span class="pre">`pMuTT.io_.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`pMuTT.io.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.read_thermdat</a>&gt;`__
 reads thermdat files.</p>
 </div>
 </div>
@@ -1295,7 +1295,7 @@ to do this is to initialize using strings.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
 <span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
 <span class="kn">from</span> <span class="nn">pMuTT.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
 
@@ -1466,6 +1466,7 @@ del_H = -2.18 kcal/mol
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pMuTT 1.2.4 documentation</title>
+  <title>Input and Output &mdash; pMuTT 1.2.5 documentation</title>
   
 
   
@@ -115,8 +115,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#vasp">VASP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.gaussian">Gaussian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io_.chemkin">Chemkin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io.gaussian">Gaussian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pMuTT.io.chemkin">Chemkin</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -218,8 +218,8 @@
 <div class="section" id="excel">
 <h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="pMuTT.io_.excel.read_excel">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0.0, include_imaginary=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.read_excel" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.read_excel">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io, skiprows=[1], header=0, delimiter='.', min_frequency_cutoff=0.0, include_imaginary=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.read_excel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an excel file and returns it as a list of dictionaries to
 initialize objects</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -264,26 +264,26 @@ int (i.e. 1.0 –&gt; 1)</li>
 <p class="rubric">Notes</p>
 <p>Special rules exist for the following column headings</p>
 <ul class="simple">
-<li>element.[element_symbol] (<a class="reference internal" href="#pMuTT.io_.excel.set_element" title="pMuTT.io_.excel.set_element"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_element()</span></code></a>)</li>
-<li>formula (<a class="reference internal" href="#pMuTT.io_.excel.set_formula" title="pMuTT.io_.excel.set_formula"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_formula()</span></code></a>)</li>
-<li>atoms (<a class="reference internal" href="#pMuTT.io_.excel.set_atoms" title="pMuTT.io_.excel.set_atoms"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_atoms()</span></code></a>)</li>
-<li>statmech_model (<a class="reference internal" href="#pMuTT.io_.excel.set_statmech_model" title="pMuTT.io_.excel.set_statmech_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_statmech_model()</span></code></a>)</li>
-<li>vib_wavenumber (<a class="reference internal" href="#pMuTT.io_.excel.set_vib_wavenumbers" title="pMuTT.io_.excel.set_vib_wavenumbers"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers()</span></code></a>)</li>
-<li>rot_temperature (<a class="reference internal" href="#pMuTT.io_.excel.set_rot_temperatures" title="pMuTT.io_.excel.set_rot_temperatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_rot_temperatures()</span></code></a>)</li>
-<li>nasa.a_low (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_low" title="pMuTT.io_.excel.set_nasa_a_low"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_low()</span></code></a>)</li>
-<li>nasa.a_high (<a class="reference internal" href="#pMuTT.io_.excel.set_nasa_a_high" title="pMuTT.io_.excel.set_nasa_a_high"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_high()</span></code></a>)</li>
-<li>vib_outcar (<a class="reference internal" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a>)</li>
+<li>element.[element_symbol] (<a class="reference internal" href="#pMuTT.io.excel.set_element" title="pMuTT.io.excel.set_element"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_element()</span></code></a>)</li>
+<li>formula (<a class="reference internal" href="#pMuTT.io.excel.set_formula" title="pMuTT.io.excel.set_formula"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_formula()</span></code></a>)</li>
+<li>atoms (<a class="reference internal" href="#pMuTT.io.excel.set_atoms" title="pMuTT.io.excel.set_atoms"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_atoms()</span></code></a>)</li>
+<li>statmech_model (<a class="reference internal" href="#pMuTT.io.excel.set_statmech_model" title="pMuTT.io.excel.set_statmech_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_statmech_model()</span></code></a>)</li>
+<li>vib_wavenumber (<a class="reference internal" href="#pMuTT.io.excel.set_vib_wavenumbers" title="pMuTT.io.excel.set_vib_wavenumbers"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers()</span></code></a>)</li>
+<li>rot_temperature (<a class="reference internal" href="#pMuTT.io.excel.set_rot_temperatures" title="pMuTT.io.excel.set_rot_temperatures"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_rot_temperatures()</span></code></a>)</li>
+<li>nasa.a_low (<a class="reference internal" href="#pMuTT.io.excel.set_nasa_a_low" title="pMuTT.io.excel.set_nasa_a_low"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_low()</span></code></a>)</li>
+<li>nasa.a_high (<a class="reference internal" href="#pMuTT.io.excel.set_nasa_a_high" title="pMuTT.io.excel.set_nasa_a_high"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_high()</span></code></a>)</li>
+<li>vib_outcar (<a class="reference internal" href="#pMuTT.io.vasp.set_vib_wavenumbers_from_outcar" title="pMuTT.io.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a>)</li>
 </ul>
 </dd></dl>
 
 <div class="section" id="special-rules">
 <h3>Special Rules<a class="headerlink" href="#special-rules" title="Permalink to this headline">¶</a></h3>
-<p>Special rules can be defined in the <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>
+<p>Special rules can be defined in the <a class="reference internal" href="#pMuTT.io.excel.read_excel" title="pMuTT.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>
 function to process inputs differently. Currently supported special rules are
 listed below.</p>
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_element">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_element" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_element">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_element</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure[‘elements’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -310,8 +310,8 @@ output_structure[‘elements’][element]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_formula">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_formula" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_formula">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_formula" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses stoichiometric formula unit and assigns to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -337,8 +337,8 @@ output_structure[‘elements’]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_atoms">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_atoms">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_atoms</code><span class="sig-paren">(</span><em>path</em>, <em>output_structure</em>, <em>excel_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_atoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the atoms object ans assigns to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -364,8 +364,8 @@ See ase.read for supported formats</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_statmech_model">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_statmech_model</code><span class="sig-paren">(</span><em>model</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_statmech_model" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_statmech_model">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_statmech_model</code><span class="sig-paren">(</span><em>model</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_statmech_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Imports module and assigns the class to output_structure</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -396,8 +396,8 @@ output_structure[‘statmech_model’]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_vib_wavenumbers">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_vib_wavenumbers</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_vib_wavenumbers">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_vib_wavenumbers</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_vib_wavenumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure[‘vib_wavenumber’]</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -421,8 +421,8 @@ output_structure[‘elements’][element]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_rot_temperatures">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_rot_temperatures">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_rot_temperatures</code><span class="sig-paren">(</span><em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_rot_temperatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses element header and assigns to output_structure
 [‘rot_temperatures’]</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -447,8 +447,8 @@ output_structure[‘elements’][element]</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_nasa_a_low">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_nasa_a_low">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_nasa_a_low</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_nasa_a_low" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses a_low parameter for <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -477,8 +477,8 @@ e.g. nasa.a_low.0</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.excel.set_nasa_a_high">
-<code class="descclassname">pMuTT.io_.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.excel.set_nasa_a_high">
+<code class="descclassname">pMuTT.io.excel.</code><code class="descname">set_nasa_a_high</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.excel.set_nasa_a_high" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses a_high parameter for <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -592,12 +592,12 @@ the interested species.</p>
 </tr>
 </tbody>
 </table>
-<p>The <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> function returns a list of dictionaries.
+<p>The <a class="reference internal" href="#pMuTT.io.excel.read_excel" title="pMuTT.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> function returns a list of dictionaries.
 The dictionaries contain field-to-value pairings that can be used to initilize
 objects using the keyword argument syntax (**kwargs). This is shown in code
 below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
 <span class="kn">from</span> <span class="nn">pMuTT.empirical.references</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">refs_path</span> <span class="o">=</span> <span class="s1">&#39;./references.xlsx&#39;</span>
@@ -692,7 +692,7 @@ below:</p>
 <h4>NASA Polynomial Input Example<a class="headerlink" href="#nasa-polynomial-input-example" title="Permalink to this headline">¶</a></h4>
 <p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_excel">pMuTT.examples.read_nasa_from_excel</a>. Due to
 the special rules defined for NASA parsing, a group of NASA polynomials can be
-directly imported using <a class="reference internal" href="#pMuTT.io_.excel.read_excel" title="pMuTT.io_.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p>
+directly imported using <a class="reference internal" href="#pMuTT.io.excel.read_excel" title="pMuTT.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="2%" />
@@ -793,7 +793,7 @@ directly imported using <a class="reference internal" href="#pMuTT.io_.excel.rea
 </tbody>
 </table>
 <p>Using a similar set of statements as the <a class="reference internal" href="#dft-input-example"><span class="std std-ref">DFT Input Example</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
 <span class="kn">from</span> <span class="nn">pMuTT.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;input_data.xlsx&#39;</span><span class="p">)</span>
@@ -836,11 +836,11 @@ directly imported using <a class="reference internal" href="#pMuTT.io_.excel.rea
 <h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
 <p>This is the output format used for Chemkin. A list of NASA objects can be
 written to a thermdat file.</p>
-<span class="target" id="module-pMuTT.io_.thermdat"></span><p><a href="#id6"><span class="problematic" id="id7">pMuTT.io_</span></a>.thermdat</p>
+<span class="target" id="module-pMuTT.io.thermdat"></span><p>pMuTT.io.thermdat</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
-<dt id="pMuTT.io_.thermdat.read_thermdat">
-<code class="descclassname">pMuTT.io_.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.thermdat.read_thermdat">
+<code class="descclassname">pMuTT.io.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directly read thermdat file that is in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -866,8 +866,8 @@ written to a thermdat file.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.thermdat.write_thermdat">
-<code class="descclassname">pMuTT.io_.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em>, <em>supp_data=None</em>, <em>supp_txt=None</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.thermdat.write_thermdat">
+<code class="descclassname">pMuTT.io.thermdat.</code><code class="descname">write_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>nasa_species</em>, <em>write_date=True</em>, <em>supp_data=None</em>, <em>supp_txt=None</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.thermdat.write_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes thermdats in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -894,12 +894,12 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using
-<a class="reference internal" href="#pMuTT.io_.thermdat.read_thermdat" title="pMuTT.io_.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. The example here can be found in
+<a class="reference internal" href="#pMuTT.io.thermdat.read_thermdat" title="pMuTT.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. The example here can be found in
 <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/tree/master/examples/read_nasa_from_thermdat">pMuTT.examples.read_nasa_from_thermdat</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
 <span class="kn">from</span> <span class="nn">pMuTT.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
 
 <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
@@ -944,9 +944,9 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 <h2>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.json.org/">JavaScript Object Notation (JSON)</a> is a format that is easily read and written by
 both humans and machines. All pMuTT objects are JSON compatible.</p>
-<span class="target" id="module-pMuTT.io_.jsonio"></span><dl class="function">
-<dt id="pMuTT.io_.jsonio.json_to_pMuTT">
-<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">json_to_pMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-pMuTT.io.json"></span><dl class="function">
+<dt id="pMuTT.io.json.json_to_pMuTT">
+<code class="descclassname">pMuTT.io.json.</code><code class="descname">json_to_pMuTT</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.json.json_to_pMuTT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Object hook to convert json to pMuTT objects. Any complex object should
 be in the <code class="xref py py-data docutils literal notranslate"><span class="pre">type_to_class_dict</span></code>
 dictionary.</p>
@@ -966,13 +966,13 @@ pMuTT object, must have the ‘class’ entry in the dictionary.</td>
 </dd></dl>
 
 <dl class="class">
-<dt id="pMuTT.io_.jsonio.pMuTTEncoder">
-<em class="property">class </em><code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">pMuTTEncoder</code><span class="sig-paren">(</span><em>*</em>, <em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.json.pMuTTEncoder">
+<em class="property">class </em><code class="descclassname">pMuTT.io.json.</code><code class="descname">pMuTTEncoder</code><span class="sig-paren">(</span><em>*</em>, <em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.json.pMuTTEncoder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encodes pMuTT objects to JSON format. The object (and complex subobjects
 ) must have the method: to_dict().</p>
 <dl class="method">
-<dt id="pMuTT.io_.jsonio.pMuTTEncoder.default">
-<code class="descname">default</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.pMuTTEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.json.pMuTTEncoder.default">
+<code class="descname">default</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.json.pMuTTEncoder.default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implement this method in a subclass such that it returns
 a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
 (to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
@@ -994,16 +994,17 @@ implement default like this:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.jsonio.remove_class">
-<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">remove_class</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.remove_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes the ‘class’ entry from the JSON object.</p>
+<dt id="pMuTT.io.json.remove_class">
+<code class="descclassname">pMuTT.io.json.</code><code class="descname">remove_class</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.json.remove_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes unnecessary entries from the JSON object when reinitializing the
+pMuTT object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON object with ‘class’ entry</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON object unnecessary entries</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>json_obj</strong> – JSON object without ‘class’ entry</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>json_obj</strong> – JSON object without unnecessary entries</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
 </tr>
@@ -1012,8 +1013,8 @@ implement default like this:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.jsonio.type_to_class">
-<code class="descclassname">pMuTT.io_.jsonio.</code><code class="descname">type_to_class</code><span class="sig-paren">(</span><em>class_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.jsonio.type_to_class" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.json.type_to_class">
+<code class="descclassname">pMuTT.io.json.</code><code class="descname">type_to_class</code><span class="sig-paren">(</span><em>class_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.json.type_to_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts between type of object and pMuTT classes.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1032,16 +1033,16 @@ implement default like this:</p>
 <div class="section" id="id5">
 <h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Saving pMuTT objects can be done by using
-<a class="reference internal" href="#pMuTT.io_.jsonio.pMuTTEncoder" title="pMuTT.io_.jsonio.pMuTTEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTTEncoder()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">pMuTTEncoder</span>
+<a class="reference internal" href="#pMuTT.io.json.pMuTTEncoder" title="pMuTT.io.json.pMuTTEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTTEncoder()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="kn">import</span> <span class="n">pMuTTEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pMuTT_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Loading pMuTT objects can be done by using the object hook:
-<a class="reference internal" href="#pMuTT.io_.jsonio.json_to_pMuTT" title="pMuTT.io_.jsonio.json_to_pMuTT"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pMuTT()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">json_to_pMuTT</span>
+<a class="reference internal" href="#pMuTT.io.json.json_to_pMuTT" title="pMuTT.io.json.json_to_pMuTT"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pMuTT()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="kn">import</span> <span class="n">json_to_pMuTT</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">pMuTT_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
@@ -1158,12 +1159,12 @@ using <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech"
 <div class="section" id="decoding">
 <h4>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h4>
 <p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook,
-add an entry to the dictionary in the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.type_to_class</span></code> method.
+add an entry to the dictionary in the <code class="docutils literal notranslate"><span class="pre">pMuTT.io.json.type_to_class</span></code> method.
 The key should be the type of your object in string format (i.e. the result of
 <code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class
 method to reinitialize your object. A simple example using
 <a class="reference internal" href="statmech.html#pMuTT.statmech.trans.IdealTrans" title="pMuTT.statmech.trans.IdealTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealTrans</span></code></a> is shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="kn">import</span> <span class="n">remove_class</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="kn">import</span> <span class="n">remove_class</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1174,7 +1175,7 @@ method to reinitialize your object. A simple example using
 <p>Similarly to encoding, sometimes your object contains pMuTT objects. You can
 use the <code class="docutils literal notranslate"><span class="pre">json_to_pMuTT</span></code> object hook to remake these objects. An example using
 <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="kn">import</span> <span class="n">jsonio</span> <span class="k">as</span> <span class="n">json_pMuTT</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pMuTT.io</span> <span class="kn">import</span> <span class="n">json</span> <span class="k">as</span> <span class="n">json_pMuTT</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1198,8 +1199,8 @@ use the <code class="docutils literal notranslate"><span class="pre">json_to_pMu
 <div class="section" id="vasp">
 <h2>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar">
-<code class="descclassname">pMuTT.io_.vasp.</code><code class="descname">set_vib_wavenumbers_from_outcar</code><span class="sig-paren">(</span><em>in_file</em>, <em>output_structure</em>, <em>min_frequency_cutoff=0.0</em>, <em>include_imaginary=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.vasp.set_vib_wavenumbers_from_outcar">
+<code class="descclassname">pMuTT.io.vasp.</code><code class="descname">set_vib_wavenumbers_from_outcar</code><span class="sig-paren">(</span><em>in_file</em>, <em>output_structure</em>, <em>min_frequency_cutoff=0.0</em>, <em>include_imaginary=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses OUTCAR files for vibrational frequencies and assigns to
 output_structure[‘vib_wavenumber’]. Imaginary frequencies are represented
 by negative numbers.</p>
@@ -1231,11 +1232,11 @@ are read from OUTCAR. Default is 0 cm-1</li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pMuTT.io_.gaussian">
-<span id="gaussian"></span><h2>Gaussian<a class="headerlink" href="#module-pMuTT.io_.gaussian" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pMuTT.io.gaussian">
+<span id="gaussian"></span><h2>Gaussian<a class="headerlink" href="#module-pMuTT.io.gaussian" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_electronic_and_zpe">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_electronic_and_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_electronic_and_zpe" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_electronic_and_zpe">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_electronic_and_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_electronic_and_zpe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the electronic energy and zero-point energy from the
 Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1253,8 +1254,8 @@ Gaussian log file.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_frequencies">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_frequencies</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_frequencies" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_frequencies">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_frequencies</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_frequencies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the frequencies from the Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1271,8 +1272,8 @@ Gaussian log file.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_molecular_mass">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_molecular_mass</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_molecular_mass" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_molecular_mass">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_molecular_mass</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_molecular_mass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the molecular mass from the Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1289,8 +1290,8 @@ Gaussian log file.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_pattern">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_pattern</code><span class="sig-paren">(</span><em>filename</em>, <em>pattern</em>, <em>group=0</em>, <em>return_immediately=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_pattern" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_pattern">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_pattern</code><span class="sig-paren">(</span><em>filename</em>, <em>pattern</em>, <em>group=0</em>, <em>return_immediately=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_pattern" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the pattern from the Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1319,8 +1320,8 @@ If the pattern is not found, returns an empty list</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_rot_symmetry_num">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_rot_symmetry_num</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_rot_symmetry_num" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_rot_symmetry_num">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_rot_symmetry_num</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_rot_symmetry_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the rotational symmetry number from the Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1337,8 +1338,8 @@ If the pattern is not found, returns an empty list</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_rotational_temperatures">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_rotational_temperatures</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_rotational_temperatures" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_rotational_temperatures">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_rotational_temperatures</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_rotational_temperatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the rotational temperatures from the Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1355,8 +1356,8 @@ If the pattern is not found, returns an empty list</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.gaussian.read_zpe">
-<code class="descclassname">pMuTT.io_.gaussian.</code><code class="descname">read_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.gaussian.read_zpe" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.gaussian.read_zpe">
+<code class="descclassname">pMuTT.io.gaussian.</code><code class="descname">read_zpe</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.gaussian.read_zpe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the zero-point energy from the Gaussian log file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1373,13 +1374,13 @@ If the pattern is not found, returns an empty list</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pMuTT.io_.chemkin">
-<span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pMuTT.io_.chemkin" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id8"><span class="problematic" id="id9">pMuTT.io_</span></a>.chemkin</p>
+<div class="section" id="module-pMuTT.io.chemkin">
+<span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pMuTT.io.chemkin" title="Permalink to this headline">¶</a></h2>
+<p>pMuTT.io.chemkin</p>
 <p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
 <dl class="function">
-<dt id="pMuTT.io_.chemkin.read_reactions">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.chemkin.read_reactions">
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1417,15 +1418,15 @@ default = None. Will not return React_obj and Prod_obj</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.chemkin.write_EA">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_EA</code><span class="sig-paren">(</span><em>reactions</em>, <em>conditions</em>, <em>write_gas_phase=False</em>, <em>filename='EAs.inp'</em>, <em>act_method_name='get_EoRT_act'</em>, <em>float_format=' .2E'</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='&lt;=&gt;'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.chemkin.write_EA">
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_EA</code><span class="sig-paren">(</span><em>reactions</em>, <em>conditions</em>, <em>write_gas_phase=False</em>, <em>filename='EAs.inp'</em>, <em>act_method_name='get_EoRT_act'</em>, <em>float_format=' .2E'</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='&lt;=&gt;'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the EAs.inp or EAg.inp file for Chemkin</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="chemkin.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -1453,8 +1454,8 @@ positive)</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.chemkin.write_T_flow">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_T_flow</code><span class="sig-paren">(</span><em>T=None</em>, <em>P=None</em>, <em>Q=None</em>, <em>abyv=None</em>, <em>conditions=None</em>, <em>filename='T_flow.inp'</em>, <em>float_format='.3E'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_T_flow" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.chemkin.write_T_flow">
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_T_flow</code><span class="sig-paren">(</span><em>T=None</em>, <em>P=None</em>, <em>Q=None</em>, <em>abyv=None</em>, <em>conditions=None</em>, <em>filename='T_flow.inp'</em>, <em>float_format='.3E'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_T_flow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the T_flow.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1478,8 +1479,8 @@ scientific notation rounded to 3 decimal places)</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.chemkin.write_gas">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_gas</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>filename='gas.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_gas" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.chemkin.write_gas">
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_gas</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>filename='gas.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_gas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the gas.inp Chemkin file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1499,8 +1500,8 @@ be written to this file</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.chemkin.write_surf">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='min'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.chemkin.write_surf">
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='min'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the surf.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1511,7 +1512,7 @@ be written to this file</li>
 present, they will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="chemkin.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
 Default is ‘+’</li>
@@ -1536,8 +1537,8 @@ factor</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pMuTT.io_.chemkin.write_tube_mole">
-<code class="descclassname">pMuTT.io_.chemkin.</code><code class="descname">write_tube_mole</code><span class="sig-paren">(</span><em>mole_frac_conditions</em>, <em>nasa_species</em>, <em>filename='tube_mole.inp'</em>, <em>float_format=' .3f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io_.chemkin.write_tube_mole" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.io.chemkin.write_tube_mole">
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_tube_mole</code><span class="sig-paren">(</span><em>mole_frac_conditions</em>, <em>nasa_species</em>, <em>filename='tube_mole.inp'</em>, <em>float_format=' .3f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_tube_mole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write tube_mole.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1607,6 +1608,7 @@ scientific notation rounded to 3 decimal places)</li>
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

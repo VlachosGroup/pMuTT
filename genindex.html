@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pMuTT 1.2.4 documentation</title>
+  <title>Index &mdash; pMuTT 1.2.5 documentation</title>
   
 
   
@@ -225,14 +225,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.b">b (pMuTT.eos.vanDerWaalsEOS attribute)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo">BaseThermo (class in pMuTT.empirical)</a>
-</li>
       <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib.Bav">Bav (pMuTT.statmech.vib.QRRHOVib attribute)</a>
+</li>
+      <li><a href="reactions.html#pMuTT.reaction.bep.BEP">BEP (class in pMuTT.reaction.bep)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reactions.html#pMuTT.reaction.bep.BEP">BEP (class in pMuTT.reaction.bep)</a>
-</li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.bep">bep (pMuTT.reaction.Reaction attribute)</a>
 </li>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.beta">beta (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.beta">[1]</a>
@@ -259,13 +257,13 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.compare_CpoR">compare_CpoR() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_CpoR">compare_CpoR() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.compare_GoRT">compare_GoRT() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_GoRT">compare_GoRT() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.compare_HoRT">compare_HoRT() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_HoRT">compare_HoRT() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.compare_SoR">compare_SoR() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_SoR">compare_SoR() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
       <li><a href="constants.html#pMuTT.constants.convert_unit">convert_unit() (in module pMuTT.constants)</a>
 </li>
@@ -279,7 +277,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.D0">D0 (pMuTT.statmech.elec.IdealElec attribute)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.jsonio.pMuTTEncoder.default">default() (pMuTT.io_.jsonio.pMuTTEncoder method)</a>
+      <li><a href="io.html#pMuTT.io.json.pMuTTEncoder.default">default() (pMuTT.io.json.pMuTTEncoder method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -303,9 +301,11 @@
 </li>
       <li><a href="statmech.html#pMuTT.statmech.StatMech.elec_model">elec_model (pMuTT.statmech.StatMech attribute)</a>
 </li>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.elements">elements (pMuTT.empirical.EmpiricalBase attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.elements">elements (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase">EmpiricalBase (class in pMuTT.empirical)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.EmptyMode">EmptyMode (class in pMuTT.statmech)</a>
 </li>
@@ -340,7 +340,7 @@
       <li><a href="chemkin.html#pMuTT.chemkin.CatSite.from_dict">from_dict() (pMuTT.chemkin.CatSite class method)</a>
 
       <ul>
-        <li><a href="empirical.html#pMuTT.empirical.BaseThermo.from_dict">(pMuTT.empirical.BaseThermo class method)</a>
+        <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.from_dict">(pMuTT.empirical.EmpiricalBase class method)</a>
 </li>
         <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.from_dict">(pMuTT.empirical.nasa.Nasa class method)</a>
 </li>
@@ -859,7 +859,7 @@
 <h2 id="J">J</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="io.html#pMuTT.io_.jsonio.json_to_pMuTT">json_to_pMuTT() (in module pMuTT.io_.jsonio)</a>
+      <li><a href="io.html#pMuTT.io.json.json_to_pMuTT">json_to_pMuTT() (in module pMuTT.io.json)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -889,7 +889,7 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.mix_models">mix_models (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.mix_models">mix_models (pMuTT.empirical.EmpiricalBase attribute)</a>
 
       <ul>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.mix_models">(pMuTT.statmech.StatMech attribute)</a>
@@ -912,7 +912,7 @@
       <li><a href="chemkin.html#pMuTT.chemkin.CatSite.name">name (pMuTT.chemkin.CatSite attribute)</a>
 
       <ul>
-        <li><a href="empirical.html#pMuTT.empirical.BaseThermo.name">(pMuTT.empirical.BaseThermo attribute)</a>
+        <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.name">(pMuTT.empirical.EmpiricalBase attribute)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.name">(pMuTT.statmech.StatMech attribute)</a>
 </li>
@@ -927,7 +927,7 @@
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.norm_factors">norm_factors (pMuTT.reaction.phasediagram.PhaseDiagram attribute)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.notes">notes (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.notes">notes (pMuTT.empirical.EmpiricalBase attribute)</a>
 
       <ul>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.notes">(pMuTT.statmech.StatMech attribute)</a>
@@ -955,7 +955,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#pMuTT.constants.P0">P0() (in module pMuTT.constants)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.phase">phase (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.phase">phase (pMuTT.empirical.EmpiricalBase attribute)</a>
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram">PhaseDiagram (class in pMuTT.reaction.phasediagram)</a>
 </li>
@@ -965,27 +965,27 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reactions.plot_coordinate_diagram">plot_coordinate_diagram() (pMuTT.reaction.Reactions method)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.plot_empirical">plot_empirical() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.plot_empirical">plot_empirical() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.plot_statmech">plot_statmech() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.plot_statmech">plot_statmech() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.plot_statmech_and_empirical">plot_statmech_and_empirical() (pMuTT.empirical.BaseThermo method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.plot_statmech_and_empirical">plot_statmech_and_empirical() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
       <li><a href="constants.html#module-pMuTT.constants">pMuTT.constants (module)</a>
 </li>
-      <li><a href="chemkin.html#module-pMuTT.io_.chemkin">pMuTT.io_.chemkin (module)</a>, <a href="io.html#module-pMuTT.io_.chemkin">[1]</a>
+      <li><a href="chemkin.html#module-pMuTT.io.chemkin">pMuTT.io.chemkin (module)</a>, <a href="io.html#module-pMuTT.io.chemkin">[1]</a>
 </li>
-      <li><a href="io.html#module-pMuTT.io_.gaussian">pMuTT.io_.gaussian (module)</a>
+      <li><a href="io.html#module-pMuTT.io.gaussian">pMuTT.io.gaussian (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="io.html#module-pMuTT.io_.jsonio">pMuTT.io_.jsonio (module)</a>
+      <li><a href="io.html#module-pMuTT.io.json">pMuTT.io.json (module)</a>
 </li>
-      <li><a href="io.html#module-pMuTT.io_.thermdat">pMuTT.io_.thermdat (module)</a>
+      <li><a href="io.html#module-pMuTT.io.thermdat">pMuTT.io.thermdat (module)</a>
 </li>
       <li><a href="statmech.html#module-pMuTT.statmech.nucl">pMuTT.statmech.nucl (module)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.jsonio.pMuTTEncoder">pMuTTEncoder (class in pMuTT.io_.jsonio)</a>
+      <li><a href="io.html#pMuTT.io.json.pMuTTEncoder">pMuTTEncoder (class in pMuTT.io.json)</a>
 </li>
       <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.pop">pop() (pMuTT.mixture.cov.CovEffect method)</a>
 </li>
@@ -1037,39 +1037,39 @@
         <li><a href="reactions.html#pMuTT.reaction.Reactions.reactions">(pMuTT.reaction.Reactions attribute)</a>
 </li>
       </ul></li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_electronic_and_zpe">read_electronic_and_zpe() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_electronic_and_zpe">read_electronic_and_zpe() (in module pMuTT.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.read_excel">read_excel() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.read_excel">read_excel() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_frequencies">read_frequencies() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_frequencies">read_frequencies() (in module pMuTT.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_molecular_mass">read_molecular_mass() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_molecular_mass">read_molecular_mass() (in module pMuTT.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_pattern">read_pattern() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_pattern">read_pattern() (in module pMuTT.io.gaussian)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="chemkin.html#pMuTT.io_.chemkin.read_reactions">read_reactions() (in module pMuTT.io_.chemkin)</a>, <a href="io.html#pMuTT.io_.chemkin.read_reactions">[1]</a>
+      <li><a href="chemkin.html#pMuTT.io.chemkin.read_reactions">read_reactions() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.read_reactions">[1]</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_rot_symmetry_num">read_rot_symmetry_num() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_rot_symmetry_num">read_rot_symmetry_num() (in module pMuTT.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_rotational_temperatures">read_rotational_temperatures() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_rotational_temperatures">read_rotational_temperatures() (in module pMuTT.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.thermdat.read_thermdat">read_thermdat() (in module pMuTT.io_.thermdat)</a>
+      <li><a href="io.html#pMuTT.io.thermdat.read_thermdat">read_thermdat() (in module pMuTT.io.thermdat)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.gaussian.read_zpe">read_zpe() (in module pMuTT.io_.gaussian)</a>
+      <li><a href="io.html#pMuTT.io.gaussian.read_zpe">read_zpe() (in module pMuTT.io.gaussian)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.references.Reference">Reference (class in pMuTT.empirical.references)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.references.References">References (class in pMuTT.empirical.references)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.references">references (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.references">references (pMuTT.empirical.EmpiricalBase attribute)</a>
 
       <ul>
         <li><a href="empirical.html#pMuTT.empirical.references.References.references">(pMuTT.empirical.references.References attribute)</a>
 </li>
       </ul></li>
-      <li><a href="io.html#pMuTT.io_.jsonio.remove_class">remove_class() (in module pMuTT.io_.jsonio)</a>
+      <li><a href="io.html#pMuTT.io.json.remove_class">remove_class() (in module pMuTT.io.json)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor">RigidRotor (class in pMuTT.statmech.rot)</a>
 </li>
@@ -1083,25 +1083,25 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="io.html#pMuTT.io_.excel.set_atoms">set_atoms() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_atoms">set_atoms() (in module pMuTT.io.excel)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.set_descriptor">set_descriptor() (pMuTT.reaction.bep.BEP method)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_element">set_element() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_element">set_element() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_formula">set_formula() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_formula">set_formula() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_nasa_a_high">set_nasa_a_high() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_nasa_a_high">set_nasa_a_high() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_nasa_a_low">set_nasa_a_low() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_nasa_a_low">set_nasa_a_low() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_rot_temperatures">set_rot_temperatures() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_rot_temperatures">set_rot_temperatures() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_statmech_model">set_statmech_model() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_statmech_model">set_statmech_model() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.excel.set_vib_wavenumbers">set_vib_wavenumbers() (in module pMuTT.io_.excel)</a>
+      <li><a href="io.html#pMuTT.io.excel.set_vib_wavenumbers">set_vib_wavenumbers() (in module pMuTT.io.excel)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar">set_vib_wavenumbers_from_outcar() (in module pMuTT.io_.vasp)</a>
+      <li><a href="io.html#pMuTT.io.vasp.set_vib_wavenumbers_from_outcar">set_vib_wavenumbers_from_outcar() (in module pMuTT.io.vasp)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate">Shomate (class in pMuTT.empirical.shomate)</a>
 </li>
@@ -1113,7 +1113,7 @@
 </li>
       <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.slopes">slopes (pMuTT.mixture.cov.CovEffect attribute)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.smiles">smiles (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.smiles">smiles (pMuTT.empirical.EmpiricalBase attribute)</a>
 
       <ul>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.smiles">(pMuTT.statmech.StatMech attribute)</a>
@@ -1123,7 +1123,7 @@
 </li>
       <li><a href="statmech.html#pMuTT.statmech.StatMech">StatMech (class in pMuTT.statmech)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.BaseThermo.statmech_model">statmech_model (pMuTT.empirical.BaseThermo attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.statmech_model">statmech_model (pMuTT.empirical.EmpiricalBase attribute)</a>
 </li>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.sticking_coeff">sticking_coeff (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.sticking_coeff">[1]</a>
 </li>
@@ -1168,7 +1168,7 @@
       <li><a href="chemkin.html#pMuTT.chemkin.CatSite.to_dict">to_dict() (pMuTT.chemkin.CatSite method)</a>
 
       <ul>
-        <li><a href="empirical.html#pMuTT.empirical.BaseThermo.to_dict">(pMuTT.empirical.BaseThermo method)</a>
+        <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.to_dict">(pMuTT.empirical.EmpiricalBase method)</a>
 </li>
         <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.to_dict">(pMuTT.empirical.nasa.Nasa method)</a>
 </li>
@@ -1225,7 +1225,7 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.transition_state_stoich">transition_state_stoich (pMuTT.reaction.Reaction attribute)</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.jsonio.type_to_class">type_to_class() (in module pMuTT.io_.jsonio)</a>
+      <li><a href="io.html#pMuTT.io.json.type_to_class">type_to_class() (in module pMuTT.io.json)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1261,19 +1261,19 @@
 </li>
       <li><a href="constants.html#pMuTT.constants.wavenumber_to_temp">wavenumber_to_temp() (in module pMuTT.constants)</a>
 </li>
-      <li><a href="chemkin.html#pMuTT.io_.chemkin.write_EA">write_EA() (in module pMuTT.io_.chemkin)</a>, <a href="io.html#pMuTT.io_.chemkin.write_EA">[1]</a>
+      <li><a href="chemkin.html#pMuTT.io.chemkin.write_EA">write_EA() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.write_EA">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="chemkin.html#pMuTT.io_.chemkin.write_gas">write_gas() (in module pMuTT.io_.chemkin)</a>, <a href="io.html#pMuTT.io_.chemkin.write_gas">[1]</a>
+      <li><a href="chemkin.html#pMuTT.io.chemkin.write_gas">write_gas() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.write_gas">[1]</a>
 </li>
-      <li><a href="chemkin.html#pMuTT.io_.chemkin.write_surf">write_surf() (in module pMuTT.io_.chemkin)</a>, <a href="io.html#pMuTT.io_.chemkin.write_surf">[1]</a>
+      <li><a href="chemkin.html#pMuTT.io.chemkin.write_surf">write_surf() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.write_surf">[1]</a>
 </li>
-      <li><a href="chemkin.html#pMuTT.io_.chemkin.write_T_flow">write_T_flow() (in module pMuTT.io_.chemkin)</a>, <a href="io.html#pMuTT.io_.chemkin.write_T_flow">[1]</a>
+      <li><a href="chemkin.html#pMuTT.io.chemkin.write_T_flow">write_T_flow() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.write_T_flow">[1]</a>
 </li>
-      <li><a href="io.html#pMuTT.io_.thermdat.write_thermdat">write_thermdat() (in module pMuTT.io_.thermdat)</a>
+      <li><a href="io.html#pMuTT.io.thermdat.write_thermdat">write_thermdat() (in module pMuTT.io.thermdat)</a>
 </li>
-      <li><a href="chemkin.html#pMuTT.io_.chemkin.write_tube_mole">write_tube_mole() (in module pMuTT.io_.chemkin)</a>, <a href="io.html#pMuTT.io_.chemkin.write_tube_mole">[1]</a>
+      <li><a href="chemkin.html#pMuTT.io.chemkin.write_tube_mole">write_tube_mole() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.write_tube_mole">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1323,6 +1323,7 @@
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

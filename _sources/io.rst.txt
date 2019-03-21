@@ -8,30 +8,30 @@ Input and output to different forms is an active area of development for pMuTT
 Excel
 =====
 
-.. autofunction:: pMuTT.io_.excel.read_excel
+.. autofunction:: pMuTT.io.excel.read_excel
 
 Special Rules
 -------------
 
-Special rules can be defined in the :func:`~pMuTT.io_.excel.read_excel` 
+Special rules can be defined in the :func:`~pMuTT.io.excel.read_excel` 
 function to process inputs differently. Currently supported special rules are 
 listed below.
 
-.. autofunction:: pMuTT.io_.excel.set_element
+.. autofunction:: pMuTT.io.excel.set_element
 
-.. autofunction:: pMuTT.io_.excel.set_formula
+.. autofunction:: pMuTT.io.excel.set_formula
 
-.. autofunction:: pMuTT.io_.excel.set_atoms
+.. autofunction:: pMuTT.io.excel.set_atoms
 
-.. autofunction:: pMuTT.io_.excel.set_statmech_model
+.. autofunction:: pMuTT.io.excel.set_statmech_model
 
-.. autofunction:: pMuTT.io_.excel.set_vib_wavenumbers
+.. autofunction:: pMuTT.io.excel.set_vib_wavenumbers
 
-.. autofunction:: pMuTT.io_.excel.set_rot_temperatures
+.. autofunction:: pMuTT.io.excel.set_rot_temperatures
 
-.. autofunction:: pMuTT.io_.excel.set_nasa_a_low
+.. autofunction:: pMuTT.io.excel.set_nasa_a_low
 
-.. autofunction:: pMuTT.io_.excel.set_nasa_a_high
+.. autofunction:: pMuTT.io.excel.set_nasa_a_high
    
 Examples
 --------
@@ -44,7 +44,7 @@ DFT Input Example
 This example uses data found in `pMuTT.examples.VASP_to_thermdat.example1`_. 
 Below, we show the contents of the references.xlsx spreadsheet. The first row 
 corresponds to header labels. The headers may have special processing rules, 
-which can be found in the docstring of :func:`~pMuTT.io_.read_excel`. If no 
+which can be found in the docstring of :func:`~pMuTT.io.read_excel`. If no 
 special rules are defined, then the output dictionary will use the header as a 
 key and field as a value. The second row (only shown in the Excel file) is a 
 description of the header. A good description should include units, and 
@@ -59,7 +59,7 @@ the interested species.
 | H2O  | G     | 2          | 1          | IdealGas       | 298   | -97.60604334 | -14.2209        | nonlinear | .\H2O\CONTCAR | 2              | 0    | 3825.434       | 3710.2642      | 1582.432       |
 +------+-------+------------+------------+----------------+-------+--------------+-----------------+-----------+---------------+----------------+------+----------------+----------------+----------------+
 
-The :func:`~pMuTT.io_.excel.read_excel` function returns a list of dictionaries. 
+The :func:`~pMuTT.io.excel.read_excel` function returns a list of dictionaries. 
 The dictionaries contain field-to-value pairings that can be used to initilize 
 objects using the keyword argument syntax (\*\*kwargs). This is shown in code 
 below:
@@ -67,7 +67,7 @@ below:
 .. code:: python
 
     from pprint import pprint
-    from pMuTT.io_.excel import read_excel
+    from pMuTT.io.excel import read_excel
     from pMuTT.empirical.references import Reference, References
 
     refs_path = './references.xlsx'
@@ -160,7 +160,7 @@ NASA Polynomial Input Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This example uses data found in `pMuTT.examples.read_nasa_from_excel`_. Due to 
 the special rules defined for NASA parsing, a group of NASA polynomials can be 
-directly imported using :func:`~pMuTT.io_.excel.read_excel`.
+directly imported using :func:`~pMuTT.io.excel.read_excel`.
 
 +------+-------+------------+------------+-------+-------+--------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+--------+
 | name | phase | elements.H | elements.O | T_low | T_mid | T_high | nasa.a_low.0 | nasa.a_low.1 | nasa.a_low.2 | nasa.a_low.3 | nasa.a_low.4 | nasa.a_low.5 | nasa.a_low.6 | nasa.a_high.0 | nasa.a_high.1 | nasa.a_high.2 | nasa.a_high.3 | nasa.a_high.4 | nasa.a_high.5 | nasa.a_high.6 | notes  |
@@ -174,7 +174,7 @@ Using a similar set of statements as the :ref:`DFT-Input-Example`.
 
 .. code:: python
 
-    from pMuTT.io_.excel import read_excel
+    from pMuTT.io.excel import read_excel
     from pMuTT.empirical.nasa import Nasa
     
     species_data = read_excel('input_data.xlsx')
@@ -214,7 +214,7 @@ Thermdat
 This is the output format used for Chemkin. A list of NASA objects can be 
 written to a thermdat file.
 
-.. automodule:: pMuTT.io_.thermdat
+.. automodule:: pMuTT.io.thermdat
    :members:
 
 Examples
@@ -222,7 +222,7 @@ Examples
 Reading Thermdat
 ^^^^^^^^^^^^^^^^
 A thermdat file can be read directly by using 
-:func:`~pMuTT.io_.thermdat.read_thermdat`. The example here can be found in 
+:func:`~pMuTT.io.thermdat.read_thermdat`. The example here can be found in 
 `pMuTT.examples.read_nasa_from_thermdat`_
 
 .. code:: python
@@ -230,7 +230,7 @@ A thermdat file can be read directly by using
     import os
     from pprint import pprint
     from matplotlib import pyplot as plt
-    from pMuTT.io_.thermdat import read_thermdat
+    from pMuTT.io.thermdat import read_thermdat
     from pMuTT.empirical.nasa import Nasa
 
     base_path = os.path.dirname(__file__)
@@ -274,27 +274,27 @@ JSON
 `JavaScript Object Notation (JSON)`_ is a format that is easily read and written by
 both humans and machines. All pMuTT objects are JSON compatible.
 
-.. automodule:: pMuTT.io_.jsonio
+.. automodule:: pMuTT.io.json
    :members:
 
 Examples
 --------
 Saving pMuTT objects can be done by using 
-:func:`~pMuTT.io_.jsonio.pMuTTEncoder`.
+:func:`~pMuTT.io.json.pMuTTEncoder`.
 
 .. code:: python
 
-   from pMuTT.io_.jsonio import pMuTTEncoder
+   from pMuTT.io.json import pMuTTEncoder
    
    with open(json_path, 'w') as f_ptr:
        json.dump(pMuTT_obj, f_ptr, cls=pMuTTEncoder, indent=True)
    
 Loading pMuTT objects can be done by using the object hook: 
-:func:`~pMuTT.io_.jsonio.json_to_pMuTT`.
+:func:`~pMuTT.io.json.json_to_pMuTT`.
 
 .. code:: python
 
-   from pMuTT.io_.jsonio import json_to_pMuTT
+   from pMuTT.io.json import json_to_pMuTT
 
    with open(json_path, 'r') as f_ptr:
        pMuTT_obj = json.load(f_ptr, object_hook=json_to_pMuTT)
@@ -413,7 +413,7 @@ using :class:`~pMuTT.statmech.StatMech` is shown below.
 Decoding
 ^^^^^^^^
 To ensure your object can be decoded using the ``json_to_pMuTT`` object hook, 
-add an entry to the dictionary in the ``pMuTT.io_.jsonio.type_to_class`` method.
+add an entry to the dictionary in the ``pMuTT.io.json.type_to_class`` method.
 The key should be the type of your object in string format (i.e. the result of 
 ``str(self.__class__)``). Your class should also have the ``from_dict()`` class 
 method to reinitialize your object. A simple example using 
@@ -421,7 +421,7 @@ method to reinitialize your object. A simple example using
 
 .. code:: python
 
-   from pMuTT.io_.jsonio import remove_class
+   from pMuTT.io.json import remove_class
 
    @classmethod
    def from_dict(cls, json_obj):
@@ -434,7 +434,7 @@ use the ``json_to_pMuTT`` object hook to remake these objects. An example using
 
 .. code:: python
 
-   from pMuTT.io_ import jsonio as json_pMuTT
+   from pMuTT.io import json as json_pMuTT
 
    @classmethod
    def from_dict(cls, json_obj):
@@ -454,18 +454,18 @@ use the ``json_to_pMuTT`` object hook to remake these objects. An example using
 VASP
 ====
 
-.. autofunction:: pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar
+.. autofunction:: pMuTT.io.vasp.set_vib_wavenumbers_from_outcar
 
 Gaussian
 ========
 
-.. automodule:: pMuTT.io_.gaussian
+.. automodule:: pMuTT.io.gaussian
    :members:
 
 Chemkin
 =======
 
-.. automodule:: pMuTT.io_.chemkin
+.. automodule:: pMuTT.io.chemkin
    :members:
 
 

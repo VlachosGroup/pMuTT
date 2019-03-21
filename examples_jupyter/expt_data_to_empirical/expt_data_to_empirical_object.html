@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.4 documentation</title>
+  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.5 documentation</title>
   
 
   
@@ -434,8 +434,10 @@ Shomate object for Name: CH3OH
         phase: None
         elements: None
         references: None
+        smiles: None
         notes: None
         statmech_model: None
+        mix_models: None
         T_low: 50.0
         T_high: 3000.0
         a: [ 2.05590626e+01  9.56149336e+01 -3.13060961e+01  3.51405987e+00
@@ -524,10 +526,10 @@ T(K)    Cp expt (J/mol/K)       Cp shomate (J/mol/K)
 T_ref: 298.15 K
 -
 H expt: -205.0 kJ/mol
-H shomate: -205.00000000000003 kJ/mol
+H shomate: [-205.] kJ/mol
 -
 S expt: 239.9 J/mol/K
-S shomate: 239.9 J/mol/K
+S shomate: [239.9] J/mol/K
 </pre></div></div>
 </div>
 </div>
@@ -575,7 +577,7 @@ S shomate: 239.9 J/mol/K
 <div class="section" id="Save-the-Shomate-polynomial-as-a-JSON-file">
 <h2>Save the Shomate polynomial as a JSON file<a class="headerlink" href="#Save-the-Shomate-polynomial-as-a-JSON-file" title="Permalink to this headline">¶</a></h2>
 <p>If we would like to save our Shomate object, we can save it in JSON
-format with the help of the <code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.pMuTTEncoder</span></code>.</p>
+format with the help of the <code class="docutils literal notranslate"><span class="pre">pMuTT.io.json.pMuTTEncoder</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [6]:
@@ -583,7 +585,7 @@ format with the help of the <code class="docutils literal notranslate"><span cla
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CH3OH_shomate.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">CH3OH_shomate</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -619,14 +621,14 @@ opening, the file will look like this:</p>
 <div class="section" id="Loading-the-Shomate-polynomial-from-a-JSON-file">
 <h2>Loading the Shomate polynomial from a JSON file<a class="headerlink" href="#Loading-the-Shomate-polynomial-from-a-JSON-file" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve saved the Shomate object, we can open it using
-<code class="docutils literal notranslate"><span class="pre">pMuTT.io_.jsonio.json_to_pMuTT</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">pMuTT.io.json.json_to_pMuTT</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.jsonio</span> <span class="k">import</span> <span class="n">json_to_pMuTT</span>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="k">import</span> <span class="n">json_to_pMuTT</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CH3OH_shomate.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">CH3OH_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
@@ -644,8 +646,10 @@ Shomate object for Name: CH3OH
         phase: None
         elements: None
         references: None
+        smiles: None
         notes: None
         statmech_model: None
+        mix_models: None
         T_low: 50.0
         T_high: 3000.0
         a: [20.55906255664672, 95.61493361898438, -31.306096062902366, 3.5140598702327708, 0.025109137759508435, -215.02560497018567, 237.7737728103737, 205.00000000000006]
@@ -690,6 +694,7 @@ Shomate object for Name: CH3OH
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   
