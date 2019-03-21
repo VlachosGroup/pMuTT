@@ -3,12 +3,14 @@
  "reactants": [
   {
    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "type": "nasa",
    "name": "H2",
    "phase": "G",
    "elements": {
     "H": 2
    },
    "notes": "TPIS78",
+   "smiles": null,
    "references": null,
    "statmech_model": null,
    "mix_models": null,
@@ -32,16 +34,20 @@
    ],
    "T_low": 200.0,
    "T_mid": 1000.0,
-   "T_high": 3500.0
+   "T_high": 3500.0,
+   "cat_site": null,
+   "n_sites": null
   },
   {
    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "type": "nasa",
    "name": "O2",
    "phase": "G",
    "elements": {
     "O": 2
    },
    "notes": "TPIS89",
+   "smiles": null,
    "references": null,
    "statmech_model": null,
    "mix_models": null,
@@ -65,7 +71,9 @@
    ],
    "T_low": 200.0,
    "T_mid": 1000.0,
-   "T_high": 3500.0
+   "T_high": 3500.0,
+   "cat_site": null,
+   "n_sites": null
   }
  ],
  "reactants_stoich": [
@@ -75,6 +83,7 @@
  "products": [
   {
    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "type": "nasa",
    "name": "H2O",
    "phase": "G",
    "elements": {
@@ -82,6 +91,7 @@
     "O": 1
    },
    "notes": "L 8/89",
+   "smiles": null,
    "references": null,
    "statmech_model": null,
    "mix_models": null,
@@ -105,7 +115,9 @@
    ],
    "T_low": 200.0,
    "T_mid": 1000.0,
-   "T_high": 3500.0
+   "T_high": 3500.0,
+   "cat_site": null,
+   "n_sites": null
   }
  ],
  "products_stoich": [
@@ -114,6 +126,7 @@
  "transition_state": [
   {
    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "type": "nasa",
    "name": "H2O_TS",
    "phase": "G",
    "elements": {
@@ -121,6 +134,7 @@
     "O": 1
    },
    "notes": "L 8/89",
+   "smiles": null,
    "references": null,
    "statmech_model": null,
    "mix_models": null,
@@ -144,7 +158,9 @@
    ],
    "T_low": 200.0,
    "T_mid": 1000.0,
-   "T_high": 3500.0
+   "T_high": 3500.0,
+   "cat_site": null,
+   "n_sites": null
   }
  ],
  "transition_state_stoich": [
