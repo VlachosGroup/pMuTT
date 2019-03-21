@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.io_.excel
+pMuTT.io.excel
 
 Read from/write to xlsx files of particular format.
 """
@@ -11,7 +11,7 @@ import os
 from ase.io import read
 from pMuTT import parse_formula
 from pMuTT.statmech import presets, StatMech
-from pMuTT.io_.vasp import set_vib_wavenumbers_from_outcar
+from pMuTT.io.vasp import set_vib_wavenumbers_from_outcar
 
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.',
@@ -58,15 +58,15 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
     -----
         Special rules exist for the following column headings
 
-        - element.[element_symbol] (:func:`~pMuTT.io_.excel.set_element`)
-        - formula (:func:`~pMuTT.io_.excel.set_formula`)
-        - atoms (:func:`~pMuTT.io_.excel.set_atoms`)
-        - statmech_model (:func:`~pMuTT.io_.excel.set_statmech_model`)
-        - vib_wavenumber (:func:`~pMuTT.io_.excel.set_vib_wavenumbers`)
-        - rot_temperature (:func:`~pMuTT.io_.excel.set_rot_temperatures`)
-        - nasa.a_low (:func:`~pMuTT.io_.excel.set_nasa_a_low`)
-        - nasa.a_high (:func:`~pMuTT.io_.excel.set_nasa_a_high`)
-        - vib_outcar (:func:`~pMuTT.io_.vasp.set_vib_wavenumbers_from_outcar`)
+        - element.[element_symbol] (:func:`~pMuTT.io.excel.set_element`)
+        - formula (:func:`~pMuTT.io.excel.set_formula`)
+        - atoms (:func:`~pMuTT.io.excel.set_atoms`)
+        - statmech_model (:func:`~pMuTT.io.excel.set_statmech_model`)
+        - vib_wavenumber (:func:`~pMuTT.io.excel.set_vib_wavenumbers`)
+        - rot_temperature (:func:`~pMuTT.io.excel.set_rot_temperatures`)
+        - nasa.a_low (:func:`~pMuTT.io.excel.set_nasa_a_low`)
+        - nasa.a_high (:func:`~pMuTT.io.excel.set_nasa_a_high`)
+        - vib_outcar (:func:`~pMuTT.io.vasp.set_vib_wavenumbers_from_outcar`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """

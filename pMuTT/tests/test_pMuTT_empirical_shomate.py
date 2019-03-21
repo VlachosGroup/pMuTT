@@ -32,6 +32,7 @@ class TestShomate(unittest.TestCase):
             'statmech_model': None,
             'mix_models': None,
             'smiles': None,
+            'type': 'shomate',
         }
 
         self.Shomate_data = Shomate.from_data(

@@ -17,7 +17,7 @@ class pMuTTEncoder(json.JSONEncoder):
 
 def json_to_pMuTT(json_obj):
     """Object hook to convert json to pMuTT objects. Any complex object should
-    be in the :data:`~pMuTT.io_.jsonio.type_to_class.type_to_class_dict`
+    be in the :data:`~pMuTT.io.json.type_to_class.type_to_class_dict`
     dictionary.
 
     Parameters
@@ -58,7 +58,7 @@ def type_to_class(class_str):
     from pMuTT.eos import IdealGasEOS, vanDerWaalsEOS
     from pMuTT.reaction import Reaction, Reactions
     from pMuTT.reaction.bep import BEP
-    from pMuTT.empirical import BaseThermo
+    from pMuTT.empirical import EmpiricalBase
     from pMuTT.empirical.nasa import Nasa
     from pMuTT.empirical.shomate import Shomate
     from pMuTT.empirical.references import Reference, References
@@ -78,7 +78,7 @@ def type_to_class(class_str):
         "<class 'pMuTT.reaction.Reaction'>": Reaction,
         "<class 'pMuTT.reaction.Reactions'>": Reactions,
         "<class 'pMuTT.reaction.bep.BEP'>": BEP,
-        "<class 'pMuTT.empirical.BaseThermo'>": BaseThermo,
+        "<class 'pMuTT.empirical.EmpiricalBase'>": EmpiricalBase,
         "<class 'pMuTT.empirical.nasa.Nasa'>": Nasa,
         "<class 'pMuTT.empirical.shomate.Shomate'>": Shomate,
         "<class 'pMuTT.empirical.references.Reference'>": Reference,
@@ -100,19 +100,19 @@ def type_to_class(class_str):
 
 
 def remove_class(json_obj):
-    """Removes the 'class' entry from the JSON object.
+    """Removes unnecessary entries from the JSON object when reinitializing the
+    pMuTT object
 
     Parameters
     ----------
         json_obj : dict
-            JSON object with 'class' entry
+            JSON object unnecessary entries
     Returns
     -------
         json_obj : dict
-            JSON object without 'class' entry
+            JSON object without unnecessary entries
     """
-    try:
-        del json_obj['class']
-    except KeyError:
-        pass
+    json_obj.pop('class', None)
+    json_obj.pop('type', None)
+    json_obj.pop('_id', None)
     return json_obj

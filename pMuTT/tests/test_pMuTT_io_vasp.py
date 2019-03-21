@@ -1,6 +1,6 @@
 import os
 import unittest
-from pMuTT.io_ import vasp
+from pMuTT.io import vasp
 
 
 class TestVasp(unittest.TestCase):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pMuTT.io_.chemkin
+pMuTT.io.chemkin
 
 Reads reactions lists from Chemkin gas.inp and surf.inp files
 """
@@ -273,6 +273,10 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
+<<<<<<< HEAD:pMuTT/io/chemkin.py
+
+=======
+>>>>>>> master:pMuTT/io_/chemkin.py
 def write_surf(nasa_species, sden_operation='min',
                filename='surf.inp', T=c.T0('K'), reactions=[],
                species_delimiter='+', reaction_delimiter='=',
@@ -459,6 +463,7 @@ def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
                                        P_i, column_delimiter,
                                        Q_i, column_delimiter,
                                        abyv_i, i+1))
+    lines.append('EOF')
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 

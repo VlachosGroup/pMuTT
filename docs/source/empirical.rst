@@ -3,12 +3,12 @@
 Empirical Models
 ****************
 
-BaseThermo
-##########
+EmpiricalBase
+#############
 
 This is the parent class for the empirical models.
 
-.. autoclass:: pMuTT.empirical.BaseThermo
+.. autoclass:: pMuTT.empirical.EmpiricalBase
    :members:
    
 NASA

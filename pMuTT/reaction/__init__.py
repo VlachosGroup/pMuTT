@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 from pMuTT import (_force_pass_arguments, _pass_expected_arguments,
                    _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
+from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
 class Reaction:
@@ -1447,9 +1447,18 @@ class Reaction:
         return np.exp(-self.get_delta_GoRT(rev=rev, act=act,
                                            **kwargs))
 
-    def get_EoRT_act(self, rev=False, method='any', **kwargs):
-        """Gets dimensionless act energy between reactants
+    def get_EoRT_act(self, rev=False, method='any', del_m=None, **kwargs):
+        """Gets dimensionless Arrhenius activation energy between reactants
         (or products) and transition state
+
+        If the transition state method is used, the enthalpy of activation is
+        converted to activation energy using the following:
+
+        :math:`\\frac {E_a}{RT} = \\frac {\\Delta H^{TS}}{RT} +
+        (1-\\Delta n^{TS})`
+
+        where :math:`\\Delta n^{TS}` is the change in the number of molecules 
+        on forming the transition state.
 
         Parameters
         ----------
@@ -1468,6 +1477,13 @@ class Reaction:
                   reaction is exothermic, returns 0)
 
                 Default is 'any'.
+            del_m : int, optional
+                Change in molecularity of gas-phase species in the reaction.
+                Condensed-phase and unimolecular gas-phase reactions should have
+                a value of 0. Bimolecular gas-phase reactions should have a 
+                value of -1. If not specified, m will be calculated 
+                (assuming all species in the initial state and transition state
+                are gas phase).
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless act
                 energy
@@ -1488,7 +1504,16 @@ class Reaction:
                 method = 'enthalpy'
 
         if method == 'transition_state' or method == 'ts':
-            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs)
+            # Find molecularity of the reaction
+            if del_m is None:
+                m_FS = _get_molecularity(self.transition_state_stoich)
+                if rev:
+                    m_IS = _get_molecularity(self.products_stoich)
+                else:
+                    m_IS = _get_molecularity(self.reactants_stoich)
+                del_m = m_FS - m_IS
+            # Calculate H_TS and convert to Arrhenius activation energy
+            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
         elif method == 'bep':
             EoRT = self.bep.get_EoRT_act(rev=rev, **kwargs)
         elif method == 'enthalpy':
@@ -1501,7 +1526,8 @@ class Reaction:
                               'for supported options.'.format(method)))
         return EoRT
 
-    def get_E_act(self, units, T, rev=False, method='any', **kwargs):
+    def get_E_act(self, units, T, rev=False, method='any', del_m=None,
+                  **kwargs):
         """Gets act energy between reactants (or products)
         and transition state
 
@@ -1525,6 +1551,13 @@ class Reaction:
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
 
                 Default is 'any'.
+            del_m : int, optional
+                Change in molecularity of gas-phase species in the reaction.
+                Condensed-phase and unimolecular gas-phase reactions should have
+                a value of 0. Bimolecular gas-phase reactions should have a 
+                value of -1. If not specified, m will be calculated 
+                (assuming all species in the initial state and transition state
+                are gas phase).
             kwargs : keyword arguments
                 Parameters required to calculate act energy. See class
                 docstring to see how to pass specific parameters to
@@ -1535,12 +1568,15 @@ class Reaction:
                 act energy between reactants (or products) and
                 transition state
         """
-        return self.get_EoRT_act(rev=rev, method=method, T=T, **kwargs)*T \
-            * c.R('{}/K'.format(units))
+        return self.get_EoRT_act(rev=rev, method=method, T=T, del_m=del_m,
+                                 **kwargs)*T*c.R('{}/K'.format(units))
 
-    def get_A(self, T=c.T0('K'), rev=False, **kwargs):
+    def get_A(self, T=c.T0('K'), rev=False, m=None, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
+
+        :math:`A = \\frac {k_B T} {h} \\exp\\bigg(\\frac {\\Delta S^{TS}}{R}+m
+        \\bigg)`
 
         Parameters
         ----------
@@ -1549,6 +1585,13 @@ class Reaction:
                 instead of reactants. Default is False
             T : float, optional
                 Temperature in K. Default is standard temperature.
+            m : int, optional
+                Molecularity of gas-phase species in the reaction.
+                Condensed-phase reactions and unimolecular gas-phase reactions
+                should have a value of 1. Bimolecular gas-phase reactions 
+                should have a value of 2. If not specified, m will be 
+                calculated (assuming all species in the initial state are
+                gas phase). 
             kwargs : keyword arguments
                 Parameters required to calculate pre-exponential factor. See
                 class docstring to see how to pass specific parameters to
@@ -1559,14 +1602,14 @@ class Reaction:
                 Pre-exponential factor
         """
         # Calculate molecularity (e.g. unimolecular, bimolecular)
-        if rev:
-            m = _get_molecularity(self.products_stoich)
-        else:
-            m = _get_molecularity(self.reactants_stoich)
+        if m is None:
+            if rev:
+                m = _get_molecularity(self.products_stoich)
+            else:
+                m = _get_molecularity(self.reactants_stoich)
 
         return c.kb('J/K')*T/c.h('J s') \
-            * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T,
-                                        **kwargs)+m)
+            * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs)+m)
 
     def _parse_state(self, state):
         """Helper method to get the relevant species and stoichiometry
@@ -1919,14 +1962,14 @@ class ChemkinReaction(Reaction):
             n_surf += stoich
         return n_surf
 
-    def get_A(self, sden_operation='sum', include_entropy=True, T=c.T0('K'),
+    def get_A(self, sden_operation='min', include_entropy=True, T=c.T0('K'),
               **kwargs):
         """Calculates the preexponential factor in the Chemkin format
 
         Parameters
         ----------
         sden_operation : str, optional
-            Site density operation to use. Default is 'sum'
+            Site density operation to use. Default is 'min'
         include_entropy : bool, optional
             If True, includes the act entropy. Default is True
         T : float, optional
@@ -1943,7 +1986,7 @@ class ChemkinReaction(Reaction):
         if not self.gas_phase:
             # Uses site with highest site density
             site_dens = []
-            for reactant in self.reactants:
+            for reactant, stoich in zip(self.reactants, self.reactants_stoich):
                 # Skip species without a catalyst site
                 try:
                     site_den = reactant.cat_site.site_density
@@ -1952,7 +1995,7 @@ class ChemkinReaction(Reaction):
                 # Skip bulk species
                 if reactant.name == reactant.cat_site.bulk_specie:
                     continue
-                site_dens.append(site_den)
+                site_dens.extend([site_den]*int(stoich))
 
             # Apply the operation to the site densities
             eff_site_den = _apply_numpy_operation(quantity=site_dens,
@@ -2013,7 +2056,9 @@ class ChemkinReaction(Reaction):
             act = False
         else:
             act = True
-        return np.max([0., super().get_delta_GoRT(rev=rev, act=act, **kwargs)])
+        return np.max([0., 
+                       super().get_delta_GoRT(rev=rev, act=act, **kwargs),
+                       super().get_delta_GoRT(rev=rev, act=False, **kwargs)])
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

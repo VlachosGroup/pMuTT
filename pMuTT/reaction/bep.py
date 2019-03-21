@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from pMuTT.io_.jsonio import remove_class
+from pMuTT.io.json import remove_class
 
 
 class BEP:
     """Represents a Bronsted Evans Polyani relationship
+
+    :math:`\\frac{E_a}{RT} = \\alpha \\frac{H}{RT} + \\beta`
 
     Attributes
     ----------
@@ -16,10 +18,10 @@ class BEP:
             immediately
         descriptor : str, optional
             Descriptor to calculate the activation energy. Supported options:
-            - 'delta' (H_products - H_reactants)
-            - 'rev_delta' (H_reactants - H_products)
-            - 'reactants' (H_reactants)
-            - 'products' (H_products)
+            - 'delta' (HoRT_products - HoRT_reactants)
+            - 'rev_delta' (HoRT_reactants - HoRT_products)
+            - 'reactants' (HoRT_reactants)
+            - 'products' (HoRT_products)
             Default is delta.
         _descriptor : method
             Method taken from reaction to calculate enthalpy. This attribute is
@@ -42,10 +44,10 @@ class BEP:
             descriptor : str, optional
                 Descriptor to calculate the activation energy. Supported
                 options:
-                - 'delta' (H_products - H_reactants)
-                - 'rev_delta' (H_reactants - H_products)
-                - 'reactants' (H_reactants)
-                - 'products' (H_products)
+                - 'delta' (HoRT_products - HoRT_reactants)
+                - 'rev_delta' (HoRT_reactants - HoRT_products)
+                - 'reactants' (HoRT_reactants)
+                - 'products' (HoRT_products)
                 If specified, overwites the value held by BEP object.
         """
         try:
@@ -97,7 +99,8 @@ class BEP:
         return self.to_dict() == other_dict
 
     def get_EoRT_act(self, rev=False, **kwargs):
-        """Calculate dimensionless activation energy using BEP relationship
+        """Calculate dimensionless Arrhenius activation energy using BEP
+        relationship
 
         Parameters
         ----------

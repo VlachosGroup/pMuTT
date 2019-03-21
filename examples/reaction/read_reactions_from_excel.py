@@ -8,7 +8,7 @@ from pMuTT import pMuTT_list_to_dict
 from pMuTT.reaction import Reaction
 from pMuTT.io_.thermdat import read_thermdat
 from pMuTT.io_.excel import read_excel
-from pMuTT.io_.jsonio import pMuTTEncoder
+from pMuTT.io_.json import pMuTTEncoder
 
 os.chdir(os.path.dirname(__file__))
 

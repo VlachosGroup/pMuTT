@@ -65,7 +65,7 @@ way is more convenient if you're dealing with large reaction networks.
    import os
    import numpy as np
    from matplotlib import pyplot as plt
-   from pMuTT.io_.thermdat import read_thermdat
+   from pMuTT.io.thermdat import read_thermdat
    from pMuTT import pMuTT_list_to_dict
    from pMuTT import reaction as rxn
    

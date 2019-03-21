@@ -11,14 +11,14 @@ from scipy.optimize import curve_fit
 from scipy.stats import variation
 from pMuTT import _is_iterable
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import json_to_pMuTT, remove_class
-from pMuTT.empirical import BaseThermo
+from pMuTT.io.json import json_to_pMuTT, remove_class
+from pMuTT.empirical import EmpiricalBase
 from pMuTT.mixture import _get_mix_quantity
 
 
-class Shomate(BaseThermo):
+class Shomate(EmpiricalBase):
     """Stores the information for an individual Shomate specie
-    Inherits from :class:`~pMuTT.empirical.BaseThermo`
+    Inherits from :class:`~pMuTT.empirical.EmpiricalBase`
 
     The thermodynamic properties are calculated using the following form:
 
@@ -378,7 +378,7 @@ class Shomate(BaseThermo):
             references : `pMuTT.empirical.references.References` object
                 Reference to adjust enthalpy
             **kwargs : keyword arguments
-                Used to initalize ``statmech_model`` or ``BaseThermo``
+                Used to initalize ``statmech_model`` or ``EmpiricalBase``
                 attributes to be stored.
         Returns
         -------
@@ -419,6 +419,7 @@ class Shomate(BaseThermo):
         """
         obj_dict = super().to_dict()
         obj_dict['class'] = str(self.__class__)
+        obj_dict['type'] = 'shomate'
         obj_dict['a'] = list(self.a)
         obj_dict['T_low'] = self.T_low
         obj_dict['T_high'] = self.T_high
