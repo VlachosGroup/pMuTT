@@ -8,7 +8,7 @@ Created on Tues Jul 10 12:40:00 2018
 import numpy as np
 
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import remove_class
+from pMuTT.io.json import remove_class
 
 
 class IdealGasEOS:

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from pMuTT.io_.jsonio import remove_class
+from pMuTT.io.json import remove_class
 
 
 class CatSite:
@@ -46,7 +46,7 @@ class CatSite:
                 JSON representation
         Returns
         -------
-            BaseThermo : BaseThermo object
+            EmpiricalBase : EmpiricalBase object
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)

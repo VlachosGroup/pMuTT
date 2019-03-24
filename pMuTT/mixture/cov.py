@@ -7,7 +7,7 @@ Created on Thurs Feb 7 10:15:00 2019
 
 import numpy as np
 from pMuTT import constants as c
-from pMuTT.io_.jsonio import remove_class
+from pMuTT.io.json import remove_class
 
 
 class CovEffect:
@@ -198,7 +198,7 @@ class CovEffect:
                 JSON representation
         Returns
         -------
-            BaseThermo : BaseThermo object
+            EmpiricalBase : EmpiricalBase object
         """
         json_obj = remove_class(json_obj)
         # Recalculate the intercepts to ensure range is smooth

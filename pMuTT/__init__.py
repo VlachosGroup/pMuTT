@@ -318,3 +318,26 @@ def pMuTT_list_to_dict(pMuTT_list, key='name'):
             Dictionary of pMuTT objects
     """
     return {getattr(obj, key): obj for obj in pMuTT_list}
+
+def format_conditions(**kwargs):
+    """Converts an arbitrary number of lists to a list of dictionaries. Useful
+    for specifying the conditions in pMuTT.io.chemkin.write_EA
+
+    Parameters
+    ----------
+        kwargs - keyword arguments
+            Lists of the conditions where each index corresponds to a run
+    Returns
+    -------
+        conditions - list of dict
+            A list where each element is a dictionary containing the conditions
+            for a specific run
+    """
+    conditions = []
+    for cond_name, cond_values in kwargs.items():
+        for i, cond_value in enumerate(cond_values):
+            try:
+                conditions[i][cond_name] = cond_value
+            except (IndexError, KeyError):
+                conditions.append({cond_name: cond_value})
+    return conditions

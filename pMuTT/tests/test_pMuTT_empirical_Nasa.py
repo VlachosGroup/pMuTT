@@ -45,6 +45,7 @@ class TestNasa(unittest.TestCase):
             'cat_site': None,
             'n_sites': None,
             'smiles': None,
+            'type': 'nasa'
         }
 
         self.Nasa_data = Nasa.from_data(
