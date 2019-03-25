@@ -29,6 +29,7 @@ Topics Covered
   to thermdat format
 - Initializing :class:`~pMuTT.reaction.Reaction` objects from strings
 
+------------
 
 Experimental to Empirical
 -------------------------
@@ -44,6 +45,7 @@ Topics Covered
 - Plot the shape of the :class:`~pMuTT.empirical.shomate.Shomate` curve
 - Save the :class:`~pMuTT.empirical.shomate.Shomate` object as a JSON file
 
+------------
 
 Excel to Empirical Data
 -----------------------
@@ -57,6 +59,8 @@ Topics Covered
 - Initialize :class:`~pMuTT.empirical.references.Reference` objects and a :class:`~pMuTT.empirical.references.References` object
 - Generate a :class:`~pMuTT.empirical.nasa.Nasa` object using :class:`~pMuTT.statmech.StatMech` models
 - Write :class:`~pMuTT.empirical.nasa.Nasa` object to a ``thermdat`` file
+
+------------
 
 Reaction
 --------
@@ -72,6 +76,22 @@ Topics Covered
 - Calculate thermodynamic and kinetic properties using the 
   :class:`~pMuTT.reaction.Reaction` object
 - Save the :class:`~pMuTT.reaction.Reaction` object as a ``JSON`` file
+
+------------
+
+Chemkin_IO
+----------
+- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.ipynb>`_
+- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.py>`_
+
+Topics Covered
+^^^^^^^^^^^^^^
+- Read species *ab-initio* data, reactions, and catalyst sites from a
+  spreadsheet
+- Write the thermdat, gas.inp, surf.inp, T_flow.inp, EAg.inp, EAs.inp, 
+  tube_mole.inp files
+
+------------
 
 Phase Diagram
 -------------
