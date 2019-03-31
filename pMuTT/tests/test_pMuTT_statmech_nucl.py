@@ -7,12 +7,12 @@ import unittest
 from pMuTT.statmech import nucl
 
 
-class TestIdealNucl(unittest.TestCase):
+class TestEmptyNucl(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.nuclear = nucl.IdealNucl()
+        self.nuclear = nucl.EmptyNucl()
         self.nuclear_dict = {
-            'class': "<class 'pMuTT.statmech.nucl.IdealNucl'>"
+            'class': "<class 'pMuTT.statmech.nucl.EmptyNucl'>"
         }
 
     def test_get_q(self):
@@ -43,7 +43,7 @@ class TestIdealNucl(unittest.TestCase):
         self.assertEqual(self.nuclear.to_dict(), self.nuclear_dict)
 
     def test_from_dict(self):
-        self.assertEqual(nucl.IdealNucl.from_dict(self.nuclear_dict),
+        self.assertEqual(nucl.EmptyNucl.from_dict(self.nuclear_dict),
                          self.nuclear)
 
 

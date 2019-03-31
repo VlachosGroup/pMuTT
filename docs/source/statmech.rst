@@ -30,10 +30,10 @@ Example of initialization using objects
    from pMuTT.statmech import StatMech, trans, vib, rot, elec
 
    atoms = molecule('H2O')
-   H2O_trans = trans.IdealTrans(n_degrees=3, atoms=atoms)
+   H2O_trans = trans.FreeTrans(n_degrees=3, atoms=atoms)
    H2O_vib = vib.HarmonicVib(vib_wavenumbers=[3825.434, 3710.2642, 1582.432])
    H2O_rot = rot.RigidRotor(symmetrynumber=2, atoms=atoms)
-   H2O_elec = elec.IdealElec(potentialenergy=-14.2209, spin=0)
+   H2O_elec = elec.GroundStateElec(potentialenergy=-14.2209, spin=0)
    H2O_statmech = StatMech(trans_model=H2O_trans,
                            vib_model=H2O_vib,
                            rot_model=H2O_rot,
@@ -49,14 +49,14 @@ Example of initialization using classes and parameters
    from pMuTT.statmech import StatMech, trans, vib, rot, elec
    
    
-   H2O_statmech = StatMech(trans_model=trans.IdealTrans,
+   H2O_statmech = StatMech(trans_model=trans.FreeTrans,
                            n_degrees=3,
                            vib_model=vib.HarmonicVib,
                            vib_wavenumbers=[3825.434, 3710.2642, 1582.432],
                            rot_model=rot.RigidRotor,
                            symmetrynumber=2,
                            atoms=molecule('H2O'),
-                           elec_model=elec.IdealElec,
+                           elec_model=elec.GroundStateElec,
                            potentialenergy=-14.2209,
                            spin=0)
 
@@ -95,13 +95,13 @@ Ideal Gas (idealgas)
 +------------------+-------------------------------------------+
 | Set Attributes   | Default Value                             |
 +==================+===========================================+
-| trans_model      | :class:`~pMuTT.statmech.trans.IdealTrans` |
+| trans_model      | :class:`~pMuTT.statmech.trans.FreeTrans` |
 +------------------+-------------------------------------------+
 | n_degrees        | 3                                         |
 +------------------+-------------------------------------------+
 | vib_model        | :class:`~pMuTT.statmech.vib.HarmonicVib`  |
 +------------------+-------------------------------------------+
-| elec_model       | :class:`~pMuTT.statmech.elec.IdealElec`   |
+| elec_model       | :class:`~pMuTT.statmech.elec.GroundStateElec`   |
 +------------------+-------------------------------------------+
 | rot_model        | :class:`~pMuTT.statmech.rot.RigidRotor`   |
 +------------------+-------------------------------------------+
@@ -161,7 +161,7 @@ Typically used to model adsorbates.
 +=============+==========================================+
 | vib_model   | :class:`~pMuTT.statmech.vib.HarmonicVib` |
 +-------------+------------------------------------------+
-| elec_model  | :class:`~pMuTT.statmech.elec.IdealElec`  |
+| elec_model  | :class:`~pMuTT.statmech.elec.GroundStateElec`  |
 +-------------+------------------------------------------+
 
 +---------------------+-------------------------------------------------+
@@ -201,7 +201,7 @@ Electronic (electronic)
 +-------------+-----------------------------------------+
 | Parameter   | Default Value                           |
 +=============+=========================================+
-| elec_model  | :class:`~pMuTT.statmech.elec.IdealElec` |
+| elec_model  | :class:`~pMuTT.statmech.elec.GroundStateElec` |
 +-------------+-----------------------------------------+
 
 +---------------------+-------------------------------------------+
@@ -286,9 +286,9 @@ will use a model often.
 Translational Models
 ====================
 
-IdealTrans
+FreeTrans
 ----------
-.. autoclass:: pMuTT.statmech.trans.IdealTrans
+.. autoclass:: pMuTT.statmech.trans.FreeTrans
    :members:
 
 .. _vib:
@@ -326,9 +326,9 @@ RigidRotor
 Electronic Models
 =================
 
-IdealElec
+GroundStateElec
 ---------
-.. autoclass:: pMuTT.statmech.elec.IdealElec
+.. autoclass:: pMuTT.statmech.elec.GroundStateElec
    :members:
 
 .. _nucl:

@@ -8,14 +8,14 @@ import numpy as np
 from pMuTT.statmech import elec
 
 
-class TestIdealElec(unittest.TestCase):
+class TestGroundStateElec(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.elec_H2 = elec.IdealElec(potentialenergy=-6.759576, spin=0.)
-        self.elec_OH = elec.IdealElec(potentialenergy=-7.554949, spin=0.5)
-        self.elec_O2 = elec.IdealElec(potentialenergy=-9.862407, spin=1.)
+        self.elec_H2 = elec.GroundStateElec(potentialenergy=-6.759576, spin=0.)
+        self.elec_OH = elec.GroundStateElec(potentialenergy=-7.554949, spin=0.5)
+        self.elec_O2 = elec.GroundStateElec(potentialenergy=-9.862407, spin=1.)
         self.elec_O2_dict = {
-            'class': "<class 'pMuTT.statmech.elec.IdealElec'>",
+            'class': "<class 'pMuTT.statmech.elec.GroundStateElec'>",
             'potentialenergy': -9.862407,
             'spin': 1.
         }
@@ -96,7 +96,7 @@ class TestIdealElec(unittest.TestCase):
         self.assertEqual(self.elec_O2.to_dict(), self.elec_O2_dict)
 
     def test_from_dict(self):
-        self.assertEqual(elec.IdealElec.from_dict(self.elec_O2_dict),
+        self.assertEqual(elec.GroundStateElec.from_dict(self.elec_O2_dict),
                          self.elec_O2)
 
 

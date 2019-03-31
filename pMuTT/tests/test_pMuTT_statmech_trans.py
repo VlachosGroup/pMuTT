@@ -8,20 +8,20 @@ import numpy as np
 from pMuTT.statmech import trans
 
 
-class TestIdealTrans(unittest.TestCase):
+class TestFreeTrans(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
         # Using Cl2 as an example
         molecular_weight = 71.
-        self.trans_1D = trans.IdealTrans(molecular_weight=molecular_weight,
+        self.trans_1D = trans.FreeTrans(molecular_weight=molecular_weight,
                                          n_degrees=1)
-        self.trans_2D = trans.IdealTrans(molecular_weight=molecular_weight,
+        self.trans_2D = trans.FreeTrans(molecular_weight=molecular_weight,
                                          n_degrees=2)
-        self.trans_3D = trans.IdealTrans(molecular_weight=molecular_weight,
+        self.trans_3D = trans.FreeTrans(molecular_weight=molecular_weight,
                                          n_degrees=3)
         self.trans_3D_dict = {
-            'class': "<class 'pMuTT.statmech.trans.IdealTrans'>",
+            'class': "<class 'pMuTT.statmech.trans.FreeTrans'>",
             'molecular_weight': 71.,
             'n_degrees': 3
         }
@@ -93,7 +93,7 @@ class TestIdealTrans(unittest.TestCase):
         self.assertEqual(self.trans_3D.to_dict(), self.trans_3D_dict)
 
     def test_from_dict(self):
-        self.assertEqual(trans.IdealTrans.from_dict(self.trans_3D_dict),
+        self.assertEqual(trans.FreeTrans.from_dict(self.trans_3D_dict),
                          self.trans_3D)
 
 

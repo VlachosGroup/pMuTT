@@ -112,7 +112,7 @@ class IdealGasEOS:
                 JSON representation
         Returns
         -------
-            IdealElec : IdealElec object
+            GroundStateElec : GroundStateElec object
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
@@ -322,7 +322,7 @@ class vanDerWaalsEOS:
                 JSON representation
         Returns
         -------
-            IdealElec : IdealElec object
+            GroundStateElec : GroundStateElec object
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)

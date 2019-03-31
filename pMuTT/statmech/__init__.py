@@ -405,7 +405,7 @@ class StatMech:
         ----------
             T : float, optional
                 Temperature in K. If the electronic mode is
-                :class:`~pMuTT.statmech.elec.IdealElec`, then the output is
+                :class:`~pMuTT.statmech.elec.GroundStateElec`, then the output is
                 insensitive to this input. Default is 298.15 K
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
@@ -449,7 +449,7 @@ class StatMech:
                 units but omit the '/K' (e.g. J/mol).
             T : float, optional
                 Temperature in K. If the electronic mode is
-                :class:`~pMuTT.statmech.elec.IdealElec`, then the output is
+                :class:`~pMuTT.statmech.elec.GroundStateElec`, then the output is
                 insensitive to this input. Default is 298.15 K
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
@@ -872,10 +872,10 @@ class StatMech:
 presets = {
     'idealgas': {
         'statmech_model': StatMech,
-        'trans_model': trans.IdealTrans,
+        'trans_model': trans.FreeTrans,
         'n_degrees': 3,
         'vib_model': vib.HarmonicVib,
-        'elec_model': elec.IdealElec,
+        'elec_model': elec.GroundStateElec,
         'rot_model': rot.RigidRotor,
         'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy',
                      'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'),
@@ -884,12 +884,12 @@ presets = {
     'harmonic': {
         'statmech_model': StatMech,
         'vib_model': vib.HarmonicVib,
-        'elec_model': elec.IdealElec,
+        'elec_model': elec.GroundStateElec,
         'required': ('vib_wavenumbers', 'potentialenergy', 'spin'),
     },
     'electronic': {
         'statmech_model': StatMech,
-        'elec_model': elec.IdealElec,
+        'elec_model': elec.GroundStateElec,
         'required': ('potentialenergy', 'spin'),
     },
     'placeholder': {

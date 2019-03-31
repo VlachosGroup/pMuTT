@@ -20,7 +20,7 @@ class TestStatMech(unittest.TestCase):
         CO2_pMuTT_parameters = {
             'name': 'CO2',
 
-            'trans_model': trans.IdealTrans,
+            'trans_model': trans.FreeTrans,
             'n_degrees': 3,
             'molecular_weight': get_molecular_weight('CO2'),
 
@@ -30,7 +30,7 @@ class TestStatMech(unittest.TestCase):
             'geometry': 'linear',
             'symmetrynumber': 2,
 
-            'elec_model': elec.IdealElec,
+            'elec_model': elec.GroundStateElec,
             'potentialenergy': -22.994202,
             'spin': 0.,
 
