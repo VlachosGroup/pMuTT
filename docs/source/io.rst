@@ -25,6 +25,16 @@ listed below.
 
 .. autofunction:: pMuTT.io.excel.set_statmech_model
 
+.. autofunction:: pMuTT.io.excel.set_trans_model
+
+.. autofunction:: pMuTT.io.excel.set_vib_model
+
+.. autofunction:: pMuTT.io.excel.set_rot_model
+
+.. autofunction:: pMuTT.io.excel.set_elec_model
+
+.. autofunction:: pMuTT.io.excel.set_nucl_model
+
 .. autofunction:: pMuTT.io.excel.set_vib_wavenumbers
 
 .. autofunction:: pMuTT.io.excel.set_rot_temperatures
