@@ -71,7 +71,7 @@ from pMuTT.statmech import StatMech, trans, vib, rot, elec
 butane_atoms = molecule('trans-butane')
 
 '''Translational'''
-butane_trans = trans.IdealTrans(n_degrees=3, atoms=butane_atoms)
+butane_trans = trans.FreeTrans(n_degrees=3, atoms=butane_atoms)
 
 '''Vibrational'''
 butane_vib = vib.HarmonicVib(vib_wavenumbers=[3054.622862, 3047.573455, 3037.53448,
@@ -91,7 +91,7 @@ butane_vib = vib.HarmonicVib(vib_wavenumbers=[3054.622862, 3047.573455, 3037.534
 butane_rot = rot.RigidRotor(symmetrynumber=2, atoms=butane_atoms)
 
 '''Electronic'''
-butane_elec = elec.IdealElec(potentialenergy=-73.7051, spin=0)
+butane_elec = elec.GroundStateElec(potentialenergy=-73.7051, spin=0)
 
 '''StatMech Initialization'''
 butane_statmech = StatMech(name='butane',

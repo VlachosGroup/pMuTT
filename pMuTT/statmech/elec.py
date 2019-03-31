@@ -5,7 +5,7 @@ from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class IdealElec:
+class GroundStateElec:
     """Electronic modes using the ideal gas assumption. Equations found in
     Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
@@ -187,7 +187,7 @@ class IdealElec:
                 JSON representation
         Returns
         -------
-            IdealElec : IdealElec object
+            GroundStateElec : GroundStateElec object
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)

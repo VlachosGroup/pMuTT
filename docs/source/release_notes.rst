@@ -116,7 +116,7 @@ Dec. 11, 2018
 - Added ``placeholder`` entry to :data:`~pMuTT.statmech.presets` dictionary to
   represent an empty species
 - Added correction factor to calculate partition coefficient, q, in
-  :class:`~pMuTT.statmech.elec.IdealElec` class
+  :class:`~pMuTT.statmech.elec.GroundStateElec` class
 
 Version 1.1.2
 -------------

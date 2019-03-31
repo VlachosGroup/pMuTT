@@ -64,11 +64,11 @@ def type_to_class(class_str):
     from pMuTT.empirical.references import Reference, References
     from pMuTT.empirical.zacros import Zacros
     from pMuTT.statmech import StatMech, EmptyMode
-    from pMuTT.statmech.trans import IdealTrans
+    from pMuTT.statmech.trans import FreeTrans
     from pMuTT.statmech.vib import HarmonicVib, QRRHOVib, EinsteinVib
     from pMuTT.statmech.rot import RigidRotor
-    from pMuTT.statmech.elec import IdealElec
-    from pMuTT.statmech.nucl import IdealNucl
+    from pMuTT.statmech.elec import GroundStateElec
+    from pMuTT.statmech.nucl import EmptyNucl
     from pMuTT.mixture.cov import CovEffect
     from pMuTT.chemkin import CatSite
 
@@ -86,13 +86,13 @@ def type_to_class(class_str):
         "<class 'pMuTT.empirical.zacros.Zacros'>": Zacros,
         "<class 'pMuTT.statmech.StatMech'>": StatMech,
         "<class 'pMuTT.statmech.EmptyMode'>": EmptyMode,
-        "<class 'pMuTT.statmech.trans.IdealTrans'>": IdealTrans,
+        "<class 'pMuTT.statmech.trans.FreeTrans'>": FreeTrans,
         "<class 'pMuTT.statmech.vib.HarmonicVib'>": HarmonicVib,
         "<class 'pMuTT.statmech.vib.QRRHOVib'>": QRRHOVib,
         "<class 'pMuTT.statmech.vib.EinsteinVib'>": EinsteinVib,
         "<class 'pMuTT.statmech.rot.RigidRotor'>": RigidRotor,
-        "<class 'pMuTT.statmech.elec.IdealElec'>": IdealElec,
-        "<class 'pMuTT.statmech.nucl.IdealNucl'>": IdealNucl,
+        "<class 'pMuTT.statmech.elec.GroundStateElec'>": GroundStateElec,
+        "<class 'pMuTT.statmech.nucl.EmptyNucl'>": EmptyNucl,
         "<class 'pMuTT.mixture.cov.CovEffect'>": CovEffect,
         "<class 'pMuTT.chemkin.CatSite'>": CatSite,
     }

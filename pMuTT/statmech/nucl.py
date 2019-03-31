@@ -2,7 +2,7 @@
 from pMuTT.io.json import remove_class
 
 
-class IdealNucl:
+class EmptyNucl:
     """Nuclear modes. Assumes no change in any chemical reaction and hence
     does not affect thermodynamic quantities."""
 
@@ -116,7 +116,7 @@ class IdealNucl:
                 JSON representation
         Returns
         -------
-            IdealNucl : IdealNucl object
+            EmptyNucl : EmptyNucl object
         """
         json_obj = remove_class(json_obj)
         return cls(**json_obj)
