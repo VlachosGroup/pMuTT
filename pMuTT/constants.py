@@ -377,7 +377,7 @@ def V0(units):
             ========= =================
     """
     V0 = R('J/mol/K')*T0('K')/P0('Pa')
-    return V0*convert_unit(from_='m3', to=units)
+    return V0*convert_unit(initial='m3', final=units)
 
 
 Na = 6.02214086e23  # Avogadro number
@@ -387,7 +387,7 @@ e = 1.6021766208e-19  # Electronic charge
 """float : Electronic charge in Coulombs"""
 
 
-def convert_unit(num=None, from_=None, to=None):
+def convert_unit(num=None, initial=None, final=None):
     """Converts units between two unit sets
 
     Parameters
@@ -618,27 +618,28 @@ def convert_unit(num=None, from_=None, to=None):
     }
 
     # Check if the entry exists
-    if type_dict.get(from_) is None:
+    if type_dict.get(initial) is None:
         raise ValueError("%r not a supported unit. Use help(pMuTT.constants."
-                         "convert_unit) for accepted units." % from_)
-    if type_dict.get(to) is None:
+                         "convert_unit) for accepted units." % initial)
+    if type_dict.get(final) is None:
         raise ValueError("%r not a supported unit. Use help(pMuTT.constants."
-                         "convert_unit) for accepted units." % to)
+                         "convert_unit) for accepted units." % final)
     # Check that the unit types are the same
-    from_type = type_dict[from_]
-    to_type = type_dict[to]
-    if from_type != to_type:
+    initial_type = type_dict[initial]
+    final_type = type_dict[final]
+    if initial_type != final_type:
         raise ValueError("%r [Type %r] not compatible with %r [Type %r]. "
                          "Use help(pMuTT.constants.convert_unit) for "
-                         "accepted units." % (from_, from_type, to, to_type))
-    elif from_type == 'temp':
+                         "accepted units." % (initial, initial_type, final,
+                                              final_type))
+    elif initial_type == 'temp':
         if num is None:
             num = 0.
-        return num + unit_dict[to] - unit_dict[from_]
+        return num + unit_dict[final] - unit_dict[initial]
     else:
         if num is None:
             num = 1.
-        return num * unit_dict[to] / unit_dict[from_]
+        return num * unit_dict[final] / unit_dict[initial]
 
 
 def energy_to_freq(energy):
@@ -744,7 +745,7 @@ def inertia_to_temp(inertia):
             Rotational temperature in K
     """
     return h('eV s', bar=True)**2/2./kb('eV/K')/inertia \
-        * convert_unit(from_='eV', to='J')
+        * convert_unit(initial='eV', final='J')
 
 
 def temp_to_energy(temp):

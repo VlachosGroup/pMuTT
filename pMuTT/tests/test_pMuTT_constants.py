@@ -53,14 +53,14 @@ class TestConstants(unittest.TestCase):
             c.T0('arbitrary unit')
 
     def test_convert_unit(self):
-        self.assertEqual(c.convert_unit(num=0., from_='C', to='K'), 273.15)
-        self.assertEqual(c.convert_unit(from_='m', to='cm'), 100.)
+        self.assertEqual(c.convert_unit(num=0., initial='C', final='K'), 273.15)
+        self.assertEqual(c.convert_unit(initial='m', final='cm'), 100.)
         with self.assertRaises(ValueError):
-            c.convert_unit(from_='cm', to='J')
+            c.convert_unit(initial='cm', final='J')
         with self.assertRaises(ValueError):
-            c.convert_unit(from_='arbitrary unit', to='J')
+            c.convert_unit(initial='arbitrary unit', final='J')
         with self.assertRaises(ValueError):
-            c.convert_unit(from_='cm', to='arbitrary unit')
+            c.convert_unit(initial='cm', final='arbitrary unit')
 
     def test_wavenumber_to_temp(self):
         self.assertAlmostEqual(c.wavenumber_to_temp(1.), 1.4387773538277204)

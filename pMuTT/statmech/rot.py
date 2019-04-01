@@ -294,8 +294,8 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     for moment in atoms.get_moments_of_inertia():
         if np.isclose(0., moment):
             continue
-        moment_SI = moment*c.convert_unit(from_='amu', to='kg') \
-            * c.convert_unit(from_='A2', to='m2')
+        moment_SI = moment*c.convert_unit(initial='amu', final='kg') \
+            * c.convert_unit(initial='A2', final='m2')
         rot_temperatures.append(c.inertia_to_temp(moment_SI))
 
     if geometry == 'monatomic':

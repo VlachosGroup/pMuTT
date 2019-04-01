@@ -35,7 +35,7 @@ print('R (J/mol/K) = {}'.format(c.R('J/mol/K')))
 print("Avogadro's number = {}\n".format(c.Na))
 
 print('Unit conversions')
-print('5 kJ/mol --> {} eV/molecule'.format(c.convert_unit(num=5., from_='kJ/mol', to='eV/molecule')))
+print('5 kJ/mol --> {} eV/molecule'.format(c.convert_unit(num=5., initial='kJ/mol', final='eV/molecule')))
 print('Frequency of 1000 Hz --> Wavenumber of {} 1/cm\n'.format(c.freq_to_wavenumber(1000.)))
 
 print('See expected inputs, supported units of different constants')
