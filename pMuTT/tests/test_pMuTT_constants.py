@@ -53,8 +53,33 @@ class TestConstants(unittest.TestCase):
             c.T0('arbitrary unit')
 
     def test_convert_unit(self):
-        self.assertEqual(c.convert_unit(num=0., initial='C', final='K'), 273.15)
-        self.assertEqual(c.convert_unit(initial='m', final='cm'), 100.)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='C', final='K'),
+                               274.15)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='C', final='F'),
+                               33.8)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='C', final='R'), 
+                               493.46999999999997)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='K', final='C'),
+                               -272.15)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='K', final='F'),
+                               -457.87)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='K', final='R'),
+                               1.8)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='F', final='C'),
+                               -17.22222222222222)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='F', final='K'),
+                               255.92777777777778)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='F', final='R'),
+                               460.67)
+
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='R', final='C'),
+                               -272.59444444444443)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='R', final='K'),
+                               0.5555555555555556)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='R', final='F'),
+                               -458.67)
+
+        self.assertAlmostEqual(c.convert_unit(initial='m', final='cm'), 100.)
         with self.assertRaises(ValueError):
             c.convert_unit(initial='cm', final='J')
         with self.assertRaises(ValueError):
