@@ -1,34 +1,45 @@
 # -*- coding: utf-8 -*-
+from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
 class BEP:
     """Represents a Bronsted Evans Polyani relationship
 
-    :math:`\\frac{E_a}{RT} = \\alpha \\frac{H}{RT} + \\beta`
+    :math:`E_a = \\alpha H + \\beta`
 
     Attributes
     ----------
         slope : float
             Slope of BEP relationship.
         intercept : float
-            Intercept of BEP relationship in dimensionless units.
+            Intercept of BEP relationship in kcal/mol.
         reaction : :class:`~pMuTT.reaction.Reaction` object, optional
             Reaction related to BEP. The Reaction does not need to be supplied
             immediately
         descriptor : str, optional
             Descriptor to calculate the activation energy. Supported options:
-            - 'delta' (HoRT_products - HoRT_reactants)
-            - 'rev_delta' (HoRT_reactants - HoRT_products)
-            - 'reactants' (HoRT_reactants)
-            - 'products' (HoRT_products)
-            Default is delta.
+
+            ===========  ===========================================================================
+            Descriptor   Description
+            ===========  ===========================================================================
+            delta_H      H_products - H_reactants (change in enthalpy)
+            rev_delta_H  H_reactants - H_products (change in enthalpy in reverse direction)
+            reactants_H  H_reactants (enthalpy of reactants)
+            products_H   H_products (enthalpy of products)
+            delta_E      E_products - E_reactants (change in electronic energy)
+            rev_delta_E  E_reactants - E_products (change in electronic energy in reverse direction)
+            reactants_E  E_reactants (electronic energy of reactants)
+            products_E   E_products (electronic energy of products)
+            ===========  ===========================================================================
+
+            Default is 'delta_H'.
         _descriptor : method
             Method taken from reaction to calculate enthalpy. This attribute is
             not supplied to constructor.
     """
 
-    def __init__(self, slope, intercept, reaction=None, descriptor='delta'):
+    def __init__(self, slope, intercept, reaction=None, descriptor='delta_H'):
         self.slope = slope
         self.intercept = intercept
         self.set_descriptor(reaction=reaction, descriptor=descriptor)
@@ -44,10 +55,20 @@ class BEP:
             descriptor : str, optional
                 Descriptor to calculate the activation energy. Supported
                 options:
-                - 'delta' (HoRT_products - HoRT_reactants)
-                - 'rev_delta' (HoRT_reactants - HoRT_products)
-                - 'reactants' (HoRT_reactants)
-                - 'products' (HoRT_products)
+
+                ===========  ===========================================================================
+                Descriptor   Description
+                ===========  ===========================================================================
+                delta_H      H_products - H_reactants (change in enthalpy)
+                rev_delta_H  H_reactants - H_products (change in enthalpy in reverse direction)
+                reactants_H  H_reactants (enthalpy of reactants)
+                products_H   H_products (enthalpy of products)
+                delta_E      E_products - E_reactants (change in electronic energy)
+                rev_delta_E  E_reactants - E_products (change in electronic energy in reverse direction)
+                reactants_E  E_reactants (electronic energy of reactants)
+                products_E   E_products (electronic energy of products)
+                ===========  ===========================================================================
+                
                 If specified, overwites the value held by BEP object.
         """
         try:
@@ -72,18 +93,49 @@ class BEP:
 
         if self.descriptor is None or self.reaction is None:
             self._descriptor = None
-        elif self.descriptor == 'delta':
+        elif self.descriptor == 'delta_H':
             self._descriptor = \
-                    lambda **kwargs: self.reaction.get_delta_HoRT(rev=False,
-                                                                  **kwargs)
-        elif self.descriptor == 'rev_delta':
+                    lambda **kwargs: self.reaction.get_delta_H(rev=False,
+                                                               units='kcal/mol',
+                                                               **kwargs)
+        elif self.descriptor == 'rev_delta_H':
             self._descriptor = \
-                    lambda **kwargs: self.reaction.get_delta_HoRT(rev=True,
-                                                                  **kwargs)
-        elif self.descriptor == 'reactants' or descriptor == 'products':
+                    lambda **kwargs: self.reaction.get_delta_H(rev=True,
+                                                               units='kcal/mol',
+                                                               **kwargs)
+        elif self.descriptor == 'reactants_H':
             self._descriptor = \
-                    lambda **kwargs: self.reaction.get_HoRT_state(
-                            state=descriptor,
+                    lambda **kwargs: self.reaction.get_H_state(
+                            units='kcal/mol',
+                            state='reactants',
+                            **kwargs)
+        elif descriptor == 'products_H':
+            self._descriptor = \
+                    lambda **kwargs: self.reaction.get_H_state(
+                            units='kcal/mol',
+                            state='products',
+                            **kwargs)
+        elif self.descriptor == 'delta_E':
+            self._descriptor = \
+                    lambda **kwargs: self.reaction.get_delta_E(rev=False,
+                                                               units='kcal/mol',
+                                                               **kwargs)
+        elif self.descriptor == 'rev_delta_E':
+            self._descriptor = \
+                    lambda **kwargs: self.reaction.get_delta_E(rev=True,
+                                                               units='kcal/mol',
+                                                               **kwargs)
+        elif self.descriptor == 'reactants_E':
+            self._descriptor = \
+                    lambda **kwargs: self.reaction.get_E_state(
+                            units='kcal/mol',
+                            state='reactants',
+                            **kwargs)
+        elif self.descriptor == 'products_E':
+            self._descriptor = \
+                    lambda **kwargs: self.reaction.get_E_state(
+                            units='kcal/mol',
+                            state='products',
                             **kwargs)
         else:
             raise ValueError(('Descriptor "{}" not supported. See '
@@ -98,7 +150,41 @@ class BEP:
             return False
         return self.to_dict() == other_dict
 
-    def get_EoRT_act(self, rev=False, **kwargs):
+    def get_E_act(self, units, rev=False, **kwargs):
+        """Calculate Arrhenius activation energy using BEP relationship
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate the descriptor
+        Returns
+        -------
+            E_act : float
+                Dimensionless activation energy
+        """
+        if 'rev_delta' in self.descriptor:
+            # If the descriptor is for the reverse reaction, the slope has to
+            # be modified
+            if rev:
+                E_act = self.slope*self._descriptor(**kwargs) + self.intercept
+            else:
+                E_act = (self.slope-1.)*self._descriptor(**kwargs) \
+                        + self.intercept
+        else:
+            if rev:
+                E_act = (self.slope-1.)*self._descriptor(**kwargs) \
+                        + self.intercept
+            else:
+                E_act = self.slope*self._descriptor(**kwargs) + self.intercept
+        return E_act*c.convert_unit(initial='kcal/mol', final=units)
+
+    def get_EoRT_act(self, rev=False, T=c.T0('K'), **kwargs):
         """Calculate dimensionless Arrhenius activation energy using BEP
         relationship
 
@@ -114,20 +200,9 @@ class BEP:
             EoRT_act : float
                 Dimensionless activation energy
         """
-        if self.descriptor == 'rev_delta':
-            # If the descriptor is for the reverse reaction, the slope has to
-            # be modified
-            if rev:
-                return self.slope*self._descriptor(**kwargs) + self.intercept
-            else:
-                return (self.slope-1.)*self._descriptor(**kwargs) \
-                       + self.intercept
-        else:
-            if rev:
-                return (self.slope-1.)*self._descriptor(**kwargs) \
-                       + self.intercept
-            else:
-                return self.slope*self._descriptor(**kwargs) + self.intercept
+        return self.get_E_act(units='kcal/mol', rev=rev, T=T, **kwargs) \
+               /c.R('kcal/mol/K')/T
+
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

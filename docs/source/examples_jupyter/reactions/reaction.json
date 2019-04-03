@@ -170,6 +170,6 @@
   "class": "<class 'pMuTT.reaction.bep.BEP'>",
   "slope": 0.2,
   "intercept": 100.0,
-  "descriptor": "delta"
+  "descriptor": "delta_H"
  }
 }
