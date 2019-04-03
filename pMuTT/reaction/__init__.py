@@ -1471,8 +1471,8 @@ class Reaction:
 
                 - 'any' (uses whichever is available. First uses transition
                   state theory, then BEPs, then the reaction enthalpy)
-                - 'bep' (uses ``self.bep``)
                 - 'ts' or 'transition_state' (uses ``self.transition_state``)
+                - 'bep' (uses ``self.bep``)
                 - 'enthalpy' (uses the enthalpy of the reaction. If the
                   reaction is exothermic, returns 0)
 
@@ -1483,7 +1483,8 @@ class Reaction:
                 a value of 0. Bimolecular gas-phase reactions should have a 
                 value of -1. If not specified, m will be calculated 
                 (assuming all species in the initial state and transition state
-                are gas phase).
+                are gas phase). To get the transition-state enthalpy of
+                activation, set to 1.
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless act
                 energy
@@ -1571,9 +1572,12 @@ class Reaction:
         return self.get_EoRT_act(rev=rev, method=method, T=T, del_m=del_m,
                                  **kwargs)*T*c.R('{}/K'.format(units))
 
-    def get_A(self, T=c.T0('K'), rev=False, m=None, **kwargs):
+    def get_A(self, T=c.T0('K'), rev=False, m=None, use_q=True, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
+
+        :math:`A = \\frac {k_B T} {h} \\frac {q^{TS}}{q^{initial state}}
+                   \\exp (m)`
 
         :math:`A = \\frac {k_B T} {h} \\exp\\bigg(\\frac {\\Delta S^{TS}}{R}+m
         \\bigg)`
@@ -1591,7 +1595,11 @@ class Reaction:
                 should have a value of 1. Bimolecular gas-phase reactions 
                 should have a value of 2. If not specified, m will be 
                 calculated (assuming all species in the initial state are
-                gas phase). 
+                gas phase). To get the transition-state estimate of the
+                pre-exponential factor, set to 0.
+            use_q : bool, optional
+                If True, uses ratio of partition functions to calculate A. If
+                False, uses the entropy of activation to calculate A.
             kwargs : keyword arguments
                 Parameters required to calculate pre-exponential factor. See
                 class docstring to see how to pass specific parameters to
@@ -1607,9 +1615,11 @@ class Reaction:
                 m = _get_molecularity(self.products_stoich)
             else:
                 m = _get_molecularity(self.reactants_stoich)
-
-        return c.kb('J/K')*T/c.h('J s') \
-            * np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs)+m)
+        if use_q:
+            A = self.get_delta_q(rev=rev, act=True, T=T, **kwargs)
+        else:
+            A = self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs)
+        return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
 
     def _parse_state(self, state):
         """Helper method to get the relevant species and stoichiometry
