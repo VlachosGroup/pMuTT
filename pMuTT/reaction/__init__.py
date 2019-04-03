@@ -1616,9 +1616,10 @@ class Reaction:
             else:
                 m = _get_molecularity(self.reactants_stoich)
         if use_q:
-            A = self.get_delta_q(rev=rev, act=True, T=T, **kwargs)
+            A = self.get_q_act(rev=rev, T=T, ignore_q_elec=True,
+                               include_ZPE=False, **kwargs)
         else:
-            A = self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs)
+            A = np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs))
         return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
 
     def _parse_state(self, state):
