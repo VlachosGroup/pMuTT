@@ -1045,6 +1045,21 @@ class TestReaction(unittest.TestCase):
                 exp_sm_E_rev)
 
     def test_get_A(self):
+        # Testing partition function method
+        exp_sm_q = self.H2O_TS_sm.get_q(T=c.T0('K'), include_ZPE=False) \
+            / self.H2_sm.get_q(T=c.T0('K'), include_ZPE=False) \
+            / self.O2_sm.get_q(T=c.T0('K'), include_ZPE=False)**0.5
+        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*exp_sm_q*np.exp(1.5)
+        exp_sm_q_rev = self.H2O_TS_sm.get_q(T=c.T0('K'), include_ZPE=False) \
+            / self.H2O_sm.get_q(T=c.T0('K'), include_ZPE=False)
+        exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s')*exp_sm_q_rev*np.exp(1.)
+        np.testing.assert_almost_equal(
+                self.rxn_sm.get_A(T=c.T0('K')), exp_sm_A, decimal=0)
+        np.testing.assert_almost_equal(
+                self.rxn_sm.get_A(T=c.T0('K'), rev=True), exp_sm_A_rev,
+                decimal=0)
+
+        # Testing entropy method
         exp_sm_SoR = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
             - self.H2_sm.get_SoR(T=c.T0('K')) \
             - self.O2_sm.get_SoR(T=c.T0('K'))*0.5
@@ -1054,9 +1069,11 @@ class TestReaction(unittest.TestCase):
         exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s') \
             * np.exp(exp_sm_SoR_rev+1.)
         np.testing.assert_almost_equal(
-                self.rxn_sm.get_A(T=c.T0('K')), exp_sm_A, decimal=0)
+                self.rxn_sm.get_A(T=c.T0('K'), use_q=False), exp_sm_A,
+                decimal=0)
         np.testing.assert_almost_equal(
-                self.rxn_sm.get_A(T=c.T0('K'), rev=True), exp_sm_A_rev,
+                self.rxn_sm.get_A(T=c.T0('K'), rev=True, use_q=False), 
+                exp_sm_A_rev,
                 decimal=0)
 
     def test_from_string(self):
