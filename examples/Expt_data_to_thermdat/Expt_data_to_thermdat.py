@@ -39,5 +39,5 @@ axes[0].plot(T, Cp, 'ko')
 axes[1].plot(T_ref, H_ref, 'ko')
 axes[2].plot(T_ref, S_ref, 'ko')
 axes[3].plot(T_ref, H_ref - T_ref * S_ref *
-             c.convert_unit(from_='J', to='kJ'), 'ko')
+             c.convert_unit(initial='J', final='kJ'), 'ko')
 plt.show()

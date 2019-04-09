@@ -32,7 +32,7 @@ class Zacros(EmpiricalBase):
         self.vib_energies = c.wavenumber_to_energy(np.array(vib_wavenumbers))
         self.theta = np.array(self.vib_energies) / c.kb('eV/K')
         self.zpe = sum(np.array(self.vib_energies)/2.) *\
-            c.convert_unit(from_='eV', to='kcal')*c.Na
+            c.convert_unit(initial='eV', final='kcal')*c.Na
         if np.sum(self.vib_energies) != 0:
             self.q_vib = np.product(np.divide(1, (1 - np.exp(-self.theta /
                                                              c.T0('K')))))
@@ -41,8 +41,8 @@ class Zacros(EmpiricalBase):
                 self.I3 = self.inertia
             else:
                 self.I3 = atoms.get_moments_of_inertia() *\
-                        c.convert_unit(from_='A2', to='m2') *\
-                        c.convert_unit(from_='amu', to='kg')
+                        c.convert_unit(initial='A2', final='m2') *\
+                        c.convert_unit(initial='amu', final='kg')
             self.T_I = c.h('J s')**2/(8*np.pi**2*c.kb('J/K'))
         if self.phase == 'G':
             Irot = np.max(self.I3)
@@ -54,7 +54,7 @@ class Zacros(EmpiricalBase):
         else:
             self.q_rot = 0.
         if self.A_st is not None:
-            self.MW = mw(self.elements)*c.convert_unit(from_='g', to='kg')/c.Na
+            self.MW = mw(self.elements)*c.convert_unit(initial='g', final='kg')/c.Na
             self.q_trans2D = self.A_st * (2*np.pi*self.MW*c.kb('J/K') *
                                           c.T0('K'))/c.h('J s')**2
 

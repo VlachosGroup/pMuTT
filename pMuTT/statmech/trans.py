@@ -51,7 +51,7 @@ class FreeTrans:
             V : float
                 Molar volume in m3
         """
-        return T*c.R('J/mol/K')/(P*c.convert_unit(from_='bar', to='Pa'))
+        return T*c.R('J/mol/K')/(P*c.convert_unit(initial='bar', final='Pa'))
 
     def get_q(self, T, P=c.P0('bar')):
         """Calculates the partition function
@@ -73,7 +73,7 @@ class FreeTrans:
         """
         V = self.get_V(T=T, P=P)
         unit_mass = self.molecular_weight *\
-            c.convert_unit(from_='g', to='kg')/c.Na
+            c.convert_unit(initial='g', final='kg')/c.Na
         return V*(2*np.pi*c.kb('J/K')*T*unit_mass/c.h('J s')**2) \
             ** (float(self.n_degrees)/2.)
 
@@ -146,7 +146,7 @@ class FreeTrans:
         """
         V = self.get_V(T=T, P=P)
         unit_mass = self.molecular_weight *\
-            c.convert_unit(from_='g', to='kg')/c.Na
+            c.convert_unit(initial='g', final='kg')/c.Na
         return 1. + float(self.n_degrees)/2. \
             + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2)
                      ** (float(self.n_degrees)/2.)*V/c.Na)

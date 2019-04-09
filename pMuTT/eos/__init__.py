@@ -154,7 +154,7 @@ class vanDerWaalsEOS:
             Vm : float
                 Volume in m3
         """
-        P_SI = P*c.convert_unit(from_='bar', to='Pa')
+        P_SI = P*c.convert_unit(initial='bar', final='Pa')
         Vm = np.roots(
             [P_SI, -(P_SI*self.b + c.R('J/mol/K')*T), self.a, -self.a*self.b])
         real_Vm = np.real([Vm_i for Vm_i in Vm if np.isreal(Vm_i)])
@@ -203,7 +203,7 @@ class vanDerWaalsEOS:
         """
         Vm = V/n
         return (c.R('J/mol/K')*T/(Vm - self.b) - self.a*(1./Vm)**2) \
-            * c.convert_unit(from_='Pa', to='bar')
+            * c.convert_unit(initial='Pa', final='bar')
 
     def get_T(self, V=c.V0('m3'), P=c.P0('bar'), n=1.):
         """Calculates the temperature of a van der Waals gas
@@ -222,7 +222,7 @@ class vanDerWaalsEOS:
                 Temperature in K
         """
         Vm = V/n
-        return (P*c.convert_unit(from_='bar', to='Pa') + self.a/Vm**2) \
+        return (P*c.convert_unit(initial='bar', final='Pa') + self.a/Vm**2) \
             * (Vm - self.b)/c.R('J/mol/K')
 
     def get_n(self, V=c.V0('m3'), P=c.P0('bar'), T=c.T0('K'), gas_phase=True):
@@ -255,7 +255,7 @@ class vanDerWaalsEOS:
             Pc : float
                 Critical pressure in bar
         """
-        return self.a/27./self.b**2*c.convert_unit(from_='Pa', to='bar')
+        return self.a/27./self.b**2*c.convert_unit(initial='Pa', final='bar')
 
     def get_Tc(self):
         """Calculates the critical temperature
@@ -296,7 +296,7 @@ class vanDerWaalsEOS:
         -------
             vanDerWaalsEOS : vanDerWaalsEOS object
         """
-        Pc_SI = Pc*c.convert_unit(from_='bar', to='Pa')
+        Pc_SI = Pc*c.convert_unit(initial='bar', final='Pa')
         a = 27./64.*(c.R('J/mol/K')*Tc)**2/Pc_SI
         b = c.R('J/mol/K')*Tc/8./Pc_SI
         return cls(a=a, b=b)
