@@ -248,7 +248,7 @@
     }
    ],
    "source": [
-    "rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = H2O_TS = H2O', species=species_dict)\n",
+    "rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = H2O', species=species_dict)\n",
     "\n",
     "# See that you get the same stoichiometry as before\n",
     "print('Creating Reaction object using default string notation: {}'.format(rxn))\n",
@@ -723,7 +723,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.7.2"
+   "version": "3.6.8"
   }
  },
  "nbformat": 4,

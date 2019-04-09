@@ -515,7 +515,7 @@ default = None. Will not return React_obj and Prod_obj</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -601,7 +601,7 @@ be written to this file</li>
 present, they will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
-<li><strong>reactions</strong> (list of <a class="reference internal" href="#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
 Default is ‘+’</li>
