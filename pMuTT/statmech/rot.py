@@ -6,6 +6,21 @@ import numpy as np
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
+symmetry_dict = {
+    'C1': 1,
+    'Cs': 1,
+    'C2': 2,
+    'C2v': 2,
+    'C3v': 3,
+    'Cinfv': 1,
+    'D2h': 4,
+    'D3h': 6,
+    'D5h': 10,
+    'Dinfh': 2,
+    'D3d': 6,
+    'Td': 12,
+    'Oh': 24
+}
 
 class RigidRotor:
     """Rotational mode using the rigid rotor assumption. Equations found in
@@ -14,8 +29,9 @@ class RigidRotor:
 
     Attributes
     ----------
-        symmetrynumber : float
-            Symmetry number of molecule.
+        symmetrynumber : float or str
+            Symmetry number of molecule. If a string is inputted, it represents 
+            the point group. Supported options are shown below.
 
             ===========    ===============
             Point group    symmetry number
@@ -54,6 +70,15 @@ class RigidRotor:
 
     def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None,
                  atoms=None, degree_tol=5.):
+        if isinstance(symmetrynumber, str):
+            try:
+                symmetrynumber = symmetry_dict[symmetrynumber]
+            except KeyError:
+                raise ValueError('Point group, {}, not supported. '
+                                 'See :class:`~pMuTT.statmech.rot.RigidRotor '
+                                 'for supported '
+                                 'options.'.format(symmetrynumber))
+
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
             self.rot_temperatures = get_rot_temperatures_from_atoms(
