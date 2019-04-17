@@ -134,7 +134,7 @@ class Nasa(EmpiricalBase):
             for i, T_i in enumerate(T):
                 a = self.get_a(T_i)
                 CpoR[i] = get_nasa_CpoR(a=a, T=T_i) \
-                    + np.sum(_get_mix_quantity(self.mix_models,
+                    + np.sum(_get_mix_quantity(self.misc_models,
                                                method_name='get_CpoR',
                                                raise_error=raise_error,
                                                raise_warning=raise_warning,
@@ -143,7 +143,7 @@ class Nasa(EmpiricalBase):
         else:
             a = self.get_a(T=T)
             CpoR = get_nasa_CpoR(a=a, T=T) \
-                + np.sum(_get_mix_quantity(self.mix_models, 
+                + np.sum(_get_mix_quantity(self.misc_models, 
                                            method_name='get_CpoR',
                                            raise_error=raise_error,
                                            raise_warning=raise_warning,
@@ -207,7 +207,7 @@ class Nasa(EmpiricalBase):
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 HoRT[i] = get_nasa_HoRT(a=a, T=T_i) \
-                    + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                    + np.sum(_get_mix_quantity(misc_models=self.misc_models,
                                                method_name='get_HoRT',
                                                raise_error=raise_error,
                                                raise_warning=raise_warning,
@@ -216,7 +216,7 @@ class Nasa(EmpiricalBase):
         else:
             a = self.get_a(T=T)
             HoRT = get_nasa_HoRT(a=a, T=T) \
-                + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                + np.sum(_get_mix_quantity(misc_models=self.misc_models,
                                            method_name='get_HoRT',
                                            raise_error=raise_error,
                                            raise_warning=raise_warning,
@@ -282,7 +282,7 @@ class Nasa(EmpiricalBase):
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 SoR[i] = get_nasa_SoR(a=a, T=T_i) \
-                    + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                    + np.sum(_get_mix_quantity(misc_models=self.misc_models,
                                                method_name='get_SoR',
                                                raise_error=raise_error,
                                                raise_warning=raise_warning,
@@ -291,7 +291,7 @@ class Nasa(EmpiricalBase):
         else:
             a = self.get_a(T=T)
             SoR = get_nasa_SoR(a=a, T=T) \
-                + np.sum(_get_mix_quantity(mix_models=self.mix_models,
+                + np.sum(_get_mix_quantity(misc_models=self.misc_models,
                                            method_name='get_SoR',
                                            raise_error=raise_error,
                                            raise_warning=raise_warning,
@@ -551,7 +551,7 @@ class Nasa(EmpiricalBase):
         json_obj['statmech_model'] = json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = json_to_pMuTT(json_obj['references'])
         json_obj['cat_site'] = json_to_pMuTT(json_obj['cat_site'])
-        json_obj['mix_models'] = json_to_pMuTT(json_obj['mix_models'])
+        json_obj['misc_models'] = json_to_pMuTT(json_obj['misc_models'])
         return cls(**json_obj)
 
 

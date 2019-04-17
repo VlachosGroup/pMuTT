@@ -80,7 +80,7 @@ class Shomate(EmpiricalBase):
         CpoR = get_shomate_CpoR(a=self.a, T=T)
         # Calculate mixing properties
         for T_i in T:
-            CpoR_mix = _get_mix_quantity(mix_models=self.mix_models,
+            CpoR_mix = _get_mix_quantity(misc_models=self.misc_models,
                                          method_name='get_CpoR',
                                          raise_error=raise_error,
                                          raise_warning=raise_warning,
@@ -154,7 +154,7 @@ class Shomate(EmpiricalBase):
         HoRT = get_shomate_HoRT(a=self.a, T=T)
         # Calculate mixing properties
         for T_i in T:
-            HoRT_mix = _get_mix_quantity(mix_models=self.mix_models,
+            HoRT_mix = _get_mix_quantity(misc_models=self.misc_models,
                                          method_name='get_HoRT',
                                          raise_error=raise_error,
                                          raise_warning=raise_warning,
@@ -229,7 +229,7 @@ class Shomate(EmpiricalBase):
         SoR = get_shomate_SoR(a=self.a, T=T)
         # Calculate mixing properties
         for T_i in T:
-            SoR_mix = _get_mix_quantity(mix_models=self.mix_models,
+            SoR_mix = _get_mix_quantity(misc_models=self.misc_models,
                                         method_name='get_SoR',
                                         raise_error=raise_error,
                                         raise_warning=raise_warning,
@@ -443,7 +443,7 @@ class Shomate(EmpiricalBase):
             json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
             json_to_pMuTT(json_obj['references'])
-        json_obj['mix_models'] = json_to_pMuTT(json_obj['mix_models'])
+        json_obj['misc_models'] = json_to_pMuTT(json_obj['misc_models'])
 
         return cls(**json_obj)
 

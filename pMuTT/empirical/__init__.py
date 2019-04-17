@@ -39,8 +39,9 @@ class EmpiricalBase:
         references : ``pMuTT.empirical.References.references`` object, optional
             Contains references to calculate ``HoRT_ref``. If not specified
             then HoRT_dft will be used without adjustment. Default is None
-        mix_models : list of ``pMuTT.mixture`` objects, optional
-            Mixture models that calculate excess properties.
+        misc_models : list of pMuTT model objects, optional
+            Extra models to add extra functionality. Commonly used models would
+            be ``pMuTT.mixture`` models
         smiles : str, optional
             Smiles representation of species. Default is None
         notes : str, optional
@@ -49,7 +50,7 @@ class EmpiricalBase:
     """
 
     def __init__(self, name=None, phase=None, elements=None,
-                 statmech_model=None, references=None, mix_models=None,
+                 statmech_model=None, references=None, misc_models=None,
                  smiles=None, notes=None, **kwargs):
         self.name = name
         self.phase = phase
@@ -72,9 +73,9 @@ class EmpiricalBase:
         # because all the models will have the same attributes. Figure out a
         # way to pass them. Perhaps have a dictionary that contains the
         # attributes separated by species
-        if not _is_iterable(mix_models) and mix_models is not None:
-            mix_models = [mix_models]
-        self.mix_models = mix_models
+        if not _is_iterable(misc_models) and misc_models is not None:
+            misc_models = [misc_models]
+        self.misc_models = misc_models
 
     def __eq__(self, other):
         try:
@@ -589,11 +590,11 @@ class EmpiricalBase:
         except AttributeError:
             obj_dict['statmech_model'] = self.statmech_model
 
-        if _is_iterable(self.mix_models):
-            obj_dict['mix_models'] = \
-                    [mix_model.to_dict() for mix_model in self.mix_models]
+        if _is_iterable(self.misc_models):
+            obj_dict['misc_models'] = \
+                    [mix_model.to_dict() for mix_model in self.misc_models]
         else:
-            obj_dict['mix_models'] = self.mix_models
+            obj_dict['misc_models'] = self.misc_models
         return obj_dict
 
     @classmethod
@@ -614,7 +615,7 @@ class EmpiricalBase:
             json_to_pMuTT(json_obj['statmech_model'])
         json_obj['references'] = \
             json_to_pMuTT(json_obj['references'])
-        json_obj['mix_models'] = \
-            [json_to_pMuTT(mix_model) for mix_model in json_obj['mix_models']]
+        json_obj['misc_models'] = \
+            [json_to_pMuTT(mix_model) for mix_model in json_obj['misc_models']]
 
         return cls(**json_obj)

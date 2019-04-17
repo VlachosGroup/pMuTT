@@ -10,8 +10,9 @@ from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class CovEffect:
-    """Models enthalpic contribution to coverage effect between two species
+class PiecewiseCovEffect:
+    """Models enthalpic contribution to coverage effect between two species 
+    using piecewise linear functions
 
     Attributes
     ----------

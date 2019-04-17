@@ -90,8 +90,9 @@ class StatMech:
         nucl_model : :ref:`pMuTT.statmech.nucl <nucl>` object
             Deals with nuclear modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
-        mix_models : list of ``pMuTT.mixture`` objects, optional
-            Mixture models that calculate excess properties.
+        misc_models : list of pMuTT model objects, optional
+            Extra models that do not fit in the above attributes. Commonly used
+            models would be ``pMuTT.statmech`` and ``pMuTT.mixture`` models
         smiles : str, optional
             Smiles representation of species
         notes : str, optional
@@ -102,7 +103,7 @@ class StatMech:
     def __init__(self, name=None, trans_model=EmptyMode(),
                  vib_model=EmptyMode(), rot_model=EmptyMode(),
                  elec_model=EmptyMode(), nucl_model=EmptyMode(),
-                 mix_models=None, smiles=None, notes=None, **kwargs):
+                 misc_models=None, smiles=None, notes=None, **kwargs):
         self.name = name
         self.smiles = smiles
         self.notes = notes
@@ -142,9 +143,9 @@ class StatMech:
         # because all the models will have the same attributes. Figure out
         # a way to pass them. Perhaps have a dictionary that contains the
         # attributes separated by species
-        if not _is_iterable(mix_models) and mix_models is not None:
-            mix_models = [mix_models]
-        self.mix_models = mix_models
+        if not _is_iterable(misc_models) and misc_models is not None:
+            misc_models = [misc_models]
+        self.misc_models = misc_models
 
     def get_quantity(self, method_name, raise_error=True, raise_warning=True,
                      operation='sum', verbose=False, **kwargs):
@@ -221,7 +222,7 @@ class StatMech:
                                default_value=default_value,
                                **specie_kwargs)])
         # Calculate contribution from mixing models if any
-        mix_quantity = _get_mix_quantity(mix_models=self.mix_models,
+        mix_quantity = _get_mix_quantity(misc_models=self.misc_models,
                                          method_name=method_name,
                                          raise_error=raise_error,
                                          raise_warning=raise_warning,
@@ -831,11 +832,11 @@ class StatMech:
             'smiles': self.smiles,
             'notes': self.notes}
 
-        if _is_iterable(self.mix_models):
-            obj_dict['mix_models'] = \
-                    [mix_model.to_dict() for mix_model in self.mix_models]
+        if _is_iterable(self.misc_models):
+            obj_dict['misc_models'] = \
+                    [mix_model.to_dict() for mix_model in self.misc_models]
         else:
-            obj_dict['mix_models'] = self.mix_models
+            obj_dict['misc_models'] = self.misc_models
 
         return obj_dict
 

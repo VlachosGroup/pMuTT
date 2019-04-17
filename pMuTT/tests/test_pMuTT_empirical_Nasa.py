@@ -41,7 +41,7 @@ class TestNasa(unittest.TestCase):
             'notes': None,
             'references': None,
             'statmech_model': None,
-            'mix_models': None,
+            'misc_models': None,
             'cat_site': None,
             'n_sites': None,
             'smiles': None,
