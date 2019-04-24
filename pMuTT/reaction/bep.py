@@ -15,7 +15,7 @@ class BEP(_ModelBase):
         slope : float
             Slope of BEP relationship.
         intercept : float
-            Intercept of BEP relationship in eV.
+            Intercept of BEP relationship in kcal/mol.
         name : str, optional
             Name of the BEP. Default is None
         reaction : :class:`~pMuTT.reaction.Reaction` object, optional
@@ -171,7 +171,7 @@ class BEP(_ModelBase):
         -------
             E_act : float
                 Dimensionless activation energy
-        """        
+        """
         if 'rev_delta' in self.descriptor:
             # If the descriptor is for the reverse reaction, the slope has to
             # be modified
@@ -245,7 +245,7 @@ class BEP(_ModelBase):
         """
         HoRT_reactants = self.reaction.get_HoRT_state(state='reactants', T=T,
                                                       **kwargs)
-        return self.get_EoRT_act(rev=True, T=T, **kwargs) + HoRT_reactants
+        return self.get_EoRT_act(rev=False, T=T, **kwargs) + HoRT_reactants
 
     def get_SoR(self, T=c.T0('K'), entropy_state='reactants', **kwargs):
         """Calculates the dimensionless entropy using reactants or products

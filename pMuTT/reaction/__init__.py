@@ -1486,18 +1486,6 @@ class Reaction(_pMuTTBase):
             rev : bool, optional
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
-            method : str, optional
-                Method to use to calculate dimensionless act energy.
-                Accepted options:
-
-                - 'any' (uses whichever is available. First uses transition
-                  state theory, then BEPs, then the reaction enthalpy)
-                - 'ts' or 'transition_state' (uses ``self.transition_state``)
-                - 'bep' (uses ``self.bep``)
-                - 'enthalpy' (uses the enthalpy of the reaction. If the
-                  reaction is exothermic, returns 0)
-
-                Default is 'any'.
             del_m : int, optional
                 Change in molecularity of gas-phase species in the reaction.
                 Condensed-phase and unimolecular gas-phase reactions should have
@@ -1527,8 +1515,7 @@ class Reaction(_pMuTTBase):
         EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
         return EoRT
 
-    def get_E_act(self, units, T, rev=False, method='any', del_m=None,
-                  **kwargs):
+    def get_E_act(self, units, T, rev=False, del_m=1, **kwargs):
         """Gets act energy between reactants (or products)
         and transition state
 
@@ -1542,23 +1529,14 @@ class Reaction(_pMuTTBase):
             rev : bool, optional
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
-            method : str, optional
-                Method to use to calculate act energy.
-                Accepted options:
-
-                - 'any' (uses whichever is available. ``self.transition_state``
-                  is used preferentially over ``self.BEP``)
-                - 'bep' (uses ``self.bep``)
-                - 'ts' or 'transition_state' (uses ``self.transition_state``)
-
-                Default is 'any'.
             del_m : int, optional
                 Change in molecularity of gas-phase species in the reaction.
                 Condensed-phase and unimolecular gas-phase reactions should have
                 a value of 0. Bimolecular gas-phase reactions should have a 
-                value of -1. If not specified, m will be calculated 
+                value of -1. If None specified, m will be calculated 
                 (assuming all species in the initial state and transition state
-                are gas phase).
+                are gas phase). To get the transition-state enthalpy of
+                activation, set to 1 (default).
             kwargs : keyword arguments
                 Parameters required to calculate act energy. See class
                 docstring to see how to pass specific parameters to
@@ -1569,7 +1547,7 @@ class Reaction(_pMuTTBase):
                 act energy between reactants (or products) and
                 transition state
         """
-        return self.get_EoRT_act(rev=rev, method=method, T=T, del_m=del_m,
+        return self.get_EoRT_act(rev=rev, T=T, del_m=del_m,
                                  **kwargs)*T*c.R('{}/K'.format(units))
 
     def get_A(self, T=c.T0('K'), rev=False, m=0, use_q=True, **kwargs):
