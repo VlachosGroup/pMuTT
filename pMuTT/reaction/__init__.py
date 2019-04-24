@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 from collections import Counter
+from copy import deepcopy
 import inspect
 import re
 import numpy as np
 from scipy import interpolate
 from matplotlib import pyplot as plt
 from pMuTT import (_force_pass_arguments, _pass_expected_arguments,
-                   _is_iterable, _get_specie_kwargs, _apply_numpy_operation)
+                   _is_iterable, _get_specie_kwargs, _apply_numpy_operation,
+                   _pMuTTBase)
+from pMuTT.reaction.bep import BEP
 from pMuTT import constants as c
 from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
-class Reaction:
+class Reaction(_pMuTTBase):
     """Represents a chemical reaction
 
     Attributes
@@ -29,11 +32,13 @@ class Reaction:
         transition_state_stoich : list of float, optional
             Stoichiometric quantities of transition state species.
             Default is None
-        bep : :class:`~pMuTT.reaction.bep.BEP` object, optional
-            Bronsted Evans Polyani relationship. Default is None
-        kwargs : keyword arguments
-            BEP parameters. See :class:`~pMuTT.reaction.bep.BEP` documentation
-            for expected parameters
+        bep_descriptor : str, optional
+            If the transition state is a :class:`~pMuTT.reaction.bep.BEP`
+            object, the descriptor can be set using this parameter. See
+            :class:`~pMuTT.reaction.bep.BEP` documentation for accepted
+            descriptors
+        notes : str or dict, optional
+            Other notes such as the source of the reaction. Default is None
 
     Notes
     -----
@@ -64,7 +69,7 @@ class Reaction:
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
                  transition_state=None, transition_state_stoich=None,
-                 bep=None, **kwargs):
+                 bep_descriptor=None, notes=None):
         # If any of the entries were not iterable, assign them to a list
         if not _is_iterable(reactants) and reactants is not None:
             reactants = [reactants]
@@ -79,25 +84,24 @@ class Reaction:
         if not _is_iterable(transition_state_stoich) \
            and transition_state_stoich is not None:
             transition_state_stoich = [transition_state_stoich]
+        self.notes = notes
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
         self.products = products
         self.products_stoich = products_stoich
-        self.transition_state = transition_state
         self.transition_state_stoich = transition_state_stoich
-        if inspect.isclass(bep):
-            kwargs['reaction'] = self
-            self.bep = _pass_expected_arguments(bep, **kwargs)
-        else:
-            self.bep = bep
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
+        # Assign the transition state or BEP relationships
+        if transition_state is not None:
+            transition_state_list = []
+            for specie in transition_state:
+                # If BEP specified, link reaction to BEP
+                if isinstance(specie, BEP):
+                    specie = deepcopy(specie)
+                    specie.set_descriptor(reaction=self,
+                                          descriptor=bep_descriptor)
+                transition_state_list.append(specie)
+            transition_state = transition_state_list
+        self.transition_state = transition_state
 
     def __str__(self):
         return self.to_string()
@@ -172,6 +176,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts'
             kwargs : keyword arguments
                 Parameters with the conditions to calculate partition function.
@@ -196,6 +201,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless heat capacity at
@@ -221,6 +227,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -247,6 +254,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless heat capacity at
@@ -273,6 +281,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -299,6 +308,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless internal energy.
@@ -324,6 +334,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -353,6 +364,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             include_ZPE : bool, optional
                 If True, includes the zero point energy. Default is False
@@ -380,6 +392,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -412,6 +425,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless enthalpy. See
@@ -438,6 +452,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -467,6 +482,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless entropy. See
@@ -491,6 +507,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -517,6 +534,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless
@@ -542,6 +560,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -571,6 +590,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless Gibbs energy.
@@ -595,6 +615,7 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
                 - 'ts' (same as transition state)
             units : str
                 Units as string. See :func:`~pMuTT.constants.R` for accepted
@@ -1447,7 +1468,7 @@ class Reaction:
         return np.exp(-self.get_delta_GoRT(rev=rev, act=act,
                                            **kwargs))
 
-    def get_EoRT_act(self, rev=False, method='any', del_m=None, **kwargs):
+    def get_EoRT_act(self, rev=False, del_m=1, **kwargs):
         """Gets dimensionless Arrhenius activation energy between reactants
         (or products) and transition state
 
@@ -1481,10 +1502,10 @@ class Reaction:
                 Change in molecularity of gas-phase species in the reaction.
                 Condensed-phase and unimolecular gas-phase reactions should have
                 a value of 0. Bimolecular gas-phase reactions should have a 
-                value of -1. If not specified, m will be calculated 
+                value of -1. If None specified, m will be calculated 
                 (assuming all species in the initial state and transition state
                 are gas phase). To get the transition-state enthalpy of
-                activation, set to 1.
+                activation, set to 1 (default).
             kwargs : keyword arguments
                 Parameters required to calculate dimensionless act
                 energy
@@ -1494,37 +1515,16 @@ class Reaction:
                 Dimensionless act energy between reactants (or products)
                 and transition state
         """
-        method = method.lower()
-        # Assign the appropriate method is 'any' was specified
-        if method == 'any':
-            if self.transition_state is not None:
-                method = 'transition_state'
-            elif self.bep is not None:
-                method = 'bep'
+        # Find molecularity of the reaction
+        if del_m is None:
+            m_FS = _get_molecularity(self.transition_state_stoich)
+            if rev:
+                m_IS = _get_molecularity(self.products_stoich)
             else:
-                method = 'enthalpy'
-
-        if method == 'transition_state' or method == 'ts':
-            # Find molecularity of the reaction
-            if del_m is None:
-                m_FS = _get_molecularity(self.transition_state_stoich)
-                if rev:
-                    m_IS = _get_molecularity(self.products_stoich)
-                else:
-                    m_IS = _get_molecularity(self.reactants_stoich)
-                del_m = m_FS - m_IS
-            # Calculate H_TS and convert to Arrhenius activation energy
-            EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
-        elif method == 'bep':
-            EoRT = self.bep.get_EoRT_act(rev=rev, **kwargs)
-        elif method == 'enthalpy':
-            EoRT = np.max([0., self.get_delta_HoRT(rev=rev, act=False,
-                                                   **kwargs)])
-        else:
-            raise ValueError(('Method "{}" not supported. See documentation '
-                              'of '
-                              '``pMuTT.reaction.Reaction.get_EoRT_act`` '
-                              'for supported options.'.format(method)))
+                m_IS = _get_molecularity(self.reactants_stoich)
+            del_m = m_FS - m_IS
+        # Calculate H_TS and convert to Arrhenius activation energy
+        EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
         return EoRT
 
     def get_E_act(self, units, T, rev=False, method='any', del_m=None,
@@ -1572,7 +1572,7 @@ class Reaction:
         return self.get_EoRT_act(rev=rev, method=method, T=T, del_m=del_m,
                                  **kwargs)*T*c.R('{}/K'.format(units))
 
-    def get_A(self, T=c.T0('K'), rev=False, m=None, use_q=True, **kwargs):
+    def get_A(self, T=c.T0('K'), rev=False, m=0, use_q=True, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
         transition state in 1/s
 
@@ -1593,10 +1593,10 @@ class Reaction:
                 Molecularity of gas-phase species in the reaction.
                 Condensed-phase reactions and unimolecular gas-phase reactions
                 should have a value of 1. Bimolecular gas-phase reactions 
-                should have a value of 2. If not specified, m will be 
+                should have a value of 2. If None specified, m will be 
                 calculated (assuming all species in the initial state are
                 gas phase). To get the transition-state estimate of the
-                pre-exponential factor, set to 0.
+                pre-exponential factor, set to 0 (default).
             use_q : bool, optional
                 If True, uses ratio of partition functions to calculate A. If
                 False, uses the entropy of activation to calculate A.
@@ -1616,10 +1616,10 @@ class Reaction:
             else:
                 m = _get_molecularity(self.reactants_stoich)
         if use_q:
-            A = self.get_q_act(rev=rev, T=T, ignore_q_elec=True,
-                               include_ZPE=False, **kwargs)
+            A = self.get_delta_q(rev=rev, act=True, T=T, ignore_q_elec=True,
+                                 include_ZPE=False, **kwargs)
         else:
-            A = np.exp(self.get_SoR_act(rev=rev, T=T, **kwargs))
+            A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
         return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
 
     def _parse_state(self, state):
@@ -1633,6 +1633,8 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
+                - 'ts'
         Returns
         -------
             species : list of ``pMuTT`` specie objects
@@ -1647,7 +1649,9 @@ class Reaction:
         elif state == 'products':
             species = self.products
             species_stoich = self.products_stoich
-        elif state == 'transition state' or state == 'ts':
+        elif state == 'transition state' \
+             or state == 'transition_state' \
+             or state == 'ts':
             species = self.transition_state
             species_stoich = self.transition_state_stoich
         else:
@@ -1666,6 +1670,8 @@ class Reaction:
                 - 'reactants'
                 - 'products'
                 - 'transition state'
+                - 'transition_state'
+                - 'ts'
             method_name : str
                 Name of method to use to calculate quantity. Calculates any
                 quantity as long as the relevant objects have the same method
@@ -1679,7 +1685,6 @@ class Reaction:
                 Thermodynamic quantity of particular state
         """
         species, stoich = self._parse_state(state=state)
-
         if method_name == 'get_q':
             state_quantity = 1.
         else:
@@ -1746,7 +1751,7 @@ class Reaction:
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', **kwargs):
+                    reaction_delimiter='=', bep_descriptor=None, notes=None):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -1762,9 +1767,13 @@ class Reaction:
             reaction_delimiter : str, optional
                 Delimiter that separate states of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
-            kwargs : keyword arguments
-                BEP parameters. See :class:`~pMuTT.reaction.bep.BEP`
-                documentation for expected parameters
+            bep_descriptor : str, optional
+                If the transition state is a :class:`~pMuTT.reaction.bep.BEP`
+                object, the descriptor can be set using this parameter. See
+                :class:`~pMuTT.reaction.bep.BEP` documentation for accepted
+                descriptors
+            notes : str or dict, optional
+                Other notes such as the source of the reaction. Default is None
         Returns
         -------
             Reaction : Reaction object
@@ -1783,7 +1792,7 @@ class Reaction:
         return cls(reactants=reactants, reactants_stoich=react_stoich,
                    products=products, products_stoich=prod_stoich,
                    transition_state=ts, transition_state_stoich=ts_stoich,
-                   **kwargs)
+                   bep_descriptor=bep_descriptor, notes=notes)
 
     def to_string(self, species_delimiter='+', reaction_delimiter='=',
                   stoich_format='.2f', include_TS=True, key='name'):
@@ -1840,8 +1849,7 @@ class Reaction:
         -------
             obj_dict : dict
         """
-        obj_dict = {
-            'class': str(self.__class__)}
+        obj_dict = {'class': str(self.__class__)}
         # Reactants
         if _is_iterable(self.reactants):
             obj_dict['reactants'] = \
@@ -1876,12 +1884,6 @@ class Reaction:
                     list(self.transition_state_stoich)
         else:
             obj_dict['transition_state_stoich'] = self.transition_state_stoich
-        # BEP
-        try:
-            obj_dict['bep'] = self.bep.to_dict()
-        except (AttributeError, TypeError):
-            obj_dict['bep'] = self.bep
-
         return obj_dict
 
     @classmethod
@@ -1903,11 +1905,7 @@ class Reaction:
                                 for product in json_obj['products']]
         json_obj['transition_state'] = json_to_pMuTT(
                 json_obj['transition_state'])
-        json_obj['bep'] = json_to_pMuTT(json_obj['bep'])
-
         reaction = cls(**json_obj)
-        if reaction.bep is not None:
-            reaction.bep.set_descriptor(reaction=reaction)
         return reaction
 
 
@@ -2086,7 +2084,7 @@ class ChemkinReaction(Reaction):
         return obj_dict
 
 
-class Reactions:
+class Reactions(_pMuTTBase):
     """Contains multiple reactions. Serves as a parent class for other objects
 
     Attributes
@@ -2095,14 +2093,6 @@ class Reactions:
     """
     def __init__(self, reactions):
         self.reactions = list(reactions)
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def __iter__(self):
         for reaction in self.reactions:
@@ -2339,6 +2329,47 @@ class Reactions:
         plt.tight_layout()
         return figure, axes
 
+    def get_E_span(self, units, **kwargs):
+        """Gets the energy span of a set of reactions
+        
+        If the TOF-determining transition state (TSTS) appears after the
+        TOF-determining intermediate (TDI):
+        :math:`\\delta E = T_{TDTS} - I_{TDI}`
+
+        If the TSTS appears before the TDI:
+        :math:`\\delta E = T_{TDTS} - I_{TDI} + \\Delta G_r
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            kwargs : keyword arguments
+                Parameters to evaluate Gibbs energy at each state.
+        """
+        states = ('reactants', 'transition_state', 'products')
+        states_G = []
+        for reaction in self.reactions:
+            for state in states:
+                # Skip states that are not occupied
+                if getattr(reaction, state) is None:
+                    continue
+                states_G.append(reaction.get_G_state(state=state, units=units,
+                                                     **kwargs))
+        min_G = np.amin(states_G)
+        min_i = np.argmin(states_G)
+        max_G = np.amax(states_G)
+        max_i = np.argmax(states_G)
+        if max_i >= min_i:
+            E_span = max_G - min_G
+        else:
+            delta_G = self.reactions[-1].get_G_state(state='products',
+                                                     units=units, **kwargs) \
+                      - self.reactions[0].get_G_state(state='reactants',
+                                                      units=units, **kwargs)
+            E_span = max_G - min_G + delta_G
+        return E_span
+            
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
 
@@ -2584,9 +2615,7 @@ def _get_states(rev, act):
     else:
         initial_state = 'reactants'
         final_state = 'products'
-
     # Overwrites the final state if necessary
     if act:
         final_state = 'transition state'
-
     return initial_state, final_state

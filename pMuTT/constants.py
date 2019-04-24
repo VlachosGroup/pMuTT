@@ -225,17 +225,11 @@ def m_e(units):
         KeyError
             If units is not supported.
     """
-    m_e_dict = {
-        'kg': 9.10938356e-31,
-        'g': 9.10938356e-28,
-        'amu': 5.48579909070e-4
-    }
     try:
-        return m_e_dict[units]
+        return convert_unit(num=5.48579909070e-4, initial='amu', final=units)
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pMuTT.constants.m_e) for '
+        raise KeyError('Invalid unit: {}. Use help(pMuTT.constants.m_p) for '
                        'accepted units.'.format(units))
-
 
 def m_p(units):
     """Mass of a proton
@@ -262,17 +256,11 @@ def m_p(units):
         KeyError
             If units is not supported.
     """
-    m_p_dict = {
-        'kg': 1.6726219e-27,
-        'g': 1.6726219e-24,
-        'amu': 1.007276466879
-    }
     try:
-        return m_p_dict[units]
+        return convert_unit(num=1.007276466879, initial='amu', final=units)
     except KeyError:
         raise KeyError('Invalid unit: {}. Use help(pMuTT.constants.m_p) for '
                        'accepted units.'.format(units))
-
 
 def P0(units):
     """Reference pressure
@@ -285,14 +273,14 @@ def P0(units):
             ====  =====================  ========
             Unit  Description            Value
             ====  =====================  ========
-            bar   Bar                    1.01325
-            atm   Atmosphere             1
-            Pa    Pascal                 101325
-            kPa   Kilopascal             101.325
-            MPa   Megapascal             0.101325
-            psi   Pound per square inch  14.6959
-            mmHg  Millimeter of mercury  760
-            Torr  Torr                   760
+            bar   Bar                    1
+            atm   Atmosphere             0.986923
+            Pa    Pascal                 100000
+            kPa   Kilopascal             100
+            MPa   Megapascal             0.1
+            psi   Pound per square inch  14.5038
+            mmHg  Millimeter of mercury  750.062
+            Torr  Torr                   750.062
             ====  =====================  ========
 
     Returns
@@ -304,19 +292,8 @@ def P0(units):
         KeyError
             If units is not supported.
     """
-    P0_dict = {
-        'bar': 1.01325,
-        'atm': 1.,
-        'Pa': 101325.,
-        'kPa': 101.325,
-        'MPa': 0.101325,
-        'psi': 14.6959,
-        'mmHg': 760.,
-        'Torr': 760.,
-        None: 1
-    }
     try:
-        return P0_dict[units]
+        return convert_unit(num=1., initial='bar', final=units)
     except KeyError:
         raise KeyError('Invalid unit: {}. Use help(pMuTT.constants.P0) for '
                        'accepted units.'.format(units))
@@ -348,13 +325,8 @@ def T0(units):
         KeyError
             If units is not supported.
     """
-    T0_dict = {'K': 298.15,
-               'C': 25.,
-               'R': 533.07,
-               'F': 73.4
-               }
     try:
-        return T0_dict[units]
+        return convert_unit(num=298.15, initial='K', final=units)
     except KeyError:
         raise KeyError('Invalid unit: {}. Use help(pMuTT.constants.T0) for '
                        'accepted units.'.format(units))
@@ -630,10 +602,6 @@ def convert_unit(num=None, initial=None, final=None):
         'yr': 1./3600./24./365.25,
         'mol': 1.,
         'molecule': 6.02214086e23,
-        'C': 0.,
-        'K': 273.15,
-        'F': 0.,
-        'R': 459.67,
         'm': 1.,
         'cm': 100.,
         'nm': 1.e9,
@@ -669,15 +637,18 @@ def convert_unit(num=None, initial=None, final=None):
     }
 
     # Check if the entry exists
-    if type_dict.get(initial) is None:
+    try:
+        initial_type = type_dict[initial]
+    except KeyError:
         raise ValueError("%r not a supported unit. Use help(pMuTT.constants."
                          "convert_unit) for accepted units." % initial)
-    if type_dict.get(final) is None:
+    try:
+        final_type = type_dict[final]
+    except KeyError:
         raise ValueError("%r not a supported unit. Use help(pMuTT.constants."
                          "convert_unit) for accepted units." % final)
+
     # Check that the unit types are the same
-    initial_type = type_dict[initial]
-    final_type = type_dict[final]
     if initial_type != final_type:
         raise ValueError("%r [Type %r] not compatible with %r [Type %r]. "
                          "Use help(pMuTT.constants.convert_unit) for "
@@ -687,7 +658,9 @@ def convert_unit(num=None, initial=None, final=None):
         if num is None:
             num = 0.
         # Evaluating each combination
-        if initial == 'C':
+        if initial == final:
+            result = num
+        elif initial == 'C':
             if final == 'K':
                 result = num + 273.15
             elif final == 'F':

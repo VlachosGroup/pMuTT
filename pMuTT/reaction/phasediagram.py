@@ -22,7 +22,7 @@ class PhaseDiagram(Reactions):
             reactions stoichiometry is not consistent. Default is an array of
             1. It should have the same length as reactions.
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
 
     def __init__(self, reactions, norm_factors=None):
@@ -41,7 +41,6 @@ class PhaseDiagram(Reactions):
         """
         obj_dict = super().to_dict()
         obj_dict['class'] = str(self.__class__),
-
         return obj_dict
 
     @classmethod

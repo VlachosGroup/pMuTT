@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from pMuTT import _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class HarmonicVib:
+class HarmonicVib(_pMuTTBase):
     """Vibrational modes using the harmonic approximation. Equations found in
     Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
@@ -23,14 +24,6 @@ class HarmonicVib:
     def __init__(self, vib_wavenumbers=[], imaginary_substitute=None):
         self.vib_wavenumbers = np.array(vib_wavenumbers)
         self.imaginary_substitute = imaginary_substitute
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T, include_ZPE=True):
         """Calculates the partition function
@@ -250,14 +243,13 @@ class HarmonicVib:
                                          substitute=self.imaginary_substitute))
 
 
-class QRRHOVib:
+class QRRHOVib(_pMuTTBase):
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
-    approximation. Equations found in
+    approximation. Equations source from:
 
-    1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
-    Phys. Chem. C 2015, 119 (4), 1840–1850.
-
-    2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
+    * Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
+      Phys. Chem. C 2015, 119 (4), 1840–1850.
+    * Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
 
     Attributes
     ----------
@@ -283,14 +275,6 @@ class QRRHOVib:
         self.vib_wavenumbers = vib_wavenumbers
         self.alpha = alpha
         self.imaginary_substitute = imaginary_substitute
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def _get_scaled_wavenumber(self, wavenumber):
         """Calculates the scaled wavenumber determining mixture of RRHO to
@@ -614,10 +598,11 @@ class QRRHOVib:
                                          substitute=self.imaginary_substitute))
 
 
-class EinsteinVib:
-    """Einstein model of a crystal. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class EinsteinVib(_pMuTTBase):
+    """Einstein model of a crystal. Equations used sourced from
+
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -630,14 +615,6 @@ class EinsteinVib:
     def __init__(self, einstein_temperature, interaction_energy=0.):
         self.einstein_temperature = einstein_temperature
         self.interaction_energy = interaction_energy
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T):
         """Calculates the partition function
@@ -809,22 +786,6 @@ class EinsteinVib:
         return {'class': str(self.__class__),
                 'einstein_temperature': self.einstein_temperature,
                 'interaction_energy': self.interaction_energy}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            HarmonicVib : HarmonicVib object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)
-
 
 def debye_to_einstein(debye_temperature):
     """Converts Debye temperature to Einstein temperature

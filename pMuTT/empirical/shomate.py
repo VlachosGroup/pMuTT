@@ -69,7 +69,7 @@ class Shomate(EmpiricalBase):
             CpoR : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         # Convert T to 1D numpy format
         if not _is_iterable(T):
@@ -117,7 +117,7 @@ class Shomate(EmpiricalBase):
             Cp : float or (N,) `numpy.ndarray`_
                 Heat capacity
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_CpoR(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs)*c.R(units)
@@ -143,7 +143,7 @@ class Shomate(EmpiricalBase):
             HoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless enthalpy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         # Convert T to 1D numpy format
         if not _is_iterable(T):
@@ -162,7 +162,7 @@ class Shomate(EmpiricalBase):
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
         if len(T) == 1:
-            HoRT += HoRT_mix[0]
+            HoRT = HoRT[0] + HoRT_mix[0]
         else:
             HoRT += HoRT_mix
         return HoRT
@@ -191,7 +191,7 @@ class Shomate(EmpiricalBase):
             H : float or (N,) `numpy.ndarray`_
                 Enthalpy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_HoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -218,7 +218,7 @@ class Shomate(EmpiricalBase):
             SoR : float or (N,) `numpy.ndarray`_
                 Dimensionless entropy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         # Convert T to 1D numpy format
         if not _is_iterable(T):
@@ -266,7 +266,7 @@ class Shomate(EmpiricalBase):
             S : float or (N,) `numpy.ndarray`_
                 Entropy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_SoR(T=T)*c.R(units)
 
@@ -291,7 +291,7 @@ class Shomate(EmpiricalBase):
             GoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless Gibbs free energy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_HoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -322,7 +322,7 @@ class Shomate(EmpiricalBase):
             G : float or (N,) `numpy.ndarray`_
                 Gibbs energy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_GoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -351,7 +351,7 @@ class Shomate(EmpiricalBase):
             shomate : Shomate object
                 Shomate object with polynomial terms fitted to data.
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         T_low = min(T)
         T_high = max(T)
@@ -462,7 +462,7 @@ def _fit_CpoR(T, CpoR):
         a : (8,) `numpy.ndarray`_
             Lower coefficients of Shomate polynomial
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
@@ -493,7 +493,7 @@ def _fit_HoRT(T_ref, HoRT_ref, a):
         a : (8,) `numpy.ndarray`_
             Lower coefficients of Shomate polynomial
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     a[5] = (HoRT_ref - get_shomate_HoRT(T=np.array([T_ref]), a=a)) \
         * c.R('kJ/mol/K')*T_ref
@@ -517,7 +517,7 @@ def _fit_SoR(T_ref, SoR_ref, a):
         a : (8,) `numpy.ndarray`_
             Lower coefficients of Shomate polynomial
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     a[6] = (SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a))*c.R('J/mol/K')
     return a
@@ -537,7 +537,7 @@ def get_shomate_CpoR(a, T):
         CpoR: float
             Dimensionless heat capacity
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     t = T/1000.
     t_arr = np.array([[1., x, x**2, x**3, 1./x**2, 0., 0., 0.] for x in t])
@@ -558,7 +558,7 @@ def get_shomate_HoRT(a, T):
         HoRT : float
             Dimensionless enthalpy
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     t = T/1000.
     t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.]
@@ -581,7 +581,7 @@ def get_shomate_SoR(a, T):
         SoR : float
             Dimensionless entropy
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     t = T/1000.
     t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.]
@@ -605,7 +605,7 @@ def get_shomate_GoRT(a, T):
         GoRT : float
             Dimensionless Gibbs energy
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     return get_shomate_HoRT(a=a, T=T) - get_shomate_SoR(a=a, T=T)
 

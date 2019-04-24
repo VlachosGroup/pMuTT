@@ -143,8 +143,7 @@ class TestReaction(unittest.TestCase):
                      'type': 'nasa'}],
                 'reactants_stoich': [1.0, 0.5],
                 'transition_state': None,
-                'transition_state_stoich': None,
-                'bep': None}
+                'transition_state_stoich': None}
 
         '''Reactions using StatMech'''
         ideal_gas_param = presets['idealgas']
@@ -1018,9 +1017,9 @@ class TestReaction(unittest.TestCase):
     def test_get_EoRT_act(self):
         exp_sm_EoRT = self.H2O_TS_sm.get_HoRT(T=c.T0('K')) \
             - self.H2_sm.get_HoRT(T=c.T0('K')) \
-            - self.O2_sm.get_HoRT(T=c.T0('K'))*0.5 + 1.5
+            - self.O2_sm.get_HoRT(T=c.T0('K'))*0.5
         exp_sm_EoRT_rev = self.H2O_TS_sm.get_HoRT(T=c.T0('K')) \
-            - self.H2O_sm.get_HoRT(T=c.T0('K')) + 1.
+            - self.H2O_sm.get_HoRT(T=c.T0('K'))
         self.assertAlmostEqual(
                 self.rxn_sm.get_EoRT_act(T=c.T0('K')),
                 exp_sm_EoRT)
@@ -1049,10 +1048,10 @@ class TestReaction(unittest.TestCase):
         exp_sm_q = self.H2O_TS_sm.get_q(T=c.T0('K'), include_ZPE=False) \
             / self.H2_sm.get_q(T=c.T0('K'), include_ZPE=False) \
             / self.O2_sm.get_q(T=c.T0('K'), include_ZPE=False)**0.5
-        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*exp_sm_q*np.exp(1.5)
+        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*exp_sm_q
         exp_sm_q_rev = self.H2O_TS_sm.get_q(T=c.T0('K'), include_ZPE=False) \
             / self.H2O_sm.get_q(T=c.T0('K'), include_ZPE=False)
-        exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s')*exp_sm_q_rev*np.exp(1.)
+        exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s')*exp_sm_q_rev
         np.testing.assert_almost_equal(
                 self.rxn_sm.get_A(T=c.T0('K')), exp_sm_A, decimal=0)
         np.testing.assert_almost_equal(
@@ -1063,11 +1062,11 @@ class TestReaction(unittest.TestCase):
         exp_sm_SoR = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
             - self.H2_sm.get_SoR(T=c.T0('K')) \
             - self.O2_sm.get_SoR(T=c.T0('K'))*0.5
-        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*np.exp(exp_sm_SoR+1.5)
+        exp_sm_A = c.kb('J/K')*c.T0('K')/c.h('J s')*np.exp(exp_sm_SoR)
         exp_sm_SoR_rev = self.H2O_TS_sm.get_SoR(T=c.T0('K')) \
             - self.H2O_sm.get_SoR(T=c.T0('K'))
         exp_sm_A_rev = c.kb('J/K')*c.T0('K')/c.h('J s') \
-            * np.exp(exp_sm_SoR_rev+1.)
+            * np.exp(exp_sm_SoR_rev)
         np.testing.assert_almost_equal(
                 self.rxn_sm.get_A(T=c.T0('K'), use_q=False), exp_sm_A,
                 decimal=0)

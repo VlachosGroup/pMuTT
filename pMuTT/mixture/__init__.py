@@ -39,7 +39,7 @@ def _get_mix_quantity(misc_models, method_name, raise_error=True,
             Mixing quantity of interest. If verbose is True, each element
             corresponds to the contribution of each mix_model
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     # Return default value if no mixture models exist
     if misc_models is None:

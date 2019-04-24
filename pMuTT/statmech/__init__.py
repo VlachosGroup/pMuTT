@@ -7,14 +7,14 @@ Created on Fri Jul 7 12:40:00 2018
 import inspect
 import numpy as np
 from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-                   _get_specie_kwargs, _apply_numpy_operation)
+                   _get_specie_kwargs, _apply_numpy_operation, _ModelBase)
 from pMuTT import constants as c
 from pMuTT.statmech import trans, vib, elec, rot
 from pMuTT.mixture import _get_mix_quantity
 from pMuTT.io import json as json_pMuTT
 
 
-class EmptyMode:
+class EmptyMode(_ModelBase):
     """Placeholder mode that returns 1 for partition function and
     0 for all functions other thermodynamic properties."""
     def __init__(self):
@@ -44,31 +44,143 @@ class EmptyMode:
     def get_GoRT(self):
         return 0.
 
-    def to_dict(self):
-        """Represents object as dictionary with JSON-accepted datatypes
+class ConstantMode(_ModelBase):
+    """Mode where thermodynamic properties can be arbitrarily set. Note that
+    thermodynamic properties must be explicitly set and are not calculated from
+    other properties.
+ 
+    Attributes
+    ----------
+        q : float, optional
+            Partition function. Default is 1
+        Cv : float, optional
+            Heat capacity at constant volume in eV/K. Default is 0
+        Cp : float, optional
+            Heat capacity at constant pressure in eV/K. Default is 0
+        U : float, optional
+            Internal energy in eV. Default is 0
+        H : float, optional
+            Enthalpy in eV. Default is 0
+        S : float, optional
+            Entropy in eV/K. Default is 0
+        F : float, optional
+            Helmholtz energy in eV. Default is 0
+        G : float, optional
+            Gibbs energy in eV. Default is 0
+        notes : str or dict, optional
+            Any additional details you would like to include such as
+            source of data. Default is None
+            
+    """
+    def __init__(self, q=1., Cv=0., Cp=0., U=0., H=0., S=0., F=0., G=0.,
+                 notes=None):
+        self.q = q
+        self.Cv = Cv
+        self.Cp = Cp
+        self.U = U
+        self.H = H
+        self.S = S
+        self.F = F
+        self.G = G
+        self.notes = notes
 
+    def get_q(self):
+        """Calculate the partition function
+        
         Returns
         -------
-            obj_dict : dict
+            q : float
+                Partition function
         """
-        return {'class': str(self.__class__)}
+        return self.q
 
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
+    def get_CvoR(self):
+        """Calculate the dimensionless heat capacity (constant volume)
+        
+        Returns
+        -------
+            CvoR : float
+                Dimensionless heat capacity (constant volume)
+        """
+        return self.Cv/c.R('eV/K')
+
+    def get_CpoR(self):
+        """Calculate the dimensionless heat capacity (constant pressure)
+        
+        Returns
+        -------
+            CpoR : float
+                Dimensionless heat capacity (constant pressure)
+        """
+        return self.Cp/c.R('eV/K')
+
+    def get_UoRT(self, T=c.T0('K')):
+        """Calculate the dimensionless internal energy
 
         Parameters
         ----------
-            json_obj : dict
-                JSON representation
+            T : float, optional
+                Temperature in K. Default is 298.15 K
         Returns
         -------
-            EmptyMode : EmptyMode object
+            UoRT : float
+                Dimensionless internal energy
         """
-        return cls()
+        return self.U/c.R('eV/K')/T
 
+    def get_HoRT(self, T=c.T0('K')):
+        """Calculate the dimensionless enthalpy
 
-class StatMech:
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            HoRT : float
+                Dimensionless enthalpy
+        """
+        return self.H/c.R('eV/K')/T
+
+    def get_SoR(self):
+        """Calculate the dimensionless entropy
+        
+        Returns
+        -------
+            SoR : float
+                Dimensionless entropy
+        """
+        return self.S/c.R('eV/K')
+
+    def get_FoRT(self, T=c.T0('K')):
+        """Calculate the dimensionless Helmholtz energy
+        
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            FoRT : float
+                Dimensionless Helmholtz energy
+        """
+        return self.F/c.R('eV/K')/T
+
+    def get_GoRT(self, T=c.T0('K')):
+        """Calculate the dimensionless Gibbs energy
+        
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+        Returns
+        -------
+            GoRT : float
+                Dimensionless Gibbs energy
+        """
+        return self.G/c.R('eV/K')/T
+
+class StatMech(_ModelBase):
     """Base class for statistical mechanic models.
 
     Attributes
@@ -138,8 +250,8 @@ class StatMech:
         else:
             self.nucl_model = nucl_model
 
-        # Assign mixing models
-        # TODO Mixing models can not be initialized by passing the class
+        # Assign misc models
+        # TODO misc models can not be initialized by passing the class
         # because all the models will have the same attributes. Figure out
         # a way to pass them. Perhaps have a dictionary that contains the
         # attributes separated by species
@@ -178,11 +290,11 @@ class StatMech:
         Returns
         -------
             quantity : float or (N+5,) `numpy.ndarray`_
-                Desired quantity. N represents the number of mixing models. If
+                Desired quantity. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         # Get the default value
         operation = operation.lower()
@@ -221,7 +333,7 @@ class StatMech:
                                raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs)])
-        # Calculate contribution from mixing models if any
+        # Calculate contribution from misc models if any
         mix_quantity = _get_mix_quantity(misc_models=self.misc_models,
                                          method_name=method_name,
                                          raise_error=raise_error,
@@ -229,7 +341,7 @@ class StatMech:
                                          default_value=default_value,
                                          verbose=verbose,
                                          **kwargs)
-        # Add mixing quantities onto quantity
+        # Add misc quantities onto quantity
         quantity = np.concatenate([quantity, mix_quantity])
         quantity = _apply_numpy_operation(quantity, verbose=verbose,
                                           operation=operation)
@@ -256,11 +368,11 @@ class StatMech:
         Returns
         -------
             q : float or (N+5,) `numpy.ndarray`_
-                Partition function. N represents the number of mixing models.
+                Partition function. N represents the number of misc models.
                 If verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_q', raise_error=raise_error,
                                  raise_warning=raise_warning, operation='prod',
@@ -287,12 +399,12 @@ class StatMech:
         Returns
         -------
             CvoR : float or (N+5,) `numpy.ndarray`_
-                Dimensionless heat capacity. N represents the number of mixing
+                Dimensionless heat capacity. N represents the number of misc
                 models. If verbose is True, contribution to each mode are as
                 follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_CvoR', operation='sum',
                                  raise_error=raise_error,
@@ -323,11 +435,11 @@ class StatMech:
         Returns
         -------
             Cv : float or (N+5,) `numpy.ndarray`_
-                Heat capacity. N represents the number of mixing models. If
+                Heat capacity. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_CvoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs)*c.R(units)
@@ -353,12 +465,12 @@ class StatMech:
         Returns
         -------
             CpoR : float or (N+5,) `numpy.ndarray`_
-                Dimensionless heat capacity. N represents the number of mixing
+                Dimensionless heat capacity. N represents the number of misc
                 models. If verbose is True, contribution to each mode are as
                 follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_CpoR', operation='sum',
                                  raise_error=raise_error,
@@ -389,11 +501,11 @@ class StatMech:
         Returns
         -------
             Cp : float or (N+5,) `numpy.ndarray`_
-                Heat capacity. N represents the number of mixing models. If
+                Heat capacity. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_CpoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs)*c.R(units)
@@ -495,11 +607,11 @@ class StatMech:
         -------
             UoRT : float or (N+5,) `numpy.ndarray`_
                 Dimensionless internal energy. N represents the number of
-                mixing models. If verbose is True, contribution to each mode
+                misc models. If verbose is True, contribution to each mode
                 are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_UoRT', operation='sum',
                                  raise_error=raise_error,
@@ -532,11 +644,11 @@ class StatMech:
         Returns
         -------
             U : float or (N+5,) `numpy.ndarray`_
-                Internal energy. N represents the number of mixing models. If
+                Internal energy. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_UoRT(verbose=verbose, T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -563,12 +675,12 @@ class StatMech:
         Returns
         -------
             HoRT : float or (N+5,) `numpy.ndarray`_
-                Dimensionless enthalpy. N represents the number of mixing
+                Dimensionless enthalpy. N represents the number of misc
                 models. If verbose is True, contribution to each mode are as
                 follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_HoRT', operation='sum',
                                  raise_error=raise_error,
@@ -601,11 +713,11 @@ class StatMech:
         Returns
         -------
             H : float or (N+5,) `numpy.ndarray`_
-                Enthalpy. N represents the number of mixing models. If
+                Enthalpy. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_HoRT(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, T=T, **kwargs) \
@@ -632,11 +744,11 @@ class StatMech:
         Returns
         -------
             SoR : float or (N+5,) `numpy.ndarray`_
-                Dimensionless entropy. N represents the number of mixing
+                Dimensionless entropy. N represents the number of misc
                 models. If verbose is True, contribution to each mode are as
-                follows: [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                follows: [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_SoR', operation='sum',
                                  raise_error=raise_error,
@@ -667,11 +779,11 @@ class StatMech:
         Returns
         -------
             S : float or (N+5,) `numpy.ndarray`_
-                Entropy. N represents the number of mixing models. If
+                Entropy. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_SoR(verbose=verbose, raise_error=raise_error,
                             raise_warning=raise_warning, **kwargs)*c.R(units)
@@ -698,11 +810,11 @@ class StatMech:
         -------
             FoRT : float or (N+5,) `numpy.ndarray`_
                 Dimensionless Helmoltz energy. N represents the number of
-                mixing models. If verbose is True, contribution to each mode
+                misc models. If verbose is True, contribution to each mode
                 are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_FoRT', operation='sum',
                                  raise_error=raise_error,
@@ -735,11 +847,11 @@ class StatMech:
         Returns
         -------
             F : float or (N+5,) `numpy.ndarray`_
-                Helmholtz energy. N represents the number of mixing models. If
+                Helmholtz energy. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_FoRT(verbose=verbose, T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -766,12 +878,12 @@ class StatMech:
         Returns
         -------
             GoRT : float or (N+5,) `numpy.ndarray`_
-                Dimensionless Gibbs energy. N represents the number of mixing
+                Dimensionless Gibbs energy. N represents the number of misc
                 models. If verbose is True, contribution to each mode are as
                 follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_quantity(method_name='get_GoRT', operation='sum',
                                  raise_error=raise_error,
@@ -804,11 +916,11 @@ class StatMech:
         Returns
         -------
             G : float or (N+5,) `numpy.ndarray`_
-                Gibbs energy. N represents the number of mixing models. If
+                Gibbs energy. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, mixing_models (if any)]
+                [trans, vib, rot, elec, nucl, misc_models (if any)]
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_GoRT(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, T=T, **kwargs) \
@@ -901,6 +1013,11 @@ presets = {
         'rot_model': EmptyMode,
         'nucl_model': EmptyMode,
         'required': (),
+    },
+    'constant': {
+        'statmech_model': StatMech,
+        'elec_model': ConstantMode,
+        'optional': ('q', 'Cv', 'Cp', 'U', 'H', 'S', 'F', 'G')
     }
 }
 """Commonly used models. The 'required' and 'optional' fields indicate

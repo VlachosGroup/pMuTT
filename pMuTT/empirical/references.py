@@ -29,14 +29,6 @@ class Reference(EmpiricalBase):
         self.T_ref = T_ref
         self.HoRT_ref = HoRT_ref
 
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
-
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
 
@@ -48,22 +40,6 @@ class Reference(EmpiricalBase):
         obj_dict['T_ref'] = self.T_ref
         obj_dict['HoRT_ref'] = self.HoRT_ref
         return obj_dict
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            Reference : Reference object
-        """
-        json_obj = remove_class(json_obj)
-        # Reconstruct statmech model
-        return cls(**json_obj)
 
 
 class References:
@@ -218,7 +194,7 @@ class References:
                 Offset to add to potentialenergy (in eV) to adjust to
                 References
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         HoRT_offset = 0.
         for descriptor, coefficient in descriptors.items():

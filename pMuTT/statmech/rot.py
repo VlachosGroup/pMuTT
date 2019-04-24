@@ -3,6 +3,7 @@
 import itertools
 from warnings import warn
 import numpy as np
+from pMuTT import _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
@@ -22,10 +23,11 @@ symmetry_dict = {
     'Oh': 24
 }
 
-class RigidRotor:
-    """Rotational mode using the rigid rotor assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class RigidRotor(_pMuTTBase):
+    """Rotational mode using the rigid rotor assumption. Equations sourced from:
+    
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -91,14 +93,6 @@ class RigidRotor:
                     atoms=atoms, degree_tol=degree_tol)
         else:
             self.geometry = geometry
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T):
         """Calculates the partition function
@@ -278,22 +272,6 @@ class RigidRotor:
                 'symmetrynumber': self.symmetrynumber,
                 'geometry': self.geometry,
                 'rot_temperatures': list(self.rot_temperatures)}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            RigidRotor : RigidRotor object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)
-
 
 def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     """Calculate the rotational temperatures from ase.Atoms object

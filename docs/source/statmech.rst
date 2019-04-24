@@ -92,19 +92,19 @@ parentheses is the default value).
 Ideal Gas (idealgas)
 --------------------
 
-+------------------+-------------------------------------------+
-| Set Attributes   | Default Value                             |
-+==================+===========================================+
-| trans_model      | :class:`~pMuTT.statmech.trans.FreeTrans` |
-+------------------+-------------------------------------------+
-| n_degrees        | 3                                         |
-+------------------+-------------------------------------------+
-| vib_model        | :class:`~pMuTT.statmech.vib.HarmonicVib`  |
-+------------------+-------------------------------------------+
++------------------+-------------------------------------------------+
+| Set Attributes   | Default Value                                   |
++==================+=================================================+
+| trans_model      | :class:`~pMuTT.statmech.trans.FreeTrans`        |
++------------------+-------------------------------------------------+
+| n_degrees        | 3                                               |
++------------------+-------------------------------------------------+
+| vib_model        | :class:`~pMuTT.statmech.vib.HarmonicVib`        |
++------------------+-------------------------------------------------+
 | elec_model       | :class:`~pMuTT.statmech.elec.GroundStateElec`   |
-+------------------+-------------------------------------------+
-| rot_model        | :class:`~pMuTT.statmech.rot.RigidRotor`   |
-+------------------+-------------------------------------------+
++------------------+-------------------------------------------------+
+| rot_model        | :class:`~pMuTT.statmech.rot.RigidRotor`         |
++------------------+-------------------------------------------------+
 
 +---------------------+--------------------------------------------------------+
 | Required Attributes | Description                                            |
@@ -156,13 +156,13 @@ Harmonic Approximation (harmonic)
 
 Typically used to model adsorbates.
 
-+-------------+------------------------------------------+
-| Parameter   | Default Value                            |
-+=============+==========================================+
-| vib_model   | :class:`~pMuTT.statmech.vib.HarmonicVib` |
-+-------------+------------------------------------------+
++-------------+------------------------------------------------+
+| Parameter   | Default Value                                  |
++=============+================================================+
+| vib_model   | :class:`~pMuTT.statmech.vib.HarmonicVib`       |
++-------------+------------------------------------------------+
 | elec_model  | :class:`~pMuTT.statmech.elec.GroundStateElec`  |
-+-------------+------------------------------------------+
++-------------+------------------------------------------------+
 
 +---------------------+-------------------------------------------------+
 | Required Parameters | Description                                     |
@@ -198,11 +198,11 @@ Typically used to model adsorbates.
 Electronic (electronic)
 -----------------------
 
-+-------------+-----------------------------------------+
-| Parameter   | Default Value                           |
-+=============+=========================================+
++-------------+-----------------------------------------------+
+| Parameter   | Default Value                                 |
++=============+===============================================+
 | elec_model  | :class:`~pMuTT.statmech.elec.GroundStateElec` |
-+-------------+-----------------------------------------+
++-------------+-----------------------------------------------+
 
 +---------------------+-------------------------------------------+
 | Required Parameters | Description                               |
@@ -254,6 +254,61 @@ Placeholder (placeholder)
 +=====================+=============+
 | N/A                 |             |
 +---------------------+-------------+
+
++-------------------------+---------------------+-----------------------+
+| Thermodynamic Quantity  | Expected Parameters | Optional Parameters   |
++=========================+=====================+=======================+
+| :math:`q`               |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_V} {R}` |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {C_P} {R}` |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {U} {RT}`  |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {H} {RT}`  |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {S} {R}`   |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {A} {RT}`  |                     |                       |
++-------------------------+---------------------+-----------------------+
+| :math:`\frac {G} {RT}`  |                     |                       |
++-------------------------+---------------------+-----------------------+
+
+Constant (constant)
+-------------------------
+
++-------------+---------------------------------------+
+| Parameter   | Default Value                         |
++=============+=======================================+
+| elec_model  | :class:`~pMuTT.statmech.ConstantMode` |
++-------------+---------------------------------------+
+
++---------------------+--------------------------------------------------------+
+| Required Parameters | Description                                            |
++=====================+========================================================+
+| q                   | (float) Optional. Partition function                   |
++---------------------+--------------------------------------------------------+
+| CvoR                | (float) Optional. Dimensionless heat capacity at       |
+|                     | constant volume                                        |
++---------------------+--------------------------------------------------------+
+| CpoR                | (float) Optional. Dimensionless heat capacity at       |
+|                     | constant pressure                                      |
++---------------------+--------------------------------------------------------+
+| UoR                 | (float) Optional. Internal energy in units of |K-1|    |
+|                     | (i.e. internal energy divided by molar gas constant)   |
++---------------------+--------------------------------------------------------+
+| HoR                 | (float) Optional. Enthalpy in units of |K-1| (i.e.     |
+|                     | enthalpy divided by molar gas constant)                |
++---------------------+--------------------------------------------------------+
+| SoR                 | (float) Optional. Dimensionless entropy                |
++---------------------+--------------------------------------------------------+
+| FoR                 | (float) Optional. Helmholtz energy in units of K-1     |
+|                     | (i.e. Helmholtz divided by molar gas constant)         |
++---------------------+--------------------------------------------------------+
+| GoR                 | (float) Optional. Gibbs energy in units of |K-1| (i.e. |
+|                     | Gibbs divided by molar gas constant)                   |
++---------------------+--------------------------------------------------------+
 
 +-------------------------+---------------------+-----------------------+
 | Thermodynamic Quantity  | Expected Parameters | Optional Parameters   |
@@ -352,6 +407,15 @@ contribute to any thermodynamic properties (i.e. q = 1, all other quantities
 .. autoclass:: pMuTT.statmech.EmptyMode
    :members:
 
+Constant Mode
+=============
+
+If you would like to arbitrarily set thermodynamic properties, you can use the
+``ConstantMode``.
+
+.. autoclass:: pMuTT.statmech.ConstantMode
+   :members:
+
 Creating New StatMech Models
 ============================
 If you would like to create your own class to be stored by 
@@ -367,3 +431,5 @@ If you would like to create your own class to be stored by
 - ``get_GoRT``
 - ``from_dict``
 - ``to_dict``
+
+.. |K-1| replace:: K\ :sup:`-1`

@@ -52,7 +52,7 @@ class Nasa(EmpiricalBase):
             assigned, then n_sites is None. If cat_site is specified, the
             default is 1
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     def __init__(self, name, T_low, T_mid, T_high, a_low, a_high,
                  cat_site=None, n_sites=1, **kwargs):
@@ -70,14 +70,6 @@ class Nasa(EmpiricalBase):
             n_sites = None
         self.n_sites = n_sites
 
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
-
     def get_a(self, T):
         """Returns the correct polynomial range based on T_low, T_mid and
         T_high
@@ -91,7 +83,7 @@ class Nasa(EmpiricalBase):
             a : (7,) `numpy.ndarray`_
                 NASA polynomial coefficients
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if type(self.T_mid) is list:
             self.T_mid = self.T_mid[0]
@@ -127,7 +119,7 @@ class Nasa(EmpiricalBase):
             CpoR : float or (N,) `numpy.ndarray`_
                 Dimensionless heat capacity
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
             CpoR = np.zeros(len(T))
@@ -175,7 +167,7 @@ class Nasa(EmpiricalBase):
             Cp : float or (N,) `numpy.ndarray`_
                 Heat capacity
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_CpoR(T=T)*c.R(units)
 
@@ -200,7 +192,7 @@ class Nasa(EmpiricalBase):
             HoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless enthalpy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
             HoRT = np.zeros_like(T)
@@ -248,7 +240,7 @@ class Nasa(EmpiricalBase):
             H : float or (N,) `numpy.ndarray`_
                 Enthalpy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_HoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -275,7 +267,7 @@ class Nasa(EmpiricalBase):
             SoR : float or (N,) `numpy.ndarray`_
                 Dimensionless entropy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
             SoR = np.zeros_like(T)
@@ -323,7 +315,7 @@ class Nasa(EmpiricalBase):
             S : float or (N,) `numpy.ndarray`_
                 Entropy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_SoR(T=T, raise_error=raise_error,
                             raise_warning=raise_warning, **kwargs)*c.R(units)
@@ -349,7 +341,7 @@ class Nasa(EmpiricalBase):
             GoRT : float or (N,) `numpy.ndarray`_
                 Dimensionless Gibbs free energy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         GoRT = self.get_HoRT(T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -381,7 +373,7 @@ class Nasa(EmpiricalBase):
             G : float or (N,) `numpy.ndarray`_
                 Gibbs energy
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_GoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
@@ -422,7 +414,7 @@ class Nasa(EmpiricalBase):
             Nasa : Nasa object
                 Nasa object with polynomial terms fitted to data.
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         T_low = min(T)
         T_high = max(T)
@@ -580,7 +572,7 @@ def _fit_CpoR(T, CpoR, T_mid=None):
             Temperature in K used to split the CpoR data
 
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
@@ -655,7 +647,7 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
         p_high : (5,) `numpy.ndarray`_
             Polynomial corresponding to high range of data
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     low_condition = (T <= T_mid)
     high_condition = (T > T_mid)
@@ -759,7 +751,7 @@ def get_nasa_CpoR(a, T):
         CpoR: float
             Dimensionless heat capacity
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     T_arr = np.array([1., T, T**2, T**3, T**4, 0., 0.])
     return np.dot(a, T_arr)
@@ -779,7 +771,7 @@ def get_nasa_HoRT(a, T):
         HoRT : float
             Dimensionless enthalpy
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     T_arr = np.array([1., T/2., (T**2)/3., (T**3)/4., (T**4)/5., 1./T, 0.])
     return np.dot(a, T_arr)
@@ -799,7 +791,7 @@ def get_nasa_SoR(a, T):
         SoR : float
             Dimensionless entropy
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     T_arr = np.array([np.log(T), T, (T**2)/2., (T**3)/3., (T**4)/4., 0., 1.])
     return np.dot(a, T_arr)

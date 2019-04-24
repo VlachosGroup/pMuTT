@@ -6,11 +6,12 @@ Created on Thurs Feb 7 10:15:00 2019
 """
 
 import numpy as np
+from pMuTT import _ModelBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class PiecewiseCovEffect:
+class PiecewiseCovEffect(_ModelBase):
     """Models enthalpic contribution to coverage effect between two species 
     using piecewise linear functions
 
@@ -35,14 +36,6 @@ class PiecewiseCovEffect:
         self.intervals = intervals
         self.slopes = slopes
         self._set_intercepts()
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def insert(self, interval, slope):
         """Inserts the a new interval and slope for the piecewise function

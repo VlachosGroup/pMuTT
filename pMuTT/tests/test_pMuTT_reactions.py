@@ -5,6 +5,8 @@ Tests for pMuTT module
 """
 
 import unittest
+from pMuTT import constants as c
+from pMuTT.statmech import StatMech, presets
 from pMuTT.empirical.nasa import Nasa
 from pMuTT.reaction import Reaction, Reactions
 
@@ -73,8 +75,7 @@ class TestReactions(unittest.TestCase):
 
         self.reactions_dict = {
             'class': "<class 'pMuTT.reaction.Reactions'>",
-            'reactions': [{'bep': None,
-                'class': "<class 'pMuTT.reaction.Reaction'>",
+            'reactions': [{'class': "<class 'pMuTT.reaction.Reaction'>",
                 'products': [{'T_high': 3500.0,
                               'T_low': 200.0,
                               'T_mid': 1000.0,
@@ -167,8 +168,7 @@ class TestReactions(unittest.TestCase):
                 'reactants_stoich': [1.0, 2.0],
                 'transition_state': None,
                 'transition_state_stoich': None},
-               {'bep': None,
-                'class': "<class 'pMuTT.reaction.Reaction'>",
+               {'class': "<class 'pMuTT.reaction.Reaction'>",
                 'products': [{'T_high': 3500.0,
                               'T_low': 200.0,
                               'T_mid': 1000.0,
@@ -260,8 +260,7 @@ class TestReactions(unittest.TestCase):
                 'reactants_stoich': [1.0, 1.0],
                 'transition_state': None,
                 'transition_state_stoich': None},
-               {'bep': None,
-                'class': "<class 'pMuTT.reaction.Reaction'>",
+               {'class': "<class 'pMuTT.reaction.Reaction'>",
                 'products': [{'T_high': 3500.0,
                               'T_low': 200.0,
                               'T_mid': 1000.0,
@@ -353,8 +352,7 @@ class TestReactions(unittest.TestCase):
                 'reactants_stoich': [1.0, 1.0],
                 'transition_state': None,
                 'transition_state_stoich': None},
-               {'bep': None,
-                'class': "<class 'pMuTT.reaction.Reaction'>",
+               {'class': "<class 'pMuTT.reaction.Reaction'>",
                 'products': [{'T_high': 3500.0,
                               'T_low': 200.0,
                               'T_mid': 1000.0,
@@ -446,8 +444,7 @@ class TestReactions(unittest.TestCase):
                 'reactants_stoich': [1.0, 0.5],
                 'transition_state': None,
                 'transition_state_stoich': None},
-               {'bep': None,
-                'class': "<class 'pMuTT.reaction.Reaction'>",
+               {'class': "<class 'pMuTT.reaction.Reaction'>",
                 'products': [{'T_high': 3500.0,
                               'T_low': 200.0,
                               'T_mid': 1000.0,
@@ -539,8 +536,7 @@ class TestReactions(unittest.TestCase):
                 'reactants_stoich': [0.5, 2.0],
                 'transition_state': None,
                 'transition_state_stoich': None},
-               {'bep': None,
-                'class': "<class 'pMuTT.reaction.Reaction'>",
+               {'class': "<class 'pMuTT.reaction.Reaction'>",
                 'products': [{'T_high': 3500.0,
                               'T_low': 200.0,
                               'T_mid': 1000.0,
@@ -633,9 +629,34 @@ class TestReactions(unittest.TestCase):
                 'transition_state': None,
                 'transition_state_stoich': None}]}
 
+        species_pathway = {
+            'A': StatMech(G=1., **presets['constant']),
+            'A_TS1': StatMech(G=3., **presets['constant']),
+            'A_TS2': StatMech(G=2., **presets['constant']),
+            'B': StatMech(G=-1., **presets['constant']),
+            'C': StatMech(G=2., **presets['constant']),
+            'C_TS': StatMech(G=2.5, **presets['constant']),
+            'D': StatMech(G=0., **presets['constant']),
+        }
+        self.rxn_pathway1 = Reactions(reactions=[
+            Reaction.from_string('A = A_TS1 = B', species_pathway),
+            Reaction.from_string('B = C', species_pathway),
+            Reaction.from_string('C = C_TS = D', species_pathway)])
+        self.rxn_pathway2 = Reactions(reactions=[
+            Reaction.from_string('A = A_TS2 = B', species_pathway),
+            Reaction.from_string('B = C', species_pathway),
+            Reaction.from_string('C = C_TS = D', species_pathway)])
+
     def test_get_species(self):
         self.assertDictEqual(self.reactions.get_species(key='name'), 
                              self.species_dict)
+
+    def test_get_energy_span(self):
+        G_span = self.rxn_pathway1.get_E_span(units='eV', T=298.15)
+        self.assertAlmostEqual(G_span, 3.)
+
+        G_span = self.rxn_pathway2.get_E_span(units='eV', T=298.15)
+        self.assertAlmostEqual(G_span, 3.5)
 
     def test_to_dict(self):
         self.maxDiff = None

@@ -2,14 +2,15 @@
 
 import numpy as np
 from pMuTT import constants as c
-from pMuTT import get_molecular_weight
+from pMuTT import get_molecular_weight, _pMuTTBase
 from pMuTT.io.json import remove_class
 
 
-class FreeTrans:
-    """Translational mode using ideal gas assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class FreeTrans(_pMuTTBase):
+    """Translational mode using ideal gas assumption. Equations sourced from:
+    
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -26,14 +27,6 @@ class FreeTrans:
                     atoms.get_chemical_formula(mode='hill'))
         else:
             self.molecular_weight = molecular_weight
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_V(self, T, P):
         """Calculates the molar volume of an ideal gas at T and P
@@ -199,18 +192,3 @@ class FreeTrans:
         return {'class': str(self.__class__),
                 'n_degrees': self.n_degrees,
                 'molecular_weight': self.molecular_weight}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            FreeTrans : FreeTrans object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)

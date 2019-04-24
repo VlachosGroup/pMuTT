@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
+from pMuTT import _pMuTTBase
 from pMuTT.io.json import remove_class
 
 
-class EmptyNucl:
+class EmptyNucl(_pMuTTBase):
     """Nuclear modes. Assumes no change in any chemical reaction and hence
     does not affect thermodynamic quantities."""
 
     def __init__(self):
         pass
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self):
         """Calculates the partition function
@@ -96,27 +89,3 @@ class EmptyNucl:
                 Nuclear dimensionless Gibbs energy
         """
         return 0.
-
-    def to_dict(self):
-        """Represents object as dictionary with JSON-accepted datatypes
-
-        Returns
-        -------
-            obj_dict : dict
-        """
-        return {'class': str(self.__class__)}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            EmptyNucl : EmptyNucl object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)

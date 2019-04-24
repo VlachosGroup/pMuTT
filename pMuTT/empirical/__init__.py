@@ -8,12 +8,12 @@ Empirical models.
 import inspect
 from matplotlib import pyplot as plt
 import numpy as np
-from pMuTT import _is_iterable
+from pMuTT import _is_iterable, _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import json_to_pMuTT, remove_class
 
 
-class EmpiricalBase:
+class EmpiricalBase(_pMuTTBase):
     """The empirical parent class.
     Holds properties of a specie, the statistical-mechanical thermodynamic
     model.
@@ -76,22 +76,6 @@ class EmpiricalBase:
         if not _is_iterable(misc_models) and misc_models is not None:
             misc_models = [misc_models]
         self.misc_models = misc_models
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
-
-    def __repr__(self):
-        out = ['{} object for Name: {}'.format(self.__class__.__name__,
-               self.name)]
-        for key, val in self.__dict__.items():
-            if key != 'name':
-                out.append('\t{}: {}'.format(key, val))
-        return '\n'.join(out)
 
     def plot_empirical(self, T_low=None, T_high=None, Cp_units=None,
                        H_units=None, S_units=None, G_units=None):
@@ -423,7 +407,7 @@ class EmpiricalBase:
             CpoR_empirical :((N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
 
         if T is None:
@@ -460,7 +444,7 @@ class EmpiricalBase:
             CpoR_empirical :((N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if T is None:
             T = np.linspace(self.T_low, self.T_high)
@@ -504,7 +488,7 @@ class EmpiricalBase:
             CpoR_empirical :((N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if T is None:
             T = np.linspace(self.T_low, self.T_high)
@@ -541,7 +525,7 @@ class EmpiricalBase:
             CpoR_empirical : (N,) `numpy.ndarray`_ or float
                 Dimensionless heat capacity of empirical model
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if T is None:
             T = np.linspace(self.T_low, self.T_high)

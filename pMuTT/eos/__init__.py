@@ -7,11 +7,12 @@ Created on Tues Jul 10 12:40:00 2018
 
 import numpy as np
 
+from pMuTT import _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class IdealGasEOS:
+class IdealGasEOS(_pMuTTBase):
     """Ideal gas equation of state
 
     :math:`PV=nRT`
@@ -93,32 +94,8 @@ class IdealGasEOS:
         """
         return P*V/c.R('m3 bar/mol/K')/T
 
-    def to_dict(self):
-        """Represents object as dictionary with JSON-accepted datatypes
 
-        Returns
-        -------
-            obj_dict : dict
-        """
-        return {'class': str(self.__class__)}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            GroundStateElec : GroundStateElec object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)
-
-
-class vanDerWaalsEOS:
+class vanDerWaalsEOS(_pMuTTBase):
     """van der Waals equation of state
 
     :math:`\\bigg(P+a\\big(\\frac{n}{V}\\big)^2 \\bigg)\\bigg(\\frac{V}{n}-b
@@ -300,29 +277,3 @@ class vanDerWaalsEOS:
         a = 27./64.*(c.R('J/mol/K')*Tc)**2/Pc_SI
         b = c.R('J/mol/K')*Tc/8./Pc_SI
         return cls(a=a, b=b)
-
-    def to_dict(self):
-        """Represents object as dictionary with JSON-accepted datatypes
-
-        Returns
-        -------
-            obj_dict : dict
-        """
-        return {'class': str(self.__class__),
-                'a': self.a,
-                'b': self.b}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            GroundStateElec : GroundStateElec object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)

@@ -16,7 +16,182 @@ import re
 import inspect
 from warnings import warn
 import numpy as np
+from pMuTT.io.json import remove_class
 from pMuTT import constants as c
+
+class _pMuTTBase:
+    """Generic parent class to all pMuTT objects"""
+
+    def __init__(self):
+        pass
+    
+    def __eq__(self, other):
+        try:
+            other_dict = other.to_dict()
+        except AttributeError:
+            # If other doesn't have to_dict method, is not equal
+            return False
+        return self.to_dict() == other_dict
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = dict(self.__dict__)
+        obj_dict['class'] = str(self.__class__)
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            Obj : Appropriate object
+        """
+        json_obj = remove_class(json_obj)
+        return cls(**json_obj)
+
+
+class _ModelBase(_pMuTTBase):
+    """Generic parent class to all model type objects"""
+
+    def __init__(self):
+        pass
+
+    def get_Cv(units, **kwargs):
+        """Calculate the heat capacity (constant V)
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : keyword arguments
+                Parameters needed by ``get_CvoR``
+        Returns
+        -------
+            Cv : float
+                Heat capacity (constant V) in appropriate units
+        """
+        self.get_CvoR(**kwargs)*c.R(units)
+
+    def get_Cp(units, **kwargs):
+        """Calculate the heat capacity (constant P)
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : keyword arguments
+                Parameters needed by ``get_CpoR``
+        Returns
+        -------
+            Cp : float
+                Heat capacity (constant P) in appropriate units
+        """
+        self.get_CpoR(**kwargs)*c.R(units)
+
+    def get_U(units, T=c.T0('K'), **kwargs):
+        """Calculate the internal energy
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters needed by ``get_UoRT``
+        Returns
+        -------
+            U : float
+                Internal energy in appropriate units
+        """
+        self.get_UoRT(**kwargs)*T*c.R('{}/K'.format(units))
+
+    def get_H(units, T=c.T0('K'), **kwargs):
+        """Calculate the enthalpy
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters needed by ``get_HoRT``
+        Returns
+        -------
+            H : float
+                Enthalpy in appropriate units
+        """
+        self.get_HoRT(**kwargs)*T*c.R('{}/K'.format(units))
+
+    def get_S(units, **kwargs):
+        """Calculate the entropy
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units.
+            kwargs : keyword arguments
+                Parameters needed by ``get_SoR``
+        Returns
+        -------
+            S : float
+                Entropy in appropriate units
+        """
+        self.get_SoR(**kwargs)*c.R(units)
+
+    def get_F(units, T=c.T0('K'), **kwargs):
+        """Calculate the Helmholtz energy
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters needed by ``get_FoRT``
+        Returns
+        -------
+            F : float
+                Hemholtz energy in appropriate units
+        """
+        self.get_FoRT(**kwargs)*T*c.R('{}/K'.format(units))
+
+    def get_G(units, T=c.T0('K'), **kwargs):
+        """Calculate the Gibbs energy
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pMuTT.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters needed by ``get_GoRT``
+        Returns
+        -------
+            G : float
+                Gibbs energy in appropriate units
+        """
+        self.get_GoRT(**kwargs)*T*c.R('{}/K'.format(units))
 
 
 def _get_expected_arguments(fn):
@@ -249,7 +424,6 @@ def _apply_numpy_operation(quantity, operation, verbose=False):
         np_method = getattr(np, operation)
         out_quantity = np_method(quantity)
     return out_quantity
-
 
 def parse_formula(formula):
     """Parses chemical formula into its elements and returns it as a
