@@ -65,7 +65,7 @@ def type_to_class(class_str):
     from pMuTT.empirical.zacros import Zacros
     from pMuTT.statmech import StatMech, EmptyMode
     from pMuTT.statmech.trans import FreeTrans
-    from pMuTT.statmech.vib import HarmonicVib, QRRHOVib, EinsteinVib
+    from pMuTT.statmech.vib import HarmonicVib, QRRHOVib, EinsteinVib, DebyeVib
     from pMuTT.statmech.rot import RigidRotor
     from pMuTT.statmech.elec import GroundStateElec
     from pMuTT.statmech.nucl import EmptyNucl
@@ -90,6 +90,7 @@ def type_to_class(class_str):
         "<class 'pMuTT.statmech.vib.HarmonicVib'>": HarmonicVib,
         "<class 'pMuTT.statmech.vib.QRRHOVib'>": QRRHOVib,
         "<class 'pMuTT.statmech.vib.EinsteinVib'>": EinsteinVib,
+        "<class 'pMuTT.statmech.vib.DebyeVib'>": DebyeVib,
         "<class 'pMuTT.statmech.rot.RigidRotor'>": RigidRotor,
         "<class 'pMuTT.statmech.elec.GroundStateElec'>": GroundStateElec,
         "<class 'pMuTT.statmech.nucl.EmptyNucl'>": EmptyNucl,
