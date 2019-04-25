@@ -28,13 +28,13 @@
 # | Obr(S)    | S     | 0          | 0          | 1          | Harmonic       | -7.519858       | 537.116485     | 439.995941     | 256.38412      |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |
 # | IPA(S)    | S     | 3          | 8          | 1          | Harmonic       | -64.935392      | 3072.824921    | 3056.583116    | 3049.635786    | 3038.996872    | 3031.532711    | 3008.868219    | 2969.688478    | 2956.451871    | 1460.613697    | 1454.472854    | 1435.981201    | 1432.413496    | 1413.554005    | 1366.129117    | 1353.211574    | 1327.903925    | 1321.25272     | 1148.721745    | 1130.053472    | 1098.855825    | 933.64652      | 921.005746     | 903.030098     | 825.727381     | 809.440337     | 535.60253      | 414.794848     | 378.193102     | 295.278829     | 237.586784     | 230.560246     | 171.110789     | 129.36901      | 77.415076      | 64.350293      | 56.879635      |
 
-# To import the data, we use the ``pMuTT.io_.excel.read_excel`` function.
+# To import the data, we use the ``pMuTT.io.excel.read_excel`` function.
 
 # In[1]:
 
 
 from pprint import pprint
-from pMuTT.io_.excel import read_excel
+from pMuTT.io.excel import read_excel
 
 species_data = read_excel(io='input.xlsx')
 pprint(species_data)
@@ -45,11 +45,11 @@ pprint(species_data)
 # ## Importing the *ab-initio* references data from Excel
 # Before initializing the Nasa objects, we have to adjust the enthalpies from the DFT reference to the standard reference (i.e. pure species have an enthalpy of 0 at 298 K and 1 atm). The references.xlsx file contains the following information.
 
-# | ﻿name | phase | elements.C | elements.H | elements.O | statmech_model | T_ref | HoRT_ref     | potentialenergy | atoms         | symmetrynumber | spin | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-# |------|-------|------------|------------|------------|----------------|-------|--------------|-----------------|---------------|----------------|------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-# | IPA  | G     | 3          | 8          | 1          | IdealGas       | 298   | -110.1077991 | -63.6353        | ./CONTCAR_IPA | 1              | 0    | 3695.6947      | 3058.1512      | 3056.3031      | 3037.6154      | 3027.4596      | 2977.8791      | 2962.0141      | 2959.4138      | 1455.9381      | 1446.9241      | 1432.5845      | 1430.694       | 1365.4299      | 1359.4158      | 1345.7613      | 1312.957       | 1258.3806      | 1144.4464      | 1121.8044      | 1043.2856      | 936.5137       | 910.6527       | 894.8818       | 802.0075       | 459.1458       | 414.8802       | 355.2703       | 261.3417       | 250.5753       | 219.2591       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-# | H2O  | G     | 0          | 2          | 1          | IdealGas       | 298   | -97.60604334 | -14.2209        | ./CONTCAR_H2O | 2              | 0    | 3825.434       | 3710.2642      | 1582.432       |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-# | H2   | G     | 0          | 2          | 0          | IdealGas       | 298   | 0            | -6.7598         | ./CONTCAR_H2  | 2              | 0    | 4306.1793      |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+# | name | phase | elements.C | elements.H | elements.O | statmech_model | T_ref | HoRT_ref   | potentialenergy | atoms         | symmetrynumber | spin | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber | vib_wavenumber |
+# |------|-------|------------|------------|------------|----------------|-------|------------|-----------------|---------------|----------------|------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+# | IPA  | G     | 3          | 8          | 1          | IdealGas       | 298   | -110.1078  | -63.6353        | ./CONTCAR_IPA | 1              | 0    | 3695.6947      | 3058.1512      | 3056.3031      | 3037.6154      | 3027.4596      | 2977.8791      | 2962.0141      | 2959.4138      | 1455.9381      | 1446.9241      | 1432.5845      | 1430.694       | 1365.4299      | 1359.4158      | 1345.7613      | 1312.957       | 1258.3806      | 1144.4464      | 1121.8044      | 1043.2856      | 936.5137       | 910.6527       | 894.8818       | 802.0075       | 459.1458       | 414.8802       | 355.2703       | 261.3417       | 250.5753       | 219.2591       |
+# | H2O  | G     | 0          | 2          | 1          | IdealGas       | 298   | -97.606043 | -14.2209        | ./CONTCAR_H2O | 2              | 0    | 3825.434       | 3710.2642      | 1582.432       |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |
+# | H2   | G     | 0          | 2          | 0          | IdealGas       | 298   | 0          | -6.7598         | ./CONTCAR_H2  | 2              | 0    | 4306.1793      |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |
 
 # Note that these species contain extra fields, such as ``atoms``, ``symmetrynumber``, and ``spin`` since the ``IdealGas`` statistical mechanical model will be used. The ``T_ref`` and ``HoRT_ref`` are extra fields that are necessary for reference species.
 
@@ -97,7 +97,7 @@ print(species[0])
 # In[5]:
 
 
-from pMuTT.io_.thermdat import write_thermdat
+from pMuTT.io.thermdat import write_thermdat
 
 write_thermdat(nasa_species=species, filename='thermdat',
                write_date=True)
@@ -143,9 +143,7 @@ write_thermdat(nasa_species=species, filename='thermdat',
 # In[6]:
 
 
-fig, axes = species[0].plot_statmech_and_empirical(Cp_units='J/mol/K',
-                                                   H_units='kJ/mol',
-                                                   S_units='J/mol/K',
-                                                   G_units='kJ/mol')
+fig, ax = species[0].plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol',
+                                                 S_units='J/mol/K', G_units='kJ/mol')
 fig.set_size_inches((10, 8))
 

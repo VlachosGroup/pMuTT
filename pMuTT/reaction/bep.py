@@ -311,6 +311,7 @@ class BEP(_ModelBase):
         """
         obj_dict = {
             'class': str(self.__class__),
+            'name': self.name,
             'slope': self.slope,
             'intercept': self.intercept,
             'descriptor': self.descriptor,

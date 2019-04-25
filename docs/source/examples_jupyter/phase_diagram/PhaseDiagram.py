@@ -161,7 +161,7 @@ phase_diagram = PhaseDiagram(reactions=reactions)
 
 # ## Creating a 1D Phase Diagram
 
-# In[12]:
+# In[4]:
 
 
 from matplotlib import pyplot as plt
@@ -177,7 +177,7 @@ ax1.set_xlabel('Temperature (K)')
 
 # ## Creating a 2D Phase Diagram
 
-# In[7]:
+# In[5]:
 
 
 # Generate Pressure range

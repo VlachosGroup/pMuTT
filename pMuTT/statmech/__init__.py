@@ -5,6 +5,7 @@ Vlachos group code for thermodynamic models.
 Created on Fri Jul 7 12:40:00 2018
 """
 import inspect
+from copy import copy
 import numpy as np
 from pMuTT import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
                    _get_specie_kwargs, _apply_numpy_operation, _ModelBase)
@@ -202,6 +203,15 @@ class StatMech(_ModelBase):
         nucl_model : :ref:`pMuTT.statmech.nucl <nucl>` object
             Deals with nuclear modes. Default is
             :class:`~pMuTT.statmech.EmptyMode`
+        elements : dict, optional
+            Composition of the species. Default is None.
+            Keys of dictionary are elements, values are stoichiometric values
+            in a formula unit.
+            e.g. CH3OH can be represented as:
+            {'C': 1, 'H': 4, 'O': 1,}.
+        references : ``pMuTT.empirical.References.references`` object, optional
+            Contains references to calculate ``HoRT_ref``. If not specified
+            then HoRT_dft will be used without adjustment. Default is None
         misc_models : list of pMuTT model objects, optional
             Extra models that do not fit in the above attributes. Commonly used
             models would be ``pMuTT.statmech`` and ``pMuTT.mixture`` models
@@ -215,10 +225,13 @@ class StatMech(_ModelBase):
     def __init__(self, name=None, trans_model=EmptyMode(),
                  vib_model=EmptyMode(), rot_model=EmptyMode(),
                  elec_model=EmptyMode(), nucl_model=EmptyMode(),
-                 misc_models=None, smiles=None, notes=None, **kwargs):
+                 misc_models=None, elements=None, references=None,
+                 smiles=None, notes=None, **kwargs):
         self.name = name
         self.smiles = smiles
         self.notes = notes
+        self.elements=elements
+        self.references = references
 
         # Translational modes
         if inspect.isclass(trans_model):
@@ -260,7 +273,8 @@ class StatMech(_ModelBase):
         self.misc_models = misc_models
 
     def get_quantity(self, method_name, raise_error=True, raise_warning=True,
-                     operation='sum', verbose=False, **kwargs):
+                     operation='sum', verbose=False, use_references=True,
+                     **kwargs):
         """Generic method to get any quantity from modes.
 
         Parameters
@@ -282,6 +296,8 @@ class StatMech(_ModelBase):
 
                 - sum (Default)
                 - prod
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             verbose : bool, optional
                 If False, returns the total Gibbs energy. If True, returns
                 contribution of each mode.
@@ -289,10 +305,10 @@ class StatMech(_ModelBase):
                 Parameters passed to each mode
         Returns
         -------
-            quantity : float or (N+5,) `numpy.ndarray`_
+            quantity : float or (N+6,) `numpy.ndarray`_
                 Desired quantity. N represents the number of misc models. If
                 verbose is True, contribution to each mode are as follows:
-                [trans, vib, rot, elec, nucl, misc_models (if any)]
+                [trans, vib, rot, elec, nucl, references, misc_models (if any)]
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
@@ -333,8 +349,21 @@ class StatMech(_ModelBase):
                                raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs)])
+        if use_references and self.references is not None:
+            ref_kwargs = copy(specie_kwargs)
+            ref_kwargs['descriptors'] = getattr(self,
+                                                self.references.descriptor)
+            refs_quantity = np.atleast_1d(
+                    _get_mode_quantity(mode=self.references,
+                                       method_name=method_name,
+                                       raise_error=raise_error,
+                                       raise_warning=raise_warning,
+                                       default_value=default_value,
+                                       **ref_kwargs))
+        else:
+            refs_quantity = np.atleast_1d(default_value)
         # Calculate contribution from misc models if any
-        mix_quantity = _get_mix_quantity(misc_models=self.misc_models,
+        misc_quantity = _get_mix_quantity(misc_models=self.misc_models,
                                          method_name=method_name,
                                          raise_error=raise_error,
                                          raise_warning=raise_warning,
@@ -342,13 +371,13 @@ class StatMech(_ModelBase):
                                          verbose=verbose,
                                          **kwargs)
         # Add misc quantities onto quantity
-        quantity = np.concatenate([quantity, mix_quantity])
+        quantity = np.concatenate([quantity, refs_quantity, misc_quantity])
         quantity = _apply_numpy_operation(quantity, verbose=verbose,
                                           operation=operation)
         return quantity
 
     def get_q(self, verbose=False, raise_error=True, raise_warning=True,
-              **kwargs):
+              use_references=True, **kwargs):
         """Partition function
 
         Parameters
@@ -363,6 +392,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -376,10 +407,11 @@ class StatMech(_ModelBase):
         """
         return self.get_quantity(method_name='get_q', raise_error=raise_error,
                                  raise_warning=raise_warning, operation='prod',
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_CvoR(self, verbose=False, raise_error=True, raise_warning=True,
-                 **kwargs):
+                 use_references=True, **kwargs):
         """Dimensionless heat capacity (constant V)
 
         Parameters
@@ -394,6 +426,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -409,10 +443,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_CvoR', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_Cv(self, units, verbose=False, raise_error=True,
-               raise_warning=True, **kwargs):
+               raise_warning=True, use_references=True, **kwargs):
         """Calculate the heat capacity (constant V)
 
         Parameters
@@ -430,6 +465,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -442,10 +479,11 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_CvoR(verbose=verbose, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*c.R(units)
+                             raise_warning=raise_warning,
+                             use_references=use_references, **kwargs)*c.R(units)
 
     def get_CpoR(self, verbose=False, raise_error=True, raise_warning=True,
-                 **kwargs):
+                 use_references=True, **kwargs):
         """Dimensionless heat capacity (constant P)
 
         Parameters
@@ -460,6 +498,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -475,10 +515,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_CpoR', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_Cp(self, units, verbose=False, raise_error=True,
-               raise_warning=True, **kwargs):
+               raise_warning=True, use_references=True, **kwargs):
         """Calculate the heat capacity (constant P)
 
         Parameters
@@ -496,6 +537,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -508,7 +551,8 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_CpoR(verbose=verbose, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*c.R(units)
+                             raise_warning=raise_warning,
+                             use_references=use_references, **kwargs)*c.R(units)
 
     def get_EoRT(self, T=c.T0('K'), include_ZPE=False,
                  raise_error=True, raise_warning=True, **kwargs):
@@ -586,7 +630,7 @@ class StatMech(_ModelBase):
             * T*c.R('{}/K'.format(units))
 
     def get_UoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 **kwargs):
+                 use_references=True, **kwargs):
         """Dimensionless internal energy
 
         Parameters
@@ -601,6 +645,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -616,10 +662,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_UoRT', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose,
+                                 use_references=use_references, **kwargs)
 
     def get_U(self, units, T=c.T0('K'), verbose=False, raise_error=True,
-              raise_warning=True, **kwargs):
+              raise_warning=True, use_references=True, **kwargs):
         """Calculate the internal energy
 
         Parameters
@@ -639,6 +686,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -651,11 +700,12 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_UoRT(verbose=verbose, T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
+                             raise_warning=raise_warning,
+                             use_references=use_references, **kwargs) \
             * T*c.R('{}/K'.format(units))
 
     def get_HoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 **kwargs):
+                 use_references=True, **kwargs):
         """Dimensionless enthalpy
 
         Parameters
@@ -670,6 +720,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -685,10 +737,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_HoRT', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_H(self, units, T=c.T0('K'), raise_error=True, raise_warning=True,
-              verbose=False, **kwargs):
+              verbose=False, use_references=True, **kwargs):
         """Calculate the enthalpy
 
         Parameters
@@ -708,6 +761,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -720,11 +775,12 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_HoRT(verbose=verbose, raise_error=raise_error,
-                             raise_warning=raise_warning, T=T, **kwargs) \
+                             raise_warning=raise_warning, T=T,
+                             use_references=use_references, **kwargs) \
             * T*c.R('{}/K'.format(units))
 
     def get_SoR(self, verbose=False, raise_error=True, raise_warning=True,
-                **kwargs):
+                use_references=True, **kwargs):
         """Dimensionless entropy
 
         Parameters
@@ -741,6 +797,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
         Returns
         -------
             SoR : float or (N+5,) `numpy.ndarray`_
@@ -753,10 +811,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_SoR', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_S(self, units, verbose=False, raise_error=True,
-              raise_warning=True, **kwargs):
+              raise_warning=True, use_references=True, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -774,6 +833,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -786,10 +847,11 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_SoR(verbose=verbose, raise_error=raise_error,
-                            raise_warning=raise_warning, **kwargs)*c.R(units)
+                            raise_warning=raise_warning, 
+                            use_references=use_references, **kwargs)*c.R(units)
 
     def get_FoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 **kwargs):
+                 use_references=True, **kwargs):
         """Dimensionless Helmholtz energy
 
         Parameters
@@ -804,6 +866,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -819,10 +883,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_FoRT', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_F(self, units, T=c.T0('K'), verbose=False, raise_error=True,
-              raise_warning=True, **kwargs):
+              raise_warning=True, use_references=True, **kwargs):
         """Calculate the Helmholtz energy
 
         Parameters
@@ -842,6 +907,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -854,11 +921,12 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_FoRT(verbose=verbose, T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
+                             raise_warning=raise_warning,
+                             use_references=use_references, **kwargs) \
             * T*c.R('{}/K'.format(units))
 
     def get_GoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 **kwargs):
+                 use_references=True, **kwargs):
         """Dimensionless Gibbs energy
 
         Parameters
@@ -873,6 +941,8 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            use_references : bool, optional
+                If True, adds contribution from references. Default is True
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -888,10 +958,11 @@ class StatMech(_ModelBase):
         return self.get_quantity(method_name='get_GoRT', operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, **kwargs)
+                                 verbose=verbose, use_references=use_references,
+                                 **kwargs)
 
     def get_G(self, units, T=c.T0('K'), verbose=False, raise_error=True,
-              raise_warning=True, **kwargs):
+              raise_warning=True, use_references=True, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -923,7 +994,8 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         return self.get_GoRT(verbose=verbose, raise_error=raise_error,
-                             raise_warning=raise_warning, T=T, **kwargs) \
+                             raise_warning=raise_warning, T=T,
+                             use_references=use_references, **kwargs) \
             * T*c.R('{}/K'.format(units))
 
     def to_dict(self):
@@ -950,6 +1022,11 @@ class StatMech(_ModelBase):
         else:
             obj_dict['misc_models'] = self.misc_models
 
+        try:
+            obj_dict['references'] = self.references.to_dict()
+        except AttributeError:
+            obj_dict['references'] = self.references
+
         return obj_dict
 
     @classmethod
@@ -971,6 +1048,7 @@ class StatMech(_ModelBase):
         rot_model = json_pMuTT.json_to_pMuTT(json_obj['rot_model'])
         elec_model = json_pMuTT.json_to_pMuTT(json_obj['elec_model'])
         nucl_model = json_pMuTT.json_to_pMuTT(json_obj['nucl_model'])
+        references = json_to_pMuTT(json_obj['references'])
         notes = json_obj['notes']
 
         return cls(name=name,
@@ -979,6 +1057,7 @@ class StatMech(_ModelBase):
                    rot_model=rot_model,
                    elec_model=elec_model,
                    nucl_model=nucl_model,
+                   references=references,
                    notes=notes)
 
 

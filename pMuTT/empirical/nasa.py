@@ -470,9 +470,10 @@ class Nasa(EmpiricalBase):
         """
         # Initialize the StatMech object
         if inspect.isclass(statmech_model):
-            statmech_model = statmech_model(**kwargs)
+            statmech_model = statmech_model(name=name, references=references,
+                                            elements=elements, **kwargs)
 
-        # Generate data
+        # Generate heat capacity data
         T = np.linspace(T_low, T_high)
         if T_mid is not None:
             # Check to see if specified T_mid's are in T and, if not,
@@ -485,19 +486,12 @@ class Nasa(EmpiricalBase):
                     # Insert T_mid's into T and save position
                     Ts_index = np.where(T > T_mid[x])[0][0]
                     T = np.insert(T, Ts_index, T_mid[x])
-        CpoR = np.array([statmech_model.get_CpoR(T=T_i) for T_i in T])
+        CpoR = np.array(
+            [statmech_model.get_CpoR(T=T_i, use_references=True) for T_i in T])
+        # Generate enthalpy and entropy data
         T_ref = c.T0('K')
-        HoRT_ref = statmech_model.get_HoRT(T=T_ref)
-        # Add contribution of references
-        if references is not None:
-            descriptor_name = references.descriptor
-            if descriptor_name == 'elements':
-                descriptors = elements
-            else:
-                descriptors = kwargs[descriptor_name]
-            HoRT_ref += references.get_HoRT_offset(descriptors=descriptors,
-                                                   T=T_ref)
-        SoR_ref = statmech_model.get_SoR(T=T_ref)
+        HoRT_ref = statmech_model.get_HoRT(T=T_ref, use_references=True)
+        SoR_ref = statmech_model.get_SoR(T=T_ref, use_references=True)
 
         return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
@@ -541,7 +535,6 @@ class Nasa(EmpiricalBase):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = json_to_pMuTT(json_obj['statmech_model'])
-        json_obj['references'] = json_to_pMuTT(json_obj['references'])
         json_obj['cat_site'] = json_to_pMuTT(json_obj['cat_site'])
         json_obj['misc_models'] = json_to_pMuTT(json_obj['misc_models'])
         return cls(**json_obj)

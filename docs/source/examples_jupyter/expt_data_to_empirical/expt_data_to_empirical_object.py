@@ -120,13 +120,13 @@ fig.set_size_inches((10, 8))
 # Note that in this code's section, we showcase the ``pMuTT.constants.convert_unit`` function. Similarly to the ``c.R`` and ``c.T0`` functions shown above, this helps to increase code readability.
 # 
 # ## Save the Shomate polynomial as a JSON file
-# If we would like to save our Shomate object, we can save it in JSON format with the help of the ``pMuTT.io_.json.pMuTTEncoder``.
+# If we would like to save our Shomate object, we can save it in JSON format with the help of the ``pMuTT.io.json.pMuTTEncoder``.
 
 # In[6]:
 
 
 import json
-from pMuTT.io_.json import pMuTTEncoder
+from pMuTT.io.json import pMuTTEncoder
 
 with open('CH3OH_shomate.json', 'w') as f_ptr:
     json.dump(CH3OH_shomate, f_ptr, cls=pMuTTEncoder, indent=True)
@@ -158,12 +158,12 @@ with open('CH3OH_shomate.json', 'w') as f_ptr:
 # ```
 
 # ## Loading the Shomate polynomial from a JSON file
-# Now that we've saved the Shomate object, we can open it using ``pMuTT.io_.json.json_to_pMuTT``.
+# Now that we've saved the Shomate object, we can open it using ``pMuTT.io.json.json_to_pMuTT``.
 
 # In[7]:
 
 
-from pMuTT.io_.json import json_to_pMuTT
+from pMuTT.io.json import json_to_pMuTT
 
 with open('CH3OH_shomate.json', 'r') as f_ptr:
     CH3OH_json = json.load(f_ptr, object_hook=json_to_pMuTT)

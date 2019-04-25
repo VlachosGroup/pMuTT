@@ -388,7 +388,7 @@ def write_surf(reactions, sden_operation='min',
     lines.extend(cat_site_lines)
     lines.extend(['END',
                   '',
-                  '!Gas-phase reactions.',
+                  '!Surface-phase reactions.',
                   '!The reaction line has the following format:',
                   '!REACTIONS  MW[ON/OFF]   [Ea units]',
                   '!where MW stands for Motz-Wise corrections and if the Ea',

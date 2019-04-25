@@ -70,7 +70,6 @@ class TestReaction(unittest.TestCase):
                      'name': 'H2O',
                      'notes': None,
                      'phase': None,
-                     'references': None,
                      'statmech_model': None,
                      'misc_models': None,
                      'cat_site': None,
@@ -103,7 +102,6 @@ class TestReaction(unittest.TestCase):
                      'name': 'H2',
                      'notes': None,
                      'phase': None,
-                     'references': None,
                      'statmech_model': None,
                      'misc_models': None,
                      'cat_site': None,
@@ -134,7 +132,6 @@ class TestReaction(unittest.TestCase):
                      'name': 'O2',
                      'notes': None,
                      'phase': None,
-                     'references': None,
                      'statmech_model': None,
                      'misc_models': None,
                      'cat_site': None,
@@ -1031,11 +1028,9 @@ class TestReaction(unittest.TestCase):
         units = 'J/mol'
         exp_sm_E = self.H2O_TS_sm.get_H(T=c.T0('K'), units=units) \
             - self.H2_sm.get_H(T=c.T0('K'), units=units) \
-            - self.O2_sm.get_H(T=c.T0('K'), units=units)*0.5 + 1.5 \
-            *c.R('{}/K'.format(units))*c.T0('K')
+            - self.O2_sm.get_H(T=c.T0('K'), units=units)*0.5
         exp_sm_E_rev = self.H2O_TS_sm.get_H(T=c.T0('K'), units=units) \
-            - self.H2O_sm.get_H(T=c.T0('K'), units=units) + 1. \
-            *c.R('{}/K'.format(units))*c.T0('K')
+            - self.H2O_sm.get_H(T=c.T0('K'), units=units)
         self.assertAlmostEqual(
                 self.rxn_sm.get_E_act(T=c.T0('K'), units=units),
                 exp_sm_E)

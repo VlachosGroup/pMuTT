@@ -28,7 +28,6 @@ class TestShomate(unittest.TestCase):
             'T_low': 500.,
             'T_high': 1700.,
             'notes': None,
-            'references': None,
             'statmech_model': None,
             'misc_models': None,
             'smiles': None,

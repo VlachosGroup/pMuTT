@@ -39,7 +39,6 @@ class TestNasa(unittest.TestCase):
             'T_mid': 1610.97,
             'T_high': 5000.,
             'notes': None,
-            'references': None,
             'statmech_model': None,
             'misc_models': None,
             'cat_site': None,

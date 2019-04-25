@@ -42,8 +42,8 @@ class Reaction(_pMuTTBase):
 
     Notes
     -----
-        Specie specific parameters can be passed by having a key named
-        'specie' mapping onto a dictionary whose keys are the species names.
+        Specie-specific parameters can be passed by having a key named after the
+        specie mapping onto a dictionary whose keys are the parameters to pass.
 
         e.g. For the reaction: H2 + 0.5O2 = H2O, the pressures can be specified
         independently using the following dictionary. In this example arbitrary
@@ -53,17 +53,9 @@ class Reaction(_pMuTTBase):
 
             kwargs = {
                 'T': 298.,
-                'specie': {
-                    'H2': {
-                        'P': 2.,
-                    },
-                    'O2': {
-                        'P': 1.,
-                    },
-                    'H2O': {
-                        'P': 1.,
-                    }
-                }
+                'H2_kwargs': {'P': 2.},
+                'O2_kwargs': {'P': 1.},
+                'H2O_kwargs': {'P': 1.,}
             }
     """
 
@@ -1594,8 +1586,11 @@ class Reaction(_pMuTTBase):
             else:
                 m = _get_molecularity(self.reactants_stoich)
         if use_q:
-            A = self.get_delta_q(rev=rev, act=True, T=T, ignore_q_elec=True,
-                                 include_ZPE=False, **kwargs)
+            try:
+                A = self.get_delta_q(rev=rev, act=True, T=T, ignore_q_elec=True,
+                                     include_ZPE=False, **kwargs)
+            except AttributeError:
+                A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
         else:
             A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
         return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
@@ -1671,10 +1666,6 @@ class Reaction(_pMuTTBase):
         for specie, stoich in zip(species, stoich):
             # Process the inputs and methods for each specie
             specie_kwargs = _get_specie_kwargs(specie.name, **kwargs)
-            try:
-                specie_kwargs['specie'] = kwargs['specie']
-            except KeyError:
-                pass
 
             method = getattr(specie, method_name)
             if method_name == 'get_q':
@@ -2046,6 +2037,59 @@ class ChemkinReaction(Reaction):
         return np.max([0., 
                        super().get_delta_GoRT(rev=rev, act=act, **kwargs),
                        super().get_delta_GoRT(rev=rev, act=False, **kwargs)])
+
+    @classmethod
+    def from_string(cls, reaction_str, species, species_delimiter='+',
+                    reaction_delimiter='=', bep_descriptor=None, notes=None,
+                    beta=1, is_adsorption=False, sticking_coeff=1.):
+        """Create a reaction object using the reaction string
+
+        Parameters
+        ----------
+            reaction_str : str
+                Reaction string.
+            species : dict
+                Dictionary using the names as keys. If you have a list of
+                species, use pMuTT.pMuTT_list_to_dict to make a dict.
+            species_delimiter : str, optional
+                Delimiter that separate species. Leading and trailing spaces
+                will be trimmed. Default is '+'
+            reaction_delimiter : str, optional
+                Delimiter that separate states of the reaction. Leading and
+                trailing spaces will be trimmed. Default is '='
+            bep_descriptor : str, optional
+                If the transition state is a :class:`~pMuTT.reaction.bep.BEP`
+                object, the descriptor can be set using this parameter. See
+                :class:`~pMuTT.reaction.bep.BEP` documentation for accepted
+                descriptors
+            notes : str or dict, optional
+                Other notes such as the source of the reaction. Default is None
+            beta : float, optional
+                Power to raise the temperature in the rate expression. Default is 1
+            is_adsorption : bool, optional
+                If True, the reaction represents an adsorption. Default is False
+            sticking_coeff : float, optional
+                Sticking coefficient. Only relevant if ``is_adsorption`` is True
+            gas_phase : bool
+                True if the reaction has only gas-phase species. This attribute is
+                determined based on the reactants and products
+        Returns
+        -------
+            ChemkinReaction : ChemkinReaction object
+        """
+        rxn = super().from_string(reaction_str=reaction_str,
+                                  species=species,
+                                  species_delimiter=species_delimiter,
+                                  reaction_delimiter=reaction_delimiter,
+                                  bep_descriptor=bep_descriptor)
+        return cls(reactants=rxn.reactants,
+                   reactants_stoich=rxn.reactants_stoich,
+                   products=rxn.products, products_stoich=rxn.products_stoich,
+                   transition_state=rxn.transition_state,
+                   transition_state_stoich=rxn.transition_state_stoich,
+                   bep_descriptor=bep_descriptor,
+                   notes=notes, beta=beta, is_adsorption=is_adsorption,
+                   sticking_coeff=sticking_coeff)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

@@ -146,7 +146,7 @@ class PhaseDiagram(Reactions):
             x1_values : iterable object
                 x1 values to use
             x2_name : str
-                Name of first variable to vary
+                Name of second variable to vary
             x2_values : iterable object
                 x2 values to use
             G_units : str, optional

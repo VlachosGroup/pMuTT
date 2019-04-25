@@ -8,7 +8,7 @@ Empirical models.
 import inspect
 from matplotlib import pyplot as plt
 import numpy as np
-from pMuTT import _is_iterable, _pMuTTBase
+from pMuTT import _is_iterable, _pMuTTBase, plot_1D
 from pMuTT import constants as c
 from pMuTT.io.json import json_to_pMuTT, remove_class
 
@@ -36,9 +36,6 @@ class EmpiricalBase(_pMuTTBase):
             Statistical thermodynamic model. Default is None.
             Object should have the following methods: ``get_CpoR``,
             ``get_HoRT``, ``get_SoR``, ``get_GoRT``.
-        references : ``pMuTT.empirical.References.references`` object, optional
-            Contains references to calculate ``HoRT_ref``. If not specified
-            then HoRT_dft will be used without adjustment. Default is None
         misc_models : list of pMuTT model objects, optional
             Extra models to add extra functionality. Commonly used models would
             be ``pMuTT.mixture`` models
@@ -55,7 +52,6 @@ class EmpiricalBase(_pMuTTBase):
         self.name = name
         self.phase = phase
         self.elements = elements
-        self.references = references
         self.smiles = smiles
         self.notes = notes
 
@@ -118,63 +114,43 @@ class EmpiricalBase(_pMuTTBase):
         .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
         .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
+        # Process temperatures
         if T_low is None:
             T_low = self.T_low
         if T_high is None:
             T_high = self.T_high
         T = np.linspace(T_low, T_high)
 
-        f, ax = plt.subplots(4, sharex=True)
-        '''
-        Heat Capacity
-        '''
+        # Process the method names, units, and y labels
+        units = (Cp_units, H_units, S_units, G_units)
+        methods = ['get_Cp', 'get_H', 'get_S', 'get_G']
+        y_labels = []
+        kwargs = {}
+        for i, (units, method) in enumerate(zip(units, methods)):
+            if units is None:
+                if method == 'get_Cp' or method == 'get_S':
+                    methods[i] = '{}oR'.format(method)
+                else:
+                    methods[i] = '{}oRT'.format(method)
+                y_labels.append(method.replace('o', '/').replace('get_', ''))
+            else:
+                kwargs['{}_kwargs'.format(method)] = {'units': units}
+                y_labels.append('{} ({})'.format(method.replace('get_', ''),
+                                                 units))
+
+        fig, ax = plot_1D(self, x_name='T', x_values=T, methods=methods,
+                          **kwargs)
+        
+        # Add titles and labels
         ax[0].set_title('Specie: {}'.format(self.name))
-        Cp_plot = self.get_CpoR(T=T)
-        if Cp_units is None:
-            ax[0].set_ylabel('Cp/R')
-        else:
-            ax[0].set_ylabel('Cp ({})'.format(Cp_units))
-            Cp_plot = Cp_plot*c.R(Cp_units)
-        ax[0].plot(T, Cp_plot, 'r-')
-
-        '''
-        Enthalpy
-        '''
-        H_plot = self.get_HoRT(T=T)
-        if H_units is None:
-            ax[1].set_ylabel('H/RT')
-        else:
-            ax[1].set_ylabel('H ({})'.format(H_units))
-            H_plot = H_plot*c.R('{}/K'.format(H_units))*T
-        ax[1].plot(T, H_plot, 'g-')
-
-        '''
-        Entropy
-        '''
-        S_plot = self.get_SoR(T=T)
-        if S_units is None:
-            ax[2].set_ylabel('S/R')
-        else:
-            ax[2].set_ylabel('S ({})'.format(S_units))
-            S_plot = S_plot*c.R(S_units)
-        ax[2].plot(T, S_plot, 'b-')
-
-        '''
-        Gibbs energy
-        '''
-        ax[3].set_xlabel('Temperature (K)')
-        G_plot = self.get_GoRT(T=T)
-        if G_units is None:
-            ax[3].set_ylabel('G/RT')
-        else:
-            ax[3].set_ylabel('G ({})'.format(G_units))
-            G_plot = G_plot*c.R('{}/K'.format(G_units))*T
-        ax[3].plot(T, G_plot, 'k-')
-
-        return f, ax
+        for i, y_label in enumerate(y_labels):
+            ax[i].set_xlabel('Temperature (K)')            
+            ax[i].set_ylabel(y_label)
+        return fig, ax
 
     def plot_statmech(self, T_low=None, T_high=None, Cp_units=None,
-                      H_units=None, S_units=None, G_units=None):
+                      H_units=None, S_units=None, G_units=None,
+                      use_references=True):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
 
@@ -214,72 +190,45 @@ class EmpiricalBase(_pMuTTBase):
         .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
         .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
+        # Process temperatures
         if T_low is None:
             T_low = self.T_low
         if T_high is None:
             T_high = self.T_high
         T = np.linspace(T_low, T_high)
 
-        f, ax = plt.subplots(4, sharex=True)
-        '''
-        Heat Capacity
-        '''
+        # Process the method names, units, and y labels
+        units = (Cp_units, H_units, S_units, G_units)
+        methods = ['get_Cp', 'get_H', 'get_S', 'get_G']
+        y_labels = []
+        kwargs = {}
+        for i, (units, method) in enumerate(zip(units, methods)):
+            if units is None:
+                if method == 'get_Cp' or method == 'get_S':
+                    methods[i] = '{}oR'.format(method)
+                else:
+                    methods[i] = '{}oRT'.format(method)
+                y_labels.append(method.replace('o', '/').replace('get_', ''))
+            else:
+                kwargs['{}_kwargs'.format(method)] = {'units': units}
+                y_labels.append('{} ({})'.format(method.replace('get_', ''),
+                                                 units))
+
+        fig, ax = plot_1D(self.statmech_model, x_name='T', x_values=T,
+                          methods=methods, use_references=use_references,
+                          **kwargs)
+        
+        # Add titles and labels
         ax[0].set_title('Specie: {}'.format(self.name))
-        Cp_plot = np.array([self.statmech_model.get_CpoR(T=T_i) for T_i in T])
-        if Cp_units is None:
-            ax[0].set_ylabel('Cp/R')
-        else:
-            ax[0].set_ylabel('Cp ({})'.format(Cp_units))
-            Cp_plot = Cp_plot*c.R(Cp_units)
-        ax[0].plot(T, Cp_plot, 'r-')
-
-        '''
-        Enthalpy
-        '''
-        H_plot = self.statmech_model.get_HoRT(T=T)
-        if self.references is not None:
-            H_plot += self.references.get_HoRT_offset(
-                    descriptors=getattr(self, self.references.descriptor), T=T)
-
-        if H_units is None:
-            ax[1].set_ylabel('H/RT')
-        else:
-            ax[1].set_ylabel('H ({})'.format(H_units))
-            H_plot = H_plot*c.R('{}/K'.format(H_units))*T
-        ax[1].plot(T, H_plot, 'g-')
-
-        '''
-        Entropy
-        '''
-        S_plot = self.statmech_model.get_SoR(T=T)
-        if S_units is None:
-            ax[2].set_ylabel('S/R')
-        else:
-            ax[2].set_ylabel('S ({})'.format(S_units))
-            S_plot = S_plot*c.R(S_units)
-        ax[2].plot(T, S_plot, 'b-')
-
-        '''
-        Gibbs energy
-        '''
-        ax[3].set_xlabel('Temperature (K)')
-        G_plot = self.statmech_model.get_GoRT(T=T)
-        if self.references is not None:
-            G_plot += self.references.get_HoRT_offset(
-                    descriptors=getattr(self, self.references.descriptor), T=T)
-
-        if G_units is None:
-            ax[3].set_ylabel('G/RT')
-        else:
-            ax[3].set_ylabel('G ({})'.format(G_units))
-            G_plot = G_plot*c.R('{}/K'.format(G_units))*T
-        ax[3].plot(T, G_plot, 'k-')
-
-        return f, ax
+        for i, y_label in enumerate(y_labels):
+            ax[i].set_xlabel('Temperature (K)')            
+            ax[i].set_ylabel(y_label)
+        return fig, ax
 
     def plot_statmech_and_empirical(self, T_low=None, T_high=None,
                                     Cp_units=None, H_units=None,
-                                    S_units=None, G_units=None):
+                                    S_units=None, G_units=None,
+                                    use_references=True):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
 
@@ -319,75 +268,43 @@ class EmpiricalBase(_pMuTTBase):
         .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
         .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
         """
+        # Process temperatures
         if T_low is None:
             T_low = self.T_low
         if T_high is None:
             T_high = self.T_high
         T = np.linspace(T_low, T_high)
 
-        f, ax = plt.subplots(4, sharex=True)
-        '''
-        Heat Capacity
-        '''
+        # Process the method names, units, and y labels
+        units = (Cp_units, H_units, S_units, G_units)
+        methods = ['get_Cp', 'get_H', 'get_S', 'get_G']
+        y_labels = []
+        kwargs = {}
+        for i, (units, method) in enumerate(zip(units, methods)):
+            if units is None:
+                if method == 'get_Cp' or method == 'get_S':
+                    methods[i] = '{}oR'.format(method)
+                else:
+                    methods[i] = '{}oRT'.format(method)
+                y_labels.append(method.replace('o', '/').replace('get_', ''))
+            else:
+                kwargs['{}_kwargs'.format(method)] = {'units': units}
+                y_labels.append('{} ({})'.format(method.replace('get_', ''),
+                                                 units))
+
+        fig, ax = plot_1D(self, x_name='T', x_values=T, methods=methods,
+                          **kwargs)
+        fig, ax = plot_1D(self.statmech_model, x_name='T', x_values=T,
+                          methods=methods, figure=fig, ax=ax,
+                          use_references=use_references, **kwargs)
+        
+        # Add titles and labels
         ax[0].set_title('Specie: {}'.format(self.name))
-        T, Cp_plot_statmech, Cp_plot_empirical = self.compare_CpoR(T=T)
-        if Cp_units is None:
-            ax[0].set_ylabel('Cp/R')
-        else:
-            ax[0].set_ylabel('Cp ({})'.format(Cp_units))
-            Cp_plot_statmech = Cp_plot_statmech*c.R(Cp_units)
-            Cp_plot_empirical = Cp_plot_empirical*c.R(Cp_units)
-
-        ax[0].plot(T, Cp_plot_statmech, 'r-', label='Stat Mech Model')
-        ax[0].plot(T, Cp_plot_empirical, 'b-', label='Empirical Model')
-        ax[0].legend()
-
-        '''
-        Enthalpy
-        '''
-        T, H_plot_statmech, H_plot_empirical = self.compare_HoRT(T=T)
-
-        if H_units is None:
-            ax[1].set_ylabel('H/RT')
-        else:
-            ax[1].set_ylabel('H ({})'.format(H_units))
-            H_plot_statmech = H_plot_statmech *\
-                c.R('{}/K'.format(H_units))*T
-            H_plot_empirical = H_plot_empirical *\
-                c.R('{}/K'.format(H_units))*T
-        ax[1].plot(T, H_plot_statmech, 'r-')
-        ax[1].plot(T, H_plot_empirical, 'b-')
-
-        '''
-        Entropy
-        '''
-        T, S_plot_statmech, S_plot_empirical = self.compare_SoR(T=T)
-        if S_units is None:
-            ax[2].set_ylabel('S/R')
-        else:
-            ax[2].set_ylabel('S ({})'.format(S_units))
-            S_plot_statmech = S_plot_statmech*c.R(S_units)
-            S_plot_empirical = S_plot_empirical*c.R(S_units)
-        ax[2].plot(T, S_plot_statmech, 'r-')
-        ax[2].plot(T, S_plot_empirical, 'b-')
-
-        '''
-        Gibbs energy
-        '''
-        ax[3].set_xlabel('Temperature (K)')
-        T, G_plot_statmech, G_plot_empirical = self.compare_GoRT(T=T)
-        if G_units is None:
-            ax[3].set_ylabel('G/RT')
-        else:
-            ax[3].set_ylabel('G ({})'.format(G_units))
-            G_plot_statmech = G_plot_statmech *\
-                c.R('{}/K'.format(G_units))*T
-            G_plot_empirical = G_plot_empirical *\
-                c.R('{}/K'.format(G_units))*T
-        ax[3].plot(T, G_plot_statmech, 'r-')
-        ax[3].plot(T, G_plot_empirical, 'b-')
-
-        return f, ax
+        ax[0].legend(['Empirical', 'StatMech'])
+        for i, y_label in enumerate(y_labels):
+            ax[i].set_xlabel('Temperature (K)')            
+            ax[i].set_ylabel(y_label)
+        return fig, ax
 
     def compare_CpoR(self, T=None):
         """Compares the dimensionless heat capacity of the statistical model
@@ -565,11 +482,6 @@ class EmpiricalBase(_pMuTTBase):
                     'notes': self.notes,
                     'smiles': self.smiles, }
         try:
-            obj_dict['references'] = self.references.to_dict()
-        except AttributeError:
-            obj_dict['references'] = self.references
-
-        try:
             obj_dict['statmech_model'] = self.statmech_model.to_dict()
         except AttributeError:
             obj_dict['statmech_model'] = self.statmech_model
@@ -595,10 +507,7 @@ class EmpiricalBase(_pMuTTBase):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = \
-            json_to_pMuTT(json_obj['statmech_model'])
-        json_obj['references'] = \
-            json_to_pMuTT(json_obj['references'])
+        json_obj['statmech_model'] = json_to_pMuTT(json_obj['statmech_model'])
         json_obj['misc_models'] = \
             [json_to_pMuTT(mix_model) for mix_model in json_obj['misc_models']]
 
