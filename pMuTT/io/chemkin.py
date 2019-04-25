@@ -273,8 +273,8 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
 
-def write_surf(nasa_species, sden_operation='min',
-               filename='surf.inp', T=c.T0('K'), reactions=[],
+def write_surf(reactions, sden_operation='min',
+               filename='surf.inp', T=c.T0('K'),
                species_delimiter='+', reaction_delimiter='=',
                act_method_name='get_E_act', act_unit='kcal/mol',
                float_format=' .3E', stoich_format='.0f', newline='\n',
@@ -283,16 +283,13 @@ def write_surf(nasa_species, sden_operation='min',
 
     Parameters
     ----------
-        nasa_species : list of :class:`~pMuTT.empirical.nasa.Nasa` objects
-            Surface used in Chemkin mechanism. If gas-phase species are
-            present, they will be ignored
+        reactions : list of :class:`~pMuTT.reaction.ChemkinReaction` objects
+            Chemkin reactions to write in surf.inp file. Purely gas-phase
+            reactions will be ignored
         filename : str, optional
             Filename for surf.inp file. Default is 'surf.inp'
         T : float, optional
             Temperature to calculate activation energy. Default is 298.15 K
-        reactions : list of :class:`~pMuTT.reaction.ChemkinReaction` objects
-            Chemkin reactions to write in surf.inp file. Purely gas-phase
-            reactions will be ignored
         species_delimiter : str, optional
             Delimiter to separate species when writing reactions.
             Default is '+'
@@ -322,7 +319,8 @@ def write_surf(nasa_species, sden_operation='min',
     # Organize species by their catalyst sites
     cat_adsorbates = {}
     unique_cat_sites = []
-    for specie in nasa_species:
+    nasa_species = reactions.get_species(include_TS=False)
+    for specie in nasa_species.values():
         # Skip gas phase species
         if specie.phase.upper() == 'G':
             continue
@@ -390,12 +388,12 @@ def write_surf(nasa_species, sden_operation='min',
     lines.extend(cat_site_lines)
     lines.extend(['END',
                   '',
-                  '!Gas-phase reactions.',
+                  '!Surface-phase reactions.',
                   '!The reaction line has the following format:',
                   '!REACTIONS  MW[ON/OFF]   [Ea units]',
                   '!where MW stands for Motz-Wise corrections and if the Ea',
                   ('!units are left blank, then the activation energy should '
-                   'be dimensionless (i.e. E/RT)'),
+                   'be in cal/mol'),
                   '!The rate constant expression is:',
                   '!k = kb/h/site_den^(n-1) * (T)^beta * exp(-Ea/RT)',
                   ('!where site_den is the site density and is the number '

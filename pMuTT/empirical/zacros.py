@@ -84,14 +84,6 @@ class Zacros(EmpiricalBase):
         obj_dict['MW'] = self.MW
         obj_dict['q_trans2D'] = self.q_trans2D
 
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
-
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.

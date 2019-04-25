@@ -8,6 +8,8 @@ references.
 
 from warnings import warn
 import numpy as np
+from pMuTT import _ModelBase
+from pMuTT import constants as c
 from pMuTT.empirical import EmpiricalBase
 from pMuTT.io.json import json_to_pMuTT, remove_class
 
@@ -29,14 +31,6 @@ class Reference(EmpiricalBase):
         self.T_ref = T_ref
         self.HoRT_ref = HoRT_ref
 
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
-
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
 
@@ -49,24 +43,8 @@ class Reference(EmpiricalBase):
         obj_dict['HoRT_ref'] = self.HoRT_ref
         return obj_dict
 
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
 
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            Reference : Reference object
-        """
-        json_obj = remove_class(json_obj)
-        # Reconstruct statmech model
-        return cls(**json_obj)
-
-
-class References:
+class References(_ModelBase):
     """Holds reference species to adjust DFT energies to experimental data.
 
     Attributes
@@ -74,16 +52,20 @@ class References:
         offset : dict
             Dimensionless enthalpy offset for each descriptor
         references : list of :class:`~pMuTT.empirical.references.Reference`,
-        optional
+                     optional
             Reference species. Each member of the list should have the
             attributes ``T_ref`` and ``HoRT_ref``
-        T_ref : float
-            Reference temperature in K
+        descriptor: str, optional
+            Descriptor to use to calculate offset. Default is 'elements'
+        T_ref : float, optional
+            Reference temperature in K. Default is 298.15 K
     """
-    def __init__(self, offset=None, references=None, descriptor='elements'):
+    def __init__(self, offset=None, references=None, descriptor='elements',
+                 T_ref=c.T0('K')):
         self.offset = offset
         self.references = references
         self.descriptor = descriptor
+        self.T_ref = T_ref
         # If offset not specified but references is specified
         if self.offset is None and self.references is not None:
             self.fit_HoRT_offset()
@@ -199,7 +181,7 @@ class References:
         self.offset = {descriptor: val for descriptor, val
                        in zip(descriptors, offset)}
 
-    def get_HoRT_offset(self, descriptors, T=None):
+    def get_HoRT(self, descriptors, T=None):
         """Returns the offset due to the descriptor composition of a specie.
         The offset is defined as follows:
 
@@ -210,28 +192,46 @@ class References:
             descriptors : dict
                 Dictionary where the keys are decriptors and the values are the
                 number of each descriptor in a formula unit
-            Ts : float or (N,) numpy.ndarray_
-                Temperatures in K. If not specified, adjusts using ``T_ref``
+            T : float or (N,) numpy.ndarray_, optional
+                Temperature in K. If not specified, adjusts using ``T_ref``
         Returns
         -------
-            HoRT_offset : float
+            HoRT : float
                 Offset to add to potentialenergy (in eV) to adjust to
                 References
 
-        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+        .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        HoRT_offset = 0.
+        HoRT = 0.
         for descriptor, coefficient in descriptors.items():
             try:
-                HoRT_offset -= self.offset[descriptor]*coefficient
+                HoRT -= self.offset[descriptor]*coefficient
             except KeyError:
                 warn('References does not have offset value for the '
                      'descriptor: {}.'.format(descriptor), RuntimeWarning)
         if T is None:
-            return HoRT_offset
+            return HoRT
         else:
             # Adjust for the temperature
-            return HoRT_offset * self.T_ref/T
+            return HoRT * self.T_ref/T
+
+    def get_CvoR(self):
+        return 0.
+
+    def get_CpoR(self):
+        return 0.
+
+    def get_UoRT(self):
+        return 0.
+
+    def get_SoR(self):
+        return 0.
+
+    def get_AoRT(self, descriptors, T):
+        return self.get_UoRT() - self.get_SoR()
+
+    def get_GoRT(self, descriptors, T):
+        return self.get_HoRT(descriptors=descriptors, T=T) - self.get_SoR()
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -242,7 +242,8 @@ class References:
         """
         obj_dict = {'class': str(self.__class__),
                     'offset': self.offset,
-                    'descriptor': self.descriptor}
+                    'descriptor': self.descriptor,
+                    'T_ref': self.T_ref}
         try:
             obj_dict['references'] = [ref.to_dict() for ref in self.references]
         except (AttributeError, TypeError):

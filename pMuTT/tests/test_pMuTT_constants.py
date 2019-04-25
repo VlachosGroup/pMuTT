@@ -34,22 +34,22 @@ class TestConstants(unittest.TestCase):
 
     def test_m_e(self):
         self.assertEqual(c.m_e('amu'), 5.48579909070e-4)
-        with self.assertRaises(KeyError):
+        with self.assertRaises(ValueError):
             c.m_e('arbitrary unit')
 
     def test_m_p(self):
         self.assertEqual(c.m_p('amu'), 1.007276466879)
-        with self.assertRaises(KeyError):
+        with self.assertRaises(ValueError):
             c.m_p('arbitrary unit')
 
     def test_P0(self):
-        self.assertEqual(c.P0('atm'), 1.)
-        with self.assertRaises(KeyError):
+        self.assertEqual(c.P0('bar'), 1.)
+        with self.assertRaises(ValueError):
             c.P0('arbitrary unit')
 
     def test_T0(self):
         self.assertEqual(c.T0('K'), 298.15)
-        with self.assertRaises(KeyError):
+        with self.assertRaises(ValueError):
             c.T0('arbitrary unit')
 
     def test_convert_unit(self):

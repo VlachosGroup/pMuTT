@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from scipy.integrate import quad
+from pMuTT import _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class HarmonicVib:
+class HarmonicVib(_pMuTTBase):
     """Vibrational modes using the harmonic approximation. Equations found in
     Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
     John Wiley & Sons, 2010.
@@ -23,14 +25,6 @@ class HarmonicVib:
     def __init__(self, vib_wavenumbers=[], imaginary_substitute=None):
         self.vib_wavenumbers = np.array(vib_wavenumbers)
         self.imaginary_substitute = imaginary_substitute
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T, include_ZPE=True):
         """Calculates the partition function
@@ -250,14 +244,13 @@ class HarmonicVib:
                                          substitute=self.imaginary_substitute))
 
 
-class QRRHOVib:
+class QRRHOVib(_pMuTTBase):
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
-    approximation. Equations found in
+    approximation. Equations source from:
 
-    1. Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
-    Phys. Chem. C 2015, 119 (4), 1840–1850.
-
-    2. Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
+    * Li, Y. P.; Gomes, J.; Sharada, S. M.; Bell, A. T.; Head-Gordon, M. J.
+      Phys. Chem. C 2015, 119 (4), 1840–1850.
+    * Grimme, S. Chem. - A Eur. J. 2012, 18 (32), 9955–9964.
 
     Attributes
     ----------
@@ -283,14 +276,6 @@ class QRRHOVib:
         self.vib_wavenumbers = vib_wavenumbers
         self.alpha = alpha
         self.imaginary_substitute = imaginary_substitute
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def _get_scaled_wavenumber(self, wavenumber):
         """Calculates the scaled wavenumber determining mixture of RRHO to
@@ -614,10 +599,11 @@ class QRRHOVib:
                                          substitute=self.imaginary_substitute))
 
 
-class EinsteinVib:
-    """Einstein model of a crystal. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class EinsteinVib(_pMuTTBase):
+    """Einstein model of a crystal. Equations used sourced from
+
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -630,14 +616,6 @@ class EinsteinVib:
     def __init__(self, einstein_temperature, interaction_energy=0.):
         self.einstein_temperature = einstein_temperature
         self.interaction_energy = interaction_energy
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T):
         """Calculates the partition function
@@ -703,7 +681,7 @@ class EinsteinVib:
 
         Returns
         -------
-            ZPE : float
+            zpe : float
                 Zero point energy in eV
         """
         return self.interaction_energy \
@@ -810,21 +788,228 @@ class EinsteinVib:
                 'einstein_temperature': self.einstein_temperature,
                 'interaction_energy': self.interaction_energy}
 
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
+
+class DebyeVib(_pMuTTBase):
+    """Debye model of a crystal. Equations sourced from:
+
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
+
+    Attributes
+    ----------
+        debye_temperature : float
+            Debye temperature (:math:`\\Theta_D`) in K
+        interaction_energy : float, optional
+            Interaction energy (:math:`u`) per atom in eV. Default is 0 eV
+    """
+
+    def __init__(self, debye_temperature, interaction_energy):
+        self.debye_temperature = debye_temperature
+        self.interaction_energy = interaction_energy
+
+    def get_q(self, T):
+        """Calculate the partition function
+
+        :math:`q = \\exp\\bigg(-\\frac{u}{3k_B T} - \\frac{3}{8}
+        \\frac{\\Theta_D}{T} - G\\big(\\frac{\Theta_D}{T}\\big)\\bigg)`
 
         Parameters
         ----------
-            json_obj : dict
-                JSON representation
+            T : float
+                Temperature in K
         Returns
         -------
-            HarmonicVib : HarmonicVib object
+            q : float
+                Partition function
         """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)
+        G = self._get_intermediate_fn(T=T, fn=self._G_integrand)
+        return np.exp(-self.interaction_energy/3./c.kb('eV/K')/T \
+                      -3./8.*self.debye_temperature/T - G)
 
+    def get_CvoR(self, T):
+        """Calculates dimensionless heat capacity (constant V)
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            CvoR : float
+                Dimensionless heat capacity (constant V)
+        """
+        K = self._get_intermediate_fn(T=T, fn=self._K_integrand)
+        return 3.*K
+    
+    def get_CpoR(self, T):
+        """Calculates dimensionless heat capacity (constant P)
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            CpoR : float
+                Dimensionless heat capacity (constant P)
+        """
+        return self.get_CvoR(T=T)
+
+    def get_UoRT(self, T):
+        """Calculates dimensionless internal energy
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            UoRT : float
+                Dimensionless internal energy
+        """
+        return self.get_ZPE()/c.kb('eV/K')/T \
+               + 3.*self._get_intermediate_fn(T=T, fn=self._F_integrand)
+    
+    def get_HoRT(self, T):
+        """Calculates dimensionless enthalpy
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            HoRT : float
+                Dimensionless enthalpy
+        """
+        return self.get_UoRT(T=T)
+
+    def get_SoR(self, T):
+        """Calculates dimensionless entropy
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            SoR : float
+                Dimensionless entropy
+        """
+        F = self._get_intermediate_fn(T=T, fn=self._F_integrand)
+        G = self._get_intermediate_fn(T=T, fn=self._G_integrand)
+        return 3.*(F - G)
+
+    def get_FoRT(self, T):
+        """Calculates dimensionless Helmholtz energy
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            FoRT : float
+                Dimensionless Helmholtz energy
+        """
+        return self.get_UoRT(T=T) - self.get_SoR(T=T)
+
+    def get_GoRT(self, T):
+        """Calculates dimensionless Gibbs energy
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+        Returns
+        -------
+            GoRT : float
+                Dimensionless Gibbs energy
+        """
+        return self.get_HoRT(T=T) - self.get_SoR(T=T)
+
+    def get_ZPE(self):
+        """Calculate zero point energy
+
+        Returns
+        -------
+            zpe : float
+                Zero point energy in eV
+        """
+        return self.interaction_energy \
+               + 9./8.*c.R('eV/K')*self.debye_temperature
+
+    def _G_integrand(self, x):
+        """Integrand when evaluating intermediate function G.
+
+        :math:`f(x) = x^2 \\ln \\bigg(1-e^{-x}\\bigg)`
+
+        Parameters
+        ----------
+            x : float
+                Variable of integration. Represents
+                :math:`\\frac{\\Theta_D}{T}}`
+        Returns
+        -------
+            f(x) : float
+                Integrand evaluated at x
+        """
+        return np.log(1. - np.exp(-x))*(x**2)
+
+    def _K_integrand(self, x):
+        """Integrand when evaluating intermediate function K.
+
+        :math:`f(x) = \\frac {x^4 e^x}{(e^x -1)^2}`
+
+        Parameters
+        ----------
+            x : float
+                Variable of integration. Represents
+                :math:`\\frac{\\Theta_D}{T}}`
+        Returns
+        -------
+            f(x) : float
+                Integrand evaluated at x
+        """
+        return (x**4)*np.exp(x)/(np.exp(x) - 1.)**2
+
+    def _F_integrand(self, x):
+        """Integrand when evaluating intermediate function F.
+
+        :math:`f(x) = \\frac {x^3 e^x}{e^x -1}`
+
+        Parameters
+        ----------
+            x : float
+                Variable of integration. Represents
+                :math:`\\frac{\\Theta_D}{T}}`
+        Returns
+        -------
+            f(x) : float
+                Integrand evaluated at x
+        """
+        return (x**3)*np.exp(x)/(np.exp(x) - 1.)
+
+    def _get_intermediate_fn(self, T, fn):
+        """Calculates the intermediate function (i.e. F, G, or K)
+
+        :math:`F(x) = 3\\bigg(\\frac{T}{\\Theta_D}\\bigg)^3\\int_0^{\\frac
+        {\\Theta_D}{T}} f(x) dx`
+
+        Parameters
+        ----------
+            T : float
+                Temperature in K
+            fn : function
+                Integrand function, f(x)
+        Returns
+        -------
+            F : float
+                Intermediate function evaluated at T
+        """
+        vib_dimless = self.debye_temperature/T
+        integral = quad(func=fn, a=0., b=vib_dimless)[0]
+        return 3.*integral/vib_dimless**3
 
 def debye_to_einstein(debye_temperature):
     """Converts Debye temperature to Einstein temperature

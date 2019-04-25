@@ -24,90 +24,66 @@ class TestBEP(unittest.TestCase):
                            **presets['electronic']),
             'H2O': StatMech(name='H2O', potentialenergy=3.*dim_factor,
                             **presets['electronic']),
+            'BEP': BEP(slope=self.m, intercept=self.c, name='BEP')
         }
         self.rxn_delta_H = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='delta_H',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_delta_H = self.rxn_delta_H.bep
+                bep_descriptor='delta_H')
+        self.bep_delta_H = self.rxn_delta_H.transition_state[0]
 
         rxn_rev_delta_H = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='rev_delta_H',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_rev_delta_H = rxn_rev_delta_H.bep
+                bep_descriptor='rev_delta_H')
+        self.bep_rev_delta_H = rxn_rev_delta_H.transition_state[0]
 
         rxn_reactants_H = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='reactants_H',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_reactants_H = rxn_reactants_H.bep
+                bep_descriptor='reactants_H')
+        self.bep_reactants_H = rxn_reactants_H.transition_state[0]
 
         rxn_products_H = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='products_H',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_products_H = rxn_products_H.bep
+                bep_descriptor='products_H')
+        self.bep_products_H = rxn_products_H.transition_state[0]
 
         self.rxn_delta_E = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='delta_E',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_delta_E = self.rxn_delta_E.bep
+                bep_descriptor='delta_E')
+        self.bep_delta_E = self.rxn_delta_E.transition_state[0]
 
         rxn_rev_delta_E = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='rev_delta_E',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_rev_delta_E = rxn_rev_delta_E.bep
+                bep_descriptor='rev_delta_E')
+        self.bep_rev_delta_E = rxn_rev_delta_E.transition_state[0]
 
         rxn_reactants_E = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='reactants_E',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_reactants_E = rxn_reactants_E.bep
+                bep_descriptor='reactants_E')
+        self.bep_reactants_E = rxn_reactants_E.transition_state[0]
 
         rxn_products_E = Reaction.from_string(
-                reaction_str='H2 + 0.5O2 = H2O',
+                reaction_str='H2 + 0.5O2 = BEP = H2O',
                 species=species,
-                descriptor='products_E',
-                slope=self.m,
-                intercept=self.c,
-                bep=BEP)
-        self.bep_products_E = rxn_products_E.bep
+                bep_descriptor='products_E')
+        self.bep_products_E = rxn_products_E.transition_state[0]
 
     def test_get_EoRT(self):
         delta_H = self.rxn_delta_H.get_delta_HoRT(T=self.T)
         exp_EoRT_delta = self.m*delta_H + self.c/c.R('kcal/mol/K')/self.T
         exp_EoRT_delta_rev = (self.m-1.)*delta_H \
                              + self.c/c.R('kcal/mol/K')/self.T
-
         self.assertAlmostEqual(self.bep_delta_H.get_EoRT_act(T=self.T,
-                                                           rev=False),
+                                                             rev=False),
                                exp_EoRT_delta)
         self.assertAlmostEqual(self.bep_delta_H.get_EoRT_act(T=self.T,
-                                                           rev=True),
+                                                             rev=True),
                                exp_EoRT_delta_rev)
 
         rev_delta_H = self.rxn_delta_H.get_delta_HoRT(T=self.T,
@@ -130,7 +106,7 @@ class TestBEP(unittest.TestCase):
                              + self.c/c.R('kcal/mol/K')/self.T
 
         self.assertAlmostEqual(self.bep_reactants_H.get_EoRT_act(T=self.T,
-                                                               rev=False),
+                                                                 rev=False),
                                exp_EoRT_delta)
         self.assertAlmostEqual(self.bep_reactants_H.get_EoRT_act(T=self.T,
                                                                rev=True),
@@ -176,29 +152,29 @@ class TestBEP(unittest.TestCase):
                                exp_EoRT_delta_rev)
 
         reactants_E = self.rxn_delta_E.get_EoRT_state(state='reactants',
-                                                    T=self.T)
+                                                      T=self.T)
         exp_EoRT_delta = self.m*reactants_E + self.c/c.R('kcal/mol/K')/self.T
         exp_EoRT_delta_rev = (self.m-1.)*reactants_E \
                              + self.c/c.R('kcal/mol/K')/self.T
 
         self.assertAlmostEqual(self.bep_reactants_E.get_EoRT_act(T=self.T,
-                                                               rev=False),
+                                                                 rev=False),
                                exp_EoRT_delta)
         self.assertAlmostEqual(self.bep_reactants_E.get_EoRT_act(T=self.T,
-                                                               rev=True),
+                                                                 rev=True),
                                exp_EoRT_delta_rev)
 
         products_E = self.rxn_delta_E.get_EoRT_state(state='products',
-                                                   T=self.T)
+                                                     T=self.T)
         exp_EoRT_delta = self.m*products_E + self.c/c.R('kcal/mol/K')/self.T
         exp_EoRT_delta_rev = (self.m-1.)*products_E \
                              + self.c/c.R('kcal/mol/K')/self.T
 
         self.assertAlmostEqual(self.bep_products_E.get_EoRT_act(T=self.T,
-                                                              rev=False),
+                                                                rev=False),
                                exp_EoRT_delta)
         self.assertAlmostEqual(self.bep_products_E.get_EoRT_act(T=self.T,
-                                                              rev=True),
+                                                                rev=True),
                                exp_EoRT_delta_rev)
 
 

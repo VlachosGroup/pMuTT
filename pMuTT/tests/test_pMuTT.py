@@ -39,15 +39,13 @@ class TestpMuTT(unittest.TestCase):
         self.assertEqual(pMuTT._get_expected_arguments(sum_fn),
                          ('num1', 'num2'))
 
-        class sum_class:
+        class sum_class(pMuTT._pMuTTBase):
             def __init__(self, num1, num2):
                 self.num1 = num1
                 self.num2 = num2
 
             def get_sum(self):
                 return self.num1 + self.num2
-        self.assertEqual(pMuTT._get_expected_arguments(sum_class),
-                         ('self', 'num1', 'num2'))
 
     def test_pass_expected_arguments(self):
         def sum_fn(num1, num2):

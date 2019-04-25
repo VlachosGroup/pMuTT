@@ -9,13 +9,13 @@ import numpy as np
 from pMuTT import _get_specie_kwargs, _apply_numpy_operation, _get_mode_quantity
 
 
-def _get_mix_quantity(mix_models, method_name, raise_error=True,
+def _get_mix_quantity(misc_models, method_name, raise_error=True,
                       raise_warning=True, default_value=0., **kwargs):
     """Calculate contribution from mixing models to desired quantity
 
     Parameters
     ----------
-        mix_models : list (length N) of ``pMuTT.mixture`` objects
+        misc_models : list (length N) of ``pMuTT.mixture`` objects
             Mix models to calculate the property
         method_name : str
             Name of method to use to calculate quantity. Calculates any
@@ -39,15 +39,15 @@ def _get_mix_quantity(mix_models, method_name, raise_error=True,
             Mixing quantity of interest. If verbose is True, each element
             corresponds to the contribution of each mix_model
 
-    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     # Return default value if no mixture models exist
-    if mix_models is None:
+    if misc_models is None:
         return np.array([default_value])
 
     # Calculate contribution from mixing models if any
-    mix_quantity = np.full_like(a=mix_models, fill_value=default_value)
-    for i, mix_model in enumerate(mix_models):
+    mix_quantity = np.full_like(a=misc_models, fill_value=default_value)
+    for i, mix_model in enumerate(misc_models):
         if mix_model is None:
             continue
 

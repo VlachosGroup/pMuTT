@@ -98,13 +98,13 @@ class TestReferences(unittest.TestCase):
             self.assertAlmostEqual(expected_element_offset[element],
                                    calculated_element_offset[element])
 
-    def test_get_specie_offset(self):
+    def test_get_HoRT(self):
         elements = {'H': 2, 'O': 2}
         self.assertAlmostEqual(
-                self.references.get_HoRT_offset(descriptors=elements),
+                self.references.get_HoRT(descriptors=elements),
                 619.6674284923677)
         with self.assertWarns(RuntimeWarning):
-            self.assertEqual(self.references.get_HoRT_offset(
+            self.assertEqual(self.references.get_HoRT(
                     descriptors={'non-referenced element': 1}), 0.)
 
 

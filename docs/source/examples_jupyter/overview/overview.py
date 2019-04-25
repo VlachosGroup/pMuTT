@@ -3,7 +3,8 @@
 
 # # Overview of pMuTT's Core Functionality
 # Originally written for Version 1.2.1
-# Last Updated for Version 1.2.1
+# 
+# Last Updated for Version 1.2.3
 # 
 # ## Topics Covered
 # 
@@ -287,7 +288,6 @@ from pMuTT.empirical.references import Reference, References
 
 ethane_ref = Reference(name='ethane',
                        elements={'C': 2, 'H': 6},
-                       statmech_model=StatMech,
                        atoms=molecule('C2H6'),
                        vib_wavenumbers=[3050.5296, 3049.8428, 3025.2714,
                                         3024.4304, 2973.5455, 2971.9261, 
@@ -304,7 +304,6 @@ ethane_ref = Reference(name='ethane',
 
 propane_ref = Reference(name='propane',
                         elements={'C': 3, 'H': 8},
-                        statmech_model=StatMech,
                         atoms=molecule('C3H8'),
                         vib_wavenumbers=[3040.9733, 3038.992, 3036.8071,
                                          3027.6062, 2984.8436, 2966.1692,
@@ -345,20 +344,20 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_nasa_ref))
 
 # ## Input and Output
 # ### Excel
-# Encoding each object in Python can be tedious and so you can read from Excel spreadsheets using [``pMuTT.io_.excel.read_excel``][0]. Note that this function returns a list of dictionaries. This output allows you to initialize whichever object you want. There are also special rules that depend on the header name.
+# Encoding each object in Python can be tedious and so you can read from Excel spreadsheets using [``pMuTT.io.excel.read_excel``][0]. Note that this function returns a list of dictionaries. This output allows you to initialize whichever object you want. There are also special rules that depend on the header name.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io_.excel.read_excel
+# [0]: https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io.excel.read_excel
 
 # In[11]:
 
 
 import os
 from pathlib import Path
-from pMuTT.io_.excel import read_excel
+from pMuTT.io.excel import read_excel
 
 # Find the location of Jupyter notebook
-# Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't. Using pathlib can
-# overcome this limiation
+# Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
+# Using pathlib can overcome this limiation
 notebook_folder = Path().resolve()
 
 # The Excel spreadsheet is located in the same folder as the Jupyter notebook
@@ -402,14 +401,14 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_excel))
 
 
 # ### Thermdat
-# The thermdat format uses NASA polynomials to represent several species. It has a very particular format so doing it manually is error-prone. You can write a list of ``Nasa`` objects to thermdat format using [``pMuTT.io_.thermdat.write_thermdat``][0].
+# The thermdat format uses NASA polynomials to represent several species. It has a very particular format so doing it manually is error-prone. You can write a list of ``Nasa`` objects to thermdat format using [``pMuTT.io.thermdat.write_thermdat``][0].
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.write_thermdat
+# [0]: https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.write_thermdat
 
 # In[14]:
 
 
-from pMuTT.io_.thermdat import write_thermdat
+from pMuTT.io.thermdat import write_thermdat
 
 # Make Nasa objects from previously defined ethane and propane
 ethane_nasa = Nasa.from_statmech(name='ethane',
@@ -447,9 +446,9 @@ butane          20190122C   4H  10          G298.0     800.0     502.9         1
 -8.15415828E+05 3.48691129E+01 9.98107805E+00-3.50556935E-02 2.38938732E-04    3
 -3.63709779E-07 1.92062158E-10-8.16632302E+05-1.47065846E+01                   4
 END
-# Similarly, [``pMuTT.io_.thermdat.read_thermdat``][0] reads thermdat files.
+# Similarly, [``pMuTT.io.thermdat.read_thermdat``][0] reads thermdat files.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io_.thermdat.read_thermdat
+# [0]: https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.read_thermdat
 
 # ## Reactions
 # You can also evaluate reactions properties. The most straightforward way to do this is to initialize using strings.
@@ -457,7 +456,7 @@ END
 # In[15]:
 
 
-from pMuTT.io_.thermdat import read_thermdat
+from pMuTT.io.thermdat import read_thermdat
 from pMuTT import pMuTT_list_to_dict
 from pMuTT.reaction import Reaction
 
