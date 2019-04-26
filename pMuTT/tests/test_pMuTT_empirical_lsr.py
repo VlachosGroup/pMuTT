@@ -9,7 +9,7 @@ from pprint import pprint
 from pMuTT import constants as c
 from pMuTT.reaction import Reaction
 from pMuTT.empirical.shomate import Shomate
-from pMuTT.empirical.lsr import LSR
+from pMuTT.statmech.lsr import LSR
 from pMuTT.statmech import StatMech, presets
 
 

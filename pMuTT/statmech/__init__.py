@@ -1048,7 +1048,7 @@ class StatMech(_ModelBase):
         rot_model = json_pMuTT.json_to_pMuTT(json_obj['rot_model'])
         elec_model = json_pMuTT.json_to_pMuTT(json_obj['elec_model'])
         nucl_model = json_pMuTT.json_to_pMuTT(json_obj['nucl_model'])
-        references = json_to_pMuTT(json_obj['references'])
+        references = json_pMuTT.json_to_pMuTT(json_obj['references'])
         notes = json_obj['notes']
 
         return cls(name=name,

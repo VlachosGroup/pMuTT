@@ -8,14 +8,16 @@ from pMuTT.io.json import remove_class
 
 
 class HarmonicVib(_pMuTTBase):
-    """Vibrational modes using the harmonic approximation. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+    """Vibrational modes using the harmonic approximation. Equations used
+    sourced from:
+    
+    - Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
         vib_wavenumbers : list of float
-            Vibrational wavenumbers in 1/cm
+            Vibrational wavenumbers (:math:`\\tilde{\\nu}`) in 1/cm
         imaginary_substitute : float, optional
             If this value is set, imaginary frequencies are substituted with
             this value for calculations. Otherwise, imaginary frequencies are
@@ -255,7 +257,7 @@ class QRRHOVib(_pMuTTBase):
     Attributes
     ----------
         vib_wavenumber : list of float
-            Vibrational wavenumbers in 1/cm
+            Vibrational wavenumbers (:math:`\\tilde{\\nu}`) in 1/cm
         Bav : float, optional
             Average molecular moment of inertia as a limiting value of small
             wavenumbers. Default is 1.e-44 kg m2
@@ -810,9 +812,13 @@ class DebyeVib(_pMuTTBase):
     def get_q(self, T):
         """Calculate the partition function
 
-        :math:`q = \\exp\\bigg(-\\frac{u}{3k_B T} - \\frac{3}{8}
-        \\frac{\\Theta_D}{T} - G\\big(\\frac{\Theta_D}{T}\\big)\\bigg)`
+        :math:`q^{vib} = \\exp\\bigg(-\\frac{u}{3k_B T} - \\frac{3}{8}
+        \\frac{\\Theta_D}{T} - G\\big(\\frac{\\Theta_D}{T}\\big)\\bigg)`
 
+        :math:`G\\bigg(\\frac{\\Theta_D}{T}\\bigg) = 3\\bigg(\\frac{T}{
+        \\Theta_D}\\bigg)^3\\int_0^{\\frac{\\Theta_D}{T}}x^2 \\ln
+        \\bigg(1-e^{-x}\\bigg)dx`
+        
         Parameters
         ----------
             T : float
@@ -829,6 +835,11 @@ class DebyeVib(_pMuTTBase):
     def get_CvoR(self, T):
         """Calculates dimensionless heat capacity (constant V)
 
+        :math:`\\frac {C_V^{vib}}{R} = 3K\\bigg(\\frac{\\Theta_D}{T}\\bigg)`
+
+        :math:`K\\bigg(\\frac{\\Theta_D}{T}\\bigg)=3\\bigg(\\frac{T}{\\Theta_D}
+        \\bigg)^3 \\int_0^{\\frac{\\Theta_D}{T}}\\frac{x^4 e^x}{(e^x-1)^2}dx`
+
         Parameters
         ----------
             T : float
@@ -844,6 +855,11 @@ class DebyeVib(_pMuTTBase):
     def get_CpoR(self, T):
         """Calculates dimensionless heat capacity (constant P)
 
+        :math:`\\frac {C_P^{vib}}{R} = 3K\\bigg(\\frac{\\Theta_D}{T}\\bigg)`
+
+        :math:`K\\bigg(\\frac{\\Theta_D}{T}\\bigg)=3\\bigg(\\frac{T}{\\Theta_D}
+        \\bigg)^3 \\int_0^{\\frac{\\Theta_D}{T}}\\frac{x^4 e^x}{(e^x-1)^2}dx`
+
         Parameters
         ----------
             T : float
@@ -857,6 +873,13 @@ class DebyeVib(_pMuTTBase):
 
     def get_UoRT(self, T):
         """Calculates dimensionless internal energy
+
+        :math:`\\frac{U^{vib}}{RT} = \\frac{u_D^o}{RT} + 3F\\bigg(\\frac{
+        \\Theta_D}{T}\\bigg)`
+
+        :math:`F\\bigg(\\frac{\\Theta_D}{T}\\bigg) = 3\\bigg(\\frac{T}{
+        \\Theta_D}\\bigg)^3 \\int_0^{\\frac{\\Theta_D}{T}} \\frac{x^3 e^x}
+        {e^x-1} dx`
 
         Parameters
         ----------
@@ -873,6 +896,14 @@ class DebyeVib(_pMuTTBase):
     def get_HoRT(self, T):
         """Calculates dimensionless enthalpy
 
+        :math:`\\frac{H^{vib}}{RT} = \\frac{u_D^o}{RT} + 3F\\bigg(\\frac{
+        \\Theta_D}{T}\\bigg)`
+
+        :math:`F\\bigg(\\frac{\\Theta_D}{T}\\bigg) = 3\\bigg(\\frac{T}{
+        \\Theta_D}\\bigg)^3 \\int_0^{\\frac{\\Theta_D}{T}} \\frac{x^3 e^x}
+        {e^x-1} dx`
+
+
         Parameters
         ----------
             T : float
@@ -886,6 +917,17 @@ class DebyeVib(_pMuTTBase):
 
     def get_SoR(self, T):
         """Calculates dimensionless entropy
+
+        :math:`\\frac{S^{vib}}{R} = 3\\bigg[F\\bigg(\\frac{\\Theta_D}{T}\\bigg)
+        - G\\bigg(\\frac{\\Theta_D}{T}\\bigg)\\bigg]`
+
+        :math:`F\\bigg(\\frac{\\Theta_D}{T}\\bigg) = 3\\bigg(\\frac{T}{
+        \\Theta_D}\\bigg)^3 \\int_0^{\\frac{\\Theta_D}{T}} \\frac{x^3 e^x}
+        {e^x-1} dx`
+
+        :math:`G\\bigg(\\frac{\\Theta_D}{T}\\bigg) = 3\\bigg(\\frac{T}{
+        \\Theta_D}\\bigg)^3\\int_0^{\\frac{\\Theta_D}{T}}x^2 \\ln
+        \\bigg(1-e^{-x}\\bigg)dx`
 
         Parameters
         ----------
@@ -903,6 +945,8 @@ class DebyeVib(_pMuTTBase):
     def get_FoRT(self, T):
         """Calculates dimensionless Helmholtz energy
 
+        :math:`\\frac{F^{vib}}{RT}=\\frac{U^{vib}}{RT}-\\frac{S^{vib}}{R}`
+
         Parameters
         ----------
             T : float
@@ -917,6 +961,8 @@ class DebyeVib(_pMuTTBase):
     def get_GoRT(self, T):
         """Calculates dimensionless Gibbs energy
 
+        :math:`\\frac{G^{vib}}{RT}=\\frac{H^{vib}}{RT}-\\frac{S^{vib}}{R}`
+
         Parameters
         ----------
             T : float
@@ -930,6 +976,8 @@ class DebyeVib(_pMuTTBase):
 
     def get_ZPE(self):
         """Calculate zero point energy
+
+        :math:`u^o_D = u^o +\\frac{9}{8}R\\Theta_D`
 
         Returns
         -------
@@ -1010,35 +1058,6 @@ class DebyeVib(_pMuTTBase):
         vib_dimless = self.debye_temperature/T
         integral = quad(func=fn, a=0., b=vib_dimless)[0]
         return 3.*integral/vib_dimless**3
-
-def debye_to_einstein(debye_temperature):
-    """Converts Debye temperature to Einstein temperature
-
-    Parameters
-    ----------
-        debye_temperature : float
-            Debye temperature in K
-    Returns
-    -------
-        einstein_temperature : float
-            Einstein temperature in K
-    """
-    return (np.pi/6.)**(1./3.)*debye_temperature
-
-
-def einstein_to_debye(einstein_temperature):
-    """Converts Einstein temperature to Debye temperature
-
-    Parameters
-    ----------
-        einstein_temperature : float
-            Einstein temperature in K
-    Returns
-    -------
-        debye_temperature : float
-            Debye temperature in K
-    """
-    return einstein_temperature/(np.pi/6.)**(1./3.)
 
 
 def _get_valid_vib_wavenumbers(wavenumbers, substitute=None):

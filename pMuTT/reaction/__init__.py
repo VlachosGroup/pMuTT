@@ -1547,10 +1547,10 @@ class Reaction(_pMuTTBase):
         transition state in 1/s
 
         :math:`A = \\frac {k_B T} {h} \\frac {q^{TS}}{q^{initial state}}
-                   \\exp (m)`
+        \\exp (m)` if use_q = True
 
         :math:`A = \\frac {k_B T} {h} \\exp\\bigg(\\frac {\\Delta S^{TS}}{R}+m
-        \\bigg)`
+        \\bigg)` if use_q = False
 
         Parameters
         ----------
@@ -2352,14 +2352,22 @@ class Reactions(_pMuTTBase):
         return figure, axes
 
     def get_E_span(self, units, **kwargs):
-        """Gets the energy span of a set of reactions
-        
-        If the TOF-determining transition state (TSTS) appears after the
-        TOF-determining intermediate (TDI):
-        :math:`\\delta E = T_{TDTS} - I_{TDI}`
+        """Gets the energy span of a set of reactions. Equations sourced from
 
-        If the TSTS appears before the TDI:
-        :math:`\\delta E = T_{TDTS} - I_{TDI} + \\Delta G_r
+        * Kozuch, S.; Shaik, S. How to Conceptualize Catalytic Cycles? The
+          Energetic Span Model. Acc. Chem. Res. 2011, 44 (2), 101–110. 
+          https://doi.org/10.1021/ar1000956.
+
+
+        
+        :math:`\\delta E = T_{TDTS} - I_{TDI}`
+        
+        if the TOF-determining transition state (TSTS) appears after the
+        TOF-determining intermediate (TDI):
+
+        :math:`\\delta E = T_{TDTS} - I_{TDI} + \\Delta G_r`
+
+        if the TSTS appears before the TDI:
 
         Parameters
         ----------
@@ -2368,6 +2376,10 @@ class Reactions(_pMuTTBase):
                 units but omit the '/K' (e.g. J/mol).
             kwargs : keyword arguments
                 Parameters to evaluate Gibbs energy at each state.
+        Returns
+        -------
+            E_span : float
+                Energy span of the Reactions
         """
         states = ('reactants', 'transition_state', 'products')
         states_G = []

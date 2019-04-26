@@ -40,4 +40,3 @@ References
    
 .. autoclass:: pMuTT.empirical.references.References
    :members:
-

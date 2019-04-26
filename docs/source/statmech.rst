@@ -276,7 +276,7 @@ Placeholder (placeholder)
 +-------------------------+---------------------+-----------------------+
 
 Constant (constant)
--------------------------
+-------------------
 
 +-------------+---------------------------------------+
 | Parameter   | Default Value                         |
@@ -287,27 +287,23 @@ Constant (constant)
 +---------------------+--------------------------------------------------------+
 | Required Parameters | Description                                            |
 +=====================+========================================================+
-| q                   | (float) Optional. Partition function                   |
+| q                   | (float) Optional. Partition function. Default is 1     |
 +---------------------+--------------------------------------------------------+
-| CvoR                | (float) Optional. Dimensionless heat capacity at       |
-|                     | constant volume                                        |
+| Cv                  | (float) Optional. Heat capacity at constant volume     |
+|                     | in eV/K. Default is 0                                  |
 +---------------------+--------------------------------------------------------+
-| CpoR                | (float) Optional. Dimensionless heat capacity at       |
-|                     | constant pressure                                      |
+| Cp                  | (float) Optional. Heat capacity at constant pressure   |
+|                     | in eV/K. Default is 0                                  |
 +---------------------+--------------------------------------------------------+
-| UoR                 | (float) Optional. Internal energy in units of |K-1|    |
-|                     | (i.e. internal energy divided by molar gas constant)   |
+| U                   | (float) Optional. Internal energy in eV. Default is 0  |
 +---------------------+--------------------------------------------------------+
-| HoR                 | (float) Optional. Enthalpy in units of |K-1| (i.e.     |
-|                     | enthalpy divided by molar gas constant)                |
+| H                   | (float) Optional. Enthalpy in eV. Default is 0         |
 +---------------------+--------------------------------------------------------+
-| SoR                 | (float) Optional. Dimensionless entropy                |
+| S                   | (float) Optional. Entropy in eV/K. Default is 0        |
 +---------------------+--------------------------------------------------------+
-| FoR                 | (float) Optional. Helmholtz energy in units of K-1     |
-|                     | (i.e. Helmholtz divided by molar gas constant)         |
+| F                   | (float) Optional. Helmholtz energy in eV. Default is 0 |
 +---------------------+--------------------------------------------------------+
-| GoR                 | (float) Optional. Gibbs energy in units of |K-1| (i.e. |
-|                     | Gibbs divided by molar gas constant)                   |
+| G                   | (float) Optional. Gibbs energy in eV. Default is 0     |
 +---------------------+--------------------------------------------------------+
 
 +-------------------------+---------------------+-----------------------+
@@ -365,7 +361,12 @@ EinsteinVib
 -----------
 .. autoclass:: pMuTT.statmech.vib.EinsteinVib
    :members:
-   
+
+DebyeVib
+--------
+.. autoclass:: pMuTT.statmech.vib.DebyeVib
+   :members:
+
 .. _rot:
 
 Rotational Models
@@ -382,9 +383,15 @@ Electronic Models
 =================
 
 GroundStateElec
----------
+---------------
 .. autoclass:: pMuTT.statmech.elec.GroundStateElec
    :members:
+
+Linear Scaling Relationships (LSRs)
+-----------------------------------
+.. autoclass:: pMuTT.statmech.lsr.LSR
+   :members:
+
 
 .. _nucl:
 
@@ -431,5 +438,3 @@ If you would like to create your own class to be stored by
 - ``get_GoRT``
 - ``from_dict``
 - ``to_dict``
-
-.. |K-1| replace:: K\ :sup:`-1`

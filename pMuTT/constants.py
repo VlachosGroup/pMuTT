@@ -312,8 +312,8 @@ def T0(units):
             ====   ===========  ======
             K      Kelvin       298.15
             C      Celcius      25
-            R      Rankine      533.07
-            F      Fahrenheit   73.4
+            R      Rankine      536.67
+            F      Fahrenheit   77
             ====   ===========  ======
 
     Returns
@@ -905,6 +905,53 @@ def wavenumber_to_temp(wavenumber):
     """
     return wavenumber*c('cm/s')*h('J s')/kb('J/K')
 
+
+def debye_to_einstein(debye_temperature):
+    """Converts Debye temperature to Einstein temperature
+
+    Parameters
+    ----------
+        debye_temperature : float
+            Debye temperature in K
+    Returns
+    -------
+        einstein_temperature : float
+            Einstein temperature in K
+    """
+    return (np.pi/6.)**(1./3.)*debye_temperature
+
+
+def einstein_to_debye(einstein_temperature):
+    """Converts Einstein temperature to Debye temperature
+
+    Parameters
+    ----------
+        einstein_temperature : float
+            Einstein temperature in K
+    Returns
+    -------
+        debye_temperature : float
+            Debye temperature in K
+    """
+    return einstein_temperature/(np.pi/6.)**(1./3.)
+
+symmetry_dict = {
+    'C1': 1,
+    'Cs': 1,
+    'C2': 2,
+    'C2v': 2,
+    'C3v': 3,
+    'Cinfv': 1,
+    'D2h': 4,
+    'D3h': 6,
+    'D5h': 10,
+    'Dinfh': 2,
+    'D3d': 6,
+    'Td': 12,
+    'Oh': 24
+}
+"""dict : Keys are point groups and the values are the symmetry numbers used for
+rotational modes."""
 
 prefixes = {
     'Y': 1.e24,
