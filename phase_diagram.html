@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Phase Diagrams &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Phase Diagrams &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -222,7 +222,7 @@ reactions stoichiometry is not consistent. Default is an array of
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">(N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float, optional</td>
 </tr>
 </tbody>
 </table>
@@ -264,10 +264,10 @@ parameter</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>GoRT</strong> ((M, N) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float) – GoRT values. The first index corresponds to the number of
+<li><strong>GoRT</strong> ((M, N) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float) – GoRT values. The first index corresponds to the number of
 reactions. The second index corresponds to the conditions
 specified by x_values.</li>
-<li><strong>stable_phases</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of int) – Each element of the array corresponds to the index of the most
+<li><strong>stable_phases</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of int) – Each element of the array corresponds to the index of the most
 stable phase at the x_values.</li>
 </ul>
 </p>
@@ -289,7 +289,7 @@ varying parameters</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of first variable to vary</li>
 <li><strong>x1_values</strong> (<em>iterable object</em>) – x1 values to use</li>
-<li><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of first variable to vary</li>
+<li><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of second variable to vary</li>
 <li><strong>x2_values</strong> (<em>iterable object</em>) – x2 values to use</li>
 <li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Other variables to use in the calculation</li>
@@ -297,10 +297,10 @@ varying parameters</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>GoRT</strong> ((M, N, O) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float) – GoRT values. The first index corresponds to the number of
+<li><strong>GoRT</strong> ((M, N, O) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of float) – GoRT values. The first index corresponds to the number of
 reactions. The second index corresponds to the conditions
 specified by x_values.</li>
-<li><strong>stable_phases</strong> ((N, O) <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of int) – Each element of the array corresponds to the index of the most
+<li><strong>stable_phases</strong> ((N, O) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> of int) – Each element of the array corresponds to the index of the most
 stable phase at the x_values.</li>
 </ul>
 </p>
@@ -409,7 +409,7 @@ stable phase at the x_values.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

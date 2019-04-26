@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Release Notes &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-6">Version 1.2.6</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-5">Version 1.2.5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-4">Version 1.2.4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-3">Version 1.2.3</a></li>
@@ -201,22 +202,35 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/commits/development">Development Branch</a></p>
+</div>
+<div class="section" id="version-1-2-6">
+<h2>Version 1.2.6<a class="headerlink" href="#version-1-2-6" title="Permalink to this headline">¶</a></h2>
+<p>Apr. 26, 2019</p>
 <ul class="simple">
+<li>Moved <code class="docutils literal notranslate"><span class="pre">references</span></code> attribute from empirical classes to
+<a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a></li>
+<li>Changed <code class="docutils literal notranslate"><span class="pre">mix_models</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">misc_models</span></code> in  indicating any model
+object can be used</li>
+<li>Implemented <a class="reference internal" href="statmech.html#pMuTT.statmech.vib.DebyeVib" title="pMuTT.statmech.vib.DebyeVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">DebyeVib</span></code></a> and
+<a class="reference internal" href="statmech.html#pMuTT.statmech.ConstantMode" title="pMuTT.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> classes</li>
+<li>Restructured <a class="reference internal" href="reactions.html#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object to act as a transition
+state species in <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</li>
+<li>Implemented <code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code> object</li>
 <li>Added option to calculate pre-exponential factor using ratio of partition
 functions or entropy of activation</li>
 <li>Added option to use electronic energy as descriptor for
-<a class="reference internal" href="reactions.html#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object.</li>
+<a class="reference internal" href="reactions.html#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object</li>
 <li>Added some imperial unit functionality to <code class="docutils literal notranslate"><span class="pre">pMuTT.constants</span></code> module</li>
 <li>Renamed <code class="docutils literal notranslate"><span class="pre">from_</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">to</span></code> parameter in
-<a class="reference internal" href="constants.html#pMuTT.constants.convert_unit" title="pMuTT.constants.convert_unit"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTT.constants.convert_unit()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">initial</span></code> and <code class="docutils literal notranslate"><span class="pre">final</span></code>.</li>
+<a class="reference internal" href="constants.html#pMuTT.constants.convert_unit" title="pMuTT.constants.convert_unit"><code class="xref py py-func docutils literal notranslate"><span class="pre">pMuTT.constants.convert_unit()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">initial</span></code> and <code class="docutils literal notranslate"><span class="pre">final</span></code></li>
 <li>Added ability to import individual translational, rotational, vibrational,
-electronic and nuclear modes to Excel.</li>
+electronic and nuclear modes to Excel</li>
 <li>Renamed <code class="docutils literal notranslate"><span class="pre">pMuTT.statmech.trans.IdealTrans</span></code> to
-<code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></li>
+<a class="reference internal" href="statmech.html#pMuTT.statmech.trans.FreeTrans" title="pMuTT.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a></li>
 <li>Renamed <code class="docutils literal notranslate"><span class="pre">pMuTT.statmech.elec.IdealElec</span></code> to
-<code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></li>
+<a class="reference internal" href="statmech.html#pMuTT.statmech.elec.GroundStateElec" title="pMuTT.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a></li>
 <li>Renamed <code class="docutils literal notranslate"><span class="pre">pMuTT.statmech.nucl.IdealNucl</span></code> to
-<code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyNucl</span></code></li>
+<a class="reference internal" href="statmech.html#pMuTT.statmech.nucl.EmptyNucl" title="pMuTT.statmech.nucl.EmptyNucl"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyNucl</span></code></a></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-5">
@@ -243,7 +257,7 @@ electronic and nuclear modes to Excel.</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">smiles</span></code> attribute to <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
 <a class="reference internal" href="empirical.html#pMuTT.empirical.EmpiricalBase" title="pMuTT.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a> classes</li>
 <li>Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files</li>
-<li>Added <a class="reference internal" href="mixture.html#pMuTT.mixture.cov.CovEffect" title="pMuTT.mixture.cov.CovEffect"><code class="xref py py-class docutils literal notranslate"><span class="pre">CovEffect</span></code></a> class to model coverage effects
+<li>Added <code class="xref py py-class docutils literal notranslate"><span class="pre">CovEffect</span></code> class to model coverage effects
 and integrated it with <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
 <a class="reference internal" href="empirical.html#pMuTT.empirical.EmpiricalBase" title="pMuTT.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a> classes</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">include_ZPE</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_E</span></code>, <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code>
@@ -335,7 +349,7 @@ reference any attribute</li>
 <li>Added <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> entry to <a class="reference internal" href="statmech.html#pMuTT.statmech.presets" title="pMuTT.statmech.presets"><code class="xref py py-data docutils literal notranslate"><span class="pre">presets</span></code></a> dictionary to
 represent an empty species</li>
 <li>Added correction factor to calculate partition coefficient, q, in
-<a class="reference internal" href="statmech.html#pMuTT.statmech.elec.IdealElec" title="pMuTT.statmech.elec.IdealElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code></a> class</li>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code> class</li>
 </ul>
 </div>
 <div class="section" id="version-1-1-2">
@@ -373,7 +387,7 @@ vibrational energies instead of wavenumbers.</li>
 <a class="reference internal" href="eos.html#pMuTT.eos.vanDerWaalsEOS" title="pMuTT.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
 <li>New <a class="reference internal" href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram" title="pMuTT.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</li>
 <li>New <a class="reference internal" href="statmech.html#pMuTT.statmech.vib.EinsteinVib" title="pMuTT.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</li>
-<li>New <a class="reference internal" href="chemkin.html#pMuTT.io.chemkin.read_reactions" title="pMuTT.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
+<li>New <a class="reference internal" href="io.html#pMuTT.io.chemkin.read_reactions" title="pMuTT.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
 reactions from Chemkin surf.inp and gas.inp files</li>
 </ul>
 </div>
@@ -397,7 +411,7 @@ reactions from Chemkin surf.inp and gas.inp files</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

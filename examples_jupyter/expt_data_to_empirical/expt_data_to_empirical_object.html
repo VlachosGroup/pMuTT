@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -430,18 +430,7 @@ so that the code is more readable.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Shomate object for Name: CH3OH
-        phase: None
-        elements: None
-        references: None
-        smiles: None
-        notes: None
-        statmech_model: None
-        mix_models: None
-        T_low: 50.0
-        T_high: 3000.0
-        a: [ 2.05590626e+01  9.56149336e+01 -3.13060961e+01  3.51405987e+00
-  2.51091378e-02 -2.15025605e+02  2.37773773e+02  2.05000000e+02]
+&lt;pMuTT.empirical.shomate.Shomate object at 0x000002375159E7F0&gt;
 </pre></div></div>
 </div>
 </div>
@@ -526,7 +515,7 @@ T(K)    Cp expt (J/mol/K)       Cp shomate (J/mol/K)
 T_ref: 298.15 K
 -
 H expt: -205.0 kJ/mol
-H shomate: [-205.] kJ/mol
+H shomate: -205.00000000000003 kJ/mol
 -
 S expt: 239.9 J/mol/K
 S shomate: [239.9] J/mol/K
@@ -549,7 +538,7 @@ S shomate: [239.9] J/mol/K
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Cp</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">S_ref</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span> <span class="o">-</span> <span class="n">T_ref</span> <span class="o">*</span> <span class="n">S_ref</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">convert_unit</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;kJ&#39;</span><span class="p">),</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">H_ref</span> <span class="o">-</span> <span class="n">T_ref</span> <span class="o">*</span> <span class="n">S_ref</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">convert_unit</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="s1">&#39;kJ&#39;</span><span class="p">),</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add legend to plot</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Shomate&#39;</span><span class="p">,</span> <span class="s1">&#39;Expt&#39;</span><span class="p">])</span>
@@ -642,17 +631,7 @@ opening, the file will look like this:</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Shomate object for Name: CH3OH
-        phase: None
-        elements: None
-        references: None
-        smiles: None
-        notes: None
-        statmech_model: None
-        mix_models: None
-        T_low: 50.0
-        T_high: 3000.0
-        a: [20.55906255664672, 95.61493361898438, -31.306096062902366, 3.5140598702327708, 0.025109137759508435, -215.02560497018567, 237.7737728103737, 205.00000000000006]
+&lt;pMuTT.empirical.shomate.Shomate object at 0x000002375C51BC18&gt;
 </pre></div></div>
 </div>
 </div>
@@ -669,7 +648,7 @@ Shomate object for Name: CH3OH
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

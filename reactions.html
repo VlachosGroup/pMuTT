@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Reactions &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -202,7 +202,7 @@
 class.</p>
 <dl class="class">
 <dt id="pMuTT.reaction.Reaction">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em>, <em>transition_state_stoich=None</em>, <em>bep=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em>, <em>transition_state_stoich=None</em>, <em>bep_descriptor=None</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a chemical reaction</p>
 <dl class="attribute">
 <dt id="pMuTT.reaction.Reaction.reactants">
@@ -290,53 +290,47 @@ Default is None</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.bep">
-<code class="descname">bep</code><a class="headerlink" href="#pMuTT.reaction.Reaction.bep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bronsted Evans Polyani relationship. Default is None</p>
+<dt id="pMuTT.reaction.Reaction.bep_descriptor">
+<code class="descname">bep_descriptor</code><a class="headerlink" href="#pMuTT.reaction.Reaction.bep_descriptor" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the transition state is a <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+object, the descriptor can be set using this parameter. See
+<a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+descriptors</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.kwargs">
-<code class="descname">kwargs</code><a class="headerlink" href="#pMuTT.reaction.Reaction.kwargs" title="Permalink to this definition">¶</a></dt>
-<dd><p>BEP parameters. See <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation
-for expected parameters</p>
+<dt id="pMuTT.reaction.Reaction.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pMuTT.reaction.Reaction.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Other notes such as the source of the reaction. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">keyword arguments</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <p class="rubric">Notes</p>
-<p>Specie specific parameters can be passed by having a key named
-‘specie’ mapping onto a dictionary whose keys are the species names.</p>
+<p>Specie-specific parameters can be passed by having a key named after the
+specie mapping onto a dictionary whose keys are the parameters to pass.</p>
 <p>e.g. For the reaction: H2 + 0.5O2 = H2O, the pressures can be specified
 independently using the following dictionary. In this example arbitrary
 values were used so the quantity evaluated may be meaningless.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mf">298.</span><span class="p">,</span>
-    <span class="s1">&#39;specie&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;H2&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">2.</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="s1">&#39;O2&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="s1">&#39;H2O&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="s1">&#39;H2_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">2.</span><span class="p">},</span>
+    <span class="s1">&#39;O2_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span>
+    <span class="s1">&#39;H2O_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">,}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -376,7 +370,7 @@ element composition does not agree.</td>
 
 <dl class="classmethod">
 <dt id="pMuTT.reaction.Reaction.from_string">
-<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.from_string" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.from_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a reaction object using the reaction string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -390,8 +384,11 @@ species, use pMuTT.pMuTT_list_to_dict to make a dict.</li>
 will be trimmed. Default is ‘+’</li>
 <li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate states of the reaction. Leading and
 trailing spaces will be trimmed. Default is ‘=’</li>
-<li><strong>kwargs</strong> (<em>keyword arguments</em>) – BEP parameters. See <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
-documentation for expected parameters</li>
+<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+object, the descriptor can be set using this parameter. See
+<a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+descriptors</li>
+<li><strong>notes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Other notes such as the source of the reaction. Default is None</li>
 </ul>
 </td>
 </tr>
@@ -407,11 +404,13 @@ documentation for expected parameters</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>m=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>m=0</em>, <em>use_q=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets pre-exponential factor between reactants (or products) and
 transition state in 1/s</p>
+<p><span class="math notranslate nohighlight">\(A = \frac {k_B T} {h} \frac {q^{TS}}{q^{initial state}}
+\exp (m)\)</span> if use_q = True</p>
 <p><span class="math notranslate nohighlight">\(A = \frac {k_B T} {h} \exp\bigg(\frac {\Delta S^{TS}}{R}+m
-\bigg)\)</span></p>
+\bigg)\)</span> if use_q = False</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -423,9 +422,12 @@ instead of reactants. Default is False</li>
 <li><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Molecularity of gas-phase species in the reaction.
 Condensed-phase reactions and unimolecular gas-phase reactions
 should have a value of 1. Bimolecular gas-phase reactions
-should have a value of 2. If not specified, m will be
+should have a value of 2. If None specified, m will be
 calculated (assuming all species in the initial state are
-gas phase).</li>
+gas phase). To get the transition-state estimate of the
+pre-exponential factor, set to 0 (default).</li>
+<li><strong>use_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses ratio of partition functions to calculate A. If
+False, uses the entropy of activation to calculate A.</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor. See
 class docstring to see how to pass specific parameters to
 different species.</li>
@@ -487,6 +489,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -551,6 +554,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -615,6 +619,7 @@ species.</li>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -679,6 +684,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -701,7 +707,7 @@ state</p>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_E_act">
-<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>method='any'</em>, <em>del_m=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>del_m=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets act energy between reactants (or products)
 and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -714,22 +720,13 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate act energy.
-Accepted options:</p>
-<ul>
-<li>’any’ (uses whichever is available. <code class="docutils literal notranslate"><span class="pre">self.transition_state</span></code>
-is used preferentially over <code class="docutils literal notranslate"><span class="pre">self.BEP</span></code>)</li>
-<li>’bep’ (uses <code class="docutils literal notranslate"><span class="pre">self.bep</span></code>)</li>
-<li>’ts’ or ‘transition_state’ (uses <code class="docutils literal notranslate"><span class="pre">self.transition_state</span></code>)</li>
-</ul>
-<p>Default is ‘any’.</p>
-</li>
 <li><strong>del_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Change in molecularity of gas-phase species in the reaction.
 Condensed-phase and unimolecular gas-phase reactions should have
 a value of 0. Bimolecular gas-phase reactions should have a
-value of -1. If not specified, m will be calculated
+value of -1. If None specified, m will be calculated
 (assuming all species in the initial state and transition state
-are gas phase).</li>
+are gas phase). To get the transition-state enthalpy of
+activation, set to 1 (default).</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate act energy. See class
 docstring to see how to pass specific parameters to
 different species.</li>
@@ -761,6 +758,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -786,7 +784,7 @@ different species.</li>
 
 <dl class="method">
 <dt id="pMuTT.reaction.Reaction.get_EoRT_act">
-<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>method='any'</em>, <em>del_m=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>del_m=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless Arrhenius activation energy between reactants
 (or products) and transition state</p>
 <p>If the transition state method is used, the enthalpy of activation is
@@ -802,24 +800,13 @@ on forming the transition state.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Method to use to calculate dimensionless act energy.
-Accepted options:</p>
-<ul>
-<li>’any’ (uses whichever is available. First uses transition
-state theory, then BEPs, then the reaction enthalpy)</li>
-<li>’bep’ (uses <code class="docutils literal notranslate"><span class="pre">self.bep</span></code>)</li>
-<li>’ts’ or ‘transition_state’ (uses <code class="docutils literal notranslate"><span class="pre">self.transition_state</span></code>)</li>
-<li>’enthalpy’ (uses the enthalpy of the reaction. If the
-reaction is exothermic, returns 0)</li>
-</ul>
-<p>Default is ‘any’.</p>
-</li>
 <li><strong>del_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Change in molecularity of gas-phase species in the reaction.
 Condensed-phase and unimolecular gas-phase reactions should have
 a value of 0. Bimolecular gas-phase reactions should have a
-value of -1. If not specified, m will be calculated
+value of -1. If None specified, m will be calculated
 (assuming all species in the initial state and transition state
-are gas phase).</li>
+are gas phase). To get the transition-state enthalpy of
+activation, set to 1 (default).</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate dimensionless act
 energy</li>
 </ul>
@@ -850,6 +837,7 @@ and transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -916,6 +904,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -981,6 +970,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1047,6 +1037,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1112,6 +1103,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1177,6 +1169,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1242,6 +1235,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1336,6 +1330,7 @@ state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1400,6 +1395,7 @@ state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1465,6 +1461,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -1530,6 +1527,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
@@ -2156,6 +2154,7 @@ transition state</p>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
 <li>’ts’</li>
 </ul>
 </li>
@@ -2214,6 +2213,8 @@ is name</li>
 <li>’reactants’</li>
 <li>’products’</li>
 <li>’transition state’</li>
+<li>’transition_state’</li>
+<li>’ts’</li>
 </ul>
 </li>
 <li><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
@@ -2460,6 +2461,45 @@ state and products</p>
 </table>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="pMuTT.reaction.ChemkinReaction.from_string">
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em>, <em>beta=1</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a reaction object using the reaction string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reaction_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Reaction string.</li>
+<li><strong>species</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dictionary using the names as keys. If you have a list of
+species, use pMuTT.pMuTT_list_to_dict to make a dict.</li>
+<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate species. Leading and trailing spaces
+will be trimmed. Default is ‘+’</li>
+<li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate states of the reaction. Leading and
+trailing spaces will be trimmed. Default is ‘=’</li>
+<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+object, the descriptor can be set using this parameter. See
+<a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+descriptors</li>
+<li><strong>notes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Other notes such as the source of the reaction. Default is None</li>
+<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Power to raise the temperature in the rate expression. Default is 1</li>
+<li><strong>is_adsorption</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the reaction represents an adsorption. Default is False</li>
+<li><strong>sticking_coeff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True</li>
+<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – True if the reaction has only gas-phase species. This attribute is
+determined based on the reactants and products</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ChemkinReaction</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ChemkinReaction object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="pMuTT.reaction.ChemkinReaction.get_A">
 <code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
@@ -2597,6 +2637,41 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pMuTT.reaction.Reactions.get_E_span">
+<code class="descname">get_E_span</code><span class="sig-paren">(</span><em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.get_E_span" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the energy span of a set of reactions. Equations sourced from</p>
+<ul class="simple">
+<li>Kozuch, S.; Shaik, S. How to Conceptualize Catalytic Cycles? The
+Energetic Span Model. Acc. Chem. Res. 2011, 44 (2), 101–110.
+<a class="reference external" href="https://doi.org/10.1021/ar1000956">https://doi.org/10.1021/ar1000956</a>.</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\delta E = T_{TDTS} - I_{TDI}\)</span></p>
+<p>if the TOF-determining transition state (TSTS) appears after the
+TOF-determining intermediate (TDI):</p>
+<p><span class="math notranslate nohighlight">\(\delta E = T_{TDTS} - I_{TDI} + \Delta G_r\)</span></p>
+<p>if the TSTS appears before the TDI:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to evaluate Gibbs energy at each state.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>E_span</strong> – Energy span of the Reactions</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pMuTT.reaction.Reactions.get_species">
 <code class="descname">get_species</code><span class="sig-paren">(</span><em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.get_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the unique species included in the reactions.</p>
@@ -2712,9 +2787,10 @@ generated</li>
 estimated using the change in enthalpy.</p>
 <dl class="class">
 <dt id="pMuTT.reaction.bep.BEP">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>reaction=None</em>, <em>descriptor='delta'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents a Bronsted Evans Polyani relationship</p>
-<p><span class="math notranslate nohighlight">\(\frac{E_a}{RT} = \alpha \frac{H}{RT} + \beta\)</span></p>
+<em class="property">class </em><code class="descclassname">pMuTT.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>name=None</em>, <em>reaction=None</em>, <em>descriptor='delta_H'</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a Bronsted Evans Polyani relationship. Intended to be a
+<code class="docutils literal notranslate"><span class="pre">specie</span></code> class.</p>
+<p><span class="math notranslate nohighlight">\(E_a = \alpha H + \beta\)</span></p>
 <dl class="attribute">
 <dt id="pMuTT.reaction.bep.BEP.slope">
 <code class="descname">slope</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.slope" title="Permalink to this definition">¶</a></dt>
@@ -2732,7 +2808,7 @@ estimated using the change in enthalpy.</p>
 <dl class="attribute">
 <dt id="pMuTT.reaction.bep.BEP.intercept">
 <code class="descname">intercept</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.intercept" title="Permalink to this definition">¶</a></dt>
-<dd><p>Intercept of BEP relationship in dimensionless units.</p>
+<dd><p>Intercept of BEP relationship in kcal/mol.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2744,10 +2820,24 @@ estimated using the change in enthalpy.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="pMuTT.reaction.bep.BEP.name">
+<code class="descname">name</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the BEP. Default is None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="pMuTT.reaction.bep.BEP.reaction">
 <code class="descname">reaction</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.reaction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reaction related to BEP. The Reaction does not need to be supplied
-immediately</p>
+<dd><p>Reaction related to BEP. The Reaction can be supplied later by
+using <code class="docutils literal notranslate"><span class="pre">set_descriptor</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2761,17 +2851,66 @@ immediately</p>
 <dl class="attribute">
 <dt id="pMuTT.reaction.bep.BEP.descriptor">
 <code class="descname">descriptor</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.descriptor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Descriptor to calculate the activation energy. Supported options:
-- ‘delta’ (HoRT_products - HoRT_reactants)
-- ‘rev_delta’ (HoRT_reactants - HoRT_products)
-- ‘reactants’ (HoRT_reactants)
-- ‘products’ (HoRT_products)
-Default is delta.</p>
+<dd><p>Descriptor to calculate the activation energy. Supported options:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Descriptor</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>delta_H</td>
+<td>H_products - H_reactants (change in enthalpy)</td>
+</tr>
+<tr class="row-odd"><td>rev_delta_H</td>
+<td>H_reactants - H_products (change in enthalpy in reverse direction)</td>
+</tr>
+<tr class="row-even"><td>reactants_H</td>
+<td>H_reactants (enthalpy of reactants)</td>
+</tr>
+<tr class="row-odd"><td>products_H</td>
+<td>H_products (enthalpy of products)</td>
+</tr>
+<tr class="row-even"><td>delta_E</td>
+<td>E_products - E_reactants (change in electronic energy)</td>
+</tr>
+<tr class="row-odd"><td>rev_delta_E</td>
+<td>E_reactants - E_products (change in electronic energy in reverse direction)</td>
+</tr>
+<tr class="row-even"><td>reactants_E</td>
+<td>E_reactants (electronic energy of reactants)</td>
+</tr>
+<tr class="row-odd"><td>products_E</td>
+<td>E_products (electronic energy of products)</td>
+</tr>
+</tbody>
+</table>
+<p>Default is ‘delta_H’.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pMuTT.reaction.bep.BEP.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notes relevant to BEP relationship such as its source. If using a
+dictionary, the keys and values must be simple types supported by
+JSON</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -2792,19 +2931,28 @@ not supplied to constructor.</p>
 </table>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="pMuTT.reaction.bep.BEP.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recreate an object from the JSON representation.</p>
+<dl class="method">
+<dt id="pMuTT.reaction.bep.BEP.get_E_act">
+<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_E_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Arrhenius activation energy using BEP relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</li>
+<li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>Reaction</strong></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>E_act</strong> – Dimensionless activation energy</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Reaction object</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2812,8 +2960,8 @@ not supplied to constructor.</p>
 
 <dl class="method">
 <dt id="pMuTT.reaction.bep.BEP.get_EoRT_act">
-<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate dimensionless Arrhenius activation energy using BEP
+<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates dimensionless Arrhenius activation energy using BEP
 relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2822,11 +2970,129 @@ relationship</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>EoRT_act</strong> – Dimensionless activation energy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.bep.BEP.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>entropy_state='reactants'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy using BEP relationship
+and reactants Gibbs energy. The BEP relationship has no entropic
+contribution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</li>
+<li><strong>entropy_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em>, </em><em>optional</em>) – <p>State to use to estimate entropy. Supported arguments:</p>
+<ul>
+<li>’reactants’ (default)</li>
+<li>’products’</li>
+<li>None (Entropy contribution is 0. Useful if misc_models
+have been specified for entropy)</li>
+</ul>
+</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>GoRT</strong> – Dimensionless Gibbs energy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.bep.BEP.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy using BEP relationship
+and reactants or products enthalpy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>HoRT</strong> – Dimensionless enthalpy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.bep.BEP.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>entropy_state='reactants'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy using reactants or products
+entropy. The BEP relationship has no entropic contribution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</li>
+<li><strong>entropy_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em>, </em><em>optional</em>) – <p>State to use to estimate entropy. Supported arguments:</p>
+<ul>
+<li>’reactants’ (default)</li>
+<li>’products’</li>
+<li>None (Entropy contribution is 0. Useful if misc_models
+have been specified for entropy)</li>
+</ul>
+</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>SoR</strong> – Dimensionless entropy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pMuTT.reaction.bep.BEP.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless internal energy using BEP relationship
+and initial state internal energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>UoRT</strong> – Dimensionless internal energy</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
@@ -2847,13 +3113,47 @@ instead of reactants. Default is False</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>reaction</strong> (<a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object, optional) – Reaction related to BEP. If specified, overwrites the value
 held by BEP object</li>
-<li><strong>descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Descriptor to calculate the activation energy. Supported
-options:
-- ‘delta’ (HoRT_products - HoRT_reactants)
-- ‘rev_delta’ (HoRT_reactants - HoRT_products)
-- ‘reactants’ (HoRT_reactants)
-- ‘products’ (HoRT_products)
-If specified, overwites the value held by BEP object.</li>
+<li><strong>descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Descriptor to calculate the activation energy. Supported
+options:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Descriptor</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>delta_H</td>
+<td>H_products - H_reactants (change in enthalpy)</td>
+</tr>
+<tr class="row-odd"><td>rev_delta_H</td>
+<td>H_reactants - H_products (change in enthalpy in reverse direction)</td>
+</tr>
+<tr class="row-even"><td>reactants_H</td>
+<td>H_reactants (enthalpy of reactants)</td>
+</tr>
+<tr class="row-odd"><td>products_H</td>
+<td>H_products (enthalpy of products)</td>
+</tr>
+<tr class="row-even"><td>delta_E</td>
+<td>E_products - E_reactants (change in electronic energy)</td>
+</tr>
+<tr class="row-odd"><td>rev_delta_E</td>
+<td>E_reactants - E_products (change in electronic energy in reverse direction)</td>
+</tr>
+<tr class="row-even"><td>reactants_E</td>
+<td>E_reactants (electronic energy of reactants)</td>
+</tr>
+<tr class="row-odd"><td>products_E</td>
+<td>E_products (electronic energy of products)</td>
+</tr>
+</tbody>
+</table>
+<p>If specified, overwites the value held by BEP object.</p>
+</li>
 </ul>
 </td>
 </tr>
@@ -2902,7 +3202,7 @@ If specified, overwites the value held by BEP object.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

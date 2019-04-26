@@ -10,5 +10,5 @@ and :class:`~pMuTT.statmech.StatMech` classes.
 
 Coverage Effects
 ----------------
-.. autoclass:: pMuTT.mixture.cov.CovEffect
+.. autoclass:: pMuTT.mixture.cov.PiecewiseCovEffect
    :members:

@@ -7,15 +7,28 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.6
+-------------
+Apr. 26, 2019
+
+- Moved ``references`` attribute from empirical classes to
+  :class:`~pMuTT.statmech.StatMech`
+- Changed ``mix_models`` attribute to ``misc_models`` in  indicating any model
+  object can be used
+- Implemented :class:`~pMuTT.statmech.vib.DebyeVib` and
+  :class:`~pMuTT.statmech.ConstantMode` classes
+- Restructured :class:`~pMuTT.reaction.bep.BEP` object to act as a transition
+  state species in :class:`~pMuTT.reaction.Reaction` objects
+- Implemented :class:`~pMuTT.empirical.lsr.LSR` object
 - Added option to calculate pre-exponential factor using ratio of partition
   functions or entropy of activation
 - Added option to use electronic energy as descriptor for
-  :class:`~pMuTT.reaction.bep.BEP` object.
+  :class:`~pMuTT.reaction.bep.BEP` object
 - Added some imperial unit functionality to ``pMuTT.constants`` module
 - Renamed ``from_`` parameter and ``to`` parameter in 
-  :func:`pMuTT.constants.convert_unit` to ``initial`` and ``final``.
+  :func:`pMuTT.constants.convert_unit` to ``initial`` and ``final``
 - Added ability to import individual translational, rotational, vibrational,
-  electronic and nuclear modes to Excel.
+  electronic and nuclear modes to Excel
 - Renamed ``pMuTT.statmech.trans.IdealTrans`` to
   :class:`~pMuTT.statmech.trans.FreeTrans`
 - Renamed ``pMuTT.statmech.elec.IdealElec`` to

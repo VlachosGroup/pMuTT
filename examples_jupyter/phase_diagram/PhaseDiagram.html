@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Phase Diagram &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Phase Diagram &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -491,59 +491,11 @@ see the Experimental to Empirical example.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;Fe&#39;: Nasa object for Name: Fe
-        phase: None
-        elements: None
-        references: None
-        notes: None
-        statmech_model: None
-        T_low: 298.0
-        T_mid: 380.0
-        T_high: 500.0
-        a_low: [ 2.01449208e+00  4.56218533e-03 -6.39848753e-06  9.56223988e-09
- -5.16521158e-12 -7.62871062e+02 -9.34191359e+00]
-        a_high: [ 2.09765123e+00  3.68475333e-03 -2.91355935e-06  3.38794160e-09
- -1.04854127e-12 -7.69200680e+02 -9.66260833e+00],
- &#39;Fe2O3&#39;: Nasa object for Name: Fe2O3
-        phase: None
-        elements: None
-        references: None
-        notes: None
-        statmech_model: None
-        T_low: 298.0
-        T_mid: 380.0
-        T_high: 500.0
-        a_low: [-1.45020829e+01  2.16728052e-01 -6.84930159e-04  1.07356269e-06
- -6.58251701e-10 -1.00352063e+05  5.07720517e+01]
-        a_high: [-3.90419180e+00  1.04908021e-01 -2.40814218e-04  2.86723130e-07
- -1.33637083e-10 -1.01158722e+05  9.90229288e+00],
- &#39;Fe3O4&#39;: Nasa object for Name: Fe3O4
-        phase: None
-        elements: None
-        references: None
-        notes: None
-        statmech_model: None
-        T_low: 298.0
-        T_mid: 380.0
-        T_high: 500.0
-        a_low: [-3.34832035e+00  1.47151692e-01 -4.17555995e-04  6.60634156e-07
- -4.06146548e-10 -1.37776863e+05  6.19804710e+00]
-        a_high: [ 3.19067803e+00  7.81576955e-02 -1.43532401e-04  1.75147075e-07
- -8.24547042e-11 -1.38274579e+05 -1.90189793e+01],
- &#39;FeO&#39;: Nasa object for Name: FeO
-        phase: None
-        elements: None
-        references: None
-        notes: None
-        statmech_model: None
-        T_low: 298.0
-        T_mid: 380.0
-        T_high: 500.0
-        a_low: [ 4.20444149e+00  1.25324622e-02 -3.49507772e-05  5.40908877e-08
- -3.31979413e-11 -3.43115166e+04 -1.92444434e+01]
-        a_high: [ 4.73893289e+00  6.89296183e-03 -1.25523691e-05  1.44076787e-08
- -6.73970947e-12 -3.43521995e+04 -2.13056590e+01],
- &#39;O2&#39;: &lt;pMuTT.statmech.StatMech object at 0x0000025DE909DEF0&gt;}
+{&#39;Fe&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000001F67D499A20&gt;,
+ &#39;Fe2O3&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000001F67D499978&gt;,
+ &#39;Fe3O4&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000001F67D499E48&gt;,
+ &#39;FeO&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000001F67D499AC8&gt;,
+ &#39;O2&#39;: &lt;pMuTT.statmech.StatMech object at 0x000001F67D499F98&gt;}
 </pre></div></div>
 </div>
 </div>
@@ -614,7 +566,7 @@ reactions example.</p>
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Text(0.5,0,&#39;Temperature (K)&#39;)
+<span></span>Text(0.5, 0, &#39;Temperature (K)&#39;)
 </pre></div>
 </div>
 </div>
@@ -660,7 +612,7 @@ reactions example.</p>
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>[Text(1,0,&#39;FeO&#39;), Text(1,0,&#39;Fe3O4&#39;), Text(1,0,&#39;Fe2O3&#39;)]
+<span></span>[Text(1, 0, &#39;FeO&#39;), Text(1, 0, &#39;Fe3O4&#39;), Text(1, 0, &#39;Fe2O3&#39;)]
 </pre></div>
 </div>
 </div>
@@ -695,7 +647,7 @@ reactions example.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

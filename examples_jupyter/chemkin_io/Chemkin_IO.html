@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Chemkin Input and Output &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Chemkin Input and Output &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -1917,7 +1917,7 @@ the references.</p>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io_.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 <span class="kn">from</span> <span class="nn">pMuTT.chemkin</span> <span class="k">import</span> <span class="n">CatSite</span>
 
 <span class="c1"># Find the location of Jupyter notebook</span>
@@ -2011,7 +2011,7 @@ the references.</p>
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
-C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
+C:\Users\jonat\AppData\Local\conda\conda\envs\pMuTT_development\lib\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
@@ -2056,7 +2056,7 @@ folder</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="n">write_thermdat</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/thermdat&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
 </pre></div>
@@ -2065,63 +2065,63 @@ folder</a>.</p>
 <p>The thermdat file written in shown below.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">THERMO</span> <span class="n">ALL</span>
        <span class="mi">100</span>       <span class="mi">500</span>      <span class="mi">1500</span>
-<span class="n">N2</span>              <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">523.4</span>         <span class="mi">1</span>
+<span class="n">N2</span>              <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">523.4</span>         <span class="mi">1</span>
  <span class="mf">3.75207309E+00</span><span class="o">-</span><span class="mf">1.30159027E-03</span> <span class="mf">1.83848785E-06</span><span class="o">-</span><span class="mf">1.17413430E-10</span><span class="o">-</span><span class="mf">3.65391117E-13</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">1.67464905E+02</span> <span class="mf">2.01171161E+00</span> <span class="mf">3.41792195E+00</span> <span class="mf">8.91688129E-04</span><span class="o">-</span><span class="mf">3.46864753E-06</span>    <span class="mi">3</span>
- <span class="mf">5.44691795E-09</span><span class="o">-</span><span class="mf">2.46804017E-12</span><span class="o">-</span><span class="mf">1.27217456E+02</span> <span class="mf">3.45609372E+00</span>                   <span class="mi">4</span>
-<span class="n">NH3</span>             <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">533.6</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">1.67464905E+02</span> <span class="mf">2.02487460E+00</span> <span class="mf">3.41792195E+00</span> <span class="mf">8.91688129E-04</span><span class="o">-</span><span class="mf">3.46864753E-06</span>    <span class="mi">3</span>
+ <span class="mf">5.44691795E-09</span><span class="o">-</span><span class="mf">2.46804017E-12</span><span class="o">-</span><span class="mf">1.27217456E+02</span> <span class="mf">3.46925670E+00</span>                   <span class="mi">4</span>
+<span class="n">NH3</span>             <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">533.6</span>         <span class="mi">1</span>
  <span class="mf">3.29427463E+00</span> <span class="mf">2.57481517E-03</span> <span class="mf">5.20883059E-07</span><span class="o">-</span><span class="mf">1.00678313E-09</span> <span class="mf">3.59356180E-13</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">8.39739662E+03</span> <span class="mf">3.58202003E+00</span> <span class="mf">4.57124680E+00</span><span class="o">-</span><span class="mf">6.89724277E-03</span> <span class="mf">2.70972941E-05</span>    <span class="mi">3</span>
-<span class="o">-</span><span class="mf">3.44331645E-08</span> <span class="mf">1.62568430E-11</span><span class="o">-</span><span class="mf">8.53630325E+03</span><span class="o">-</span><span class="mf">1.79552658E+00</span>                   <span class="mi">4</span>
-<span class="n">H2</span>              <span class="mi">20190314</span><span class="n">H</span>   <span class="mi">2</span>               <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">574.6</span>         <span class="mi">1</span>
+<span class="o">-</span><span class="mf">8.39739662E+03</span> <span class="mf">3.59518301E+00</span> <span class="mf">4.57124680E+00</span><span class="o">-</span><span class="mf">6.89724277E-03</span> <span class="mf">2.70972941E-05</span>    <span class="mi">3</span>
+<span class="o">-</span><span class="mf">3.44331645E-08</span> <span class="mf">1.62568430E-11</span><span class="o">-</span><span class="mf">8.53630325E+03</span><span class="o">-</span><span class="mf">1.78236359E+00</span>                   <span class="mi">4</span>
+<span class="n">H2</span>              <span class="mi">20190425</span><span class="n">H</span>   <span class="mi">2</span>               <span class="n">G298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">574.6</span>         <span class="mi">1</span>
  <span class="mf">3.37903251E+00</span> <span class="mf">7.92301907E-04</span><span class="o">-</span><span class="mf">1.88662952E-06</span> <span class="mf">1.85974220E-09</span><span class="o">-</span><span class="mf">5.68447254E-13</span>    <span class="mi">2</span>
- <span class="mf">1.70231785E+03</span><span class="o">-</span><span class="mf">3.76701177E+00</span> <span class="mf">3.50717925E+00</span><span class="o">-</span><span class="mf">8.50397135E-05</span> <span class="mf">3.79570576E-07</span>    <span class="mi">3</span>
-<span class="o">-</span><span class="mf">7.57943298E-10</span> <span class="mf">5.72423558E-13</span> <span class="mf">1.68725520E+03</span><span class="o">-</span><span class="mf">4.31675916E+00</span>                   <span class="mi">4</span>
-<span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
+ <span class="mf">1.70231785E+03</span><span class="o">-</span><span class="mf">3.75384879E+00</span> <span class="mf">3.50717925E+00</span><span class="o">-</span><span class="mf">8.50397135E-05</span> <span class="mf">3.79570576E-07</span>    <span class="mi">3</span>
+<span class="o">-</span><span class="mf">7.57943298E-10</span> <span class="mf">5.72423558E-13</span> <span class="mf">1.68725520E+03</span><span class="o">-</span><span class="mf">4.30359617E+00</span>                   <span class="mi">4</span>
+<span class="n">N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
  <span class="mf">3.42605836E+00</span> <span class="mf">5.03710708E-03</span><span class="o">-</span><span class="mf">6.92689694E-06</span> <span class="mf">6.03246113E-09</span><span class="o">-</span><span class="mf">2.18862675E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">7.10922368E+03</span><span class="o">-</span><span class="mf">1.39236755E+01</span> <span class="mf">4.40553502E-01</span> <span class="mf">2.97759950E-02</span><span class="o">-</span><span class="mf">8.47698148E-05</span>    <span class="mi">3</span>
  <span class="mf">1.16195177E-07</span><span class="o">-</span><span class="mf">6.12938589E-11</span><span class="o">-</span><span class="mf">6.81726811E+03</span><span class="o">-</span><span class="mf">1.67561821E+00</span>                   <span class="mi">4</span>
-<span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">502.9</span>         <span class="mi">1</span>
+<span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">502.9</span>         <span class="mi">1</span>
 <span class="o">-</span><span class="mf">8.29107669E-01</span> <span class="mf">2.64469843E-02</span><span class="o">-</span><span class="mf">4.38832016E-05</span> <span class="mf">3.47600781E-08</span><span class="o">-</span><span class="mf">1.07819310E-11</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">1.10025913E+04</span> <span class="mf">5.84749603E-01</span><span class="o">-</span><span class="mf">5.23174593E+00</span> <span class="mf">6.11537184E-02</span><span class="o">-</span><span class="mf">1.47762309E-04</span>    <span class="mi">3</span>
  <span class="mf">1.74618161E-07</span><span class="o">-</span><span class="mf">8.21997526E-11</span><span class="o">-</span><span class="mf">1.05502378E+04</span> <span class="mf">1.88654280E+01</span>                   <span class="mi">4</span>
-<span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mi">20190314</span><span class="n">H</span>   <span class="mi">1</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">461.9</span>         <span class="mi">1</span>
+<span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>            <span class="mi">20190425</span><span class="n">H</span>   <span class="mi">1</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">461.9</span>         <span class="mi">1</span>
 <span class="o">-</span><span class="mf">2.11302416E+00</span> <span class="mf">1.72572991E-02</span><span class="o">-</span><span class="mf">2.60046478E-05</span> <span class="mf">1.92388088E-08</span><span class="o">-</span><span class="mf">5.68363784E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">6.07693323E+03</span> <span class="mf">8.35415551E+00</span><span class="o">-</span><span class="mf">1.41307531E+00</span> <span class="mf">1.00687718E-02</span> <span class="mf">1.09758988E-06</span>    <span class="mi">3</span>
 <span class="o">-</span><span class="mf">2.55216914E-08</span> <span class="mf">2.17566538E-11</span><span class="o">-</span><span class="mf">6.12970520E+03</span> <span class="mf">5.64702945E+00</span>                   <span class="mi">4</span>
-<span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">461.9</span>         <span class="mi">1</span>
+<span class="n">NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">461.9</span>         <span class="mi">1</span>
  <span class="mf">1.58312977E+00</span> <span class="mf">1.57753291E-02</span><span class="o">-</span><span class="mf">1.71587153E-05</span> <span class="mf">1.15414255E-08</span><span class="o">-</span><span class="mf">3.21958978E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">1.42569335E+04</span><span class="o">-</span><span class="mf">6.35113154E+00</span> <span class="mf">1.16759533E+00</span> <span class="mf">2.05732170E-02</span><span class="o">-</span><span class="mf">3.66958772E-05</span>    <span class="mi">3</span>
  <span class="mf">4.56112325E-08</span><span class="o">-</span><span class="mf">2.49628744E-11</span><span class="o">-</span><span class="mf">1.42313136E+04</span><span class="o">-</span><span class="mf">4.80541265E+00</span>                   <span class="mi">4</span>
-<span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">2</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">523.4</span>         <span class="mi">1</span>
+<span class="n">NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">2</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">523.4</span>         <span class="mi">1</span>
 <span class="o">-</span><span class="mf">6.86530719E-01</span> <span class="mf">2.43298826E-02</span><span class="o">-</span><span class="mf">3.68705157E-05</span> <span class="mf">2.88483783E-08</span><span class="o">-</span><span class="mf">8.86963660E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">1.19475429E+04</span> <span class="mf">1.03190122E+00</span><span class="o">-</span><span class="mf">2.56305506E+00</span> <span class="mf">3.84726874E-02</span><span class="o">-</span><span class="mf">7.73503504E-05</span>    <span class="mi">3</span>
  <span class="mf">8.09903199E-08</span><span class="o">-</span><span class="mf">3.43595838E-11</span><span class="o">-</span><span class="mf">1.17458710E+04</span> <span class="mf">8.90805309E+00</span>                   <span class="mi">4</span>
-<span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">1</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">543.9</span>         <span class="mi">1</span>
+<span class="n">NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">1</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">543.9</span>         <span class="mi">1</span>
 <span class="o">-</span><span class="mf">1.33660645E+00</span> <span class="mf">2.33106600E-02</span><span class="o">-</span><span class="mf">3.77180253E-05</span> <span class="mf">2.97486446E-08</span><span class="o">-</span><span class="mf">9.12157176E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">1.48903408E+04</span> <span class="mf">3.58875312E+00</span><span class="o">-</span><span class="mf">3.73687435E+00</span> <span class="mf">4.05226889E-02</span><span class="o">-</span><span class="mf">8.44226964E-05</span>    <span class="mi">3</span>
  <span class="mf">8.65932632E-08</span><span class="o">-</span><span class="mf">3.53036247E-11</span><span class="o">-</span><span class="mf">1.46202194E+04</span> <span class="mf">1.37781593E+01</span>                   <span class="mi">4</span>
-<span class="n">TS1_NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">451.7</span>         <span class="mi">1</span>
+<span class="n">TS1_NH3</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">3</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">451.7</span>         <span class="mi">1</span>
  <span class="mf">5.21221040E-02</span> <span class="mf">2.11615812E-02</span><span class="o">-</span><span class="mf">2.49542203E-05</span> <span class="mf">1.66204937E-08</span><span class="o">-</span><span class="mf">4.59897868E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">5.86628985E+03</span><span class="o">-</span><span class="mf">1.43112446E+00</span> <span class="mf">4.96418515E-02</span> <span class="mf">2.15674671E-02</span><span class="o">-</span><span class="mf">2.75604959E-05</span>    <span class="mi">3</span>
  <span class="mf">2.23225323E-08</span><span class="o">-</span><span class="mf">8.79255935E-12</span><span class="o">-</span><span class="mf">5.87008224E+03</span><span class="o">-</span><span class="mf">1.46494399E+00</span>                   <span class="mi">4</span>
-<span class="n">TS2_NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">2</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
+<span class="n">TS2_NH2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>      <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">2</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
 <span class="o">-</span><span class="mf">1.48538501E+00</span> <span class="mf">2.67287608E-02</span><span class="o">-</span><span class="mf">3.86606417E-05</span> <span class="mf">2.81558194E-08</span><span class="o">-</span><span class="mf">8.15140597E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">8.43975871E+03</span> <span class="mf">4.23478568E+00</span><span class="o">-</span><span class="mf">2.58881424E+00</span> <span class="mf">3.43781302E-02</span><span class="o">-</span><span class="mf">5.87419101E-05</span>    <span class="mi">3</span>
  <span class="mf">5.18321984E-08</span><span class="o">-</span><span class="mf">1.87340797E-11</span><span class="o">-</span><span class="mf">8.31127804E+03</span> <span class="mf">8.95651586E+00</span>                   <span class="mi">4</span>
-<span class="n">TS3_NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">1</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
+<span class="n">TS3_NH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">1</span><span class="n">H</span>   <span class="mi">1</span>          <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
 <span class="o">-</span><span class="mf">1.24242592E-01</span> <span class="mf">1.65859456E-02</span><span class="o">-</span><span class="mf">2.43704704E-05</span> <span class="mf">1.77594067E-08</span><span class="o">-</span><span class="mf">5.19878424E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">1.39060398E+04</span><span class="o">-</span><span class="mf">1.18117850E+00</span><span class="o">-</span><span class="mf">1.80701218E+00</span> <span class="mf">3.07479132E-02</span><span class="o">-</span><span class="mf">6.96816870E-05</span>    <span class="mi">3</span>
  <span class="mf">8.30020912E-08</span><span class="o">-</span><span class="mf">4.08170225E-11</span><span class="o">-</span><span class="mf">1.37437409E+04</span> <span class="mf">5.69757432E+00</span>                   <span class="mi">4</span>
-<span class="n">TS4_N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20190314</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
+<span class="n">TS4_N2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20190425</span><span class="n">N</span>   <span class="mi">2</span>               <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">482.4</span>         <span class="mi">1</span>
  <span class="mf">1.52431744E+00</span> <span class="mf">1.40315985E-02</span><span class="o">-</span><span class="mf">2.40821843E-05</span> <span class="mf">1.96281604E-08</span><span class="o">-</span><span class="mf">6.24114074E-12</span>    <span class="mi">2</span>
 <span class="o">-</span><span class="mf">1.24945441E+02</span><span class="o">-</span><span class="mf">8.60931129E+00</span><span class="o">-</span><span class="mf">1.75107618E+00</span> <span class="mf">4.12189598E-02</span><span class="o">-</span><span class="mf">1.09828935E-04</span>    <span class="mi">3</span>
  <span class="mf">1.41320046E-07</span><span class="o">-</span><span class="mf">7.17404084E-11</span> <span class="mf">1.95040067E+02</span> <span class="mf">4.82355594E+00</span>                   <span class="mi">4</span>
-<span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190314</span>                    <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
+<span class="n">RU</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>           <span class="mi">20190425</span>                    <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
  <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">2</span>
  <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">3</span>
  <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>                   <span class="mi">4</span>
-<span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>           <span class="mi">20190314</span>                    <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
+<span class="n">RU</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>           <span class="mi">20190425</span>                    <span class="n">S298</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">800.0</span>     <span class="mf">554.1</span>         <span class="mi">1</span>
  <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">2</span>
  <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>    <span class="mi">3</span>
  <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span> <span class="mf">0.00000000E+00</span>                   <span class="mi">4</span>
@@ -2137,10 +2137,10 @@ folder</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io_</span> <span class="k">import</span> <span class="n">chemkin</span> <span class="k">as</span> <span class="n">ck_io</span>
+<span></span><span class="kn">from</span> <span class="nn">pMuTT.io</span> <span class="k">import</span> <span class="n">chemkin</span> <span class="k">as</span> <span class="n">ck_io</span>
 
 <span class="n">ck_io</span><span class="o">.</span><span class="n">write_gas</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/gas.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
-<span class="n">ck_io</span><span class="o">.</span><span class="n">write_surf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/surf.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
+<span class="n">ck_io</span><span class="o">.</span><span class="n">write_surf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/surf.inp&#39;</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2150,11 +2150,11 @@ folder</a>.</p>
 factor.</p>
 <p>The gas.inp file written is shown below. Note there are no gas-phase
 reactions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:35.953210
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:46.954918
 !Elements present in gas and surface species
 ELEMENTS
-N
 H
+N
 END
 
 !Gas-phase species
@@ -2176,7 +2176,7 @@ END
 </pre></div>
 </div>
 <p>The surf.inp file written in shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:35.964181
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:46.977586
 !Surface species
 !Each catalyst site has the following format:
 !SITE/[Site name]/      SDEN/[Site density in mol/cm2]/
@@ -2184,26 +2184,22 @@ END
 !BULK [Bulk name]/[Bulk density in g/cm3]
 SITE/RU0001/       SDEN/2.16710E-09/
 
-  N2(S)/1/
-  N(S)/1/
+  RU(S)/1/
   H(S)/1/
+  N2(S)/1/
   NH3(S)/1/
   NH2(S)/1/
   NH(S)/1/
-  TS1_NH3(S)/1/
-  TS2_NH2(S)/1/
-  TS3_NH(S)/1/
-  TS4_N2(S)/1/
-  RU(S)/1/
+  N(S)/1/
 
 BULK RU(B)/12.2/
 END
 
-!Gas-phase reactions.
+!Surface-phase reactions.
 !The reaction line has the following format:
 !REACTIONS  MW[ON/OFF]   [Ea units]
 !where MW stands for Motz-Wise corrections and if the Ea
-!units are left blank, then the activation energy should be dimensionless (i.e. E/RT)
+!units are left blank, then the activation energy should be in cal/mol
 !The rate constant expression is:
 !k = kb/h/site_den^(n-1) * (T)^beta * exp(-Ea/RT)
 !where site_den is the site density and is the number of surface species (including empty sites)
@@ -2215,11 +2211,11 @@ END
 !- Ea (Activation Energy or Gibbs energy of activation in specified units
 !Adsorption reactions can be represented using the STICK keyword
 REACTIONS  MWON
-H2+2RU(S)=2H(S)+2RU(B)           5.000E-01   1.000E+00   0.000E+00
+H2+2RU(S)=2H(S)+2RU(B)           1.000E+00   1.000E+00   0.000E+00
 STICK
-N2+RU(S)=N2(S)+RU(B)             5.000E-01   1.000E+00   0.000E+00
+N2+RU(S)=N2(S)+RU(B)             1.000E+00   1.000E+00   0.000E+00
 STICK
-NH3+RU(S)=NH3(S)+RU(B)           5.000E-01   1.000E+00   0.000E+00
+NH3+RU(S)=NH3(S)+RU(B)           1.000E+00   1.000E+00   0.000E+00
 STICK
 NH3(S)+RU(S)=NH2(S)+H(S)+RU(B)   9.615E+18   1.000E+00   2.972E+01
 NH2(S)+RU(S)=NH(S)+H(S)+RU(B)    9.615E+18   1.000E+00   1.199E+01
@@ -2248,13 +2244,14 @@ END
 </div>
 </div>
 <p>The T_flow.inp file written is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:35.974154
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.025434
 !Conditions for each reaction run
 !Only used when MultiInput in tube.inp is set to &quot;T&quot;
 !T[K]      P[atm]     Q[cm3/s]   abyv[cm-1]  Run #
 3.000E+02  1.000E+00  1.000E+01  1.000E+02  !1
 4.000E+02  2.000E+00  2.000E+01  5.000E+01  !2
 5.000E+02  3.000E+00  3.000E+01  2.500E+01  !3
+EOF
 </pre></div>
 </div>
 </div>
@@ -2293,7 +2290,7 @@ END
 <p>Reminder that we use <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> as ‘get_GoRT_act’ for the
 <a class="reference external" href="#act_method_name_explanation">reason described above</a>.</p>
 <p>The EAg.inp file is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:36.004074
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.088278
 !The first line is the number of reactions. Subsequent lines follow the format
 !of rxn (from surf.out) followed by the EA/RT value at each run condition.
 !There may be one slight deviation from surf.out: any repeated species should
@@ -2306,7 +2303,7 @@ EOF
 </pre></div>
 </div>
 <p>The EAs.inp file is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:04:35.990111
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.043381
 !The first line is the number of reactions. Subsequent lines follow the format
 !of rxn (from surf.out) followed by the EA/RT value at each run condition.
 !There may be one slight deviation from surf.out: any repeated species should
@@ -2316,8 +2313,8 @@ EOF
   7  !Number of reactions
 !                                           1          2          3
 H2+2RU(S)&lt;=&gt;2H(S)+2RU(B)             0.00E+00   0.00E+00   0.00E+00
-N2+RU(S)&lt;=&gt;N2(S)+RU(B)               0.00E+00   0.00E+00   2.47E+00
-NH3+RU(S)&lt;=&gt;NH3(S)+RU(B)             0.00E+00   1.59E+00   4.45E+00
+N2+RU(S)&lt;=&gt;N2(S)+RU(B)               0.00E+00   0.00E+00   2.49E+00
+NH3+RU(S)&lt;=&gt;NH3(S)+RU(B)             0.00E+00   1.61E+00   4.47E+00
 NH3(S)+RU(S)&lt;=&gt;NH2(S)+H(S)+RU(B)     2.95E+01   2.28E+01   1.88E+01
 NH2(S)+RU(S)&lt;=&gt;NH(S)+H(S)+RU(B)      1.19E+01   9.12E+00   7.46E+00
 NH(S)+RU(S)&lt;=&gt;N(S)+H(S)+RU(B)        3.18E+00   2.23E+00   1.65E+00
@@ -2363,7 +2360,7 @@ EOF
 </pre></div></div>
 </div>
 <p>The tube_mole.inp file is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-03-14 11:14:44.502516
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.114596
 !Specify the &#39;species/phase/&#39; pair /(in quotes!)/ and the associated
 !composition values. If the composition does not sum to 1 for each phase or
 !site type, it will be renormalized to 1. At the end of a calculation, a
@@ -2405,7 +2402,7 @@ EOF
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

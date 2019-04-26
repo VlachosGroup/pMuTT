@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mixture Models &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Mixture Models &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -193,12 +193,13 @@ and <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" t
 <div class="section" id="coverage-effects">
 <h2>Coverage Effects<a class="headerlink" href="#coverage-effects" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.mixture.cov.CovEffect">
-<em class="property">class </em><code class="descclassname">pMuTT.mixture.cov.</code><code class="descname">CovEffect</code><span class="sig-paren">(</span><em>name_i</em>, <em>name_j</em>, <em>intervals</em>, <em>slopes</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Models enthalpic contribution to coverage effect between two species</p>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect">
+<em class="property">class </em><code class="descclassname">pMuTT.mixture.cov.</code><code class="descname">PiecewiseCovEffect</code><span class="sig-paren">(</span><em>name_i</em>, <em>name_j</em>, <em>intervals</em>, <em>slopes</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Models enthalpic contribution to coverage effect between two species
+using piecewise linear functions</p>
 <dl class="attribute">
-<dt id="pMuTT.mixture.cov.CovEffect.name_i">
-<code class="descname">name_i</code><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.name_i" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.name_i">
+<code class="descname">name_i</code><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.name_i" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of specie’s properties affected by coverage of specie_j</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -211,8 +212,8 @@ and <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" t
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.mixture.cov.CovEffect.name_j">
-<code class="descname">name_j</code><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.name_j" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.name_j">
+<code class="descname">name_j</code><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.name_j" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of specie affecting the properties of specie_i</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -225,8 +226,8 @@ and <a class="reference internal" href="statmech.html#pMuTT.statmech.StatMech" t
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.mixture.cov.CovEffect.intervals">
-<code class="descname">intervals</code><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.intervals" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.intervals">
+<code class="descname">intervals</code><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.intervals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intervals (in ML) to change slopes. The first element of the list
 should be 0 and the list should be sorted in ascending order to
 correctly specify a piecewise function with mole fraction domain
@@ -242,8 +243,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.mixture.cov.CovEffect.slopes">
-<code class="descname">slopes</code><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.slopes" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.slopes">
+<code class="descname">slopes</code><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.slopes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Slopes (in kcal/mol) to use between the intervals</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -256,8 +257,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.mixture.cov.CovEffect.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -274,8 +275,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.get_FoRT">
-<code class="descname">get_FoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.get_FoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.get_FoRT">
+<code class="descname">get_FoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.get_FoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the excess Helmholtz energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -298,8 +299,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the excess Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -322,8 +323,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the excess enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -346,8 +347,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>x=0.0</em>, <em>T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the excess internal energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -370,8 +371,8 @@ correctly specify a piecewise function with mole fraction domain
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.insert">
-<code class="descname">insert</code><span class="sig-paren">(</span><em>interval</em>, <em>slope</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.insert" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>interval</em>, <em>slope</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.insert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inserts the a new interval and slope for the piecewise function</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -390,8 +391,8 @@ remains continuous</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.pop">
-<code class="descname">pop</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.pop" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the interval and slope specified by an index</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -408,8 +409,8 @@ mole fractions to span from 0 to 1</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.mixture.cov.CovEffect.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.CovEffect.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pMuTT.mixture.cov.PiecewiseCovEffect.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.mixture.cov.PiecewiseCovEffect.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -448,7 +449,7 @@ mole fractions to span from 0 to 1</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

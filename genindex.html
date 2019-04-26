@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Index &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -175,6 +175,7 @@
  | <a href="#I"><strong>I</strong></a>
  | <a href="#J"><strong>J</strong></a>
  | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -183,6 +184,7 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  | <a href="#Z"><strong>Z</strong></a>
@@ -231,7 +233,7 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reactions.html#pMuTT.reaction.Reaction.bep">bep (pMuTT.reaction.Reaction attribute)</a>
+      <li><a href="reactions.html#pMuTT.reaction.Reaction.bep_descriptor">bep_descriptor (pMuTT.reaction.Reaction attribute)</a>
 </li>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.beta">beta (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.beta">[1]</a>
 </li>
@@ -255,19 +257,23 @@
 </li>
       <li><a href="empirical.html#pMuTT.empirical.references.References.clear_offset">clear_offset() (pMuTT.empirical.references.References method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_CpoR">compare_CpoR() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_GoRT">compare_GoRT() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_HoRT">compare_HoRT() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.compare_SoR">compare_SoR() (pMuTT.empirical.EmpiricalBase method)</a>
 </li>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode">ConstantMode (class in pMuTT.statmech)</a>
+</li>
       <li><a href="constants.html#pMuTT.constants.convert_unit">convert_unit() (in module pMuTT.constants)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect">CovEffect (class in pMuTT.mixture.cov)</a>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.Cp">Cp (pMuTT.statmech.ConstantMode attribute)</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.Cv">Cv (pMuTT.statmech.ConstantMode attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -275,18 +281,28 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.D0">D0 (pMuTT.statmech.elec.IdealElec attribute)</a>
+      <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.D0">D0 (pMuTT.statmech.elec.GroundStateElec attribute)</a>
 </li>
-      <li><a href="io.html#pMuTT.io.json.pMuTTEncoder.default">default() (pMuTT.io.json.pMuTTEncoder method)</a>
+      <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.debye_temperature">debye_temperature (pMuTT.statmech.vib.DebyeVib attribute)</a>
+</li>
+      <li><a href="constants.html#pMuTT.constants.debye_to_einstein">debye_to_einstein() (in module pMuTT.constants)</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib">DebyeVib (class in pMuTT.statmech.vib)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="io.html#pMuTT.io.json.pMuTTEncoder.default">default() (pMuTT.io.json.pMuTTEncoder method)</a>
+</li>
       <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.degree_tol">degree_tol (pMuTT.statmech.rot.RigidRotor attribute)</a>
 </li>
       <li><a href="chemkin.html#pMuTT.chemkin.CatSite.density">density (pMuTT.chemkin.CatSite attribute)</a>
 </li>
-      <li><a href="reactions.html#pMuTT.reaction.bep.BEP.descriptor">descriptor (pMuTT.reaction.bep.BEP attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.references.References.descriptor">descriptor (pMuTT.empirical.references.References attribute)</a>
+
+      <ul>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.descriptor">(pMuTT.reaction.bep.BEP attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -297,17 +313,25 @@
 </li>
       <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.einstein_temperature">einstein_temperature (pMuTT.statmech.vib.EinsteinVib attribute)</a>
 </li>
+      <li><a href="constants.html#pMuTT.constants.einstein_to_debye">einstein_to_debye() (in module pMuTT.constants)</a>
+</li>
       <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib">EinsteinVib (class in pMuTT.statmech.vib)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.StatMech.elec_model">elec_model (pMuTT.statmech.StatMech attribute)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.elements">elements (pMuTT.empirical.EmpiricalBase attribute)</a>
+
+      <ul>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.elements">(pMuTT.statmech.StatMech attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase">EmpiricalBase (class in pMuTT.empirical)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.EmptyMode">EmptyMode (class in pMuTT.statmech)</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl">EmptyNucl (class in pMuTT.statmech.nucl)</a>
 </li>
       <li><a href="constants.html#pMuTT.constants.energy_to_freq">energy_to_freq() (in module pMuTT.constants)</a>
 </li>
@@ -321,7 +345,11 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.F">F (pMuTT.statmech.ConstantMode attribute)</a>
+</li>
       <li><a href="empirical.html#pMuTT.empirical.references.References.fit_HoRT_offset">fit_HoRT_offset() (pMuTT.empirical.references.References method)</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans">FreeTrans (class in pMuTT.statmech.trans)</a>
 </li>
       <li><a href="constants.html#pMuTT.constants.freq_to_energy">freq_to_energy() (in module pMuTT.constants)</a>
 </li>
@@ -337,14 +365,10 @@
         <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.from_data">(pMuTT.empirical.shomate.Shomate class method)</a>
 </li>
       </ul></li>
-      <li><a href="chemkin.html#pMuTT.chemkin.CatSite.from_dict">from_dict() (pMuTT.chemkin.CatSite class method)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.from_dict">from_dict() (pMuTT.empirical.EmpiricalBase class method)</a>
 
       <ul>
-        <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.from_dict">(pMuTT.empirical.EmpiricalBase class method)</a>
-</li>
         <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.from_dict">(pMuTT.empirical.nasa.Nasa class method)</a>
-</li>
-        <li><a href="empirical.html#pMuTT.empirical.references.Reference.from_dict">(pMuTT.empirical.references.Reference class method)</a>
 </li>
         <li><a href="empirical.html#pMuTT.empirical.references.References.from_dict">(pMuTT.empirical.references.References class method)</a>
 </li>
@@ -352,33 +376,17 @@
 </li>
         <li><a href="empirical.html#pMuTT.empirical.zacros.Zacros.from_dict">(pMuTT.empirical.zacros.Zacros class method)</a>
 </li>
-        <li><a href="eos.html#pMuTT.eos.IdealGasEOS.from_dict">(pMuTT.eos.IdealGasEOS class method)</a>
-</li>
-        <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.from_dict">(pMuTT.eos.vanDerWaalsEOS class method)</a>
-</li>
-        <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.from_dict">(pMuTT.mixture.cov.CovEffect class method)</a>
+        <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.from_dict">(pMuTT.mixture.cov.PiecewiseCovEffect class method)</a>
 </li>
         <li><a href="reactions.html#pMuTT.reaction.Reaction.from_dict">(pMuTT.reaction.Reaction class method)</a>
 </li>
         <li><a href="reactions.html#pMuTT.reaction.Reactions.from_dict">(pMuTT.reaction.Reactions class method)</a>
 </li>
-        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.from_dict">(pMuTT.reaction.bep.BEP class method)</a>
-</li>
         <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.from_dict">(pMuTT.reaction.phasediagram.PhaseDiagram class method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.EmptyMode.from_dict">(pMuTT.statmech.EmptyMode class method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.from_dict">(pMuTT.statmech.StatMech class method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.from_dict">(pMuTT.statmech.elec.IdealElec class method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.from_dict">(pMuTT.statmech.nucl.IdealNucl class method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.from_dict">(pMuTT.statmech.rot.RigidRotor class method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.from_dict">(pMuTT.statmech.trans.IdealTrans class method)</a>
-</li>
-        <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.from_dict">(pMuTT.statmech.vib.EinsteinVib class method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.from_dict">(pMuTT.statmech.lsr.LSR class method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.HarmonicVib.from_dict">(pMuTT.statmech.vib.HarmonicVib class method)</a>
 </li>
@@ -393,15 +401,23 @@
         <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.from_statmech">(pMuTT.empirical.shomate.Shomate class method)</a>
 </li>
       </ul></li>
-      <li><a href="reactions.html#pMuTT.reaction.Reaction.from_string">from_string() (pMuTT.reaction.Reaction class method)</a>
+      <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.from_string">from_string() (pMuTT.reaction.ChemkinReaction class method)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.from_string">[1]</a>
+
+      <ul>
+        <li><a href="reactions.html#pMuTT.reaction.Reaction.from_string">(pMuTT.reaction.Reaction class method)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.G">G (pMuTT.statmech.ConstantMode attribute)</a>
+</li>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.gas_phase">gas_phase (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.gas_phase">[1]</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.gas_specie">gas_specie (pMuTT.statmech.lsr.LSR attribute)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.geometry">geometry (pMuTT.statmech.rot.RigidRotor attribute)</a>
 </li>
@@ -430,15 +446,19 @@
       <ul>
         <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_CpoR">(pMuTT.empirical.shomate.Shomate method)</a>
 </li>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_CpoR">(pMuTT.statmech.ConstantMode method)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_CpoR">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_CpoR">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_CpoR">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_CpoR">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_CpoR">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_CpoR">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_CpoR">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_CpoR">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_CpoR">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_CpoR">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -457,16 +477,20 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_Cv_state">get_Cv_state() (pMuTT.reaction.Reaction method)</a>
 </li>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_CvoR">get_CvoR() (pMuTT.statmech.elec.IdealElec method)</a>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_CvoR">get_CvoR() (pMuTT.statmech.ConstantMode method)</a>
 
       <ul>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_CvoR">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_CvoR">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_CvoR">(pMuTT.statmech.elec.GroundStateElec method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_CvoR">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_CvoR">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_CvoR">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_CvoR">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_CvoR">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_CvoR">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -521,7 +545,13 @@
 </li>
       <li><a href="statmech.html#pMuTT.statmech.StatMech.get_E">get_E() (pMuTT.statmech.StatMech method)</a>
 </li>
-      <li><a href="reactions.html#pMuTT.reaction.Reaction.get_E_act">get_E_act() (pMuTT.reaction.Reaction method)</a>
+      <li><a href="reactions.html#pMuTT.reaction.bep.BEP.get_E_act">get_E_act() (pMuTT.reaction.bep.BEP method)</a>
+
+      <ul>
+        <li><a href="reactions.html#pMuTT.reaction.Reaction.get_E_act">(pMuTT.reaction.Reaction method)</a>
+</li>
+      </ul></li>
+      <li><a href="reactions.html#pMuTT.reaction.Reactions.get_E_span">get_E_span() (pMuTT.reaction.Reactions method)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_E_state">get_E_state() (pMuTT.reaction.Reaction method)</a>
 </li>
@@ -541,18 +571,24 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_F_state">get_F_state() (pMuTT.reaction.Reaction method)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.get_FoRT">get_FoRT() (pMuTT.mixture.cov.CovEffect method)</a>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.get_FoRT">get_FoRT() (pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
 
       <ul>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_FoRT">(pMuTT.statmech.ConstantMode method)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_FoRT">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_FoRT">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_FoRT">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_FoRT">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.get_FoRT">(pMuTT.statmech.lsr.LSR method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_FoRT">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_FoRT">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_FoRT">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_FoRT">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_FoRT">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_FoRT">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -582,17 +618,25 @@
       <ul>
         <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_GoRT">(pMuTT.empirical.shomate.Shomate method)</a>
 </li>
-        <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.get_GoRT">(pMuTT.mixture.cov.CovEffect method)</a>
+        <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.get_GoRT">(pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
+</li>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.get_GoRT">(pMuTT.reaction.bep.BEP method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_GoRT">(pMuTT.statmech.ConstantMode method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_GoRT">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_GoRT">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_GoRT">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_GoRT">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.get_GoRT">(pMuTT.statmech.lsr.LSR method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_GoRT">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_GoRT">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_GoRT">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_GoRT">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_GoRT">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_GoRT">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -630,19 +674,29 @@
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.get_HoRT">get_HoRT() (pMuTT.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pMuTT.empirical.references.References.get_HoRT">(pMuTT.empirical.references.References method)</a>
+</li>
         <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_HoRT">(pMuTT.empirical.shomate.Shomate method)</a>
 </li>
-        <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.get_HoRT">(pMuTT.mixture.cov.CovEffect method)</a>
+        <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.get_HoRT">(pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
+</li>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.get_HoRT">(pMuTT.reaction.bep.BEP method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_HoRT">(pMuTT.statmech.ConstantMode method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_HoRT">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_HoRT">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_HoRT">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_HoRT">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.get_HoRT">(pMuTT.statmech.lsr.LSR method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_HoRT">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_HoRT">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_HoRT">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_HoRT">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_HoRT">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_HoRT">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -657,8 +711,6 @@
         <li><a href="reactions.html#pMuTT.reaction.Reaction.get_HoRT_act">(pMuTT.reaction.Reaction method)</a>
 </li>
       </ul></li>
-      <li><a href="empirical.html#pMuTT.empirical.references.References.get_HoRT_offset">get_HoRT_offset() (pMuTT.empirical.references.References method)</a>
-</li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_HoRT_state">get_HoRT_state() (pMuTT.reaction.Reaction method)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_Keq">get_Keq() (pMuTT.reaction.Reaction method)</a>
@@ -677,16 +729,20 @@
       </ul></li>
       <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.get_Pc">get_Pc() (pMuTT.eos.vanDerWaalsEOS method)</a>
 </li>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_q">get_q() (pMuTT.statmech.elec.IdealElec method)</a>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_q">get_q() (pMuTT.statmech.ConstantMode method)</a>
 
       <ul>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_q">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_q">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_q">(pMuTT.statmech.elec.GroundStateElec method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_q">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_q">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_q">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_q">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_q">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_q">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -718,15 +774,23 @@
       <ul>
         <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate.get_SoR">(pMuTT.empirical.shomate.Shomate method)</a>
 </li>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.get_SoR">(pMuTT.reaction.bep.BEP method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_SoR">(pMuTT.statmech.ConstantMode method)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_SoR">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_SoR">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_SoR">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_SoR">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.get_SoR">(pMuTT.statmech.lsr.LSR method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_SoR">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_SoR">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_SoR">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_SoR">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_SoR">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_SoR">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -761,18 +825,26 @@
 </li>
       <li><a href="reactions.html#pMuTT.reaction.Reaction.get_U_state">get_U_state() (pMuTT.reaction.Reaction method)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.get_UoRT">get_UoRT() (pMuTT.mixture.cov.CovEffect method)</a>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.get_UoRT">get_UoRT() (pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
 
       <ul>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.get_UoRT">(pMuTT.reaction.bep.BEP method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.get_UoRT">(pMuTT.statmech.ConstantMode method)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.get_UoRT">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.get_UoRT">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.get_UoRT">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.get_UoRT">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.get_UoRT">(pMuTT.statmech.lsr.LSR method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.nucl.EmptyNucl.get_UoRT">(pMuTT.statmech.nucl.EmptyNucl method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.get_UoRT">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_UoRT">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_UoRT">(pMuTT.statmech.trans.FreeTrans method)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_UoRT">(pMuTT.statmech.vib.DebyeVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_UoRT">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -790,27 +862,33 @@
       <ul>
         <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.get_V">(pMuTT.eos.vanDerWaalsEOS method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.get_V">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.get_V">(pMuTT.statmech.trans.FreeTrans method)</a>
 </li>
       </ul></li>
       <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.get_Vc">get_Vc() (pMuTT.eos.vanDerWaalsEOS method)</a>
 </li>
       <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.get_Vm">get_Vm() (pMuTT.eos.vanDerWaalsEOS method)</a>
 </li>
-      <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_ZPE">get_ZPE() (pMuTT.statmech.vib.EinsteinVib method)</a>
+      <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.get_ZPE">get_ZPE() (pMuTT.statmech.vib.DebyeVib method)</a>
 
       <ul>
+        <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.get_ZPE">(pMuTT.statmech.vib.EinsteinVib method)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.vib.HarmonicVib.get_ZPE">(pMuTT.statmech.vib.HarmonicVib method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib.get_ZPE">(pMuTT.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
+      <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec">GroundStateElec (class in pMuTT.statmech.elec)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.H">H (pMuTT.statmech.ConstantMode attribute)</a>
+</li>
       <li><a href="constants.html#pMuTT.constants.h">h() (in module pMuTT.constants)</a>
 </li>
   </ul></td>
@@ -825,13 +903,7 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec">IdealElec (class in pMuTT.statmech.elec)</a>
-</li>
       <li><a href="eos.html#pMuTT.eos.IdealGasEOS">IdealGasEOS (class in pMuTT.eos)</a>
-</li>
-      <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl">IdealNucl (class in pMuTT.statmech.nucl)</a>
-</li>
-      <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans">IdealTrans (class in pMuTT.statmech.trans)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.vib.HarmonicVib.imaginary_substitute">imaginary_substitute (pMuTT.statmech.vib.HarmonicVib attribute)</a>
 
@@ -839,17 +911,25 @@
         <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib.imaginary_substitute">(pMuTT.statmech.vib.QRRHOVib attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#pMuTT.constants.inertia_to_temp">inertia_to_temp() (in module pMuTT.constants)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.insert">insert() (pMuTT.mixture.cov.CovEffect method)</a>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.insert">insert() (pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
 </li>
-      <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.interaction_energy">interaction_energy (pMuTT.statmech.vib.EinsteinVib attribute)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.vib.DebyeVib.interaction_energy">interaction_energy (pMuTT.statmech.vib.DebyeVib attribute)</a>
+
+      <ul>
+        <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.interaction_energy">(pMuTT.statmech.vib.EinsteinVib attribute)</a>
 </li>
+      </ul></li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.intercept">intercept (pMuTT.reaction.bep.BEP attribute)</a>
+
+      <ul>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.intercept">(pMuTT.statmech.lsr.LSR attribute)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.intervals">intervals (pMuTT.mixture.cov.CovEffect attribute)</a>
+      </ul></li>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.intervals">intervals (pMuTT.mixture.cov.PiecewiseCovEffect attribute)</a>
 </li>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.is_adsorption">is_adsorption (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.is_adsorption">[1]</a>
 </li>
@@ -872,11 +952,15 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.kwargs">kwargs (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.kwargs">[1]</a>
-
-      <ul>
-        <li><a href="reactions.html#pMuTT.reaction.Reaction.kwargs">(pMuTT.reaction.Reaction attribute)</a>
 </li>
-      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.lsr.LSR">LSR (class in pMuTT.statmech.lsr)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -889,13 +973,13 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.mix_models">mix_models (pMuTT.empirical.EmpiricalBase attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.misc_models">misc_models (pMuTT.empirical.EmpiricalBase attribute)</a>
 
       <ul>
-        <li><a href="statmech.html#pMuTT.statmech.StatMech.mix_models">(pMuTT.statmech.StatMech attribute)</a>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.misc_models">(pMuTT.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
-      <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.molecular_weight">molecular_weight (pMuTT.statmech.trans.IdealTrans attribute)</a>
+      <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.molecular_weight">molecular_weight (pMuTT.statmech.trans.FreeTrans attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -903,7 +987,7 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.n_degrees">n_degrees (pMuTT.statmech.trans.IdealTrans attribute)</a>
+      <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.n_degrees">n_degrees (pMuTT.statmech.trans.FreeTrans attribute)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa.n_sites">n_sites (pMuTT.empirical.nasa.Nasa attribute)</a>
 </li>
@@ -914,15 +998,17 @@
       <ul>
         <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.name">(pMuTT.empirical.EmpiricalBase attribute)</a>
 </li>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.name">(pMuTT.reaction.bep.BEP attribute)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.name">(pMuTT.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.name_i">name_i (pMuTT.mixture.cov.PiecewiseCovEffect attribute)</a>
+</li>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.name_j">name_j (pMuTT.mixture.cov.PiecewiseCovEffect attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.name_i">name_i (pMuTT.mixture.cov.CovEffect attribute)</a>
-</li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.name_j">name_j (pMuTT.mixture.cov.CovEffect attribute)</a>
-</li>
       <li><a href="empirical.html#pMuTT.empirical.nasa.Nasa">Nasa (class in pMuTT.empirical.nasa)</a>
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.norm_factors">norm_factors (pMuTT.reaction.phasediagram.PhaseDiagram attribute)</a>
@@ -930,7 +1016,15 @@
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.notes">notes (pMuTT.empirical.EmpiricalBase attribute)</a>
 
       <ul>
+        <li><a href="reactions.html#pMuTT.reaction.Reaction.notes">(pMuTT.reaction.Reaction attribute)</a>
+</li>
+        <li><a href="reactions.html#pMuTT.reaction.bep.BEP.notes">(pMuTT.reaction.bep.BEP attribute)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.ConstantMode.notes">(pMuTT.statmech.ConstantMode attribute)</a>
+</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.notes">(pMuTT.statmech.StatMech attribute)</a>
+</li>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.notes">(pMuTT.statmech.lsr.LSR attribute)</a>
 </li>
       </ul></li>
       <li><a href="statmech.html#pMuTT.statmech.StatMech.nucl_model">nucl_model (pMuTT.statmech.StatMech attribute)</a>
@@ -944,10 +1038,6 @@
       <li><a href="empirical.html#pMuTT.empirical.references.References.offset">offset (pMuTT.empirical.references.References attribute)</a>
 </li>
   </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pMuTT.empirical.references.References.optional">optional (pMuTT.empirical.references.References attribute)</a>
-</li>
-  </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
@@ -958,6 +1048,8 @@
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.phase">phase (pMuTT.empirical.EmpiricalBase attribute)</a>
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram">PhaseDiagram (class in pMuTT.reaction.phasediagram)</a>
+</li>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect">PiecewiseCovEffect (class in pMuTT.mixture.cov)</a>
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.plot_1D">plot_1D() (pMuTT.reaction.phasediagram.PhaseDiagram method)</a>
 </li>
@@ -975,10 +1067,10 @@
 </li>
       <li><a href="chemkin.html#module-pMuTT.io.chemkin">pMuTT.io.chemkin (module)</a>, <a href="io.html#module-pMuTT.io.chemkin">[1]</a>
 </li>
-      <li><a href="io.html#module-pMuTT.io.gaussian">pMuTT.io.gaussian (module)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="io.html#module-pMuTT.io.gaussian">pMuTT.io.gaussian (module)</a>
+</li>
       <li><a href="io.html#module-pMuTT.io.json">pMuTT.io.json (module)</a>
 </li>
       <li><a href="io.html#module-pMuTT.io.thermdat">pMuTT.io.thermdat (module)</a>
@@ -987,9 +1079,9 @@
 </li>
       <li><a href="io.html#pMuTT.io.json.pMuTTEncoder">pMuTTEncoder (class in pMuTT.io.json)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.pop">pop() (pMuTT.mixture.cov.CovEffect method)</a>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.pop">pop() (pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
 </li>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.potentialenergy">potentialenergy (pMuTT.statmech.elec.IdealElec attribute)</a>
+      <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.potentialenergy">potentialenergy (pMuTT.statmech.elec.GroundStateElec attribute)</a>
 </li>
       <li><a href="constants.html#pMuTT.constants.prefixes">prefixes (in module pMuTT.constants)</a>
 </li>
@@ -1011,6 +1103,10 @@
 <h2 id="Q">Q</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.q">q (pMuTT.statmech.ConstantMode attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pMuTT.statmech.vib.QRRHOVib">QRRHOVib (class in pMuTT.statmech.vib)</a>
 </li>
   </ul></td>
@@ -1028,7 +1124,11 @@
       <li><a href="reactions.html#pMuTT.reaction.Reaction">Reaction (class in pMuTT.reaction)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.reaction">reaction (pMuTT.reaction.bep.BEP attribute)</a>
+
+      <ul>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.reaction">(pMuTT.statmech.lsr.LSR attribute)</a>
 </li>
+      </ul></li>
       <li><a href="reactions.html#pMuTT.reaction.Reactions">Reactions (class in pMuTT.reaction)</a>
 </li>
       <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.reactions">reactions (pMuTT.reaction.phasediagram.PhaseDiagram attribute)</a>
@@ -1045,10 +1145,10 @@
 </li>
       <li><a href="io.html#pMuTT.io.gaussian.read_molecular_mass">read_molecular_mass() (in module pMuTT.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pMuTT.io.gaussian.read_pattern">read_pattern() (in module pMuTT.io.gaussian)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="io.html#pMuTT.io.gaussian.read_pattern">read_pattern() (in module pMuTT.io.gaussian)</a>
+</li>
       <li><a href="chemkin.html#pMuTT.io.chemkin.read_reactions">read_reactions() (in module pMuTT.io.chemkin)</a>, <a href="io.html#pMuTT.io.chemkin.read_reactions">[1]</a>
 </li>
       <li><a href="io.html#pMuTT.io.gaussian.read_rot_symmetry_num">read_rot_symmetry_num() (in module pMuTT.io.gaussian)</a>
@@ -1063,10 +1163,10 @@
 </li>
       <li><a href="empirical.html#pMuTT.empirical.references.References">References (class in pMuTT.empirical.references)</a>
 </li>
-      <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.references">references (pMuTT.empirical.EmpiricalBase attribute)</a>
+      <li><a href="empirical.html#pMuTT.empirical.references.References.references">references (pMuTT.empirical.references.References attribute)</a>
 
       <ul>
-        <li><a href="empirical.html#pMuTT.empirical.references.References.references">(pMuTT.empirical.references.References attribute)</a>
+        <li><a href="statmech.html#pMuTT.statmech.StatMech.references">(pMuTT.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
       <li><a href="io.html#pMuTT.io.json.remove_class">remove_class() (in module pMuTT.io.json)</a>
@@ -1083,9 +1183,13 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.S">S (pMuTT.statmech.ConstantMode attribute)</a>
+</li>
       <li><a href="io.html#pMuTT.io.excel.set_atoms">set_atoms() (in module pMuTT.io.excel)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.set_descriptor">set_descriptor() (pMuTT.reaction.bep.BEP method)</a>
+</li>
+      <li><a href="io.html#pMuTT.io.excel.set_elec_model">set_elec_model() (in module pMuTT.io.excel)</a>
 </li>
       <li><a href="io.html#pMuTT.io.excel.set_element">set_element() (in module pMuTT.io.excel)</a>
 </li>
@@ -1095,23 +1199,35 @@
 </li>
       <li><a href="io.html#pMuTT.io.excel.set_nasa_a_low">set_nasa_a_low() (in module pMuTT.io.excel)</a>
 </li>
+      <li><a href="io.html#pMuTT.io.excel.set_nucl_model">set_nucl_model() (in module pMuTT.io.excel)</a>
+</li>
+      <li><a href="io.html#pMuTT.io.excel.set_rot_model">set_rot_model() (in module pMuTT.io.excel)</a>
+</li>
       <li><a href="io.html#pMuTT.io.excel.set_rot_temperatures">set_rot_temperatures() (in module pMuTT.io.excel)</a>
 </li>
       <li><a href="io.html#pMuTT.io.excel.set_statmech_model">set_statmech_model() (in module pMuTT.io.excel)</a>
 </li>
+      <li><a href="io.html#pMuTT.io.excel.set_trans_model">set_trans_model() (in module pMuTT.io.excel)</a>
+</li>
+      <li><a href="io.html#pMuTT.io.excel.set_vib_model">set_vib_model() (in module pMuTT.io.excel)</a>
+</li>
       <li><a href="io.html#pMuTT.io.excel.set_vib_wavenumbers">set_vib_wavenumbers() (in module pMuTT.io.excel)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pMuTT.io.vasp.set_vib_wavenumbers_from_outcar">set_vib_wavenumbers_from_outcar() (in module pMuTT.io.vasp)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.shomate.Shomate">Shomate (class in pMuTT.empirical.shomate)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="chemkin.html#pMuTT.chemkin.CatSite.site_density">site_density (pMuTT.chemkin.CatSite attribute)</a>
 </li>
       <li><a href="reactions.html#pMuTT.reaction.bep.BEP.slope">slope (pMuTT.reaction.bep.BEP attribute)</a>
+
+      <ul>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.slope">(pMuTT.statmech.lsr.LSR attribute)</a>
 </li>
-      <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.slopes">slopes (pMuTT.mixture.cov.CovEffect attribute)</a>
+      </ul></li>
+      <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.slopes">slopes (pMuTT.mixture.cov.PiecewiseCovEffect attribute)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.smiles">smiles (pMuTT.empirical.EmpiricalBase attribute)</a>
 
@@ -1119,13 +1235,15 @@
         <li><a href="statmech.html#pMuTT.statmech.StatMech.smiles">(pMuTT.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
-      <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.spin">spin (pMuTT.statmech.elec.IdealElec attribute)</a>
+      <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.spin">spin (pMuTT.statmech.elec.GroundStateElec attribute)</a>
 </li>
       <li><a href="statmech.html#pMuTT.statmech.StatMech">StatMech (class in pMuTT.statmech)</a>
 </li>
       <li><a href="empirical.html#pMuTT.empirical.EmpiricalBase.statmech_model">statmech_model (pMuTT.empirical.EmpiricalBase attribute)</a>
 </li>
       <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.sticking_coeff">sticking_coeff (pMuTT.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.sticking_coeff">[1]</a>
+</li>
+      <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.surf_specie">surf_specie (pMuTT.statmech.lsr.LSR attribute)</a>
 </li>
       <li><a href="constants.html#pMuTT.constants.symmetry_dict">symmetry_dict (in module pMuTT.constants)</a>
 </li>
@@ -1180,11 +1298,7 @@
 </li>
         <li><a href="empirical.html#pMuTT.empirical.zacros.Zacros.to_dict">(pMuTT.empirical.zacros.Zacros method)</a>
 </li>
-        <li><a href="eos.html#pMuTT.eos.IdealGasEOS.to_dict">(pMuTT.eos.IdealGasEOS method)</a>
-</li>
-        <li><a href="eos.html#pMuTT.eos.vanDerWaalsEOS.to_dict">(pMuTT.eos.vanDerWaalsEOS method)</a>
-</li>
-        <li><a href="mixture.html#pMuTT.mixture.cov.CovEffect.to_dict">(pMuTT.mixture.cov.CovEffect method)</a>
+        <li><a href="mixture.html#pMuTT.mixture.cov.PiecewiseCovEffect.to_dict">(pMuTT.mixture.cov.PiecewiseCovEffect method)</a>
 </li>
         <li><a href="chemkin.html#pMuTT.reaction.ChemkinReaction.to_dict">(pMuTT.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pMuTT.reaction.ChemkinReaction.to_dict">[1]</a>
 </li>
@@ -1196,17 +1310,15 @@
 </li>
         <li><a href="phase_diagram.html#pMuTT.reaction.phasediagram.PhaseDiagram.to_dict">(pMuTT.reaction.phasediagram.PhaseDiagram method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.EmptyMode.to_dict">(pMuTT.statmech.EmptyMode method)</a>
-</li>
         <li><a href="statmech.html#pMuTT.statmech.StatMech.to_dict">(pMuTT.statmech.StatMech method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.elec.IdealElec.to_dict">(pMuTT.statmech.elec.IdealElec method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.elec.GroundStateElec.to_dict">(pMuTT.statmech.elec.GroundStateElec method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.nucl.IdealNucl.to_dict">(pMuTT.statmech.nucl.IdealNucl method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.lsr.LSR.to_dict">(pMuTT.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.rot.RigidRotor.to_dict">(pMuTT.statmech.rot.RigidRotor method)</a>
 </li>
-        <li><a href="statmech.html#pMuTT.statmech.trans.IdealTrans.to_dict">(pMuTT.statmech.trans.IdealTrans method)</a>
+        <li><a href="statmech.html#pMuTT.statmech.trans.FreeTrans.to_dict">(pMuTT.statmech.trans.FreeTrans method)</a>
 </li>
         <li><a href="statmech.html#pMuTT.statmech.vib.EinsteinVib.to_dict">(pMuTT.statmech.vib.EinsteinVib method)</a>
 </li>
@@ -1226,6 +1338,14 @@
       <li><a href="reactions.html#pMuTT.reaction.Reaction.transition_state_stoich">transition_state_stoich (pMuTT.reaction.Reaction attribute)</a>
 </li>
       <li><a href="io.html#pMuTT.io.json.type_to_class">type_to_class() (in module pMuTT.io.json)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="statmech.html#pMuTT.statmech.ConstantMode.U">U (pMuTT.statmech.ConstantMode attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1298,7 +1418,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

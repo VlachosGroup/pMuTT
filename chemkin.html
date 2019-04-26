@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Chemkin &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Chemkin &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -252,24 +252,6 @@ be supported in the commercial version.</p>
 </table>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="pMuTT.chemkin.CatSite.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.chemkin.CatSite.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recreate an object from the JSON representation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – JSON representation</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>EmpiricalBase</strong></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">EmpiricalBase object</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="pMuTT.chemkin.CatSite.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.chemkin.CatSite.to_dict" title="Permalink to this definition">¶</a></dt>
@@ -359,6 +341,45 @@ state and products</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">keyword arguments</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pMuTT.reaction.ChemkinReaction.from_string">
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em>, <em>beta=1</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a reaction object using the reaction string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reaction_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Reaction string.</li>
+<li><strong>species</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dictionary using the names as keys. If you have a list of
+species, use pMuTT.pMuTT_list_to_dict to make a dict.</li>
+<li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate species. Leading and trailing spaces
+will be trimmed. Default is ‘+’</li>
+<li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate states of the reaction. Leading and
+trailing spaces will be trimmed. Default is ‘=’</li>
+<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="reactions.html#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+object, the descriptor can be set using this parameter. See
+<a class="reference internal" href="reactions.html#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+descriptors</li>
+<li><strong>notes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Other notes such as the source of the reaction. Default is None</li>
+<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Power to raise the temperature in the rate expression. Default is 1</li>
+<li><strong>is_adsorption</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the reaction represents an adsorption. Default is False</li>
+<li><strong>sticking_coeff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True</li>
+<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – True if the reaction has only gas-phase species. This attribute is
+determined based on the reactants and products</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ChemkinReaction</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ChemkinReaction object</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -590,19 +611,17 @@ be written to this file</li>
 
 <dl class="function">
 <dt id="pMuTT.io.chemkin.write_surf">
-<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>sden_operation='min'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pMuTT.io.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>reactions</em>, <em>sden_operation='min'</em>, <em>filename='surf.inp'</em>, <em>T=298.15</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.io.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the surf.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pMuTT.empirical.nasa.Nasa" title="pMuTT.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – Surface used in Chemkin mechanism. If gas-phase species are
-present, they will be ignored</li>
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
-<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
 <li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pMuTT.reaction.ChemkinReaction" title="pMuTT.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
 <li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
 Default is ‘+’</li>
 <li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate reaction sides. Default is ‘=’</li>
@@ -672,7 +691,7 @@ scientific notation rounded to 3 decimal places)</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

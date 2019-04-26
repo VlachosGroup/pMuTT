@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Reactions &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -402,48 +402,9 @@ We will store the species in a dictionary for code clarity later on.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H2&#39;: Nasa object for Name: H2
-        phase: G
-        elements: {&#39;H&#39;: 2}
-        references: None
-        notes: TPIS78
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 2.34433112e+00  7.98052075e-03 -1.94781510e-05  2.01572094e-08
- -7.37611761e-12 -9.17935173e+02  6.83010238e-01]
-        a_high: [ 3.33727920e+00 -4.94024731e-05  4.99456778e-07 -1.79566394e-10
-  2.00255376e-14 -9.50158922e+02 -3.20502331e+00],
- &#39;H2O&#39;: Nasa object for Name: H2O
-        phase: G
-        elements: {&#39;H&#39;: 2, &#39;O&#39;: 1}
-        references: None
-        notes: L 8/89
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 4.19864056e+00 -2.03643410e-03  6.52040211e-06 -5.48797062e-09
-  1.77197817e-12 -3.02937267e+04 -8.49032208e-01]
-        a_high: [ 3.03399249e+00  2.17691804e-03 -1.64072518e-07 -9.70419870e-11
-  1.68200992e-14 -3.00042971e+04  4.96677010e+00],
- &#39;O2&#39;: Nasa object for Name: O2
-        phase: G
-        elements: {&#39;O&#39;: 2}
-        references: None
-        notes: TPIS89
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 3.78245636e+00 -2.99673416e-03  9.84730201e-06 -9.68129509e-09
-  3.24372837e-12 -1.06394356e+03  3.65767573e+00]
-        a_high: [ 3.28253784e+00  1.48308754e-03 -7.57966669e-07  2.09470555e-10
- -2.16717794e-14 -1.08845772e+03  5.45323129e+00]}
+{&#39;H2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF7B77710&gt;,
+ &#39;H2O&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF7BA4390&gt;,
+ &#39;O2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF0F46C18&gt;}
 </pre></div></div>
 </div>
 <p>To calculate transition state properties, we will need to represent the
@@ -481,62 +442,10 @@ parameter arbitrarily to give it a higher enthalpy.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H2&#39;: Nasa object for Name: H2
-        phase: G
-        elements: {&#39;H&#39;: 2}
-        references: None
-        notes: TPIS78
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 2.34433112e+00  7.98052075e-03 -1.94781510e-05  2.01572094e-08
- -7.37611761e-12 -9.17935173e+02  6.83010238e-01]
-        a_high: [ 3.33727920e+00 -4.94024731e-05  4.99456778e-07 -1.79566394e-10
-  2.00255376e-14 -9.50158922e+02 -3.20502331e+00],
- &#39;H2O&#39;: Nasa object for Name: H2O
-        phase: G
-        elements: {&#39;H&#39;: 2, &#39;O&#39;: 1}
-        references: None
-        notes: L 8/89
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 4.19864056e+00 -2.03643410e-03  6.52040211e-06 -5.48797062e-09
-  1.77197817e-12 -3.02937267e+04 -8.49032208e-01]
-        a_high: [ 3.03399249e+00  2.17691804e-03 -1.64072518e-07 -9.70419870e-11
-  1.68200992e-14 -3.00042971e+04  4.96677010e+00],
- &#39;H2O_TS&#39;: Nasa object for Name: H2O_TS
-        phase: G
-        elements: {&#39;H&#39;: 2, &#39;O&#39;: 1}
-        references: None
-        notes: L 8/89
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 4.19864056e+00 -2.03643410e-03  6.52040211e-06 -5.48797062e-09
-  1.77197817e-12 -3.02437267e+04 -8.49032208e-01]
-        a_high: [ 3.03399249e+00  2.17691804e-03 -1.64072518e-07 -9.70419870e-11
-  1.68200992e-14 -2.99542971e+04  4.96677010e+00],
- &#39;O2&#39;: Nasa object for Name: O2
-        phase: G
-        elements: {&#39;O&#39;: 2}
-        references: None
-        notes: TPIS89
-        statmech_model: None
-        mix_models: None
-        T_low: 200.0
-        T_mid: 1000.0
-        T_high: 3500.0
-        a_low: [ 3.78245636e+00 -2.99673416e-03  9.84730201e-06 -9.68129509e-09
-  3.24372837e-12 -1.06394356e+03  3.65767573e+00]
-        a_high: [ 3.28253784e+00  1.48308754e-03 -7.57966669e-07  2.09470555e-10
- -2.16717794e-14 -1.08845772e+03  5.45323129e+00]}
+{&#39;H2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF7B77710&gt;,
+ &#39;H2O&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF7BA4390&gt;,
+ &#39;H2O_TS&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF7BA4A90&gt;,
+ &#39;O2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x0000021DF0F46C18&gt;}
 </pre></div></div>
 </div>
 </div>
@@ -565,7 +474,7 @@ reactants, transition states, products and their stoichiometries.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Creating Reaction object manually: H2+ 0.50O2=H2O_TS=H2O
+Creating Reaction object manually: H2+0.50O2=H2O_TS=H2O
 </pre></div></div>
 </div>
 </div>
@@ -579,7 +488,7 @@ use <code class="docutils literal notranslate"><span class="pre">.from_string()<
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;H2 + 0.5O2 = H2O&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">)</span>
+<span></span><span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;H2 + 0.5O2 = H2O_TS = H2O&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">)</span>
 
 <span class="c1"># See that you get the same stoichiometry as before</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating Reaction object using default string notation: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rxn</span><span class="p">))</span>
@@ -599,8 +508,8 @@ use <code class="docutils literal notranslate"><span class="pre">.from_string()<
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Creating Reaction object using default string notation: H2+ 0.50O2=H2O_TS=H2O
-Creating Reaction object using custom string notation: H2+ 0.50O2=H2O_TS=H2O
+Creating Reaction object using default string notation: H2+0.50O2=H2O_TS=H2O
+Creating Reaction object using custom string notation: H2+0.50O2=H2O_TS=H2O
 </pre></div></div>
 </div>
 </div>
@@ -696,15 +605,15 @@ species, take the printed value with a grain of salt</p>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Forward properties
-Enthalpy of activation: -241.41 kJ/mol
+Enthalpy of activation: -241.82 kJ/mol
 Activation Energy: -241.41 kJ/mol
-Pre-exponential factor: 1.331e+11 1/s
+Pre-exponential factor: 2.970e+10 1/s
 
 
 Reverse properties
-Enthalpy of activation: 0.42 kJ/mol
+Enthalpy of activation: 241.82 kJ/mol
 Activation Energy: 0.42 kJ/mol
-Pre-exponential factor: 1.688e+13 1/s
+Pre-exponential factor: 6.209e+12 1/s
 </pre></div></div>
 </div>
 </div>
@@ -721,18 +630,12 @@ relationship.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pMuTT.reaction.bep</span> <span class="k">import</span> <span class="n">BEP</span>
 
-<span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;H2 + 0.5O2 = H2O_TS = H2O&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">,</span>
-                           <span class="n">descriptor</span><span class="o">=</span><span class="s1">&#39;delta&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">intercept</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span>
-                           <span class="n">bep</span><span class="o">=</span><span class="n">BEP</span><span class="p">)</span>
+<span class="n">species_dict</span><span class="p">[</span><span class="s1">&#39;BEP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BEP</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;BEP&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">intercept</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">descriptor</span><span class="o">=</span><span class="s1">&#39;delta_H&#39;</span><span class="p">)</span>
+<span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;H2 + 0.5O2 = BEP = H2O&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">)</span>
+<span class="n">Ea_BEP</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_E_act</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
 
-<span class="n">Ea_TS</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_E_act</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ts&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
-<span class="n">Ea_BEP</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_E_act</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bep&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
-<span class="n">Ea_any</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_E_act</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Activation energies using different methods&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transition State: </span><span class="si">{:.2f}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ea_TS</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BEP: </span><span class="si">{:.2f}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ea_BEP</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Any: </span><span class="si">{:.2f}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ea_any</span><span class="p">))</span>
+
 </pre></div>
 </div>
 </div>
@@ -741,14 +644,9 @@ relationship.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Activation energies using different methods
-Transition State: -241.41 kJ/mol
-BEP: 199.41 kJ/mol
-Any: -241.41 kJ/mol
+BEP: 370.04 kJ/mol
 </pre></div></div>
 </div>
-<p>Note that setting method to ‘any’ uses the transition state
-preferentially.</p>
 </div>
 <div class="section" id="Saving-and-Loading-our-Reaction-as-JSON">
 <h2>Saving and Loading our Reaction as JSON<a class="headerlink" href="#Saving-and-Loading-our-Reaction-as-JSON" title="Permalink to this headline">¶</a></h2>
@@ -786,9 +684,9 @@ read from JSON format.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-H2+ 0.50O2=H2O_TS=H2O
+H2+0.50O2=BEP=H2O
 Delta H: -241.82 kJ/mol
-Activation Energy: -241.41 kJ/mol
+Activation Energy: 370.04 kJ/mol
 </pre></div></div>
 </div>
 <p>Here is the resulting JSON file.</p>
@@ -797,14 +695,16 @@ Activation Energy: -241.41 kJ/mol
  <span class="s2">&quot;reactants&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nasa&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2&quot;</span><span class="p">,</span>
    <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mi">2</span>
    <span class="p">},</span>
    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;TPIS78&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
    <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
    <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="mf">2.34433112</span><span class="p">,</span>
     <span class="mf">0.00798052075</span><span class="p">,</span>
@@ -825,18 +725,22 @@ Activation Energy: -241.41 kJ/mol
    <span class="p">],</span>
    <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
    <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span><span class="p">,</span>
+   <span class="s2">&quot;cat_site&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;n_sites&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="p">{</span>
    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nasa&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span>
    <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">2</span>
    <span class="p">},</span>
    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;TPIS89&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
    <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
    <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="mf">3.78245636</span><span class="p">,</span>
     <span class="o">-</span><span class="mf">0.00299673416</span><span class="p">,</span>
@@ -857,7 +761,9 @@ Activation Energy: -241.41 kJ/mol
    <span class="p">],</span>
    <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
    <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span><span class="p">,</span>
+   <span class="s2">&quot;cat_site&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;n_sites&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">}</span>
  <span class="p">],</span>
  <span class="s2">&quot;reactants_stoich&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -867,6 +773,7 @@ Activation Energy: -241.41 kJ/mol
  <span class="s2">&quot;products&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nasa&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2O&quot;</span><span class="p">,</span>
    <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
    <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -874,8 +781,9 @@ Activation Energy: -241.41 kJ/mol
     <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">1</span>
    <span class="p">},</span>
    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;L 8/89&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
    <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
    <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="mf">4.19864056</span><span class="p">,</span>
     <span class="o">-</span><span class="mf">0.0020364341</span><span class="p">,</span>
@@ -896,7 +804,9 @@ Activation Energy: -241.41 kJ/mol
    <span class="p">],</span>
    <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
    <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span><span class="p">,</span>
+   <span class="s2">&quot;cat_site&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;n_sites&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">}</span>
  <span class="p">],</span>
  <span class="s2">&quot;products_stoich&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -904,48 +814,17 @@ Activation Energy: -241.41 kJ/mol
  <span class="p">],</span>
  <span class="s2">&quot;transition_state&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
-   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2O&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">1</span>
-   <span class="p">},</span>
-   <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;L 8/89&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="mf">4.19864056</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">0.0020364341</span><span class="p">,</span>
-    <span class="mf">6.52040211e-06</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">5.48797062e-09</span><span class="p">,</span>
-    <span class="mf">1.77197817e-12</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">30243.7267</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">0.849032208</span>
-   <span class="p">],</span>
-   <span class="s2">&quot;a_high&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="mf">3.03399249</span><span class="p">,</span>
-    <span class="mf">0.00217691804</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">1.64072518e-07</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">9.7041987e-11</span><span class="p">,</span>
-    <span class="mf">1.68200992e-14</span><span class="p">,</span>
-    <span class="o">-</span><span class="mf">29954.2971</span><span class="p">,</span>
-    <span class="mf">4.9667701</span>
-   <span class="p">],</span>
-   <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
-   <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-   <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.reaction.bep.BEP&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;BEP&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;slope&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+   <span class="s2">&quot;intercept&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+   <span class="s2">&quot;descriptor&quot;</span><span class="p">:</span> <span class="s2">&quot;delta_H&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">}</span>
  <span class="p">],</span>
  <span class="s2">&quot;transition_state_stoich&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="mf">1.0</span>
- <span class="p">],</span>
- <span class="s2">&quot;bep&quot;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.reaction.bep.BEP&#39;&gt;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;slope&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
-  <span class="s2">&quot;intercept&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
-  <span class="s2">&quot;descriptor&quot;</span><span class="p">:</span> <span class="s2">&quot;delta&quot;</span>
- <span class="p">}</span>
+ <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1012,7 +891,7 @@ Github</a>.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_reactions_reactions_21_0.png" src="../../_images/examples_jupyter_reactions_reactions_21_0.png" />
+<img alt="../../_images/examples_jupyter_reactions_reactions_20_0.png" src="../../_images/examples_jupyter_reactions_reactions_20_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1039,7 +918,7 @@ Github</a>.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>

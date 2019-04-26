@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Excel to Empirical &mdash; pMuTT 1.2.5 documentation</title>
+  <title>Excel to Empirical &mdash; pMuTT 1.2.6 documentation</title>
   
 
   
@@ -2163,7 +2163,7 @@ c</td>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[{&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+[{&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 0},
   &#39;name&#39;: &#39;H2_cus(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -2177,7 +2177,7 @@ c</td>
                       537.019612,
                       469.648212,
                       444.089371]},
- {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+ {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 1},
   &#39;name&#39;: &#39;H2Obr(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -2194,7 +2194,7 @@ c</td>
                       204.875732,
                       162.988907,
                       113.146516]},
- {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+ {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 1},
   &#39;name&#39;: &#39;H2Ocus(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -2211,7 +2211,7 @@ c</td>
                       204.875732,
                       162.988907,
                       113.146516]},
- {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+ {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 1, &#39;O&#39;: 0},
   &#39;name&#39;: &#39;H_cus(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -2220,7 +2220,7 @@ c</td>
   &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [1868.8092, 681.336865, 578.20889]},
- {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+ {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 1, &#39;O&#39;: 1},
   &#39;name&#39;: &#39;HObr(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -2234,7 +2234,7 @@ c</td>
                       418.298492,
                       374.446393,
                       204.720161]},
- {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+ {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 0, &#39;O&#39;: 1},
   &#39;name&#39;: &#39;Obr(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -2243,7 +2243,7 @@ c</td>
   &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [537.116485, 439.995941, 256.38412]},
- {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+ {&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 3, &#39;H&#39;: 8, &#39;O&#39;: 1},
   &#39;name&#39;: &#39;IPA(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -3393,7 +3393,7 @@ fields that are necessary for reference species.</p>
 [{&#39;HoRT_ref&#39;: -110.10779908717083,
   &#39;T_ref&#39;: 298,
   &#39;atoms&#39;: Atoms(symbols=&#39;H6C5O2&#39;, pbc=True, cell=[12.843615942469413, 9.254207587944354, 28.20143514534594]),
-  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 3, &#39;H&#39;: 8, &#39;O&#39;: 1},
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;IPA&#39;,
@@ -3411,7 +3411,7 @@ fields that are necessary for reference species.</p>
   &#39;spin&#39;: 0,
   &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 1,
-  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.IdealTrans&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3695.6947,
                       3058.1512,
@@ -3446,7 +3446,7 @@ fields that are necessary for reference species.</p>
  {&#39;HoRT_ref&#39;: -97.60604333597571,
   &#39;T_ref&#39;: 298,
   &#39;atoms&#39;: Atoms(symbols=&#39;OH2&#39;, pbc=True, cell=[20.0, 21.526478, 20.596309]),
-  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 1},
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;H2O&#39;,
@@ -3464,13 +3464,13 @@ fields that are necessary for reference species.</p>
   &#39;spin&#39;: 0,
   &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2,
-  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.IdealTrans&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3825.434, 3710.2642, 1582.432]},
  {&#39;HoRT_ref&#39;: 0.0,
   &#39;T_ref&#39;: 298,
   &#39;atoms&#39;: Atoms(symbols=&#39;H2&#39;, pbc=True, cell=[20.0, 20.0, 20.737166]),
-  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.IdealElec&#39;&gt;,
+  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 0},
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;H2&#39;,
@@ -3488,7 +3488,7 @@ fields that are necessary for reference species.</p>
   &#39;spin&#39;: 0,
   &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2,
-  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.IdealTrans&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [4306.1793]}]
 </pre></div></div>
@@ -3547,19 +3547,7 @@ from the data.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Nasa object for Name: H2_cus(S)
-        phase: S
-        elements: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 0}
-        references: &lt;pMuTT.empirical.references.References object at 0x0000023DAAA20978&gt;
-        notes: None
-        statmech_model: &lt;pMuTT.statmech.StatMech object at 0x0000023DAD14A208&gt;
-        T_low: 300.0
-        T_mid: 610.204081632653
-        T_high: 1100.0
-        a_low: [-2.37252750e+00  2.60714871e-02 -4.73583826e-05  4.61096590e-08
- -1.83624246e-11 -1.68126562e+03  8.63949434e+00]
-        a_high: [-1.32355622e-01  1.17210568e-02 -1.21067695e-05  6.77414609e-09
- -1.56703390e-12 -1.96714519e+03 -1.13778416e+00]
+&lt;pMuTT.empirical.nasa.Nasa object at 0x00000234AF8FBAC8&gt;
 </pre></div></div>
 </div>
 </div>
@@ -3623,10 +3611,8 @@ matches the statistical mechanical model inputted, use the
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_statmech_and_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
-                                                   <span class="n">H_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">,</span>
-                                                   <span class="n">S_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
-                                                   <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_statmech_and_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span> <span class="n">H_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">,</span>
+                                                 <span class="n">S_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span> <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -3636,6 +3622,16 @@ matches the statistical mechanical model inputted, use the
 </div>
 <div class="output_area docutils container">
 <img alt="../../_images/examples_jupyter_excel_to_empirical_excel_to_empirical_18_0.png" src="../../_images/examples_jupyter_excel_to_empirical_excel_to_empirical_18_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -3652,7 +3648,7 @@ matches the statistical mechanical model inputted, use the
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Vlachos Research Group
+        &copy; Copyright 2019, Vlachos Research Group
 
     </p>
   </div>
