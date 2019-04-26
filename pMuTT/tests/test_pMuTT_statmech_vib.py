@@ -4,6 +4,8 @@ pMuTT.test_pMuTT_model_statmech_vib
 Tests for pMuTT module
 """
 import unittest
+import numpy as np
+from pMuTT import constants as c
 from pMuTT.statmech import vib
 
 
@@ -221,15 +223,76 @@ class TestEinsteinVib(unittest.TestCase):
         self.assertEqual(vib.EinsteinVib.from_dict(self.vib_Ag_dict),
                          self.vib_Ag)
 
+class TestDebyeVib(unittest.TestCase):
+    def setUp(self):
+        unittest.TestCase.setUp(self)
+        self.theta_D = 215.
+        self.u = 0.5
+        self.vib_Ag = vib.DebyeVib(debye_temperature=self.theta_D,
+                                   interaction_energy=self.u)
+        self.vib_Ag_dict = {
+            'class': "<class 'pMuTT.statmech.vib.DebyeVib'>",
+            'debye_temperature': self.theta_D,
+            'interaction_energy': self.u
+        }
+        self.T = 300.  # K
+        # Integrals calculated using Wolfram Alpha
+        # https://www.wolframalpha.com/input/?i=integrate+x%5E3+exp(x)%2F(exp(x)-1)+dx+from+0+to+215%2F300
+        self.F = 3.*(self.T/self.theta_D)**3*0.158802
+        # https://www.wolframalpha.com/input/?i=integrate+x%5E2+*+ln(1-exp(-x))+dx+from+0+to+215%2F300
+        self.G = 3.*(self.T/self.theta_D)**3*-0.113178
+        # https://www.wolframalpha.com/input/?i=integrate+x%5E4+exp(x)%2F(exp(x)-1)%5E2+dx+from+0+to+215%2F300
+        self.K = 3.*(self.T/self.theta_D)**3*0.119602
 
-class TestHelperFunc(unittest.TestCase):
-    def test_debye_to_einstein(self):
-        self.assertAlmostEqual(vib.debye_to_einstein(215.),
-                               173.28913505677)
+    def test_get_q(self):
+        exp_q = np.exp(-self.u/3./c.kb('eV/K')/self.T \
+                       -3./8.*self.theta_D/self.T \
+                       -self.G)
+        self.assertAlmostEqual(self.vib_Ag.get_q(T=self.T),
+                               exp_q)
 
-    def test_einstein_to_debye(self):
-        self.assertAlmostEqual(vib.einstein_to_debye(173.28913505677), 215.)
+    def test_get_CvoR(self):
+        self.assertAlmostEqual(self.vib_Ag.get_CvoR(T=self.T),
+                               3.*self.K, 6)
 
+    def test_get_CpoR(self):
+        self.assertAlmostEqual(self.vib_Ag.get_CpoR(T=self.T),
+                               3.*self.K, 6)
+
+    def test_get_ZPE(self):
+        self.assertAlmostEqual(self.vib_Ag.get_ZPE(),
+                               self.u + 9./8.*self.theta_D*c.kb('eV/K'))
+
+    def test_get_UoRT(self):
+        exp_UoRT = (self.u + 9./8.*self.theta_D*c.kb('eV/K')) \
+                   /c.kb('eV/K')/self.T \
+                   + 3.*self.F
+        self.assertAlmostEqual(self.vib_Ag.get_UoRT(T=self.T), exp_UoRT, 4)
+
+    def test_get_HoRT(self):
+        exp_HoRT = (self.u + 9./8.*self.theta_D*c.kb('eV/K')) \
+                   /c.kb('eV/K')/self.T \
+                   + 3.*self.F
+        self.assertAlmostEqual(self.vib_Ag.get_HoRT(T=self.T), exp_HoRT, 4)
+
+    def test_get_SoR(self):
+        self.assertAlmostEqual(self.vib_Ag.get_SoR(T=self.T),
+                               3.*(self.F-self.G), 4)
+
+    def test_get_FoRT(self):
+        exp_FoRT = self.vib_Ag.get_UoRT(T=self.T)-self.vib_Ag.get_SoR(T=self.T)
+        self.assertAlmostEqual(self.vib_Ag.get_FoRT(T=self.T), exp_FoRT, 6)
+
+    def test_get_GoRT(self):
+        exp_GoRT = self.vib_Ag.get_HoRT(T=self.T)-self.vib_Ag.get_SoR(T=self.T)
+        self.assertAlmostEqual(self.vib_Ag.get_GoRT(T=self.T), exp_GoRT, 6)
+
+    def test_to_dict(self):
+        self.assertEqual(self.vib_Ag.to_dict(), self.vib_Ag_dict)
+
+    def test_from_dict(self):
+        self.assertEqual(vib.DebyeVib.from_dict(self.vib_Ag_dict),
+                         self.vib_Ag)
 
 if __name__ == '__main__':
     unittest.main()

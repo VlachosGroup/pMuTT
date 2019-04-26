@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from pMuTT import _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class IdealElec:
-    """Electronic modes using the ideal gas assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class GroundStateElec(_pMuTTBase):
+    """Electronic modes using the ideal gas assumption. Equations sourced from:
+    
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -30,14 +32,6 @@ class IdealElec:
         self.D0 = D0
         self.spin = spin
         self._degeneracy = 2.*self.spin + 1.
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function
@@ -176,18 +170,3 @@ class IdealElec:
         return {'class': str(self.__class__),
                 'potentialenergy': self.potentialenergy,
                 'spin': self.spin}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            IdealElec : IdealElec object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)

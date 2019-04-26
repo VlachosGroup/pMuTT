@@ -3,19 +3,21 @@
 import itertools
 from warnings import warn
 import numpy as np
+from pMuTT import _pMuTTBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
-
-class RigidRotor:
-    """Rotational mode using the rigid rotor assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class RigidRotor(_pMuTTBase):
+    """Rotational mode using the rigid rotor assumption. Equations sourced from:
+    
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
-        symmetrynumber : float
-            Symmetry number of molecule.
+        symmetrynumber : float or str
+            Symmetry number of molecule. If a string is inputted, it represents 
+            the point group. Supported options are shown below.
 
             ===========    ===============
             Point group    symmetry number
@@ -54,6 +56,15 @@ class RigidRotor:
 
     def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None,
                  atoms=None, degree_tol=5.):
+        if isinstance(symmetrynumber, str):
+            try:
+                symmetrynumber = c.symmetry_dict[symmetrynumber]
+            except KeyError:
+                raise ValueError('Point group, {}, not supported. '
+                                 'See :class:`~pMuTT.statmech.rot.RigidRotor '
+                                 'for supported '
+                                 'options.'.format(symmetrynumber))
+
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
             self.rot_temperatures = get_rot_temperatures_from_atoms(
@@ -66,14 +77,6 @@ class RigidRotor:
                     atoms=atoms, degree_tol=degree_tol)
         else:
             self.geometry = geometry
-
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
 
     def get_q(self, T):
         """Calculates the partition function
@@ -254,22 +257,6 @@ class RigidRotor:
                 'geometry': self.geometry,
                 'rot_temperatures': list(self.rot_temperatures)}
 
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            RigidRotor : RigidRotor object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)
-
-
 def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     """Calculate the rotational temperatures from ase.Atoms object
 
@@ -294,8 +281,8 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     for moment in atoms.get_moments_of_inertia():
         if np.isclose(0., moment):
             continue
-        moment_SI = moment*c.convert_unit(from_='amu', to='kg') \
-            * c.convert_unit(from_='A2', to='m2')
+        moment_SI = moment*c.convert_unit(initial='amu', final='kg') \
+            * c.convert_unit(initial='A2', final='m2')
         rot_temperatures.append(c.inertia_to_temp(moment_SI))
 
     if geometry == 'monatomic':

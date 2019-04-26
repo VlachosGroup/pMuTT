@@ -21,7 +21,7 @@
 
 
 from pprint import pprint
-from pMuTT.io_.thermdat import read_thermdat
+from pMuTT.io.thermdat import read_thermdat
 from pMuTT import pMuTT_list_to_dict
 
 # The output will be a list
@@ -43,6 +43,9 @@ from copy import deepcopy
 
 # Make a copy so we don't edit the original H2O
 H2O_TS = deepcopy(species_dict['H2O'])
+
+# Change name to differentiate it
+H2O_TS.name = 'H2O_TS'
 
 # Increase the H/RT value
 H2O_TS.a_low[5] += 50.
@@ -82,8 +85,10 @@ rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = H2O_TS = H2O', species=spe
 print('Creating Reaction object using default string notation: {}'.format(rxn))
 
 # You can specify the notation for the reaction!
-rxn = Reaction.from_string(reaction_str='H2 ++ 0.5O2 --> H2O_TS --> H2O', species=species_dict,
-                           species_delimiter='++', reaction_delimiter='-->')
+rxn = Reaction.from_string(reaction_str='H2 ++ 0.5O2 --> H2O_TS --> H2O', 
+                           species=species_dict,
+                           species_delimiter='++',
+                           reaction_delimiter='-->')
 # When reprinting it, it will converts it to the standard notation
 print('Creating Reaction object using custom string notation: {}'.format(rxn))
 
@@ -120,26 +125,26 @@ print('Delta S: {} J/mol/K'.format(188.84-130.68-0.5*205.152))
 
 
 # Forward direction properties (i.e. reactants to transition state)
-H_TS = rxn.get_H_act(T=T, units='kJ/mol')
+H_TS = rxn.get_delta_H(T=T, activation=True, units='kJ/mol')
 Ea = rxn.get_E_act(T=T, units='kJ/mol')
 A = rxn.get_A(T=T)
 
 # Take these values with a grain of salt since we arbitrarily 
 # specified our transition state
 print('Forward properties')
-print('Enthalpy of activation: {} kJ/mol'.format(H_TS))
-print('Activation Energy: {} kJ/mol'.format(Ea))
-print('Pre-exponential factor: {} 1/s'.format(A))
+print('Enthalpy of activation: {:.2f} kJ/mol'.format(H_TS))
+print('Activation Energy: {:.2f} kJ/mol'.format(Ea))
+print('Pre-exponential factor: {:.3e} 1/s'.format(A))
 print('\n')
 # Reverse direction properties (i.e. products to transition state)
-H_TS_rev = rxn.get_HoRT_act(T=T, rev=True, units='kJ/mol')
-Ea_rev = rxn.get_EoRT_act(T=T, rev=True, units='kJ/mol')
+H_TS_rev = rxn.get_delta_H(T=T, activation=True, rev=True, units='kJ/mol')
+Ea_rev = rxn.get_E_act(T=T, rev=True, units='kJ/mol')
 A_rev = rxn.get_A(T=T, rev=True)
 
 print('Reverse properties')
-print('Enthalpy of activation: {} kJ/mol'.format(H_TS_rev))
-print('Activation Energy: {} kJ/mol'.format(Ea_rev))
-print('Pre-exponential factor: {} 1/s'.format(A_rev))
+print('Enthalpy of activation: {:.2f} kJ/mol'.format(H_TS_rev))
+print('Activation Energy: {:.2f} kJ/mol'.format(Ea_rev))
+print('Pre-exponential factor: {:.3e} 1/s'.format(A_rev))
 
 
 # ## Calculating Activation Energy Using BEP Relationships
@@ -150,21 +155,12 @@ print('Pre-exponential factor: {} 1/s'.format(A_rev))
 
 from pMuTT.reaction.bep import BEP
 
-rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = H2O_TS = H2O', species=species_dict,
-                           descriptor='delta', slope=0.2, intercept=100.,
-                           bep=BEP)
+species_dict['BEP'] = BEP(name='BEP', slope=0.2, intercept=100., descriptor='delta_H')
+rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = BEP = H2O', species=species_dict)
+Ea_BEP = rxn.get_E_act(T=T, units='kJ/mol')
 
-Ea_TS = rxn.get_E_act(T=T, method='ts', units='kJ/mol')
-Ea_BEP = rxn.get_E_act(T=T, method='bep', units='kJ/mol')
-Ea_any = rxn.get_E_act(T=T, method='any', units='kJ/mol')
+print('BEP: {:.2f} kJ/mol'.format(Ea_BEP))
 
-print('Activation energies using different methods')
-print('Transition State: {} kJ/mol'.format(Ea_TS))
-print('BEP: {} kJ/mol'.format(Ea_BEP))
-print('Any: {} kJ/mol'.format(Ea_any))
-
-
-# Note that setting method to 'any' uses the transition state preferentially.
 
 # ## Saving and Loading our Reaction as JSON
 # Similarly to pMuTT objects, ``Reaction`` objects can be saved to and read from JSON format.
@@ -173,7 +169,7 @@ print('Any: {} kJ/mol'.format(Ea_any))
 
 
 import json
-from pMuTT.io_.json import pMuTTEncoder, json_to_pMuTT
+from pMuTT.io.json import pMuTTEncoder, json_to_pMuTT
 
 # Saving
 with open('reaction.json', 'w') as f_ptr:
@@ -188,8 +184,8 @@ dH_298_io = rxn_io.get_delta_H(T=T, units='kJ/mol')
 Ea_io = rxn_io.get_E_act(T=T, units='kJ/mol')
 
 print(rxn_io)
-print('Delta H: {} kJ/mol'.format(dH_298_io))
-print('Activation Energy: {} kJ/mol'.format(Ea_io))
+print('Delta H: {:.2f} kJ/mol'.format(dH_298_io))
+print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 
 
 # Here is the resulting JSON file.
@@ -199,14 +195,16 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #  "reactants": [
 #   {
 #    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+#    "type": "nasa",
 #    "name": "H2",
 #    "phase": "G",
 #    "elements": {
 #     "H": 2
 #    },
 #    "notes": "TPIS78",
-#    "references": null,
+#    "smiles": null,
 #    "statmech_model": null,
+#    "misc_models": null,
 #    "a_low": [
 #     2.34433112,
 #     0.00798052075,
@@ -227,18 +225,22 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #    ],
 #    "T_low": 200.0,
 #    "T_mid": 1000.0,
-#    "T_high": 3500.0
+#    "T_high": 3500.0,
+#    "cat_site": null,
+#    "n_sites": null
 #   },
 #   {
 #    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+#    "type": "nasa",
 #    "name": "O2",
 #    "phase": "G",
 #    "elements": {
 #     "O": 2
 #    },
 #    "notes": "TPIS89",
-#    "references": null,
+#    "smiles": null,
 #    "statmech_model": null,
+#    "misc_models": null,
 #    "a_low": [
 #     3.78245636,
 #     -0.00299673416,
@@ -259,7 +261,9 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #    ],
 #    "T_low": 200.0,
 #    "T_mid": 1000.0,
-#    "T_high": 3500.0
+#    "T_high": 3500.0,
+#    "cat_site": null,
+#    "n_sites": null
 #   }
 #  ],
 #  "reactants_stoich": [
@@ -269,6 +273,7 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #  "products": [
 #   {
 #    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+#    "type": "nasa",
 #    "name": "H2O",
 #    "phase": "G",
 #    "elements": {
@@ -276,8 +281,9 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #     "O": 1
 #    },
 #    "notes": "L 8/89",
-#    "references": null,
+#    "smiles": null,
 #    "statmech_model": null,
+#    "misc_models": null,
 #    "a_low": [
 #     4.19864056,
 #     -0.0020364341,
@@ -298,7 +304,9 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #    ],
 #    "T_low": 200.0,
 #    "T_mid": 1000.0,
-#    "T_high": 3500.0
+#    "T_high": 3500.0,
+#    "cat_site": null,
+#    "n_sites": null
 #   }
 #  ],
 #  "products_stoich": [
@@ -306,47 +314,69 @@ print('Activation Energy: {} kJ/mol'.format(Ea_io))
 #  ],
 #  "transition_state": [
 #   {
-#    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
-#    "name": "H2O",
-#    "phase": "G",
-#    "elements": {
-#     "H": 2,
-#     "O": 1
-#    },
-#    "notes": "L 8/89",
-#    "references": null,
-#    "statmech_model": null,
-#    "a_low": [
-#     4.19864056,
-#     -0.0020364341,
-#     6.52040211e-06,
-#     -5.48797062e-09,
-#     1.77197817e-12,
-#     -30243.7267,
-#     -0.849032208
-#    ],
-#    "a_high": [
-#     3.03399249,
-#     0.00217691804,
-#     -1.64072518e-07,
-#     -9.7041987e-11,
-#     1.68200992e-14,
-#     -29954.2971,
-#     4.9667701
-#    ],
-#    "T_low": 200.0,
-#    "T_mid": 1000.0,
-#    "T_high": 3500.0
+#    "class": "<class 'pMuTT.reaction.bep.BEP'>",
+#    "name": "BEP",
+#    "slope": 0.2,
+#    "intercept": 100.0,
+#    "descriptor": "delta_H",
+#    "notes": null
 #   }
 #  ],
 #  "transition_state_stoich": [
 #   1.0
-#  ],
-#  "bep": {
-#   "class": "<class 'pMuTT.reaction.bep.BEP'>",
-#   "slope": 0.2,
-#   "intercept": 100.0,
-#   "descriptor": "delta"
-#  }
+#  ]
 # }
 # ```
+
+# ## Plotting Reaction Coordinate Diagrams
+# 
+# The ``pMuTT.reaction.Reactions.plot_coordinate_diagram`` allows users to plot reaction coordinate diagrams in a semi-automated way. For this example, we will use the synthesis of NH3 on Ru. The thermdat file was taken from the [NH3 MATLAB Microkinetic Model available on Github][0].
+# 
+# [0]: https://github.com/VlachosGroup/NH3-Matlab-Microkinetic-Model
+
+# In[9]:
+
+
+import os
+from pathlib import Path
+from matplotlib import pyplot as plt
+from pMuTT import pMuTT_list_to_dict
+from pMuTT.reaction import Reaction, Reactions
+from pMuTT.io.thermdat import read_thermdat
+
+# Find the location of Jupyter notebook
+# Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
+# Using pathlib can overcome this limiation
+notebook_folder = Path().resolve()
+
+'''Read the thermdat file and convert it to a dictionary'''
+NH3_species_list = read_thermdat(os.path.join(notebook_folder, 'thermdat_NH3'))
+NH3_species = pMuTT_list_to_dict(NH3_species_list)
+
+'''Initialize the reaction'''
+rxns = Reactions(reactions=[
+    Reaction.from_string('0.5N2 + 1.5H2 = 0.5TS4_N2 + 1.5H2 = N(S1) + 1.5H2', 
+                         NH3_species),
+    Reaction.from_string('N(S1) + 1.5H2 = N(S1) + 3H(S1)', NH3_species),
+    Reaction.from_string('N(S1) + 3H(S1) = TS3_NH + 2H(S1) = NH(S1) + 2H(S1)', 
+                         NH3_species),
+    Reaction.from_string('NH(S1) + 2H(S1) = TS2_NH2 + H(S1) = NH2(S1) + H(S1)',
+                         NH3_species),
+    Reaction.from_string('NH2(S1) + H(S1) = TS1_NH3 = NH3(S1)', NH3_species),
+    Reaction.from_string('NH3(S1) = NH3', NH3_species)])
+
+'''Plot the reaction coordinate diagram'''
+# Enthalpy coordinate diagram
+fig1, ax1 = rxns.plot_coordinate_diagram(method_name='get_H', units='eV',
+                                         T=300.)
+# Gibbs energy coordinate diagram on the same plot
+fig1, ax1 = rxns.plot_coordinate_diagram(method_name='get_G', units='eV',
+                                         T=300., figure=fig1, axes=ax1)
+
+'''Adjust plot settings'''
+ax1.legend(['Enthalpy (H)', 'Gibbs Energy (G)'])
+ax1.set_ylabel('Energy (eV)')
+fig1.set_size_inches(12, 10)
+fig1.dpi = 150
+plt.show()
+

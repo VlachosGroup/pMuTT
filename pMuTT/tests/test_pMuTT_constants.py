@@ -34,33 +34,58 @@ class TestConstants(unittest.TestCase):
 
     def test_m_e(self):
         self.assertEqual(c.m_e('amu'), 5.48579909070e-4)
-        with self.assertRaises(KeyError):
+        with self.assertRaises(ValueError):
             c.m_e('arbitrary unit')
 
     def test_m_p(self):
         self.assertEqual(c.m_p('amu'), 1.007276466879)
-        with self.assertRaises(KeyError):
+        with self.assertRaises(ValueError):
             c.m_p('arbitrary unit')
 
     def test_P0(self):
-        self.assertEqual(c.P0('atm'), 1.)
-        with self.assertRaises(KeyError):
+        self.assertEqual(c.P0('bar'), 1.)
+        with self.assertRaises(ValueError):
             c.P0('arbitrary unit')
 
     def test_T0(self):
         self.assertEqual(c.T0('K'), 298.15)
-        with self.assertRaises(KeyError):
+        with self.assertRaises(ValueError):
             c.T0('arbitrary unit')
 
     def test_convert_unit(self):
-        self.assertEqual(c.convert_unit(num=0., from_='C', to='K'), 273.15)
-        self.assertEqual(c.convert_unit(from_='m', to='cm'), 100.)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='C', final='K'),
+                               274.15)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='C', final='F'),
+                               33.8)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='C', final='R'), 
+                               493.46999999999997)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='K', final='C'),
+                               -272.15)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='K', final='F'),
+                               -457.87)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='K', final='R'),
+                               1.8)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='F', final='C'),
+                               -17.22222222222222)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='F', final='K'),
+                               255.92777777777778)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='F', final='R'),
+                               460.67)
+
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='R', final='C'),
+                               -272.59444444444443)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='R', final='K'),
+                               0.5555555555555556)
+        self.assertAlmostEqual(c.convert_unit(num=1., initial='R', final='F'),
+                               -458.67)
+
+        self.assertAlmostEqual(c.convert_unit(initial='m', final='cm'), 100.)
         with self.assertRaises(ValueError):
-            c.convert_unit(from_='cm', to='J')
+            c.convert_unit(initial='cm', final='J')
         with self.assertRaises(ValueError):
-            c.convert_unit(from_='arbitrary unit', to='J')
+            c.convert_unit(initial='arbitrary unit', final='J')
         with self.assertRaises(ValueError):
-            c.convert_unit(from_='cm', to='arbitrary unit')
+            c.convert_unit(initial='cm', final='arbitrary unit')
 
     def test_wavenumber_to_temp(self):
         self.assertAlmostEqual(c.wavenumber_to_temp(1.), 1.4387773538277204)
@@ -72,6 +97,12 @@ class TestConstants(unittest.TestCase):
         self.assertTrue(
                 np.isclose(c.wavenumber_to_inertia(1.), 2.799275137826E-46))
 
+    def test_debye_to_einstein(self):
+        self.assertAlmostEqual(c.debye_to_einstein(215.),
+                               173.28913505677)
+
+    def test_einstein_to_debye(self):
+        self.assertAlmostEqual(c.einstein_to_debye(173.28913505677), 215.)
 
 if __name__ == '__main__':
     unittest.main()

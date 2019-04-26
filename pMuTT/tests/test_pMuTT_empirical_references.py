@@ -23,10 +23,10 @@ class TestReferences(unittest.TestCase):
             T_ref=c.T0('K'),
             HoRT_ref=0.,
             statmech_model=StatMech,
-            trans_model=trans.IdealTrans,
+            trans_model=trans.FreeTrans,
             n_degrees=3,
             vib_model=vib.HarmonicVib,
-            elec_model=elec.IdealElec,
+            elec_model=elec.GroundStateElec,
             rot_model=rot.RigidRotor,
             vib_wavenumbers=np.array([4306.1793]),
             potentialenergy=-6.7598,
@@ -42,10 +42,10 @@ class TestReferences(unittest.TestCase):
             T_ref=c.T0('K'),
             HoRT_ref=-241.826/(c.R('kJ/mol/K') * c.T0('K')),
             statmech_model=StatMech,
-            trans_model=trans.IdealTrans,
+            trans_model=trans.FreeTrans,
             n_degrees=3,
             vib_model=vib.HarmonicVib,
-            elec_model=elec.IdealElec,
+            elec_model=elec.GroundStateElec,
             rot_model=rot.RigidRotor,
             vib_wavenumbers=np.array([3825.434, 3710.264, 1582.432]),
             potentialenergy=-14.2209,
@@ -61,10 +61,10 @@ class TestReferences(unittest.TestCase):
             T_ref=c.T0('K'),
             HoRT_ref=0.,
             statmech_model=StatMech,
-            trans_model=trans.IdealTrans,
+            trans_model=trans.FreeTrans,
             n_degrees=3,
             vib_model=vib.HarmonicVib,
-            elec_model=elec.IdealElec,
+            elec_model=elec.GroundStateElec,
             rot_model=rot.RigidRotor,
             vib_wavenumbers=np.array([2205.]),
             potentialenergy=-9.86,
@@ -98,13 +98,13 @@ class TestReferences(unittest.TestCase):
             self.assertAlmostEqual(expected_element_offset[element],
                                    calculated_element_offset[element])
 
-    def test_get_specie_offset(self):
+    def test_get_HoRT(self):
         elements = {'H': 2, 'O': 2}
         self.assertAlmostEqual(
-                self.references.get_HoRT_offset(descriptors=elements),
+                self.references.get_HoRT(descriptors=elements),
                 619.6674284923677)
         with self.assertWarns(RuntimeWarning):
-            self.assertEqual(self.references.get_HoRT_offset(
+            self.assertEqual(self.references.get_HoRT(
                     descriptors={'non-referenced element': 1}), 0.)
 
 

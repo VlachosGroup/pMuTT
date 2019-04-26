@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pMuTT'
-copyright = '2018, Vlachos Research Group'
+copyright = '2019, Vlachos Research Group'
 author = 'Vlachos Research Group'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.5'
+release = '1.2.6'
 
 
 # -- General configuration ---------------------------------------------------

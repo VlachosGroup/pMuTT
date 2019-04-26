@@ -25,6 +25,16 @@ listed below.
 
 .. autofunction:: pMuTT.io.excel.set_statmech_model
 
+.. autofunction:: pMuTT.io.excel.set_trans_model
+
+.. autofunction:: pMuTT.io.excel.set_vib_model
+
+.. autofunction:: pMuTT.io.excel.set_rot_model
+
+.. autofunction:: pMuTT.io.excel.set_elec_model
+
+.. autofunction:: pMuTT.io.excel.set_nucl_model
+
 .. autofunction:: pMuTT.io.excel.set_vib_wavenumbers
 
 .. autofunction:: pMuTT.io.excel.set_rot_temperatures
@@ -386,7 +396,7 @@ To ensure your new class can be encoded using the ``pMuTTEncoder``, the
 dictionary should be ``'class': str(self.__class__)`` so that it can be decoded 
 later. The other elements should be the attributes that can be used to 
 reinitialize the object and must be JSON-supported objects. A simple example 
-using :class:`~pMuTT.statmech.trans.IdealTrans` is shown below.
+using :class:`~pMuTT.statmech.trans.FreeTrans` is shown below.
 
 .. code:: python
 
@@ -417,7 +427,7 @@ add an entry to the dictionary in the ``pMuTT.io.json.type_to_class`` method.
 The key should be the type of your object in string format (i.e. the result of 
 ``str(self.__class__)``). Your class should also have the ``from_dict()`` class 
 method to reinitialize your object. A simple example using 
-:class:`~pMuTT.statmech.trans.IdealTrans` is shown below.
+:class:`~pMuTT.statmech.trans.FreeTrans` is shown below.
 
 .. code:: python
 

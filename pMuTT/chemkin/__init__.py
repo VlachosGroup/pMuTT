@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from pMuTT import _pMuTTBase
 from pMuTT.io.json import remove_class
 
 
-class CatSite:
+class CatSite(_pMuTTBase):
     """Catalyst site for Chemkin
 
     Attributes
@@ -35,18 +36,3 @@ class CatSite:
                 'site_density': self.site_density,
                 'density': self.density,
                 'bulk_specie': self.bulk_specie, }
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            EmpiricalBase : EmpiricalBase object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)

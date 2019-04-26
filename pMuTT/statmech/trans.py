@@ -2,14 +2,15 @@
 
 import numpy as np
 from pMuTT import constants as c
-from pMuTT import get_molecular_weight
+from pMuTT import get_molecular_weight, _pMuTTBase
 from pMuTT.io.json import remove_class
 
 
-class IdealTrans:
-    """Translational mode using ideal gas assumption. Equations found in
-    Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
-    John Wiley & Sons, 2010.
+class FreeTrans(_pMuTTBase):
+    """Translational mode using ideal gas assumption. Equations sourced from:
+    
+    * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+      John Wiley & Sons, 2010.
 
     Attributes
     ----------
@@ -27,14 +28,6 @@ class IdealTrans:
         else:
             self.molecular_weight = molecular_weight
 
-    def __eq__(self, other):
-        try:
-            other_dict = other.to_dict()
-        except AttributeError:
-            # If other doesn't have to_dict method, is not equal
-            return False
-        return self.to_dict() == other_dict
-
     def get_V(self, T, P):
         """Calculates the molar volume of an ideal gas at T and P
 
@@ -51,7 +44,7 @@ class IdealTrans:
             V : float
                 Molar volume in m3
         """
-        return T*c.R('J/mol/K')/(P*c.convert_unit(from_='bar', to='Pa'))
+        return T*c.R('J/mol/K')/(P*c.convert_unit(initial='bar', final='Pa'))
 
     def get_q(self, T, P=c.P0('bar')):
         """Calculates the partition function
@@ -73,7 +66,7 @@ class IdealTrans:
         """
         V = self.get_V(T=T, P=P)
         unit_mass = self.molecular_weight *\
-            c.convert_unit(from_='g', to='kg')/c.Na
+            c.convert_unit(initial='g', final='kg')/c.Na
         return V*(2*np.pi*c.kb('J/K')*T*unit_mass/c.h('J s')**2) \
             ** (float(self.n_degrees)/2.)
 
@@ -146,7 +139,7 @@ class IdealTrans:
         """
         V = self.get_V(T=T, P=P)
         unit_mass = self.molecular_weight *\
-            c.convert_unit(from_='g', to='kg')/c.Na
+            c.convert_unit(initial='g', final='kg')/c.Na
         return 1. + float(self.n_degrees)/2. \
             + np.log((2.*np.pi*unit_mass*c.kb('J/K')*T/c.h('J s')**2)
                      ** (float(self.n_degrees)/2.)*V/c.Na)
@@ -199,18 +192,3 @@ class IdealTrans:
         return {'class': str(self.__class__),
                 'n_degrees': self.n_degrees,
                 'molecular_weight': self.molecular_weight}
-
-    @classmethod
-    def from_dict(cls, json_obj):
-        """Recreate an object from the JSON representation.
-
-        Parameters
-        ----------
-            json_obj : dict
-                JSON representation
-        Returns
-        -------
-            IdealTrans : IdealTrans object
-        """
-        json_obj = remove_class(json_obj)
-        return cls(**json_obj)

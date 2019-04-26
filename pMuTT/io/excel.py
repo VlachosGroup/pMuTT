@@ -10,7 +10,7 @@ import pandas as pd
 import os
 from ase.io import read
 from pMuTT import parse_formula
-from pMuTT.statmech import presets, StatMech
+from pMuTT.statmech import presets, StatMech, trans, vib, rot, elec, nucl
 from pMuTT.io.vasp import set_vib_wavenumbers_from_outcar
 
 
@@ -62,6 +62,11 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - formula (:func:`~pMuTT.io.excel.set_formula`)
         - atoms (:func:`~pMuTT.io.excel.set_atoms`)
         - statmech_model (:func:`~pMuTT.io.excel.set_statmech_model`)
+        - set_trans_model (:func:`~pMuTT.io.excel.set_trans_model`)
+        - set_vib_model (:func:`~pMuTT.io.excel.set_vib_model`)
+        - set_rot_model (:func:`~pMuTT.io.excel.set_rot_model`)
+        - set_elec_model (:func:`~pMuTT.io.excel.set_elec_model`)
+        - set_nucl_model (:func:`~pMuTT.io.excel.set_nucl_model`)
         - vib_wavenumber (:func:`~pMuTT.io.excel.set_vib_wavenumbers`)
         - rot_temperature (:func:`~pMuTT.io.excel.set_rot_temperatures`)
         - nasa.a_low (:func:`~pMuTT.io.excel.set_nasa_a_low`)
@@ -95,6 +100,21 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             elif 'statmech_model' in col:
                 thermo_data = set_statmech_model(model=cell_data,
                                                  output_structure=thermo_data)
+            elif 'trans_model' in col:
+                thermo_data = set_trans_model(model=cell_data,
+                                              output_structure=thermo_data)
+            elif 'vib_model' in col:
+                thermo_data = set_vib_model(model=cell_data,
+                                            output_structure=thermo_data)
+            elif 'rot_model' in col:
+                thermo_data = set_rot_model(model=cell_data,
+                                            output_structure=thermo_data)
+            elif 'elec_model' in col:
+                thermo_data = set_elec_model(model=cell_data,
+                                             output_structure=thermo_data)
+            elif 'nucl_model' in col:
+                thermo_data = set_nucl_model(model=cell_data,
+                                             output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
                 if vib_set_by_outcar:
                     continue  # vib_wavenumber already set from outcar
@@ -213,10 +233,8 @@ def set_statmech_model(model, output_structure):
     Parameters
     ----------
         model : str
-            Thermodynamic model to import. Presets:
-
-                - IdealGas
-                - Harmonic
+            Thermodynamic model to import. See `pMuTT.statmech.presets` for 
+            supported models.
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['statmech_model']
@@ -235,6 +253,120 @@ def set_statmech_model(model, output_structure):
                          'models.'.format(model))
     return output_structure
 
+def set_trans_model(model, output_structure):
+    """Imports module and assigns the class to output_structure
+
+    Parameters
+    ----------
+        model : str
+            Translational model to import
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure['trans_model']
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new thermo model added
+    """
+    try:
+        output_structure['trans_model'] = getattr(trans, model)
+    except AttributeError:
+        raise ValueError('Unsupported translational model, {}. See docstring '
+                         'of presets in pMuTT.statmech.trans for supported '
+                         'models.'.format(model))
+    return output_structure
+
+def set_vib_model(model, output_structure):
+    """Imports module and assigns the class to output_structure
+
+    Parameters
+    ----------
+        model : str
+            Vibrational model to import
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure['vib_model']
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new thermo model added
+    """
+    try:
+        output_structure['vib_model'] = getattr(vib, model)
+    except AttributeError:
+        raise ValueError('Unsupported vibrational model, {}. See docstring '
+                         'of presets in pMuTT.statmech.vib for supported '
+                         'models.'.format(model))
+    return output_structure
+
+def set_rot_model(model, output_structure):
+    """Imports module and assigns the class to output_structure
+
+    Parameters
+    ----------
+        model : str
+            Rotational model to import
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure['rot_model']
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new thermo model added
+    """
+    try:
+        output_structure['rot_model'] = getattr(rot, model)
+    except AttributeError:
+        raise ValueError('Unsupported rotational model, {}. See docstring '
+                         'of presets in pMuTT.statmech.rot for supported '
+                         'models.'.format(model))
+    return output_structure
+
+def set_elec_model(model, output_structure):
+    """Imports module and assigns the class to output_structure
+
+    Parameters
+    ----------
+        model : str
+            Electronic model to import
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure['elec_model']
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new thermo model added
+    """
+    try:
+        output_structure['elec_model'] = getattr(elec, model)
+    except AttributeError:
+        raise ValueError('Unsupported Electronic model, {}. See docstring '
+                         'of presets in pMuTT.statmech.elec for supported '
+                         'models.'.format(model))
+    return output_structure
+
+def set_nucl_model(model, output_structure):
+    """Imports module and assigns the class to output_structure
+
+    Parameters
+    ----------
+        model : str
+            Nuclear model to import
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure['nucl_model']
+    Returns
+    -------
+        output_structure: dict
+            output_structure with new thermo model added
+    """
+    try:
+        output_structure['nucl_model'] = getattr(elec, model)
+    except AttributeError:
+        raise ValueError('Unsupported Nuclear model, {}. See docstring '
+                         'of presets in pMuTT.statmech.nucl for supported '
+                         'models.'.format(model))
+    return output_structure
 
 def set_vib_wavenumbers(value, output_structure):
     """Parses element header and assigns to output_structure['vib_wavenumber']
