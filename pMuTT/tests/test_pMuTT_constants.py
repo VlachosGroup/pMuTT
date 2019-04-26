@@ -97,6 +97,12 @@ class TestConstants(unittest.TestCase):
         self.assertTrue(
                 np.isclose(c.wavenumber_to_inertia(1.), 2.799275137826E-46))
 
+    def test_debye_to_einstein(self):
+        self.assertAlmostEqual(c.debye_to_einstein(215.),
+                               173.28913505677)
+
+    def test_einstein_to_debye(self):
+        self.assertAlmostEqual(c.einstein_to_debye(173.28913505677), 215.)
 
 if __name__ == '__main__':
     unittest.main()

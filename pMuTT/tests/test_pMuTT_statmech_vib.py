@@ -294,15 +294,5 @@ class TestDebyeVib(unittest.TestCase):
         self.assertEqual(vib.DebyeVib.from_dict(self.vib_Ag_dict),
                          self.vib_Ag)
 
-
-class TestHelperFunc(unittest.TestCase):
-    def test_debye_to_einstein(self):
-        self.assertAlmostEqual(vib.debye_to_einstein(215.),
-                               173.28913505677)
-
-    def test_einstein_to_debye(self):
-        self.assertAlmostEqual(vib.einstein_to_debye(173.28913505677), 215.)
-
-
 if __name__ == '__main__':
     unittest.main()
