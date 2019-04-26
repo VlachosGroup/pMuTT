@@ -51,8 +51,7 @@ class References(_ModelBase):
     ----------
         offset : dict
             Dimensionless enthalpy offset for each descriptor
-        references : list of :class:`~pMuTT.empirical.references.Reference`,
-                     optional
+        references : list of :class:`~pMuTT.empirical.references.Reference`, optional
             Reference species. Each member of the list should have the
             attributes ``T_ref`` and ``HoRT_ref``
         descriptor: str, optional

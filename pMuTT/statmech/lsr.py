@@ -10,6 +10,7 @@ class LSR(_pMuTTBase):
     """Represents a linear scaling relationship
 
     :math:`\\Delta E^{AH_x} = \\alpha E^{A} + \\beta`
+        
     :math:`E^{AH_{x}^*}=\\Delta E^{AH_x} + E^* + E^{AH_{x(g)}}`
 
     Attributes
