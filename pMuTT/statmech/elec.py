@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from pMuTT import _pMuTTBase
+from pMuTT import _ModelBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class GroundStateElec(_pMuTTBase):
+class GroundStateElec(_ModelBase):
     """Electronic modes using the ideal gas assumption. Equations sourced from:
     
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;

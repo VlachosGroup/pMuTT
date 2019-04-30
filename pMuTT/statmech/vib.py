@@ -2,12 +2,12 @@
 
 import numpy as np
 from scipy.integrate import quad
-from pMuTT import _pMuTTBase
+from pMuTT import _ModelBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class HarmonicVib(_pMuTTBase):
+class HarmonicVib(_ModelBase):
     """Vibrational modes using the harmonic approximation. Equations used
     sourced from:
     
@@ -246,7 +246,7 @@ class HarmonicVib(_pMuTTBase):
                                          substitute=self.imaginary_substitute))
 
 
-class QRRHOVib(_pMuTTBase):
+class QRRHOVib(_ModelBase):
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
     approximation. Equations source from:
 
@@ -601,7 +601,7 @@ class QRRHOVib(_pMuTTBase):
                                          substitute=self.imaginary_substitute))
 
 
-class EinsteinVib(_pMuTTBase):
+class EinsteinVib(_ModelBase):
     """Einstein model of a crystal. Equations used sourced from
 
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
@@ -791,7 +791,7 @@ class EinsteinVib(_pMuTTBase):
                 'interaction_energy': self.interaction_energy}
 
 
-class DebyeVib(_pMuTTBase):
+class DebyeVib(_ModelBase):
     """Debye model of a crystal. Equations sourced from:
 
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;

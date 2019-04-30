@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from pMuTT import _pMuTTBase
+from pMuTT import _ModelBase
 from pMuTT.io.json import remove_class
 
 
-class EmptyNucl(_pMuTTBase):
+class EmptyNucl(_ModelBase):
     """Nuclear modes. Assumes no change in any chemical reaction and hence
     does not affect thermodynamic quantities."""
 

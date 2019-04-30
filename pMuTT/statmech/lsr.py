@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from pMuTT import constants as c
-from pMuTT import _force_pass_arguments, _pMuTTBase
+from pMuTT import _force_pass_arguments, _ModelBase
 from pMuTT.statmech import StatMech, ConstantMode, presets
 from pMuTT.reaction import Reaction
 from pMuTT.io.json import remove_class, json_to_pMuTT
 
 
-class LSR(_pMuTTBase):
+class LSR(_ModelBase):
     """Represents a linear scaling relationship
 
     :math:`\\Delta E^{AH_x} = \\alpha E^{A} + \\beta`

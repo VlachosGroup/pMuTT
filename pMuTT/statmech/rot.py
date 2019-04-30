@@ -3,11 +3,11 @@
 import itertools
 from warnings import warn
 import numpy as np
-from pMuTT import _pMuTTBase
+from pMuTT import _ModelBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
-class RigidRotor(_pMuTTBase):
+class RigidRotor(_ModelBase):
     """Rotational mode using the rigid rotor assumption. Equations sourced from:
     
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;

@@ -2,11 +2,11 @@
 
 import numpy as np
 from pMuTT import constants as c
-from pMuTT import get_molecular_weight, _pMuTTBase
+from pMuTT import get_molecular_weight, _ModelBase
 from pMuTT.io.json import remove_class
 
 
-class FreeTrans(_pMuTTBase):
+class FreeTrans(_ModelBase):
     """Translational mode using ideal gas assumption. Equations sourced from:
     
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
