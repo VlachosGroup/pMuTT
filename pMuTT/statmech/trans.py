@@ -18,6 +18,11 @@ class FreeTrans(_ModelBase):
             Number of degrees of freedom. Default is 3
         molecular_weight : float
             Molecular weight of the molecule in g/mol.
+        atoms : `ase.Atoms`_ object, optional
+            An atoms object can be used to calculate molecular weight. Not
+            stored by FreeTrans
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
 
     def __init__(self, n_degrees=3, molecular_weight=None, atoms=None):

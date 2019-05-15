@@ -46,12 +46,14 @@ class RigidRotor(_ModelBase):
             - monatomic
             - linear
             - nonlinear
-        atoms : ase.Atoms object, optional
+        atoms : `ase.Atoms`_ object, optional
             An atoms object can be used to calculate rot_temperatures and
             guess geometry
         degree_tol : float
             Degree tolerance to estimate geometry. Only required if estimating
             geometry or rot_temperatures
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
 
     def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None,
