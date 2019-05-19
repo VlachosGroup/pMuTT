@@ -47,10 +47,10 @@ class LSR(_ModelBase):
         if not isinstance(reaction, Reaction):
             reaction = self._float_to_reaction(reaction)
         self.reaction = reaction
-        if not isinstance(surf_specie, _pMuTTBase):
+        if not isinstance(surf_specie, _ModelBase):
             surf_specie = self._float_to_specie(surf_specie)
         self.surf_specie = surf_specie
-        if not isinstance(gas_specie, _pMuTTBase):
+        if not isinstance(gas_specie, _ModelBase):
             gas_specie = self._float_to_specie(gas_specie)
         self.gas_specie = gas_specie
         self.notes = notes
