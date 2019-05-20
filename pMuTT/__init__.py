@@ -17,6 +17,7 @@ import inspect
 import itertools
 from warnings import warn
 import numpy as np
+import pygal
 from matplotlib import pyplot as plt
 from pMuTT.io.json import remove_class
 from pMuTT import constants as c
@@ -208,7 +209,7 @@ class _ModelBase(_pMuTTBase):
                *T*c.R('{}/K'.format(units))
 
 def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
-            figure=None, ax=None, **kwargs):
+            viewer='matplotlib', figure=None, ax=None, **kwargs):
     """Make a 1D plot
 
     Parameters
@@ -255,17 +256,30 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
     if not _is_iterable(methods):
         methods = (methods,)
 
-    # If rows/columns not specified, assing default values
-    if nrows is None:
-        nrows = len(methods)
-        ncols = 1
+    # Set up the plot
+    if viewer == 'matplotlib':
+        # If rows/columns not specified, assing default values
+        if nrows is None:
+            nrows = len(methods)
+            ncols = 1
 
-    # Create the subplots
-    if ax is None:
-        figure, ax = plt.subplots(nrows=nrows, ncols=ncols)
-    # Force ax to be a list
-    if nrows*ncols == 1:
-        ax = [ax]
+        # Create the subplots
+        if ax is None:
+            figure, ax = plt.subplots(nrows=nrows, ncols=ncols)
+        # Force ax to be a list
+        if nrows*ncols == 1:
+            ax = [ax]
+    elif viewer == 'pygal':
+        graph = pygal.XY(x_title=x_name, y_title=methods[0].replace('get_', ''),
+                         pretty_print=True, show_y_guides=False,
+                         show_x_guides=False, include_x_axis=True)
+        if len(methods) != 1:
+            raise RuntimeError('Currently, viewer {} only supports a single '
+                               'method.'.format(viewer))
+    else:
+        raise ValueError('Viewer {} not supported. Type help(pMuTT.plot_1D) '
+                         'for supported options.'.format(viewer))
+
     # Evaluate obj for each method
     for i, method in enumerate(methods):
         # If adding data to existing plot, skip methods with None
@@ -277,10 +291,18 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
         for j, x in enumerate(x_values):
             method_kwargs[x_name] = x
             y[j] = _force_pass_arguments(fn, **method_kwargs)
-        ax[i].plot(x_values, y)
-        ax[i].set_xlabel(x_name)
-        ax[i].set_ylabel(method.replace('get_', ''))
-    return (figure, ax)
+        if viewer == 'matplotlib':
+            ax[i].plot(x_values, y)
+            ax[i].set_xlabel(x_name)
+            ax[i].set_ylabel(method.replace('get_', ''))
+        elif viewer == 'pygal':
+            # Format data for graph
+            data = [(x_val, y_val) for x_val, y_val in zip(x_values, y)]
+            graph.add(obj.name, data)
+    if viewer == 'matplotlib':
+        return (figure, ax)
+    elif viewer == 'pygal':
+        return graph
 
 def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
             nrows=None, ncols=None, **kwargs):

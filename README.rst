@@ -30,6 +30,7 @@ Dependencies
 -  `SciPy`_: Used for fitting heat capacities and generating smooth curves for
    reaction coordinate diagram
 -  `Matplotlib`_: Used for plotting thermodynamic data
+-  `pyGal`_: Similar to Matplotlib. Used for plotting interactive graphs.
 -  `PyMongo`_: Used to read/write to databases
 -  `dnspython`_: Used to connect to databases
 -  `NetworkX`_: Used to plot reaction networks.

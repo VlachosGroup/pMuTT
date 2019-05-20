@@ -3,6 +3,7 @@ import itertools as itools
 import heapq
 import numpy as np
 import networkx as nx
+import pygal
 from scipy import interpolate
 from matplotlib import pyplot as plt
 from pMuTT import _get_specie_kwargs, _force_pass_arguments, _is_iterable
@@ -230,7 +231,8 @@ class Network(Reactions):
                                 show_state_labels=True, table_font_size=None,
                                 table_width_ratio=[3, 1],
                                 show_energy_span=False,
-                                energy_span_format='.2f', **kwargs):
+                                energy_span_format='.2f', viewer='matplotlib',
+                                **kwargs):
         """Plots the reaction coordinate diagram
 
         Parameters
@@ -273,13 +275,25 @@ class Network(Reactions):
             axes : tuple of `matplotlib.axes.Axes.axis`_
                 Axes of the plot.
         """
-        # Split graph into two axes if including the table
-        if show_state_table:
-            fig, axes = plt.subplots(
-                    ncols=2, gridspec_kw={'width_ratios': table_width_ratio})
+        # Initialize plot
+        if viewer == 'matplotlib':
+            # Split graph into two axes if including the table
+            if show_state_table:
+                fig, axes = plt.subplots(
+                        ncols=2,
+                        gridspec_kw={'width_ratios': table_width_ratio})
+            else:
+                fig, axes = plt.subplots()
+                axes = [axes]
+        elif viewer == 'pygal':
+            graph = pygal.XY(x_title='Reaction Coordinate',
+                             y_title=method_name.replace('get_', ''),
+                             pretty_print=True, show_y_guides=False,
+                             show_x_guides=False, show_x_labels=False)
         else:
-            fig, axes = plt.subplots()
-            axes = [axes]
+            raise ValueError('Viewer {} not supported. Type '
+                             'help(pMuTT.reaction.network.Network) '
+                             'for supported options.'.format(viewer))
 
         # If the pathway to plot was specified as an integer, convert to a list
         if pathway_numbers is not None and not _is_iterable(pathway_numbers):
@@ -382,16 +396,20 @@ class Network(Reactions):
 
             x_plot = []
             y_plot = []
+            x_labels_major_indices = []
             if show_energy_span:
                 legend_str = 'Pathway {:>3} | {:%s}' % energy_span_format
-                legend.append(legend_str.format(i, energy_span))
+                legend_str = legend_str.format(i, energy_span)
             else:
-                legend.append('Pathway {}'.format(i))
+                legend_str = 'Pathway {:>3}'.format(i)
+
             for j, state in enumerate(path):
+
                 if state not in labels_set:
                     labels_list.append(state)
                     labels_set.add(state)
                 x_state = x_vals[state]
+                # x_labels_major.append(x_state)
                 species = self.graph.nodes[state]['species']
                 stoich = self.graph.nodes[state]['stoich']
                 y_val = get_state_quantity(species=species, stoich=stoich,
@@ -429,45 +447,94 @@ class Network(Reactions):
                     x_spline = np.linspace(x_state-delta_x, x_state+delta_x)
                     y_spline = interpolate.splev(x_spline, tck)
 
+                    '''Get x value corresponding to peak for pygal'''
+                    max_i = np.argmax(y_spline)
+                    # x_labels_major_indices.append(max_i+len(x_plot))
+                    x_labels_major_indices.append(x_spline[max_i])
+    
                     '''Add new data to the appropriate lists'''
                     x_plot.extend(x_spline)
                     y_plot.extend(y_spline)
                 else:
-                    x_plot.extend([x_state-x_width/2., x_state+x_width/2.])
-                    y_plot.extend([y_state, y_state])
-            axes[0].plot(x_plot, y_plot, zorder=n_paths-i)
+                    # x_labels_major.append(x_state)
+                    x_plot.extend([x_state-x_width/2.,
+                                   x_state,
+                                   x_state+x_width/2.])
+                    y_plot.extend([y_state, y_state, y_state])
+                    x_labels_major_indices.append(x_plot[-2])
+                print(state)
+                print(x_labels_major_indices[-1])
+            '''Add data to plot'''
+            if viewer == 'matplotlib':
+                axes[0].plot(x_plot, y_plot, label=legend_str, zorder=n_paths-i)
+            elif viewer == 'pygal':
+                data = [(x, y) for x, y in zip(x_plot, y_plot)]
+                graph.add(legend_str, data, show_only_major_dots=True)
 
-        # Add other misc labels
-        axes[0].legend(legend)
-        axes[0].set_ylabel(method_name.replace('get_', ''))
-        axes[0].set_xlabel('Reaction coordinate')
-        axes[0].tick_params(axis='x', which='both', bottom=False, top=False,
-                            labelbottom=False)
+                k = 0
+                x_labels = []
+                print(x_labels_major_indices)
+                for l, x in enumerate(x_plot):
+                    if x in x_labels_major_indices:
+                        state = path[k]
+                        x_labels.append(self.graph.nodes[state]['name'])
+                        k += 1
+                    else:
+                        x_labels.append(str(l))
+                # x_labels = [str(x) for x in x_plot]
+                # x_labels_major_str = [str(x) for x in x_labels_major]
+                graph.config.x_labels = copy(x_labels)
+                print('Label')
+                print(graph.config.x_labels)
 
-        # Add state labels
-        if show_state_labels:
-            for i, label in enumerate(labels_list, start=1):
-                axes[0].text(x=x_vals[label]+x_label_offset,
-                             y=y_states[label]+y_label_offset,
-                             s='{:^}'.format(i))
+                print('Major')
+                # try:
+                #     graph.config.x_labels_major.extend([self.graph.nodes[state]['name'] for state in path])
+                # except AttributeError:
+                #     graph.config.x_labels_major = [self.graph.nodes[state]['name'] for state in path]
+                graph.config.x_labels_major = copy([self.graph.nodes[state]['name'] for state in path])
+                # graph.config.x_labels_major = x_labels_major_str
+                print(graph.config.x_labels_major)
+                print('-')
+                graph.render_to_file('path_{}.svg'.format(i))
+                with open('path_{}.txt'.format(i), 'w') as f_ptr:
+                    f_ptr.write(graph.render(is_unicode=True))
 
-        # Add table
-        if show_state_table:
-            axes[1].axis('off')
-            # Setting up table info
-            columns = ('State',)
-            rows = range(1, len(labels_list)+1)
-            cellText = tuple([self.graph.nodes[state]['name']] 
-                             for state in labels_list)
-            # Adding table
-            table = axes[1].table(cellText=cellText, colLabels=columns,
-                                  rowLabels=rows, loc='center')
-            # Adjust font size
-            if table_font_size is not None:
-                table.auto_set_font_size(False)
-                table.set_fontsize(table_font_size)
+        if viewer == 'matplotlib':
+            # Add other misc labels
+            axes[0].legend()
+            axes[0].set_ylabel(method_name.replace('get_', ''))
+            axes[0].set_xlabel('Reaction coordinate')
+            axes[0].tick_params(axis='x', which='both', bottom=False, top=False,
+                                labelbottom=False)
 
-        return fig, axes
+
+            # Add state labels
+            if show_state_labels:
+                for i, label in enumerate(labels_list, start=1):
+                    axes[0].text(x=x_vals[label]+x_label_offset,
+                                y=y_states[label]+y_label_offset,
+                                s='{:^}'.format(i))
+
+            # Add table
+            if show_state_table:
+                axes[1].axis('off')
+                # Setting up table info
+                columns = ('State',)
+                rows = range(1, len(labels_list)+1)
+                cellText = tuple([self.graph.nodes[state]['name']] 
+                                for state in labels_list)
+                # Adding table
+                table = axes[1].table(cellText=cellText, colLabels=columns,
+                                    rowLabels=rows, loc='center')
+                # Adjust font size
+                if table_font_size is not None:
+                    table.auto_set_font_size(False)
+                    table.set_fontsize(table_font_size)
+
+            return fig, axes
+        else:
+            return graph
 
 
 def state_to_set(species, stoich):
