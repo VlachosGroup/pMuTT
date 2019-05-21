@@ -286,10 +286,27 @@ class Network(Reactions):
                 fig, axes = plt.subplots()
                 axes = [axes]
         elif viewer == 'pygal':
+            # Get the y axis value for the axis label
+            y_title = method_name.replace('get_', '')
+            if units is not None:
+                y_title = '{} ({})'.format(y_title, units)
+
+            # Use the tooltip x value to indicate what the y value indicates
+            x_value_formatter = lambda x: y_title
+
+            # Edit style sheet to have the same color for points and colors
+            style = pygal.style.DefaultStyle
+            new_colors = []
+            for color in style.colors:
+                new_colors.extend([color]*2)
+            style.colors = new_colors
+
+            # Initialize the graph
             graph = pygal.XY(x_title='Reaction Coordinate',
-                             y_title=method_name.replace('get_', ''),
+                             y_title=y_title,
                              pretty_print=True, show_y_guides=False,
-                             show_x_guides=False, show_x_labels=False)
+                             show_x_guides=False, show_x_labels=False,
+                             x_value_formatter=x_value_formatter, style=style)
         else:
             raise ValueError('Viewer {} not supported. Type '
                              'help(pMuTT.reaction.network.Network) '
@@ -387,6 +404,7 @@ class Network(Reactions):
         labels_set = set()
         y_states = {}
         n_paths = len(paths_sorted)
+        color_i = 0
         for i, (path, energy_span) in enumerate(zip(paths_sorted,
                                                     energy_spans_sorted),
                                                 start=1):
@@ -396,7 +414,8 @@ class Network(Reactions):
 
             x_plot = []
             y_plot = []
-            x_labels_major_indices = []
+            x_points = []
+            y_points = []
             if show_energy_span:
                 legend_str = 'Pathway {:>3} | {:%s}' % energy_span_format
                 legend_str = legend_str.format(i, energy_span)
@@ -449,8 +468,8 @@ class Network(Reactions):
 
                     '''Get x value corresponding to peak for pygal'''
                     max_i = np.argmax(y_spline)
-                    # x_labels_major_indices.append(max_i+len(x_plot))
-                    x_labels_major_indices.append(x_spline[max_i])
+                    x_points.append(x_spline[max_i])
+                    y_points.append(y_spline[max_i])
     
                     '''Add new data to the appropriate lists'''
                     x_plot.extend(x_spline)
@@ -461,44 +480,49 @@ class Network(Reactions):
                                    x_state,
                                    x_state+x_width/2.])
                     y_plot.extend([y_state, y_state, y_state])
-                    x_labels_major_indices.append(x_plot[-2])
-                print(state)
-                print(x_labels_major_indices[-1])
+                    x_points.append(x_state)
+                    y_points.append(y_state)
             '''Add data to plot'''
             if viewer == 'matplotlib':
                 axes[0].plot(x_plot, y_plot, label=legend_str, zorder=n_paths-i)
             elif viewer == 'pygal':
-                data = [(x, y) for x, y in zip(x_plot, y_plot)]
-                graph.add(legend_str, data, show_only_major_dots=True)
+                # if color_i == 0:
+                #     color = colors[0]
+                # else:
+                #     color = colors[(len(colors) % color_i) + 1]
+                line_data = [{'value': (x, y),} for x, y in zip(x_plot, y_plot)]
+                graph.add(legend_str, line_data, show_dots=False)
+                point_data = [{'value': (x, y), 'label': self.graph.nodes[state]['name'],} for x, y, state in zip(x_points, y_points, path)]
+                graph.add(legend_str.replace('Pathway', 'Points'), point_data, stroke=False)
+                color_i += 1
 
-                k = 0
-                x_labels = []
-                print(x_labels_major_indices)
-                for l, x in enumerate(x_plot):
-                    if x in x_labels_major_indices:
-                        state = path[k]
-                        x_labels.append(self.graph.nodes[state]['name'])
-                        k += 1
-                    else:
-                        x_labels.append(str(l))
-                # x_labels = [str(x) for x in x_plot]
-                # x_labels_major_str = [str(x) for x in x_labels_major]
-                graph.config.x_labels = copy(x_labels)
-                print('Label')
-                print(graph.config.x_labels)
+                # k = 0
+                # x_labels = []
+                # for l, x in enumerate(x_plot):
+                #     if x in x_labels_major_indices:
+                #         state = path[k]
+                #         x_labels.append(self.graph.nodes[state]['name'])
+                #         k += 1
+                #     else:
+                #         x_labels.append(str(l))
+                # # x_labels = [str(x) for x in x_plot]
+                # # x_labels_major_str = [str(x) for x in x_labels_major]
+                # graph.config.x_labels = copy(x_labels)
+                # print('Label')
+                # print(graph.config.x_labels)
 
-                print('Major')
-                # try:
-                #     graph.config.x_labels_major.extend([self.graph.nodes[state]['name'] for state in path])
-                # except AttributeError:
-                #     graph.config.x_labels_major = [self.graph.nodes[state]['name'] for state in path]
-                graph.config.x_labels_major = copy([self.graph.nodes[state]['name'] for state in path])
-                # graph.config.x_labels_major = x_labels_major_str
-                print(graph.config.x_labels_major)
-                print('-')
+                # print('Major')
+                # # try:
+                # #     graph.config.x_labels_major.extend([self.graph.nodes[state]['name'] for state in path])
+                # # except AttributeError:
+                # #     graph.config.x_labels_major = [self.graph.nodes[state]['name'] for state in path]
+                # graph.config.x_labels_major = copy([self.graph.nodes[state]['name'] for state in path])
+                # # graph.config.x_labels_major = x_labels_major_str
+                # print(graph.config.x_labels_major)
+                # print('-')
                 graph.render_to_file('path_{}.svg'.format(i))
-                with open('path_{}.txt'.format(i), 'w') as f_ptr:
-                    f_ptr.write(graph.render(is_unicode=True))
+                # with open('path_{}.txt'.format(i), 'w') as f_ptr:
+                #     f_ptr.write(graph.render(is_unicode=True))
 
         if viewer == 'matplotlib':
             # Add other misc labels
