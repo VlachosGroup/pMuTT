@@ -227,11 +227,11 @@ class Network(Reactions):
                                 min_x_spacing=1., x_width=0.5,
                                 x_scale_TS=0.5, y_scale_TS=0.5,
                                 x_label_offset=-0.1, y_label_offset=0.1,
-                                species_delimiter='+', show_state_table=True,
-                                show_state_labels=True, table_font_size=None,
-                                table_width_ratio=[3, 1],
+                                species_delimiter='+', viewer='matplotlib',
+                                show_state_table=True, show_state_labels=True,
+                                table_font_size=None, table_width_ratio=[3, 1],
                                 show_energy_span=False,
-                                energy_span_format='.2f', viewer='matplotlib',
+                                energy_span_format='.2f', colors=None,
                                 **kwargs):
         """Plots the reaction coordinate diagram
 
@@ -244,9 +244,18 @@ class Network(Reactions):
             method_name : str
                 Method to evaluate property of the states. Examples include:
                 'get_H', 'get_HoRT', 'get_G', 'get_GoRT'
+            units : str, optional
+                Units to use to evaluate method_name. Must be specified if the
+                `method_name` returns a dimensional property
             cutoff : int, optional
                 Maximum number of states in the pathway. If not specified, all
                 pathways are shown
+            max_energy_span : float, optional
+                If specified, pathways with larger energy spans are eliminated
+            max_paths : int, optional
+                If specified, the number of pathways plotted are limited
+            pathway_numbers : list of int, optional
+                If specified, only certain pathways are plotted            
             min_x_spacing : float, optional
                 Minimum spacing between states. Default is 1.
             x_width : float, optional
@@ -259,13 +268,44 @@ class Network(Reactions):
                 Value between 0 and 1 that controls curvature of transition
                 state peaks. Higher values produce sharper peaks. Default is
                 0.5
-            y_TS_label_offset : float, optional
+            x_label_offset : float, optional
+                Horizontal value to offset TS_label from the TS position. This
+                value scales with the difference between major ticks. Negative
+                values will shift the label leftward. Default is -0.1
+            y_label_offset : float, optional
                 Vertical value to offset TS_label from the TS position. This
                 value scales with the difference between major ticks. Negative
-                values will shift the label downwards. Default is 0.10
+                values will shift the label downwards. Default is 0.1
             species_delimiter : str, optional
                 Delimiter that separate species for target and source.
                 Leading and trailing spaces will be trimmed. Default is '+'
+            viewer : str, optional
+                Visualization package to use. Currently, the accepted options
+                are: 
+
+                - 'matplotlib' (default)
+                - 'pygal'
+            show_state_table : bool, optional
+                Only applies if `viewer` = 'matplotlib'. If True, a table of
+                the states is printed with the diagram. Default is True
+            show_state_labels : bool, optional
+                Only applies if `viewer` = 'matplotlib'. If True, numbers are
+                added to the states which correspond to the entries in the
+                table. Default is True
+            table_font_size : int, optional
+                Only applies if `viewer` = 'matplotlib'. Controls the text font
+                size. If not specified, font rescales with figure size
+            table_width_ratio : list of int, optional
+                Only applies if `viewer` = 'matplotlib'. Controls the relative
+                size of diagram to table. i.e. [2, 1] will make the diagram
+                width twice as large as the table. Default is [3, 1]
+            show_energy_span : bool, optional
+                If True, adds energy span value to legend. Default is True
+            energy_span_format : str, optional
+                String format for energy span in legend. Default is 2 floating
+                decimal points
+            colors : list of str, optional
+                Colors to use for reaction plots
             kwargs: keyword arguments
                 Extra arguments that will be fed to evaluate reaction states
         Returns
@@ -274,8 +314,11 @@ class Network(Reactions):
                 Figure
             axes : tuple of `matplotlib.axes.Axes.axis`_
                 Axes of the plot.
+        Raises
+        ------
+            ValueError : Raised when `viewer` is not supported.
         """
-        # Initialize plot
+        # Initialize plot using appropriate viewer
         if viewer == 'matplotlib':
             # Split graph into two axes if including the table
             if show_state_table:
@@ -297,7 +340,9 @@ class Network(Reactions):
             # Edit style sheet to have the same color for points and colors
             style = pygal.style.DefaultStyle
             new_colors = []
-            for color in style.colors:
+            if colors is None:
+                colors = style.colors
+            for color in colors:
                 new_colors.extend([color]*2)
             style.colors = new_colors
 
@@ -306,7 +351,8 @@ class Network(Reactions):
                              y_title=y_title,
                              pretty_print=True, show_y_guides=False,
                              show_x_guides=False, show_x_labels=False,
-                             x_value_formatter=x_value_formatter, style=style)
+                             x_value_formatter=x_value_formatter, style=style,
+                             truncate_legend=-1)
         else:
             raise ValueError('Viewer {} not supported. Type '
                              'help(pMuTT.reaction.network.Network) '
@@ -322,11 +368,11 @@ class Network(Reactions):
         target_sets = _get_target_sets(target=target,
                                        species_delimiter=species_delimiter)
 
-        # Get all the pathways
+        # Get all the pathways and associated data for sorting
         paths = list(path for path in nx.all_simple_paths(self.graph,
-                                                           source=source_set,
-                                                           target=target_sets,
-                                                           cutoff=cutoff))
+                                                          source=source_set,
+                                                          target=target_sets,
+                                                          cutoff=cutoff))
         path_lens = list(len(path) for path in paths)
         energy_spans = list(self.get_E_span(path, units, **kwargs)
                             for path in paths)
@@ -399,12 +445,10 @@ class Network(Reactions):
                                                             paths_sorted)))
 
         # Assign x, y values for plot
-        legend = []
         labels_list = []
         labels_set = set()
         y_states = {}
         n_paths = len(paths_sorted)
-        color_i = 0
         for i, (path, energy_span) in enumerate(zip(paths_sorted,
                                                     energy_spans_sorted),
                                                 start=1):
@@ -412,35 +456,47 @@ class Network(Reactions):
             if pathway_numbers is not None and i not in pathway_numbers:
                 continue
 
+            # Initialize x, y points for continuous line
             x_plot = []
             y_plot = []
+            # Initialize x, y points for interactive points (when viewer is
+            # pygal)
             x_points = []
             y_points = []
+
+            # Generate legend for trend
             if show_energy_span:
-                legend_str = 'Pathway {:>3} | {:%s}' % energy_span_format
-                legend_str = legend_str.format(i, energy_span)
+                if units is None:
+                    units_str = ''
+                else:
+                    units_str = units
+                path_name = 'Pathway {:>3} ({:%s} {})'%energy_span_format
+                path_name = path_name.format(i, energy_span, units_str)
             else:
-                legend_str = 'Pathway {:>3}'.format(i)
+                path_name = 'Pathway {:>3}'.format(i)
+            point_name = 'Points {:>4}'.format(i)
 
             for j, state in enumerate(path):
-
+                # If unique state found, add it to the label set
                 if state not in labels_set:
                     labels_list.append(state)
                     labels_set.add(state)
+                # Get x and y value
                 x_state = x_vals[state]
-                # x_labels_major.append(x_state)
                 species = self.graph.nodes[state]['species']
                 stoich = self.graph.nodes[state]['stoich']
                 y_val = get_state_quantity(species=species, stoich=stoich,
                                            method_name=method_name, units=units,
                                            **kwargs)
+                # Subtract the initial state's energy
                 if j == 0:
                     y_ref = y_val
                 y_state = y_val - y_ref
                 y_states[state] = y_state
 
+                # Generate continuous points for plot
                 if self.graph.nodes[state]['is_transition_state']:
-                    # Calculate product properties
+                    # Calculate product properties for y interpolation
                     products = self.graph.nodes[path[j+1]]['species']
                     prod_stoich = self.graph.nodes[path[j+1]]['stoich']
                     y_prod = get_state_quantity(species=products,
@@ -462,67 +518,39 @@ class Network(Reactions):
                                       (y_state-y_prod)*y_scale_TS+y_prod,
                                       y_prod])
                     tck = interpolate.splrep(x_fit, y_fit, k=2)
-                    '''Calculate new x and y points from spline fit'''
-                    x_spline = np.linspace(x_state-delta_x, x_state+delta_x)
+                    # Calculate new x and y points from spline fit
+                    x_spline = np.linspace(x_state-delta_x, x_state+delta_x,
+                                           100)
                     y_spline = interpolate.splev(x_spline, tck)
 
-                    '''Get x value corresponding to peak for pygal'''
+                    # Get x value corresponding to peak for pygal
                     max_i = np.argmax(y_spline)
                     x_points.append(x_spline[max_i])
                     y_points.append(y_spline[max_i])
     
-                    '''Add new data to the appropriate lists'''
+                    # Add new data to the appropriate lists
                     x_plot.extend(x_spline)
                     y_plot.extend(y_spline)
                 else:
-                    # x_labels_major.append(x_state)
+                    # For intermediates, use a straight line
                     x_plot.extend([x_state-x_width/2.,
                                    x_state,
                                    x_state+x_width/2.])
                     y_plot.extend([y_state, y_state, y_state])
                     x_points.append(x_state)
                     y_points.append(y_state)
-            '''Add data to plot'''
+            # Add data to plot
             if viewer == 'matplotlib':
-                axes[0].plot(x_plot, y_plot, label=legend_str, zorder=n_paths-i)
+                axes[0].plot(x_plot, y_plot, label=path_name, zorder=n_paths-i)
             elif viewer == 'pygal':
-                # if color_i == 0:
-                #     color = colors[0]
-                # else:
-                #     color = colors[(len(colors) % color_i) + 1]
+                # Add line
                 line_data = [{'value': (x, y),} for x, y in zip(x_plot, y_plot)]
-                graph.add(legend_str, line_data, show_dots=False)
-                point_data = [{'value': (x, y), 'label': self.graph.nodes[state]['name'],} for x, y, state in zip(x_points, y_points, path)]
-                graph.add(legend_str.replace('Pathway', 'Points'), point_data, stroke=False)
-                color_i += 1
-
-                # k = 0
-                # x_labels = []
-                # for l, x in enumerate(x_plot):
-                #     if x in x_labels_major_indices:
-                #         state = path[k]
-                #         x_labels.append(self.graph.nodes[state]['name'])
-                #         k += 1
-                #     else:
-                #         x_labels.append(str(l))
-                # # x_labels = [str(x) for x in x_plot]
-                # # x_labels_major_str = [str(x) for x in x_labels_major]
-                # graph.config.x_labels = copy(x_labels)
-                # print('Label')
-                # print(graph.config.x_labels)
-
-                # print('Major')
-                # # try:
-                # #     graph.config.x_labels_major.extend([self.graph.nodes[state]['name'] for state in path])
-                # # except AttributeError:
-                # #     graph.config.x_labels_major = [self.graph.nodes[state]['name'] for state in path]
-                # graph.config.x_labels_major = copy([self.graph.nodes[state]['name'] for state in path])
-                # # graph.config.x_labels_major = x_labels_major_str
-                # print(graph.config.x_labels_major)
-                # print('-')
-                graph.render_to_file('path_{}.svg'.format(i))
-                # with open('path_{}.txt'.format(i), 'w') as f_ptr:
-                #     f_ptr.write(graph.render(is_unicode=True))
+                graph.add(path_name, line_data, show_dots=False)
+                # Add interactive points
+                point_data = [{'value': (x, y),
+                               'label': self.graph.nodes[state]['name'],}
+                              for x, y, state in zip(x_points, y_points, path)]
+                graph.add(point_name, point_data, stroke=False)
 
         if viewer == 'matplotlib':
             # Add other misc labels
@@ -531,15 +559,12 @@ class Network(Reactions):
             axes[0].set_xlabel('Reaction coordinate')
             axes[0].tick_params(axis='x', which='both', bottom=False, top=False,
                                 labelbottom=False)
-
-
             # Add state labels
             if show_state_labels:
                 for i, label in enumerate(labels_list, start=1):
                     axes[0].text(x=x_vals[label]+x_label_offset,
                                 y=y_states[label]+y_label_offset,
                                 s='{:^}'.format(i))
-
             # Add table
             if show_state_table:
                 axes[1].axis('off')
@@ -555,7 +580,6 @@ class Network(Reactions):
                 if table_font_size is not None:
                     table.auto_set_font_size(False)
                     table.set_fontsize(table_font_size)
-
             return fig, axes
         else:
             return graph
