@@ -318,6 +318,11 @@ class Network(Reactions):
         ------
             ValueError : Raised when `viewer` is not supported.
         """
+        # Get the y axis value for the axis label
+        y_title = method_name.replace('get_', '')
+        if units is not None:
+            y_title = '{} ({})'.format(y_title, units)
+
         # Initialize plot using appropriate viewer
         if viewer == 'matplotlib':
             # Split graph into two axes if including the table
@@ -329,11 +334,6 @@ class Network(Reactions):
                 fig, axes = plt.subplots()
                 axes = [axes]
         elif viewer == 'pygal':
-            # Get the y axis value for the axis label
-            y_title = method_name.replace('get_', '')
-            if units is not None:
-                y_title = '{} ({})'.format(y_title, units)
-
             # Use the tooltip x value to indicate what the y value indicates
             x_value_formatter = lambda x: y_title
 
@@ -555,7 +555,7 @@ class Network(Reactions):
         if viewer == 'matplotlib':
             # Add other misc labels
             axes[0].legend()
-            axes[0].set_ylabel(method_name.replace('get_', ''))
+            axes[0].set_ylabel(y_title)
             axes[0].set_xlabel('Reaction coordinate')
             axes[0].tick_params(axis='x', which='both', bottom=False, top=False,
                                 labelbottom=False)
@@ -575,7 +575,7 @@ class Network(Reactions):
                                 for state in labels_list)
                 # Adding table
                 table = axes[1].table(cellText=cellText, colLabels=columns,
-                                    rowLabels=rows, loc='center')
+                                      rowLabels=rows, loc='center')
                 # Adjust font size
                 if table_font_size is not None:
                     table.auto_set_font_size(False)

@@ -2299,9 +2299,6 @@ class Reactions(_pMuTTBase):
                 y_TS = reaction.get_state_quantity(method_name=method_name,
                                                    state='transition state',
                                                    **reaction_kwargs) - ref
-                print(reaction.to_string())
-                print(y_TS)
-                print('-'*10)
                 '''Calculate data to fit spline'''
                 x_fit = np.array([x-x_offset,
                                   x-x_offset*(1.-x_scale_TS),
