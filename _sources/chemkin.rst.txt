@@ -15,10 +15,12 @@ Objects
 
 .. autoclass:: pMuTT.reaction.ChemkinReaction
    :members:
+   :noindex:
 
 Input and Output
 ----------------
 
 .. automodule:: pMuTT.io.chemkin
    :members:
+   :noindex:
 
