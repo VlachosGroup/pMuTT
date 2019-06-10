@@ -281,8 +281,9 @@ And a sample plot is shown below
 
 JSON
 ====
-`JavaScript Object Notation (JSON)`_ is a format that is easily read and written by
-both humans and machines. All pMuTT objects are JSON compatible.
+`JavaScript Object Notation (JSON)`_ is a format that is easily read and
+written by both humans and machines. All pMuTT objects with the methods 
+``to_dict`` and ``from_dict`` are JSON compatible.
 
 .. automodule:: pMuTT.io.json
    :members:

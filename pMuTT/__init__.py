@@ -164,6 +164,22 @@ class _ModelBase(_pMuTTBase):
         """
         return _force_pass_arguments(self.get_SoR, **kwargs)*c.R(units)
 
+    def get_FoRT(self, **kwargs):
+        """Calculates the dimensionless Helmholtz energy
+
+        Parameters
+        ----------
+            kwargs : keyword arguments
+                Parameters needed by ``get_UoRT`` and ``get_SoR``
+        Returns
+        -------
+            FoRT : float
+                Dimensionless Helmholtz energy
+        """
+        UoRT = _force_pass_arguments(self.get_UoRT, **kwargs)
+        SoR = _force_pass_arguments(self.get_SoR, **kwargs)
+        return UoRT - SoR
+
     def get_F(self, units, T=c.T0('K'), **kwargs):
         """Calculate the Helmholtz energy
 
@@ -185,6 +201,22 @@ class _ModelBase(_pMuTTBase):
         FoRT_kwargs['T'] = T
         return _force_pass_arguments(self.get_FoRT, **FoRT_kwargs) \
                *T*c.R('{}/K'.format(units))
+
+    def get_GoRT(self, **kwargs):
+        """Calculates the dimensionless Gibbs free energy
+
+        Parameters
+        ----------
+            kwargs : keyword arguments
+                Parameters needed by ``get_HoRT`` and ``get_SoR``
+        Returns
+        -------
+            GoRT : float
+                Dimensionless Gibbs free energy
+        """
+        HoRT = _force_pass_arguments(self.get_HoRT, **kwargs)
+        SoR = _force_pass_arguments(self.get_SoR, **kwargs)
+        return HoRT - SoR
 
     def get_G(self, units, T=c.T0('K'), **kwargs):
         """Calculate the Gibbs energy

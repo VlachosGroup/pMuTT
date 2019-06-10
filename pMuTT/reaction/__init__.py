@@ -90,8 +90,8 @@ class Reaction(_pMuTTBase):
                 # If BEP specified, link reaction to BEP
                 if isinstance(specie, BEP):
                     specie = deepcopy(specie)
-                    specie.set_descriptor(reaction=self,
-                                          descriptor=bep_descriptor)
+                    specie.reaction = self
+                    specie.descriptor = bep_descriptor
                 transition_state_list.append(specie)
             transition_state = transition_state_list
         self.transition_state = transition_state

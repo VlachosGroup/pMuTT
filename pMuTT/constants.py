@@ -370,7 +370,7 @@ def convert_unit(num=None, initial=None, final=None):
             conversion factor.
         initial : str
             Units that num is currently in
-        to : str
+        final : str
             Units you would like num to be in
     Returns
     -------
