@@ -3,11 +3,11 @@
 import itertools
 from warnings import warn
 import numpy as np
-from pMuTT import _pMuTTBase
+from pMuTT import _ModelBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
-class RigidRotor(_pMuTTBase):
+class RigidRotor(_ModelBase):
     """Rotational mode using the rigid rotor assumption. Equations sourced from:
     
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
@@ -46,12 +46,14 @@ class RigidRotor(_pMuTTBase):
             - monatomic
             - linear
             - nonlinear
-        atoms : ase.Atoms object, optional
+        atoms : `ase.Atoms`_ object, optional
             An atoms object can be used to calculate rot_temperatures and
             guess geometry
         degree_tol : float
             Degree tolerance to estimate geometry. Only required if estimating
             geometry or rot_temperatures
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
 
     def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None,

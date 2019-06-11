@@ -26,7 +26,7 @@ author = 'Vlachos Research Group'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.6'
+release = '1.2.7'
 
 
 # -- General configuration ---------------------------------------------------
@@ -147,7 +147,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pymutt', 'pMuTT Documentation',
+    (master_doc, 'pmutt', 'pMuTT Documentation',
      [author], 1)
 ]
 

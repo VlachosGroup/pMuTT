@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from pMuTT import constants as c
-from pMuTT import _force_pass_arguments, _pMuTTBase
+from pMuTT import _force_pass_arguments, _ModelBase
 from pMuTT.statmech import StatMech, ConstantMode, presets
 from pMuTT.reaction import Reaction
 from pMuTT.io.json import remove_class, json_to_pMuTT
 
 
-class LSR(_pMuTTBase):
+class LSR(_ModelBase):
     """Represents a linear scaling relationship
 
     :math:`\\Delta E^{AH_x} = \\alpha E^{A} + \\beta`
@@ -47,10 +47,10 @@ class LSR(_pMuTTBase):
         if not isinstance(reaction, Reaction):
             reaction = self._float_to_reaction(reaction)
         self.reaction = reaction
-        if not isinstance(surf_specie, _pMuTTBase):
+        if not isinstance(surf_specie, _ModelBase):
             surf_specie = self._float_to_specie(surf_specie)
         self.surf_specie = surf_specie
-        if not isinstance(gas_specie, _pMuTTBase):
+        if not isinstance(gas_specie, _ModelBase):
             gas_specie = self._float_to_specie(gas_specie)
         self.gas_specie = gas_specie
         self.notes = notes

@@ -30,8 +30,10 @@ Dependencies
 -  `SciPy`_: Used for fitting heat capacities and generating smooth curves for
    reaction coordinate diagram
 -  `Matplotlib`_: Used for plotting thermodynamic data
+-  `pyGal`_: Similar to Matplotlib. Used for plotting interactive graphs.
 -  `PyMongo`_: Used to read/write to databases
 -  `dnspython`_: Used to connect to databases
+-  `NetworkX`_: Used to plot reaction networks.
 
 Getting Started
 ---------------
@@ -99,8 +101,10 @@ Special Thanks
 .. _Pandas: https://pandas.pydata.org/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
+.. _`pyGal`: http://pygal.org/en/stable/
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
+.. _networkx: https://networkx.github.io/
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pMuTT/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html

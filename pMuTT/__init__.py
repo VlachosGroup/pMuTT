@@ -17,6 +17,7 @@ import inspect
 import itertools
 from warnings import warn
 import numpy as np
+import pygal
 from matplotlib import pyplot as plt
 from pMuTT.io.json import remove_class
 from pMuTT import constants as c
@@ -68,7 +69,7 @@ class _ModelBase(_pMuTTBase):
     def __init__(self):
         pass
 
-    def get_Cv(units, **kwargs):
+    def get_Cv(self, units, **kwargs):
         """Calculate the heat capacity (constant V)
 
         Parameters
@@ -83,9 +84,9 @@ class _ModelBase(_pMuTTBase):
             Cv : float
                 Heat capacity (constant V) in appropriate units
         """
-        self.get_CvoR(**kwargs)*c.R(units)
+        return _force_pass_arguments(self.get_CvoR, **kwargs)*c.R(units)
 
-    def get_Cp(units, **kwargs):
+    def get_Cp(self, units, **kwargs):
         """Calculate the heat capacity (constant P)
 
         Parameters
@@ -100,9 +101,9 @@ class _ModelBase(_pMuTTBase):
             Cp : float
                 Heat capacity (constant P) in appropriate units
         """
-        self.get_CpoR(**kwargs)*c.R(units)
+        return _force_pass_arguments(self.get_CpoR, **kwargs)*c.R(units)
 
-    def get_U(units, T=c.T0('K'), **kwargs):
+    def get_U(self, units, T=c.T0('K'), **kwargs):
         """Calculate the internal energy
 
         Parameters
@@ -119,9 +120,12 @@ class _ModelBase(_pMuTTBase):
             U : float
                 Internal energy in appropriate units
         """
-        self.get_UoRT(**kwargs)*T*c.R('{}/K'.format(units))
+        UoRT_kwargs = kwargs.copy()
+        UoRT_kwargs['T'] = T
+        return _force_pass_arguments(self.get_UoRT, **UoRT_kwargs) \
+               *T*c.R('{}/K'.format(units))
 
-    def get_H(units, T=c.T0('K'), **kwargs):
+    def get_H(self, units, T=c.T0('K'), **kwargs):
         """Calculate the enthalpy
 
         Parameters
@@ -138,9 +142,12 @@ class _ModelBase(_pMuTTBase):
             H : float
                 Enthalpy in appropriate units
         """
-        self.get_HoRT(**kwargs)*T*c.R('{}/K'.format(units))
+        HoRT_kwargs = kwargs.copy()
+        HoRT_kwargs['T'] = T
+        return _force_pass_arguments(self.get_HoRT, **HoRT_kwargs) \
+               *T*c.R('{}/K'.format(units))
 
-    def get_S(units, **kwargs):
+    def get_S(self, units, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -155,9 +162,25 @@ class _ModelBase(_pMuTTBase):
             S : float
                 Entropy in appropriate units
         """
-        self.get_SoR(**kwargs)*c.R(units)
+        return _force_pass_arguments(self.get_SoR, **kwargs)*c.R(units)
 
-    def get_F(units, T=c.T0('K'), **kwargs):
+    def get_FoRT(self, **kwargs):
+        """Calculates the dimensionless Helmholtz energy
+
+        Parameters
+        ----------
+            kwargs : keyword arguments
+                Parameters needed by ``get_UoRT`` and ``get_SoR``
+        Returns
+        -------
+            FoRT : float
+                Dimensionless Helmholtz energy
+        """
+        UoRT = _force_pass_arguments(self.get_UoRT, **kwargs)
+        SoR = _force_pass_arguments(self.get_SoR, **kwargs)
+        return UoRT - SoR
+
+    def get_F(self, units, T=c.T0('K'), **kwargs):
         """Calculate the Helmholtz energy
 
         Parameters
@@ -174,9 +197,28 @@ class _ModelBase(_pMuTTBase):
             F : float
                 Hemholtz energy in appropriate units
         """
-        self.get_FoRT(**kwargs)*T*c.R('{}/K'.format(units))
+        FoRT_kwargs = kwargs.copy()
+        FoRT_kwargs['T'] = T
+        return _force_pass_arguments(self.get_FoRT, **FoRT_kwargs) \
+               *T*c.R('{}/K'.format(units))
 
-    def get_G(units, T=c.T0('K'), **kwargs):
+    def get_GoRT(self, **kwargs):
+        """Calculates the dimensionless Gibbs free energy
+
+        Parameters
+        ----------
+            kwargs : keyword arguments
+                Parameters needed by ``get_HoRT`` and ``get_SoR``
+        Returns
+        -------
+            GoRT : float
+                Dimensionless Gibbs free energy
+        """
+        HoRT = _force_pass_arguments(self.get_HoRT, **kwargs)
+        SoR = _force_pass_arguments(self.get_SoR, **kwargs)
+        return HoRT - SoR
+
+    def get_G(self, units, T=c.T0('K'), **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -193,10 +235,13 @@ class _ModelBase(_pMuTTBase):
             G : float
                 Gibbs energy in appropriate units
         """
-        self.get_GoRT(**kwargs)*T*c.R('{}/K'.format(units))
+        GoRT_kwargs = kwargs.copy()
+        GoRT_kwargs['T'] = T
+        return _force_pass_arguments(self.get_GoRT, **GoRT_kwargs) \
+               *T*c.R('{}/K'.format(units))
 
 def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
-            figure=None, ax=None, **kwargs):
+            viewer='matplotlib', figure=None, ax=None, **kwargs):
     """Make a 1D plot
 
     Parameters
@@ -227,8 +272,8 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
             arguments can be passed by having a key that corresponds to
             the method name
             
-            e.g. kwargs = {'get_H': {'units': 'kcal/mol'},
-                            'get_S': {'units': 'cal/mol/K'}}
+            e.g. kwargs = {'get_H_kwargs': {'units': 'kcal/mol'},
+                           'get_S_kwargs': {'units': 'cal/mol/K'}}
     Returns
     -------
         figure : `matplotlib.figure.Figure`_
@@ -243,17 +288,30 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
     if not _is_iterable(methods):
         methods = (methods,)
 
-    # If rows/columns not specified, assing default values
-    if nrows is None:
-        nrows = len(methods)
-        ncols = 1
+    # Set up the plot
+    if viewer == 'matplotlib':
+        # If rows/columns not specified, assing default values
+        if nrows is None:
+            nrows = len(methods)
+            ncols = 1
 
-    # Create the subplots
-    if ax is None:
-        figure, ax = plt.subplots(nrows=nrows, ncols=ncols)
-    # Force ax to be a list
-    if nrows*ncols == 1:
-        ax = [ax]
+        # Create the subplots
+        if ax is None:
+            figure, ax = plt.subplots(nrows=nrows, ncols=ncols)
+        # Force ax to be a list
+        if nrows*ncols == 1:
+            ax = [ax]
+    elif viewer == 'pygal':
+        graph = pygal.XY(x_title=x_name, y_title=methods[0].replace('get_', ''),
+                         pretty_print=True, show_y_guides=False,
+                         show_x_guides=False, include_x_axis=True)
+        if len(methods) != 1:
+            raise RuntimeError('Currently, viewer {} only supports a single '
+                               'method.'.format(viewer))
+    else:
+        raise ValueError('Viewer {} not supported. Type help(pMuTT.plot_1D) '
+                         'for supported options.'.format(viewer))
+
     # Evaluate obj for each method
     for i, method in enumerate(methods):
         # If adding data to existing plot, skip methods with None
@@ -265,10 +323,18 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
         for j, x in enumerate(x_values):
             method_kwargs[x_name] = x
             y[j] = _force_pass_arguments(fn, **method_kwargs)
-        ax[i].plot(x_values, y)
-        ax[i].set_xlabel(x_name)
-        ax[i].set_ylabel(method.replace('get_', ''))
-    return (figure, ax)
+        if viewer == 'matplotlib':
+            ax[i].plot(x_values, y)
+            ax[i].set_xlabel(x_name)
+            ax[i].set_ylabel(method.replace('get_', ''))
+        elif viewer == 'pygal':
+            # Format data for graph
+            data = [(x_val, y_val) for x_val, y_val in zip(x_values, y)]
+            graph.add(obj.name, data)
+    if viewer == 'matplotlib':
+        return (figure, ax)
+    elif viewer == 'pygal':
+        return graph
 
 def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
             nrows=None, ncols=None, **kwargs):
@@ -307,8 +373,12 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
     -------
         figure : `matplotlib.figure.Figure`_
             Figure
-        ax : `matplotlib.axes.Axes.axis`_
+        ax : (N,) list of `matplotlib.axes.Axes.axis`_
             Axes of the plots.
+        c : (N,) list of `matplotlib.collections.QuadMesh`_
+            Heatmap plots
+        cbar : (N,) list of `matplotlib.colorbar.Colorbar`_
+            Colorbar for plots
 
     .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
     .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html

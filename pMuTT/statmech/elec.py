@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from pMuTT import _pMuTTBase
+from pMuTT import _ModelBase
 from pMuTT import constants as c
 from pMuTT.io.json import remove_class
 
 
-class GroundStateElec(_pMuTTBase):
+class GroundStateElec(_ModelBase):
     """Electronic modes using the ideal gas assumption. Equations sourced from:
     
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
@@ -15,23 +15,49 @@ class GroundStateElec(_pMuTTBase):
     Attributes
     ----------
         potentialenergy : float, optional
-            Potential energy in eV. Default is 0
-        D0 : float, optional
-            Bond strength in eV. Preferentially used when calculating partition
-            coefficient.
+            Potential energy in eV. If this value and `atoms` are not
+            specified, defaults to 0
         spin : float, optional
             The total electron spin. Default is 0
 
             - 0 for molecules in which all electrons are paired
             - 0.5 for a free radical with a single unpaired electron
             - 1.0 for a triplet with two unpaired electrons, such as O :sub:`2`
+        atoms : `ase.Atoms`_ object, optional
+            If `potentialenergy` is not specified, the energy will be obtained
+            using `atoms.get_potential_energy()`.
+        D0 : float, optional
+            Bond strength in eV. Preferentially used when calculating partition
+            coefficient.
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
 
-    def __init__(self, potentialenergy=0., spin=0., D0=None):
+    def __init__(self, potentialenergy=None, spin=0., atoms=None, D0=None):
+        # If the potentialenergy was not specified, calculate from atoms object
+        if potentialenergy is None:
+            # If atoms was not specified, assign default value
+            if atoms is None:
+                potentialenergy = 0.
+            else:
+                # Try to read the potentialenergy from the atoms object. If it
+                # fails, use the default value
+                try:
+                    potentialenergy = atoms.get_potential_energy()
+                except (RuntimeError, ValueError):
+                    potentialenergy = 0. 
         self.potentialenergy = potentialenergy
         self.D0 = D0
         self.spin = spin
-        self._degeneracy = 2.*self.spin + 1.
+
+    @property
+    def spin(self):
+        return self._spin
+    
+    @spin.setter
+    def spin(self, val):
+        self._spin = val
+        self._degeneracy = 2.*val + 1.
 
     def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function

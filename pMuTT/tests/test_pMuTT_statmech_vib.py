@@ -94,12 +94,16 @@ class TestQRRHOVib(unittest.TestCase):
         self.T = 300.  # K
 
     def test_get_scaled_wavenumber(self):
-        self.assertAlmostEqual(self.vib_H2O._get_scaled_wavenumber(1582.432),
-                               0.999984052)
+        np.testing.assert_array_almost_equal(
+                np.array([9.999995330429E-01, 9.999994723081E-01,
+                          9.999840524913E-01]),
+                self.vib_H2O._get_scaled_wavenumber())
 
     def test_get_scaled_inertia(self):
-        self.assertAlmostEqual(self.vib_H2O._get_scaled_inertia(1582.432),
-                               1.76893896253E-49)
+        np.testing.assert_array_almost_equal(
+                np.array([7.317482550162E-50, 7.544621804437E-50,
+                          1.768938962532E-49]),
+                self.vib_H2O._get_scaled_inertia())
 
     def test_get_CvoR(self):
         self.assertAlmostEqual(self.vib_H2.get_CvoR(T=self.T),
@@ -142,22 +146,25 @@ class TestQRRHOVib(unittest.TestCase):
                 5.899139738E-02)
 
     def test_get_SoR(self):
+        # It's odd that this evaluated to a negative quantity. However, this
+        # may be due to qRRHO not being valid for species with more
+        # harmonic-like vibrations?
         self.assertAlmostEqual(self.vib_H2.get_SoR(T=self.T),
-                               1.6315868671e-06)
+                               -1.0516394390905423e-07)
         self.assertAlmostEqual(self.vib_H2O.get_SoR(T=self.T),
-                               0.00444131527822)
+                               0.004348189190084936)
 
     def test_get_FoRT(self):
         self.assertAlmostEqual(self.vib_H2.get_FoRT(T=self.T),
-                               10.3260509635305)
+                               10.326052700281332)
         self.assertAlmostEqual(self.vib_H2O.get_FoRT(T=self.T),
-                               21.864271329132)
+                               21.86436445522042)
 
     def test_get_GoRT(self):
         self.assertAlmostEqual(self.vib_H2.get_GoRT(T=self.T),
-                               10.3260509635305)
+                               10.326052700281332)
         self.assertAlmostEqual(self.vib_H2O.get_GoRT(T=self.T),
-                               21.864271329132)
+                               21.86436445522042)
 
     def test_to_dict(self):
         self.assertEqual(self.vib_H2O.to_dict(), self.vib_H2O_dict)

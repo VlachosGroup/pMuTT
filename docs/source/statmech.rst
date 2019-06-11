@@ -126,8 +126,9 @@ Ideal Gas (idealgas)
 | symmetrynumber      | (int) Symmetry number                                  |
 +---------------------+--------------------------------------------------------+
 | atoms               | (ase.Atoms object) Optional. If this parameter is      |
-|                     | specified, ``molecular_weight``, ``geometry``, and     |
-|                     | ``rot_temperatures`` do not have to be specified.      |
+|                     | specified, ``molecular_weight``, ``geometry``,         |
+|                     | ``rot_temperatures``, and ``potentialenergy`` do not   |
+|                     | have to be specified.                                  |
 +---------------------+--------------------------------------------------------+
 
 +-------------------------+---------------------+-------------------------+
@@ -173,6 +174,10 @@ Typically used to model adsorbates.
 +---------------------+-------------------------------------------------+
 | spin                | (float) Electron spin                           |
 +---------------------+-------------------------------------------------+
+| atoms               | (ase.Atoms object) Optional. If this parameter  |
+|                     | is specified, ``potentialenergy`` does not have |
+|                     | to be specified.                                |
++---------------------+-------------------------------------------------+
 
 +-------------------------+---------------------+-----------------------+
 | Thermodynamic Quantity  | Expected Parameters | Optional Parameters   |
@@ -210,6 +215,11 @@ Electronic (electronic)
 | potentialenergy     | (float) Electronic potential energy in eV |
 +---------------------+-------------------------------------------+
 | spin                | (float) Electron spin                     |
++---------------------+-------------------------------------------+
+| atoms               | (ase.Atoms object) Optional. If this      |
+|                     | parameter is specified,                   |
+|                     | ``potentialenergy`` does not have to be   |
+|                     | specified                                 |
 +---------------------+-------------------------------------------+
 
 +-------------------------+---------------------+-----------------------+
@@ -425,16 +435,15 @@ If you would like to arbitrarily set thermodynamic properties, you can use the
 
 Creating New StatMech Models
 ============================
-If you would like to create your own class to be stored by 
-:class:`~pMuTT.statmech.StatMech`, it should have the methods: 
+New models should inherit from ``pMuTT._ModelBase``. This class already has the
+dimensional methods (e.g. ``get_Cv``, ``get_U``, ``get_S``), and some routine
+methods (e.g. ``get_FoRT``, ``get_GoRT``, ``from_dict``, ``to_dict``)
+implemented.
 
+For full accessibility, the following methods should be implemented:
 - ``get_q`` 
 - ``get_CvoR`` 
 - ``get_CpoR`` 
 - ``get_UoRT``
 - ``get_HoRT``
 - ``get_SoR``
-- ``get_FoRT``
-- ``get_GoRT``
-- ``from_dict``
-- ``to_dict``
