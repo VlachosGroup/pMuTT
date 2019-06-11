@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Referencing &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Installation &mdash; pMuTT 1.2.7 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Input and Output" href="io.html" />
-    <link rel="prev" title="Examples" href="examples.html" /> 
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" href="includeme.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -85,9 +85,16 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-python">Installing Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-using-pip">Installing pMuTT using pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-from-source">Installing pMuTT from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-pmutt-using-pip">Upgrading pMuTT using pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
@@ -144,13 +151,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Referencing</li>
+      <li>Installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/referencing.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -182,29 +189,65 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="referencing">
-<span id="id1"></span><h1>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline">¶</a></h1>
-<p>Enthalpies calculated using VASP (and some other computational methods)
-have different references than standard references (i.e. the enthalpy of
-formation of pure substances, like O<sub>2</sub> or Pt, is not necessarily
-zero). This difference makes it difficult to ensure thermodynamic consistency
-for our mechanisms since we may be mixing experimental gas thermodynamics with
-computational surface thermodynamics. In order to make the references
-consistent, we find a correction factor for each element by solving the
-equation:</p>
-<p><span class="math notranslate nohighlight">\(\underline {\underline {H}}^{expt}_{[M \times N]} = \underline
-{\underline {H}}^{DFT}_{[M \times N]} + \underline {\underline {x}}_
-{[M \times N]} \underline{\mathbf{h}}_{[N]}\)</span></p>
-<p>where M is the number of reference species, N is the number of elements,
-H<sup>expt</sup> is the experimental standard enthalpies,
-H<sup>DFT</sup> is the standard enthalpies calculated using DFT,
-x is a matrix that describes the composition of the references (each row
-represents a specie, each column represents an element), and θ is the
-correction for each element.</p>
-<p>The equation can be solved using a Least Squares approach.
-The correction factor can then be added to subsequent species calculated
-through DFT to ensure consistent references. Referencing is handled by the
-<a class="reference internal" href="empirical.html#pMuTT.empirical.references.References" title="pMuTT.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a>.</p>
+<div class="section" id="installation">
+<span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-python">
+<h2>Installing Python<a class="headerlink" href="#installing-python" title="Permalink to this headline">¶</a></h2>
+<p>Anaconda is the recommended method to install Python for scientific
+applications. It is supported on Linux, Windows and Mac OS X.
+<a class="reference external" href="https://www.anaconda.com/distribution/#download-section">Download Anaconda here</a>. Note that pMuTT runs on Python 3.X.</p>
+</div>
+<div class="section" id="installing-pmutt-using-pip">
+<h2>Installing pMuTT using pip<a class="headerlink" href="#installing-pmutt-using-pip" title="Permalink to this headline">¶</a></h2>
+<p>Using pip is the most straightforward way to install pMuTT.</p>
+<ol class="arabic simple">
+<li>Open a command prompt with access to Python (if Python is installed via
+Anaconda on Windows, use the Anaconda Prompt).</li>
+</ol>
+<p>2. Install pMuTT using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">pMuTT</span>
+</pre></div>
+</div>
+<p>The output towards the end should state “Successfully built pMuTT” if the
+installation was successful.</p>
+</div>
+<div class="section" id="installing-pmutt-from-source">
+<h2>Installing pMuTT from source<a class="headerlink" href="#installing-pmutt-from-source" title="Permalink to this headline">¶</a></h2>
+<p>If you would prefer to install from source or you are interested in development,
+follow the instructions below.</p>
+<ol class="arabic simple">
+<li>Clone the repository from GitHub (using the GitHub Desktop makes it easier).
+<a class="reference external" href="https://help.github.com/en/articles/cloning-a-repository">See GitHub instructions on cloning repositories here</a>.</li>
+<li>Add the path of the <code class="docutils literal notranslate"><span class="pre">pMuTT</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment
+variable.</li>
+</ol>
+</div>
+<div class="section" id="upgrading-pmutt-using-pip">
+<h2>Upgrading pMuTT using pip<a class="headerlink" href="#upgrading-pmutt-using-pip" title="Permalink to this headline">¶</a></h2>
+<p>To upgrade to a newer release, use the –upgrade flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pMuTT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-unit-tests">
+<h2>Running unit tests<a class="headerlink" href="#running-unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>pMuTT has a suite of unit tests that should be run before committing any code.
+To run the tests, navigate to the tests folder (pMuTT/tests) via a command line
+with access to Python.</p>
+<p>Run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">unittest</span>
+</pre></div>
+</div>
+<p>The expected output is shown below. The number of tests will not
+necessarily be the same.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.........................</span>
+<span class="o">----------------------------------------------------------------------</span>
+<span class="n">Ran</span> <span class="mi">25</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">0.020</span><span class="n">s</span>
+
+<span class="n">OK</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -215,10 +258,10 @@ through DFT to ensure consistent references. Referencing is handled by the
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="io.html" class="btn btn-neutral float-right" title="Input and Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="examples.html" class="btn btn-neutral" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

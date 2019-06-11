@@ -14,7 +14,7 @@ equation:
 
 :math:`\underline {\underline {H}}^{expt}_{[M \times N]} = \underline 
 {\underline {H}}^{DFT}_{[M \times N]} + \underline {\underline {x}}_
-{[M \times N]} \underline{\theta}_{[N]}`
+{[M \times N]} \underline{\mathbf{h}}_{[N]}`
 
 where M is the number of reference species, N is the number of elements, 
 H\ :sup:`expt`\  is the experimental standard enthalpies, 

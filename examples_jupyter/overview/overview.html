@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview of pMuTT’s Core Functionality &mdash; pMuTT 1.2.6 documentation</title>
+  <title>Overview of pMuTT’s Core Functionality &mdash; pMuTT 1.2.7 documentation</title>
   
 
   
@@ -83,6 +83,7 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
@@ -383,6 +384,9 @@ in the documentation for supported units.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
+<span class="mf">1.987</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;kJ/mol/K&#39;</span><span class="p">))</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Some constants&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R (J/mol/K) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Avogadro&#39;s number = </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">Na</span><span class="p">))</span>
@@ -402,6 +406,7 @@ in the documentation for supported units.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
+0.0083144598
 Some constants
 R (J/mol/K) = 8.3144598
 Avogadro&#39;s number = 6.02214086e+23
@@ -463,7 +468,7 @@ convert_unit(num=None, initial=None, final=None)
             conversion factor.
         initial : str
             Units that num is currently in
-        to : str
+        final : str
             Units you would like num to be in
     Returns
     -------

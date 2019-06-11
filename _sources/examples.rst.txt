@@ -9,8 +9,8 @@ codes listed here are available in the `examples folder`_ as Jupyter notebooks
 Overview
 --------
 
-- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.ipynb>`_
-- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.py>`_
+- `Jupyter Notebook (Overview) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.ipynb>`_
+- `Python Script (Overview) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.py>`_
 
 
 Topics Covered
@@ -33,8 +33,8 @@ Topics Covered
 
 Experimental to Empirical
 -------------------------
-- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb>`_
-- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.py>`_
+- `Jupyter Notebook (Experimental to Empirical) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb>`_
+- `Python Script (Experimental to Empirical) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.py>`_
 
 Topics Covered
 ^^^^^^^^^^^^^^
@@ -49,8 +49,8 @@ Topics Covered
 
 Excel to Empirical Data
 -----------------------
-- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb>`_
-- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.py>`_
+- `Jupyter Notebook (Excel to Empirical Data) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb>`_
+- `Python Script (Excel to Empirical Data) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.py>`_
 
 Topics Covered
 ^^^^^^^^^^^^^^
@@ -64,8 +64,8 @@ Topics Covered
 
 Reaction
 --------
-- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.ipynb>`_
-- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.py>`_
+- `Jupyter Notebook (Reaction) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.ipynb>`_
+- `Python Script (Reaction) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.py>`_
 
 Topics Covered
 ^^^^^^^^^^^^^^
@@ -81,8 +81,8 @@ Topics Covered
 
 Chemkin_IO
 ----------
-- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.ipynb>`_
-- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.py>`_
+- `Jupyter Notebook (Chemkin_IO) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.ipynb>`_
+- `Python Script (Chemkin_IO) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.py>`_
 
 Topics Covered
 ^^^^^^^^^^^^^^
@@ -95,8 +95,8 @@ Topics Covered
 
 Phase Diagram
 -------------
-- `Jupyter Notebook <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
-- `Python Script <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.py>`_
+- `Jupyter Notebook (Phase Diagram) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
+- `Python Script (Phase Diagram) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.py>`_
 
 Topics Covered
 ^^^^^^^^^^^^^^

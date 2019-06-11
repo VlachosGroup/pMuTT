@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.6 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pMuTT 1.2.7 documentation</title>
   
 
   
@@ -85,6 +85,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
@@ -1197,8 +1198,9 @@ parentheses is the default value).</p>
 </tr>
 <tr class="row-odd"><td>atoms</td>
 <td>(ase.Atoms object) Optional. If this parameter is
-specified, <code class="docutils literal notranslate"><span class="pre">molecular_weight</span></code>, <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">rot_temperatures</span></code> do not have to be specified.</td>
+specified, <code class="docutils literal notranslate"><span class="pre">molecular_weight</span></code>, <code class="docutils literal notranslate"><span class="pre">geometry</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rot_temperatures</span></code>, and <code class="docutils literal notranslate"><span class="pre">potentialenergy</span></code> do not
+have to be specified.</td>
 </tr>
 </tbody>
 </table>
@@ -1296,6 +1298,11 @@ specified, <code class="docutils literal notranslate"><span class="pre">molecula
 <tr class="row-even"><td>spin</td>
 <td>(float) Electron spin</td>
 </tr>
+<tr class="row-odd"><td>atoms</td>
+<td>(ase.Atoms object) Optional. If this parameter
+is specified, <code class="docutils literal notranslate"><span class="pre">potentialenergy</span></code> does not have
+to be specified.</td>
+</tr>
 </tbody>
 </table>
 <table border="1" class="docutils">
@@ -1380,6 +1387,12 @@ specified, <code class="docutils literal notranslate"><span class="pre">molecula
 </tr>
 <tr class="row-odd"><td>spin</td>
 <td>(float) Electron spin</td>
+</tr>
+<tr class="row-even"><td>atoms</td>
+<td>(ase.Atoms object) Optional. If this
+parameter is specified,
+<code class="docutils literal notranslate"><span class="pre">potentialenergy</span></code> does not have to be
+specified</td>
 </tr>
 </tbody>
 </table>
@@ -4209,20 +4222,17 @@ source of data. Default is None</p>
 </div>
 <div class="section" id="creating-new-statmech-models">
 <h2>Creating New StatMech Models<a class="headerlink" href="#creating-new-statmech-models" title="Permalink to this headline">¶</a></h2>
-<p>If you would like to create your own class to be stored by
-<a class="reference internal" href="#pMuTT.statmech.StatMech" title="pMuTT.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>, it should have the methods:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">get_q</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">from_dict</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">to_dict</span></code></li>
-</ul>
+<p>New models should inherit from <code class="docutils literal notranslate"><span class="pre">pMuTT._ModelBase</span></code>. This class already has the
+dimensional methods (e.g. <code class="docutils literal notranslate"><span class="pre">get_Cv</span></code>, <code class="docutils literal notranslate"><span class="pre">get_U</span></code>, <code class="docutils literal notranslate"><span class="pre">get_S</span></code>), and some routine
+methods (e.g. <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">from_dict</span></code>, <code class="docutils literal notranslate"><span class="pre">to_dict</span></code>)
+implemented.</p>
+<p>For full accessibility, the following methods should be implemented:
+- <code class="docutils literal notranslate"><span class="pre">get_q</span></code>
+- <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code>
+- <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>
+- <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code>
+- <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>
+- <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p>
 </div>
 </div>
 

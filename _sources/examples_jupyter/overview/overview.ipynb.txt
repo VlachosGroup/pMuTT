@@ -44,6 +44,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "0.0083144598\n",
       "Some constants\n",
       "R (J/mol/K) = 8.3144598\n",
       "Avogadro's number = 6.02214086e+23\n",
@@ -105,7 +106,7 @@
       "            conversion factor.\n",
       "        initial : str\n",
       "            Units that num is currently in\n",
-      "        to : str\n",
+      "        final : str\n",
       "            Units you would like num to be in\n",
       "    Returns\n",
       "    -------\n",
@@ -253,6 +254,9 @@
    ],
    "source": [
     "from pMuTT import constants as c\n",
+    "\n",
+    "1.987\n",
+    "print(c.R('kJ/mol/K'))\n",
     "\n",
     "print('Some constants')\n",
     "print('R (J/mol/K) = {}'.format(c.R('J/mol/K')))\n",

@@ -7,6 +7,19 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.7
+-------------
+Jun. 11, 2019
+
+- Added documentation page for more verbose installation instructions.
+- Updated :class:`~pMuTT.reaction.network` to use graph theory approach using
+  states as nodes
+- Bug fix for :class:`~pMuTT.statmech.lsr.LSR` to handle inputs that are not
+  pMuTT model objects
+- Added ability to create interactive plots with Pygal
+- Updated :class:`~pMuTT.statmech.elec.GroundStateElec` to read
+  ``potentialenergy`` from inputted ``Atoms`` object.
+
 Version 1.2.6
 -------------
 Apr. 26, 2019
