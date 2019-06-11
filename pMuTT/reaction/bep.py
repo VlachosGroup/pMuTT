@@ -52,9 +52,9 @@ class BEP(_ModelBase):
         self.name = name
         self.slope = slope
         self.intercept = intercept
+        self.descriptor = descriptor
         self.reaction = reaction
         self.notes = notes
-        self.descriptor = descriptor
     
     @property
     def reaction(self):
@@ -63,7 +63,7 @@ class BEP(_ModelBase):
     @reaction.setter
     def reaction(self, val):
         self._reaction = val
-        self._set_descriptor(reaction=val)
+        self._set_descriptor_fn(reaction=val)
 
     @property
     def descriptor(self):
@@ -71,11 +71,12 @@ class BEP(_ModelBase):
     
     @descriptor.setter
     def descriptor(self, val):
-        self._descriptor = val
-        self._set_descriptor(descriptor=val)
+        if val is not None:
+            self._descriptor = val
+            self._set_descriptor_fn(descriptor=val)
 
 
-    def _set_descriptor(self, reaction=None, descriptor=None):
+    def _set_descriptor_fn(self, reaction=None, descriptor=None):
         """Sets the appropriate method handle to the BEP object
 
         Parameters
@@ -102,29 +103,26 @@ class BEP(_ModelBase):
                 
                 If specified, overwites the value held by BEP object.
         """
+        # Return if the descriptor has not been set or is None
         try:
-            self._reaction
+            self.descriptor
         except AttributeError:
-            # Assigns reaction to default value
-            self._reaction = reaction
+            return
         else:
-            # Overwrites reaction if not previously set
-            if reaction is not None:
-                self._reaction = reaction
+            if self.descriptor is None:
+                return
 
+        # Return if the reaction has not been set or is None
         try:
-            self._descriptor
+            self.reaction
         except AttributeError:
-            # Assigns descriptor to default value
-            self._descriptor = descriptor
+            return
         else:
-            # Overwrites reaction if not previously set
-            if descriptor is not None:
-                self._descriptor = descriptor
+            if self.reaction is None:
+                return   
 
-        if self.descriptor is None or self.reaction is None:
-            self._descriptor_fn = None
-        elif self.descriptor == 'delta_H':
+        # Assign the descriptor to the reaction
+        if self.descriptor == 'delta_H':
             self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_delta_H(rev=False,
                                                                units='kcal/mol',

@@ -101,6 +101,7 @@ Special Thanks
 .. _Pandas: https://pandas.pydata.org/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
+.. _`pyGal`: http://pygal.org/en/stable/
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
