@@ -52,11 +52,31 @@ class BEP(_ModelBase):
         self.name = name
         self.slope = slope
         self.intercept = intercept
+        self.descriptor = descriptor
         self.reaction = reaction
         self.notes = notes
-        self.set_descriptor(reaction=reaction, descriptor=descriptor)
+    
+    @property
+    def reaction(self):
+        return self._reaction
 
-    def set_descriptor(self, reaction=None, descriptor=None):
+    @reaction.setter
+    def reaction(self, val):
+        self._reaction = val
+        self._set_descriptor_fn(reaction=val)
+
+    @property
+    def descriptor(self):
+        return self._descriptor
+    
+    @descriptor.setter
+    def descriptor(self, val):
+        if val is not None:
+            self._descriptor = val
+            self._set_descriptor_fn(descriptor=val)
+
+
+    def _set_descriptor_fn(self, reaction=None, descriptor=None):
         """Sets the appropriate method handle to the BEP object
 
         Parameters
@@ -83,68 +103,65 @@ class BEP(_ModelBase):
                 
                 If specified, overwites the value held by BEP object.
         """
-        try:
-            self.reaction
-        except AttributeError:
-            # Assigns reaction to default value
-            self.reaction = reaction
-        else:
-            # Overwrites reaction if not previously set
-            if reaction is not None:
-                self.reaction = reaction
-
+        # Return if the descriptor has not been set or is None
         try:
             self.descriptor
         except AttributeError:
-            # Assigns descriptor to default value
-            self.descriptor = descriptor
+            return
         else:
-            # Overwrites reaction if not previously set
-            if descriptor is not None:
-                self.descriptor = descriptor
+            if self.descriptor is None:
+                return
 
-        if self.descriptor is None or self.reaction is None:
-            self._descriptor = None
-        elif self.descriptor == 'delta_H':
-            self._descriptor = \
+        # Return if the reaction has not been set or is None
+        try:
+            self.reaction
+        except AttributeError:
+            return
+        else:
+            if self.reaction is None:
+                return   
+
+        # Assign the descriptor to the reaction
+        if self.descriptor == 'delta_H':
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_delta_H(rev=False,
                                                                units='kcal/mol',
                                                                **kwargs)
         elif self.descriptor == 'rev_delta_H':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_delta_H(rev=True,
                                                                units='kcal/mol',
                                                                **kwargs)
         elif self.descriptor == 'reactants_H':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_H_state(
                             units='kcal/mol',
                             state='reactants',
                             **kwargs)
         elif descriptor == 'products_H':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_H_state(
                             units='kcal/mol',
                             state='products',
                             **kwargs)
         elif self.descriptor == 'delta_E':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_delta_E(rev=False,
                                                                units='kcal/mol',
                                                                **kwargs)
         elif self.descriptor == 'rev_delta_E':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_delta_E(rev=True,
                                                                units='kcal/mol',
                                                                **kwargs)
         elif self.descriptor == 'reactants_E':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_E_state(
                             units='kcal/mol',
                             state='reactants',
                             **kwargs)
         elif self.descriptor == 'products_E':
-            self._descriptor = \
+            self._descriptor_fn = \
                     lambda **kwargs: self.reaction.get_E_state(
                             units='kcal/mol',
                             state='products',
@@ -176,16 +193,16 @@ class BEP(_ModelBase):
             # If the descriptor is for the reverse reaction, the slope has to
             # be modified
             if rev:
-                E_act = self.slope*self._descriptor(**kwargs) + self.intercept
+                E_act = self.slope*self._descriptor_fn(**kwargs) + self.intercept
             else:
-                E_act = (self.slope-1.)*self._descriptor(**kwargs) \
+                E_act = (self.slope-1.)*self._descriptor_fn(**kwargs) \
                         + self.intercept
         else:
             if rev:
-                E_act = (self.slope-1.)*self._descriptor(**kwargs) \
+                E_act = (self.slope-1.)*self._descriptor_fn(**kwargs) \
                         + self.intercept
             else:
-                E_act = self.slope*self._descriptor(**kwargs) + self.intercept
+                E_act = self.slope*self._descriptor_fn(**kwargs) + self.intercept
         return E_act*c.convert_unit(initial='kcal/mol', final=units)
 
     def get_EoRT_act(self, rev=False, T=c.T0('K'), **kwargs):

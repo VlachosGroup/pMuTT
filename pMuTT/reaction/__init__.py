@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collections import Counter
 from copy import deepcopy
+from warnings import warn
 import inspect
 import re
 import numpy as np
@@ -89,8 +90,8 @@ class Reaction(_pMuTTBase):
                 # If BEP specified, link reaction to BEP
                 if isinstance(specie, BEP):
                     specie = deepcopy(specie)
-                    specie.set_descriptor(reaction=self,
-                                          descriptor=bep_descriptor)
+                    specie.reaction = self
+                    specie.descriptor = bep_descriptor
                 transition_state_list.append(specie)
             transition_state = transition_state_list
         self.transition_state = transition_state
@@ -1663,17 +1664,17 @@ class Reaction(_pMuTTBase):
         else:
             state_quantity = 0.
 
-        for specie, stoich in zip(species, stoich):
+        for specie, coeff in zip(species, stoich):
             # Process the inputs and methods for each specie
             specie_kwargs = _get_specie_kwargs(specie.name, **kwargs)
 
             method = getattr(specie, method_name)
             if method_name == 'get_q':
                 state_quantity *= \
-                        _force_pass_arguments(method, **specie_kwargs)**stoich
+                        _force_pass_arguments(method, **specie_kwargs)**coeff
             else:
                 state_quantity += \
-                        _force_pass_arguments(method, **specie_kwargs)*stoich
+                        _force_pass_arguments(method, **specie_kwargs)*coeff
         return state_quantity
 
     def get_delta_quantity(self, initial_state, final_state, method_name,
@@ -1720,7 +1721,8 @@ class Reaction(_pMuTTBase):
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', bep_descriptor=None, notes=None):
+                    reaction_delimiter='=', bep_descriptor=None, notes=None,
+                    raise_error=True, raise_warning=True):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -1743,6 +1745,14 @@ class Reaction(_pMuTTBase):
                 descriptors
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
+            raise_error : bool, optional
+                If True, raises an error if the transition state is not located
+                in species. Default is True
+            raise_warning : bool, optional
+                Only relevant if raise_error is False. Raises a warning if the
+                transition state is not located in species. If a warning is
+                raised, the Reaction will try to be initialized without the
+                transition state. Default is True
         Returns
         -------
             Reaction : Reaction object
@@ -1757,7 +1767,24 @@ class Reaction(_pMuTTBase):
         if ts_names is None:
             ts = None
         else:
-            ts = [species[name] for name in ts_names]
+            # Try to initialize the transition state
+            try:
+                ts = [species[name] for name in ts_names]
+            except KeyError:
+                if raise_error:
+                    raise KeyError('Unable to find transition state in species '
+                                   'dictionary for reaction string: {}. '
+                                   'Suppress error and reinitialize reaction '
+                                   'without transition state by settings '
+                                   'raise_error to False.'.format(reaction_str))
+                elif raise_warning:
+                    warn('Unable to find transition state in species species '
+                         'dictionary for reaction string: {}. Reinitializing '
+                         'without transition state. Suppress this warning by '
+                         'setting raise_warning to '
+                         'False.'.format(reaction_str), RuntimeWarning)
+                ts = None
+
         return cls(reactants=reactants, reactants_stoich=react_stoich,
                    products=products, products_stoich=prod_stoich,
                    transition_state=ts, transition_state_stoich=ts_stoich,
@@ -2207,7 +2234,7 @@ class Reactions(_pMuTTBase):
             figure : `matplotlib.figure.Figure`_
                 Add plot to this figure. If not specified, one will be
                 generated
-            ax : `matplotlib.axes.Axes.axis`_, optional
+            axes : `matplotlib.axes.Axes.axis`_, optional
                 Adds plot to this axis. If not specified, one will be generated
             plt_kwargs : dict, optional
                 Extra arguments that will be fed to
@@ -2390,18 +2417,11 @@ class Reactions(_pMuTTBase):
                     continue
                 states_G.append(reaction.get_G_state(state=state, units=units,
                                                      **kwargs))
-        min_G = np.amin(states_G)
         min_i = np.argmin(states_G)
-        max_G = np.amax(states_G)
         max_i = np.argmax(states_G)
-        if max_i >= min_i:
-            E_span = max_G - min_G
-        else:
-            delta_G = self.reactions[-1].get_G_state(state='products',
-                                                     units=units, **kwargs) \
-                      - self.reactions[0].get_G_state(state='reactants',
-                                                      units=units, **kwargs)
-            E_span = max_G - min_G + delta_G
+        E_span = states_G[max_i] - states_G[min_i]
+        if max_i < min_i:
+            E_span += states_G[-1] - states_G[0]
         return E_span
             
     def to_dict(self):

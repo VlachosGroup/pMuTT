@@ -15,15 +15,15 @@ from pMuTT.io.json import json_to_pMuTT, remove_class
 
 class EmpiricalBase(_pMuTTBase):
     """The empirical parent class.
-    Holds properties of a specie, the statistical-mechanical thermodynamic
+    Holds properties of a species, the statistical-mechanical thermodynamic
     model.
 
     Attributes
     ----------
         name : str, optional
-            Name of the specie. Default is None
+            Name of the species. Default is None
         phase : str, optional
-            Phase of the specie. Default is None
+            Phase of the species. Default is None
             G - gas.
             S - surface.
         elements : dict, optional
@@ -142,7 +142,7 @@ class EmpiricalBase(_pMuTTBase):
                           **kwargs)
         
         # Add titles and labels
-        ax[0].set_title('Specie: {}'.format(self.name))
+        ax[0].set_title('Species: {}'.format(self.name))
         for i, y_label in enumerate(y_labels):
             ax[i].set_xlabel('Temperature (K)')            
             ax[i].set_ylabel(y_label)
@@ -219,7 +219,7 @@ class EmpiricalBase(_pMuTTBase):
                           **kwargs)
         
         # Add titles and labels
-        ax[0].set_title('Specie: {}'.format(self.name))
+        ax[0].set_title('Species: {}'.format(self.name))
         for i, y_label in enumerate(y_labels):
             ax[i].set_xlabel('Temperature (K)')            
             ax[i].set_ylabel(y_label)
@@ -299,7 +299,7 @@ class EmpiricalBase(_pMuTTBase):
                           use_references=use_references, **kwargs)
         
         # Add titles and labels
-        ax[0].set_title('Specie: {}'.format(self.name))
+        ax[0].set_title('Species: {}'.format(self.name))
         ax[0].legend(['Empirical', 'StatMech'])
         for i, y_label in enumerate(y_labels):
             ax[i].set_xlabel('Temperature (K)')            

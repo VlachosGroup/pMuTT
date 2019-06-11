@@ -10,6 +10,7 @@ Welcome to pMuTT's documentation!
    :maxdepth: 2
    
    includeme
+   install
    examples
    referencing
    io

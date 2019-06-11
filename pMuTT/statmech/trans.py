@@ -2,11 +2,11 @@
 
 import numpy as np
 from pMuTT import constants as c
-from pMuTT import get_molecular_weight, _pMuTTBase
+from pMuTT import get_molecular_weight, _ModelBase
 from pMuTT.io.json import remove_class
 
 
-class FreeTrans(_pMuTTBase):
+class FreeTrans(_ModelBase):
     """Translational mode using ideal gas assumption. Equations sourced from:
     
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
@@ -18,6 +18,11 @@ class FreeTrans(_pMuTTBase):
             Number of degrees of freedom. Default is 3
         molecular_weight : float
             Molecular weight of the molecule in g/mol.
+        atoms : `ase.Atoms`_ object, optional
+            An atoms object can be used to calculate molecular weight. Not
+            stored by FreeTrans
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
 
     def __init__(self, n_degrees=3, molecular_weight=None, atoms=None):
