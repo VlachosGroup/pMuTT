@@ -2068,7 +2068,7 @@ class ChemkinReaction(Reaction):
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
                     reaction_delimiter='=', bep_descriptor=None, notes=None,
-                    beta=1, is_adsorption=False, sticking_coeff=1.):
+                    beta=1, is_adsorption=False, sticking_coeff=0.5):
         """Create a reaction object using the reaction string
 
         Parameters
