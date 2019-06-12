@@ -1915,7 +1915,8 @@ class ChemkinReaction(Reaction):
         is_adsorption : bool, optional
             If True, the reaction represents an adsorption. Default is False
         sticking_coeff : float, optional
-            Sticking coefficient. Only relevant if ``is_adsorption`` is True
+            Sticking coefficient. Only relevant if ``is_adsorption`` is True.
+            Default is 0.5
         gas_phase : bool
             True if the reaction has only gas-phase species. This attribute is
             determined based on the reactants and products
@@ -2092,14 +2093,16 @@ class ChemkinReaction(Reaction):
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
             beta : float, optional
-                Power to raise the temperature in the rate expression. Default is 1
+                Power to raise the temperature in the rate expression.
+                Default is 1
             is_adsorption : bool, optional
                 If True, the reaction represents an adsorption. Default is False
             sticking_coeff : float, optional
-                Sticking coefficient. Only relevant if ``is_adsorption`` is True
+                Sticking coefficient. Only relevant if ``is_adsorption`` is
+                True. Default is 0.5
             gas_phase : bool
-                True if the reaction has only gas-phase species. This attribute is
-                determined based on the reactants and products
+                True if the reaction has only gas-phase species. This attribute
+                is determined based on the reactants and products
         Returns
         -------
             ChemkinReaction : ChemkinReaction object
