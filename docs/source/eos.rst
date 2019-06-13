@@ -8,12 +8,12 @@ Use equations of state to calculate P, V, T, or n.
 IdealGas
 ========
 
-.. autoclass:: pMuTT.eos.IdealGasEOS
+.. autoclass:: pmutt.eos.IdealGasEOS
    :members:
    
 van der Waals
 =============
 
-.. autoclass:: pMuTT.eos.vanDerWaalsEOS
+.. autoclass:: pmutt.eos.vanDerWaalsEOS
    :members:
    

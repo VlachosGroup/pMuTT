@@ -39,7 +39,7 @@ Getting Started
 ---------------
 1. Install using pip::
 
-    pip install --user pMuTT
+    pip install --user pmutt
    
 2. Run the tests by navigating to the `tests directory`_ in a
    command-line interface and inputting the following command::
@@ -62,6 +62,12 @@ License
 
 This project is licensed under the MIT License - see the `LICENSE.md`_
 file for details.
+
+Publications
+------------
+- J. Lym, G.R Wittreich and D.G Vlachos, "A Python Multiscale Thermochemistry
+  Toolbox (pMuTT) for Thermochemical and Kinetic Parameter Estimation"
+  (submitted)
 
 Contributing
 ------------
@@ -105,7 +111,7 @@ Special Thanks
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
-.. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pMuTT/tests
+.. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pmutt/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html
 .. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues

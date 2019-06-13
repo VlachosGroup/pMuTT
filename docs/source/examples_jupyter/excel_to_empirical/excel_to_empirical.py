@@ -28,13 +28,13 @@
 # | Obr(S)    | S     | 0          | 0          | 1          | Harmonic       | -7.519858       | 537.116485     | 439.995941     | 256.38412      |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |                |
 # | IPA(S)    | S     | 3          | 8          | 1          | Harmonic       | -64.935392      | 3072.824921    | 3056.583116    | 3049.635786    | 3038.996872    | 3031.532711    | 3008.868219    | 2969.688478    | 2956.451871    | 1460.613697    | 1454.472854    | 1435.981201    | 1432.413496    | 1413.554005    | 1366.129117    | 1353.211574    | 1327.903925    | 1321.25272     | 1148.721745    | 1130.053472    | 1098.855825    | 933.64652      | 921.005746     | 903.030098     | 825.727381     | 809.440337     | 535.60253      | 414.794848     | 378.193102     | 295.278829     | 237.586784     | 230.560246     | 171.110789     | 129.36901      | 77.415076      | 64.350293      | 56.879635      |
 
-# To import the data, we use the ``pMuTT.io.excel.read_excel`` function.
+# To import the data, we use the ``pmutt.io.excel.read_excel`` function.
 
 # In[1]:
 
 
 from pprint import pprint
-from pMuTT.io.excel import read_excel
+from pmutt.io.excel import read_excel
 
 species_data = read_excel(io='input.xlsx')
 pprint(species_data)
@@ -65,7 +65,7 @@ pprint(refs_input)
 # In[3]:
 
 
-from pMuTT.empirical.references import Reference, References
+from pmutt.empirical.references import Reference, References
 
 refs = References(descriptor='elements', 
                   references=[Reference(**ref_input) 
@@ -81,7 +81,7 @@ print(refs.offset)
 # In[4]:
 
 
-from pMuTT.empirical.nasa import Nasa
+from pmutt.empirical.nasa import Nasa
 
 T_low = 300. # K
 T_high = 1100. # K
@@ -97,7 +97,7 @@ print(species[0])
 # In[5]:
 
 
-from pMuTT.io.thermdat import write_thermdat
+from pmutt.io.thermdat import write_thermdat
 
 write_thermdat(nasa_species=species, filename='thermdat',
                write_date=True)

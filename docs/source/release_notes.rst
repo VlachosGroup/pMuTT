@@ -7,17 +7,24 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.8
+-------------
+Jun. 13, 2019
+
+- Importing from pMuTT is now all in lowercase. (i.e. import pmutt instead of
+  import pMuTT)
+
 Version 1.2.7
 -------------
 Jun. 11, 2019
 
 - Added documentation page for more verbose installation instructions.
-- Updated :class:`~pMuTT.reaction.network` to use graph theory approach using
+- Updated :class:`~pmutt.reaction.network` to use graph theory approach using
   states as nodes
-- Bug fix for :class:`~pMuTT.statmech.lsr.LSR` to handle inputs that are not
-  pMuTT model objects
+- Bug fix for :class:`~pmutt.statmech.lsr.LSR` to handle inputs that are not
+  pmutt model objects
 - Added ability to create interactive plots with Pygal
-- Updated :class:`~pMuTT.statmech.elec.GroundStateElec` to read
+- Updated :class:`~pmutt.statmech.elec.GroundStateElec` to read
   ``potentialenergy`` from inputted ``Atoms`` object.
 
 Version 1.2.6
@@ -25,37 +32,37 @@ Version 1.2.6
 Apr. 26, 2019
 
 - Moved ``references`` attribute from empirical classes to
-  :class:`~pMuTT.statmech.StatMech`
+  :class:`~pmutt.statmech.StatMech`
 - Changed ``mix_models`` attribute to ``misc_models`` in  indicating any model
   object can be used
-- Implemented :class:`~pMuTT.statmech.vib.DebyeVib` and
-  :class:`~pMuTT.statmech.ConstantMode` classes
-- Restructured :class:`~pMuTT.reaction.bep.BEP` object to act as a transition
-  state species in :class:`~pMuTT.reaction.Reaction` objects
-- Implemented :class:`~pMuTT.empirical.lsr.LSR` object
+- Implemented :class:`~pmutt.statmech.vib.DebyeVib` and
+  :class:`~pmutt.statmech.ConstantMode` classes
+- Restructured :class:`~pmutt.reaction.bep.BEP` object to act as a transition
+  state species in :class:`~pmutt.reaction.Reaction` objects
+- Implemented :class:`~pmutt.empirical.lsr.LSR` object
 - Added option to calculate pre-exponential factor using ratio of partition
   functions or entropy of activation
 - Added option to use electronic energy as descriptor for
-  :class:`~pMuTT.reaction.bep.BEP` object
-- Added some imperial unit functionality to ``pMuTT.constants`` module
+  :class:`~pmutt.reaction.bep.BEP` object
+- Added some imperial unit functionality to ``pmutt.constants`` module
 - Renamed ``from_`` parameter and ``to`` parameter in 
-  :func:`pMuTT.constants.convert_unit` to ``initial`` and ``final``
+  :func:`pmutt.constants.convert_unit` to ``initial`` and ``final``
 - Added ability to import individual translational, rotational, vibrational,
   electronic and nuclear modes to Excel
-- Renamed ``pMuTT.statmech.trans.IdealTrans`` to
-  :class:`~pMuTT.statmech.trans.FreeTrans`
-- Renamed ``pMuTT.statmech.elec.IdealElec`` to
-  :class:`~pMuTT.statmech.elec.GroundStateElec`
-- Renamed ``pMuTT.statmech.nucl.IdealNucl`` to
-  :class:`~pMuTT.statmech.nucl.EmptyNucl`
+- Renamed ``pmutt.statmech.trans.IdealTrans`` to
+  :class:`~pmutt.statmech.trans.FreeTrans`
+- Renamed ``pmutt.statmech.elec.IdealElec`` to
+  :class:`~pmutt.statmech.elec.GroundStateElec`
+- Renamed ``pmutt.statmech.nucl.IdealNucl`` to
+  :class:`~pmutt.statmech.nucl.EmptyNucl`
 
 Version 1.2.5
 -------------
 Mar. 21, 2019
 
-- Renamed ``pMuTT.io_`` module to ``pMuTT.io``
-- Renamed ``pMuTT.io_.jsonio`` module to ``pMuTT.io.json``
-- Added preliminary IO support for MongoDB in module: ``pMuTT.io.db``
+- Renamed ``pmutt.io_`` module to ``pmutt.io``
+- Renamed ``pmutt.io_.jsonio`` module to ``pmutt.io.json``
+- Added preliminary IO support for MongoDB in module: ``pmutt.io.db``
 - Bug fixes for Chemkin IO behavior
 
 Version 1.2.4
@@ -68,37 +75,37 @@ Version 1.2.3
 -------------
 Feb. 25, 2019
 
-- Added ``smiles`` attribute to :class:`~pMuTT.statmech.StatMech` and 
-  :class:`~pMuTT.empirical.EmpiricalBase` classes
+- Added ``smiles`` attribute to :class:`~pmutt.statmech.StatMech` and 
+  :class:`~pmutt.empirical.EmpiricalBase` classes
 - Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files
-- Added :class:`~pMuTT.mixture.cov.CovEffect` class to model coverage effects
-  and integrated it with :class:`~pMuTT.statmech.StatMech` and 
-  :class:`~pMuTT.empirical.EmpiricalBase` classes
+- Added :class:`~pmutt.mixture.cov.CovEffect` class to model coverage effects
+  and integrated it with :class:`~pmutt.statmech.StatMech` and 
+  :class:`~pmutt.empirical.EmpiricalBase` classes
 - Added ``include_ZPE`` parameter to ``get_EoRT``, ``get_E``, ``get_delta_EoRT``
-  and ``get_delta_E`` for the :class:`~pMuTT.statmech.StatMech` class and
-  :class:`~pMuTT.reaction.Reaction` class to add zero-point energy in
+  and ``get_delta_E`` for the :class:`~pmutt.statmech.StatMech` class and
+  :class:`~pmutt.reaction.Reaction` class to add zero-point energy in
   calculations
 - Renamed private methods ``_get_delta_quantity`` and ``_get_state_quantity`` to
   public methods ``get_delta_quantity`` and ``get_state_quantity`` in
-  :class:`~pMuTT.reaction.Reaction` class
-- Added generic method ``get_quantity`` to :class:`~pMuTT.statmech.StatMech`
+  :class:`~pmutt.reaction.Reaction` class
+- Added generic method ``get_quantity`` to :class:`~pmutt.statmech.StatMech`
   class so any method can be evaluated. It takes the parameters ``raise_error``
   and ``raise_warning`` so the user has the ability to ignore modes if they do
   not have the desired properties
 - Added ``plot_coordinate_diagram`` method to the 
-  :class:`~pMuTT.reaction.Reactions` class to plot coordinate diagrams.
-- Added ``get_EoRT`` and ``get_E`` methods to :class:`~pMuTT.statmech.StatMech`
+  :class:`~pmutt.reaction.Reactions` class to plot coordinate diagrams.
+- Added ``get_EoRT`` and ``get_E`` methods to :class:`~pmutt.statmech.StatMech`
   class to calculate electronic contribution to thermodynamic properties
 - Added ``get_EoRT_state`` and ``get_delta_EoRT`` methods to 
-  :class:`~pMuTT.reaction.Reaction` to calculate electronic contribution to
+  :class:`~pmutt.reaction.Reaction` to calculate electronic contribution to
   reaction properties
 - Added an optional parameter, ``activation``, to ``get_delta_X`` methods to 
   specify the difference between the reactants/products and the transition
   state. 
-- Added ``pMuTT.constants.symmetry_dict`` to allow easy look up of common
+- Added ``pmutt.constants.symmetry_dict`` to allow easy look up of common
   symmetry numbers
 - Fixed bug where specie-specific arguments were not passed correctly for
-  :class:`~pMuTT.reaction.Reaction` class
+  :class:`~pmutt.reaction.Reaction` class
 
 Version 1.2.2
 -------------
@@ -106,32 +113,32 @@ Jan. 18, 2019
 
 - Added option to extract imaginary frequencies from VASP's OUTCAR files
 - Added support for imaginary frequencies for 
-  :class:`~pMuTT.statmech.vib.HarmonicVib` and 
-  :class:`~pMuTT.statmech.vib.QRRHOVib` classes
-- Restructured :class:`~pMuTT.statmech.vib.HarmonicVib` and 
-  :class:`~pMuTT.statmech.vib.QRRHOVib` classes to calculate vibrational 
+  :class:`~pmutt.statmech.vib.HarmonicVib` and 
+  :class:`~pmutt.statmech.vib.QRRHOVib` classes
+- Restructured :class:`~pmutt.statmech.vib.HarmonicVib` and 
+  :class:`~pmutt.statmech.vib.QRRHOVib` classes to calculate vibrational 
   temperatures, scaled wavenumbers and scaled inertia when methods are called 
   (rather than at initialization) to prevent incorrect calculations due to 
   changes in the vibrational wavenumbers.
 - Fixed unit test names
-- Added ``get_species`` to :class:`~pMuTT.reaction.Reaction` and 
-  :class:`~pMuTT.reaction.Reactions`
-- Fixed bug related to :class:`~pMuTT.empirical.references.References` and 
-  :class:`~pMuTT.empirical.references.Reference` objects not JSON-write 
+- Added ``get_species`` to :class:`~pmutt.reaction.Reaction` and 
+  :class:`~pmutt.reaction.Reactions`
+- Fixed bug related to :class:`~pmutt.empirical.references.References` and 
+  :class:`~pmutt.empirical.references.Reference` objects not JSON-write 
   compatible.
-- Fixed bug related to referencing in :class:`~pMuTT.empirical.shomate.Shomate`
+- Fixed bug related to referencing in :class:`~pmutt.empirical.shomate.Shomate`
   class
 
 Version 1.2.1
 -------------
 Dec. 17, 2018
 
-- Added ``vib_outcar`` special rule for :func:`~pMuTT.io.excel.read_excel` and
-  :func:`~pMuTT.io.vasp.set_vib_wavenumbers_from_outcar` to get vibrational 
+- Added ``vib_outcar`` special rule for :func:`~pmutt.io.excel.read_excel` and
+  :func:`~pmutt.io.vasp.set_vib_wavenumbers_from_outcar` to get vibrational 
   frequencies directly from VASP's OUTCAR file.
-- Added ``get_X`` methods to :class:`~pMuTT.empirical.nasa.Nasa`, 
-  :class:`~pMuTT.empirical.shomate.Shomate`, :class:`~pMuTT.statmech.StatMech` 
-  and :class:`~pMuTT.reaction.Reaction` to directly calculate thermodynamic 
+- Added ``get_X`` methods to :class:`~pmutt.empirical.nasa.Nasa`, 
+  :class:`~pmutt.empirical.shomate.Shomate`, :class:`~pmutt.statmech.StatMech` 
+  and :class:`~pmutt.reaction.Reaction` to directly calculate thermodynamic 
   properties (such as H, S, F, G) with the appropriate units
 - Changed symbol for Hemlholtz energy from A to F
 
@@ -149,51 +156,51 @@ Version 1.1.3
 -------------
 Dec. 11, 2018
 
-- Added :class:`~pMuTT.reaction.bep.BEP` class
-- Restructured :class:`~pMuTT.reaction.Reaction` class so reaction states (i.e.
+- Added :class:`~pmutt.reaction.bep.BEP` class
+- Restructured :class:`~pmutt.reaction.Reaction` class so reaction states (i.e.
   reactants, products, transition states) can be calculated separately
-- Updated :class:`~pMuTT.empirical.references.References` class to be able
+- Updated :class:`~pmutt.empirical.references.References` class to be able
   reference any attribute
-- Added ``placeholder`` entry to :data:`~pMuTT.statmech.presets` dictionary to
+- Added ``placeholder`` entry to :data:`~pmutt.statmech.presets` dictionary to
   represent an empty species
 - Added correction factor to calculate partition coefficient, q, in
-  :class:`~pMuTT.statmech.elec.IdealElec` class
+  :class:`~pmutt.statmech.elec.IdealElec` class
 
 Version 1.1.2
 -------------
 Nov. 27, 2018
 
-- Fixed bugs in :class:`~pMuTT.reaction.Reaction` class for calculating
+- Fixed bugs in :class:`~pmutt.reaction.Reaction` class for calculating
   pre-exponential factors
-- Added methods in :class:`~pMuTT.reaction.Reaction` class to calculate rate
+- Added methods in :class:`~pmutt.reaction.Reaction` class to calculate rate
   constants and activation energy (currently, this just calculates the 
   difference in enthalpy between the reactant/product and the transition state)
 - Quality of life improvements such as allowing
-  :class:`~pMuTT.reaction.Reaction` class inputs to be a single pMuTT object
+  :class:`~pmutt.reaction.Reaction` class inputs to be a single pmutt object
   instead of expecting a list
 
 Version 1.1.1
 -------------
 Nov. 7, 2018
 
-- Fixed bugs in :class:`~pMuTT.empirical.shomate.Shomate` class for ``get_HoRT``
+- Fixed bugs in :class:`~pmutt.empirical.shomate.Shomate` class for ``get_HoRT``
   and ``get_SoR`` where one temperature would return a 1x1 vector instead of a
   float
-- Fixed bug in :class:`~pMuTT.empirical.zacros.Zacros` class where it expected
+- Fixed bug in :class:`~pmutt.empirical.zacros.Zacros` class where it expected
   vibrational energies instead of wavenumbers.
 
 Version 1.1.0
 -------------
 Oct. 26, 2018
 
-- Updated :class:`~pMuTT.reaction.Reaction` class to parse strings
-- New :class:`~pMuTT.empirical.shomate.Shomate` class
-- New equation of state classes: :class:`~pMuTT.eos.IdealGasEOS`,
-  :class:`~pMuTT.eos.vanDerWaalsEOS`
-- New :class:`~pMuTT.reaction.phasediagram.PhaseDiagram` class
-- New :class:`~pMuTT.statmech.vib.EinsteinVib` class
-- New :func:`~pMuTT.io.chemkin.read_reactions` function to read species and
+- Updated :class:`~pmutt.reaction.Reaction` class to parse strings
+- New :class:`~pmutt.empirical.shomate.Shomate` class
+- New equation of state classes: :class:`~pmutt.eos.IdealGasEOS`,
+  :class:`~pmutt.eos.vanDerWaalsEOS`
+- New :class:`~pmutt.reaction.phasediagram.PhaseDiagram` class
+- New :class:`~pmutt.statmech.vib.EinsteinVib` class
+- New :func:`~pmutt.io.chemkin.read_reactions` function to read species and
   reactions from Chemkin surf.inp and gas.inp files
 
-.. _`Development Branch`: https://github.com/VlachosGroup/pMuTT/commits/development
+.. _`Development Branch`: https://github.com/VlachosGroup/pmutt/commits/development
 .. _himaghna: https://github.com/himaghna

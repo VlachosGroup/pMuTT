@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# # Overview of pMuTT's Core Functionality
+# # Overview of pmutt's Core Functionality
 # Originally written for Version 1.2.1
 # 
 # Last Updated for Version 1.2.3
@@ -17,19 +17,19 @@
 # 
 # ## Useful Links:
 # 
-# - Github: https://github.com/VlachosGroup/pMuTT
-# - Documentation: https://vlachosgroup.github.io/pMuTT/index.html
-# - Examples: https://vlachosgroup.github.io/pMuTT/examples.html
+# - Github: https://github.com/VlachosGroup/pmutt
+# - Documentation: https://vlachosgroup.github.io/pmutt/index.html
+# - Examples: https://vlachosgroup.github.io/pmutt/examples.html
 
 # ## Constants
-# pMuTT has a wide variety of constants to increase readability of the code. See [Constants page][0] in the documentation for supported units.
+# pmutt has a wide variety of constants to increase readability of the code. See [Constants page][0] in the documentation for supported units.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/constants.html#constants
+# [0]: https://vlachosgroup.github.io/pmutt/constants.html#constants
 
 # In[1]:
 
 
-from pMuTT import constants as c
+from pmutt import constants as c
 
 print('Some constants')
 print('R (J/mol/K) = {}'.format(c.R('J/mol/K')))
@@ -51,7 +51,7 @@ help(c.convert_unit)
 # 
 # The [``StatMech``][0] object allows us to specify translational, vibrational, rotational, electronic and nuclear modes independently, which gives flexibility in what behavior you would like.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech
+# [0]: https://vlachosgroup.github.io/pmutt/statmech.html#pmutt.statmech.StatMech
 
 # For this example, we will use a butane molecule as an ideal gas:
 # 
@@ -67,7 +67,7 @@ help(c.convert_unit)
 
 
 from ase.build import molecule
-from pMuTT.statmech import StatMech, trans, vib, rot, elec
+from pmutt.statmech import StatMech, trans, vib, rot, elec
 
 butane_atoms = molecule('trans-butane')
 
@@ -110,15 +110,15 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_statmech))
 # ### Presets
 # The [``presets``][0] dictionary stores commonly used models to ease the initialization of [``StatMech``][1] objects. The same water molecule before can be initialized this way instead.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/statmech.html#presets
-# [1]: https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech
+# [0]: https://vlachosgroup.github.io/pmutt/statmech.html#presets
+# [1]: https://vlachosgroup.github.io/pmutt/statmech.html#pmutt.statmech.StatMech
 
 # In[3]:
 
 
 from pprint import pprint
 from ase.build import molecule
-from pMuTT.statmech import StatMech, presets
+from pmutt.statmech import StatMech, presets
 
 idealgas_defaults = presets['idealgas']
 pprint(idealgas_defaults)
@@ -155,12 +155,12 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_preset))
 # ### Empty Modes
 # The [``EmptyMode``][0] is a special object returns 1 for the partition function and 0 for all other thermodynamic properties. This is useful if you do not want any contribution from a mode.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode
+# [0]: https://vlachosgroup.github.io/pmutt/statmech.html#empty-mode
 
 # In[5]:
 
 
-from pMuTT.statmech import EmptyMode
+from pmutt.statmech import EmptyMode
 
 empty = EmptyMode()
 print('Some EmptyMode properties:')
@@ -180,12 +180,12 @@ print('G/RT = {}'.format(empty.get_GoRT()))
 # #### Initializing Nasa from StatMech
 # Below, we initialize the NASA polynomial from the ``StatMech`` object we created earlier.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/empirical.html#nasa
+# [0]: https://vlachosgroup.github.io/pmutt/empirical.html#nasa
 
 # In[6]:
 
 
-from pMuTT.empirical.nasa import Nasa
+from pmutt.empirical.nasa import Nasa
 
 butane_nasa = Nasa.from_statmech(name='butane',
                                  statmech_model=butane_statmech,
@@ -202,7 +202,7 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_nasa))
 
 # Although it is not covered here, you can also generate empirical objects from experimental data using the ``.from_data`` method. See [Experimental to Empirical][6] example.
 # 
-# [6]: https://vlachosgroup.github.io/pMuTT/examples.html#experimental-to-empirical
+# [6]: https://vlachosgroup.github.io/pmutt/examples.html#experimental-to-empirical
 
 # #### Initializing Nasa Directly
 # We can also initialize the NASA polynomial if we have the polynomials. Using an entry from the [Reaction Mechanism Generator (RMG) database][0].
@@ -264,8 +264,8 @@ print('S_wiki = 310.23 J/mol/K')
 # 
 # We can account for this discrepancy by using the [``Reference``][0] and [``References``][1] objects.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference
-# [1]: https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References
+# [0]: https://vlachosgroup.github.io/pmutt/empirical.html#pmutt.empirical.references.Reference
+# [1]: https://vlachosgroup.github.io/pmutt/empirical.html#pmutt.empirical.references.References
 
 # ### Referencing
 # To define a reference, you must have:
@@ -279,12 +279,12 @@ print('S_wiki = 310.23 J/mol/K')
 # 
 # <img src="images/ref_molecules1.png" width=800>
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/referencing.html
+# [0]: https://vlachosgroup.github.io/pmutt/referencing.html
 
 # In[9]:
 
 
-from pMuTT.empirical.references import Reference, References
+from pmutt.empirical.references import Reference, References
 
 ethane_ref = Reference(name='ethane',
                        elements={'C': 2, 'H': 6},
@@ -344,16 +344,16 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_nasa_ref))
 
 # ## Input and Output
 # ### Excel
-# Encoding each object in Python can be tedious and so you can read from Excel spreadsheets using [``pMuTT.io.excel.read_excel``][0]. Note that this function returns a list of dictionaries. This output allows you to initialize whichever object you want. There are also special rules that depend on the header name.
+# Encoding each object in Python can be tedious and so you can read from Excel spreadsheets using [``pmutt.io.excel.read_excel``][0]. Note that this function returns a list of dictionaries. This output allows you to initialize whichever object you want. There are also special rules that depend on the header name.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io.excel.read_excel
+# [0]: https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel
 
 # In[11]:
 
 
 import os
 from pathlib import Path
-from pMuTT.io.excel import read_excel
+from pmutt.io.excel import read_excel
 
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
@@ -401,14 +401,14 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_excel))
 
 
 # ### Thermdat
-# The thermdat format uses NASA polynomials to represent several species. It has a very particular format so doing it manually is error-prone. You can write a list of ``Nasa`` objects to thermdat format using [``pMuTT.io.thermdat.write_thermdat``][0].
+# The thermdat format uses NASA polynomials to represent several species. It has a very particular format so doing it manually is error-prone. You can write a list of ``Nasa`` objects to thermdat format using [``pmutt.io.thermdat.write_thermdat``][0].
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.write_thermdat
+# [0]: https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.write_thermdat
 
 # In[14]:
 
 
-from pMuTT.io.thermdat import write_thermdat
+from pmutt.io.thermdat import write_thermdat
 
 # Make Nasa objects from previously defined ethane and propane
 ethane_nasa = Nasa.from_statmech(name='ethane',
@@ -446,9 +446,9 @@ butane          20190122C   4H  10          G298.0     800.0     502.9         1
 -8.15415828E+05 3.48691129E+01 9.98107805E+00-3.50556935E-02 2.38938732E-04    3
 -3.63709779E-07 1.92062158E-10-8.16632302E+05-1.47065846E+01                   4
 END
-# Similarly, [``pMuTT.io.thermdat.read_thermdat``][0] reads thermdat files.
+# Similarly, [``pmutt.io.thermdat.read_thermdat``][0] reads thermdat files.
 # 
-# [0]: https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.read_thermdat
+# [0]: https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.read_thermdat
 
 # ## Reactions
 # You can also evaluate reactions properties. The most straightforward way to do this is to initialize using strings.
@@ -456,14 +456,14 @@ END
 # In[15]:
 
 
-from pMuTT.io.thermdat import read_thermdat
-from pMuTT import pMuTT_list_to_dict
-from pMuTT.reaction import Reaction
+from pmutt.io.thermdat import read_thermdat
+from pmutt import pmutt_list_to_dict
+from pmutt.reaction import Reaction
 
 # Get a dictionary of species
 thermdat_H2O_path = os.path.join(notebook_folder, 'thermdat_H2O')
 species_list = read_thermdat(thermdat_H2O_path)
-species_dict = pMuTT_list_to_dict(species_list)
+species_dict = pmutt_list_to_dict(species_list)
 
 # Initialize the reaction
 rxn_H2O = Reaction.from_string('H2 + 0.5O2 = H2O', species=species_dict)
@@ -494,7 +494,7 @@ print('S_rxn(T=298) = {:.2f} J/mol/K'.format(S_rxn))
 # #### H2O+Cu(111):
 # - electronic and harmonic vibration modes
 # - potential energy (eV): -238.4713854
-# - vibrational wavenumbers (1/cm): 3797.255519, 3658.895695, 1530.600295, 266.366130, 138.907356, 63.899768, 59.150454, 51.256019, -327.384554 (negative numbers represent imaginary frequencies. The default behavior of pMuTT is to ignore these frequencies when calculating any thermodynamic property)
+# - vibrational wavenumbers (1/cm): 3797.255519, 3658.895695, 1530.600295, 266.366130, 138.907356, 63.899768, 59.150454, 51.256019, -327.384554 (negative numbers represent imaginary frequencies. The default behavior of pmutt is to ignore these frequencies when calculating any thermodynamic property)
 # 
 # #### Reaction:
 # H2O + Cu(111) --> H2O+Cu(111)
@@ -505,8 +505,8 @@ print('S_rxn(T=298) = {:.2f} J/mol/K'.format(S_rxn))
 
 
 from ase.build import molecule
-from pMuTT.statmech import StatMech, presets
-from pMuTT.reaction import Reaction
+from pmutt.statmech import StatMech, presets
+from pmutt.reaction import Reaction
 
 # Using dictionary since later I will initialize the reaction with a string
 species = {

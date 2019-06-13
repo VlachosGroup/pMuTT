@@ -1,9 +1,9 @@
-.. pMuTT documentation master file, created by
+.. pmutt documentation master file, created by
    sphinx-quickstart on Sat Aug 11 11:56:30 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pMuTT's documentation!
+Welcome to pmutt's documentation!
 ==================================
 
 .. toctree::
@@ -23,7 +23,7 @@ Welcome to pMuTT's documentation!
    eos
    constants
    release_notes
-   Return to Github <https://github.com/VlachosGroup/pMuTT>
+   Return to Github <https://github.com/VlachosGroup/pmutt>
 
 Indices and tables
 ==================
