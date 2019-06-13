@@ -65,7 +65,7 @@ file for details.
 
 Publications
 ------------
-- J. Lym, W.R Wittreich and D.G Vlachos, "A Python Multiscale Thermochemistry
+- J. Lym, G.R Wittreich and D.G Vlachos, "A Python Multiscale Thermochemistry
   Toolbox (pMuTT) for Thermochemical and Kinetic Parameter Estimation"
   (submitted)
 
