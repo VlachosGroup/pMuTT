@@ -7,6 +7,12 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.10
+-------------
+Jun. 13, 2019
+
+- Another hotfix to fix a bug where the version was not incremented correctly
+
 Version 1.2.9
 -------------
 Jun. 13, 2019
