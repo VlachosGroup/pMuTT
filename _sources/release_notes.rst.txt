@@ -7,12 +7,19 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.9
+-------------
+Jun. 13, 2019
+
+- Hotfix where pypi created the folder in the old case (pMuTT) instead of
+  lower case (pmutt)
+
 Version 1.2.8
 -------------
 Jun. 13, 2019
 
-- Importing from pMuTT is now all in lowercase. (i.e. import pmutt instead of
-  import pMuTT)
+- Importing from pMuTT is now all in lowercase. (i.e. ``import pmutt`` instead
+  of ``import pMuTT``)
 
 Version 1.2.7
 -------------
