@@ -7,6 +7,13 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.8
+-------------
+Jun. 13, 2019
+
+- Importing from pMuTT is now all in lowercase. (i.e. import pmutt instead of
+  import pMuTT)
+
 Version 1.2.7
 -------------
 Jun. 11, 2019
