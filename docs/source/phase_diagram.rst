@@ -7,8 +7,8 @@ PhaseDiagram
 ============
 
 Phase diagrams can be made by creating a list of 
-:class:`~pMuTT.reaction.Reaction` objects. The reactions should be balanced and 
+:class:`~pmutt.reaction.Reaction` objects. The reactions should be balanced and 
 have the same reactant references to give meaningful data.
 
-.. autoclass:: pMuTT.reaction.phasediagram.PhaseDiagram
+.. autoclass:: pmutt.reaction.phasediagram.PhaseDiagram
    :members:

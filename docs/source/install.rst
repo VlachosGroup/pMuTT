@@ -7,24 +7,24 @@ Installing Python
 -----------------
 Anaconda is the recommended method to install Python for scientific
 applications. It is supported on Linux, Windows and Mac OS X.
-`Download Anaconda here`_. Note that pMuTT runs on Python 3.X.
+`Download Anaconda here`_. Note that pmutt runs on Python 3.X.
 
-Installing pMuTT using pip
+Installing pmutt using pip
 --------------------------
-Using pip is the most straightforward way to install pMuTT.
+Using pip is the most straightforward way to install pmutt.
 
 1. Open a command prompt with access to Python (if Python is installed via
    Anaconda on Windows, use the Anaconda Prompt).
 
-2. Install pMuTT using:
+2. Install pmutt using:
 ::
 
-    pip install --user pMuTT
+    pip install --user pmutt
 
-The output towards the end should state "Successfully built pMuTT" if the
+The output towards the end should state "Successfully built pmutt" if the
 installation was successful.
 
-Installing pMuTT from source
+Installing pmutt from source
 ----------------------------
 If you would prefer to install from source or you are interested in development,
 follow the instructions below.
@@ -32,20 +32,20 @@ follow the instructions below.
 1. Clone the repository from GitHub (using the GitHub Desktop makes it easier).
    `See GitHub instructions on cloning repositories here`_.
 
-2. Add the path of the ``pMuTT`` folder to the ``PYTHONPATH`` environment
+2. Add the path of the ``pmutt`` folder to the ``PYTHONPATH`` environment
    variable.
 
-Upgrading pMuTT using pip
+Upgrading pmutt using pip
 -------------------------
 To upgrade to a newer release, use the --upgrade flag:
 ::
 
-    pip install --user --upgrade pMuTT
+    pip install --user --upgrade pmutt
 
 Running unit tests
 ------------------
-pMuTT has a suite of unit tests that should be run before committing any code.
-To run the tests, navigate to the tests folder (pMuTT/tests) via a command line
+pmutt has a suite of unit tests that should be run before committing any code.
+To run the tests, navigate to the tests folder (pmutt/tests) via a command line
 with access to Python.
 
 Run the following command:

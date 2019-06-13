@@ -2,10 +2,10 @@
 # coding: utf-8
 
 # # Experimental Data to Empirical Object
-# In this example, we will take experimental data (heat capacity, enthalpy of formation, and standard entropy) and convert it to a Shomate polynomial. We will then showcase some of the features of the object (such as calculating thermodynamic data). Note that even though we use a Shomate object in this example, the pMuTT Nasa object has the same functionality.
+# In this example, we will take experimental data (heat capacity, enthalpy of formation, and standard entropy) and convert it to a Shomate polynomial. We will then showcase some of the features of the object (such as calculating thermodynamic data). Note that even though we use a Shomate object in this example, the pmutt Nasa object has the same functionality.
 # 
 # ## Topics Covered
-# - Using pMuTT's constants for unit conversions
+# - Using pmutt's constants for unit conversions
 # - Create a Shomate object from experimental data
 # - Calculate thermodynamic properties using the Shomate object
 # - Plot the shape of the Shomate curve
@@ -25,7 +25,7 @@
 
 
 import numpy as np
-from pMuTT import constants as c
+from pmutt import constants as c
 
 T = np.array([50, 100, 150, 200, 273.15, 298.15, 300, 400, 500, 600, 700, 
               800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1750, 2000, 
@@ -43,7 +43,7 @@ S_ref = 239.9 # J/mol/K
 SoR_ref = S_ref/c.R('J/mol/K')
 
 
-# Note that the ``pMuTT.constants`` module contains functions for standard constants for easy use such as the molar gas constant (``pMuTT.constants.R``) and standard temperature (``~pMuTT.constants.T_ref``). The functions take a unit as an argument so that the code is more readable.
+# Note that the ``pmutt.constants`` module contains functions for standard constants for easy use such as the molar gas constant (``pmutt.constants.R``) and standard temperature (``~pmutt.constants.T_ref``). The functions take a unit as an argument so that the code is more readable.
 
 # ## Fitting the Shomate polynomial to the experimental data
 # The Shomate polynomial can be created easily by feeding the data to the ``from_data`` method as shown below.
@@ -51,7 +51,7 @@ SoR_ref = S_ref/c.R('J/mol/K')
 # In[2]:
 
 
-from pMuTT.empirical.shomate import Shomate
+from pmutt.empirical.shomate import Shomate
 
 CH3OH_shomate = Shomate.from_data(name='CH3OH', T=T, CpoR=CpoR,
                                   T_ref=T_ref, HoRT_ref=HoRT_ref,
@@ -117,25 +117,25 @@ axes[3].legend(['Shomate', 'Expt'])
 fig.set_size_inches((10, 8))
 
 
-# Note that in this code's section, we showcase the ``pMuTT.constants.convert_unit`` function. Similarly to the ``c.R`` and ``c.T0`` functions shown above, this helps to increase code readability.
+# Note that in this code's section, we showcase the ``pmutt.constants.convert_unit`` function. Similarly to the ``c.R`` and ``c.T0`` functions shown above, this helps to increase code readability.
 # 
 # ## Save the Shomate polynomial as a JSON file
-# If we would like to save our Shomate object, we can save it in JSON format with the help of the ``pMuTT.io.json.pMuTTEncoder``.
+# If we would like to save our Shomate object, we can save it in JSON format with the help of the ``pmutt.io.json.pmuttEncoder``.
 
 # In[6]:
 
 
 import json
-from pMuTT.io.json import pMuTTEncoder
+from pmutt.io.json import pmuttEncoder
 
 with open('CH3OH_shomate.json', 'w') as f_ptr:
-    json.dump(CH3OH_shomate, f_ptr, cls=pMuTTEncoder, indent=True)
+    json.dump(CH3OH_shomate, f_ptr, cls=pmuttEncoder, indent=True)
 
 
 # This block will save the Shomate object to ``CH3OH_shomate.json``. Upon opening, the file will look like this:
 # ```
 # {
-#  "class": "<class 'pMuTT.empirical.shomate.Shomate'>",
+#  "class": "<class 'pmutt.empirical.shomate.Shomate'>",
 #  "name": "CH3OH",
 #  "phase": null,
 #  "elements": null,
@@ -158,15 +158,15 @@ with open('CH3OH_shomate.json', 'w') as f_ptr:
 # ```
 
 # ## Loading the Shomate polynomial from a JSON file
-# Now that we've saved the Shomate object, we can open it using ``pMuTT.io.json.json_to_pMuTT``.
+# Now that we've saved the Shomate object, we can open it using ``pmutt.io.json.json_to_pmutt``.
 
 # In[7]:
 
 
-from pMuTT.io.json import json_to_pMuTT
+from pmutt.io.json import json_to_pmutt
 
 with open('CH3OH_shomate.json', 'r') as f_ptr:
-    CH3OH_json = json.load(f_ptr, object_hook=json_to_pMuTT)
+    CH3OH_json = json.load(f_ptr, object_hook=json_to_pmutt)
 
 print(CH3OH_json)
 

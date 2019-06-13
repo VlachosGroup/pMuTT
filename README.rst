@@ -1,8 +1,8 @@
-Python Multiscale Thermochemistry Toolbox (pMuTT)
+Python Multiscale Thermochemistry Toolbox (pmutt)
 ==================================================
   
 The **P**\ ython **Mu**\ ltiscale **T**\ hermochemistry **T**\ oolbox
-(pMuTT) is a Python library for Thermochemistry developed by the
+(pmutt) is a Python library for Thermochemistry developed by the
 Vlachos Research Group at the University of Delaware. This code was
 originally developed to convert *ab-initio* data from DFT to observable
 thermodynamic properties such as heat capacity, enthalpy, entropy, and
@@ -39,7 +39,7 @@ Getting Started
 ---------------
 1. Install using pip::
 
-    pip install --user pMuTT
+    pip install --user pmutt
    
 2. Run the tests by navigating to the `tests directory`_ in a
    command-line interface and inputting the following command::
@@ -95,7 +95,7 @@ Special Thanks
 -  Dr. Jeffrey Frey (pip and conda compatibility)
 -  Jaynell Keely (Logo design)
 
-.. _`documentation page`: https://vlachosgroup.github.io/pMuTT/
+.. _`documentation page`: https://vlachosgroup.github.io/pmutt/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
 .. _Pandas: https://pandas.pydata.org/
@@ -105,8 +105,8 @@ Special Thanks
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
-.. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pMuTT/tests
-.. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
-.. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html
-.. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues
-.. _`pull request`: https://github.com/VlachosGroup/pMuTT/pulls
+.. _tests directory: https://github.com/VlachosGroup/pmutt/tree/master/pmutt/tests
+.. _LICENSE.md: https://github.com/VlachosGroup/pmutt/blob/master/LICENSE.md
+.. _`examples using the code`: https://vlachosgroup.github.io/pmutt/examples.html
+.. _`Issues page`: https://github.com/VlachosGroup/pmutt/issues
+.. _`pull request`: https://github.com/VlachosGroup/pmutt/pulls

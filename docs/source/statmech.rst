@@ -10,7 +10,7 @@ has methods that specifies how to calculate thermodynamic quantities, such as
 partition functions, heat capacities, internal energy, enthalpy, entropy,
 Helmholtz energy and Gibbs energy.
 
- .. autoclass:: pMuTT.statmech.StatMech
+ .. autoclass:: pmutt.statmech.StatMech
    :members:
 
 The ``StatMech`` object can be initialized in two ways:
@@ -27,7 +27,7 @@ Example of initialization using objects
 
    import numpy as np
    from ase.build import molecule
-   from pMuTT.statmech import StatMech, trans, vib, rot, elec
+   from pmutt.statmech import StatMech, trans, vib, rot, elec
 
    atoms = molecule('H2O')
    H2O_trans = trans.FreeTrans(n_degrees=3, atoms=atoms)
@@ -46,7 +46,7 @@ Example of initialization using classes and parameters
 
    import numpy as np
    from ase.build import molecule
-   from pMuTT.statmech import StatMech, trans, vib, rot, elec
+   from pmutt.statmech import StatMech, trans, vib, rot, elec
    
    
    H2O_statmech = StatMech(trans_model=trans.FreeTrans,
@@ -65,14 +65,14 @@ Example of initialization using classes and parameters
 Presets
 =======
 If you are using a common model (e.g. the ideal gas model), then you can get 
-the default parameters from the dictionary, ``pMuTT.statmech.presets``. 
+the default parameters from the dictionary, ``pmutt.statmech.presets``. 
 The same H2O StatMech object can be specified without the need to pass all the 
 types of modes:
 
 .. code:: python
 
    from ase.build import molecule
-   from pMuTT.statmech import StatMech, presets
+   from pmutt.statmech import StatMech, presets
    
    idealgas_defaults = presets['idealgas']
    H2O_new = StatMech(vib_wavenumbers=[3825.434, 3710.2642, 1582.432],
@@ -95,15 +95,15 @@ Ideal Gas (idealgas)
 +------------------+-------------------------------------------------+
 | Set Attributes   | Default Value                                   |
 +==================+=================================================+
-| trans_model      | :class:`~pMuTT.statmech.trans.FreeTrans`        |
+| trans_model      | :class:`~pmutt.statmech.trans.FreeTrans`        |
 +------------------+-------------------------------------------------+
 | n_degrees        | 3                                               |
 +------------------+-------------------------------------------------+
-| vib_model        | :class:`~pMuTT.statmech.vib.HarmonicVib`        |
+| vib_model        | :class:`~pmutt.statmech.vib.HarmonicVib`        |
 +------------------+-------------------------------------------------+
-| elec_model       | :class:`~pMuTT.statmech.elec.GroundStateElec`   |
+| elec_model       | :class:`~pmutt.statmech.elec.GroundStateElec`   |
 +------------------+-------------------------------------------------+
-| rot_model        | :class:`~pMuTT.statmech.rot.RigidRotor`         |
+| rot_model        | :class:`~pmutt.statmech.rot.RigidRotor`         |
 +------------------+-------------------------------------------------+
 
 +---------------------+--------------------------------------------------------+
@@ -160,9 +160,9 @@ Typically used to model adsorbates.
 +-------------+------------------------------------------------+
 | Parameter   | Default Value                                  |
 +=============+================================================+
-| vib_model   | :class:`~pMuTT.statmech.vib.HarmonicVib`       |
+| vib_model   | :class:`~pmutt.statmech.vib.HarmonicVib`       |
 +-------------+------------------------------------------------+
-| elec_model  | :class:`~pMuTT.statmech.elec.GroundStateElec`  |
+| elec_model  | :class:`~pmutt.statmech.elec.GroundStateElec`  |
 +-------------+------------------------------------------------+
 
 +---------------------+-------------------------------------------------+
@@ -206,7 +206,7 @@ Electronic (electronic)
 +-------------+-----------------------------------------------+
 | Parameter   | Default Value                                 |
 +=============+===============================================+
-| elec_model  | :class:`~pMuTT.statmech.elec.GroundStateElec` |
+| elec_model  | :class:`~pmutt.statmech.elec.GroundStateElec` |
 +-------------+-----------------------------------------------+
 
 +---------------------+-------------------------------------------+
@@ -248,15 +248,15 @@ Placeholder (placeholder)
 +-------------+------------------------------------+
 | Parameter   | Default Value                      |
 +=============+====================================+
-| trans_model | :class:`~pMuTT.statmech.EmptyMode` |
+| trans_model | :class:`~pmutt.statmech.EmptyMode` |
 +-------------+------------------------------------+
-| vib_model   | :class:`~pMuTT.statmech.EmptyMode` |
+| vib_model   | :class:`~pmutt.statmech.EmptyMode` |
 +-------------+------------------------------------+
-| rot_model   | :class:`~pMuTT.statmech.EmptyMode` |
+| rot_model   | :class:`~pmutt.statmech.EmptyMode` |
 +-------------+------------------------------------+
-| elec_model  | :class:`~pMuTT.statmech.EmptyMode` |
+| elec_model  | :class:`~pmutt.statmech.EmptyMode` |
 +-------------+------------------------------------+
-| nucl_model  | :class:`~pMuTT.statmech.EmptyMode` |
+| nucl_model  | :class:`~pmutt.statmech.EmptyMode` |
 +-------------+------------------------------------+
 
 +---------------------+-------------+
@@ -291,7 +291,7 @@ Constant (constant)
 +-------------+---------------------------------------+
 | Parameter   | Default Value                         |
 +=============+=======================================+
-| elec_model  | :class:`~pMuTT.statmech.ConstantMode` |
+| elec_model  | :class:`~pmutt.statmech.ConstantMode` |
 +-------------+---------------------------------------+
 
 +---------------------+--------------------------------------------------------+
@@ -340,7 +340,7 @@ Constant (constant)
 The ``presets`` dictionary is flexible where you can create a new entry if you 
 will use a model often.
 
-.. autodata:: pMuTT.statmech.presets
+.. autodata:: pmutt.statmech.presets
 
 .. _trans:
 
@@ -349,7 +349,7 @@ Translational Models
 
 FreeTrans
 ----------
-.. autoclass:: pMuTT.statmech.trans.FreeTrans
+.. autoclass:: pmutt.statmech.trans.FreeTrans
    :members:
 
 .. _vib:
@@ -359,22 +359,22 @@ Vibrational Models
 
 HarmonicVib
 -----------
-.. autoclass:: pMuTT.statmech.vib.HarmonicVib
+.. autoclass:: pmutt.statmech.vib.HarmonicVib
    :members:
 
 QRRHOVib
 --------
-.. autoclass:: pMuTT.statmech.vib.QRRHOVib
+.. autoclass:: pmutt.statmech.vib.QRRHOVib
    :members:
 
 EinsteinVib
 -----------
-.. autoclass:: pMuTT.statmech.vib.EinsteinVib
+.. autoclass:: pmutt.statmech.vib.EinsteinVib
    :members:
 
 DebyeVib
 --------
-.. autoclass:: pMuTT.statmech.vib.DebyeVib
+.. autoclass:: pmutt.statmech.vib.DebyeVib
    :members:
 
 .. _rot:
@@ -384,7 +384,7 @@ Rotational Models
 
 RigidRotor
 ----------
-.. autoclass:: pMuTT.statmech.rot.RigidRotor
+.. autoclass:: pmutt.statmech.rot.RigidRotor
    :members:
 
 .. _elec:
@@ -394,12 +394,12 @@ Electronic Models
 
 GroundStateElec
 ---------------
-.. autoclass:: pMuTT.statmech.elec.GroundStateElec
+.. autoclass:: pmutt.statmech.elec.GroundStateElec
    :members:
 
 Linear Scaling Relationships (LSRs)
 -----------------------------------
-.. autoclass:: pMuTT.statmech.lsr.LSR
+.. autoclass:: pmutt.statmech.lsr.LSR
    :members:
 
 
@@ -410,7 +410,7 @@ Nuclear Models
 Typically these are unimportant for chemical reactions, but the module is 
 present in case nuclear modes become important in the future.
 
-.. automodule:: pMuTT.statmech.nucl
+.. automodule:: pmutt.statmech.nucl
    :members:
 
 Empty Mode
@@ -421,7 +421,7 @@ not have any rotational modes), you can use the ``EmptyMode``. It does not
 contribute to any thermodynamic properties (i.e. q = 1, all other quantities 
 = 0).
 
-.. autoclass:: pMuTT.statmech.EmptyMode
+.. autoclass:: pmutt.statmech.EmptyMode
    :members:
 
 Constant Mode
@@ -430,12 +430,12 @@ Constant Mode
 If you would like to arbitrarily set thermodynamic properties, you can use the
 ``ConstantMode``.
 
-.. autoclass:: pMuTT.statmech.ConstantMode
+.. autoclass:: pmutt.statmech.ConstantMode
    :members:
 
 Creating New StatMech Models
 ============================
-New models should inherit from ``pMuTT._ModelBase``. This class already has the
+New models should inherit from ``pmutt._ModelBase``. This class already has the
 dimensional methods (e.g. ``get_Cv``, ``get_U``, ``get_S``), and some routine
 methods (e.g. ``get_FoRT``, ``get_GoRT``, ``from_dict``, ``to_dict``)
 implemented.
