@@ -26,4 +26,4 @@ correction for each element.
 The equation can be solved using a Least Squares approach. 
 The correction factor can then be added to subsequent species calculated 
 through DFT to ensure consistent references. Referencing is handled by the 
-:class:`~pMuTT.empirical.references.References`.
+:class:`~pmutt.empirical.references.References`.

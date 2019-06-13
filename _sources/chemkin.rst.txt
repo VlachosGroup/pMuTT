@@ -10,15 +10,15 @@ be supported in the commercial version.
 Objects
 -------
 
-.. autoclass:: pMuTT.chemkin.CatSite
+.. autoclass:: pmutt.chemkin.CatSite
    :members:
 
-.. autoclass:: pMuTT.reaction.ChemkinReaction
+.. autoclass:: pmutt.reaction.ChemkinReaction
    :members:
 
 Input and Output
 ----------------
 
-.. automodule:: pMuTT.io.chemkin
+.. automodule:: pmutt.io.chemkin
    :members:
 

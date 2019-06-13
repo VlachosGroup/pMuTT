@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Empirical Models &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Empirical Models &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pMuTT
+            <a href="index.html" class="icon icon-home"> pmutt
           
 
           
@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -121,7 +121,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pMuTT</a>
+          <a href="index.html">pmutt</a>
         
       </nav>
 
@@ -196,15 +196,15 @@
 <h2>EmpiricalBase<a class="headerlink" href="#empiricalbase" title="Permalink to this headline">¶</a></h2>
 <p>This is the parent class for the empirical models.</p>
 <dl class="class">
-<dt id="pMuTT.empirical.EmpiricalBase">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.</code><code class="descname">EmpiricalBase</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>references=None</em>, <em>misc_models=None</em>, <em>smiles=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.</code><code class="descname">EmpiricalBase</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>references=None</em>, <em>misc_models=None</em>, <em>smiles=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>The empirical parent class.
-Holds properties of a specie, the statistical-mechanical thermodynamic
+Holds properties of a species, the statistical-mechanical thermodynamic
 model.</p>
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.name">
-<code class="descname">name</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of the specie. Default is None</p>
+<dt id="pmutt.empirical.EmpiricalBase.name">
+<code class="descname">name</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the species. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -216,9 +216,9 @@ model.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.phase">
-<code class="descname">phase</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.phase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phase of the specie. Default is None
+<dt id="pmutt.empirical.EmpiricalBase.phase">
+<code class="descname">phase</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phase of the species. Default is None
 G - gas.
 S - surface.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -232,8 +232,8 @@ S - surface.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.elements">
-<code class="descname">elements</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.elements" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.elements">
+<code class="descname">elements</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Composition of the species. Default is None.
 Keys of dictionary are elements, values are stoichiometric values
 in a formula unit.
@@ -250,8 +250,8 @@ e.g. CH3OH can be represented as:
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.statmech_model">
-<code class="descname">statmech_model</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.statmech_model" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.statmech_model">
+<code class="descname">statmech_model</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.statmech_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Statistical thermodynamic model. Default is None.
 Object should have the following methods: <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>,
 <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>.</p>
@@ -259,30 +259,30 @@ Object should have the following methods: <code class="docutils literal notransl
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">pMuTT.statmech</span></code> object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">pmutt.statmech</span></code> object, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.misc_models">
-<code class="descname">misc_models</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.misc_models" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.misc_models">
+<code class="descname">misc_models</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.misc_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extra models to add extra functionality. Commonly used models would
-be <code class="docutils literal notranslate"><span class="pre">pMuTT.mixture</span></code> models</p>
+be <code class="docutils literal notranslate"><span class="pre">pmutt.mixture</span></code> models</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of pMuTT model objects, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of pmutt model objects, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.smiles">
-<code class="descname">smiles</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.smiles" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.smiles">
+<code class="descname">smiles</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.smiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Smiles representation of species. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -295,8 +295,8 @@ be <code class="docutils literal notranslate"><span class="pre">pMuTT.mixture</s
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.EmpiricalBase.notes">
-<code class="descname">notes</code><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.notes" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Any additional details you would like to include such as
 computational set up. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -310,8 +310,8 @@ computational set up. Default is None</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.compare_CpoR">
-<code class="descname">compare_CpoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.compare_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.compare_CpoR">
+<code class="descname">compare_CpoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.compare_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the dimensionless heat capacity of the statistical model
 and the empirical model</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -333,8 +333,8 @@ list of temperatures between self.T_low and self.T_high</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.compare_GoRT">
-<code class="descname">compare_GoRT</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.compare_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.compare_GoRT">
+<code class="descname">compare_GoRT</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.compare_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the dimensionless Gibbs energy of the statistical model and
 the empirical model</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -356,8 +356,8 @@ list of temperatures between self.T_low and self.T_high</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.compare_HoRT">
-<code class="descname">compare_HoRT</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.compare_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.compare_HoRT">
+<code class="descname">compare_HoRT</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.compare_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the dimensionless enthalpy of the statistical model and
 the empirical model</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -379,8 +379,8 @@ list of temperatures between self.T_low and self.T_high</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.compare_SoR">
-<code class="descname">compare_SoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.compare_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.compare_SoR">
+<code class="descname">compare_SoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.compare_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the dimensionless entropy of the statistical model and the
 empirical model</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -402,8 +402,8 @@ list of temperatures between self.T_low and self.T_high</td>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.EmpiricalBase.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -420,8 +420,8 @@ list of temperatures between self.T_low and self.T_high</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.plot_empirical">
-<code class="descname">plot_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.plot_empirical" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.plot_empirical">
+<code class="descname">plot_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.plot_empirical" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -433,14 +433,14 @@ using empirical relationship</p>
 <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used.</li>
 <li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified,
 <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used.</li>
-<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</li>
-<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</li>
-<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</li>
 </ul>
@@ -462,8 +462,8 @@ specified, dimensionless units used.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.plot_statmech">
-<code class="descname">plot_statmech</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em>, <em>use_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.plot_statmech" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.plot_statmech">
+<code class="descname">plot_statmech</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em>, <em>use_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.plot_statmech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -475,14 +475,14 @@ using empirical relationship</p>
 <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used</li>
 <li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified,
 <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used</li>
-<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units. If not specified, dimensionless units used.</li>
-<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</li>
-<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</li>
-<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</li>
 </ul>
@@ -504,8 +504,8 @@ specified, dimensionless units used.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.plot_statmech_and_empirical">
-<code class="descname">plot_statmech_and_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em>, <em>use_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.plot_statmech_and_empirical" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.plot_statmech_and_empirical">
+<code class="descname">plot_statmech_and_empirical</code><span class="sig-paren">(</span><em>T_low=None</em>, <em>T_high=None</em>, <em>Cp_units=None</em>, <em>H_units=None</em>, <em>S_units=None</em>, <em>G_units=None</em>, <em>use_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.plot_statmech_and_empirical" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -517,14 +517,14 @@ using empirical relationship</p>
 attribute used</li>
 <li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 attribute used</li>
-<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</li>
-<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</li>
-<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</li>
-<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</li>
 </ul>
@@ -546,8 +546,8 @@ specified, dimensionless units used.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.EmpiricalBase.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.EmpiricalBase.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.EmpiricalBase.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -567,10 +567,10 @@ specified, dimensionless units used.</li>
 <div class="section" id="nasa">
 <h2>NASA<a class="headerlink" href="#nasa" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.empirical.nasa.Nasa">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.nasa.</code><code class="descname">Nasa</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_mid</em>, <em>T_high</em>, <em>a_low</em>, <em>a_high</em>, <em>cat_site=None</em>, <em>n_sites=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.nasa.</code><code class="descname">Nasa</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_mid</em>, <em>T_high</em>, <em>a_low</em>, <em>a_high</em>, <em>cat_site=None</em>, <em>n_sites=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores the information for an individual nasa specie
-Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase" title="pMuTT.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p>
+Inherits from <a class="reference internal" href="#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p>
 <p>The thermodynamic properties are calculated using the following form:</p>
 <p><span class="math notranslate nohighlight">\(\frac {Cp} {R} = a_{1} + a_{2} T + a_{3} T^{2} + a_{4} T^{3}
 + a_{5} T^{4}\)</span></p>
@@ -581,8 +581,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 \frac {T^{2}} {2} + a_{4} \frac {T^{3}} {3} + a_{5}
 \frac {T^{4}} {4} + a_{7}\)</span></p>
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.T_low">
-<code class="descname">T_low</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.T_low" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.T_low">
+<code class="descname">T_low</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.T_low" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lower temperature bound (in K)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -595,8 +595,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.T_mid">
-<code class="descname">T_mid</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.T_mid" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.T_mid">
+<code class="descname">T_mid</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.T_mid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Middle temperature bound (in K)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -609,8 +609,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.T_high">
-<code class="descname">T_high</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.T_high" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.T_high">
+<code class="descname">T_high</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.T_high" title="Permalink to this definition">¶</a></dt>
 <dd><p>High temperature bound (in K)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -623,8 +623,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.a_low">
-<code class="descname">a_low</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.a_low" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.a_low">
+<code class="descname">a_low</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.a_low" title="Permalink to this definition">¶</a></dt>
 <dd><p>NASA polynomial to use between T_low and T_mid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -637,8 +637,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.a_high">
-<code class="descname">a_high</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.a_high" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.a_high">
+<code class="descname">a_high</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.a_high" title="Permalink to this definition">¶</a></dt>
 <dd><p>NASA polynomial to use between T_mid and T_high</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -651,8 +651,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.cat_site">
-<code class="descname">cat_site</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.cat_site" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.cat_site">
+<code class="descname">cat_site</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.cat_site" title="Permalink to this definition">¶</a></dt>
 <dd><p>Catalyst site for adsorption. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -665,8 +665,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.nasa.Nasa.n_sites">
-<code class="descname">n_sites</code><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.n_sites" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.n_sites">
+<code class="descname">n_sites</code><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.n_sites" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of catalyst sites occupied by species. If cat_site is not
 assigned, then n_sites is None. If cat_site is specified, the
 default is 1</p>
@@ -681,8 +681,8 @@ default is 1</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.nasa.Nasa.from_data">
-<em class="property">classmethod </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>name</em>, <em>T</em>, <em>CpoR</em>, <em>T_ref</em>, <em>HoRT_ref</em>, <em>SoR_ref</em>, <em>elements=None</em>, <em>T_mid=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.from_data" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.from_data">
+<em class="property">classmethod </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>name</em>, <em>T</em>, <em>CpoR</em>, <em>T_ref</em>, <em>HoRT_ref</em>, <em>SoR_ref</em>, <em>elements=None</em>, <em>T_mid=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the NASA polynomials using thermodynamic data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -718,8 +718,8 @@ and 6th highest value of T.</li>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.nasa.Nasa.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -736,8 +736,8 @@ and 6th highest value of T.</li>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.nasa.Nasa.from_statmech">
-<em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>T_mid=None</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.from_statmech" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.from_statmech">
+<em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>T_mid=None</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_statmech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the NASA polynomials using statistical mechanic models</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -745,14 +745,14 @@ and 6th highest value of T.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the species</li>
-<li><strong>statmech_model</strong> (<cite>pMuTT.statmech.StatMech</cite> object or class) – Statistical Mechanics model to generate data</li>
+<li><strong>statmech_model</strong> (<cite>pmutt.statmech.StatMech</cite> object or class) – Statistical Mechanics model to generate data</li>
 <li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower limit temerature in K</li>
 <li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Higher limit temperature in K</li>
 <li><strong>T_mid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><em>iterable of float</em><em>, </em><em>optional</em>) – Guess for T_mid. If float, only uses that value for T_mid. If
 list, finds the best fit for each element in the list. If None,
 a range of T_mid values are screened between the 6th lowest
 and 6th highest value of T.</li>
-<li><strong>references</strong> (<cite>pMuTT.empirical.references.References</cite> object) – Reference to adjust enthalpy</li>
+<li><strong>references</strong> (<cite>pmutt.empirical.references.References</cite> object) – Reference to adjust enthalpy</li>
 <li><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Composition of the species.
 Keys of dictionary are elements, values are stoichiometric
 values in a formula unit.
@@ -774,8 +774,8 @@ attributes to be stored.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_Cp">
-<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_Cp" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_Cp">
+<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -783,7 +783,7 @@ attributes to be stored.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -805,8 +805,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -834,8 +834,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_G">
-<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_G" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_G">
+<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -843,7 +843,7 @@ True</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -865,8 +865,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless Gibbs free energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -894,8 +894,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_H">
-<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_H" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_H">
+<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -903,7 +903,7 @@ True</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -925,8 +925,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -954,8 +954,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_S">
-<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_S" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_S">
+<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -963,7 +963,7 @@ True</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -985,8 +985,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1014,8 +1014,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.get_a">
-<code class="descname">get_a</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.get_a" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.get_a">
+<code class="descname">get_a</code><span class="sig-paren">(</span><em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.get_a" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the correct polynomial range based on T_low, T_mid and
 T_high</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1033,8 +1033,8 @@ T_high</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.nasa.Nasa.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.nasa.Nasa.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1054,10 +1054,10 @@ T_high</p>
 <div class="section" id="shomate">
 <h2>Shomate<a class="headerlink" href="#shomate" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.empirical.shomate.Shomate">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.shomate.</code><code class="descname">Shomate</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_high</em>, <em>a</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.shomate.</code><code class="descname">Shomate</code><span class="sig-paren">(</span><em>name</em>, <em>T_low</em>, <em>T_high</em>, <em>a</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores the information for an individual Shomate specie
-Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase" title="pMuTT.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p>
+Inherits from <a class="reference internal" href="#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p>
 <p>The thermodynamic properties are calculated using the following form:</p>
 <p><span class="math notranslate nohighlight">\(\frac{c_P}{R}=\frac{1}{R}\bigg(A+Bt+Ct^2+Dt^3+\frac{E}{t^2}
 \bigg)\)</span></p>
@@ -1067,8 +1067,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 \frac{t^3}{3}-\frac{E}{2t^2}+G\bigg)\)</span></p>
 <p>where <span class="math notranslate nohighlight">\(t=\frac{T}{1000}\)</span> in K</p>
 <dl class="attribute">
-<dt id="pMuTT.empirical.shomate.Shomate.T_low">
-<code class="descname">T_low</code><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.T_low" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.T_low">
+<code class="descname">T_low</code><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.T_low" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lower temperature bound (in K)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1081,8 +1081,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.shomate.Shomate.T_high">
-<code class="descname">T_high</code><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.T_high" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.T_high">
+<code class="descname">T_high</code><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.T_high" title="Permalink to this definition">¶</a></dt>
 <dd><p>High temperature bound (in K)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1095,8 +1095,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.shomate.Shomate.a">
-<code class="descname">a</code><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.a" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.a">
+<code class="descname">a</code><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.a" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shomate polynomial to use between T_low and T_high</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1109,8 +1109,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.shomate.Shomate.from_data">
-<em class="property">classmethod </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>name</em>, <em>T</em>, <em>CpoR</em>, <em>T_ref</em>, <em>HoRT_ref</em>, <em>SoR_ref</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.from_data" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.from_data">
+<em class="property">classmethod </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>name</em>, <em>T</em>, <em>CpoR</em>, <em>T_ref</em>, <em>HoRT_ref</em>, <em>SoR_ref</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Shomate polynomials using thermodynamic data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1137,8 +1137,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.shomate.Shomate.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1155,8 +1155,8 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.shomate.Shomate.from_statmech">
-<em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.from_statmech" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.from_statmech">
+<em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.from_statmech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Shomate polynomial using statistical mechanic models</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1164,10 +1164,10 @@ Inherits from <a class="reference internal" href="#pMuTT.empirical.EmpiricalBase
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the species</li>
-<li><strong>statmech_model</strong> (<cite>pMuTT.statmech.StatMech</cite> object or class) – Statistical Mechanics model to generate data</li>
+<li><strong>statmech_model</strong> (<cite>pmutt.statmech.StatMech</cite> object or class) – Statistical Mechanics model to generate data</li>
 <li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower limit temerature in K</li>
 <li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Higher limit temperature in K</li>
-<li><strong>references</strong> (<cite>pMuTT.empirical.references.References</cite> object) – Reference to adjust enthalpy</li>
+<li><strong>references</strong> (<cite>pmutt.empirical.references.References</cite> object) – Reference to adjust enthalpy</li>
 <li><strong>**kwargs</strong> (<em>keyword arguments</em>) – Used to initalize <code class="docutils literal notranslate"><span class="pre">statmech_model</span></code> or <code class="docutils literal notranslate"><span class="pre">EmpiricalBase</span></code>
 attributes to be stored.</li>
 </ul>
@@ -1184,8 +1184,8 @@ attributes to be stored.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_Cp">
-<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_Cp" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_Cp">
+<code class="descname">get_Cp</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1193,7 +1193,7 @@ attributes to be stored.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -1215,8 +1215,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_CpoR">
-<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_CpoR">
+<code class="descname">get_CpoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless heat capacity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1244,8 +1244,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_G">
-<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_G" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_G">
+<code class="descname">get_G</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1253,7 +1253,7 @@ True</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -1275,8 +1275,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless Gibbs free energy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1304,8 +1304,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_H">
-<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_H" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_H">
+<code class="descname">get_H</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1313,7 +1313,7 @@ True</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -1335,8 +1335,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1364,8 +1364,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_S">
-<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_S" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_S">
+<code class="descname">get_S</code><span class="sig-paren">(</span><em>T</em>, <em>units</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1373,7 +1373,7 @@ True</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</li>
@@ -1395,8 +1395,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T</em>, <em>raise_error=True</em>, <em>raise_warning=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dimensionless entropy</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1424,8 +1424,8 @@ True</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.shomate.Shomate.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.shomate.Shomate.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.shomate.Shomate.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1445,13 +1445,13 @@ True</li>
 <div class="section" id="zacros">
 <h2>Zacros<a class="headerlink" href="#zacros" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.empirical.zacros.Zacros">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.zacros.</code><code class="descname">Zacros</code><span class="sig-paren">(</span><em>A_st=None</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>inertia=None</em>, <em>geometry=None</em>, <em>vib_wavenumbers=None</em>, <em>potentialenergy=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.zacros.Zacros" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.zacros.Zacros">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.zacros.</code><code class="descname">Zacros</code><span class="sig-paren">(</span><em>A_st=None</em>, <em>atoms=None</em>, <em>symmetrynumber=None</em>, <em>inertia=None</em>, <em>geometry=None</em>, <em>vib_wavenumbers=None</em>, <em>potentialenergy=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.zacros.Zacros" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores the information for an individual nasa specie
-Inherits from pMuTT.empirical.EmpiricalBase</p>
+Inherits from pmutt.empirical.EmpiricalBase</p>
 <dl class="classmethod">
-<dt id="pMuTT.empirical.zacros.Zacros.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.zacros.Zacros.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.zacros.Zacros.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.zacros.Zacros.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1468,8 +1468,8 @@ Inherits from pMuTT.empirical.EmpiricalBase</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.zacros.Zacros.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.zacros.Zacros.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.zacros.Zacros.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.zacros.Zacros.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1489,13 +1489,13 @@ Inherits from pMuTT.empirical.EmpiricalBase</p>
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.empirical.references.Reference">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.references.</code><code class="descname">Reference</code><span class="sig-paren">(</span><em>T_ref</em>, <em>HoRT_ref</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.Reference" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.Reference">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.references.</code><code class="descname">Reference</code><span class="sig-paren">(</span><em>T_ref</em>, <em>HoRT_ref</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.Reference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Single reference specie used to adjust DFT energies to
 experimental data.</p>
 <dl class="attribute">
-<dt id="pMuTT.empirical.references.Reference.T_ref">
-<code class="descname">T_ref</code><a class="headerlink" href="#pMuTT.empirical.references.Reference.T_ref" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.Reference.T_ref">
+<code class="descname">T_ref</code><a class="headerlink" href="#pmutt.empirical.references.Reference.T_ref" title="Permalink to this definition">¶</a></dt>
 <dd><p>Temperature reference in K</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1508,8 +1508,8 @@ experimental data.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.references.Reference.HoRT_ref">
-<code class="descname">HoRT_ref</code><a class="headerlink" href="#pMuTT.empirical.references.Reference.HoRT_ref" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.Reference.HoRT_ref">
+<code class="descname">HoRT_ref</code><a class="headerlink" href="#pmutt.empirical.references.Reference.HoRT_ref" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless enthalpy corresponding to T_ref</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1522,8 +1522,8 @@ experimental data.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.Reference.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.Reference.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.Reference.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.Reference.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1543,12 +1543,12 @@ experimental data.</p>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.empirical.references.References">
-<em class="property">class </em><code class="descclassname">pMuTT.empirical.references.</code><code class="descname">References</code><span class="sig-paren">(</span><em>offset=None</em>, <em>references=None</em>, <em>descriptor='elements'</em>, <em>T_ref=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.references.</code><code class="descname">References</code><span class="sig-paren">(</span><em>offset=None</em>, <em>references=None</em>, <em>descriptor='elements'</em>, <em>T_ref=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References" title="Permalink to this definition">¶</a></dt>
 <dd><p>Holds reference species to adjust DFT energies to experimental data.</p>
 <dl class="attribute">
-<dt id="pMuTT.empirical.references.References.offset">
-<code class="descname">offset</code><a class="headerlink" href="#pMuTT.empirical.references.References.offset" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.offset">
+<code class="descname">offset</code><a class="headerlink" href="#pmutt.empirical.references.References.offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimensionless enthalpy offset for each descriptor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1561,23 +1561,23 @@ experimental data.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.references.References.references">
-<code class="descname">references</code><a class="headerlink" href="#pMuTT.empirical.references.References.references" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.references">
+<code class="descname">references</code><a class="headerlink" href="#pmutt.empirical.references.References.references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reference species. Each member of the list should have the
 attributes <code class="docutils literal notranslate"><span class="pre">T_ref</span></code> and <code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="#pMuTT.empirical.references.Reference" title="pMuTT.empirical.references.Reference"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code></a>, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="#pmutt.empirical.references.Reference" title="pmutt.empirical.references.Reference"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code></a>, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.references.References.descriptor">
-<code class="descname">descriptor</code><a class="headerlink" href="#pMuTT.empirical.references.References.descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.descriptor">
+<code class="descname">descriptor</code><a class="headerlink" href="#pmutt.empirical.references.References.descriptor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Descriptor to use to calculate offset. Default is ‘elements’</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1590,8 +1590,8 @@ attributes <code class="docutils literal notranslate"><span class="pre">T_ref</s
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.empirical.references.References.T_ref">
-<code class="descname">T_ref</code><a class="headerlink" href="#pMuTT.empirical.references.References.T_ref" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.T_ref">
+<code class="descname">T_ref</code><a class="headerlink" href="#pmutt.empirical.references.References.T_ref" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reference temperature in K. Default is 298.15 K</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1604,21 +1604,21 @@ attributes <code class="docutils literal notranslate"><span class="pre">T_ref</s
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.References.clear_offset">
-<code class="descname">clear_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.clear_offset" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.clear_offset">
+<code class="descname">clear_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.clear_offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes all entries from descriptor offset dictionary.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.References.fit_HoRT_offset">
-<code class="descname">fit_HoRT_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.fit_HoRT_offset" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.fit_HoRT_offset">
+<code class="descname">fit_HoRT_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.fit_HoRT_offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the descriptoral offset between DFT and formation energies
 using reference species.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.empirical.references.References.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1635,8 +1635,26 @@ using reference species.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.References.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>descriptors</em>, <em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>descriptors</em>, <em>T</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs free energy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code> and <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>GoRT</strong> – Dimensionless Gibbs free energy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.empirical.references.References.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>descriptors</em>, <em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the offset due to the descriptor composition of a specie.
 The offset is defined as follows:</p>
 <p><span class="math notranslate nohighlight">\(HoRT_{exp} = HoRT_{dft} + offset\)</span></p>
@@ -1663,8 +1681,8 @@ References</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.References.get_descriptors">
-<code class="descname">get_descriptors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.get_descriptors" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.get_descriptors">
+<code class="descname">get_descriptors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.get_descriptors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the descriptors in references.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1679,8 +1697,8 @@ References</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.References.get_descriptors_matrix">
-<code class="descname">get_descriptors_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.get_descriptors_matrix" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.get_descriptors_matrix">
+<code class="descname">get_descriptors_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.get_descriptors_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the descriptors matrix required for calculating the offset.
 The descriptors are sorted in alphabetical order.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1697,8 +1715,8 @@ descriptors</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.empirical.references.References.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.empirical.references.References.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.references.References.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

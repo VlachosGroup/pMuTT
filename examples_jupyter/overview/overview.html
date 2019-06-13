@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview of pMuTT’s Core Functionality &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Constants &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> pMuTT
+            <a href="../../index.html" class="icon icon-home"> pmutt
           
 
           
@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -111,7 +111,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">pMuTT</a>
+          <a href="../../index.html">pmutt</a>
         
       </nav>
 
@@ -142,7 +142,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Overview of pMuTT’s Core Functionality</li>
+      <li>Constants</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -344,12 +344,20 @@ div.nboutput div.output_area.stderr {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
+<div class="section" id="Constants">
+<h1>Constants<a class="headerlink" href="#Constants" title="Permalink to this headline">¶</a></h1>
+<p>pMuTT has a wide variety of constants to increase readability of the
+code. See <a class="reference external" href="https://vlachosgroup.github.io/pmutt/constants.html#constants">Constants
+page</a>
+in the documentation for supported units.</p>
 <div class="section" id="Overview-of-pMuTT’s-Core-Functionality">
-<h1>Overview of pMuTT’s Core Functionality<a class="headerlink" href="#Overview-of-pMuTT’s-Core-Functionality" title="Permalink to this headline">¶</a></h1>
+<h2>Overview of pMuTT’s Core Functionality<a class="headerlink" href="#Overview-of-pMuTT’s-Core-Functionality" title="Permalink to this headline">¶</a></h2>
 <p>Originally written for Version 1.2.1</p>
-<p>Last Updated for Version 1.2.3</p>
+<p>Last Updated for Version 1.2.8</p>
+</div>
+</div>
 <div class="section" id="Topics-Covered">
-<h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
+<h1>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>Using constants and converting units using the <code class="docutils literal notranslate"><span class="pre">constants</span></code> module</li>
 <li>Initializing <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects by specifying all modes and by
@@ -363,26 +371,19 @@ reference to more traditional references</li>
 </ul>
 </div>
 <div class="section" id="Useful-Links:">
-<h2>Useful Links:<a class="headerlink" href="#Useful-Links:" title="Permalink to this headline">¶</a></h2>
+<h1>Useful Links:<a class="headerlink" href="#Useful-Links:" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>Github: <a class="reference external" href="https://github.com/VlachosGroup/pMuTT">https://github.com/VlachosGroup/pMuTT</a></li>
 <li>Documentation: <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/index.html">https://vlachosgroup.github.io/pMuTT/index.html</a></li>
 <li>Examples: <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/examples.html">https://vlachosgroup.github.io/pMuTT/examples.html</a></li>
 </ul>
-</div>
-<div class="section" id="Constants">
-<h2>Constants<a class="headerlink" href="#Constants" title="Permalink to this headline">¶</a></h2>
-<p>pMuTT has a wide variety of constants to increase readability of the
-code. See <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/constants.html#constants">Constants
-page</a>
-in the documentation for supported units.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
 <span class="mf">1.987</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;kJ/mol/K&#39;</span><span class="p">))</span>
@@ -416,7 +417,7 @@ Unit conversions
 Frequency of 1000 Hz --&gt; Wavenumber of 3.3356409519815205e-08 1/cm
 
 See expected inputs, supported units of different constants
-Help on function R in module pMuTT.constants:
+Help on function R in module pmutt.constants:
 
 R(units)
     Universal molar gas constant, R
@@ -456,7 +457,7 @@ R(units)
         KeyError
             If units is not supported.
 
-Help on function convert_unit in module pMuTT.constants:
+Help on function convert_unit in module pmutt.constants:
 
 convert_unit(num=None, initial=None, final=None)
     Converts units between two unit sets
@@ -615,11 +616,11 @@ convert_unit(num=None, initial=None, final=None)
 </div>
 </div>
 <div class="section" id="StatMech-Objects">
-<h2>StatMech Objects<a class="headerlink" href="#StatMech-Objects" title="Permalink to this headline">¶</a></h2>
+<h1>StatMech Objects<a class="headerlink" href="#StatMech-Objects" title="Permalink to this headline">¶</a></h1>
 <p>Molecules show translational, vibrational, rotational, electronic, and
 nuclear modes.</p>
 <p>The
-<code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech">https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/statmech.html#pmutt.statmech.StatMech">https://vlachosgroup.github.io/pmutt/statmech.html#pmutt.statmech.StatMech</a>&gt;`__
 object allows us to specify translational, vibrational, rotational,
 electronic and nuclear modes independently, which gives flexibility in
 what behavior you would like.</p>
@@ -638,7 +639,7 @@ what behavior you would like.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 <span class="n">butane_atoms</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;trans-butane&#39;</span><span class="p">)</span>
 
@@ -688,12 +689,10 @@ H_butane(T=298) = -6765.8 kJ/mol
 S_butane(T=298) = 328.44 J/mol/K
 </pre></div></div>
 </div>
-<div class="section" id="Presets">
-<h3>Presets<a class="headerlink" href="#Presets" title="Permalink to this headline">¶</a></h3>
 <p>The
-<code class="docutils literal notranslate"><span class="pre">`presets</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#presets">https://vlachosgroup.github.io/pMuTT/statmech.html#presets</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`presets</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/statmech.html#presets">https://vlachosgroup.github.io/pmutt/statmech.html#presets</a>&gt;`__
 dictionary stores commonly used models to ease the initialization of
-<code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech">https://vlachosgroup.github.io/pMuTT/statmech.html#pMuTT.statmech.StatMech</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`StatMech</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/statmech.html#pmutt.statmech.StatMech">https://vlachosgroup.github.io/pmutt/statmech.html#pmutt.statmech.StatMech</a>&gt;`__
 objects. The same water molecule before can be initialized this way
 instead.</p>
 <div class="nbinput docutils container">
@@ -704,7 +703,7 @@ instead.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
 
 <span class="n">idealgas_defaults</span> <span class="o">=</span> <span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">idealgas_defaults</span><span class="p">)</span>
@@ -716,7 +715,7 @@ instead.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
+{&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
  &#39;n_degrees&#39;: 3,
  &#39;optional&#39;: &#39;atoms&#39;,
  &#39;required&#39;: (&#39;molecular_weight&#39;,
@@ -726,10 +725,10 @@ instead.</p>
               &#39;geometry&#39;,
               &#39;rot_temperatures&#39;,
               &#39;symmetrynumber&#39;),
- &#39;rot_model&#39;: &lt;class &#39;pMuTT.statmech.rot.RigidRotor&#39;&gt;,
- &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
- &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.FreeTrans&#39;&gt;,
- &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;}
+ &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
+ &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+ &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
+ &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;}
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -773,11 +772,8 @@ H_butane(T=298) = -6765.8 kJ/mol
 S_butane(T=298) = 328.44 J/mol/K
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Empty-Modes">
-<h3>Empty Modes<a class="headerlink" href="#Empty-Modes" title="Permalink to this headline">¶</a></h3>
 <p>The
-<code class="docutils literal notranslate"><span class="pre">`EmptyMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`EmptyMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/statmech.html#empty-mode">https://vlachosgroup.github.io/pmutt/statmech.html#empty-mode</a>&gt;`__
 is a special object returns 1 for the partition function and 0 for all
 other thermodynamic properties. This is useful if you do not want any
 contribution from a mode.</p>
@@ -787,7 +783,7 @@ contribution from a mode.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="k">import</span> <span class="n">EmptyMode</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">EmptyMode</span>
 
 <span class="n">empty</span> <span class="o">=</span> <span class="n">EmptyMode</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Some EmptyMode properties:&#39;</span><span class="p">)</span>
@@ -811,22 +807,17 @@ G/RT = 0.0
 </pre></div></div>
 </div>
 </div>
-</div>
 <div class="section" id="Empirical-Objects">
-<h2>Empirical Objects<a class="headerlink" href="#Empirical-Objects" title="Permalink to this headline">¶</a></h2>
+<h1>Empirical Objects<a class="headerlink" href="#Empirical-Objects" title="Permalink to this headline">¶</a></h1>
 <p>Empirical forms are polynomials that are fit to experimental or
 <em>ab-initio data</em>. These forms are useful because they can be evaluated
 relatively quickly, so that downstream software is not hindered by
 evaluation of thermochemical properties. However, note that <code class="docutils literal notranslate"><span class="pre">StatMech</span></code>
 objects can calculate more properties than the currently supported
 empirical objects.</p>
-<div class="section" id="NASA-polynomial">
-<h3>NASA polynomial<a class="headerlink" href="#NASA-polynomial" title="Permalink to this headline">¶</a></h3>
 <p>The
-<code class="docutils literal notranslate"><span class="pre">`NASA</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#nasa">https://vlachosgroup.github.io/pMuTT/empirical.html#nasa</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`NASA</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/empirical.html#nasa">https://vlachosgroup.github.io/pmutt/empirical.html#nasa</a>&gt;`__
 format is used for our microkinetic modeling software, Chemkin.</p>
-<div class="section" id="Initializing-Nasa-from-StatMech">
-<h4>Initializing Nasa from StatMech<a class="headerlink" href="#Initializing-Nasa-from-StatMech" title="Permalink to this headline">¶</a></h4>
 <p>Below, we initialize the NASA polynomial from the <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object we
 created earlier.</p>
 <div class="nbinput docutils container">
@@ -835,7 +826,7 @@ created earlier.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="n">butane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;butane&#39;</span><span class="p">,</span>
                                  <span class="n">statmech_model</span><span class="o">=</span><span class="n">butane_statmech</span><span class="p">,</span>
@@ -862,12 +853,9 @@ S_butane(T=298) = 328.44 J/mol/K
 </div>
 <p>Although it is not covered here, you can also generate empirical objects
 from experimental data using the <code class="docutils literal notranslate"><span class="pre">.from_data</span></code> method. See
-<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/examples.html#experimental-to-empirical">Experimental to
+<a class="reference external" href="https://vlachosgroup.github.io/pmutt/examples.html#experimental-to-empirical">Experimental to
 Empirical</a>
 example.</p>
-</div>
-<div class="section" id="Initializing-Nasa-Directly">
-<h4>Initializing Nasa Directly<a class="headerlink" href="#Initializing-Nasa-Directly" title="Permalink to this headline">¶</a></h4>
 <p>We can also initialize the NASA polynomial if we have the polynomials.
 Using an entry from the <a class="reference external" href="https://rmg.mit.edu/database/thermo/libraries/DFT_QCI_thermo/215/">Reaction Mechanism Generator (RMG)
 database</a>.</p>
@@ -956,14 +944,10 @@ due to:</p>
 <li>error in DFT</li>
 </ul>
 <p>We can account for this discrepancy by using the
-<code class="docutils literal notranslate"><span class="pre">`Reference</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference">https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.Reference</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`Reference</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/empirical.html#pmutt.empirical.references.Reference">https://vlachosgroup.github.io/pmutt/empirical.html#pmutt.empirical.references.Reference</a>&gt;`__
 and
-<code class="docutils literal notranslate"><span class="pre">`References</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References">https://vlachosgroup.github.io/pMuTT/empirical.html#pMuTT.empirical.references.References</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`References</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/empirical.html#pmutt.empirical.references.References">https://vlachosgroup.github.io/pmutt/empirical.html#pmutt.empirical.references.References</a>&gt;`__
 objects.</p>
-</div>
-</div>
-<div class="section" id="Referencing">
-<h3>Referencing<a class="headerlink" href="#Referencing" title="Permalink to this headline">¶</a></h3>
 <p>To define a reference, you must have:</p>
 <ul class="simple">
 <li>enthalpy at some reference temperature (<code class="docutils literal notranslate"><span class="pre">HoRT_ref</span></code> and <code class="docutils literal notranslate"><span class="pre">T_ref</span></code>)</li>
@@ -971,7 +955,7 @@ objects.</p>
 </ul>
 <p>In general, use references that are similar to molecules in your
 mechanism. Also, the number of reference molecules must be equation to
-the number of elements (or other descriptor) in the mechanism. <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/referencing.html">Full
+the number of elements (or other descriptor) in the mechanism. <a class="reference external" href="https://vlachosgroup.github.io/pmutt/referencing.html">Full
 description of referencing scheme
 here</a>.</p>
 <p>In this example, we will use ethane and propane as references.</p>
@@ -981,7 +965,7 @@ here</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">ethane_ref</span> <span class="o">=</span> <span class="n">Reference</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ethane&#39;</span><span class="p">,</span>
                        <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
@@ -1062,14 +1046,11 @@ S_butane(T=298) = 328.44 J/mol/K
 </pre></div></div>
 </div>
 </div>
-</div>
 <div class="section" id="Input-and-Output">
-<h2>Input and Output<a class="headerlink" href="#Input-and-Output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Excel">
-<h3>Excel<a class="headerlink" href="#Excel" title="Permalink to this headline">¶</a></h3>
+<h1>Input and Output<a class="headerlink" href="#Input-and-Output" title="Permalink to this headline">¶</a></h1>
 <p>Encoding each object in Python can be tedious and so you can read from
 Excel spreadsheets using
-<code class="docutils literal notranslate"><span class="pre">`pMuTT.io.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io.excel.read_excel">https://vlachosgroup.github.io/pMuTT/io.html?highlight=read_excel#pMuTT.io.excel.read_excel</a>&gt;`__.
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel">https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel</a>&gt;`__.
 Note that this function returns a list of dictionaries. This output
 allows you to initialize whichever object you want. There are also
 special rules that depend on the header name.</p>
@@ -1081,7 +1062,7 @@ special rules that depend on the header name.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
@@ -1104,7 +1085,7 @@ special rules that depend on the header name.</p>
 [{&#39;HoRT_ref&#39;: -33.75960175823382,
   &#39;T_ref&#39;: 298.15,
   &#39;atoms&#39;: Atoms(symbols=&#39;C2H6&#39;, pbc=True, cell=[[16.3299316185545, -8.16496580927726, -8.16496580927726], [0.0, 14.1421356237309, -14.1421356237309], [11.5470053837925, 11.5470053837925, 11.5470053837925]]),
-  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 2, &#39;H&#39;: 6},
   &#39;geometry&#39;: &#39;nonlinear&#39;,
   &#39;n_degrees&#39;: 3,
@@ -1119,11 +1100,11 @@ special rules that depend on the header name.</p>
                &#39;geometry&#39;,
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
-  &#39;rot_model&#39;: &lt;class &#39;pMuTT.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 6,
-  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.FreeTrans&#39;&gt;,
-  &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3050.5296,
                       3049.8428,
                       3025.2714,
@@ -1145,7 +1126,7 @@ special rules that depend on the header name.</p>
  {&#39;HoRT_ref&#39;: -42.23326179955051,
   &#39;T_ref&#39;: 298.15,
   &#39;atoms&#39;: Atoms(symbols=&#39;C3H8&#39;, pbc=True, cell=[[16.3299316185545, -8.16496580927726, -8.16496580927726], [0.0, 14.1421356237309, -14.1421356237309], [11.5470053837925, 11.5470053837925, 11.5470053837925]]),
-  &#39;elec_model&#39;: &lt;class &#39;pMuTT.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 3, &#39;H&#39;: 8},
   &#39;geometry&#39;: &#39;nonlinear&#39;,
   &#39;n_degrees&#39;: 3,
@@ -1160,11 +1141,11 @@ special rules that depend on the header name.</p>
                &#39;geometry&#39;,
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
-  &#39;rot_model&#39;: &lt;class &#39;pMuTT.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pMuTT.statmech.StatMech&#39;&gt;,
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2,
-  &#39;trans_model&#39;: &lt;class &#39;pMuTT.statmech.trans.FreeTrans&#39;&gt;,
-  &#39;vib_model&#39;: &lt;class &#39;pMuTT.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3040.9733,
                       3038.992,
                       3036.8071,
@@ -1250,20 +1231,17 @@ H_butane(T=298) = -140.0 kJ/mol
 S_butane(T=298) = 328.50 J/mol/K
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Thermdat">
-<h3>Thermdat<a class="headerlink" href="#Thermdat" title="Permalink to this headline">¶</a></h3>
 <p>The thermdat format uses NASA polynomials to represent several species.
 It has a very particular format so doing it manually is error-prone. You
 can write a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects to thermdat format using
-<code class="docutils literal notranslate"><span class="pre">`pMuTT.io.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.write_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.write_thermdat</a>&gt;`__.</p>
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.write_thermdat">https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.write_thermdat</a>&gt;`__.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="c1"># Make Nasa objects from previously defined ethane and propane</span>
 <span class="n">ethane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ethane&#39;</span><span class="p">,</span>
@@ -1303,12 +1281,11 @@ butane          20190122C   4H  10          G298.0     800.0     502.9         1
 -8.15415828E+05 3.48691129E+01 9.98107805E+00-3.50556935E-02 2.38938732E-04    3
 -3.63709779E-07 1.92062158E-10-8.16632302E+05-1.47065846E+01                   4
 END<p>Similarly,
-<code class="docutils literal notranslate"><span class="pre">`pMuTT.io.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pMuTT.io.thermdat.read_thermdat</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.read_thermdat">https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.read_thermdat</a>&gt;`__
 reads thermdat files.</p>
 </div>
-</div>
 <div class="section" id="Reactions">
-<h2>Reactions<a class="headerlink" href="#Reactions" title="Permalink to this headline">¶</a></h2>
+<h1>Reactions<a class="headerlink" href="#Reactions" title="Permalink to this headline">¶</a></h1>
 <p>You can also evaluate reactions properties. The most straightforward way
 to do this is to initialize using strings.</p>
 <div class="nbinput docutils container">
@@ -1317,14 +1294,14 @@ to do this is to initialize using strings.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pMuTT.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
 
 <span class="c1"># Get a dictionary of species</span>
 <span class="n">thermdat_H2O_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">,</span> <span class="s1">&#39;thermdat_H2O&#39;</span><span class="p">)</span>
 <span class="n">species_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="n">thermdat_H2O_path</span><span class="p">)</span>
-<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pMuTT_list_to_dict</span><span class="p">(</span><span class="n">species_list</span><span class="p">)</span>
+<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_list</span><span class="p">)</span>
 
 <span class="c1"># Initialize the reaction</span>
 <span class="n">rxn_H2O</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;H2 + 0.5O2 = H2O&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">)</span>
@@ -1348,13 +1325,9 @@ S_rxn(T=298) = -44.42 J/mol/K
 </div>
 </div>
 <div class="section" id="Exercise">
-<h2>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h2>
+<h1>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h1>
 <p>Write a script to calculate the Enthalpy of adsorption (in kcal/mol) of
 H2O on Cu(111) at T = 298 K. Some important details are given below.</p>
-<div class="section" id="Information-Required">
-<h3>Information Required<a class="headerlink" href="#Information-Required" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="H2O:">
-<h4>H2O:<a class="headerlink" href="#H2O:" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>ideal gas</li>
 <li>atoms: You can use “ase.build.molecule” to generate a water molecule
@@ -1364,16 +1337,10 @@ like we did with ethane, propane, and butane.</li>
 <li>spin: 0</li>
 <li>symmetry number: 2</li>
 </ul>
-</div>
-<div class="section" id="Cu(111):">
-<h4>Cu(111):<a class="headerlink" href="#Cu(111):" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>only electronic modes</li>
 <li>potential energy (eV): -224.13045381</li>
 </ul>
-</div>
-<div class="section" id="H2O+Cu(111):">
-<h4>H2O+Cu(111):<a class="headerlink" href="#H2O+Cu(111):" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>electronic and harmonic vibration modes</li>
 <li>potential energy (eV): -238.4713854</li>
@@ -1383,14 +1350,7 @@ like we did with ethane, propane, and butane.</li>
 default behavior of pMuTT is to ignore these frequencies when
 calculating any thermodynamic property)</li>
 </ul>
-</div>
-<div class="section" id="Reaction:">
-<h4>Reaction:<a class="headerlink" href="#Reaction:" title="Permalink to this headline">¶</a></h4>
 <p>H2O + Cu(111) –&gt; H2O+Cu(111)</p>
-</div>
-</div>
-<div class="section" id="Solution:">
-<h3>Solution:<a class="headerlink" href="#Solution:" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [16]:
@@ -1398,8 +1358,8 @@ calculating any thermodynamic property)</li>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pMuTT.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
-<span class="kn">from</span> <span class="nn">pMuTT.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+<span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
 
 <span class="c1"># Using dictionary since later I will initialize the reaction with a string</span>
 <span class="n">species</span> <span class="o">=</span> <span class="p">{</span>
@@ -1446,8 +1406,6 @@ del_H = -2.18 kcal/mol
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span>
 </pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>

@@ -36,11 +36,11 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'Fe': <pMuTT.empirical.nasa.Nasa object at 0x0000026BD99B2A58>,\n",
-      " 'Fe2O3': <pMuTT.empirical.nasa.Nasa object at 0x0000026BD99B29B0>,\n",
-      " 'Fe3O4': <pMuTT.empirical.nasa.Nasa object at 0x0000026BD99B2E80>,\n",
-      " 'FeO': <pMuTT.empirical.nasa.Nasa object at 0x0000026BD99B2B00>,\n",
-      " 'O2': <pMuTT.statmech.StatMech object at 0x0000026BD99B2FD0>}\n"
+      "{'Fe': <pmutt.empirical.nasa.Nasa object at 0x0000026BD99B2A58>,\n",
+      " 'Fe2O3': <pmutt.empirical.nasa.Nasa object at 0x0000026BD99B29B0>,\n",
+      " 'Fe3O4': <pmutt.empirical.nasa.Nasa object at 0x0000026BD99B2E80>,\n",
+      " 'FeO': <pmutt.empirical.nasa.Nasa object at 0x0000026BD99B2B00>,\n",
+      " 'O2': <pmutt.statmech.StatMech object at 0x0000026BD99B2FD0>}\n"
      ]
     }
    ],
@@ -48,8 +48,8 @@
     "from pprint import pprint\n",
     "import numpy as np\n",
     "from ase.build import molecule\n",
-    "from pMuTT.empirical.nasa import Nasa\n",
-    "from pMuTT.statmech import StatMech, presets\n",
+    "from pmutt.empirical.nasa import Nasa\n",
+    "from pmutt.statmech import StatMech, presets\n",
     "\n",
     "# Temperature (in K) corresponding to standard enthalpy \n",
     "# and standard entropy\n",
@@ -172,7 +172,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "from pMuTT.reaction import Reaction\n",
+    "from pmutt.reaction import Reaction\n",
     "\n",
     "reactions = [\n",
     "    Reaction.from_string(reaction_str='2Fe+O2=2FeO', species=species),\n",
@@ -196,7 +196,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "from pMuTT.reaction.phasediagram import PhaseDiagram\n",
+    "from pmutt.reaction.phasediagram import PhaseDiagram\n",
     "\n",
     "phase_diagram = PhaseDiagram(reactions=reactions)"
    ]

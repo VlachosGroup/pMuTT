@@ -5,7 +5,7 @@
    "metadata": {},
    "source": [
     "# Chemkin Input and Output\n",
-    "This notebook describes pMuTT's functionality to read and write Chemkin files. We will use the NH3 formation mechanism as a case study.\n",
+    "This notebook describes pmutt's functionality to read and write Chemkin files. We will use the NH3 formation mechanism as a case study.\n",
     "\n",
     "## Topics Covered\n",
     "- Read species *ab-initio* data, reactions, and catalyst sites from a spreadsheet\n",
@@ -17,7 +17,7 @@
    "metadata": {},
    "source": [
     "## Input Spreadsheet\n",
-    "All the data will be imported from the [`./inputs/NH3_Input_data.xlsx`](https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx) file. There are four sheets:\n",
+    "All the data will be imported from the [`./inputs/NH3_Input_data.xlsx`](https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx) file. There are four sheets:\n",
     "1. `cat_sites` contains catalyst site properties for the adsorbed species\n",
     "2. `refs` contains *ab-initio* and experimental data for a handful of gas species to calculate references\n",
     "3. `species` contains *ab-initio* data for each specie\n",
@@ -112,7 +112,7 @@
      "output_type": "stream",
      "text": [
       "{'bulk_specie': 'RU(B)',\n",
-      " 'class': \"<class 'pMuTT.chemkin.CatSite'>\",\n",
+      " 'class': \"<class 'pmutt.chemkin.CatSite'>\",\n",
       " 'density': 12.2,\n",
       " 'name': 'RU0001',\n",
       " 'site_density': 2.1671e-09}\n"
@@ -123,8 +123,8 @@
     "import os\n",
     "from pprint import pprint\n",
     "from pathlib import Path\n",
-    "from pMuTT.io.excel import read_excel\n",
-    "from pMuTT.chemkin import CatSite\n",
+    "from pmutt.io.excel import read_excel\n",
+    "from pmutt.chemkin import CatSite\n",
     "\n",
     "# Find the location of Jupyter notebook\n",
     "# Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.\n",
@@ -161,7 +161,7 @@
     }
    ],
    "source": [
-    "from pMuTT.empirical.references import Reference, References\n",
+    "from pmutt.empirical.references import Reference, References\n",
     "\n",
     "references_data = read_excel(io=excel_path, sheet_name='refs')\n",
     "\n",
@@ -191,13 +191,13 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "C:\\Users\\jonat\\AppData\\Local\\conda\\conda\\envs\\pMuTT_development\\lib\\site-packages\\scipy\\stats\\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars\n",
+      "C:\\Users\\jonat\\AppData\\Local\\conda\\conda\\envs\\pmutt_development\\lib\\site-packages\\scipy\\stats\\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars\n",
       "  return a.std(axis) / a.mean(axis)\n"
      ]
     }
    ],
    "source": [
-    "from pMuTT.empirical.nasa import Nasa\n",
+    "from pmutt.empirical.nasa import Nasa\n",
     "\n",
     "# Range of data to fit the Nasa polynomials\n",
     "T_low = 298. # K\n",
@@ -234,11 +234,11 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "from pMuTT import pMuTT_list_to_dict\n",
-    "from pMuTT.reaction import ChemkinReaction, Reactions\n",
+    "from pmutt import pmutt_list_to_dict\n",
+    "from pmutt.reaction import ChemkinReaction, Reactions\n",
     "\n",
     "# Convert list of Nasa polynomials to dictionary of Nasa polynomials\n",
-    "species_dict = pMuTT_list_to_dict(species)\n",
+    "species_dict = pmutt_list_to_dict(species)\n",
     "\n",
     "reactions_data = read_excel(io=excel_path, sheet_name='reactions')\n",
     "reactions_list = []\n",
@@ -253,7 +253,7 @@
    "metadata": {},
    "source": [
     "## Writing Chemkin files\n",
-    "Now that we have all the required objects, we can write the output files. All outputs can be found in the [./outputs folder](https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/outputs)."
+    "Now that we have all the required objects, we can write the output files. All outputs can be found in the [./outputs folder](https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/outputs)."
    ]
   },
   {
@@ -269,7 +269,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "from pMuTT.io.thermdat import write_thermdat\n",
+    "from pmutt.io.thermdat import write_thermdat\n",
     "\n",
     "write_thermdat(filename='./outputs/thermdat', nasa_species=species)"
    ]
@@ -359,7 +359,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "from pMuTT.io import chemkin as ck_io\n",
+    "from pmutt.io import chemkin as ck_io\n",
     "\n",
     "ck_io.write_gas(filename='./outputs/gas.inp', nasa_species=species, reactions=reactions, act_method_name='get_GoRT_act')\n",
     "ck_io.write_surf(filename='./outputs/surf.inp', reactions=reactions, act_method_name='get_GoRT_act')"
@@ -375,7 +375,7 @@
     "The gas.inp file written is shown below. Note there are no gas-phase reactions.\n",
     "\n",
     "```\n",
-    "!File generated by pMuTT on 2019-04-25 16:05:46.954918\n",
+    "!File generated by pmutt on 2019-04-25 16:05:46.954918\n",
     "!Elements present in gas and surface species\n",
     "ELEMENTS\n",
     "H\n",
@@ -402,7 +402,7 @@
     "\n",
     "The surf.inp file written in shown below.\n",
     "```\n",
-    "!File generated by pMuTT on 2019-04-25 16:05:46.977586\n",
+    "!File generated by pmutt on 2019-06-12 14:28:23.507266\n",
     "!Surface species\n",
     "!Each catalyst site has the following format:\n",
     "!SITE/[Site name]/      SDEN/[Site density in mol/cm2]/\n",
@@ -437,16 +437,16 @@
     "!- Ea (Activation Energy or Gibbs energy of activation in specified units\n",
     "!Adsorption reactions can be represented using the STICK keyword\n",
     "REACTIONS  MWON   \n",
-    "H2+2RU(S)=2H(S)+2RU(B)           1.000E+00   1.000E+00   0.000E+00\n",
+    "H2+2RU(S)=2H(S)+2RU(B)           5.000E-01   1.000E+00   0.000E+00\n",
     "STICK\n",
-    "N2+RU(S)=N2(S)+RU(B)             1.000E+00   1.000E+00   0.000E+00\n",
+    "N2+RU(S)=N2(S)+RU(B)             5.000E-01   1.000E+00   0.000E+00\n",
     "STICK\n",
-    "NH3+RU(S)=NH3(S)+RU(B)           1.000E+00   1.000E+00   0.000E+00\n",
+    "NH3+RU(S)=NH3(S)+RU(B)           5.000E-01   1.000E+00   0.000E+00\n",
     "STICK\n",
-    "NH3(S)+RU(S)=NH2(S)+H(S)+RU(B)   9.615E+18   1.000E+00   2.972E+01\n",
-    "NH2(S)+RU(S)=NH(S)+H(S)+RU(B)    9.615E+18   1.000E+00   1.199E+01\n",
-    "NH(S)+RU(S)=N(S)+H(S)+RU(B)      9.615E+18   1.000E+00   3.203E+00\n",
-    "2N(S)+RU(B)=N2(S)+RU(S)          9.615E+18   1.000E+00   7.317E+01\n",
+    "NH3(S)+RU(S)=NH2(S)+H(S)+RU(B)   9.615E+18   1.000E+00   4.100E+01\n",
+    "NH2(S)+RU(S)=NH(S)+H(S)+RU(B)    9.615E+18   1.000E+00   2.055E+01\n",
+    "NH(S)+RU(S)=N(S)+H(S)+RU(B)      9.615E+18   1.000E+00   4.135E+01\n",
+    "2N(S)+RU(B)=N2(S)+RU(S)          9.615E+18   1.000E+00   1.459E+02\n",
     "END\n",
     "```"
    ]
@@ -480,7 +480,7 @@
     "The T_flow.inp file written is shown below.\n",
     "\n",
     "```\n",
-    "!File generated by pMuTT on 2019-04-25 16:05:47.025434\n",
+    "!File generated by pmutt on 2019-04-25 16:05:47.025434\n",
     "!Conditions for each reaction run\n",
     "!Only used when MultiInput in tube.inp is set to \"T\"\n",
     "!T[K]      P[atm]     Q[cm3/s]   abyv[cm-1]  Run #\n",
@@ -535,7 +535,7 @@
     "\n",
     "The EAg.inp file is shown below.\n",
     "```\n",
-    "!File generated by pMuTT on 2019-04-25 16:05:47.088278\n",
+    "!File generated by pmutt on 2019-04-25 16:05:47.088278\n",
     "!The first line is the number of reactions. Subsequent lines follow the format\n",
     "!of rxn (from surf.out) followed by the EA/RT value at each run condition.\n",
     "!There may be one slight deviation from surf.out: any repeated species should\n",
@@ -549,7 +549,7 @@
     "\n",
     "The EAs.inp file is shown below.\n",
     "```\n",
-    "!File generated by pMuTT on 2019-04-25 16:05:47.043381\n",
+    "!File generated by pmutt on 2019-06-12 14:36:30.247685\n",
     "!The first line is the number of reactions. Subsequent lines follow the format\n",
     "!of rxn (from surf.out) followed by the EA/RT value at each run condition.\n",
     "!There may be one slight deviation from surf.out: any repeated species should\n",
@@ -561,10 +561,10 @@
     "H2+2RU(S)<=>2H(S)+2RU(B)             0.00E+00   0.00E+00   0.00E+00\n",
     "N2+RU(S)<=>N2(S)+RU(B)               0.00E+00   0.00E+00   2.49E+00\n",
     "NH3+RU(S)<=>NH3(S)+RU(B)             0.00E+00   1.61E+00   4.47E+00\n",
-    "NH3(S)+RU(S)<=>NH2(S)+H(S)+RU(B)     2.95E+01   2.28E+01   1.88E+01\n",
-    "NH2(S)+RU(S)<=>NH(S)+H(S)+RU(B)      1.19E+01   9.12E+00   7.46E+00\n",
-    "NH(S)+RU(S)<=>N(S)+H(S)+RU(B)        3.18E+00   2.23E+00   1.65E+00\n",
-    "2N(S)+RU(B)<=>N2(S)+RU(S)            7.27E+01   5.49E+01   4.45E+01\n",
+    "NH3(S)+RU(S)<=>NH2(S)+H(S)+RU(B)     4.08E+01   3.12E+01   2.55E+01\n",
+    "NH2(S)+RU(S)<=>NH(S)+H(S)+RU(B)      2.04E+01   1.55E+01   1.26E+01\n",
+    "NH(S)+RU(S)<=>N(S)+H(S)+RU(B)        4.11E+01   3.07E+01   2.44E+01\n",
+    "2N(S)+RU(B)<=>N2(S)+RU(S)            1.45E+02   1.09E+02   8.79E+01\n",
     "EOF\n",
     "```"
    ]
@@ -616,7 +616,7 @@
     "The tube_mole.inp file is shown below.\n",
     "\n",
     "```\n",
-    "!File generated by pMuTT on 2019-04-25 16:05:47.114596\n",
+    "!File generated by pmutt on 2019-04-25 16:05:47.114596\n",
     "!Specify the 'species/phase/' pair /(in quotes!)/ and the associated\n",
     "!composition values. If the composition does not sum to 1 for each phase or\n",
     "!site type, it will be renormalized to 1. At the end of a calculation, a\n",

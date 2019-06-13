@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Reactions &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> pMuTT
+            <a href="../../index.html" class="icon icon-home"> pmutt
           
 
           
@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -111,7 +111,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">pMuTT</a>
+          <a href="../../index.html">pmutt</a>
         
       </nav>
 
@@ -384,14 +384,14 @@ We will store the species in a dictionary for code clarity later on.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
 
 <span class="c1"># The output will be a list</span>
 <span class="n">species_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">)</span>
 
 <span class="c1"># This function converts the list to a dict for easier usage downstream</span>
-<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pMuTT_list_to_dict</span><span class="p">(</span><span class="n">pMuTT_list</span><span class="o">=</span><span class="n">species_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">pmutt_list</span><span class="o">=</span><span class="n">species_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
 
 <span class="c1"># (Optional) Print the species_dict to see what&#39;s in it</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">species_dict</span><span class="p">)</span>
@@ -403,9 +403,9 @@ We will store the species in a dictionary for code clarity later on.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F2201498D0&gt;,
- &#39;H2O&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F220191550&gt;,
- &#39;O2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F219548320&gt;}
+{&#39;H2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B7389B0&gt;,
+ &#39;H2O&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B780630&gt;,
+ &#39;O2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B94B38390&gt;}
 </pre></div></div>
 </div>
 <p>To calculate transition state properties, we will need to represent the
@@ -443,10 +443,10 @@ parameter arbitrarily to give it a higher enthalpy.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F2201498D0&gt;,
- &#39;H2O&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F220191550&gt;,
- &#39;H2O_TS&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F220191D68&gt;,
- &#39;O2&#39;: &lt;pMuTT.empirical.nasa.Nasa object at 0x000002F219548320&gt;}
+{&#39;H2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B7389B0&gt;,
+ &#39;H2O&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B780630&gt;,
+ &#39;H2O_TS&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B780D30&gt;,
+ &#39;O2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B94B38390&gt;}
 </pre></div></div>
 </div>
 </div>
@@ -460,7 +460,7 @@ reactants, transition states, products and their stoichiometries.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
 
 <span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="p">(</span><span class="n">reactants</span><span class="o">=</span><span class="p">[</span><span class="n">species_dict</span><span class="p">[</span><span class="s1">&#39;H2&#39;</span><span class="p">],</span> <span class="n">species_dict</span><span class="p">[</span><span class="s1">&#39;O2&#39;</span><span class="p">]],</span> <span class="n">reactants_stoich</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
                <span class="n">products</span> <span class="o">=</span><span class="p">[</span><span class="n">species_dict</span><span class="p">[</span><span class="s1">&#39;H2O&#39;</span><span class="p">]],</span> <span class="n">products_stoich</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">],</span>
@@ -525,7 +525,7 @@ standard entropy.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="mf">298.</span>
 <span class="n">dH_298</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_delta_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
@@ -629,7 +629,7 @@ relationship.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.reaction.bep</span> <span class="k">import</span> <span class="n">BEP</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.reaction.bep</span> <span class="k">import</span> <span class="n">BEP</span>
 
 <span class="n">species_dict</span><span class="p">[</span><span class="s1">&#39;BEP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BEP</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;BEP&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">intercept</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">descriptor</span><span class="o">=</span><span class="s1">&#39;delta_H&#39;</span><span class="p">)</span>
 <span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;H2 + 0.5O2 = BEP = H2O&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">)</span>
@@ -660,15 +660,15 @@ read from JSON format.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">json_to_pMuTT</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="k">import</span> <span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">json_to_pmutt</span>
 
 <span class="c1"># Saving</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;reaction.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Loading</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;reaction.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">rxn_io</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
+    <span class="n">rxn_io</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pmutt</span><span class="p">)</span>
 
 <span class="c1"># (Optional) Print your rxn to show it was loaded correctly</span>
 <span class="n">dH_298_io</span> <span class="o">=</span> <span class="n">rxn_io</span><span class="o">.</span><span class="n">get_delta_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
@@ -692,10 +692,10 @@ Activation Energy: 370.04 kJ/mol
 </div>
 <p>Here is the resulting JSON file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
- <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.reaction.Reaction&#39;&gt;&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.reaction.Reaction&#39;&gt;&quot;</span><span class="p">,</span>
  <span class="s2">&quot;reactants&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
-   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nasa&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2&quot;</span><span class="p">,</span>
    <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
@@ -731,7 +731,7 @@ Activation Energy: 370.04 kJ/mol
    <span class="s2">&quot;n_sites&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="p">{</span>
-   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nasa&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span>
    <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
@@ -773,7 +773,7 @@ Activation Energy: 370.04 kJ/mol
  <span class="p">],</span>
  <span class="s2">&quot;products&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
-   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nasa&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2O&quot;</span><span class="p">,</span>
    <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
@@ -815,7 +815,7 @@ Activation Energy: 370.04 kJ/mol
  <span class="p">],</span>
  <span class="s2">&quot;transition_state&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
-   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.reaction.bep.BEP&#39;&gt;&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.reaction.bep.BEP&#39;&gt;&quot;</span><span class="p">,</span>
    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;BEP&quot;</span><span class="p">,</span>
    <span class="s2">&quot;slope&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
    <span class="s2">&quot;intercept&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
@@ -832,7 +832,7 @@ Activation Energy: 370.04 kJ/mol
 </div>
 <div class="section" id="Plotting-Reaction-Coordinate-Diagrams">
 <h2>Plotting Reaction Coordinate Diagrams<a class="headerlink" href="#Plotting-Reaction-Coordinate-Diagrams" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">pMuTT.reaction.Reactions.plot_coordinate_diagram</span></code> allows users to
+<p>The <code class="docutils literal notranslate"><span class="pre">pmutt.reaction.Reactions.plot_coordinate_diagram</span></code> allows users to
 plot reaction coordinate diagrams in a semi-automated way. For this
 example, we will use the synthesis of NH3 on Ru. The thermdat file was
 taken from the <a class="reference external" href="https://github.com/VlachosGroup/NH3-Matlab-Microkinetic-Model">NH3 MATLAB Microkinetic Model available on
@@ -846,9 +846,9 @@ Github</a>.</p>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pMuTT.reaction</span> <span class="k">import</span> <span class="n">Reaction</span><span class="p">,</span> <span class="n">Reactions</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span><span class="p">,</span> <span class="n">Reactions</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
 
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
@@ -857,7 +857,7 @@ Github</a>.</p>
 
 <span class="sd">&#39;&#39;&#39;Read the thermdat file and convert it to a dictionary&#39;&#39;&#39;</span>
 <span class="n">NH3_species_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">,</span> <span class="s1">&#39;thermdat_NH3&#39;</span><span class="p">))</span>
-<span class="n">NH3_species</span> <span class="o">=</span> <span class="n">pMuTT_list_to_dict</span><span class="p">(</span><span class="n">NH3_species_list</span><span class="p">)</span>
+<span class="n">NH3_species</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">NH3_species_list</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;Initialize the reaction&#39;&#39;&#39;</span>
 <span class="n">rxns</span> <span class="o">=</span> <span class="n">Reactions</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="p">[</span>

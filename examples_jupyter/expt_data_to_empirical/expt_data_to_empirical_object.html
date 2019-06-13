@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Experimental Data to Empirical Object &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Experimental Data to Empirical Object &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> pMuTT
+            <a href="../../index.html" class="icon icon-home"> pmutt
           
 
           
@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -111,7 +111,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">pMuTT</a>
+          <a href="../../index.html">pmutt</a>
         
       </nav>
 
@@ -382,7 +382,7 @@ The standard entropy was found on
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">273.15</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span>
               <span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1300</span><span class="p">,</span> <span class="mi">1400</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1750</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span>
@@ -401,10 +401,10 @@ The standard entropy was found on
 </pre></div>
 </div>
 </div>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">pMuTT.constants</span></code> module contains functions for standard
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">pmutt.constants</span></code> module contains functions for standard
 constants for easy use such as the molar gas constant
-(<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.R</span></code>) and standard temperature
-(<code class="docutils literal notranslate"><span class="pre">~pMuTT.constants.T_ref</span></code>). The functions take a unit as an argument
+(<code class="docutils literal notranslate"><span class="pre">pmutt.constants.R</span></code>) and standard temperature
+(<code class="docutils literal notranslate"><span class="pre">~pmutt.constants.T_ref</span></code>). The functions take a unit as an argument
 so that the code is more readable.</p>
 </div>
 <div class="section" id="Fitting-the-Shomate-polynomial-to-the-experimental-data">
@@ -417,7 +417,7 @@ so that the code is more readable.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.empirical.shomate</span> <span class="k">import</span> <span class="n">Shomate</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.shomate</span> <span class="k">import</span> <span class="n">Shomate</span>
 
 <span class="n">CH3OH_shomate</span> <span class="o">=</span> <span class="n">Shomate</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;CH3OH&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR</span><span class="p">,</span>
                                   <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span> <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_ref</span><span class="p">,</span>
@@ -431,7 +431,7 @@ so that the code is more readable.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;pMuTT.empirical.shomate.Shomate object at 0x0000016419937DD8&gt;
+&lt;pmutt.empirical.shomate.Shomate object at 0x0000016419937DD8&gt;
 </pre></div></div>
 </div>
 </div>
@@ -560,14 +560,14 @@ S shomate: [239.9] J/mol/K
 </div>
 </div>
 <p>Note that in this code’s section, we showcase the
-<code class="docutils literal notranslate"><span class="pre">pMuTT.constants.convert_unit</span></code> function. Similarly to the <code class="docutils literal notranslate"><span class="pre">c.R</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pmutt.constants.convert_unit</span></code> function. Similarly to the <code class="docutils literal notranslate"><span class="pre">c.R</span></code> and
 <code class="docutils literal notranslate"><span class="pre">c.T0</span></code> functions shown above, this helps to increase code readability.</p>
 </div>
 </div>
 <div class="section" id="Save-the-Shomate-polynomial-as-a-JSON-file">
 <h2>Save the Shomate polynomial as a JSON file<a class="headerlink" href="#Save-the-Shomate-polynomial-as-a-JSON-file" title="Permalink to this headline">¶</a></h2>
 <p>If we would like to save our Shomate object, we can save it in JSON
-format with the help of the <code class="docutils literal notranslate"><span class="pre">pMuTT.io.json.pMuTTEncoder</span></code>.</p>
+format with the help of the <code class="docutils literal notranslate"><span class="pre">pmutt.io.json.pmuttEncoder</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [6]:
@@ -575,17 +575,17 @@ format with the help of the <code class="docutils literal notranslate"><span cla
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="k">import</span> <span class="n">pMuTTEncoder</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="k">import</span> <span class="n">pmuttEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CH3OH_shomate.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">CH3OH_shomate</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pMuTTEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">CH3OH_shomate</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <p>This block will save the Shomate object to <code class="docutils literal notranslate"><span class="pre">CH3OH_shomate.json</span></code>. Upon
 opening, the file will look like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
- <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pMuTT.empirical.shomate.Shomate&#39;&gt;&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.shomate.Shomate&#39;&gt;&quot;</span><span class="p">,</span>
  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CH3OH&quot;</span><span class="p">,</span>
  <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
  <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -611,17 +611,17 @@ opening, the file will look like this:</p>
 <div class="section" id="Loading-the-Shomate-polynomial-from-a-JSON-file">
 <h2>Loading the Shomate polynomial from a JSON file<a class="headerlink" href="#Loading-the-Shomate-polynomial-from-a-JSON-file" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve saved the Shomate object, we can open it using
-<code class="docutils literal notranslate"><span class="pre">pMuTT.io.json.json_to_pMuTT</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">pmutt.io.json.json_to_pmutt</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.json</span> <span class="k">import</span> <span class="n">json_to_pMuTT</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="k">import</span> <span class="n">json_to_pmutt</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CH3OH_shomate.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">CH3OH_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pMuTT</span><span class="p">)</span>
+    <span class="n">CH3OH_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pmutt</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">CH3OH_json</span><span class="p">)</span>
 </pre></div>
@@ -632,7 +632,7 @@ opening, the file will look like this:</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;pMuTT.empirical.shomate.Shomate object at 0x00000164246C9CF8&gt;
+&lt;pmutt.empirical.shomate.Shomate object at 0x00000164246C9CF8&gt;
 </pre></div></div>
 </div>
 </div>

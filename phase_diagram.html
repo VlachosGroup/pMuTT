@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Phase Diagrams &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Phase Diagrams &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pMuTT
+            <a href="index.html" class="icon icon-home"> pmutt
           
 
           
@@ -101,7 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pMuTT</a>
+          <a href="index.html">pmutt</a>
         
       </nav>
 
@@ -190,31 +190,31 @@
 <div class="section" id="phasediagram">
 <h2>PhaseDiagram<a class="headerlink" href="#phasediagram" title="Permalink to this headline">¶</a></h2>
 <p>Phase diagrams can be made by creating a list of
-<a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects. The reactions should be balanced and
+<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects. The reactions should be balanced and
 have the same reactant references to give meaningful data.</p>
 <dl class="class">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.phasediagram.</code><code class="descname">PhaseDiagram</code><span class="sig-paren">(</span><em>reactions</em>, <em>norm_factors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram">
+<em class="property">class </em><code class="descclassname">pmutt.reaction.phasediagram.</code><code class="descname">PhaseDiagram</code><span class="sig-paren">(</span><em>reactions</em>, <em>norm_factors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate phase diagrams based on reactions specified. Inherits from
-<a class="reference internal" href="reactions.html#pMuTT.reaction.Reactions" title="pMuTT.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></p>
+<a class="reference internal" href="reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></p>
 <dl class="attribute">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.reactions">
-<code class="descname">reactions</code><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.reactions" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.reactions">
+<code class="descname">reactions</code><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.reactions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formation reactions for each phase. Reactions should be written
 with consistent reference species to obtain meaningful data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="reactions.html#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.norm_factors">
-<code class="descname">norm_factors</code><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.norm_factors" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.norm_factors">
+<code class="descname">norm_factors</code><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.norm_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used for normalizing Gibbs energies. These factors could be
 surface areas when calculating surface energies or if the
 reactions stoichiometry is not consistent. Default is an array of
@@ -230,8 +230,8 @@ reactions stoichiometry is not consistent. Default is an array of
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -248,8 +248,8 @@ reactions stoichiometry is not consistent. Default is an array of
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.get_GoRT_1D">
-<code class="descname">get_GoRT_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.get_GoRT_1D" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_1D">
+<code class="descname">get_GoRT_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_1D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Gibbs free energy for all the reactions for 1 varying
 parameter</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -279,8 +279,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.get_GoRT_2D">
-<code class="descname">get_GoRT_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.get_GoRT_2D" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D">
+<code class="descname">get_GoRT_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Gibbs free energy for all the reactions for two
 varying parameters</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -312,8 +312,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.plot_1D">
-<code class="descname">plot_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.plot_1D" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.plot_1D">
+<code class="descname">plot_1D</code><span class="sig-paren">(</span><em>x_name</em>, <em>x_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_1D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a 1D phase diagram.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -339,8 +339,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.plot_2D">
-<code class="descname">plot_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.plot_2D" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.plot_2D">
+<code class="descname">plot_2D</code><span class="sig-paren">(</span><em>x1_name</em>, <em>x1_values</em>, <em>x2_name</em>, <em>x2_values</em>, <em>G_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a 2D phase diagram.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -370,8 +370,8 @@ stable phase at the x_values.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.phasediagram.PhaseDiagram.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.phasediagram.PhaseDiagram.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.phasediagram.PhaseDiagram.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

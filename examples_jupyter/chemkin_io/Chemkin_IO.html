@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Chemkin Input and Output &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Chemkin Input and Output &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> pMuTT
+            <a href="../../index.html" class="icon icon-home"> pmutt
           
 
           
@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -111,7 +111,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">pMuTT</a>
+          <a href="../../index.html">pmutt</a>
         
       </nav>
 
@@ -346,7 +346,7 @@ div.nboutput div.output_area.stderr {
 </style>
 <div class="section" id="Chemkin-Input-and-Output">
 <h1>Chemkin Input and Output<a class="headerlink" href="#Chemkin-Input-and-Output" title="Permalink to this headline">¶</a></h1>
-<p>This notebook describes pMuTT’s functionality to read and write Chemkin
+<p>This notebook describes pmutt’s functionality to read and write Chemkin
 files. We will use the NH3 formation mechanism as a case study.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
@@ -360,7 +360,7 @@ tube_mole.inp files</li>
 <div class="section" id="Input-Spreadsheet">
 <h2>Input Spreadsheet<a class="headerlink" href="#Input-Spreadsheet" title="Permalink to this headline">¶</a></h2>
 <p>All the data will be imported from the
-<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
 file. There are four sheets: 1. <code class="docutils literal notranslate"><span class="pre">cat_sites</span></code> contains catalyst site
 properties for the adsorbed species 2. <code class="docutils literal notranslate"><span class="pre">refs</span></code> contains <em>ab-initio</em> and
 experimental data for a handful of gas species to calculate references
@@ -1918,8 +1918,8 @@ the references.</p>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">pMuTT.chemkin</span> <span class="k">import</span> <span class="n">CatSite</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.chemkin</span> <span class="k">import</span> <span class="n">CatSite</span>
 
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
@@ -1942,7 +1942,7 @@ the references.</p>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 {&#39;bulk_specie&#39;: &#39;RU(B)&#39;,
- &#39;class&#39;: &#34;&lt;class &#39;pMuTT.chemkin.CatSite&#39;&gt;&#34;,
+ &#39;class&#39;: &#34;&lt;class &#39;pmutt.chemkin.CatSite&#39;&gt;&#34;,
  &#39;density&#39;: 12.2,
  &#39;name&#39;: &#39;RU0001&#39;,
  &#39;site_density&#39;: 2.1671e-09}
@@ -1957,7 +1957,7 @@ the references.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">references_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
 
@@ -1989,7 +1989,7 @@ the references.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="c1"># Range of data to fit the Nasa polynomials</span>
 <span class="n">T_low</span> <span class="o">=</span> <span class="mf">298.</span> <span class="c1"># K</span>
@@ -2012,7 +2012,7 @@ the references.</p>
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
-C:\Users\jonat\AppData\Local\conda\conda\envs\pMuTT_development\lib\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
+C:\Users\jonat\AppData\Local\conda\conda\envs\pmutt_development\lib\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
@@ -2027,11 +2027,11 @@ C:\Users\jonat\AppData\Local\conda\conda\envs\pMuTT_development\lib\site-package
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT</span> <span class="k">import</span> <span class="n">pMuTT_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pMuTT.reaction</span> <span class="k">import</span> <span class="n">ChemkinReaction</span><span class="p">,</span> <span class="n">Reactions</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">ChemkinReaction</span><span class="p">,</span> <span class="n">Reactions</span>
 
 <span class="c1"># Convert list of Nasa polynomials to dictionary of Nasa polynomials</span>
-<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pMuTT_list_to_dict</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
 
 <span class="n">reactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactions&#39;</span><span class="p">)</span>
 <span class="n">reactions_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2047,7 +2047,7 @@ C:\Users\jonat\AppData\Local\conda\conda\envs\pMuTT_development\lib\site-package
 <div class="section" id="Writing-Chemkin-files">
 <h2>Writing Chemkin files<a class="headerlink" href="#Writing-Chemkin-files" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have all the required objects, we can write the output
-files. All outputs can be found in the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/outputs">./outputs
+files. All outputs can be found in the <a class="reference external" href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/outputs">./outputs
 folder</a>.</p>
 <div class="section" id="Writing-thermdat">
 <h3>Writing thermdat<a class="headerlink" href="#Writing-thermdat" title="Permalink to this headline">¶</a></h3>
@@ -2057,7 +2057,7 @@ folder</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="n">write_thermdat</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/thermdat&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
 </pre></div>
@@ -2138,7 +2138,7 @@ folder</a>.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pMuTT.io</span> <span class="k">import</span> <span class="n">chemkin</span> <span class="k">as</span> <span class="n">ck_io</span>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io</span> <span class="k">import</span> <span class="n">chemkin</span> <span class="k">as</span> <span class="n">ck_io</span>
 
 <span class="n">ck_io</span><span class="o">.</span><span class="n">write_gas</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/gas.inp&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
 <span class="n">ck_io</span><span class="o">.</span><span class="n">write_surf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/surf.inp&#39;</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">act_method_name</span><span class="o">=</span><span class="s1">&#39;get_GoRT_act&#39;</span><span class="p">)</span>
@@ -2151,7 +2151,7 @@ folder</a>.</p>
 factor.</p>
 <p>The gas.inp file written is shown below. Note there are no gas-phase
 reactions.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:46.954918
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pmutt on 2019-04-25 16:05:46.954918
 !Elements present in gas and surface species
 ELEMENTS
 H
@@ -2177,7 +2177,7 @@ END
 </pre></div>
 </div>
 <p>The surf.inp file written in shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:46.977586
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pmutt on 2019-06-12 14:28:23.507266
 !Surface species
 !Each catalyst site has the following format:
 !SITE/[Site name]/      SDEN/[Site density in mol/cm2]/
@@ -2212,16 +2212,16 @@ END
 !- Ea (Activation Energy or Gibbs energy of activation in specified units
 !Adsorption reactions can be represented using the STICK keyword
 REACTIONS  MWON
-H2+2RU(S)=2H(S)+2RU(B)           1.000E+00   1.000E+00   0.000E+00
+H2+2RU(S)=2H(S)+2RU(B)           5.000E-01   1.000E+00   0.000E+00
 STICK
-N2+RU(S)=N2(S)+RU(B)             1.000E+00   1.000E+00   0.000E+00
+N2+RU(S)=N2(S)+RU(B)             5.000E-01   1.000E+00   0.000E+00
 STICK
-NH3+RU(S)=NH3(S)+RU(B)           1.000E+00   1.000E+00   0.000E+00
+NH3+RU(S)=NH3(S)+RU(B)           5.000E-01   1.000E+00   0.000E+00
 STICK
-NH3(S)+RU(S)=NH2(S)+H(S)+RU(B)   9.615E+18   1.000E+00   2.972E+01
-NH2(S)+RU(S)=NH(S)+H(S)+RU(B)    9.615E+18   1.000E+00   1.199E+01
-NH(S)+RU(S)=N(S)+H(S)+RU(B)      9.615E+18   1.000E+00   3.203E+00
-2N(S)+RU(B)=N2(S)+RU(S)          9.615E+18   1.000E+00   7.317E+01
+NH3(S)+RU(S)=NH2(S)+H(S)+RU(B)   9.615E+18   1.000E+00   4.100E+01
+NH2(S)+RU(S)=NH(S)+H(S)+RU(B)    9.615E+18   1.000E+00   2.055E+01
+NH(S)+RU(S)=N(S)+H(S)+RU(B)      9.615E+18   1.000E+00   4.135E+01
+2N(S)+RU(B)=N2(S)+RU(S)          9.615E+18   1.000E+00   1.459E+02
 END
 </pre></div>
 </div>
@@ -2245,7 +2245,7 @@ END
 </div>
 </div>
 <p>The T_flow.inp file written is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.025434
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pmutt on 2019-04-25 16:05:47.025434
 !Conditions for each reaction run
 !Only used when MultiInput in tube.inp is set to &quot;T&quot;
 !T[K]      P[atm]     Q[cm3/s]   abyv[cm-1]  Run #
@@ -2291,7 +2291,7 @@ EOF
 <p>Reminder that we use <code class="docutils literal notranslate"><span class="pre">act_method_name</span></code> as ‘get_GoRT_act’ for the
 <a class="reference external" href="#act_method_name_explanation">reason described above</a>.</p>
 <p>The EAg.inp file is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.088278
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pmutt on 2019-04-25 16:05:47.088278
 !The first line is the number of reactions. Subsequent lines follow the format
 !of rxn (from surf.out) followed by the EA/RT value at each run condition.
 !There may be one slight deviation from surf.out: any repeated species should
@@ -2304,7 +2304,7 @@ EOF
 </pre></div>
 </div>
 <p>The EAs.inp file is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.043381
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pmutt on 2019-06-12 14:36:30.247685
 !The first line is the number of reactions. Subsequent lines follow the format
 !of rxn (from surf.out) followed by the EA/RT value at each run condition.
 !There may be one slight deviation from surf.out: any repeated species should
@@ -2316,10 +2316,10 @@ EOF
 H2+2RU(S)&lt;=&gt;2H(S)+2RU(B)             0.00E+00   0.00E+00   0.00E+00
 N2+RU(S)&lt;=&gt;N2(S)+RU(B)               0.00E+00   0.00E+00   2.49E+00
 NH3+RU(S)&lt;=&gt;NH3(S)+RU(B)             0.00E+00   1.61E+00   4.47E+00
-NH3(S)+RU(S)&lt;=&gt;NH2(S)+H(S)+RU(B)     2.95E+01   2.28E+01   1.88E+01
-NH2(S)+RU(S)&lt;=&gt;NH(S)+H(S)+RU(B)      1.19E+01   9.12E+00   7.46E+00
-NH(S)+RU(S)&lt;=&gt;N(S)+H(S)+RU(B)        3.18E+00   2.23E+00   1.65E+00
-2N(S)+RU(B)&lt;=&gt;N2(S)+RU(S)            7.27E+01   5.49E+01   4.45E+01
+NH3(S)+RU(S)&lt;=&gt;NH2(S)+H(S)+RU(B)     4.08E+01   3.12E+01   2.55E+01
+NH2(S)+RU(S)&lt;=&gt;NH(S)+H(S)+RU(B)      2.04E+01   1.55E+01   1.26E+01
+NH(S)+RU(S)&lt;=&gt;N(S)+H(S)+RU(B)        4.11E+01   3.07E+01   2.44E+01
+2N(S)+RU(B)&lt;=&gt;N2(S)+RU(S)            1.45E+02   1.09E+02   8.79E+01
 EOF
 </pre></div>
 </div>
@@ -2361,7 +2361,7 @@ EOF
 </pre></div></div>
 </div>
 <p>The tube_mole.inp file is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pMuTT on 2019-04-25 16:05:47.114596
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!File generated by pmutt on 2019-04-25 16:05:47.114596
 !Specify the &#39;species/phase/&#39; pair /(in quotes!)/ and the associated
 !composition values. If the composition does not sum to 1 for each phase or
 !site type, it will be renormalized to 1. At the end of a calculation, a

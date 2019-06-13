@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pMuTT 1.2.7 documentation</title>
+  <title>Reactions &mdash; pmutt 1.2.8 documentation</title>
   
 
   
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pMuTT
+            <a href="index.html" class="icon icon-home"> pmutt
           
 
           
@@ -95,7 +95,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reactions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#reaction">Reaction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#initialization-using-pmutt-model-objects">Initialization using pMuTT Model Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialization-using-pmutt-model-objects">Initialization using pmutt Model Objects</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#initialization-using-reaction-string">Initialization using reaction string</a></li>
 </ul>
 </li>
@@ -111,7 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT">Return to Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
             
@@ -126,7 +126,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pMuTT</a>
+          <a href="index.html">pmutt</a>
         
       </nav>
 
@@ -199,29 +199,29 @@
 <span id="id1"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="reaction">
 <h2>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h2>
-<p>Chemical reactions can be modeled using the <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">pMuTT.reaction.Reaction</span></code></a>
+<p>Chemical reactions can be modeled using the <a class="reference internal" href="#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt.reaction.Reaction</span></code></a>
 class.</p>
 <dl class="class">
-<dt id="pMuTT.reaction.Reaction">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em>, <em>transition_state_stoich=None</em>, <em>bep_descriptor=None</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction">
+<em class="property">class </em><code class="descclassname">pmutt.reaction.</code><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>reactants_stoich</em>, <em>products</em>, <em>products_stoich</em>, <em>transition_state=None</em>, <em>transition_state_stoich=None</em>, <em>bep_descriptor=None</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a chemical reaction</p>
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.reactants">
-<code class="descname">reactants</code><a class="headerlink" href="#pMuTT.reaction.Reaction.reactants" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.reactants">
+<code class="descname">reactants</code><a class="headerlink" href="#pmutt.reaction.Reaction.reactants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reactants</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of pMuTT model objects</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of pmutt model objects</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.reactants_stoich">
-<code class="descname">reactants_stoich</code><a class="headerlink" href="#pMuTT.reaction.Reaction.reactants_stoich" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.reactants_stoich">
+<code class="descname">reactants_stoich</code><a class="headerlink" href="#pmutt.reaction.Reaction.reactants_stoich" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stoichiometric quantities of reactants</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -234,22 +234,22 @@ class.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.products">
-<code class="descname">products</code><a class="headerlink" href="#pMuTT.reaction.Reaction.products" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.products">
+<code class="descname">products</code><a class="headerlink" href="#pmutt.reaction.Reaction.products" title="Permalink to this definition">¶</a></dt>
 <dd><p>Products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of pMuTT model objects</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of pmutt model objects</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.products_stoich">
-<code class="descname">products_stoich</code><a class="headerlink" href="#pMuTT.reaction.Reaction.products_stoich" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.products_stoich">
+<code class="descname">products_stoich</code><a class="headerlink" href="#pmutt.reaction.Reaction.products_stoich" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stoichiometric quantities of products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -262,22 +262,22 @@ class.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.transition_state">
-<code class="descname">transition_state</code><a class="headerlink" href="#pMuTT.reaction.Reaction.transition_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.transition_state">
+<code class="descname">transition_state</code><a class="headerlink" href="#pmutt.reaction.Reaction.transition_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transition state specie. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">pMuTT model object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">pmutt model object, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.transition_state_stoich">
-<code class="descname">transition_state_stoich</code><a class="headerlink" href="#pMuTT.reaction.Reaction.transition_state_stoich" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.transition_state_stoich">
+<code class="descname">transition_state_stoich</code><a class="headerlink" href="#pmutt.reaction.Reaction.transition_state_stoich" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stoichiometric quantities of transition state species.
 Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -291,11 +291,11 @@ Default is None</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.bep_descriptor">
-<code class="descname">bep_descriptor</code><a class="headerlink" href="#pMuTT.reaction.Reaction.bep_descriptor" title="Permalink to this definition">¶</a></dt>
-<dd><p>If the transition state is a <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+<dt id="pmutt.reaction.Reaction.bep_descriptor">
+<code class="descname">bep_descriptor</code><a class="headerlink" href="#pmutt.reaction.Reaction.bep_descriptor" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the transition state is a <a class="reference internal" href="#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
 object, the descriptor can be set using this parameter. See
-<a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+<a class="reference internal" href="#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
 descriptors</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -308,8 +308,8 @@ descriptors</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reaction.notes">
-<code class="descname">notes</code><a class="headerlink" href="#pMuTT.reaction.Reaction.notes" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pmutt.reaction.Reaction.notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Other notes such as the source of the reaction. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -336,8 +336,8 @@ values were used so the quantity evaluated may be meaningless.</p>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.check_element_balance">
-<code class="descname">check_element_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.check_element_balance" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.check_element_balance">
+<code class="descname">check_element_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.check_element_balance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the reactants, products and transition state elemental
 composition</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -352,8 +352,8 @@ element composition does not agree.</td>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.reaction.Reaction.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -370,8 +370,8 @@ element composition does not agree.</td>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.reaction.Reaction.from_string">
-<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.from_string" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.from_string">
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em>, <em>raise_error=True</em>, <em>raise_warning=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.from_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a reaction object using the reaction string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -380,16 +380,22 @@ element composition does not agree.</td>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>reaction_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Reaction string.</li>
 <li><strong>species</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dictionary using the names as keys. If you have a list of
-species, use pMuTT.pMuTT_list_to_dict to make a dict.</li>
+species, use pmutt.pmutt_list_to_dict to make a dict.</li>
 <li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate species. Leading and trailing spaces
 will be trimmed. Default is ‘+’</li>
 <li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate states of the reaction. Leading and
 trailing spaces will be trimmed. Default is ‘=’</li>
-<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
 object, the descriptor can be set using this parameter. See
-<a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+<a class="reference internal" href="#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
 descriptors</li>
 <li><strong>notes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Other notes such as the source of the reaction. Default is None</li>
+<li><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if the transition state is not located
+in species. Default is True</li>
+<li><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if the
+transition state is not located in species. If a warning is
+raised, the Reaction will try to be initialized without the
+transition state. Default is True</li>
 </ul>
 </td>
 </tr>
@@ -404,8 +410,8 @@ descriptors</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>m=0</em>, <em>use_q=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_A">
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>rev=False</em>, <em>m=0</em>, <em>use_q=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets pre-exponential factor between reactants (or products) and
 transition state in 1/s</p>
 <p><span class="math notranslate nohighlight">\(A = \frac {k_B T} {h} \frac {q^{TS}}{q^{initial state}}
@@ -446,8 +452,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_Cp_act">
-<code class="descname">get_Cp_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Cp_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_Cp_act">
+<code class="descname">get_Cp_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_Cp_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in heat capacity (constant P) between reactants/products
 and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -455,7 +461,7 @@ and the transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -477,8 +483,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_Cp_state">
-<code class="descname">get_Cp_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Cp_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_Cp_state">
+<code class="descname">get_Cp_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_Cp_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the heat capacity at constant pressure at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -494,7 +500,7 @@ transition state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity at constant
 pressure. See class docstring to see how to pass specific
@@ -513,8 +519,8 @@ parameters to different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_CpoR_act">
-<code class="descname">get_CpoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_CpoR_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_CpoR_act">
+<code class="descname">get_CpoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_CpoR_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between
 reactants/products and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -542,8 +548,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_CpoR_state">
-<code class="descname">get_CpoR_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_CpoR_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_CpoR_state">
+<code class="descname">get_CpoR_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_CpoR_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless heat capacity at constant pressure at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -577,8 +583,8 @@ of the reaction state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_Cv_act">
-<code class="descname">get_Cv_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Cv_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_Cv_act">
+<code class="descname">get_Cv_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_Cv_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in heat capacity (constant V) between reactants/products
 and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -586,7 +592,7 @@ and the transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -607,8 +613,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_Cv_state">
-<code class="descname">get_Cv_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Cv_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_Cv_state">
+<code class="descname">get_Cv_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_Cv_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the heat capacity at constant volume at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -624,7 +630,7 @@ species.</li>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate heat capacity at constant
 volume. See class docstring to see how to pass specific
@@ -643,8 +649,8 @@ parameters to different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_CvoR_act">
-<code class="descname">get_CvoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_CvoR_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_CvoR_act">
+<code class="descname">get_CvoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_CvoR_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity (constant V)
 between reactants/products and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -672,8 +678,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_CvoR_state">
-<code class="descname">get_CvoR_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_CvoR_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_CvoR_state">
+<code class="descname">get_CvoR_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_CvoR_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless heat capacity at constant volume at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -707,8 +713,8 @@ state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_E_act">
-<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>del_m=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_E_act">
+<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>del_m=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_E_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets act energy between reactants (or products)
 and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -716,7 +722,7 @@ and transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -746,8 +752,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_E_state">
-<code class="descname">get_E_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T=298.15</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_E_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_E_state">
+<code class="descname">get_E_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T=298.15</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_E_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the electronic energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -763,7 +769,7 @@ transition state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</li>
@@ -784,8 +790,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_EoRT_act">
-<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>del_m=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_EoRT_act">
+<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>del_m=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless Arrhenius activation energy between reactants
 (or products) and transition state</p>
 <p>If the transition state method is used, the enthalpy of activation is
@@ -825,8 +831,8 @@ and transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_EoRT_state">
-<code class="descname">get_EoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_EoRT_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_EoRT_state">
+<code class="descname">get_EoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>include_ZPE=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_EoRT_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless electronic energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -860,8 +866,8 @@ parameters to different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_F_act">
-<code class="descname">get_F_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_F_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_F_act">
+<code class="descname">get_F_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_F_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in Helmholtz energy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -869,7 +875,7 @@ transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -892,8 +898,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_F_state">
-<code class="descname">get_F_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_F_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_F_state">
+<code class="descname">get_F_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_F_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the Helholtz energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -909,7 +915,7 @@ transition state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Helholtz energy.
@@ -929,8 +935,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_FoRT_act">
-<code class="descname">get_FoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_FoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_FoRT_act">
+<code class="descname">get_FoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_FoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Helmholtz energy between
 reactants/products and transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -958,8 +964,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_FoRT_state">
-<code class="descname">get_FoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_FoRT_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_FoRT_state">
+<code class="descname">get_FoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_FoRT_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless Helmholtz energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -993,8 +999,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_G_act">
-<code class="descname">get_G_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_G_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_G_act">
+<code class="descname">get_G_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_G_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in Gibbs energy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1002,7 +1008,7 @@ transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1025,8 +1031,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_G_state">
-<code class="descname">get_G_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_G_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_G_state">
+<code class="descname">get_G_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_G_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the Gibbs energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1042,7 +1048,7 @@ transition state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy.
@@ -1062,8 +1068,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_GoRT_act">
-<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_GoRT_act">
+<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Gibbs energy between reactants/products
 and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1091,8 +1097,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_GoRT_state">
-<code class="descname">get_GoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_GoRT_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_GoRT_state">
+<code class="descname">get_GoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_GoRT_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless Gibbs energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1125,8 +1131,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_H_act">
-<code class="descname">get_H_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_H_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_H_act">
+<code class="descname">get_H_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_H_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in enthalpy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1134,7 +1140,7 @@ transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1157,8 +1163,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_H_state">
-<code class="descname">get_H_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_H_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_H_state">
+<code class="descname">get_H_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_H_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the enthalpy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1174,7 +1180,7 @@ transition state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy.
@@ -1194,8 +1200,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_HoRT_act">
-<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_HoRT_act">
+<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless enthalpy between reactants/products and
 the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1223,8 +1229,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_HoRT_state">
-<code class="descname">get_HoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_HoRT_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_HoRT_state">
+<code class="descname">get_HoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_HoRT_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless enthalpy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1258,8 +1264,8 @@ of the reaction state.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_Keq">
-<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_Keq">
+<code class="descname">get_Keq</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_Keq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets equilibrium constant between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1287,8 +1293,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_S_act">
-<code class="descname">get_S_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_S_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_S_act">
+<code class="descname">get_S_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_S_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in entropy between reactants/products and the transition
 state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1296,7 +1302,7 @@ state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -1318,8 +1324,8 @@ state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_S_state">
-<code class="descname">get_S_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_S_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_S_state">
+<code class="descname">get_S_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_S_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the entropy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1335,7 +1341,7 @@ state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate entropy.
 See class docstring to see how to pass specific parameters to
@@ -1354,8 +1360,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_SoR_act">
-<code class="descname">get_SoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_SoR_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_SoR_act">
+<code class="descname">get_SoR_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_SoR_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless entropy between reactants/products and
 the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1383,8 +1389,8 @@ state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_SoR_state">
-<code class="descname">get_SoR_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_SoR_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_SoR_state">
+<code class="descname">get_SoR_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_SoR_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless entropy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1417,8 +1423,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_U_act">
-<code class="descname">get_U_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_U_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_U_act">
+<code class="descname">get_U_act</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_U_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in internal energy between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1426,7 +1432,7 @@ transition state</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1449,8 +1455,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_U_state">
-<code class="descname">get_U_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_U_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_U_state">
+<code class="descname">get_U_state</code><span class="sig-paren">(</span><em>state</em>, <em>units</em>, <em>T</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_U_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the internal energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1466,7 +1472,7 @@ transition state</p>
 <li>’ts’ (same as transition state)</li>
 </ul>
 </li>
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate internal energy.
@@ -1486,8 +1492,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_UoRT_act">
-<code class="descname">get_UoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_UoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_UoRT_act">
+<code class="descname">get_UoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_UoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless internal energy between
 reactants/products and the transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1515,8 +1521,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_UoRT_state">
-<code class="descname">get_UoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_UoRT_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_UoRT_state">
+<code class="descname">get_UoRT_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_UoRT_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets dimensionless internal energy at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1549,8 +1555,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_Cp">
-<code class="descname">get_delta_Cp</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_Cp" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_Cp">
+<code class="descname">get_delta_Cp</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in heat capacity (constant P) between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1558,7 +1564,7 @@ products</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -1581,8 +1587,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_CpoR">
-<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_CpoR">
+<code class="descname">get_delta_CpoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_CpoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1611,8 +1617,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_Cv">
-<code class="descname">get_delta_Cv</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_Cv" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_Cv">
+<code class="descname">get_delta_Cv</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_Cv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in heat capacity (constant V) between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1620,7 +1626,7 @@ products</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -1643,8 +1649,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_CvoR">
-<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_CvoR">
+<code class="descname">get_delta_CvoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_CvoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless heat capacity (constant V)
 between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1673,15 +1679,15 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_E">
-<code class="descname">get_delta_E</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_E" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_E">
+<code class="descname">get_delta_E</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_E" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in electronic energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1705,8 +1711,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_EoRT">
-<code class="descname">get_delta_EoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_EoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_EoRT">
+<code class="descname">get_delta_EoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_EoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless electronic energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1735,15 +1741,15 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_F">
-<code class="descname">get_delta_F</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_F" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_F">
+<code class="descname">get_delta_F</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_F" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in Helmholtz energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1767,8 +1773,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_FoRT">
-<code class="descname">get_delta_FoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_FoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_FoRT">
+<code class="descname">get_delta_FoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_FoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Helmholtz energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1797,15 +1803,15 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_G">
-<code class="descname">get_delta_G</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_G" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_G">
+<code class="descname">get_delta_G</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in Gibbs energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1829,8 +1835,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_GoRT">
-<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_GoRT">
+<code class="descname">get_delta_GoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless Gibbs energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1859,15 +1865,15 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_H">
-<code class="descname">get_delta_H</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_H" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_H">
+<code class="descname">get_delta_H</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in enthalpy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -1891,8 +1897,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_HoRT">
-<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_HoRT">
+<code class="descname">get_delta_HoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless enthalpy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1920,15 +1926,15 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_S">
-<code class="descname">get_delta_S</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_S" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_S">
+<code class="descname">get_delta_S</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in entropy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -1951,8 +1957,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_SoR">
-<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_SoR">
+<code class="descname">get_delta_SoR</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless entropy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1980,15 +1986,15 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_U">
-<code class="descname">get_delta_U</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_U" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_U">
+<code class="descname">get_delta_U</code><span class="sig-paren">(</span><em>units</em>, <em>T</em>, <em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_U" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in internal energy between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Temperature in K</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
@@ -2012,8 +2018,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_UoRT">
-<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_UoRT">
+<code class="descname">get_delta_UoRT</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in dimensionless internal energy between reactants and
 products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2042,8 +2048,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_q">
-<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_q">
+<code class="descname">get_delta_q</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2071,8 +2077,8 @@ species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_delta_quantity">
-<code class="descname">get_delta_quantity</code><span class="sig-paren">(</span><em>initial_state</em>, <em>final_state</em>, <em>method_name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_delta_quantity" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_delta_quantity">
+<code class="descname">get_delta_quantity</code><span class="sig-paren">(</span><em>initial_state</em>, <em>final_state</em>, <em>method_name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_delta_quantity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper method to calculate the change in thermodynamic quantity
 between states</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2113,8 +2119,8 @@ products</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_q_act">
-<code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_q_act">
+<code class="descname">get_q_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants/products and the
 transition state</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2142,8 +2148,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_q_state">
-<code class="descname">get_q_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_q_state" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_q_state">
+<code class="descname">get_q_state</code><span class="sig-paren">(</span><em>state</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_q_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets partition function at a state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2176,8 +2182,8 @@ different species.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_species">
-<code class="descname">get_species</code><span class="sig-paren">(</span><em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_species" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_species">
+<code class="descname">get_species</code><span class="sig-paren">(</span><em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the unique species included in the reaction.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2201,8 +2207,8 @@ is name</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.get_state_quantity">
-<code class="descname">get_state_quantity</code><span class="sig-paren">(</span><em>state</em>, <em>method_name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.get_state_quantity" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.get_state_quantity">
+<code class="descname">get_state_quantity</code><span class="sig-paren">(</span><em>state</em>, <em>method_name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_state_quantity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper method to calculate the thermodynamic quantity of the state</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2237,8 +2243,8 @@ interest.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2253,8 +2259,8 @@ interest.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reaction.to_string">
-<code class="descname">to_string</code><span class="sig-paren">(</span><em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>stoich_format='.2f'</em>, <em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reaction.to_string" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reaction.to_string">
+<code class="descname">to_string</code><span class="sig-paren">(</span><em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>stoich_format='.2f'</em>, <em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.to_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the Reaction object as a stoichiometric reaction</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2286,15 +2292,15 @@ rounded to 2 decimal places)</li>
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>In this section, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any
-pMuTT model object should be compatible. Reaction objects can be initialized
-using the pMuTT model objects directly or using a reaction string.</p>
+pmutt model object should be compatible. Reaction objects can be initialized
+using the pmutt model objects directly or using a reaction string.</p>
 <div class="section" id="initialization-using-pmutt-model-objects">
-<h4>Initialization using pMuTT Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h4>
+<h4>Initialization using pmutt Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h4>
 <p>In this example, the Nasa objects are created directly in the script.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Initialize reaction</span>
@@ -2327,9 +2333,9 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pMuTT.io.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">pMuTT_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pMuTT</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Read the thermdat</span>
@@ -2338,7 +2344,7 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 <span class="n">nasa_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s1">&#39;thermdat&#39;</span><span class="p">))</span>
 <span class="c1"># Convert list to dictionary so Reaction.from_string can</span>
 <span class="c1"># assign species quickly</span>
-<span class="n">nasa_dict</span> <span class="o">=</span> <span class="n">pMuTT_list_to_dict</span><span class="p">(</span><span class="n">nasa_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+<span class="n">nasa_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">nasa_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Create the reaction object</span>
@@ -2384,15 +2390,15 @@ balanced.</p>
 </div>
 <div class="section" id="chemkinreaction">
 <h2>ChemkinReaction<a class="headerlink" href="#chemkinreaction" title="Permalink to this headline">¶</a></h2>
-<p>This is a child class of <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> but has additional
+<p>This is a child class of <a class="reference internal" href="#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> but has additional
 attributes for reading and writting Chemkin files.</p>
 <dl class="class">
-<dt id="pMuTT.reaction.ChemkinReaction">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">ChemkinReaction</code><span class="sig-paren">(</span><em>beta=1.0</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction">
+<em class="property">class </em><code class="descclassname">pmutt.reaction.</code><code class="descname">ChemkinReaction</code><span class="sig-paren">(</span><em>beta=1.0</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chemkin reaction. Has additional attributes to support input and output</p>
 <dl class="attribute">
-<dt id="pMuTT.reaction.ChemkinReaction.beta">
-<code class="descname">beta</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.beta" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.beta">
+<code class="descname">beta</code><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.beta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Power to raise the temperature in the rate expression. Default is 1</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2405,8 +2411,8 @@ attributes for reading and writting Chemkin files.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.ChemkinReaction.is_adsorption">
-<code class="descname">is_adsorption</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.is_adsorption" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.is_adsorption">
+<code class="descname">is_adsorption</code><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.is_adsorption" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, the reaction represents an adsorption. Default is False</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2419,9 +2425,10 @@ attributes for reading and writting Chemkin files.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.ChemkinReaction.sticking_coeff">
-<code class="descname">sticking_coeff</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.sticking_coeff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True</p>
+<dt id="pmutt.reaction.ChemkinReaction.sticking_coeff">
+<code class="descname">sticking_coeff</code><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.sticking_coeff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True.
+Default is 0.5</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2433,8 +2440,8 @@ attributes for reading and writting Chemkin files.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.ChemkinReaction.gas_phase">
-<code class="descname">gas_phase</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.gas_phase" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.gas_phase">
+<code class="descname">gas_phase</code><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.gas_phase" title="Permalink to this definition">¶</a></dt>
 <dd><p>True if the reaction has only gas-phase species. This attribute is
 determined based on the reactants and products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2448,8 +2455,8 @@ determined based on the reactants and products</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.ChemkinReaction.kwargs">
-<code class="descname">kwargs</code><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.kwargs" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.kwargs">
+<code class="descname">kwargs</code><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.kwargs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keyword arguments used to initialize the reactants, transition
 state and products</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2463,8 +2470,8 @@ state and products</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.reaction.ChemkinReaction.from_string">
-<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em>, <em>beta=1</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.from_string" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.from_string">
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>bep_descriptor=None</em>, <em>notes=None</em>, <em>beta=1</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.from_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a reaction object using the reaction string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2473,21 +2480,23 @@ state and products</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>reaction_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Reaction string.</li>
 <li><strong>species</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dictionary using the names as keys. If you have a list of
-species, use pMuTT.pMuTT_list_to_dict to make a dict.</li>
+species, use pmutt.pmutt_list_to_dict to make a dict.</li>
 <li><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate species. Leading and trailing spaces
 will be trimmed. Default is ‘+’</li>
 <li><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter that separate states of the reaction. Leading and
 trailing spaces will be trimmed. Default is ‘=’</li>
-<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
+<li><strong>bep_descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If the transition state is a <a class="reference internal" href="#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a>
 object, the descriptor can be set using this parameter. See
-<a class="reference internal" href="#pMuTT.reaction.bep.BEP" title="pMuTT.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
+<a class="reference internal" href="#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> documentation for accepted
 descriptors</li>
 <li><strong>notes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Other notes such as the source of the reaction. Default is None</li>
-<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Power to raise the temperature in the rate expression. Default is 1</li>
+<li><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Power to raise the temperature in the rate expression.
+Default is 1</li>
 <li><strong>is_adsorption</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the reaction represents an adsorption. Default is False</li>
-<li><strong>sticking_coeff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True</li>
-<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – True if the reaction has only gas-phase species. This attribute is
-determined based on the reactants and products</li>
+<li><strong>sticking_coeff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is
+True. Default is 0.5</li>
+<li><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – True if the reaction has only gas-phase species. This attribute
+is determined based on the reactants and products</li>
 </ul>
 </td>
 </tr>
@@ -2502,8 +2511,8 @@ determined based on the reactants and products</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.ChemkinReaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.get_A">
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the preexponential factor in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2522,8 +2531,8 @@ determined based on the reactants and products</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.ChemkinReaction.get_GoRT_act">
-<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.get_GoRT_act">
+<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy. If there is no transition
 state species, calculates the delta dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2553,8 +2562,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.ChemkinReaction.get_HoRT_act">
-<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.get_HoRT_act">
+<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy. If there is no transition
 state species, calculates the delta dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2582,8 +2591,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.ChemkinReaction.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.ChemkinReaction.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.ChemkinReaction.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2603,25 +2612,25 @@ transition state</p>
 <div class="section" id="id2">
 <h2>Reactions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="pMuTT.reaction.Reactions">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.</code><code class="descname">Reactions</code><span class="sig-paren">(</span><em>reactions</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions">
+<em class="property">class </em><code class="descclassname">pmutt.reaction.</code><code class="descname">Reactions</code><span class="sig-paren">(</span><em>reactions</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reactions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains multiple reactions. Serves as a parent class for other objects</p>
 <dl class="attribute">
-<dt id="pMuTT.reaction.Reactions.reactions">
-<code class="descname">reactions</code><a class="headerlink" href="#pMuTT.reaction.Reactions.reactions" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions.reactions">
+<code class="descname">reactions</code><a class="headerlink" href="#pmutt.reaction.Reactions.reactions" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of <a class="reference internal" href="#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pMuTT.reaction.Reactions.from_dict">
-<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reactions.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2638,8 +2647,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reactions.get_E_span">
-<code class="descname">get_E_span</code><span class="sig-paren">(</span><em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.get_E_span" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions.get_E_span">
+<code class="descname">get_E_span</code><span class="sig-paren">(</span><em>units</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reactions.get_E_span" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the energy span of a set of reactions. Equations sourced from</p>
 <ul class="simple">
 <li>Kozuch, S.; Shaik, S. How to Conceptualize Catalytic Cycles? The
@@ -2656,7 +2665,7 @@ TOF-determining intermediate (TDI):</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to evaluate Gibbs energy at each state.</li>
 </ul>
@@ -2673,8 +2682,8 @@ units but omit the ‘/K’ (e.g. J/mol).</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reactions.get_species">
-<code class="descname">get_species</code><span class="sig-paren">(</span><em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.get_species" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions.get_species">
+<code class="descname">get_species</code><span class="sig-paren">(</span><em>include_TS=True</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reactions.get_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the unique species included in the reactions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2698,8 +2707,8 @@ Default is name</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reactions.plot_coordinate_diagram">
-<code class="descname">plot_coordinate_diagram</code><span class="sig-paren">(</span><em>method_name</em>, <em>ref_index=0</em>, <em>ref_state='reactants'</em>, <em>x_offset=1.0</em>, <em>include_TS=True</em>, <em>x_scale_TS=0.5</em>, <em>y_scale_TS=0.5</em>, <em>include_TS_labels=True</em>, <em>y_TS_label_offset=0.1</em>, <em>x_TS_label_offset=0.0</em>, <em>TS_label_format='.2f'</em>, <em>figure=None</em>, <em>axes=None</em>, <em>plt_kwargs={}</em>, <em>**reaction_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.plot_coordinate_diagram" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions.plot_coordinate_diagram">
+<code class="descname">plot_coordinate_diagram</code><span class="sig-paren">(</span><em>method_name</em>, <em>ref_index=0</em>, <em>ref_state='reactants'</em>, <em>x_offset=1.0</em>, <em>include_TS=True</em>, <em>x_scale_TS=0.5</em>, <em>y_scale_TS=0.5</em>, <em>include_TS_labels=True</em>, <em>y_TS_label_offset=0.1</em>, <em>x_TS_label_offset=0.0</em>, <em>TS_label_format='.2f'</em>, <em>figure=None</em>, <em>axes=None</em>, <em>plt_kwargs={}</em>, <em>**reaction_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reactions.plot_coordinate_diagram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots a reaction coordinate diagram.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2744,7 +2753,7 @@ directly above peaks by default)</li>
 value rounded to the second decimal place)</li>
 <li><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Add plot to this figure. If not specified, one will be
 generated</li>
-<li><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>, optional) – Adds plot to this axis. If not specified, one will be generated</li>
+<li><strong>axes</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>, optional) – Adds plot to this axis. If not specified, one will be generated</li>
 <li><strong>plt_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Extra arguments that will be fed to
 <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html">matplotlib.pyplot.subplots</a></li>
 <li><strong>reaction_kwargs</strong> (<em>keyword arguments</em>) – Extra arguments that will be fed to the reactions</li>
@@ -2763,8 +2772,8 @@ generated</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.Reactions.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.Reactions.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.Reactions.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reactions.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2784,17 +2793,17 @@ generated</li>
 <div class="section" id="bep">
 <h2>BEP<a class="headerlink" href="#bep" title="Permalink to this headline">¶</a></h2>
 <p>Bronsted Evans Polyani relationships can be added to
-<a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects so the activation energy can be
+<a class="reference internal" href="#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects so the activation energy can be
 estimated using the change in enthalpy.</p>
 <dl class="class">
-<dt id="pMuTT.reaction.bep.BEP">
-<em class="property">class </em><code class="descclassname">pMuTT.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>name=None</em>, <em>reaction=None</em>, <em>descriptor='delta_H'</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP">
+<em class="property">class </em><code class="descclassname">pmutt.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>name=None</em>, <em>reaction=None</em>, <em>descriptor='delta_H'</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a Bronsted Evans Polyani relationship. Intended to be a
 <code class="docutils literal notranslate"><span class="pre">specie</span></code> class.</p>
 <p><span class="math notranslate nohighlight">\(E_a = \alpha H + \beta\)</span></p>
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP.slope">
-<code class="descname">slope</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.slope" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.slope">
+<code class="descname">slope</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.slope" title="Permalink to this definition">¶</a></dt>
 <dd><p>Slope of BEP relationship.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2807,8 +2816,8 @@ estimated using the change in enthalpy.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP.intercept">
-<code class="descname">intercept</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.intercept" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.intercept">
+<code class="descname">intercept</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.intercept" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intercept of BEP relationship in kcal/mol.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2821,8 +2830,8 @@ estimated using the change in enthalpy.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP.name">
-<code class="descname">name</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.name" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.name">
+<code class="descname">name</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the BEP. Default is None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2835,23 +2844,23 @@ estimated using the change in enthalpy.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP.reaction">
-<code class="descname">reaction</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.reaction" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.reaction">
+<code class="descname">reaction</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reaction related to BEP. The Reaction can be supplied later by
 using <code class="docutils literal notranslate"><span class="pre">set_descriptor</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object, optional</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP.descriptor">
-<code class="descname">descriptor</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.descriptor">
+<code class="descname">descriptor</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.descriptor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Descriptor to calculate the activation energy. Supported options:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -2902,8 +2911,8 @@ using <code class="docutils literal notranslate"><span class="pre">set_descripto
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP.notes">
-<code class="descname">notes</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP.notes" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.notes">
+<code class="descname">notes</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notes relevant to BEP relationship such as its source. If using a
 dictionary, the keys and values must be simple types supported by
 JSON</p>
@@ -2918,8 +2927,8 @@ JSON</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pMuTT.reaction.bep.BEP._descriptor">
-<code class="descname">_descriptor</code><a class="headerlink" href="#pMuTT.reaction.bep.BEP._descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP._descriptor">
+<code class="descname">_descriptor</code><a class="headerlink" href="#pmutt.reaction.bep.BEP._descriptor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method taken from reaction to calculate enthalpy. This attribute is
 not supplied to constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2933,15 +2942,15 @@ not supplied to constructor.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.get_E_act">
-<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_E_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.get_E_act">
+<code class="descname">get_E_act</code><span class="sig-paren">(</span><em>units</em>, <em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_E_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate Arrhenius activation energy using BEP relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pMuTT.constants.R" title="pMuTT.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="constants.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</li>
 <li><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</li>
@@ -2960,8 +2969,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.get_EoRT_act">
-<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.get_EoRT_act">
+<code class="descname">get_EoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates dimensionless Arrhenius activation energy using BEP
 relationship</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2987,8 +2996,8 @@ instead of reactants. Default is False</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.get_GoRT">
-<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>entropy_state='reactants'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.get_GoRT">
+<code class="descname">get_GoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>entropy_state='reactants'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_GoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy using BEP relationship
 and reactants Gibbs energy. The BEP relationship has no entropic
 contribution</p>
@@ -3021,8 +3030,8 @@ have been specified for entropy)</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.get_HoRT">
-<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.get_HoRT">
+<code class="descname">get_HoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_HoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless enthalpy using BEP relationship
 and reactants or products enthalpy</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -3046,8 +3055,8 @@ and reactants or products enthalpy</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.get_SoR">
-<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>entropy_state='reactants'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>entropy_state='reactants'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_SoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless entropy using reactants or products
 entropy. The BEP relationship has no entropic contribution</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -3079,8 +3088,8 @@ have been specified for entropy)</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.get_UoRT">
-<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.get_UoRT">
+<code class="descname">get_UoRT</code><span class="sig-paren">(</span><em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_UoRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the dimensionless internal energy using BEP relationship
 and initial state internal energy</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -3104,67 +3113,8 @@ and initial state internal energy</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.set_descriptor">
-<code class="descname">set_descriptor</code><span class="sig-paren">(</span><em>reaction=None</em>, <em>descriptor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.set_descriptor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the appropriate method handle to the BEP object</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>reaction</strong> (<a class="reference internal" href="#pMuTT.reaction.Reaction" title="pMuTT.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object, optional) – Reaction related to BEP. If specified, overwrites the value
-held by BEP object</li>
-<li><strong>descriptor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Descriptor to calculate the activation energy. Supported
-options:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="13%" />
-<col width="87%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Descriptor</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>delta_H</td>
-<td>H_products - H_reactants (change in enthalpy)</td>
-</tr>
-<tr class="row-odd"><td>rev_delta_H</td>
-<td>H_reactants - H_products (change in enthalpy in reverse direction)</td>
-</tr>
-<tr class="row-even"><td>reactants_H</td>
-<td>H_reactants (enthalpy of reactants)</td>
-</tr>
-<tr class="row-odd"><td>products_H</td>
-<td>H_products (enthalpy of products)</td>
-</tr>
-<tr class="row-even"><td>delta_E</td>
-<td>E_products - E_reactants (change in electronic energy)</td>
-</tr>
-<tr class="row-odd"><td>rev_delta_E</td>
-<td>E_reactants - E_products (change in electronic energy in reverse direction)</td>
-</tr>
-<tr class="row-even"><td>reactants_E</td>
-<td>E_reactants (electronic energy of reactants)</td>
-</tr>
-<tr class="row-odd"><td>products_E</td>
-<td>E_products (electronic energy of products)</td>
-</tr>
-</tbody>
-</table>
-<p>If specified, overwites the value held by BEP object.</p>
-</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pMuTT.reaction.bep.BEP.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pMuTT.reaction.bep.BEP.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.reaction.bep.BEP.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

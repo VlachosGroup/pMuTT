@@ -8,35 +8,35 @@ EmpiricalBase
 
 This is the parent class for the empirical models.
 
-.. autoclass:: pMuTT.empirical.EmpiricalBase
+.. autoclass:: pmutt.empirical.EmpiricalBase
    :members:
    
 NASA
 ####
    
-.. autoclass:: pMuTT.empirical.nasa.Nasa
+.. autoclass:: pmutt.empirical.nasa.Nasa
    :members:
 
 Shomate
 #######
 
-.. autoclass:: pMuTT.empirical.shomate.Shomate
+.. autoclass:: pmutt.empirical.shomate.Shomate
    :members:
 
 Zacros
 ######
    
-.. autoclass:: pMuTT.empirical.zacros.Zacros
+.. autoclass:: pmutt.empirical.zacros.Zacros
    :members:
 
 Reference
 #########
    
-.. autoclass:: pMuTT.empirical.references.Reference
+.. autoclass:: pmutt.empirical.references.Reference
    :members:
 
 References
 ##########
    
-.. autoclass:: pMuTT.empirical.references.References
+.. autoclass:: pmutt.empirical.references.References
    :members:
