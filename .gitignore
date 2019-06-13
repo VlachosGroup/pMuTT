@@ -107,3 +107,7 @@ desktop.ini
 
 # VS Code
 .vscode
+
+#macOS-specific changes
+.DS_Store
+*/DS_Store
