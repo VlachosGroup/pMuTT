@@ -15,26 +15,26 @@
 # - [thermdat](thermdat) Thermdat file used to initialize ``Nasa`` species
 
 # ## Initialize Species Used For Reaction
-# First, we need to describe our species as pMuTT objects. For this example, we will be importing the thermdat from the [combustion database by Berkeley](http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat). We will store the species in a dictionary for code clarity later on.
+# First, we need to describe our species as pmutt objects. For this example, we will be importing the thermdat from the [combustion database by Berkeley](http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat). We will store the species in a dictionary for code clarity later on.
 
 # In[1]:
 
 
 from pprint import pprint
-from pMuTT.io.thermdat import read_thermdat
-from pMuTT import pMuTT_list_to_dict
+from pmutt.io.thermdat import read_thermdat
+from pmutt import pmutt_list_to_dict
 
 # The output will be a list
 species_list = read_thermdat(filename='thermdat')
 
 # This function converts the list to a dict for easier usage downstream
-species_dict = pMuTT_list_to_dict(pMuTT_list=species_list, key='name')
+species_dict = pmutt_list_to_dict(pmutt_list=species_list, key='name')
 
 # (Optional) Print the species_dict to see what's in it
 pprint(species_dict)
 
 
-# To calculate transition state properties, we will need to represent the transition state species as a pMuTT object. For this example, we will create a new ``Nasa`` object based on the H2O entry but modify the a6 parameter arbitrarily to give it a higher enthalpy.
+# To calculate transition state properties, we will need to represent the transition state species as a pmutt object. For this example, we will create a new ``Nasa`` object based on the H2O entry but modify the a6 parameter arbitrarily to give it a higher enthalpy.
 
 # In[2]:
 
@@ -64,7 +64,7 @@ pprint(species_dict)
 # In[3]:
 
 
-from pMuTT.reaction import Reaction
+from pmutt.reaction import Reaction
 
 rxn = Reaction(reactants=[species_dict['H2'], species_dict['O2']], reactants_stoich=[1., 0.5],
                products =[species_dict['H2O']], products_stoich=[1.],
@@ -99,7 +99,7 @@ print('Creating Reaction object using custom string notation: {}'.format(rxn))
 # In[5]:
 
 
-from pMuTT import constants as c
+from pmutt import constants as c
 
 T = 298.
 dH_298 = rxn.get_delta_H(T=T, units='kJ/mol')
@@ -153,7 +153,7 @@ print('Pre-exponential factor: {:.3e} 1/s'.format(A_rev))
 # In[7]:
 
 
-from pMuTT.reaction.bep import BEP
+from pmutt.reaction.bep import BEP
 
 species_dict['BEP'] = BEP(name='BEP', slope=0.2, intercept=100., descriptor='delta_H')
 rxn = Reaction.from_string(reaction_str='H2 + 0.5O2 = BEP = H2O', species=species_dict)
@@ -163,21 +163,21 @@ print('BEP: {:.2f} kJ/mol'.format(Ea_BEP))
 
 
 # ## Saving and Loading our Reaction as JSON
-# Similarly to pMuTT objects, ``Reaction`` objects can be saved to and read from JSON format.
+# Similarly to pmutt objects, ``Reaction`` objects can be saved to and read from JSON format.
 
 # In[8]:
 
 
 import json
-from pMuTT.io.json import pMuTTEncoder, json_to_pMuTT
+from pmutt.io.json import pmuttEncoder, json_to_pmutt
 
 # Saving
 with open('reaction.json', 'w') as f_ptr:
-    json.dump(rxn, f_ptr, cls=pMuTTEncoder, indent=True)
+    json.dump(rxn, f_ptr, cls=pmuttEncoder, indent=True)
     
 # Loading
 with open('reaction.json', 'r') as f_ptr:
-    rxn_io = json.load(f_ptr, object_hook=json_to_pMuTT)
+    rxn_io = json.load(f_ptr, object_hook=json_to_pmutt)
 
 # (Optional) Print your rxn to show it was loaded correctly
 dH_298_io = rxn_io.get_delta_H(T=T, units='kJ/mol')
@@ -191,10 +191,10 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 # Here is the resulting JSON file.
 # ```
 # {
-#  "class": "<class 'pMuTT.reaction.Reaction'>",
+#  "class": "<class 'pmutt.reaction.Reaction'>",
 #  "reactants": [
 #   {
-#    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+#    "class": "<class 'pmutt.empirical.nasa.Nasa'>",
 #    "type": "nasa",
 #    "name": "H2",
 #    "phase": "G",
@@ -230,7 +230,7 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 #    "n_sites": null
 #   },
 #   {
-#    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+#    "class": "<class 'pmutt.empirical.nasa.Nasa'>",
 #    "type": "nasa",
 #    "name": "O2",
 #    "phase": "G",
@@ -272,7 +272,7 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 #  ],
 #  "products": [
 #   {
-#    "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+#    "class": "<class 'pmutt.empirical.nasa.Nasa'>",
 #    "type": "nasa",
 #    "name": "H2O",
 #    "phase": "G",
@@ -314,7 +314,7 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 #  ],
 #  "transition_state": [
 #   {
-#    "class": "<class 'pMuTT.reaction.bep.BEP'>",
+#    "class": "<class 'pmutt.reaction.bep.BEP'>",
 #    "name": "BEP",
 #    "slope": 0.2,
 #    "intercept": 100.0,
@@ -330,7 +330,7 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 
 # ## Plotting Reaction Coordinate Diagrams
 # 
-# The ``pMuTT.reaction.Reactions.plot_coordinate_diagram`` allows users to plot reaction coordinate diagrams in a semi-automated way. For this example, we will use the synthesis of NH3 on Ru. The thermdat file was taken from the [NH3 MATLAB Microkinetic Model available on Github][0].
+# The ``pmutt.reaction.Reactions.plot_coordinate_diagram`` allows users to plot reaction coordinate diagrams in a semi-automated way. For this example, we will use the synthesis of NH3 on Ru. The thermdat file was taken from the [NH3 MATLAB Microkinetic Model available on Github][0].
 # 
 # [0]: https://github.com/VlachosGroup/NH3-Matlab-Microkinetic-Model
 
@@ -340,9 +340,9 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 import os
 from pathlib import Path
 from matplotlib import pyplot as plt
-from pMuTT import pMuTT_list_to_dict
-from pMuTT.reaction import Reaction, Reactions
-from pMuTT.io.thermdat import read_thermdat
+from pmutt import pmutt_list_to_dict
+from pmutt.reaction import Reaction, Reactions
+from pmutt.io.thermdat import read_thermdat
 
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
@@ -351,7 +351,7 @@ notebook_folder = Path().resolve()
 
 '''Read the thermdat file and convert it to a dictionary'''
 NH3_species_list = read_thermdat(os.path.join(notebook_folder, 'thermdat_NH3'))
-NH3_species = pMuTT_list_to_dict(NH3_species_list)
+NH3_species = pmutt_list_to_dict(NH3_species_list)
 
 '''Initialize the reaction'''
 rxns = Reactions(reactions=[

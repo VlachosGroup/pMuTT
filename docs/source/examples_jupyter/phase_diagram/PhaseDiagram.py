@@ -22,8 +22,8 @@
 from pprint import pprint
 import numpy as np
 from ase.build import molecule
-from pMuTT.empirical.nasa import Nasa
-from pMuTT.statmech import StatMech, presets
+from pmutt.empirical.nasa import Nasa
+from pmutt.statmech import StatMech, presets
 
 # Temperature (in K) corresponding to standard enthalpy 
 # and standard entropy
@@ -138,7 +138,7 @@ pprint(species)
 # In[2]:
 
 
-from pMuTT.reaction import Reaction
+from pmutt.reaction import Reaction
 
 reactions = [
     Reaction.from_string(reaction_str='2Fe+O2=2FeO', species=species),
@@ -154,7 +154,7 @@ reactions = [
 # In[3]:
 
 
-from pMuTT.reaction.phasediagram import PhaseDiagram
+from pmutt.reaction.phasediagram import PhaseDiagram
 
 phase_diagram = PhaseDiagram(reactions=reactions)
 

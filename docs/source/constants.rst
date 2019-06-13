@@ -3,5 +3,5 @@
 Constants
 *********
 
-.. automodule:: pMuTT.constants
+.. automodule:: pmutt.constants
    :members:

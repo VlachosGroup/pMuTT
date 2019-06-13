@@ -1,8 +1,8 @@
 {
- "class": "<class 'pMuTT.reaction.Reaction'>",
+ "class": "<class 'pmutt.reaction.Reaction'>",
  "reactants": [
   {
-   "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "class": "<class 'pmutt.empirical.nasa.Nasa'>",
    "type": "nasa",
    "name": "H2",
    "phase": "G",
@@ -38,7 +38,7 @@
    "n_sites": null
   },
   {
-   "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "class": "<class 'pmutt.empirical.nasa.Nasa'>",
    "type": "nasa",
    "name": "O2",
    "phase": "G",
@@ -80,7 +80,7 @@
  ],
  "products": [
   {
-   "class": "<class 'pMuTT.empirical.nasa.Nasa'>",
+   "class": "<class 'pmutt.empirical.nasa.Nasa'>",
    "type": "nasa",
    "name": "H2O",
    "phase": "G",
@@ -122,7 +122,7 @@
  ],
  "transition_state": [
   {
-   "class": "<class 'pMuTT.reaction.bep.BEP'>",
+   "class": "<class 'pmutt.reaction.bep.BEP'>",
    "name": "BEP",
    "slope": 0.2,
    "intercept": 100.0,

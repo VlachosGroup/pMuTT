@@ -6,10 +6,10 @@ Reactions
 Reaction
 ========
 
-Chemical reactions can be modeled using the :class:`pMuTT.reaction.Reaction` 
+Chemical reactions can be modeled using the :class:`pmutt.reaction.Reaction` 
 class.
 
-.. autoclass:: pMuTT.reaction.Reaction
+.. autoclass:: pmutt.reaction.Reaction
    :members:
 
 Example
@@ -17,10 +17,10 @@ Example
 
 In this section, we calculate the thermodynamic properties of water formation
 from hydrogen and oxygen. Nasa polynomials are used in this example but any 
-pMuTT model object should be compatible. Reaction objects can be initialized 
-using the pMuTT model objects directly or using a reaction string.
+pmutt model object should be compatible. Reaction objects can be initialized 
+using the pmutt model objects directly or using a reaction string.
 
-Initialization using pMuTT Model Objects
+Initialization using pmutt Model Objects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this example, the Nasa objects are created directly in the script.
@@ -29,8 +29,8 @@ In this example, the Nasa objects are created directly in the script.
 
    import numpy as np
    from matplotlib import pyplot as plt
-   from pMuTT.empirical.nasa import Nasa
-   from pMuTT import reaction as rxn
+   from pmutt.empirical.nasa import Nasa
+   from pmutt import reaction as rxn
    
    '''
    Initialize reaction
@@ -65,9 +65,9 @@ way is more convenient if you're dealing with large reaction networks.
    import os
    import numpy as np
    from matplotlib import pyplot as plt
-   from pMuTT.io.thermdat import read_thermdat
-   from pMuTT import pMuTT_list_to_dict
-   from pMuTT import reaction as rxn
+   from pmutt.io.thermdat import read_thermdat
+   from pmutt import pmutt_list_to_dict
+   from pmutt import reaction as rxn
    
    '''
    Read the thermdat
@@ -76,7 +76,7 @@ way is more convenient if you're dealing with large reaction networks.
    nasa_list = read_thermdat(os.path.join(base_path, 'thermdat'))
    # Convert list to dictionary so Reaction.from_string can 
    # assign species quickly
-   nasa_dict = pMuTT_list_to_dict(nasa_list, key='name')
+   nasa_dict = pmutt_list_to_dict(nasa_list, key='name')
    
    '''
    Create the reaction object
@@ -123,24 +123,24 @@ Or calculate thermodynamic properties.
 ChemkinReaction
 ===============
 
-This is a child class of :class:`~pMuTT.reaction.Reaction` but has additional
+This is a child class of :class:`~pmutt.reaction.Reaction` but has additional
 attributes for reading and writting Chemkin files.
 
-.. autoclass:: pMuTT.reaction.ChemkinReaction
+.. autoclass:: pmutt.reaction.ChemkinReaction
    :members:
 
 Reactions
 =========
 
-.. autoclass:: pMuTT.reaction.Reactions
+.. autoclass:: pmutt.reaction.Reactions
    :members:
 
 BEP
 ===
 
 Bronsted Evans Polyani relationships can be added to 
-:class:`~pMuTT.reaction.Reaction` objects so the activation energy can be 
+:class:`~pmutt.reaction.Reaction` objects so the activation energy can be 
 estimated using the change in enthalpy.
 
-.. autoclass:: pMuTT.reaction.bep.BEP
+.. autoclass:: pmutt.reaction.bep.BEP
    :members:
