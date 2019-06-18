@@ -10,7 +10,7 @@ pmutt
 # present, too:
 #
 name = 'pmutt'
-__version__ = '1.2.10'
+__version__ = '1.2.11'
 
 import re
 import inspect
@@ -246,10 +246,8 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
 
     Parameters
     ----------
-        obj : Any model object (e.g. :class:`~pmutt.statmech.trans.IdealTrans`),
-              any species object (e.g. :class:`~pmutt.statmech.StatMech`) or
-              :class:`~pmutt.reaction.Reaction`)
-            pmutt object to evaluate
+        obj : Any model, species, or reaction object
+            pMuTT object to evaluate
         x_name : str
             Name of variable to vary
         x_values : iterable object
@@ -270,10 +268,10 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
         kwargs : keyword arguments
             Other variables to use in the calculation. Method specific
             arguments can be passed by having a key that corresponds to
-            the method name
-            
-            e.g. kwargs = {'get_H_kwargs': {'units': 'kcal/mol'},
-                           'get_S_kwargs': {'units': 'cal/mol/K'}}
+            the method name        
+            ::
+                e.g. kwargs = {'get_H_kwargs': {'units': 'kcal/mol'},
+                               'get_S_kwargs': {'units': 'cal/mol/K'}}
     Returns
     -------
         figure : `matplotlib.figure.Figure`_
@@ -342,10 +340,8 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
 
     Parameters
     ----------
-        obj : Any model object (e.g. :class:`~pmutt.statmech.trans.IdealTrans`),
-              any species object (e.g. :class:`~pmutt.statmech.StatMech`) or
-              :class:`~pmutt.reaction.Reaction`)
-            pmutt object to evaluate
+        obj : Any model, species, or reaction object
+            pMuTT object to evaluate
         x1_name : str
             Name of first variable to vary
         x1_values : iterable object
@@ -382,6 +378,9 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
 
     .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
     .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
+    .. _`matplotlib.collections.QuadMesh`: https://matplotlib.org/3.1.0/api/collections_api.html#matplotlib.collections.QuadMesh
+    .. _`matplotlib.colorbar.Colorbar`: https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.colorbar.html
+
     """
     # Check if single method passed
     if not _is_iterable(methods):

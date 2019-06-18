@@ -7,8 +7,15 @@ Development Branch
 ------------------
 `Development Branch`_
 
-Version 1.2.10
+Verion 1.2.11
 -------------
+Jun. 18, 2019
+
+- Added xlrd dependency so spreadsheets can be read using pandas
+- Updated documentation page with NAM 2019 instructions.
+
+Version 1.2.10
+--------------
 Jun. 13, 2019
 
 - Another hotfix to fix a bug where the version was not incremented correctly

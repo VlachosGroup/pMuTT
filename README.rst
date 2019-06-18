@@ -27,13 +27,14 @@ Dependencies
    calculate thermodynamic properties
 -  `Numpy`_: Used for vector and matrix operations
 -  `Pandas`_: Used to import data from Excel files
+-  `xlrd`_: Used by Pandas to import Excel files
 -  `SciPy`_: Used for fitting heat capacities and generating smooth curves for
    reaction coordinate diagram
 -  `Matplotlib`_: Used for plotting thermodynamic data
--  `pyGal`_: Similar to Matplotlib. Used for plotting interactive graphs.
+-  `pyGal`_: Similar to Matplotlib. Used for plotting interactive graphs
 -  `PyMongo`_: Used to read/write to databases
 -  `dnspython`_: Used to connect to databases
--  `NetworkX`_: Used to plot reaction networks.
+-  `NetworkX`_: Used to plot reaction networks
 
 Getting Started
 ---------------
@@ -105,9 +106,10 @@ Special Thanks
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
 .. _Pandas: https://pandas.pydata.org/
+.. _xlrd: https://xlrd.readthedocs.io/en/latest/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
-.. _`pyGal`: http://pygal.org/en/stable/
+.. _pyGal: http://pygal.org/en/stable/
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
