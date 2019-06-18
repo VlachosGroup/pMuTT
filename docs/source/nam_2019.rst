@@ -32,10 +32,6 @@ Microkinetic Modeling instructions
    Use all the default values. Mac and Linux users, the terminal program has
    built-in SSH capabilities.
 
-Files
------
-- `pMuTT Jupyter notebook`_
-
 .. |NAM_label| image:: ./examples_jupyter/nam2019/images/IssuesLabel.png
    :height: 20
 
