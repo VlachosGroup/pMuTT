@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; pmutt 1.2.11 documentation</title>
+  <title>NAM 2019 &mdash; pmutt 1.2.11 documentation</title>
   
 
   
@@ -30,8 +30,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Examples" href="examples.html" />
-    <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" href="includeme.html" /> 
+    <link rel="prev" title="Release Notes" href="release_notes.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -85,14 +84,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-python">Installing Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-using-pip">Installing pmutt using pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-from-source">Installing pmutt from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#upgrading-pmutt-using-pip">Upgrading pmutt using pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
@@ -106,7 +98,15 @@
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nam_2019.html">NAM 2019</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NAM 2019</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-instructions">Setup instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt-instructions">pMuTT instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#microkinetic-modeling-instructions">Microkinetic Modeling instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
@@ -153,13 +153,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Installation</li>
+      <li>NAM 2019</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/nam_2019.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -191,63 +191,41 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="installation">
-<span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installing-python">
-<h2>Installing Python<a class="headerlink" href="#installing-python" title="Permalink to this headline">¶</a></h2>
-<p>Anaconda is the recommended method to install Python for scientific
-applications. It is supported on Linux, Windows and Mac OS X.
-<a class="reference external" href="https://www.anaconda.com/distribution/#download-section">Download Anaconda here</a>. Note that pmutt runs on Python 3.X.</p>
-</div>
-<div class="section" id="installing-pmutt-using-pip">
-<h2>Installing pmutt using pip<a class="headerlink" href="#installing-pmutt-using-pip" title="Permalink to this headline">¶</a></h2>
-<p>Using pip is the most straightforward way to install pmutt.</p>
+<div class="section" id="nam-2019">
+<span id="id1"></span><h1>NAM 2019<a class="headerlink" href="#nam-2019" title="Permalink to this headline">¶</a></h1>
+<p>Instructions and materials for the <a class="reference external" href="https://isen.northwestern.edu/nam26-technical-program#sunday">“Theory, Applications, and Tools for Kinetic
+Modeling” workshop</a> can be found here.</p>
+<div class="section" id="setup-instructions">
+<h2>Setup instructions<a class="headerlink" href="#setup-instructions" title="Permalink to this headline">¶</a></h2>
+<p>If you encounter a problem while setting up, check our <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+tag%3Anam2019">pMuTT issues page</a> for
+help. When creating a new issue, make sure to tag it as <a class="reference internal" href="_images/IssuesLabel.png"><img alt="NAM_label" src="_images/IssuesLabel.png" style="height: 20px;" /></a> to help
+others! We will do our best to assist you.</p>
+<div class="section" id="pmutt-instructions">
+<h3>pMuTT instructions<a class="headerlink" href="#pmutt-instructions" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Open a command prompt with access to Python (if Python is installed via
-Anaconda on Windows, use the Anaconda Prompt).</li>
-</ol>
-<p>2. Install pmutt using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">pmutt</span>
-</pre></div>
-</div>
-<p>The output towards the end should state “Successfully built pmutt” if the
-installation was successful.</p>
-</div>
-<div class="section" id="installing-pmutt-from-source">
-<h2>Installing pmutt from source<a class="headerlink" href="#installing-pmutt-from-source" title="Permalink to this headline">¶</a></h2>
-<p>If you would prefer to install from source or you are interested in development,
-follow the instructions below.</p>
-<ol class="arabic simple">
-<li>Clone the repository from GitHub (using the GitHub Desktop makes it easier).
-<a class="reference external" href="https://help.github.com/en/articles/cloning-a-repository">See GitHub instructions on cloning repositories here</a>.</li>
-<li>Add the path of the <code class="docutils literal notranslate"><span class="pre">pmutt</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment
-variable.</li>
+<li><a class="reference external" href="https://www.anaconda.com/distribution/#download-section">Install Anaconda with Python 3.7</a>.</li>
+<li>Install pMuTT using the <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/install.html#installing-pmutt-using-pip">installation instructions</a>.</li>
+<li>Download <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/SampleJupyterNotebook.ipynb">this sample Jupyter</a> notebook and <a class="reference external" href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/execute.html">open it</a>.</li>
+<li>Run the cell with the Python code to ensure the most updated version of
+pMuTT is installed.</li>
 </ol>
 </div>
-<div class="section" id="upgrading-pmutt-using-pip">
-<h2>Upgrading pmutt using pip<a class="headerlink" href="#upgrading-pmutt-using-pip" title="Permalink to this headline">¶</a></h2>
-<p>To upgrade to a newer release, use the –upgrade flag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pmutt</span>
-</pre></div>
+<div class="section" id="microkinetic-modeling-instructions">
+<h3>Microkinetic Modeling instructions<a class="headerlink" href="#microkinetic-modeling-instructions" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://www.virtualbox.org/">Install VirtualBox</a>. Use all the default values.</li>
+<li><a class="reference external" href="http://beren.engr.udel.edu/chemkin-demo/Chemkin-demo-minimal.ova">Download the OVA file</a>, which contains the Microkinetic modeling software.</li>
+<li>Run VirtualBox and <a class="reference external" href="https://www.techjunkie.com/ova-virtualbox/">import the OVA file</a>.</li>
+<li>Windows users, <a class="reference external" href="https://mobaxterm.mobatek.net/">install MobaXterm</a> (unless you have a preferred SSH client).
+Use all the default values. Mac and Linux users, the terminal program has
+built-in SSH capabilities.</li>
+</ol>
 </div>
-</div>
-<div class="section" id="running-unit-tests">
-<h2>Running unit tests<a class="headerlink" href="#running-unit-tests" title="Permalink to this headline">¶</a></h2>
-<p>pmutt has a suite of unit tests that should be run before committing any code.
-To run the tests, navigate to the tests folder (pmutt/tests) via a command line
-with access to Python.</p>
-<p>Run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">unittest</span>
-</pre></div>
-</div>
-<p>The expected output is shown below. The number of tests will not
-necessarily be the same.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.........................</span>
-<span class="o">----------------------------------------------------------------------</span>
-<span class="n">Ran</span> <span class="mi">25</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">0.020</span><span class="n">s</span>
-
-<span class="n">OK</span>
-</pre></div>
+<div class="section" id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb.._`openit`:https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/execute.html">pMuTT Jupyter notebook</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -260,10 +238,8 @@ necessarily be the same.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="release_notes.html" class="btn btn-neutral" title="Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

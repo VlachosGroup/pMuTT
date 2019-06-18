@@ -1,0 +1,1553 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NAM 2019 pMuTT Workshop &mdash; pmutt 1.2.11 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chemkin.html">Chemkin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nam_2019.html">NAM 2019</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>NAM 2019 pMuTT Workshop</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="NAM-2019-pMuTT-Workshop">
+<h1>NAM 2019 pMuTT Workshop<a class="headerlink" href="#NAM-2019-pMuTT-Workshop" title="Permalink to this headline">¶</a></h1>
+<p>Instructions and materials for the “Theory, Applications, and Tools for
+Kinetic Modeling” workshop can be found on <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/nam_2019.html">our documentation
+page</a>.</p>
+</div>
+<div class="section" id="1.-Virtual-Kinetic-Laboratory-Ecosystem">
+<h1>1. Virtual Kinetic Laboratory Ecosystem<a class="headerlink" href="#1.-Virtual-Kinetic-Laboratory-Ecosystem" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="2.-Useful-Links">
+<h1>2. Useful Links<a class="headerlink" href="#2.-Useful-Links" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="https://vlachosgroup.github.io/pMuTT/">Documentation</a>: find the
+most updated documentation</li>
+<li><a class="reference external" href="https://github.com/VlachosGroup/pmutt/issues">Issues</a>: report
+bugs, request features, receive help</li>
+<li><a class="reference external" href="https://vlachosgroup.github.io/pMuTT/examples.html">Examples</a>:
+see examples</li>
+</ul>
+</div>
+<div class="section" id="3.-Constants">
+<h1>3. Constants<a class="headerlink" href="#3.-Constants" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/constants.html">constants
+module</a> has a
+wide variety of functions for constants and unit conversion.</p>
+<div class="section" id="3.1.-Access-common-constants-in-appropriate-units">
+<h2>3.1. Access common constants in appropriate units<a class="headerlink" href="#3.1.-Access-common-constants-in-appropriate-units" title="Permalink to this headline">¶</a></h2>
+<p>Below, we access Planck’s constant in J s.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+
+<span class="n">h1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="s1">&#39;J s&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h = </span><span class="si">{}</span><span class="s1"> J s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+h = 6.62607004e-34 J s
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="3.2.-Convert-between-units">
+<h2>3.2. Convert between units<a class="headerlink" href="#3.2.-Convert-between-units" title="Permalink to this headline">¶</a></h2>
+<p>Below, we convert 12 atm of pressure to psi.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+
+<span class="n">P_atm</span> <span class="o">=</span> <span class="mf">12.</span> <span class="c1"># atm</span>
+<span class="n">P_psi</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">convert_unit</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="n">P_atm</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="s1">&#39;atm&#39;</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="s1">&#39;psi&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> atm = </span><span class="si">{}</span><span class="s1"> psi&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">P_atm</span><span class="p">,</span> <span class="n">P_psi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+12.0 atm = 176.35175185906093 psi
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="3.3.-Convert-between-equivalent-quantities">
+<h2>3.3. Convert between equivalent quantities<a class="headerlink" href="#3.3.-Convert-between-equivalent-quantities" title="Permalink to this headline">¶</a></h2>
+<p>Below, we convert 1000 wavenumbers (cm-1) to frequency.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+
+<span class="n">wave_num</span> <span class="o">=</span> <span class="mf">1000.</span> <span class="c1"># cm-1</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">wavenumber_to_freq</span><span class="p">(</span><span class="n">wave_num</span><span class="p">)</span> <span class="c1"># Hz</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> cm-1 = </span><span class="si">{}</span><span class="s1"> Hz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wave_num</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1000.0 cm-1 = 29979245800000.0 Hz
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="4.-Exercise-1">
+<h1>4. Exercise 1<a class="headerlink" href="#4.-Exercise-1" title="Permalink to this headline">¶</a></h1>
+<p>Using <code class="docutils literal notranslate"><span class="pre">pmutt.constants</span></code>, calculate the dimensionless activation energy
+(H/RT) using the following information: - H = 0.5 eV - T = 77 F</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Fill in your answer for Exercise 1 here</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="5.-Creating-statistical-mechanical-objects-using-StatMech">
+<h1>5. Creating statistical mechanical objects using StatMech<a class="headerlink" href="#5.-Creating-statistical-mechanical-objects-using-StatMech" title="Permalink to this headline">¶</a></h1>
+<p>Molecules show translational, vibrational, rotational, electronic, and
+nuclear modes.</p>
+<p>The StatMech object allows us to specify translational, vibrational,
+rotational, electronic and nuclear modes independently, which gives
+flexibility in what behavior you would like. Below are the available
+modes.</p>
+<div class="section" id="5.1.-Translations">
+<h2>5.1. Translations<a class="headerlink" href="#5.1.-Translations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">`FreeTrans</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#freetrans">https://vlachosgroup.github.io/pMuTT/statmech.html#freetrans</a>&gt;`__
+- Translations assuming no intermolecular interactions</li>
+</ul>
+</div>
+<div class="section" id="5.2.-Vibrations">
+<h2>5.2. Vibrations<a class="headerlink" href="#5.2.-Vibrations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">`HarmonicVib</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#harmonicvib">https://vlachosgroup.github.io/pMuTT/statmech.html#harmonicvib</a>&gt;`__
+- Harmonic vibrations</li>
+<li><code class="docutils literal notranslate"><span class="pre">`QRRHOVib</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#harmonicvib">https://vlachosgroup.github.io/pMuTT/statmech.html#harmonicvib</a>&gt;`__
+- Quasi rigid rotor harmonic oscillator. Low frequency modes are
+treated as rigid rotations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">`EinsteinVib</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#einsteinvib">https://vlachosgroup.github.io/pMuTT/statmech.html#einsteinvib</a>&gt;`__
+- Each atom in the crystal vibrates as independent 3D harmonic
+oscillators</li>
+<li><code class="docutils literal notranslate"><span class="pre">`DebyeVib</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#debyevib">https://vlachosgroup.github.io/pMuTT/statmech.html#debyevib</a>&gt;`__
+- Improves upon <code class="docutils literal notranslate"><span class="pre">EinsteinVib</span></code> by considering simultaneous
+vibrations. Improves accuracy at lower temperatures.</li>
+</ul>
+</div>
+<div class="section" id="5.3.-Rotations">
+<h2>5.3. Rotations<a class="headerlink" href="#5.3.-Rotations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">`RigidRotor</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#rigidrotor">https://vlachosgroup.github.io/pMuTT/statmech.html#rigidrotor</a>&gt;`__
+- Molecule can be rotated with no change in bond properties</li>
+</ul>
+</div>
+<div class="section" id="5.4.-Electronic">
+<h2>5.4. Electronic<a class="headerlink" href="#5.4.-Electronic" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">`GroundStateElec</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#groundstateelec">https://vlachosgroup.github.io/pMuTT/statmech.html#groundstateelec</a>&gt;`__
+- Electronic ground state of the system</li>
+<li><code class="docutils literal notranslate"><span class="pre">`LSR</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#linear-scaling-relationships-lsrs">https://vlachosgroup.github.io/pMuTT/statmech.html#linear-scaling-relationships-lsrs</a>&gt;`__
+- Linear Scaling Relationship to estimate binding energies using
+reference adsorbate</li>
+</ul>
+</div>
+<div class="section" id="5.5.-Miscellaneous">
+<h2>5.5. Miscellaneous<a class="headerlink" href="#5.5.-Miscellaneous" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">`EmptyMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode</a>&gt;`__
+- Default mode if not specified. Does not contribute to any
+properties</li>
+<li><code class="docutils literal notranslate"><span class="pre">`ConstantMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#constant-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#constant-mode</a>&gt;`__
+- Specify arbitrary values to thermodynamic quantities</li>
+</ul>
+<p>For this example, we will use a hydrogen molecule as an ideal gas: -
+translations with no interaction between molecules - harmonic vibrations
+- rigid rotor rotations - ground state electronic structure - no
+contribution from nuclear modes.</p>
+</div>
+<div class="section" id="5.6.-Initializing-StatMech-modes-individually">
+<h2>5.6. Initializing StatMech modes individually<a class="headerlink" href="#5.6.-Initializing-StatMech-modes-individually" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+
+<span class="n">H2_atoms</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2&#39;</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Translational&#39;&#39;&#39;</span>
+<span class="n">H2_trans</span> <span class="o">=</span> <span class="n">trans</span><span class="o">.</span><span class="n">FreeTrans</span><span class="p">(</span><span class="n">n_degrees</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">H2_atoms</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Vibrational&#39;&#39;&#39;</span>
+<span class="n">H2_vib</span> <span class="o">=</span> <span class="n">vib</span><span class="o">.</span><span class="n">HarmonicVib</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">4342.</span><span class="p">])</span> <span class="c1"># vib_wavenumbers in cm-1</span>
+
+<span class="sd">&#39;&#39;&#39;Rotational&#39;&#39;&#39;</span>
+<span class="n">H2_rot</span> <span class="o">=</span> <span class="n">rot</span><span class="o">.</span><span class="n">RigidRotor</span><span class="p">(</span><span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">H2_atoms</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Electronic&#39;&#39;&#39;</span>
+<span class="n">H2_elec</span> <span class="o">=</span> <span class="n">elec</span><span class="o">.</span><span class="n">GroundStateElec</span><span class="p">(</span><span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">6.77</span><span class="p">,</span><span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># potentialenergy in eV</span>
+
+<span class="sd">&#39;&#39;&#39;StatMech Initialization&#39;&#39;&#39;</span>
+<span class="n">H2_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span>
+                       <span class="n">trans_model</span><span class="o">=</span><span class="n">H2_trans</span><span class="p">,</span>
+                       <span class="n">vib_model</span><span class="o">=</span><span class="n">H2_vib</span><span class="p">,</span>
+                       <span class="n">rot_model</span><span class="o">=</span><span class="n">H2_rot</span><span class="p">,</span>
+                       <span class="n">elec_model</span><span class="o">=</span><span class="n">H2_elec</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Calculate thermodynamic properties&#39;&#39;&#39;</span>
+<span class="n">H_statmech</span> <span class="o">=</span> <span class="n">H2_statmech</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span class="n">S_statmech</span> <span class="o">=</span> <span class="n">H2_statmech</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H_H2(T=298 K) = </span><span class="si">{:.1f}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_statmech</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S_H2(T=298 K) = </span><span class="si">{:.2f}</span><span class="s1"> J/mol/K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_statmech</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+H_H2(T=298 K) = -618.6 kJ/mol
+S_H2(T=298 K) = 130.23 J/mol/K
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="5.7.-Initializing-StatMech-modes-using-presets">
+<h2>5.7. Initializing StatMech modes using presets<a class="headerlink" href="#5.7.-Initializing-StatMech-modes-using-presets" title="Permalink to this headline">¶</a></h2>
+<p>Commonly used models can be accessed via
+<code class="docutils literal notranslate"><span class="pre">`presets</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#presets">https://vlachosgroup.github.io/pMuTT/statmech.html#presets</a>&gt;`__.
+The currently supported models are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">`idealgas</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#ideal-gas-idealgas">https://vlachosgroup.github.io/pMuTT/statmech.html#ideal-gas-idealgas</a>&gt;`__
+- Ideal gases</li>
+<li><code class="docutils literal notranslate"><span class="pre">`harmonic</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#harmonic-approximation-harmonic">https://vlachosgroup.github.io/pMuTT/statmech.html#harmonic-approximation-harmonic</a>&gt;`__
+- Typical for surface species</li>
+<li><code class="docutils literal notranslate"><span class="pre">`electronic</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#electronic-electronic">https://vlachosgroup.github.io/pMuTT/statmech.html#electronic-electronic</a>&gt;`__
+- Only has electronic modes</li>
+<li><code class="docutils literal notranslate"><span class="pre">`placeholder</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#placeholder-placeholder">https://vlachosgroup.github.io/pMuTT/statmech.html#placeholder-placeholder</a>&gt;`__
+- No contribution to any property</li>
+<li><code class="docutils literal notranslate"><span class="pre">`constant</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#constant-constant">https://vlachosgroup.github.io/pMuTT/statmech.html#constant-constant</a>&gt;`__
+- Use arbitrary constants to thermodynamic properties</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+
+<span class="n">H2_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2&#39;</span><span class="p">),</span>
+                       <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">4342.</span><span class="p">],</span> <span class="c1"># cm-1</span>
+                       <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                       <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">6.77</span><span class="p">,</span> <span class="c1"># eV</span>
+                       <span class="n">spin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">])</span>
+
+<span class="sd">&#39;&#39;&#39;Calculate thermodynamic properties&#39;&#39;&#39;</span>
+<span class="n">H_statmech</span> <span class="o">=</span> <span class="n">H2_statmech</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span class="n">S_statmech</span> <span class="o">=</span> <span class="n">H2_statmech</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H_H2(T=298 K) = </span><span class="si">{:.1f}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_statmech</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S_H2(T=298 K) = </span><span class="si">{:.2f}</span><span class="s1"> J/mol/K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_statmech</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+H_H2(T=298 K) = -618.6 kJ/mol
+S_H2(T=298 K) = 130.23 J/mol/K
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="6.-Plot-Thermodynamic-Quantities">
+<h1>6. Plot Thermodynamic Quantities<a class="headerlink" href="#6.-Plot-Thermodynamic-Quantities" title="Permalink to this headline">¶</a></h1>
+<p>Use
+<code class="docutils literal notranslate"><span class="pre">`pmutt.plot_1D</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/visual.html#plot-1d">https://vlachosgroup.github.io/pMuTT/visual.html#plot-1d</a>&gt;`__
+and
+<code class="docutils literal notranslate"><span class="pre">`pmutt.plot_2D</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/visual.html#plot-2d">https://vlachosgroup.github.io/pMuTT/visual.html#plot-2d</a>&gt;`__
+to plot any function with respect to 1 or 2 variables.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">plot_1D</span><span class="p">,</span> <span class="n">plot_2D</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.</span><span class="p">,</span> <span class="mf">500.</span><span class="p">)</span>
+
+<span class="n">f1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plot_1D</span><span class="p">(</span><span class="n">H2_statmech</span><span class="p">,</span>
+                  <span class="n">x_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
+                  <span class="n">methods</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;get_H&#39;</span><span class="p">,</span> <span class="s1">&#39;get_S&#39;</span><span class="p">,</span> <span class="s1">&#39;get_G&#39;</span><span class="p">),</span>
+                  <span class="n">get_H_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/mol&#39;</span><span class="p">},</span>
+                  <span class="n">get_S_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;cal/mol/K&#39;</span><span class="p">},</span>
+                  <span class="n">get_G_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/mol&#39;</span><span class="p">})</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_18_0.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_18_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="7.-Exercise-2">
+<h1>7. Exercise 2<a class="headerlink" href="#7.-Exercise-2" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Create a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object for ideal gas-phase H2O. The necessary
+inputs are given below.</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>atoms</td>
+<td><code class="docutils literal notranslate"><span class="pre">molecule('H2O')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Potential Energy (eV)</td>
+<td>-6.7598</td>
+</tr>
+<tr class="row-even"><td>Symmetry number</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>Spin</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>Vibrational Wavenumbers (cm-1)</td>
+<td>3825.434 3710.264 1582.432</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="2">
+<li>Calculate the Gibbs energy in eV for H2O at T = 500 K and P = 2 bar.</li>
+<li>Create a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object for a Cu crystal using the <code class="docutils literal notranslate"><span class="pre">DebyeVib</span></code>
+model for the vibration mode and <code class="docutils literal notranslate"><span class="pre">GroundStateElec</span></code> model for
+electronic mode. The necessary inputs are given below.</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="68%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Debye Temperature (K)</td>
+<td>310</td>
+</tr>
+<tr class="row-odd"><td>Interaction energy (eV)</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>Potential energy (eV)</td>
+<td>-14.922356</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple" start="4">
+<li>Plot the H (in eV) and S (in eV/K) for Cu between T = 300 - 700 K.</li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Fill in your answer for Exercise 2 here</span>
+
+<span class="c1"># 1.</span>
+
+
+<span class="c1"># 2.</span>
+
+
+<span class="c1"># 3.</span>
+
+
+<span class="c1"># 4.</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="8.-Creating-empirical-objects">
+<h1>8. Creating empirical objects<a class="headerlink" href="#8.-Creating-empirical-objects" title="Permalink to this headline">¶</a></h1>
+<p>Currently, pMuTT supports <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#nasa">NASA
+polynomials</a>
+and <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#shomate">Shomate
+polynomials</a>.
+They can be initialized in three ways: - passing in the polynomials
+directly - from a statistical mechanical model (<code class="docutils literal notranslate"><span class="pre">from_statmech</span></code>) -
+from heat capacity, enthalpy and entropy data (<code class="docutils literal notranslate"><span class="pre">from_data</span></code>)</p>
+<div class="section" id="8.1.-Inputting-a-NASA-polynomial-directly">
+<h2>8.1. Inputting a NASA polynomial directly<a class="headerlink" href="#8.1.-Inputting-a-NASA-polynomial-directly" title="Permalink to this headline">¶</a></h2>
+<p>The H2 NASA polynomial from the <a class="reference external" href="http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat">Burcat
+database</a>
+is represented as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H2</span>                <span class="n">TPIS78H</span>   <span class="mi">2</span>               <span class="n">G</span>   <span class="mf">200.000</span>  <span class="mf">3500.000</span>  <span class="mf">1000.000</span>    <span class="mi">1</span>
+ <span class="mf">3.33727920E+00</span><span class="o">-</span><span class="mf">4.94024731E-05</span> <span class="mf">4.99456778E-07</span><span class="o">-</span><span class="mf">1.79566394E-10</span> <span class="mf">2.00255376E-14</span>    <span class="mi">2</span>
+<span class="o">-</span><span class="mf">9.50158922E+02</span><span class="o">-</span><span class="mf">3.20502331E+00</span> <span class="mf">2.34433112E+00</span> <span class="mf">7.98052075E-03</span><span class="o">-</span><span class="mf">1.94781510E-05</span>    <span class="mi">3</span>
+ <span class="mf">2.01572094E-08</span><span class="o">-</span><span class="mf">7.37611761E-12</span><span class="o">-</span><span class="mf">9.17935173E+02</span> <span class="mf">6.83010238E-01</span>                   <span class="mi">4</span>
+</pre></div>
+</div>
+<p>This can be translated to pMuTT syntax using:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+
+<span class="c1"># Initialize NASA polynomial</span>
+<span class="n">H2_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span>
+               <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+               <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+               <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span> <span class="n">T_mid</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
+               <span class="n">a_low</span><span class="o">=</span><span class="p">[</span><span class="mf">2.34433112E+00</span><span class="p">,</span> <span class="mf">7.98052075E-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.94781510E-05</span><span class="p">,</span>
+                      <span class="mf">2.01572094E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.37611761E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.17935173E+02</span><span class="p">,</span>
+                      <span class="mf">6.83010238E-01</span><span class="p">],</span>
+               <span class="n">a_high</span><span class="o">=</span><span class="p">[</span><span class="mf">3.33727920E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.94024731E-05</span><span class="p">,</span> <span class="mf">4.99456778E-07</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">1.79566394E-10</span><span class="p">,</span> <span class="mf">2.00255376E-14</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.50158922E+02</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">3.20502331E+00</span><span class="p">])</span>
+
+<span class="c1"># Calculate thermodynamic quantities using the same syntax as StatMech</span>
+<span class="n">H_H2</span> <span class="o">=</span> <span class="n">H2_nasa</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H_H2(T=298 K) = </span><span class="si">{}</span><span class="s1"> kcal/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_H2</span><span class="p">))</span>
+
+<span class="c1"># Show thermodynamic quantities vs. T</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
+<span class="n">f2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plot_1D</span><span class="p">(</span><span class="n">H2_nasa</span><span class="p">,</span>
+                  <span class="n">x_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
+                  <span class="n">methods</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;get_H&#39;</span><span class="p">,</span> <span class="s1">&#39;get_S&#39;</span><span class="p">,</span> <span class="s1">&#39;get_G&#39;</span><span class="p">),</span>
+                  <span class="n">get_H_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/mol&#39;</span><span class="p">},</span>
+                  <span class="n">get_S_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;cal/mol/K&#39;</span><span class="p">},</span>
+                  <span class="n">get_G_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/mol&#39;</span><span class="p">})</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+H_H2(T=298 K) = -0.0010337769809016294 kcal/mol
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_23_1.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_23_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="8.2.-Fitting-an-empirical-object-to-a-StatMech-object">
+<h2>8.2. Fitting an empirical object to a StatMech object<a class="headerlink" href="#8.2.-Fitting-an-empirical-object-to-a-StatMech-object" title="Permalink to this headline">¶</a></h2>
+<p>Empirical objects can be made directly using <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects and
+the <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">H2_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span>
+                             <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span>
+                             <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
+                             <span class="n">statmech_model</span><span class="o">=</span><span class="n">H2_statmech</span><span class="p">)</span>
+
+<span class="c1"># Compare the statistical mechanical model to the empirical model</span>
+<span class="n">f3</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">H2_nasa</span><span class="o">.</span><span class="n">plot_statmech_and_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
+                                              <span class="n">H_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">,</span>
+                                              <span class="n">S_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
+                                              <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span class="n">f3</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">f3</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_25_0.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_25_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="9.-Input/Output">
+<h1>9. Input/Output<a class="headerlink" href="#9.-Input/Output" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="9.1.-Excel">
+<h2>9.1. Excel<a class="headerlink" href="#9.1.-Excel" title="Permalink to this headline">¶</a></h2>
+<p>Encoding each object in Python can be tedious. You can read several
+species from Excel spreadsheets using
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel">https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel</a>&gt;`__.
+Note that this function returns a list of dictionaries. This output
+allows you to initialize whichever object you want using kwargs syntax.
+There are also <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#special-rules">special rules that depend on the header
+name</a>.</p>
+<p>Below, we show an example importing species data from a spreadsheet and
+creating a series of NASA polynomials.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+
+<span class="c1"># Find the location of Jupyter notebook</span>
+<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
+<span class="c1"># Using pathlib can overcome this limiation</span>
+<span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">)</span>
+
+<span class="c1"># Read the data from Excel</span>
+<span class="n">ab_initio_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="s1">&#39;./input/NH3_Input_Data.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">ab_initio_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[{&#39;atoms&#39;: Atoms(symbols=&#39;N2&#39;, pbc=True, cell=[20.0, 20.0, 21.12998]),
+  &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 2},
+  &#39;n_degrees&#39;: 3,
+  &#39;name&#39;: &#39;N2&#39;,
+  &#39;optional&#39;: &#39;atoms&#39;,
+  &#39;phase&#39;: &#39;G&#39;,
+  &#39;potentialenergy&#39;: -16.63,
+  &#39;required&#39;: (&#39;molecular_weight&#39;,
+               &#39;vib_wavenumbers&#39;,
+               &#39;potentialenergy&#39;,
+               &#39;spin&#39;,
+               &#39;geometry&#39;,
+               &#39;rot_temperatures&#39;,
+               &#39;symmetrynumber&#39;),
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;symmetrynumber&#39;: 2.0,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [2744.0]},
+ {&#39;atoms&#39;: Atoms(symbols=&#39;NH3&#39;, pbc=True, cell=[21.627662, 21.409596, 20.388297]),
+  &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 3, &#39;N&#39;: 1},
+  &#39;n_degrees&#39;: 3,
+  &#39;name&#39;: &#39;NH3&#39;,
+  &#39;optional&#39;: &#39;atoms&#39;,
+  &#39;phase&#39;: &#39;G&#39;,
+  &#39;potentialenergy&#39;: -19.54,
+  &#39;required&#39;: (&#39;molecular_weight&#39;,
+               &#39;vib_wavenumbers&#39;,
+               &#39;potentialenergy&#39;,
+               &#39;spin&#39;,
+               &#39;geometry&#39;,
+               &#39;rot_temperatures&#39;,
+               &#39;symmetrynumber&#39;),
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;symmetrynumber&#39;: 3.0,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [3565.26, 3565.26, 3433.9, 1727.23, 1727.23, 1132.51]},
+ {&#39;atoms&#39;: Atoms(symbols=&#39;H2&#39;, pbc=True, cell=[20.0, 20.0, 20.737166]),
+  &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;N&#39;: 0},
+  &#39;n_degrees&#39;: 3,
+  &#39;name&#39;: &#39;H2&#39;,
+  &#39;optional&#39;: &#39;atoms&#39;,
+  &#39;phase&#39;: &#39;G&#39;,
+  &#39;potentialenergy&#39;: -6.77,
+  &#39;required&#39;: (&#39;molecular_weight&#39;,
+               &#39;vib_wavenumbers&#39;,
+               &#39;potentialenergy&#39;,
+               &#39;spin&#39;,
+               &#39;geometry&#39;,
+               &#39;rot_temperatures&#39;,
+               &#39;symmetrynumber&#39;),
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;symmetrynumber&#39;: 2.0,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [4342.0]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 2},
+  &#39;name&#39;: &#39;N2(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -17.239999999999952,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [2197.19, 360.415, 347.343, 335.674, 62.076, 32.1794]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;N(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -9.339999999999975,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [549.105, 538.56, 504.323, 475.805, 459.081, 410.018]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 1, &#39;N&#39;: 0},
+  &#39;name&#39;: &#39;H(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -4.0,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [1003.51, 625.55, 616.29]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 3, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;NH3(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -20.42999999999995,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [3491.08913,
+                      3488.81949,
+                      3364.52323,
+                      1583.51571,
+                      1582.0703,
+                      1124.22477,
+                      570.21231,
+                      567.221471,
+                      333.089624,
+                      122.859345,
+                      83.828555,
+                      70.625115]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;NH2(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -16.589999999999975,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [3469.30034,
+                      3381.05197,
+                      1503.01629,
+                      698.868804,
+                      625.596094,
+                      615.939783,
+                      475.130224,
+                      298.12001,
+                      153.250139]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 1, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;NH(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -13.20999999999998,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [3403.12878,
+                      718.177588,
+                      710.58052,
+                      528.525659,
+                      415.195869,
+                      410.130797]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 3, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;TS1_NH3(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -19.23999999999995,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [3453.41063,
+                      3355.66992,
+                      1723.84977,
+                      1487.95484,
+                      959.150723,
+                      888.946198,
+                      594.089439,
+                      428.431136,
+                      227.032386,
+                      206.046727,
+                      142.135856]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 2, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;TS2_NH2(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -15.869999999999974,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [3426.44484,
+                      1293.72327,
+                      922.830768,
+                      660.966598,
+                      525.595124,
+                      496.837263,
+                      330.674459,
+                      290.278005]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 1, &#39;N&#39;: 1},
+  &#39;name&#39;: &#39;TS3_NH(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -11.92999999999998,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [1201.60487,
+                      491.566416,
+                      462.015502,
+                      402.158904,
+                      242.138726]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 2},
+  &#39;name&#39;: &#39;TS4_N2(S)&#39;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;potentialenergy&#39;: -14.669999999999952,
+  &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
+  &#39;vib_wavenumbers&#39;: [485.614, 392.977, 386.186, 280.943, 168.431]},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 0},
+  &#39;name&#39;: &#39;RU(S)&#39;,
+  &#39;nucl_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;required&#39;: (),
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;},
+ {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 0},
+  &#39;name&#39;: &#39;RU(B)&#39;,
+  &#39;nucl_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;phase&#39;: &#39;S&#39;,
+  &#39;required&#39;: (),
+  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
+  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
+  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;}]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create NASA polynomials using **kwargs syntax</span>
+<span class="n">nasa_species</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">species_data</span> <span class="ow">in</span> <span class="n">ab_initio_data</span><span class="p">:</span>
+    <span class="n">single_nasa_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span>
+                                             <span class="n">T_high</span><span class="o">=</span><span class="mf">1500.</span><span class="p">,</span>
+                                             <span class="o">**</span><span class="n">species_data</span><span class="p">)</span>
+    <span class="n">nasa_species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_nasa_species</span><span class="p">)</span>
+
+<span class="c1"># Print out a table using enthalpy, entropy, Gibbs energy at 298 K for each species</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name         Enthalpy (kcal/mol)   Entropy (cal/mol/K)   Gibbs energy (kcal/mol)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------------------------------------------------------------------------------&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">single_nasa_species</span> <span class="ow">in</span> <span class="n">nasa_species</span><span class="p">:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">single_nasa_species</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">single_nasa_species</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">single_nasa_species</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;cal/mol/K&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">single_nasa_species</span><span class="o">.</span><span class="n">get_G</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:12}</span><span class="s1">       </span><span class="si">{:10.1f}</span><span class="s1">       </span><span class="si">{:15.1f}</span><span class="s1">       </span><span class="si">{:15.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Name         Enthalpy (kcal/mol)   Entropy (cal/mol/K)   Gibbs energy (kcal/mol)
+--------------------------------------------------------------------------------
+N2                     -377.5                  45.9                -391.2
+NH3                    -426.6                  46.0                -440.3
+H2                     -147.8                  31.1                -157.1
+N2(S)                  -391.1                  13.6                -395.1
+N(S)                   -210.3                   4.2                -211.5
+H(S)                    -88.8                   0.9                 -89.1
+NH3(S)                 -445.8                  13.3                -449.8
+NH2(S)                 -365.5                   5.9                -367.2
+NH(S)                  -295.2                   3.0                -296.0
+TS1_NH3(S)             -423.0                   8.3                -425.5
+TS2_NH2(S)             -353.7                   4.5                -355.0
+TS3_NH(S)              -270.3                   4.2                -271.5
+TS4_N2(S)              -334.6                   6.7                -336.6
+RU(S)                     0.0                   0.0                   0.0
+RU(B)                     0.0                   0.0                   0.0
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+c:\users\jonat\appdata\local\conda\conda\envs\pmutt_nam2019\lib\site-packages\scipy\stats\stats.py:1040: RuntimeWarning: invalid value encountered in double_scalars
+  return a.std(axis) / a.mean(axis)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="9.2.-Thermdat">
+<h2>9.2. Thermdat<a class="headerlink" href="#9.2.-Thermdat" title="Permalink to this headline">¶</a></h2>
+<p>The thermdat format uses NASA polynomials to represent several species.
+It has a very particular format so doing it manually is error-prone. You
+can write a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects to thermdat format using
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.thermdat.write_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.write_thermdat">https://vlachosgroup.github.io/pmutt/io.html#pmutt.io.thermdat.write_thermdat</a>&gt;`__.</p>
+<p>Below, we write a thermdat file using the species imported from the
+spreadsheet.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
+
+<span class="n">write_thermdat</span><span class="p">(</span><span class="s1">&#39;./output/thermdat&#39;</span><span class="p">,</span> <span class="n">nasa_species</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Similarly, a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects can be read from a thermdat using
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pmutt.io.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pmutt.io.thermdat.read_thermdat</a>&gt;`__.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+
+<span class="n">nasa_species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;./output/thermdat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="10.-Reactions">
+<h1>10. Reactions<a class="headerlink" href="#10.-Reactions" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects can be created by putting together <code class="docutils literal notranslate"><span class="pre">Nasa</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Shomate</span></code> and <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects. The <code class="docutils literal notranslate"><span class="pre">from_string</span></code> method is the
+easiest way to create a <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object. It requires the relevant
+species to be in a dictionary and a string to describe the reaction.</p>
+<p>We will demonstrate its use for the formation of NH3.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.shomate</span> <span class="k">import</span> <span class="n">Shomate</span>
+<span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
+
+<span class="c1"># Create species. Note that you can mix different types of species</span>
+<span class="n">species</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;H2&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2&#39;</span><span class="p">),</span>
+                   <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">4342.</span><span class="p">],</span> <span class="c1"># cm-1</span>
+                   <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                   <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">6.77</span><span class="p">,</span> <span class="c1"># eV</span>
+                   <span class="n">spin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                   <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;N2&#39;</span><span class="p">:</span> <span class="n">Nasa</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;N2&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span> <span class="n">T_mid</span><span class="o">=</span><span class="mf">643.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span>
+               <span class="n">a_low</span><span class="o">=</span><span class="p">[</span><span class="mf">3.3956319945669633</span><span class="p">,</span> <span class="mf">0.001115707689025668</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">4.301993779374381e-06</span><span class="p">,</span> <span class="mf">6.8071424019295535e-09</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">3.2903312791047058e-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">191001.55648623788</span><span class="p">,</span>
+                      <span class="mf">3.556111439828502</span><span class="p">],</span>
+               <span class="n">a_high</span><span class="o">=</span><span class="p">[</span><span class="mf">4.050329990684662</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0029677854067980108</span><span class="p">,</span>
+                       <span class="mf">5.323485005316287e-06</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.3518122405333548e-09</span><span class="p">,</span>
+                       <span class="mf">7.58446718337381e-13</span><span class="p">,</span> <span class="o">-</span><span class="mf">191086.2004520406</span><span class="p">,</span>
+                       <span class="mf">0.6858235504924011</span><span class="p">]),</span>
+    <span class="s1">&#39;NH3&#39;</span><span class="p">:</span> <span class="n">Shomate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;NH3&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span>
+                   <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mf">18.792357134351683</span><span class="p">,</span> <span class="mf">44.82725349479501</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">10.05898449447048</span><span class="p">,</span> <span class="mf">0.3711633831565547</span><span class="p">,</span>
+                      <span class="mf">0.2969942466370908</span><span class="p">,</span> <span class="o">-</span><span class="mf">1791.225746924463</span><span class="p">,</span>
+                      <span class="mf">203.9035662274934</span><span class="p">,</span> <span class="mf">1784.714638346206</span><span class="p">]),</span>
+<span class="p">}</span>
+
+<span class="c1"># Define the formation of water reaction</span>
+<span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;1.5H2 + 0.5N2 = NH3&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">)</span>
+
+<span class="c1"># Calculate forward change in enthalpy</span>
+<span class="n">H_rxn_fwd</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_delta_H</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delta H_fwd(T = 300 K) = </span><span class="si">{:.1f}</span><span class="s1"> kcal/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_rxn_fwd</span><span class="p">))</span>
+
+<span class="c1"># Calculate reverse change in enthalpy</span>
+<span class="n">H_rxn_rev</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_delta_H</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span> <span class="n">rev</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delta H_rev(T = 300 K) = </span><span class="si">{:.1f}</span><span class="s1"> kcal/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_rxn_rev</span><span class="p">))</span>
+
+<span class="c1"># Calculate enthalpy of reactants</span>
+<span class="n">H_react</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_H_state</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;reactants&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H_reactants(T = 300 K) = </span><span class="si">{:.1f}</span><span class="s1"> kcal/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_react</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Delta H_fwd(T = 300 K) = -16.1 kcal/mol
+Delta H_rev(T = 300 K) = 16.1 kcal/mol
+H_reactants(T = 300 K) = -410.5 kcal/mol
+</pre></div></div>
+</div>
+<div class="section" id="11.-Exercise-3">
+<h2>11. Exercise 3<a class="headerlink" href="#11.-Exercise-3" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Use
+<code class="docutils literal notranslate"><span class="pre">`pmutt.io.thermdat.read_thermdat</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html#pmutt.io.thermdat.read_thermdat">https://vlachosgroup.github.io/pMuTT/io.html#pmutt.io.thermdat.read_thermdat</a>&gt;`__
+to read the thermdat from ‘./output/thermdat’.</li>
+<li>Convert the list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> to a dictionary of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> using
+<code class="docutils literal notranslate"><span class="pre">pmutt.pmutt_list_to_dict</span></code>. The syntax to use the function is shown
+below.</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Create a <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> from the string:
+<code class="docutils literal notranslate"><span class="pre">NH3(S)</span> <span class="pre">+</span> <span class="pre">RU(S)</span> <span class="pre">=</span> <span class="pre">TS1_NH3(S)</span> <span class="pre">=</span> <span class="pre">NH2(S)</span> <span class="pre">+</span> <span class="pre">H(S)</span></code> and the dictionary
+from step 2.</li>
+<li>Calculate the forward reaction enthalpy in kcal/mol at 298 K using
+<code class="docutils literal notranslate"><span class="pre">`Reaction.get_E_act</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act">https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act</a>&gt;`__.</li>
+<li>Calculate the forward activation energy in kcal/mol at 298 K using
+<code class="docutils literal notranslate"><span class="pre">`Reaction.get_E_act</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act">https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act</a>&gt;`__.</li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Fill in your answer for Exercise 3</span>
+
+<span class="c1"># 1.</span>
+
+
+<span class="c1"># 2.</span>
+
+
+<span class="c1"># 3.</span>
+
+
+<span class="c1"># 4.</span>
+
+
+<span class="c1"># 5.</span>
+
+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="12.-Solutions">
+<h1>12. Solutions<a class="headerlink" href="#12.-Solutions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="12.1.-Solution-to-Exercise-1">
+<h2>12.1. Solution to Exercise 1<a class="headerlink" href="#12.1.-Solution-to-Exercise-1" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+
+<span class="c1"># Define information given</span>
+<span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># eV</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">77</span> <span class="c1"># F</span>
+
+<span class="c1"># Calculate H/RT</span>
+<span class="n">HoRT</span> <span class="o">=</span> <span class="n">H</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">R</span><span class="p">(</span><span class="s1">&#39;eV/K&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="o">.</span><span class="n">convert_unit</span><span class="p">(</span><span class="mi">77</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H/RT = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HoRT</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+H/RT = 19.460878937648065
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="12.2.-Solution-to-Exercise-2">
+<h2>12.2. Solution to Exercise 2<a class="headerlink" href="#12.2.-Solution-to-Exercise-2" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">plot_1D</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech.vib</span> <span class="k">import</span> <span class="n">DebyeVib</span>
+<span class="kn">from</span> <span class="nn">pmutt.statmech.elec</span> <span class="k">import</span> <span class="n">GroundStateElec</span>
+
+<span class="c1"># 1. Create H2O molecule</span>
+<span class="n">H2O_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">),</span>
+                        <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">6.7598</span><span class="p">,</span>
+                        <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.264</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
+                        <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">])</span>
+
+
+<span class="c1"># 2. Calculate Gibbs energy of H2O at T = 500 K and P = 2 bar</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">500.</span> <span class="c1"># K</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mf">2.</span> <span class="c1"># bar</span>
+<span class="n">G_H2O</span> <span class="o">=</span> <span class="n">H2O_statmech</span><span class="o">.</span><span class="n">get_G</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;eV&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;G_H2O(T = 500 K, P = 2 bar) = </span><span class="si">{}</span><span class="s1"> eV&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">G_H2O</span><span class="p">))</span>
+
+
+<span class="c1"># 3. Create Cu crystal</span>
+<span class="n">Cu_vib</span> <span class="o">=</span> <span class="n">DebyeVib</span><span class="p">(</span><span class="n">debye_temperature</span><span class="o">=</span><span class="mf">310.</span><span class="p">,</span> <span class="n">interaction_energy</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="n">Cu_elec</span> <span class="o">=</span> <span class="n">GroundStateElec</span><span class="p">(</span><span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">14.922356</span><span class="p">)</span>
+<span class="n">Cu_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_model</span><span class="o">=</span><span class="n">Cu_vib</span><span class="p">,</span> <span class="n">elec_model</span><span class="o">=</span><span class="n">Cu_elec</span><span class="p">)</span>
+
+
+<span class="c1"># 4. Plot the 1D profile for H and S between 300 K and 700 K</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.</span><span class="p">,</span> <span class="mf">700.</span><span class="p">)</span> <span class="c1"># K</span>
+<span class="n">f2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plot_1D</span><span class="p">(</span><span class="n">Cu_statmech</span><span class="p">,</span>
+                  <span class="n">x_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
+                  <span class="n">methods</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;get_H&#39;</span><span class="p">,</span> <span class="s1">&#39;get_S&#39;</span><span class="p">),</span>
+                  <span class="n">get_H_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;eV&#39;</span><span class="p">},</span>
+                  <span class="n">get_S_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;eV/K&#39;</span><span class="p">})</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+G_H2O(T = 500 K, P = 2 bar) = -7.060978619777942 eV
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_40_1.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_40_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="12.3.-Solution-to-Exercise-3">
+<h2>12.3. Solution to Exercise 3<a class="headerlink" href="#12.3.-Solution-to-Exercise-3" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+
+<span class="c1"># 1. Read the thermdat file</span>
+<span class="n">species_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;./output/thermdat&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Convert the list of Nasa to a dictionary of Nasa</span>
+<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_list</span><span class="p">)</span>
+
+<span class="c1"># 3. Create a Reaction from the specified string</span>
+<span class="n">rxn</span> <span class="o">=</span> <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;NH3(S) + RU(S) = TS1_NH3(S) = NH2(S) + H(S)&#39;</span><span class="p">,</span> <span class="n">species_dict</span><span class="p">)</span>
+
+<span class="c1"># 4. Calculate the reaction enthalpy</span>
+<span class="n">H_rxn</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_delta_H</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H_rxn = </span><span class="si">{:.1f}</span><span class="s1"> kcal/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_rxn</span><span class="p">))</span>
+
+<span class="c1"># 5. Calculate the forward activation energy</span>
+<span class="n">Ea</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_E_act</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ea_fwd = </span><span class="si">{:.1f}</span><span class="s1"> kcal/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ea</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+H_rxn = -8.5 kcal/mol
+Ea_fwd = 22.8 kcal/mol
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+  </style>
+
+
+</body>
+</html>
