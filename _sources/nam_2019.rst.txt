@@ -30,8 +30,9 @@ Microkinetic Modeling instructions
 2. `Download the OVA file`_, which contains the Microkinetic modeling software.
    The username is "NAM26-attendee" and the password is
    "easy SIGHT company TOWARD".
-   **There is currently an issue with the download link. Please try again later.
-   We apologize for the inconvenience.**
+   **There is currently an issue when importing the OVA file. Please try
+   downloading the file after this message disappears. We apologize for the
+   inconvenience.**
 3. Run VirtualBox and `import the OVA file`_.
 4. Windows users, `install MobaXterm`_ (unless you have a preferred SSH client).
    Use all the default values. Mac and Linux users, the terminal program has
