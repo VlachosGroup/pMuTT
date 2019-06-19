@@ -30,8 +30,6 @@ Microkinetic Modeling instructions
 2. `Download the OVA file`_, which contains the Microkinetic modeling software.
    The username is "NAM26-attendee" and the password is
    "easy SIGHT company TOWARD".
-   **There is currently an issue with the download link. Please try again later.
-   We apologize for the inconvenience.**
 3. Run VirtualBox and `import the OVA file`_.
 4. Windows users, `install MobaXterm`_ (unless you have a preferred SSH client).
    Use all the default values. Mac and Linux users, the terminal program has
@@ -39,7 +37,9 @@ Microkinetic Modeling instructions
 
 Files
 -----
-`Slides and the Jupyter Notebook can be found here.`_
+- `Slides and the Jupyter Notebook can be found here.`_
+- `GitHub view of Jupyter notebook`_. Note this will not render pictures used in
+  the presentation.
 
 .. |NAM_label| image:: ./examples_jupyter/nam2019/images/IssuesLabel.png
    :height: 20
@@ -56,3 +56,4 @@ Files
 .. _`install MobaXterm`: https://mobaxterm.mobatek.net/
 .. _`pMuTT Jupyter notebook`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb.. _`open it`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/execute.html
 .. _`Slides and the Jupyter Notebook can be found here.`: https://www.dropbox.com/sh/ds52yjn14ojqxgj/AACmbY9HGqI8pX2qKID98-Z5a?dl=0
+.. _`GitHub view of Jupyter notebook`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb
