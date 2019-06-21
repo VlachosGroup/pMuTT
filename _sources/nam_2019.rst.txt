@@ -41,6 +41,11 @@ Files
 - `GitHub view of Jupyter notebook`_. Note this will not render pictures used in
   the presentation.
 
+Feedback
+--------
+Please fill in `this feedback form`_ so we can improve! Your thoughts are
+greatly appreciated.
+
 .. |NAM_label| image:: ./examples_jupyter/nam2019/images/IssuesLabel.png
    :height: 20
 
@@ -57,3 +62,4 @@ Files
 .. _`pMuTT Jupyter notebook`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb.. _`open it`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/execute.html
 .. _`Slides and the Jupyter Notebook can be found here.`: https://www.dropbox.com/sh/ds52yjn14ojqxgj/AACmbY9HGqI8pX2qKID98-Z5a?dl=0
 .. _`GitHub view of Jupyter notebook`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb
+.. _`this feedback form`: https://forms.gle/thqBsc8DJP8V1J7Z7
