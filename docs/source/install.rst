@@ -14,17 +14,17 @@ Installing pmutt using pip
 Using pip is the most straightforward way to install pmutt.
 
 1. Open a command prompt with access to Python (if Python is installed via
-   Anaconda on Windows, use the Anaconda Prompt).
+   Anaconda on Windows, open the Anaconda Prompt from the start menu).
 
-2. Install pmutt using:
+2. Install pMuTT by typing the following in the command prompt:
 ::
 
     pip install --user pmutt
 
-The output towards the end should state "Successfully built pmutt" if the
+The output towards the end should state "Successfully built pMuTT" if the
 installation was successful.
 
-Installing pmutt from source
+Installing pMuTT from source
 ----------------------------
 If you would prefer to install from source or you are interested in development,
 follow the instructions below.
@@ -35,7 +35,7 @@ follow the instructions below.
 2. Add the path of the ``pmutt`` folder to the ``PYTHONPATH`` environment
    variable.
 
-Upgrading pmutt using pip
+Upgrading pMuTT using pip
 -------------------------
 To upgrade to a newer release, use the --upgrade flag:
 ::
@@ -44,7 +44,7 @@ To upgrade to a newer release, use the --upgrade flag:
 
 Running unit tests
 ------------------
-pmutt has a suite of unit tests that should be run before committing any code.
+pMuTT has a suite of unit tests that should be run before committing any code.
 To run the tests, navigate to the tests folder (pmutt/tests) via a command line
 with access to Python.
 

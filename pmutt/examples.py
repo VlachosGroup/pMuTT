@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from ase.build import molecule
 from pmutt.statmech import StatMech, presets
 from pmutt.empirical.nasa import Nasa
 from pmutt.empirical.shomate import Shomate
@@ -19,6 +20,9 @@ H2_shomate = Shomate(name='H2', T_low=298., T_high=1000.,
                      a=np.array([33.066178, -11.363417, 11.432816, -2.772874,
                                  -0.158558, -9.980797, 172.707974, 0.]))
 
-
-
-# H2O_statmech = StatMech(**presets['idealgas'])
+H2O_statmech = StatMech(atoms=molecule('H2O'),
+                        potentialenergy=-6.7598,
+                        symmetrynumber=2,
+                        spin=0,
+                        vib_wavenumbers=[3825.434, 3710.264, 1582.432],
+                        **presets['idealgas'])

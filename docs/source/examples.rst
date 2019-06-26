@@ -4,7 +4,10 @@ Examples
 ========
 This page and its subpages show some examples using the pMuTT code. All the 
 codes listed here are available in the `examples folder`_ as Jupyter notebooks 
-(*.ipynb) and ordinary Python scripts (*.py). 
+(*.ipynb) and ordinary Python scripts (*.py).
+
+If the Jupyter notebook does not open on GitHub, you can open it locally 
+`using these instructions`_.
 
 Overview
 --------
@@ -111,3 +114,4 @@ Topics Covered
   ``JSON`` file
 
 .. _`examples folder`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter
+.. _`using these instructions`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/
