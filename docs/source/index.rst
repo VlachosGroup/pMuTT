@@ -21,8 +21,10 @@ Welcome to pmutt's documentation!
    chemkin
    phase_diagram
    eos
+   visual
    constants
    release_notes
+   nam_2019
    Return to Github <https://github.com/VlachosGroup/pmutt>
 
 Indices and tables

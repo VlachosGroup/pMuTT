@@ -209,8 +209,8 @@ class StatMech(_ModelBase):
             in a formula unit.
             e.g. CH3OH can be represented as:
             {'C': 1, 'H': 4, 'O': 1,}.
-        references : ``pmutt.empirical.References.references`` object, optional
-            Contains references to calculate ``HoRT_ref``. If not specified
+        references : :class:`~pmutt.empirical.references.References`, optional
+            Contains references to adjust ``HoRT``. If not specified
             then HoRT_dft will be used without adjustment. Default is None
         misc_models : list of pmutt model objects, optional
             Extra models that do not fit in the above attributes. Commonly used

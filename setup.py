@@ -32,7 +32,8 @@ setuptools_info = {
 		'pymongo>=3.7.2',
 		'dnspython>=1.16.0',
 		'networkx>=2.3',
-		'pygal>=2.4.0'
+		'pygal>=2.4.0',
+		'xlrd>=1.2.0',
 	    ],
 	'classifiers': [
 		"Programming Language :: Python :: 3",
