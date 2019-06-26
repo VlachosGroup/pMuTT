@@ -7,12 +7,32 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Verion 1.2.11
+-------------
+Jun. 18, 2019
+
+- Added xlrd dependency so spreadsheets can be read using pandas
+- Updated documentation page with NAM 2019 instructions.
+
+Version 1.2.10
+--------------
+Jun. 13, 2019
+
+- Another hotfix to fix a bug where the version was not incremented correctly
+
+Version 1.2.9
+-------------
+Jun. 13, 2019
+
+- Hotfix where pypi created the folder in the old case (pMuTT) instead of
+  lower case (pmutt)
+
 Version 1.2.8
 -------------
 Jun. 13, 2019
 
-- Importing from pMuTT is now all in lowercase. (i.e. import pmutt instead of
-  import pMuTT)
+- Importing from pMuTT is now all in lowercase. (i.e. ``import pmutt`` instead
+  of ``import pMuTT``)
 
 Version 1.2.7
 -------------
