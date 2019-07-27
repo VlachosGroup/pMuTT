@@ -433,6 +433,7 @@ def convert_unit(num=None, initial=None, final=None):
     Unit      Description
     ========= =================
     molecule  Molecules
+    molec     Molecules
     mol       Moles
     ========= =================
 
@@ -539,6 +540,7 @@ def convert_unit(num=None, initial=None, final=None):
         'hr': 'time',
         'day': 'time',
         'molecule': 'amount',
+        'molec': 'amount',
         'mol': 'amount',
         'C': 'temp',
         'K': 'temp',
@@ -602,6 +604,7 @@ def convert_unit(num=None, initial=None, final=None):
         'yr': 1./3600./24./365.25,
         'mol': 1.,
         'molecule': 6.02214086e23,
+        'molec': 6.02214086e23,
         'm': 1.,
         'cm': 100.,
         'nm': 1.e9,

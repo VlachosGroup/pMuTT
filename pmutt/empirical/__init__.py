@@ -47,8 +47,8 @@ class EmpiricalBase(_pmuttBase):
     """
 
     def __init__(self, name=None, phase=None, elements=None,
-                 statmech_model=None, references=None, misc_models=None,
-                 smiles=None, notes=None, **kwargs):
+                 statmech_model=None, misc_models=None, smiles=None, notes=None,
+                 **kwargs):
         self.name = name
         self.phase = phase
         self.elements = elements
@@ -508,7 +508,8 @@ class EmpiricalBase(_pmuttBase):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['statmech_model'] = json_to_pmutt(json_obj['statmech_model'])
-        json_obj['misc_models'] = \
-            [json_to_pmutt(mix_model) for mix_model in json_obj['misc_models']]
+        if json_obj['misc_models'] is not None:
+            json_obj['misc_models'] = [json_to_pmutt(mix_model) for mix_model \
+                                       in json_obj['misc_models']]
 
         return cls(**json_obj)
