@@ -1,0 +1,18 @@
+!NUMSPEC -- If /NO/ coverage effects are desired, set lcov=F in tube.inp
+3
+!Should coverage parameters be adjusted for atomic binding energies (T) or not (F)
+T
+!Specify species with binding energy affected
+!Specify species that cov affects it and value
+!------------------------------------------------------------
+N(S)/SURFACE/2
+N(S)/SURFACE/-52.6
+H(S)/SURFACE/-17.7
+!--
+H(S)/SURFACE/2
+N(S)/SURFACE/-17.7
+H(S)/SURFACE/-3.
+!--
+NH2(S)/SURFACE/1
+N(S)/SURFACE/-20.7
+EOF

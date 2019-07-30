@@ -310,12 +310,11 @@ def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
             f_ptr.write(supp_txt)
             if supp_txt[-1] != '\n':
                 f_ptr.write('\n')
-        float_string = '%.8E'
         for nasa_specie in nasa_species:
             _write_line1(f_ptr, nasa_specie, write_date)
-            _write_line2(f_ptr, nasa_specie, float_string)
-            _write_line3(f_ptr, nasa_specie, float_string)
-            _write_line4(f_ptr, nasa_specie, float_string)
+            _write_line2(f_ptr, nasa_specie)
+            _write_line3(f_ptr, nasa_specie)
+            _write_line4(f_ptr, nasa_specie)
         f_ptr.write('END')
 
 
@@ -385,7 +384,7 @@ def _write_line1(thermdat_file, nasa_specie, write_date=True):
     thermdat_file.write(line)
 
 
-def _write_line2(thermdat_file, nasa_specie, float_string):
+def _write_line2(thermdat_file, nasa_specie):
     """Writes the second line of the thermdat file
 
     Parameters
@@ -394,20 +393,14 @@ def _write_line2(thermdat_file, nasa_specie, float_string):
             Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
-        float_string : str
-            float format
     """
-    line = ''
-    for i in range(5):
-        a = nasa_specie.a_high[i]
-        if a >= 0:
-            line += ' '
-        line += float_string % a
-    line += '    2\n'
+    line = '{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}    2\n'.format(
+           nasa_specie.a_high[0], nasa_specie.a_high[1], nasa_specie.a_high[2],
+           nasa_specie.a_high[3], nasa_specie.a_high[4])
     thermdat_file.write(line)
 
 
-def _write_line3(thermdat_file, nasa_specie, float_string):
+def _write_line3(thermdat_file, nasa_specie):
     """Writes the third line of the thermdat file
 
     Parameters
@@ -416,23 +409,14 @@ def _write_line3(thermdat_file, nasa_specie, float_string):
             Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
-        float_string : str
-            float format
     """
-    line = ''
-    for i in range(5):
-        if i < 2:
-            a = nasa_specie.a_high[i+5]
-        else:
-            a = nasa_specie.a_low[i-2]
-        if a >= 0:
-            line += ' '
-        line += float_string % a
-    line += '    3\n'
+    line = '{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}    3\n'.format(
+           nasa_specie.a_high[5], nasa_specie.a_high[6], nasa_specie.a_low[0],
+           nasa_specie.a_low[1], nasa_specie.a_low[2])
     thermdat_file.write(line)
 
 
-def _write_line4(thermdat_file, nasa_specie, float_string):
+def _write_line4(thermdat_file, nasa_specie):
     """Writes the fourth line of the thermdat file
 
     Parameters
@@ -441,16 +425,10 @@ def _write_line4(thermdat_file, nasa_specie, float_string):
             Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
-        float_string : str
-            float format
     """
-    line = ''
-    for i in range(3, 7):
-        a = nasa_specie.a_low[i]
-        if a >= 0:
-            line += ' '
-        line += float_string % a
-    line += '                   4\n'
+    line = '{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}                   4\n'.format(
+           nasa_specie.a_low[3], nasa_specie.a_low[4], nasa_specie.a_low[5],
+           nasa_specie.a_low[6])
     thermdat_file.write(line)
 
 

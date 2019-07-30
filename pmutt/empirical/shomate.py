@@ -12,9 +12,9 @@ from scipy.stats import variation
 from pmutt import _is_iterable
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
+from pmutt.io.cantera import obj_to_CTI
 from pmutt.empirical import EmpiricalBase
 from pmutt.mixture import _get_mix_quantity
-
 
 class Shomate(EmpiricalBase):
     """Stores the information for an individual Shomate specie
@@ -87,10 +87,9 @@ class Shomate(EmpiricalBase):
                                          default_value=0.,
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
+        CpoR += CpoR_mix
         if len(T) == 1:
-            CpoR += CpoR_mix[0]
-        else:
-            CpoR += CpoR_mix
+            CpoR = CpoR.item(0)
         return CpoR
 
     def get_Cp(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -161,10 +160,9 @@ class Shomate(EmpiricalBase):
                                          default_value=0.,
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
+        HoRT += HoRT_mix
         if len(T) == 1:
-            HoRT = HoRT[0] + HoRT_mix[0]
-        else:
-            HoRT += HoRT_mix
+            HoRT = HoRT.item(0)
         return HoRT
 
     def get_H(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -235,11 +233,10 @@ class Shomate(EmpiricalBase):
                                         raise_warning=raise_warning,
                                         default_value=0.,
                                         T=T_i, **kwargs)
-        # Add mixing quantity in appropriate format
+        SoR += SoR_mix
+        # If only one T specified, converted from (1,) numpy array to float
         if len(T) == 1:
-            SoR += SoR_mix[0]
-        else:
-            SoR += SoR_mix
+            SoR = SoR.item(0)
         return SoR
 
     def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -437,6 +434,24 @@ class Shomate(EmpiricalBase):
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
 
         return cls(**json_obj)
+
+    def to_CTI(self):
+        """Writes the object in Cantera's CTI format.
+
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
+        cti_str = ('species(name="{}", atoms={}\n'
+                   '        thermo=(Shomate([{}, {}],\n'
+                   '                        [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
+                   '                         {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
+                   '                         {: 2.8E}])))').format(
+                            self.name, obj_to_CTI(self.elements), self.T_low,
+                            self.T_high, self.a[0], self.a[1], self.a[2],
+                            self.a[3], self.a[4], self.a[5], self.a[6])                            
+        return cti_str
 
 
 def _fit_CpoR(T, CpoR):

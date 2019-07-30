@@ -23,7 +23,11 @@ from pmutt.io.json import remove_class
 from pmutt import constants as c
 
 class _pmuttBase:
-    """Generic parent class to all pmutt objects"""
+    """Generic parent class to all pmutt objects. Functionality:
+
+    - `__eq__` method that compares `to_dict` outputs
+    - `to_dict` method that converts object to dictionary format
+    - `from_dict` method that creates the object from a dictionary"""
 
     def __init__(self):
         pass
@@ -64,7 +68,13 @@ class _pmuttBase:
 
 
 class _ModelBase(_pmuttBase):
-    """Generic parent class to all model type objects"""
+    """Generic parent class to all model type objects. Functionality:
+    
+    - Methods that return the dimensional thermodynamic quantity (e.g. `get_H`)
+    - Methods to calculate Helmholtz energy and Gibbs energy (i.e. `get_FoRT`,
+      `get_F`, `get_GoRT`, `get_G`)
+      
+    Inherits from :class:`~pmutt._pmuttBase`"""
 
     def __init__(self):
         pass
