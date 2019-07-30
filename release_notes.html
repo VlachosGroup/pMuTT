@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html#workshops">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -211,6 +212,12 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+<ul class="simple">
+<li>Refactored <code class="docutils literal notranslate"><span class="pre">pmutt.io.thermdat.write_thermdat</span></code> so that it is simpler
+to understand</li>
+<li>Implemented <code class="docutils literal notranslate"><span class="pre">pmutt.empirical.nasa.Nasa9</span></code> polynomials</li>
+<li>Added preliminary CTI file writer for Cantera and OpenMKM</li>
+</ul>
 </div>
 <div class="section" id="verion-1-2-11">
 <h2>Verion 1.2.11<a class="headerlink" href="#verion-1-2-11" title="Permalink to this headline">¶</a></h2>
@@ -441,7 +448,7 @@ vibrational energies instead of wavenumbers.</li>
 <a class="reference internal" href="eos.html#pmutt.eos.vanDerWaalsEOS" title="pmutt.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
 <li>New <a class="reference internal" href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram" title="pmutt.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</li>
 <li>New <a class="reference internal" href="statmech.html#pmutt.statmech.vib.EinsteinVib" title="pmutt.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</li>
-<li>New <a class="reference internal" href="io.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
+<li>New <a class="reference internal" href="chemkin.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
 reactions from Chemkin surf.inp and gas.inp files</li>
 </ul>
 </div>

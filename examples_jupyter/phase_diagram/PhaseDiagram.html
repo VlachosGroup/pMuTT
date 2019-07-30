@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#workshops">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
@@ -348,14 +349,14 @@ div.nboutput div.output_area.stderr {
 </style>
 <div class="section" id="Phase-Diagram">
 <h1>Phase Diagram<a class="headerlink" href="#Phase-Diagram" title="Permalink to this headline">¶</a></h1>
-<p>In this example, we will generate a 1D and 2D phase diagram for FeOx
-species.</p>
+<p>In this example, we will generate a 1D and 2D phase diagram for a
+CO/Pt(111) system.</p>
 <div class="section" id="Topics-Covered">
 <h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Create <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> and <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects</li>
+<li>Create <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects</li>
 <li>Initialize <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects to describe the formation reaction of
-FeOx species</li>
+CO/Pt(111) species</li>
 <li>Generate a 1D phase diagram by varying T</li>
 <li>Generate a 2D phase diagram by varying T and P</li>
 <li>Save the <code class="docutils literal notranslate"><span class="pre">PhaseDiagram</span></code> object as a <code class="docutils literal notranslate"><span class="pre">JSON</span></code> file</li>
@@ -363,151 +364,87 @@ FeOx species</li>
 </div>
 <div class="section" id="Create-Species-for-Phase-Diagram">
 <h2>Create Species for Phase Diagram<a class="headerlink" href="#Create-Species-for-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
-<p>We will be considering three iron oxide species: FeO, Fe3O4, and Fe2O3.
-All the empirical data (from NIST) will be converted to <code class="docutils literal notranslate"><span class="pre">Nasa</span></code>
-objects. O2, on the other hand, will be a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> object so that it
-will be dependent on pressure.</p>
-<p>If you are unfamiliar with initializing objects using experimental data,
-see the Experimental to Empirical example.</p>
-<div class="nbinput docutils container">
+<p>We will be considering six CO/Pt(111) configurations. The configurations
+have CO adsorbed in different sites and different coverages.</p>
+<p>First, we initialize the species as a dictionary to enable easy
+<code class="docutils literal notranslate"><span class="pre">Reaction</span></code> initialization.</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="k">import</span> <span class="n">molecule</span>
+
 <span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="k">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
 
-<span class="c1"># Temperature (in K) corresponding to standard enthalpy</span>
-<span class="c1"># and standard entropy</span>
-<span class="n">T_ref</span> <span class="o">=</span> <span class="mf">298.</span>
-
-<span class="c1"># Temperatures (in K) corresponding to heat capacity</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">298.</span><span class="p">,</span> <span class="mf">300.</span><span class="p">,</span> <span class="mf">305.</span><span class="p">,</span> <span class="mf">310.</span><span class="p">,</span> <span class="mf">315.</span><span class="p">,</span> <span class="mf">320.</span><span class="p">,</span> <span class="mf">325.</span><span class="p">,</span> <span class="mf">330.</span><span class="p">,</span>
-              <span class="mf">335.</span><span class="p">,</span> <span class="mf">340.</span><span class="p">,</span> <span class="mf">345.</span><span class="p">,</span> <span class="mf">350.</span><span class="p">,</span> <span class="mf">355.</span><span class="p">,</span> <span class="mf">360.</span><span class="p">,</span> <span class="mf">365.</span><span class="p">,</span> <span class="mf">370.</span><span class="p">,</span>
-              <span class="mf">375.</span><span class="p">,</span> <span class="mf">380.</span><span class="p">,</span> <span class="mf">385.</span><span class="p">,</span> <span class="mf">390.</span><span class="p">,</span> <span class="mf">395.</span><span class="p">,</span> <span class="mf">400.</span><span class="p">,</span> <span class="mf">405.</span><span class="p">,</span> <span class="mf">410.</span><span class="p">,</span>
-              <span class="mf">415.</span><span class="p">,</span> <span class="mf">420.</span><span class="p">,</span> <span class="mf">425.</span><span class="p">,</span> <span class="mf">430.</span><span class="p">,</span> <span class="mf">435.</span><span class="p">,</span> <span class="mf">440.</span><span class="p">,</span> <span class="mf">445.</span><span class="p">,</span> <span class="mf">450.</span><span class="p">,</span>
-              <span class="mf">455.</span><span class="p">,</span> <span class="mf">460.</span><span class="p">,</span> <span class="mf">465.</span><span class="p">,</span> <span class="mf">470.</span><span class="p">,</span> <span class="mf">475.</span><span class="p">,</span> <span class="mf">480.</span><span class="p">,</span> <span class="mf">485.</span><span class="p">,</span> <span class="mf">490.</span><span class="p">,</span>
-              <span class="mf">495.</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
-
-<span class="c1"># Fe data</span>
-<span class="n">CpoR_Fe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.018129466</span><span class="p">,</span> <span class="mf">3.023626079</span><span class="p">,</span> <span class="mf">3.037347372</span><span class="p">,</span>
-                    <span class="mf">3.051041872</span><span class="p">,</span> <span class="mf">3.06471211</span><span class="p">,</span> <span class="mf">3.078360492</span><span class="p">,</span>
-                    <span class="mf">3.091989304</span><span class="p">,</span> <span class="mf">3.105600726</span><span class="p">,</span> <span class="mf">3.119196843</span><span class="p">,</span>
-                    <span class="mf">3.13277965</span><span class="p">,</span> <span class="mf">3.14635106</span><span class="p">,</span> <span class="mf">3.159912915</span><span class="p">,</span>
-                    <span class="mf">3.173466988</span><span class="p">,</span> <span class="mf">3.187014988</span><span class="p">,</span> <span class="mf">3.20055857</span><span class="p">,</span>
-                    <span class="mf">3.214099334</span><span class="p">,</span> <span class="mf">3.227638833</span><span class="p">,</span> <span class="mf">3.241178576</span><span class="p">,</span>
-                    <span class="mf">3.25472003</span><span class="p">,</span> <span class="mf">3.268264625</span><span class="p">,</span> <span class="mf">3.281813753</span><span class="p">,</span>
-                    <span class="mf">3.295368778</span><span class="p">,</span> <span class="mf">3.308931031</span><span class="p">,</span> <span class="mf">3.322501816</span><span class="p">,</span>
-                    <span class="mf">3.336082411</span><span class="p">,</span> <span class="mf">3.34967407</span><span class="p">,</span> <span class="mf">3.363278024</span><span class="p">,</span>
-                    <span class="mf">3.376895484</span><span class="p">,</span> <span class="mf">3.390527642</span><span class="p">,</span> <span class="mf">3.404175671</span><span class="p">,</span>
-                    <span class="mf">3.417840728</span><span class="p">,</span> <span class="mf">3.431523954</span><span class="p">,</span> <span class="mf">3.445226474</span><span class="p">,</span>
-                    <span class="mf">3.458949401</span><span class="p">,</span> <span class="mf">3.472693834</span><span class="p">,</span> <span class="mf">3.486460862</span><span class="p">,</span>
-                    <span class="mf">3.500251559</span><span class="p">,</span> <span class="mf">3.514066993</span><span class="p">,</span> <span class="mf">3.527908217</span><span class="p">,</span>
-                    <span class="mf">3.54177628</span><span class="p">,</span> <span class="mf">3.555672217</span><span class="p">,</span> <span class="mf">3.569597059</span><span class="p">])</span>
-<span class="n">HoRT_Fe</span> <span class="o">=</span> <span class="mf">0.</span>
-<span class="n">SoR_Fe</span> <span class="o">=</span> <span class="mf">3.284428696</span>
-
-<span class="c1"># FeO data</span>
-<span class="n">CpoR_FeO</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.004980757</span><span class="p">,</span> <span class="mf">6.010160937</span><span class="p">,</span> <span class="mf">6.022964518</span><span class="p">,</span>
-                     <span class="mf">6.035567503</span><span class="p">,</span> <span class="mf">6.047980643</span><span class="p">,</span> <span class="mf">6.060213866</span><span class="p">,</span>
-                     <span class="mf">6.072276342</span><span class="p">,</span> <span class="mf">6.084176563</span><span class="p">,</span> <span class="mf">6.095922395</span><span class="p">,</span>
-                     <span class="mf">6.107521136</span><span class="p">,</span> <span class="mf">6.118979564</span><span class="p">,</span> <span class="mf">6.130303982</span><span class="p">,</span>
-                     <span class="mf">6.141500259</span><span class="p">,</span> <span class="mf">6.152573863</span><span class="p">,</span> <span class="mf">6.163529897</span><span class="p">,</span>
-                     <span class="mf">6.174373123</span><span class="p">,</span> <span class="mf">6.185107998</span><span class="p">,</span> <span class="mf">6.195738688</span><span class="p">,</span>
-                     <span class="mf">6.206269099</span><span class="p">,</span> <span class="mf">6.216702891</span><span class="p">,</span> <span class="mf">6.227043498</span><span class="p">,</span>
-                     <span class="mf">6.237294147</span><span class="p">,</span> <span class="mf">6.247457872</span><span class="p">,</span> <span class="mf">6.257537527</span><span class="p">,</span>
-                     <span class="mf">6.267535799</span><span class="p">,</span> <span class="mf">6.277455222</span><span class="p">,</span> <span class="mf">6.287298187</span><span class="p">,</span>
-                     <span class="mf">6.297066948</span><span class="p">,</span> <span class="mf">6.306763637</span><span class="p">,</span> <span class="mf">6.31639027</span><span class="p">,</span>
-                     <span class="mf">6.325948754</span><span class="p">,</span> <span class="mf">6.335440896</span><span class="p">,</span> <span class="mf">6.344868406</span><span class="p">,</span>
-                     <span class="mf">6.354232908</span><span class="p">,</span> <span class="mf">6.363535942</span><span class="p">,</span> <span class="mf">6.372778972</span><span class="p">,</span>
-                     <span class="mf">6.381963388</span><span class="p">,</span> <span class="mf">6.391090513</span><span class="p">,</span> <span class="mf">6.400161605</span><span class="p">,</span>
-                     <span class="mf">6.409177863</span><span class="p">,</span> <span class="mf">6.418140429</span><span class="p">,</span> <span class="mf">6.427050393</span><span class="p">])</span>
-<span class="n">HoRT_FeO</span> <span class="o">=</span> <span class="o">-</span><span class="mf">109.7966298</span>
-<span class="n">SoR_FeO</span> <span class="o">=</span> <span class="mf">7.303137557</span>
-
-<span class="c1"># Fe3O4 data</span>
-<span class="n">CpoR_Fe3O4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">17.70205065</span><span class="p">,</span> <span class="mf">17.76448405</span><span class="p">,</span> <span class="mf">17.91908664</span><span class="p">,</span>
-                       <span class="mf">18.07168569</span><span class="p">,</span> <span class="mf">18.2224119</span><span class="p">,</span> <span class="mf">18.37138586</span><span class="p">,</span>
-                       <span class="mf">18.51871897</span><span class="p">,</span> <span class="mf">18.66451424</span><span class="p">,</span> <span class="mf">18.80886707</span><span class="p">,</span>
-                       <span class="mf">18.95186592</span><span class="p">,</span> <span class="mf">19.09359287</span><span class="p">,</span> <span class="mf">19.2341242</span><span class="p">,</span>
-                       <span class="mf">19.37353085</span><span class="p">,</span> <span class="mf">19.5118789</span><span class="p">,</span> <span class="mf">19.64922991</span><span class="p">,</span>
-                       <span class="mf">19.78564135</span><span class="p">,</span> <span class="mf">19.92116686</span><span class="p">,</span> <span class="mf">20.0558566</span><span class="p">,</span>
-                       <span class="mf">20.18975749</span><span class="p">,</span> <span class="mf">20.32291349</span><span class="p">,</span> <span class="mf">20.45536576</span><span class="p">,</span>
-                       <span class="mf">20.58715296</span><span class="p">,</span> <span class="mf">20.71831135</span><span class="p">,</span> <span class="mf">20.848875</span><span class="p">,</span>
-                       <span class="mf">20.97887597</span><span class="p">,</span> <span class="mf">21.10834441</span><span class="p">,</span> <span class="mf">21.23730872</span><span class="p">,</span>
-                       <span class="mf">21.36579565</span><span class="p">,</span> <span class="mf">21.49383045</span><span class="p">,</span> <span class="mf">21.62143694</span><span class="p">,</span>
-                       <span class="mf">21.7486376</span><span class="p">,</span> <span class="mf">21.8754537</span><span class="p">,</span> <span class="mf">22.00190534</span><span class="p">,</span>
-                       <span class="mf">22.12801153</span><span class="p">,</span> <span class="mf">22.25379029</span><span class="p">,</span> <span class="mf">22.37925867</span><span class="p">,</span>
-                       <span class="mf">22.50443285</span><span class="p">,</span> <span class="mf">22.62932817</span><span class="p">,</span> <span class="mf">22.75395919</span><span class="p">,</span>
-                       <span class="mf">22.87833973</span><span class="p">,</span> <span class="mf">23.00248293</span><span class="p">,</span> <span class="mf">23.12640128</span><span class="p">])</span>
-<span class="n">HoRT_Fe3O4</span> <span class="o">=</span> <span class="o">-</span><span class="mf">452.3912981</span>
-<span class="n">SoR_Fe3O4</span> <span class="o">=</span> <span class="mf">17.46008698</span>
-
-<span class="c1"># Fe2O3 data</span>
-<span class="n">CpoR_Fe2O3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">12.47757489</span><span class="p">,</span> <span class="mf">12.52697445</span><span class="p">,</span> <span class="mf">12.64787689</span><span class="p">,</span>
-                       <span class="mf">12.7652535</span><span class="p">,</span> <span class="mf">12.87931824</span><span class="p">,</span> <span class="mf">12.99026871</span><span class="p">,</span>
-                       <span class="mf">13.09828757</span><span class="p">,</span> <span class="mf">13.20354395</span><span class="p">,</span> <span class="mf">13.3061946</span><span class="p">,</span>
-                       <span class="mf">13.40638501</span><span class="p">,</span> <span class="mf">13.50425036</span><span class="p">,</span> <span class="mf">13.59991643</span><span class="p">,</span>
-                       <span class="mf">13.69350035</span><span class="p">,</span> <span class="mf">13.78511133</span><span class="p">,</span> <span class="mf">13.87485131</span><span class="p">,</span>
-                       <span class="mf">13.96281555</span><span class="p">,</span> <span class="mf">14.04909315</span><span class="p">,</span> <span class="mf">14.13376754</span><span class="p">,</span>
-                       <span class="mf">14.21691692</span><span class="p">,</span> <span class="mf">14.29861465</span><span class="p">,</span> <span class="mf">14.37892962</span><span class="p">,</span>
-                       <span class="mf">14.45792659</span><span class="p">,</span> <span class="mf">14.53566649</span><span class="p">,</span> <span class="mf">14.6122067</span><span class="p">,</span>
-                       <span class="mf">14.68760129</span><span class="p">,</span> <span class="mf">14.76190128</span><span class="p">,</span> <span class="mf">14.83515483</span><span class="p">,</span>
-                       <span class="mf">14.90740747</span><span class="p">,</span> <span class="mf">14.97870223</span><span class="p">,</span> <span class="mf">15.04907987</span><span class="p">,</span>
-                       <span class="mf">15.11857898</span><span class="p">,</span> <span class="mf">15.18723616</span><span class="p">,</span> <span class="mf">15.25508613</span><span class="p">,</span>
-                       <span class="mf">15.32216185</span><span class="p">,</span> <span class="mf">15.38849466</span><span class="p">,</span> <span class="mf">15.45411434</span><span class="p">,</span>
-                       <span class="mf">15.51904926</span><span class="p">,</span> <span class="mf">15.58332641</span><span class="p">,</span> <span class="mf">15.64697155</span><span class="p">,</span>
-                       <span class="mf">15.71000921</span><span class="p">,</span> <span class="mf">15.77246282</span><span class="p">,</span> <span class="mf">15.83435478</span><span class="p">])</span>
-<span class="n">HoRT_Fe2O3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">333.1719719</span>
-<span class="n">SoR_Fe2O3</span> <span class="o">=</span> <span class="mf">10.49736076</span>
-
-<span class="n">O2</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1580.2</span><span class="p">]),</span>
-              <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">0.1879339246281043</span><span class="p">,</span>
-              <span class="n">spin</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
-              <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-              <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;O2&#39;</span><span class="p">),</span>
-              <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">])</span>
-
 <span class="n">species</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Fe&#39;</span><span class="p">:</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Fe&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR_Fe</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span>
-                         <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_Fe</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_Fe</span><span class="p">),</span>
-    <span class="s1">&#39;FeO&#39;</span><span class="p">:</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;FeO&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR_FeO</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span>
-                          <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_FeO</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_FeO</span><span class="p">),</span>
-    <span class="s1">&#39;Fe3O4&#39;</span><span class="p">:</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Fe3O4&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR_Fe3O4</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span>
-                            <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_Fe3O4</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_Fe3O4</span><span class="p">),</span>
-    <span class="s1">&#39;Fe2O3&#39;</span><span class="p">:</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Fe2O3&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">CpoR</span><span class="o">=</span><span class="n">CpoR_Fe2O3</span><span class="p">,</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T_ref</span><span class="p">,</span>
-                            <span class="n">HoRT_ref</span><span class="o">=</span><span class="n">HoRT_Fe2O3</span><span class="p">,</span> <span class="n">SoR_ref</span><span class="o">=</span><span class="n">SoR_Fe2O3</span><span class="p">),</span>
-    <span class="s1">&#39;O2&#39;</span><span class="p">:</span> <span class="n">O2</span><span class="p">,</span>
+    <span class="s1">&#39;CO&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;CO&#39;</span><span class="p">),</span>
+                   <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">14.8021</span><span class="p">,</span>
+                   <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">2121.2</span><span class="p">],</span> <span class="n">symmetrynumber</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;Pt&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">383.161235</span><span class="p">,</span>
+                   <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;electronic&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;CO(S) 1/16ML fcc&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO(S) 1/16ML fcc&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">399.48282843</span><span class="p">,</span>
+            <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">1731.942697</span><span class="p">,</span> <span class="mf">349.970617</span><span class="p">,</span> <span class="mf">322.15111</span><span class="p">,</span>
+                             <span class="mf">319.114152</span><span class="p">,</span> <span class="mf">161.45669</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;harmonic&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;CO(S) 1/16ML br&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO(S) 1/16ML br&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">399.464095</span><span class="p">,</span>
+            <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">1831.626557</span><span class="p">,</span> <span class="mf">394.436054</span><span class="p">,</span> <span class="mf">388.098645</span><span class="p">,</span>
+                             <span class="mf">373.063005</span><span class="p">,</span> <span class="mf">203.887416</span><span class="p">,</span> <span class="mf">52.987012</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;harmonic&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;CO(S) 1/16ML top&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO(S) 1/16ML top&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">399.39545350</span><span class="p">,</span>
+            <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">2045.797559</span><span class="p">,</span> <span class="mf">489.514815</span><span class="p">,</span> <span class="mf">396.498284</span><span class="p">,</span>
+                             <span class="mf">393.395406</span><span class="p">,</span> <span class="mf">56.058884</span><span class="p">,</span> <span class="mf">52.157548</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;harmonic&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;CO(S) 1/8ML&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO(S) 1/8ML&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">415.67626828</span><span class="p">,</span>
+            <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">2047.452988</span><span class="p">,</span> <span class="mf">1730.209946</span><span class="p">,</span> <span class="mf">482.24755</span><span class="p">,</span>
+                             <span class="mf">394.675312</span><span class="p">,</span> <span class="mf">392.79586</span><span class="p">,</span> <span class="mf">354.078848</span><span class="p">,</span>
+                             <span class="mf">323.143303</span><span class="p">,</span> <span class="mf">320.375056</span><span class="p">,</span> <span class="mf">162.356233</span><span class="p">,</span>
+                             <span class="mf">158.239412</span><span class="p">,</span> <span class="mf">60.269377</span><span class="p">,</span> <span class="mf">51.362263</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;harmonic&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;CO(S) 3/16ML&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO(S) 3/16ML&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">431.867618</span><span class="p">,</span>
+            <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">2049.767728</span><span class="p">,</span> <span class="mf">1746.427506</span><span class="p">,</span> <span class="mf">1733.474666</span><span class="p">,</span>
+                             <span class="mf">478.755939</span><span class="p">,</span> <span class="mf">391.899407</span><span class="p">,</span> <span class="mf">389.661616</span><span class="p">,</span>
+                             <span class="mf">354.568306</span><span class="p">,</span> <span class="mf">352.532192</span><span class="p">,</span> <span class="mf">325.154407</span><span class="p">,</span>
+                             <span class="mf">322.578758</span><span class="p">,</span> <span class="mf">319.593333</span><span class="p">,</span> <span class="mf">315.883097</span><span class="p">,</span>
+                             <span class="mf">163.2316</span><span class="p">,</span> <span class="mf">162.672434</span><span class="p">,</span> <span class="mf">158.815096</span><span class="p">,</span>
+                             <span class="mf">157.87804</span><span class="p">,</span> <span class="mf">59.576319</span><span class="p">,</span> <span class="mf">50.284495</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;harmonic&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;CO(S) 1/2ML&#39;</span><span class="p">:</span> <span class="n">StatMech</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CO(S) 1/2ML&#39;</span><span class="p">,</span> <span class="n">potentialenergy</span><span class="o">=-</span><span class="mf">512.817507</span><span class="p">,</span>
+            <span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">2072.099888</span><span class="p">,</span> <span class="mf">2053.332551</span><span class="p">,</span> <span class="mf">2052.632444</span><span class="p">,</span>
+                             <span class="mf">2052.501762</span><span class="p">,</span> <span class="mf">1835.620624</span><span class="p">,</span> <span class="mf">1824.088854</span><span class="p">,</span>
+                             <span class="mf">1823.712945</span><span class="p">,</span> <span class="mf">1823.531493</span><span class="p">,</span> <span class="mf">481.148383</span><span class="p">,</span>
+                             <span class="mf">480.426246</span><span class="p">,</span> <span class="mf">480.187182</span><span class="p">,</span> <span class="mf">479.70589</span><span class="p">,</span>
+                             <span class="mf">414.42128</span><span class="p">,</span> <span class="mf">411.357815</span><span class="p">,</span> <span class="mf">411.091615</span><span class="p">,</span>
+                             <span class="mf">406.851876</span><span class="p">,</span> <span class="mf">404.128284</span><span class="p">,</span> <span class="mf">403.391877</span><span class="p">,</span>
+                             <span class="mf">402.879585</span><span class="p">,</span> <span class="mf">401.452804</span><span class="p">,</span> <span class="mf">401.134231</span><span class="p">,</span>
+                             <span class="mf">397.539281</span><span class="p">,</span> <span class="mf">394.569066</span><span class="p">,</span> <span class="mf">394.101234</span><span class="p">,</span>
+                             <span class="mf">393.933956</span><span class="p">,</span> <span class="mf">390.740547</span><span class="p">,</span> <span class="mf">390.173637</span><span class="p">,</span>
+                             <span class="mf">389.805187</span><span class="p">,</span> <span class="mf">388.420025</span><span class="p">,</span> <span class="mf">387.427067</span><span class="p">,</span>
+                             <span class="mf">383.620218</span><span class="p">,</span> <span class="mf">383.348263</span><span class="p">,</span> <span class="mf">201.654999</span><span class="p">,</span>
+                             <span class="mf">200.123762</span><span class="p">,</span> <span class="mf">196.698042</span><span class="p">,</span> <span class="mf">195.736534</span><span class="p">,</span>
+                             <span class="mf">75.269065</span><span class="p">,</span> <span class="mf">72.94012</span><span class="p">,</span> <span class="mf">70.402739</span><span class="p">,</span>
+                             <span class="mf">68.651958</span><span class="p">,</span> <span class="mf">65.289743</span><span class="p">,</span> <span class="mf">64.556735</span><span class="p">,</span>
+                             <span class="mf">63.904694</span><span class="p">,</span> <span class="mf">60.051442</span><span class="p">,</span> <span class="mf">58.698334</span><span class="p">,</span>
+                             <span class="mf">55.589005</span><span class="p">,</span> <span class="mf">52.608038</span><span class="p">,</span> <span class="mf">43.883525</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">presets</span><span class="p">[</span><span class="s1">&#39;harmonic&#39;</span><span class="p">]),</span>
 <span class="p">}</span>
-
-<span class="c1"># (Optional) Print the species dictionary</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{&#39;Fe&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000026BD99B2A58&gt;,
- &#39;Fe2O3&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000026BD99B29B0&gt;,
- &#39;Fe3O4&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000026BD99B2E80&gt;,
- &#39;FeO&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000026BD99B2B00&gt;,
- &#39;O2&#39;: &lt;pmutt.statmech.StatMech object at 0x0000026BD99B2FD0&gt;}
-</pre></div></div>
 </div>
 </div>
 <div class="section" id="Create-Reactions-for-Phase-Diagram">
 <h2>Create Reactions for Phase Diagram<a class="headerlink" href="#Create-Reactions-for-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
 <p>The reactions will be initialized and put in a list. Notice that the
-stiochiometric coefficient of O2 in all reactions is 1 to ensure
-consistency. If you are unfamiliar with initializing reactions, see the
-reactions example.</p>
+stoichiometric coefficient of CO changes for higher coverages. If you
+are unfamiliar with initializing reactions, see the Reactions example.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [2]:
@@ -516,12 +453,14 @@ reactions example.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
 
-<span class="n">reactions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;2Fe+O2=2FeO&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">),</span>
-    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">Fe+O2=</span><span class="si">{}</span><span class="s1">Fe2O3&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">4.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">),</span>
-                         <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">),</span>
-    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">reaction_str</span><span class="o">=</span><span class="s1">&#39;1.5Fe+O2=0.5Fe3O4&#39;</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span>
-<span class="p">]</span>
+<span class="n">reactions</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt = Pt&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span> <span class="c1"># Clean surface</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt + CO = CO(S) 1/16ML fcc&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt + CO = CO(S) 1/16ML br&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt + CO = CO(S) 1/16ML top&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt + 2CO = CO(S) 1/8ML&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt + 3CO = CO(S) 3/16ML&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">),</span>
+    <span class="n">Reaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;Pt + 8CO = CO(S) 1/2ML&#39;</span><span class="p">,</span> <span class="n">species</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -550,26 +489,29 @@ reactions example.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="c1"># K</span>
 <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">phase_diagram</span><span class="o">.</span><span class="n">plot_1D</span><span class="p">(</span><span class="n">x_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;Plotting adjustments&#39;&#39;&#39;</span>
-<span class="c1"># Add custom legend</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;FeO&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe3O4&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe2O3&#39;</span><span class="p">])</span>
-<span class="c1"># Add custom x axis label</span>
+<span class="c1"># Set colors to lines</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;#000080&#39;</span><span class="p">,</span> <span class="s1">&#39;#0029FF&#39;</span><span class="p">,</span> <span class="s1">&#39;#00D5FF&#39;</span><span class="p">,</span> <span class="s1">&#39;#7AFF7D&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;#FFE600&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF4A00&#39;</span><span class="p">,</span> <span class="s1">&#39;#800000&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()):</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+
+<span class="c1"># Set labels to lines</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;0 ML&#39;</span><span class="p">,</span> <span class="s1">&#39;1/16 ML (fcc)&#39;</span><span class="p">,</span> <span class="s1">&#39;1/16 ML (bridge)&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;1/16 ML (top)&#39;</span><span class="p">,</span> <span class="s1">&#39;1/8 ML&#39;</span><span class="p">,</span> <span class="s1">&#39;3/16 ML&#39;</span><span class="p">,</span> <span class="s1">&#39;1/2 ML&#39;</span><span class="p">)</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">labels</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+           <span class="n">title</span><span class="o">=</span><span class="s1">&#39;CO/Pt Configuration&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
 
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Text(0.5, 0, &#39;Temperature (K)&#39;)
+<span class="n">fig1</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mf">150.</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -577,7 +519,7 @@ reactions example.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_8_1.png" src="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_8_1.png" />
+<img alt="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_8_0.png" src="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_8_0.png" />
 </div>
 </div>
 </div>
@@ -585,37 +527,30 @@ reactions example.</p>
 <h2>Creating a 2D Phase Diagram<a class="headerlink" href="#Creating-a-2D-Phase-Diagram" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Generate Pressure range</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="c1"># K</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># bar</span>
 
-<span class="n">fig3</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">c3</span><span class="p">,</span> <span class="n">cbar3</span> <span class="o">=</span> <span class="n">phase_diagram</span><span class="o">.</span><span class="n">plot_2D</span><span class="p">(</span><span class="n">x1_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x1_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
-                                             <span class="n">x2_name</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">x2_values</span><span class="o">=</span><span class="n">P</span><span class="p">,</span>
-                                             <span class="n">G_units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
+<span class="n">fig2</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">cbar2</span> <span class="o">=</span> <span class="n">phase_diagram</span><span class="o">.</span><span class="n">plot_2D</span><span class="p">(</span><span class="n">x1_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x1_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
+                                             <span class="n">x2_name</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">x2_values</span><span class="o">=</span><span class="n">P</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;Plotting adjustments&#39;&#39;&#39;</span>
-<span class="c1"># Add custom axis labels</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Pressure (bar)&#39;</span><span class="p">)</span>
-<span class="c1"># Change y axis to log scale</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="c1"># Add custom colors</span>
+<span class="c1"># Change y axis to use log scale</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="c1"># Add axis labels</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;CO Pressure (bar)&#39;</span><span class="p">)</span>
+<span class="c1"># Change color scheme</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">set_cmap</span><span class="p">(</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
-<span class="c1"># Set custom labels on colorbar</span>
-<span class="n">cbar3</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;FeO&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe3O4&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe2O3&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[5]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>[Text(1, 0, &#39;FeO&#39;), Text(1, 0, &#39;Fe3O4&#39;), Text(1, 0, &#39;Fe2O3&#39;)]
+<span class="c1"># Add labels</span>
+<span class="n">cbar2</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">fig2</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mf">150.</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -623,7 +558,7 @@ reactions example.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_10_1.png" src="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_10_1.png" />
+<img alt="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_10_0.png" src="../../_images/examples_jupyter_phase_diagram_PhaseDiagram_10_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

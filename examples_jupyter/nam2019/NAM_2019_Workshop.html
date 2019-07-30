@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html#workshops">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
@@ -352,8 +353,85 @@ div.nboutput div.output_area.stderr {
 Kinetic Modeling” workshop can be found on <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/nam_2019.html">our documentation
 page</a>.</p>
 </div>
+<div class="section" id="Table-of-Contents">
+<h1>Table of Contents<a class="headerlink" href="#Table-of-Contents" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><strong>1.</strong><a class="reference external" href="#section_1">Virtual Kinetic Laboratory Ecosystem</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>2.</strong><a class="reference external" href="#section_2">Useful Links</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>3.</strong><a class="reference external" href="#section_3">Constants</a></div>
+</div>
+<p>|– <strong>3.1.</strong><a class="reference external" href="#section_3_1">Access common constants in appropriate
+units</a></p>
+<p>|– <strong>3.2.</strong><a class="reference external" href="#section_3_2">Convert between units</a></p>
+<p>|– <strong>3.3.</strong><a class="reference external" href="#section_3_3">Convert between equivalent quantities</a></p>
+<div class="line-block">
+<div class="line"><strong>4.</strong><a class="reference external" href="#section_4">Exercise 1</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>5.</strong><a class="reference external" href="#section_5">Creating statistical mechanical objects using
+StatMech</a></div>
+</div>
+<p>|– <strong>5.1.</strong><a class="reference external" href="#section_5_1">Supported StatMech models</a></p>
+<p>|–<a href="#id1"><span class="problematic" id="id2">|</span></a>– <strong>5.1.1</strong><a class="reference external" href="#section_5_1_1">Translations</a></p>
+<p>|–<a href="#id3"><span class="problematic" id="id4">|</span></a>– <strong>5.1.2.</strong><a class="reference external" href="#section_5_1_2">Vibrations</a></p>
+<p>|–<a href="#id5"><span class="problematic" id="id6">|</span></a>– <strong>5.1.3.</strong><a class="reference external" href="#section_5_1_3">Rotations</a></p>
+<p>|–<a href="#id7"><span class="problematic" id="id8">|</span></a>– <strong>5.1.4.</strong><a class="reference external" href="#section_5_1_4">Electronic</a></p>
+<p>|–<a href="#id9"><span class="problematic" id="id10">|</span></a>– <strong>5.1.5.</strong><a class="reference external" href="#section_5_1_5">Miscellaneous</a></p>
+<p>|– <strong>5.2.</strong><a class="reference external" href="#section_5_2">Initializing StatMech modes
+individually</a></p>
+<p>|– <strong>5.3.</strong><a class="reference external" href="#section_5_3">Initializing StatMech modes using
+presets</a></p>
+<div class="line-block">
+<div class="line"><strong>6.</strong><a class="reference external" href="#section_6">Plot Thermodynamic Quantities</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>7.</strong><a class="reference external" href="#section_7">Exercise 2</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>8.</strong><a class="reference external" href="#section_8">Creating empirical objects</a></div>
+</div>
+<p>|– <strong>8.1.</strong><a class="reference external" href="#section_8_1">Inputting a NASA polynomial directly</a></p>
+<p>|– <strong>8.2.</strong><a class="reference external" href="#section_8_2">Fitting an empirical object to a StatMech
+object</a></p>
+<div class="line-block">
+<div class="line"><strong>9.</strong><a class="reference external" href="#section_9">Input/Output</a></div>
+</div>
+<p>|– <strong>9.1.</strong><a class="reference external" href="#section_9_1">Input via Excel</a></p>
+<p>|– <strong>9.2.</strong><a class="reference external" href="#section_9_2">Output via Thermdat</a></p>
+<div class="line-block">
+<div class="line"><strong>10.</strong><a class="reference external" href="#section_10">Reactions</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>11.</strong><a class="reference external" href="#section_11">Exercise 3</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>12.</strong><a class="reference external" href="#section_12">Solutions</a></div>
+</div>
+<p>|– <strong>12.1.</strong><a class="reference external" href="#section_12_1">Solution 1</a></p>
+<p>|– <strong>12.2.</strong><a class="reference external" href="#section_12_2">Solution 2</a></p>
+<p>|– <strong>12.3.</strong><a class="reference external" href="#section_12_3">Solution 3</a></p>
+</div>
 <div class="section" id="1.-Virtual-Kinetic-Laboratory-Ecosystem">
 <h1>1. Virtual Kinetic Laboratory Ecosystem<a class="headerlink" href="#1.-Virtual-Kinetic-Laboratory-Ecosystem" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Estimates thermochemical and kinetic parameters using statistical
+mechanics, transition state theory</li>
+<li>Writes input files for kinetic models and eases thermodynamic
+analysis</li>
+<li>Implemented in Python<ul>
+<li>Easy to learn</li>
+<li>Heavily used in scientific community</li>
+<li>Object-oriented approach is a natural analogy to chemical
+phenomenon</li>
+</ul>
+</li>
+<li>Library approach allows users to define the starting point and end
+point</li>
+</ul>
 </div>
 <div class="section" id="2.-Useful-Links">
 <h1>2. Useful Links<a class="headerlink" href="#2.-Useful-Links" title="Permalink to this headline">¶</a></h1>
@@ -382,8 +460,8 @@ wide variety of functions for constants and unit conversion.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
 
-<span class="n">h1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="s1">&#39;J s&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h = </span><span class="si">{}</span><span class="s1"> J s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="s1">&#39;eV s&#39;</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h = </span><span class="si">{}</span><span class="s1"> eV s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -392,7 +470,7 @@ wide variety of functions for constants and unit conversion.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-h = 6.62607004e-34 J s
+h = 6.582119513926018e-16 eV s
 </pre></div></div>
 </div>
 </div>
@@ -471,19 +549,21 @@ h = 6.62607004e-34 J s
 <h1>5. Creating statistical mechanical objects using StatMech<a class="headerlink" href="#5.-Creating-statistical-mechanical-objects-using-StatMech" title="Permalink to this headline">¶</a></h1>
 <p>Molecules show translational, vibrational, rotational, electronic, and
 nuclear modes.</p>
+<div class="section" id="5.1.-Supported-StatMech-modes">
+<h2>5.1. Supported StatMech modes<a class="headerlink" href="#5.1.-Supported-StatMech-modes" title="Permalink to this headline">¶</a></h2>
 <p>The StatMech object allows us to specify translational, vibrational,
 rotational, electronic and nuclear modes independently, which gives
 flexibility in what behavior you would like. Below are the available
 modes.</p>
-<div class="section" id="5.1.-Translations">
-<h2>5.1. Translations<a class="headerlink" href="#5.1.-Translations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="5.1.1.-Translations">
+<h3>5.1.1. Translations<a class="headerlink" href="#5.1.1.-Translations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">`FreeTrans</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#freetrans">https://vlachosgroup.github.io/pMuTT/statmech.html#freetrans</a>&gt;`__
 - Translations assuming no intermolecular interactions</li>
 </ul>
 </div>
-<div class="section" id="5.2.-Vibrations">
-<h2>5.2. Vibrations<a class="headerlink" href="#5.2.-Vibrations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="5.1.2.-Vibrations">
+<h3>5.1.2. Vibrations<a class="headerlink" href="#5.1.2.-Vibrations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">`HarmonicVib</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#harmonicvib">https://vlachosgroup.github.io/pMuTT/statmech.html#harmonicvib</a>&gt;`__
 - Harmonic vibrations</li>
@@ -498,15 +578,15 @@ oscillators</li>
 vibrations. Improves accuracy at lower temperatures.</li>
 </ul>
 </div>
-<div class="section" id="5.3.-Rotations">
-<h2>5.3. Rotations<a class="headerlink" href="#5.3.-Rotations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="5.1.3.-Rotations">
+<h3>5.1.3. Rotations<a class="headerlink" href="#5.1.3.-Rotations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">`RigidRotor</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#rigidrotor">https://vlachosgroup.github.io/pMuTT/statmech.html#rigidrotor</a>&gt;`__
 - Molecule can be rotated with no change in bond properties</li>
 </ul>
 </div>
-<div class="section" id="5.4.-Electronic">
-<h2>5.4. Electronic<a class="headerlink" href="#5.4.-Electronic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="5.1.4.-Electronic">
+<h3>5.1.4. Electronic<a class="headerlink" href="#5.1.4.-Electronic" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">`GroundStateElec</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#groundstateelec">https://vlachosgroup.github.io/pMuTT/statmech.html#groundstateelec</a>&gt;`__
 - Electronic ground state of the system</li>
@@ -515,8 +595,8 @@ vibrations. Improves accuracy at lower temperatures.</li>
 reference adsorbate</li>
 </ul>
 </div>
-<div class="section" id="5.5.-Miscellaneous">
-<h2>5.5. Miscellaneous<a class="headerlink" href="#5.5.-Miscellaneous" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="5.1.5.-Miscellaneous">
+<h3>5.1.5. Miscellaneous<a class="headerlink" href="#5.1.5.-Miscellaneous" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">`EmptyMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#empty-mode</a>&gt;`__
 - Default mode if not specified. Does not contribute to any
@@ -524,13 +604,16 @@ properties</li>
 <li><code class="docutils literal notranslate"><span class="pre">`ConstantMode</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#constant-mode">https://vlachosgroup.github.io/pMuTT/statmech.html#constant-mode</a>&gt;`__
 - Specify arbitrary values to thermodynamic quantities</li>
 </ul>
+<p>Using a <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> mode gives you access to all the common
+thermodynamic properties.</p>
 <p>For this example, we will use a hydrogen molecule as an ideal gas: -
 translations with no interaction between molecules - harmonic vibrations
 - rigid rotor rotations - ground state electronic structure - no
 contribution from nuclear modes.</p>
 </div>
-<div class="section" id="5.6.-Initializing-StatMech-modes-individually">
-<h2>5.6. Initializing StatMech modes individually<a class="headerlink" href="#5.6.-Initializing-StatMech-modes-individually" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="5.2.-Initializing-StatMech-modes-individually">
+<h2>5.2. Initializing StatMech modes individually<a class="headerlink" href="#5.2.-Initializing-StatMech-modes-individually" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [5]:
@@ -579,8 +662,8 @@ S_H2(T=298 K) = 130.23 J/mol/K
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="5.7.-Initializing-StatMech-modes-using-presets">
-<h2>5.7. Initializing StatMech modes using presets<a class="headerlink" href="#5.7.-Initializing-StatMech-modes-using-presets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="5.3.-Initializing-StatMech-modes-using-presets">
+<h2>5.3. Initializing StatMech modes using presets<a class="headerlink" href="#5.3.-Initializing-StatMech-modes-using-presets" title="Permalink to this headline">¶</a></h2>
 <p>Commonly used models can be accessed via
 <code class="docutils literal notranslate"><span class="pre">`presets</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/statmech.html#presets">https://vlachosgroup.github.io/pMuTT/statmech.html#presets</a>&gt;`__.
 The currently supported models are:</p>
@@ -666,7 +749,7 @@ to plot any function with respect to 1 or 2 variables.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_18_0.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_18_0.png" />
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_42_0.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_42_0.png" />
 </div>
 </div>
 </div>
@@ -678,8 +761,8 @@ inputs are given below.</li>
 </ol>
 <table border="1" class="docutils">
 <colgroup>
-<col width="53%" />
-<col width="47%" />
+<col width="52%" />
+<col width="48%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -700,7 +783,7 @@ inputs are given below.</li>
 <td>0</td>
 </tr>
 <tr class="row-even"><td>Vibrational Wavenumbers (cm-1)</td>
-<td>3825.434 3710.264 1582.432</td>
+<td>3825.434, 3710.264, 1582.432</td>
 </tr>
 </tbody>
 </table>
@@ -829,7 +912,7 @@ H_H2(T=298 K) = -0.0010337769809016294 kcal/mol
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_23_1.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_23_1.png" />
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_50_1.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_50_1.png" />
 </div>
 </div>
 </div>
@@ -863,15 +946,17 @@ the <code class="docutils literal notranslate"><span class="pre">from_statmech</
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_25_0.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_25_0.png" />
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_53_0.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_53_0.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="9.-Input/Output">
 <h1>9. Input/Output<a class="headerlink" href="#9.-Input/Output" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="9.1.-Excel">
-<h2>9.1. Excel<a class="headerlink" href="#9.1.-Excel" title="Permalink to this headline">¶</a></h2>
+<p>pMuTT has more IO functionality than below. See this page for <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/io.html">supported
+IO functions</a>.</p>
+<div class="section" id="9.1.-Input-via-Excel">
+<h2>9.1. Input via Excel<a class="headerlink" href="#9.1.-Input-via-Excel" title="Permalink to this headline">¶</a></h2>
 <p>Encoding each object in Python can be tedious. You can read several
 species from Excel spreadsheets using
 <code class="docutils literal notranslate"><span class="pre">`pmutt.io.excel.read_excel</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel">https://vlachosgroup.github.io/pmutt/io.html?highlight=read_excel#pmutt.io.excel.read_excel</a>&gt;`__.
@@ -1185,13 +1270,13 @@ RU(B)                     0.0                   0.0                   0.0
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
-c:\users\jonat\appdata\local\conda\conda\envs\pmutt_nam2019\lib\site-packages\scipy\stats\stats.py:1040: RuntimeWarning: invalid value encountered in double_scalars
+C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="9.2.-Thermdat">
-<h2>9.2. Thermdat<a class="headerlink" href="#9.2.-Thermdat" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="9.2.-Output-via-Thermdat">
+<h2>9.2. Output via Thermdat<a class="headerlink" href="#9.2.-Output-via-Thermdat" title="Permalink to this headline">¶</a></h2>
 <p>The thermdat format uses NASA polynomials to represent several species.
 It has a very particular format so doing it manually is error-prone. You
 can write a list of <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects to thermdat format using
@@ -1229,9 +1314,10 @@ spreadsheet.</p>
 <div class="section" id="10.-Reactions">
 <h1>10. Reactions<a class="headerlink" href="#10.-Reactions" title="Permalink to this headline">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects can be created by putting together <code class="docutils literal notranslate"><span class="pre">Nasa</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Shomate</span></code> and <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects. The <code class="docutils literal notranslate"><span class="pre">from_string</span></code> method is the
-easiest way to create a <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> object. It requires the relevant
-species to be in a dictionary and a string to describe the reaction.</p>
+<code class="docutils literal notranslate"><span class="pre">Shomate</span></code> and <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">from_string</span></code> method is the easiest way to create a <code class="docutils literal notranslate"><span class="pre">Reaction</span></code>
+object. It requires the relevant species to be in a dictionary and a
+string to describe the reaction.</p>
 <p>We will demonstrate its use for the formation of NH3.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
@@ -1304,7 +1390,9 @@ to read the thermdat from ‘./output/thermdat’.</li>
 <code class="docutils literal notranslate"><span class="pre">pmutt.pmutt_list_to_dict</span></code>. The syntax to use the function is shown
 below.</li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_list</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+
+<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_list</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -1312,7 +1400,7 @@ below.</li>
 <code class="docutils literal notranslate"><span class="pre">NH3(S)</span> <span class="pre">+</span> <span class="pre">RU(S)</span> <span class="pre">=</span> <span class="pre">TS1_NH3(S)</span> <span class="pre">=</span> <span class="pre">NH2(S)</span> <span class="pre">+</span> <span class="pre">H(S)</span></code> and the dictionary
 from step 2.</li>
 <li>Calculate the forward reaction enthalpy in kcal/mol at 298 K using
-<code class="docutils literal notranslate"><span class="pre">`Reaction.get_E_act</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act">https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act</a>&gt;`__.</li>
+<code class="docutils literal notranslate"><span class="pre">`Reaction.get_delta_H</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act">https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act</a>&gt;`__.</li>
 <li>Calculate the forward activation energy in kcal/mol at 298 K using
 <code class="docutils literal notranslate"><span class="pre">`Reaction.get_E_act</span></code> &lt;<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act">https://vlachosgroup.github.io/pMuTT/reactions.html#pmutt.reaction.Reaction.get_E_act</a>&gt;`__.</li>
 </ol>
@@ -1348,6 +1436,7 @@ from step 2.</li>
 <h1>12. Solutions<a class="headerlink" href="#12.-Solutions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="12.1.-Solution-to-Exercise-1">
 <h2>12.1. Solution to Exercise 1<a class="headerlink" href="#12.1.-Solution-to-Exercise-1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="#section_4">Link to Exercise 1</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [17]:
@@ -1377,6 +1466,7 @@ H/RT = 19.460878937648065
 </div>
 <div class="section" id="12.2.-Solution-to-Exercise-2">
 <h2>12.2. Solution to Exercise 2<a class="headerlink" href="#12.2.-Solution-to-Exercise-2" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="#section_7">Link to Exercise 2</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [18]:
@@ -1436,20 +1526,22 @@ G_H2O(T = 500 K, P = 2 bar) = -7.060978619777942 eV
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_40_1.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_40_1.png" />
+<img alt="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_78_1.png" src="../../_images/examples_jupyter_nam2019_NAM_2019_Workshop_78_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="12.3.-Solution-to-Exercise-3">
 <h2>12.3. Solution to Exercise 3<a class="headerlink" href="#12.3.-Solution-to-Exercise-3" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="#section_11">Link to Exercise 3</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [21]:
+<span></span>In [19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
 <span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.reaction</span> <span class="k">import</span> <span class="n">Reaction</span>
 
 <span class="c1"># 1. Read the thermdat file</span>
 <span class="n">species_list</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;./output/thermdat&#39;</span><span class="p">)</span>
@@ -1478,16 +1570,6 @@ G_H2O(T = 500 K, P = 2 bar) = -7.060978619777942 eV
 H_rxn = -8.5 kcal/mol
 Ea_fwd = 22.8 kcal/mol
 </pre></div></div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
 </div>
 </div>
 </div>

@@ -113,5 +113,26 @@ Topics Covered
 - Save the :class:`~pmutt.reaction.phasediagram.PhaseDiagram` object as a 
   ``JSON`` file
 
+Workshops
+=========
+
+NAM26 Workshop
+--------------
+- `Jupyter Notebook (NAM26 Workhop) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb>`_
+- `Python Script (NAM26 Workhop) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.py>`_
+
+Topics Covered
+^^^^^^^^^^^^^^
+
+- Using constants and converting units using the :mod:`~pmutt.constants` module
+- Initializing :class:`~pmutt.statmech.StatMech` objects by specifying all modes
+  and by using :ref:`presets`
+- Initializing empirical objects such as :class:`~pmutt.empirical.nasa.Nasa`
+  objects using a :class:`~pmutt.statmech.StatMech` object or directly using 
+  the polynomial
+- Input (via Excel) and output :class:`~pmutt.empirical.nasa.Nasa` polynomials
+  to thermdat format
+- Initializing :class:`~pmutt.reaction.Reaction` objects from strings
+
 .. _`examples folder`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter
 .. _`using these instructions`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/
