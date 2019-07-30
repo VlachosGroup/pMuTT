@@ -5,8 +5,9 @@ from pmutt.reaction import Reaction
 from pmutt.omkm.phase import InteractingInterface, StoichSolid
 
 class SurfaceReaction(Reaction):
-    """Cantera reaction. Has additional attributes to support input and output
-
+    """Expresses OpenMKM surface reaction in Cantera CTI format reaction.
+    Inherits from :class:`~pmutt.reaction.Reaction`.
+    
     Attributes
     ----------
         beta : float, optional
@@ -45,7 +46,7 @@ class SurfaceReaction(Reaction):
         return n_surf
 
     def get_A(self, sden_operation='min', include_entropy=True, T=c.T0('K'),
-              units='molecule/cm2', **kwargs):
+              units='molec/cm2', **kwargs):
         """Calculates the preexponential factor in the Cantera format
 
         Parameters
@@ -53,9 +54,11 @@ class SurfaceReaction(Reaction):
         sden_operation : str, optional
             Site density operation to use. Default is 'min'
         include_entropy : bool, optional
-            If True, includes the act entropy. Default is True
+            If True, includes the entropy of activation. Default is True
         T : float, optional
             Temperature in K. Default is 298.15 K
+        units : str, optional
+            Units for A. Default is 'molec/cm2'
         kwargs : keyword arguments
             Parameters required to calculate pre-exponential factor
         """
@@ -101,14 +104,15 @@ class SurfaceReaction(Reaction):
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
             kwargs : keyword arguments
-                Parameters required to calculate Gibbs energy. See class
-                docstring to see how to pass specific parameters to different
-                species.
+                Parameters required to calculate enthalpy of activation.
         Returns
         -------
             HoRT_act : float
-                Change in Gibbs energy between reactants/products and the
-                transition state
+                Dimensionless activation enthalpy. Returns the max of the
+                following to ensure stable MKM performance:
+                - Difference between reactants/products and the transition state
+                - Difference between the reactants and the products
+                - 0
         """
         act = self.transition_state is not None
         return np.max([0.,
@@ -128,14 +132,15 @@ class SurfaceReaction(Reaction):
                 If True, uses the transition state as the final state. Default
                 is False
             kwargs : keyword arguments
-                Parameters required to calculate Gibbs energy. See class
-                docstring to see how to pass specific parameters to different
-                species.
+                Parameters required to calculate Gibbs energy.
         Returns
         -------
             GoRT_act : float
-                Change in Gibbs energy between reactants/products and the
-                transition state
+                Dimensionless Gibbs energy of activation. Returns the max of the
+                following to ensure stable MKM performance:
+                - Difference between reactants/products and the transition state
+                - Difference between the reactants and the products
+                - 0
         """
         act = self.transition_state is not None
         return np.max([0., 
@@ -210,9 +215,9 @@ class SurfaceReaction(Reaction):
         obj_dict['sticking_coeff'] = self.sticking_coeff
         return obj_dict
 
-    def to_CTI(self, T=c.T0('K'), P=c.P0('bar'), quantity_unit='molecule',
-               length_unit='cm', act_energy_unit='J/mol'):
-        """Writes the string for a single surface reaction reaction
+    def to_CTI(self, T=c.T0('K'), P=c.P0('bar'), quantity_unit='molec',
+               length_unit='cm', act_energy_unit='cal/mol'):
+        """Writes the object in Cantera's CTI format.
 
         Parameters
         ----------
@@ -220,8 +225,12 @@ class SurfaceReaction(Reaction):
                 Temperature in K. Default is 298.15 K
             P : float, optional
                 Pressure in bar. Default is 1 bar
+            quantity_unit : str, optional
+                Quantity unit to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to calculate A. Default is 'cm'
             act_energy_unit : str, optional
-                Unit to use for activation energy. Default is 'J/mol'
+                Unit to use for activation energy. Default is 'cal/mol'
         Returns
         -------
             cti_str : str

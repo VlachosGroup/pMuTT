@@ -69,6 +69,33 @@ class Phase:
         return self._species.copy()
 
 class IdealGas(Phase):
+    """Expresses ideal gas as Cantera CTI file. Inherits from
+    :class:`~pmutt.cantera.phase.Phase`.
+
+    Attributes
+    ----------
+        name : str
+            Name of the phase
+        species : list of :class:`~pmutt._ModelBase` objects
+            Species present in Phase
+        reactions : str, optional
+            Source of reactions. If any reactions in CTI file occur in this
+            phase, specify 'all'. Default is None.
+        note : str, optional
+            Comment field for users. Default is None.
+        initial_state : None, optional
+            Currently not supported. Gives ability to set initial temperature,
+            pressure or other operating variables of the phase. Default is None.
+        kinetics : None, optional
+            Currently not supported. Gives ability to specify reaction kinetics
+            to use for phase. Default is None.
+        transport : None, optional
+            Currently not supported. Gives ability to specify transport model
+            to use for phase. Default is None.
+        options : None, optional
+            Currently not supported. Specify special options to the phase.
+            Default is None.
+    """
     def __init__(self, name, species=[], initial_state=None, kinetics=None,
                  reactions=None, transport=None, options=None, note=None):
         super().__init__(name=name, species=species, kinetics=kinetics,
@@ -76,6 +103,17 @@ class IdealGas(Phase):
                          reactions=reactions, initial_state=initial_state)
 
     def to_CTI(self, max_line_len=80):
+        """Writes the object in Cantera's CTI format.
+
+        Parameters
+        ----------
+            max_line_len : int, optional
+                Maximum number of characters in the line. Default is 80.
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         species_names = [species.name for species in self.species]
         # Add required fields
         cti_str = ('ideal_gas(name={},\n'
@@ -105,7 +143,29 @@ class IdealGas(Phase):
         return cti_str
 
 class StoichSolid(Phase):
+    """Expresses stoichiometric solid as Cantera CTI file. Inherits from
+    :class:`~pmutt.cantera.phase.Phase`.
 
+    Attributes
+    ----------
+        name : str
+            Name of the phase
+        species : list of :class:`~pmutt._ModelBase` objects
+            Species present in Phase
+        density : float, optional
+            Bulk density in g/cm3. Default is None
+        initial_state : None, optional
+            Currently not supported. Gives ability to set initial temperature,
+            pressure or other operating variables of the phase. Default is None.
+        transport : None, optional
+            Currently not supported. Gives ability to specify transport model
+            to use for phase. Default is None.
+        options : None, optional
+            Currently not supported. Specify special options to the phase.
+            Default is None.
+        note : str, optional
+            Comment field for users. Default is None.
+    """
     def __init__(self, name, species=[], initial_state=None, transport=None,
                  options=None, density=None, note=None):
         super().__init__(name=name, species=species, transport=transport,
@@ -113,8 +173,26 @@ class StoichSolid(Phase):
                          initial_state=initial_state)
         self.density = density
 
-    def to_CTI(self, max_line_len=80):
+    def to_CTI(self, max_line_len=80, mass_unit='g', length_unit='cm'):
+        """Writes the object in Cantera's CTI format.
+
+        Parameters
+        ----------
+            max_line_len : int, optional
+                Maximum number of characters in the line. Default is 80.
+            mass_unit : str, optional
+                Mass unit for `density`. Default is 'g'
+            length_unit : str, optional
+                Length unit for `density`. Default is 'cm'
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         species_names = [species.name for species in self.species]
+        volume_unit = '{}3'.format(length_unit)
+        density = self.density*c.convert_unit(initial='g', final=mass_unit)\
+                  /c.convert_unit(initial='cm3', final=volume_unit)
         # Add required fields
         cti_str = ('stoichiometric_solid(name={},\n'
                    '                     elements={},\n'
@@ -126,7 +204,7 @@ class StoichSolid(Phase):
                                   max_line_len=max_line_len),
                        obj_to_CTI(species_names, line_len=max_line_len-29,
                                   max_line_len=max_line_len),
-                       self.density))
+                       density))
         # Add optional fields
         optional_fields = ('transport', 'options', 'note', 'initial_state')
         for field in optional_fields:

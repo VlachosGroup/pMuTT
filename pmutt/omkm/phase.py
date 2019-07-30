@@ -19,7 +19,33 @@ class StoichSolid(phase_cantera.StoichSolid):
 
 
 class InteractingInterface(phase_cantera.Phase):
-    """OpenMKM implementation of interacting interface.
+    """OpenMKM implementation of interacting interface. Inherits from
+    :class:`~pmutt.cantera.phase.Phase`.
+
+    Attributes
+    ----------
+        name : str
+            Name of the phase
+        species : list of :class:`~pmutt._ModelBase` objects
+            Species present in Phase
+        site_density : float, optional
+            Site density in g/cm2. Default is None
+        phases : list of :class:`~pmutt.cantera.phase.Phase` objects
+            Phases associated with this interface
+        interactions : str, optional
+            Source of lateral interactions. If any lateral interactions in CTI
+            file occur in this phase, specify 'all'. Default is None.
+        note : str, optional
+            Comment field for users. Default is None.
+        initial_state : None, optional
+            Currently not supported. Gives ability to set initial temperature,
+            pressure or other operating variables of the phase. Default is None.
+        transport : None, optional
+            Currently not supported. Gives ability to specify transport model
+            to use for phase. Default is None.
+        options : None, optional
+            Currently not supported. Specify special options to the phase.
+            Default is None.
     """
     def __init__(self, name, species=[], site_density=None, phases=None,
                  initial_state=None, kinetics=None, reactions=None,
@@ -32,6 +58,21 @@ class InteractingInterface(phase_cantera.Phase):
         self.interactions = interactions
 
     def to_CTI(self, max_line_len=80, quantity_unit='molec', length_unit='cm'):
+        """Writes the object in Cantera's CTI format.
+
+        Parameters
+        ----------
+            max_line_len : int, optional
+                Maximum number of characters in the line. Default is 80.
+            quantity_unit : str, optional
+                Quantity unit to use to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to use to calculate A. Default is 'cm'
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         species_names = [species.name for species in self.species]
         area_unit = '{}2'.format(length_unit)
         site_den = self.site_density\

@@ -553,6 +553,13 @@ class Nasa(EmpiricalBase):
                              **kwargs)
 
     def to_CTI(self):
+        """Writes the object in Cantera's CTI format.
+
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         elements = {key: int(val) for key, val in self.elements.items()}
         cti_str = ('species(name="{}", atoms={},\n'
                    '        thermo=(NASA([{}, {}],\n'
@@ -627,7 +634,7 @@ class Nasa9(EmpiricalBase):
 
     :math:`\\frac {S} {R} = -a_{1}\\frac {T^{-2}} {2} - a_2 \\frac {1} {T} +
     a_{3} \\ln {T} + a_{4} T + a_{5} \\frac {T^{2}} {2} + a_{6}
-    \\frac {T^{3}} {3} + a_{7}\\frac {T^{4}} {4} + a_{8}`
+    \\frac {T^{3}} {3} + a_{7}\\frac {T^{4}} {4} + a_{9}`
 
     Attributes
     ----------
@@ -1168,6 +1175,13 @@ class Nasa9(EmpiricalBase):
         return cls(**json_obj)
 
     def to_CTI(self):
+        """Writes the object in Cantera's CTI format.
+
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         elements = {key: int(val) for key, val in self.elements.items()}
         cti_str = ('species(name="{}", atoms={},\n'
                    '        thermo=(').format(
@@ -1299,6 +1313,18 @@ class SingleNasa9(EmpiricalBase):
         return cls(**json_obj)
 
     def to_CTI(self, line_indent=False):
+        """Writes the object in Cantera's CTI format.
+
+        Parameters
+        ----------
+            line_indent : bool, optional
+                If True, the first line is indented by 16 spaces. Default is
+                False
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         if line_indent:
             line_adj = '                '
         else:

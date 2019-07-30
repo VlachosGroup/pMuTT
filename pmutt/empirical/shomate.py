@@ -436,6 +436,13 @@ class Shomate(EmpiricalBase):
         return cls(**json_obj)
 
     def to_CTI(self):
+        """Writes the object in Cantera's CTI format.
+
+        Returns
+        -------
+            CTI_str : str
+                Object represented as a CTI string.
+        """
         cti_str = ('species(name="{}", atoms={}\n'
                    '        thermo=(Shomate([{}, {}],\n'
                    '                        [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
