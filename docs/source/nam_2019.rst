@@ -24,16 +24,12 @@ pMuTT instructions
 5. Run the cell with the Python code to ensure the most updated version of
    pMuTT is installed.
 
-Microkinetic Modeling instructions
-----------------------------------
-1. `Install VirtualBox`_. Use all the default values.
-2. `Download the OVA file`_, which contains the Microkinetic modeling software.
-   The username is "NAM26-attendee" and the password is
-   "easy SIGHT company TOWARD".
-3. Run VirtualBox and `import the OVA file`_.
-4. Windows users, `install MobaXterm`_ (unless you have a preferred SSH client).
-   Use all the default values. Mac and Linux users, the terminal program has
-   built-in SSH capabilities.
+OpenMKM
+-------
+This workshop had a microkinetic modeling section but the license was only
+available during the session. We will be releasing an open-source microkinetic
+modeling software (OpenMKM) soon. If interested, please e-mail Jon Lym
+(jlym@udel.edu) to sign up for the mailing list.
 
 Files
 -----
@@ -41,10 +37,10 @@ Files
 - `GitHub view of Jupyter notebook`_. Note this will not render pictures used in
   the presentation.
 
-Feedback
---------
-Please fill in `this feedback form`_ so we can improve! Your thoughts are
-greatly appreciated.
+Mailing List
+------------
+If you are interested in software developments, please sign up for our mailing
+list by e-mailing Jon Lym (jlym@udel.edu) to sign up!
 
 .. |NAM_label| image:: ./examples_jupyter/nam2019/images/IssuesLabel.png
    :height: 20
@@ -62,4 +58,3 @@ greatly appreciated.
 .. _`pMuTT Jupyter notebook`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb.. _`open it`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/execute.html
 .. _`Slides and the Jupyter Notebook can be found here.`: https://www.dropbox.com/sh/ds52yjn14ojqxgj/AACmbY9HGqI8pX2qKID98-Z5a?dl=0
 .. _`GitHub view of Jupyter notebook`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb
-.. _`this feedback form`: https://forms.gle/thqBsc8DJP8V1J7Z7

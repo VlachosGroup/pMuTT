@@ -1591,9 +1591,13 @@ class Reaction(_pmuttBase):
                 A = self.get_delta_q(rev=rev, act=True, T=T, ignore_q_elec=True,
                                      include_ZPE=False, **kwargs)
             except AttributeError:
-                A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
-        else:
+                # Partition function failed. Use entropy instead
+                use_q = False
+        if use_q:
             A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
+        print(type(A))
+        print(type(T))
+        print(type(m))
         return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
 
     def _parse_state(self, state):

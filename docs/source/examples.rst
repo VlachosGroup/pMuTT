@@ -3,15 +3,17 @@
 Examples
 ========
 This page and its subpages show some examples using the pMuTT code. All the 
-codes listed here are available in the `examples folder`_ as Jupyter notebooks 
-(*.ipynb) and ordinary Python scripts (*.py).
+codes listed here are available in the `examples folder`_ as Binder notebooks,
+Jupyter notebooks (\*.ipynb) and ordinary Python scripts (\*.py).
 
-If the Jupyter notebook does not open on GitHub, you can open it locally 
-`using these instructions`_.
+Clicking on the binder badge allows you to run the Jupyter notebook without
+needing to install pMuTT. If you would prefer to open the Jupyter notebook
+locally, `follow these instructions`_.
 
 Overview
 --------
-
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Foverview%2Foverview.ipynb
 - `Jupyter Notebook (Overview) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.ipynb>`_
 - `Python Script (Overview) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/overview/overview.py>`_
 
@@ -36,6 +38,8 @@ Topics Covered
 
 Experimental to Empirical
 -------------------------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexpt_data_to_empirical%2Fexpt_data_to_empirical_object.ipynb
 - `Jupyter Notebook (Experimental to Empirical) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb>`_
 - `Python Script (Experimental to Empirical) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.py>`_
 
@@ -52,6 +56,8 @@ Topics Covered
 
 Excel to Empirical Data
 -----------------------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexcel_to_empirical%2Fexcel_to_empirical.ipynb
 - `Jupyter Notebook (Excel to Empirical Data) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb>`_
 - `Python Script (Excel to Empirical Data) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.py>`_
 
@@ -67,6 +73,8 @@ Topics Covered
 
 Reaction
 --------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Freactions%2Freactions.ipynb
 - `Jupyter Notebook (Reaction) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.ipynb>`_
 - `Python Script (Reaction) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/reactions/reactions.py>`_
 
@@ -84,6 +92,8 @@ Topics Covered
 
 Chemkin_IO
 ----------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fchemkin_io%2FChemkin_IO.ipynb
 - `Jupyter Notebook (Chemkin_IO) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.ipynb>`_
 - `Python Script (Chemkin_IO) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.py>`_
 
@@ -98,6 +108,8 @@ Topics Covered
 
 Phase Diagram
 -------------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fphase_diagram%2FPhaseDiagram.ipynb
 - `Jupyter Notebook (Phase Diagram) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb>`_
 - `Python Script (Phase Diagram) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.py>`_
 
@@ -113,5 +125,28 @@ Topics Covered
 - Save the :class:`~pmutt.reaction.phasediagram.PhaseDiagram` object as a 
   ``JSON`` file
 
+Workshops
+---------
+
+NAM26 Workshop
+--------------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fnam2019%2FNAM_2019_Workshop.ipynb
+- `Jupyter Notebook (NAM26 Workhop) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb>`_
+- `Python Script (NAM26 Workhop) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.py>`_
+
+Topics Covered
+^^^^^^^^^^^^^^
+
+- Using constants and converting units using the :mod:`~pmutt.constants` module
+- Initializing :class:`~pmutt.statmech.StatMech` objects by specifying all modes
+  and by using :ref:`presets`
+- Initializing empirical objects such as :class:`~pmutt.empirical.nasa.Nasa`
+  objects using a :class:`~pmutt.statmech.StatMech` object or directly using 
+  the polynomial
+- Input (via Excel) and output :class:`~pmutt.empirical.nasa.Nasa` polynomials
+  to thermdat format
+- Initializing :class:`~pmutt.reaction.Reaction` objects from strings
+
 .. _`examples folder`: https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter
-.. _`using these instructions`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/
+.. _`follow these instructions`: https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/
