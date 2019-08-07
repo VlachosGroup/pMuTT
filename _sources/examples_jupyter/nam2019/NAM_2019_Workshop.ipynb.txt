@@ -261,7 +261,7 @@
    "source": [
     "# 4. Exercise 1\n",
     "\n",
-    "Using `pmutt.constants`, calculate the dimensionless activation energy (H/RT) using the following information:\n",
+    "Using `pmutt.constants`, calculate the dimensionless enthalpy (H/RT) using the following information:\n",
     "- H = 0.5 eV\n",
     "- T = 77 F"
    ]
@@ -642,7 +642,7 @@
     "- from a statistical mechanical model (``from_statmech``)\n",
     "- from heat capacity, enthalpy and entropy data (``from_data``)\n",
     "\n",
-    "<img src=\"images/nasa_func.png\" width=400>"
+    "<img src=\"images/nasa_func1.png\" width=400>"
    ]
   },
   {
@@ -1178,7 +1178,7 @@
     "\n",
     "``Reaction`` objects can be created by putting together ``Nasa``, ``Shomate`` and ``StatMech`` objects.\n",
     "\n",
-    "<img src=\"images/reaction_func.png\" width=800>\n",
+    "<img src=\"images/reaction_func1.png\" width=800>\n",
     "\n",
     "\n",
     "The ``from_string`` method is the easiest way to create a ``Reaction`` object. It requires the relevant species to be in a dictionary and a string to describe the reaction.\n",
@@ -1506,7 +1506,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.7.3"
+   "version": "3.6.8"
   }
  },
  "nbformat": 4,

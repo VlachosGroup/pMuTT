@@ -85,7 +85,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples.html#workshops">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
@@ -363,7 +362,7 @@ tube_mole.inp files</li>
 <div class="section" id="Input-Spreadsheet">
 <h2>Input Spreadsheet<a class="headerlink" href="#Input-Spreadsheet" title="Permalink to this headline">¶</a></h2>
 <p>All the data will be imported from the
-<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_Data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/chemkin_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
 file. There are four sheets: 1. <code class="docutils literal notranslate"><span class="pre">cat_sites</span></code> contains catalyst site
 properties for the adsorbed species 2. <code class="docutils literal notranslate"><span class="pre">refs</span></code> contains <em>ab-initio</em> and
 experimental data for a handful of gas species to calculate references
@@ -1929,7 +1928,7 @@ the references.</p>
 <span class="c1"># Using pathlib can overcome this limiation</span>
 <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
-<span class="n">excel_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_data.xlsx&#39;</span>
+<span class="n">excel_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_Data.xlsx&#39;</span>
 
 <span class="n">cat_site_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;cat_sites&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">cat_site</span> <span class="o">=</span> <span class="n">CatSite</span><span class="p">(</span><span class="o">**</span><span class="n">cat_site_data</span><span class="p">)</span>
@@ -2015,7 +2014,7 @@ the references.</p>
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
-C:\Users\jonat\AppData\Local\conda\conda\envs\pmutt_development\lib\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
+C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
