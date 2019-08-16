@@ -86,7 +86,6 @@ class InteractingInterface(phase_cantera.Phase):
             except AttributeError:
                 phases_names.append(phase)
         # Add required fields
-                    
         cti_str = ('interacting_interface(name={},\n'
                    '                      elements={},\n'
                    '                      species={},\n'
@@ -107,7 +106,7 @@ class InteractingInterface(phase_cantera.Phase):
                        site_den))
         # Add optional fields
         optional_fields = ('transport', 'options', 'note', 'initial_state',
-                           'interactions')
+                           'interactions', 'reactions')
         for field in optional_fields:
             val = getattr(self, field)
             # Skip empty fields
