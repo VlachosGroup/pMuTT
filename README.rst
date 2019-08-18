@@ -9,8 +9,13 @@ thermodynamic properties such as heat capacity, enthalpy, entropy, and
 Gibbs energy. These properties can be fit to empirical equations and
 written to different formats. 
 
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo.jpg
+   :target: https://vlachosgroup.github.io/pMuTT/
+   :height: 300
+
 Documentation
 -------------
+
 See our `documentation page`_ for examples, equations used, and docstrings.
 
 Developers
@@ -38,25 +43,12 @@ Dependencies
 
 Getting Started
 ---------------
-1. Install using pip::
+
+1. Install using pip (`see documentation for more thorough instructions`_)::
 
     pip install --user pmutt
-   
-2. Run the tests by navigating to the `tests directory`_ in a
-   command-line interface and inputting the following command::
 
-    python -m unittest
-
-The expected output is shown below. The number of tests will not
-necessarily be the same. ::
-
-    .........................
-    ----------------------------------------------------------------------
-    Ran 25 tests in 0.020s
-
-    OK
-
-3. Look at `examples using the code`_
+2. Look at `examples using the code`_
 
 License
 -------
@@ -66,9 +58,11 @@ file for details.
 
 Publications
 ------------
-- J. Lym, G.R Wittreich and D.G Vlachos, "A Python Multiscale Thermochemistry
-  Toolbox (pMuTT) for Thermochemical and Kinetic Parameter Estimation"
-  (submitted)
+
+- J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry
+  Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer
+  Physics Communications (2019) 106864,
+  https://doi.org/10.1016/j.cpc.2019.106864.
 
 Contributing
 ------------
@@ -115,6 +109,7 @@ Special Thanks
 .. _networkx: https://networkx.github.io/
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pmutt/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
+.. _`see documentation for more thorough instructions`: https://vlachosgroup.github.io/pMuTT/install.html
 .. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html
 .. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues
 .. _`pull request`: https://github.com/VlachosGroup/pMuTT/pulls

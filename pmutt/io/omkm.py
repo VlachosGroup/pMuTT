@@ -6,20 +6,18 @@ from pmutt.omkm.units import Units
 def write_cti(phases=None, species=None, reactions=None,
               lateral_interactions=None, units=None, filename='input.cti',
               T=300., P=1., newline='\n', use_motz_wise=False):
-    """Writes the species and reactions in the CTI format for OpenMKM
+    """Writes the units, phases, species, lateral interactions, reactions and 
+    additional options in the CTI format for OpenMKM
     
     Parameters
     ----------
         phases : list of :class:`~pmutt.omkm.phase.Phase` objects
             Phases to write in CTI file. The species should already be assigned.
-        species : list of :class:`~pmutt.empirical.nasa.Nasa`,
-        :class:`~pmutt.empirical.nasa.Nasa9` or
-        :class:`~pmutt.empirical.shomate.Shomate`
+        species : list of :class:`~pmutt.empirical.nasa.Nasa`, :class:`~pmutt.empirical.nasa.Nasa9` or :class:`~pmutt.empirical.shomate.Shomate`
             Species to write in CTI file.
         reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction`
             Reactions to write in CTI file.
-        lateral_interactions : list of
-        :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
+        lateral_interactions : list of :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
             Lateral interactions to include in CTI file. Default is None.
         units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
             Units to write file. If a dict is inputted, the key is the quantity and
