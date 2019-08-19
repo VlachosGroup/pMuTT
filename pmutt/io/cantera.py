@@ -1,14 +1,25 @@
 from pmutt import constants as c
 
-def write_cti(filename, species, reactions, units):
-    """
-    
-    https://cantera.org/tutorials/cti/cti-syntax.html#recognized-units
-    """
-    pass
-
 def obj_to_CTI(obj, line_len=80, max_line_len=80, **kwargs):
-    """Converts elementary data types to CTI format"""
+    """Converts elementary data types to CTI format
+    
+    Parameters
+    ----------
+        obj
+            Object to convert to CTI format
+        line_len : int, optional
+            Number of characters available in line. Used to determine
+            indentation. Default is 80
+        max_line_len : int, optional
+            Maximum number of characters available in line. Used to determine
+            indentation. Default is 80
+        kwargs : keyword arguments
+            Arguments to pass to `obj.to_CTI` function
+    Returns
+    -------
+        CTI_str : str
+            Object expressed in CTI format
+    """
     # See if the object has a specific format for CTI
     try:
         cti_str = obj.to_CTI(**kwargs)

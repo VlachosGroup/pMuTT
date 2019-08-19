@@ -6,20 +6,18 @@ from pmutt.omkm.units import Units
 def write_cti(phases=None, species=None, reactions=None,
               lateral_interactions=None, units=None, filename='input.cti',
               T=300., P=1., newline='\n', use_motz_wise=False):
-    """Writes the species and reactions in the CTI format for OpenMKM
+    """Writes the units, phases, species, lateral interactions, reactions and 
+    additional options in the CTI format for OpenMKM
     
     Parameters
     ----------
         phases : list of :class:`~pmutt.omkm.phase.Phase` objects
             Phases to write in CTI file. The species should already be assigned.
-        species : list of :class:`~pmutt.empirical.nasa.Nasa`,
-        :class:`~pmutt.empirical.nasa.Nasa9` or
-        :class:`~pmutt.empirical.shomate.Shomate`
+        species : list of :class:`~pmutt.empirical.nasa.Nasa`, :class:`~pmutt.empirical.nasa.Nasa9` or :class:`~pmutt.empirical.shomate.Shomate`
             Species to write in CTI file.
         reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction`
             Reactions to write in CTI file.
-        lateral_interactions : list of
-        :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
+        lateral_interactions : list of :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
             Lateral interactions to include in CTI file. Default is None.
         units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
             Units to write file. If a dict is inputted, the key is the quantity and
@@ -40,21 +38,15 @@ def write_cti(phases=None, species=None, reactions=None,
         units = Units()
     elif isinstance(units, dict):
         units = Units(**units)
-    units_dict = units.to_CTI_dict()
+    # units_dict = units.to_CTI_dict()
     lines.append(units.to_CTI())
 
     '''Write phases'''
     if phases is not None:
         lines.extend(['', '#' + '-'*80, '# PHASES', '#' + '-'*80])
         for phase in phases:
-            phase_CTI = _force_pass_arguments(phase.to_CTI, **units_dict)
+            phase_CTI = _force_pass_arguments(phase.to_CTI, units=units)
             lines.append(phase_CTI)
-            # try:
-            #     lines.append(phase.to_CTI(quantity_unit=units.quantity,
-            #                               length_unit=units.length))
-            # except TypeError:
-            #     lines.append(phase.to_CTI())
-
 
     '''Write species'''
     if species is not None:
@@ -68,7 +60,7 @@ def write_cti(phases=None, species=None, reactions=None,
         if lateral_interactions is not None:
             for lat_interaction in lateral_interactions:
                 lat_inter_CTI = _force_pass_arguments(lat_interaction.to_CTI,
-                                                      **units_dict)
+                                                      units=units)
                 lines.append(lat_inter_CTI)
 
     if reactions is not None:
@@ -82,7 +74,7 @@ def write_cti(phases=None, species=None, reactions=None,
         '''Write reactions'''
         lines.extend(['', '#' + '-'*80, '# REACTIONS', '#' + '-'*80])
         for reaction in reactions:
-            reaction_CTI = _force_pass_arguments(reaction.to_CTI, **units_dict)
+            reaction_CTI = _force_pass_arguments(reaction.to_CTI, units=units)
             lines.append(reaction_CTI)
     
     '''Write to file'''

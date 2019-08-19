@@ -167,14 +167,23 @@ class PiecewiseCovEffect(_ModelBase):
     def get_SoR(self):
         return 0.
 
-    def to_CTI(self, energy_unit='kcal/mol'):
+    def to_CTI(self, energy_unit='kcal/mol', units=None):
         """Writes the lateral interaction in CTI format
 
+        Parameters
+        ----------
+            energy_unit : str, optional
+                Energy unit for slopes. Default is 'kcal/mol'
+            units : :class:`~pmutt.cantera.units.Units` object
+                If specified, energy_unit` are overwritten. Default is None.
         Returns
         -------
             lat_inter_str : str
                 Lateral interaction in CTI format
         """
+        if units is not None:
+            energy_unit = units.energy
+
         lat_inter_str = 'lateral_interaction("{} {}", {}, {})'.format(
                 self.name_i,
                 self.name_j,

@@ -23,12 +23,6 @@ Shomate
 .. autoclass:: pmutt.empirical.shomate.Shomate
    :members:
 
-Zacros
-######
-   
-.. autoclass:: pmutt.empirical.zacros.Zacros
-   :members:
-
 Reference
 #########
    

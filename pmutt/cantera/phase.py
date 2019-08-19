@@ -173,7 +173,8 @@ class StoichSolid(Phase):
                          initial_state=initial_state)
         self.density = density
 
-    def to_CTI(self, max_line_len=80, mass_unit='g', length_unit='cm'):
+    def to_CTI(self, max_line_len=80, mass_unit='g', length_unit='cm',
+               units=None):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -184,11 +185,18 @@ class StoichSolid(Phase):
                 Mass unit for `density`. Default is 'g'
             length_unit : str, optional
                 Length unit for `density`. Default is 'cm'
+            units : :class:`~pmutt.cantera.units.Units` object, optional
+                If specified, `mass_unit` and `length_unit` are overwritten.
+                Default is None.
         Returns
         -------
             CTI_str : str
                 Object represented as a CTI string.
         """
+        if units is not None:
+            length_unit = units.length
+            mass_unit = units.mass
+
         species_names = [species.name for species in self.species]
         volume_unit = '{}3'.format(length_unit)
         density = self.density*c.convert_unit(initial='g', final=mass_unit)\
