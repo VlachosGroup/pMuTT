@@ -11,7 +11,8 @@ written to different formats.
 
 .. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo.jpg
    :target: https://vlachosgroup.github.io/pMuTT/
-   :height: 300
+   :height: 250
+   :align: center
 
 Documentation
 -------------

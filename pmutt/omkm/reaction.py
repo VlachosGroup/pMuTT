@@ -2,6 +2,7 @@ import numpy as np
 from pmutt import _apply_numpy_operation
 from pmutt import constants as c
 from pmutt.reaction import Reaction
+from pmutt.omkm.units import Units
 from pmutt.omkm.phase import InteractingInterface, StoichSolid
 
 class SurfaceReaction(Reaction):
@@ -57,11 +58,13 @@ class SurfaceReaction(Reaction):
             If True, includes the entropy of activation. Default is True
         T : float, optional
             Temperature in K. Default is 298.15 K
-        units : str, optional
-            Units for A. Default is 'molec/cm2'
+        units : str or :class:`~pmutt.omkm.units.Units`, optional
+            Units for A. If `Units` class specified, determines the units for A.
+            Default is 'molec/cm2'
         kwargs : keyword arguments
             Parameters required to calculate pre-exponential factor
         """
+
         if self.transition_state is None or not include_entropy:
             A = c.kb('J/K')/c.h('J s')
         else:
@@ -85,7 +88,11 @@ class SurfaceReaction(Reaction):
                                               operation=sden_operation,
                                               verbose=False)
         # Convert site density to appropriate unit
-        quantity_unit, area_unit = units.split('/')
+        if isinstance(units, Units):
+            quantity_unit = units.quantity
+            area_unit = '{}2'.format(units.length)
+        else:
+            quantity_unit, area_unit = units.split('/')
         eff_site_den = eff_site_den\
                        *c.convert_unit(initial='mol', final=quantity_unit)\
                        /c.convert_unit(initial='cm2', final=area_unit)
@@ -216,7 +223,7 @@ class SurfaceReaction(Reaction):
         return obj_dict
 
     def to_CTI(self, T=c.T0('K'), P=c.P0('bar'), quantity_unit='molec',
-               length_unit='cm', act_energy_unit='cal/mol'):
+               length_unit='cm', act_energy_unit='cal/mol', units=None):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -231,11 +238,19 @@ class SurfaceReaction(Reaction):
                 Length unit to calculate A. Default is 'cm'
             act_energy_unit : str, optional
                 Unit to use for activation energy. Default is 'cal/mol'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit`, `length_unit`, and
+                `act_energy_unit` are overwritten. Default is None.
         Returns
         -------
             cti_str : str
                 Surface reaction string in CTI format
         """
+        if units is not None:
+            quantity_unit = units.quantity
+            length_unit = units.length
+            act_energy_unit = units.act_energy
+    
         reaction_str = self.to_string(stoich_space=True,
                                       species_delimiter=' + ',
                                       reaction_delimiter=' <=> ',\

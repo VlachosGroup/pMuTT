@@ -14,8 +14,25 @@ If you use pMuTT for your research, please cite the following reference.
 
 `Download citation as BibTex file.`_
 
+Logos
+-----
+
+When citing our software in a presentation or other reproducible format, you
+may use the high-resolution logos below.
+
+**Dark Version**
+
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo_highres.jpg
+   :align: center
+
+**Light Version**
+
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_inverse_highres.png
+   :align: center
+
 Cited By
 --------
+
 If you have published work using pMuTT and would like to be featured here,
 please post an issue with the |Publication_label| tag.
 

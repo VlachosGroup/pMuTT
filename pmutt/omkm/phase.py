@@ -57,7 +57,8 @@ class InteractingInterface(phase_cantera.Phase):
         self.phases = phases
         self.interactions = interactions
 
-    def to_CTI(self, max_line_len=80, quantity_unit='molec', length_unit='cm'):
+    def to_CTI(self, max_line_len=80, quantity_unit='molec', length_unit='cm',
+               units=None):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -68,11 +69,18 @@ class InteractingInterface(phase_cantera.Phase):
                 Quantity unit to use to calculate A. Default is 'molec'
             length_unit : str, optional
                 Length unit to use to calculate A. Default is 'cm'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit` and `length_unit` are overwritten.
+                Default is None.
         Returns
         -------
             CTI_str : str
                 Object represented as a CTI string.
         """
+        if units is not None:
+            quantity_unit = units.quantity
+            length_unit = units.length
+
         species_names = [species.name for species in self.species]
         area_unit = '{}2'.format(length_unit)
         site_den = self.site_density\
