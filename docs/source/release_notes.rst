@@ -7,7 +7,6 @@ Development Branch
 ------------------
 `Development Branch`_
 
-
 Version 1.2.12
 --------------
 Aug. 22, 2019
