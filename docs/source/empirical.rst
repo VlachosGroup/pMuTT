@@ -17,6 +17,18 @@ NASA
 .. autoclass:: pmutt.empirical.nasa.Nasa
    :members:
 
+NASA9
+#####
+
+.. autoclass:: pmutt.empirical.nasa.Nasa9
+   :members:
+
+A :class:`~pmutt.empirical.nasa.Nasa9` object is composed of a list of
+:class:`~pmutt.empirical.nasa.SingleNasa9`.
+
+.. autoclass:: pmutt.empirical.nasa.SingleNasa9
+   :members:
+
 Shomate
 #######
 
