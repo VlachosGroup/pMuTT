@@ -1,0 +1,2658 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpenMKM Input and Output &mdash; pmutt 1.2.12 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>OpenMKM Input and Output</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/examples_jupyter/omkm_io/OpenMKM_IO.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="OpenMKM-Input-and-Output">
+<h1>OpenMKM Input and Output<a class="headerlink" href="#OpenMKM-Input-and-Output" title="Permalink to this headline">¶</a></h1>
+<p>This notebook describes pmutt’s functionality to read and write OpenMKM
+CTI files. We will use the NH3 formation mechanism as a case study.</p>
+<div class="section" id="Topics-Covered">
+<h2>Topics Covered<a class="headerlink" href="#Topics-Covered" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Read species <em>ab-initio</em> data, reactions, lateral interactions and
+phases from a spreadsheet</li>
+<li>Write the CTI file that can be read by OpenMKM</li>
+</ul>
+</div>
+<div class="section" id="Input-Spreadsheet">
+<h2>Input Spreadsheet<a class="headerlink" href="#Input-Spreadsheet" title="Permalink to this headline">¶</a></h2>
+<p>All the data will be imported from the
+<code class="docutils literal notranslate"><span class="pre">`./inputs/NH3_Input_data.xlsx</span></code> &lt;<a class="reference external" href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/openmkm_io/inputs/NH3_Input_Data.xlsx">https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/openmkm_io/inputs/NH3_Input_Data.xlsx</a>&gt;`__
+file. There are five sheets: 1. <code class="docutils literal notranslate"><span class="pre">refs</span></code> contains <em>ab-initio</em> and
+experimental data for a handful of gas species to calculate references
+2. <code class="docutils literal notranslate"><span class="pre">species</span></code> contains <em>ab-initio</em> data for each specie 3.
+<code class="docutils literal notranslate"><span class="pre">reactions</span></code> contains elementary steps 4. <code class="docutils literal notranslate"><span class="pre">phases</span></code> contains phases
+for the species 5. <code class="docutils literal notranslate"><span class="pre">lateral_interactions</span></code> contains lateral
+interactions between species</p>
+<p>The contents are displayed below:</p>
+<p><strong>References</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="10%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">n
+a
+m
+e</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+N</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+H</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+R
+u</th>
+<th class="head">r
+e
+f</th>
+<th class="head">Ho
+RT
+_r
+ef</th>
+<th class="head">pot
+ent
+ial
+ene
+rgy</th>
+<th class="head">sy
+mm
+et
+ry
+nu
+mb
+er</th>
+<th class="head">st
+at
+me
+ch
+_m
+od
+el</th>
+<th class="head">at
+om
+s</th>
+<th class="head">vi
+<a href="#id1"><span class="problematic" id="id2">b_</span></a>
+wa
+ve
+nu
+mb
+er</th>
+<th class="head">vi
+<a href="#id3"><span class="problematic" id="id4">b_</span></a>
+wa
+ve
+nu
+mb
+er</th>
+<th class="head">vi
+<a href="#id5"><span class="problematic" id="id6">b_</span></a>
+wa
+ve
+nu
+mb
+er</th>
+<th class="head">vi
+<a href="#id7"><span class="problematic" id="id8">b_</span></a>
+wa
+ve
+nu
+mb
+er</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>N
+2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>0</td>
+<td>-16
+.63</td>
+<td>2</td>
+<td>Id
+ea
+lG
+as</td>
+<td>./
+N2
+/C
+ON
+TC
+AR</td>
+<td>27
+44</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>N
+H
+3</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>-1
+8.
+38
+02
+53
+11</td>
+<td>-19
+.54</td>
+<td>3</td>
+<td>Id
+ea
+lG
+as</td>
+<td>./
+NH
+3/
+CO
+NT
+CA
+R</td>
+<td>35
+34</td>
+<td>34
+64</td>
+<td>17
+65</td>
+<td>11
+39</td>
+</tr>
+<tr class="row-even"><td>H
+2</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>0</td>
+<td>-6.
+770
+0</td>
+<td>2</td>
+<td>Id
+ea
+lG
+as</td>
+<td>./
+H2
+/C
+ON
+TC
+AR</td>
+<td>43
+42</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>R
+u</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2
+9
+8
+.
+1
+5</td>
+<td>0.
+00
+00</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>Pl
+ac
+eh
+ol
+de
+r</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Species</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">n
+a
+m
+e</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+N</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+H</th>
+<th class="head">e
+l
+e
+m
+e
+n
+t
+s
+.
+R
+u</th>
+<th class="head">p
+h
+a
+s
+e</th>
+<th class="head">s
+t
+a
+t
+m
+e
+c
+h
+_
+m
+o
+d
+e
+l</th>
+<th class="head">s
+y
+m
+m
+e
+t
+r
+y
+n
+u
+m
+b
+e
+r</th>
+<th class="head">a
+t
+o
+m
+s</th>
+<th class="head">p
+o
+t
+e
+n
+t
+i
+a
+l
+e
+n
+e
+r
+g
+y</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+<th class="head">v
+i
+b
+_
+w
+a
+v
+e
+n
+u
+m
+b
+e
+r</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>N
+2</td>
+<td>2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>g
+a
+s</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
+<td>2</td>
+<td>N
+2
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+6
+3</p>
+</td>
+<td>2
+7
+4
+4
+.
+0
+0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>N
+H
+3</td>
+<td>1</td>
+<td>3</td>
+<td>&#160;</td>
+<td>g
+a
+s</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
+<td>3</td>
+<td>N
+H
+3
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+9
+.
+5
+4</p>
+</td>
+<td>3
+5
+3
+4
+.
+0
+0</td>
+<td>3
+4
+6
+4
+.
+0
+0</td>
+<td>1
+7
+6
+5
+.
+0
+0</td>
+<td>1
+1
+3
+9
+.
+0
+0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>H
+2</td>
+<td>&#160;</td>
+<td>2</td>
+<td>&#160;</td>
+<td>g
+a
+s</td>
+<td>I
+d
+e
+a
+l
+G
+a
+s</td>
+<td>2</td>
+<td>H
+2
+/
+C
+O
+N
+T
+C
+A
+R</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">7
+7</p>
+</td>
+<td>4
+3
+4
+2
+.
+0
+0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>N
+2
+(
+S
+)</td>
+<td>2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+7
+.
+2
+4</p>
+</td>
+<td>2
+1
+9
+7
+.
+1
+9</td>
+<td>3
+6
+0
+.
+4
+2</td>
+<td>3
+4
+7
+.
+3
+4</td>
+<td>3
+3
+5
+.
+6
+7</td>
+<td>6
+2
+.
+0
+8</td>
+<td>3
+2
+.
+1
+8</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>1</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">3
+4</p>
+</td>
+<td>5
+4
+9
+.
+1
+1</td>
+<td>5
+3
+8
+.
+5
+6</td>
+<td>5
+0
+4
+.
+3
+2</td>
+<td>4
+7
+5
+.
+8
+1</td>
+<td>4
+5
+9
+.
+0
+8</td>
+<td>4
+1
+0
+.
+0
+2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>1</td>
+<td>&#160;</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">0
+0</p>
+</td>
+<td>1
+0
+0
+3
+.
+5
+1</td>
+<td>6
+2
+5
+.
+5
+5</td>
+<td>6
+1
+6
+.
+2
+9</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>N
+H
+3
+(
+S
+)</td>
+<td>1</td>
+<td>3</td>
+<td>&#160;</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">2
+0
+.
+4
+3</p>
+</td>
+<td>3
+4
+9
+1
+.
+0
+9</td>
+<td>3
+4
+8
+8
+.
+8
+2</td>
+<td>3
+3
+6
+4
+.
+5
+2</td>
+<td>1
+5
+8
+3
+.
+5
+2</td>
+<td>1
+5
+8
+2
+.
+0
+7</td>
+<td>1
+1
+2
+4
+.
+2
+2</td>
+<td>5
+7
+0
+.
+2
+1</td>
+<td>5
+6
+7
+.
+2
+2</td>
+<td>3
+3
+3
+.
+0
+9</td>
+<td>1
+2
+2
+.
+8
+6</td>
+<td>8
+3
+.
+8
+3</td>
+<td>7
+0
+.
+6
+3</td>
+</tr>
+<tr class="row-odd"><td>N
+H
+2
+(
+S
+)</td>
+<td>1</td>
+<td>2</td>
+<td>&#160;</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+6
+.
+5
+9</p>
+</td>
+<td>3
+4
+6
+9
+.
+3
+0</td>
+<td>3
+3
+8
+1
+.
+0
+5</td>
+<td>1
+5
+0
+3
+.
+0
+2</td>
+<td>6
+9
+8
+.
+8
+7</td>
+<td>6
+2
+5
+.
+6
+0</td>
+<td>6
+1
+5
+.
+9
+4</td>
+<td>4
+7
+5
+.
+1
+3</td>
+<td>2
+9
+8
+.
+1
+2</td>
+<td>1
+5
+3
+.
+2
+5</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>N
+H
+(
+S
+)</td>
+<td>1</td>
+<td>1</td>
+<td>&#160;</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+3
+.
+2
+1</p>
+</td>
+<td>3
+4
+0
+3
+.
+1
+3</td>
+<td>7
+1
+8
+.
+1
+8</td>
+<td>7
+1
+0
+.
+5
+8</td>
+<td>5
+2
+8
+.
+5
+3</td>
+<td>4
+1
+5
+.
+2
+0</td>
+<td>4
+1
+0
+.
+1
+3</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>T
+S
+1
+_
+N
+H
+3
+(
+S
+)</td>
+<td>1</td>
+<td>3</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+9
+.
+2
+4</p>
+</td>
+<td>3
+4
+5
+3
+.
+4
+1</td>
+<td>3
+3
+5
+5
+.
+6
+7</td>
+<td>1
+7
+2
+3
+.
+8
+5</td>
+<td>1
+4
+8
+7
+.
+9
+5</td>
+<td>9
+5
+9
+.
+1
+5</td>
+<td>8
+8
+8
+.
+9
+5</td>
+<td>5
+9
+4
+.
+0
+9</td>
+<td>4
+2
+8
+.
+4
+3</td>
+<td>2
+2
+7
+.
+0
+3</td>
+<td>2
+0
+6
+.
+0
+5</td>
+<td>1
+4
+2
+.
+1
+4</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>T
+S
+2
+_
+N
+H
+2
+(
+S
+)</td>
+<td>1</td>
+<td>2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+5
+.
+8
+7</p>
+</td>
+<td>3
+4
+2
+6
+.
+4
+4</td>
+<td>1
+2
+9
+3
+.
+7
+2</td>
+<td>9
+2
+2
+.
+8
+3</td>
+<td>6
+6
+0
+.
+9
+7</td>
+<td>5
+2
+5
+.
+6
+0</td>
+<td>4
+9
+6
+.
+8
+4</td>
+<td>3
+3
+0
+.
+6
+7</td>
+<td>2
+9
+0
+.
+2
+8</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>T
+S
+3
+_
+N
+H
+(
+S
+)</td>
+<td>1</td>
+<td>1</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+1
+.
+9
+3</p>
+</td>
+<td>1
+2
+0
+1
+.
+6
+0</td>
+<td>4
+9
+1
+.
+5
+7</td>
+<td>4
+6
+2
+.
+0
+2</td>
+<td>4
+0
+2
+.
+1
+6</td>
+<td>2
+4
+2
+.
+1
+4</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>T
+S
+4
+_
+N
+2
+(
+S
+)</td>
+<td>2</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>H
+a
+r
+m
+o
+n
+i
+c</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ul class="first simple">
+<li></li>
+</ul>
+<p class="last">1
+4
+.
+6
+7</p>
+</td>
+<td>4
+8
+5
+.
+6
+1</td>
+<td>3
+9
+2
+.
+9
+8</td>
+<td>3
+8
+6
+.
+1
+9</td>
+<td>2
+8
+0
+.
+9
+4</td>
+<td>1
+6
+8
+.
+4
+3</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>R
+U
+(
+S
+)</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>1</td>
+<td>t
+e
+r
+r
+a
+c
+e</td>
+<td>P
+l
+a
+c
+e
+h
+o
+l
+d
+e
+r</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>R
+U
+(
+B
+)</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>1</td>
+<td>b
+u
+l
+k</td>
+<td>P
+l
+a
+c
+e
+h
+o
+l
+d
+e
+r</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phases</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="21%" />
+<col width="7%" />
+<col width="12%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">na
+me</th>
+<th class="head">phase_type</th>
+<th class="head">de
+ns
+it
+y</th>
+<th class="head"><a href="#id9"><span class="problematic" id="id10">site_</span></a>
+densi
+ty</th>
+<th class="head">rea
+cti
+ons</th>
+<th class="head">inter
+actio
+ns</th>
+<th class="head">list.
+phase
+s</th>
+<th class="head">list.
+phase
+s</th>
+<th class="head">not
+e</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ga
+s</td>
+<td>IdealGas</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>bu
+lk</td>
+<td>StoichSoli
+d</td>
+<td>12
+.4</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>Ru
+Met
+al</td>
+</tr>
+<tr class="row-even"><td>te
+rr
+ac
+e</td>
+<td>Interactin
+gInterface</td>
+<td>&#160;</td>
+<td>2.17E
+-09</td>
+<td>all</td>
+<td>all</td>
+<td>gas</td>
+<td>bulk</td>
+<td>Ru(
+000
+1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reactions</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="78%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">reaction_str</th>
+<th class="head">is_adsorption</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>H2 + 2RU(S) = 2H(S) + 2RU(B)</td>
+<td>TRUE</td>
+</tr>
+<tr class="row-odd"><td>N2 + RU(S) = N2(S) + RU(B)</td>
+<td>TRUE</td>
+</tr>
+<tr class="row-even"><td>NH3 + RU(S) = NH3(S) + RU(B)</td>
+<td>TRUE</td>
+</tr>
+<tr class="row-odd"><td>NH3(S) + RU(S)= TS1_NH3(S) = NH2(S) + H(S) + RU(B)</td>
+<td>FALSE</td>
+</tr>
+<tr class="row-even"><td>NH2(S) + RU(S) = TS2_NH2(S) = NH(S) + H(S) + RU(B)</td>
+<td>FALSE</td>
+</tr>
+<tr class="row-odd"><td>NH(S) + RU(S) = TS3_NH(S) = N(S) + H(S) + RU(B)</td>
+<td>FALSE</td>
+</tr>
+<tr class="row-even"><td>2N(S) + RU(B) = TS4_N2(S) = N2(S) + RU(S)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lateral Interactions</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="36%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name_i</th>
+<th class="head">name_j</th>
+<th class="head">list.intervals</th>
+<th class="head">list.slopes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>N(S)</td>
+<td>N(S)</td>
+<td>0</td>
+<td>-52.6</td>
+</tr>
+<tr class="row-odd"><td>N(S)</td>
+<td>H(S)</td>
+<td>0</td>
+<td>-17.7</td>
+</tr>
+<tr class="row-even"><td>H(S)</td>
+<td>N(S)</td>
+<td>0</td>
+<td>-17.7</td>
+</tr>
+<tr class="row-odd"><td>H(S)</td>
+<td>H(S)</td>
+<td>0</td>
+<td>-3</td>
+</tr>
+<tr class="row-even"><td>NH2(S)</td>
+<td>N(S)</td>
+<td>0</td>
+<td>-20.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Designate-Units">
+<h2>Designate Units<a class="headerlink" href="#Designate-Units" title="Permalink to this headline">¶</a></h2>
+<p>First, we will designate the units to write the CTI file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.omkm.units</span> <span class="k">import</span> <span class="n">Units</span>
+
+<span class="n">units</span> <span class="o">=</span> <span class="n">Units</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="s1">&#39;cm&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;mol&#39;</span><span class="p">,</span> <span class="n">act_energy</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Reading-data">
+<h2>Reading data<a class="headerlink" href="#Reading-data" title="Permalink to this headline">¶</a></h2>
+<p>Before we can initialize our species, we need the references.</p>
+<div class="section" id="Reading-References">
+<h3>Reading References<a class="headerlink" href="#Reading-References" title="Permalink to this headline">¶</a></h3>
+<p>We will open the <a class="reference external" href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/openmkm_io/inputs/NH3_Input_Data.xlsx">input
+spreadsheet</a>
+and read the <code class="docutils literal notranslate"><span class="pre">refs</span></code> sheet.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+
+<span class="c1"># Find the location of Jupyter notebook</span>
+<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
+<span class="c1"># Using pathlib can overcome this limiation</span>
+<span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
+<span class="n">input_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_Data.xlsx&#39;</span>
+
+<span class="n">refs_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
+<span class="n">refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_data</span> <span class="ow">in</span> <span class="n">refs_data</span><span class="p">]</span>
+<span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">(</span><span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Reading-Species">
+<h3>Reading Species<a class="headerlink" href="#Reading-Species" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+
+<span class="c1"># Lower and higher temperatures</span>
+<span class="n">T_low</span> <span class="o">=</span> <span class="mf">298.</span> <span class="c1"># K</span>
+<span class="n">T_high</span> <span class="o">=</span> <span class="mf">800.</span> <span class="c1"># K</span>
+
+<span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+<span class="n">species</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">species_phases</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">ind_species_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">:</span>
+    <span class="c1"># Initialize NASA from statistical mechanical data</span>
+    <span class="n">ind_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="n">T_high</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">,</span> <span class="o">**</span><span class="n">ind_species_data</span><span class="p">)</span>
+    <span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ind_species</span><span class="p">)</span>
+
+    <span class="c1"># Group the species by phase for later use</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">species_phases</span><span class="p">[</span><span class="n">ind_species</span><span class="o">.</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ind_species</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="n">species_phases</span><span class="p">[</span><span class="n">ind_species</span><span class="o">.</span><span class="n">phase</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ind_species</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+C:\Users\jonat\AppData\Roaming\Python\Python37\site-packages\scipy-1.3.0-py3.7-win-amd64.egg\scipy\stats\stats.py:1040: RuntimeWarning: invalid value encountered in double_scalars
+  return a.std(axis) / a.mean(axis)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Reading-Phases">
+<h3>Reading Phases<a class="headerlink" href="#Reading-Phases" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.omkm.phase</span> <span class="k">import</span> <span class="n">IdealGas</span><span class="p">,</span> <span class="n">InteractingInterface</span><span class="p">,</span> <span class="n">StoichSolid</span>
+
+<span class="n">phases_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;phases&#39;</span><span class="p">)</span>
+<span class="c1"># We store the phases as a dictionary here instead of a list for the following section</span>
+<span class="n">phases_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">phase_data</span> <span class="ow">in</span> <span class="n">phases_data</span><span class="p">:</span>
+    <span class="c1"># Pre-processing relevant data</span>
+    <span class="n">phase_name</span> <span class="o">=</span> <span class="n">phase_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="n">phase_type</span> <span class="o">=</span> <span class="n">phase_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;phase_type&#39;</span><span class="p">)</span>
+    <span class="n">phase_data</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">species_phases</span><span class="p">[</span><span class="n">phase_name</span><span class="p">]</span>
+
+    <span class="c1"># Create the appropriate object</span>
+    <span class="k">if</span> <span class="n">phase_type</span> <span class="o">==</span> <span class="s1">&#39;IdealGas&#39;</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">IdealGas</span><span class="p">(</span><span class="o">**</span><span class="n">phase_data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">phase_type</span> <span class="o">==</span> <span class="s1">&#39;StoichSolid&#39;</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">StoichSolid</span><span class="p">(</span><span class="o">**</span><span class="n">phase_data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">phase_type</span> <span class="o">==</span> <span class="s1">&#39;InteractingInterface&#39;</span><span class="p">:</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">InteractingInterface</span><span class="p">(</span><span class="o">**</span><span class="n">phase_data</span><span class="p">)</span>
+    <span class="n">phases_dict</span><span class="p">[</span><span class="n">phase</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">phase</span>
+
+<span class="c1"># Convert phases_dict to list for write_cti</span>
+<span class="n">phases</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">phases_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Assign-Phases-to-InteractingInterface">
+<h3>Assign Phases to InteractingInterface<a class="headerlink" href="#Assign-Phases-to-InteractingInterface" title="Permalink to this headline">¶</a></h3>
+<p>One attribute required by <code class="docutils literal notranslate"><span class="pre">InteractingInterface</span></code> are the phases it
+interacts with. The following code will assign the relevant phases to
+any <code class="docutils literal notranslate"><span class="pre">InteractingInterface</span></code> object.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">phase</span> <span class="ow">in</span> <span class="n">phases_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Skips object if phases is not as an attribute</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">req_phase_names</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">phases</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># If the object has a phases attribute, assign them based on the name</span>
+    <span class="n">phases_objs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">req_phase_name</span> <span class="ow">in</span> <span class="n">req_phase_names</span><span class="p">:</span>
+        <span class="n">phases_objs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phases_dict</span><span class="p">[</span><span class="n">req_phase_name</span><span class="p">])</span>
+    <span class="n">phase</span><span class="o">.</span><span class="n">phases</span> <span class="o">=</span> <span class="n">phases_objs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-reactions">
+<h3>Read reactions<a class="headerlink" href="#Read-reactions" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.omkm.reaction</span> <span class="k">import</span> <span class="n">SurfaceReaction</span>
+
+<span class="c1"># Convert species to dictionary for easier reaction assignment</span>
+<span class="n">species_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+<span class="n">reactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactions&#39;</span><span class="p">)</span>
+<span class="n">reactions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">reaction_data</span> <span class="ow">in</span> <span class="n">reactions_data</span><span class="p">:</span>
+    <span class="n">reaction</span> <span class="o">=</span> <span class="n">SurfaceReaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">species_dict</span><span class="p">,</span>
+                                           <span class="o">**</span><span class="n">reaction_data</span><span class="p">)</span>
+    <span class="n">reactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Read-lateral-interactions">
+<h3>Read lateral interactions<a class="headerlink" href="#Read-lateral-interactions" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.mixture.cov</span> <span class="k">import</span> <span class="n">PiecewiseCovEffect</span>
+
+<span class="n">interactions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">interactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;lateral_interactions&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">interaction_data</span> <span class="ow">in</span> <span class="n">interactions_data</span><span class="p">:</span>
+    <span class="n">interaction</span> <span class="o">=</span> <span class="n">PiecewiseCovEffect</span><span class="p">(</span><span class="o">**</span><span class="n">interaction_data</span><span class="p">)</span>
+    <span class="n">interactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Write-CTI-File">
+<h2>Write CTI File<a class="headerlink" href="#Write-CTI-File" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="k">import</span> <span class="n">write_cti</span>
+
+<span class="n">output_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/cti.out&#39;</span>
+<span class="n">use_motz_wise</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+          <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+          <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Output-CTI-File">
+<h2>Output CTI File<a class="headerlink" href="#Output-CTI-File" title="Permalink to this headline">¶</a></h2>
+<p>The CTI file produced is shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File generated by pmutt on 2019-08-19 09:44:11.417553</span>
+
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="c1"># UNITS</span>
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="n">units</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="s2">&quot;cm&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s2">&quot;mol&quot;</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="s2">&quot;kcal/mol&quot;</span><span class="p">,</span>
+      <span class="n">act_energy</span><span class="o">=</span><span class="s2">&quot;kcal/mol&quot;</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="c1"># PHASES</span>
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="n">ideal_gas</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;gas&quot;</span><span class="p">,</span>
+          <span class="n">elements</span><span class="o">=</span><span class="s2">&quot;H N&quot;</span><span class="p">,</span>
+          <span class="n">species</span><span class="o">=</span><span class="s2">&quot;N2 NH3 H2&quot;</span><span class="p">)</span>
+
+<span class="n">stoichiometric_solid</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bulk&quot;</span><span class="p">,</span>
+                     <span class="n">elements</span><span class="o">=</span><span class="s2">&quot;Ru&quot;</span><span class="p">,</span>
+                     <span class="n">species</span><span class="o">=</span><span class="s2">&quot;RU(B)&quot;</span><span class="p">,</span>
+                     <span class="n">density</span><span class="o">=</span><span class="mf">12.4</span><span class="p">,</span>
+                     <span class="n">note</span><span class="o">=</span><span class="s2">&quot;Ru Metal&quot;</span><span class="p">)</span>
+
+<span class="n">interacting_interface</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;terrace&quot;</span><span class="p">,</span>
+                      <span class="n">elements</span><span class="o">=</span><span class="s2">&quot;Ru H N&quot;</span><span class="p">,</span>
+                      <span class="n">species</span><span class="o">=</span><span class="s2">&quot;N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)&quot;</span><span class="p">,</span>
+                      <span class="n">phases</span><span class="o">=</span><span class="s2">&quot;gas bulk&quot;</span><span class="p">,</span>
+                      <span class="n">site_density</span><span class="o">=</span><span class="mf">2.1671e-09</span><span class="p">,</span>
+                      <span class="n">note</span><span class="o">=</span><span class="s2">&quot;Ru(0001)&quot;</span><span class="p">,</span>
+                      <span class="n">interactions</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+                      <span class="n">reactions</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="c1"># SPECIES</span>
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;N2&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:2&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">523.3877551020408</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">3.41792195E+00</span><span class="p">,</span>  <span class="mf">8.91688129E-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.46864753E-06</span><span class="p">,</span>
+                       <span class="mf">5.44691795E-09</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.46804017E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.27217456E+02</span><span class="p">,</span>
+                       <span class="mf">3.46925670E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">523.3877551020408</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">3.75207309E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.30159027E-03</span><span class="p">,</span>  <span class="mf">1.83848785E-06</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.17413430E-10</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.65391117E-13</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.67464905E+02</span><span class="p">,</span>
+                       <span class="mf">2.02487460E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;NH3&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:3&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">533.6326530612245</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">4.57124680E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.89724277E-03</span><span class="p">,</span>  <span class="mf">2.70972941E-05</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">3.44331645E-08</span><span class="p">,</span>  <span class="mf">1.62568430E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.53630325E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.78236359E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">533.6326530612245</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">3.29427463E+00</span><span class="p">,</span>  <span class="mf">2.57481517E-03</span><span class="p">,</span>  <span class="mf">5.20883059E-07</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.00678313E-09</span><span class="p">,</span>  <span class="mf">3.59356180E-13</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.39739662E+03</span><span class="p">,</span>
+                       <span class="mf">3.59518301E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;H2&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;H:2&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">574.6122448979592</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">3.50717925E+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.50397135E-05</span><span class="p">,</span>  <span class="mf">3.79570576E-07</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">7.57943298E-10</span><span class="p">,</span>  <span class="mf">5.72423558E-13</span><span class="p">,</span>  <span class="mf">1.68725520E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">4.30359617E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">574.6122448979592</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">3.37903251E+00</span><span class="p">,</span>  <span class="mf">7.92301907E-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.88662952E-06</span><span class="p">,</span>
+                       <span class="mf">1.85974220E-09</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.68447254E-13</span><span class="p">,</span>  <span class="mf">1.70231785E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">3.75384879E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;N2(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:2&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">482.40816326530614</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">4.40553502E-01</span><span class="p">,</span>  <span class="mf">2.97759950E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.47698148E-05</span><span class="p">,</span>
+                       <span class="mf">1.16195177E-07</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.12938589E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.81726811E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.67561821E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">482.40816326530614</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">3.42605836E+00</span><span class="p">,</span>  <span class="mf">5.03710708E-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.92689694E-06</span><span class="p">,</span>
+                       <span class="mf">6.03246113E-09</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.18862675E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.10922368E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.39236755E+01</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;N(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">502.8979591836735</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">5.23174593E+00</span><span class="p">,</span>  <span class="mf">6.11537184E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.47762309E-04</span><span class="p">,</span>
+                       <span class="mf">1.74618161E-07</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.21997526E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.05502378E+04</span><span class="p">,</span>
+                       <span class="mf">1.88654280E+01</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">502.8979591836735</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">8.29107669E-01</span><span class="p">,</span>  <span class="mf">2.64469843E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.38832016E-05</span><span class="p">,</span>
+                       <span class="mf">3.47600781E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.07819310E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.10025913E+04</span><span class="p">,</span>
+                       <span class="mf">5.84749603E-01</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;H(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;H:1&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">461.9183673469388</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">1.41307531E+00</span><span class="p">,</span>  <span class="mf">1.00687718E-02</span><span class="p">,</span>  <span class="mf">1.09758988E-06</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">2.55216914E-08</span><span class="p">,</span>  <span class="mf">2.17566538E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.12970520E+03</span><span class="p">,</span>
+                       <span class="mf">5.64702945E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">461.9183673469388</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">2.11302416E+00</span><span class="p">,</span>  <span class="mf">1.72572991E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.60046478E-05</span><span class="p">,</span>
+                       <span class="mf">1.92388088E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.68363784E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.07693323E+03</span><span class="p">,</span>
+                       <span class="mf">8.35415551E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;NH3(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:3&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">461.9183673469388</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">1.16759533E+00</span><span class="p">,</span>  <span class="mf">2.05732170E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.66958772E-05</span><span class="p">,</span>
+                       <span class="mf">4.56112325E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.49628744E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.42313136E+04</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">4.80541265E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">461.9183673469388</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">1.58312977E+00</span><span class="p">,</span>  <span class="mf">1.57753291E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.71587153E-05</span><span class="p">,</span>
+                       <span class="mf">1.15414255E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.21958978E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.42569335E+04</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">6.35113154E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;NH2(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:2&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">523.3877551020408</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">2.56305506E+00</span><span class="p">,</span>  <span class="mf">3.84726874E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.73503504E-05</span><span class="p">,</span>
+                       <span class="mf">8.09903199E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.43595838E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.17458710E+04</span><span class="p">,</span>
+                       <span class="mf">8.90805309E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">523.3877551020408</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">6.86530719E-01</span><span class="p">,</span>  <span class="mf">2.43298826E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.68705157E-05</span><span class="p">,</span>
+                       <span class="mf">2.88483783E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.86963660E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.19475429E+04</span><span class="p">,</span>
+                       <span class="mf">1.03190122E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;NH(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:1&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">543.8775510204082</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">3.73687435E+00</span><span class="p">,</span>  <span class="mf">4.05226889E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.44226964E-05</span><span class="p">,</span>
+                       <span class="mf">8.65932632E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.53036247E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.46202194E+04</span><span class="p">,</span>
+                       <span class="mf">1.37781593E+01</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">543.8775510204082</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">1.33660645E+00</span><span class="p">,</span>  <span class="mf">2.33106600E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.77180253E-05</span><span class="p">,</span>
+                       <span class="mf">2.97486446E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.12157176E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.48903408E+04</span><span class="p">,</span>
+                       <span class="mf">3.58875312E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TS1_NH3(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:3&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">451.67346938775506</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">4.96418515E-02</span><span class="p">,</span>  <span class="mf">2.15674671E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.75604959E-05</span><span class="p">,</span>
+                       <span class="mf">2.23225323E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.79255935E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.50477082E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.46494399E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">451.67346938775506</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">5.21221040E-02</span><span class="p">,</span>  <span class="mf">2.11615812E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.49542203E-05</span><span class="p">,</span>
+                       <span class="mf">1.66204937E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.59897868E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.50097843E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.43112446E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TS2_NH2(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:2&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">554.1224489795918</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">2.58881424E+00</span><span class="p">,</span>  <span class="mf">3.43781302E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.87419101E-05</span><span class="p">,</span>
+                       <span class="mf">5.18321984E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.87340797E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.75828318E+03</span><span class="p">,</span>
+                       <span class="mf">8.95651586E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">554.1224489795918</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">1.48538501E+00</span><span class="p">,</span>  <span class="mf">2.67287608E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.86606417E-05</span><span class="p">,</span>
+                       <span class="mf">2.81558194E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.15140597E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.88676384E+03</span><span class="p">,</span>
+                       <span class="mf">4.23478568E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TS3_NH(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:1 H:1&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">482.40816326530614</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">1.80701218E+00</span><span class="p">,</span>  <span class="mf">3.07479132E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.96816870E-05</span><span class="p">,</span>
+                       <span class="mf">8.30020912E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.08170225E-11</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.37130921E+03</span><span class="p">,</span>
+                       <span class="mf">5.69757432E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">482.40816326530614</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">1.24242592E-01</span><span class="p">,</span>  <span class="mf">1.65859456E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.43704704E-05</span><span class="p">,</span>
+                       <span class="mf">1.77594067E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.19878424E-12</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.53360814E+03</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">1.18117850E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TS4_N2(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;N:2&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">482.40816326530614</span><span class="p">],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mf">1.75107618E+00</span><span class="p">,</span>  <span class="mf">4.12189598E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.09828935E-04</span><span class="p">,</span>
+                       <span class="mf">1.41320046E-07</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.17404084E-11</span><span class="p">,</span>  <span class="mf">2.18954964E+04</span><span class="p">,</span>
+                       <span class="mf">4.82355594E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">482.40816326530614</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">1.52431744E+00</span><span class="p">,</span>  <span class="mf">1.40315985E-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.40821843E-05</span><span class="p">,</span>
+                       <span class="mf">1.96281604E-08</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.24114074E-12</span><span class="p">,</span>  <span class="mf">2.15755109E+04</span><span class="p">,</span>
+                      <span class="o">-</span><span class="mf">8.60931129E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;RU(S)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;Ru:1&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">554.1224489795918</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">554.1224489795918</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">])))</span>
+
+<span class="n">species</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;RU(B)&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="s2">&quot;Ru:1&quot;</span><span class="p">,</span>
+        <span class="n">thermo</span><span class="o">=</span><span class="p">(</span><span class="n">NASA</span><span class="p">([</span><span class="mf">298.0</span><span class="p">,</span> <span class="mf">554.1224489795918</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">]),</span>
+                <span class="n">NASA</span><span class="p">([</span><span class="mf">554.1224489795918</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+                     <span class="p">[</span> <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>  <span class="mf">0.00000000E+00</span><span class="p">,</span>
+                       <span class="mf">0.00000000E+00</span><span class="p">])))</span>
+
+
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="c1"># LATERAL INTERACTIONS</span>
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="n">lateral_interaction</span><span class="p">(</span><span class="s2">&quot;N(S) N(S)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">52.6</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">lateral_interaction</span><span class="p">(</span><span class="s2">&quot;N(S) H(S)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">17.7</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">lateral_interaction</span><span class="p">(</span><span class="s2">&quot;H(S) N(S)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">17.7</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">lateral_interaction</span><span class="p">(</span><span class="s2">&quot;H(S) H(S)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">lateral_interaction</span><span class="p">(</span><span class="s2">&quot;NH2(S) N(S)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">20.7</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="c1"># REACTION OPTIONS</span>
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="n">enable_motz_wise</span><span class="p">()</span>
+
+
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="c1"># REACTIONS</span>
+<span class="c1">#--------------------------------------------------------------------------------</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;H2 + 2 RU(S) &lt;=&gt; 2 H(S) + 2 RU(B)&quot;</span><span class="p">,</span> <span class="n">stick</span><span class="p">(</span> <span class="mf">5.00000e-01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">0.00000e+00</span><span class="p">))</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;N2 + RU(S) &lt;=&gt; N2(S) + RU(B)&quot;</span><span class="p">,</span> <span class="n">stick</span><span class="p">(</span> <span class="mf">5.00000e-01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">0.00000e+00</span><span class="p">))</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;NH3 + RU(S) &lt;=&gt; NH3(S) + RU(B)&quot;</span><span class="p">,</span> <span class="n">stick</span><span class="p">(</span> <span class="mf">5.00000e-01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">0.00000e+00</span><span class="p">))</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;NH3(S) + RU(S) &lt;=&gt; NH2(S) + H(S) + RU(B)&quot;</span><span class="p">,</span> <span class="p">[</span> <span class="mf">9.61497e+18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">2.42941e+01</span><span class="p">])</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;NH2(S) + RU(S) &lt;=&gt; NH(S) + H(S) + RU(B)&quot;</span><span class="p">,</span> <span class="p">[</span> <span class="mf">9.61497e+18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">1.21743e+01</span><span class="p">])</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;NH(S) + RU(S) &lt;=&gt; N(S) + H(S) + RU(B)&quot;</span><span class="p">,</span> <span class="p">[</span> <span class="mf">9.61497e+18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">2.44974e+01</span><span class="p">])</span>
+<span class="n">surface_reaction</span><span class="p">(</span><span class="s2">&quot;2 N(S) + RU(B) &lt;=&gt; N2(S) + RU(S)&quot;</span><span class="p">,</span> <span class="p">[</span> <span class="mf">9.61497e+18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mf">8.64724e+01</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+  </style>
+
+
+</body>
+</html>

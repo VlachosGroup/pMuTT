@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mixture Models &mdash; pmutt 1.2.11 documentation</title>
+  <title>Mixture Models &mdash; pmutt 1.2.12 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reactions" href="reactions.html" />
+    <link rel="next" title="Kinetic Models" href="kinetic_models.html" />
     <link rel="prev" title="Statistical Thermodynamic Models" href="statmech.html" /> 
 
   
@@ -87,7 +87,9 @@
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
@@ -95,14 +97,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#coverage-effects">Coverage Effects</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="kinetic_models.html">Kinetic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nam_2019.html">NAM 2019</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
@@ -239,7 +240,7 @@ correctly specify a piecewise function with mole fraction domain
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a> (length N) of floats</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a> (length N) of float</td>
 </tr>
 </tbody>
 </table>
@@ -412,6 +413,30 @@ mole fractions to span from 0 to 1</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="pmutt.mixture.cov.PiecewiseCovEffect.to_CTI">
+<code class="descname">to_CTI</code><span class="sig-paren">(</span><em>energy_unit='kcal/mol'</em>, <em>units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the lateral interaction in CTI format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal/mol’</li>
+<li><strong>units</strong> (<a class="reference internal" href="kinetic_models.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, energy_unit` are overwritten. Default is None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lat_inter_str</strong> – Lateral interaction in CTI format</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pmutt.mixture.cov.PiecewiseCovEffect.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
@@ -440,7 +465,7 @@ mole fractions to span from 0 to 1</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="reactions.html" class="btn btn-neutral float-right" title="Reactions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="kinetic_models.html" class="btn btn-neutral float-right" title="Kinetic Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="statmech.html" class="btn btn-neutral" title="Statistical Thermodynamic Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

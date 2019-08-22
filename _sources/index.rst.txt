@@ -12,19 +12,20 @@ Welcome to pmutt's documentation!
    includeme
    install
    examples
-   referencing
+   workshops
+   publications
+   constants
    io
    empirical
    statmech
    mixture
+   kinetic_models
    reactions
-   chemkin
    phase_diagram
    eos
    visual
-   constants
+   referencing
    release_notes
-   nam_2019
    Return to Github <https://github.com/VlachosGroup/pmutt>
 
 Indices and tables

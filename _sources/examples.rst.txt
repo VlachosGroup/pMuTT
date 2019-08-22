@@ -34,7 +34,7 @@ Topics Covered
   to thermdat format
 - Initializing :class:`~pmutt.reaction.Reaction` objects from strings
 
-------------
+--------------------------------------------------------------------------------
 
 Experimental to Empirical
 -------------------------
@@ -52,7 +52,7 @@ Topics Covered
 - Plot the shape of the :class:`~pmutt.empirical.shomate.Shomate` curve
 - Save the :class:`~pmutt.empirical.shomate.Shomate` object as a JSON file
 
-------------
+--------------------------------------------------------------------------------
 
 Excel to Empirical Data
 -----------------------
@@ -69,7 +69,7 @@ Topics Covered
 - Generate a :class:`~pmutt.empirical.nasa.Nasa` object using :class:`~pmutt.statmech.StatMech` models
 - Write :class:`~pmutt.empirical.nasa.Nasa` object to a ``thermdat`` file
 
-------------
+--------------------------------------------------------------------------------
 
 Reaction
 --------
@@ -88,7 +88,9 @@ Topics Covered
   :class:`~pmutt.reaction.Reaction` object
 - Save the :class:`~pmutt.reaction.Reaction` object as a ``JSON`` file
 
-------------
+--------------------------------------------------------------------------------
+
+.. _chemkin_io_example:
 
 Chemkin_IO
 ----------
@@ -104,7 +106,24 @@ Topics Covered
 - Write the thermdat, gas.inp, surf.inp, T_flow.inp, EAg.inp, EAs.inp, 
   tube_mole.inp files
 
-------------
+--------------------------------------------------------------------------------
+
+.. _openmkm_io_example:
+
+OpenMKM_IO
+----------
+- .. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fomkm_io%2FOpenMKM_IO.ipynb
+- `Jupyter Notebook (Cantera_IO) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.ipynb>`_
+- `Python Script (Cantera_IO) <https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.py>`_
+
+Topics Covered
+^^^^^^^^^^^^^^
+- Read species *ab-initio* data, reactions, lateral interactions and phases
+  from a spreadsheet
+- Write the CTI input file
+
+--------------------------------------------------------------------------------
 
 Phase Diagram
 -------------

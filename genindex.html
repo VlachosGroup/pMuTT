@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pmutt 1.2.11 documentation</title>
+  <title>Index &mdash; pmutt 1.2.12 documentation</title>
   
 
   
@@ -86,19 +86,20 @@
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetic_models.html">Kinetic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chemkin.html">Chemkin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nam_2019.html">NAM 2019</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
 </ul>
 
@@ -204,9 +205,11 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.a">a (pmutt.empirical.shomate.Shomate attribute)</a>
+      <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.a">a (pmutt.empirical.nasa.SingleNasa9 attribute)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.a">(pmutt.empirical.shomate.Shomate attribute)</a>
+</li>
         <li><a href="eos.html#pmutt.eos.vanDerWaalsEOS.a">(pmutt.eos.vanDerWaalsEOS attribute)</a>
 </li>
       </ul></li>
@@ -216,6 +219,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.act_energy">act_energy (pmutt.cantera.units.Units attribute)</a>
+</li>
       <li><a href="statmech.html#pmutt.statmech.vib.QRRHOVib.alpha">alpha (pmutt.statmech.vib.QRRHOVib attribute)</a>
 </li>
       <li><a href="constants.html#pmutt.constants.atomic_weight">atomic_weight (in module pmutt.constants)</a>
@@ -244,9 +249,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reactions.html#pmutt.reaction.Reaction.bep_descriptor">bep_descriptor (pmutt.reaction.Reaction attribute)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.beta">beta (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.beta">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.beta">beta (pmutt.omkm.reaction.SurfaceReaction attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.beta">(pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.beta">[1]</a>
 </li>
-      <li><a href="chemkin.html#pmutt.chemkin.CatSite.bulk_specie">bulk_specie (pmutt.chemkin.CatSite attribute)</a>
+      </ul></li>
+      <li><a href="kinetic_models.html#pmutt.chemkin.CatSite.bulk_specie">bulk_specie (pmutt.chemkin.CatSite attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -258,11 +267,11 @@
 </li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.cat_site">cat_site (pmutt.empirical.nasa.Nasa attribute)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.chemkin.CatSite">CatSite (class in pmutt.chemkin)</a>
+      <li><a href="kinetic_models.html#pmutt.chemkin.CatSite">CatSite (class in pmutt.chemkin)</a>
 </li>
       <li><a href="reactions.html#pmutt.reaction.Reaction.check_element_balance">check_element_balance() (pmutt.reaction.Reaction method)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction">ChemkinReaction (class in pmutt.reaction)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction">ChemkinReaction (class in pmutt.reaction)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction">[1]</a>
 </li>
       <li><a href="empirical.html#pmutt.empirical.references.References.clear_offset">clear_offset() (pmutt.empirical.references.References method)</a>
 </li>
@@ -298,14 +307,18 @@
 </li>
       <li><a href="statmech.html#pmutt.statmech.vib.DebyeVib">DebyeVib (class in pmutt.statmech.vib)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pmutt.io.json.pmuttEncoder.default">default() (pmutt.io.json.pmuttEncoder method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pmutt.statmech.rot.RigidRotor.degree_tol">degree_tol (pmutt.statmech.rot.RigidRotor attribute)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.chemkin.CatSite.density">density (pmutt.chemkin.CatSite attribute)</a>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.density">density (pmutt.cantera.phase.StoichSolid attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.chemkin.CatSite.density">(pmutt.chemkin.CatSite attribute)</a>
 </li>
+      </ul></li>
       <li><a href="empirical.html#pmutt.empirical.references.References.descriptor">descriptor (pmutt.empirical.references.References attribute)</a>
 
       <ul>
@@ -342,6 +355,8 @@
 </li>
       <li><a href="statmech.html#pmutt.statmech.nucl.EmptyNucl">EmptyNucl (class in pmutt.statmech.nucl)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.energy">energy (pmutt.cantera.units.Units attribute)</a>
+</li>
       <li><a href="constants.html#pmutt.constants.energy_to_freq">energy_to_freq() (in module pmutt.constants)</a>
 </li>
       <li><a href="constants.html#pmutt.constants.energy_to_temp">energy_to_temp() (in module pmutt.constants)</a>
@@ -371,6 +386,8 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.from_data">from_data() (pmutt.empirical.nasa.Nasa class method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.from_data">(pmutt.empirical.nasa.Nasa9 class method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.from_data">(pmutt.empirical.shomate.Shomate class method)</a>
 </li>
       </ul></li>
@@ -379,11 +396,15 @@
       <ul>
         <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.from_dict">(pmutt.empirical.nasa.Nasa class method)</a>
 </li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.from_dict">(pmutt.empirical.nasa.Nasa9 class method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.from_dict">(pmutt.empirical.nasa.SingleNasa9 class method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.references.References.from_dict">(pmutt.empirical.references.References class method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.from_dict">(pmutt.empirical.shomate.Shomate class method)</a>
 </li>
-        <li><a href="empirical.html#pmutt.empirical.zacros.Zacros.from_dict">(pmutt.empirical.zacros.Zacros class method)</a>
+        <li><a href="kinetic_models.html#pmutt.empirical.zacros.Zacros.from_dict">(pmutt.empirical.zacros.Zacros class method)</a>
 </li>
         <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect.from_dict">(pmutt.mixture.cov.PiecewiseCovEffect class method)</a>
 </li>
@@ -404,15 +425,23 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.from_model">from_model() (pmutt.empirical.nasa.Nasa class method)</a>
+
+      <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.from_model">(pmutt.empirical.nasa.Nasa9 class method)</a>
+</li>
+      </ul></li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.from_statmech">from_statmech() (pmutt.empirical.nasa.Nasa class method)</a>
 
       <ul>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.from_statmech">(pmutt.empirical.shomate.Shomate class method)</a>
 </li>
       </ul></li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.from_string">from_string() (pmutt.reaction.ChemkinReaction class method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.from_string">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.from_string">from_string() (pmutt.omkm.reaction.SurfaceReaction class method)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.from_string">(pmutt.reaction.ChemkinReaction class method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.from_string">[1]</a>
+</li>
         <li><a href="reactions.html#pmutt.reaction.Reaction.from_string">(pmutt.reaction.Reaction class method)</a>
 </li>
       </ul></li>
@@ -424,7 +453,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pmutt.statmech.ConstantMode.G">G (pmutt.statmech.ConstantMode attribute)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.gas_phase">gas_phase (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.gas_phase">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.gas_phase">gas_phase (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.gas_phase">[1]</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.lsr.LSR.gas_specie">gas_specie (pmutt.statmech.lsr.LSR attribute)</a>
 </li>
@@ -432,15 +461,19 @@
 </li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_a">get_a() (pmutt.empirical.nasa.Nasa method)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.get_A">get_A() (pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.get_A">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.get_A">get_A() (pmutt.omkm.reaction.SurfaceReaction method)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.get_A">(pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.get_A">[1]</a>
+</li>
         <li><a href="reactions.html#pmutt.reaction.Reaction.get_A">(pmutt.reaction.Reaction method)</a>
 </li>
       </ul></li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_Cp">get_Cp() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_Cp">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_Cp">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
         <li><a href="statmech.html#pmutt.statmech.StatMech.get_Cp">(pmutt.statmech.StatMech method)</a>
@@ -453,6 +486,10 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_CpoR">get_CpoR() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_CpoR">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.get_CpoR">(pmutt.empirical.nasa.SingleNasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_CpoR">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
         <li><a href="statmech.html#pmutt.statmech.ConstantMode.get_CpoR">(pmutt.statmech.ConstantMode method)</a>
@@ -615,6 +652,8 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_G">get_G() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_G">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_G">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
         <li><a href="statmech.html#pmutt.statmech.StatMech.get_G">(pmutt.statmech.StatMech method)</a>
@@ -627,6 +666,8 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_GoRT">get_GoRT() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_GoRT">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.references.References.get_GoRT">(pmutt.empirical.references.References method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_GoRT">(pmutt.empirical.shomate.Shomate method)</a>
@@ -666,9 +707,11 @@
 </li>
       <li><a href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D">get_GoRT_2D() (pmutt.reaction.phasediagram.PhaseDiagram method)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.get_GoRT_act">get_GoRT_act() (pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.get_GoRT_act">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.get_GoRT_act">get_GoRT_act() (pmutt.omkm.reaction.SurfaceReaction method)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.get_GoRT_act">(pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.get_GoRT_act">[1]</a>
+</li>
         <li><a href="reactions.html#pmutt.reaction.Reaction.get_GoRT_act">(pmutt.reaction.Reaction method)</a>
 </li>
       </ul></li>
@@ -677,6 +720,8 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_H">get_H() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_H">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_H">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
         <li><a href="statmech.html#pmutt.statmech.StatMech.get_H">(pmutt.statmech.StatMech method)</a>
@@ -689,6 +734,10 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_HoRT">get_HoRT() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_HoRT">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.get_HoRT">(pmutt.empirical.nasa.SingleNasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.references.References.get_HoRT">(pmutt.empirical.references.References method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_HoRT">(pmutt.empirical.shomate.Shomate method)</a>
@@ -720,9 +769,11 @@
         <li><a href="statmech.html#pmutt.statmech.vib.QRRHOVib.get_HoRT">(pmutt.statmech.vib.QRRHOVib method)</a>
 </li>
       </ul></li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.get_HoRT_act">get_HoRT_act() (pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.get_HoRT_act">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.get_HoRT_act">get_HoRT_act() (pmutt.omkm.reaction.SurfaceReaction method)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.get_HoRT_act">(pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.get_HoRT_act">[1]</a>
+</li>
         <li><a href="reactions.html#pmutt.reaction.Reaction.get_HoRT_act">(pmutt.reaction.Reaction method)</a>
 </li>
       </ul></li>
@@ -775,6 +826,8 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_S">get_S() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_S">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_S">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
         <li><a href="statmech.html#pmutt.statmech.StatMech.get_S">(pmutt.statmech.StatMech method)</a>
@@ -787,6 +840,10 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_SoR">get_SoR() (pmutt.empirical.nasa.Nasa method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_SoR">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.get_SoR">(pmutt.empirical.nasa.SingleNasa9 method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.get_SoR">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
         <li><a href="reactions.html#pmutt.reaction.bep.BEP.get_SoR">(pmutt.reaction.bep.BEP method)</a>
@@ -918,6 +975,12 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas">IdealGas (class in pmutt.cantera.phase)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.IdealGas">(class in pmutt.omkm.phase)</a>
+</li>
+      </ul></li>
       <li><a href="eos.html#pmutt.eos.IdealGasEOS">IdealGasEOS (class in pmutt.eos)</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.vib.HarmonicVib.imaginary_substitute">imaginary_substitute (pmutt.statmech.vib.HarmonicVib attribute)</a>
@@ -928,16 +991,28 @@
       </ul></li>
       <li><a href="constants.html#pmutt.constants.inertia_to_temp">inertia_to_temp() (in module pmutt.constants)</a>
 </li>
-      <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect.insert">insert() (pmutt.mixture.cov.PiecewiseCovEffect method)</a>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.initial_state">initial_state (pmutt.cantera.phase.IdealGas attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.initial_state">(pmutt.cantera.phase.StoichSolid attribute)</a>
 </li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.initial_state">(pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect.insert">insert() (pmutt.mixture.cov.PiecewiseCovEffect method)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface">InteractingInterface (class in pmutt.omkm.phase)</a>
+</li>
       <li><a href="statmech.html#pmutt.statmech.vib.DebyeVib.interaction_energy">interaction_energy (pmutt.statmech.vib.DebyeVib attribute)</a>
 
       <ul>
         <li><a href="statmech.html#pmutt.statmech.vib.EinsteinVib.interaction_energy">(pmutt.statmech.vib.EinsteinVib attribute)</a>
 </li>
       </ul></li>
+      <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.interactions">interactions (pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
       <li><a href="reactions.html#pmutt.reaction.bep.BEP.intercept">intercept (pmutt.reaction.bep.BEP attribute)</a>
 
       <ul>
@@ -946,8 +1021,12 @@
       </ul></li>
       <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect.intervals">intervals (pmutt.mixture.cov.PiecewiseCovEffect attribute)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.is_adsorption">is_adsorption (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.is_adsorption">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.is_adsorption">is_adsorption (pmutt.omkm.reaction.SurfaceReaction attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.is_adsorption">(pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.is_adsorption">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -964,15 +1043,25 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#pmutt.constants.kb">kb() (in module pmutt.constants)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.kinetics">kinetics (pmutt.cantera.phase.IdealGas attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.kwargs">kwargs (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.kwargs">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.kwargs">kwargs (pmutt.omkm.reaction.SurfaceReaction attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.kwargs">(pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.kwargs">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.length">length (pmutt.cantera.units.Units attribute)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pmutt.statmech.lsr.LSR">LSR (class in pmutt.statmech.lsr)</a>
 </li>
@@ -985,6 +1074,8 @@
       <li><a href="constants.html#pmutt.constants.m_e">m_e() (in module pmutt.constants)</a>
 </li>
       <li><a href="constants.html#pmutt.constants.m_p">m_p() (in module pmutt.constants)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.mass">mass (pmutt.cantera.units.Units attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -1008,10 +1099,18 @@
 </li>
       <li><a href="constants.html#pmutt.constants.Na">Na (in module pmutt.constants)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.chemkin.CatSite.name">name (pmutt.chemkin.CatSite attribute)</a>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.name">name (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.name">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.name">(pmutt.cantera.phase.StoichSolid attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.chemkin.CatSite.name">(pmutt.chemkin.CatSite attribute)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.name">(pmutt.empirical.EmpiricalBase attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.name">(pmutt.omkm.phase.InteractingInterface attribute)</a>
 </li>
         <li><a href="reactions.html#pmutt.reaction.bep.BEP.name">(pmutt.reaction.bep.BEP attribute)</a>
 </li>
@@ -1026,8 +1125,20 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa">Nasa (class in pmutt.empirical.nasa)</a>
 </li>
+      <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9">Nasa9 (class in pmutt.empirical.nasa)</a>
+</li>
+      <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.nasas">nasas (pmutt.empirical.nasa.Nasa9 attribute)</a>
+</li>
       <li><a href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram.norm_factors">norm_factors (pmutt.reaction.phasediagram.PhaseDiagram attribute)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.note">note (pmutt.cantera.phase.IdealGas attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.note">(pmutt.cantera.phase.StoichSolid attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.note">(pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
+      </ul></li>
       <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.notes">notes (pmutt.empirical.EmpiricalBase attribute)</a>
 
       <ul>
@@ -1050,8 +1161,20 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kinetic_models.html#pmutt.io.cantera.obj_to_CTI">obj_to_CTI() (in module pmutt.io.cantera)</a>
+</li>
       <li><a href="empirical.html#pmutt.empirical.references.References.offset">offset (pmutt.empirical.references.References attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.options">options (pmutt.cantera.phase.IdealGas attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.options">(pmutt.cantera.phase.StoichSolid attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.options">(pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1060,9 +1183,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="constants.html#pmutt.constants.P0">P0() (in module pmutt.constants)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase">Phase (class in pmutt.cantera.phase)</a>
+</li>
       <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.phase">phase (pmutt.empirical.EmpiricalBase attribute)</a>
 </li>
       <li><a href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram">PhaseDiagram (class in pmutt.reaction.phasediagram)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.phases">phases (pmutt.omkm.phase.InteractingInterface attribute)</a>
 </li>
       <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect">PiecewiseCovEffect (class in pmutt.mixture.cov)</a>
 </li>
@@ -1086,17 +1213,33 @@
 </li>
       <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.plot_statmech_and_empirical">plot_statmech_and_empirical() (pmutt.empirical.EmpiricalBase method)</a>
 </li>
+      <li><a href="kinetic_models.html#module-pmutt.cantera.phase">pmutt.cantera.phase (module)</a>
+</li>
+      <li><a href="kinetic_models.html#module-pmutt.cantera.reaction">pmutt.cantera.reaction (module)</a>
+</li>
+      <li><a href="kinetic_models.html#module-pmutt.cantera.units">pmutt.cantera.units (module)</a>
+</li>
       <li><a href="constants.html#module-pmutt.constants">pmutt.constants (module)</a>
+</li>
+      <li><a href="kinetic_models.html#module-pmutt.io.cantera">pmutt.io.cantera (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="chemkin.html#module-pmutt.io.chemkin">pmutt.io.chemkin (module)</a>, <a href="io.html#module-pmutt.io.chemkin">[1]</a>
+      <li><a href="io.html#module-pmutt.io.chemkin">pmutt.io.chemkin (module)</a>, <a href="kinetic_models.html#module-pmutt.io.chemkin">[1]</a>
 </li>
       <li><a href="io.html#module-pmutt.io.gaussian">pmutt.io.gaussian (module)</a>
 </li>
       <li><a href="io.html#module-pmutt.io.json">pmutt.io.json (module)</a>
 </li>
+      <li><a href="kinetic_models.html#module-pmutt.io.omkm">pmutt.io.omkm (module)</a>
+</li>
       <li><a href="io.html#module-pmutt.io.thermdat">pmutt.io.thermdat (module)</a>
+</li>
+      <li><a href="kinetic_models.html#module-pmutt.omkm.phase">pmutt.omkm.phase (module)</a>
+</li>
+      <li><a href="kinetic_models.html#module-pmutt.omkm.reaction">pmutt.omkm.reaction (module)</a>
+</li>
+      <li><a href="kinetic_models.html#module-pmutt.omkm.units">pmutt.omkm.units (module)</a>
 </li>
       <li><a href="statmech.html#module-pmutt.statmech.nucl">pmutt.statmech.nucl (module)</a>
 </li>
@@ -1109,6 +1252,8 @@
       <li><a href="constants.html#pmutt.constants.prefixes">prefixes (in module pmutt.constants)</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.presets">presets (in module pmutt.statmech)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.pressure">pressure (pmutt.cantera.units.Units attribute)</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.vib.HarmonicVib.print_calc_wavenumbers">print_calc_wavenumbers() (pmutt.statmech.vib.HarmonicVib method)</a>
 
@@ -1132,6 +1277,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pmutt.statmech.vib.QRRHOVib">QRRHOVib (class in pmutt.statmech.vib)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.quantity">quantity (pmutt.cantera.units.Units attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1154,10 +1301,12 @@
       </ul></li>
       <li><a href="reactions.html#pmutt.reaction.Reactions">Reactions (class in pmutt.reaction)</a>
 </li>
-      <li><a href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram.reactions">reactions (pmutt.reaction.phasediagram.PhaseDiagram attribute)</a>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.reactions">reactions (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
         <li><a href="reactions.html#pmutt.reaction.Reactions.reactions">(pmutt.reaction.Reactions attribute)</a>
+</li>
+        <li><a href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram.reactions">(pmutt.reaction.phasediagram.PhaseDiagram attribute)</a>
 </li>
       </ul></li>
       <li><a href="io.html#pmutt.io.gaussian.read_electronic_and_zpe">read_electronic_and_zpe() (in module pmutt.io.gaussian)</a>
@@ -1172,7 +1321,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pmutt.io.gaussian.read_pattern">read_pattern() (in module pmutt.io.gaussian)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.io.chemkin.read_reactions">read_reactions() (in module pmutt.io.chemkin)</a>, <a href="io.html#pmutt.io.chemkin.read_reactions">[1]</a>
+      <li><a href="io.html#pmutt.io.chemkin.read_reactions">read_reactions() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.read_reactions">[1]</a>
 </li>
       <li><a href="io.html#pmutt.io.gaussian.read_rot_symmetry_num">read_rot_symmetry_num() (in module pmutt.io.gaussian)</a>
 </li>
@@ -1234,14 +1383,20 @@
 </li>
       <li><a href="io.html#pmutt.io.excel.set_vib_wavenumbers">set_vib_wavenumbers() (in module pmutt.io.excel)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io.html#pmutt.io.vasp.set_vib_wavenumbers_from_outcar">set_vib_wavenumbers_from_outcar() (in module pmutt.io.vasp)</a>
 </li>
       <li><a href="empirical.html#pmutt.empirical.shomate.Shomate">Shomate (class in pmutt.empirical.shomate)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.chemkin.CatSite.site_density">site_density (pmutt.chemkin.CatSite attribute)</a>
+      <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9">SingleNasa9 (class in pmutt.empirical.nasa)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.chemkin.CatSite.site_density">site_density (pmutt.chemkin.CatSite attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.site_density">(pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reactions.html#pmutt.reaction.bep.BEP.slope">slope (pmutt.reaction.bep.BEP attribute)</a>
 
       <ul>
@@ -1256,15 +1411,37 @@
         <li><a href="statmech.html#pmutt.statmech.StatMech.smiles">(pmutt.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.species">species (pmutt.cantera.phase.IdealGas attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.species">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.species">(pmutt.cantera.phase.StoichSolid attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.species">(pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
+      </ul></li>
       <li><a href="statmech.html#pmutt.statmech.elec.GroundStateElec.spin">spin (pmutt.statmech.elec.GroundStateElec attribute)</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.StatMech">StatMech (class in pmutt.statmech)</a>
 </li>
       <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.statmech_model">statmech_model (pmutt.empirical.EmpiricalBase attribute)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.sticking_coeff">sticking_coeff (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.sticking_coeff">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.sticking_coeff">sticking_coeff (pmutt.omkm.reaction.SurfaceReaction attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.sticking_coeff">(pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.sticking_coeff">[1]</a>
 </li>
+      </ul></li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid">StoichSolid (class in pmutt.cantera.phase)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.StoichSolid">(class in pmutt.omkm.phase)</a>
+</li>
+      </ul></li>
       <li><a href="statmech.html#pmutt.statmech.lsr.LSR.surf_specie">surf_specie (pmutt.statmech.lsr.LSR attribute)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction">SurfaceReaction (class in pmutt.omkm.reaction)</a>
 </li>
       <li><a href="constants.html#pmutt.constants.symmetry_dict">symmetry_dict (in module pmutt.constants)</a>
 </li>
@@ -1281,12 +1458,20 @@
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.T_high">T_high (pmutt.empirical.nasa.Nasa attribute)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.T_high">(pmutt.empirical.nasa.Nasa9 attribute)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.T_high">(pmutt.empirical.nasa.SingleNasa9 attribute)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.T_high">(pmutt.empirical.shomate.Shomate attribute)</a>
 </li>
       </ul></li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.T_low">T_low (pmutt.empirical.nasa.Nasa attribute)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.T_low">(pmutt.empirical.nasa.Nasa9 attribute)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.T_low">(pmutt.empirical.nasa.SingleNasa9 attribute)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.T_low">(pmutt.empirical.shomate.Shomate attribute)</a>
 </li>
       </ul></li>
@@ -1304,12 +1489,42 @@
 </li>
       <li><a href="constants.html#pmutt.constants.temp_to_wavenumber">temp_to_wavenumber() (in module pmutt.constants)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.chemkin.CatSite.to_dict">to_dict() (pmutt.chemkin.CatSite method)</a>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.time">time (pmutt.cantera.units.Units attribute)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.to_CTI">to_CTI() (pmutt.cantera.phase.IdealGas method)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.to_CTI">(pmutt.cantera.phase.StoichSolid method)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.cantera.units.Units.to_CTI">(pmutt.cantera.units.Units method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.to_CTI">(pmutt.empirical.nasa.Nasa method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.to_CTI">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.to_CTI">(pmutt.empirical.nasa.SingleNasa9 method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.to_CTI">(pmutt.empirical.shomate.Shomate method)</a>
+</li>
+        <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI">(pmutt.mixture.cov.PiecewiseCovEffect method)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.to_CTI">(pmutt.omkm.phase.InteractingInterface method)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.to_CTI">(pmutt.omkm.reaction.SurfaceReaction method)</a>
+</li>
+      </ul></li>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.to_CTI_dict">to_CTI_dict() (pmutt.cantera.units.Units method)</a>
+</li>
+      <li><a href="kinetic_models.html#pmutt.chemkin.CatSite.to_dict">to_dict() (pmutt.chemkin.CatSite method)</a>
 
       <ul>
         <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.to_dict">(pmutt.empirical.EmpiricalBase method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.to_dict">(pmutt.empirical.nasa.Nasa method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.to_dict">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
+        <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.to_dict">(pmutt.empirical.nasa.SingleNasa9 method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.references.Reference.to_dict">(pmutt.empirical.references.Reference method)</a>
 </li>
@@ -1317,11 +1532,13 @@
 </li>
         <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.to_dict">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
-        <li><a href="empirical.html#pmutt.empirical.zacros.Zacros.to_dict">(pmutt.empirical.zacros.Zacros method)</a>
+        <li><a href="kinetic_models.html#pmutt.empirical.zacros.Zacros.to_dict">(pmutt.empirical.zacros.Zacros method)</a>
 </li>
         <li><a href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect.to_dict">(pmutt.mixture.cov.PiecewiseCovEffect method)</a>
 </li>
-        <li><a href="chemkin.html#pmutt.reaction.ChemkinReaction.to_dict">(pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.to_dict">[1]</a>
+        <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.to_dict">(pmutt.omkm.reaction.SurfaceReaction method)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.to_dict">(pmutt.reaction.ChemkinReaction method)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.to_dict">[1]</a>
 </li>
         <li><a href="reactions.html#pmutt.reaction.Reaction.to_dict">(pmutt.reaction.Reaction method)</a>
 </li>
@@ -1358,6 +1575,14 @@
 </li>
       <li><a href="reactions.html#pmutt.reaction.Reaction.transition_state_stoich">transition_state_stoich (pmutt.reaction.Reaction attribute)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.transport">transport (pmutt.cantera.phase.IdealGas attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.transport">(pmutt.cantera.phase.StoichSolid attribute)</a>
+</li>
+        <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.transport">(pmutt.omkm.phase.InteractingInterface attribute)</a>
+</li>
+      </ul></li>
       <li><a href="io.html#pmutt.io.json.type_to_class">type_to_class() (in module pmutt.io.json)</a>
 </li>
   </ul></td>
@@ -1368,6 +1593,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="statmech.html#pmutt.statmech.ConstantMode.U">U (pmutt.statmech.ConstantMode attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units">Units (class in pmutt.cantera.units)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.omkm.units.Units">(class in pmutt.omkm.units)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1402,19 +1635,21 @@
 </li>
       <li><a href="constants.html#pmutt.constants.wavenumber_to_temp">wavenumber_to_temp() (in module pmutt.constants)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.io.chemkin.write_EA">write_EA() (in module pmutt.io.chemkin)</a>, <a href="io.html#pmutt.io.chemkin.write_EA">[1]</a>
+      <li><a href="kinetic_models.html#pmutt.io.omkm.write_cti">write_cti() (in module pmutt.io.omkm)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="chemkin.html#pmutt.io.chemkin.write_gas">write_gas() (in module pmutt.io.chemkin)</a>, <a href="io.html#pmutt.io.chemkin.write_gas">[1]</a>
+      <li><a href="io.html#pmutt.io.chemkin.write_EA">write_EA() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.write_EA">[1]</a>
 </li>
-      <li><a href="chemkin.html#pmutt.io.chemkin.write_surf">write_surf() (in module pmutt.io.chemkin)</a>, <a href="io.html#pmutt.io.chemkin.write_surf">[1]</a>
+      <li><a href="io.html#pmutt.io.chemkin.write_gas">write_gas() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.write_gas">[1]</a>
 </li>
-      <li><a href="chemkin.html#pmutt.io.chemkin.write_T_flow">write_T_flow() (in module pmutt.io.chemkin)</a>, <a href="io.html#pmutt.io.chemkin.write_T_flow">[1]</a>
+      <li><a href="io.html#pmutt.io.chemkin.write_surf">write_surf() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.write_surf">[1]</a>
+</li>
+      <li><a href="io.html#pmutt.io.chemkin.write_T_flow">write_T_flow() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.write_T_flow">[1]</a>
 </li>
       <li><a href="io.html#pmutt.io.thermdat.write_thermdat">write_thermdat() (in module pmutt.io.thermdat)</a>
 </li>
-      <li><a href="chemkin.html#pmutt.io.chemkin.write_tube_mole">write_tube_mole() (in module pmutt.io.chemkin)</a>, <a href="io.html#pmutt.io.chemkin.write_tube_mole">[1]</a>
+      <li><a href="io.html#pmutt.io.chemkin.write_tube_mole">write_tube_mole() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.write_tube_mole">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1422,7 +1657,7 @@
 <h2 id="Z">Z</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="empirical.html#pmutt.empirical.zacros.Zacros">Zacros (class in pmutt.empirical.zacros)</a>
+      <li><a href="kinetic_models.html#pmutt.empirical.zacros.Zacros">Zacros (class in pmutt.empirical.zacros)</a>
 </li>
   </ul></td>
 </tr></table>
