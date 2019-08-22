@@ -7,8 +7,20 @@ Development Branch
 ------------------
 `Development Branch`_
 
-Verion 1.2.11
--------------
+Version 1.2.12
+--------------
+Aug. 22, 2019
+
+- Refactored :class:`~pmutt.io.thermdat.write_thermdat` so that it is simpler
+  to understand
+- Implemented :class:`~pmutt.empirical.nasa.Nasa9` and 
+  :class:`~pmutt.empirical.nasa.SingleNasa9` polynomials
+- Added preliminary CTI file writer for Cantera and OpenMKM
+- Added Binder notebooks to Examples page so users can try pMuTT before
+  installing
+
+Version 1.2.11
+--------------
 Jun. 18, 2019
 
 - Added xlrd dependency so spreadsheets can be read using pandas
