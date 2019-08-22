@@ -7,11 +7,11 @@ Installing Python
 -----------------
 Anaconda is the recommended method to install Python for scientific
 applications. It is supported on Linux, Windows and Mac OS X.
-`Download Anaconda here`_. Note that pmutt runs on Python 3.X.
+`Download Anaconda here`_. Note that pMuTT runs on Python 3.X.
 
-Installing pmutt using pip
+Installing pMuTT using pip
 --------------------------
-Using pip is the most straightforward way to install pmutt.
+Using pip is the most straightforward way to install pMuTT.
 
 1. Open a command prompt with access to Python (if Python is installed via
    Anaconda on Windows, open the Anaconda Prompt from the start menu).
