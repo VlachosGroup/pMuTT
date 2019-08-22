@@ -7,10 +7,7 @@ If you use pMuTT for your research, please cite the following reference.
 
 ::
 
-   J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry
-   Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer
-   Physics Communications (2019) 106864,
-   https://doi.org/10.1016/j.cpc.2019.106864.
+   J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer Physics Communications (2019) 106864, https://doi.org/10.1016/j.cpc.2019.106864.
 
 `Download citation as BibTex file.`_
 
@@ -20,14 +17,24 @@ Logos
 When citing our software in a presentation or other reproducible format, you
 may use the high-resolution logos below.
 
-**Dark Version**
+**Default**
 
-.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo_highres.jpg
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png
    :align: center
 
-**Light Version**
+**Inverse**
 
-.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_inverse_highres.png
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_inverse_web.png
+   :align: center
+
+**Black**
+
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_black_web.png
+   :align: center
+
+**White**
+
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_white_web.png
    :align: center
 
 Cited By

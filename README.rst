@@ -9,9 +9,8 @@ thermodynamic properties such as heat capacity, enthalpy, entropy, and
 Gibbs energy. These properties can be fit to empirical equations and
 written to different formats. 
 
-.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo.png
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png
    :target: https://vlachosgroup.github.io/pMuTT/
-   :height: 250
    :align: center
 
 Documentation
