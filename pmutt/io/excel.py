@@ -72,7 +72,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - nasa.a_low (:func:`~pmutt.io.excel.set_nasa_a_low`)
         - nasa.a_high (:func:`~pmutt.io.excel.set_nasa_a_high`)
         - vib_outcar (:func:`~pmutt.io.vasp.set_vib_wavenumbers_from_outcar`)
-        - list.[variable name]
+        - list.[variable name] (:func:`~pmutt.io.excel.set_list_value`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
@@ -284,6 +284,7 @@ def set_trans_model(model, output_structure):
         raise ValueError('Unsupported translational model, {}. See docstring '
                          'of presets in pmutt.statmech.trans for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_vib_model(model, output_structure):
@@ -307,6 +308,7 @@ def set_vib_model(model, output_structure):
         raise ValueError('Unsupported vibrational model, {}. See docstring '
                          'of presets in pmutt.statmech.vib for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_rot_model(model, output_structure):
@@ -330,6 +332,7 @@ def set_rot_model(model, output_structure):
         raise ValueError('Unsupported rotational model, {}. See docstring '
                          'of presets in pmutt.statmech.rot for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_elec_model(model, output_structure):
@@ -353,6 +356,7 @@ def set_elec_model(model, output_structure):
         raise ValueError('Unsupported Electronic model, {}. See docstring '
                          'of presets in pmutt.statmech.elec for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_nucl_model(model, output_structure):
@@ -376,6 +380,7 @@ def set_nucl_model(model, output_structure):
         raise ValueError('Unsupported Nuclear model, {}. See docstring '
                          'of presets in pmutt.statmech.nucl for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_vib_wavenumbers(value, output_structure):
