@@ -21,7 +21,7 @@ class PiecewiseCovEffect(_ModelBase):
             Name of specie's properties affected by coverage of specie_j
         name_j : str
             Name of specie affecting the properties of specie_i
-        intervals : list (length N) of floats
+        intervals : list (length N) of float
             Intervals (in ML) to change slopes. The first element of the list
             should be 0 and the list should be sorted in ascending order to
             correctly specify a piecewise function with mole fraction domain
@@ -166,6 +166,31 @@ class PiecewiseCovEffect(_ModelBase):
 
     def get_SoR(self):
         return 0.
+
+    def to_CTI(self, energy_unit='kcal/mol', units=None):
+        """Writes the lateral interaction in CTI format
+
+        Parameters
+        ----------
+            energy_unit : str, optional
+                Energy unit for slopes. Default is 'kcal/mol'
+            units : :class:`~pmutt.cantera.units.Units` object
+                If specified, energy_unit` are overwritten. Default is None.
+        Returns
+        -------
+            lat_inter_str : str
+                Lateral interaction in CTI format
+        """
+        if units is not None:
+            energy_unit = units.energy
+
+        lat_inter_str = 'lateral_interaction("{} {}", {}, {})'.format(
+                self.name_i,
+                self.name_j,
+                c.convert_unit(num=np.array(self.slopes), initial='kcal/mol',
+                               final=energy_unit),
+                self.intervals)
+        return lat_inter_str
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

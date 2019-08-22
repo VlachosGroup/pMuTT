@@ -72,6 +72,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - nasa.a_low (:func:`~pmutt.io.excel.set_nasa_a_low`)
         - nasa.a_high (:func:`~pmutt.io.excel.set_nasa_a_high`)
         - vib_outcar (:func:`~pmutt.io.vasp.set_vib_wavenumbers_from_outcar`)
+        - list.[variable name] (:func:`~pmutt.io.excel.set_list_value`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
@@ -140,6 +141,15 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                 else:
                     raise NotImplementedError('Does not support {}'
                                               .format(col))
+            elif 'list' in col:
+                # Process column name
+                header = col.replace('list.', '')
+                # Remove the number if present
+                if '.' in header:
+                    i = header.rfind('.')
+                    header = header[:i]
+                thermo_data = set_list_value(header=header, value=cell_data,
+                                             output_structure=thermo_data)
             else:
                 thermo_data[col] = cell_data
         thermos_out.append(thermo_data)
@@ -274,6 +284,7 @@ def set_trans_model(model, output_structure):
         raise ValueError('Unsupported translational model, {}. See docstring '
                          'of presets in pmutt.statmech.trans for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_vib_model(model, output_structure):
@@ -297,6 +308,7 @@ def set_vib_model(model, output_structure):
         raise ValueError('Unsupported vibrational model, {}. See docstring '
                          'of presets in pmutt.statmech.vib for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_rot_model(model, output_structure):
@@ -320,6 +332,7 @@ def set_rot_model(model, output_structure):
         raise ValueError('Unsupported rotational model, {}. See docstring '
                          'of presets in pmutt.statmech.rot for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_elec_model(model, output_structure):
@@ -343,6 +356,7 @@ def set_elec_model(model, output_structure):
         raise ValueError('Unsupported Electronic model, {}. See docstring '
                          'of presets in pmutt.statmech.elec for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_nucl_model(model, output_structure):
@@ -366,6 +380,7 @@ def set_nucl_model(model, output_structure):
         raise ValueError('Unsupported Nuclear model, {}. See docstring '
                          'of presets in pmutt.statmech.nucl for supported '
                          'models.'.format(model))
+    output_structure['statmech_model'] = StatMech
     return output_structure
 
 def set_vib_wavenumbers(value, output_structure):
@@ -474,3 +489,27 @@ def set_nasa_a_high(header, value, output_structure, delimiter='.'):
         output_structure['a_high'] = np.zeros(7,)
         output_structure['a_high'][i] = value
     return output_structure
+
+def set_list_value(header, value, output_structure):
+    """Generic function to read a list from a spreadsheet
+
+    Parameters
+    ----------
+        header : str
+            Name of the header. 'list' should already be removed.
+        value : float
+            Value to assign
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure[header]
+    Returns
+    -------
+        output_structure : dict
+            output_structure with value added
+    """
+    try:
+        output_structure[header].append(value)
+    except KeyError:
+        output_structure[header] = [value]
+    return output_structure
+

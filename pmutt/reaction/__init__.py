@@ -1436,7 +1436,8 @@ class Reaction(_pmuttBase):
                 Change in Gibbs energy between reactants/products and the
                 transition state
         """
-        return self.get_delta_G(units=units, T=T, rev=rev, act=True, **kwargs)
+        return self.get_GoRT_act(T=T, rev=rev, **kwargs)*T \
+               *c.R('{}/K'.format(units))
 
     def get_Keq(self, rev=False, act=False, **kwargs):
         """Gets equilibrium constant between reactants and products
@@ -1591,13 +1592,10 @@ class Reaction(_pmuttBase):
                 A = self.get_delta_q(rev=rev, act=True, T=T, ignore_q_elec=True,
                                      include_ZPE=False, **kwargs)
             except AttributeError:
-                # Partition function failed. Use entropy instead
+                # Partition function failed. Use entropy of activation instead
                 use_q = False
-        if use_q:
+        if not use_q:
             A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
-        print(type(A))
-        print(type(T))
-        print(type(m))
         return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
 
     def _parse_state(self, state):
@@ -1795,7 +1793,8 @@ class Reaction(_pmuttBase):
                    bep_descriptor=bep_descriptor, notes=notes)
 
     def to_string(self, species_delimiter='+', reaction_delimiter='=',
-                  stoich_format='.2f', include_TS=True, key='name'):
+                  stoich_format='.2f', include_TS=True, stoich_space=False,
+                  key='name'):
         """Writes the Reaction object as a stoichiometric reaction
 
         Parameters
@@ -1809,6 +1808,9 @@ class Reaction(_pmuttBase):
                 rounded to 2 decimal places)
             include_TS : bool, optional
                 If True, includes transition states in output. Default is True
+            stoich_space : bool, optional
+                If True, inserts a space between stoichiometric coefficients
+                and the species name. Default is False
             key : str, optional
                 Attribute to use to print out species. Default is name
         Returns
@@ -1817,11 +1819,10 @@ class Reaction(_pmuttBase):
                 Reaction string
         """
         # Write reactants
-        reaction_str = _write_reaction_state(species=self.reactants,
-                                             stoich=self.reactants_stoich,
-                                             species_delimiter=species_delimiter,
-                                             stoich_format=stoich_format,
-                                             key=key)
+        reaction_str = _write_reaction_state(
+                species=self.reactants, stoich=self.reactants_stoich,
+                species_delimiter=species_delimiter,
+                stoich_format=stoich_format, stoich_space=stoich_space, key=key)
         reaction_str += reaction_delimiter
 
         # Write transition state if any
@@ -1830,7 +1831,7 @@ class Reaction(_pmuttBase):
                     species=self.transition_state,
                     stoich=self.transition_state_stoich,
                     species_delimiter=species_delimiter,
-                    stoich_format=stoich_format,
+                    stoich_format=stoich_format, stoich_space=stoich_space,
                     key=key)
             reaction_str += reaction_delimiter
 
@@ -1838,7 +1839,7 @@ class Reaction(_pmuttBase):
         reaction_str += _write_reaction_state(
                 species=self.products, stoich=self.products_stoich,
                 species_delimiter=species_delimiter,
-                stoich_format=stoich_format,
+                stoich_format=stoich_format, stoich_space=stoich_space,
                 key=key)
         return reaction_str
 
@@ -2034,11 +2035,10 @@ class ChemkinReaction(Reaction):
                 Change in Gibbs energy between reactants/products and the
                 transition state
         """
-        if self.transition_state is None:
-            act = False
-        else:
-            act = True
-        return np.max([0., super().get_delta_HoRT(rev=rev, act=act, **kwargs)])
+        act = self.transition_state is not None
+        return np.max([0.,
+                       super().get_delta_HoRT(rev=rev, act=act, **kwargs),
+                       super().get_delta_HoRT(rev=rev, act=False, **kwargs)])
 
     def get_GoRT_act(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
@@ -2062,10 +2062,7 @@ class ChemkinReaction(Reaction):
                 Change in Gibbs energy between reactants/products and the
                 transition state
         """
-        if self.transition_state is None:
-            act = False
-        else:
-            act = True
+        act = self.transition_state is not None
         return np.max([0., 
                        super().get_delta_GoRT(rev=rev, act=act, **kwargs),
                        super().get_delta_GoRT(rev=rev, act=False, **kwargs)])
@@ -2574,7 +2571,7 @@ def _parse_reaction(reaction_str, species_delimiter='+',
 
 
 def _write_reaction_state(species, stoich, species_delimiter='+',
-                          stoich_format='.2f', key='name'):
+                          stoich_format='.2f', stoich_space=False, key='name'):
     """Writes one section of the reaction string
 
     Parameters
@@ -2588,6 +2585,9 @@ def _write_reaction_state(species, stoich, species_delimiter='+',
         stoich_format : float, optional
             Format to write stoichiometric numbers. Default is '.2f' (float
             rounded to 2 decimal places)
+        stoich_space : bool, optional
+            If True, inserts a space between stoichiometric coefficients
+            and the species name. Default is False
         key : str, optional
             Attribute to display species. Default is name
     Returns
@@ -2599,14 +2599,25 @@ def _write_reaction_state(species, stoich, species_delimiter='+',
     if species is None:
         return ''
 
-    stoich_field = '{:%s}' % stoich_format
     for i, (specie, stoich_val) in enumerate(zip(species, stoich)):
+        specie_key = getattr(specie, key)
         # If the coefficient is 1, just write the specie name
         if np.isclose(stoich_val, 1.):
-            specie_str = getattr(specie, key)
+            specie_str = specie_key
         else:
-            stoich_val = stoich_field.format(stoich_val)
-            specie_str = '{}{}'.format(stoich_val, getattr(specie, key))
+            # If the value is close to an integer, remove the decimal point
+            if np.isclose(stoich_val, round(stoich_val)):
+                stoich_val = int(stoich_val)
+            else:
+                # Otherwise, use the float format specified earlier
+                stoich_val = '{:{format}}'.format(stoich_val, 
+                                                  format=stoich_format)
+
+            # Add space between coefficient and species if required
+            if stoich_space:
+                specie_str = '{} {}'.format(stoich_val, specie_key)
+            else:
+                specie_str = '{}{}'.format(stoich_val, specie_key)
 
         # Specie delimiter only written after the first specie
         if i == 0:
