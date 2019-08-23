@@ -101,7 +101,7 @@ Special Thanks
    :height: 20
    :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Abug
 
-.. |enhacement_label| image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/enhancement_small.png
+.. |enhancement_label| image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/enhancement_small.png
    :height: 20
    :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Aenhancement
 
