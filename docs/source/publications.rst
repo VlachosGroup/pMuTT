@@ -7,7 +7,10 @@ If you use pMuTT for your research, please cite the following reference.
 
 ::
 
-   J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer Physics Communications (2019) 106864, https://doi.org/10.1016/j.cpc.2019.106864.
+   J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry
+   Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer
+   Physics Communications (2019) 106864,
+   https://doi.org/10.1016/j.cpc.2019.106864.
 
 `Download citation as BibTex file.`_
 
