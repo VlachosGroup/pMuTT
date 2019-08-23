@@ -46,7 +46,7 @@ Cited By
 If you have published work using pMuTT and would like to be featured here,
 please post an issue with the |Publication_label| tag.
 
-.. |Publication_label| image:: ./images/PublicationsLabel.png
+.. |Publication_label| image:: ./images/labels/publication.png
    :height: 20
    :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Apublications
 
