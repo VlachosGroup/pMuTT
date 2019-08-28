@@ -264,7 +264,7 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
 
     Parameters
     ----------
-        atoms : ase.Atoms object
+        atoms : `ase.Atoms`_ object
             Atoms object
         geometry : str, optional
             Geometry of molecule. If not specified, it will be guessed from
@@ -275,6 +275,8 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     -------
         rot_temperatures : list of float
             Rotational temperatures
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
     if geometry is None:
         geometry = get_geometry_from_atoms(atoms=atoms, degree_tol=degree_tol)
@@ -297,7 +299,7 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
             warn('Expected rot_temperatures for linear specie, {}, to be '
                  'similar. Values found were:{}'
                  .format(atoms, rot_temperatures))
-        return [max(rot_temperatures)]
+        return [min(rot_temperatures)]
     elif geometry == 'nonlinear':
         # Expecting 3 modes. May or may not be equal
         return rot_temperatures
@@ -307,7 +309,7 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
 
 
 def get_geometry_from_atoms(atoms, degree_tol=5.):
-    """Estimate the geometry using the ase.Atoms object
+    """Estimate the geometry using the `ase.Atoms`_ object
 
     Parameters
     ----------
@@ -319,6 +321,8 @@ def get_geometry_from_atoms(atoms, degree_tol=5.):
     -------
         geometry : str
             Geometry
+
+    .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
     if len(atoms) == 1:
         return 'monatomic'
