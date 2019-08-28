@@ -100,8 +100,14 @@
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-2-12">Version 1.2.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#contributors">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-12">Version 1.2.12</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Contributors</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-11">Version 1.2.11</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-10">Version 1.2.10</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-9">Version 1.2.9</a></li>
@@ -113,7 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-3">Version 1.2.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-2">Version 1.2.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-1">Version 1.2.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#contributors">Contributors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Contributors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-0">Version 1.2.0</a></li>
@@ -212,6 +218,16 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+<ul class="simple">
+<li>Fixed bug where small non-zero rotational inertia modes were chosen
+preferentially over larger contributing modes.</li>
+</ul>
+<div class="section" id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Geun Ho Gu (<a class="reference external" href="https://github.com/googhgoo">googhgoo</a>)</li>
+</ul>
+</div>
 </div>
 <div class="section" id="version-1-2-12">
 <h2>Version 1.2.12<a class="headerlink" href="#version-1-2-12" title="Permalink to this headline">¶</a></h2>
@@ -224,7 +240,13 @@ to understand</li>
 <li>Added preliminary CTI file writer for Cantera and OpenMKM</li>
 <li>Added Binder notebooks to Examples page so users can try pMuTT before
 installing</li>
+<li>Fixed bug where <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> was not passed when
+modes were specified indivudally in spreadsheets.</li>
 </ul>
+<div class="section" id="id2">
+<h3>Contributors<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Xenhua Zhang (<a class="reference external" href="https://github.com/xenhua">xenhua</a>)</p>
+</div>
 </div>
 <div class="section" id="version-1-2-11">
 <h2>Version 1.2.11<a class="headerlink" href="#version-1-2-11" title="Permalink to this headline">¶</a></h2>
@@ -391,8 +413,8 @@ and <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" 
 properties (such as H, S, F, G) with the appropriate units</li>
 <li>Changed symbol for Hemlholtz energy from A to F</li>
 </ul>
-<div class="section" id="contributors">
-<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Contributors<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Himaghna Bhattacharjee (<a class="reference external" href="https://github.com/himaghna">himaghna</a>)</li>
 </ul>
