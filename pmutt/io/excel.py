@@ -10,7 +10,8 @@ import pandas as pd
 import os
 from ase.io import read
 from pmutt import parse_formula
-from pmutt.statmech import presets, StatMech, trans, vib, rot, elec, nucl
+from pmutt.statmech import (presets, StatMech, trans, vib, rot, elec, nucl,
+    EmptyMode)
 from pmutt.io.vasp import set_vib_wavenumbers_from_outcar
 
 
@@ -256,11 +257,17 @@ def set_statmech_model(model, output_structure):
     model = model.lower()
     output_structure['statmech_model'] = StatMech
     try:
-        output_structure.update(presets[model])
+        # See if the model exists
+        presets[model]
     except KeyError:
         raise ValueError('Unsupported thermodynamic model, {}. See docstring '
                          'of presets in pmutt.statmech.presets for supported '
                          'models.'.format(model))
+    else:
+        # Assign keys that were not previously assigned
+        for key, val in presets[model].items():
+            if key not in output_structure:
+                output_structure[key] = val
     return output_structure
 
 def set_trans_model(model, output_structure):
@@ -281,9 +288,12 @@ def set_trans_model(model, output_structure):
     try:
         output_structure['trans_model'] = getattr(trans, model)
     except AttributeError:
-        raise ValueError('Unsupported translational model, {}. See docstring '
-                         'of presets in pmutt.statmech.trans for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['trans_model'] = EmptyMode
+        else:
+            raise ValueError('Unsupported translational model, {}. '
+                             'See docstring of presets in pmutt.statmech.trans'
+                             'for supported models.'.format(model))
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -305,9 +315,12 @@ def set_vib_model(model, output_structure):
     try:
         output_structure['vib_model'] = getattr(vib, model)
     except AttributeError:
-        raise ValueError('Unsupported vibrational model, {}. See docstring '
-                         'of presets in pmutt.statmech.vib for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['vib_model'] = EmptyMode
+        else:
+            raise ValueError('Unsupported vibrational model, {}. See docstring '
+                             'of presets in pmutt.statmech.vib for supported '
+                             'models.'.format(model))
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -329,9 +342,12 @@ def set_rot_model(model, output_structure):
     try:
         output_structure['rot_model'] = getattr(rot, model)
     except AttributeError:
-        raise ValueError('Unsupported rotational model, {}. See docstring '
-                         'of presets in pmutt.statmech.rot for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['rot_model'] = EmptyMode
+        else:
+            raise ValueError('Unsupported rotational model, {}. See docstring '
+                             'of presets in pmutt.statmech.rot for supported '
+                             'models.'.format(model))
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -353,9 +369,12 @@ def set_elec_model(model, output_structure):
     try:
         output_structure['elec_model'] = getattr(elec, model)
     except AttributeError:
-        raise ValueError('Unsupported Electronic model, {}. See docstring '
-                         'of presets in pmutt.statmech.elec for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['elec_model'] = EmptyMode
+        else:
+            raise ValueError('Unsupported Electronic model, {}. See docstring '
+                             'of presets in pmutt.statmech.elec for supported '
+                             'models.'.format(model))
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -377,9 +396,12 @@ def set_nucl_model(model, output_structure):
     try:
         output_structure['nucl_model'] = getattr(elec, model)
     except AttributeError:
-        raise ValueError('Unsupported Nuclear model, {}. See docstring '
-                         'of presets in pmutt.statmech.nucl for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['nucl_model'] = EmptyMode
+        else:
+            raise ValueError('Unsupported Nuclear model, {}. See docstring '
+                             'of presets in pmutt.statmech.nucl for supported '
+                             'models.'.format(model))
     output_structure['statmech_model'] = StatMech
     return output_structure
 
