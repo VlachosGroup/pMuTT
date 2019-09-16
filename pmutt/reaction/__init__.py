@@ -1758,34 +1758,60 @@ class Reaction(_pmuttBase):
         Returns
         -------
             Reaction : Reaction object
+        Raises
+        ------
+            KeyError
+                Raised if `species` does not contain an entry for the
+                reactants, products or transition state in `reaction_str`
         """
         (react_names, react_stoich, prod_names, prod_stoich,
          ts_names, ts_stoich) = _parse_reaction(
                 reaction_str=reaction_str,
                 species_delimiter=species_delimiter,
                 reaction_delimiter=reaction_delimiter)
-        reactants = [species[name] for name in react_names]
-        products = [species[name] for name in prod_names]
+        reactants = []
+        for name in react_names:
+            try:
+                reactants.append(species[name])
+            except KeyError:
+                raise KeyError('Unable to find reactant species "{}" in species'
+                               ' dictionary for reaction string: "{}".'
+                               ''.format(name, reaction_str))
+        products = []
+        for name in prod_names:
+            try:
+                products.append(species[name])
+            except KeyError:
+                raise KeyError('Unable to find product species "{}" in species '
+                               'dictionary for reaction string: "{}". '
+                               ''.format(name, reaction_str))
         if ts_names is None:
             ts = None
         else:
+            ts = []
             # Try to initialize the transition state
-            try:
-                ts = [species[name] for name in ts_names]
-            except KeyError:
-                if raise_error:
-                    raise KeyError('Unable to find transition state in species '
-                                   'dictionary for reaction string: {}. '
-                                   'Suppress error and reinitialize reaction '
-                                   'without transition state by settings '
-                                   'raise_error to False.'.format(reaction_str))
-                elif raise_warning:
-                    warn('Unable to find transition state in species species '
-                         'dictionary for reaction string: {}. Reinitializing '
-                         'without transition state. Suppress this warning by '
-                         'setting raise_warning to '
-                         'False.'.format(reaction_str), RuntimeWarning)
-                ts = None
+            for name in ts_names:
+                try:
+                    ts.append(species[name])
+                except KeyError:
+                    if raise_error:
+                        raise KeyError('Unable to find transition state "{}" '
+                                       'in species dictionary for reaction '
+                                       'string: "{}". Suppress error and '
+                                       'reinitialize reaction without '
+                                       'transition state by passing '
+                                       'raise_error=False to '
+                                       'pmutt.reaction.Reaction.from_string '
+                                       'method.'.format(name, reaction_str))
+                    elif raise_warning:
+                        warn('Unable to find transition state "{}" in species '
+                             'dictionary for reaction string: "{}". '
+                             'Reinitializing without transition state. '
+                             'Suppress this warning by passing '
+                             'raise_warning=False to '
+                             'pmutt.reaction.Reaction.from_string method.'
+                             ''.format(reaction_str), RuntimeWarning)
+                        ts = None
 
         return cls(reactants=reactants, reactants_stoich=react_stoich,
                    products=products, products_stoich=prod_stoich,

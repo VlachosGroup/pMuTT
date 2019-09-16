@@ -719,12 +719,17 @@ def pmutt_list_to_dict(pmutt_list, key='name'):
     ----------
         pmutt_list : list of objects
             List of pmutt objects to convert
-        key : str
-            Name of attribute used as the keys for the dictionary
+        key : str, optional
+            Name of attribute used as the keys for the dictionary. Default is
+            'name'
     Returns
     -------
         pmutt_dict : dict
             Dictionary of pmutt objects
+    Raises
+    ------
+        KeyError
+            Raised if `key` is not an attribute of the pmutt objects
     """
     return {getattr(obj, key): obj for obj in pmutt_list}
 

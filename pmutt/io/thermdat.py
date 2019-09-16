@@ -7,19 +7,26 @@ Read from/write to thermdat files.
 
 import numpy as np
 from datetime import datetime
+from pmutt import pmutt_list_to_dict
 from pmutt.empirical.nasa import Nasa
 
 
-def read_thermdat(filename):
+def read_thermdat(filename, format='list', key='name'):
     """Directly read thermdat file that is in the Chemkin format
 
     Parameters
     ----------
         filename : str
             Input filename
+        format : str, optional
+            Format to output NASA polynomials. Supported options are:
+            'list', 'tuple', 'dict'. Default is 'list'
+        key : str, optional
+            If `format` is 'dict', uses this attribute as the key for the
+            output dictionary. Default is 'name'
     Returns
     -------
-        Nasas : list of :class:`~pmutt.empirical.nasa.Nasa`
+        Nasas : list, tuple or dict of :class:`~pmutt.empirical.nasa.Nasa`
     Raises
     ------
         FileNotFoundError
@@ -27,7 +34,7 @@ def read_thermdat(filename):
         IOError
             Invalid line number found.
     """
-
+    
     species = []
     with open(filename, 'r') as f_ptr:
         for line in f_ptr:
@@ -66,6 +73,17 @@ def read_thermdat(filename):
             else:
                 raise IOError('Invalid line number, {}, in thermdat file: {}'
                               .format(line_num, filename))
+    # Format the NASA polynomials in the required format
+    if format == 'list':
+        pass
+    elif format == 'tuple':
+        species = tuple(species)
+    elif format == 'dict':
+        species = pmutt_list_to_dict(species, key=key)
+    else:
+        raise ValueError('Unsupported format: {}. '
+                         'See pmutt.io.thermdat.read_thermdat docstring for '
+                         'supported formats.'.format(format))
     return species
 
 
