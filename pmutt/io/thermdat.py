@@ -305,7 +305,7 @@ def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
     ----------
         filename : str
             Output file name
-        nasa_species : list of :class:`~pmutt.empirical.nasa.Nasa`
+        nasa_species : list or dict of :class:`~pmutt.empirical.nasa.Nasa`
             List of species to populate thermdat
         supp_data : Additional thermdat entries to include, optional
             Must be in therndat format.
@@ -328,7 +328,13 @@ def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
             f_ptr.write(supp_txt)
             if supp_txt[-1] != '\n':
                 f_ptr.write('\n')
-        for nasa_specie in nasa_species:
+        # Iterate over nasa_species using appropriate method
+        if isinstance(nasa_species, dict):
+            nasa_iter = nasa_species.values()
+        else:
+            nasa_iter = iter(nasa_species)
+
+        for nasa_specie in nasa_iter:
             _write_line1(f_ptr, nasa_specie, write_date)
             _write_line2(f_ptr, nasa_specie)
             _write_line3(f_ptr, nasa_specie)
