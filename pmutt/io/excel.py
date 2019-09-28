@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import os
 from ase.io import read
+from ase.build import molecule
 from pmutt import parse_formula
 from pmutt.statmech import (presets, StatMech, trans, vib, rot, elec, nucl,
     EmptyMode)
@@ -213,9 +214,9 @@ def set_atoms(path, output_structure, excel_path=None):
     Parameters
     ----------
         path : str
-            Location to import atoms object. If relative references used,
-            the path should be relative to excel_path.
-            See ase.read for supported formats
+            Path to read the atoms object using `ase.read`_ or the string to
+            build the atoms object using `ase.build.molecule`_.
+            Path can be relative to the imported spreadsheet or absolute.
         excel_path : str
             Location where excel path is located
         output_structure : dict
@@ -224,17 +225,32 @@ def set_atoms(path, output_structure, excel_path=None):
     -------
         output_structure: dict
             output_structure with atoms added
+    Raises
+    ------
+        FileNotFoundError:
+            Raised if the `path` is not a valid file and not a supported string
+            by `ase.build.molecule`_.
+
+    .. _`ase.read`: https://wiki.fysik.dtu.dk/ase/ase/io/io.html#ase.io.read
+    .. _`ase.build.molecule`: https://wiki.fysik.dtu.dk/ase/ase/build/build.html#ase.build.molecule
     """
+    # Try reading the path as absolute path
     try:
         output_structure['atoms'] = read(path)
     except FileNotFoundError:
+        # Try reading the path as relative to excel sheet
         try:
             output_structure['atoms'] = read(os.path.join(excel_path, path))
         except FileNotFoundError:
-            print(path)
-            raise FileNotFoundError('If using relative references for atoms '
-                                    'files, use a path relative to the '
-                                    'spreadsheet imported.', path)
+            try:
+                output_structure['atoms'] = molecule(path)
+            except KeyError:
+                raise FileNotFoundError('Cannot create atoms object from {}. '
+                                        'This value should be an absolute path '
+                                        ', a relative path (relative to the '
+                                        'inputted spreadsheet, or a molecule '
+                                        'supported by ase.build.molecule.'
+                                        ''.format(path))
     return output_structure
 
 
