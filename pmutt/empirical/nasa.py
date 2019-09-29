@@ -471,6 +471,10 @@ class Nasa(EmpiricalBase):
             Nasa : Nasa object
                 Nasa object with polynomial terms fitted to data.
         """
+        warn('Nasa.from_statmech is deprecated as of Version 1.2.13. Please '
+             'use the more generic function, Nasa.from_model.',
+             DeprecationWarning)
+
         # Initialize the StatMech object
         if inspect.isclass(statmech_model):
             statmech_model = statmech_model(name=name, references=references,
@@ -502,8 +506,9 @@ class Nasa(EmpiricalBase):
                              references=references, **kwargs)
 
     @classmethod
-    def from_model(cls, name, model, T_low, T_high, elements=None, **kwargs):
-        """Calculates the NASA polynomials using statistical mechanic models
+    def from_model(cls, model, name=None, T_low=None, T_high=None,
+                   fit_T_mid=True, T_mid=None, n_T=20, elements=None, **kwargs):
+        """Calculates the NASA polynomials using the model passed
 
         Parameters
         ----------
@@ -516,7 +521,7 @@ class Nasa(EmpiricalBase):
                 Lower limit temerature in K
             T_high : float
                 Higher limit temperature in K
-            elements : dict
+            elements : dict, optional
                 Composition of the species.
                 Keys of dictionary are elements, values are stoichiometric
                 values in a formula unit.
@@ -529,28 +534,84 @@ class Nasa(EmpiricalBase):
             Nasa : Nasa object
                 Nasa object with polynomial terms fitted to data.
         """
-        # Initialize the StatMech object
+        # Initialize the model object
         if inspect.isclass(model):
             model = model(name=name, elements=elements, **kwargs)
 
-        # Optimize T_mid
-        T = np.linspace(T_low, T_high, num=20.)
-        # CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
-        # res = minimize_scalar(fun=_get_T_mid_nasa1, method='bounded', 
-        #                args=(T, CpoR), bounds=(T_low, T_high))
-        res = minimize_scalar(fun=_get_T_mid_nasa, method='bounded', 
-                       args=(T_low, T_high, model), bounds=(T_low, T_high))
-        T_mid = res.x
-        CpoR = [model.get_CpoR(T=T_i) for T_i in T]
+        if name is None:
+            try:
+                name = model.name
+            except AttributeError:
+                raise AttributeError('Name must either be passed to from_model '
+                                     'directly or be an attribute of model.')
+        if T_low is None:
+            try:
+                T_low = model.T_low
+            except AttributeError:
+                raise AttributeError('T_low must either be passed to '
+                                     'from_model directly or be an attribute '
+                                     'of model.')
+        if T_high is None:
+            try:
+                T_high = model.T_high
+            except AttributeError:
+                raise AttributeError('T_high must either be passed to '
+                                     'from_model directly or be an attribute '
+                                     'of model.')
+        if elements is None:
+            try:
+                elements = model.elements
+            except AttributeError:
+                raise AttributeError('elements must either be passed to '
+                                     'from_model directly or be an attribute '
+                                     'of model.')
+        # Check if inputted T_low and T_high are outside model's T_low and 
+        # T_high range
+        try:
+            if T_low < model.T_low:
+                warn('Inputted T_low is lower than model T_low. Fitted '
+                     'empirical object may not be valid.', UserWarning)
+        except AttributeError:
+            pass
+
+        try:
+            if T_high > model.T_high:
+                warn('Inputted T_high is higher than model T_high. Fitted '
+                     'empirical object may not be valid.', UserWarning)
+        except AttributeError:
+            pass
+
+        # Optimize T_mids
+        if fit_T_mid:
+            # If guesses not specified, use mean of T_low and T_high as first
+            # guess
+            if T_mid is None:
+                T_mid0 = [np.mean([T_low, T_high])]
+            else:
+                T_mid0 = T_mid
+            res = minimize(method='Nelder-Mead', x0=T_mid0,
+                           fun=_calc_T_mid_mse_nasa,
+                           args=(T_low, T_high, model, n_T))
+            T_mid = res.x
+
+        # Generate heat capacity data for from_data
+        T_interval = np.concatenate([[T_low], T_mid, [T_high]])
+        for i, (T1, T2) in enumerate(zip(T_interval, T_interval[1:])):
+            if i == 0:
+                T = np.linspace(T1, T2, n_T)
+            else:
+                T = np.concatenate([T, np.linspace(T1, T2, n_T)])
+        CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Generate enthalpy and entropy data
-        HoRT_ref = model.get_HoRT(T=T_mid)
-        SoR_ref = model.get_SoR(T=T_mid)
+        HoRT_ref = model.get_HoRT(T=T_low)
+        SoR_ref = model.get_SoR(T=T_low)
 
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mid,
+        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_low,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
-                             statmech_model=model, elements=elements,
+                             model=model, elements=elements, fit_T_mid=False,
                              **kwargs)
+
 
     def to_CTI(self):
         """Writes the object in Cantera's CTI format.
@@ -1566,6 +1627,98 @@ def _calc_T_mid_mse_nasa9(T_mid, T_low, T_high, model, n_T=50):
                        x0=np.zeros(9))
         mse += res.fun
     return mse
+
+def _calc_T_mid_mse_nasa(T_mid, T_low, T_high, model, n_T=50):
+    """Calculates the mean squared error associated with temperature intervals
+    for NASA9 polynomials
+
+    Parameters
+    ----------
+        T_mid : float
+            Middle temperature bound in K being tested
+        T_low : float
+            Lower temperature bound in K
+        T_high : float
+            Higher temperature bound in K
+        model : Species object
+            Object that can provide heat capacity at any temperature
+        n_T : int
+            Number of temperature values to evaluate between each interval
+    Returns
+    -------
+        mse : float
+            Total mean squared error
+    """
+    # T_mid should be between T_low and T_high
+    if np.any(T_mid <= T_low) or np.any(T_mid >= T_high):
+        return np.inf
+
+    mse = 0.
+    # Calculate MSE for each interval
+    T_interval = np.array([T_low, T_mid[0], T_high])
+    i = 0
+    for T1, T2 in zip(T_interval, T_interval[1:]):
+        T = np.linspace(T1, T2, n_T)
+
+        # Generate heat capacity data
+        try:
+            CpoR = model.get_CpoR(T=T)
+        except ValueError:
+            CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
+
+        # Optimize NASA9 coefficients
+        res = minimize(method='BFGS', args=(T, CpoR),
+                       fun=_get_nasa_mse, jac=_get_nasa_mse_jacob,
+                       x0=np.zeros(7))
+        mse += res.fun
+    return mse
+
+def _get_nasa_mse(a, T, CpoR):
+    """Calculates the mean squared error associated with NASA coefficients
+
+    Parameters
+    ----------
+        a : (7,) nd.ndarray
+            Coefficients of NASA polynomial
+        T : (N,) nd.ndarray
+            Temperatures to evaluate the NASA coefficients in K
+        CpoR : (N,) nd.ndarray
+            Accurate dimensionless heat capacities corresponding to T
+    Returns
+    -------
+        mse : float
+            Total mean squared error
+    """
+    CpoR_fit = get_nasa_CpoR(a, T)
+    mse = np.mean((CpoR_fit - CpoR)**2)
+    return mse
+
+def _get_nasa_mse_jacob(a, T, CpoR):
+    """Calculates the Jacobian associated with NASA coefficients
+
+    Parameters
+    ----------
+        a : (7,) nd.ndarray
+            Coefficients of NASA polynomial
+        T : (N,) nd.ndarray
+            Temperatures to evaluate the NASA coefficients in K
+        CpoR : (N,) nd.ndarray
+            Accurate dimensionless heat capacities corresponding to T
+    Returns
+    -------
+        jac : (7,) nd.ndarray
+            Jacobian corresponding to a
+    """
+    CpoR_fit = get_nasa_CpoR(a, T)
+    error = CpoR_fit - CpoR
+    jac = 2./float(len(T))*np.array([1.,
+                                     np.sum(error*T),
+                                     np.sum(error*(T**2)),
+                                     np.sum(error*(T**3)),
+                                     np.sum(error*(T**4)),
+                                     0.,
+                                     0.])
+    return jac
 
 def _get_nasa9_mse(a, T, CpoR):
     """Calculates the mean squared error associated with NASA9 coefficients
