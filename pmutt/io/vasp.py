@@ -26,9 +26,9 @@ def get_vib_wavenumber_from_line(in_line):
     try:
         vib_wavenumber = float(m[1])
         return vib_wavenumber
-    except TypeError as e:
-        print('No frequency in this line')
-        raise e
+    except TypeError:
+        err_msg = 'No frequencies present in line.'
+        raise TypeError(err_msg)
 
 
 def set_vib_wavenumbers_from_outcar(in_file, output_structure,
@@ -60,7 +60,8 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
             Raised if in_file does not exist
     """
     if not os.path.isfile(in_file):
-        raise FileNotFoundError('Invalid OUTCAR filename: {}'.format(in_file))
+        err_msg = 'Invalid OUTCAR filename: {}'.format(in_file)
+        raise FileNotFoundError(err_msg)
 
     vib_wavenumbers = list()
     real_pattern = re.compile(r'f[ ]*=')  # pattern for real frequencies

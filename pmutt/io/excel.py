@@ -141,8 +141,9 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                     thermo_data = set_nasa_a_high(header=col, value=cell_data,
                                                   output_structure=thermo_data)
                 else:
-                    raise NotImplementedError('Does not support {}'
-                                              .format(col))
+                    err_msg = ('Unrecognized argument for nasa column: {}'
+                               ''.format(col))
+                    raise NotImplementedError(err_msg)
             elif 'list' in col:
                 # Process column name
                 header = col.replace('list.', '')
@@ -245,12 +246,12 @@ def set_atoms(path, output_structure, excel_path=None):
             try:
                 output_structure['atoms'] = molecule(path)
             except KeyError:
-                raise FileNotFoundError('Cannot create atoms object from {}. '
-                                        'This value should be an absolute path '
-                                        ', a relative path (relative to the '
-                                        'inputted spreadsheet, or a molecule '
-                                        'supported by ase.build.molecule.'
-                                        ''.format(path))
+                err_msg = ('Cannot create atoms object from {}. This value '
+                           'should be an absolute path, a relative path '
+                           '(relative to the inputted spreadsheet, or a '
+                           'molecule supported by ase.build.molecule.'
+                           ''.format(path))
+                raise FileNotFoundError(err_msg)
     return output_structure
 
 
@@ -276,9 +277,10 @@ def set_statmech_model(model, output_structure):
         # See if the model exists
         presets[model]
     except KeyError:
-        raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pmutt.statmech.presets for supported '
-                         'models.'.format(model))
+        err_msg = ('Unsupported thermodynamic model, {}. See docstring '
+                   'of presets in pmutt.statmech.presets for supported '
+                   'models.'.format(model))
+        raise ValueError(err_msg)
     else:
         # Assign keys that were not previously assigned
         for key, val in presets[model].items():
@@ -307,9 +309,10 @@ def set_trans_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['trans_model'] = EmptyMode
         else:
-            raise ValueError('Unsupported translational model, {}. '
-                             'See docstring of presets in pmutt.statmech.trans'
-                             'for supported models.'.format(model))
+            err_msg = ('Unsupported translational model, {}. See '
+                       'pmutt.statmech.trans for supported models.'
+                       ''.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -334,9 +337,10 @@ def set_vib_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['vib_model'] = EmptyMode
         else:
-            raise ValueError('Unsupported vibrational model, {}. See docstring '
-                             'of presets in pmutt.statmech.vib for supported '
-                             'models.'.format(model))
+            err_msg = ('Unsupported vibrational model, {}. See docstring '
+                       'of presets in pmutt.statmech.vib for supported models.'
+                       ''.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -361,9 +365,9 @@ def set_rot_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['rot_model'] = EmptyMode
         else:
-            raise ValueError('Unsupported rotational model, {}. See docstring '
-                             'of presets in pmutt.statmech.rot for supported '
-                             'models.'.format(model))
+            err_msg = ('Unsupported rotational model, {}. See '
+                       'pmutt.statmech.rot for supported models.'.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -388,9 +392,9 @@ def set_elec_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['elec_model'] = EmptyMode
         else:
-            raise ValueError('Unsupported Electronic model, {}. See docstring '
-                             'of presets in pmutt.statmech.elec for supported '
-                             'models.'.format(model))
+            err_msg = ('Unsupported electronic model, {}. See '
+                       'pmutt.statmech.elec for supported models.'format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -415,9 +419,9 @@ def set_nucl_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['nucl_model'] = EmptyMode
         else:
-            raise ValueError('Unsupported Nuclear model, {}. See docstring '
-                             'of presets in pmutt.statmech.nucl for supported '
-                             'models.'.format(model))
+            err_msg = ('Unsupported nuclear model, {}. See pmutt.statmech.nucl '
+                       'for supported models.'.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 

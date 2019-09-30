@@ -161,12 +161,14 @@ class References(_ModelBase):
         T_refs = np.array([reference.T_ref for reference in self])
         # If any of the T_ref values are not close to the others.
         if any([not np.isclose(T_refs[0], T_ref) for T_ref in T_refs]):
-            warn('All the reference temperatures are not the same. May cause '
-                 'error in referencing. Using mean temperature.')
+            warn_msg = ('All the reference temperatures are not the same. '
+                        'May cause error in referencing. Using mean '
+                        'temperature.')
+            warn(warn_msg)
         self.T_ref = np.mean(T_refs)
 
         HoRT_ref_dft = np.array(
-                [reference.statmech_model.get_HoRT(T=reference.T_ref)
+                [reference.model.get_HoRT(T=reference.T_ref)
                     for reference in self])
         HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
         # Offset between the DFT energies and experimentalvalues
@@ -206,8 +208,9 @@ class References(_ModelBase):
             try:
                 HoRT -= self.offset[descriptor]*coefficient
             except KeyError:
-                warn('References does not have offset value for the '
-                     'descriptor: {}.'.format(descriptor), RuntimeWarning)
+                warn_msg = ('References does not have offset value for the '
+                            'descriptor: {}.'.format(descriptor))
+                warn(warn_msg, RuntimeWarning)
         if T is None:
             return HoRT
         else:

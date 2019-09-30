@@ -71,8 +71,9 @@ def read_thermdat(filename, format='list', key='name'):
                 nasa_data = _read_line4(line, nasa_data)
                 species.append(Nasa(**nasa_data))
             else:
-                raise IOError('Invalid line number, {}, in thermdat file: {}'
-                              .format(line_num, filename))
+                err_msg = ('Invalid line number, {}, in thermdat file: {}'
+                           ''.format(line_num, filename))
+                raise IOError(err_msg)
     # Format the NASA polynomials in the required format
     if format == 'list':
         pass
@@ -81,9 +82,9 @@ def read_thermdat(filename, format='list', key='name'):
     elif format == 'dict':
         species = pmutt_list_to_dict(species, key=key)
     else:
-        raise ValueError('Unsupported format: {}. '
-                         'See pmutt.io.thermdat.read_thermdat docstring for '
-                         'supported formats.'.format(format))
+        err_msg = ('Unsupported format: {}. See pmutt.io.thermdat.read_thermdat'
+                   ' docstring for supported formats.'.format(format))
+        raise ValueError(err_msg)
     return species
 
 

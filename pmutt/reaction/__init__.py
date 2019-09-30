@@ -114,20 +114,20 @@ class Reaction(_pmuttBase):
         product_elements = _count_elements(self.products,
                                            self.products_stoich)
         if reactant_elements != product_elements:
-            raise ValueError('Number of elements in reactants and products do '
-                             'not agree.\nReactant count: {}\n'
-                             'Product count: {}'.format(reactant_elements,
-                                                        product_elements))
+            err_msg = ('Number of elements in reactants and products do not '
+                       'agree.\nReactant count: {}\nProduct count: {}'
+                       ''.format(reactant_elements, product_elements))
+            raise ValueError(err_msg)
 
         if self.transition_state is not None:
             TS_elements = _count_elements(self.transition_state,
                                           self.transition_state_stoich)
             if reactant_elements != TS_elements:
-                raise ValueError('Number of elements in reactants and '
-                                 'transition state do not agree.\n'
-                                 'Reactant count: {}\n'
-                                 'Product count: {}'.format(reactant_elements,
-                                                            TS_elements))
+                err_msg = ('Number of elements in reactants and transition '
+                           'state do not agree.\nReactant count: {}\n'
+                           'Product count: {}'
+                           ''.format(reactant_elements, TS_elements))
+                raise ValueError(err_msg)
 
     def get_species(self, include_TS=True, key='name'):
         """Returns the unique species included in the reaction.
@@ -1631,8 +1631,8 @@ class Reaction(_pmuttBase):
             species = self.transition_state
             species_stoich = self.transition_state_stoich
         else:
-            raise ValueError(
-                    'Thermodynamic state {} not supported'.format(state))
+            err_msg = 'Thermodynamic state {} not supported'.format(state)
+            raise ValueError(err_msg)
         return (species, species_stoich)
 
     def get_state_quantity(self, state, method_name, **kwargs):
@@ -1774,17 +1774,19 @@ class Reaction(_pmuttBase):
             try:
                 reactants.append(species[name])
             except KeyError:
-                raise KeyError('Unable to find reactant species "{}" in species'
-                               ' dictionary for reaction string: "{}".'
-                               ''.format(name, reaction_str))
+                err_msg = ('Unable to find reactant species "{}" in species '
+                           'dictionary for reaction string: "{}".'
+                           ''.format(name, reaction_str))
+                raise KeyError(err_msg)
         products = []
         for name in prod_names:
             try:
                 products.append(species[name])
             except KeyError:
-                raise KeyError('Unable to find product species "{}" in species '
-                               'dictionary for reaction string: "{}". '
-                               ''.format(name, reaction_str))
+                err_msg = ('Unable to find product species "{}" in species '
+                           'dictionary for reaction string: "{}".'
+                           ''.format(name, reaction_str))
+                raise KeyError(err_msg)
         if ts_names is None:
             ts = None
         else:
@@ -1795,22 +1797,23 @@ class Reaction(_pmuttBase):
                     ts.append(species[name])
                 except KeyError:
                     if raise_error:
-                        raise KeyError('Unable to find transition state "{}" '
-                                       'in species dictionary for reaction '
-                                       'string: "{}". Suppress error and '
-                                       'reinitialize reaction without '
-                                       'transition state by passing '
-                                       'raise_error=False to '
-                                       'pmutt.reaction.Reaction.from_string '
-                                       'method.'.format(name, reaction_str))
+                        err_msg = ('Unable to find transition state "{}" in '
+                                   'species dictionary for reaction string: '
+                                   '"{}". Suppress error and reinitialize '
+                                   'reaction without transition state by '
+                                   'passing raise_error=False to '
+                                   'pmutt.reaction.Reaction.from_string '
+                                   'method.'.format(name, reaction_str))
+                        raise KeyError(err_msg)
                     elif raise_warning:
-                        warn('Unable to find transition state "{}" in species '
-                             'dictionary for reaction string: "{}". '
-                             'Reinitializing without transition state. '
-                             'Suppress this warning by passing '
-                             'raise_warning=False to '
-                             'pmutt.reaction.Reaction.from_string method.'
-                             ''.format(reaction_str), RuntimeWarning)
+                        warn_msg = ('Unable to find transition state "{}" in '
+                                    'species dictionary for reaction string: '
+                                    '"{}". Reinitializing without transition '
+                                    'state. Suppress this warning by passing '
+                                    'raise_warning=False to '
+                                    'pmutt.reaction.Reaction.from_string '
+                                    'method.'.format(reaction_str))
+                        warn(warn_msg, RuntimeWarning)
                         ts = None
 
         return cls(reactants=reactants, reactants_stoich=react_stoich,

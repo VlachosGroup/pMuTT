@@ -39,7 +39,7 @@ class TestNasa(unittest.TestCase):
             'T_mid': 1610.97,
             'T_high': 5000.,
             'notes': None,
-            'statmech_model': None,
+            'model': None,
             'misc_models': None,
             'cat_site': None,
             'n_sites': None,
@@ -65,11 +65,11 @@ class TestNasa(unittest.TestCase):
             SoR_ref=24.84583501
         )
 
-        self.Nasa_statmech = Nasa.from_statmech(
+        self.Nasa_statmech = Nasa.from_model(
             name='H2O',
             elements={'H': 2, 'O': 1},
             phase='g',
-            statmech_model=StatMech,
+            model=StatMech,
             trans_model=trans.FreeTrans,
             n_degrees=3,
             vib_model=vib.HarmonicVib,

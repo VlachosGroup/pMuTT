@@ -167,9 +167,10 @@ class BEP(_ModelBase):
                             state='products',
                             **kwargs)
         else:
-            raise ValueError(('Descriptor "{}" not supported. See '
-                              'documentation of pmutt.reaction.bep.BEP for '
-                              'supported options.'.format(self.descriptor)))
+            err_msg = ('Descriptor "{}" not supported. See documentation of '
+                       'pmutt.reaction.bep.BEP for supported options.'
+                       ''.format(self.descriptor))
+            raise ValueError(err_msg)
 
     def get_E_act(self, units, rev=False, **kwargs):
         """Calculate Arrhenius activation energy using BEP relationship
