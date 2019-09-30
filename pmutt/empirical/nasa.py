@@ -9,7 +9,7 @@ import inspect
 from copy import copy
 from warnings import warn
 import numpy as np
-from scipy.optimize import minimize_scalar, minimize
+from scipy.optimize import minimize_scalar, minimize, LinearConstraint, Bounds
 from scipy.stats import variation
 from pmutt import _is_iterable, _pass_expected_arguments, _apply_numpy_operation
 from pmutt import constants as c
@@ -92,13 +92,13 @@ class Nasa(EmpiricalBase):
             self.T_mid = self.T_mid[0]
         if T < self.T_mid:
             if T < self.T_low:
-                warn('Temperature below T_low for {}'.format(self.name),
-                     RuntimeWarning)
+                warn_msg = 'Temperature below T_low for {}'.format(self.name)
+                warn(warn_msg, RuntimeWarning)
             return self.a_low
         else:
             if T > self.T_high:
-                warn('Temperature above T_high for {}'.format(self.name),
-                     RuntimeWarning)
+                warn_msg = 'Temperature above T_high for {}'.format(self.name)
+                warn(warn_msg, RuntimeWarning)
             return self.a_high
 
     def get_CpoR(self, T, raise_error=True, raise_warning=True, **kwargs):
@@ -438,7 +438,8 @@ class Nasa(EmpiricalBase):
     @classmethod
     def from_statmech(cls, name, statmech_model, T_low, T_high, T_mid=None,
                       references=None, elements=None, **kwargs):
-        """Calculates the NASA polynomials using statistical mechanic models
+        """Calculates the NASA polynomials using statistical mechanic models.
+        Deprecated as of Version 1.2.13.
 
         Parameters
         ----------
@@ -471,6 +472,10 @@ class Nasa(EmpiricalBase):
             Nasa : Nasa object
                 Nasa object with polynomial terms fitted to data.
         """
+        warn_msg = ('Nasa.from_statmech is deprecated as of Version 1.2.13. '
+                    'Please use the more generic function, Nasa.from_model.')
+        warn(warn_msg, DeprecationWarning)
+
         # Initialize the StatMech object
         if inspect.isclass(statmech_model):
             statmech_model = statmech_model(name=name, references=references,
@@ -498,30 +503,41 @@ class Nasa(EmpiricalBase):
 
         return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
-                             statmech_model=statmech_model, elements=elements,
+                             model=statmech_model, elements=elements,
                              references=references, **kwargs)
 
     @classmethod
-    def from_model(cls, name, model, T_low, T_high, elements=None, **kwargs):
-        """Calculates the NASA polynomials using statistical mechanic models
+    def from_model(cls, model, name=None, T_low=None, T_high=None, T_mid=None,
+                   elements=None, n_T=50, **kwargs):
+        """Calculates the NASA polynomials using the model passed
 
         Parameters
         ----------
-            name : str
-                Name of the species
             model : Model object or class
                 Model to generate data. Must contain the methods `get_CpoR`,
                 `get_HoRT` and `get_SoR`
-            T_low : float
-                Lower limit temerature in K
-            T_high : float
-                Higher limit temperature in K
-            elements : dict
-                Composition of the species.
-                Keys of dictionary are elements, values are stoichiometric
-                values in a formula unit.
+            name : str, optional
+                Name of the species. If not passed, `model.name` will be used.
+            T_low : float, optional
+                Lower limit temerature in K. If not passed, `model.T_low` will
+                be used.
+            T_high : float, optional
+                Higher limit temperature in K. If not passed, `model.T_high`
+                will be used.
+            T_mid : float or iterable of float, optional
+                Guess for T_mid. If float, only uses that value for T_mid. If
+                list, finds the best fit for each element in the list. If None,
+                a range of T_mid values are screened between the 6th lowest
+                and 6th highest value of T.
+            elements : dict, optional
+                Composition of the species. If not passed, `model.elements`
+                will be used. Keys of dictionary are elements, values are
+                stoichiometric values in a formula unit.
                 e.g. CH3OH can be represented as:
                 {'C': 1, 'H': 4, 'O': 1,}.
+            n_T : int, optional
+                Number of data points between `T_low` and `T_high` for fitting
+                heat capacity. Default is 50.
             kwargs : keyword arguments
                 Used to initalize model if a class is passed.
         Returns
@@ -529,28 +545,68 @@ class Nasa(EmpiricalBase):
             Nasa : Nasa object
                 Nasa object with polynomial terms fitted to data.
         """
-        # Initialize the StatMech object
+        # Initialize the model object
         if inspect.isclass(model):
             model = model(name=name, elements=elements, **kwargs)
 
-        # Optimize T_mid
-        T = np.linspace(T_low, T_high, num=20.)
-        # CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
-        # res = minimize_scalar(fun=_get_T_mid_nasa1, method='bounded', 
-        #                args=(T, CpoR), bounds=(T_low, T_high))
-        res = minimize_scalar(fun=_get_T_mid_nasa, method='bounded', 
-                       args=(T_low, T_high, model), bounds=(T_low, T_high))
-        T_mid = res.x
-        CpoR = [model.get_CpoR(T=T_i) for T_i in T]
+        if name is None:
+            try:
+                name = model.name
+            except AttributeError:
+                err_msg = ('Name must either be passed to from_model directly '
+                           'or be an attribute of model.')                      
+                raise AttributeError(err_msg)
+        if T_low is None:
+            try:
+                T_low = model.T_low
+            except AttributeError:
+                err_msg = ('T_low must either be passed to from_model '
+                           'directly or be an attribute of model.')
+                raise AttributeError(err_msg)
+        if T_high is None:
+            try:
+                T_high = model.T_high
+            except AttributeError:
+                err_msg = ('T_high must either be passed to from_model '
+                           'directly or be an attribute of model.')
+                raise AttributeError(err_msg)
+        if elements is None:
+            try:
+                elements = model.elements
+            except AttributeError:
+                pass
+        # Check if inputted T_low and T_high are outside model's T_low and 
+        # T_high range
+        try:
+            if T_low < model.T_low:
+                warn_msg = ('Inputted T_low is lower than model T_low. Fitted '
+                            'empirical object may not be valid.')
+                warn(warn_msg, UserWarning)
+        except AttributeError:
+            pass
+
+        try:
+            if T_high > model.T_high:
+                warn_msg = ('Inputted T_high is higher than model T_high. '
+                            'Fitted empirical object may not be valid.')
+                warn(warn_msg, UserWarning)
+        except AttributeError:
+            pass
+
+        # Generate heat capacity data
+        T = np.linspace(T_low, T_high, n_T)
+        try:
+            CpoR = model.get_CpoR(T=T)
+        except ValueError:
+            CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Generate enthalpy and entropy data
-        HoRT_ref = model.get_HoRT(T=T_mid)
-        SoR_ref = model.get_SoR(T=T_mid)
-
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mid,
+        T_mean = (T_low+T_high)/2.
+        HoRT_ref = model.get_HoRT(T=T_mean)
+        SoR_ref = model.get_SoR(T=T_mean)
+        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mean,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
-                             statmech_model=model, elements=elements,
-                             **kwargs)
+                             model=model, elements=elements, **kwargs)
 
     def to_CTI(self):
         """Writes the object in Cantera's CTI format.
@@ -615,7 +671,7 @@ class Nasa(EmpiricalBase):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = json_to_pmutt(json_obj['statmech_model'])
+        json_obj['model'] = json_to_pmutt(json_obj['model'])
         json_obj['cat_site'] = json_to_pmutt(json_obj['cat_site'])
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
@@ -692,7 +748,8 @@ class Nasa9(EmpiricalBase):
             if T <= nasa.T_high and T >= nasa.T_low:
                 return nasa
         else:
-            raise ValueError('No valid SingleNasa9 object for T: {}'.format(T))
+            err_msg = 'No valid SingleNasa9 object for T: {}'.format(T)
+            raise ValueError(err_msg)
 
     def get_CpoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless heat capacity
@@ -1134,9 +1191,9 @@ class Nasa9(EmpiricalBase):
         elif limit == 'max':
             T_attr = 'T_high'
         else:
-            raise ValueError('Unsupported value for limit: {}. The only '
-                             'supported values are "min" and '
-                             '"max"'.format(limit))
+            err_msg = ('Unsupported value for limit: {}. The only supported '
+                       'values are "min" and "max"'.format(limit))
+            raise ValueError(err_msg)
         # Gather the values from the NASA9 polynomials
         T_lim = [getattr(nasa, T_attr) for nasa in self._nasas]
         return _apply_numpy_operation(quantity=T_lim, operation=limit)
@@ -1170,7 +1227,7 @@ class Nasa9(EmpiricalBase):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['nasas'] = [json_to_pmutt(nasa) for nasa in json_obj['nasas']]
-        json_obj['statmech_model'] = json_to_pmutt(json_obj['statmech_model'])
+        json_obj['model'] = json_to_pmutt(json_obj['model'])
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
 
@@ -1308,7 +1365,7 @@ class SingleNasa9(EmpiricalBase):
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
         json_obj['nasas'] = [json_to_pmutt(nasa) for nasa in json_obj['nasas']]
-        json_obj['statmech_model'] = json_to_pmutt(json_obj['statmech_model'])
+        json_obj['model'] = json_to_pmutt(json_obj['model'])
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
 
@@ -1332,10 +1389,10 @@ class SingleNasa9(EmpiricalBase):
         cti_str = ('{}NASA([{}, {}],\n'
                    '                     [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
-                   '                      {: 2.8E}, {: 2.8E}, {: 2.8E}])'.format(
-                            line_adj, self.T_low, self.T_high, self.a[0],
-                            self.a[1], self.a[2], self.a[3], self.a[4],
-                            self.a[5], self.a[6], self.a[7], self.a[8]))
+                   '                      {: 2.8E}, {: 2.8E}, {: 2.8E}])'
+                   ''.format(line_adj, self.T_low, self.T_high, self.a[0],
+                             self.a[1], self.a[2], self.a[3], self.a[4],
+                             self.a[5], self.a[6], self.a[7], self.a[8]))
         return cti_str
 
 def _fit_CpoR(T, CpoR, T_mid=None):
@@ -1448,11 +1505,13 @@ def _get_CpoR_MSE(T, CpoR, T_mid):
     CpoR_high = np.extract(condition=high_condition, arr=CpoR)
 
     if len(T_low) < 5:
-        warn('Small set of CpoR data between T_low and T_mid. '
-             'Fit may not be desirable.', RuntimeWarning)
+        warn_msg = ('Small set of CpoR data between T_low and T_mid. Fit may '
+                    'not be desirable.')
+        warn(warn_msg, RuntimeWarning)
     if len(T_high) < 5:
-        warn('Small set of CpoR data between T_mid and T_high. '
-             'Fit may not be desirable.', RuntimeWarning)
+        warn_msg = ('Small set of CpoR data between T_mid and T_high. Fit may '
+                    'not be desirable.')
+        warn(warn_msg, RuntimeWarning)
 
     # Fit the polynomials
     p_low = np.polyfit(x=T_low, y=CpoR_low, deg=4)
@@ -1566,6 +1625,97 @@ def _calc_T_mid_mse_nasa9(T_mid, T_low, T_high, model, n_T=50):
                        x0=np.zeros(9))
         mse += res.fun
     return mse
+
+def _calc_T_mid_mse_nasa(T_mid, T_low, T_high, model, n_T=50):
+    """Calculates the mean squared error associated with temperature intervals
+    for NASA9 polynomials
+
+    Parameters
+    ----------
+        T_mid : float
+            Middle temperature bound in K being tested
+        T_low : float
+            Lower temperature bound in K
+        T_high : float
+            Higher temperature bound in K
+        model : Species object
+            Object that can provide heat capacity at any temperature
+        n_T : int
+            Number of temperature values to evaluate between each interval
+    Returns
+    -------
+        mse : float
+            Total mean squared error
+    """
+    # T_mid should be between T_low and T_high
+    if np.any(T_mid <= T_low) or np.any(T_mid >= T_high):
+        return np.inf
+
+    mse = 0.
+    # Calculate MSE for each interval
+    T_interval = np.array([T_low, T_mid[0], T_high])
+    for T1, T2 in zip(T_interval, T_interval[1:]):
+        T = np.linspace(T1, T2, n_T)
+
+        # Generate heat capacity data
+        try:
+            CpoR = model.get_CpoR(T=T)
+        except ValueError:
+            CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
+
+        # Optimize NASA9 coefficients
+        res = minimize(method='BFGS', args=(T, CpoR),
+                       fun=_get_nasa_mse, jac=_get_nasa_mse_jacob,
+                       x0=np.zeros(7))
+        mse += res.fun
+    return mse
+
+def _get_nasa_mse(a, T, CpoR):
+    """Calculates the mean squared error associated with NASA coefficients
+
+    Parameters
+    ----------
+        a : (7,) nd.ndarray
+            Coefficients of NASA polynomial
+        T : (N,) nd.ndarray
+            Temperatures to evaluate the NASA coefficients in K
+        CpoR : (N,) nd.ndarray
+            Accurate dimensionless heat capacities corresponding to T
+    Returns
+    -------
+        mse : float
+            Total mean squared error
+    """
+    CpoR_fit = get_nasa_CpoR(a, T)
+    mse = np.mean((CpoR_fit - CpoR)**2)
+    return mse
+
+def _get_nasa_mse_jacob(a, T, CpoR):
+    """Calculates the Jacobian associated with NASA coefficients
+
+    Parameters
+    ----------
+        a : (7,) nd.ndarray
+            Coefficients of NASA polynomial
+        T : (N,) nd.ndarray
+            Temperatures to evaluate the NASA coefficients in K
+        CpoR : (N,) nd.ndarray
+            Accurate dimensionless heat capacities corresponding to T
+    Returns
+    -------
+        jac : (7,) nd.ndarray
+            Jacobian corresponding to a
+    """
+    CpoR_fit = get_nasa_CpoR(a, T)
+    error = CpoR_fit - CpoR
+    jac = 2./float(len(T))*np.array([1.,
+                                     np.sum(error*T),
+                                     np.sum(error*(T**2)),
+                                     np.sum(error*(T**3)),
+                                     np.sum(error*(T**4)),
+                                     0.,
+                                     0.])
+    return jac
 
 def _get_nasa9_mse(a, T, CpoR):
     """Calculates the mean squared error associated with NASA9 coefficients

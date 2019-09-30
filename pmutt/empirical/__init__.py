@@ -32,8 +32,8 @@ class EmpiricalBase(_pmuttBase):
             in a formula unit.
             e.g. CH3OH can be represented as:
             {'C': 1, 'H': 4, 'O': 1,}.
-        statmech_model : ``pmutt.statmech`` object, optional
-            Statistical thermodynamic model. Default is None.
+        model : model object, optional
+            Object which was used to fit the Nasa polynomial. Default is None.
             Object should have the following methods: ``get_CpoR``,
             ``get_HoRT``, ``get_SoR``, ``get_GoRT``.
         misc_models : list of pmutt model objects, optional
@@ -47,7 +47,7 @@ class EmpiricalBase(_pmuttBase):
     """
 
     def __init__(self, name=None, phase=None, elements=None,
-                 statmech_model=None, misc_models=None, smiles=None, notes=None,
+                 model=None, misc_models=None, smiles=None, notes=None,
                  **kwargs):
         self.name = name
         self.phase = phase
@@ -55,14 +55,14 @@ class EmpiricalBase(_pmuttBase):
         self.smiles = smiles
         self.notes = notes
 
-        # Assign self.statmech_model
-        if inspect.isclass(statmech_model):
+        # Assign self.model
+        if inspect.isclass(model):
             # If you're passing a class. Note that the required
             # arguments will be guessed.
-            self.statmech_model = statmech_model(**kwargs)
+            self.model = model(**kwargs)
         else:
             # If it's an object that has already been initialized
-            self.statmech_model = statmech_model
+            self.model = model
 
         # Assign mixing models
         # TODO Mixing models can not be initialized by passing the class
@@ -214,7 +214,7 @@ class EmpiricalBase(_pmuttBase):
                 y_labels.append('{} ({})'.format(method.replace('get_', ''),
                                                  units))
 
-        fig, ax = plot_1D(self.statmech_model, x_name='T', x_values=T,
+        fig, ax = plot_1D(self.model, x_name='T', x_values=T,
                           methods=methods, use_references=use_references,
                           **kwargs)
         
@@ -294,7 +294,7 @@ class EmpiricalBase(_pmuttBase):
 
         fig, ax = plot_1D(self, x_name='T', x_values=T, methods=methods,
                           **kwargs)
-        fig, ax = plot_1D(self.statmech_model, x_name='T', x_values=T,
+        fig, ax = plot_1D(self.model, x_name='T', x_values=T,
                           methods=methods, figure=fig, ax=ax,
                           use_references=use_references, **kwargs)
         
@@ -333,13 +333,13 @@ class EmpiricalBase(_pmuttBase):
         try:
             iter(T)
         except TypeError:
-            CpoR_statmech = self.statmech_model.get_CpoR(T=T)
+            CpoR_statmech = self.model.get_CpoR(T=T)
             CpoR_empirical = self.get_CpoR(T=T)
         else:
             CpoR_statmech = np.zeros_like(T)
             CpoR_empirical = np.zeros_like(T)
             for i, T_i in enumerate(T):
-                CpoR_statmech[i] = self.statmech_model.get_CpoR(T=T_i)
+                CpoR_statmech[i] = self.model.get_CpoR(T=T_i)
                 CpoR_empirical[i] = self.get_CpoR(T=T_i)
         return (T, CpoR_statmech, CpoR_empirical)
 
@@ -375,7 +375,7 @@ class EmpiricalBase(_pmuttBase):
         try:
             iter(T)
         except TypeError:
-            HoRT_statmech = np.array([self.statmech_model.get_HoRT(T=T_i)
+            HoRT_statmech = np.array([self.model.get_HoRT(T=T_i)
                                       + H_offset for T_i in T])
             HoRT_empirical = self.get_HoRT(T=T)
         else:
@@ -383,7 +383,7 @@ class EmpiricalBase(_pmuttBase):
             HoRT_empirical = np.zeros_like(T)
             HoRT_empirical = self.get_HoRT(T=T)
             for i, T_i in enumerate(T):
-                HoRT_statmech[i] = self.statmech_model.get_HoRT(T=T_i) \
+                HoRT_statmech[i] = self.model.get_HoRT(T=T_i) \
                                    + H_offset[i]
         return (T, HoRT_statmech, HoRT_empirical)
 
@@ -413,14 +413,14 @@ class EmpiricalBase(_pmuttBase):
         try:
             iter(T)
         except TypeError:
-            SoR_statmech = np.array([self.statmech_model.get_SoR(T=T_i)
+            SoR_statmech = np.array([self.model.get_SoR(T=T_i)
                                      for T_i in T])
             SoR_empirical = self.get_SoR(T=T)
         else:
             SoR_statmech = np.zeros_like(T)
             SoR_empirical = np.zeros_like(T)
             for i, T_i in enumerate(T):
-                SoR_statmech[i] = self.statmech_model.get_SoR(T=T_i)
+                SoR_statmech[i] = self.model.get_SoR(T=T_i)
                 SoR_empirical[i] = self.get_SoR(T=T_i)
         return (T, SoR_statmech, SoR_empirical)
 
@@ -456,13 +456,13 @@ class EmpiricalBase(_pmuttBase):
         try:
             iter(T)
         except TypeError:
-            GoRT_statmech = self.statmech_model.get_GoRT(T=T) + G_offset
+            GoRT_statmech = self.model.get_GoRT(T=T) + G_offset
             GoRT_empirical = self.get_GoRT(T=T)
         else:
             GoRT_statmech = np.zeros_like(T)
             GoRT_empirical = np.zeros_like(T)
             for i, T_i in enumerate(T):
-                GoRT_statmech[i] = self.statmech_model.get_GoRT(T=T_i) +\
+                GoRT_statmech[i] = self.model.get_GoRT(T=T_i) +\
                     G_offset[i]
                 GoRT_empirical[i] = self.get_GoRT(T=T_i)
         return (T, GoRT_statmech, GoRT_empirical)
@@ -482,9 +482,9 @@ class EmpiricalBase(_pmuttBase):
                     'notes': self.notes,
                     'smiles': self.smiles, }
         try:
-            obj_dict['statmech_model'] = self.statmech_model.to_dict()
+            obj_dict['model'] = self.model.to_dict()
         except AttributeError:
-            obj_dict['statmech_model'] = self.statmech_model
+            obj_dict['model'] = self.model
 
         if _is_iterable(self.misc_models):
             obj_dict['misc_models'] = \
@@ -507,7 +507,7 @@ class EmpiricalBase(_pmuttBase):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = json_to_pmutt(json_obj['statmech_model'])
+        json_obj['model'] = json_to_pmutt(json_obj['model'])
         if json_obj['misc_models'] is not None:
             json_obj['misc_models'] = [json_to_pmutt(mix_model) for mix_model \
                                        in json_obj['misc_models']]

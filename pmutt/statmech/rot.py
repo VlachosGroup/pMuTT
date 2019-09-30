@@ -62,10 +62,10 @@ class RigidRotor(_ModelBase):
             try:
                 symmetrynumber = c.symmetry_dict[symmetrynumber]
             except KeyError:
-                raise ValueError('Point group, {}, not supported. '
-                                 'See :class:`~pmutt.statmech.rot.RigidRotor '
-                                 'for supported '
-                                 'options.'.format(symmetrynumber))
+                err_msg = ('Point group, {}, not supported. See '
+                           'pmutt.statmech.rot.RigidRotor for supported '
+                           'options.'.format(symmetrynumber))
+                raise ValueError(err_msg)
 
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
@@ -107,8 +107,8 @@ class RigidRotor(_ModelBase):
             return np.sqrt(np.pi)/self.symmetrynumber \
                 * (T**3/np.prod(self.rot_temperatures))**0.5
         else:
-            raise ValueError(
-                'Geometry, {}, not supported.'.format(self.geometry))
+            err_msg = 'Geometry, {}, not supported.'.format(self.geometry)
+            raise ValueError(err_msg)
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
@@ -131,8 +131,8 @@ class RigidRotor(_ModelBase):
         elif self.geometry == 'nonlinear':
             return 1.5
         else:
-            raise ValueError(
-                'Geometry, {}, not supported.'.format(self.geometry))
+            err_msg = 'Geometry, {}, not supported.'.format(self.geometry)
+            raise ValueError(err_msg)
 
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
@@ -167,8 +167,8 @@ class RigidRotor(_ModelBase):
         elif self.geometry == 'nonlinear':
             return 1.5
         else:
-            raise ValueError(
-                'Geometry, {}, not supported.'.format(self.geometry))
+            err_msg = 'Geometry, {}, not supported.'.format(self.geometry)
+            raise ValueError(err_msg)
 
     def get_HoRT(self):
         """Calculates the dimensionless enthalpy
@@ -212,8 +212,8 @@ class RigidRotor(_ModelBase):
             return np.log(np.sqrt(np.pi)/self.symmetrynumber
                           * (T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
         else:
-            raise ValueError(
-                'Geometry, {}, not supported.'.format(self.geometry))
+            err_msg = 'Geometry, {}, not supported.'.format(self.geometry)
+            raise ValueError(err_msg)
 
     def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
@@ -296,16 +296,17 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     elif geometry == 'linear':
         # Expecting one mode to be 0 and the other modes to be identical
         if not np.isclose(rot_temperatures[0], rot_temperatures[1]):
-            warn('Expected rot_temperatures for linear specie, {}, to be '
-                 'similar. Values found were:{}'
-                 .format(atoms, rot_temperatures))
+            warn_msg = ('Expected rot_temperatures for linear specie, {}, to be '
+                        'similar. Values found were: {}'
+                        ''.format(atoms, rot_temperatures))
+            warn(warn_msg)
         return [min(rot_temperatures)]
     elif geometry == 'nonlinear':
         # Expecting 3 modes. May or may not be equal
         return rot_temperatures
     else:
-        raise ValueError(
-            'Geometry, {}, not supported.'.format(geometry))
+        err_msg = 'Geometry, {}, not supported.'.format(geometry)
+        raise ValueError(err_msg)
 
 
 def get_geometry_from_atoms(atoms, degree_tol=5.):

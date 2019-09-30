@@ -354,9 +354,9 @@ class Network(Reactions):
                              x_value_formatter=x_value_formatter, style=style,
                              truncate_legend=-1)
         else:
-            raise ValueError('Viewer {} not supported. Type '
-                             'help(pmutt.reaction.network.Network) '
-                             'for supported options.'.format(viewer))
+            err_msg = ('Viewer {} not supported. Type help(pmutt.reaction.'
+                       'network.Network) for supported options.'.format(viewer))
+            raise ValueError(err_msg)
 
         # If the pathway to plot was specified as an integer, convert to a list
         if pathway_numbers is not None and not _is_iterable(pathway_numbers):

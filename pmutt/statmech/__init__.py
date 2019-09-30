@@ -319,7 +319,8 @@ class StatMech(_ModelBase):
         elif operation == 'prod':
             default_value = 1.
         else:
-            raise ValueError('Operation: {} not supported'.format(operation))
+            err_msg = 'Operation: {} not supported'.format(operation)
+            raise ValueError(err_msg)
 
         # Calculate the quantity for each mode
         specie_kwargs = _get_specie_kwargs(specie_name=self.name, **kwargs)

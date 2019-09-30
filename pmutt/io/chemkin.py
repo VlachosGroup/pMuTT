@@ -605,8 +605,8 @@ def _get_specie_str(specie, include_phase):
         elif specie.cat_site is not None:
             phase = '/{}/'.format(specie.cat_site.name)
         else:
-            raise ValueError('Must specify phase or catalyst site to include '
-                             'phase')
+            err_msg = 'Must specify phase or catalyst site to include phase.'
+            raise ValueError(err_msg)
     else:
         phase = ''
     return "'{}{}'".format(specie.name, phase)

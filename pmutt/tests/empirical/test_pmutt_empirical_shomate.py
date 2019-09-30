@@ -28,7 +28,7 @@ class TestShomate(unittest.TestCase):
             'T_low': 500.,
             'T_high': 1700.,
             'notes': None,
-            'statmech_model': None,
+            'model': None,
             'misc_models': None,
             'smiles': None,
             'type': 'shomate',
@@ -62,11 +62,11 @@ class TestShomate(unittest.TestCase):
             SoR_ref=22.71163786
         )
 
-        self.Shomate_statmech = Shomate.from_statmech(
+        self.Shomate_statmech = Shomate.from_model(
             name='H2O',
             elements={'H': 2, 'O': 1},
             phase='g',
-            statmech_model=StatMech,
+            model=StatMech,
             trans_model=trans.FreeTrans,
             n_degrees=3,
             vib_model=vib.HarmonicVib,

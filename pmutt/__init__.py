@@ -314,11 +314,13 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
                          pretty_print=True, show_y_guides=False,
                          show_x_guides=False, include_x_axis=True)
         if len(methods) != 1:
-            raise RuntimeError('Currently, viewer {} only supports a single '
-                               'method.'.format(viewer))
+            err_msg = ('Currently, viewer {} only supports a single method.'
+                       ''.format(viewer))
+            raise RuntimeError(err_msg)
     else:
-        raise ValueError('Viewer {} not supported. Type help(pmutt.plot_1D) '
-                         'for supported options.'.format(viewer))
+        err_msg = ('Viewer {} not supported. Type help(pmutt.plot_1D) for '
+                   'supported options.'.format(viewer))
+        raise ValueError(err_msg)
 
     # Evaluate obj for each method
     for i, method in enumerate(methods):
@@ -719,12 +721,17 @@ def pmutt_list_to_dict(pmutt_list, key='name'):
     ----------
         pmutt_list : list of objects
             List of pmutt objects to convert
-        key : str
-            Name of attribute used as the keys for the dictionary
+        key : str, optional
+            Name of attribute used as the keys for the dictionary. Default is
+            'name'
     Returns
     -------
         pmutt_dict : dict
             Dictionary of pmutt objects
+    Raises
+    ------
+        KeyError
+            Raised if `key` is not an attribute of the pmutt objects
     """
     return {getattr(obj, key): obj for obj in pmutt_list}
 

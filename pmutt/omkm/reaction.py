@@ -82,8 +82,9 @@ class SurfaceReaction(Reaction):
         
         # Apply the operation to the site densities
         if len(site_dens) == 0:
-            raise ValueError('At least one species requires a catalytic site '
-                             'with site density to calculate A.')
+            err_msg = ('At least one species requires a catalytic site with '
+                       'site density to calculate A.')
+            raise ValueError(err_msg)
         eff_site_den = _apply_numpy_operation(quantity=site_dens,
                                               operation=sden_operation,
                                               verbose=False)
