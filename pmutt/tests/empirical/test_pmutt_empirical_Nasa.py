@@ -40,7 +40,7 @@ class TestNasa(unittest.TestCase):
             'T_high': 5000.,
             'notes': None,
             'model': None,
-            'misc_models': None,
+            'misc_models': [{'class': "<class 'pmutt.empirical.GasPressureAdj'>"}],
             'cat_site': None,
             'n_sites': None,
             'smiles': None,

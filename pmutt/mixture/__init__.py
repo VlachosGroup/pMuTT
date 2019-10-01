@@ -50,8 +50,10 @@ def _get_mix_quantity(misc_models, method_name, raise_error=True,
     for i, mix_model in enumerate(misc_models):
         if mix_model is None:
             continue
-
-        specie_kwargs = _get_specie_kwargs(mix_model.name_j, **kwargs)
+        try:
+            specie_kwargs = _get_specie_kwargs(mix_model.name_j, **kwargs)
+        except AttributeError:
+            specie_kwargs = kwargs.copy()
         mix_quantity[i] = _get_mode_quantity(mode=mix_model,
                                              method_name=method_name,
                                              raise_error=raise_error,

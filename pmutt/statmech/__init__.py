@@ -1064,7 +1064,7 @@ class StatMech(_ModelBase):
 
 presets = {
     'idealgas': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'trans_model': trans.FreeTrans,
         'n_degrees': 3,
         'vib_model': vib.HarmonicVib,
@@ -1075,18 +1075,18 @@ presets = {
         'optional': ('atoms')
         },
     'harmonic': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.GroundStateElec,
         'required': ('vib_wavenumbers', 'potentialenergy', 'spin'),
     },
     'electronic': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'elec_model': elec.GroundStateElec,
         'required': ('potentialenergy', 'spin'),
     },
     'placeholder': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'trans_model': EmptyMode,
         'vib_model': EmptyMode,
         'elec_model': EmptyMode,
@@ -1095,7 +1095,7 @@ presets = {
         'required': (),
     },
     'constant': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'elec_model': ConstantMode,
         'optional': ('q', 'Cv', 'Cp', 'U', 'H', 'S', 'F', 'G')
     }
