@@ -291,13 +291,16 @@ def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
 
     if geometry == 'monatomic':
         # Expecting all modes to be 0
-        assert np.isclose(np.sum(rot_temperatures), 0.)
+        if not np.isclose(np.sum(rot_temperatures), 0.):
+            err_msg = ('Geometry expected to be monatomic but contains '
+                       'non-zero rotational temperatures.')
+            raise ValueError(err_msg)
         return [0.]
     elif geometry == 'linear':
         # Expecting one mode to be 0 and the other modes to be identical
         if not np.isclose(rot_temperatures[0], rot_temperatures[1]):
-            warn_msg = ('Expected rot_temperatures for linear specie, {}, to be '
-                        'similar. Values found were: {}'
+            warn_msg = ('Expected rot_temperatures for linear specie, {}, to '
+                        'be similar. Values found were: {}'
                         ''.format(atoms, rot_temperatures))
             warn(warn_msg)
         return [min(rot_temperatures)]
@@ -330,6 +333,7 @@ def get_geometry_from_atoms(atoms, degree_tol=5.):
     elif len(atoms) == 2:
         return 'linear'
     else:
+        # Iterate over 3 atoms at a time
         for i, j, k in itertools.combinations(range(len(atoms)), 3):
             angle = atoms.get_angle(i, j, k)
             # If the angles are NOT close to 0 and 180 degrees
