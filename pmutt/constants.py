@@ -67,9 +67,9 @@ def R(units):
     try:
         return R_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit for R: {}. Use help(pmutt.constants.R) '
-                       'for accepted units.'.format(units))
-
+        err_msg = ('Invalid unit for R: {}. Use help(pmutt.constants.R) '
+                   'for accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 def h(units, bar=False):
     """Planck's constant, h
@@ -111,8 +111,9 @@ def h(units, bar=False):
     try:
         h_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.h) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit for h: {}. Use help(pmutt.constants.h) for '
+                   'accepted units.'.format(units))
+        raise KeyError(err_msg)
 
     if bar:
         return h_dict[units]/(2.*np.pi)
@@ -161,8 +162,9 @@ def kb(units):
     try:
         return kb_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.kb) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit for kb: {}. Use help(pmutt.constants.kb) for '
+                   'accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 
 def c(units):
@@ -196,8 +198,9 @@ def c(units):
     try:
         return c_dict[units]
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.c) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit: {}. Use help(pmutt.constants.c) for '
+                   'accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 
 def m_e(units):
@@ -228,8 +231,9 @@ def m_e(units):
     try:
         return convert_unit(num=5.48579909070e-4, initial='amu', final=units)
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.m_p) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit for m_e: {}. Use help(pmutt.constants.m_e) '
+                   'for accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 def m_p(units):
     """Mass of a proton
@@ -259,8 +263,9 @@ def m_p(units):
     try:
         return convert_unit(num=1.007276466879, initial='amu', final=units)
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.m_p) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit for m_p: {}. Use help(pmutt.constants.m_p) '
+                   'for accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 def P0(units):
     """Reference pressure
@@ -295,8 +300,9 @@ def P0(units):
     try:
         return convert_unit(num=1., initial='bar', final=units)
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.P0) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit for P0: {}. Use help(pmutt.constants.P0) for '
+                   'accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 
 def T0(units):
@@ -328,8 +334,9 @@ def T0(units):
     try:
         return convert_unit(num=298.15, initial='K', final=units)
     except KeyError:
-        raise KeyError('Invalid unit: {}. Use help(pmutt.constants.T0) for '
-                       'accepted units.'.format(units))
+        err_msg = ('Invalid unit for T0: {}. Use help(pmutt.constants.T0) for '
+                   'accepted units.'.format(units))
+        raise KeyError(err_msg)
 
 
 def V0(units):
@@ -359,6 +366,70 @@ Na = 6.02214086e23  # Avogadro number
 e = 1.6021766208e-19  # Electronic charge
 """float : Electronic charge in Coulombs"""
 
+type_dict = {
+    'J': 'energy',
+    'kJ': 'energy',
+    'eV': 'energy',
+    'cal': 'energy',
+    'kcal': 'energy',
+    'L atm': 'energy',
+    'Eh': 'energy',
+    'Ha': 'energy',
+    'J/mol': 'energy/amount',
+    'kJ/mol': 'energy/amount',
+    'cal/mol': 'energy/amount',
+    'kcal/mol': 'energy/amount',
+    'eV/molecule': 'energy/amount',
+    'Eh/molecule': 'energy/amount',
+    'Ha/molecule': 'energy/amount',
+    'ps': 'time',
+    'ns': 'time',
+    'ms': 'time',
+    's': 'time',
+    'min': 'time',
+    'hr': 'time',
+    'day': 'time',
+    'molecule': 'amount',
+    'molec': 'amount',
+    'mol': 'amount',
+    'C': 'temp',
+    'K': 'temp',
+    'F': 'temp',
+    'R': 'temp',
+    'm': 'length',
+    'cm': 'length',
+    'nm': 'length',
+    'km': 'length',
+    'inch': 'length',
+    'ft': 'length',
+    'mile': 'length',
+    'A': 'length',
+    'm2': 'area',
+    'cm2': 'area',
+    'A2': 'area',
+    'km2': 'area',
+    'inch2': 'area',
+    'ft2': 'area',
+    'm3': 'volume',
+    'cm3': 'volume',
+    'mL': 'volume',
+    'L': 'volume',
+    'inch3': 'volume',
+    'ft3': 'volume',
+    'kg': 'mass',
+    'g': 'mass',
+    'amu': 'mass',
+    'lbs': 'mass',
+    'Pa': 'pressure',
+    'kPa': 'pressure',
+    'MPa': 'pressure',
+    'atm': 'pressure',
+    'bar': 'pressure',
+    'mmHg': 'pressure',
+    'torr': 'pressure',
+    'psi': 'pressure'
+}
+"""dict : Key are units, values are the type of unit"""
 
 def convert_unit(num=None, initial=None, final=None):
     """Converts units between two unit sets
@@ -515,71 +586,6 @@ def convert_unit(num=None, initial=None, final=None):
     ========= =======================
 
     """
-
-    type_dict = {
-        'J': 'energy',
-        'kJ': 'energy',
-        'eV': 'energy',
-        'cal': 'energy',
-        'kcal': 'energy',
-        'L atm': 'energy',
-        'Eh': 'energy',
-        'Ha': 'energy',
-        'J/mol': 'energy/amount',
-        'kJ/mol': 'energy/amount',
-        'cal/mol': 'energy/amount',
-        'kcal/mol': 'energy/amount',
-        'eV/molecule': 'energy/amount',
-        'Eh/molecule': 'energy/amount',
-        'Ha/molecule': 'energy/amount',
-        'ps': 'time',
-        'ns': 'time',
-        'ms': 'time',
-        's': 'time',
-        'min': 'time',
-        'hr': 'time',
-        'day': 'time',
-        'molecule': 'amount',
-        'molec': 'amount',
-        'mol': 'amount',
-        'C': 'temp',
-        'K': 'temp',
-        'F': 'temp',
-        'R': 'temp',
-        'm': 'length',
-        'cm': 'length',
-        'nm': 'length',
-        'km': 'length',
-        'inch': 'length',
-        'ft': 'length',
-        'mile': 'length',
-        'A': 'length',
-        'm2': 'area',
-        'cm2': 'area',
-        'A2': 'area',
-        'km2': 'area',
-        'inch2': 'area',
-        'ft2': 'area',
-        'm3': 'volume',
-        'cm3': 'volume',
-        'mL': 'volume',
-        'L': 'volume',
-        'inch3': 'volume',
-        'ft3': 'volume',
-        'kg': 'mass',
-        'g': 'mass',
-        'amu': 'mass',
-        'lbs': 'mass',
-        'Pa': 'pressure',
-        'kPa': 'pressure',
-        'MPa': 'pressure',
-        'atm': 'pressure',
-        'bar': 'pressure',
-        'mmHg': 'pressure',
-        'torr': 'pressure',
-        'psi': 'pressure'
-    }
-
     unit_dict = {
         'J': 1.,
         'kJ': 1.e-3,
@@ -643,20 +649,22 @@ def convert_unit(num=None, initial=None, final=None):
     try:
         initial_type = type_dict[initial]
     except KeyError:
-        raise ValueError("%r not a supported unit. Use help(pmutt.constants."
-                         "convert_unit) for accepted units." % initial)
+        err_msg = ('{} not a supported unit. Use help(pmutt.constants.'
+                   'convert_unit) for accepted units.'.format(initial))
+        raise ValueError(err_msg)
     try:
         final_type = type_dict[final]
     except KeyError:
-        raise ValueError("%r not a supported unit. Use help(pmutt.constants."
-                         "convert_unit) for accepted units." % final)
+        err_msg = ('{} not a supported unit. Use help(pmutt.constants.'
+                   'convert_unit) for accepted units.'.format(final))
+        raise ValueError(err_msg)
 
     # Check that the unit types are the same
     if initial_type != final_type:
-        raise ValueError("%r [Type %r] not compatible with %r [Type %r]. "
-                         "Use help(pmutt.constants.convert_unit) for "
-                         "accepted units." % (initial, initial_type, final,
-                                              final_type))
+        err_msg = ('{} [Type {}] not compatible with {} [Type {}]. '
+                   'Use help(pmutt.constants.convert_unit) for accepted pairs.'
+                   ''.format(initial, initial_type, final, final_type))
+        raise ValueError(err_msg)
     elif initial_type == 'temp':
         if num is None:
             num = 0.

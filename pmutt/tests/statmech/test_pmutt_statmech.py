@@ -19,6 +19,7 @@ class TestStatMech(unittest.TestCase):
         CO2 = molecule('CO2')
         CO2_pmutt_parameters = {
             'name': 'CO2',
+            'elements': {'C': 1, 'O': 2},
 
             'trans_model': trans.FreeTrans,
             'n_degrees': 3,
@@ -52,6 +53,7 @@ class TestStatMech(unittest.TestCase):
         self.T0 = c.T0('K')  # K
         self.P0 = c.P0('Pa')
         self.V0 = c.V0('m3')
+        self.mw = get_molecular_weight({'C': 1, 'O': 2})
 
     def test_get_q(self):
         np.testing.assert_almost_equal(
@@ -67,6 +69,9 @@ class TestStatMech(unittest.TestCase):
         np.testing.assert_almost_equal(
                 self.CO2_pmutt.get_Cv(T=self.T0, V=self.V0, units='J/mol/K'),
                 2.9422622359004853*c.R('J/mol/K'))
+        np.testing.assert_almost_equal(
+                self.CO2_pmutt.get_Cv(T=self.T0, V=self.V0, units='J/g/K'),
+                2.9422622359004853*c.R('J/mol/K')/self.mw)
 
     def test_get_CpoR(self):
         np.testing.assert_almost_equal(
@@ -77,6 +82,9 @@ class TestStatMech(unittest.TestCase):
         np.testing.assert_almost_equal(
                 self.CO2_pmutt.get_Cp(T=self.T0, V=self.V0, units='J/mol/K'),
                 3.9422622359004853*c.R('J/mol/K'))
+        np.testing.assert_almost_equal(
+                self.CO2_pmutt.get_Cp(T=self.T0, V=self.V0, units='J/g/K'),
+                3.9422622359004853*c.R('J/mol/K')/self.mw)
 
     def test_get_EoRT(self):
         np.testing.assert_almost_equal(
@@ -93,6 +101,9 @@ class TestStatMech(unittest.TestCase):
         np.testing.assert_almost_equal(
             self.CO2_pmutt.get_E(T=self.T0, units='J/mol', include_ZPE=True),
             -877.703643641077*c.R('J/mol/K')*self.T0, decimal=2)
+        np.testing.assert_almost_equal(
+            self.CO2_pmutt.get_E(T=self.T0, units='J/g'),
+            -894.97476277965*c.R('J/mol/K')*self.T0/self.mw)
 
     def test_get_UoRT(self):
         np.testing.assert_almost_equal(
@@ -103,6 +114,9 @@ class TestStatMech(unittest.TestCase):
         np.testing.assert_almost_equal(
             self.CO2_pmutt.get_U(T=self.T0, V=self.V0, units='J/mol'),
             -875.1095022368354*c.R('J/mol/K')*self.T0)
+        np.testing.assert_almost_equal(
+            self.CO2_pmutt.get_U(T=self.T0, V=self.V0, units='J/g'),
+            -875.1095022368354*c.R('J/mol/K')*self.T0/self.mw)
 
     def test_get_HoRT(self):
         expected_HoRT_CO2 = \
@@ -143,6 +157,9 @@ class TestStatMech(unittest.TestCase):
         np.testing.assert_almost_equal(
             self.CO2_pmutt.get_F(T=self.T0, V=self.V0, units='J/mol'),
             -900.6031596134445*c.R('J/mol/K')*self.T0)
+        np.testing.assert_almost_equal(
+            self.CO2_pmutt.get_F(T=self.T0, V=self.V0, units='J/g'),
+            -900.6031596134445*c.R('J/mol/K')*self.T0/self.mw)
 
     def test_get_GoRT(self):
         expected_GoRT_CO2 = \

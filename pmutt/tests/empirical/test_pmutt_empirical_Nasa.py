@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from ase.build import molecule
 from pmutt import constants as c
+from pmutt import get_molecular_weight
 from pmutt.statmech import StatMech, trans, rot, vib, elec
 from pmutt.empirical.nasa import Nasa
 
@@ -39,8 +40,8 @@ class TestNasa(unittest.TestCase):
             'T_mid': 1610.97,
             'T_high': 5000.,
             'notes': None,
-            'statmech_model': None,
-            'misc_models': None,
+            'model': None,
+            'misc_models': [{'class': "<class 'pmutt.empirical.GasPressureAdj'>"}],
             'cat_site': None,
             'n_sites': None,
             'smiles': None,
@@ -65,11 +66,11 @@ class TestNasa(unittest.TestCase):
             SoR_ref=24.84583501
         )
 
-        self.Nasa_statmech = Nasa.from_statmech(
+        self.Nasa_statmech = Nasa.from_model(
             name='H2O',
             elements={'H': 2, 'O': 1},
             phase='g',
-            statmech_model=StatMech,
+            model=StatMech,
             trans_model=trans.FreeTrans,
             n_degrees=3,
             vib_model=vib.HarmonicVib,
@@ -84,6 +85,7 @@ class TestNasa(unittest.TestCase):
             T_mid=1610.97,
             T_high=5000.
         )
+        self.mw = get_molecular_weight({'H': 2, 'O': 1}) # g/mol
 
     def test_get_a(self):
         np.testing.assert_array_equal(self.Nasa_direct.get_a(T=300.),
@@ -126,6 +128,10 @@ class TestNasa(unittest.TestCase):
                                        Cp_expected[0])
         np.testing.assert_array_almost_equal(self.Nasa_direct.get_Cp(T=T, units='J/mol/K'),
                                              Cp_expected)
+        np.testing.assert_almost_equal(self.Nasa_direct.get_Cp(T=T[0], units='J/g/K'),
+                                       Cp_expected[0]/self.mw)
+        np.testing.assert_array_almost_equal(self.Nasa_direct.get_Cp(T=T, units='J/g/K'),
+                                             Cp_expected/self.mw)
 
     def test_get_HoRT(self):
         T = np.array([500., 600., 700., 800., 900., 1000., 1100., 1200.,
@@ -157,6 +163,11 @@ class TestNasa(unittest.TestCase):
                                        H_expected[0], decimal=4)
         np.testing.assert_array_almost_equal(self.Nasa_direct.get_H(T=T, units='J/mol'),
                                              H_expected, decimal=4)
+        np.testing.assert_almost_equal(self.Nasa_direct.get_H(T=T[0],
+                                                              units='J/g'),
+                                       H_expected[0]/self.mw, decimal=4)
+        np.testing.assert_array_almost_equal(self.Nasa_direct.get_H(T=T, units='J/g'),
+                                             H_expected/self.mw, decimal=4)
 
     def test_get_SoR(self):
         T = np.array([500., 600., 700., 800., 900., 1000., 1100., 1200.,
@@ -187,6 +198,10 @@ class TestNasa(unittest.TestCase):
                                        S_expected[0])
         np.testing.assert_array_almost_equal(self.Nasa_direct.get_S(T=T, units='J/mol/K'),
                                              S_expected)
+        np.testing.assert_almost_equal(self.Nasa_direct.get_S(T=T[0], units='J/g/K'),
+                                       S_expected[0]/self.mw)
+        np.testing.assert_array_almost_equal(self.Nasa_direct.get_S(T=T, units='J/g/K'),
+                                             S_expected/self.mw)
 
     def test_get_GoRT(self):
         T = np.array([500., 600., 700., 800., 900., 1000., 1100., 1200.,

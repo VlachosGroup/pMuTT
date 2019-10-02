@@ -58,8 +58,8 @@ def type_to_class(class_str):
     from pmutt.eos import IdealGasEOS, vanDerWaalsEOS
     from pmutt.reaction import Reaction, Reactions
     from pmutt.reaction.bep import BEP
-    from pmutt.empirical import EmpiricalBase
-    from pmutt.empirical.nasa import Nasa
+    from pmutt.empirical import EmpiricalBase, GasPressureAdj
+    from pmutt.empirical.nasa import Nasa, SingleNasa9, Nasa9
     from pmutt.empirical.shomate import Shomate
     from pmutt.empirical.references import Reference, References
     from pmutt.empirical.zacros import Zacros
@@ -79,7 +79,10 @@ def type_to_class(class_str):
         "<class 'pmutt.reaction.Reactions'>": Reactions,
         "<class 'pmutt.reaction.bep.BEP'>": BEP,
         "<class 'pmutt.empirical.EmpiricalBase'>": EmpiricalBase,
+        "<class 'pmutt.empirical.GasPressureAdj'>": GasPressureAdj,
         "<class 'pmutt.empirical.nasa.Nasa'>": Nasa,
+        "<class 'pmutt.empirical.nasa.SingleNasa9'>": SingleNasa9,
+        "<class 'pmutt.empirical.nasa.Nasa9'>": Nasa9,
         "<class 'pmutt.empirical.shomate.Shomate'>": Shomate,
         "<class 'pmutt.empirical.references.Reference'>": Reference,
         "<class 'pmutt.empirical.references.References'>": References,

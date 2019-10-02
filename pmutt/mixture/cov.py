@@ -69,7 +69,8 @@ class PiecewiseCovEffect(_ModelBase):
                 Raised when i = 0
         """
         if i == 0:
-            raise ValueError('First index cannot be removed')
+            err_msg = 'First index cannot be removed'
+            raise ValueError(err_msg)
         self.intervals.pop(i)
         self.slopes.pop(i)
         self._set_intercepts()

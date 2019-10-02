@@ -5,11 +5,12 @@ pmutt.empirical.shomate
 Operations related to Shomate polynomials
 """
 
+from warnings import warn
 import inspect
 import numpy as np
 from scipy.optimize import curve_fit
 from scipy.stats import variation
-from pmutt import _is_iterable
+from pmutt import _is_iterable, _get_R_adj
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.io.cantera import obj_to_CTI
@@ -87,7 +88,7 @@ class Shomate(EmpiricalBase):
                                          default_value=0.,
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
-        CpoR += CpoR_mix
+        CpoR = CpoR + CpoR_mix
         if len(T) == 1:
             CpoR = CpoR.item(0)
         return CpoR
@@ -118,8 +119,9 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_CpoR(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*c.R(units)
+                             raise_warning=raise_warning, **kwargs)*R_adj
 
     def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
@@ -160,7 +162,7 @@ class Shomate(EmpiricalBase):
                                          default_value=0.,
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
-        HoRT += HoRT_mix
+        HoRT = HoRT + HoRT_mix
         if len(T) == 1:
             HoRT = HoRT.item(0)
         return HoRT
@@ -191,9 +193,10 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_HoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             raise_warning=raise_warning, **kwargs)*T*R_adj
 
     def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
@@ -233,7 +236,7 @@ class Shomate(EmpiricalBase):
                                         raise_warning=raise_warning,
                                         default_value=0.,
                                         T=T_i, **kwargs)
-        SoR += SoR_mix
+        SoR = SoR + SoR_mix
         # If only one T specified, converted from (1,) numpy array to float
         if len(T) == 1:
             SoR = SoR.item(0)
@@ -265,7 +268,8 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_SoR(T=T)*c.R(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+        return self.get_SoR(T=T)*R_adj
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
@@ -321,9 +325,10 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_GoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             raise_warning=raise_warning, **kwargs)*T*R_adj
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, **kwargs):
@@ -360,7 +365,8 @@ class Shomate(EmpiricalBase):
     @classmethod
     def from_statmech(cls, name, statmech_model, T_low, T_high,
                       references=None, elements=None, **kwargs):
-        """Calculates the Shomate polynomial using statistical mechanic models
+        """Calculates the Shomate polynomial using statistical mechanic models.
+        Deprecated as of Version 1.2.13.
 
         Parameters
         ----------
@@ -382,6 +388,10 @@ class Shomate(EmpiricalBase):
             shomate : Shomate object
                 Shomate object with polynomial terms fitted to data.
         """
+        warn_msg = ('Shomate.from_statmech is deprecated as of Version 1.2.13. '
+                    'Please use the more generic function, Shomate.from_model.')
+        warn(warn_msg, DeprecationWarning)
+
         # Initialize the StatMech object
         if inspect.isclass(statmech_model):
             statmech_model = statmech_model(name=name, references=references,
@@ -397,8 +407,105 @@ class Shomate(EmpiricalBase):
 
         return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref,
-                             statmech_model=statmech_model, elements=elements,
+                             model=statmech_model, elements=elements,
                              references=references, **kwargs)
+
+    @classmethod
+    def from_model(cls, model, name=None, T_low=None, T_high=None,
+                   elements=None, n_T=50, **kwargs):
+        """Calculates the NASA polynomials using the model passed
+
+        Parameters
+        ----------
+            model : Model object or class
+                Model to generate data. Must contain the methods `get_CpoR`,
+                `get_HoRT` and `get_SoR`
+            name : str, optional
+                Name of the species. If not passed, `model.name` will be used.
+            T_low : float, optional
+                Lower limit temerature in K. If not passed, `model.T_low` will
+                be used.
+            T_high : float, optional
+                Higher limit temperature in K. If not passed, `model.T_high`
+                will be used.
+            elements : dict, optional
+                Composition of the species. If not passed, `model.elements`
+                will be used. Keys of dictionary are elements, values are
+                stoichiometric values in a formula unit.
+                e.g. CH3OH can be represented as:
+                {'C': 1, 'H': 4, 'O': 1,}.
+            n_T : int, optional
+                Number of data points between `T_low` and `T_high` for fitting
+                heat capacity. Default is 50.
+            kwargs : keyword arguments
+                Used to initalize model if a class is passed.
+        Returns
+        -------
+            Shomate : Shomate object
+                Shomate object with polynomial terms fitted to data.
+        """
+        # Initialize the model object
+        if inspect.isclass(model):
+            model = model(name=name, elements=elements, **kwargs)
+
+        if name is None:
+            try:
+                name = model.name
+            except AttributeError:
+                err_msg = ('Name must either be passed to from_model directly '
+                           'or be an attribute of model.')                      
+                raise AttributeError(err_msg)
+        if T_low is None:
+            try:
+                T_low = model.T_low
+            except AttributeError:
+                err_msg = ('T_low must either be passed to from_model '
+                           'directly or be an attribute of model.')
+                raise AttributeError(err_msg)
+        if T_high is None:
+            try:
+                T_high = model.T_high
+            except AttributeError:
+                err_msg = ('T_high must either be passed to from_model '
+                           'directly or be an attribute of model.')
+                raise AttributeError(err_msg)
+        if elements is None:
+            try:
+                elements = model.elements
+            except AttributeError:
+                pass
+        # Check if inputted T_low and T_high are outside model's T_low and 
+        # T_high range
+        try:
+            if T_low < model.T_low:
+                warn_msg = ('Inputted T_low is lower than model T_low. Fitted '
+                            'empirical object may not be valid.')
+                warn(warn_msg, UserWarning)
+        except AttributeError:
+            pass
+
+        try:
+            if T_high > model.T_high:
+                warn_msg = ('Inputted T_high is higher than model T_high. '
+                            'Fitted empirical object may not be valid.')
+                warn(warn_msg, UserWarning)
+        except AttributeError:
+            pass
+
+        # Generate heat capacity data
+        T = np.linspace(T_low, T_high, n_T)
+        try:
+            CpoR = model.get_CpoR(T=T)
+        except ValueError:
+            CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
+
+        # Generate enthalpy and entropy data
+        T_mean = (T_low+T_high)/2.
+        HoRT_ref = model.get_HoRT(T=T_mean)
+        SoR_ref = model.get_SoR(T=T_mean)
+        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mean,
+                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref,
+                             model=model, elements=elements, **kwargs)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -429,8 +536,8 @@ class Shomate(EmpiricalBase):
         """
         json_obj = remove_class(json_obj)
         # Reconstruct statmech model
-        json_obj['statmech_model'] = \
-            json_to_pmutt(json_obj['statmech_model'])
+        json_obj['model'] = \
+            json_to_pmutt(json_obj['model'])
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
 
         return cls(**json_obj)

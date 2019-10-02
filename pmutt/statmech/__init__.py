@@ -8,7 +8,8 @@ import inspect
 from copy import copy
 import numpy as np
 from pmutt import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-                   _get_specie_kwargs, _apply_numpy_operation, _ModelBase)
+                   _get_specie_kwargs, _apply_numpy_operation, _ModelBase,
+                   _get_R_adj, parse_formula)
 from pmutt import constants as c
 from pmutt.statmech import trans, vib, elec, rot
 from pmutt.mixture import _get_mix_quantity
@@ -230,8 +231,17 @@ class StatMech(_ModelBase):
         self.name = name
         self.smiles = smiles
         self.notes = notes
-        self.elements=elements
         self.references = references
+
+        # Assign elements from Atoms
+        if elements is None:
+            try:
+                elements = parse_formula( \
+                        kwargs['atoms'].get_chemical_formula('hill'))
+            except KeyError:
+                pass
+        self.elements=elements
+
 
         # Translational modes
         if inspect.isclass(trans_model):
@@ -319,7 +329,8 @@ class StatMech(_ModelBase):
         elif operation == 'prod':
             default_value = 1.
         else:
-            raise ValueError('Operation: {} not supported'.format(operation))
+            err_msg = 'Operation: {} not supported'.format(operation)
+            raise ValueError(err_msg)
 
         # Calculate the quantity for each mode
         specie_kwargs = _get_specie_kwargs(specie_name=self.name, **kwargs)
@@ -478,9 +489,10 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_CvoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs)*c.R(units)
+                             use_references=use_references, **kwargs)*R_adj
 
     def get_CpoR(self, verbose=False, raise_error=True, raise_warning=True,
                  use_references=True, **kwargs):
@@ -550,9 +562,10 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_CpoR(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs)*c.R(units)
+                             use_references=use_references, **kwargs)*R_adj
 
     def get_EoRT(self, T=c.T0('K'), include_ZPE=False,
                  raise_error=True, raise_warning=True, **kwargs):
@@ -624,11 +637,12 @@ class StatMech(_ModelBase):
             E : float
                 Electronic energy
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_EoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning,
-                             include_ZPE=include_ZPE, **kwargs) \
-            * T*c.R('{}/K'.format(units))
-
+                             include_ZPE=include_ZPE, **kwargs)*T*R_adj
+                             
     def get_UoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  use_references=True, **kwargs):
         """Dimensionless internal energy
@@ -699,10 +713,11 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_UoRT(verbose=verbose, T=T, raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             use_references=use_references, **kwargs)*T*R_adj
 
     def get_HoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  use_references=True, **kwargs):
@@ -774,10 +789,11 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_HoRT(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, T=T,
-                             use_references=use_references, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             use_references=use_references, **kwargs)*T*R_adj
 
     def get_SoR(self, verbose=False, raise_error=True, raise_warning=True,
                 use_references=True, **kwargs):
@@ -846,9 +862,10 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_SoR(verbose=verbose, raise_error=raise_error,
                             raise_warning=raise_warning, 
-                            use_references=use_references, **kwargs)*c.R(units)
+                            use_references=use_references, **kwargs)*R_adj
 
     def get_FoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  use_references=True, **kwargs):
@@ -920,10 +937,11 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_FoRT(verbose=verbose, T=T, raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             use_references=use_references, **kwargs)*T*R_adj
 
     def get_GoRT(self, verbose=False, raise_error=True, raise_warning=True,
                  use_references=True, **kwargs):
@@ -993,10 +1011,11 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_GoRT(verbose=verbose, raise_error=raise_error,
                              raise_warning=raise_warning, T=T,
-                             use_references=use_references, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             use_references=use_references, **kwargs)*T*R_adj
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -1063,7 +1082,7 @@ class StatMech(_ModelBase):
 
 presets = {
     'idealgas': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'trans_model': trans.FreeTrans,
         'n_degrees': 3,
         'vib_model': vib.HarmonicVib,
@@ -1074,18 +1093,18 @@ presets = {
         'optional': ('atoms')
         },
     'harmonic': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'vib_model': vib.HarmonicVib,
         'elec_model': elec.GroundStateElec,
         'required': ('vib_wavenumbers', 'potentialenergy', 'spin'),
     },
     'electronic': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'elec_model': elec.GroundStateElec,
         'required': ('potentialenergy', 'spin'),
     },
     'placeholder': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'trans_model': EmptyMode,
         'vib_model': EmptyMode,
         'elec_model': EmptyMode,
@@ -1094,7 +1113,7 @@ presets = {
         'required': (),
     },
     'constant': {
-        'statmech_model': StatMech,
+        'model': StatMech,
         'elec_model': ConstantMode,
         'optional': ('q', 'Cv', 'Cp', 'U', 'H', 'S', 'F', 'G')
     }

@@ -7,6 +7,7 @@ Reads reactions lists from Chemkin gas.inp and surf.inp files
 import re
 import numpy as np
 import datetime
+from warnings import warn
 from pmutt import constants as c
 from pmutt import pmutt_list_to_dict, _force_pass_arguments
 
@@ -245,6 +246,15 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
             act_unit=act_unit, float_format=float_format,
             column_delimiter=column_delimiter, T=T, sden_operation=None,
             **kwargs)
+    # Check length of lines
+    if any([(len(reaction_line) > 80) for reaction line in reaction_lines]):
+        warn_msg = ('Reaction lines exceed 80 character limit when writing '
+                    'gas.inp. This may cause errors when Chemkin reads this '
+                    'file. Consider passing a different float_format, '
+                    'column_delimiter, or expressing the reactions more '
+                    'succiently to pmutt.io.chemkin.write_gas.')
+        warn(warn_msg, UserWarning)
+
     # Collect all the lines into a list
     lines = [
         _get_filestamp(),
@@ -364,6 +374,15 @@ def write_surf(reactions, sden_operation='min',
                 act_unit=act_unit, float_format=float_format,
                 column_delimiter=column_delimiter, T=T,
                 sden_operation=sden_operation, **kwargs)
+
+    # Check length of lines
+    if any([(len(reaction_line) > 80) for reaction line in reaction_lines]):
+        warn_msg = ('Reaction lines exceed 80 character limit when writing '
+                    'surf.inp. This may cause errors when Chemkin reads this '
+                    'file. Consider passing a different float_format, '
+                    'column_delimiter, or expressing the reactions more '
+                    'succiently to pmutt.io.chemkin.write_surf.')
+        warn(warn_msg, UserWarning)
 
     # Preparing reaction line header
     mw_field = '{:<5}'
@@ -605,8 +624,8 @@ def _get_specie_str(specie, include_phase):
         elif specie.cat_site is not None:
             phase = '/{}/'.format(specie.cat_site.name)
         else:
-            raise ValueError('Must specify phase or catalyst site to include '
-                             'phase')
+            err_msg = 'Must specify phase or catalyst site to include phase.'
+            raise ValueError(err_msg)
     else:
         phase = ''
     return "'{}{}'".format(specie.name, phase)

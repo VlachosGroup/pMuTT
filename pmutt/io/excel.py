@@ -9,8 +9,10 @@ import numpy as np
 import pandas as pd
 import os
 from ase.io import read
+from ase.build import molecule
 from pmutt import parse_formula
-from pmutt.statmech import presets, StatMech, trans, vib, rot, elec, nucl
+from pmutt.statmech import (presets, StatMech, trans, vib, rot, elec, nucl,
+    EmptyMode)
 from pmutt.io.vasp import set_vib_wavenumbers_from_outcar
 
 
@@ -139,8 +141,9 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                     thermo_data = set_nasa_a_high(header=col, value=cell_data,
                                                   output_structure=thermo_data)
                 else:
-                    raise NotImplementedError('Does not support {}'
-                                              .format(col))
+                    err_msg = ('Unrecognized argument for nasa column: {}'
+                               ''.format(col))
+                    raise NotImplementedError(err_msg)
             elif 'list' in col:
                 # Process column name
                 header = col.replace('list.', '')
@@ -212,9 +215,9 @@ def set_atoms(path, output_structure, excel_path=None):
     Parameters
     ----------
         path : str
-            Location to import atoms object. If relative references used,
-            the path should be relative to excel_path.
-            See ase.read for supported formats
+            Path to read the atoms object using `ase.read`_ or the string to
+            build the atoms object using `ase.build.molecule`_.
+            Path can be relative to the imported spreadsheet or absolute.
         excel_path : str
             Location where excel path is located
         output_structure : dict
@@ -223,17 +226,32 @@ def set_atoms(path, output_structure, excel_path=None):
     -------
         output_structure: dict
             output_structure with atoms added
+    Raises
+    ------
+        FileNotFoundError:
+            Raised if the `path` is not a valid file and not a supported string
+            by `ase.build.molecule`_.
+
+    .. _`ase.read`: https://wiki.fysik.dtu.dk/ase/ase/io/io.html#ase.io.read
+    .. _`ase.build.molecule`: https://wiki.fysik.dtu.dk/ase/ase/build/build.html#ase.build.molecule
     """
+    # Try reading the path as absolute path
     try:
         output_structure['atoms'] = read(path)
     except FileNotFoundError:
+        # Try reading the path as relative to excel sheet
         try:
             output_structure['atoms'] = read(os.path.join(excel_path, path))
         except FileNotFoundError:
-            print(path)
-            raise FileNotFoundError('If using relative references for atoms '
-                                    'files, use a path relative to the '
-                                    'spreadsheet imported.', path)
+            try:
+                output_structure['atoms'] = molecule(path)
+            except KeyError:
+                err_msg = ('Cannot create atoms object from {}. This value '
+                           'should be an absolute path, a relative path '
+                           '(relative to the inputted spreadsheet, or a '
+                           'molecule supported by ase.build.molecule.'
+                           ''.format(path))
+                raise FileNotFoundError(err_msg)
     return output_structure
 
 
@@ -256,11 +274,18 @@ def set_statmech_model(model, output_structure):
     model = model.lower()
     output_structure['statmech_model'] = StatMech
     try:
-        output_structure.update(presets[model])
+        # See if the model exists
+        presets[model]
     except KeyError:
-        raise ValueError('Unsupported thermodynamic model, {}. See docstring '
-                         'of presets in pmutt.statmech.presets for supported '
-                         'models.'.format(model))
+        err_msg = ('Unsupported thermodynamic model, {}. See docstring '
+                   'of presets in pmutt.statmech.presets for supported '
+                   'models.'.format(model))
+        raise ValueError(err_msg)
+    else:
+        # Assign keys that were not previously assigned
+        for key, val in presets[model].items():
+            if key not in output_structure:
+                output_structure[key] = val
     return output_structure
 
 def set_trans_model(model, output_structure):
@@ -281,9 +306,13 @@ def set_trans_model(model, output_structure):
     try:
         output_structure['trans_model'] = getattr(trans, model)
     except AttributeError:
-        raise ValueError('Unsupported translational model, {}. See docstring '
-                         'of presets in pmutt.statmech.trans for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['trans_model'] = EmptyMode
+        else:
+            err_msg = ('Unsupported translational model, {}. See '
+                       'pmutt.statmech.trans for supported models.'
+                       ''.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -305,9 +334,13 @@ def set_vib_model(model, output_structure):
     try:
         output_structure['vib_model'] = getattr(vib, model)
     except AttributeError:
-        raise ValueError('Unsupported vibrational model, {}. See docstring '
-                         'of presets in pmutt.statmech.vib for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['vib_model'] = EmptyMode
+        else:
+            err_msg = ('Unsupported vibrational model, {}. See docstring '
+                       'of presets in pmutt.statmech.vib for supported models.'
+                       ''.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -329,9 +362,12 @@ def set_rot_model(model, output_structure):
     try:
         output_structure['rot_model'] = getattr(rot, model)
     except AttributeError:
-        raise ValueError('Unsupported rotational model, {}. See docstring '
-                         'of presets in pmutt.statmech.rot for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['rot_model'] = EmptyMode
+        else:
+            err_msg = ('Unsupported rotational model, {}. See '
+                       'pmutt.statmech.rot for supported models.'.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -353,9 +389,12 @@ def set_elec_model(model, output_structure):
     try:
         output_structure['elec_model'] = getattr(elec, model)
     except AttributeError:
-        raise ValueError('Unsupported Electronic model, {}. See docstring '
-                         'of presets in pmutt.statmech.elec for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['elec_model'] = EmptyMode
+        else:
+            err_msg = ('Unsupported electronic model, {}. See '
+                       'pmutt.statmech.elec for supported models.'format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
@@ -377,9 +416,12 @@ def set_nucl_model(model, output_structure):
     try:
         output_structure['nucl_model'] = getattr(elec, model)
     except AttributeError:
-        raise ValueError('Unsupported Nuclear model, {}. See docstring '
-                         'of presets in pmutt.statmech.nucl for supported '
-                         'models.'.format(model))
+        if model.lower() == 'emptymode':
+            output_structure['nucl_model'] = EmptyMode
+        else:
+            err_msg = ('Unsupported nuclear model, {}. See pmutt.statmech.nucl '
+                       'for supported models.'.format(model))
+            raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure
 
