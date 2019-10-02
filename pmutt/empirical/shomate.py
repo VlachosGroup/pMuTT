@@ -88,7 +88,7 @@ class Shomate(EmpiricalBase):
                                          default_value=0.,
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
-        CpoR += CpoR_mix
+        CpoR = CpoR + CpoR_mix
         if len(T) == 1:
             CpoR = CpoR.item(0)
         return CpoR
@@ -162,7 +162,7 @@ class Shomate(EmpiricalBase):
                                          default_value=0.,
                                          T=T_i, **kwargs)
         # Add mixing quantity in appropriate format
-        HoRT += HoRT_mix
+        HoRT = HoRT + HoRT_mix
         if len(T) == 1:
             HoRT = HoRT.item(0)
         return HoRT
@@ -236,7 +236,7 @@ class Shomate(EmpiricalBase):
                                         raise_warning=raise_warning,
                                         default_value=0.,
                                         T=T_i, **kwargs)
-        SoR += SoR_mix
+        SoR = SoR + SoR_mix
         # If only one T specified, converted from (1,) numpy array to float
         if len(T) == 1:
             SoR = SoR.item(0)
