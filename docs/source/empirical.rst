@@ -46,3 +46,10 @@ References
    
 .. autoclass:: pmutt.empirical.references.References
    :members:
+
+
+Misc.
+#####
+
+.. autoclass:: pmutt.empirical.GasPressureAdj
+   :members:

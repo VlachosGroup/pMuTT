@@ -26,7 +26,7 @@ author = 'Vlachos Research Group'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.12'
+release = '1.2.13'
 
 
 # -- General configuration ---------------------------------------------------
@@ -184,5 +184,5 @@ imgmath_image_format = 'svg'
 imgmath_font_size = 18
 
 # Logo
-html_logo = './logos/Screen/pmutt_inverse_icon.png'
-html_favicon = './logos/Screen/p_icon.ico'
+html_logo = './logos/pmutt_inverse_icon.png'
+html_favicon = './logos/p_icon.ico'

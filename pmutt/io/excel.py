@@ -393,7 +393,8 @@ def set_elec_model(model, output_structure):
             output_structure['elec_model'] = EmptyMode
         else:
             err_msg = ('Unsupported electronic model, {}. See '
-                       'pmutt.statmech.elec for supported models.'format(model))
+                       'pmutt.statmech.elec for supported models.'
+                       ''.format(model))
             raise ValueError(err_msg)
     output_structure['statmech_model'] = StatMech
     return output_structure

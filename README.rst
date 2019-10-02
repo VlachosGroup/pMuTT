@@ -9,9 +9,8 @@ thermodynamic properties such as heat capacity, enthalpy, entropy, and
 Gibbs energy. These properties can be fit to empirical equations and
 written to different formats. 
 
-.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo.png
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png
    :target: https://vlachosgroup.github.io/pMuTT/
-   :height: 250
    :align: center
 
 Documentation
@@ -69,7 +68,7 @@ Contributing
 ------------
 
 If you have a suggestion or find a bug, please post to our `Issues page`_ with 
-the ``enhancement`` or ``bug`` tag respectively.
+the |enhancement_label| or |bug_label| tag respectively.
 
 Finally, if you would like to add to the body of code, please:
 
@@ -82,7 +81,7 @@ Questions
 ---------
 
 If you are having issues, please post to our `Issues page`_ with the 
-``help wanted`` or ``question`` tag. We will do our best to assist.
+|help_wanted_label| or |question_label| tag. We will do our best to assist.
 
 Funding
 -------
@@ -97,6 +96,23 @@ Special Thanks
 -  Dr. Jeffrey Frey (pip and conda compatibility)
 -  Jaynell Keely (Logo design)
 
+
+.. |bug_label| image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/bug_small.png
+   :height: 20
+   :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Abug
+
+.. |enhancement_label| image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/enhancement_small.png
+   :height: 20
+   :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Aenhancement
+
+.. |help_wanted_label| image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/help_wanted_small.png
+   :height: 20
+   :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3A%22help%20wanted%22
+
+.. |question_label| image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/question_small.png
+   :height: 20
+   :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Aquestion
+
 .. _`documentation page`: https://vlachosgroup.github.io/pMuTT/
 .. _Atomic Simulation Environment: https://wiki.fysik.dtu.dk/ase/
 .. _Numpy: http://www.numpy.org/
@@ -104,7 +120,7 @@ Special Thanks
 .. _xlrd: https://xlrd.readthedocs.io/en/latest/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
-.. _pyGal: http://pygal.org/en/stable/
+.. _pyGal: http://www.pygal.org/en/stable/
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
