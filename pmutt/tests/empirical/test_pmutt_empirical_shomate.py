@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from ase.build import molecule
 from pmutt import constants as c
+from pmutt import get_molecular_weight
 from pmutt.statmech import StatMech, trans, rot, vib, elec
 from pmutt.empirical.shomate import Shomate
 
@@ -80,6 +81,7 @@ class TestShomate(unittest.TestCase):
             T_low=500.,
             T_high=1700.
         )
+        self.mw = get_molecular_weight({'H': 2, 'O': 1}) # g/mol
 
     def test_get_CpoR(self):
         T = np.array([500., 525., 550., 575., 600., 625., 650., 675., 700.,
@@ -140,6 +142,12 @@ class TestShomate(unittest.TestCase):
         np.testing.assert_array_almost_equal(
                 self.Shomate_direct.get_Cp(T=T, units='J/mol/K'),
                 Cp_expected)
+        np.testing.assert_almost_equal(
+                self.Shomate_direct.get_Cp(T=T[0], units='J/g/K'),
+                Cp_expected[0]/self.mw)
+        np.testing.assert_array_almost_equal(
+                self.Shomate_direct.get_Cp(T=T, units='J/g/K'),
+                Cp_expected/self.mw)
 
     def test_get_HoRT(self):
         T = np.array([500., 525., 550., 575., 600., 625., 650., 675., 700.,
@@ -200,6 +208,12 @@ class TestShomate(unittest.TestCase):
         np.testing.assert_array_almost_equal(
                 self.Shomate_direct.get_H(T=T, units='J/mol'),
                 H_expected, decimal=4)
+        np.testing.assert_almost_equal(
+                self.Shomate_direct.get_H(T=T[0], units='J/g'),
+                H_expected[0]/self.mw, decimal=4)
+        np.testing.assert_array_almost_equal(
+                self.Shomate_direct.get_H(T=T, units='J/g'),
+                H_expected/self.mw, decimal=4)
 
     def test_get_SoR(self):
         T = np.array([500., 525., 550., 575., 600., 625., 650., 675., 700.,
@@ -260,6 +274,12 @@ class TestShomate(unittest.TestCase):
         np.testing.assert_array_almost_equal(
                 self.Shomate_direct.get_S(T=T, units='J/mol/K'),
                 S_expected)
+        np.testing.assert_almost_equal(
+                self.Shomate_direct.get_S(T=T[0], units='J/g/K'),
+                S_expected[0]/self.mw)
+        np.testing.assert_array_almost_equal(
+                self.Shomate_direct.get_S(T=T, units='J/g/K'),
+                S_expected/self.mw)
 
     def test_get_GoRT(self):
         T = np.array([500., 525., 550., 575., 600., 625., 650., 675., 700.,
@@ -320,6 +340,12 @@ class TestShomate(unittest.TestCase):
         np.testing.assert_array_almost_equal(
                 self.Shomate_direct.get_G(T=T, units='J/mol'),
                 G_expected, decimal=4)
+        np.testing.assert_almost_equal(
+                self.Shomate_direct.get_G(T=T[0], units='J/g'),
+                G_expected[0]/self.mw, decimal=4)
+        np.testing.assert_array_almost_equal(
+                self.Shomate_direct.get_G(T=T, units='J/g'),
+                G_expected/self.mw, decimal=4)
 
     def test_to_dict(self):
         self.maxDiff = None

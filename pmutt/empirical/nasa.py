@@ -11,7 +11,8 @@ from warnings import warn
 import numpy as np
 from scipy.optimize import minimize_scalar, minimize, LinearConstraint, Bounds
 from scipy.stats import variation
-from pmutt import _is_iterable, _pass_expected_arguments, _apply_numpy_operation
+from pmutt import (_is_iterable, _pass_expected_arguments, 
+                   _apply_numpy_operation, _get_R_adj)
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.io.cantera import obj_to_CTI
@@ -172,7 +173,8 @@ class Nasa(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_CpoR(T=T)*c.R(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+        return self.get_CpoR(T=T)*R_adj
 
     def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
@@ -245,9 +247,10 @@ class Nasa(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_HoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+                             raise_warning=raise_warning, **kwargs)*T*R_adj
 
     def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
@@ -320,8 +323,9 @@ class Nasa(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_SoR(T=T, raise_error=raise_error,
-                            raise_warning=raise_warning, **kwargs)*c.R(units)
+                            raise_warning=raise_warning, **kwargs)*R_adj
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
@@ -378,9 +382,10 @@ class Nasa(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_GoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             raise_warning=raise_warning, **kwargs)*T*R_adj
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
@@ -824,7 +829,8 @@ class Nasa9(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_CpoR(T=T)*c.R(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+        return self.get_CpoR(T=T)*R_adj
 
     def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
@@ -900,9 +906,10 @@ class Nasa9(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_HoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
-               *T*c.R('{}/K'.format(units))
+                             raise_warning=raise_warning, **kwargs)*T*R_adj
 
     def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
@@ -978,8 +985,9 @@ class Nasa9(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_SoR(T=T, raise_error=raise_error,
-                            raise_warning=raise_warning, **kwargs)*c.R(units)
+                            raise_warning=raise_warning, **kwargs)*R_adj
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
@@ -1036,9 +1044,10 @@ class Nasa9(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
         return self.get_GoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs) \
-            * T*c.R('{}/K'.format(units))
+                             raise_warning=raise_warning, **kwargs)*T*R_adj
 
     @classmethod
     def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,

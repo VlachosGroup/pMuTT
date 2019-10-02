@@ -35,7 +35,7 @@ H2O_ref = Reference(name='H2O', elements={'H': 2, 'O': 1},
 
 refs = References(references=[H2_ref, H2O_ref])
 
-H2O_statmech = StatMech(name='H2O', elements={'H': 2, 'O': 1}, phase='G',
+H2O_statmech = StatMech(name='H2O', phase='G',
                         atoms=molecule('H2O'), potentialenergy=-14.2209,
                         symmetrynumber=2, spin=0, references=refs,
                         vib_wavenumbers=[3825.434, 3710.264, 1582.432],

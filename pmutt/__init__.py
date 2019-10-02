@@ -111,7 +111,8 @@ class _ModelBase(_pmuttBase):
             Cp : float
                 Heat capacity (constant P) in appropriate units
         """
-        return _force_pass_arguments(self.get_CpoR, **kwargs)*c.R(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+        return _force_pass_arguments(self.get_CpoR, **kwargs)*R_adj
 
     def get_U(self, units, T=c.T0('K'), **kwargs):
         """Calculate the internal energy
@@ -130,10 +131,12 @@ class _ModelBase(_pmuttBase):
             U : float
                 Internal energy in appropriate units
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+
         UoRT_kwargs = kwargs.copy()
         UoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_UoRT, **UoRT_kwargs) \
-               *T*c.R('{}/K'.format(units))
+        return _force_pass_arguments(self.get_UoRT, **UoRT_kwargs)*T*R_adj
 
     def get_H(self, units, T=c.T0('K'), **kwargs):
         """Calculate the enthalpy
@@ -152,10 +155,12 @@ class _ModelBase(_pmuttBase):
             H : float
                 Enthalpy in appropriate units
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+
         HoRT_kwargs = kwargs.copy()
         HoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_HoRT, **HoRT_kwargs) \
-               *T*c.R('{}/K'.format(units))
+        return _force_pass_arguments(self.get_HoRT, **HoRT_kwargs)*T*R_adj
 
     def get_S(self, units, **kwargs):
         """Calculate the entropy
@@ -172,7 +177,8 @@ class _ModelBase(_pmuttBase):
             S : float
                 Entropy in appropriate units
         """
-        return _force_pass_arguments(self.get_SoR, **kwargs)*c.R(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+        return _force_pass_arguments(self.get_SoR, **kwargs)*R_adj
 
     def get_FoRT(self, **kwargs):
         """Calculates the dimensionless Helmholtz energy
@@ -207,10 +213,12 @@ class _ModelBase(_pmuttBase):
             F : float
                 Hemholtz energy in appropriate units
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+
         FoRT_kwargs = kwargs.copy()
         FoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_FoRT, **FoRT_kwargs) \
-               *T*c.R('{}/K'.format(units))
+        return _force_pass_arguments(self.get_FoRT, **FoRT_kwargs)*T*R_adj
 
     def get_GoRT(self, **kwargs):
         """Calculates the dimensionless Gibbs free energy
@@ -245,10 +253,12 @@ class _ModelBase(_pmuttBase):
             G : float
                 Gibbs energy in appropriate units
         """
+        units = '{}/K'.format(units)
+        R_adj = _get_R_adj(units=units, elements=self.elements)
+
         GoRT_kwargs = kwargs.copy()
         GoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_GoRT, **GoRT_kwargs) \
-               *T*c.R('{}/K'.format(units))
+        return _force_pass_arguments(self.get_GoRT, **GoRT_kwargs)*T*R_adj
 
 def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
             viewer='matplotlib', figure=None, ax=None, **kwargs):
@@ -757,3 +767,63 @@ def format_conditions(**kwargs):
             except (IndexError, KeyError):
                 conditions.append({cond_name: cond_value})
     return conditions
+
+def _get_mass_unit(units):
+    """Determine the mass units present
+    
+    Parameters
+    ----------
+        units : str
+            Units as string. Units are delimited by '/'
+    Returns
+    -------
+        mass_units : str
+            Mass units    
+    """
+    units_sep = units.split('/')
+    for unit in units_sep:
+        try:
+            unit_type = c.type_dict[unit]
+        except KeyError:
+            pass
+        else:
+            if unit_type == 'mass':
+                return unit
+    return None
+
+def _get_R_adj(units, elements):
+    """Get adjustment to mass when converting from mol to g
+    
+    Parameters
+    ----------
+        units : str
+            Units as string. Units are delimited by '/'
+        elements : dict
+            Composition of the species. Default is None.
+            Keys of dictionary are elements, values are stoichiometric values
+            in a formula unit.
+            e.g. CH3OH can be represented as:
+            {'C': 1, 'H': 4, 'O': 1,}.
+    Returns
+    -------
+        R_adj : float
+            Adjustment to the mass. If no mass units are found, returns R in
+            appropriate units.
+    """
+    mass_unit = _get_mass_unit(units)
+    
+    # If no mass unit is found, return R in appropriate units
+    if mass_unit is None:
+        return c.R(units)
+    # If elements were not provided, throw error
+    if elements is None:
+        err_msg = ('To calculate thermodynamic quantities on per mass basis, '
+                   'the species object must have a dictionary assigned to '
+                   'elements.')
+        raise AttributeError(err_msg)
+
+    mol_weight = get_molecular_weight(elements) # g/mol
+    mol_units = units.replace('/{}'.format(mass_unit), '/mol')
+    R_adj = c.R(mol_units)/c.convert_unit(num=mol_weight, initial='g',
+                                          final=mass_unit)
+    return R_adj
