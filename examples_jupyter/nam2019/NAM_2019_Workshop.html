@@ -856,8 +856,9 @@ polynomials</a>
 and <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/empirical.html#shomate">Shomate
 polynomials</a>.
 They can be initialized in three ways: - passing in the polynomials
-directly - from a statistical mechanical model (<code class="docutils literal notranslate"><span class="pre">from_statmech</span></code>) -
-from heat capacity, enthalpy and entropy data (<code class="docutils literal notranslate"><span class="pre">from_data</span></code>)</p>
+directly - from a model (e.g. <code class="docutils literal notranslate"><span class="pre">StatMech</span></code>, <code class="docutils literal notranslate"><span class="pre">Shomate</span></code>)
+(<code class="docutils literal notranslate"><span class="pre">from_model</span></code>) - from heat capacity, enthalpy and entropy data
+(<code class="docutils literal notranslate"><span class="pre">from_data</span></code>)</p>
 <div class="section" id="8.1.-Inputting-a-NASA-polynomial-directly">
 <h2>8.1. Inputting a NASA polynomial directly<a class="headerlink" href="#8.1.-Inputting-a-NASA-polynomial-directly" title="Permalink to this headline">¶</a></h2>
 <p>The H2 NASA polynomial from the <a class="reference external" href="http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat">Burcat
@@ -927,17 +928,17 @@ H_H2(T=298 K) = -0.0010337769809016294 kcal/mol
 <div class="section" id="8.2.-Fitting-an-empirical-object-to-a-StatMech-object">
 <h2>8.2. Fitting an empirical object to a StatMech object<a class="headerlink" href="#8.2.-Fitting-an-empirical-object-to-a-StatMech-object" title="Permalink to this headline">¶</a></h2>
 <p>Empirical objects can be made directly using <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects and
-the <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method.</p>
+the <code class="docutils literal notranslate"><span class="pre">from_model</span></code> method.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">H2_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span>
-                             <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span>
-                             <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
-                             <span class="n">statmech_model</span><span class="o">=</span><span class="n">H2_statmech</span><span class="p">)</span>
+<span></span><span class="n">H2_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;H2&#39;</span><span class="p">,</span>
+                          <span class="n">T_low</span><span class="o">=</span><span class="mf">200.</span><span class="p">,</span>
+                          <span class="n">T_high</span><span class="o">=</span><span class="mf">3500.</span><span class="p">,</span>
+                          <span class="n">model</span><span class="o">=</span><span class="n">H2_statmech</span><span class="p">)</span>
 
 <span class="c1"># Compare the statistical mechanical model to the empirical model</span>
 <span class="n">f3</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">H2_nasa</span><span class="o">.</span><span class="n">plot_statmech_and_empirical</span><span class="p">(</span><span class="n">Cp_units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">,</span>
@@ -1006,6 +1007,7 @@ creating a series of NASA polynomials.</p>
 [{&#39;atoms&#39;: Atoms(symbols=&#39;N2&#39;, pbc=True, cell=[20.0, 20.0, 21.12998]),
   &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 2},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;N2&#39;,
   &#39;optional&#39;: &#39;atoms&#39;,
@@ -1027,6 +1029,7 @@ creating a series of NASA polynomials.</p>
  {&#39;atoms&#39;: Atoms(symbols=&#39;NH3&#39;, pbc=True, cell=[21.627662, 21.409596, 20.388297]),
   &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 3, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;NH3&#39;,
   &#39;optional&#39;: &#39;atoms&#39;,
@@ -1048,6 +1051,7 @@ creating a series of NASA polynomials.</p>
  {&#39;atoms&#39;: Atoms(symbols=&#39;H2&#39;, pbc=True, cell=[20.0, 20.0, 20.737166]),
   &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 2, &#39;N&#39;: 0},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;H2&#39;,
   &#39;optional&#39;: &#39;atoms&#39;,
@@ -1068,6 +1072,7 @@ creating a series of NASA polynomials.</p>
   &#39;vib_wavenumbers&#39;: [4342.0]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 2},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;N2(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -17.239999999999952,
@@ -1077,6 +1082,7 @@ creating a series of NASA polynomials.</p>
   &#39;vib_wavenumbers&#39;: [2197.19, 360.415, 347.343, 335.674, 62.076, 32.1794]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;N(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -9.339999999999975,
@@ -1086,6 +1092,7 @@ creating a series of NASA polynomials.</p>
   &#39;vib_wavenumbers&#39;: [549.105, 538.56, 504.323, 475.805, 459.081, 410.018]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 1, &#39;N&#39;: 0},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;H(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -4.0,
@@ -1095,6 +1102,7 @@ creating a series of NASA polynomials.</p>
   &#39;vib_wavenumbers&#39;: [1003.51, 625.55, 616.29]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 3, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;NH3(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -20.42999999999995,
@@ -1115,6 +1123,7 @@ creating a series of NASA polynomials.</p>
                       70.625115]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 2, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;NH2(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -16.589999999999975,
@@ -1132,6 +1141,7 @@ creating a series of NASA polynomials.</p>
                       153.250139]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 1, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;NH(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -13.20999999999998,
@@ -1146,6 +1156,7 @@ creating a series of NASA polynomials.</p>
                       410.130797]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 3, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;TS1_NH3(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -19.23999999999995,
@@ -1165,6 +1176,7 @@ creating a series of NASA polynomials.</p>
                       142.135856]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 2, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;TS2_NH2(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -15.869999999999974,
@@ -1181,6 +1193,7 @@ creating a series of NASA polynomials.</p>
                       290.278005]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 1, &#39;N&#39;: 1},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;TS3_NH(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -11.92999999999998,
@@ -1194,6 +1207,7 @@ creating a series of NASA polynomials.</p>
                       242.138726]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 2},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;TS4_N2(S)&#39;,
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -14.669999999999952,
@@ -1203,6 +1217,7 @@ creating a series of NASA polynomials.</p>
   &#39;vib_wavenumbers&#39;: [485.614, 392.977, 386.186, 280.943, 168.431]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 0},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;RU(S)&#39;,
   &#39;nucl_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -1213,6 +1228,7 @@ creating a series of NASA polynomials.</p>
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
   &#39;elements&#39;: {&#39;H&#39;: 0, &#39;N&#39;: 0},
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;name&#39;: &#39;RU(B)&#39;,
   &#39;nucl_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
   &#39;phase&#39;: &#39;S&#39;,
@@ -1232,9 +1248,9 @@ creating a series of NASA polynomials.</p>
 <span></span><span class="c1"># Create NASA polynomials using **kwargs syntax</span>
 <span class="n">nasa_species</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">species_data</span> <span class="ow">in</span> <span class="n">ab_initio_data</span><span class="p">:</span>
-    <span class="n">single_nasa_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span>
-                                             <span class="n">T_high</span><span class="o">=</span><span class="mf">1500.</span><span class="p">,</span>
-                                             <span class="o">**</span><span class="n">species_data</span><span class="p">)</span>
+    <span class="n">single_nasa_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span>
+                                          <span class="n">T_high</span><span class="o">=</span><span class="mf">1500.</span><span class="p">,</span>
+                                          <span class="o">**</span><span class="n">species_data</span><span class="p">)</span>
     <span class="n">nasa_species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_nasa_species</span><span class="p">)</span>
 
 <span class="c1"># Print out a table using enthalpy, entropy, Gibbs energy at 298 K for each species</span>
@@ -1256,19 +1272,19 @@ creating a series of NASA polynomials.</p>
 <div class="highlight"><pre>
 Name         Enthalpy (kcal/mol)   Entropy (cal/mol/K)   Gibbs energy (kcal/mol)
 --------------------------------------------------------------------------------
-N2                     -377.5                  45.9                -391.2
-NH3                    -426.6                  46.0                -440.3
-H2                     -147.8                  31.1                -157.1
-N2(S)                  -391.1                  13.6                -395.1
-N(S)                   -210.3                   4.2                -211.5
-H(S)                    -88.8                   0.9                 -89.1
-NH3(S)                 -445.8                  13.3                -449.8
-NH2(S)                 -365.5                   5.9                -367.2
-NH(S)                  -295.2                   3.0                -296.0
-TS1_NH3(S)             -423.0                   8.3                -425.5
-TS2_NH2(S)             -353.7                   4.5                -355.0
-TS3_NH(S)              -270.3                   4.2                -271.5
-TS4_N2(S)              -334.6                   6.7                -336.6
+N2                     -374.0                  52.9                -389.7
+NH3                    -426.1                  46.7                -440.0
+H2                     -144.3                  38.0                -155.7
+N2(S)                  -392.5                  11.5                -396.0
+N(S)                   -224.0                 -15.2                -219.5
+H(S)                    -90.4                  -1.2                 -90.0
+NH3(S)                 -445.8                  13.4                -449.8
+NH2(S)                 -367.7                   2.8                -368.5
+NH(S)                  -300.3                  -4.3                -299.1
+TS1_NH3(S)             -421.1                  10.9                -424.4
+TS2_NH2(S)             -355.6                   1.9                -356.1
+TS3_NH(S)              -274.4                  -1.7                -274.0
+TS4_N2(S)              -336.0                   4.8                -337.4
 RU(S)                     0.0                   0.0                   0.0
 RU(B)                     0.0                   0.0                   0.0
 </pre></div></div>
@@ -1575,8 +1591,8 @@ G_H2O(T = 500 K, P = 2 bar) = -7.060978619777942 eV
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-H_rxn = -8.5 kcal/mol
-Ea_fwd = 22.8 kcal/mol
+H_rxn = -12.3 kcal/mol
+Ea_fwd = 24.6 kcal/mol
 </pre></div></div>
 </div>
 </div>

@@ -2232,7 +2232,7 @@ and read the <code class="docutils literal notranslate"><span class="pre">refs</
 <span class="n">species_phases</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">ind_species_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">:</span>
     <span class="c1"># Initialize NASA from statistical mechanical data</span>
-    <span class="n">ind_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="n">T_high</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">,</span> <span class="o">**</span><span class="n">ind_species_data</span><span class="p">)</span>
+    <span class="n">ind_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="n">T_high</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">,</span> <span class="o">**</span><span class="n">ind_species_data</span><span class="p">)</span>
     <span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ind_species</span><span class="p">)</span>
 
     <span class="c1"># Group the species by phase for later use</span>
@@ -2248,7 +2248,7 @@ and read the <code class="docutils literal notranslate"><span class="pre">refs</
 </div>
 <div class="stderr output_area docutils container">
 <div class="highlight"><pre>
-C:\Users\jonat\AppData\Roaming\Python\Python37\site-packages\scipy-1.3.0-py3.7-win-amd64.egg\scipy\stats\stats.py:1040: RuntimeWarning: invalid value encountered in double_scalars
+C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
   return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>

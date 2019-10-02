@@ -364,7 +364,7 @@ in the documentation for supported units.</p>
 <div class="section" id="Overview-of-pMuTT’s-Core-Functionality">
 <h2>Overview of pMuTT’s Core Functionality<a class="headerlink" href="#Overview-of-pMuTT’s-Core-Functionality" title="Permalink to this headline">¶</a></h2>
 <p>Originally written for Version 1.2.1</p>
-<p>Last Updated for Version 1.2.8</p>
+<p>Last Updated for Version 1.2.13</p>
 </div>
 </div>
 <div class="section" id="Topics-Covered">
@@ -543,6 +543,7 @@ convert_unit(num=None, initial=None, final=None)
     Unit      Description
     ========= =================
     molecule  Molecules
+    molec     Molecules
     mol       Moles
     ========= =================
 
@@ -727,6 +728,7 @@ instead.</p>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
+ &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
  &#39;n_degrees&#39;: 3,
  &#39;optional&#39;: &#39;atoms&#39;,
  &#39;required&#39;: (&#39;molecular_weight&#39;,
@@ -737,7 +739,6 @@ instead.</p>
               &#39;rot_temperatures&#39;,
               &#39;symmetrynumber&#39;),
  &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
- &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
  &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
  &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;}
 </pre></div></div>
@@ -839,12 +840,12 @@ created earlier.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
-<span class="n">butane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;butane&#39;</span><span class="p">,</span>
-                                 <span class="n">statmech_model</span><span class="o">=</span><span class="n">butane_statmech</span><span class="p">,</span>
-                                 <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
-                                 <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
-                                 <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
-                                 <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
+<span class="n">butane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;butane&#39;</span><span class="p">,</span>
+                              <span class="n">model</span><span class="o">=</span><span class="n">butane_statmech</span><span class="p">,</span>
+                              <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
+                              <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
+                              <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+                              <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
 
 <span class="n">H_nasa</span> <span class="o">=</span> <span class="n">butane_nasa</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
 <span class="n">S_nasa</span> <span class="o">=</span> <span class="n">butane_nasa</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
@@ -1034,12 +1035,12 @@ produces a value closer to the one listed above.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">butane_nasa_ref</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;butane&#39;</span><span class="p">,</span>
-                                     <span class="n">statmech_model</span><span class="o">=</span><span class="n">butane_statmech</span><span class="p">,</span>
-                                     <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
-                                     <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
-                                     <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
-                                     <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
+<span></span><span class="n">butane_nasa_ref</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;butane&#39;</span><span class="p">,</span>
+                                  <span class="n">model</span><span class="o">=</span><span class="n">butane_statmech</span><span class="p">,</span>
+                                  <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
+                                  <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
+                                  <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+                                  <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
 <span class="n">H_nasa_ref</span> <span class="o">=</span> <span class="n">butane_nasa_ref</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
 <span class="n">S_nasa_ref</span> <span class="o">=</span> <span class="n">butane_nasa_ref</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H_butane(T=298) = </span><span class="si">{:.1f}</span><span class="s1"> kJ/mol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">H_nasa_ref</span><span class="p">))</span>
@@ -1099,6 +1100,7 @@ special rules that depend on the header name.</p>
   &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 2, &#39;H&#39;: 6},
   &#39;geometry&#39;: &#39;nonlinear&#39;,
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;ethane&#39;,
   &#39;optional&#39;: &#39;atoms&#39;,
@@ -1140,6 +1142,7 @@ special rules that depend on the header name.</p>
   &#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 3, &#39;H&#39;: 8},
   &#39;geometry&#39;: &#39;nonlinear&#39;,
+  &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;n_degrees&#39;: 3,
   &#39;name&#39;: &#39;propane&#39;,
   &#39;optional&#39;: &#39;atoms&#39;,
@@ -1221,10 +1224,10 @@ special rules that depend on the header name.</p>
 <span class="n">butane_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">,</span> <span class="s1">&#39;butane.xlsx&#39;</span><span class="p">)</span>
 <span class="n">butane_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">butane_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># [0] accesses the butane data</span>
 
-<span class="n">butane_excel</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
-                                  <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
-                                  <span class="n">references</span><span class="o">=</span><span class="n">refs_excel</span><span class="p">,</span>
-                                  <span class="o">**</span><span class="n">butane_data</span><span class="p">)</span>
+<span class="n">butane_excel</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
+                               <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
+                               <span class="n">references</span><span class="o">=</span><span class="n">refs_excel</span><span class="p">,</span>
+                               <span class="o">**</span><span class="n">butane_data</span><span class="p">)</span>
 
 <span class="n">H_excel</span> <span class="o">=</span> <span class="n">butane_excel</span><span class="o">.</span><span class="n">get_H</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;kJ/mol&#39;</span><span class="p">)</span>
 <span class="n">S_excel</span> <span class="o">=</span> <span class="n">butane_excel</span><span class="o">.</span><span class="n">get_S</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;J/mol/K&#39;</span><span class="p">)</span>
@@ -1255,20 +1258,20 @@ can write a list of <code class="docutils literal notranslate"><span class="pre"
 <span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
 <span class="c1"># Make Nasa objects from previously defined ethane and propane</span>
-<span class="n">ethane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ethane&#39;</span><span class="p">,</span>
-                                 <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
-                                 <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
-                                 <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
-                                 <span class="n">statmech_model</span><span class="o">=</span><span class="n">ethane_ref</span><span class="o">.</span><span class="n">statmech_model</span><span class="p">,</span>
-                                 <span class="n">elements</span><span class="o">=</span><span class="n">ethane_ref</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
-                                 <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
-<span class="n">propane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_statmech</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;propane&#39;</span><span class="p">,</span>
-                                  <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
-                                  <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
-                                  <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
-                                  <span class="n">statmech_model</span><span class="o">=</span><span class="n">propane_ref</span><span class="o">.</span><span class="n">statmech_model</span><span class="p">,</span>
-                                  <span class="n">elements</span><span class="o">=</span><span class="n">propane_ref</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
-                                  <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
+<span class="n">ethane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ethane&#39;</span><span class="p">,</span>
+                              <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+                              <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
+                              <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
+                              <span class="n">model</span><span class="o">=</span><span class="n">ethane_ref</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                              <span class="n">elements</span><span class="o">=</span><span class="n">ethane_ref</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+                              <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
+<span class="n">propane_nasa</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;propane&#39;</span><span class="p">,</span>
+                               <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+                               <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span>
+                               <span class="n">T_high</span><span class="o">=</span><span class="mf">800.</span><span class="p">,</span>
+                               <span class="n">model</span><span class="o">=</span><span class="n">propane_ref</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                               <span class="n">elements</span><span class="o">=</span><span class="n">propane_ref</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+                               <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
 <span class="n">nasa_species</span> <span class="o">=</span> <span class="p">[</span><span class="n">ethane_nasa</span><span class="p">,</span> <span class="n">propane_nasa</span><span class="p">,</span> <span class="n">butane_nasa</span><span class="p">]</span>
 
 <span class="c1"># Determine the output path and write the thermdat file</span>

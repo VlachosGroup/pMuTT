@@ -414,9 +414,9 @@ We will store the species in a dictionary for code clarity later on.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B7389B0&gt;,
- &#39;H2O&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B780630&gt;,
- &#39;O2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B94B38390&gt;}
+{&#39;H2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000025130C23940&gt;,
+ &#39;H2O&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000025130C23A20&gt;,
+ &#39;O2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x000002512A0FB208&gt;}
 </pre></div></div>
 </div>
 <p>To calculate transition state properties, we will need to represent the
@@ -454,10 +454,10 @@ parameter arbitrarily to give it a higher enthalpy.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B7389B0&gt;,
- &#39;H2O&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B780630&gt;,
- &#39;H2O_TS&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B9B780D30&gt;,
- &#39;O2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000029B94B38390&gt;}
+{&#39;H2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000025130C23940&gt;,
+ &#39;H2O&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000025130C23A20&gt;,
+ &#39;H2O_TS&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x0000025130C4E128&gt;,
+ &#39;O2&#39;: &lt;pmutt.empirical.nasa.Nasa object at 0x000002512A0FB208&gt;}
 </pre></div></div>
 </div>
 </div>
@@ -715,8 +715,12 @@ Activation Energy: 370.04 kJ/mol
    <span class="p">},</span>
    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;TPIS78&quot;</span><span class="p">,</span>
    <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+     <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.GasPressureAdj&#39;&gt;&quot;</span>
+    <span class="p">}</span>
+   <span class="p">],</span>
    <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="mf">2.34433112</span><span class="p">,</span>
     <span class="mf">0.00798052075</span><span class="p">,</span>
@@ -751,8 +755,12 @@ Activation Energy: 370.04 kJ/mol
    <span class="p">},</span>
    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;TPIS89&quot;</span><span class="p">,</span>
    <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+     <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.GasPressureAdj&#39;&gt;&quot;</span>
+    <span class="p">}</span>
+   <span class="p">],</span>
    <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="mf">3.78245636</span><span class="p">,</span>
     <span class="o">-</span><span class="mf">0.00299673416</span><span class="p">,</span>
@@ -794,8 +802,12 @@ Activation Energy: 370.04 kJ/mol
    <span class="p">},</span>
    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;L 8/89&quot;</span><span class="p">,</span>
    <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+     <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.GasPressureAdj&#39;&gt;&quot;</span>
+    <span class="p">}</span>
+   <span class="p">],</span>
    <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="mf">4.19864056</span><span class="p">,</span>
     <span class="o">-</span><span class="mf">0.0020364341</span><span class="p">,</span>
