@@ -19,8 +19,8 @@ equation:
 where M is the number of reference species, N is the number of elements, 
 H\ :sup:`expt`\  is the experimental standard enthalpies, 
 H\ :sup:`DFT`\  is the standard enthalpies calculated using DFT, 
-x is a matrix that describes the composition of the references (each row 
-represents a specie, each column represents an element), and θ is the 
+**x** is a matrix that describes the composition of the references (each row 
+represents a specie, each column represents an element), and **h** is the 
 correction for each element.
 
 The equation can be solved using a Least Squares approach. 

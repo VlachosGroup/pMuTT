@@ -209,8 +209,8 @@ equation:</p>
 <p>where M is the number of reference species, N is the number of elements,
 H<sup>expt</sup> is the experimental standard enthalpies,
 H<sup>DFT</sup> is the standard enthalpies calculated using DFT,
-x is a matrix that describes the composition of the references (each row
-represents a specie, each column represents an element), and θ is the
+<strong>x</strong> is a matrix that describes the composition of the references (each row
+represents a specie, each column represents an element), and <strong>h</strong> is the
 correction for each element.</p>
 <p>The equation can be solved using a Least Squares approach.
 The correction factor can then be added to subsequent species calculated
@@ -280,6 +280,10 @@ through DFT to ensure consistent references. Referencing is handled by the
     /* Sidebar header (and topbar for mobile) */
     .wy-side-nav-search, .wy-nav-top {
       background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
     }
   </style>
 
