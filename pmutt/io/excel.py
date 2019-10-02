@@ -86,6 +86,12 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         thermo_data = {}
         vib_set_by_outcar = False
         for col, cell_data in row_data.iteritems():
+            # Trim whitespaces from cell_data and col
+            if isinstance(cell_data, str):
+                cell_data = cell_data.strip()
+            if isinstance(col, str):
+                col = col.strip()
+
             # Special parsing instructions
             if pd.isnull(cell_data):
                 # Skip empty cells
