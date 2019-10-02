@@ -1,12 +1,12 @@
 {
- "class": "<class 'pMuTT.empirical.shomate.Shomate'>",
+ "class": "<class 'pmutt.empirical.shomate.Shomate'>",
  "type": "shomate",
  "name": "CH3OH",
  "phase": null,
  "elements": null,
  "notes": null,
  "smiles": null,
- "statmech_model": null,
+ "model": null,
  "misc_models": null,
  "a": [
   20.55906255664672,

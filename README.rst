@@ -120,7 +120,7 @@ Special Thanks
 .. _xlrd: https://xlrd.readthedocs.io/en/latest/
 .. _SciPy: https://www.scipy.org/
 .. _Matplotlib: https://matplotlib.org/
-.. _pyGal: http://pygal.org/en/stable/
+.. _pyGal: http://www.pygal.org/en/stable/
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
