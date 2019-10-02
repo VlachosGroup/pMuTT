@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Empirical Models &mdash; pmutt 1.2.12 documentation</title>
+  <title>Empirical Models &mdash; pmutt 1.2.13 documentation</title>
   
 
   
@@ -83,12 +83,17 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Empirical Models</a><ul>
@@ -98,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#shomate">Shomate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#misc">Misc.</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
@@ -107,9 +113,12 @@
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
             
@@ -200,7 +209,7 @@
 <p>This is the parent class for the empirical models.</p>
 <dl class="class">
 <dt id="pmutt.empirical.EmpiricalBase">
-<em class="property">class </em><code class="descclassname">pmutt.empirical.</code><code class="descname">EmpiricalBase</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>statmech_model=None</em>, <em>misc_models=None</em>, <em>smiles=None</em>, <em>notes=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pmutt.empirical.</code><code class="descname">EmpiricalBase</code><span class="sig-paren">(</span><em>name=None</em>, <em>phase=None</em>, <em>elements=None</em>, <em>model=None</em>, <em>misc_models=None</em>, <em>smiles=None</em>, <em>notes=None</em>, <em>add_gas_P_adj=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>The empirical parent class.
 Holds properties of a species, the statistical-mechanical thermodynamic
 model.</p>
@@ -253,16 +262,16 @@ e.g. CH3OH can be represented as:
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.empirical.EmpiricalBase.statmech_model">
-<code class="descname">statmech_model</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.statmech_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Statistical thermodynamic model. Default is None.
+<dt id="pmutt.empirical.EmpiricalBase.model">
+<code class="descname">model</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object which was used to fit the Nasa polynomial. Default is None.
 Object should have the following methods: <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>,
 <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">pmutt.statmech</span></code> object, optional</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">model object, optional</td>
 </tr>
 </tbody>
 </table>
@@ -312,6 +321,22 @@ computational set up. Default is None</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pmutt.empirical.EmpiricalBase.add_gas_P_adj">
+<code class="descname">add_gas_P_adj</code><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.add_gas_P_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, gas species (i.e. <cite>phase`=’gas’ or `phase`=’g’) will
+automatically be assigned :class:`~pmutt.empirical.GasPressureAdj</cite>.
+Default is True.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="pmutt.empirical.EmpiricalBase.compare_CpoR">
 <code class="descname">compare_CpoR</code><span class="sig-paren">(</span><em>T=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.EmpiricalBase.compare_CpoR" title="Permalink to this definition">¶</a></dt>
@@ -326,7 +351,7 @@ list of temperatures between self.T_low and self.T_high</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
 <li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
-<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_model</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of original model</li>
 <li><strong>CpoR_empirical</strong> (((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
 </ul>
 </td>
@@ -349,7 +374,7 @@ list of temperatures between self.T_low and self.T_high</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
 <li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
-<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_model</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of original model</li>
 <li><strong>CpoR_empirical</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
 </ul>
 </td>
@@ -372,7 +397,7 @@ list of temperatures between self.T_low and self.T_high</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
 <li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
-<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_model</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of original model</li>
 <li><strong>CpoR_empirical</strong> (((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
 </ul>
 </td>
@@ -395,7 +420,7 @@ list of temperatures between self.T_low and self.T_high</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
 <li><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Temperatures in K</li>
-<li><strong>CpoR_statmech</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of statistical thermodynamic model</li>
+<li><strong>CpoR_model</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of original model</li>
 <li><strong>CpoR_empirical</strong> (((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a> or float) – Dimensionless heat capacity of empirical model</li>
 </ul>
 </td>
@@ -741,23 +766,31 @@ and 6th highest value of T.</li>
 
 <dl class="classmethod">
 <dt id="pmutt.empirical.nasa.Nasa.from_model">
-<em class="property">classmethod </em><code class="descname">from_model</code><span class="sig-paren">(</span><em>name</em>, <em>model</em>, <em>T_low</em>, <em>T_high</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the NASA polynomials using statistical mechanic models</p>
+<em class="property">classmethod </em><code class="descname">from_model</code><span class="sig-paren">(</span><em>model</em>, <em>name=None</em>, <em>T_low=None</em>, <em>T_high=None</em>, <em>T_mid=None</em>, <em>elements=None</em>, <em>n_T=50</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the NASA polynomials using the model passed</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the species</li>
 <li><strong>model</strong> (<em>Model object</em><em> or </em><em>class</em>) – Model to generate data. Must contain the methods <cite>get_CpoR</cite>,
 <cite>get_HoRT</cite> and <cite>get_SoR</cite></li>
-<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Lower limit temerature in K</li>
-<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Higher limit temperature in K</li>
-<li><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Composition of the species.
-Keys of dictionary are elements, values are stoichiometric
-values in a formula unit.
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the species. If not passed, <cite>model.name</cite> will be used.</li>
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Lower limit temerature in K. If not passed, <cite>model.T_low</cite> will
+be used.</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Higher limit temperature in K. If not passed, <cite>model.T_high</cite>
+will be used.</li>
+<li><strong>T_mid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><em>iterable of float</em><em>, </em><em>optional</em>) – Guess for T_mid. If float, only uses that value for T_mid. If
+list, finds the best fit for each element in the list. If None,
+a range of T_mid values are screened between the 6th lowest
+and 6th highest value of T.</li>
+<li><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Composition of the species. If not passed, <cite>model.elements</cite>
+will be used. Keys of dictionary are elements, values are
+stoichiometric values in a formula unit.
 e.g. CH3OH can be represented as:
 {‘C’: 1, ‘H’: 4, ‘O’: 1,}.</li>
+<li><strong>n_T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of data points between <cite>T_low</cite> and <cite>T_high</cite> for fitting
+heat capacity. Default is 50.</li>
 <li><strong>kwargs</strong> (<em>keyword arguments</em>) – Used to initalize model if a class is passed.</li>
 </ul>
 </td>
@@ -775,7 +808,8 @@ e.g. CH3OH can be represented as:
 <dl class="classmethod">
 <dt id="pmutt.empirical.nasa.Nasa.from_statmech">
 <em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>T_mid=None</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_statmech" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the NASA polynomials using statistical mechanic models</p>
+<dd><p>Calculates the NASA polynomials using statistical mechanic models.
+Deprecated as of Version 1.2.13.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1795,9 +1829,47 @@ Inherits from <a class="reference internal" href="#pmutt.empirical.EmpiricalBase
 </dd></dl>
 
 <dl class="classmethod">
+<dt id="pmutt.empirical.shomate.Shomate.from_model">
+<em class="property">classmethod </em><code class="descname">from_model</code><span class="sig-paren">(</span><em>model</em>, <em>name=None</em>, <em>T_low=None</em>, <em>T_high=None</em>, <em>elements=None</em>, <em>n_T=50</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.from_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the NASA polynomials using the model passed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>Model object</em><em> or </em><em>class</em>) – Model to generate data. Must contain the methods <cite>get_CpoR</cite>,
+<cite>get_HoRT</cite> and <cite>get_SoR</cite></li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Name of the species. If not passed, <cite>model.name</cite> will be used.</li>
+<li><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Lower limit temerature in K. If not passed, <cite>model.T_low</cite> will
+be used.</li>
+<li><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Higher limit temperature in K. If not passed, <cite>model.T_high</cite>
+will be used.</li>
+<li><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) – Composition of the species. If not passed, <cite>model.elements</cite>
+will be used. Keys of dictionary are elements, values are
+stoichiometric values in a formula unit.
+e.g. CH3OH can be represented as:
+{‘C’: 1, ‘H’: 4, ‘O’: 1,}.</li>
+<li><strong>n_T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of data points between <cite>T_low</cite> and <cite>T_high</cite> for fitting
+heat capacity. Default is 50.</li>
+<li><strong>kwargs</strong> (<em>keyword arguments</em>) – Used to initalize model if a class is passed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Shomate</strong> – Shomate object with polynomial terms fitted to data.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Shomate object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="pmutt.empirical.shomate.Shomate.from_statmech">
 <em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.from_statmech" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the Shomate polynomial using statistical mechanic models</p>
+<dd><p>Calculates the Shomate polynomial using statistical mechanic models.
+Deprecated as of Version 1.2.13.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2329,6 +2401,50 @@ descriptors</td>
 <dl class="method">
 <dt id="pmutt.empirical.references.References.to_dict">
 <code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.references.References.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>obj_dict</strong></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="misc">
+<h2>Misc.<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pmutt.empirical.GasPressureAdj">
+<em class="property">class </em><code class="descclassname">pmutt.empirical.</code><code class="descname">GasPressureAdj</code><a class="headerlink" href="#pmutt.empirical.GasPressureAdj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Includes pressure’s effect on entropy for gas molecules</p>
+<dl class="method">
+<dt id="pmutt.empirical.GasPressureAdj.get_SoR">
+<code class="descname">get_SoR</code><span class="sig-paren">(</span><em>P=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.GasPressureAdj.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates dimesionless entropy</p>
+<p><span class="math notranslate nohighlight">\(\frac{S}{R} = -\ln\bigg(\frac{P}{P_0}\bigg)\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>P</strong> (float or <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>, optional) – Pressure in bar. Default is P0 (1 bar)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>SoR</strong> – Dimensionless adjustment to entropy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float or <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.empirical.GasPressureAdj.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.GasPressureAdj.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

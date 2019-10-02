@@ -10,6 +10,8 @@ Clicking on the binder badge allows you to run the Jupyter notebook without
 needing to install pMuTT. If you would prefer to open the Jupyter notebook
 locally, `follow these instructions`_.
 
+.. _overview_example:
+
 Overview
 --------
 - .. image:: https://mybinder.org/badge_logo.svg
@@ -36,6 +38,8 @@ Topics Covered
 
 --------------------------------------------------------------------------------
 
+.. _expt_to_empirical_example:
+
 Experimental to Empirical
 -------------------------
 - .. image:: https://mybinder.org/badge_logo.svg
@@ -54,6 +58,8 @@ Topics Covered
 
 --------------------------------------------------------------------------------
 
+.. _excel_to_empirical_example:
+
 Excel to Empirical Data
 -----------------------
 - .. image:: https://mybinder.org/badge_logo.svg
@@ -70,6 +76,8 @@ Topics Covered
 - Write :class:`~pmutt.empirical.nasa.Nasa` object to a ``thermdat`` file
 
 --------------------------------------------------------------------------------
+
+.. _reaction_example:
 
 Reaction
 --------
@@ -125,6 +133,8 @@ Topics Covered
 
 --------------------------------------------------------------------------------
 
+.. _phase_diagram_example:
+
 Phase Diagram
 -------------
 - .. image:: https://mybinder.org/badge_logo.svg
@@ -146,6 +156,8 @@ Topics Covered
 
 Workshops
 ---------
+
+.. _nam26_workshop_example:
 
 NAM26 Workshop
 --------------

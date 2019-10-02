@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Constants &mdash; pmutt 1.2.12 documentation</title>
+  <title>Constants &mdash; pmutt 1.2.13 documentation</title>
   
 
   
@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Input and Output" href="io.html" />
-    <link rel="prev" title="Publications" href="publications.html" /> 
+    <link rel="prev" title="Referencing" href="referencing.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -83,12 +83,17 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -99,9 +104,12 @@
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
             
@@ -1362,6 +1370,20 @@ conversion factor.</li>
 </table>
 </dd></dl>
 
+<dl class="data">
+<dt id="pmutt.constants.type_dict">
+<code class="descclassname">pmutt.constants.</code><code class="descname">type_dict</code><em class="property"> = {'A': 'length', 'A2': 'area', 'C': 'temp', 'Eh': 'energy', 'Eh/molecule': 'energy/amount', 'F': 'temp', 'Ha': 'energy', 'Ha/molecule': 'energy/amount', 'J': 'energy', 'J/mol': 'energy/amount', 'K': 'temp', 'L': 'volume', 'L atm': 'energy', 'MPa': 'pressure', 'Pa': 'pressure', 'R': 'temp', 'amu': 'mass', 'atm': 'pressure', 'bar': 'pressure', 'cal': 'energy', 'cal/mol': 'energy/amount', 'cm': 'length', 'cm2': 'area', 'cm3': 'volume', 'day': 'time', 'eV': 'energy', 'eV/molecule': 'energy/amount', 'ft': 'length', 'ft2': 'area', 'ft3': 'volume', 'g': 'mass', 'hr': 'time', 'inch': 'length', 'inch2': 'area', 'inch3': 'volume', 'kJ': 'energy', 'kJ/mol': 'energy/amount', 'kPa': 'pressure', 'kcal': 'energy', 'kcal/mol': 'energy/amount', 'kg': 'mass', 'km': 'length', 'km2': 'area', 'lbs': 'mass', 'm': 'length', 'm2': 'area', 'm3': 'volume', 'mL': 'volume', 'mile': 'length', 'min': 'time', 'mmHg': 'pressure', 'mol': 'amount', 'molec': 'amount', 'molecule': 'amount', 'ms': 'time', 'nm': 'length', 'ns': 'time', 'ps': 'time', 'psi': 'pressure', 's': 'time', 'torr': 'pressure'}</em><a class="headerlink" href="#pmutt.constants.type_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key are units, values are the type of unit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="function">
 <dt id="pmutt.constants.wavenumber_to_energy">
 <code class="descclassname">pmutt.constants.</code><code class="descname">wavenumber_to_energy</code><span class="sig-paren">(</span><em>wavenumber</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.constants.wavenumber_to_energy" title="Permalink to this definition">¶</a></dt>
@@ -1447,7 +1469,7 @@ conversion factor.</li>
         <a href="io.html" class="btn btn-neutral float-right" title="Input and Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="publications.html" class="btn btn-neutral" title="Publications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="referencing.html" class="btn btn-neutral" title="Referencing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

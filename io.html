@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pmutt 1.2.12 documentation</title>
+  <title>Input and Output &mdash; pmutt 1.2.13 documentation</title>
   
 
   
@@ -83,12 +83,17 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#excel">Excel</a><ul>
@@ -130,9 +135,12 @@
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
             
@@ -355,9 +363,9 @@ output_structure[‘elements’]</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location to import atoms object. If relative references used,
-the path should be relative to excel_path.
-See ase.read for supported formats</li>
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Path to read the atoms object using <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/io/io.html#ase.io.read">ase.read</a> or the string to
+build the atoms object using <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/build/build.html#ase.build.molecule">ase.build.molecule</a>.
+Path can be relative to the imported spreadsheet or absolute.</li>
 <li><strong>excel_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Location where excel path is located</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘atoms’]</li>
 </ul>
@@ -366,7 +374,11 @@ See ase.read for supported formats</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with atoms added</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">FileNotFoundError: – Raised if the <cite>path</cite> is not a valid file and not a supported string
+by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/build/build.html#ase.build.molecule">ase.build.molecule</a>.</p>
 </td>
 </tr>
 </tbody>
@@ -641,7 +653,7 @@ output_structure[‘a_high’]</li>
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="dft-input-example">
 <span id="id3"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
-<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pmutt/tree/master/examples/VASP_to_thermdat/example1">pmutt.examples.VASP_to_thermdat.example1</a>.
+<p>This example uses data found in <a class="reference internal" href="examples.html#excel-to-empirical-example"><span class="std std-ref">Excel to Empirical Data</span></a>.
 Below, we show the contents of the references.xlsx spreadsheet. The first row
 corresponds to header labels. The headers may have special processing rules,
 which can be found in the docstring of <code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code>. If no
@@ -819,9 +831,8 @@ below:</p>
 </div>
 <div class="section" id="nasa-polynomial-input-example">
 <h4>NASA Polynomial Input Example<a class="headerlink" href="#nasa-polynomial-input-example" title="Permalink to this headline">¶</a></h4>
-<p>This example uses data found in <a class="reference external" href="https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_excel">pmutt.examples.read_nasa_from_excel</a>. Due to
-the special rules defined for NASA parsing, a group of NASA polynomials can be
-directly imported using <a class="reference internal" href="#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p>
+<p>Due to the special rules defined for NASA parsing, a group of NASA polynomials
+can be directly imported using <a class="reference internal" href="#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="2%" />
@@ -969,19 +980,25 @@ written to a thermdat file.</p>
 <p>Read from/write to thermdat files.</p>
 <dl class="function">
 <dt id="pmutt.io.thermdat.read_thermdat">
-<code class="descclassname">pmutt.io.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pmutt.io.thermdat.</code><code class="descname">read_thermdat</code><span class="sig-paren">(</span><em>filename</em>, <em>format='list'</em>, <em>key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.thermdat.read_thermdat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directly read thermdat file that is in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input filename</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Input filename</li>
+<li><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Format to output NASA polynomials. Supported options are:
+‘list’, ‘tuple’, ‘dict’. Default is ‘list’</li>
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – If <cite>format</cite> is ‘dict’, uses this attribute as the key for the
+output dictionary. Default is ‘name’</li>
+</ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Nasas</strong></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list, tuple or dict of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -1004,7 +1021,7 @@ written to a thermdat file.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Output file name</li>
-<li><strong>nasa_species</strong> (list of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) – List of species to populate thermdat</li>
+<li><strong>nasa_species</strong> (list or dict of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) – List of species to populate thermdat</li>
 <li><strong>supp_data</strong> (<em>Additional thermdat entries to include</em><em>, </em><em>optional</em>) – Must be in therndat format.</li>
 <li><strong>supp_txt</strong> (<em>Comment field to preceed nasa_species entries</em><em>, </em><em>optional</em>) – Each line needs to begin with a ! so it is recognized as a
 comment.</li>
@@ -1023,8 +1040,8 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using
-<a class="reference internal" href="#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. The example here can be found in
-<a class="reference external" href="https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_thermdat">pmutt.examples.read_nasa_from_thermdat</a></p>
+<a class="reference internal" href="#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. See the <a class="reference internal" href="examples.html#overview-example"><span class="std std-ref">Overview</span></a> of
+how its done.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -1556,7 +1573,7 @@ default = None. Will not return React_obj and Prod_obj</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -1638,7 +1655,7 @@ be written to this file</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. Default is ‘surf.inp’</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.12 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.13 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Referencing" href="referencing.html" /> 
+    <link rel="prev" title="Visualization" href="visual.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -82,12 +82,17 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -98,9 +103,9 @@
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-13">Version 1.2.13</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#contributors">Contributors</a></li>
 </ul>
 </li>
@@ -129,7 +134,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#version-1-1-0">Version 1.1.0</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
             
@@ -218,9 +227,36 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+</div>
+<div class="section" id="version-1-2-13">
+<h2>Version 1.2.13<a class="headerlink" href="#version-1-2-13" title="Permalink to this headline">¶</a></h2>
+<p>Oct. 2, 2019</p>
 <ul class="simple">
 <li>Fixed bug where small non-zero rotational inertia modes were chosen
 preferentially over larger contributing modes.</li>
+<li>Fixed bug where presets had to be specified before statistical mechanical
+arguments. Now, the preset will not overwrite any previously set values.</li>
+<li>Updated <a class="reference internal" href="io.html#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a> to allow the user to return
+the <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects as a list, tuple, or
+dictionary.</li>
+<li>Updated <a class="reference internal" href="io.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_thermdat()</span></code></a> to accept a list or a
+dictionary of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects</li>
+<li>Implemented <cite>from_model</cite> method in <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
+<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> classes so empirical objects can be
+created from <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects as well as other
+empirical objects. The <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method is deprecated.</li>
+<li>Added more descriptive warnings and errors.</li>
+<li>Created <a class="reference internal" href="empirical.html#pmutt.empirical.GasPressureAdj" title="pmutt.empirical.GasPressureAdj"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureAdj</span></code></a> so entropy and Gibbs energy
+of gas-phase empirical objects (like <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
+and <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) are dependent on pressure. This
+object is assigned automatically to <code class="docutils literal notranslate"><span class="pre">misc_models</span></code> if <code class="docutils literal notranslate"><span class="pre">phase</span></code> is ‘g’ or
+‘gas’ and the <code class="docutils literal notranslate"><span class="pre">add_gas_P_adj</span></code> can be set to False if users do not wish to
+assign this object automatically.</li>
+<li>Thermodynamic quantities of individual species can also be calculated on a
+per mass basis (i.e. users can calculate quantities in J/g, cal/kg, etc.).
+The object must contain a dictionary of its composition in <code class="docutils literal notranslate"><span class="pre">elements</span></code> for
+this functionality.</li>
+<li>Fixed broken hyperlinks.</li>
 </ul>
 <div class="section" id="contributors">
 <h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
@@ -492,7 +528,7 @@ reactions from Chemkin surf.inp and gas.inp files</li>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="referencing.html" class="btn btn-neutral" title="Referencing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="visual.html" class="btn btn-neutral" title="Visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -51,7 +51,7 @@ Examples
 DFT Input Example
 ^^^^^^^^^^^^^^^^^^
 
-This example uses data found in `pmutt.examples.VASP_to_thermdat.example1`_. 
+This example uses data found in :ref:`excel_to_empirical_example`. 
 Below, we show the contents of the references.xlsx spreadsheet. The first row 
 corresponds to header labels. The headers may have special processing rules, 
 which can be found in the docstring of :func:`~pmutt.io.read_excel`. If no 
@@ -168,9 +168,8 @@ The output can be shown below::
 
 NASA Polynomial Input Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This example uses data found in `pmutt.examples.read_nasa_from_excel`_. Due to 
-the special rules defined for NASA parsing, a group of NASA polynomials can be 
-directly imported using :func:`~pmutt.io.excel.read_excel`.
+Due to the special rules defined for NASA parsing, a group of NASA polynomials
+can be directly imported using :func:`~pmutt.io.excel.read_excel`.
 
 +------+-------+------------+------------+-------+-------+--------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+--------+
 | name | phase | elements.H | elements.O | T_low | T_mid | T_high | nasa.a_low.0 | nasa.a_low.1 | nasa.a_low.2 | nasa.a_low.3 | nasa.a_low.4 | nasa.a_low.5 | nasa.a_low.6 | nasa.a_high.0 | nasa.a_high.1 | nasa.a_high.2 | nasa.a_high.3 | nasa.a_high.4 | nasa.a_high.5 | nasa.a_high.6 | notes  |
@@ -232,8 +231,8 @@ Examples
 Reading Thermdat
 ^^^^^^^^^^^^^^^^
 A thermdat file can be read directly by using 
-:func:`~pmutt.io.thermdat.read_thermdat`. The example here can be found in 
-`pmutt.examples.read_nasa_from_thermdat`_
+:func:`~pmutt.io.thermdat.read_thermdat`. See the :ref:`overview_example` of
+how its done.
 
 .. code:: python
 
@@ -480,7 +479,5 @@ Chemkin
    :members:
 
 
-.. _`pmutt.examples.VASP_to_thermdat.example1`: https://github.com/VlachosGroup/pmutt/tree/master/examples/VASP_to_thermdat/example1
-.. _`pmutt.examples.read_nasa_from_excel`: https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_excel 
 .. _`pmutt.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_thermdat 
 .. _`JavaScript Object Notation (JSON)`: https://www.json.org/

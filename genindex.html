@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pmutt 1.2.12 documentation</title>
+  <title>Index &mdash; pmutt 1.2.13 documentation</title>
   
 
   
@@ -82,12 +82,17 @@
               
             
             
-              <ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -98,9 +103,12 @@
 <li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">Return to Github</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
             
@@ -217,9 +225,11 @@
 </li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.a_low">a_low (pmutt.empirical.nasa.Nasa attribute)</a>
 </li>
+      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.act_energy">act_energy (pmutt.cantera.units.Units attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="kinetic_models.html#pmutt.cantera.units.Units.act_energy">act_energy (pmutt.cantera.units.Units attribute)</a>
+      <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.add_gas_P_adj">add_gas_P_adj (pmutt.empirical.EmpiricalBase attribute)</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.vib.QRRHOVib.alpha">alpha (pmutt.statmech.vib.QRRHOVib attribute)</a>
 </li>
@@ -430,6 +440,8 @@
       <ul>
         <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.from_model">(pmutt.empirical.nasa.Nasa9 class method)</a>
 </li>
+        <li><a href="empirical.html#pmutt.empirical.shomate.Shomate.from_model">(pmutt.empirical.shomate.Shomate class method)</a>
+</li>
       </ul></li>
       <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.from_statmech">from_statmech() (pmutt.empirical.nasa.Nasa class method)</a>
 
@@ -456,6 +468,8 @@
       <li><a href="kinetic_models.html#pmutt.reaction.ChemkinReaction.gas_phase">gas_phase (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="reactions.html#pmutt.reaction.ChemkinReaction.gas_phase">[1]</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.lsr.LSR.gas_specie">gas_specie (pmutt.statmech.lsr.LSR attribute)</a>
+</li>
+      <li><a href="empirical.html#pmutt.empirical.GasPressureAdj">GasPressureAdj (class in pmutt.empirical)</a>
 </li>
       <li><a href="statmech.html#pmutt.statmech.rot.RigidRotor.geometry">geometry (pmutt.statmech.rot.RigidRotor attribute)</a>
 </li>
@@ -837,9 +851,11 @@
 </li>
       <li><a href="reactions.html#pmutt.reaction.Reaction.get_S_state">get_S_state() (pmutt.reaction.Reaction method)</a>
 </li>
-      <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_SoR">get_SoR() (pmutt.empirical.nasa.Nasa method)</a>
+      <li><a href="empirical.html#pmutt.empirical.GasPressureAdj.get_SoR">get_SoR() (pmutt.empirical.GasPressureAdj method)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.get_SoR">(pmutt.empirical.nasa.Nasa method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.get_SoR">(pmutt.empirical.nasa.Nasa9 method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.nasa.SingleNasa9.get_SoR">(pmutt.empirical.nasa.SingleNasa9 method)</a>
@@ -1085,6 +1101,8 @@
         <li><a href="statmech.html#pmutt.statmech.StatMech.misc_models">(pmutt.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
+      <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.model">model (pmutt.empirical.EmpiricalBase attribute)</a>
+</li>
       <li><a href="statmech.html#pmutt.statmech.trans.FreeTrans.molecular_weight">molecular_weight (pmutt.statmech.trans.FreeTrans attribute)</a>
 </li>
   </ul></td>
@@ -1425,8 +1443,6 @@
 </li>
       <li><a href="statmech.html#pmutt.statmech.StatMech">StatMech (class in pmutt.statmech)</a>
 </li>
-      <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.statmech_model">statmech_model (pmutt.empirical.EmpiricalBase attribute)</a>
-</li>
       <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.sticking_coeff">sticking_coeff (pmutt.omkm.reaction.SurfaceReaction attribute)</a>
 
       <ul>
@@ -1520,6 +1536,8 @@
       <ul>
         <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.to_dict">(pmutt.empirical.EmpiricalBase method)</a>
 </li>
+        <li><a href="empirical.html#pmutt.empirical.GasPressureAdj.to_dict">(pmutt.empirical.GasPressureAdj method)</a>
+</li>
         <li><a href="empirical.html#pmutt.empirical.nasa.Nasa.to_dict">(pmutt.empirical.nasa.Nasa method)</a>
 </li>
         <li><a href="empirical.html#pmutt.empirical.nasa.Nasa9.to_dict">(pmutt.empirical.nasa.Nasa9 method)</a>
@@ -1583,6 +1601,8 @@
         <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.transport">(pmutt.omkm.phase.InteractingInterface attribute)</a>
 </li>
       </ul></li>
+      <li><a href="constants.html#pmutt.constants.type_dict">type_dict (in module pmutt.constants)</a>
+</li>
       <li><a href="io.html#pmutt.io.json.type_to_class">type_to_class() (in module pmutt.io.json)</a>
 </li>
   </ul></td>
