@@ -544,11 +544,11 @@ class GasPressureAdj(_ModelBase):
 
         Parameters
         ----------
-            P : float or `np.ndarray`_, optional
+            P : float or `numpy.ndarray`_, optional
                 Pressure in bar. Default is P0 (1 bar)
         Returns
         -------
-            SoR : float or `np.ndarray`_
+            SoR : float or `numpy.ndarray`_
                 Dimensionless adjustment to entropy
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html

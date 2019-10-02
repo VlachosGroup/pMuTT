@@ -20,14 +20,24 @@ Logos
 When citing our software in a presentation or other reproducible format, you
 may use the high-resolution logos below.
 
-**Dark Version**
+**Default**
 
-.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_logo_highres.jpg
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png
    :align: center
 
-**Light Version**
+**Inverse**
 
-.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/Screen/pmutt_inverse_highres.png
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_inverse_web.png
+   :align: center
+
+**Black**
+
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_black_web.png
+   :align: center
+
+**White**
+
+.. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_white_web.png
    :align: center
 
 Cited By
@@ -36,7 +46,7 @@ Cited By
 If you have published work using pMuTT and would like to be featured here,
 please post an issue with the |Publication_label| tag.
 
-.. |Publication_label| image:: ./images/PublicationsLabel.png
+.. |Publication_label| image:: ./images/labels/publication.png
    :height: 20
    :target: https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&q=label%3Apublications
 

@@ -11,8 +11,12 @@
    },
    "notes": "TPIS78",
    "smiles": null,
-   "statmech_model": null,
-   "misc_models": null,
+   "model": null,
+   "misc_models": [
+    {
+     "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+    }
+   ],
    "a_low": [
     2.34433112,
     0.00798052075,
@@ -47,8 +51,12 @@
    },
    "notes": "TPIS89",
    "smiles": null,
-   "statmech_model": null,
-   "misc_models": null,
+   "model": null,
+   "misc_models": [
+    {
+     "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+    }
+   ],
    "a_low": [
     3.78245636,
     -0.00299673416,
@@ -90,8 +98,12 @@
    },
    "notes": "L 8/89",
    "smiles": null,
-   "statmech_model": null,
-   "misc_models": null,
+   "model": null,
+   "misc_models": [
+    {
+     "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+    }
+   ],
    "a_low": [
     4.19864056,
     -0.0020364341,

@@ -247,7 +247,7 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
             column_delimiter=column_delimiter, T=T, sden_operation=None,
             **kwargs)
     # Check length of lines
-    if any([(len(reaction_line) > 80) for reaction line in reaction_lines]):
+    if any([(len(reaction_line) > 80) for reaction_line in reaction_lines]):
         warn_msg = ('Reaction lines exceed 80 character limit when writing '
                     'gas.inp. This may cause errors when Chemkin reads this '
                     'file. Consider passing a different float_format, '
@@ -376,7 +376,7 @@ def write_surf(reactions, sden_operation='min',
                 sden_operation=sden_operation, **kwargs)
 
     # Check length of lines
-    if any([(len(reaction_line) > 80) for reaction line in reaction_lines]):
+    if any([(len(reaction_line) > 80) for reaction_line in reaction_lines]):
         warn_msg = ('Reaction lines exceed 80 character limit when writing '
                     'surf.inp. This may cause errors when Chemkin reads this '
                     'file. Consider passing a different float_format, '

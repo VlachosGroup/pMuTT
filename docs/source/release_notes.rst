@@ -7,6 +7,40 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.13
+--------------
+Oct. 2, 2019
+
+- Fixed bug where small non-zero rotational inertia modes were chosen
+  preferentially over larger contributing modes.
+- Fixed bug where presets had to be specified before statistical mechanical
+  arguments. Now, the preset will not overwrite any previously set values.
+- Updated :func:`~pmutt.io.thermdat.read_thermdat` to allow the user to return
+  the :class:`~pmutt.empirical.nasa.Nasa` objects as a list, tuple, or
+  dictionary.
+- Updated :func:`~pmutt.io.thermdat.write_thermdat` to accept a list or a
+  dictionary of :class:`~pmutt.empirical.nasa.Nasa` objects
+- Implemented `from_model` method in :class:`~pmutt.empirical.nasa.Nasa` and
+  :class:`~pmutt.empirical.shomate.Shomate` classes so empirical objects can be
+  created from :class:`~pmutt.statmech.StatMech` objects as well as other
+  empirical objects. The ``from_statmech`` method is deprecated.
+- Added more descriptive warnings and errors.
+- Created :class:`~pmutt.empirical.GasPressureAdj` so entropy and Gibbs energy
+  of gas-phase empirical objects (like :class:`~pmutt.empirical.shomate.Shomate`
+  and :class:`~pmutt.empirical.nasa.Nasa`) are dependent on pressure. This
+  object is assigned automatically to ``misc_models`` if ``phase`` is 'g' or
+  'gas' and the ``add_gas_P_adj`` can be set to False if users do not wish to
+  assign this object automatically.
+- Thermodynamic quantities of individual species can also be calculated on a
+  per mass basis (i.e. users can calculate quantities in J/g, cal/kg, etc.).
+  The object must contain a dictionary of its composition in ``elements`` for
+  this functionality.
+- Fixed broken hyperlinks.
+
+Contributors
+^^^^^^^^^^^^
+- Geun Ho Gu (googhgoo_)
+
 Version 1.2.12
 --------------
 Aug. 22, 2019
@@ -18,6 +52,12 @@ Aug. 22, 2019
 - Added preliminary CTI file writer for Cantera and OpenMKM
 - Added Binder notebooks to Examples page so users can try pMuTT before
   installing
+- Fixed bug where :class:`~pmutt.statmech.StatMech` was not passed when
+  modes were specified indivudally in spreadsheets.
+
+Contributors
+^^^^^^^^^^^^
+Xenhua Zhang (xenhua_)
 
 Version 1.2.11
 --------------
@@ -236,3 +276,5 @@ Oct. 26, 2018
 
 .. _`Development Branch`: https://github.com/VlachosGroup/pmutt/commits/development
 .. _himaghna: https://github.com/himaghna
+.. _xenhua: https://github.com/xenhua
+.. _googhgoo: https://github.com/googhgoo

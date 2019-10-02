@@ -8,12 +8,19 @@ Welcome to pmutt's documentation!
 
 .. toctree::
    :maxdepth: 2
-   
+   :caption: Getting Started
+
    includeme
    install
    examples
    workshops
    publications
+   referencing
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
+
    constants
    io
    empirical
@@ -24,9 +31,14 @@ Welcome to pmutt's documentation!
    phase_diagram
    eos
    visual
-   referencing
    release_notes
-   Return to Github <https://github.com/VlachosGroup/pmutt>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Useful Links
+
+   View Source Code (GitHub) <https://github.com/VlachosGroup/pmutt>
+   Report an Issue <https://github.com/VlachosGroup/pMuTT/issues>
 
 Indices and tables
 ==================
