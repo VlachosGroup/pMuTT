@@ -8,16 +8,19 @@ Operations related to Nasa polynomials
 import inspect
 from copy import copy
 from warnings import warn
+
 import numpy as np
-from scipy.optimize import minimize_scalar, minimize, LinearConstraint, Bounds
+from scipy.optimize import Bounds, LinearConstraint, minimize, minimize_scalar
 from scipy.stats import variation
-from pmutt import (_is_iterable, _pass_expected_arguments, 
-                   _apply_numpy_operation, _get_R_adj)
+
+from pmutt import (_apply_numpy_operation, _get_R_adj, _is_iterable,
+                   _pass_expected_arguments)
 from pmutt import constants as c
-from pmutt.io.json import json_to_pmutt, remove_class
-from pmutt.io.cantera import obj_to_CTI
 from pmutt.empirical import EmpiricalBase
+from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
+
 
 class Nasa(EmpiricalBase):
     """Stores the information for an individual species' NASA polynomial

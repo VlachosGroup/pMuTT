@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
+from pmutt import _ModelBase
 from pmutt import constants as c
-from pmutt import get_molecular_weight, _ModelBase
+from pmutt import get_molecular_weight
 from pmutt.io.json import remove_class
 
 

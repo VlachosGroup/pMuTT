@@ -6,11 +6,11 @@ Operations related to the Zacros wrapper
 """
 
 import numpy as np
+
 from pmutt import constants as c
 from pmutt import get_molecular_weight as mw
-from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.empirical import EmpiricalBase
-""" Test"""
+from pmutt.io.json import json_to_pmutt, remove_class
 
 
 class Zacros(EmpiricalBase):

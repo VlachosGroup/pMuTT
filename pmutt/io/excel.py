@@ -5,15 +5,17 @@ pmutt.io.excel
 Read from/write to xlsx files of particular format.
 """
 
+import os
+
 import numpy as np
 import pandas as pd
-import os
-from ase.io import read
 from ase.build import molecule
+from ase.io import read
+
 from pmutt import parse_formula
-from pmutt.statmech import (presets, StatMech, trans, vib, rot, elec, nucl,
-    EmptyMode)
 from pmutt.io.vasp import set_vib_wavenumbers_from_outcar
+from pmutt.statmech import (EmptyMode, StatMech, elec, nucl, presets, rot,
+                            trans, vib)
 
 
 def read_excel(io, skiprows=[1], header=0, delimiter='.',
@@ -561,4 +563,3 @@ def set_list_value(header, value, output_structure):
     except KeyError:
         output_structure[header] = [value]
     return output_structure
-

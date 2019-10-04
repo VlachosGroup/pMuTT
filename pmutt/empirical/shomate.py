@@ -5,17 +5,20 @@ pmutt.empirical.shomate
 Operations related to Shomate polynomials
 """
 
-from warnings import warn
 import inspect
+from warnings import warn
+
 import numpy as np
 from scipy.optimize import curve_fit
 from scipy.stats import variation
-from pmutt import _is_iterable, _get_R_adj
+
+from pmutt import _get_R_adj, _is_iterable
 from pmutt import constants as c
-from pmutt.io.json import json_to_pmutt, remove_class
-from pmutt.io.cantera import obj_to_CTI
 from pmutt.empirical import EmpiricalBase
+from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
+
 
 class Shomate(EmpiricalBase):
     """Stores the information for an individual Shomate specie

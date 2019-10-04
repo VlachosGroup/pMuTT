@@ -5,8 +5,10 @@ pmutt.io.thermdat
 Read from/write to thermdat files.
 """
 
-import numpy as np
 from datetime import datetime
+
+import numpy as np
+
 from pmutt import pmutt_list_to_dict
 from pmutt.empirical.nasa import Nasa
 

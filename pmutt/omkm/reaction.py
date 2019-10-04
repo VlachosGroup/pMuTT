@@ -1,10 +1,12 @@
 import numpy as np
+
 from pmutt import _apply_numpy_operation
 from pmutt import constants as c
-from pmutt.reaction.bep import BEP as BEP_parent
-from pmutt.reaction import Reaction
-from pmutt.omkm.units import Units
 from pmutt.omkm.phase import InteractingInterface, StoichSolid
+from pmutt.omkm.units import Units
+from pmutt.reaction import Reaction
+from pmutt.reaction.bep import BEP as BEP_parent
+
 
 class SurfaceReaction(Reaction):
     """Expresses OpenMKM surface reaction in Cantera CTI format reaction.
@@ -325,5 +327,3 @@ class BEP(BEP_parent):
                 Reaction to add
         """
         self._reactions.append(reaction)
-    
-    

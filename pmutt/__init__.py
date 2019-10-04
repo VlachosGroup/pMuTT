@@ -12,15 +12,18 @@ pmutt
 name = 'pmutt'
 __version__ = '1.2.13'
 
-import re
 import inspect
 import itertools
+import re
 from warnings import warn
+
 import numpy as np
 import pygal
 from matplotlib import pyplot as plt
-from pmutt.io.json import remove_class
+
 from pmutt import constants as c
+from pmutt.io.json import remove_class
+
 
 class _pmuttBase:
     """Generic parent class to all pmutt objects. Functionality:

@@ -1,7 +1,9 @@
 import datetime
+
 from pmutt import _force_pass_arguments
 from pmutt.io.cantera import obj_to_CTI
 from pmutt.omkm.units import Units
+
 
 def write_cti(phases=None, species=None, reactions=None,
               lateral_interactions=None, units=None, filename='input.cti',

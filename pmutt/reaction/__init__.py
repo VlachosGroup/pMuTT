@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
+import inspect
+import re
 from collections import Counter
 from copy import deepcopy
 from warnings import warn
-import inspect
-import re
+
 import numpy as np
-from scipy import interpolate
 from matplotlib import pyplot as plt
-from pmutt import (_force_pass_arguments, _pass_expected_arguments,
-                   _is_iterable, _get_specie_kwargs, _apply_numpy_operation,
+from scipy import interpolate
+
+from pmutt import (_apply_numpy_operation, _force_pass_arguments,
+                   _get_specie_kwargs, _is_iterable, _pass_expected_arguments,
                    _pmuttBase)
-from pmutt.reaction.bep import BEP
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
+from pmutt.reaction.bep import BEP
 
 
 class Reaction(_pmuttBase):
@@ -62,7 +64,7 @@ class Reaction(_pmuttBase):
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
                  transition_state=None, transition_state_stoich=None,
-                 bep_descriptor=None, notes=None):
+                 notes=None):
         # If any of the entries were not iterable, assign them to a list
         if not _is_iterable(reactants) and reactants is not None:
             reactants = [reactants]
@@ -83,17 +85,6 @@ class Reaction(_pmuttBase):
         self.products = products
         self.products_stoich = products_stoich
         self.transition_state_stoich = transition_state_stoich
-        # Assign the transition state or BEP relationships
-        if transition_state is not None:
-            transition_state_list = []
-            for specie in transition_state:
-                # If BEP specified, link reaction to BEP
-                if isinstance(specie, BEP):
-                    specie = deepcopy(specie)
-                    specie.reaction = self
-                    specie.descriptor = bep_descriptor
-                transition_state_list.append(specie)
-            transition_state = transition_state_list
         self.transition_state = transition_state
 
     def __str__(self):
@@ -1669,6 +1660,9 @@ class Reaction(_pmuttBase):
         for specie, coeff in zip(species, stoich):
             # Process the inputs and methods for each specie
             specie_kwargs = _get_specie_kwargs(specie.name, **kwargs)
+            # If the species is a BEP relationship, add reaction specie_kwargs
+            if isinstance(specie, BEP):
+                specie_kwargs['reaction'] = self
 
             method = getattr(specie, method_name)
             if method_name == 'get_q':
@@ -1723,8 +1717,8 @@ class Reaction(_pmuttBase):
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', bep_descriptor=None, notes=None,
-                    raise_error=True, raise_warning=True):
+                    reaction_delimiter='=', notes=None, raise_error=True,
+                    raise_warning=True):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -1812,14 +1806,14 @@ class Reaction(_pmuttBase):
                                     'state. Suppress this warning by passing '
                                     'raise_warning=False to '
                                     'pmutt.reaction.Reaction.from_string '
-                                    'method.'.format(reaction_str))
+                                    'method.'.format(name, reaction_str))
                         warn(warn_msg, RuntimeWarning)
                         ts = None
 
         return cls(reactants=reactants, reactants_stoich=react_stoich,
                    products=products, products_stoich=prod_stoich,
                    transition_state=ts, transition_state_stoich=ts_stoich,
-                   bep_descriptor=bep_descriptor, notes=notes)
+                   notes=notes)
 
     def to_string(self, species_delimiter='+', reaction_delimiter='=',
                   stoich_format='.2f', include_TS=True, stoich_space=False,
@@ -2140,8 +2134,7 @@ class ChemkinReaction(Reaction):
         rxn = super().from_string(reaction_str=reaction_str,
                                   species=species,
                                   species_delimiter=species_delimiter,
-                                  reaction_delimiter=reaction_delimiter,
-                                  bep_descriptor=bep_descriptor)
+                                  reaction_delimiter=reaction_delimiter)
         return cls(reactants=rxn.reactants,
                    reactants_stoich=rxn.reactants_stoich,
                    products=rxn.products, products_stoich=rxn.products_stoich,
