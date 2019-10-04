@@ -30,7 +30,7 @@ class InteractingInterface(phase_cantera.Phase):
             Species present in Phase
         site_density : float, optional
             Site density in g/cm2. Default is None
-        phases : list of :class:`~pmutt.cantera.phase.Phase` objects
+        phases : list of :class:`~pmutt.cantera.phase.Phase` objects or str
             Phases associated with this interface
         interactions : str, optional
             Source of lateral interactions. If any lateral interactions in CTI

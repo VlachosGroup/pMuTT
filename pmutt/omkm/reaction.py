@@ -1,6 +1,7 @@
 import numpy as np
 from pmutt import _apply_numpy_operation
 from pmutt import constants as c
+from pmutt.reaction.bep import BEP as BEP_parent
 from pmutt.reaction import Reaction
 from pmutt.omkm.units import Units
 from pmutt.omkm.phase import InteractingInterface, StoichSolid
@@ -11,6 +12,8 @@ class SurfaceReaction(Reaction):
     
     Attributes
     ----------
+        id : str, optional
+            ID of the reaction. Default is None
         beta : float, optional
             Power to raise the temperature in the rate expression. Default is 1
         is_adsorption : bool, optional
@@ -18,19 +21,35 @@ class SurfaceReaction(Reaction):
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True.
             Default is 0.5
+        bep_id : str, optional
+            Name of the BEP relationship. If ``bep_id`` is not specified and a
+            transition state species is a BEP relationship, then ``BEP.name``
+            will be used. Otherwise, None is assigned.
+        direction : str, optional
+            Direction of the reaction. Used for BEP relationships.
+            Accepted options are 'cleavage' and 'synthesis'.
         kwargs : keyword arguments
             Keyword arguments used to initialize the reactants, transition
             state and products
     """
-    def __init__(self, beta=1., is_adsorption=False, sticking_coeff=0.5,
-                 **kwargs):
+    def __init__(self, id=None, beta=1., is_adsorption=False,
+                 sticking_coeff=0.5, bep_id=None, direction=None, **kwargs):
         super().__init__(**kwargs)
         self.beta = beta
         self.is_adsorption = is_adsorption
+        self.direction = direction
         # Sticking coefficient not relevant for non-adsorption reaction
         if not self.is_adsorption:
             sticking_coeff = None
         self.sticking_coeff = sticking_coeff
+
+        # Assigns BEP ID
+        if bep_id is None and self.transition_state is not None:
+            for species in self.transition_state:
+                if isinstance(species, BEP):
+                    bep_id = species.name
+                    break
+        self.bep_id = bep_id
 
     def _get_n_surf(self):
         """Counts the number of surface reactants
@@ -270,3 +289,41 @@ class SurfaceReaction(Reaction):
                             self.beta,
                             self.get_G_act(units=act_energy_unit, T=T, P=P))
         return cti_str
+
+class BEP(BEP_parent):
+    """Represents BEP relationships used by OpenMKM. Contains other attributes
+    to aid in writing CTI file. Inherits from :class:`~pmutt.reaction.bep.BEP`
+    
+    Attributes
+    ----------
+        direction : str, optional
+            Direction of the BEP. Accepted options are 'cleavage' and
+            'synthesis'
+        reactions : list of str or :class:`~pmutt.omkm.reaction.SurfaceReaction`
+            Reactions
+    """
+    def __init__(self, direction=None, reactions=None, **kwargs):
+        super().__init__(**kwargs)
+        self.direction = direction
+        self.reactions = reactions
+
+    @property
+    def reactions(self):
+        return self._reactions
+
+    @reaction.setter
+    def reaction(self, val):
+        self._reactions = val
+        self._set_descriptor_fn(reaction=val)
+    
+    def add_reaction(self, reaction):
+        """Adds a reaction associated with the BEP relationship
+        
+        Parameters
+        ----------
+            reaction : :class:`~pmutt.reaction.SurfaceReaction` object
+                Reaction to add
+        """
+        self._reactions.append(reaction)
+    
+    
