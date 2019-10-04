@@ -19,8 +19,10 @@ def read_pattern(filename, pattern, group=0, return_immediately=True):
     -------
         out_values : str or list of str
             Value(s) corresponding to pattern.
+
             - str if return_immediately is True
             - list if return_immediately is False
+
             If the pattern is not found, returns an empty list
     """
     out_values = []
@@ -88,16 +90,11 @@ def read_frequencies(filename):
         frequencies : list of float
             Frequencies in 1/cm
     """
-    # freq_out = []
     freq_patterns = read_pattern(filename=filename,
                                  pattern='Frequencies -- (.*)',
                                  group=0,
                                  return_immediately=False)
     return [float(freq) for freq in freq_patterns]
-    # for freq_line in freq_patterns:
-    #     print(freq_line)
-    #     freq_out.append(float(freq) for freq in freq_line.split())
-    # return freq_out
 
 
 def read_rotational_temperatures(filename):
@@ -112,9 +109,9 @@ def read_rotational_temperatures(filename):
         rotational_temperatures : list of float
             Rotational temperatures in K
     """
+    pattern = 'Rotational temperatures \(Kelvin\)(.*)'
     rot_T_patterns = read_pattern(filename=filename,
-                                  pattern='Rotational temperatures '
-                                  '\(Kelvin\)(.*)',
+                                  pattern=pattern,
                                   group=0,
                                   return_immediately=False)
     return [float(rot_T) for rot_T in rot_T_patterns]
