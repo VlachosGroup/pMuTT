@@ -2,6 +2,7 @@ import datetime
 
 from pmutt import _force_pass_arguments
 from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.ctml_writer import convert
 from pmutt.omkm.units import Units
 
 
@@ -40,7 +41,6 @@ def write_cti(phases=None, species=None, reactions=None,
         units = Units()
     elif isinstance(units, dict):
         units = Units(**units)
-    # units_dict = units.to_CTI_dict()
     lines.append(units.to_CTI())
 
     '''Write phases'''
@@ -54,7 +54,9 @@ def write_cti(phases=None, species=None, reactions=None,
     if species is not None:
         lines.extend(['', '#' + '-'*80, '# SPECIES', '#' + '-'*80])
         for ind_species in species:
-            lines.append(ind_species.to_CTI())
+            ind_species_CTI = _force_pass_arguments(ind_species.to_CTI,
+                                                    units=units)
+            lines.append(ind_species_CTI)
 
     '''Write lateral interactions'''
     if lateral_interactions is not None:
@@ -74,11 +76,32 @@ def write_cti(phases=None, species=None, reactions=None,
             lines.extend(['disable_motz_wise()\n'])
 
         '''Write reactions'''
+        beps = []
         lines.extend(['', '#' + '-'*80, '# REACTIONS', '#' + '-'*80])
         for reaction in reactions:
             reaction_CTI = _force_pass_arguments(reaction.to_CTI, units=units)
             lines.append(reaction_CTI)
-    
+            # Add BEP relationship if any
+            try:
+                bep = reaction.bep
+            except AttributeError:
+                pass
+            else:
+                if bep is not None and bep not in beps:
+                    beps.append(bep)
+
+        '''Write BEP Relationships'''
+        lines.extend(['', '#' + '-'*80, '# BEP Relationships', '#' + '-'*80])
+
+        # Only write each BEP once
+        for bep in beps:
+            bep_CTI = _force_pass_arguments(bep.to_CTI, units=units)
+            lines.append(bep_CTI)
+
     '''Write to file'''
     with open(filename, 'w', newline=newline) as f_ptr:
         f_ptr.write('\n'.join(lines))
+    
+    '''Write XML file'''
+    xml_filename = '{}.xml'.format(filename.replace('.cti', ''))
+    convert(filename=filename, outName=xml_filename)

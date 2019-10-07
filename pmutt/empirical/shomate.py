@@ -553,11 +553,11 @@ class Shomate(EmpiricalBase):
             CTI_str : str
                 Object represented as a CTI string.
         """
-        cti_str = ('species(name="{}", atoms={}\n'
-                   '        thermo=(Shomate([{}, {}],\n'
-                   '                        [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
-                   '                         {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
-                   '                         {: 2.8E}])))').format(
+        cti_str = ('species(name="{}", atoms={},\n'
+                   '        thermo=Shomate([{}, {}],\n'
+                   '                       [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
+                   '                        {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
+                   '                        {: 2.8E}]))').format(
                             self.name, obj_to_CTI(self.elements), self.T_low,
                             self.T_high, self.a[0], self.a[1], self.a[2],
                             self.a[3], self.a[4], self.a[5], self.a[6])                            
