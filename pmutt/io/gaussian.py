@@ -1,5 +1,7 @@
 import re
 
+from pmutt import constants as c
+
 
 def read_pattern(filename, pattern, group=0, return_immediately=True):
     """Reads the pattern from the Gaussian log file.
@@ -40,25 +42,28 @@ def read_pattern(filename, pattern, group=0, return_immediately=True):
             return out_values
 
 
-def read_zpe(filename):
+def read_zpe(filename, units='eV/molecule'):
     """Reads the zero-point energy from the Gaussian log file.
 
     Parameters
     ----------
         filename : str
             Log file
+        units : str, optional
+            Units to return energy. Default is 'eV/molecule'
     Returns
     -------
         zero_point_energy : float
-            Zero point energy in Hartree/particle
+            Zero point energy in ``units``. Default units are 'eV/molecule'
     """
     return float(read_pattern(filename=filename,
                               pattern='Zero-point correction=(.*?)\(',
                               group=0,
-                              return_immediately=True))
+                              return_immediately=True)) \
+           *c.convert_unit(initial='Ha/molecule', final=units)
 
 
-def read_electronic_and_zpe(filename):
+def read_electronic_and_zpe(filename, units='eV/molecule'):
     """Reads the electronic energy and zero-point energy from the
     Gaussian log file.
 
@@ -66,35 +71,44 @@ def read_electronic_and_zpe(filename):
     ----------
         filename : str
             Log file
+        units : str, optional
+            Units to return energy. Default is 'eV/molecule'
     Returns
     -------
         electronic_and_zero_point_energy : float
-            Electronic and zero point energy in Hartree/particle
+            Electronic and zero point energy in ``units``. Default is
+            'eV/molecule'
     """
     return float(read_pattern(filename=filename,
                               pattern='Sum of electronic and zero-point '
                               'Energies=(.*)',
                               group=0,
-                              return_immediately=True))
+                              return_immediately=True)) \
+           *c.convert_unit(initial='Ha/molecule', final=units)
 
 
-def read_frequencies(filename):
+
+def read_frequencies(filename, units='1/cm'):
     """Reads the frequencies from the Gaussian log file.
 
     Parameters
     ----------
         filename : str
             Log file
+        units : str, optional
+            Units to return frequencies. Default is '1/cm'
     Returns
     -------
         frequencies : list of float
-            Frequencies in 1/cm
+            Frequencies in ``units``. Default is '1/cm'
     """
+    final = units.split('/')[-1]
     freq_patterns = read_pattern(filename=filename,
                                  pattern='Frequencies -- (.*)',
                                  group=0,
                                  return_immediately=False)
-    return [float(freq) for freq in freq_patterns]
+    return [float(freq)/c.convert_unit(initial='cm', final=final) \
+            for freq in freq_patterns]
 
 
 def read_rotational_temperatures(filename):
@@ -117,23 +131,30 @@ def read_rotational_temperatures(filename):
     return [float(rot_T) for rot_T in rot_T_patterns]
 
 
-def read_molecular_mass(filename):
+def read_molecular_mass(filename, units='g/mol'):
     """Reads the molecular mass from the Gaussian log file.
 
     Parameters
     ----------
         filename : str
             Log file
+        units : str, optional
+            Units for molecular mass. Default is 'g/mol'
     Returns
     -------
         molecular_mass : float
-            Molecular mass in amu
+            Molecular mass in ``units``. Default is 'g/mol'
     """
-    data = read_pattern(filename=filename,
-                        pattern='Molecular mass:(.*)',
-                        group=0,
-                        return_immediately=True).split()
-    return float(data[0])
+    if units == 'amu':
+        units = 'amu/molecule'
+    mass_unit, amount_unit = units.split('/')
+    molecular_mass = float(read_pattern(filename=filename,
+                                        pattern='Molecular mass:(.*)',
+                                        group=0,
+                                        return_immediately=True).split()[0]) \
+                     *c.convert_unit(initial='amu', final=mass_unit) \
+                     /c.convert_unit(initial='molecule', final=amount_unit)
+    return molecular_mass
 
 
 def read_rot_symmetry_num(filename):
