@@ -674,7 +674,7 @@ def convert_unit(num=None, initial=None, final=None):
                    'Use help(pmutt.constants.convert_unit) for accepted pairs.'
                    ''.format(initial, initial_type, final, final_type))
         raise ValueError(err_msg)
-    elif 'temp' in initial_type:
+    elif 'temp' == initial_type:
         if num is None:
             num = 0.
         # Evaluating each combination
