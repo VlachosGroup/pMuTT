@@ -40,6 +40,7 @@ Dependencies
 -  `PyMongo`_: Used to read/write to databases
 -  `dnspython`_: Used to connect to databases
 -  `NetworkX`_: Used to plot reaction networks
+-  `More Itertools`_: Used for writing ranges for OpenMKM output.
 
 Getting Started
 ---------------
@@ -124,6 +125,7 @@ Special Thanks
 .. _PyMongo: http://api.mongodb.com/python/current/
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
+.. _`More Itertools`: https://more-itertools.readthedocs.io/en/stable/index.html
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pmutt/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`see documentation for more thorough instructions`: https://vlachosgroup.github.io/pMuTT/install.html

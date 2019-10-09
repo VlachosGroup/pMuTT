@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
 from pmutt import _ModelBase
 from pmutt import constants as c
 from pmutt.io.json import remove_class

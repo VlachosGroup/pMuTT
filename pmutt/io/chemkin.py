@@ -4,12 +4,15 @@ pmutt.io.chemkin
 
 Reads reactions lists from Chemkin gas.inp and surf.inp files
 """
-import re
-import numpy as np
 import datetime
+import re
 from warnings import warn
+
+import numpy as np
+
+from pmutt import _force_pass_arguments
 from pmutt import constants as c
-from pmutt import pmutt_list_to_dict, _force_pass_arguments
+from pmutt import pmutt_list_to_dict
 
 
 def read_reactions(filename, species=None):

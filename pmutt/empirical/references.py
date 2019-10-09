@@ -7,7 +7,9 @@ references.
 """
 
 from warnings import warn
+
 import numpy as np
+
 from pmutt import _ModelBase
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase

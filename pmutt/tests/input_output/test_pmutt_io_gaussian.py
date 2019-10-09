@@ -8,10 +8,10 @@ test_file = os.path.join(os.path.dirname(__file__), 'test_gaussian.log')
 
 class TestGaussian(unittest.TestCase):
     def test_read_zpe(self):
-        self.assertAlmostEqual(gaussian.read_zpe(test_file), 0.451590)
+        self.assertAlmostEqual(gaussian.read_zpe(test_file, units='Ha/molecule'), 0.451590)
 
     def test_read_electronic_and_zpe(self):
-        self.assertAlmostEqual(gaussian.read_electronic_and_zpe(test_file),
+        self.assertAlmostEqual(gaussian.read_electronic_and_zpe(test_file, units='Ha/molecule'),
                                -31835.216711)
 
     def test_read_freq(self):
@@ -67,7 +67,8 @@ class TestGaussian(unittest.TestCase):
                                              expected_rot_temp)
 
     def test_read_molecular_mass(self):
-        self.assertAlmostEqual(gaussian.read_molecular_mass(test_file),
+        self.assertAlmostEqual(gaussian.read_molecular_mass(test_file,
+                                                            units='amu'),
                                8470.11614)
 
     def test_rot_symmetry_number(self):

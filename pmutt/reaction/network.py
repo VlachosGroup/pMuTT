@@ -1,14 +1,16 @@
-from copy import copy
-import itertools as itools
 import heapq
-import numpy as np
+import itertools as itools
+from copy import copy
+
 import networkx as nx
+import numpy as np
 import pygal
-from scipy import interpolate
 from matplotlib import pyplot as plt
-from pmutt import _get_specie_kwargs, _force_pass_arguments, _is_iterable
-from pmutt.reaction import (Reactions, _write_reaction_state,
-                            _parse_reaction_state)
+from scipy import interpolate
+
+from pmutt import _force_pass_arguments, _get_specie_kwargs, _is_iterable
+from pmutt.reaction import (Reactions, _parse_reaction_state,
+                            _write_reaction_state)
 
 
 class Network(Reactions):

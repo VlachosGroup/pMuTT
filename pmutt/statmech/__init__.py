@@ -6,14 +6,17 @@ Created on Fri Jul 7 12:40:00 2018
 """
 import inspect
 from copy import copy
+
 import numpy as np
-from pmutt import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-                   _get_specie_kwargs, _apply_numpy_operation, _ModelBase,
-                   _get_R_adj, parse_formula)
+
+from pmutt import (_apply_numpy_operation, _get_mode_quantity, _get_R_adj,
+                   _get_specie_kwargs, _is_iterable, _ModelBase,
+                   _pass_expected_arguments)
 from pmutt import constants as c
-from pmutt.statmech import trans, vib, elec, rot
-from pmutt.mixture import _get_mix_quantity
+from pmutt import parse_formula
 from pmutt.io import json as json_pmutt
+from pmutt.mixture import _get_mix_quantity
+from pmutt.statmech import elec, rot, trans, vib
 
 
 class EmptyMode(_ModelBase):

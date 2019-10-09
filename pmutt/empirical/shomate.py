@@ -5,17 +5,20 @@ pmutt.empirical.shomate
 Operations related to Shomate polynomials
 """
 
-from warnings import warn
 import inspect
+from warnings import warn
+
 import numpy as np
 from scipy.optimize import curve_fit
 from scipy.stats import variation
-from pmutt import _is_iterable, _get_R_adj
+
+from pmutt import _get_R_adj, _is_iterable
 from pmutt import constants as c
-from pmutt.io.json import json_to_pmutt, remove_class
-from pmutt.io.cantera import obj_to_CTI
 from pmutt.empirical import EmpiricalBase
+from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
+
 
 class Shomate(EmpiricalBase):
     """Stores the information for an individual Shomate specie
@@ -550,11 +553,11 @@ class Shomate(EmpiricalBase):
             CTI_str : str
                 Object represented as a CTI string.
         """
-        cti_str = ('species(name="{}", atoms={}\n'
-                   '        thermo=(Shomate([{}, {}],\n'
-                   '                        [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
-                   '                         {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
-                   '                         {: 2.8E}])))').format(
+        cti_str = ('species(name="{}", atoms={},\n'
+                   '        thermo=Shomate([{}, {}],\n'
+                   '                       [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
+                   '                        {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
+                   '                        {: 2.8E}]))').format(
                             self.name, obj_to_CTI(self.elements), self.T_low,
                             self.T_high, self.a[0], self.a[1], self.a[2],
                             self.a[3], self.a[4], self.a[5], self.a[6])                            
