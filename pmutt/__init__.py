@@ -342,7 +342,7 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
             continue
         method_kwargs = _get_specie_kwargs(method, **kwargs)
         fn = getattr(obj, method)
-        y = np.zeros_like(x_values)
+        y = np.zeros_like(a=x_values, dtype=np.double)
         for j, x in enumerate(x_values):
             method_kwargs[x_name] = x
             y[j] = _force_pass_arguments(fn, **method_kwargs)
