@@ -203,7 +203,7 @@ class Nasa(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
-            HoRT = np.zeros_like(T)
+            HoRT = np.zeros_like(a=T, dtype=np.double)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 HoRT[i] = get_nasa_HoRT(a=a, T=T_i) \
@@ -279,7 +279,7 @@ class Nasa(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
-            SoR = np.zeros_like(T)
+            SoR = np.zeros_like(a=T, dtype=np.double)
             for i, T_i in enumerate(T):
                 a = self.get_a(T=T_i)
                 SoR[i] = get_nasa_SoR(a=a, T=T_i) \
@@ -859,7 +859,7 @@ class Nasa9(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
-            HoRT = np.zeros_like(T)
+            HoRT = np.zeros_like(a=T, dtype=np.double)
             for i, T_i in enumerate(T):
                 nasa = self._get_nasa(T=T_i)
                 HoRT[i] = nasa.get_HoRT(T=T_i) \
@@ -938,7 +938,7 @@ class Nasa9(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         if _is_iterable(T):
-            SoR = np.zeros_like(T)
+            SoR = np.zeros_like(a=T, dtype=np.double)
             for i, T_i in enumerate(T):
                 nasa = self._get_nasa(T=T_i)
                 SoR[i] = nasa.get_SoR(T=T_i) \
