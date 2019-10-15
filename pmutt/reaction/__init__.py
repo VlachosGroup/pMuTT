@@ -35,11 +35,6 @@ class Reaction(_pmuttBase):
         transition_state_stoich : list of float, optional
             Stoichiometric quantities of transition state species.
             Default is None
-        bep_descriptor : str, optional
-            If the transition state is a :class:`~pmutt.reaction.bep.BEP`
-            object, the descriptor can be set using this parameter. See
-            :class:`~pmutt.reaction.bep.BEP` documentation for accepted
-            descriptors
         notes : str or dict, optional
             Other notes such as the source of the reaction. Default is None
 
@@ -1734,11 +1729,6 @@ class Reaction(_pmuttBase):
             reaction_delimiter : str, optional
                 Delimiter that separate states of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
-            bep_descriptor : str, optional
-                If the transition state is a :class:`~pmutt.reaction.bep.BEP`
-                object, the descriptor can be set using this parameter. See
-                :class:`~pmutt.reaction.bep.BEP` documentation for accepted
-                descriptors
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
             raise_error : bool, optional
@@ -2092,7 +2082,7 @@ class ChemkinReaction(Reaction):
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', bep_descriptor=None, notes=None,
+                    reaction_delimiter='=', notes=None,
                     beta=1, is_adsorption=False, sticking_coeff=0.5):
         """Create a reaction object using the reaction string
 
@@ -2109,11 +2099,6 @@ class ChemkinReaction(Reaction):
             reaction_delimiter : str, optional
                 Delimiter that separate states of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
-            bep_descriptor : str, optional
-                If the transition state is a :class:`~pmutt.reaction.bep.BEP`
-                object, the descriptor can be set using this parameter. See
-                :class:`~pmutt.reaction.bep.BEP` documentation for accepted
-                descriptors
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
             beta : float, optional
@@ -2140,7 +2125,6 @@ class ChemkinReaction(Reaction):
                    products=rxn.products, products_stoich=rxn.products_stoich,
                    transition_state=rxn.transition_state,
                    transition_state_stoich=rxn.transition_state_stoich,
-                   bep_descriptor=bep_descriptor,
                    notes=notes, beta=beta, is_adsorption=is_adsorption,
                    sticking_coeff=sticking_coeff)
 

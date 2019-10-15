@@ -306,10 +306,10 @@ def write_thermdat(nasa_species, filename=None, write_date=True, supp_data=None,
 
     Parameters
     ----------
-        filename : str
-            Output file name
         nasa_species : list or dict of :class:`~pmutt.empirical.nasa.Nasa`
             List of species to populate thermdat
+        filename : str, optional
+            Output file name. If not specified, returns thermdat as str
         supp_data : str, optional
             Additional thermdat entries to include. Must be in therndat format.
         supp_txt : str, optional
