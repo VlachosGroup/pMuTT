@@ -13,7 +13,8 @@ from matplotlib import pyplot as plt
 from pmutt import plot_1D
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
-from pmutt import _is_iterable, _ModelBase, _pmuttBase
+from pmutt import (_is_iterable, _ModelBase, _pmuttBase, _check_obj,
+                   _check_iterable_attr)
 
 
 class EmpiricalBase(_pmuttBase):
@@ -61,15 +62,7 @@ class EmpiricalBase(_pmuttBase):
         self.elements = elements
         self.smiles = smiles
         self.notes = notes
-
-        # Assign self.model
-        if inspect.isclass(model):
-            # If you're passing a class. Note that the required
-            # arguments will be guessed.
-            self.model = model(**kwargs)
-        else:
-            # If it's an object that has already been initialized
-            self.model = model
+        self.model = _check_obj(model, **kwargs)
 
         # Assign mixing models
         # TODO Mixing models can not be initialized by passing the class
@@ -77,9 +70,7 @@ class EmpiricalBase(_pmuttBase):
         # way to pass them. Perhaps have a dictionary that contains the
         # attributes separated by species
         
-        # Single misc model is passed
-        if not _is_iterable(misc_models) and misc_models is not None:
-            misc_models = [misc_models]
+        self.misc_models = _check_iterable_attr(misc_models)
 
         # Assign pressure adjustment if necessary
         dict_entry = {'class': "<class 'pmutt.empirical.GasPressureAdj'>"}
