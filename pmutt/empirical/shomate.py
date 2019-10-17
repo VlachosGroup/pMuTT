@@ -45,12 +45,33 @@ class Shomate(EmpiricalBase):
             High temperature bound (in K)
         a : (8,) `numpy.ndarray`_
             Shomate polynomial to use between T_low and T_high
+        units : str, optional
+            Units used to fit the Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R` (e.g. J/mol/K, cal/mol/K, eV/K).
+            Default is J/mol/K.
     """
-    def __init__(self, name, T_low, T_high, a, **kwargs):
+    def __init__(self, name, T_low, T_high, a, units='J/mol/K', **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_high = T_high
         self.a = a
+        self.units = units
+
+    @property
+    def units(self):
+        return self._units
+    
+    @units.setter
+    def units(self, val):
+        try:
+            c.R(val)
+        except KeyError:
+            err_msg = ('Units, "{}", inputted into pmutt.empirical.Shomate '
+                       'object are invalid. See pmutt.constants.R for '
+                       'supported units.'.format(val))
+            raise ValueError(err_msg)
+        else:
+            self._units = val
 
     def get_CpoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless heat capacity
@@ -81,7 +102,7 @@ class Shomate(EmpiricalBase):
         T = np.array(T)
 
         # Calculate pure properties
-        CpoR = get_shomate_CpoR(a=self.a, T=T)
+        CpoR = get_shomate_CpoR(a=self.a, T=T, units=self.units)
         # Calculate mixing properties
         for T_i in T:
             CpoR_mix = _get_mix_quantity(misc_models=self.misc_models,
@@ -155,7 +176,7 @@ class Shomate(EmpiricalBase):
         T = np.array(T)
 
         # Calculate pure properties
-        HoRT = get_shomate_HoRT(a=self.a, T=T)
+        HoRT = get_shomate_HoRT(a=self.a, T=T, units=self.units)
         # Calculate mixing properties
         for T_i in T:
             HoRT_mix = _get_mix_quantity(misc_models=self.misc_models,
@@ -230,7 +251,7 @@ class Shomate(EmpiricalBase):
         T = np.array(T)
 
         # Calculate pure properties
-        SoR = get_shomate_SoR(a=self.a, T=T)
+        SoR = get_shomate_SoR(a=self.a, T=T, units=self.units)
         # Calculate mixing properties
         for T_i in T:
             SoR_mix = _get_mix_quantity(misc_models=self.misc_models,
@@ -334,7 +355,8 @@ class Shomate(EmpiricalBase):
                              raise_warning=raise_warning, **kwargs)*T*R_adj
 
     @classmethod
-    def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, **kwargs):
+    def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, units='J/mol/K',
+                  **kwargs):
         """Calculates the Shomate polynomials using thermodynamic data
 
         Parameters
@@ -351,6 +373,10 @@ class Shomate(EmpiricalBase):
                 Dimensionless reference enthalpy that corresponds to T_ref.
             SoR_ref : float
                 Dimensionless entropy that corresponds to T_ref.
+            units : str, optional
+                Units used to fit the Shomate polynomial. Units should be
+                supported by :class:`~pmutt.constants.R` (e.g. J/mol/K,
+                cal/mol/K, eV/K). Default is J/mol/K.
         Returns
         -------
             shomate : Shomate object
@@ -360,10 +386,11 @@ class Shomate(EmpiricalBase):
         """
         T_low = min(T)
         T_high = max(T)
-        a = _fit_CpoR(T=T, CpoR=CpoR)
-        a = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, a=a)
-        a = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, a=a)
-        return cls(name=name, T_low=T_low, T_high=T_high, a=a, **kwargs)
+        a = _fit_CpoR(T=T, CpoR=CpoR, units=units)
+        a = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, a=a, units=units)
+        a = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, a=a, units=units)
+        return cls(name=name, T_low=T_low, T_high=T_high, a=a, units=units,
+                   **kwargs)
 
     @classmethod
     def from_statmech(cls, name, statmech_model, T_low, T_high,
@@ -415,7 +442,7 @@ class Shomate(EmpiricalBase):
 
     @classmethod
     def from_model(cls, model, name=None, T_low=None, T_high=None,
-                   elements=None, n_T=50, **kwargs):
+                   elements=None, n_T=50, units='J/mol/K', **kwargs):
         """Calculates the NASA polynomials using the model passed
 
         Parameters
@@ -440,6 +467,10 @@ class Shomate(EmpiricalBase):
             n_T : int, optional
                 Number of data points between `T_low` and `T_high` for fitting
                 heat capacity. Default is 50.
+            units : str, optional
+                Units used to fit the Shomate polynomial. Units should be
+                supported by :class:`~pmutt.constants.R` (e.g. J/mol/K,
+                cal/mol/K, eV/K). Default is J/mol/K.
             kwargs : keyword arguments
                 Used to initalize model if a class is passed.
         Returns
@@ -508,7 +539,8 @@ class Shomate(EmpiricalBase):
         SoR_ref = model.get_SoR(T=T_mean)
         return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mean,
                              HoRT_ref=HoRT_ref, SoR_ref=SoR_ref,
-                             model=model, elements=elements, **kwargs)
+                             model=model, elements=elements, units=units,
+                             **kwargs)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -523,6 +555,7 @@ class Shomate(EmpiricalBase):
         obj_dict['a'] = list(self.a)
         obj_dict['T_low'] = self.T_low
         obj_dict['T_high'] = self.T_high
+        obj_dict['units'] = self.units
         return obj_dict
 
     @classmethod
@@ -564,7 +597,7 @@ class Shomate(EmpiricalBase):
         return cti_str
 
 
-def _fit_CpoR(T, CpoR):
+def _fit_CpoR(T, CpoR, units):
     """Fit a[0]-a[4] coefficients given the dimensionless heat capacity data
 
     Parameters
@@ -573,6 +606,9 @@ def _fit_CpoR(T, CpoR):
             Temperatures in K
         CpoR : (N,) `numpy.ndarray`_
             Dimensionless heat capacity
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         a : (8,) `numpy.ndarray`_
@@ -587,12 +623,16 @@ def _fit_CpoR(T, CpoR):
        or any([np.isnan(x) for x in CpoR]):
         return np.zeros(7)
     else:
-        [a, _] = curve_fit(_shomate_CpoR, T, np.array(CpoR))
+        # Pass the unit set
+        adj_shomate_CpoR = lambda T, A, B, C, D, E: _shomate_CpoR(T=T, A=A, B=B,
+                                                                  C=C, D=D, E=E,
+                                                                  units=units)
+        [a, _] = curve_fit(adj_shomate_CpoR, T, np.array(CpoR))
         a = np.append(a, [0., 0., 0.])
         return a
 
 
-def _fit_HoRT(T_ref, HoRT_ref, a):
+def _fit_HoRT(T_ref, HoRT_ref, a, units):
     """Fit a[5] coefficient in a_low and a_high attributes given the
     dimensionless enthalpy
 
@@ -604,6 +644,9 @@ def _fit_HoRT(T_ref, HoRT_ref, a):
             Reference dimensionless enthalpy
         T_mid : float
             Temperature to fit the offset
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         a : (8,) `numpy.ndarray`_
@@ -611,14 +654,15 @@ def _fit_HoRT(T_ref, HoRT_ref, a):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    a[5] = (HoRT_ref - get_shomate_HoRT(T=np.array([T_ref]), a=a)) \
-        * c.R('kJ/mol/K')*T_ref
-    a[7] = -get_shomate_HoRT(T=np.array([c.T0('K')]), a=a) \
-        * c.R('kJ/mol/K')*c.T0('K')
+    a[5] = (HoRT_ref \
+            - get_shomate_HoRT(T=np.array([T_ref]), a=a, units=units)) \
+            *c.R(units)*T_ref/c.prefixes['k']
+    a[7] = - get_shomate_HoRT(T=np.array([c.T0('K')]), a=a, units=units) \
+            *c.R(units)*c.T0('K')/c.prefixes['k']
     return a
 
 
-def _fit_SoR(T_ref, SoR_ref, a):
+def _fit_SoR(T_ref, SoR_ref, a, units):
     """Fit a[6] coefficient in a_low and a_high attributes given the
     dimensionless entropy
 
@@ -628,6 +672,9 @@ def _fit_SoR(T_ref, SoR_ref, a):
             Reference temperature in K
         SoR_ref : float
             Reference dimensionless entropy
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         a : (8,) `numpy.ndarray`_
@@ -635,11 +682,12 @@ def _fit_SoR(T_ref, SoR_ref, a):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    a[6] = (SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a))*c.R('J/mol/K')
+    a[6] = c.R(units)*(SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a,
+                                                 units=units))
     return a
 
 
-def get_shomate_CpoR(a, T):
+def get_shomate_CpoR(a, T, units):
     """Calculates the dimensionless heat capacity using Shomate polynomial form
 
     Parameters
@@ -648,6 +696,9 @@ def get_shomate_CpoR(a, T):
             Coefficients of Shomate polynomial
         T : iterable
             Temperature in K
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         CpoR: float
@@ -657,10 +708,10 @@ def get_shomate_CpoR(a, T):
     """
     t = T/1000.
     t_arr = np.array([[1., x, x**2, x**3, 1./x**2, 0., 0., 0.] for x in t])
-    return np.dot(t_arr, a)/c.R('J/mol/K')
+    return np.dot(t_arr, a)/c.R(units)
 
 
-def get_shomate_HoRT(a, T):
+def get_shomate_HoRT(a, T, units):
     """Calculates the dimensionless enthalpy using Shomate polynomial form
 
     Parameters
@@ -669,6 +720,9 @@ def get_shomate_HoRT(a, T):
             Coefficients of Shomate polynomial
         T : iterable
             Temperature in K
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         HoRT : float
@@ -679,11 +733,11 @@ def get_shomate_HoRT(a, T):
     t = T/1000.
     t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.]
                      for x in t])
-    HoRT = np.dot(t_arr, a)/(c.R('kJ/mol/K')*T)
+    HoRT = np.dot(t_arr, a)/(T*c.R(units)/c.prefixes['k'])
     return HoRT
 
 
-def get_shomate_SoR(a, T):
+def get_shomate_SoR(a, T, units):
     """Calculates the dimensionless entropy using Shomate polynomial form
 
     Parameters
@@ -692,6 +746,9 @@ def get_shomate_SoR(a, T):
             Coefficients of Shomate polynomial
         T : iterable
             Temperature in K
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         SoR : float
@@ -702,11 +759,11 @@ def get_shomate_SoR(a, T):
     t = T/1000.
     t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.]
                      for x in t])
-    SoR = np.dot(t_arr, a)/c.R('J/mol/K')
+    SoR = np.dot(t_arr, a)/c.R(units)
     return SoR
 
 
-def get_shomate_GoRT(a, T):
+def get_shomate_GoRT(a, T, units):
     """Calculates the dimensionless Gibbs free energy using Shomate
     polynomial form
 
@@ -716,6 +773,9 @@ def get_shomate_GoRT(a, T):
             Coefficients of Shomate polynomial
         T : iterable
             Temperature in K
+        units : str
+            Units corresponding to Shomate polynomial. Units should be supported
+            by :class:`~pmutt.constants.R`.
     Returns
     -------
         GoRT : float
@@ -723,12 +783,14 @@ def get_shomate_GoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    return get_shomate_HoRT(a=a, T=T) - get_shomate_SoR(a=a, T=T)
+    GoRT = get_shomate_HoRT(a=a, T=T, units=units) \
+           - get_shomate_SoR(a=a, T=T, units=units)
+    return GoRT
 
 
-def _shomate_CpoR(T, A, B, C, D, E):
+def _shomate_CpoR(T, A, B, C, D, E, units):
     """
-    Helper function to fit shomate heat capacity.
+    Helper function to fit Shomate heat capacity.
 
     Paramters
     ---------
@@ -745,4 +807,4 @@ def _shomate_CpoR(T, A, B, C, D, E):
     if not _is_iterable(T):
         T = [T]
     T = np.array(T)
-    return get_shomate_CpoR(a=a, T=T)
+    return get_shomate_CpoR(a=a, T=T, units=units)

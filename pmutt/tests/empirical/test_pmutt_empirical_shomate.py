@@ -33,6 +33,7 @@ class TestShomate(unittest.TestCase):
             'misc_models': None,
             'smiles': None,
             'type': 'shomate',
+            'units': 'J/mol/K'
         }
 
         self.Shomate_data = Shomate.from_data(
