@@ -106,7 +106,8 @@ from pmutt.empirical.references import Reference, References
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
 # Using pathlib can overcome this limiation
-notebook_path = Path().resolve()
+#notebook_path = Path().resolve()
+notebook_path = os.path.dirname(__file__)
 os.chdir(notebook_path)
 input_path = './inputs/NH3_Input_Data.xlsx'
 

@@ -41,7 +41,7 @@ class TestStatMech(unittest.TestCase):
         CO2_ase_parameters = {
             'atoms': CO2,
             'potentialenergy': -22.994202,
-            'vib_energies': [c.wavenumber_to_energy(x)
+            'vib_energies': [c.wavenumber_to_energy(x)*c.convert_unit(initial='J', final='eV')
                              for x in CO2_pmutt_parameters['vib_wavenumbers']],
             'geometry': 'linear',
             'symmetrynumber': 2,
@@ -123,13 +123,13 @@ class TestStatMech(unittest.TestCase):
             self.CO2_ASE.get_enthalpy(temperature=self.T0, verbose=False) \
             / c.R('eV/K')/self.T0
         calc_HoRT_CO2 = self.CO2_pmutt.get_HoRT(T=self.T0)
-        np.testing.assert_almost_equal(expected_HoRT_CO2, calc_HoRT_CO2)
+        np.testing.assert_almost_equal(expected_HoRT_CO2, calc_HoRT_CO2, 3)
 
     def test_get_H(self):
         expected_H_CO2 = \
             self.CO2_ASE.get_enthalpy(temperature=self.T0, verbose=False)
         calc_H_CO2 = self.CO2_pmutt.get_H(T=self.T0, units='eV')
-        np.testing.assert_almost_equal(expected_H_CO2, calc_H_CO2)
+        np.testing.assert_almost_equal(expected_H_CO2, calc_H_CO2, 3)
 
     def test_get_SoR(self):
         expected_SoR_CO2 = \
@@ -178,7 +178,7 @@ class TestStatMech(unittest.TestCase):
                                           T=self.T0,
                                           V=self.V0,
                                           units='eV')
-        np.testing.assert_almost_equal(expected_G_CO2, calc_G_CO2, 5)
+        np.testing.assert_almost_equal(expected_G_CO2, calc_G_CO2, 3)
 
 
 if __name__ == '__main__':

@@ -62,7 +62,7 @@ class Nasa(EmpiricalBase):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     def __init__(self, name, T_low, T_mid, T_high, a_low, a_high,
-                 cat_site=None, n_sites=1, **kwargs):
+                 cat_site=None, n_sites=None, **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_mid = T_mid
@@ -73,8 +73,8 @@ class Nasa(EmpiricalBase):
             self.cat_site = _pass_expected_arguments(cat_site, **kwargs)
         else:
             self.cat_site = cat_site
-        if self.cat_site is None:
-            n_sites = None
+        if self.cat_site is not None and n_sites is None:
+            n_sites = 1
         self.n_sites = n_sites
 
     def get_a(self, T):
@@ -625,7 +625,11 @@ class Nasa(EmpiricalBase):
                 Object represented as a CTI string.
         """
         elements = {key: int(val) for key, val in self.elements.items()}
-        cti_str = ('species(name="{}", atoms={},\n'
+        if self.n_sites is None:
+            size_str = ''
+        else:
+            size_str = ' size={},'.format(self.n_sites)
+        cti_str = ('species(name="{}", atoms={},{}\n'
                    '        thermo=(NASA([{}, {}],\n'
                    '                     [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
@@ -634,8 +638,8 @@ class Nasa(EmpiricalBase):
                    '                     [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}])))\n').format(
-                            self.name, obj_to_CTI(elements), self.T_low,
-                            self.T_mid, self.a_low[0], self.a_low[1],
+                            self.name, obj_to_CTI(elements), size_str,
+                            self.T_low, self.T_mid, self.a_low[0], self.a_low[1],
                             self.a_low[2], self.a_low[3], self.a_low[4],
                             self.a_low[5], self.a_low[6], self.T_mid,
                             self.T_high, self.a_high[0], self.a_high[1],
@@ -1252,9 +1256,13 @@ class Nasa9(EmpiricalBase):
                 Object represented as a CTI string.
         """
         elements = {key: int(val) for key, val in self.elements.items()}
-        cti_str = ('species(name="{}", atoms={},\n'
-                   '        thermo=(').format(
-                            self.name, obj_to_CTI(elements))
+        if self.n_sites is None:
+            size_str = ''
+        else:
+            size_str = ' size={},'.format(self.n_sites)
+        cti_str = ('species(name="{}", atoms={},{}\n'
+                   '        thermo=('
+                   ''.format(self.name, obj_to_CTI(elements), size_str))
         for i, nasa in enumerate(self.nasas):
             line_indent = (i != 0)
             cti_str += '{},\n'.format(nasa.to_CTI(line_indent=line_indent))

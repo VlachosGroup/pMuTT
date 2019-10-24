@@ -37,10 +37,12 @@ def write_cti(phases=None, species=None, reactions=None,
         lines_out : str
             If ``filename`` is None, CTI file is returned
     """
-    lines = [_get_file_timestamp(comment_char='# ')]
+    lines = [_get_file_timestamp(comment_char='# '),
+             '# See documentation for OpenMKM CTI file here:',
+             '# https://vlachosgroup.github.io/openmkm/input']
 
     '''Write units'''
-    lines.extend(['', '#' + '-'*80, '# UNITS', '#' + '-'*80])
+    lines.extend(['', '#' + '-'*79, '# UNITS', '#' + '-'*79])
     if units is None:
         units = Units()
     elif isinstance(units, dict):
@@ -117,16 +119,16 @@ def write_cti(phases=None, species=None, reactions=None,
         lines.extend(reaction_lines)
 
         '''Write BEP Relationships'''
-        lines.extend(['', '#' + '-'*80, '# BEP Relationships', '#' + '-'*80])
-
-        # Only write each BEP once
-        i = 0
-        for bep in beps:
-            bep_CTI = _force_pass_arguments(bep.to_CTI, units=units)
-            # Increment counter if necessary
-            if bep.name is None:
-                i += 1
-            lines.append(bep_CTI)
+        if len(beps) > 0:
+            lines.extend(['', '#' + '-'*80, '# BEP Relationships', '#' + '-'*80])
+            # Only write each BEP once
+            i = 0
+            for bep in beps:
+                bep_CTI = _force_pass_arguments(bep.to_CTI, units=units)
+                # Increment counter if necessary
+                if bep.name is None:
+                    i += 1
+                lines.append(bep_CTI)
 
     '''Write to file'''
     lines_out = '\n'.join(lines)

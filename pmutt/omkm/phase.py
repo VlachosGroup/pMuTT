@@ -160,6 +160,9 @@ class InteractingInterface(phase_cantera.Phase):
             # Skip empty fields
             if val is None:
                 continue
+            # Skip blank lists
+            if len(val) == 0:
+                continue
 
             cti_str += '                      {}={},\n'.format(
                     field,
