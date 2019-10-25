@@ -534,6 +534,9 @@ class Shomate(EmpiricalBase):
             CpoR = model.get_CpoR(T=T)
         except ValueError:
             CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
+        else:
+            if not _is_iterable(CpoR) or len(CpoR) != len(T):
+                CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Generate enthalpy and entropy data
         T_mean = (T_low+T_high)/2.
