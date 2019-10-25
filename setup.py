@@ -23,7 +23,7 @@ setuptools_info = {
 	'zip_safe': True,
 	'url': 'https://github.com/VlachosGroup/pmutt',
 	'packages': setuptools.find_packages(),
-	'package_data': {'':['*.xlsx']},
+	'package_data': {'':['*.xlsx', '*.log', 'OUTCAR']},
 	'install_requires': [
 		'ASE>=3.16.2',
 		'matplotlib>=2.2.3',
