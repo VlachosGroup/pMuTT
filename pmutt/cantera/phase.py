@@ -1,3 +1,5 @@
+import more_itertools as mit
+
 from pmutt import constants as c
 from pmutt.io.cantera import obj_to_CTI
 

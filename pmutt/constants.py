@@ -867,7 +867,7 @@ def temp_to_wavenumber(temp):
 
 
 def wavenumber_to_energy(wavenumber):
-    """Converts wavenumbers (1/cm) to energies (eV)
+    """Converts wavenumbers (1/cm) to energies (J)
 
     Parameters
     ----------
@@ -876,9 +876,9 @@ def wavenumber_to_energy(wavenumber):
     Returns
     -------
         energies : float
-            Corresponding temperature in eV
+            Corresponding temperature in J
     """
-    return wavenumber*c('cm/s')*h('eV s')
+    return wavenumber*c('cm/s')*h('J s')
 
 
 def wavenumber_to_freq(wavenumber):

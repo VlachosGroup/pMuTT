@@ -3,6 +3,7 @@ import more_itertools as mit
 
 from pmutt import _apply_numpy_operation
 from pmutt import constants as c
+from pmutt.cantera import _get_range_CTI
 from pmutt.omkm.phase import InteractingInterface, StoichSolid
 from pmutt.omkm.units import Units
 from pmutt.reaction import Reaction
@@ -311,18 +312,20 @@ class SurfaceReaction(Reaction):
 
         if self.is_adsorption:
             G_act = self.get_G_act(units=act_energy_unit, T=T, P=P)
-            cti_str = ('surface_reaction("{}", stick({: .5e}, {}, {: .5e}){})'
+            cti_str = ('surface_reaction("{}",\n'
+                       '                 stick({: .5e}, {}, {: .5e}){})'
                        ''.format(reaction_str, self.sticking_coeff,
                                  self.beta, G_act, id_str))
         else:
             A_units = '{}/{}2'.format(quantity_unit, length_unit)
-            cti_str = 'surface_reaction("{}", [{: .5e}, {}, {: .5e}]{})'.format(
+            cti_str = ('surface_reaction("{}",\n'
+                       '                 [{: .5e}, {}, {: .5e}]{})'.format(
                             reaction_str,
                             self.get_A(T=T, P=P, include_entropy=False,
                                        units=A_units),
                             self.beta,
                             self.get_G_act(units=act_energy_unit, T=T, P=P),
-                            id_str)
+                            id_str))
         return cti_str
 
 class BEP(BEP_parent):
@@ -384,7 +387,7 @@ class BEP(BEP_parent):
             raise ValueError(err_msg)
         return reactions
 
-    def _get_reaction_ids(self, direction, format='int'):
+    def _get_bep_reaction_ids(self, direction, format='int'):
         """Get the indices of the reactions that match the BEP template.
 
         Parameters
@@ -427,7 +430,7 @@ class BEP(BEP_parent):
                 New ID to assign to reaction.
         """
         # Separate reactions with BEP-related ID
-        reaction_ids = self._get_reaction_ids(direction=direction)
+        reaction_ids = self._get_bep_reaction_ids(direction=direction)
 
         # New ID is incremented
         if len(reaction_ids) == 0:
@@ -455,8 +458,8 @@ class BEP(BEP_parent):
             CTI_out = '['
             # Add reactions ranges with BEP template
             bep_template = self._get_bep_template(direction=direction)
-            reaction_int_ids = self._get_reaction_ids(direction=direction,
-                                                      format='int')
+            reaction_int_ids = self._get_bep_reaction_ids(direction=direction,
+                                                          format='int')
             reaction_int_ids.sort()
             reaction_id_ranges = mit.consecutive_groups(reaction_int_ids)
             for id_range in reaction_id_ranges:
@@ -479,7 +482,7 @@ class BEP(BEP_parent):
             CTI_out = '{}]'.format(CTI_out[:-2])
         return CTI_out
         
-    def to_CTI(self, act_energy_unit=None, units=None):
+    def to_CTI(self, act_energy_unit=None, units=None, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -495,9 +498,14 @@ class BEP(BEP_parent):
         """
         if units is not None:
             act_energy_unit = units.act_energy
-
-        synthesis_reactions = self._get_reactions_CTI(direction='synthesis')
-        cleavage_reactions = self._get_reactions_CTI(direction='cleavage')
+        # synthesis_reactions = self._get_reactions_CTI(direction='synthesis')
+        # cleavage_reactions = self._get_reactions_CTI(direction='cleavage')
+        synthesis_reactions = _get_range_CTI(objs=self.synthesis_reactions,
+                                             parent_obj=self,
+                                             delimiter=delimiter)
+        cleavage_reactions = _get_range_CTI(objs=self.cleavage_reactions,
+                                            parent_obj=self,
+                                            delimiter=delimiter)
         intercept = c.convert_unit(self.intercept, 'kcal/mol', act_energy_unit)
         cti_str = ('bep(id="{}",\n'
                    '    slope={},\n'

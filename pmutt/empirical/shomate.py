@@ -50,12 +50,14 @@ class Shomate(EmpiricalBase):
             by :class:`~pmutt.constants.R` (e.g. J/mol/K, cal/mol/K, eV/K).
             Default is J/mol/K.
     """
-    def __init__(self, name, T_low, T_high, a, units='J/mol/K', **kwargs):
+    def __init__(self, name, T_low, T_high, a, units='J/mol/K', n_sites=None,
+                 **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_high = T_high
         self.a = a
         self.units = units
+        self.n_sites = n_sites
 
     @property
     def units(self):
@@ -586,14 +588,19 @@ class Shomate(EmpiricalBase):
             CTI_str : str
                 Object represented as a CTI string.
         """
-        cti_str = ('species(name="{}", atoms={},\n'
+        if self.n_sites is None:
+            size_str = ''
+        else:
+            size_str = ' size={},'.format(self.n_sites)
+        cti_str = ('species(name="{}", atoms={},{}\n'
                    '        thermo=Shomate([{}, {}],\n'
                    '                       [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}]))').format(
-                            self.name, obj_to_CTI(self.elements), self.T_low,
-                            self.T_high, self.a[0], self.a[1], self.a[2],
-                            self.a[3], self.a[4], self.a[5], self.a[6])                            
+                            self.name, obj_to_CTI(self.elements), size_str,
+                            self.T_low, self.T_high, self.a[0], self.a[1],
+                            self.a[2], self.a[3], self.a[4], self.a[5],
+                            self.a[6])                            
         return cti_str
 
 
