@@ -37,9 +37,9 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'H2': <pmutt.empirical.nasa.Nasa object at 0x0000025130C23940>,\n",
-      " 'H2O': <pmutt.empirical.nasa.Nasa object at 0x0000025130C23A20>,\n",
-      " 'O2': <pmutt.empirical.nasa.Nasa object at 0x000002512A0FB208>}\n"
+      "{'H2': <pmutt.empirical.nasa.Nasa object at 0x000001C65F321C88>,\n",
+      " 'H2O': <pmutt.empirical.nasa.Nasa object at 0x000001C65F321D68>,\n",
+      " 'O2': <pmutt.empirical.nasa.Nasa object at 0x000001C6587F93C8>}\n"
      ]
     }
    ],
@@ -76,10 +76,10 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'H2': <pmutt.empirical.nasa.Nasa object at 0x0000025130C23940>,\n",
-      " 'H2O': <pmutt.empirical.nasa.Nasa object at 0x0000025130C23A20>,\n",
-      " 'H2O_TS': <pmutt.empirical.nasa.Nasa object at 0x0000025130C4E128>,\n",
-      " 'O2': <pmutt.empirical.nasa.Nasa object at 0x000002512A0FB208>}\n"
+      "{'H2': <pmutt.empirical.nasa.Nasa object at 0x000001C65F321C88>,\n",
+      " 'H2O': <pmutt.empirical.nasa.Nasa object at 0x000001C65F321D68>,\n",
+      " 'H2O_TS': <pmutt.empirical.nasa.Nasa object at 0x000001C65F350470>,\n",
+      " 'O2': <pmutt.empirical.nasa.Nasa object at 0x000001C6587F93C8>}\n"
      ]
     }
    ],

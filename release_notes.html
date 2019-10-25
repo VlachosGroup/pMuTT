@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.13 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.14 documentation</title>
   
 
   
@@ -105,12 +105,16 @@
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-2-13">Version 1.2.13</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-14">Version 1.2.14</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#contributors">Contributors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#version-1-2-12">Version 1.2.12</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-13">Version 1.2.13</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-12">Version 1.2.12</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Contributors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-11">Version 1.2.11</a></li>
@@ -124,7 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-3">Version 1.2.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-2">Version 1.2.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-1">Version 1.2.1</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Contributors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Contributors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-0">Version 1.2.0</a></li>
@@ -228,6 +232,33 @@
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
 </div>
+<div class="section" id="version-1-2-14">
+<h2>Version 1.2.14<a class="headerlink" href="#version-1-2-14" title="Permalink to this headline">¶</a></h2>
+<p>Oct. 25, 2019</p>
+<ul class="simple">
+<li>Added functionality to write files (such as
+<a class="reference internal" href="io.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_thermdat()</span></code></a>) can return a string containing
+the file if <code class="docutils literal notranslate"><span class="pre">filename</span></code> is not specified.</li>
+<li>Bug fix where <code class="docutils literal notranslate"><span class="pre">from_model</span></code> for <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
+<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> returned errors. The fix was
+related to incorrect datatyping for <code class="docutils literal notranslate"><span class="pre">misc_models</span></code>.</li>
+<li>Improved <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> to allow users to specify
+the units for the polynomial coefficients.</li>
+<li>Energies from Gaussian input functions (<a class="reference internal" href="io.html#module-pmutt.io.gaussian" title="pmutt.io.gaussian"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gaussian</span></code></a>)
+was originally in Hartrees. Changed to allow users to specify what unit they
+desire (default in eV).</li>
+<li>Added functionality to write BEP relationships to OpenMKM CTI files.</li>
+<li>Restructured OpenMKM CTI writer to be more robust when specifying custom IDs</li>
+<li>Added functionality to remove leading and trailing spaces when reading from
+Excel sheets since users found this error hard to pick up.</li>
+</ul>
+<div class="section" id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Qiang Li (<a class="reference external" href="https://github.com/lqcata">lqcata</a>)</li>
+</ul>
+</div>
+</div>
 <div class="section" id="version-1-2-13">
 <h2>Version 1.2.13<a class="headerlink" href="#version-1-2-13" title="Permalink to this headline">¶</a></h2>
 <p>Oct. 2, 2019</p>
@@ -258,8 +289,8 @@ The object must contain a dictionary of its composition in <code class="docutils
 this functionality.</li>
 <li>Fixed broken hyperlinks.</li>
 </ul>
-<div class="section" id="contributors">
-<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Contributors<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Geun Ho Gu (<a class="reference external" href="https://github.com/googhgoo">googhgoo</a>)</li>
 </ul>
@@ -279,8 +310,8 @@ installing</li>
 <li>Fixed bug where <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> was not passed when
 modes were specified indivudally in spreadsheets.</li>
 </ul>
-<div class="section" id="id2">
-<h3>Contributors<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Contributors<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Xenhua Zhang (<a class="reference external" href="https://github.com/xenhua">xenhua</a>)</p>
 </div>
 </div>
@@ -449,8 +480,8 @@ and <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" 
 properties (such as H, S, F, G) with the appropriate units</li>
 <li>Changed symbol for Hemlholtz energy from A to F</li>
 </ul>
-<div class="section" id="id3">
-<h3>Contributors<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Contributors<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Himaghna Bhattacharjee (<a class="reference external" href="https://github.com/himaghna">himaghna</a>)</li>
 </ul>
@@ -513,7 +544,7 @@ vibrational energies instead of wavenumbers.</li>
 <a class="reference internal" href="eos.html#pmutt.eos.vanDerWaalsEOS" title="pmutt.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
 <li>New <a class="reference internal" href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram" title="pmutt.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</li>
 <li>New <a class="reference internal" href="statmech.html#pmutt.statmech.vib.EinsteinVib" title="pmutt.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</li>
-<li>New <a class="reference internal" href="io.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
+<li>New <a class="reference internal" href="kinetic_models.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
 reactions from Chemkin surf.inp and gas.inp files</li>
 </ul>
 </div>

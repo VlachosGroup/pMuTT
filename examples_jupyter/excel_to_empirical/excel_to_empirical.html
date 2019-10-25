@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Excel to Empirical &mdash; pmutt 1.2.13 documentation</title>
+  <title>Excel to Empirical &mdash; pmutt 1.2.14 documentation</title>
   
 
   
@@ -3572,13 +3572,13 @@ the data.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;pmutt.empirical.nasa.Nasa object at 0x00000230CEC20550&gt;
+&lt;pmutt.empirical.nasa.Nasa object at 0x000002C40A25A908&gt;
 </pre></div></div>
 </div>
 </div>
 <div class="section" id="Writing-Nasa-objects-to-a-Thermdat-file">
 <h2>Writing Nasa objects to a Thermdat file<a class="headerlink" href="#Writing-Nasa-objects-to-a-Thermdat-file" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [5]:
 </pre></div>
@@ -3586,43 +3586,52 @@ the data.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">write_thermdat</span>
 
-<span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span>
-               <span class="n">write_date</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Writing thermdat to a file</span>
+<span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thermdat&#39;</span><span class="p">,</span> <span class="n">write_date</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># The thermdat contents can also be returned as a string by omitting filename</span>
+<span class="n">thermdat_str</span> <span class="o">=</span> <span class="n">write_thermdat</span><span class="p">(</span><span class="n">nasa_species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">write_date</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">thermdat_str</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">THERMO</span> <span class="n">ALL</span>
-       <span class="mi">100</span>       <span class="mi">500</span>      <span class="mi">1500</span>
-<span class="n">H2_cus</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20181106</span><span class="n">H</span>   <span class="mi">2</span>               <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">610.2</span>         <span class="mi">1</span>
-<span class="o">-</span><span class="mf">1.32355622E-01</span> <span class="mf">1.17210568E-02</span><span class="o">-</span><span class="mf">1.21067695E-05</span> <span class="mf">6.77414609E-09</span><span class="o">-</span><span class="mf">1.56703390E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">1.96714519E+03</span><span class="o">-</span><span class="mf">1.13778416E+00</span><span class="o">-</span><span class="mf">2.37252750E+00</span> <span class="mf">2.60714871E-02</span><span class="o">-</span><span class="mf">4.73583826E-05</span>    <span class="mi">3</span>
- <span class="mf">4.61096590E-08</span><span class="o">-</span><span class="mf">1.83624246E-11</span><span class="o">-</span><span class="mf">1.68126562E+03</span> <span class="mf">8.63949434E+00</span>                   <span class="mi">4</span>
-<span class="n">H2Obr</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>        <span class="mi">20181106</span><span class="n">H</span>   <span class="mi">2</span><span class="n">O</span>   <span class="mi">1</span>          <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">561.2</span>         <span class="mi">1</span>
- <span class="mf">3.33914632E+00</span> <span class="mf">8.65676156E-03</span><span class="o">-</span><span class="mf">1.03441245E-05</span> <span class="mf">7.11690970E-09</span><span class="o">-</span><span class="mf">1.91112739E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">3.65073462E+04</span><span class="o">-</span><span class="mf">1.59589792E+01</span> <span class="mf">3.68293150E-01</span> <span class="mf">3.06585581E-02</span><span class="o">-</span><span class="mf">7.30019576E-05</span>    <span class="mi">3</span>
- <span class="mf">8.80731362E-08</span><span class="o">-</span><span class="mf">4.17597362E-11</span><span class="o">-</span><span class="mf">3.61771342E+04</span><span class="o">-</span><span class="mf">3.41520582E+00</span>                   <span class="mi">4</span>
-<span class="n">H2Ocus</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>       <span class="mi">20181106</span><span class="n">H</span>   <span class="mi">2</span><span class="n">O</span>   <span class="mi">1</span>          <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">561.2</span>         <span class="mi">1</span>
- <span class="mf">3.33914632E+00</span> <span class="mf">8.65676156E-03</span><span class="o">-</span><span class="mf">1.03441245E-05</span> <span class="mf">7.11690970E-09</span><span class="o">-</span><span class="mf">1.91112739E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">4.35526918E+04</span><span class="o">-</span><span class="mf">1.59589792E+01</span> <span class="mf">3.68293150E-01</span> <span class="mf">3.06585581E-02</span><span class="o">-</span><span class="mf">7.30019576E-05</span>    <span class="mi">3</span>
- <span class="mf">8.80731362E-08</span><span class="o">-</span><span class="mf">4.17597362E-11</span><span class="o">-</span><span class="mf">4.32224798E+04</span><span class="o">-</span><span class="mf">3.41520582E+00</span>                   <span class="mi">4</span>
-<span class="n">H_cus</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>        <span class="mi">20181106</span><span class="n">H</span>   <span class="mi">1</span>               <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">544.9</span>         <span class="mi">1</span>
-<span class="o">-</span><span class="mf">4.56626289E-01</span> <span class="mf">6.52756961E-03</span><span class="o">-</span><span class="mf">5.72385869E-06</span> <span class="mf">2.56064809E-09</span><span class="o">-</span><span class="mf">4.74217654E-13</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">8.86598312E+02</span> <span class="mf">1.29145407E+00</span><span class="o">-</span><span class="mf">1.70971795E+00</span> <span class="mf">1.57880872E-02</span><span class="o">-</span><span class="mf">3.17011214E-05</span>    <span class="mi">3</span>
- <span class="mf">3.53093929E-08</span><span class="o">-</span><span class="mf">1.61102148E-11</span><span class="o">-</span><span class="mf">7.49187896E+02</span> <span class="mf">6.57564204E+00</span>                   <span class="mi">4</span>
-<span class="n">HObr</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>         <span class="mi">20181106</span><span class="n">H</span>   <span class="mi">1</span><span class="n">O</span>   <span class="mi">1</span>          <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">610.2</span>         <span class="mi">1</span>
- <span class="mf">1.32317902E+00</span> <span class="mf">1.07943705E-02</span><span class="o">-</span><span class="mf">1.40435635E-05</span> <span class="mf">9.13293283E-09</span><span class="o">-</span><span class="mf">2.29632826E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">3.92614463E+04</span><span class="o">-</span><span class="mf">7.89440118E+00</span><span class="o">-</span><span class="mf">1.90464381E+00</span> <span class="mf">3.13120166E-02</span><span class="o">-</span><span class="mf">6.40095247E-05</span>    <span class="mi">3</span>
- <span class="mf">6.43701568E-08</span><span class="o">-</span><span class="mf">2.56553082E-11</span><span class="o">-</span><span class="mf">3.88467774E+04</span> <span class="mf">6.21680636E+00</span>                   <span class="mi">4</span>
-<span class="n">Obr</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20181106</span><span class="n">O</span>   <span class="mi">1</span>               <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">561.2</span>         <span class="mi">1</span>
- <span class="mf">1.10929486E+00</span> <span class="mf">6.02227730E-03</span><span class="o">-</span><span class="mf">8.09582034E-06</span> <span class="mf">5.13595359E-09</span><span class="o">-</span><span class="mf">1.26396875E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">3.27394702E+04</span><span class="o">-</span><span class="mf">6.27416658E+00</span><span class="o">-</span><span class="mf">1.46028728E+00</span> <span class="mf">2.43280424E-02</span><span class="o">-</span><span class="mf">5.80735069E-05</span>    <span class="mi">3</span>
- <span class="mf">6.69898412E-08</span><span class="o">-</span><span class="mf">3.04663321E-11</span><span class="o">-</span><span class="mf">3.24443213E+04</span> <span class="mf">4.66839332E+00</span>                   <span class="mi">4</span>
-<span class="n">IPA</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>          <span class="mi">20181106</span><span class="n">C</span>   <span class="mi">3</span><span class="n">H</span>   <span class="mi">8</span><span class="n">O</span>   <span class="mi">1</span>     <span class="n">S300</span><span class="o">.</span><span class="mi">0</span>     <span class="mf">1100.0</span>    <span class="mf">544.9</span>         <span class="mi">1</span>
-<span class="o">-</span><span class="mf">2.41027713E+00</span> <span class="mf">6.03014873E-02</span><span class="o">-</span><span class="mf">5.21384920E-05</span> <span class="mf">2.61809899E-08</span><span class="o">-</span><span class="mf">5.76980678E-12</span>    <span class="mi">2</span>
-<span class="o">-</span><span class="mf">4.86845128E+04</span> <span class="mf">1.14685801E+01</span> <span class="mf">6.36065045E+00</span><span class="o">-</span><span class="mf">8.82654398E-03</span> <span class="mf">1.52433654E-04</span>    <span class="mi">3</span>
-<span class="o">-</span><span class="mf">2.43446336E-07</span> <span class="mf">1.27830717E-10</span><span class="o">-</span><span class="mf">4.95747767E+04</span><span class="o">-</span><span class="mf">2.48996210E+01</span>                   <span class="mi">4</span>
-<span class="n">END</span>
-</pre></div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+THERMO ALL
+       100       500      1500
+H2_cus(S)       20191025H   2               S300.0     1100.0    610.2         1
+-1.32355622E-01 1.17210568E-02-1.21067695E-05 6.77414609E-09-1.56703390E-12    2
+-1.96688030E+03-1.13738972E+00-2.37252750E+00 2.60714871E-02-4.73583826E-05    3
+ 4.61096590E-08-1.83624246E-11-1.68100073E+03 8.63988878E+00                   4
+H2Obr(S)        20191025H   2O   1          S300.0     1100.0    561.2         1
+ 3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
+-3.65044468E+04-1.59546195E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
+ 8.80731362E-08-4.17597362E-11-3.61742347E+04-3.41084606E+00                   4
+H2Ocus(S)       20191025H   2O   1          S300.0     1100.0    561.2         1
+ 3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
+-4.35497924E+04-1.59546195E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
+ 8.80731362E-08-4.17597362E-11-4.32195803E+04-3.41084606E+00                   4
+H_cus(S)        20191025H   1               S300.0     1100.0    544.9         1
+-4.56626289E-01 6.52756961E-03-5.72385869E-06 2.56064809E-09-4.74217654E-13    2
+-8.85760036E+02 1.29271332E+00-1.70971795E+00 1.57880872E-02-3.17011214E-05    3
+ 3.53093929E-08-1.61102148E-11-7.48349620E+02 6.57690129E+00                   4
+HObr(S)         20191025H   1O   1          S300.0     1100.0    610.2         1
+ 1.32317902E+00 1.07943705E-02-1.40435635E-05 9.13293283E-09-2.29632826E-12    2
+-3.92611148E+04-7.89390797E+00-1.90464381E+00 3.13120166E-02-6.40095247E-05    3
+ 6.43701568E-08-2.56553082E-11-3.88464459E+04 6.21729957E+00                   4
+Obr(S)          20191025O   1               S300.0     1100.0    561.2         1
+ 1.10929486E+00 6.02227730E-03-8.09582034E-06 5.13595359E-09-1.26396875E-12    2
+-3.27378795E+04-6.27177767E+00-1.46028728E+00 2.43280424E-02-5.80735069E-05    3
+ 6.69898412E-08-3.04663321E-11-3.24427306E+04 4.67078224E+00                   4
+IPA(S)          20191025C   3H   8O   1     S300.0     1100.0    544.9         1
+-2.41027713E+00 6.03014873E-02-5.21384920E-05 2.61809899E-08-5.76980678E-12    2
+-4.86934052E+04 1.14552028E+01 6.36065045E+00-8.82654398E-03 1.52433654E-04    3
+-2.43446336E-07 1.27830717E-10-4.95836691E+04-2.49129983E+01                   4
+END
+</pre></div></div>
 </div>
 </div>
 <div class="section" id="Checking-the-fit-of-the-Nasa-object">
@@ -3646,7 +3655,7 @@ matches the statistical mechanical model inputted, use the
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/examples_jupyter_excel_to_empirical_excel_to_empirical_18_0.png" src="../../_images/examples_jupyter_excel_to_empirical_excel_to_empirical_18_0.png" />
+<img alt="../../_images/examples_jupyter_excel_to_empirical_excel_to_empirical_17_0.png" src="../../_images/examples_jupyter_excel_to_empirical_excel_to_empirical_17_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
