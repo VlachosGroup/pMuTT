@@ -4,7 +4,7 @@
 
   <!-- phase gas     -->
   <phase id="gas" dim="3">
-    <elementArray datasrc="elements.xml">N Ar H</elementArray>
+    <elementArray datasrc="elements.xml">Ar H N</elementArray>
     <speciesArray datasrc="#species_data">N2 NH3 H2 Ar</speciesArray>
     <thermo model="IdealGas"/>
     <kinetics model="GasKinetics"/>
@@ -25,7 +25,7 @@
 
   <!-- phase terrace     -->
   <phase id="terrace" dim="2">
-    <elementArray datasrc="elements.xml">Ru N H</elementArray>
+    <elementArray datasrc="elements.xml">Ru H N</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0000" max="0003"/>
@@ -54,7 +54,7 @@
 
   <!-- phase step     -->
   <phase id="step" dim="2">
-    <elementArray datasrc="elements.xml">Ru N H</elementArray>
+    <elementArray datasrc="elements.xml">Ru H N</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0004" max="0007"/>
@@ -88,15 +88,15 @@
     <species name="N2">
       <atomArray>N:2 </atomArray>
       <thermo>
-        <NASA Tmin="298.0" Tmax="554.1224489795918" P0="100000.0">
+        <NASA Tmin="298.0" Tmax="523.3877551020408" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             0.000000000E+00,   0.000000000E+00,   0.000000000E+00,   0.000000000E+00, 
-             0.000000000E+00,   1.791365840E+03,   2.524103400E+01</floatArray>
+             3.417921950E+00,   8.916881290E-04,  -3.468647530E-06,   5.446917950E-09, 
+             -2.468040170E-12,  -1.272185980E+02,   3.469254460E+00</floatArray>
         </NASA>
-        <NASA Tmin="554.1224489795918" Tmax="800.0" P0="100000.0">
+        <NASA Tmin="523.3877551020408" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             0.000000000E+00,   0.000000000E+00,   0.000000000E+00,   0.000000000E+00, 
-             0.000000000E+00,   1.791365840E+03,   2.524103400E+01</floatArray>
+             3.752073090E+00,  -1.301590270E-03,   1.838487850E-06,  -1.174134300E-10, 
+             -3.653911170E-13,  -1.674660460E+02,   2.024872350E+00</floatArray>
         </NASA>
       </thermo>
     </species>
@@ -122,15 +122,15 @@
     <species name="H2">
       <atomArray>H:2 </atomArray>
       <thermo>
-        <NASA Tmin="298.0" Tmax="554.1224489795918" P0="100000.0">
+        <NASA Tmin="298.0" Tmax="574.6122448979592" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             0.000000000E+00,   0.000000000E+00,   0.000000000E+00,   0.000000000E+00, 
-             0.000000000E+00,   3.609313100E+03,   1.780174520E+01</floatArray>
+             3.507179250E+00,  -8.503971350E-05,   3.795705760E-07,  -7.579432980E-10, 
+             5.724235580E-13,   1.687255210E+03,  -4.303596160E+00</floatArray>
         </NASA>
-        <NASA Tmin="554.1224489795918" Tmax="800.0" P0="100000.0">
+        <NASA Tmin="574.6122448979592" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             0.000000000E+00,   0.000000000E+00,   0.000000000E+00,   0.000000000E+00, 
-             0.000000000E+00,   3.609313100E+03,   1.780174520E+01</floatArray>
+             3.379032510E+00,   7.923019070E-04,  -1.886629520E-06,   1.859742200E-09, 
+             -5.684472540E-13,   1.702317850E+03,  -3.753848780E+00</floatArray>
         </NASA>
       </thermo>
     </species>

@@ -7,6 +7,30 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.14
+--------------
+Oct. 25, 2019
+
+- Added functionality to write files (such as 
+  :func:`~pmutt.io.thermdat.write_thermdat`) can return a string containing
+  the file if ``filename`` is not specified.
+- Bug fix where ``from_model`` for :class:`~pmutt.empirical.nasa.Nasa` and
+  :class:`~pmutt.empirical.shomate.Shomate` returned errors. The fix was
+  related to incorrect datatyping for ``misc_models``.
+- Improved :class:`~pmutt.empirical.shomate.Shomate` to allow users to specify
+  the units for the polynomial coefficients.
+- Energies from Gaussian input functions (:mod:`~pmutt.io.gaussian`)
+  was originally in Hartrees. Changed to allow users to specify what unit they
+  desire (default in eV).
+- Added functionality to write BEP relationships to OpenMKM CTI files.
+- Restructured OpenMKM CTI writer to be more robust when specifying custom IDs
+- Added functionality to remove leading and trailing spaces when reading from
+  Excel sheets since users found this error hard to pick up.
+
+Contributors
+^^^^^^^^^^^^
+- Qiang Li (lqcata_)
+
 Version 1.2.13
 --------------
 Oct. 2, 2019
@@ -278,3 +302,4 @@ Oct. 26, 2018
 .. _himaghna: https://github.com/himaghna
 .. _xenhua: https://github.com/xenhua
 .. _googhgoo: https://github.com/googhgoo
+.. _lqcata: https://github.com/lqcata
