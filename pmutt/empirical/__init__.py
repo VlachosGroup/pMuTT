@@ -37,8 +37,8 @@ class EmpiricalBase(_pmuttBase):
             e.g. CH3OH can be represented as:
             {'C': 1, 'H': 4, 'O': 1,}.
         model : model object, optional
-            Object which was used to fit the Nasa polynomial. Default is None.
-            Object should have the following methods: ``get_CpoR``,
+            Object which was used to fit the empirical polynomial. Default is
+            None. Object should have the following methods: ``get_CpoR``,
             ``get_HoRT``, ``get_SoR``, ``get_GoRT``.
         misc_models : list of pmutt model objects, optional
             Extra models to add extra functionality. Commonly used models would
