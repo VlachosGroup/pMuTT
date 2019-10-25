@@ -6,6 +6,7 @@ Read from/write to xlsx files of particular format.
 """
 
 import os
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -98,6 +99,12 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             if pd.isnull(cell_data):
                 # Skip empty cells
                 continue
+            elif 'Unnamed' in col:
+                warn_msg = ('Found data ({}) with no column header in Excel '
+                            'sheet, {}. This property will not be assigned '
+                            'correctly.'
+                            ''.format(cell_data, io))
+                warnings.warn(warn_msg)
             elif 'element' in col:
                 thermo_data = set_element(header=col, value=cell_data,
                                           output_structure=thermo_data,
