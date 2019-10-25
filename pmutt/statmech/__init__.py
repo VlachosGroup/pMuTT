@@ -6,14 +6,17 @@ Created on Fri Jul 7 12:40:00 2018
 """
 import inspect
 from copy import copy
+
 import numpy as np
-from pmutt import (_pass_expected_arguments, _is_iterable, _get_mode_quantity,
-                   _get_specie_kwargs, _apply_numpy_operation, _ModelBase,
-                   _get_R_adj, parse_formula)
+
+from pmutt import (_apply_numpy_operation, _get_mode_quantity, _get_R_adj,
+                   _get_specie_kwargs, _is_iterable, _ModelBase,
+                   _pass_expected_arguments, _check_obj, _check_iterable_attr)
 from pmutt import constants as c
-from pmutt.statmech import trans, vib, elec, rot
-from pmutt.mixture import _get_mix_quantity
+from pmutt import parse_formula
 from pmutt.io import json as json_pmutt
+from pmutt.mixture import _get_mix_quantity
+from pmutt.statmech import elec, rot, trans, vib
 
 
 class EmptyMode(_ModelBase):
@@ -232,8 +235,12 @@ class StatMech(_ModelBase):
         self.smiles = smiles
         self.notes = notes
         self.references = references
-
-        # Assign elements from Atoms
+        self.trans_model = _check_obj(trans_model, **kwargs)
+        self.vib_model = _check_obj(vib_model, **kwargs)
+        self.rot_model = _check_obj(rot_model, **kwargs)
+        self.elec_model = _check_obj(elec_model, **kwargs)
+        self.nucl_model = _check_obj(nucl_model, **kwargs)
+        # Assign elements from Atoms if necessary
         if elements is None:
             try:
                 elements = parse_formula( \
@@ -242,45 +249,12 @@ class StatMech(_ModelBase):
                 pass
         self.elements=elements
 
-
-        # Translational modes
-        if inspect.isclass(trans_model):
-            self.trans_model = _pass_expected_arguments(trans_model, **kwargs)
-        else:
-            self.trans_model = trans_model
-
-        # Vibrational modes
-        if inspect.isclass(vib_model):
-            self.vib_model = _pass_expected_arguments(vib_model, **kwargs)
-        else:
-            self.vib_model = vib_model
-
-        # Rotational modes
-        if inspect.isclass(rot_model):
-            self.rot_model = _pass_expected_arguments(rot_model, **kwargs)
-        else:
-            self.rot_model = rot_model
-
-        # Electronic modes
-        if inspect.isclass(elec_model):
-            self.elec_model = _pass_expected_arguments(elec_model, **kwargs)
-        else:
-            self.elec_model = elec_model
-
-        # Nuclear modes
-        if inspect.isclass(nucl_model):
-            self.nucl_model = _pass_expected_arguments(nucl_model, **kwargs)
-        else:
-            self.nucl_model = nucl_model
-
         # Assign misc models
         # TODO misc models can not be initialized by passing the class
         # because all the models will have the same attributes. Figure out
         # a way to pass them. Perhaps have a dictionary that contains the
         # attributes separated by species
-        if not _is_iterable(misc_models) and misc_models is not None:
-            misc_models = [misc_models]
-        self.misc_models = misc_models
+        self.misc_models = _check_iterable_attr(misc_models)
 
     def get_quantity(self, method_name, raise_error=True, raise_warning=True,
                      operation='sum', verbose=False, use_references=True,

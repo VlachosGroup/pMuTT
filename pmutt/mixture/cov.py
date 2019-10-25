@@ -6,6 +6,7 @@ Created on Thurs Feb 7 10:15:00 2019
 """
 
 import numpy as np
+
 from pmutt import _ModelBase
 from pmutt import constants as c
 from pmutt.io.json import remove_class
@@ -28,14 +29,17 @@ class PiecewiseCovEffect(_ModelBase):
             [0, 1]
         slopes : list (length N) of float
             Slopes (in kcal/mol) to use between the intervals
+        name : str, optional
+            Name to assign. Default is None
     """
 
-    def __init__(self, name_i, name_j, intervals, slopes):
+    def __init__(self, name_i, name_j, intervals, slopes, name=None):
         self.name_i = name_i
         self.name_j = name_j
         self.intervals = intervals
         self.slopes = slopes
         self._set_intercepts()
+        self.name = name
 
     def insert(self, interval, slope):
         """Inserts the a new interval and slope for the piecewise function
@@ -184,13 +188,13 @@ class PiecewiseCovEffect(_ModelBase):
         """
         if units is not None:
             energy_unit = units.energy
-
-        lat_inter_str = 'lateral_interaction("{} {}", {}, {})'.format(
+        lat_inter_str = 'lateral_interaction("{} {}", {}, {}, id="{}")'.format(
                 self.name_i,
                 self.name_j,
                 c.convert_unit(num=np.array(self.slopes), initial='kcal/mol',
                                final=energy_unit),
-                self.intervals)
+                self.intervals,
+                self.name)
         return lat_inter_str
 
     def to_dict(self):

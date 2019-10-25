@@ -2,11 +2,12 @@
 
 import numpy as np
 from ase.build import molecule
-from pmutt.statmech import StatMech, presets
+
 from pmutt.empirical.nasa import Nasa
-from pmutt.empirical.shomate import Shomate
 from pmutt.empirical.references import Reference, References
+from pmutt.empirical.shomate import Shomate
 from pmutt.reaction import Reaction, Reactions
+from pmutt.statmech import StatMech, presets
 
 O2_nasa = Nasa(name='O2', T_low=200., T_mid=1000., T_high=3500.,
                elements={'O': 2}, phase='G',

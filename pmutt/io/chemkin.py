@@ -4,13 +4,16 @@ pmutt.io.chemkin
 
 Reads reactions lists from Chemkin gas.inp and surf.inp files
 """
-import re
-import numpy as np
 import datetime
+import re
 from warnings import warn
-from pmutt import constants as c
-from pmutt import pmutt_list_to_dict, _force_pass_arguments
 
+import numpy as np
+
+from pmutt import _force_pass_arguments
+from pmutt import constants as c
+from pmutt import pmutt_list_to_dict
+from pmutt.io import _get_file_timestamp
 
 def read_reactions(filename, species=None):
     """Directly read reactions from Chemkin gas.inp or surf.inp files
@@ -110,7 +113,7 @@ def read_reactions(filename, species=None):
 
 
 def write_EA(reactions, conditions, write_gas_phase=False,
-             filename='EAs.inp', act_method_name='get_EoRT_act',
+             filename=None, act_method_name='get_EoRT_act',
              float_format=' .2E', species_delimiter='+',
              reaction_delimiter='<=>', stoich_format='.0f', newline='\n',
              column_delimiter='  '):
@@ -128,7 +131,8 @@ def write_EA(reactions, conditions, write_gas_phase=False,
             adsorption). If False, only surface phase reactions are written.
             Default is False
         filename : str, optional
-            Filename for the EAs.inp file. Default is 'EAs.inp'
+            Filename for the EAs.inp file. If not specified, returns EAs file
+            as str
         method_name : str, optional
             Method to use to calculate values. Typical values are:
 
@@ -146,6 +150,10 @@ def write_EA(reactions, conditions, write_gas_phase=False,
             Newline character to use. Default is the Linux newline character
         column_delimiter : str, optional
             Delimiter for columns. Default is '  '
+    Returns
+    -------
+        lines_out : str
+            EA.inp lines as a string if ``filename`` is None
     """
     valid_reactions = []
     for reaction in reactions:
@@ -160,7 +168,7 @@ def write_EA(reactions, conditions, write_gas_phase=False,
     n_reactions = len(valid_reactions)
     # Add initial comment help line and number of reactions
     lines = [
-        _get_filestamp(),
+        _get_file_timestamp(comment_char='! '),
         ('!The first line is the number of reactions. Subsequent lines follow '
          'the format'),
         ('!of rxn (from surf.out) followed by the EA/RT value at each run '
@@ -205,11 +213,15 @@ def write_EA(reactions, conditions, write_gas_phase=False,
             line.append(float_field.format(quantity))
         lines.append(column_delimiter.join(line))
     lines.append('EOF')
-    with open(filename, 'w', newline=newline) as f_ptr:
-        f_ptr.write('\n'.join(lines))
+    lines_out = '\n'.join(lines)
+    if filename is not None:
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write(lines_out)
+    else:
+        return lines_out
 
 
-def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
+def write_gas(nasa_species, filename=None, T=c.T0('K'), reactions=[],
               species_delimiter='+', reaction_delimiter='=',
               act_method_name='get_E_act', act_unit='kcal/mol',
               float_format=' .3E', stoich_format='.0f', newline='\n',
@@ -222,10 +234,15 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
             Surface and gas species used in Chemkin mechanism. Used to write
             elements section
         filename : str, optional
-            File name for gas.inp file. Default is 'gas.inp'
+            File name for gas.inp file. If not specified, returns gas.inp as
+            string
         reactions : :class:`~pmutt.reaction.Reactions` object, optional
             Reactions in mechanism. Reactions with only gas-phase species will
             be written to this file
+    Returns
+    -------
+        lines_out : str
+            gas.inp lines as a string if ``filename`` is None
     """
     # Get unique elements and gas-phase species
     unique_elements = set()
@@ -257,7 +274,7 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
 
     # Collect all the lines into a list
     lines = [
-        _get_filestamp(),
+        _get_file_timestamp(comment_char='! '),
         '!Elements present in gas and surface species',
         'ELEMENTS']
     lines.extend(unique_elements)
@@ -280,11 +297,14 @@ def write_gas(nasa_species, filename='gas.inp', T=c.T0('K'), reactions=[],
     lines.extend(reaction_lines)
     lines.append('END')
 
-    with open(filename, 'w', newline=newline) as f_ptr:
-        f_ptr.write('\n'.join(lines))
+    lines_out = '\n'.join(lines)
+    if filename is not None:
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write('\n'.join(lines))
+    else:
+        return lines_out
 
-def write_surf(reactions, sden_operation='min',
-               filename='surf.inp', T=c.T0('K'),
+def write_surf(reactions, sden_operation='min', filename=None, T=c.T0('K'),
                species_delimiter='+', reaction_delimiter='=',
                act_method_name='get_E_act', act_unit='kcal/mol',
                float_format=' .3E', stoich_format='.0f', newline='\n',
@@ -297,7 +317,7 @@ def write_surf(reactions, sden_operation='min',
             Chemkin reactions to write in surf.inp file. Purely gas-phase
             reactions will be ignored
         filename : str, optional
-            Filename for surf.inp file. Default is 'surf.inp'
+            Filename for surf.inp file. If not specified, returns file as str
         T : float, optional
             Temperature to calculate activation energy. Default is 298.15 K
         species_delimiter : str, optional
@@ -325,6 +345,10 @@ def write_surf(reactions, sden_operation='min',
         kwargs : keyword arguments
             Parameters needed to calculate activation energy and preexponential
             factor
+    Returns
+    -------
+        lines_out : str
+            surf.inp lines as a string if ``filename`` is None
     """
     # Organize species by their catalyst sites
     cat_adsorbates = {}
@@ -397,7 +421,7 @@ def write_surf(reactions, sden_operation='min',
         act_unit_str = act_unit.upper()
 
     lines = [
-        _get_filestamp(),
+        _get_file_timestamp(comment_char='! '),
         '!Surface species',
         '!Each catalyst site has the following format:',
         '!SITE/[Site name]/      SDEN/[Site density in mol/cm2]/',
@@ -431,42 +455,49 @@ def write_surf(reactions, sden_operation='min',
     lines.extend(reaction_lines)
     lines.append('END')
 
-    # Write the file
-    with open(filename, 'w', newline=newline) as f_ptr:
-        f_ptr.write('\n'.join(lines))
-
+    lines_out = '\n'.join(lines)
+    if filename is not None:
+        # Write the file
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write(lines_out)
+    else:
+        return lines_out
 
 def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
-                 filename='T_flow.inp', float_format='.3E', newline='\n',
+                 filename=None, float_format='.3E', newline='\n',
                  column_delimiter='  '):
     """Writes the T_flow.inp Chemkin file
 
     Parameters
     ----------
-    T : list of float
-        Temperatures in K
-    P : list of float
-        Pressures in atm
-    Q : list of float
-        Volumetric flow rate in cm3/s
-    abyv : list of float
-        Catalyst area to reactor volume ratio in 1/cm
-    filename : str, optional
-        Name of the file. Default is T_flow.inp
-    float_format : str, optional
-        Format to write floating point numbers. Default is '.3E' (i.e.
-        scientific notation rounded to 3 decimal places)
-    newline : str, optional
-        Newline character. Default is the Linux newline character
-    column_delimiter : str, optional
-        Delimiter for columns. Default is '  '
+        T : list of float
+            Temperatures in K
+        P : list of float
+            Pressures in atm
+        Q : list of float
+            Volumetric flow rate in cm3/s
+        abyv : list of float
+            Catalyst area to reactor volume ratio in 1/cm
+        filename : str, optional
+            Name of the file. If not specified, returns file as str
+        float_format : str, optional
+            Format to write floating point numbers. Default is '.3E' (i.e.
+            scientific notation rounded to 3 decimal places)
+        newline : str, optional
+            Newline character. Default is the Linux newline character
+        column_delimiter : str, optional
+            Delimiter for columns. Default is '  '
+    Returns
+    -------
+        lines_out : str
+            T_flow lines as a string if ``filename`` is None
     """
     line_field = '{:%s}{}{:%s}{}{:%s}{}{:%s}  !{:<3}' % (float_format,
                                                          float_format,
                                                          float_format,
                                                          float_format)
     lines = [
-        _get_filestamp(),
+        _get_file_timestamp(comment_char='! '),
         '!Conditions for each reaction run',
         '!Only used when MultiInput in tube.inp is set to "T"',
         '!T[K]    {0}P[atm]   {0}Q[cm3/s] {0}abyv[cm-1]{0}Run #'.format(
@@ -477,12 +508,17 @@ def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
                                        Q_i, column_delimiter,
                                        abyv_i, i+1))
     lines.append('EOF')
-    with open(filename, 'w', newline=newline) as f_ptr:
-        f_ptr.write('\n'.join(lines))
+
+    lines_out = '\n'.join(lines)
+    if filename is not None:
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write(lines_out)
+    else:
+        return lines_out
 
 
 def write_tube_mole(mole_frac_conditions, nasa_species,
-                    filename='tube_mole.inp', float_format=' .3f',
+                    filename=None, float_format=' .3f',
                     newline='\n', column_delimiter='  '):
     """Write tube_mole.inp Chemkin file
 
@@ -494,7 +530,7 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
     nasa_species : list of :class:`~pmutt.empirical.nasa.Nasa` objects
         Nasa species to find phase information
     filename : str, optional
-        Name of the file. Default is 'tube_mole.inp'
+        Name of the file. If not specified, returns file as str
     float_format : str, optional
         Format to write floating point numbers. Default is '.3E' (i.e.
         scientific notation rounded to 3 decimal places)
@@ -502,6 +538,10 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
         Newline character. Default is the Linux newline character
     column_delimiter : str, optional
         Delimiter for columns. Default is '  '
+    Returns
+    -------
+        lines_out : str
+            tube_mole lines as a string if ``filename`` is None
     """
     # Prepare the float field for printing mole fractions
     float_field = '{:%s}' % float_format
@@ -529,7 +569,6 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
     for specie in unique_species:
         specie_line = _get_specie_str(specie=specie,
                                       include_phase=True).ljust(species_padding)
-        print(specie_line)
         for condition in mole_frac_conditions:
             # If the mole fraction was not specified, assumed to be 0
             try:
@@ -541,7 +580,7 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
         species_lines.append(specie_line)
 
     lines = [
-        _get_filestamp(),
+        _get_file_timestamp(comment_char='! '),
         "!Specify the 'species/phase/' pair /(in quotes!)/ and the associated",
         ("!composition values. If the composition does not sum to 1 for each "
          "phase or"),
@@ -560,14 +599,12 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
     lines.extend(species_lines)
     lines.append('EOF')
 
-    with open(filename, 'w', newline=newline) as f_ptr:
-        f_ptr.write('\n'.join(lines))
-
-
-def _get_filestamp():
-    """Writes a comment indicating when the file was written by pmutt"""
-    return '!File generated by pmutt on {}'.format(datetime.datetime.now())
-
+    lines_out = '\n'.join(lines)
+    if filename is not None:
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write(lines_out)
+    else:
+        return lines_out
 
 def _get_max_reaction_len(reactions, species_delimiter, reaction_delimiter,
                           stoich_format, include_TS):

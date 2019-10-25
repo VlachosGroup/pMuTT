@@ -12,15 +12,18 @@ pmutt
 name = 'pmutt'
 __version__ = '1.2.13'
 
-import re
 import inspect
 import itertools
+import re
 from warnings import warn
+
 import numpy as np
 import pygal
 from matplotlib import pyplot as plt
-from pmutt.io.json import remove_class
+
 from pmutt import constants as c
+from pmutt.io.json import remove_class
+
 
 class _pmuttBase:
     """Generic parent class to all pmutt objects. Functionality:
@@ -339,7 +342,7 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
             continue
         method_kwargs = _get_specie_kwargs(method, **kwargs)
         fn = getattr(obj, method)
-        y = np.zeros_like(x_values)
+        y = np.zeros_like(a=x_values, dtype=np.double)
         for j, x in enumerate(x_values):
             method_kwargs[x_name] = x
             y[j] = _force_pass_arguments(fn, **method_kwargs)
@@ -827,3 +830,42 @@ def _get_R_adj(units, elements):
     R_adj = c.R(mol_units)/c.convert_unit(num=mol_weight, initial='g',
                                           final=mass_unit)
     return R_adj
+
+def _check_obj(obj, **kwargs):
+    """Helper function to create an object if the class definition is passed.
+
+    Parameters
+    ----------
+        obj : Object or class
+            Value to check
+        kwargs : keyword arguments
+            Parameters needed by obj for initialization
+    Returns
+    -------
+        obj_out : Object
+            Initialized object
+    """
+    if inspect.isclass(obj):
+        obj_out = _force_pass_arguments(obj, **kwargs)
+    else:
+        obj_out = obj
+    return obj_out
+
+def _check_iterable_attr(obj):
+        """Helper method to assign object to a list if only one non-iterable
+        element specified.
+
+        Parameters
+        ----------
+            obj : list or non-iterable object
+                Object to check
+        Returns
+        -------
+            obj_out : list or None
+                If ``obj`` is None, returns None. Otherwise, returns ``obj``
+                as a list
+        """
+        if not _is_iterable(obj) and obj is not None:
+            return [obj]
+        else:
+            return obj

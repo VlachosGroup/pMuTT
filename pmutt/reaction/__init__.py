@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
+import inspect
+import re
 from collections import Counter
 from copy import deepcopy
 from warnings import warn
-import inspect
-import re
+
 import numpy as np
-from scipy import interpolate
 from matplotlib import pyplot as plt
-from pmutt import (_force_pass_arguments, _pass_expected_arguments,
-                   _is_iterable, _get_specie_kwargs, _apply_numpy_operation,
-                   _pmuttBase)
-from pmutt.reaction.bep import BEP
+from scipy import interpolate
+
+from pmutt import (_apply_numpy_operation, _force_pass_arguments,
+                   _get_specie_kwargs, _is_iterable, _pass_expected_arguments,
+                   _pmuttBase, _check_iterable_attr)
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
+from pmutt.reaction.bep import BEP
 
 
 class Reaction(_pmuttBase):
@@ -33,11 +35,6 @@ class Reaction(_pmuttBase):
         transition_state_stoich : list of float, optional
             Stoichiometric quantities of transition state species.
             Default is None
-        bep_descriptor : str, optional
-            If the transition state is a :class:`~pmutt.reaction.bep.BEP`
-            object, the descriptor can be set using this parameter. See
-            :class:`~pmutt.reaction.bep.BEP` documentation for accepted
-            descriptors
         notes : str or dict, optional
             Other notes such as the source of the reaction. Default is None
 
@@ -62,39 +59,68 @@ class Reaction(_pmuttBase):
 
     def __init__(self, reactants, reactants_stoich, products, products_stoich,
                  transition_state=None, transition_state_stoich=None,
-                 bep_descriptor=None, notes=None):
-        # If any of the entries were not iterable, assign them to a list
-        if not _is_iterable(reactants) and reactants is not None:
-            reactants = [reactants]
-        if not _is_iterable(reactants_stoich) and reactants_stoich is not None:
-            reactants_stoich = [reactants_stoich]
-        if not _is_iterable(products) and products is not None:
-            products = [products]
-        if not _is_iterable(products_stoich) and products_stoich is not None:
-            products_stoich = [products_stoich]
-        if not _is_iterable(transition_state) and transition_state is not None:
-            transition_state = [transition_state]
-        if not _is_iterable(transition_state_stoich) \
-           and transition_state_stoich is not None:
-            transition_state_stoich = [transition_state_stoich]
-        self.notes = notes
+                 notes=None):
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
         self.products = products
         self.products_stoich = products_stoich
         self.transition_state_stoich = transition_state_stoich
-        # Assign the transition state or BEP relationships
-        if transition_state is not None:
-            transition_state_list = []
-            for specie in transition_state:
-                # If BEP specified, link reaction to BEP
-                if isinstance(specie, BEP):
-                    specie = deepcopy(specie)
-                    specie.reaction = self
-                    specie.descriptor = bep_descriptor
-                transition_state_list.append(specie)
-            transition_state = transition_state_list
         self.transition_state = transition_state
+        self.notes = notes
+
+    @property
+    def reactants(self):
+        return self._reactants
+
+    @reactants.setter
+    def reactants(self, val):
+        val = _check_iterable_attr(val)
+        self._reactants =val
+
+    @property
+    def reactants_stoich(self):
+        return self._reactants_stoich
+
+    @reactants_stoich.setter
+    def reactants_stoich(self, val):
+        val = _check_iterable_attr(val)
+        self._reactants_stoich =val
+
+    @property
+    def products(self):
+        return self._products
+
+    @products.setter
+    def products(self, val):
+        val = _check_iterable_attr(val)
+        self._products =val
+
+    @property
+    def products_stoich(self):
+        return self._products_stoich
+
+    @products_stoich.setter
+    def products_stoich(self, val):
+        val = _check_iterable_attr(val)
+        self._products_stoich =val
+
+    @property
+    def transition_state(self):
+        return self._transition_state
+
+    @transition_state.setter
+    def transition_state(self, val):
+        val = _check_iterable_attr(val)
+        self._transition_state =val
+
+    @property
+    def transition_state_stoich(self):
+        return self._transition_state_stoich
+
+    @transition_state_stoich.setter
+    def transition_state_stoich(self, val):
+        val = _check_iterable_attr(val)
+        self._transition_state_stoich =val
 
     def __str__(self):
         return self.to_string()
@@ -1669,6 +1695,9 @@ class Reaction(_pmuttBase):
         for specie, coeff in zip(species, stoich):
             # Process the inputs and methods for each specie
             specie_kwargs = _get_specie_kwargs(specie.name, **kwargs)
+            # If the species is a BEP relationship, add reaction specie_kwargs
+            if isinstance(specie, BEP):
+                specie_kwargs['reaction'] = self
 
             method = getattr(specie, method_name)
             if method_name == 'get_q':
@@ -1723,8 +1752,8 @@ class Reaction(_pmuttBase):
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', bep_descriptor=None, notes=None,
-                    raise_error=True, raise_warning=True):
+                    reaction_delimiter='=', notes=None, raise_error=True,
+                    raise_warning=True):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -1740,11 +1769,6 @@ class Reaction(_pmuttBase):
             reaction_delimiter : str, optional
                 Delimiter that separate states of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
-            bep_descriptor : str, optional
-                If the transition state is a :class:`~pmutt.reaction.bep.BEP`
-                object, the descriptor can be set using this parameter. See
-                :class:`~pmutt.reaction.bep.BEP` documentation for accepted
-                descriptors
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
             raise_error : bool, optional
@@ -1812,14 +1836,14 @@ class Reaction(_pmuttBase):
                                     'state. Suppress this warning by passing '
                                     'raise_warning=False to '
                                     'pmutt.reaction.Reaction.from_string '
-                                    'method.'.format(reaction_str))
+                                    'method.'.format(name, reaction_str))
                         warn(warn_msg, RuntimeWarning)
                         ts = None
 
         return cls(reactants=reactants, reactants_stoich=react_stoich,
                    products=products, products_stoich=prod_stoich,
                    transition_state=ts, transition_state_stoich=ts_stoich,
-                   bep_descriptor=bep_descriptor, notes=notes)
+                   notes=notes)
 
     def to_string(self, species_delimiter='+', reaction_delimiter='=',
                   stoich_format='.2f', include_TS=True, stoich_space=False,
@@ -2098,7 +2122,7 @@ class ChemkinReaction(Reaction):
 
     @classmethod
     def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', bep_descriptor=None, notes=None,
+                    reaction_delimiter='=', notes=None,
                     beta=1, is_adsorption=False, sticking_coeff=0.5):
         """Create a reaction object using the reaction string
 
@@ -2115,11 +2139,6 @@ class ChemkinReaction(Reaction):
             reaction_delimiter : str, optional
                 Delimiter that separate states of the reaction. Leading and
                 trailing spaces will be trimmed. Default is '='
-            bep_descriptor : str, optional
-                If the transition state is a :class:`~pmutt.reaction.bep.BEP`
-                object, the descriptor can be set using this parameter. See
-                :class:`~pmutt.reaction.bep.BEP` documentation for accepted
-                descriptors
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
             beta : float, optional
@@ -2140,14 +2159,12 @@ class ChemkinReaction(Reaction):
         rxn = super().from_string(reaction_str=reaction_str,
                                   species=species,
                                   species_delimiter=species_delimiter,
-                                  reaction_delimiter=reaction_delimiter,
-                                  bep_descriptor=bep_descriptor)
+                                  reaction_delimiter=reaction_delimiter)
         return cls(reactants=rxn.reactants,
                    reactants_stoich=rxn.reactants_stoich,
                    products=rxn.products, products_stoich=rxn.products_stoich,
                    transition_state=rxn.transition_state,
                    transition_state_stoich=rxn.transition_state_stoich,
-                   bep_descriptor=bep_descriptor,
                    notes=notes, beta=beta, is_adsorption=is_adsorption,
                    sticking_coeff=sticking_coeff)
 

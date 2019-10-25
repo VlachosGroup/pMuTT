@@ -382,6 +382,9 @@ type_dict = {
     'eV/molecule': 'energy/amount',
     'Eh/molecule': 'energy/amount',
     'Ha/molecule': 'energy/amount',
+    'eV/particle': 'energy/amount',
+    'Eh/particle': 'energy/amount',
+    'Ha/particle': 'energy/amount',
     'ps': 'time',
     'ns': 'time',
     'ms': 'time',
@@ -593,13 +596,18 @@ def convert_unit(num=None, initial=None, final=None):
         'cal': 0.239006,
         'kcal': 0.000239006,
         'L atm': 101.33,
-        'Eh': 4.359744650e-18,
-        'Ha': 4.359744650e-18,
+        'Eh': 2293710448690592.,
+        'Ha': 2293710448690592.,
         'J/mol': 1.,
         'kJ/mol': 1.e-3,
         'cal/mol': 0.239006,
         'kcal/mol': 0.000239006,
         'eV/molecule': 6.242e+18/6.02214086e23,
+        'Eh/molecule': 2293710448690592./6.02214086e23,        
+        'Ha/molecule': 2293710448690592./6.02214086e23,
+        'eV/particle': 6.242e+18/6.02214086e23,
+        'Eh/particle': 2293710448690592./6.02214086e23,        
+        'Ha/particle': 2293710448690592./6.02214086e23,
         'ps': 1.e12,
         'ns': 1.e9,
         'ms': 1.e3,
@@ -611,6 +619,7 @@ def convert_unit(num=None, initial=None, final=None):
         'mol': 1.,
         'molecule': 6.02214086e23,
         'molec': 6.02214086e23,
+        'particle': 6.02214086e23,
         'm': 1.,
         'cm': 100.,
         'nm': 1.e9,
@@ -665,7 +674,7 @@ def convert_unit(num=None, initial=None, final=None):
                    'Use help(pmutt.constants.convert_unit) for accepted pairs.'
                    ''.format(initial, initial_type, final, final_type))
         raise ValueError(err_msg)
-    elif initial_type == 'temp':
+    elif 'temp' == initial_type:
         if num is None:
             num = 0.
         # Evaluating each combination
@@ -858,7 +867,7 @@ def temp_to_wavenumber(temp):
 
 
 def wavenumber_to_energy(wavenumber):
-    """Converts wavenumbers (1/cm) to energies (eV)
+    """Converts wavenumbers (1/cm) to energies (J)
 
     Parameters
     ----------
@@ -867,9 +876,9 @@ def wavenumber_to_energy(wavenumber):
     Returns
     -------
         energies : float
-            Corresponding temperature in eV
+            Corresponding temperature in J
     """
-    return wavenumber*c('cm/s')*h('eV s')
+    return wavenumber*c('cm/s')*h('J s')
 
 
 def wavenumber_to_freq(wavenumber):

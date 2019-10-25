@@ -5,8 +5,8 @@ from pmutt.io.json import remove_class
 
 
 class BEP(_ModelBase):
-    """Represents a Bronsted Evans Polyani relationship. Intended to be a
-    ``specie`` class.
+    """Represents a Bronsted Evans Polyani relationship. Intended to represent
+    a species. Inherits from :class:`~pmutt._ModelBase`.
 
     :math:`E_a = \\alpha H + \\beta`
 
@@ -18,9 +18,6 @@ class BEP(_ModelBase):
             Intercept of BEP relationship in kcal/mol.
         name : str, optional
             Name of the BEP. Default is None
-        reaction : :class:`~pmutt.reaction.Reaction` object, optional
-            Reaction related to BEP. The Reaction can be supplied later by
-            using ``set_descriptor``
         descriptor : str, optional
             Descriptor to calculate the activation energy. Supported options:
 
@@ -42,9 +39,6 @@ class BEP(_ModelBase):
             Notes relevant to BEP relationship such as its source. If using a
             dictionary, the keys and values must be simple types supported by
             JSON
-        _descriptor : method
-            Method taken from reaction to calculate enthalpy. This attribute is
-            not supplied to constructor.
     """
 
     def __init__(self, slope, intercept, name=None, reaction=None,
@@ -53,126 +47,81 @@ class BEP(_ModelBase):
         self.slope = slope
         self.intercept = intercept
         self.descriptor = descriptor
-        self.reaction = reaction
         self.notes = notes
-    
-    @property
-    def reaction(self):
-        return self._reaction
 
-    @reaction.setter
-    def reaction(self, val):
-        self._reaction = val
-        self._set_descriptor_fn(reaction=val)
-
-    @property
-    def descriptor(self):
-        return self._descriptor
-    
-    @descriptor.setter
-    def descriptor(self, val):
-        if val is not None:
-            self._descriptor = val
-            self._set_descriptor_fn(descriptor=val)
-
-
-    def _set_descriptor_fn(self, reaction=None, descriptor=None):
+    def _get_descriptor_val(self, reaction, **kwargs):
         """Sets the appropriate method handle to the BEP object
 
         Parameters
         ----------
-            reaction : :class:`~pmutt.reaction.Reaction` object, optional
-                Reaction related to BEP. If specified, overwrites the value
-                held by BEP object
-            descriptor : str, optional
-                Descriptor to calculate the activation energy. Supported
-                options:
-
-                ===========  ===========================================================================
-                Descriptor   Description
-                ===========  ===========================================================================
-                delta_H      H_products - H_reactants (change in enthalpy)
-                rev_delta_H  H_reactants - H_products (change in enthalpy in reverse direction)
-                reactants_H  H_reactants (enthalpy of reactants)
-                products_H   H_products (enthalpy of products)
-                delta_E      E_products - E_reactants (change in electronic energy)
-                rev_delta_E  E_reactants - E_products (change in electronic energy in reverse direction)
-                reactants_E  E_reactants (electronic energy of reactants)
-                products_E   E_products (electronic energy of products)
-                ===========  ===========================================================================
-                
-                If specified, overwites the value held by BEP object.
+            reaction : :class:`~pmutt.reaction.Reaction` object
+                Reaction related to BEP.
+            kwargs : keyword arguments
+                Parameters required to calculate descriptor value such as
+                temperature and pressure.
+        Returns
+        -------
+            val : float
+                Descriptor value in kcal/mol. Note that kcal/mol is the standard
+                unit since the intercept is also in kcal/mol.
         """
-        # Return if the descriptor has not been set or is None
-        try:
-            self.descriptor
-        except AttributeError:
-            return
-        else:
-            if self.descriptor is None:
-                return
-
-        # Return if the reaction has not been set or is None
-        try:
-            self.reaction
-        except AttributeError:
-            return
-        else:
-            if self.reaction is None:
-                return   
-
         # Assign the descriptor to the reaction
         if self.descriptor == 'delta_H':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_delta_H(rev=False,
-                                                               units='kcal/mol',
-                                                               **kwargs)
+            val = reaction.get_delta_H(rev=False, units='kcal/mol', **kwargs)
         elif self.descriptor == 'rev_delta_H':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_delta_H(rev=True,
-                                                               units='kcal/mol',
-                                                               **kwargs)
+            val = reaction.get_delta_H(rev=True, units='kcal/mol', **kwargs)
         elif self.descriptor == 'reactants_H':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_H_state(
-                            units='kcal/mol',
-                            state='reactants',
-                            **kwargs)
-        elif descriptor == 'products_H':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_H_state(
-                            units='kcal/mol',
-                            state='products',
-                            **kwargs)
+            val = reaction.get_H_state(units='kcal/mol', state='reactants',
+                                       **kwargs)
+        elif self.descriptor == 'products_H':
+            val = reaction.get_H_state(units='kcal/mol', state='products',
+                                       **kwargs)
         elif self.descriptor == 'delta_E':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_delta_E(rev=False,
-                                                               units='kcal/mol',
-                                                               **kwargs)
+            val = reaction.get_delta_E(rev=False, units='kcal/mol', **kwargs)
         elif self.descriptor == 'rev_delta_E':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_delta_E(rev=True,
-                                                               units='kcal/mol',
-                                                               **kwargs)
+            val = reaction.get_delta_E(rev=True, units='kcal/mol', **kwargs)
         elif self.descriptor == 'reactants_E':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_E_state(
-                            units='kcal/mol',
-                            state='reactants',
-                            **kwargs)
+            val = reaction.get_E_state(units='kcal/mol', state='reactants',
+                                       **kwargs)
         elif self.descriptor == 'products_E':
-            self._descriptor_fn = \
-                    lambda **kwargs: self.reaction.get_E_state(
-                            units='kcal/mol',
-                            state='products',
-                            **kwargs)
+            val = reaction.get_E_state(units='kcal/mol', state='products',
+                                       **kwargs)
         else:
             err_msg = ('Descriptor "{}" not supported. See documentation of '
                        'pmutt.reaction.bep.BEP for supported options.'
                        ''.format(self.descriptor))
             raise ValueError(err_msg)
+        return val
 
-    def get_E_act(self, units, rev=False, **kwargs):
+    def _get_adjusted_slope(self, rev):
+        """Calculates the adjusted slope based on the descriptor and the
+        direction of the reaction
+
+        Parameters
+        ----------
+            rev : bool
+                If True, the reaction is reversible.
+        Returns
+        -------
+            adj_slope : float
+                Adjusted slope
+        """
+        # If the descriptor is for the reverse reaction, the slope has to
+        # be modified
+        if 'rev_delta' in self.descriptor:
+            if rev:
+                adj_slope = self.slope
+            else:
+                adj_slope = self.slope - 1.
+        else:
+            if rev:
+                adj_slope = self.slope - 1.
+            else:
+                adj_slope = self.slope
+        return adj_slope
+
+
+    def get_E_act(self, units, reaction, rev=False, **kwargs):
         """Calculate Arrhenius activation energy using BEP relationship
 
         Parameters
@@ -180,6 +129,8 @@ class BEP(_ModelBase):
             units : str
                 Units as string. See :func:`~pmutt.constants.R` for accepted
                 units but omit the '/K' (e.g. J/mol).
+            reaction : :class:`~pmutt.reaction.Reaction` object
+                Reaction related to BEP.
             rev : bool, optional
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
@@ -190,28 +141,19 @@ class BEP(_ModelBase):
             E_act : float
                 Dimensionless activation energy
         """
-        if 'rev_delta' in self.descriptor:
-            # If the descriptor is for the reverse reaction, the slope has to
-            # be modified
-            if rev:
-                E_act = self.slope*self._descriptor_fn(**kwargs) + self.intercept
-            else:
-                E_act = (self.slope-1.)*self._descriptor_fn(**kwargs) \
-                        + self.intercept
-        else:
-            if rev:
-                E_act = (self.slope-1.)*self._descriptor_fn(**kwargs) \
-                        + self.intercept
-            else:
-                E_act = self.slope*self._descriptor_fn(**kwargs) + self.intercept
+        adj_slope = self._get_adjusted_slope(rev=rev)
+        descriptor_val = self._get_descriptor_val(reaction=reaction, **kwargs)
+        E_act = adj_slope*descriptor_val + self.intercept
         return E_act*c.convert_unit(initial='kcal/mol', final=units)
 
-    def get_EoRT_act(self, rev=False, T=c.T0('K'), **kwargs):
+    def get_EoRT_act(self, reaction, rev=False, T=c.T0('K'), **kwargs):
         """Calculates dimensionless Arrhenius activation energy using BEP
         relationship
 
         Parameters
         ----------
+            reaction : :class:`~pmutt.reaction.Reaction` object
+                Reaction related to BEP.
             rev : bool, optional
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
@@ -224,15 +166,17 @@ class BEP(_ModelBase):
             EoRT_act : float
                 Dimensionless activation energy
         """
-        return self.get_E_act(units='kcal/mol', rev=rev, T=T, **kwargs) \
-               /c.R('kcal/mol/K')/T
+        return self.get_E_act(units='kcal/mol', reaction=reaction,
+                              rev=rev, T=T, **kwargs)/c.R('kcal/mol/K')/T
 
-    def get_UoRT(self, T=c.T0('K'), **kwargs):
+    def get_UoRT(self, reaction, T=c.T0('K'), **kwargs):
         """Calculates the dimensionless internal energy using BEP relationship
         and initial state internal energy
         
         Parameters
         ----------
+            reaction : :class:`~pmutt.reaction.Reaction` object
+                Reaction related to BEP.
             T : float, optional
                 Temperature in K. Default is 298.15
             kwargs : keyword arguments
@@ -242,16 +186,19 @@ class BEP(_ModelBase):
             UoRT : float
                 Dimensionless internal energy
         """
-        UoRT_reactants = self.reaction.get_UoRT_state(state='reactants', T=T,
-                                                      **kwargs)
-        return self.get_EoRT_act(rev=True, T=T, **kwargs) + UoRT_reactants
+        UoRT_reactants = reaction.get_UoRT_state(state='reactants', T=T,
+                                                 **kwargs)
+        return self.get_EoRT_act(rev=True, reaction=reaction, T=T,
+                                 **kwargs) + UoRT_reactants
 
-    def get_HoRT(self, T=c.T0('K'), **kwargs):
+    def get_HoRT(self, reaction, T=c.T0('K'), **kwargs):
         """Calculates the dimensionless enthalpy using BEP relationship
         and reactants or products enthalpy
         
         Parameters
         ----------
+            reaction : :class:`~pmutt.reaction.Reaction` object
+                Reaction related to BEP.
             T : float, optional
                 Temperature in K. Default is 298.15
             kwargs : keyword arguments
@@ -261,16 +208,21 @@ class BEP(_ModelBase):
             HoRT : float
                 Dimensionless enthalpy
         """
-        HoRT_reactants = self.reaction.get_HoRT_state(state='reactants', T=T,
-                                                      **kwargs)
-        return self.get_EoRT_act(rev=False, T=T, **kwargs) + HoRT_reactants
+        HoRT_reactants = reaction.get_HoRT_state(state='reactants', T=T,
+                                                 **kwargs)
+        return self.get_EoRT_act(rev=False, reaction=reaction, T=T, **kwargs) \
+               + HoRT_reactants
 
-    def get_SoR(self, T=c.T0('K'), entropy_state='reactants', **kwargs):
+    def get_SoR(self, reaction=None, T=c.T0('K'), entropy_state='reactants',
+                **kwargs):
         """Calculates the dimensionless entropy using reactants or products
         entropy. The BEP relationship has no entropic contribution
         
         Parameters
         ----------
+            reaction : :class:`~pmutt.reaction.Reaction` object, optional
+                Reaction related to BEP. If `entropy_state` is None, `reaction`
+                is not required.
             T : float, optional
                 Temperature in K. Default is 298.15
             entropy_state : str or None, optional
@@ -290,17 +242,26 @@ class BEP(_ModelBase):
         if entropy_state is None:
             SoR = 0.
         else:
-            SoR = self.reaction.get_SoR_state(state=entropy_state, T=T,
-                                              **kwargs)
+            try:
+                SoR = reaction.get_SoR_state(state=entropy_state, T=T, **kwargs)
+            except AttributeError:
+                err_msg = ('Unable to calculate SoR of BEP object since '
+                           'a Reaction object was not supplied. Either set '
+                           'entropy_state to None or supply a Reaction to '
+                           'get_SoR.')
+                raise ValueError(err_msg)
         return SoR
 
-    def get_GoRT(self, T=c.T0('K'), entropy_state='reactants', **kwargs):
+    def get_GoRT(self, reaction, T=c.T0('K'), entropy_state='reactants', 
+                 **kwargs):
         """Calculates the dimensionless Gibbs energy using BEP relationship
         and reactants Gibbs energy. The BEP relationship has no entropic
         contribution
         
         Parameters
         ----------
+            reaction : :class:`~pmutt.reaction.Reaction` object
+                Reaction related to BEP.
             T : float, optional
                 Temperature in K. Default is 298.15
             entropy_state : str or None, optional
@@ -317,8 +278,10 @@ class BEP(_ModelBase):
             GoRT : float
                 Dimensionless Gibbs energy
         """
-        return self.get_HoRT(T=T, **kwargs) \
-               - self.get_SoR(T=T, entropy_state=entropy_state, **kwargs)
+        HoRT = self.get_HoRT(T=T, reaction=reaction, **kwargs)
+        SoR = self.get_SoR(T=T, reaction=reaction, entropy_state=entropy_state,
+                           **kwargs)
+        return HoRT - SoR
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

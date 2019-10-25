@@ -5,8 +5,10 @@ pmutt.io.thermdat
 Read from/write to thermdat files.
 """
 
-import numpy as np
 from datetime import datetime
+
+import numpy as np
+
 from pmutt import pmutt_list_to_dict
 from pmutt.empirical.nasa import Nasa
 
@@ -298,64 +300,82 @@ def _read_line4(line, nasa_data):
     return nasa_data
 
 
-def write_thermdat(filename, nasa_species, write_date=True, supp_data=None,
+def write_thermdat(nasa_species, filename=None, write_date=True, supp_data=None,
                    supp_txt=None, newline='\n'):
     """Writes thermdats in the Chemkin format
 
     Parameters
     ----------
-        filename : str
-            Output file name
         nasa_species : list or dict of :class:`~pmutt.empirical.nasa.Nasa`
             List of species to populate thermdat
-        supp_data : Additional thermdat entries to include, optional
-            Must be in therndat format.
-        supp_txt : Comment field to preceed nasa_species entries, optional
-            Each line needs to begin with a ! so it is recognized as a
-            comment.
+        filename : str, optional
+            Output file name. If not specified, returns thermdat as str
+        supp_data : str, optional
+            Additional thermdat entries to include. Must be in therndat format.
+        supp_txt : str, optional
+            Comment field to preceed nasa_species entries. Each line needs to
+            begin with a ! so it is recognized as a comment.
         write_date : bool, optional
             Whether or not the date should be written. If False, writes the
             first 8 characters of ``notes`` attribute. Defaults to True
         newline : str, optional
             Newline character to use. Default is the Unix convention (\\n)
+    Returns
+    -------
+        lines_out : str
+            Thermdat lines as a string if ``filename`` is None
     """
-    with open(filename, 'w', newline=newline) as f_ptr:
-        f_ptr.write('THERMO ALL\n       100       500      1500\n')
-        if supp_data is not None:
-            f_ptr.write(supp_data)
-            if supp_data[-1] != '\n':
-                f_ptr.write('\n')
-        if supp_txt is not None:
-            f_ptr.write(supp_txt)
-            if supp_txt[-1] != '\n':
-                f_ptr.write('\n')
-        # Iterate over nasa_species using appropriate method
-        if isinstance(nasa_species, dict):
-            nasa_iter = nasa_species.values()
-        else:
-            nasa_iter = iter(nasa_species)
+    lines = []
+    # Add header
+    lines.append('THERMO ALL\n       100       500      1500\n')
+    # Add supplementary data
+    if supp_data is not None:
+        if supp_data[-1] != '\n':
+            supp_data += '\n'
+        lines.append(supp_data)
+    # Add supplementary text
+    if supp_txt is not None:
+        if supp_txt[-1] != '\n':
+            supp_data += '\n'
+        lines.append(supp_data)
 
-        for nasa_specie in nasa_iter:
-            _write_line1(f_ptr, nasa_specie, write_date)
-            _write_line2(f_ptr, nasa_specie)
-            _write_line3(f_ptr, nasa_specie)
-            _write_line4(f_ptr, nasa_specie)
-        f_ptr.write('END')
+    # Iterate over nasa_species using appropriate method
+    if isinstance(nasa_species, dict):
+        nasa_iter = nasa_species.values()
+    else:
+        nasa_iter = iter(nasa_species)
+
+    for nasa_specie in nasa_iter:
+        lines.append(_write_line1(nasa_specie, write_date))
+        lines.append(_write_line2(nasa_specie))
+        lines.append(_write_line3(nasa_specie))
+        lines.append(_write_line4(nasa_specie))
+    lines.append('END')
+
+    # Write lines or return the string to the user
+    lines_out = ''.join(lines)
+    if filename is not None:
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write(lines_out)
+    else:
+        return lines_out
 
 
-def _write_line1(thermdat_file, nasa_specie, write_date=True):
+def _write_line1(nasa_specie, write_date=True):
     """Writes the first line of the thermdat file, which contains information
     on the composition, phase, and temperature ranges
 
     Parameters
     ----------
-        thermdat_file : file object
-            Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
         write_date : bool, optional
             Whether or not the date should be written. If False, writes the
             first 8 characters of ``notes`` attribute. Defaults to True
+    Returns
+    -------
+        line : str
+            Thermdat line
     """
     element_pos = [
         24,  # Element 1
@@ -406,55 +426,62 @@ def _write_line1(thermdat_file, nasa_specie, write_date=True):
         line += field
         line = _insert_space(pos, line)
     line += '1\n'
-    thermdat_file.write(line)
+    return line
 
-
-def _write_line2(thermdat_file, nasa_specie):
+def _write_line2(nasa_specie):
     """Writes the second line of the thermdat file
 
     Parameters
     ----------
-        thermdat_file : file object
-            Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
+    Returns
+    -------
+        line : str
+            Thermdat line
     """
-    line = '{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}    2\n'.format(
-           nasa_specie.a_high[0], nasa_specie.a_high[1], nasa_specie.a_high[2],
-           nasa_specie.a_high[3], nasa_specie.a_high[4])
-    thermdat_file.write(line)
+    line = ('{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}    2\n'
+            ''.format(nasa_specie.a_high[0], nasa_specie.a_high[1],
+                      nasa_specie.a_high[2], nasa_specie.a_high[3],
+                      nasa_specie.a_high[4]))
+    return line
 
 
-def _write_line3(thermdat_file, nasa_specie):
+def _write_line3(nasa_specie):
     """Writes the third line of the thermdat file
 
     Parameters
     ----------
-        thermdat_file : file object
-            Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
+    Returns
+    -------
+        line : str
+            Thermdat line
     """
-    line = '{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}    3\n'.format(
-           nasa_specie.a_high[5], nasa_specie.a_high[6], nasa_specie.a_low[0],
-           nasa_specie.a_low[1], nasa_specie.a_low[2])
-    thermdat_file.write(line)
+    line = ('{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}    3\n'
+            ''.format(nasa_specie.a_high[5], nasa_specie.a_high[6],
+                      nasa_specie.a_low[0], nasa_specie.a_low[1],
+                      nasa_specie.a_low[2]))
+    return line
 
 
-def _write_line4(thermdat_file, nasa_specie):
+def _write_line4(nasa_specie):
     """Writes the fourth line of the thermdat file
 
     Parameters
     ----------
-        thermdat_file : file object
-            Thermdat file that is being written to
         nasa_specie : :class:`~pmutt.empirical.nasa.Nasa`
             Nasa specie to take information from
+    Returns
+    -------
+        line : str
+            Thermdat line
     """
-    line = '{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}                   4\n'.format(
-           nasa_specie.a_low[3], nasa_specie.a_low[4], nasa_specie.a_low[5],
-           nasa_specie.a_low[6])
-    thermdat_file.write(line)
+    line = ('{: 2.8E}{: 2.8E}{: 2.8E}{: 2.8E}                   4\n'
+            ''.format(nasa_specie.a_low[3], nasa_specie.a_low[4],
+                      nasa_specie.a_low[5], nasa_specie.a_low[6]))
+    return line
 
 
 def _insert_space(end_index, string):

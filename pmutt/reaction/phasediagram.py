@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-import numpy as np
 import matplotlib
+import numpy as np
 from matplotlib import pyplot as plt
+
 from pmutt import constants as c
-from pmutt.reaction import Reactions
 from pmutt.io.json import json_to_pmutt, remove_class
+from pmutt.reaction import Reactions
 
 
 class PhaseDiagram(Reactions):

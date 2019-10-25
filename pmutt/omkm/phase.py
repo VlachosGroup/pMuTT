@@ -1,4 +1,5 @@
 from pmutt import constants as c
+from pmutt.cantera import _get_range_CTI
 import pmutt.cantera.phase as phase_cantera
 
 class IdealGas(phase_cantera.IdealGas):
@@ -30,7 +31,7 @@ class InteractingInterface(phase_cantera.Phase):
             Species present in Phase
         site_density : float, optional
             Site density in g/cm2. Default is None
-        phases : list of :class:`~pmutt.cantera.phase.Phase` objects
+        phases : list of :class:`~pmutt.cantera.phase.Phase` objects or str
             Phases associated with this interface
         interactions : str, optional
             Source of lateral interactions. If any lateral interactions in CTI
@@ -57,8 +58,32 @@ class InteractingInterface(phase_cantera.Phase):
         self.phases = phases
         self.interactions = interactions
 
+    @property
+    def beps(self):
+        if self.reactions is None:
+            beps = None
+        else:
+            beps = []
+            for reaction in self.reactions:
+                # Skip if the reaction does not have a BEP
+                try:
+                    bep = reaction.bep
+                except AttributeError:
+                    continue
+                # Skip if the reaction does not have a BEP
+                if bep is None:
+                    continue 
+                # Skip if this is not a unique BEP
+                if bep in beps:
+                    continue
+                # Append if this is a valid BEP
+                beps.append(bep.name)
+        return beps
+
+
+
     def to_CTI(self, max_line_len=80, quantity_unit='molec', length_unit='cm',
-               units=None):
+               units=None, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -72,6 +97,9 @@ class InteractingInterface(phase_cantera.Phase):
             units : :class:`~pmutt.omkm.units.Units` object
                 If specified, `quantity_unit` and `length_unit` are overwritten.
                 Default is None.
+            delimiter : str, optional
+                Delimiter used to separate header from footer of reaction and
+                lateral interaction IDs. Default is '_'.
         Returns
         -------
             CTI_str : str
@@ -112,13 +140,28 @@ class InteractingInterface(phase_cantera.Phase):
                                 phases_names, line_len=max_line_len-29,
                                 max_line_len=max_line_len),
                        site_den))
+        # Fields with ranges
+        range_fields = ('interactions', 'reactions')
+        for range_field in range_fields:
+            val = getattr(self, range_field)
+            # Skip empty fields
+            if val is None:
+                continue
+            cti_str += ('                      {}={},\n'
+                        ''.format(range_field, 
+                                  _get_range_CTI(objs=val, parent_obj=self,
+                                                 delimiter=delimiter)))
+
         # Add optional fields
-        optional_fields = ('transport', 'options', 'note', 'initial_state',
-                           'interactions', 'reactions')
+        optional_fields = ('beps', 'transport', 'options', 'note',
+                           'initial_state')
         for field in optional_fields:
             val = getattr(self, field)
             # Skip empty fields
             if val is None:
+                continue
+            # Skip blank lists
+            if len(val) == 0:
                 continue
 
             cti_str += '                      {}={},\n'.format(

@@ -2,6 +2,7 @@
 
 import numpy as np
 from scipy.integrate import quad
+
 from pmutt import _ModelBase
 from pmutt import constants as c
 from pmutt.io.json import remove_class

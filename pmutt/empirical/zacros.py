@@ -6,11 +6,11 @@ Operations related to the Zacros wrapper
 """
 
 import numpy as np
+
 from pmutt import constants as c
 from pmutt import get_molecular_weight as mw
-from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.empirical import EmpiricalBase
-""" Test"""
+from pmutt.io.json import json_to_pmutt, remove_class
 
 
 class Zacros(EmpiricalBase):
@@ -30,9 +30,9 @@ class Zacros(EmpiricalBase):
         self.inertia = inertia
         self.etotal = potentialenergy
         self.vib_energies = c.wavenumber_to_energy(np.array(vib_wavenumbers))
-        self.theta = np.array(self.vib_energies) / c.kb('eV/K')
+        self.theta = np.array(self.vib_energies) / c.kb('J/K')
         self.zpe = sum(np.array(self.vib_energies)/2.) *\
-            c.convert_unit(initial='eV', final='kcal')*c.Na
+            c.convert_unit(initial='J', final='kcal')*c.Na
         if np.sum(self.vib_energies) != 0:
             self.q_vib = np.product(np.divide(1, (1 - np.exp(-self.theta /
                                                              c.T0('K')))))
