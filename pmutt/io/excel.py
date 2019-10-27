@@ -6,6 +6,7 @@ Read from/write to xlsx files of particular format.
 """
 
 import os
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -98,6 +99,12 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             if pd.isnull(cell_data):
                 # Skip empty cells
                 continue
+            elif 'Unnamed' in col:
+                warn_msg = ('Found data ({}) with no column header in Excel '
+                            'sheet, {}. This property will not be assigned '
+                            'correctly.'
+                            ''.format(cell_data, io))
+                warnings.warn(warn_msg)
             elif 'element' in col:
                 thermo_data = set_element(header=col, value=cell_data,
                                           output_structure=thermo_data,
@@ -273,14 +280,14 @@ def set_statmech_model(model, output_structure):
             supported models.
         output_structure : dict
             Structure to assign value. Will assign to
-            output_structure['statmech_model']
+            output_structure['model']
     Returns
     -------
         output_structure: dict
             output_structure with new thermo model added
     """
     model = model.lower()
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     try:
         # See if the model exists
         presets[model]
@@ -321,7 +328,7 @@ def set_trans_model(model, output_structure):
                        'pmutt.statmech.trans for supported models.'
                        ''.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     return output_structure
 
 def set_vib_model(model, output_structure):
@@ -349,7 +356,7 @@ def set_vib_model(model, output_structure):
                        'of presets in pmutt.statmech.vib for supported models.'
                        ''.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     return output_structure
 
 def set_rot_model(model, output_structure):
@@ -376,7 +383,7 @@ def set_rot_model(model, output_structure):
             err_msg = ('Unsupported rotational model, {}. See '
                        'pmutt.statmech.rot for supported models.'.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     return output_structure
 
 def set_elec_model(model, output_structure):
@@ -404,7 +411,7 @@ def set_elec_model(model, output_structure):
                        'pmutt.statmech.elec for supported models.'
                        ''.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     return output_structure
 
 def set_nucl_model(model, output_structure):
@@ -431,7 +438,7 @@ def set_nucl_model(model, output_structure):
             err_msg = ('Unsupported nuclear model, {}. See pmutt.statmech.nucl '
                        'for supported models.'.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     return output_structure
 
 def set_vib_wavenumbers(value, output_structure):
