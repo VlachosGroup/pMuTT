@@ -1116,7 +1116,7 @@ class Nasa9(EmpiricalBase):
     @classmethod
     def from_model(cls, name, model, T_low, T_high, elements=None, T_mid=None,
                    n_interval=2, n_T=50, fit_T_mid=True, **kwargs):
-        """Calculates the NASA polynomials using statistical mechanic models
+        """Calculates the NASA polynomials using the model passed
 
         Parameters
         ----------
