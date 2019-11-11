@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="301.625mm"
+   height="40.009949mm"
+   viewBox="0 0 301.625 40.009949"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="reaction_string.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="251.42857"
+     inkscape:cy="-52.962079"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="958"
+     inkscape:window-height="991"
+     inkscape:window-x="-8"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-26.080357,-94.810502)">
+    <g
+       style="font-size:12px;overflow:visible;color-interpolation-filters:sRGB;fill:none;fill-rule:evenodd;stroke-linecap:square;stroke-miterlimit:3"
+       id="g73"
+       transform="matrix(0.35277778,0,0,0.35277778,-81.869644,-39.429896)">
+      <g
+         id="g44"
+         v:groupContext="foregroundPage"
+         v:index="1"
+         v:mID="0">
+		<title
+   id="title12">Page-1</title>
+
+		<v:pageProperties
+   v:shadowOffsetY="-9"
+   v:shadowOffsetX="9"
+   v:drawingUnits="19"
+   v:pageScale="1"
+   v:drawingScale="1" />
+
+		<g
+   transform="translate(306,-386.66)"
+   v:groupContext="shape"
+   v:mID="1"
+   id="shape1-1">
+			<title
+   id="title14">Sheet.1</title>
+
+			<desc
+   id="desc16">Reactant1 + Reactant2 = TS1 + TS2 = Product1 + Product2</desc>
+
+			<v:textBlock
+   v:margins="rect(4,4,4,4)" />
+
+			<v:textRect
+   height="22.4037"
+   width="855"
+   cy="780.798"
+   cx="427.5" />
+
+			<rect
+   id="rect18"
+   class="st1"
+   height="22.4037"
+   width="855"
+   y="769.59601"
+   x="0"
+   style="fill:#ffffff;stroke:none;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round" />
+
+			<text
+   id="text30"
+   v:langID="8201"
+   class="st2"
+   y="791.59998"
+   x="7.7199998"
+   style="font-size:36px;font-family:Calibri;fill:#000000"><v:paragraph
+   v:horizAlign="1" />
+<v:tabList />
+Reactant1 <tspan
+   id="tspan20"
+   class="st3"
+   style="font-size:36px;fill:#c00000">+</tspan>
+ Reactant2 <tspan
+   id="tspan22"
+   class="st4"
+   style="font-size:36px;fill:#0070c0">=</tspan>
+ TS1 <tspan
+   id="tspan24"
+   class="st3"
+   style="font-size:36px;fill:#c00000">+</tspan>
+ TS2 <tspan
+   id="tspan26"
+   class="st4"
+   style="font-size:36px;fill:#0070c0">=</tspan>
+ Product1 <tspan
+   id="tspan28"
+   class="st3"
+   style="font-size:36px;fill:#c00000">+</tspan>
+ Product2</text>
+		</g>
+
+		<g
+   transform="translate(306,-319.596)"
+   v:groupContext="shape"
+   v:mID="2"
+   id="shape2-9">
+			<title
+   id="title33">Sheet.2</title>
+
+			<desc
+   id="desc35">+ Species Delimiter = Reaction Delimiter</desc>
+
+			<v:textBlock
+   v:margins="rect(4,4,4,4)" />
+
+			<v:textRect
+   height="22.4037"
+   width="855"
+   cy="780.798"
+   cx="427.5" />
+
+			<rect
+   id="rect37"
+   class="st1"
+   height="22.4037"
+   width="855"
+   y="769.59601"
+   x="0"
+   style="fill:#ffffff;stroke:none;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round" />
+
+			<text
+   id="text41"
+   v:langID="8201"
+   class="st5"
+   y="770"
+   x="283.84"
+   style="font-size:36px;font-family:Calibri;fill:#c00000"><v:paragraph
+   v:horizAlign="1" />
+<v:tabList />
++ Species Delimiter<v:newlineChar />
+<tspan
+   id="tspan39"
+   class="st4"
+   dy="1.2em"
+   x="278.26001"
+   style="font-size:36px;fill:#0070c0">= Reaction Delimiter</tspan>
+</text>
+		</g>
+
+	</g>
+    </g>
+  </g>
+  <style
+     id="style10"
+     type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st2 {fill:#000000;font-family:Calibri;font-size:3em}
+		.st3 {fill:#c00000;font-size:1em}
+		.st4 {fill:#0070c0;font-size:1em}
+		.st5 {fill:#c00000;font-family:Calibri;font-size:3em}
+		.st6 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+</svg>
