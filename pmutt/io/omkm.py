@@ -4,6 +4,8 @@ from pmutt import _force_pass_arguments
 from pmutt.io import _get_file_timestamp
 from pmutt.io.cantera import obj_to_CTI
 from pmutt.io.ctml_writer import convert
+from pmutt.cantera.phase import IdealGas, StoichSolid
+from pmutt.omkm.phase import InteractingInterface
 from pmutt.omkm.units import Units
 
 
@@ -150,7 +152,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                transient=None, stepping=None, init_step=None, step_size=None,
                atol=None, rtol=None, phases=None, reactor={}, inlet_gas={},
                solver={}, simulation={}, misc={}, units=None, filename=None,
-               yaml_options={'default_flow_style': False}):
+               yaml_options={'default_flow_style': False}, newline='\n'):
     """Writes the reactor options in a YAML file for OpenMKM. 
     
     Parameters
@@ -274,55 +276,71 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             '# https://vlachosgroup.github.io/openmkm/input']
 
     '''Organize reactor parameters'''
-    _assign_yaml_val('type', reactor, reactor_type)
-    _assign_yaml_val('mode', reactor, mode)
-    _assign_yaml_val('volume', reactor, V)
-    _assign_yaml_val('temperature', reactor, T)
-    _assign_yaml_val('pressure', reactor, P)
-    _assign_yaml_val('area', reactor, A)
-    _assign_yaml_val('length', reactor, L)
-    _assign_yaml_val('cat_abyv', reactor, cat_abyv)
+    reactor_params = (('type', reactor_type), ('mode', mode), ('volume', V),
+                      ('temperature', T), ('pressure', P), ('area', A),
+                      ('length', L), ('cat_abyv', cat_abyv))
+    for parameter in reactor_params:
+        _assign_yaml_val(parameter[0], reactor, parameter[1])
 
     '''Organize inlet gas parameters'''
-    _assign_yaml_val('flow_rate', inlet_gas, flow_rate)
+    inlet_gas_params = (('flow_rate', flow_rate),)
+    for parameter in inlet_gas_params:
+        _assign_yaml_val(parameter[0], inlet_gas, parameter[1])
 
     '''Organize solver parameters'''
-    _assign_yaml_val('atol', solver, atol)
-    _assign_yaml_val('rtol', solver, rtol)
+    solver_params = (('atol', atol), ('rtol', rtol))
+    for parameter in solver_params:
+        _assign_yaml_val(parameter[0], solver, parameter[1])
 
     '''Organize simulation parameters'''
-    _assign_yaml_val('end_time', simulation, end_time)
-    _assign_yaml_val('transient', simulation, transient)
-    _assign_yaml_val('stepping', simulation, stepping)
-    _assign_yaml_val('step_size', simulation, step_size)
+    simulation_params = (('end_time', end_time), ('transient', transient),
+                         ('stepping', stepping), ('step_size', step_size))
+    for parameter in simulation_params:
+        _assign_yaml_val(parameter[0], simulation, parameter[1])
     if len(solver) > 0:
         _assign_yaml_val('solver', simulation, solver)
     
     '''Organize phase parameters'''
-    # TODO Iterate through phases and check for type to separate gas, bulk, surfaces
-    # For each phase, assign name and initial conditions attribute
-    # Sample dictionary:
-    # phases = {'gas': [
-    #                {'name': 'gas',
-    #                 'initial_state': 'NH3: 1'}],
-    #           'bulk': [
-    #                {'name': 'bulk'}],
-    #           'surfaces': [
-    #               {'name': 'terrace',
-    #                'initial_state': 'RU(S1):1'},
-    #               {'name': 'step',
-    #                'initial_state': 'Ru(S2):1'}]
-    # }
+    if phases is not None:
+        if isinstance(phases, dict):
+            phases_dict = phases.copy()
+        elif isinstance(phases, list):
+            phases_dict = {}
+            for phase in phases:
+                phase_info = {'name': phase.name}
+
+                # Assign intial state if available
+                if phase.initial_state is not None:
+                    initial_state_str = ''
+                    for species, mole_frac in phase.initial_state.items():
+                        initial_state_str += '{}:{}, '.format(species,mole_frac)
+                    initial_state_str = initial_state_str[:-2]
+                    phase_info['initial_state'] = initial_state_str
+
+                # Assign phase type
+                if isinstance(phase, IdealGas):
+                    phase_type = 'gas'
+                elif isinstance(phase, StoichSolid):
+                    phase_type = 'bulk'
+                elif isinstance(phase, InteractingInterface):
+                    phase_type = 'surfaces'
+
+                try:
+                    phases_dict[phase_type].append(phase_info)
+                except KeyError:
+                    phases_dict[phase_type] = [phase_info]
     
     '''Assign misc values'''
     yaml_dict = misc.copy()
     
     '''Assign values to overall YAML dict'''
-    headers_str = ('reactor', 'inlet_gas', 'simulation', 'phases')
-    headers_dict = (reactor, inlet_gas, simulation, phases)
-    for header_str, header_dict in zip(headers_str, headers_dict):
-        if len(header_dict) > 0:
-            yaml_dict[header_str] = header_dict
+    headers = (('reactor', reactor), ('inlet_gas', inlet_gas),
+               ('simulation', simulation), ('phases', phases_dict))
+    # headers_str = ('reactor', 'inlet_gas', 'simulation', 'phases')
+    # headers_dict = (reactor, inlet_gas, simulation, phases_dict)
+    for header in headers:
+        if len(header[1]) > 0:
+            yaml_dict[header[0]] = header[1]
 
     '''Convert dictionary to YAML str'''
     yaml_str = yaml.dump(yaml_dict, **yaml_options)
