@@ -152,8 +152,8 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                transient=None, stepping=None, init_step=None, step_size=None,
                atol=None, rtol=None, phases=None, reactor=None, inlet_gas=None,
                multi_T=None, multi_P=None, multi_flow_rate=None,
-               solver=None, simulation=None, multi_input=None, misc=None,
-               units=None, filename=None, 
+               output_format=None, solver=None, simulation=None,
+               multi_input=None, misc=None, units=None, filename=None, 
                yaml_options={'default_flow_style': False, 'indent': 4},
                newline='\n'):
     """Writes the reactor options in a YAML file for OpenMKM. 
@@ -247,6 +247,16 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             Multiple flow rates to run the model. Value written to
             simulation.multi_input.flow_rate. Units of length3/time. See Notes
             section regarding unit specification.
+        output_format : str
+            Format for output files. Supported options include:
+            
+            - CSV
+            - DAT
+
+            Value written to simulation.output_format.
+
+        misc : dict
+            Generic dictionary for any parameter specified at the top level.
         solver : dict
             Generic dictionary for solver to specify values not supported by
             ``write_yaml``.            
@@ -367,7 +377,9 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
     simulation_params = (('end_time', end_time, '_time'),
                          ('transient', transient, None),
                          ('stepping', stepping, None),
-                         ('step_size', step_size, '_time'))
+                         ('step_size', step_size, '_time'),
+                         ('init_step', init_step, '_time'),
+                         ('output_format', output_format, None))
     for parameter in simulation_params:
         _assign_yaml_val(parameter[0], parameter[1], parameter[2], simulation,
                          units)
@@ -387,10 +399,10 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
 
                 # Assign intial state if available
                 if phase.initial_state is not None:
-                    initial_state_str = ''
+                    initial_state_str = '"'
                     for species, mole_frac in phase.initial_state.items():
                         initial_state_str += '{}:{}, '.format(species,mole_frac)
-                    initial_state_str = initial_state_str[:-2]
+                    initial_state_str = '{}"'.format(initial_state_str[:-2])
                     phase_info['initial_state'] = initial_state_str
 
                 # Assign phase type
@@ -405,7 +417,10 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                     phases_dict[phase_type].append(phase_info)
                 except KeyError:
                     phases_dict[phase_type] = [phase_info]
-    
+        # If only one entry for phase type, reassign it.
+        for phase_type, phases in phases_dict.items():
+            if len(phases) == 1:
+                phases_dict[phase_type] = phases[0]
     '''Assign misc values'''
     if misc is None:
         misc = {}
@@ -422,6 +437,8 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
 
     '''Convert dictionary to YAML str'''
     yaml_str = yaml.dump(yaml_dict, **yaml_options)
+    # Remove redundant quotes
+    yaml_str = yaml_str.replace('\"', '')
     lines.append(yaml_str)
 
     '''Write to file'''
@@ -452,19 +469,50 @@ def _assign_yaml_val(label, val, val_units, header, units=None):
     units : :class:`~pmutt.omkm.units.Unit` object, optional
         Units to write file.
     """
-    if label not in header and val is not None:
-        if units is not None and val_units is not None:
-            if isinstance(val, (int, float)):           
-                units_str = '{} {}'.format(val, val_units)
-                for unit_type, unit in units.__dict__.items():
-                    units_str = units_str.replace('_{}'.format(unit_type), unit)
-                header[label] = units_str
-            elif isinstance(val, list):
-                units_list = ['{} {}'.format(i, val_units) for i in val]
-                for unit_type, unit in units.__dict__.items():
-                    old_str = '_{}'.format(unit_type)
-                    for i, unit_member in enumerate(units_list):
-                        units_list[i] = unit_member.replace(old_str, unit)
-                header[label] = units_list
-        else:
-            header[label] = val
+    # Do nothing if the label was previously assigned
+    if label in header:
+        return
+    # Do nothing if value is not specified
+    if val is None:
+        return
+    if isinstance(val, str):
+        val = '\"{}\"'.format(val)
+    # Assign the value as is if the unit type is None
+    if val_units is None:
+        header[label] = val
+        return
+    # Assume SI units if units is not specified
+    if units is None:
+        header[label] = val
+        return
+    # If the value is numerical and units were specified, add the units
+    if isinstance(val, (int, float)):
+        val_str = '\"{} {}\"'.format(val, val_units)
+        for unit_type, unit in units.__dict__.items():
+            val_str = val_str.replace('_{}'.format(unit_type), unit)
+        header[label] = val_str
+    # If the value is a list and units were specified, add units to each entry
+    elif isinstance(val, list):
+        vals_list = ['\"{} {}\"'.format(i, val_units) for i in val]
+        for unit_type, unit in units.__dict__.items():
+            old_str = '_{}'.format(unit_type)
+            for i, val in enumerate(vals_list):
+                vals_list[i] = val.replace(old_str, unit)
+        header[label] = vals_list
+
+    # if label not in header and val is not None:
+    #     if units is not None and val_units is not None:
+    #         if isinstance(val, (int, float)):           
+    #             units_str = '{} {}'.format(val, val_units)
+    #             for unit_type, unit in units.__dict__.items():
+    #                 units_str = units_str.replace('_{}'.format(unit_type), unit)
+    #             header[label] = units_str
+    #         elif isinstance(val, list):
+    #             units_list = ['{} {}'.format(i, val_units) for i in val]
+    #             for unit_type, unit in units.__dict__.items():
+    #                 old_str = '_{}'.format(unit_type)
+    #                 for i, unit_member in enumerate(units_list):
+    #                     units_list[i] = unit_member.replace(old_str, unit)
+    #             header[label] = units_list
+    #     else:
+    #         header[label] = val
