@@ -315,7 +315,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                       ('volume', V, '_length3'),
                       ('area', A, '_length2'),
                       ('length', L, '_length'),
-                      ('cat_abyv', cat_abyv, ' /_length')]
+                      ('cat_abyv', cat_abyv, '/_length')]
     # Process temperature
     if T is not None:
         reactor_params.append(('temperature', T, None))
@@ -378,7 +378,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                          ('transient', transient, None),
                          ('stepping', stepping, None),
                          ('step_size', step_size, '_time'),
-                         ('init_step', init_step, '_time'),
+                         ('init_step', init_step, None),
                          ('output_format', output_format, None))
     for parameter in simulation_params:
         _assign_yaml_val(parameter[0], parameter[1], parameter[2], simulation,
@@ -429,8 +429,6 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
     '''Assign values to overall YAML dict'''
     headers = (('reactor', reactor), ('inlet_gas', inlet_gas),
                ('simulation', simulation), ('phases', phases_dict))
-    # headers_str = ('reactor', 'inlet_gas', 'simulation', 'phases')
-    # headers_dict = (reactor, inlet_gas, simulation, phases_dict)
     for header in headers:
         if len(header[1]) > 0:
             yaml_dict[header[0]] = header[1]
@@ -438,7 +436,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
     '''Convert dictionary to YAML str'''
     yaml_str = yaml.dump(yaml_dict, **yaml_options)
     # Remove redundant quotes
-    yaml_str = yaml_str.replace('\"', '')
+    yaml_str = yaml_str.replace('\'', '')
     lines.append(yaml_str)
 
     '''Write to file'''
@@ -499,20 +497,3 @@ def _assign_yaml_val(label, val, val_units, header, units=None):
             for i, val in enumerate(vals_list):
                 vals_list[i] = val.replace(old_str, unit)
         header[label] = vals_list
-
-    # if label not in header and val is not None:
-    #     if units is not None and val_units is not None:
-    #         if isinstance(val, (int, float)):           
-    #             units_str = '{} {}'.format(val, val_units)
-    #             for unit_type, unit in units.__dict__.items():
-    #                 units_str = units_str.replace('_{}'.format(unit_type), unit)
-    #             header[label] = units_str
-    #         elif isinstance(val, list):
-    #             units_list = ['{} {}'.format(i, val_units) for i in val]
-    #             for unit_type, unit in units.__dict__.items():
-    #                 old_str = '_{}'.format(unit_type)
-    #                 for i, unit_member in enumerate(units_list):
-    #                     units_list[i] = unit_member.replace(old_str, unit)
-    #             header[label] = units_list
-    #     else:
-    #         header[label] = val
