@@ -398,7 +398,7 @@ class Shomate(EmpiricalBase):
     def from_statmech(cls, name, statmech_model, T_low, T_high,
                       references=None, elements=None, **kwargs):
         """Calculates the Shomate polynomial using statistical mechanic models.
-        Deprecated as of Version 1.2.13.
+        Deprecated as of Version 1.2.13. Please use ``from_model`` instead.
 
         Parameters
         ----------
@@ -420,27 +420,9 @@ class Shomate(EmpiricalBase):
             shomate : Shomate object
                 Shomate object with polynomial terms fitted to data.
         """
-        warn_msg = ('Shomate.from_statmech is deprecated as of Version 1.2.13. '
-                    'Please use the more generic function, Shomate.from_model.')
-        warn(warn_msg, DeprecationWarning)
-
-        # Initialize the StatMech object
-        if inspect.isclass(statmech_model):
-            statmech_model = statmech_model(name=name, references=references,
-                                            elements=elements, **kwargs)
-
-        # Generate heat capacity data
-        T = np.linspace(T_low, T_high)
-        CpoR = np.array([statmech_model.get_CpoR(T=T_i) for T_i in T])
-        T_ref = c.T0('K')
-        # Generate enthalpy and entropy data
-        HoRT_ref = statmech_model.get_HoRT(T=T_ref, use_references=True)
-        SoR_ref = statmech_model.get_SoR(T=T_ref, use_references=True)
-
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
-                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref,
-                             model=statmech_model, elements=elements,
-                             references=references, **kwargs)
+        err_msg = ('Shomate.from_statmech is deprecated as of Version 1.2.13. '
+                   'Please use the more generic function, Shomate.from_model.')
+        raise RuntimeError(err_msg)
 
     @classmethod
     def from_model(cls, model, name=None, T_low=None, T_high=None,

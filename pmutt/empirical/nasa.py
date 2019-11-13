@@ -447,7 +447,7 @@ class Nasa(EmpiricalBase):
     def from_statmech(cls, name, statmech_model, T_low, T_high, T_mid=None,
                       references=None, elements=None, **kwargs):
         """Calculates the NASA polynomials using statistical mechanic models.
-        Deprecated as of Version 1.2.13.
+        Deprecated as of Version 1.2.13. Please use ``from_model`` instead.
 
         Parameters
         ----------
@@ -480,39 +480,9 @@ class Nasa(EmpiricalBase):
             Nasa : Nasa object
                 Nasa object with polynomial terms fitted to data.
         """
-        warn_msg = ('Nasa.from_statmech is deprecated as of Version 1.2.13. '
-                    'Please use the more generic function, Nasa.from_model.')
-        warn(warn_msg, DeprecationWarning)
-
-        # Initialize the StatMech object
-        if inspect.isclass(statmech_model):
-            statmech_model = statmech_model(name=name, references=references,
-                                            elements=elements, **kwargs)
-
-        # Generate heat capacity data
-        T = np.linspace(T_low, T_high)
-        if T_mid is not None:
-            # Check to see if specified T_mid's are in T and, if not,
-            # insert them into T.
-            # If a single value for T_mid is chosen, convert to a tuple
-            if not _is_iterable(T_mid):
-                T_mid = (T_mid,)
-            for x in range(0, len(T_mid)):
-                if np.where(T == T_mid[x])[0].size == 0:
-                    # Insert T_mid's into T and save position
-                    Ts_index = np.where(T > T_mid[x])[0][0]
-                    T = np.insert(T, Ts_index, T_mid[x])
-        CpoR = np.array(
-            [statmech_model.get_CpoR(T=T_i, use_references=True) for T_i in T])
-        # Generate enthalpy and entropy data
-        T_ref = c.T0('K')
-        HoRT_ref = statmech_model.get_HoRT(T=T_ref, use_references=True)
-        SoR_ref = statmech_model.get_SoR(T=T_ref, use_references=True)
-
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_ref,
-                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
-                             model=statmech_model, elements=elements,
-                             references=references, **kwargs)
+        err_msg = ('Nasa.from_statmech is deprecated as of Version 1.2.13. '
+                   'Please use the more generic function, Nasa.from_model.')
+        raise RuntimeError(err_msg)
 
     @classmethod
     def from_model(cls, model, name=None, T_low=None, T_high=None, T_mid=None,
