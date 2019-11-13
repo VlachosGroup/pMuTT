@@ -175,30 +175,29 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             - Adiabatic
 
             Value written to reactor.mode.
-        V : float or tuple
+        V : float or str
             Volume of reactor. Value written to reactor.volume. Units of
             length^3. See Notes section regarding unit specification.
-        T : float or tuple
-            Temperature of reactor. Value written to reactor.temperature. Units
-            of temperature. See Notes section regarding unit specification.
-        P : float or tuple
+        T : float
+            Temperature (in K) of reactor. Value written to reactor.temperature.
+        P : float or str
             Pressure of reactor. Value written to reactor.pressure. Units of
             pressure. See Notes section regarding unit specification.
-        A : float or tuple
+        A : float or str
             Surface area of reactor. Value written to reactor.area. Units of
             length^2. See Notes section regarding unit specification.
-        L : float or tuple
+        L : float or str
             Length of reactor. Value written to reactor.length. Units of length.
             See Notes section regarding unit specification.
-        cat_abyv : float or tuple
+        cat_abyv : float or str
             Catalyst surface area to volume ratio. Value written to
             reactor.cat_abyv. Units of 1/length. See Notes section regarding
             unit specification.
-        flow_rate : float or tuple
+        flow_rate : float or str
             Volumetric flow rate of inlet. Value written to inlet_gas.flow_rate.
             Units of length^3/time. See Notes section regarding unit
             specification.
-        end_time : float or tuple
+        end_time : float or str
             Reactor simulation time. For continuous reactors, the system is
             assumed to reach steady state by this time. Value written to
             simulation.end_time. Units of time. See Notes section regarding
@@ -214,9 +213,9 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             - regular
 
             Value written to simulation.stepping.
-        init_step : float or tuple
+        init_step : float or str
             Initial step to take. Value written to simulation.init_step.
-        step_size : float or tuple
+        step_size : float or str
             If ``stepping`` is logarithmic, represents the ratio between the
             next step and the current step. If ``stepping`` is regular,
             represents the time between the next step and the current step in
@@ -237,12 +236,26 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         inlet_gas : dict
             Generic dictionary for inlet_gas to specify values not supported by
             ``write_yaml``.
+        multi_T : list of float
+            Multiple temperatures (in K) of reactor. Value written to
+            simulation.multi_input.temperature.
+        multi_P : list of float/str
+            Multiple pressures of reactor. Value written to
+            simulation.multi_input.pressure. Units of pressure. See Notes
+            section regarding unit specification.
+        multi_flow_rate : list of float/str
+            Multiple flow rates to run the model. Value written to
+            simulation.multi_input.flow_rate. Units of length3/time. See Notes
+            section regarding unit specification.
         solver : dict
             Generic dictionary for solver to specify values not supported by
             ``write_yaml``.            
         simulation : dict
             Generic dictionary for simultaion to specify values not supported by
             ``write_yaml``.            
+        multi_input : dict
+            Generic dictionary for multi_input to specify values not supported
+            by ``write_yaml``.
         units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
             Units used for file. If a dict is inputted, the key is the quantity
             and the value is the unit. If not specified, uses the default units
@@ -250,6 +263,9 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         filename: str, optional
             Filename for the input.cti file. If not specified, returns file
             as str.
+        yaml_options : dict
+            Options to pass when converting the parameters to YAML format. See
+            `PyYAML documentation`_ for ``dump`` for available options.
     Returns
     -------
         lines_out : str
@@ -261,9 +277,9 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         units. If ``units`` is specified, all values inputted are assumed to
         be in the units specified by ``units``. If a particular unit set is
         desired for a value, a str can be inputted with the form
-        quantity="<<value>> <<desired units>>" where ``value`` is a float-like
-        and ``desired units`` is a string. See
-        https://vlachosgroup.github.io/openmkm/input for the most up-to-date
+        quantity="<<value>> <<desired units>>" where ``value`` is float-like
+        and ``desired units`` is a string. For example, flow_rate="1 cm3/s".
+        See https://vlachosgroup.github.io/openmkm/input for the most up-to-date
         supported values.
 
         **Generic Dictionaries**
@@ -272,7 +288,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         i.e. The value in ``reactor['temperature']`` will be written instead
         of ``T``.
 
-
+    .. _`PyYAML Documentation`: https://pyyaml.org/wiki/PyYAMLDocumentation
     """
     lines = [_get_file_timestamp(comment_char='# '),
             '# See documentation for OpenMKM YAML file here:',
