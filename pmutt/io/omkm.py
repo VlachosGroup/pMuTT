@@ -1,6 +1,6 @@
 import yaml
 
-from pmutt import _force_pass_arguments
+from pmutt import _force_pass_arguments, _is_iterable
 from pmutt.io import _get_file_timestamp
 from pmutt.io.cantera import obj_to_CTI
 from pmutt.io.ctml_writer import convert
@@ -150,9 +150,12 @@ def write_cti(phases=None, species=None, reactions=None,
 def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                L=None, cat_abyv=None, flow_rate=None, end_time=None,
                transient=None, stepping=None, init_step=None, step_size=None,
-               atol=None, rtol=None, phases=None, reactor={}, inlet_gas={},
-               solver={}, simulation={}, misc={}, units=None, filename=None,
-               yaml_options={'default_flow_style': False}, newline='\n'):
+               atol=None, rtol=None, phases=None, reactor=None, inlet_gas=None,
+               multi_T=None, multi_P=None, multi_flow_rate=None,
+               solver=None, simulation=None, multi_input=None, misc=None,
+               units=None, filename=None, 
+               yaml_options={'default_flow_style': False, 'indent': 4},
+               newline='\n'):
     """Writes the reactor options in a YAML file for OpenMKM. 
     
     Parameters
@@ -275,30 +278,87 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             '# See documentation for OpenMKM YAML file here:',
             '# https://vlachosgroup.github.io/openmkm/input']
 
+    '''Initialize units'''
+    if isinstance(units, dict):
+        units = Units(**units)
+
     '''Organize reactor parameters'''
-    reactor_params = (('type', reactor_type), ('mode', mode), ('volume', V),
-                      ('temperature', T), ('pressure', P), ('area', A),
-                      ('length', L), ('cat_abyv', cat_abyv))
+    if reactor is None:
+        reactor = {}
+    reactor_params = [('type', reactor_type, None), ('mode', mode, None),
+                      ('volume', V, '_length3'),
+                      ('area', A, '_length2'),
+                      ('length', L, '_length'),
+                      ('cat_abyv', cat_abyv, ' /_length')]
+    # Process temperature
+    if T is not None:
+        reactor_params.append(('temperature', T, None))
+    elif multi_T is not None:
+        reactor_params.append(('temperature', multi_T[0], None))
+    # Process pressure
+    if P is not None:
+        reactor_params.append(('pressure', P, '_pressure'))
+    elif multi_P is not None:
+        reactor_params.append(('pressure', multi_P[0], '_pressure'))
+    
     for parameter in reactor_params:
-        _assign_yaml_val(parameter[0], reactor, parameter[1])
+        _assign_yaml_val(parameter[0], parameter[1], parameter[2], reactor,
+                         units)
 
     '''Organize inlet gas parameters'''
-    inlet_gas_params = (('flow_rate', flow_rate),)
+    if inlet_gas is None:
+        inlet_gas = {}
+    inlet_gas_params = []
+    # Process flow rate
+    if flow_rate is not None:
+        inlet_gas_params.append(('flow_rate', flow_rate, '_length3/_time'))
+    elif multi_flow_rate is not None:
+        inlet_gas_params.append(('flow_rate', multi_flow_rate[0],
+                                 '_length3/_time'))
+
     for parameter in inlet_gas_params:
-        _assign_yaml_val(parameter[0], inlet_gas, parameter[1])
+        _assign_yaml_val(parameter[0], parameter[1], parameter[2], inlet_gas,
+                         units)
 
     '''Organize solver parameters'''
-    solver_params = (('atol', atol), ('rtol', rtol))
+    if solver is None:
+        solver = {}
+    solver_params = [('atol', atol, None), ('rtol', rtol, None)]
     for parameter in solver_params:
-        _assign_yaml_val(parameter[0], solver, parameter[1])
+        _assign_yaml_val(parameter[0], parameter[1], parameter[2], solver,
+                         units)
+
+    '''Organize multi parameters'''
+    if multi_input is None:
+        multi_input = {}
+    # Ensure multi quantities are in correct type
+    if _is_iterable(multi_T):
+        multi_T = list(multi_T)
+    if _is_iterable(multi_P):
+        multi_P = list(multi_P)
+    if _is_iterable(multi_flow_rate):
+        multi_flow_rate = list(multi_flow_rate)
+    multi_input_params = [('temperature', multi_T, None),
+                          ('pressure', multi_P, '_pressure'),
+                          ('flow_rate', multi_flow_rate, '_length3/_time')]
+    for parameter in multi_input_params:
+        _assign_yaml_val(parameter[0], parameter[1], parameter[2], multi_input,
+                         units)
 
     '''Organize simulation parameters'''
-    simulation_params = (('end_time', end_time), ('transient', transient),
-                         ('stepping', stepping), ('step_size', step_size))
+    if simulation is None:
+        simulation = {}
+    simulation_params = (('end_time', end_time, '_time'),
+                         ('transient', transient, None),
+                         ('stepping', stepping, None),
+                         ('step_size', step_size, '_time'))
     for parameter in simulation_params:
-        _assign_yaml_val(parameter[0], simulation, parameter[1])
+        _assign_yaml_val(parameter[0], parameter[1], parameter[2], simulation,
+                         units)
     if len(solver) > 0:
-        _assign_yaml_val('solver', simulation, solver)
+        _assign_yaml_val('solver', solver, None, simulation, units)
+    if len(multi_input) > 0:
+        _assign_yaml_val('multi_input', multi_input, None, simulation, units)
     
     '''Organize phase parameters'''
     if phases is not None:
@@ -331,6 +391,8 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                     phases_dict[phase_type] = [phase_info]
     
     '''Assign misc values'''
+    if misc is None:
+        misc = {}
     yaml_dict = misc.copy()
     
     '''Assign values to overall YAML dict'''
@@ -356,18 +418,37 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         return lines_out
 
 
-def _assign_yaml_val(label, header, val=None):
+def _assign_yaml_val(label, val, val_units, header, units=None):
     """Helper method to assign label to header
     
     Parameters
     ----------
     label : str
         Label name for attribute being assigned.
-    header : dict
-        Upper level dictionary that ``label`` will be nested under.
-    val : obj, optional
+    val : obj
         Value that is assigned to header[label] if the key does not exist or
         val is None.
+    val_units : str
+        Units for ``val`` where quantities are proceeded by '_'.
+        e.g. '_length3/_time' for the volumetric flow rate.
+    header : dict
+        Upper level dictionary that ``label`` will be nested under.
+    units : :class:`~pmutt.omkm.units.Unit` object, optional
+        Units to write file.
     """
     if label not in header and val is not None:
-        header[label] = val
+        if units is not None and val_units is not None:
+            if isinstance(val, (int, float)):           
+                units_str = '{} {}'.format(val, val_units)
+                for unit_type, unit in units.__dict__.items():
+                    units_str = units_str.replace('_{}'.format(unit_type), unit)
+                header[label] = units_str
+            elif isinstance(val, list):
+                units_list = ['{} {}'.format(i, val_units) for i in val]
+                for unit_type, unit in units.__dict__.items():
+                    old_str = '_{}'.format(unit_type)
+                    for i, unit_member in enumerate(units_list):
+                        units_list[i] = unit_member.replace(old_str, unit)
+                header[label] = units_list
+        else:
+            header[label] = val
