@@ -167,54 +167,55 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             - CSTR
             - Batch
 
-            Value written to reactor.type.
+            Value written to ``reactor.type``.
         mode : str
             Operation of reactor. Supported options include:
 
             - Isothermal
             - Adiabatic
 
-            Value written to reactor.mode.
+            Value written to ``reactor.mode``.
         V : float or str
-            Volume of reactor. Value written to reactor.volume. Units of
+            Volume of reactor. Value written to ``reactor.volume``. Units of
             length^3. See Notes section regarding unit specification.
         T : float
-            Temperature (in K) of reactor. Value written to reactor.temperature.
+            Temperature (in K) of reactor. Value written to 
+            ``reactor.temperature``.
         P : float or str
-            Pressure of reactor. Value written to reactor.pressure. Units of
-            pressure. See Notes section regarding unit specification.
+            Pressure of reactor. Value written to ``reactor.pressure``. Units
+            of pressure. See Notes section regarding unit specification.
         A : float or str
-            Surface area of reactor. Value written to reactor.area. Units of
-            length^2. See Notes section regarding unit specification.
+            Surface area of reactor. Value written to ``reactor.area``.
+            Units of length^2. See Notes section regarding unit specification.
         L : float or str
-            Length of reactor. Value written to reactor.length. Units of length.
-            See Notes section regarding unit specification.
+            Length of reactor. Value written to ``reactor.length``.
+            Units of length. See Notes section regarding unit specification.
         cat_abyv : float or str
             Catalyst surface area to volume ratio. Value written to
-            reactor.cat_abyv. Units of 1/length. See Notes section regarding
-            unit specification.
+            ``reactor.cat_abyv``. Units of 1/length. See Notes section
+            regarding unit specification.
         flow_rate : float or str
-            Volumetric flow rate of inlet. Value written to inlet_gas.flow_rate.
-            Units of length^3/time. See Notes section regarding unit
-            specification.
+            Volumetric flow rate of inlet. Value written to
+            ``inlet_gas.flow_rate``. Units of length^3/time.
+            See Notes section regarding unit specification.
         end_time : float or str
             Reactor simulation time. For continuous reactors, the system is
             assumed to reach steady state by this time. Value written to
-            simulation.end_time. Units of time. See Notes section regarding
+            ``simulation.end_time``. Units of time. See Notes section regarding
             unit specification.
         transient : bool
             If True, transient operation results are saved. Otherwise,
             transient files are left blank. Value written to
-            simulation.transient.
+            ``simulation.transient``.
         stepping : str
             Time steps taken to simulate reactor. Supported options include:
 
             - logarithmic
             - regular
 
-            Value written to simulation.stepping.
+            Value written to ``simulation.stepping``.
         init_step : float or str
-            Initial step to take. Value written to simulation.init_step.
+            Initial step to take. Value written to ``simulation.init_step``.
         step_size : float or str
             If ``stepping`` is logarithmic, represents the ratio between the
             next step and the current step. If ``stepping`` is regular,
@@ -223,10 +224,10 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             section regarding unit specification.
         atol : float
             Absolute tolerance for solver. Value written to
-            simulation.solver.atol.
+            ``simulation.solver.atol``.
         rtol : float
             Relative tolerance for solver. Value written to
-            simulation.solver.rtol.
+            ``simulation.solver.rtol``.
         phases : list of ``Phase`` objects
             Phases present in reactor. Each phase should have the ``name``
             and ``initial_state`` attribute.
@@ -238,22 +239,22 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             ``write_yaml``.
         multi_T : list of float
             Multiple temperatures (in K) of reactor. Value written to
-            simulation.multi_input.temperature.
+            ``simulation.multi_input.temperature``.
         multi_P : list of float/str
             Multiple pressures of reactor. Value written to
-            simulation.multi_input.pressure. Units of pressure. See Notes
+            ``simulation.multi_input.pressure``. Units of pressure. See Notes
             section regarding unit specification.
         multi_flow_rate : list of float/str
             Multiple flow rates to run the model. Value written to
-            simulation.multi_input.flow_rate. Units of length3/time. See Notes
-            section regarding unit specification.
+            ``simulation.multi_input.flow_rate``. Units of length3/time.
+            See Notes section regarding unit specification.
         output_format : str
             Format for output files. Supported options include:
             
             - CSV
             - DAT
 
-            Value written to simulation.output_format.
+            Value written to ``simulation.output_format``.
 
         misc : dict
             Generic dictionary for any parameter specified at the top level.
@@ -454,18 +455,18 @@ def _assign_yaml_val(label, val, val_units, header, units=None):
     
     Parameters
     ----------
-    label : str
-        Label name for attribute being assigned.
-    val : obj
-        Value that is assigned to header[label] if the key does not exist or
-        val is None.
-    val_units : str
-        Units for ``val`` where quantities are proceeded by '_'.
-        e.g. '_length3/_time' for the volumetric flow rate.
-    header : dict
-        Upper level dictionary that ``label`` will be nested under.
-    units : :class:`~pmutt.omkm.units.Unit` object, optional
-        Units to write file.
+        label : str
+            Label name for attribute being assigned.
+        val : obj
+            Value that is assigned to header[label] if the key does not exist or
+            val is None.
+        val_units : str
+            Units for ``val`` where quantities are proceeded by '_'.
+            e.g. '_length3/_time' for the volumetric flow rate.
+        header : dict
+            Upper level dictionary that ``label`` will be nested under.
+        units : :class:`~pmutt.omkm.units.Unit` object, optional
+            Units to write file.
     """
     # Do nothing if the label was previously assigned
     if label in header:
