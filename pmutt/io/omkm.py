@@ -92,14 +92,14 @@ def write_cti(phases=None, species=None, reactions=None,
 
     '''Write phases'''
     if phases is not None:
-        lines.extend(['', '#' + '-'*80, '# PHASES', '#' + '-'*80])
+        lines.extend(['', '#' + '-'*79, '# PHASES', '#' + '-'*79])
         for phase in phases:
             phase_CTI = _force_pass_arguments(phase.to_CTI, units=units)
             lines.append(phase_CTI)
 
     '''Write species'''
     if species is not None:
-        lines.extend(['', '#' + '-'*80, '# SPECIES', '#' + '-'*80])
+        lines.extend(['', '#' + '-'*79, '# SPECIES', '#' + '-'*79])
         for ind_species in species:
             ind_species_CTI = _force_pass_arguments(ind_species.to_CTI,
                                                     units=units)
@@ -107,24 +107,24 @@ def write_cti(phases=None, species=None, reactions=None,
 
     '''Write lateral interactions'''
     if lateral_interactions is not None:
-        lines.extend(['', '#' + '-'*80, '# LATERAL INTERACTIONS', '#' + '-'*80])
+        lines.extend(['', '#' + '-'*79, '# LATERAL INTERACTIONS', '#' + '-'*79])
         lines.extend(lat_inter_lines)
 
     if reactions is not None:
         '''Write reaction options'''
-        lines.extend(['', '#' + '-'*80, '# REACTION OPTIONS', '#' + '-'*80])
+        lines.extend(['', '#' + '-'*79, '# REACTION OPTIONS', '#' + '-'*79])
         if use_motz_wise:
             lines.extend(['enable_motz_wise()\n'])
         else:
             lines.extend(['disable_motz_wise()\n'])
 
         '''Write reactions'''
-        lines.extend(['', '#' + '-'*80, '# REACTIONS', '#' + '-'*80])
+        lines.extend(['', '#' + '-'*79, '# REACTIONS', '#' + '-'*79])
         lines.extend(reaction_lines)
 
         '''Write BEP Relationships'''
         if len(beps) > 0:
-            lines.extend(['', '#' + '-'*80, '# BEP Relationships', '#' + '-'*80])
+            lines.extend(['', '#' + '-'*79, '# BEP Relationships', '#' + '-'*79])
             # Only write each BEP once
             i = 0
             for bep in beps:

@@ -1,5 +1,5 @@
 Python Multiscale Thermochemistry Toolbox (pMuTT)
-==================================================
+=================================================
   
 The **P**\ ython **Mu**\ ltiscale **T**\ hermochemistry **T**\ oolbox
 (pMuTT) is a Python library for Thermochemistry developed by the
@@ -41,13 +41,14 @@ Dependencies
 -  `dnspython`_: Used to connect to databases
 -  `NetworkX`_: Used to plot reaction networks
 -  `More Itertools`_: Used for writing ranges for OpenMKM output.
+-  `PyYAML`_: Used to write YAML input files for OpenMKM.
 
 Getting Started
 ---------------
 
 1. Install using pip (`see documentation for more thorough instructions`_)::
 
-    pip install --user pmutt
+    pip install pmutt
 
 2. Look at `examples using the code`_
 
@@ -126,6 +127,7 @@ Special Thanks
 .. _dnspython: http://www.dnspython.org/
 .. _networkx: https://networkx.github.io/
 .. _`More Itertools`: https://more-itertools.readthedocs.io/en/stable/index.html
+.. _`PyYAML`: https://pyyaml.org/
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pmutt/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`see documentation for more thorough instructions`: https://vlachosgroup.github.io/pMuTT/install.html

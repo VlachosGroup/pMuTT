@@ -129,7 +129,7 @@ class IdealGas(Phase):
                                   max_line_len=max_line_len)))
         # Add optional fields
         optional_fields = ('kinetics', 'transport', 'options', 'note',
-                           'reactions', 'initial_state')
+                           'reactions')
         for field in optional_fields:
             val = getattr(self, field)
             # Skip empty fields
