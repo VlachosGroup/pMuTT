@@ -10,10 +10,25 @@ class Phase:
     ----------
         name : str
             Name of the phase
-        species : list of :class:`~pmutt._ModelBase` objects
-            Species present in Phase
+        species : list of :class:`~pmutt._ModelBase` objects, optional
+            Species present in Phase. Default is an empty list
+        initial_state : dict, optional
+            Dictionary of initial mole fractions. Default is None
+        kinetics : Kinetics object, optional
+            Kinetics model to use for phase. Default is None
+        transport : Transport object, optional
+            Transport model to use for transport. Default is None
+        reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction`, optional
+            Reactions associated with phase. Default is None
+        options : dict, optional
+            Additional options. Default is None
+        note : str, optional
+            Note about the phase. Default is None.
+        elements : set
+            Not supplied during initialization. Attribute derived from
+            ``species`` attribute.        
     """
-    def __init__(self, name, species=[], initial_state=None, kinetics=None,
+    def __init__(self, name, species=None, initial_state=None, kinetics=None,
                  transport=None, reactions=None, options=None, note=None):
         self.name = name
         self.species = species
@@ -41,8 +56,11 @@ class Phase:
 
     @species.setter
     def species(self, val):
-        for i in range(len(val)):
-            val[i].phase = self
+        if val is None:
+            val = []
+        else:
+            for i in range(len(val)):
+                val[i].phase = self
         self._species = val
 
     def append_species(self, val):

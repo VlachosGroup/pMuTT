@@ -35,6 +35,13 @@ class BEP(_ModelBase):
             ===========  ===========================================================================
 
             Default is 'delta_H'.
+        elements : dict
+            Composition of the species.
+            Keys of dictionary are elements, values are stoichiometric
+            values in a formula unit.
+            e.g. CH3OH can be represented as:
+            {'C': 1, 'H': 4, 'O': 1,}.
+    
         notes : str or dict
             Notes relevant to BEP relationship such as its source. If using a
             dictionary, the keys and values must be simple types supported by
@@ -42,11 +49,12 @@ class BEP(_ModelBase):
     """
 
     def __init__(self, slope, intercept, name=None, reaction=None,
-                 descriptor='delta_H', notes=None):
+                 descriptor='delta_H', elements=None, notes=None):
         self.name = name
         self.slope = slope
         self.intercept = intercept
         self.descriptor = descriptor
+        self.elements = elements
         self.notes = notes
 
     def _get_descriptor_val(self, reaction, **kwargs):

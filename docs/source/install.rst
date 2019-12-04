@@ -40,7 +40,7 @@ the master branch. You can install using the following:
 ::
 
 
-    pip install git+https://github.com/VlachosGroup/pMuTT.git@development
+    pip install --upgrade git+https://github.com/VlachosGroup/pMuTT.git@development
 
 Upgrading pMuTT using pip
 -------------------------

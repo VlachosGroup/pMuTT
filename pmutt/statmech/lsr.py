@@ -9,7 +9,7 @@ from pmutt.io.json import remove_class, json_to_pmutt
 class LSR(_ModelBase):
     """Represents a linear scaling relationship
 
-    :math:`\\Delta E^{AH_x} = \\alpha E^{A} + \\beta`
+    :math:`\\Delta E^{AH_x} = \\alpha \\Delta E^{A} + \\beta`
         
     :math:`E^{AH_{x}^*}=\\Delta E^{AH_x} + E^* + E^{AH_{x(g)}}`
 
@@ -22,11 +22,11 @@ class LSR(_ModelBase):
             equation
         reaction : float or :class:`~pmutt.reaction.Reaction` object
             Reaction to use to calculate reference binding energy. Binding
-            energy calculated using `get_delta_E` and if that fails,
-            `get_delta_H`. If the binding energy is specified as a float
+            energy calculated using ``get_delta_E`` and if that fails,
+            ``get_delta_H``. If the binding energy is specified as a float
             (in kcal/mol), it will be converted to a
-            :class:`~pmutt.reaction.Reaction` made of `~pmutt.statmech.StatMech`
-            objects
+            :class:`~pmutt.reaction.Reaction` made of
+            :class:`~pmutt.statmech.StatMech` objects
         surf_specie : float or :class:`~pmutt.statmech.StatMech` object, optional
             Surface specie. If the surface's energy is specified as a float (in
             kcal/mol), it will be converted to a

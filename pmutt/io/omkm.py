@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 import yaml
 
 from pmutt import _force_pass_arguments, _is_iterable
@@ -7,6 +9,21 @@ from pmutt.io.ctml_writer import convert
 from pmutt.cantera.phase import IdealGas, StoichSolid
 from pmutt.omkm.phase import InteractingInterface
 from pmutt.omkm.units import Units
+
+
+_Param = namedtuple('_Param', 'label val units')
+'''_Parameter as a NamedTuple for easier unit passing.
+    Attributes
+    ----------
+        label : str
+            Label name for attribute being assigned.
+        val : obj
+            Value that is assigned to header[label] if the key does not exist or
+            val is None.
+        val_units : str
+            Units for ``val`` where quantities are proceeded by '_'.
+            e.g. '_length3/_time' for the volumetric flow rate.
+'''
 
 
 def write_cti(phases=None, species=None, reactions=None,
@@ -148,9 +165,10 @@ def write_cti(phases=None, species=None, reactions=None,
         return lines_out
 
 def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
-               L=None, cat_abyv=None, flow_rate=None, end_time=None,
-               transient=None, stepping=None, init_step=None, step_size=None,
-               atol=None, rtol=None, phases=None, reactor=None, inlet_gas=None,
+               L=None, cat_abyv=None, flow_rate=None, residence_time=None,
+               mass_flow_rate=None, end_time=None, transient=None,
+               stepping=None, init_step=None, step_size=None, atol=None,
+               rtol=None, phases=None, reactor=None, inlet_gas=None,
                multi_T=None, multi_P=None, multi_flow_rate=None,
                output_format=None, solver=None, simulation=None,
                multi_input=None, misc=None, units=None, filename=None, 
@@ -197,6 +215,15 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         flow_rate : float or str
             Volumetric flow rate of inlet. Value written to
             ``inlet_gas.flow_rate``. Units of length^3/time.
+            See Notes section regarding unit specification.
+        residence_time : float or str
+            Residence time of reactor. Value written to
+            ``inlet_gas.residence_time``. Not required if ``flow_rate``
+            or ``mass_flow_rate`` already specified. Units of time.
+            See Notes section regarding unit specification.
+        mass_flow_rate : float or str
+            Mass flow rate of inlet. Value written to
+            ``inlet_gas.mass_flow_rate``. Units of mass^3/time.
             See Notes section regarding unit specification.
         end_time : float or str
             Reactor simulation time. For continuous reactors, the system is
@@ -312,48 +339,48 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
     '''Organize reactor parameters'''
     if reactor is None:
         reactor = {}
-    reactor_params = [('type', reactor_type, None), ('mode', mode, None),
-                      ('volume', V, '_length3'),
-                      ('area', A, '_length2'),
-                      ('length', L, '_length'),
-                      ('cat_abyv', cat_abyv, '/_length')]
+    reactor_params = [_Param('type', reactor_type, None),
+                      _Param('mode', mode, None),
+                      _Param('volume', V, '_length3'),
+                      _Param('area', A, '_length2'),
+                      _Param('length', L, '_length'),
+                      _Param('cat_abyv', cat_abyv, '/_length')]
     # Process temperature
     if T is not None:
-        reactor_params.append(('temperature', T, None))
+        reactor_params.append(_Param('temperature', T, None))
     elif multi_T is not None:
-        reactor_params.append(('temperature', multi_T[0], None))
+        reactor_params.append(_Param('temperature', multi_T[0], None))
     # Process pressure
     if P is not None:
-        reactor_params.append(('pressure', P, '_pressure'))
+        reactor_params.append(_Param('pressure', P, '_pressure'))
     elif multi_P is not None:
-        reactor_params.append(('pressure', multi_P[0], '_pressure'))
+        reactor_params.append(_Param('pressure', multi_P[0], '_pressure'))
     
     for parameter in reactor_params:
-        _assign_yaml_val(parameter[0], parameter[1], parameter[2], reactor,
-                         units)
+        _assign_yaml_val(parameter, reactor, units)
 
     '''Organize inlet gas parameters'''
     if inlet_gas is None:
         inlet_gas = {}
-    inlet_gas_params = []
+    inlet_gas_params = [_Param('residence_time', residence_time, '_time'),
+                        _Param('mass_flow_rate', mass_flow_rate, '_mass/_time')]
     # Process flow rate
     if flow_rate is not None:
-        inlet_gas_params.append(('flow_rate', flow_rate, '_length3/_time'))
+        inlet_gas_params.append(_Param('flow_rate', flow_rate,
+                                       '_length3/_time'))
     elif multi_flow_rate is not None:
-        inlet_gas_params.append(('flow_rate', multi_flow_rate[0],
-                                 '_length3/_time'))
+        inlet_gas_params.append(_Param('flow_rate', multi_flow_rate[0],
+                                       '_length3/_time'))
 
     for parameter in inlet_gas_params:
-        _assign_yaml_val(parameter[0], parameter[1], parameter[2], inlet_gas,
-                         units)
+        _assign_yaml_val(parameter, inlet_gas, units)
 
     '''Organize solver parameters'''
     if solver is None:
         solver = {}
-    solver_params = [('atol', atol, None), ('rtol', rtol, None)]
+    solver_params = [_Param('atol', atol, None), _Param('rtol', rtol, None)]
     for parameter in solver_params:
-        _assign_yaml_val(parameter[0], parameter[1], parameter[2], solver,
-                         units)
+        _assign_yaml_val(parameter, solver, units)
 
     '''Organize multi parameters'''
     if multi_input is None:
@@ -365,29 +392,27 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         multi_P = list(multi_P)
     if _is_iterable(multi_flow_rate):
         multi_flow_rate = list(multi_flow_rate)
-    multi_input_params = [('temperature', multi_T, None),
-                          ('pressure', multi_P, '_pressure'),
-                          ('flow_rate', multi_flow_rate, '_length3/_time')]
+    multi_input_params = [_Param('temperature', multi_T, None),
+                          _Param('pressure', multi_P, '_pressure'),
+                          _Param('flow_rate', multi_flow_rate, '_length3/_time')]
     for parameter in multi_input_params:
-        _assign_yaml_val(parameter[0], parameter[1], parameter[2], multi_input,
-                         units)
+        _assign_yaml_val(parameter, multi_input, units)
 
     '''Organize simulation parameters'''
     if simulation is None:
         simulation = {}
-    simulation_params = (('end_time', end_time, '_time'),
-                         ('transient', transient, None),
-                         ('stepping', stepping, None),
-                         ('step_size', step_size, '_time'),
-                         ('init_step', init_step, None),
-                         ('output_format', output_format, None))
+    simulation_params = (_Param('end_time', end_time, '_time'),
+                         _Param('transient', transient, None),
+                         _Param('stepping', stepping, None),
+                         _Param('step_size', step_size, '_time'),
+                         _Param('init_step', init_step, '_time'),
+                         _Param('output_format', output_format, None))
     for parameter in simulation_params:
-        _assign_yaml_val(parameter[0], parameter[1], parameter[2], simulation,
-                         units)
+        _assign_yaml_val(parameter, simulation, units)
     if len(solver) > 0:
-        _assign_yaml_val('solver', solver, None, simulation, units)
+        _assign_yaml_val(_Param('solver', solver, None), simulation, units)
     if len(multi_input) > 0:
-        _assign_yaml_val('multi_input', multi_input, None, simulation, units)
+        _assign_yaml_val(_Param('multi_input', multi_input, None), simulation, units)
     
     '''Organize phase parameters'''
     if phases is not None:
@@ -450,51 +475,45 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         return lines_out
 
 
-def _assign_yaml_val(label, val, val_units, header, units=None):
+def _assign_yaml_val(param, header, units=None):
     """Helper method to assign label to header
     
     Parameters
     ----------
-        label : str
-            Label name for attribute being assigned.
-        val : obj
-            Value that is assigned to header[label] if the key does not exist or
-            val is None.
-        val_units : str
-            Units for ``val`` where quantities are proceeded by '_'.
-            e.g. '_length3/_time' for the volumetric flow rate.
+        param : _Param namedtuple
+            Parameter with three attributes: ``label``, ``val``, ``units``
         header : dict
             Upper level dictionary that ``label`` will be nested under.
         units : :class:`~pmutt.omkm.units.Unit` object, optional
             Units to write file.
     """
     # Do nothing if the label was previously assigned
-    if label in header:
+    if param.label in header:
         return
     # Do nothing if value is not specified
-    if val is None:
+    if param.val is None:
         return
-    if isinstance(val, str):
-        val = '\"{}\"'.format(val)
+    if isinstance(param.val, str):
+        param = param._replace(val='\"{}\"'.format(param.val))
     # Assign the value as is if the unit type is None
-    if val_units is None:
-        header[label] = val
+    if param.units is None:
+        header[param.label] = param.val
         return
     # Assume SI units if units is not specified
-    if units is None:
-        header[label] = val
+    if param.units is None:
+        header[param.label] = param.val
         return
     # If the value is numerical and units were specified, add the units
-    if isinstance(val, (int, float)):
-        val_str = '\"{} {}\"'.format(val, val_units)
+    if isinstance(param.val, (int, float)):
+        val_str = '\"{} {}\"'.format(param.val, param.units)
         for unit_type, unit in units.__dict__.items():
             val_str = val_str.replace('_{}'.format(unit_type), unit)
-        header[label] = val_str
+        header[param.label] = val_str
     # If the value is a list and units were specified, add units to each entry
-    elif isinstance(val, list):
-        vals_list = ['\"{} {}\"'.format(i, val_units) for i in val]
+    elif isinstance(param.val, list):
+        vals_list = ['\"{} {}\"'.format(i, param.units) for i in param.val]
         for unit_type, unit in units.__dict__.items():
             old_str = '_{}'.format(unit_type)
             for i, val in enumerate(vals_list):
                 vals_list[i] = val.replace(old_str, unit)
-        header[label] = vals_list
+        header[param.label] = vals_list
