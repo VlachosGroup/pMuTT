@@ -12,7 +12,8 @@ from pmutt.omkm.units import Units
 
 
 _Param = namedtuple('_Param', 'label val units')
-'''_Parameter as a NamedTuple for easier unit passing.
+"""Parameters as a NamedTuple for easier unit passing for YAML file.
+
     Attributes
     ----------
         label : str
@@ -23,7 +24,7 @@ _Param = namedtuple('_Param', 'label val units')
         val_units : str
             Units for ``val`` where quantities are proceeded by '_'.
             e.g. '_length3/_time' for the volumetric flow rate.
-'''
+"""
 
 
 def write_cti(phases=None, species=None, reactions=None,
@@ -43,9 +44,9 @@ def write_cti(phases=None, species=None, reactions=None,
         lateral_interactions : list of :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
             Lateral interactions to include in CTI file. Default is None.
         units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
-            Units to write file. If a dict is inputted, the key is the quantity and
-            the value is the unit. If not specified, uses the default units of
-            :class:`~pmutt.omkm.units.Unit`
+            Units to write file. If a dict is inputted, the key is the quantity
+            and the value is the unit. If not specified, uses the default units
+            of :class:`~pmutt.omkm.units.Unit`
         filename: str, optional
             Filename for the input.cti file. If not specified, returns file
             as str
@@ -141,7 +142,8 @@ def write_cti(phases=None, species=None, reactions=None,
 
         '''Write BEP Relationships'''
         if len(beps) > 0:
-            lines.extend(['', '#' + '-'*79, '# BEP Relationships', '#' + '-'*79])
+            lines.extend(['', '#' + '-'*79, '# BEP Relationships',
+                          '#' + '-'*79])
             # Only write each BEP once
             i = 0
             for bep in beps:
@@ -394,7 +396,8 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         multi_flow_rate = list(multi_flow_rate)
     multi_input_params = [_Param('temperature', multi_T, None),
                           _Param('pressure', multi_P, '_pressure'),
-                          _Param('flow_rate', multi_flow_rate, '_length3/_time')]
+                          _Param('flow_rate', multi_flow_rate,
+                                 '_length3/_time')]
     for parameter in multi_input_params:
         _assign_yaml_val(parameter, multi_input, units)
 
@@ -405,14 +408,15 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                          _Param('transient', transient, None),
                          _Param('stepping', stepping, None),
                          _Param('step_size', step_size, '_time'),
-                         _Param('init_step', init_step, '_time'),
+                         _Param('init_step', init_step, None),
                          _Param('output_format', output_format, None))
     for parameter in simulation_params:
         _assign_yaml_val(parameter, simulation, units)
     if len(solver) > 0:
         _assign_yaml_val(_Param('solver', solver, None), simulation, units)
     if len(multi_input) > 0:
-        _assign_yaml_val(_Param('multi_input', multi_input, None), simulation, units)
+        _assign_yaml_val(_Param('multi_input', multi_input, None), simulation,
+                         units)
     
     '''Organize phase parameters'''
     if phases is not None:

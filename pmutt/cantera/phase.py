@@ -1,6 +1,7 @@
 import more_itertools as mit
 
 from pmutt import constants as c
+from pmutt.cantera import _get_range_CTI
 from pmutt.io.cantera import obj_to_CTI
 
 class Phase:
@@ -122,13 +123,16 @@ class IdealGas(Phase):
                          transport=transport, options=options, note=note,
                          reactions=reactions, initial_state=initial_state)
 
-    def to_CTI(self, max_line_len=80):
+    def to_CTI(self, max_line_len=80, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters
         ----------
             max_line_len : int, optional
                 Maximum number of characters in the line. Default is 80.
+            delimiter : str, optional
+                Delimiter to use when specifying ranges for reactions. Default
+                is '_'.
         Returns
         -------
             CTI_str : str
@@ -145,9 +149,21 @@ class IdealGas(Phase):
                                   max_line_len=max_line_len),
                        obj_to_CTI(species_names, line_len=max_line_len-18,
                                   max_line_len=max_line_len)))
+
+        # Fields with ranges
+        range_fields = ('reactions',)
+        for range_field in range_fields:
+            val = getattr(self, range_field)
+            # Skip empty fields
+            if val is None:
+                continue
+            cti_str += ('          {}={},\n'
+                        ''.format(range_field, 
+                                  _get_range_CTI(objs=val, parent_obj=self,
+                                                 delimiter=delimiter)))
+
         # Add optional fields
-        optional_fields = ('kinetics', 'transport', 'options', 'note',
-                           'reactions')
+        optional_fields = ('kinetics', 'transport', 'options', 'note')
         for field in optional_fields:
             val = getattr(self, field)
             # Skip empty fields
@@ -187,9 +203,9 @@ class StoichSolid(Phase):
             Comment field for users. Default is None.
     """
     def __init__(self, name, species=[], initial_state=None, transport=None,
-                 options=None, density=None, note=None):
+                 reactions=None, options=None, density=None, note=None):
         super().__init__(name=name, species=species, transport=transport,
-                         options=options, note=note,
+                         options=options, note=note, reactions=reactions,
                          initial_state=initial_state)
         self.density = density
 
