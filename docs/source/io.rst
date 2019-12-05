@@ -478,6 +478,11 @@ Chemkin
 .. automodule:: pmutt.io.chemkin
    :members:
 
+OpenMKM
+=======
+
+.. automodule:: pmutt.io.omkm
+   :members:
 
 .. _`pmutt.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_thermdat 
 .. _`JavaScript Object Notation (JSON)`: https://www.json.org/
