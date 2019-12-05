@@ -1,7 +1,31 @@
 import more_itertools as mit
 
-def _get_range_CTI(objs, parent_obj, delimiter='_'):
-    """Returns the objs IDs"""
+def _get_range_CTI(objs, parent_obj=None, delimiter='_'):
+    """Returns the objs IDs
+    
+    Parameters
+    ----------
+        objs : list
+            List of objects to be grouped as a range of CTI strings. Objects
+            should be str, or have the ``name`` or ``id`` attribute.
+        parent_obj : obj, optional
+            Primarily used for more helpful error messages. Default is None.
+        delimiter : str, optional
+            Delimiter to separate header and footer of obj strings. Default is
+            '_'
+    Returns
+    -------
+        CTI_range_out : str
+            Objects expressed in CTI range format.
+    Raises
+    ------
+        TypeError:
+            Raised when members of ``objs`` do not have an ``id`` or ``name``
+            attribute and cannot be expressed as a string.
+        ValueError:
+            Raised when ``objs`` does not have an integer-compatible section
+            that is required by the external library, more_itertools.
+    """
     if isinstance(objs, str):
         CTI_out = objs
     elif len(objs) == 0:

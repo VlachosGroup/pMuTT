@@ -18,14 +18,12 @@ class TestVasp(unittest.TestCase):
                                        1535.727129, 115.153397,
                                        105.380772]}
         # check parsing with no min_frequency_cutoff
-        self.assertEqual(vasp.set_vib_wavenumbers_from_outcar(test_file,
-                                                              out_dict, 0),
-                         expected_wavenumber_nocutoff)
+        vasp.set_vib_wavenumbers_from_outcar(test_file, out_dict, 0.)
+        self.assertDictEqual(out_dict, expected_wavenumber_nocutoff)
+
         # check min_frequency_cutoff working
-        self.assertEqual(vasp.set_vib_wavenumbers_from_outcar(test_file,
-                                                              out_dict,
-                                                              cutoff),
-                         expected_wavenumber_cutoff)
+        vasp.set_vib_wavenumbers_from_outcar(test_file, out_dict, cutoff)
+        self.assertDictEqual(out_dict, expected_wavenumber_cutoff)
         # check file opening exception handling
         with self.assertRaises(FileNotFoundError):
             vasp.set_vib_wavenumbers_from_outcar(incorrect_file, out_dict,

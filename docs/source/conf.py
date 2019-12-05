@@ -26,7 +26,7 @@ author = 'Vlachos Research Group'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.14'
+release = '1.2.15'
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,7 +42,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    # 'sphinx.ext.imgmath',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.githubpages',

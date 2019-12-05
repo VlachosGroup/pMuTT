@@ -6,6 +6,7 @@ Read from/write to xlsx files of particular format.
 """
 
 import os
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -77,6 +78,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - nasa.a_high (:func:`~pmutt.io.excel.set_nasa_a_high`)
         - vib_outcar (:func:`~pmutt.io.vasp.set_vib_wavenumbers_from_outcar`)
         - list.[variable name] (:func:`~pmutt.io.excel.set_list_value`)
+        - dict.[dict_name].[key] (:func:`~pmutt.io.excel.set_dict_value`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
@@ -98,69 +100,73 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             if pd.isnull(cell_data):
                 # Skip empty cells
                 continue
+            elif 'Unnamed' in col:
+                warn_msg = ('Found data ({}) with no column header in Excel '
+                            'sheet, {}. This property will not be assigned '
+                            'correctly.'
+                            ''.format(cell_data, io))
+                warnings.warn(warn_msg)
             elif 'element' in col:
-                thermo_data = set_element(header=col, value=cell_data,
-                                          output_structure=thermo_data,
-                                          delimiter=delimiter)
+                set_element(header=col, value=cell_data,
+                            output_structure=thermo_data, delimiter=delimiter)
             elif 'formula' in col:
-                thermo_data = set_formula(formula=cell_data,
-                                          output_structure=thermo_data)
+                set_formula(formula=cell_data, output_structure=thermo_data)
             elif 'atoms' in col:
-                thermo_data = set_atoms(path=cell_data, excel_path=excel_path,
-                                        output_structure=thermo_data)
+                set_atoms(path=cell_data, excel_path=excel_path,
+                          output_structure=thermo_data)
             elif 'statmech_model' in col:
-                thermo_data = set_statmech_model(model=cell_data,
-                                                 output_structure=thermo_data)
+                set_statmech_model(model=cell_data,
+                                   output_structure=thermo_data)
             elif 'trans_model' in col:
-                thermo_data = set_trans_model(model=cell_data,
-                                              output_structure=thermo_data)
+                set_trans_model(model=cell_data, output_structure=thermo_data)
             elif 'vib_model' in col:
-                thermo_data = set_vib_model(model=cell_data,
-                                            output_structure=thermo_data)
+                set_vib_model(model=cell_data, output_structure=thermo_data)
             elif 'rot_model' in col:
-                thermo_data = set_rot_model(model=cell_data,
-                                            output_structure=thermo_data)
+                set_rot_model(model=cell_data, output_structure=thermo_data)
             elif 'elec_model' in col:
-                thermo_data = set_elec_model(model=cell_data,
-                                             output_structure=thermo_data)
+                set_elec_model(model=cell_data, output_structure=thermo_data)
             elif 'nucl_model' in col:
-                thermo_data = set_nucl_model(model=cell_data,
-                                             output_structure=thermo_data)
+                set_nucl_model(model=cell_data, output_structure=thermo_data)
             elif 'vib_wavenumber' in col:
                 if vib_set_by_outcar:
                     continue  # vib_wavenumber already set from outcar
-                thermo_data = set_vib_wavenumbers(value=cell_data,
-                                                  output_structure=thermo_data)
+                set_vib_wavenumbers(value=cell_data,
+                                    output_structure=thermo_data)
             elif 'vib_outcar' in col:
-                thermo_data = set_vib_wavenumbers_from_outcar(
-                    in_file=cell_data,
-                    output_structure=thermo_data,
-                    min_frequency_cutoff=min_frequency_cutoff,
-                    include_imaginary=include_imaginary)
+                set_vib_wavenumbers_from_outcar(
+                        in_file=cell_data, output_structure=thermo_data,
+                        min_frequency_cutoff=min_frequency_cutoff,
+                        include_imaginary=include_imaginary)
                 vib_set_by_outcar = True
             elif 'rot_temperature' in col:
-                thermo_data = set_rot_temperatures(value=cell_data,
-                                                   output_structure=thermo_data)
+                set_rot_temperatures(value=cell_data,
+                                     output_structure=thermo_data)
             elif 'nasa' in col:
                 if 'a_low' in col:
-                    thermo_data = set_nasa_a_low(header=col, value=cell_data,
-                                                 output_structure=thermo_data)
+                    set_nasa_a_low(header=col, value=cell_data,
+                                   output_structure=thermo_data)
                 elif 'a_high' in col:
-                    thermo_data = set_nasa_a_high(header=col, value=cell_data,
-                                                  output_structure=thermo_data)
+                    set_nasa_a_high(header=col, value=cell_data,
+                                    output_structure=thermo_data)
                 else:
                     err_msg = ('Unrecognized argument for nasa column: {}'
                                ''.format(col))
                     raise NotImplementedError(err_msg)
-            elif 'list' in col:
+            elif 'list.' in col:
                 # Process column name
                 header = col.replace('list.', '')
                 # Remove the number if present
                 if '.' in header:
                     i = header.rfind('.')
                     header = header[:i]
-                thermo_data = set_list_value(header=header, value=cell_data,
-                                             output_structure=thermo_data)
+                set_list_value(header=header, value=cell_data,
+                               output_structure=thermo_data)
+            elif 'dict.' in col:
+                # Process dict_name and key
+                header = col.replace('dict.', '')
+                dict_name, key = header.split('.')
+                set_dict_value(dict_name=dict_name, key=key, value=cell_data,
+                               output_structure=thermo_data)
             else:
                 thermo_data[col] = cell_data
         thermos_out.append(thermo_data)
@@ -182,17 +188,12 @@ def set_element(header, value, output_structure, delimiter='.'):
             output_structure['elements'][element]
         delimiter : str
             Delimiter for element. Element symbol should be at the end
-    Returns
-    -------
-        output_structure : (dict)
-            output_structure with new element added
     """
     element = header.split(delimiter)[-1]
     try:
         output_structure['elements'][element] = value
     except (NameError, KeyError):
         output_structure['elements'] = {element: value}
-    return output_structure
 
 
 def set_formula(formula, output_structure):
@@ -207,14 +208,9 @@ def set_formula(formula, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['elements']
-    Returns
-    -------
-        output_structure : dict
-            output_structure with new elements added
     """
     elements = parse_formula(formula=formula)
     output_structure['elements'] = elements
-    return output_structure
 
 
 def set_atoms(path, output_structure, excel_path=None):
@@ -230,10 +226,6 @@ def set_atoms(path, output_structure, excel_path=None):
             Location where excel path is located
         output_structure : dict
             Structure to assign value. Will assign to output_structure['atoms']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with atoms added
     Raises
     ------
         FileNotFoundError:
@@ -260,7 +252,6 @@ def set_atoms(path, output_structure, excel_path=None):
                            'molecule supported by ase.build.molecule.'
                            ''.format(path))
                 raise FileNotFoundError(err_msg)
-    return output_structure
 
 
 def set_statmech_model(model, output_structure):
@@ -273,14 +264,10 @@ def set_statmech_model(model, output_structure):
             supported models.
         output_structure : dict
             Structure to assign value. Will assign to
-            output_structure['statmech_model']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new thermo model added
+            output_structure['model']
     """
     model = model.lower()
-    output_structure['statmech_model'] = StatMech
+    output_structure['model'] = StatMech
     try:
         # See if the model exists
         presets[model]
@@ -294,7 +281,6 @@ def set_statmech_model(model, output_structure):
         for key, val in presets[model].items():
             if key not in output_structure:
                 output_structure[key] = val
-    return output_structure
 
 def set_trans_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -306,10 +292,6 @@ def set_trans_model(model, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['trans_model']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new thermo model added
     """
     try:
         output_structure['trans_model'] = getattr(trans, model)
@@ -321,8 +303,7 @@ def set_trans_model(model, output_structure):
                        'pmutt.statmech.trans for supported models.'
                        ''.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
-    return output_structure
+    output_structure['model'] = StatMech
 
 def set_vib_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -334,10 +315,6 @@ def set_vib_model(model, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['vib_model']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new thermo model added
     """
     try:
         output_structure['vib_model'] = getattr(vib, model)
@@ -349,8 +326,7 @@ def set_vib_model(model, output_structure):
                        'of presets in pmutt.statmech.vib for supported models.'
                        ''.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
-    return output_structure
+    output_structure['model'] = StatMech
 
 def set_rot_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -362,10 +338,6 @@ def set_rot_model(model, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['rot_model']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new thermo model added
     """
     try:
         output_structure['rot_model'] = getattr(rot, model)
@@ -376,8 +348,7 @@ def set_rot_model(model, output_structure):
             err_msg = ('Unsupported rotational model, {}. See '
                        'pmutt.statmech.rot for supported models.'.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
-    return output_structure
+    output_structure['model'] = StatMech
 
 def set_elec_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -389,10 +360,6 @@ def set_elec_model(model, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['elec_model']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new thermo model added
     """
     try:
         output_structure['elec_model'] = getattr(elec, model)
@@ -404,8 +371,7 @@ def set_elec_model(model, output_structure):
                        'pmutt.statmech.elec for supported models.'
                        ''.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
-    return output_structure
+    output_structure['model'] = StatMech
 
 def set_nucl_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -417,10 +383,6 @@ def set_nucl_model(model, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['nucl_model']
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new thermo model added
     """
     try:
         output_structure['nucl_model'] = getattr(elec, model)
@@ -431,8 +393,7 @@ def set_nucl_model(model, output_structure):
             err_msg = ('Unsupported nuclear model, {}. See pmutt.statmech.nucl '
                        'for supported models.'.format(model))
             raise ValueError(err_msg)
-    output_structure['statmech_model'] = StatMech
-    return output_structure
+    output_structure['model'] = StatMech
 
 def set_vib_wavenumbers(value, output_structure):
     """Parses element header and assigns to output_structure['vib_wavenumber']
@@ -444,16 +405,11 @@ def set_vib_wavenumbers(value, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['elements'][element]
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new vibration added
     """
     try:
         output_structure['vib_wavenumbers'].append(value)
     except (NameError, KeyError):
         output_structure['vib_wavenumbers'] = [value]
-    return output_structure
 
 
 def set_rot_temperatures(value, output_structure):
@@ -467,16 +423,11 @@ def set_rot_temperatures(value, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure['elements'][element]
-    Returns
-    -------
-        output_structure: dict
-            output_structure with new vibration added
     """
     try:
         output_structure['rot_temperatures'].append(value)
     except (NameError, KeyError):
         output_structure['rot_temperatures'] = [value]
-    return output_structure
 
 
 def set_nasa_a_low(header, value, output_structure, delimiter='.'):
@@ -496,10 +447,6 @@ def set_nasa_a_low(header, value, output_structure, delimiter='.'):
             Structure to assign value. Will assign to output_structure['a_low']
         delimiter : str
             How to parse header to find the coefficient
-    Returns
-    -------
-        output_structure : dict
-            output_structure with a_low value added
     """
     i = int(header.split(delimiter)[-1])
     try:
@@ -507,7 +454,6 @@ def set_nasa_a_low(header, value, output_structure, delimiter='.'):
     except KeyError:
         output_structure['a_low'] = np.zeros(7,)
         output_structure['a_low'][i] = value
-    return output_structure
 
 
 def set_nasa_a_high(header, value, output_structure, delimiter='.'):
@@ -528,10 +474,6 @@ def set_nasa_a_high(header, value, output_structure, delimiter='.'):
             output_structure['a_high']
         delimiter : str
             How to parse header to find the coefficient
-    Returns
-    -------
-        output_structure : dict
-            output_structure with a_high value added
     """
     i = int(header.split(delimiter)[-1])
     try:
@@ -539,7 +481,6 @@ def set_nasa_a_high(header, value, output_structure, delimiter='.'):
     except KeyError:
         output_structure['a_high'] = np.zeros(7,)
         output_structure['a_high'][i] = value
-    return output_structure
 
 def set_list_value(header, value, output_structure):
     """Generic function to read a list from a spreadsheet
@@ -553,13 +494,28 @@ def set_list_value(header, value, output_structure):
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure[header]
-    Returns
-    -------
-        output_structure : dict
-            output_structure with value added
     """
     try:
         output_structure[header].append(value)
     except KeyError:
         output_structure[header] = [value]
-    return output_structure
+
+def set_dict_value(dict_name, key, value, output_structure):
+    """Generic function to read a dictionary from a spreadsheet
+
+    Parameters
+    ----------
+        dict_name : str
+            Name of the dictionary. 'dict' should already be removed.
+        key : str
+            Key corresponding to ``value``
+        value : float
+            Value to assign to ``key
+        output_structure : dict
+            Structure to assign value. Will assign to
+            output_structure[dict_name]
+    """
+    try:
+        output_structure[dict_name][key] = value
+    except KeyError:
+        output_structure[dict_name] = {key: value}

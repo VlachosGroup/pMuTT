@@ -42,7 +42,11 @@ listed below.
 .. autofunction:: pmutt.io.excel.set_nasa_a_low
 
 .. autofunction:: pmutt.io.excel.set_nasa_a_high
-   
+
+.. autofunction:: pmutt.io.excel.set_list_value
+
+.. autofunction:: pmutt.io.excel.set_dict_value
+
 Examples
 --------
 
@@ -278,6 +282,70 @@ And a sample plot is shown below
 
 .. image:: read_nasa_from_thermdat_example_O2.png
 
+YAML
+====
+`YAML Ain't Markup Language (YAML)`_ is a human friendly data serialization
+standard for all programming languages. All pmutt objects are natively supported
+by YAML.
+
+Examples
+--------
+Saving pmutt objects can be done by using 
+:func:`~pmutt.io.json.pmuttEncoder`.
+
+.. code:: python
+
+   import yaml
+   
+   with open(yaml_path, 'w') as f_ptr:
+       yaml.dump(pmutt_obj, f_ptr)
+   
+Loading pmutt objects can be done by using the object hook: 
+:func:`~pmutt.io.json.json_to_pmutt`.
+
+.. code:: python
+
+   import yaml
+
+   with open(yaml_path, 'r') as f_ptr:
+       pmutt_obj = yaml.load(f_ptr)
+
+Sample YAML File
+----------------
+YAML writes in a human-readable syntax. An example showing a H2 
+:class:`~pmutt.empirical.shomate.Shomate` object in YAML format is shown below.
+::
+
+   !!python/object:pmutt.empirical.shomate.Shomate
+   T_high: 1000.0
+   T_low: 298.0
+   _units: J/mol/K
+   a: !!python/object/apply:numpy.core.multiarray._reconstruct
+     args:
+     - !!python/name:numpy.ndarray ''
+     - !!python/tuple [0]
+     - !!binary |
+       Yg==
+     state: !!python/tuple
+     - 1
+     - !!python/tuple [8]
+     - !!python/object/apply:numpy.dtype
+       args: [f8, 0, 1]
+       state: !!python/tuple [3, <, null, null, null, -1, -1, 0]
+     - false
+     - !!binary |
+       e9tMhXiIQEDxngPLEbomwP9eCg+a3SZA/G1PkNguBsAZdELooEvEv6MHPgYr9iPAYw0XuaeWZUAA
+       AAAAAAAAAA==
+   elements: {H: 2}
+   misc_models:
+   - !!python/object:pmutt.empirical.GasPressureAdj {}
+   model: null
+   n_sites: null
+   name: H2
+   notes: null
+   phase: G
+   smiles: null
+
 JSON
 ====
 `JavaScript Object Notation (JSON)`_ is a format that is easily read and
@@ -294,6 +362,7 @@ Saving pmutt objects can be done by using
 
 .. code:: python
 
+   import json
    from pmutt.io.json import pmuttEncoder
    
    with open(json_path, 'w') as f_ptr:
@@ -304,6 +373,7 @@ Loading pmutt objects can be done by using the object hook:
 
 .. code:: python
 
+   import json
    from pmutt.io.json import json_to_pmutt
 
    with open(json_path, 'r') as f_ptr:
@@ -311,80 +381,41 @@ Loading pmutt objects can be done by using the object hook:
 
 Sample JSON File
 ----------------
-JSON writes in a human-readable syntax. An example showing two 
-:class:`~pmutt.empirical.nasa.Nasa` objects in JSON format is shown below.::
+JSON writes in a human-readable syntax. An example showing a H2 
+:class:`~pmutt.empirical.shomate.Shomate` object in JSON format is shown below.
+::
 
-   [
-    {
-     "class": "<class 'pmutt.empirical.nasa.Nasa'>",
-     "name": "O",
-     "phase": "G",
-     "elements": {
-      "O": 1
-     },
-     "T_ref": 298.15,
-     "notes": "L 1/90",
-     "HoRT_dft": null,
-     "HoRT_ref": null,
-     "references": null,
-     "statmech_model": null,
-     "a_low": [
-      3.1682671,
-      -0.00327931884,
-      6.64306396e-06,
-      -6.12806624e-09,
-      2.11265971e-12,
-      29122.2592,
-      2.05193346
-     ],
-     "a_high": [
-      2.56942078,
-      -8.59741137e-05,
-      4.19484589e-08,
-      -1.00177799e-11,
-      1.22833691e-15,
-      29217.5791,
-      4.78433864
-     ],
-     "T_low": 200.0,
-     "T_mid": 1000.0,
-     "T_high": 3500.0
+   {
+    "class": "<class 'pmutt.empirical.shomate.Shomate'>",
+    "type": "shomate",
+    "name": "H2",
+    "phase": "G",
+    "elements": {
+     "H": 2
     },
-    {
-     "class": "<class 'pmutt.empirical.nasa.Nasa'>",
-     "name": "O2",
-     "phase": "G",
-     "elements": {
-      "O": 2
-     },
-     "T_ref": 298.15,
-     "notes": "TPIS89",
-     "HoRT_dft": null,
-     "HoRT_ref": null,
-     "references": null,
-     "statmech_model": null,
-     "a_low": [
-      3.78245636,
-      -0.00299673416,
-      9.84730201e-06,
-      -9.68129509e-09,
-      3.24372837e-12,
-      -1063.94356,
-      3.65767573
-     ],
-     "a_high": [
-      3.28253784,
-      0.00148308754,
-      -7.57966669e-07,
-      2.09470555e-10,
-      -2.16717794e-14,
-      -1088.45772,
-      5.45323129
-     ],
-     "T_low": 200.0,
-     "T_mid": 1000.0,
-     "T_high": 3500.0
-    }]
+    "notes": null,
+    "smiles": null,
+    "model": null,
+    "misc_models": [
+     {
+      "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+     }
+    ],
+    "a": [
+     33.066178,
+     -11.363417,
+     11.432816,
+     -2.772874,
+     -0.158558,
+     -9.980797,
+     172.707974,
+     0.0
+    ],
+    "T_low": 298.0,
+    "T_high": 1000.0,
+    "units": "J/mol/K"
+   }
+
 
 Creating New pmutt Classes
 ---------------------------

@@ -18,8 +18,8 @@ class TestConstants(unittest.TestCase):
     def setUp(self):
         # Read excel sheet with answers
         os.chdir(os.path.dirname(__file__))
-        self.ans = pd.read_excel('expected_results.xlsx',
-                                 sheet_name='test_constants_ans',
+        self.ans = pd.read_excel('test_constants.xlsx',
+                                 sheet_name='ans',
                                  index_col=0, header=0)
 
     def test_R(self):
