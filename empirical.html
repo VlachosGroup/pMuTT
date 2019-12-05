@@ -809,7 +809,7 @@ heat capacity. Default is 50.</li>
 <dt id="pmutt.empirical.nasa.Nasa.from_statmech">
 <em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>T_mid=None</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa.from_statmech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the NASA polynomials using statistical mechanic models.
-Deprecated as of Version 1.2.13.</p>
+Deprecated as of Version 1.2.13. Please use <code class="docutils literal notranslate"><span class="pre">from_model</span></code> instead.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1254,7 +1254,7 @@ and 6th highest value of T.</li>
 <dl class="classmethod">
 <dt id="pmutt.empirical.nasa.Nasa9.from_model">
 <em class="property">classmethod </em><code class="descname">from_model</code><span class="sig-paren">(</span><em>name</em>, <em>model</em>, <em>T_low</em>, <em>T_high</em>, <em>elements=None</em>, <em>T_mid=None</em>, <em>n_interval=2</em>, <em>n_T=50</em>, <em>fit_T_mid=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the NASA polynomials using statistical mechanic models</p>
+<dd><p>Calculates the NASA polynomials using the model passed</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1891,7 +1891,7 @@ cal/mol/K, eV/K). Default is J/mol/K.</li>
 <dt id="pmutt.empirical.shomate.Shomate.from_statmech">
 <em class="property">classmethod </em><code class="descname">from_statmech</code><span class="sig-paren">(</span><em>name</em>, <em>statmech_model</em>, <em>T_low</em>, <em>T_high</em>, <em>references=None</em>, <em>elements=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.shomate.Shomate.from_statmech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the Shomate polynomial using statistical mechanic models.
-Deprecated as of Version 1.2.13.</p>
+Deprecated as of Version 1.2.13. Please use <code class="docutils literal notranslate"><span class="pre">from_model</span></code> instead.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

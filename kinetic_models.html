@@ -568,7 +568,7 @@ default = None. Will not return React_obj and Prod_obj</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -670,7 +670,7 @@ be written to this file</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. If not specified, returns file as str</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
@@ -1782,6 +1782,132 @@ as str</li>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pmutt.io.omkm.write_yaml">
+<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_yaml</code><span class="sig-paren">(</span><em>reactor_type=None</em>, <em>mode=None</em>, <em>V=None</em>, <em>T=None</em>, <em>P=None</em>, <em>A=None</em>, <em>L=None</em>, <em>cat_abyv=None</em>, <em>flow_rate=None</em>, <em>end_time=None</em>, <em>transient=None</em>, <em>stepping=None</em>, <em>init_step=None</em>, <em>step_size=None</em>, <em>atol=None</em>, <em>rtol=None</em>, <em>phases=None</em>, <em>reactor=None</em>, <em>inlet_gas=None</em>, <em>multi_T=None</em>, <em>multi_P=None</em>, <em>multi_flow_rate=None</em>, <em>output_format=None</em>, <em>solver=None</em>, <em>simulation=None</em>, <em>multi_input=None</em>, <em>misc=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>yaml_options={'default_flow_style': False</em>, <em>'indent': 4}</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the reactor options in a YAML file for OpenMKM.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reactor_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Type of reactor. Supported options include:</p>
+<ul>
+<li>PFR</li>
+<li>CSTR</li>
+<li>Batch</li>
+</ul>
+<p>Value written to reactor.type.</p>
+</li>
+<li><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Operation of reactor. Supported options include:</p>
+<ul>
+<li>Isothermal</li>
+<li>Adiabatic</li>
+</ul>
+<p>Value written to reactor.mode.</p>
+</li>
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Volume of reactor. Value written to reactor.volume. Units of
+length^3. See Notes section regarding unit specification.</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature (in K) of reactor. Value written to reactor.temperature.</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Pressure of reactor. Value written to reactor.pressure. Units of
+pressure. See Notes section regarding unit specification.</li>
+<li><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Surface area of reactor. Value written to reactor.area. Units of
+length^2. See Notes section regarding unit specification.</li>
+<li><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Length of reactor. Value written to reactor.length. Units of length.
+See Notes section regarding unit specification.</li>
+<li><strong>cat_abyv</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Catalyst surface area to volume ratio. Value written to
+reactor.cat_abyv. Units of 1/length. See Notes section regarding
+unit specification.</li>
+<li><strong>flow_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Volumetric flow rate of inlet. Value written to inlet_gas.flow_rate.
+Units of length^3/time. See Notes section regarding unit
+specification.</li>
+<li><strong>end_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Reactor simulation time. For continuous reactors, the system is
+assumed to reach steady state by this time. Value written to
+simulation.end_time. Units of time. See Notes section regarding
+unit specification.</li>
+<li><strong>transient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, transient operation results are saved. Otherwise,
+transient files are left blank. Value written to
+simulation.transient.</li>
+<li><strong>stepping</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Time steps taken to simulate reactor. Supported options include:</p>
+<ul>
+<li>logarithmic</li>
+<li>regular</li>
+</ul>
+<p>Value written to simulation.stepping.</p>
+</li>
+<li><strong>init_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Initial step to take. Value written to simulation.init_step.</li>
+<li><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – If <code class="docutils literal notranslate"><span class="pre">stepping</span></code> is logarithmic, represents the ratio between the
+next step and the current step. If <code class="docutils literal notranslate"><span class="pre">stepping</span></code> is regular,
+represents the time between the next step and the current step in
+units of time. Value written to simulation.step_size. See Notes
+section regarding unit specification.</li>
+<li><strong>atol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Absolute tolerance for solver. Value written to
+simulation.solver.atol.</li>
+<li><strong>rtol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Relative tolerance for solver. Value written to
+simulation.solver.rtol.</li>
+<li><strong>phases</strong> (list of <code class="docutils literal notranslate"><span class="pre">Phase</span></code> objects) – Phases present in reactor. Each phase should have the <code class="docutils literal notranslate"><span class="pre">name</span></code>
+and <code class="docutils literal notranslate"><span class="pre">initial_state</span></code> attribute.</li>
+<li><strong>reactor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for reactor to specify values not supported by
+<code class="docutils literal notranslate"><span class="pre">write_yaml</span></code>.</li>
+<li><strong>inlet_gas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for inlet_gas to specify values not supported by
+<code class="docutils literal notranslate"><span class="pre">write_yaml</span></code>.</li>
+<li><strong>multi_T</strong> (<em>list of float</em>) – Multiple temperatures (in K) of reactor. Value written to
+simulation.multi_input.temperature.</li>
+<li><strong>multi_P</strong> (<em>list of float/str</em>) – Multiple pressures of reactor. Value written to
+simulation.multi_input.pressure. Units of pressure. See Notes
+section regarding unit specification.</li>
+<li><strong>multi_flow_rate</strong> (<em>list of float/str</em>) – Multiple flow rates to run the model. Value written to
+simulation.multi_input.flow_rate. Units of length3/time. See Notes
+section regarding unit specification.</li>
+<li><strong>output_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Format for output files. Supported options include:</p>
+<ul>
+<li>CSV</li>
+<li>DAT</li>
+</ul>
+<p>Value written to simulation.output_format.</p>
+</li>
+<li><strong>misc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for any parameter specified at the top level.</li>
+<li><strong>solver</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for solver to specify values not supported by
+<code class="docutils literal notranslate"><span class="pre">write_yaml</span></code>.</li>
+<li><strong>simulation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for simultaion to specify values not supported by
+<code class="docutils literal notranslate"><span class="pre">write_yaml</span></code>.</li>
+<li><strong>multi_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for multi_input to specify values not supported
+by <code class="docutils literal notranslate"><span class="pre">write_yaml</span></code>.</li>
+<li><strong>units</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code> object, optional) – Units used for file. If a dict is inputted, the key is the quantity
+and the value is the unit. If not specified, uses the default units
+of <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code>.</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for the input.cti file. If not specified, returns file
+as str.</li>
+<li><strong>yaml_options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Options to pass when converting the parameters to YAML format. See
+<a class="reference external" href="https://pyyaml.org/wiki/PyYAMLDocumentation">PyYAML documentation</a> for <code class="docutils literal notranslate"><span class="pre">dump</span></code> for available options.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lines_out</strong> – If <code class="docutils literal notranslate"><span class="pre">filename</span></code> is None, CTI file is returned</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><strong>Units</strong>
+If <code class="docutils literal notranslate"><span class="pre">units</span></code> is not specified, all values in file are assumed to be SI
+units. If <code class="docutils literal notranslate"><span class="pre">units</span></code> is specified, all values inputted are assumed to
+be in the units specified by <code class="docutils literal notranslate"><span class="pre">units</span></code>. If a particular unit set is
+desired for a value, a str can be inputted with the form
+quantity=”&lt;&lt;value&gt;&gt; &lt;&lt;desired units&gt;&gt;” where <code class="docutils literal notranslate"><span class="pre">value</span></code> is float-like
+and <code class="docutils literal notranslate"><span class="pre">desired</span> <span class="pre">units</span></code> is a string. For example, flow_rate=”1 cm3/s”.
+See <a class="reference external" href="https://vlachosgroup.github.io/openmkm/input">https://vlachosgroup.github.io/openmkm/input</a> for the most up-to-date
+supported values.</p>
+<p><strong>Generic Dictionaries</strong>
+Also, values in generic dictionaries (i.e. <code class="docutils literal notranslate"><span class="pre">reactor</span></code>, <code class="docutils literal notranslate"><span class="pre">inlet_gas</span></code>,
+<code class="docutils literal notranslate"><span class="pre">simulation</span></code>) will ben written preferentially over arguments passed.
+i.e. The value in <code class="docutils literal notranslate"><span class="pre">reactor['temperature']</span></code> will be written instead
+of <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
 </dd></dl>
 
 </div>
