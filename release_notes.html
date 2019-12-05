@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.14 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-15">Version 1.2.15</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-14">Version 1.2.14</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#contributors">Contributors</a></li>
 </ul>
@@ -231,6 +232,22 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+</div>
+<div class="section" id="version-1-2-15">
+<h2>Version 1.2.15<a class="headerlink" href="#version-1-2-15" title="Permalink to this headline">¶</a></h2>
+<p>Dec. 5, 2019</p>
+<ul class="simple">
+<li>Added <a class="reference internal" href="kinetic_models.html#pmutt.io.omkm.write_yaml" title="pmutt.io.omkm.write_yaml"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_yaml()</span></code></a> to write YAML files for OpenMKM.</li>
+<li>Added warning for <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> if the header is blank
+but the cells are occupied.</li>
+<li>Fixed bug in <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> where <code class="docutils literal notranslate"><span class="pre">model</span></code> was not
+correctly initialized with <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-func docutils literal notranslate"><span class="pre">StatMech()</span></code></a>.</li>
+<li>Added the generic method, <a class="reference internal" href="io.html#pmutt.io.excel.set_dict_value" title="pmutt.io.excel.set_dict_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_dict_value()</span></code></a> to specify
+dictionaries in <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a></li>
+<li>Removed redundant statements involving returning dictionaries in functions to
+process Excel data.</li>
+<li>Fixed warning raised whenever CpoR = 0 when fitting empirical polynomials.</li>
+</ul>
 </div>
 <div class="section" id="version-1-2-14">
 <h2>Version 1.2.14<a class="headerlink" href="#version-1-2-14" title="Permalink to this headline">¶</a></h2>

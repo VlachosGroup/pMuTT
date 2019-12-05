@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pmutt 1.2.14 documentation</title>
+  <title>Input and Output &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -106,14 +106,19 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reading-thermdat">Reading Thermdat</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#yaml">YAML</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-yaml-file">Sample YAML File</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#json">JSON</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-new-pmutt-classes">Creating New pmutt Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
@@ -291,7 +296,8 @@ int (i.e. 1.0 –&gt; 1)</li>
 <li>nasa.a_low (<a class="reference internal" href="#pmutt.io.excel.set_nasa_a_low" title="pmutt.io.excel.set_nasa_a_low"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_low()</span></code></a>)</li>
 <li>nasa.a_high (<a class="reference internal" href="#pmutt.io.excel.set_nasa_a_high" title="pmutt.io.excel.set_nasa_a_high"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_nasa_a_high()</span></code></a>)</li>
 <li>vib_outcar (<a class="reference internal" href="#pmutt.io.vasp.set_vib_wavenumbers_from_outcar" title="pmutt.io.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a>)</li>
-<li>list.[variable name] (<code class="xref py py-func docutils literal notranslate"><span class="pre">set_list_value()</span></code>)</li>
+<li>list.[variable name] (<a class="reference internal" href="#pmutt.io.excel.set_list_value" title="pmutt.io.excel.set_list_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_list_value()</span></code></a>)</li>
+<li>dict.[dict_name].[key] (<a class="reference internal" href="#pmutt.io.excel.set_dict_value" title="pmutt.io.excel.set_dict_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_dict_value()</span></code></a>)</li>
 </ul>
 </dd></dl>
 
@@ -308,7 +314,7 @@ listed below.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – String containing the element name. Element symbol should be at
 the end. e.g. ‘element.O’</li>
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Amount found in formula</li>
@@ -316,12 +322,6 @@ the end. e.g. ‘element.O’</li>
 output_structure[‘elements’][element]</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Delimiter for element. Element symbol should be at the end</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new element added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a>)</p>
 </td>
 </tr>
 </tbody>
@@ -336,19 +336,13 @@ output_structure[‘elements’][element]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>formula</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Stoichiometric formula unit. e.g. H2O
 Note that an element cannot be specified multiple times.
 e.g. CH3OH is not supported</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘elements’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new elements added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -372,12 +366,6 @@ Path can be relative to the imported spreadsheet or absolute.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with atoms added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
-</td>
-</tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">FileNotFoundError: – Raised if the <cite>path</cite> is not a valid file and not a supported string
 by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/build/build.html#ase.build.molecule">ase.build.molecule</a>.</p>
 </td>
@@ -394,18 +382,12 @@ by <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/build/b
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Thermodynamic model to import. See <cite>pmutt.statmech.presets</cite> for
 supported models.</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘model’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -420,17 +402,11 @@ output_structure[‘model’]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Translational model to import</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘trans_model’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -445,17 +421,11 @@ output_structure[‘trans_model’]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Vibrational model to import</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘vib_model’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -470,17 +440,11 @@ output_structure[‘vib_model’]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Rotational model to import</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘rot_model’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -495,17 +459,11 @@ output_structure[‘rot_model’]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Electronic model to import</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘elec_model’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -520,17 +478,11 @@ output_structure[‘elec_model’]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Nuclear model to import</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘nucl_model’]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new thermo model added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -545,17 +497,11 @@ output_structure[‘nucl_model’]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘elements’][element]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new vibration added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -571,17 +517,11 @@ output_structure[‘elements’][element]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Vibrational frequency in 1/cm</li>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘elements’][element]</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with new vibration added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -596,7 +536,7 @@ output_structure[‘elements’][element]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
 Assumes zero index and header takes the format:</p>
 <p>nasa[delimiter]a_low[delimiter][index]
@@ -606,12 +546,6 @@ e.g. nasa.a_low.0</p>
 <li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to output_structure[‘a_low’]</li>
 <li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – How to parse header to find the coefficient</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_low value added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -626,7 +560,7 @@ e.g. nasa.a_low.0</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Name of the header. Used to determine coefficient.
 Assumes zero index and header takes the format:</p>
 <p>nasa[delimiter]a_high[delimiter][index]
@@ -639,10 +573,45 @@ output_structure[‘a_high’]</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – output_structure with a_high value added</p>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pmutt.io.excel.set_list_value">
+<code class="descclassname">pmutt.io.excel.</code><code class="descname">set_list_value</code><span class="sig-paren">(</span><em>header</em>, <em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.excel.set_list_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic function to read a list from a spreadsheet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Name of the header. ‘list’ should already be removed.</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Value to assign</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[header]</li>
+</ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pmutt.io.excel.set_dict_value">
+<code class="descclassname">pmutt.io.excel.</code><code class="descname">set_dict_value</code><span class="sig-paren">(</span><em>dict_name</em>, <em>key</em>, <em>value</em>, <em>output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.excel.set_dict_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic function to read a dictionary from a spreadsheet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dict_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Name of the dictionary. ‘dict’ should already be removed.</li>
+<li><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Key corresponding to <code class="docutils literal notranslate"><span class="pre">value</span></code></li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Value to assign to <a href="#id3"><span class="problematic" id="id4">``</span></a>key</li>
+<li><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[dict_name]</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -653,7 +622,7 @@ output_structure[‘a_high’]</li>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="dft-input-example">
-<span id="id3"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
+<span id="id5"></span><h4>DFT Input Example<a class="headerlink" href="#dft-input-example" title="Permalink to this headline">¶</a></h4>
 <p>This example uses data found in <a class="reference internal" href="examples.html#excel-to-empirical-example"><span class="std std-ref">Excel to Empirical Data</span></a>.
 Below, we show the contents of the references.xlsx spreadsheet. The first row
 corresponds to header labels. The headers may have special processing rules,
@@ -1042,8 +1011,8 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 </table>
 </dd></dl>
 
-<div class="section" id="id4">
-<h3>Examples<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="reading-thermdat">
 <h4>Reading Thermdat<a class="headerlink" href="#reading-thermdat" title="Permalink to this headline">¶</a></h4>
 <p>A thermdat file can be read directly by using
@@ -1090,6 +1059,67 @@ how its done.</p>
 </div>
 <p>And a sample plot is shown below</p>
 <img alt="_images/read_nasa_from_thermdat_example_O2.png" src="_images/read_nasa_from_thermdat_example_O2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="yaml">
+<h2>YAML<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id9"><span class="problematic" id="id10">`YAML Ain't Markup Language (YAML)`_</span></a> is a human friendly data serialization
+standard for all programming languages. All pmutt objects are natively supported
+by YAML.</p>
+<div class="section" id="id7">
+<h3>Examples<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>Saving pmutt objects can be done by using
+<a class="reference internal" href="#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmuttEncoder()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Loading pmutt objects can be done by using the object hook:
+<a class="reference internal" href="#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">pmutt_obj</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-yaml-file">
+<h3>Sample YAML File<a class="headerlink" href="#sample-yaml-file" title="Permalink to this headline">¶</a></h3>
+<p>YAML writes in a human-readable syntax. An example showing a H2
+<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object in YAML format is shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!!python/object:pmutt.empirical.shomate.Shomate
+T_high: 1000.0
+T_low: 298.0
+_units: J/mol/K
+a: !!python/object/apply:numpy.core.multiarray._reconstruct
+  args:
+  - !!python/name:numpy.ndarray &#39;&#39;
+  - !!python/tuple [0]
+  - !!binary |
+    Yg==
+  state: !!python/tuple
+  - 1
+  - !!python/tuple [8]
+  - !!python/object/apply:numpy.dtype
+    args: [f8, 0, 1]
+    state: !!python/tuple [3, &lt;, null, null, null, -1, -1, 0]
+  - false
+  - !!binary |
+    e9tMhXiIQEDxngPLEbomwP9eCg+a3SZA/G1PkNguBsAZdELooEvEv6MHPgYr9iPAYw0XuaeWZUAA
+    AAAAAAAAAA==
+elements: {H: 2}
+misc_models:
+- !!python/object:pmutt.empirical.GasPressureAdj {}
+model: null
+n_sites: null
+name: H2
+notes: null
+phase: G
+smiles: null
+</pre></div>
 </div>
 </div>
 </div>
@@ -1184,11 +1214,12 @@ pmutt object</p>
 </table>
 </dd></dl>
 
-<div class="section" id="id5">
-<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Examples<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>Saving pmutt objects can be done by using
 <a class="reference internal" href="#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmuttEncoder()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">pmuttEncoder</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">pmuttEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -1196,7 +1227,8 @@ pmutt object</p>
 </div>
 <p>Loading pmutt objects can be done by using the object hook:
 <a class="reference internal" href="#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">json_to_pmutt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">json_to_pmutt</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">pmutt_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pmutt</span><span class="p">)</span>
@@ -1205,79 +1237,38 @@ pmutt object</p>
 </div>
 <div class="section" id="sample-json-file">
 <h3>Sample JSON File<a class="headerlink" href="#sample-json-file" title="Permalink to this headline">¶</a></h3>
-<p>JSON writes in a human-readable syntax. An example showing two
-<a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects in JSON format is shown below.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
- <span class="p">{</span>
-  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
-   <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;T_ref&quot;</span><span class="p">:</span> <span class="mf">298.15</span><span class="p">,</span>
-  <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;L 1/90&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;HoRT_dft&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;HoRT_ref&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
-   <span class="mf">3.1682671</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">0.00327931884</span><span class="p">,</span>
-   <span class="mf">6.64306396e-06</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">6.12806624e-09</span><span class="p">,</span>
-   <span class="mf">2.11265971e-12</span><span class="p">,</span>
-   <span class="mf">29122.2592</span><span class="p">,</span>
-   <span class="mf">2.05193346</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;a_high&quot;</span><span class="p">:</span> <span class="p">[</span>
-   <span class="mf">2.56942078</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">8.59741137e-05</span><span class="p">,</span>
-   <span class="mf">4.19484589e-08</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">1.00177799e-11</span><span class="p">,</span>
-   <span class="mf">1.22833691e-15</span><span class="p">,</span>
-   <span class="mf">29217.5791</span><span class="p">,</span>
-   <span class="mf">4.78433864</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
-  <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-  <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
+<p>JSON writes in a human-readable syntax. An example showing a H2
+<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object in JSON format is shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.shomate.Shomate&#39;&gt;&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;shomate&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mi">2</span>
  <span class="p">},</span>
- <span class="p">{</span>
-  <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.nasa.Nasa&#39;&gt;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;O2&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
-   <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;T_ref&quot;</span><span class="p">:</span> <span class="mf">298.15</span><span class="p">,</span>
-  <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;TPIS89&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;HoRT_dft&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;HoRT_ref&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;statmech_model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;a_low&quot;</span><span class="p">:</span> <span class="p">[</span>
-   <span class="mf">3.78245636</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">0.00299673416</span><span class="p">,</span>
-   <span class="mf">9.84730201e-06</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">9.68129509e-09</span><span class="p">,</span>
-   <span class="mf">3.24372837e-12</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">1063.94356</span><span class="p">,</span>
-   <span class="mf">3.65767573</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;a_high&quot;</span><span class="p">:</span> <span class="p">[</span>
-   <span class="mf">3.28253784</span><span class="p">,</span>
-   <span class="mf">0.00148308754</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">7.57966669e-07</span><span class="p">,</span>
-   <span class="mf">2.09470555e-10</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">2.16717794e-14</span><span class="p">,</span>
-   <span class="o">-</span><span class="mf">1088.45772</span><span class="p">,</span>
-   <span class="mf">5.45323129</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
-  <span class="s2">&quot;T_mid&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
-  <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">3500.0</span>
- <span class="p">}]</span>
+ <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.GasPressureAdj&#39;&gt;&quot;</span>
+  <span class="p">}</span>
+ <span class="p">],</span>
+ <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="mf">33.066178</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">11.363417</span><span class="p">,</span>
+  <span class="mf">11.432816</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">2.772874</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">0.158558</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">9.980797</span><span class="p">,</span>
+  <span class="mf">172.707974</span><span class="p">,</span>
+  <span class="mf">0.0</span>
+ <span class="p">],</span>
+ <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">298.0</span><span class="p">,</span>
+ <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
+ <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;J/mol/K&quot;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1370,12 +1361,6 @@ output_structure[‘elements’][element]</li>
 are read from OUTCAR. Default is 0 cm-1</li>
 <li><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether imaginary frequencies should be included. Default is False.</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output_structure</strong> – Output_structure with new vibration added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.8)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> – Raised if in_file does not exist</p>
@@ -1608,7 +1593,7 @@ default = None. Will not return React_obj and Prod_obj</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -1710,7 +1695,7 @@ be written to this file</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. If not specified, returns file as str</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
@@ -1789,9 +1774,9 @@ additional options in the CTI format for OpenMKM</p>
 <li><strong>species</strong> (list of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>, <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa9" title="pmutt.empirical.nasa.Nasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa9</span></code></a> or <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>) – Species to write in CTI file.</li>
 <li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceReaction</span></code></a>) – Reactions to write in CTI file.</li>
 <li><strong>lateral_interactions</strong> (list of <a class="reference internal" href="mixture.html#pmutt.mixture.cov.PiecewiseCovEffect" title="pmutt.mixture.cov.PiecewiseCovEffect"><code class="xref py py-class docutils literal notranslate"><span class="pre">PiecewiseCovEffect</span></code></a> objects, optional) – Lateral interactions to include in CTI file. Default is None.</li>
-<li><strong>units</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code> object, optional) – Units to write file. If a dict is inputted, the key is the quantity and
-the value is the unit. If not specified, uses the default units of
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code></li>
+<li><strong>units</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code> object, optional) – Units to write file. If a dict is inputted, the key is the quantity
+and the value is the unit. If not specified, uses the default units
+of <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code></li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for the input.cti file. If not specified, returns file
 as str</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K.</li>
@@ -1811,7 +1796,7 @@ as str</li>
 
 <dl class="function">
 <dt id="pmutt.io.omkm.write_yaml">
-<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_yaml</code><span class="sig-paren">(</span><em>reactor_type=None</em>, <em>mode=None</em>, <em>V=None</em>, <em>T=None</em>, <em>P=None</em>, <em>A=None</em>, <em>L=None</em>, <em>cat_abyv=None</em>, <em>flow_rate=None</em>, <em>end_time=None</em>, <em>transient=None</em>, <em>stepping=None</em>, <em>init_step=None</em>, <em>step_size=None</em>, <em>atol=None</em>, <em>rtol=None</em>, <em>phases=None</em>, <em>reactor=None</em>, <em>inlet_gas=None</em>, <em>multi_T=None</em>, <em>multi_P=None</em>, <em>multi_flow_rate=None</em>, <em>output_format=None</em>, <em>solver=None</em>, <em>simulation=None</em>, <em>multi_input=None</em>, <em>misc=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>yaml_options={'default_flow_style': False</em>, <em>'indent': 4}</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_yaml" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_yaml</code><span class="sig-paren">(</span><em>reactor_type=None</em>, <em>mode=None</em>, <em>V=None</em>, <em>T=None</em>, <em>P=None</em>, <em>A=None</em>, <em>L=None</em>, <em>cat_abyv=None</em>, <em>flow_rate=None</em>, <em>residence_time=None</em>, <em>mass_flow_rate=None</em>, <em>end_time=None</em>, <em>transient=None</em>, <em>stepping=None</em>, <em>init_step=None</em>, <em>step_size=None</em>, <em>atol=None</em>, <em>rtol=None</em>, <em>phases=None</em>, <em>reactor=None</em>, <em>inlet_gas=None</em>, <em>multi_T=None</em>, <em>multi_P=None</em>, <em>multi_flow_rate=None</em>, <em>output_format=None</em>, <em>solver=None</em>, <em>simulation=None</em>, <em>multi_input=None</em>, <em>misc=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>yaml_options={'default_flow_style': False</em>, <em>'indent': 4}</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the reactor options in a YAML file for OpenMKM.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1824,54 +1809,62 @@ as str</li>
 <li>CSTR</li>
 <li>Batch</li>
 </ul>
-<p>Value written to reactor.type.</p>
+<p>Value written to <code class="docutils literal notranslate"><span class="pre">reactor.type</span></code>.</p>
 </li>
 <li><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Operation of reactor. Supported options include:</p>
 <ul>
 <li>Isothermal</li>
 <li>Adiabatic</li>
 </ul>
-<p>Value written to reactor.mode.</p>
+<p>Value written to <code class="docutils literal notranslate"><span class="pre">reactor.mode</span></code>.</p>
 </li>
-<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Volume of reactor. Value written to reactor.volume. Units of
+<li><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Volume of reactor. Value written to <code class="docutils literal notranslate"><span class="pre">reactor.volume</span></code>. Units of
 length^3. See Notes section regarding unit specification.</li>
-<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature (in K) of reactor. Value written to reactor.temperature.</li>
-<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Pressure of reactor. Value written to reactor.pressure. Units of
-pressure. See Notes section regarding unit specification.</li>
-<li><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Surface area of reactor. Value written to reactor.area. Units of
-length^2. See Notes section regarding unit specification.</li>
-<li><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Length of reactor. Value written to reactor.length. Units of length.
-See Notes section regarding unit specification.</li>
+<li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature (in K) of reactor. Value written to
+<code class="docutils literal notranslate"><span class="pre">reactor.temperature</span></code>.</li>
+<li><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Pressure of reactor. Value written to <code class="docutils literal notranslate"><span class="pre">reactor.pressure</span></code>. Units
+of pressure. See Notes section regarding unit specification.</li>
+<li><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Surface area of reactor. Value written to <code class="docutils literal notranslate"><span class="pre">reactor.area</span></code>.
+Units of length^2. See Notes section regarding unit specification.</li>
+<li><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Length of reactor. Value written to <code class="docutils literal notranslate"><span class="pre">reactor.length</span></code>.
+Units of length. See Notes section regarding unit specification.</li>
 <li><strong>cat_abyv</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Catalyst surface area to volume ratio. Value written to
-reactor.cat_abyv. Units of 1/length. See Notes section regarding
-unit specification.</li>
-<li><strong>flow_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Volumetric flow rate of inlet. Value written to inlet_gas.flow_rate.
-Units of length^3/time. See Notes section regarding unit
-specification.</li>
+<code class="docutils literal notranslate"><span class="pre">reactor.cat_abyv</span></code>. Units of 1/length. See Notes section
+regarding unit specification.</li>
+<li><strong>flow_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Volumetric flow rate of inlet. Value written to
+<code class="docutils literal notranslate"><span class="pre">inlet_gas.flow_rate</span></code>. Units of length^3/time.
+See Notes section regarding unit specification.</li>
+<li><strong>residence_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Residence time of reactor. Value written to
+<code class="docutils literal notranslate"><span class="pre">inlet_gas.residence_time</span></code>. Not required if <code class="docutils literal notranslate"><span class="pre">flow_rate</span></code>
+or <code class="docutils literal notranslate"><span class="pre">mass_flow_rate</span></code> already specified. Units of time.
+See Notes section regarding unit specification.</li>
+<li><strong>mass_flow_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Mass flow rate of inlet. Value written to
+<code class="docutils literal notranslate"><span class="pre">inlet_gas.mass_flow_rate</span></code>. Units of mass^3/time.
+See Notes section regarding unit specification.</li>
 <li><strong>end_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Reactor simulation time. For continuous reactors, the system is
 assumed to reach steady state by this time. Value written to
-simulation.end_time. Units of time. See Notes section regarding
+<code class="docutils literal notranslate"><span class="pre">simulation.end_time</span></code>. Units of time. See Notes section regarding
 unit specification.</li>
 <li><strong>transient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, transient operation results are saved. Otherwise,
 transient files are left blank. Value written to
-simulation.transient.</li>
+<code class="docutils literal notranslate"><span class="pre">simulation.transient</span></code>.</li>
 <li><strong>stepping</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Time steps taken to simulate reactor. Supported options include:</p>
 <ul>
 <li>logarithmic</li>
 <li>regular</li>
 </ul>
-<p>Value written to simulation.stepping.</p>
+<p>Value written to <code class="docutils literal notranslate"><span class="pre">simulation.stepping</span></code>.</p>
 </li>
-<li><strong>init_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Initial step to take. Value written to simulation.init_step.</li>
+<li><strong>init_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Initial step to take. Value written to <code class="docutils literal notranslate"><span class="pre">simulation.init_step</span></code>.</li>
 <li><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – If <code class="docutils literal notranslate"><span class="pre">stepping</span></code> is logarithmic, represents the ratio between the
 next step and the current step. If <code class="docutils literal notranslate"><span class="pre">stepping</span></code> is regular,
 represents the time between the next step and the current step in
 units of time. Value written to simulation.step_size. See Notes
 section regarding unit specification.</li>
 <li><strong>atol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Absolute tolerance for solver. Value written to
-simulation.solver.atol.</li>
+<code class="docutils literal notranslate"><span class="pre">simulation.solver.atol</span></code>.</li>
 <li><strong>rtol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Relative tolerance for solver. Value written to
-simulation.solver.rtol.</li>
+<code class="docutils literal notranslate"><span class="pre">simulation.solver.rtol</span></code>.</li>
 <li><strong>phases</strong> (list of <code class="docutils literal notranslate"><span class="pre">Phase</span></code> objects) – Phases present in reactor. Each phase should have the <code class="docutils literal notranslate"><span class="pre">name</span></code>
 and <code class="docutils literal notranslate"><span class="pre">initial_state</span></code> attribute.</li>
 <li><strong>reactor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for reactor to specify values not supported by
@@ -1879,19 +1872,19 @@ and <code class="docutils literal notranslate"><span class="pre">initial_state</
 <li><strong>inlet_gas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for inlet_gas to specify values not supported by
 <code class="docutils literal notranslate"><span class="pre">write_yaml</span></code>.</li>
 <li><strong>multi_T</strong> (<em>list of float</em>) – Multiple temperatures (in K) of reactor. Value written to
-simulation.multi_input.temperature.</li>
+<code class="docutils literal notranslate"><span class="pre">simulation.multi_input.temperature</span></code>.</li>
 <li><strong>multi_P</strong> (<em>list of float/str</em>) – Multiple pressures of reactor. Value written to
-simulation.multi_input.pressure. Units of pressure. See Notes
+<code class="docutils literal notranslate"><span class="pre">simulation.multi_input.pressure</span></code>. Units of pressure. See Notes
 section regarding unit specification.</li>
 <li><strong>multi_flow_rate</strong> (<em>list of float/str</em>) – Multiple flow rates to run the model. Value written to
-simulation.multi_input.flow_rate. Units of length3/time. See Notes
-section regarding unit specification.</li>
+<code class="docutils literal notranslate"><span class="pre">simulation.multi_input.flow_rate</span></code>. Units of length3/time.
+See Notes section regarding unit specification.</li>
 <li><strong>output_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Format for output files. Supported options include:</p>
 <ul>
 <li>CSV</li>
 <li>DAT</li>
 </ul>
-<p>Value written to simulation.output_format.</p>
+<p>Value written to <code class="docutils literal notranslate"><span class="pre">simulation.output_format</span></code>.</p>
 </li>
 <li><strong>misc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for any parameter specified at the top level.</li>
 <li><strong>solver</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Generic dictionary for solver to specify values not supported by

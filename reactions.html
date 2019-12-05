@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pmutt 1.2.14 documentation</title>
+  <title>Reactions &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -2789,7 +2789,7 @@ generated</li>
 estimated using the change in enthalpy.</p>
 <dl class="class">
 <dt id="pmutt.reaction.bep.BEP">
-<em class="property">class </em><code class="descclassname">pmutt.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>name=None</em>, <em>reaction=None</em>, <em>descriptor='delta_H'</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pmutt.reaction.bep.</code><code class="descname">BEP</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>name=None</em>, <em>reaction=None</em>, <em>descriptor='delta_H'</em>, <em>elements=None</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a Bronsted Evans Polyani relationship. Intended to represent
 a species. Inherits from <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code>.</p>
 <p><span class="math notranslate nohighlight">\(E_a = \alpha H + \beta\)</span></p>
@@ -2882,6 +2882,24 @@ a species. Inherits from <code class="xref py py-class docutils literal notransl
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, optional</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.elements">
+<code class="descname">elements</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Composition of the species.
+Keys of dictionary are elements, values are stoichiometric
+values in a formula unit.
+e.g. CH3OH can be represented as:
+{‘C’: 1, ‘H’: 4, ‘O’: 1,}.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></td>
 </tr>
 </tbody>
 </table>

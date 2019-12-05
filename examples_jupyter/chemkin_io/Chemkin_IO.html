@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Chemkin Input and Output &mdash; pmutt 1.2.14 documentation</title>
+  <title>Chemkin Input and Output &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -377,1542 +377,718 @@ properties for the adsorbed species 2. <code class="docutils literal notranslate
 experimental data for a handful of gas species to calculate references
 3. <code class="docutils literal notranslate"><span class="pre">species</span></code> contains <em>ab-initio</em> data for each specie 4.
 <code class="docutils literal notranslate"><span class="pre">reactions</span></code> contains elementary steps</p>
-<p>The contents are displayed below</p>
+<p>First, we change the working directory to the location of the Jupyter
+notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+
+<span class="c1"># Find the location of Jupyter notebook</span>
+<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
+<span class="c1"># Using pathlib can overcome this limiation</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
+<span class="n">excel_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_Data.xlsx&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>Below is a helper function to print tables easily.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
+
+<span class="k">def</span> <span class="nf">disp_data</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <p><strong>Catalytic Sites</strong></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="32%" />
-<col width="20%" />
-<col width="30%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">name</th>
-<th class="head">site_density</th>
-<th class="head">density</th>
-<th class="head">bulk_specie</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>RU0001</td>
-<td>2.1671E-09</td>
-<td>12.2</td>
-<td>RU(B)</td>
-</tr>
-</tbody>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;cat_sites&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>site_density</th>
+      <th>density</th>
+      <th>bulk_specie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RU0001</td>
+      <td>2.167100e-09</td>
+      <td>12.2</td>
+      <td>RU(B)</td>
+    </tr>
+  </tbody>
 </table>
+</div></div>
+</div>
 <p><strong>References</strong></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="7%" />
-<col width="9%" />
-<col width="9%" />
-<col width="9%" />
-<col width="9%" />
-<col width="9%" />
-<col width="9%" />
-<col width="9%" />
-<col width="9%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">n
-a
-m
-e</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-N</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-H</th>
-<th class="head">r
-e
-f</th>
-<th class="head">Ho
-RT
-_r
-ef</th>
-<th class="head">pot
-ent
-ial
-ene
-rgy</th>
-<th class="head">sym
-met
-ryn
-umb
-er</th>
-<th class="head">sta
-tme
-<a href="#id1"><span class="problematic" id="id2">ch_</span></a>
-mod
-el</th>
-<th class="head">ato
-ms</th>
-<th class="head">vib
-_wa
-ven
-umb
-er</th>
-<th class="head">vib
-_wa
-ven
-umb
-er</th>
-<th class="head">vib
-_wa
-ven
-umb
-er</th>
-<th class="head">vib
-_wa
-ven
-umb
-er</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>N
-2</td>
-<td>2</td>
-<td>0</td>
-<td>2
-9
-8
-.
-1
-5</td>
-<td>0</td>
-<td>-16
-.63</td>
-<td>2</td>
-<td>Ide
-alG
-as</td>
-<td>./N
-2/C
-ONT
-CAR</td>
-<td>274
-4</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>N
-H
-3</td>
-<td>1</td>
-<td>3</td>
-<td>2
-9
-8
-.
-1
-5</td>
-<td>-1
-8.
-38
-02
-53
-11</td>
-<td>-19
-.54</td>
-<td>3</td>
-<td>Ide
-alG
-as</td>
-<td>./N
-H3/
-CON
-TCA
-R</td>
-<td>353
-4</td>
-<td>346
-4</td>
-<td>176
-5</td>
-<td>113
-9</td>
-</tr>
-<tr class="row-even"><td>H
-2</td>
-<td>0</td>
-<td>2</td>
-<td>2
-9
-8
-.
-1
-5</td>
-<td>0</td>
-<td>-6.
-770
-0</td>
-<td>2</td>
-<td>Ide
-alG
-as</td>
-<td>./H
-2/C
-ONT
-CAR</td>
-<td>434
-2</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-</tbody>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>elements.N</th>
+      <th>elements.H</th>
+      <th>elements.RU</th>
+      <th>T_ref</th>
+      <th>HoRT_ref</th>
+      <th>potentialenergy</th>
+      <th>symmetrynumber</th>
+      <th>statmech_model</th>
+      <th>atoms</th>
+      <th>vib_wavenumber</th>
+      <th>vib_wavenumber.1</th>
+      <th>vib_wavenumber.2</th>
+      <th>vib_wavenumber.3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>298.15</td>
+      <td>0.000000</td>
+      <td>-16.63</td>
+      <td>2</td>
+      <td>IdealGas</td>
+      <td>./N2/CONTCAR</td>
+      <td>2744</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NH3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>298.15</td>
+      <td>-18.380253</td>
+      <td>-19.54</td>
+      <td>3</td>
+      <td>IdealGas</td>
+      <td>./NH3/CONTCAR</td>
+      <td>3534</td>
+      <td>3464</td>
+      <td>1765</td>
+      <td>1139</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>298.15</td>
+      <td>0.000000</td>
+      <td>-6.77</td>
+      <td>2</td>
+      <td>IdealGas</td>
+      <td>./H2/CONTCAR</td>
+      <td>4342</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ru</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>298.15</td>
+      <td>0.000000</td>
+      <td></td>
+      <td></td>
+      <td>Placeholder</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
+</div></div>
+</div>
 <p><strong>Species</strong></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">n
-a
-m
-e</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-N</th>
-<th class="head">e
-l
-e
-m
-e
-n
-t
-s
-.
-H</th>
-<th class="head">p
-h
-a
-s
-e</th>
-<th class="head">s
-t
-a
-t
-m
-e
-c
-h
-_
-m
-o
-d
-e
-l</th>
-<th class="head">s
-y
-m
-m
-e
-t
-r
-y
-n
-u
-m
-b
-e
-r</th>
-<th class="head">a
-t
-o
-m
-s</th>
-<th class="head">p
-o
-t
-e
-n
-t
-i
-a
-l
-e
-n
-e
-r
-g
-y</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-<th class="head">v
-i
-b
-_
-w
-a
-v
-e
-n
-u
-m
-b
-e
-r</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>N
-2</td>
-<td>2</td>
-<td>0</td>
-<td>G</td>
-<td>I
-d
-e
-a
-l
-G
-a
-s</td>
-<td>2</td>
-<td>N
-2
-/
-C
-O
-N
-T
-C
-A
-R</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-6
-.
-6
-3</p>
-</td>
-<td>2
-7
-4
-4
-.
-0
-0</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>N
-H
-3</td>
-<td>1</td>
-<td>3</td>
-<td>G</td>
-<td>I
-d
-e
-a
-l
-G
-a
-s</td>
-<td>3</td>
-<td>N
-H
-3
-/
-C
-O
-N
-T
-C
-A
-R</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-9
-.
-5
-4</p>
-</td>
-<td>3
-5
-3
-4
-.
-0
-0</td>
-<td>3
-4
-6
-4
-.
-0
-0</td>
-<td>1
-7
-6
-5
-.
-0
-0</td>
-<td>1
-1
-3
-9
-.
-0
-0</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>H
-2</td>
-<td>0</td>
-<td>2</td>
-<td>G</td>
-<td>I
-d
-e
-a
-l
-G
-a
-s</td>
-<td>2</td>
-<td>H
-2
-/
-C
-O
-N
-T
-C
-A
-R</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">7
-7</p>
-</td>
-<td>4
-3
-4
-2
-.
-0
-0</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>N
-2
-(
-S
-)</td>
-<td>2</td>
-<td>0</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-7
-.
-2
-4</p>
-</td>
-<td>2
-1
-9
-7
-.
-1
-9</td>
-<td>3
-6
-0
-.
-4
-2</td>
-<td>3
-4
-7
-.
-3
-4</td>
-<td>3
-3
-5
-.
-6
-7</td>
-<td>6
-2
-.
-0
-8</td>
-<td>3
-2
-.
-1
-8</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>&#160;</td>
-<td>1</td>
-<td>0</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">3
-4</p>
-</td>
-<td>5
-4
-9
-.
-1
-1</td>
-<td>5
-3
-8
-.
-5
-6</td>
-<td>5
-0
-4
-.
-3
-2</td>
-<td>4
-7
-5
-.
-8
-1</td>
-<td>4
-5
-9
-.
-0
-8</td>
-<td>4
-1
-0
-.
-0
-2</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>&#160;</td>
-<td>0</td>
-<td>1</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">0
-0</p>
-</td>
-<td>1
-0
-0
-3
-.
-5
-1</td>
-<td>6
-2
-5
-.
-5
-5</td>
-<td>6
-1
-6
-.
-2
-9</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>N
-H
-3
-(
-S
-)</td>
-<td>1</td>
-<td>3</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">2
-0
-.
-4
-3</p>
-</td>
-<td>3
-4
-9
-1
-.
-0
-9</td>
-<td>3
-4
-8
-8
-.
-8
-2</td>
-<td>3
-3
-6
-4
-.
-5
-2</td>
-<td>1
-5
-8
-3
-.
-5
-2</td>
-<td>1
-5
-8
-2
-.
-0
-7</td>
-<td>1
-1
-2
-4
-.
-2
-2</td>
-<td>5
-7
-0
-.
-2
-1</td>
-<td>5
-6
-7
-.
-2
-2</td>
-<td>3
-3
-3
-.
-0
-9</td>
-<td>1
-2
-2
-.
-8
-6</td>
-<td>8
-3
-.
-8
-3</td>
-<td>7
-0
-.
-6
-3</td>
-</tr>
-<tr class="row-odd"><td>N
-H
-2
-(
-S
-)</td>
-<td>1</td>
-<td>2</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-6
-.
-5
-9</p>
-</td>
-<td>3
-4
-6
-9
-.
-3
-0</td>
-<td>3
-3
-8
-1
-.
-0
-5</td>
-<td>1
-5
-0
-3
-.
-0
-2</td>
-<td>6
-9
-8
-.
-8
-7</td>
-<td>6
-2
-5
-.
-6
-0</td>
-<td>6
-1
-5
-.
-9
-4</td>
-<td>4
-7
-5
-.
-1
-3</td>
-<td>2
-9
-8
-.
-1
-2</td>
-<td>1
-5
-3
-.
-2
-5</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>N
-H
-(
-S
-)</td>
-<td>1</td>
-<td>1</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-3
-.
-2
-1</p>
-</td>
-<td>3
-4
-0
-3
-.
-1
-3</td>
-<td>7
-1
-8
-.
-1
-8</td>
-<td>7
-1
-0
-.
-5
-8</td>
-<td>5
-2
-8
-.
-5
-3</td>
-<td>4
-1
-5
-.
-2
-0</td>
-<td>4
-1
-0
-.
-1
-3</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>T
-S
-1
-_
-N
-H
-3
-(
-S
-)</td>
-<td>1</td>
-<td>3</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-9
-.
-5
-3</p>
-</td>
-<td>3
-4
-5
-3
-.
-4
-1</td>
-<td>3
-3
-5
-5
-.
-6
-7</td>
-<td>1
-7
-2
-3
-.
-8
-5</td>
-<td>1
-4
-8
-7
-.
-9
-5</td>
-<td>9
-5
-9
-.
-1
-5</td>
-<td>8
-8
-8
-.
-9
-5</td>
-<td>5
-9
-4
-.
-0
-9</td>
-<td>4
-2
-8
-.
-4
-3</td>
-<td>2
-2
-7
-.
-0
-3</td>
-<td>2
-0
-6
-.
-0
-5</td>
-<td>1
-4
-2
-.
-1
-4</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>T
-S
-2
-_
-N
-H
-2
-(
-S
-)</td>
-<td>1</td>
-<td>2</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-6
-.
-0
-9</p>
-</td>
-<td>3
-4
-2
-6
-.
-4
-4</td>
-<td>1
-2
-9
-3
-.
-7
-2</td>
-<td>9
-2
-2
-.
-8
-3</td>
-<td>6
-6
-0
-.
-9
-7</td>
-<td>5
-2
-5
-.
-6
-0</td>
-<td>4
-9
-6
-.
-8
-4</td>
-<td>3
-3
-0
-.
-6
-7</td>
-<td>2
-9
-0
-.
-2
-8</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>T
-S
-3
-_
-N
-H
-(
-S
-)</td>
-<td>1</td>
-<td>1</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-2
-.
-9
-1</p>
-</td>
-<td>1
-2
-0
-1
-.
-6
-0</td>
-<td>4
-9
-1
-.
-5
-7</td>
-<td>4
-6
-2
-.
-0
-2</td>
-<td>4
-0
-2
-.
-1
-6</td>
-<td>2
-4
-2
-.
-1
-4</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>T
-S
-4
-_
-N
-2
-(
-S
-)</td>
-<td>2</td>
-<td>0</td>
-<td>S</td>
-<td>H
-a
-r
-m
-o
-n
-i
-c</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td><ul class="first simple">
-<li></li>
-</ul>
-<p class="last">1
-6
-.
-5
-4</p>
-</td>
-<td>4
-8
-5
-.
-6
-1</td>
-<td>3
-9
-2
-.
-9
-8</td>
-<td>3
-8
-6
-.
-1
-9</td>
-<td>2
-8
-0
-.
-9
-4</td>
-<td>1
-6
-8
-.
-4
-3</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-odd"><td>R
-U
-(
-S
-)</td>
-<td>0</td>
-<td>0</td>
-<td>S</td>
-<td>P
-l
-a
-c
-e
-h
-o
-l
-d
-e
-r</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td>R
-U
-(
-B
-)</td>
-<td>0</td>
-<td>0</td>
-<td>S</td>
-<td>P
-l
-a
-c
-e
-h
-o
-l
-d
-e
-r</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-<td>&#160;</td>
-</tr>
-</tbody>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>elements.N</th>
+      <th>elements.H</th>
+      <th>elements.RU</th>
+      <th>phase</th>
+      <th>statmech_model</th>
+      <th>symmetrynumber</th>
+      <th>atoms</th>
+      <th>potentialenergy</th>
+      <th>vib_wavenumber</th>
+      <th>...</th>
+      <th>vib_wavenumber.2</th>
+      <th>vib_wavenumber.3</th>
+      <th>vib_wavenumber.4</th>
+      <th>vib_wavenumber.5</th>
+      <th>vib_wavenumber.6</th>
+      <th>vib_wavenumber.7</th>
+      <th>vib_wavenumber.8</th>
+      <th>vib_wavenumber.9</th>
+      <th>vib_wavenumber.10</th>
+      <th>vib_wavenumber.11</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>G</td>
+      <td>IdealGas</td>
+      <td>2</td>
+      <td>./N2/CONTCAR</td>
+      <td>-16.63</td>
+      <td>2744</td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NH3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>G</td>
+      <td>IdealGas</td>
+      <td>3</td>
+      <td>./NH3/CONTCAR</td>
+      <td>-19.54</td>
+      <td>3534</td>
+      <td>...</td>
+      <td>1765</td>
+      <td>1139</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>G</td>
+      <td>IdealGas</td>
+      <td>2</td>
+      <td>./H2/CONTCAR</td>
+      <td>-6.77</td>
+      <td>4342</td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>N2(S)</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-17.24</td>
+      <td>2197.19</td>
+      <td>...</td>
+      <td>347.343</td>
+      <td>335.674</td>
+      <td>62.076</td>
+      <td>32.1794</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>N(S)</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-9.34</td>
+      <td>549.105</td>
+      <td>...</td>
+      <td>504.323</td>
+      <td>475.805</td>
+      <td>459.081</td>
+      <td>410.018</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>H(S)</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-4</td>
+      <td>1003.51</td>
+      <td>...</td>
+      <td>616.29</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NH3(S)</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-20.43</td>
+      <td>3491.09</td>
+      <td>...</td>
+      <td>3364.52</td>
+      <td>1583.52</td>
+      <td>1582.07</td>
+      <td>1124.22</td>
+      <td>570.212</td>
+      <td>567.221</td>
+      <td>333.09</td>
+      <td>122.859</td>
+      <td>83.8286</td>
+      <td>70.6251</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NH2(S)</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-16.59</td>
+      <td>3469.3</td>
+      <td>...</td>
+      <td>1503.02</td>
+      <td>698.869</td>
+      <td>625.596</td>
+      <td>615.94</td>
+      <td>475.13</td>
+      <td>298.12</td>
+      <td>153.25</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NH(S)</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-13.21</td>
+      <td>3403.13</td>
+      <td>...</td>
+      <td>710.581</td>
+      <td>528.526</td>
+      <td>415.196</td>
+      <td>410.131</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>TS1_NH3(S)</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-19.24</td>
+      <td>3453.41</td>
+      <td>...</td>
+      <td>1723.85</td>
+      <td>1487.95</td>
+      <td>959.151</td>
+      <td>888.946</td>
+      <td>594.089</td>
+      <td>428.431</td>
+      <td>227.032</td>
+      <td>206.047</td>
+      <td>142.136</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>TS2_NH2(S)</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-15.87</td>
+      <td>3426.44</td>
+      <td>...</td>
+      <td>922.831</td>
+      <td>660.967</td>
+      <td>525.595</td>
+      <td>496.837</td>
+      <td>330.674</td>
+      <td>290.278</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>TS3_NH(S)</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-11.93</td>
+      <td>1201.6</td>
+      <td>...</td>
+      <td>462.016</td>
+      <td>402.159</td>
+      <td>242.139</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>TS4_N2(S)</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>S</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td></td>
+      <td>-14.67</td>
+      <td>485.614</td>
+      <td>...</td>
+      <td>386.186</td>
+      <td>280.943</td>
+      <td>168.431</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>RU(S)</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>S</td>
+      <td>Placeholder</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>RU(B)</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>S</td>
+      <td>Placeholder</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
+<p>15 rows × 21 columns</p>
+</div></div>
+</div>
 <p><strong>Reactions</strong></p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="78%" />
-<col width="22%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">reaction_str</th>
-<th class="head">is_adsorption</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>H2 + 2RU(S) = 2H(S) + 2RU(B)</td>
-<td>TRUE</td>
-</tr>
-<tr class="row-odd"><td>N2 + RU(S) = N2(S) + RU(B)</td>
-<td>TRUE</td>
-</tr>
-<tr class="row-even"><td>NH3 + RU(S) = NH3(S) + RU(B)</td>
-<td>TRUE</td>
-</tr>
-<tr class="row-odd"><td>NH3(S) + RU(S)= TS1_NH3(S) = NH2(S) + H(S) + RU(B)</td>
-<td>FALSE</td>
-</tr>
-<tr class="row-even"><td>NH2(S) + RU(S) = TS2_NH2(S) = NH(S) + H(S) + RU(B)</td>
-<td>FALSE</td>
-</tr>
-<tr class="row-odd"><td>NH(S) + RU(S) = TS3_NH(S) = N(S) + H(S) + RU(B)</td>
-<td>FALSE</td>
-</tr>
-<tr class="row-even"><td>2N(S) + RU(B) = TS4_N2(S) = N2(S) + RU(S)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactions&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>reaction_str</th>
+      <th>is_adsorption</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>H2 + 2RU(S) = 2H(S) + 2RU(B)</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>N2 + RU(S)  = N2(S) + RU(B)</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NH3 + RU(S) = NH3(S) + RU(B)</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NH3(S) + RU(S)= TS1_NH3(S) = NH2(S) + H(S) + R...</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NH2(S) + RU(S) = TS2_NH2(S) = NH(S)  + H(S) + ...</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NH(S)  + RU(S) = TS3_NH(S) = N(S)   + H(S) + R...</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2N(S) + RU(B) = TS4_N2(S) = N2(S)  +  RU(S)</td>
+      <td>False</td>
+    </tr>
+  </tbody>
 </table>
+</div></div>
+</div>
 </div>
 <div class="section" id="Reading-data">
 <h2>Reading data<a class="headerlink" href="#Reading-data" title="Permalink to this headline">¶</a></h2>
@@ -1922,7 +1098,7 @@ the references.</p>
 <h3>Reading Catalytic Sites<a class="headerlink" href="#Reading-Catalytic-Sites" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1931,13 +1107,6 @@ the references.</p>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
 <span class="kn">from</span> <span class="nn">pmutt.chemkin</span> <span class="k">import</span> <span class="n">CatSite</span>
-
-<span class="c1"># Find the location of Jupyter notebook</span>
-<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
-<span class="c1"># Using pathlib can overcome this limiation</span>
-<span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
-<span class="n">excel_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_Data.xlsx&#39;</span>
 
 <span class="n">cat_site_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;cat_sites&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">cat_site</span> <span class="o">=</span> <span class="n">CatSite</span><span class="p">(</span><span class="o">**</span><span class="n">cat_site_data</span><span class="p">)</span>
@@ -1964,7 +1133,7 @@ the references.</p>
 <h3>Reading reference species<a class="headerlink" href="#Reading-reference-species" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1988,15 +1157,15 @@ the references.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;H&#39;: -129.34222830159834, &#39;N&#39;: -320.10077207763885}
+{&#39;H&#39;: -129.34222830159834, &#39;N&#39;: -320.10077207763885, &#39;RU&#39;: 0.0}
 </pre></div></div>
 </div>
 </div>
 <div class="section" id="Reading-species">
 <h3>Reading species<a class="headerlink" href="#Reading-species" title="Permalink to this headline">¶</a></h3>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2018,15 +1187,6 @@ the references.</p>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="stderr output_area docutils container">
-<div class="highlight"><pre>
-C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
-  return a.std(axis) / a.mean(axis)
-</pre></div></div>
-</div>
 <p>The warning above is typical when empirical objects are fitting to
 <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> objects with the <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> preset.</p>
 </div>
@@ -2034,7 +1194,7 @@ C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.p
 <h3>Reading reactions<a class="headerlink" href="#Reading-reactions" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2064,7 +1224,7 @@ folder</a>.</p>
 <h3>Writing thermdat<a class="headerlink" href="#Writing-thermdat" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2077,7 +1237,7 @@ folder</a>.</p>
 <p>The thermdat file can be return as a string by omitting <code class="docutils literal notranslate"><span class="pre">filename</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<span></span>In [12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2093,63 +1253,63 @@ folder</a>.</p>
 <div class="highlight"><pre>
 THERMO ALL
        100       500      1500
-N2              20191025N   2               G298.0     800.0     523.4         1
+N2              20191205N   2               G298.0     800.0     523.4         1
  3.75207309E+00-1.30159027E-03 1.83848785E-06-1.17413430E-10-3.65391117E-13    2
 -1.67466046E+02 2.02487235E+00 3.41792195E+00 8.91688129E-04-3.46864753E-06    3
  5.44691795E-09-2.46804017E-12-1.27218598E+02 3.46925446E+00                   4
-NH3             20191025N   1H   3          G298.0     800.0     533.6         1
+NH3             20191205N   1H   3          G298.0     800.0     533.6         1
  3.29427463E+00 2.57481517E-03 5.20883059E-07-1.00678313E-09 3.59356180E-13    2
 -8.39739729E+03 3.59518179E+00 4.57124680E+00-6.89724277E-03 2.70972941E-05    3
 -3.44331645E-08 1.62568430E-11-8.53630392E+03-1.78236482E+00                   4
-H2              20191025H   2               G298.0     800.0     574.6         1
+H2              20191205H   2               G298.0     800.0     574.6         1
  3.37903251E+00 7.92301907E-04-1.88662952E-06 1.85974220E-09-5.68447254E-13    2
  1.70231785E+03-3.75384878E+00 3.50717925E+00-8.50397135E-05 3.79570576E-07    3
 -7.57943298E-10 5.72423558E-13 1.68725521E+03-4.30359616E+00                   4
-N2(S)           20191025N   2               S298.0     800.0     482.4         1
+N2(S)           20191205N   2               S298.0     800.0     482.4         1
  3.42605836E+00 5.03710708E-03-6.92689694E-06 6.03246113E-09-2.18862675E-12    2
 -7.10908593E+03-1.39234158E+01 4.40553502E-01 2.97759950E-02-8.47698148E-05    3
  1.16195177E-07-6.12938589E-11-6.81713036E+03-1.67535850E+00                   4
-N(S)            20191025N   1               S298.0     800.0     502.9         1
+N(S)            20191205N   1               S298.0     800.0     502.9         1
 -8.29107669E-01 2.64469843E-02-4.38832016E-05 3.47600781E-08-1.07819310E-11    2
 -1.10025322E+04 5.84860624E-01-5.23174593E+00 6.11537184E-02-1.47762309E-04    3
  1.74618161E-07-8.21997526E-11-1.05501788E+04 1.88655390E+01                   4
-H(S)            20191025H   1               S298.0     800.0     461.9         1
+H(S)            20191205H   1               S298.0     800.0     461.9         1
 -2.11302416E+00 1.72572991E-02-2.60046478E-05 1.92388088E-08-5.68363784E-12    2
 -6.07714366E+03 8.35375655E+00-1.41307531E+00 1.00687718E-02 1.09758988E-06    3
 -2.55216914E-08 2.17566538E-11-6.12991563E+03 5.64663049E+00                   4
-NH3(S)          20191025N   1H   3          S298.0     800.0     461.9         1
+NH3(S)          20191205N   1H   3          S298.0     800.0     461.9         1
  1.58312977E+00 1.57753291E-02-1.71587153E-05 1.15414255E-08-3.21958978E-12    2
 -1.42567384E+04-6.35076167E+00 1.16759533E+00 2.05732170E-02-3.66958772E-05    3
  4.56112325E-08-2.49628744E-11-1.42311185E+04-4.80504278E+00                   4
-NH2(S)          20191025N   1H   2          S298.0     800.0     523.4         1
+NH2(S)          20191205N   1H   2          S298.0     800.0     523.4         1
 -6.86530719E-01 2.43298826E-02-3.68705157E-05 2.88483783E-08-8.86963660E-12    2
 -1.19475373E+04 1.03191178E+00-2.56305506E+00 3.84726874E-02-7.73503504E-05    3
  8.09903199E-08-3.43595838E-11-1.17458655E+04 8.90806366E+00                   4
-NH(S)           20191025N   1H   1          S298.0     800.0     543.9         1
+NH(S)           20191205N   1H   1          S298.0     800.0     543.9         1
 -1.33660645E+00 2.33106600E-02-3.77180253E-05 2.97486446E-08-9.12157176E-12    2
 -1.48903410E+04 3.58875263E+00-3.73687435E+00 4.05226889E-02-8.44226964E-05    3
  8.65932632E-08-3.53036247E-11-1.46202196E+04 1.37781588E+01                   4
-TS1_NH3(S)      20191025N   1H   3          S298.0     800.0     451.7         1
+TS1_NH3(S)      20191205N   1H   3          S298.0     800.0     451.7         1
  5.21221040E-02 2.11615812E-02-2.49542203E-05 1.66204937E-08-4.59897868E-12    2
 -2.50090675E+03-1.43098814E+00 4.96418515E-02 2.15674671E-02-2.75604959E-05    3
  2.23225323E-08-8.79255935E-12-2.50469914E+03-1.46480767E+00                   4
-TS2_NH2(S)      20191025N   1H   2          S298.0     800.0     554.1         1
+TS2_NH2(S)      20191205N   1H   2          S298.0     800.0     554.1         1
 -1.48538501E+00 2.67287608E-02-3.86606417E-05 2.81558194E-08-8.15140597E-12    2
 -5.88676392E+03 4.23478570E+00-2.58881424E+00 3.43781302E-02-5.87419101E-05    3
  5.18321984E-08-1.87340797E-11-5.75828326E+03 8.95651588E+00                   4
-TS3_NH(S)       20191025N   1H   1          S298.0     800.0     482.4         1
+TS3_NH(S)       20191205N   1H   1          S298.0     800.0     482.4         1
 -1.24242592E-01 1.65859456E-02-2.43704704E-05 1.77594067E-08-5.19878424E-12    2
 -2.53350782E+03-1.18098922E+00-1.80701218E+00 3.07479132E-02-6.96816870E-05    3
  8.30020912E-08-4.08170225E-11-2.37120889E+03 5.69776360E+00                   4
-TS4_N2(S)       20191025N   2               S298.0     800.0     482.4         1
+TS4_N2(S)       20191205N   2               S298.0     800.0     482.4         1
  1.52431744E+00 1.40315985E-02-2.40821843E-05 1.96281604E-08-6.24114074E-12    2
  2.15756709E+04-8.60900953E+00-1.75107618E+00 4.12189598E-02-1.09828935E-04    3
  1.41320046E-07-7.17404084E-11 2.18956564E+04 4.82385770E+00                   4
-RU(S)           20191025                    S298.0     800.0     554.1         1
+RU(S)           20191205RU  1               S298.0     800.0     554.1         1
  0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00    2
  0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00    3
  0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00                   4
-RU(B)           20191025                    S298.0     800.0     554.1         1
+RU(B)           20191205RU  1               S298.0     800.0     554.1         1
  0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00    2
  0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00    3
  0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00                   4
@@ -2161,7 +1321,7 @@ END
 <h3>Writing gas.inp and surf.inp<a class="headerlink" href="#Writing-gas.inp-and-surf.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2181,7 +1341,7 @@ written as a string by omitting the filename. Note there are no
 gas-phase reactions.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<span></span>In [14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2195,11 +1355,12 @@ gas-phase reactions.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-! File generated by pMuTT (v 1.2.14) on 2019-10-25 13:36:20.936932
+! File generated by pMuTT (v 1.2.14) on 2019-12-05 16:51:43.246692
 !Elements present in gas and surface species
 ELEMENTS
-N
 H
+N
+RU
 END
 
 !Gas-phase species
@@ -2222,7 +1383,7 @@ END
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<span></span>In [15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2236,7 +1397,7 @@ END
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-! File generated by pMuTT (v 1.2.14) on 2019-10-25 13:36:20.965854
+! File generated by pMuTT (v 1.2.14) on 2019-12-05 16:51:43.274690
 !Surface species
 !Each catalyst site has the following format:
 !SITE/[Site name]/      SDEN/[Site density in mol/cm2]/
@@ -2289,7 +1450,7 @@ END
 <h3>Writing T_flow.inp<a class="headerlink" href="#Writing-T_flow.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<span></span>In [16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2307,7 +1468,7 @@ END
 filename.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<span></span>In [17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2321,7 +1482,7 @@ filename.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-! File generated by pMuTT (v 1.2.14) on 2019-10-25 13:36:20.994777
+! File generated by pMuTT (v 1.2.14) on 2019-12-05 16:51:43.304689
 !Conditions for each reaction run
 !Only used when MultiInput in tube.inp is set to &#34;T&#34;
 !T[K]      P[atm]     Q[cm3/s]   abyv[cm-1]  Run #
@@ -2336,7 +1497,7 @@ EOF
 <h3>Writing EAg.inp and EAs.inp<a class="headerlink" href="#Writing-EAg.inp-and-EAs.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<span></span>In [18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2368,7 +1529,7 @@ EOF
 <a class="reference external" href="#act_method_name_explanation">reason described above</a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<span></span>In [19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2385,7 +1546,7 @@ EOF
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-! File generated by pMuTT (v 1.2.14) on 2019-10-25 13:36:21.058606
+! File generated by pMuTT (v 1.2.14) on 2019-12-05 16:51:43.375691
 !The first line is the number of reactions. Subsequent lines follow the format
 !of rxn (from surf.out) followed by the EA/RT value at each run condition.
 !There may be one slight deviation from surf.out: any repeated species should
@@ -2406,7 +1567,7 @@ EOF
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<span></span>In [20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2423,7 +1584,7 @@ EOF
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-! File generated by pMuTT (v 1.2.14) on 2019-10-25 13:36:21.113459
+! File generated by pMuTT (v 1.2.14) on 2019-12-05 16:51:43.443690
 !The first line is the number of reactions. Subsequent lines follow the format
 !of rxn (from surf.out) followed by the EA/RT value at each run condition.
 !There may be one slight deviation from surf.out: any repeated species should
@@ -2440,7 +1601,7 @@ EOF
 <h3>Writing tube_mole.inp<a class="headerlink" href="#Writing-tube_mole.inp" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<span></span>In [21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2464,7 +1625,7 @@ EOF
 <p>Below is the output of the function.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<span></span>In [22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2479,7 +1640,7 @@ EOF
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-! File generated by pMuTT (v 1.2.14) on 2019-10-25 13:36:21.150361
+! File generated by pMuTT (v 1.2.14) on 2019-12-05 16:51:43.487693
 !Specify the &#39;species/phase/&#39; pair /(in quotes!)/ and the associated
 !composition values. If the composition does not sum to 1 for each phase or
 !site type, it will be renormalized to 1. At the end of a calculation, a

@@ -19,7 +19,7 @@ Using pip is the most straightforward way to install pMuTT.
 2. Install pMuTT by typing the following in the command prompt:
 ::
 
-    pip install --user pmutt
+    pip install pmutt
 
 The output towards the end should state "Successfully built pMuTT" if the
 installation was successful.
@@ -28,19 +28,26 @@ Installing pMuTT from source
 ----------------------------
 If you would prefer to install from source or you are interested in development,
 follow the instructions below.
+::
 
-1. Clone the repository from GitHub (using the GitHub Desktop makes it easier).
-   `See GitHub instructions on cloning repositories here`_.
+    pip install git+https://github.com/VlachosGroup/pMuTT.git
 
-2. Add the path of the ``pmutt`` folder to the ``PYTHONPATH`` environment
-   variable.
+Installing the developer branch
+-------------------------------
+pMuTT has a release roughly once a month. Changes that will be in the next
+release will be located in the Developer branch but may have more bugs than
+the master branch. You can install using the following:
+::
+
+
+    pip install --upgrade git+https://github.com/VlachosGroup/pMuTT.git@development
 
 Upgrading pMuTT using pip
 -------------------------
 To upgrade to a newer release, use the --upgrade flag:
 ::
 
-    pip install --user --upgrade pmutt
+    pip install --upgrade pmutt
 
 Running unit tests
 ------------------

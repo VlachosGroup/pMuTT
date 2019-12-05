@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Excel to Empirical &mdash; pmutt 1.2.14 documentation</title>
+  <title>Excel to Empirical &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -2162,9 +2162,16 @@ c</td>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="s1">&#39;./test/input.xlsx&#39;</span><span class="p">)</span>
@@ -2177,7 +2184,7 @@ c</td>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\pMuTT_master\docs\source\examples_jupyter\excel_to_empirical
+C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\pMuTT_development\docs\source\examples_jupyter\excel_to_empirical
 [{&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
   &#39;elements&#39;: {&#39;C&#39;: 0, &#39;H&#39;: 2, &#39;O&#39;: 0},
   &#39;model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
@@ -2185,7 +2192,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -6.9860974799998985,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3066.979319,
                       1520.963162,
@@ -2200,7 +2206,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -14.81328099999996,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3732.4315,
                       3615.316915,
@@ -2218,7 +2223,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -15.420401699999957,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3732.4315,
                       3615.316915,
@@ -2236,7 +2240,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -3.470207479999999,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [1868.8092, 681.336865, 578.20889]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
@@ -2246,7 +2249,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -11.577084999999897,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3678.377186,
                       851.655046,
@@ -2261,7 +2263,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -7.519857999999886,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [537.116485, 439.995941, 256.38412]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
@@ -2271,7 +2272,6 @@ C:\Users\jonat\Dropbox (Personal)\UDel Documents (Dropbox)\UDel Research\Github\
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -64.93539200000009,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3072.824921,
                       3056.583116,
@@ -3432,7 +3432,6 @@ fields that are necessary for reference species.</p>
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
   &#39;spin&#39;: 0,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 1,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -3486,7 +3485,6 @@ fields that are necessary for reference species.</p>
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
   &#39;spin&#39;: 0,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -3511,7 +3509,6 @@ fields that are necessary for reference species.</p>
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
   &#39;spin&#39;: 0,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -3572,7 +3569,7 @@ the data.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;pmutt.empirical.nasa.Nasa object at 0x000002C40A25A908&gt;
+&lt;pmutt.empirical.nasa.Nasa object at 0x000001CF441C4160&gt;
 </pre></div></div>
 </div>
 </div>
@@ -3602,31 +3599,31 @@ the data.</p>
 <div class="highlight"><pre>
 THERMO ALL
        100       500      1500
-H2_cus(S)       20191025H   2               S300.0     1100.0    610.2         1
+H2_cus(S)       20191205H   2               S300.0     1100.0    610.2         1
 -1.32355622E-01 1.17210568E-02-1.21067695E-05 6.77414609E-09-1.56703390E-12    2
 -1.96688030E+03-1.13738972E+00-2.37252750E+00 2.60714871E-02-4.73583826E-05    3
  4.61096590E-08-1.83624246E-11-1.68100073E+03 8.63988878E+00                   4
-H2Obr(S)        20191025H   2O   1          S300.0     1100.0    561.2         1
+H2Obr(S)        20191205H   2O   1          S300.0     1100.0    561.2         1
  3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
 -3.65044468E+04-1.59546195E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
  8.80731362E-08-4.17597362E-11-3.61742347E+04-3.41084606E+00                   4
-H2Ocus(S)       20191025H   2O   1          S300.0     1100.0    561.2         1
+H2Ocus(S)       20191205H   2O   1          S300.0     1100.0    561.2         1
  3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
 -4.35497924E+04-1.59546195E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
  8.80731362E-08-4.17597362E-11-4.32195803E+04-3.41084606E+00                   4
-H_cus(S)        20191025H   1               S300.0     1100.0    544.9         1
+H_cus(S)        20191205H   1               S300.0     1100.0    544.9         1
 -4.56626289E-01 6.52756961E-03-5.72385869E-06 2.56064809E-09-4.74217654E-13    2
 -8.85760036E+02 1.29271332E+00-1.70971795E+00 1.57880872E-02-3.17011214E-05    3
  3.53093929E-08-1.61102148E-11-7.48349620E+02 6.57690129E+00                   4
-HObr(S)         20191025H   1O   1          S300.0     1100.0    610.2         1
+HObr(S)         20191205H   1O   1          S300.0     1100.0    610.2         1
  1.32317902E+00 1.07943705E-02-1.40435635E-05 9.13293283E-09-2.29632826E-12    2
 -3.92611148E+04-7.89390797E+00-1.90464381E+00 3.13120166E-02-6.40095247E-05    3
  6.43701568E-08-2.56553082E-11-3.88464459E+04 6.21729957E+00                   4
-Obr(S)          20191025O   1               S300.0     1100.0    561.2         1
+Obr(S)          20191205O   1               S300.0     1100.0    561.2         1
  1.10929486E+00 6.02227730E-03-8.09582034E-06 5.13595359E-09-1.26396875E-12    2
 -3.27378795E+04-6.27177767E+00-1.46028728E+00 2.43280424E-02-5.80735069E-05    3
  6.69898412E-08-3.04663321E-11-3.24427306E+04 4.67078224E+00                   4
-IPA(S)          20191025C   3H   8O   1     S300.0     1100.0    544.9         1
+IPA(S)          20191205C   3H   8O   1     S300.0     1100.0    544.9         1
 -2.41027713E+00 6.03014873E-02-5.21384920E-05 2.61809899E-08-5.76980678E-12    2
 -4.86934052E+04 1.14552028E+01 6.36065045E+00-8.82654398E-03 1.52433654E-04    3
 -2.43446336E-07 1.27830717E-10-4.95836691E+04-2.49129983E+01                   4

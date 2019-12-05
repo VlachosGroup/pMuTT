@@ -7,6 +7,21 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.15
+--------------
+Dec. 5, 2019
+
+- Added :func:`~pmutt.io.omkm.write_yaml` to write YAML files for OpenMKM.
+- Added warning for :func:`~pmutt.io.excel.read_excel` if the header is blank
+  but the cells are occupied.
+- Fixed bug in :func:`~pmutt.io.excel.read_excel` where ``model`` was not
+  correctly initialized with :func:`~pmutt.statmech.StatMech`.
+- Added the generic method, :func:`~pmutt.io.excel.set_dict_value` to specify
+  dictionaries in :func:`~pmutt.io.excel.read_excel`
+- Removed redundant statements involving returning dictionaries in functions to
+  process Excel data.
+- Fixed warning raised whenever CpoR = 0 when fitting empirical polynomials.
+
 Version 1.2.14
 --------------
 Oct. 25, 2019

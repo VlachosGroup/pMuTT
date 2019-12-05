@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Statistical Thermodynamic Models &mdash; pmutt 1.2.14 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -3574,7 +3574,7 @@ very negative causing q_elec to go to infinity. Default is True</li>
 <dt id="pmutt.statmech.lsr.LSR">
 <em class="property">class </em><code class="descclassname">pmutt.statmech.lsr.</code><code class="descname">LSR</code><span class="sig-paren">(</span><em>slope</em>, <em>intercept</em>, <em>reaction</em>, <em>surf_specie=0.0</em>, <em>gas_specie=0.0</em>, <em>notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a linear scaling relationship</p>
-<p><span class="math notranslate nohighlight">\(\Delta E^{AH_x} = \alpha E^{A} + \beta\)</span></p>
+<p><span class="math notranslate nohighlight">\(\Delta E^{AH_x} = \alpha \Delta E^{A} + \beta\)</span></p>
 <p><span class="math notranslate nohighlight">\(E^{AH_{x}^*}=\Delta E^{AH_x} + E^* + E^{AH_{x(g)}}\)</span></p>
 <dl class="attribute">
 <dt id="pmutt.statmech.lsr.LSR.slope">
@@ -3609,11 +3609,11 @@ equation</p>
 <dt id="pmutt.statmech.lsr.LSR.reaction">
 <code class="descname">reaction</code><a class="headerlink" href="#pmutt.statmech.lsr.LSR.reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reaction to use to calculate reference binding energy. Binding
-energy calculated using <cite>get_delta_E</cite> and if that fails,
-<cite>get_delta_H</cite>. If the binding energy is specified as a float
+energy calculated using <code class="docutils literal notranslate"><span class="pre">get_delta_E</span></code> and if that fails,
+<code class="docutils literal notranslate"><span class="pre">get_delta_H</span></code>. If the binding energy is specified as a float
 (in kcal/mol), it will be converted to a
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> made of <cite>~pmutt.statmech.StatMech</cite>
-objects</p>
+<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> made of
+<a class="reference internal" href="#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

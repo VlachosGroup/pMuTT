@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NAM 2019 pMuTT Workshop &mdash; pmutt 1.2.14 documentation</title>
+  <title>NAM 2019 pMuTT Workshop &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -990,7 +990,10 @@ creating a series of NASA polynomials.</p>
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
 <span class="c1"># Using pathlib can overcome this limiation</span>
-<span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">)</span>
 
 <span class="c1"># Read the data from Excel</span>
@@ -1021,7 +1024,6 @@ creating a series of NASA polynomials.</p>
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2.0,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -1043,7 +1045,6 @@ creating a series of NASA polynomials.</p>
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 3.0,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -1065,7 +1066,6 @@ creating a series of NASA polynomials.</p>
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2.0,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -1077,7 +1077,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -17.239999999999952,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [2197.19, 360.415, 347.343, 335.674, 62.076, 32.1794]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
@@ -1087,7 +1086,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -9.339999999999975,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [549.105, 538.56, 504.323, 475.805, 459.081, 410.018]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
@@ -1097,7 +1095,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -4.0,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [1003.51, 625.55, 616.29]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.elec.GroundStateElec&#39;&gt;,
@@ -1107,7 +1104,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -20.42999999999995,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3491.08913,
                       3488.81949,
@@ -1128,7 +1124,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -16.589999999999975,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3469.30034,
                       3381.05197,
@@ -1146,7 +1141,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -13.20999999999998,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3403.12878,
                       718.177588,
@@ -1161,7 +1155,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -19.23999999999995,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3453.41063,
                       3355.66992,
@@ -1181,7 +1174,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -15.869999999999974,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [3426.44484,
                       1293.72327,
@@ -1198,7 +1190,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -11.92999999999998,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [1201.60487,
                       491.566416,
@@ -1212,7 +1203,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;potentialenergy&#39;: -14.669999999999952,
   &#39;required&#39;: (&#39;vib_wavenumbers&#39;, &#39;potentialenergy&#39;, &#39;spin&#39;),
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
   &#39;vib_wavenumbers&#39;: [485.614, 392.977, 386.186, 280.943, 168.431]},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
@@ -1223,7 +1213,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;required&#39;: (),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;},
  {&#39;elec_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
@@ -1234,7 +1223,6 @@ creating a series of NASA polynomials.</p>
   &#39;phase&#39;: &#39;S&#39;,
   &#39;required&#39;: (),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.EmptyMode&#39;&gt;}]
 </pre></div></div>
@@ -1265,7 +1253,7 @@ creating a series of NASA polynomials.</p>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
@@ -1287,15 +1275,6 @@ TS3_NH(S)              -274.4                  -1.7                -274.0
 TS4_N2(S)              -336.0                   4.8                -337.4
 RU(S)                     0.0                   0.0                   0.0
 RU(B)                     0.0                   0.0                   0.0
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="stderr output_area docutils container">
-<div class="highlight"><pre>
-C:\Users\jonat\AppData\Roaming\Python\Python36\site-packages\scipy\stats\stats.py:1025: RuntimeWarning: invalid value encountered in double_scalars
-  return a.std(axis) / a.mean(axis)
 </pre></div></div>
 </div>
 </div>

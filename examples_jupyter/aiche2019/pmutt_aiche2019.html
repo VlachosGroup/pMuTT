@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>AIChE 2019 pMuTT Workshop &mdash; pmutt 1.2.14 documentation</title>
+  <title>AIChE 2019 pMuTT Workshop &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -841,8 +841,11 @@ notebook so we can access the spreadsheet.</p>
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
 <span class="c1"># Using pathlib can overcome this limiation</span>
-<span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1088,7 +1091,7 @@ notebook so we can access the spreadsheet.</p>
 </div>
 <p>After the data is read, we can fit the <code class="docutils literal notranslate"><span class="pre">Nasa</span></code> objects from the
 statistical mechanical data.</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [10]:
 </pre></div>
@@ -1105,15 +1108,6 @@ statistical mechanical data.</p>
     <span class="n">nasa_species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_nasa_species</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="stderr output_area docutils container">
-<div class="highlight"><pre>
-C:\Users\jonat\AppData\Roaming\Python\Python37\site-packages\scipy-1.3.0-py3.7-win-amd64.egg\scipy\stats\stats.py:1040: RuntimeWarning: invalid value encountered in double_scalars
-  return a.std(axis) / a.mean(axis)
-</pre></div></div>
 </div>
 <p>Just to ensure the species were read correctly, we can try printing out
 thermodynamic values.</p>

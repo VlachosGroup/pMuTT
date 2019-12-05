@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Constants &mdash; pmutt 1.2.14 documentation</title>
+  <title>Constants &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -1079,7 +1079,11 @@ special rules that depend on the header name.</p>
 <span class="c1"># Find the location of Jupyter notebook</span>
 <span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
 <span class="c1"># Using pathlib can overcome this limiation</span>
-<span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">notebook_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">)</span>
 
 <span class="c1"># The Excel spreadsheet is located in the same folder as the Jupyter notebook</span>
 <span class="n">refs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_folder</span><span class="p">,</span> <span class="s1">&#39;refs.xlsx&#39;</span><span class="p">)</span>
@@ -1114,7 +1118,6 @@ special rules that depend on the header name.</p>
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 6,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,
@@ -1156,7 +1159,6 @@ special rules that depend on the header name.</p>
                &#39;rot_temperatures&#39;,
                &#39;symmetrynumber&#39;),
   &#39;rot_model&#39;: &lt;class &#39;pmutt.statmech.rot.RigidRotor&#39;&gt;,
-  &#39;statmech_model&#39;: &lt;class &#39;pmutt.statmech.StatMech&#39;&gt;,
   &#39;symmetrynumber&#39;: 2,
   &#39;trans_model&#39;: &lt;class &#39;pmutt.statmech.trans.FreeTrans&#39;&gt;,
   &#39;vib_model&#39;: &lt;class &#39;pmutt.statmech.vib.HarmonicVib&#39;&gt;,

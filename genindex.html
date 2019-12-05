@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pmutt 1.2.14 documentation</title>
+  <title>Index &mdash; pmutt 1.2.15 documentation</title>
   
 
   
@@ -350,9 +350,13 @@
 </li>
       <li><a href="statmech.html#pmutt.statmech.StatMech.elec_model">elec_model (pmutt.statmech.StatMech attribute)</a>
 </li>
-      <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.elements">elements (pmutt.empirical.EmpiricalBase attribute)</a>
+      <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.elements">elements (pmutt.cantera.phase.Phase attribute)</a>
 
       <ul>
+        <li><a href="empirical.html#pmutt.empirical.EmpiricalBase.elements">(pmutt.empirical.EmpiricalBase attribute)</a>
+</li>
+        <li><a href="reactions.html#pmutt.reaction.bep.BEP.elements">(pmutt.reaction.bep.BEP attribute)</a>
+</li>
         <li><a href="statmech.html#pmutt.statmech.StatMech.elements">(pmutt.statmech.StatMech attribute)</a>
 </li>
       </ul></li>
@@ -1011,6 +1015,8 @@
       <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.initial_state">initial_state (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.initial_state">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
         <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.initial_state">(pmutt.cantera.phase.StoichSolid attribute)</a>
 </li>
         <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.initial_state">(pmutt.omkm.phase.InteractingInterface attribute)</a>
@@ -1061,7 +1067,11 @@
       <li><a href="constants.html#pmutt.constants.kb">kb() (in module pmutt.constants)</a>
 </li>
       <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.kinetics">kinetics (pmutt.cantera.phase.IdealGas attribute)</a>
+
+      <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.kinetics">(pmutt.cantera.phase.Phase attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="kinetic_models.html#pmutt.omkm.reaction.SurfaceReaction.kwargs">kwargs (pmutt.omkm.reaction.SurfaceReaction attribute)</a>
@@ -1155,6 +1165,8 @@
       <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.note">note (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.note">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
         <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.note">(pmutt.cantera.phase.StoichSolid attribute)</a>
 </li>
         <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.note">(pmutt.omkm.phase.InteractingInterface attribute)</a>
@@ -1186,11 +1198,11 @@
 </li>
       <li><a href="empirical.html#pmutt.empirical.references.References.offset">offset (pmutt.empirical.references.References attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.options">options (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.options">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
         <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.options">(pmutt.cantera.phase.StoichSolid attribute)</a>
 </li>
         <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.options">(pmutt.omkm.phase.InteractingInterface attribute)</a>
@@ -1321,6 +1333,8 @@
       <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.reactions">reactions (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.reactions">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
         <li><a href="kinetic_models.html#pmutt.omkm.reaction.BEP.reactions">(pmutt.omkm.reaction.BEP attribute)</a>
 </li>
         <li><a href="reactions.html#pmutt.reaction.Reactions.reactions">(pmutt.reaction.Reactions attribute)</a>
@@ -1334,10 +1348,10 @@
 </li>
       <li><a href="io.html#pmutt.io.gaussian.read_frequencies">read_frequencies() (in module pmutt.io.gaussian)</a>
 </li>
-      <li><a href="io.html#pmutt.io.gaussian.read_molecular_mass">read_molecular_mass() (in module pmutt.io.gaussian)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="io.html#pmutt.io.gaussian.read_molecular_mass">read_molecular_mass() (in module pmutt.io.gaussian)</a>
+</li>
       <li><a href="io.html#pmutt.io.gaussian.read_pattern">read_pattern() (in module pmutt.io.gaussian)</a>
 </li>
       <li><a href="io.html#pmutt.io.chemkin.read_reactions">read_reactions() (in module pmutt.io.chemkin)</a>, <a href="kinetic_models.html#pmutt.io.chemkin.read_reactions">[1]</a>
@@ -1378,11 +1392,15 @@
 </li>
       <li><a href="io.html#pmutt.io.excel.set_atoms">set_atoms() (in module pmutt.io.excel)</a>
 </li>
+      <li><a href="io.html#pmutt.io.excel.set_dict_value">set_dict_value() (in module pmutt.io.excel)</a>
+</li>
       <li><a href="io.html#pmutt.io.excel.set_elec_model">set_elec_model() (in module pmutt.io.excel)</a>
 </li>
       <li><a href="io.html#pmutt.io.excel.set_element">set_element() (in module pmutt.io.excel)</a>
 </li>
       <li><a href="io.html#pmutt.io.excel.set_formula">set_formula() (in module pmutt.io.excel)</a>
+</li>
+      <li><a href="io.html#pmutt.io.excel.set_list_value">set_list_value() (in module pmutt.io.excel)</a>
 </li>
       <li><a href="io.html#pmutt.io.excel.set_nasa_a_high">set_nasa_a_high() (in module pmutt.io.excel)</a>
 </li>
@@ -1599,6 +1617,8 @@
       <li><a href="kinetic_models.html#pmutt.cantera.phase.IdealGas.transport">transport (pmutt.cantera.phase.IdealGas attribute)</a>
 
       <ul>
+        <li><a href="kinetic_models.html#pmutt.cantera.phase.Phase.transport">(pmutt.cantera.phase.Phase attribute)</a>
+</li>
         <li><a href="kinetic_models.html#pmutt.cantera.phase.StoichSolid.transport">(pmutt.cantera.phase.StoichSolid attribute)</a>
 </li>
         <li><a href="kinetic_models.html#pmutt.omkm.phase.InteractingInterface.transport">(pmutt.omkm.phase.InteractingInterface attribute)</a>
