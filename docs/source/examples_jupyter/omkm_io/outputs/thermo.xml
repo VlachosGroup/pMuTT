@@ -4,7 +4,7 @@
 
   <!-- phase gas     -->
   <phase id="gas" dim="3">
-    <elementArray datasrc="elements.xml">Ar N H</elementArray>
+    <elementArray datasrc="elements.xml">H Ar N</elementArray>
     <speciesArray datasrc="#species_data">N2 NH3 H2 Ar</speciesArray>
     <thermo model="IdealGas"/>
     <kinetics model="GasKinetics"/>
@@ -25,7 +25,7 @@
 
   <!-- phase terrace     -->
   <phase id="terrace" dim="2">
-    <elementArray datasrc="elements.xml">Ru N H</elementArray>
+    <elementArray datasrc="elements.xml">Ru H N</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0000" max="0003"/>
@@ -39,7 +39,7 @@
     <reactionArray datasrc="#reaction_data">
       <include min="N-H_cle_0001" max="N-H_cle_0001"/>
     </reactionArray>
-    <note>Ru(0001)</note>
+    <note>Surface: Ru0001(0T)</note>
     <thermo model="SurfaceCoverage">
       <site_density units="mol/cm2">2.1671e-09</site_density>
     </thermo>
@@ -54,7 +54,7 @@
 
   <!-- phase step     -->
   <phase id="step" dim="2">
-    <elementArray datasrc="elements.xml">Ru N H</elementArray>
+    <elementArray datasrc="elements.xml">Ru H N</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0004" max="0007"/>
@@ -68,7 +68,7 @@
     <reactionArray datasrc="#reaction_data">
       <include min="N-H_syn_0001" max="N-H_syn_0001"/>
     </reactionArray>
-    <note>Ru(0001) with atoms deleted</note>
+    <note>Surface: Ru0001(0S)</note>
     <thermo model="SurfaceCoverage">
       <site_density units="mol/cm2">4.4385e-10</site_density>
     </thermo>
@@ -158,13 +158,13 @@
       <thermo>
         <NASA Tmin="298.0" Tmax="502.8979591836735" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -5.231745930E+00,   6.115371840E-02,  -1.477623090E-04,   1.746181610E-07, 
-             -8.219975260E-11,  -1.055017880E+04,   1.886553900E+01</floatArray>
+             -2.719197090E+00,   3.103804280E-02,  -7.475403240E-05,   8.807234950E-08, 
+             -4.134333580E-11,  -1.172347400E+04,   9.873717960E+00</floatArray>
         </NASA>
         <NASA Tmin="502.8979591836735" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -8.291076690E-01,   2.644698430E-02,  -4.388320160E-05,   3.476007810E-08, 
-             -1.078193100E-11,  -1.100253220E+04,   5.848606240E-01</floatArray>
+             -4.950256200E-01,   1.353356400E-02,  -2.245355010E-05,   1.778373920E-08, 
+             -5.515692900E-12,  -1.195235040E+04,   6.349271040E-01</floatArray>
         </NASA>
       </thermo>
     </species>
@@ -173,15 +173,15 @@
     <species name="H(T)">
       <atomArray>H:1 </atomArray>
       <thermo>
-        <NASA Tmin="298.0" Tmax="461.9183673469388" P0="100000.0">
+        <NASA Tmin="298.0" Tmax="441.42857142857144" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -1.413075310E+00,   1.006877180E-02,   1.097589880E-06,  -2.552169140E-08, 
-             2.175665380E-11,  -6.129915630E+03,   5.646630490E+00</floatArray>
+             7.913134130E-03,  -7.184740940E-03,   6.125982210E-05,  -1.160967390E-07, 
+             7.328210520E-11,  -5.911659500E+03,   4.992718100E-01</floatArray>
         </NASA>
-        <NASA Tmin="461.9183673469388" Tmax="800.0" P0="100000.0">
+        <NASA Tmin="441.42857142857144" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -2.113024160E+00,   1.725729910E-02,  -2.600464780E-05,   1.923880880E-08, 
-             -5.683637840E-12,  -6.077143660E+03,   8.353756550E+00</floatArray>
+             -2.649466680E+00,   1.721046290E-02,  -2.347204230E-05,   1.577647900E-08, 
+             -4.252319150E-12,  -5.677884860E+03,   1.112431950E+01</floatArray>
         </NASA>
       </thermo>
     </species>
@@ -275,15 +275,15 @@
     <species name="TS3_NH(T)">
       <atomArray>N:1 H:1 </atomArray>
       <thermo>
-        <NASA Tmin="298.0" Tmax="482.40816326530614" P0="100000.0">
+        <NASA Tmin="298.0" Tmax="400.44897959183675" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -1.807012180E+00,   3.074791320E-02,  -6.968168700E-05,   8.300209120E-08, 
-             -4.081702250E-11,  -2.371208890E+03,   5.697763600E+00</floatArray>
+             -1.653766130E+00,   2.828485110E-02,  -5.941064280E-05,   7.525048080E-08, 
+             -4.257762410E-11,  -1.531885200E+03,   5.199658130E+00</floatArray>
         </NASA>
-        <NASA Tmin="482.40816326530614" Tmax="800.0" P0="100000.0">
+        <NASA Tmin="400.44897959183675" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -1.242425920E-01,   1.658594560E-02,  -2.437047040E-05,   1.775940670E-08, 
-             -5.198784240E-12,  -2.533507820E+03,  -1.180989220E+00</floatArray>
+             -8.319376470E-01,   1.975696150E-02,  -2.611436960E-05,   1.730077360E-08, 
+             -4.658697500E-12,  -1.595485760E+03,   2.016735180E+00</floatArray>
         </NASA>
       </thermo>
     </species>
@@ -295,12 +295,12 @@
         <NASA Tmin="298.0" Tmax="482.40816326530614" P0="100000.0">
            <floatArray size="7" name="coeffs">
              -1.751076180E+00,   4.121895980E-02,  -1.098289350E-04,   1.413200460E-07, 
-             -7.174040840E-11,   2.189565640E+04,   4.823857700E+00</floatArray>
+             -7.174040840E-11,   9.942998670E+03,   4.823857700E+00</floatArray>
         </NASA>
         <NASA Tmin="482.40816326530614" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
              1.524317440E+00,   1.403159850E-02,  -2.408218430E-05,   1.962816040E-08, 
-             -6.241140740E-12,   2.157567090E+04,  -8.609009530E+00</floatArray>
+             -6.241140740E-12,   9.623013160E+03,  -8.609009530E+00</floatArray>
         </NASA>
       </thermo>
     </species>
@@ -360,15 +360,15 @@
     <species name="H(S)">
       <atomArray>H:1 </atomArray>
       <thermo>
-        <NASA Tmin="298.0" Tmax="461.9183673469388" P0="100000.0">
+        <NASA Tmin="298.0" Tmax="513.1428571428571" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -1.413075310E+00,   1.006877180E-02,   1.097589880E-06,  -2.552169140E-08, 
-             2.175665380E-11,  -6.129915630E+03,   5.646630490E+00</floatArray>
+             7.349798610E-01,  -4.317768990E-03,   3.000846520E-05,  -4.654483090E-08, 
+             2.422874750E-11,  -6.010079120E+03,  -3.111171090E+00</floatArray>
         </NASA>
-        <NASA Tmin="461.9183673469388" Tmax="800.0" P0="100000.0">
+        <NASA Tmin="513.1428571428571" Tmax="800.0" P0="100000.0">
            <floatArray size="7" name="coeffs">
-             -2.113024160E+00,   1.725729910E-02,  -2.600464780E-05,   1.923880880E-08, 
-             -5.683637840E-12,  -6.077143660E+03,   8.353756550E+00</floatArray>
+             -9.383470430E-01,   8.574591920E-03,  -7.590070820E-06,   2.636482380E-09, 
+             -1.083565500E-13,  -5.834704520E+03,   3.872585640E+00</floatArray>
         </NASA>
       </thermo>
     </species>
@@ -589,7 +589,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">17.680400</E>
+           <E units="kcal/mol">18.035900</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3(T):1.0 RU(T):1</reactants>
@@ -603,7 +603,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">10.150000</E>
+           <E units="kcal/mol">10.410300</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH2(T):1.0 RU(T):1</reactants>
@@ -617,7 +617,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">22.077100</E>
+           <E units="kcal/mol">21.490700</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH(T):1.0 RU(T):1</reactants>
@@ -631,7 +631,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">86.472500</E>
+           <E units="kcal/mol">66.468800</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N(T):2.0 RU(B):1</reactants>
@@ -687,7 +687,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">12.602600</E>
+           <E units="kcal/mol">13.076500</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3(S):1.0 RU(S):1</reactants>
@@ -701,7 +701,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">18.012000</E>
+           <E units="kcal/mol">18.359100</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH2(S):1.0 RU(S):1</reactants>
@@ -715,7 +715,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">26.080900</E>
+           <E units="kcal/mol">25.887400</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N(S):1.0 H(S):1 RU(B):1</reactants>

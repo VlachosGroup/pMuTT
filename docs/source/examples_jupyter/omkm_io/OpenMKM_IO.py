@@ -28,7 +28,12 @@ from pathlib import Path
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
 # Using pathlib can overcome this limiation
-os.chdir(os.path.dirname(__file__))
+try:
+    notebook_path = os.path.dirname(__file__)
+except NameError:
+    notebook_path = Path().resolve()
+    
+os.chdir(notebook_path)
 input_path = './inputs/NH3_Input_Data.xlsx'
 
 
@@ -108,7 +113,7 @@ units = Units(length='cm', quantity='mol', act_energy='kcal/mol', mass='g', ener
 # ## Reading data
 # Before we can initialize our species, we need the references.
 # 
-# ### Reading References
+# ### Reading References (optional)
 # We will open the [input spreadsheet](https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/openmkm_io/inputs/NH3_Input_Data.xlsx) and read the `refs` sheet.
 
 # In[10]:
@@ -117,9 +122,13 @@ units = Units(length='cm', quantity='mol', act_energy='kcal/mol', mass='g', ener
 from pmutt.io.excel import read_excel
 from pmutt.empirical.references import Reference, References
 
-refs_data = read_excel(io=input_path, sheet_name='refs')
-refs = [Reference(**ref_data) for ref_data in refs_data]
-refs = References(references=refs)
+try:
+    refs_data = read_excel(io=input_path, sheet_name='refs')
+except:
+    refs = None
+else:
+    refs = [Reference(**ref_data) for ref_data in refs_data]
+    refs = References(references=refs)
 
 
 # ### Reading Species
@@ -138,7 +147,8 @@ species = []
 species_phases = {}
 for ind_species_data in species_data:
     # Initialize NASA from statistical mechanical data
-    ind_species = Nasa.from_model(T_low=T_low, T_high=T_high, references=refs, **ind_species_data)
+    ind_species = Nasa.from_model(T_low=T_low, T_high=T_high, references=refs,
+                                  **ind_species_data)
     species.append(ind_species)
 
     # Group the species by phase for later use
@@ -148,7 +158,7 @@ for ind_species_data in species_data:
         species_phases[ind_species.phase] = [ind_species]
 
 
-# ### Adding species from other empirical sources
+# ### Adding species from other empirical sources (optional)
 
 # In[12]:
 
@@ -163,20 +173,25 @@ species.append(Ar)
 species_phases['gas'].append(Ar)
 
 
-# ### Reading BEP
+# ### Reading BEP (optional)
 
 # In[13]:
 
 
 from pmutt.omkm.reaction import BEP
 
-beps_data = read_excel(io=input_path, sheet_name='beps')
-beps = []
-for bep_data in beps_data:
-    beps.append(BEP(**bep_data))
+try:
+    beps_data = read_excel(io=input_path, sheet_name='beps')
+except:
+    beps = None
+    species_with_beps = species.copy()
+else:
+    beps = []
+    for bep_data in beps_data:
+        beps.append(BEP(**bep_data))
 
-# Combine species and BEPs to make reactions
-species_with_beps = species + beps
+    # Combine species and BEPs to make reactions
+    species_with_beps = species + beps
 
 
 # ### Read reactions
@@ -189,51 +204,59 @@ from pmutt.omkm.reaction import SurfaceReaction
 
 # Convert species to dictionary for easier reaction assignment
 species_with_beps_dict = pmutt_list_to_dict(species_with_beps)
-reactions_data = read_excel(io=input_path, sheet_name='reactions')
-reactions = []
-# Store information about phases for later retrieval
-reaction_phases = {}
-for reaction_data in reactions_data:
-    reaction = SurfaceReaction.from_string(species=species_with_beps_dict,
-                                           **reaction_data)
-    reactions.append(reaction)
-    # Assign phase information
-    reaction_species = reaction.get_species(include_TS=True)
-    for ind_species in reaction_species:
-        try:
-            phase = species_with_beps_dict[ind_species].phase
-        except AttributeError:
-            pass
-        # Assign if key already exists
-        if phase in reaction_phases:
-            if reaction not in reaction_phases[phase]:
-                reaction_phases[phase].append(reaction)
-        else:
-            reaction_phases[phase] = [reaction]
+try:
+    reactions_data = read_excel(io=input_path, sheet_name='reactions')
+except:
+    reactions = None
+else:
+    reactions = []
+    # Store information about phases for later retrieval
+    reaction_phases = {}
+    for reaction_data in reactions_data:
+        reaction = SurfaceReaction.from_string(species=species_with_beps_dict,
+                                               **reaction_data)
+        reactions.append(reaction)
+        # Assign phase information
+        reaction_species = reaction.get_species(include_TS=True)
+        for ind_species in reaction_species.values():
+            try:
+                phase = ind_species.phase
+            except AttributeError:
+                pass
+            # Assign if key already exists
+            if phase in reaction_phases:
+                if reaction not in reaction_phases[phase]:
+                    reaction_phases[phase].append(reaction)
+            else:
+                reaction_phases[phase] = [reaction]
 
 
-# ### Read lateral interactions
+# ### Read lateral interactions (optional)
 
 # In[15]:
 
 
 from pmutt.mixture.cov import PiecewiseCovEffect
 
-interactions = []
-interactions_data = read_excel(io=input_path, sheet_name='lateral_interactions')
-interaction_phases = {}
-for interaction_data in interactions_data:
-    interaction = PiecewiseCovEffect(**interaction_data)
-    interactions.append(interaction)
+try:
+    interactions_data = read_excel(io=input_path, sheet_name='lateral_interactions')
+except:
+    interactions = None
+else:
+    interactions = []
+    interaction_phases = {}
+    for interaction_data in interactions_data:
+        interaction = PiecewiseCovEffect(**interaction_data)
+        interactions.append(interaction)
 
-    # Assign phase information
-    phase = species_with_beps_dict[interaction.name_i].phase
-    # Assign if key already exists
-    if phase in interaction_phases:
-        if interaction not in interaction_phases[phase]:
-            interaction_phases[phase].append(interaction)
-    else:
-        interaction_phases[phase] = [interaction]
+        # Assign phase information
+        phase = species_with_beps_dict[interaction.name_i].phase
+        # Assign if key already exists
+        if phase in interaction_phases:
+            if interaction not in interaction_phases[phase]:
+                interaction_phases[phase].append(interaction)
+        else:
+            interaction_phases[phase] = [interaction]
 
 
 # ### Reading Phases
@@ -243,24 +266,60 @@ for interaction_data in interactions_data:
 
 from pmutt.omkm.phase import IdealGas, InteractingInterface, StoichSolid
 
-phases_data = read_excel(io=input_path, sheet_name='phases')
-phases = []
-for phase_data in phases_data:
-    # Pre-processing relevant data
-    phase_name = phase_data['name']
-    phase_type = phase_data.pop('phase_type')
-    phase_data['species'] = species_phases[phase_name]
+try:
+    phases_data = read_excel(io=input_path, sheet_name='phases')
+except:
+    phases = None
+else:
+    phases = []
+    # Group data related to previously collected data
+    additional_fields = {'species': species_phases,
+                         'reactions': reaction_phases,
+                         'interactions': interaction_phases}
+    for phase_data in phases_data:
+        # Pre-processing relevant data
+        phase_name = phase_data['name']
+        phase_type = phase_data.pop('phase_type')
 
-    # Create the appropriate object
-    if phase_type == 'IdealGas':
-        phase = IdealGas(**phase_data)
-    elif phase_type == 'StoichSolid':
-        phase = StoichSolid(**phase_data)
-    elif phase_type == 'InteractingInterface':
-        phase_data['reactions'] = reaction_phases[phase_name]
-        phase_data['interactions'] = interaction_phases[phase_name]
-        phase = InteractingInterface(**phase_data)
-    phases.append(phase)
+        # Add additional fields to phase data if present
+        for field, phase_dict in additional_fields.items():
+            try:
+                phase_data[field] = phase_dict[phase_name]
+            except (NameError, KeyError):
+                pass
+
+        # Create the appropriate object
+        if phase_type == 'IdealGas':
+            # Special rule where reactions are only in the gas phase if
+            # all species belong to the gas phase
+            del_indices = []
+            for i, reaction in enumerate(phase_data['reactions']):
+                # Reaction will be deleted if any of the species are a different phase
+                valid_rxn = True
+                for ind_species in reaction.get_species(include_TS=False).values():
+                    try:
+                        ind_species_phase = ind_species.phase
+                    except AttributeError:
+                        valid_rxn = False
+                    else:
+                        if ind_species_phase != phase_name:
+                            valid_rxn = False
+                    # Record reaction index if not valid
+                    if not valid_rxn:
+                        del_indices.append(i)
+                        break
+            # Delete reactions that do not qualify
+            if len(del_indices) == len(phase_data['reactions']):
+                phase_data.pop('reactions')
+            else:
+                for del_i in sorted(del_indices, reverse=True):
+                    del phase_data['reactions'][del_i]
+            phase = IdealGas(**phase_data)
+        elif phase_type == 'StoichSolid':
+            phase = StoichSolid(**phase_data)
+        elif phase_type == 'InteractingInterface':
+            phase = InteractingInterface(**phase_data)
+        phases.append(phase)
 
 
 # ## Write CTI File

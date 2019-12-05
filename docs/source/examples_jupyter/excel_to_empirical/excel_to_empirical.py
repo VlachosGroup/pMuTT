@@ -33,10 +33,19 @@
 # In[1]:
 
 
+import os
+from pathlib import Path
+
 from pprint import pprint
 from pmutt.io.excel import read_excel
 
-species_data = read_excel(io='input.xlsx')
+try:
+    notebook_path = os.path.dirname(__file__)
+except NameError:
+    notebook_path = Path().resolve()
+
+print(os.getcwd())
+species_data = read_excel(io='./test/input.xlsx')
 pprint(species_data)
 
 
@@ -76,7 +85,7 @@ print(refs.offset)
 # The ``References`` object calculated the offset between C, H, and O.
 
 # ## Initialize the Nasa objects
-# The ``from_statmech`` method allows us to initialize the Nasa objects from the data.
+# The ``from_model`` method allows us to initialize the Nasa objects from the data.
 
 # In[4]:
 
@@ -86,8 +95,8 @@ from pmutt.empirical.nasa import Nasa
 T_low = 300. # K
 T_high = 1100. # K
 
-species = [Nasa.from_statmech(references=refs, T_low=T_low, T_high=T_high, 
-                              **specie_data) for specie_data in species_data]
+species = [Nasa.from_model(references=refs, T_low=T_low, T_high=T_high, 
+                           **specie_data) for specie_data in species_data]
 # Printing an example of a Nasa species
 print(species[0])
 
@@ -99,43 +108,13 @@ print(species[0])
 
 from pmutt.io.thermdat import write_thermdat
 
-write_thermdat(nasa_species=species, filename='thermdat',
-               write_date=True)
+# Writing thermdat to a file
+write_thermdat(nasa_species=species, filename='thermdat', write_date=True)
 
+# The thermdat contents can also be returned as a string by omitting filename
+thermdat_str = write_thermdat(nasa_species=species, write_date=True)
+print(thermdat_str)
 
-# ```
-# THERMO ALL
-#        100       500      1500
-# H2_cus(S)       20181106H   2               S300.0     1100.0    610.2         1
-# -1.32355622E-01 1.17210568E-02-1.21067695E-05 6.77414609E-09-1.56703390E-12    2
-# -1.96714519E+03-1.13778416E+00-2.37252750E+00 2.60714871E-02-4.73583826E-05    3
-#  4.61096590E-08-1.83624246E-11-1.68126562E+03 8.63949434E+00                   4
-# H2Obr(S)        20181106H   2O   1          S300.0     1100.0    561.2         1
-#  3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
-# -3.65073462E+04-1.59589792E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
-#  8.80731362E-08-4.17597362E-11-3.61771342E+04-3.41520582E+00                   4
-# H2Ocus(S)       20181106H   2O   1          S300.0     1100.0    561.2         1
-#  3.33914632E+00 8.65676156E-03-1.03441245E-05 7.11690970E-09-1.91112739E-12    2
-# -4.35526918E+04-1.59589792E+01 3.68293150E-01 3.06585581E-02-7.30019576E-05    3
-#  8.80731362E-08-4.17597362E-11-4.32224798E+04-3.41520582E+00                   4
-# H_cus(S)        20181106H   1               S300.0     1100.0    544.9         1
-# -4.56626289E-01 6.52756961E-03-5.72385869E-06 2.56064809E-09-4.74217654E-13    2
-# -8.86598312E+02 1.29145407E+00-1.70971795E+00 1.57880872E-02-3.17011214E-05    3
-#  3.53093929E-08-1.61102148E-11-7.49187896E+02 6.57564204E+00                   4
-# HObr(S)         20181106H   1O   1          S300.0     1100.0    610.2         1
-#  1.32317902E+00 1.07943705E-02-1.40435635E-05 9.13293283E-09-2.29632826E-12    2
-# -3.92614463E+04-7.89440118E+00-1.90464381E+00 3.13120166E-02-6.40095247E-05    3
-#  6.43701568E-08-2.56553082E-11-3.88467774E+04 6.21680636E+00                   4
-# Obr(S)          20181106O   1               S300.0     1100.0    561.2         1
-#  1.10929486E+00 6.02227730E-03-8.09582034E-06 5.13595359E-09-1.26396875E-12    2
-# -3.27394702E+04-6.27416658E+00-1.46028728E+00 2.43280424E-02-5.80735069E-05    3
-#  6.69898412E-08-3.04663321E-11-3.24443213E+04 4.66839332E+00                   4
-# IPA(S)          20181106C   3H   8O   1     S300.0     1100.0    544.9         1
-# -2.41027713E+00 6.03014873E-02-5.21384920E-05 2.61809899E-08-5.76980678E-12    2
-# -4.86845128E+04 1.14685801E+01 6.36065045E+00-8.82654398E-03 1.52433654E-04    3
-# -2.43446336E-07 1.27830717E-10-4.95747767E+04-2.48996210E+01                   4
-# END
-# ```
 
 # ## Checking the fit of the Nasa object
 # To see if the Nasa object's predictions of the thermodynamic data matches the statistical mechanical model inputted, use the ``plot_statmech_and_empirical`` method.

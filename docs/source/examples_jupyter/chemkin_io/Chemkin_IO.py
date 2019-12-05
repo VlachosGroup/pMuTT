@@ -26,7 +26,11 @@ from pathlib import Path
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
 # Using pathlib can overcome this limiation
-os.chdir(os.path.dirname(__file__))
+try:
+    notebook_path = os.path.dirname(__file__)
+except NameError:
+    notebook_path = Path().resolve()
+os.chdir(notebook_path)
 excel_path = './inputs/NH3_Input_Data.xlsx'
 
 
