@@ -78,6 +78,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
         - nasa.a_high (:func:`~pmutt.io.excel.set_nasa_a_high`)
         - vib_outcar (:func:`~pmutt.io.vasp.set_vib_wavenumbers_from_outcar`)
         - list.[variable name] (:func:`~pmutt.io.excel.set_list_value`)
+        - dict.[dict_name].[key] (:func:`~pmutt.io.excel.set_dict_value`)
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """

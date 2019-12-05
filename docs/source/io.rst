@@ -42,7 +42,11 @@ listed below.
 .. autofunction:: pmutt.io.excel.set_nasa_a_low
 
 .. autofunction:: pmutt.io.excel.set_nasa_a_high
-   
+
+.. autofunction:: pmutt.io.excel.set_list_value
+
+.. autofunction:: pmutt.io.excel.set_dict_value
+
 Examples
 --------
 
