@@ -50,10 +50,6 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
             are read from OUTCAR. Default is 0 cm-1
         include_imaginary: bool, optional
             Whether imaginary frequencies should be included. Default is False.
-    Returns
-    -------
-        output_structure: dict
-            Output_structure with new vibration added
     Raises
     ------
         FileNotFoundError
@@ -91,4 +87,3 @@ def set_vib_wavenumbers_from_outcar(in_file, output_structure,
     if len(vib_wavenumbers) == 0:
         print('no frequencies found in file')
     output_structure['vib_wavenumbers'] = vib_wavenumbers
-    return output_structure

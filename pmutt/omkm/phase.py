@@ -153,8 +153,7 @@ class InteractingInterface(phase_cantera.Phase):
                                                  delimiter=delimiter)))
 
         # Add optional fields
-        optional_fields = ('beps', 'transport', 'options', 'note',
-                           'initial_state')
+        optional_fields = ('beps', 'transport', 'options', 'note')
         for field in optional_fields:
             val = getattr(self, field)
             # Skip empty fields

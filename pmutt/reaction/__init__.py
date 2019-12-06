@@ -75,7 +75,7 @@ class Reaction(_pmuttBase):
     @reactants.setter
     def reactants(self, val):
         val = _check_iterable_attr(val)
-        self._reactants =val
+        self._reactants = val
 
     @property
     def reactants_stoich(self):
@@ -84,7 +84,7 @@ class Reaction(_pmuttBase):
     @reactants_stoich.setter
     def reactants_stoich(self, val):
         val = _check_iterable_attr(val)
-        self._reactants_stoich =val
+        self._reactants_stoich = val
 
     @property
     def products(self):
@@ -93,7 +93,7 @@ class Reaction(_pmuttBase):
     @products.setter
     def products(self, val):
         val = _check_iterable_attr(val)
-        self._products =val
+        self._products = val
 
     @property
     def products_stoich(self):
@@ -102,7 +102,7 @@ class Reaction(_pmuttBase):
     @products_stoich.setter
     def products_stoich(self, val):
         val = _check_iterable_attr(val)
-        self._products_stoich =val
+        self._products_stoich = val
 
     @property
     def transition_state(self):
@@ -111,7 +111,7 @@ class Reaction(_pmuttBase):
     @transition_state.setter
     def transition_state(self, val):
         val = _check_iterable_attr(val)
-        self._transition_state =val
+        self._transition_state = val
 
     @property
     def transition_state_stoich(self):
@@ -120,7 +120,7 @@ class Reaction(_pmuttBase):
     @transition_state_stoich.setter
     def transition_state_stoich(self, val):
         val = _check_iterable_attr(val)
-        self._transition_state_stoich =val
+        self._transition_state_stoich = val
 
     def __str__(self):
         return self.to_string()

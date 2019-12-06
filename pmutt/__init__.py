@@ -10,7 +10,7 @@ pmutt
 # present, too:
 #
 name = 'pmutt'
-__version__ = '1.2.14'
+__version__ = '1.2.15'
 
 import inspect
 import itertools
@@ -28,9 +28,9 @@ from pmutt.io.json import remove_class
 class _pmuttBase:
     """Generic parent class to all pmutt objects. Functionality:
 
-    - `__eq__` method that compares `to_dict` outputs
-    - `to_dict` method that converts object to dictionary format
-    - `from_dict` method that creates the object from a dictionary"""
+    - ``__eq__`` method that compares ``to_dict`` outputs
+    - ``to_dict`` method that converts object to dictionary format
+    - ``from_dict`` method that creates the object from a dictionary"""
 
     def __init__(self):
         pass
@@ -73,9 +73,10 @@ class _pmuttBase:
 class _ModelBase(_pmuttBase):
     """Generic parent class to all model type objects. Functionality:
     
-    - Methods that return the dimensional thermodynamic quantity (e.g. `get_H`)
-    - Methods to calculate Helmholtz energy and Gibbs energy (i.e. `get_FoRT`,
-      `get_F`, `get_GoRT`, `get_G`)
+    - Methods that return the dimensional thermodynamic quantity
+      (e.g. ``get_H``)
+    - Methods to calculate Helmholtz energy and Gibbs energy (i.e. ``get_FoRT``,
+      ``get_F``, ``get_GoRT``, ``get_G``)
       
     Inherits from :class:`~pmutt._pmuttBase`"""
 
@@ -263,6 +264,7 @@ class _ModelBase(_pmuttBase):
         GoRT_kwargs['T'] = T
         return _force_pass_arguments(self.get_GoRT, **GoRT_kwargs)*T*R_adj
 
+
 def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
             viewer='matplotlib', figure=None, ax=None, **kwargs):
     """Make a 1D plot
@@ -445,7 +447,7 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
 
 def _get_expected_arguments(fn):
     """Returns the arguments expected by a function. Useful for determining
-    where to assign **kwargs parameters.
+    where to assign ``**kwargs`` parameters.
 
     Parameters
     ----------
@@ -455,7 +457,7 @@ def _get_expected_arguments(fn):
     -------
         expected_arguments : tuple of str
             Expected arguments. If a class is specified, returns the
-            expected arguments of __init__
+            expected arguments of ``__init__``
     """
 
     # If class passed, use __init__ to find expected arguments
@@ -466,7 +468,6 @@ def _get_expected_arguments(fn):
     arg_count = fn_code.co_argcount
     args = fn_code.co_varnames[:arg_count]
     return args
-
 
 def _pass_expected_arguments(fn, **kwargs):
     """Finds expected values from a function or class and passes the
@@ -479,11 +480,11 @@ def _pass_expected_arguments(fn, **kwargs):
         verbose : bool, Optional
             If True, warns when an argument could not be found. Default is True
         **kwargs :
-            Keyword arguments that contain parameters to pass to fn
+            Keyword arguments that contain parameters to pass to ``fn``
     Returns
     -------
         fn_or_class_output :
-        Output of fn that has been fed the expected arguments.
+        Output of ``fn`` that has been fed the expected arguments.
     """
     expected_args = _get_expected_arguments(fn)
     expected_arg_val = {}
@@ -496,7 +497,6 @@ def _pass_expected_arguments(fn, **kwargs):
         except KeyError:
             continue
     return fn(**expected_arg_val)
-
 
 def _kwargs_allowed(fn):
     """Checks to see if kwargs is allowed
@@ -516,7 +516,6 @@ def _kwargs_allowed(fn):
             return True
     else:
         return False
-
 
 def _force_pass_arguments(fn, **kwargs):
     """Checks to see if fn accepts kwargs. If it does, pass arguments using
@@ -539,7 +538,6 @@ def _force_pass_arguments(fn, **kwargs):
         return fn(**kwargs)
     else:
         return _pass_expected_arguments(fn, **kwargs)
-
 
 def _is_iterable(val):
     """
@@ -565,7 +563,6 @@ def _is_iterable(val):
             return False
         else:
             return True
-
 
 def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
                        default_value=0., **kwargs):
@@ -610,7 +607,6 @@ def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
         quantity = _pass_expected_arguments(method, **kwargs)
     return quantity
 
-
 def _get_specie_kwargs(specie_name, **kwargs):
     """Gets the keyword arguments specific to a specie
 
@@ -649,7 +645,6 @@ def _get_specie_kwargs(specie_name, **kwargs):
     except (KeyError, TypeError, NameError):
         pass
     return specie_kwargs
-
 
 def _apply_numpy_operation(quantity, operation, verbose=False):
     """Apply operation to quantity
@@ -695,7 +690,6 @@ def parse_formula(formula):
         elements[element] = elements.get(element, 0) + int(coefficient or '1')
     return elements
 
-
 def get_molecular_weight(elements):
     """Molecular mass (in g/mol) given the elemental composition.
     Data taken from: https://en.wikipedia.org/wiki/Standard_atomic_weight
@@ -724,7 +718,6 @@ def get_molecular_weight(elements):
         molecular_weight += c.atomic_weight[element] * coefficient
 
     return molecular_weight
-
 
 def pmutt_list_to_dict(pmutt_list, key='name'):
     """Converts a pmutt list to a dictionary using a specified attribute. This
@@ -794,14 +787,14 @@ def _get_mass_unit(units):
                 return unit
     return None
 
-def _get_R_adj(units, elements):
+def _get_R_adj(units, elements=None):
     """Get adjustment to mass when converting from mol to g
     
     Parameters
     ----------
         units : str
             Units as string. Units are delimited by '/'
-        elements : dict
+        elements : dict, optional
             Composition of the species. Default is None.
             Keys of dictionary are elements, values are stoichiometric values
             in a formula unit.
@@ -852,20 +845,20 @@ def _check_obj(obj, **kwargs):
     return obj_out
 
 def _check_iterable_attr(obj):
-        """Helper method to assign object to a list if only one non-iterable
-        element specified.
+    """Helper method to assign object to a list if only one non-iterable
+    element specified.
 
-        Parameters
-        ----------
-            obj : list or non-iterable object
-                Object to check
-        Returns
-        -------
-            obj_out : list or None
-                If ``obj`` is None, returns None. Otherwise, returns ``obj``
-                as a list
-        """
-        if not _is_iterable(obj) and obj is not None:
-            return [obj]
-        else:
-            return obj
+    Parameters
+    ----------
+        obj : list or non-iterable object
+            Object to check
+    Returns
+    -------
+        obj_out : list or None
+            If ``obj`` is None, returns None. Otherwise, returns ``obj``
+            as a list
+    """
+    if not _is_iterable(obj) and obj is not None:
+        return [obj]
+    else:
+        return obj

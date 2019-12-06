@@ -1,6 +1,7 @@
 import more_itertools as mit
 
 from pmutt import constants as c
+from pmutt.cantera import _get_range_CTI
 from pmutt.io.cantera import obj_to_CTI
 
 class Phase:
@@ -10,10 +11,25 @@ class Phase:
     ----------
         name : str
             Name of the phase
-        species : list of :class:`~pmutt._ModelBase` objects
-            Species present in Phase
+        species : list of :class:`~pmutt._ModelBase` objects, optional
+            Species present in Phase. Default is an empty list
+        initial_state : dict, optional
+            Dictionary of initial mole fractions. Default is None
+        kinetics : Kinetics object, optional
+            Kinetics model to use for phase. Default is None
+        transport : Transport object, optional
+            Transport model to use for transport. Default is None
+        reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction`, optional
+            Reactions associated with phase. Default is None
+        options : dict, optional
+            Additional options. Default is None
+        note : str, optional
+            Note about the phase. Default is None.
+        elements : set
+            Not supplied during initialization. Attribute derived from
+            ``species`` attribute.        
     """
-    def __init__(self, name, species=[], initial_state=None, kinetics=None,
+    def __init__(self, name, species=None, initial_state=None, kinetics=None,
                  transport=None, reactions=None, options=None, note=None):
         self.name = name
         self.species = species
@@ -41,8 +57,11 @@ class Phase:
 
     @species.setter
     def species(self, val):
-        for i in range(len(val)):
-            val[i].phase = self
+        if val is None:
+            val = []
+        else:
+            for i in range(len(val)):
+                val[i].phase = self
         self._species = val
 
     def append_species(self, val):
@@ -104,13 +123,16 @@ class IdealGas(Phase):
                          transport=transport, options=options, note=note,
                          reactions=reactions, initial_state=initial_state)
 
-    def to_CTI(self, max_line_len=80):
+    def to_CTI(self, max_line_len=80, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters
         ----------
             max_line_len : int, optional
                 Maximum number of characters in the line. Default is 80.
+            delimiter : str, optional
+                Delimiter to use when specifying ranges for reactions. Default
+                is '_'.
         Returns
         -------
             CTI_str : str
@@ -127,9 +149,21 @@ class IdealGas(Phase):
                                   max_line_len=max_line_len),
                        obj_to_CTI(species_names, line_len=max_line_len-18,
                                   max_line_len=max_line_len)))
+
+        # Fields with ranges
+        range_fields = ('reactions',)
+        for range_field in range_fields:
+            val = getattr(self, range_field)
+            # Skip empty fields
+            if val is None:
+                continue
+            cti_str += ('          {}={},\n'
+                        ''.format(range_field, 
+                                  _get_range_CTI(objs=val, parent_obj=self,
+                                                 delimiter=delimiter)))
+
         # Add optional fields
-        optional_fields = ('kinetics', 'transport', 'options', 'note',
-                           'reactions', 'initial_state')
+        optional_fields = ('kinetics', 'transport', 'options', 'note')
         for field in optional_fields:
             val = getattr(self, field)
             # Skip empty fields
@@ -169,9 +203,9 @@ class StoichSolid(Phase):
             Comment field for users. Default is None.
     """
     def __init__(self, name, species=[], initial_state=None, transport=None,
-                 options=None, density=None, note=None):
+                 reactions=None, options=None, density=None, note=None):
         super().__init__(name=name, species=species, transport=transport,
-                         options=options, note=note,
+                         options=options, note=note, reactions=reactions,
                          initial_state=initial_state)
         self.density = density
 

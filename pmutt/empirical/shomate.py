@@ -10,7 +10,6 @@ from warnings import warn
 
 import numpy as np
 from scipy.optimize import curve_fit
-from scipy.stats import variation
 
 from pmutt import _get_R_adj, _is_iterable
 from pmutt import constants as c
@@ -610,8 +609,7 @@ def _fit_CpoR(T, CpoR, units):
     """
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
-    if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
-       or np.isclose(variation(CpoR), 0.) \
+    if all([np.isclose(x, 0.) for x in CpoR]) \
        or any([np.isnan(x) for x in CpoR]):
         return np.zeros(7)
     else:

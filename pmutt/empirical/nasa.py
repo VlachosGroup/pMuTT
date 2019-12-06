@@ -11,7 +11,6 @@ from warnings import warn
 
 import numpy as np
 from scipy.optimize import Bounds, LinearConstraint, minimize, minimize_scalar
-from scipy.stats import variation
 
 from pmutt import (_apply_numpy_operation, _get_R_adj, _is_iterable,
                    _pass_expected_arguments)
@@ -1425,8 +1424,7 @@ def _fit_CpoR(T, CpoR, T_mid=None):
     """
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
-    if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
-       or np.isclose(variation(CpoR), 0.) \
+    if all([np.isclose(x, 0.) for x in CpoR]) \
        or any([np.isnan(x) for x in CpoR]):
         T_mid = T[int(len(T)/2)]
         a_low = np.zeros(7)
@@ -1795,10 +1793,9 @@ def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
     """
     # If the Cp/R does not vary with temperature (occurs when no
     # vibrational frequencies are listed), return default values
-    if (np.isclose(np.mean(CpoR), 0.) and np.isnan(variation(CpoR))) \
-       or np.isclose(variation(CpoR), 0.) \
+    if all([np.isclose(x, 0.) for x in CpoR]) \
        or any([np.isnan(x) for x in CpoR]):
-       return [np.zeros(9)]*(len(T_mid)+1)
+        return [np.zeros(9)]*(len(T_mid)+1)
 
     a = []
     T_interval = np.concatenate([[T_low], T_mid, [T_high]])
