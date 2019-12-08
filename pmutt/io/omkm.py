@@ -29,7 +29,7 @@ _Param = namedtuple('_Param', 'label val units')
 
 def write_cti(phases=None, species=None, reactions=None,
               lateral_interactions=None, units=None, filename=None,
-              T=300., P=1., newline='\n', use_motz_wise=False):
+              T=300., P=1., newline='\n', use_motz_wise=False, write_xml=True):
     """Writes the units, phases, species, lateral interactions, reactions and 
     additional options in the CTI format for OpenMKM
     
@@ -46,18 +46,21 @@ def write_cti(phases=None, species=None, reactions=None,
         units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
             Units to write file. If a dict is inputted, the key is the quantity
             and the value is the unit. If not specified, uses the default units
-            of :class:`~pmutt.omkm.units.Unit`
+            of :class:`~pmutt.omkm.units.Unit`.
         filename: str, optional
             Filename for the input.cti file. If not specified, returns file
-            as str
+            as str.
         T : float, optional
             Temperature in K. Default is 300 K.
         P : float, optional
             Pressure in atm. Default is 1 atm.
+        write_xml : bool, optional
+            If True and ``filename`` is not ``None``, automatically generates
+            an XML file with the CTI file.
     Returns
     -------
         lines_out : str
-            If ``filename`` is None, CTI file is returned
+            If ``filename`` is None, CTI file is returned.
     """
     lines = [_get_file_timestamp(comment_char='# '),
              '# See documentation for OpenMKM CTI file here:',
@@ -160,8 +163,9 @@ def write_cti(phases=None, species=None, reactions=None,
             f_ptr.write(lines_out)
 
         '''Write XML file'''
-        xml_filename = '{}.xml'.format(filename.replace('.cti', ''))
-        convert(filename=filename, outName=xml_filename)
+        if write_xml:
+            xml_filename = '{}.xml'.format(filename.replace('.cti', ''))
+            convert(filename=filename, outName=xml_filename)
     else:
         # Or return as string
         return lines_out

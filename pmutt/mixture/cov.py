@@ -188,13 +188,11 @@ class PiecewiseCovEffect(_ModelBase):
         """
         if units is not None:
             energy_unit = units.energy
-        lat_inter_str = 'lateral_interaction("{} {}", {}, {}, id="{}")'.format(
-                self.name_i,
-                self.name_j,
-                c.convert_unit(num=np.array(self.slopes), initial='kcal/mol',
-                               final=energy_unit),
-                self.intervals,
-                self.name)
+        slopes = [c.convert_unit(slope, initial='kcal/mol', final=energy_unit) \
+                  for slope in self.slopes]
+        lat_inter_str = ('lateral_interaction("{} {}", {}, {}, id="{}")'
+                         ''.format(self.name_i, self.name_j, slopes,
+                                   self.intervals, self.name))
         return lat_inter_str
 
     def to_dict(self):

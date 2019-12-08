@@ -74,7 +74,7 @@ class InteractingInterface(phase_cantera.Phase):
                 if bep is None:
                     continue 
                 # Skip if this is not a unique BEP
-                if bep in beps:
+                if bep.name in beps:
                     continue
                 # Append if this is a valid BEP
                 beps.append(bep.name)
