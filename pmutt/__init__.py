@@ -293,7 +293,7 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
         kwargs : keyword arguments
             Other variables to use in the calculation. Method specific
             arguments can be passed by having a key that corresponds to
-            the method name        
+            the method name
             ::
                 e.g. kwargs = {'get_H_kwargs': {'units': 'kcal/mol'},
                                'get_S_kwargs': {'units': 'cal/mol/K'}}

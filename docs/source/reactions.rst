@@ -128,6 +128,7 @@ attributes for reading and writting Chemkin files.
 
 .. autoclass:: pmutt.reaction.ChemkinReaction
    :members:
+   :noindex:
 
 Reactions
 =========
