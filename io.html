@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input and Output &mdash; pmutt 1.2.15 documentation</title>
+  <title>Input and Output &mdash; pmutt 1.2.16 documentation</title>
   
 
   
@@ -129,8 +129,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#vasp">VASP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pmutt.io.gaussian">Gaussian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pmutt.io.chemkin">Chemkin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-pmutt.io.omkm">OpenMKM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chemkin">Chemkin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openmkm">OpenMKM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
@@ -211,26 +211,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="input-and-output">
+  <div class="section" id="input-and-output">
 <span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
 <p>Input and output to different forms is an active area of development for pmutt</p>
 <div class="section" id="excel">
@@ -707,15 +688,15 @@ the interested species.</p>
 The dictionaries contain field-to-value pairings that can be used to initilize
 objects using the keyword argument syntax (**kwargs). This is shown in code
 below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
 
 <span class="n">refs_path</span> <span class="o">=</span> <span class="s1">&#39;./references.xlsx&#39;</span>
 <span class="n">refs_input</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">refs_path</span><span class="p">)</span>
 <span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">([</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_input</span> <span class="ow">in</span> <span class="n">refs_input</span><span class="p">])</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reference Input:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference Input:&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">refs_input</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -903,8 +884,8 @@ can be directly imported using <a class="reference internal" href="#pmutt.io.exc
 </tbody>
 </table>
 <p>Using a similar set of statements as the <a class="reference internal" href="#dft-input-example"><span class="std std-ref">DFT Input Example</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;input_data.xlsx&#39;</span><span class="p">)</span>
 <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nasa</span><span class="p">(</span><span class="o">**</span><span class="n">specie_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">specie_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">]</span>
@@ -1018,22 +999,22 @@ first 8 characters of <code class="docutils literal notranslate"><span class="pr
 <p>A thermdat file can be read directly by using
 <a class="reference internal" href="#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a>. See the <a class="reference internal" href="examples.html#overview-example"><span class="std std-ref">Overview</span></a> of
 how its done.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
 
 <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="c1">#Thermdat file from http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat</span>
-<span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;{}/thermdat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_path</span><span class="p">))</span>
+<span class="n">species</span> <span class="o">=</span> <span class="n">read_thermdat</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/thermdat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_path</span><span class="p">))</span>
 
 <span class="c1">#Printing information related to each specie</span>
 <span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Name: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">specie</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">specie</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">specie</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">{}</span><span class="se">\t</span><span class="s1">{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
 
 <span class="c1">#Plot an example of an imported NASA polynomial</span>
 <span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_empirical</span><span class="p">()</span>
@@ -1064,14 +1045,14 @@ how its done.</p>
 </div>
 <div class="section" id="yaml">
 <h2>YAML<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id9"><span class="problematic" id="id10">`YAML Ain't Markup Language (YAML)`_</span></a> is a human friendly data serialization
+<p><a class="reference external" href="https://yaml.org/">YAML Ain’t Markup Language (YAML)</a> is a human friendly data serialization
 standard for all programming languages. All pmutt objects are natively supported
 by YAML.</p>
 <div class="section" id="id7">
 <h3>Examples<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>Saving pmutt objects can be done by using
 <a class="reference internal" href="#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmuttEncoder()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">)</span>
@@ -1079,7 +1060,7 @@ by YAML.</p>
 </div>
 <p>Loading pmutt objects can be done by using the object hook:
 <a class="reference internal" href="#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">pmutt_obj</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">)</span>
@@ -1218,17 +1199,17 @@ pmutt object</p>
 <h3>Examples<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>Saving pmutt objects can be done by using
 <a class="reference internal" href="#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmuttEncoder()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">pmuttEncoder</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="k">import</span> <span class="n">pmuttEncoder</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Loading pmutt objects can be done by using the object hook:
 <a class="reference internal" href="#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">json_to_pmutt</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="k">import</span> <span class="n">json_to_pmutt</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
     <span class="n">pmutt_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pmutt</span><span class="p">)</span>
@@ -1282,7 +1263,7 @@ dictionary should be <code class="docutils literal notranslate"><span class="pre
 later. The other elements should be the attributes that can be used to
 reinitialize the object and must be JSON-supported objects. A simple example
 using <a class="reference internal" href="statmech.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a> is shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;n_degrees&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_degrees</span><span class="p">,</span>
             <span class="s1">&#39;molecular_weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">}</span>
@@ -1291,7 +1272,7 @@ using <a class="reference internal" href="statmech.html#pmutt.statmech.trans.Fre
 <p>If the attributes are not supported by JSON (such as other pmutt objects), use
 their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported objects. An example
 using <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
             <span class="s1">&#39;trans_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
             <span class="s1">&#39;vib_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vib_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
@@ -1309,7 +1290,7 @@ The key should be the type of your object in string format (i.e. the result of
 <code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class
 method to reinitialize your object. A simple example using
 <a class="reference internal" href="statmech.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a> is shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">remove_class</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="k">import</span> <span class="n">remove_class</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1320,7 +1301,7 @@ method to reinitialize your object. A simple example using
 <p>Similarly to encoding, sometimes your object contains pmutt objects. You can
 use the <code class="docutils literal notranslate"><span class="pre">json_to_pmutt</span></code> object hook to remake these objects. An example using
 <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io</span> <span class="kn">import</span> <span class="n">json</span> <span class="k">as</span> <span class="n">json_pmutt</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io</span> <span class="k">import</span> <span class="n">json</span> <span class="k">as</span> <span class="n">json_pmutt</span>
 
 <span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
@@ -1541,13 +1522,13 @@ whole file. Default is True</li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pmutt.io.chemkin">
-<span id="chemkin"></span><h2>Chemkin<a class="headerlink" href="#module-pmutt.io.chemkin" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chemkin">
+<h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this headline">¶</a></h2>
 <p>pmutt.io.chemkin</p>
 <p>Reads reactions lists from Chemkin gas.inp and surf.inp files</p>
 <dl class="function">
-<dt id="pmutt.io.chemkin.read_reactions">
-<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">read_reactions</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em><span class="sig-paren">)</span></dt>
 <dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1585,15 +1566,15 @@ default = None. Will not return React_obj and Prod_obj</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pmutt.io.chemkin.write_EA">
-<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_EA</code><span class="sig-paren">(</span><em>reactions</em>, <em>conditions</em>, <em>write_gas_phase=False</em>, <em>filename=None</em>, <em>act_method_name='get_EoRT_act'</em>, <em>float_format=' .2E'</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='&lt;=&gt;'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_EA</code><span class="sig-paren">(</span><em>reactions</em>, <em>conditions</em>, <em>write_gas_phase=False</em>, <em>filename=None</em>, <em>act_method_name='get_EoRT_act'</em>, <em>float_format=' .2E'</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='&lt;=&gt;'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the EAs.inp or EAg.inp file for Chemkin</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -1628,8 +1609,8 @@ positive)</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pmutt.io.chemkin.write_T_flow">
-<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_T_flow</code><span class="sig-paren">(</span><em>T=None</em>, <em>P=None</em>, <em>Q=None</em>, <em>abyv=None</em>, <em>conditions=None</em>, <em>filename=None</em>, <em>float_format='.3E'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_T_flow" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_T_flow</code><span class="sig-paren">(</span><em>T=None</em>, <em>P=None</em>, <em>Q=None</em>, <em>abyv=None</em>, <em>conditions=None</em>, <em>filename=None</em>, <em>float_format='.3E'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the T_flow.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1659,8 +1640,8 @@ scientific notation rounded to 3 decimal places)</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pmutt.io.chemkin.write_gas">
-<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_gas</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>filename=None</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_gas" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_gas</code><span class="sig-paren">(</span><em>nasa_species</em>, <em>filename=None</em>, <em>T=298.15</em>, <em>reactions=[]</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the gas.inp Chemkin file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1687,15 +1668,15 @@ be written to this file</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pmutt.io.chemkin.write_surf">
-<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>reactions</em>, <em>sden_operation='min'</em>, <em>filename=None</em>, <em>T=298.15</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_surf" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_surf</code><span class="sig-paren">(</span><em>reactions</em>, <em>sden_operation='min'</em>, <em>filename=None</em>, <em>T=298.15</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>act_method_name='get_E_act'</em>, <em>act_unit='kcal/mol'</em>, <em>float_format=' .3E'</em>, <em>stoich_format='.0f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em>, <em>use_mw_correction=True</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the surf.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="kinetic_models.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. If not specified, returns file as str</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
@@ -1728,8 +1709,8 @@ factor</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pmutt.io.chemkin.write_tube_mole">
-<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_tube_mole</code><span class="sig-paren">(</span><em>mole_frac_conditions</em>, <em>nasa_species</em>, <em>filename=None</em>, <em>float_format=' .3f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_tube_mole" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.chemkin.</code><code class="descname">write_tube_mole</code><span class="sig-paren">(</span><em>mole_frac_conditions</em>, <em>nasa_species</em>, <em>filename=None</em>, <em>float_format=' .3f'</em>, <em>newline='\n'</em>, <em>column_delimiter='  '</em><span class="sig-paren">)</span></dt>
 <dd><p>Write tube_mole.inp Chemkin file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1758,11 +1739,11 @@ scientific notation rounded to 3 decimal places)</li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pmutt.io.omkm">
-<span id="openmkm"></span><h2>OpenMKM<a class="headerlink" href="#module-pmutt.io.omkm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="openmkm">
+<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="pmutt.io.omkm.write_cti">
-<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_cti</code><span class="sig-paren">(</span><em>phases=None</em>, <em>species=None</em>, <em>reactions=None</em>, <em>lateral_interactions=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>T=300.0</em>, <em>P=1.0</em>, <em>newline='\n'</em>, <em>use_motz_wise=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_cti" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_cti</code><span class="sig-paren">(</span><em>phases=None</em>, <em>species=None</em>, <em>reactions=None</em>, <em>lateral_interactions=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>T=300.0</em>, <em>P=1.0</em>, <em>newline='\n'</em>, <em>use_motz_wise=False</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the units, phases, species, lateral interactions, reactions and
 additional options in the CTI format for OpenMKM</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1795,8 +1776,8 @@ as str</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="pmutt.io.omkm.write_yaml">
-<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_yaml</code><span class="sig-paren">(</span><em>reactor_type=None</em>, <em>mode=None</em>, <em>V=None</em>, <em>T=None</em>, <em>P=None</em>, <em>A=None</em>, <em>L=None</em>, <em>cat_abyv=None</em>, <em>flow_rate=None</em>, <em>residence_time=None</em>, <em>mass_flow_rate=None</em>, <em>end_time=None</em>, <em>transient=None</em>, <em>stepping=None</em>, <em>init_step=None</em>, <em>step_size=None</em>, <em>atol=None</em>, <em>rtol=None</em>, <em>phases=None</em>, <em>reactor=None</em>, <em>inlet_gas=None</em>, <em>multi_T=None</em>, <em>multi_P=None</em>, <em>multi_flow_rate=None</em>, <em>output_format=None</em>, <em>solver=None</em>, <em>simulation=None</em>, <em>multi_input=None</em>, <em>misc=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>yaml_options={'default_flow_style': False</em>, <em>'indent': 4}</em>, <em>newline='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_yaml" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">pmutt.io.omkm.</code><code class="descname">write_yaml</code><span class="sig-paren">(</span><em>reactor_type=None</em>, <em>mode=None</em>, <em>V=None</em>, <em>T=None</em>, <em>P=None</em>, <em>A=None</em>, <em>L=None</em>, <em>cat_abyv=None</em>, <em>flow_rate=None</em>, <em>residence_time=None</em>, <em>mass_flow_rate=None</em>, <em>end_time=None</em>, <em>transient=None</em>, <em>stepping=None</em>, <em>init_step=None</em>, <em>step_size=None</em>, <em>atol=None</em>, <em>rtol=None</em>, <em>phases=None</em>, <em>reactor=None</em>, <em>inlet_gas=None</em>, <em>multi_T=None</em>, <em>multi_P=None</em>, <em>multi_flow_rate=None</em>, <em>output_format=None</em>, <em>solver=None</em>, <em>simulation=None</em>, <em>multi_input=None</em>, <em>misc=None</em>, <em>units=None</em>, <em>filename=None</em>, <em>yaml_options={'default_flow_style': False</em>, <em>'indent': 4}</em>, <em>newline='\n'</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the reactor options in a YAML file for OpenMKM.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

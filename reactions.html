@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reactions &mdash; pmutt 1.2.15 documentation</title>
+  <title>Reactions &mdash; pmutt 1.2.16 documentation</title>
   
 
   
@@ -187,26 +187,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="reactions">
+  <div class="section" id="reactions">
 <span id="id1"></span><h1>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="reaction">
 <h2>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h2>
@@ -321,7 +302,7 @@ specie mapping onto a dictionary whose keys are the parameters to pass.</p>
 <p>e.g. For the reaction: H2 + 0.5O2 = H2O, the pressures can be specified
 independently using the following dictionary. In this example arbitrary
 values were used so the quantity evaluated may be meaningless.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mf">298.</span><span class="p">,</span>
     <span class="s1">&#39;H2_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">2.</span><span class="p">},</span>
     <span class="s1">&#39;O2_kwargs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">},</span>
@@ -2293,10 +2274,10 @@ using the pmutt model objects directly or using a reaction string.</p>
 <div class="section" id="initialization-using-pmutt-model-objects">
 <h4>Initialization using pmutt Model Objects<a class="headerlink" href="#initialization-using-pmutt-model-objects" title="Permalink to this headline">¶</a></h4>
 <p>In this example, the Nasa objects are created directly in the script.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
-<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Initialize reaction</span>
@@ -2326,12 +2307,12 @@ using the pmutt model objects directly or using a reaction string.</p>
 <p>In this example, the Nasa objects are read from a thermdat file and
 are assigned to the Reaction object based on the reaction string. This
 way is more convenient if you’re dealing with large reaction networks.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="kn">import</span> <span class="n">read_thermdat</span>
-<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">pmutt_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.thermdat</span> <span class="k">import</span> <span class="n">read_thermdat</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">rxn</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Read the thermdat</span>
@@ -2352,11 +2333,11 @@ way is more convenient if you’re dealing with large reaction networks.</p>
 </div>
 <p>After the Reaction object is initialized, you can ensure the equation is
 balanced.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rxn_nasa</span><span class="o">.</span><span class="n">check_element_balance</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Or calculate thermodynamic properties.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">200.</span><span class="p">,</span> <span class="mf">3500.</span><span class="p">)</span>
 <span class="n">HoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_HoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">SoR_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_SoR</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">GoRT_rxn</span> <span class="o">=</span> <span class="n">rxn_nasa</span><span class="o">.</span><span class="n">get_delta_GoRT</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
@@ -2364,7 +2345,7 @@ balanced.</p>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Plot the data</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;H2 + 1/2 O2 --&gt; H2O&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">HoRT_rxn</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;H/RT&#39;</span><span class="p">)</span>
@@ -2389,8 +2370,8 @@ balanced.</p>
 <p>This is a child class of <a class="reference internal" href="#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> but has additional
 attributes for reading and writting Chemkin files.</p>
 <dl class="class">
-<dt id="pmutt.reaction.ChemkinReaction">
-<em class="property">class </em><code class="descclassname">pmutt.reaction.</code><code class="descname">ChemkinReaction</code><span class="sig-paren">(</span><em>beta=1.0</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">pmutt.reaction.</code><code class="descname">ChemkinReaction</code><span class="sig-paren">(</span><em>beta=1.0</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Chemkin reaction. Has additional attributes to support input and output</p>
 <dl class="attribute">
 <dt id="pmutt.reaction.ChemkinReaction.beta">
@@ -2466,8 +2447,8 @@ state and products</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pmutt.reaction.ChemkinReaction.from_string">
-<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>notes=None</em>, <em>beta=1</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.from_string" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">classmethod </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>reaction_str</em>, <em>species</em>, <em>species_delimiter='+'</em>, <em>reaction_delimiter='='</em>, <em>notes=None</em>, <em>beta=1</em>, <em>is_adsorption=False</em>, <em>sticking_coeff=0.5</em><span class="sig-paren">)</span></dt>
 <dd><p>Create a reaction object using the reaction string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2503,8 +2484,8 @@ is determined based on the reactants and products</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.reaction.ChemkinReaction.get_A">
-<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">get_A</code><span class="sig-paren">(</span><em>sden_operation='min'</em>, <em>include_entropy=True</em>, <em>T=298.15</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Calculates the preexponential factor in the Chemkin format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2523,8 +2504,8 @@ is determined based on the reactants and products</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.reaction.ChemkinReaction.get_GoRT_act">
-<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">get_GoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>act=False</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Calculates the dimensionless Gibbs energy. If there is no transition
 state species, calculates the delta dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2554,8 +2535,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.reaction.ChemkinReaction.get_HoRT_act">
-<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">get_HoRT_act</code><span class="sig-paren">(</span><em>rev=False</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Calculates the dimensionless enthalpy. If there is no transition
 state species, calculates the delta dimensionless Gibbs energy</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2583,8 +2564,8 @@ transition state</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.reaction.ChemkinReaction.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

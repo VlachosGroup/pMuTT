@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Kinetic Models &mdash; pmutt 1.2.15 documentation</title>
+  <title>Kinetic Models &mdash; pmutt 1.2.16 documentation</title>
   
 
   
@@ -197,26 +197,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="kinetic-models">
+  <div class="section" id="kinetic-models">
 <span id="id1"></span><h1>Kinetic Models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="chemkin">
 <h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this headline">¶</a></h2>
@@ -568,7 +549,7 @@ default = None. Will not return React_obj and Prod_obj</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
+<li><strong>reactions</strong> (list of <a class="reference internal" href="#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Reactions to write</li>
 <li><strong>conditions</strong> (<em>list of dicts</em>) – Conditions to evaluate each reaction. The key of the dictionaries
 should be a relevant quantity to evaluate the reaction (e.g. T, P)</li>
 <li><strong>write_gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, only gas phase reactions are written (including
@@ -670,7 +651,7 @@ be written to this file</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactions</strong> (list of <a class="reference internal" href="reactions.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
+<li><strong>reactions</strong> (list of <a class="reference internal" href="#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChemkinReaction</span></code></a> objects) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</li>
 <li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. If not specified, returns file as str</li>
 <li><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</li>
