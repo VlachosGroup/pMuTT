@@ -7,6 +7,13 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.16
+--------------
+Dec. 9, 2019
+
+- Hotfix to correct a typo for PyYAML version required.
+
+
 Version 1.2.15
 --------------
 Dec. 5, 2019

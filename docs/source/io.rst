@@ -508,12 +508,15 @@ Chemkin
 
 .. automodule:: pmutt.io.chemkin
    :members:
+   :noindex:
 
 OpenMKM
 =======
 
 .. automodule:: pmutt.io.omkm
    :members:
+   :noindex:
 
 .. _`pmutt.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_thermdat 
+.. _`YAML Ain't Markup Language (YAML)`: https://yaml.org/
 .. _`JavaScript Object Notation (JSON)`: https://www.json.org/
