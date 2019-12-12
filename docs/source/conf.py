@@ -26,7 +26,7 @@ author = 'Vlachos Research Group'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.16dev'
+release = '1.2.17dev'
 
 
 # -- General configuration ---------------------------------------------------
@@ -46,7 +46,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
-    'nbsphinx',
+    #'nbsphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
