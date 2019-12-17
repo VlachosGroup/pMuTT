@@ -170,11 +170,11 @@ def write_cti(phases=None, species=None, reactions=None,
         # Or return as string
         return lines_out
 
-def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
-               L=None, cat_abyv=None, flow_rate=None, residence_time=None,
-               mass_flow_rate=None, end_time=None, transient=None,
-               stepping=None, init_step=None, step_size=None, atol=None,
-               rtol=None, phases=None, reactor=None, inlet_gas=None,
+def write_yaml(reactor_type=None, mode=None, nodes=None, V=None, T=None, P=None,
+               A=None, L=None, cat_abyv=None, flow_rate=None,
+               residence_time=None, mass_flow_rate=None, end_time=None,
+               transient=None, stepping=None, init_step=None, step_size=None,
+               atol=None, rtol=None, phases=None, reactor=None, inlet_gas=None,
                multi_T=None, multi_P=None, multi_flow_rate=None,
                output_format=None, solver=None, simulation=None,
                multi_input=None, misc=None, units=None, filename=None, 
@@ -187,9 +187,10 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         reactor_type : str
             Type of reactor. Supported options include:
             
-            - PFR
-            - CSTR
-            - Batch
+            - pfr
+            - pfr_0d
+            - cstr
+            - batch
 
             Value written to ``reactor.type``.
         mode : str
@@ -199,6 +200,9 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             - Adiabatic
 
             Value written to ``reactor.mode``.
+        nodes : int
+            Number of nodes to use if ``reactor_type`` is 'pfr_0d'. Value
+            written to ``reactor.nodes``
         V : float or str
             Volume of reactor. Value written to ``reactor.volume``. Units of
             length^3. See Notes section regarding unit specification.
@@ -347,6 +351,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         reactor = {}
     reactor_params = [_Param('type', reactor_type, None),
                       _Param('mode', mode, None),
+                      _Param('nodes', nodes, None),
                       _Param('volume', V, '_length3'),
                       _Param('area', A, '_length2'),
                       _Param('length', L, '_length'),
@@ -411,7 +416,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
     simulation_params = (_Param('end_time', end_time, '_time'),
                          _Param('transient', transient, None),
                          _Param('stepping', stepping, None),
-                         _Param('step_size', step_size, '_time'),
+                         _Param('step_size', step_size, None),
                          _Param('init_step', init_step, None),
                          _Param('output_format', output_format, None))
     for parameter in simulation_params:
@@ -453,7 +458,7 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                     phases_dict[phase_type] = [phase_info]
         # If only one entry for phase type, reassign it.
         for phase_type, phases in phases_dict.items():
-            if len(phases) == 1:
+            if len(phases) == 1 and phase_type != 'surfaces':
                 phases_dict[phase_type] = phases[0]
     '''Assign misc values'''
     if misc is None:
