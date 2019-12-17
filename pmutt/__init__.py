@@ -12,6 +12,7 @@ pmutt
 name = 'pmutt'
 __version__ = '1.2.17dev'
 
+import os
 import inspect
 import itertools
 import re
@@ -862,3 +863,18 @@ def _check_iterable_attr(obj):
         return [obj]
     else:
         return obj
+    
+def run_tests(test_command='python -m unittest'):
+    """Run unit tests.
+    
+    Parameters
+    ----------
+        test_command : str
+            Test command to use. Default is 'python -m unittest'.
+    """
+    base_path = os.getcwd()
+    pmutt_path = os.path.dirname(__file__)
+    test_path = os.path.join(pmutt_path, 'tests')
+    os.chdir(test_path)
+    os.system(test_command)
+    os.chdir(base_path)
