@@ -29,7 +29,7 @@ Dependencies
 
 -  Python3
 -  `Atomic Simulation Environment`_: Used for I/O operations and to
-   calculate thermodynamic properties
+   calculate some thermodynamic properties
 -  `Numpy`_: Used for vector and matrix operations
 -  `Pandas`_: Used to import data from Excel files
 -  `xlrd`_: Used by Pandas to import Excel files
@@ -51,6 +51,8 @@ Getting Started
     pip install pmutt
 
 2. Look at `examples using the code`_
+
+3. Run the `unit tests`_.
 
 License
 -------
@@ -134,3 +136,4 @@ Special Thanks
 .. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html
 .. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues
 .. _`pull request`: https://github.com/VlachosGroup/pMuTT/pulls
+.. _`unit tests`: https://vlachosgroup.github.io/pMuTT/install.html#running-unit-tests

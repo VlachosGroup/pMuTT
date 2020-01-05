@@ -52,13 +52,13 @@ To upgrade to a newer release, use the --upgrade flag:
 Running unit tests
 ------------------
 pMuTT has a suite of unit tests that should be run before committing any code.
-To run the tests, navigate to the tests folder (pmutt/tests) via a command line
-with access to Python.
+To run the tests, run the following in a Python terminal.
 
 Run the following command:
 ::
 
-     python -m unittest
+     import pmutt
+     pmutt.run_tests()
 
 The expected output is shown below. The number of tests will not
 necessarily be the same. ::

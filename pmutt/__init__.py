@@ -875,6 +875,9 @@ def run_tests(test_command='python -m unittest'):
     base_path = os.getcwd()
     pmutt_path = os.path.dirname(__file__)
     test_path = os.path.join(pmutt_path, 'tests')
+
+    # Swich to test directory and run the tests
     os.chdir(test_path)
-    os.system(test_command)
+    if os.system(test_command) != 1:
+        os.system(test_command.replace('python', 'python3'))
     os.chdir(base_path)
