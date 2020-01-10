@@ -864,20 +864,35 @@ def _check_iterable_attr(obj):
     else:
         return obj
     
-def run_tests(test_command='python -m unittest'):
+def run_tests(python_command='python', buffer=False, failfast=False,
+              verbose=False):
     """Run unit tests.
     
     Parameters
     ----------
-        test_command : str
-            Test command to use. Default is 'python -m unittest'.
+        python_command : str
+            Command used by terminal to run python. Default is 'python'.
+        buffer : bool, optional
+            The standard output and standard error streams are buffered during
+            the test run. Output during a passing test is discarded. Output is
+            echoed normally on test fail or error and is added to the failure
+            messages. Default is False.
+        failfast : bool, optional
+            Stop the test run on the first error or failure. Default is False.
+        verbose : bool, optional
+            Verbose output. Default is False.
     """
+    # Swich to test directory and run the tests
     base_path = os.getcwd()
     pmutt_path = os.path.dirname(__file__)
     test_path = os.path.join(pmutt_path, 'tests')
-
-    # Swich to test directory and run the tests
     os.chdir(test_path)
-    if os.system(test_command) != 1:
-        os.system(test_command.replace('python', 'python3'))
+    test_command = '{} -m unittest'.format(python_command)
+    if buffer:
+        test_command += ' -b'
+    if failfast:
+        test_command += ' -f'
+    if verbose:
+        test_command += ' -v'
+    os.system(test_command)
     os.chdir(base_path)
