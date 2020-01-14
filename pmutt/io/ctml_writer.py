@@ -25,13 +25,15 @@ import sys
 
 # Python 2/3 compatibility
 try:
-  basestring
+    basestring
 except NameError:
-  basestring = str
+    basestring = str
+
 
 def _printerr(*args):
     # All debug and error output should go to stderr
     print(*args, file=sys.stderr)
+
 
 class CTI_Error(Exception):
     """Exception raised if an error is encountered while
@@ -43,26 +45,14 @@ class CTI_Error(Exception):
         _printerr()
 
 
-
-
-indent = ['',
-          ' ',
-          '  ',
-          '   ',
-          '    ',
-          '     ',
-          '      ',
-          '       ',
-          '        ',
-          '          ',
-          '           ',
-          '            ',
-          '             ',
-          '              ',
-          '               ',
-          '                ']
+indent = [
+    '', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ',
+    '          ', '           ', '            ', '             ',
+    '              ', '               ', '                '
+]
 
 #-----------------------------------------------------
+
 
 class XMLnode(object):
     """This is a minimal class to allow easy creation of an XML tree
@@ -70,8 +60,7 @@ class XMLnode(object):
 
     __slots__ = ('_name', '_value', '_attribs', '_children', '_childmap')
 
-    def __init__(self, name="--", value = ""):
-
+    def __init__(self, name="--", value=""):
         """Create a new node. Usually this only needs to be explicitly
         called to create the root element. Method addChild calls this
         constructor to create the new child node."""
@@ -85,10 +74,9 @@ class XMLnode(object):
         else:
             self._value = value.lstrip()
 
-        self._attribs = {}    # dictionary of attributes
-        self._children = []   # list of child nodes
-        self._childmap = {}   # dictionary of child nodes
-
+        self._attribs = {}  # dictionary of attributes
+        self._children = []  # list of child nodes
+        self._childmap = {}  # dictionary of child nodes
 
     def name(self):
         """The tag name of the node."""
@@ -103,7 +91,7 @@ class XMLnode(object):
         parameter is supplied."""
 
         # create a new node for the child
-        c = XMLnode(name = name, value = value)
+        c = XMLnode(name=name, value=value)
 
         # add it to the list of children, and to the dictionary
         # of children
@@ -113,7 +101,7 @@ class XMLnode(object):
 
     def addComment(self, comment):
         """Add a comment."""
-        self.addChild(name = '_comment_', value = comment)
+        self.addChild(name='_comment_', value=comment)
 
     def value(self):
         """A string containing the element value."""
@@ -152,18 +140,18 @@ class XMLnode(object):
             filename.write(''.join(s))
 
     def write_comment(self, s, level):
-        s.append('\n'+indent[level]+'<!--')
+        s.append('\n' + indent[level] + '<!--')
         value = self._value
         if value:
             if value[0] != ' ':
-                value = ' '+value
+                value = ' ' + value
             if value[-1] != ' ':
                 value += ' '
-        s.append(value+'-->')
+        s.append(value + '-->')
 
     def write_attribs(self, s):
         for a in self._attribs:
-            s.append(' '+a+'="'+self._attribs[a]+'"')
+            s.append(' ' + a + '="' + self._attribs[a] + '"')
 
     def write_value(self, s, level):
         indnt = indent[level]
@@ -174,14 +162,14 @@ class XMLnode(object):
                 ieol = vv.find('\n')
                 if ieol >= 0:
                     s.extend(('\n  ', indnt, vv[:ieol]))
-                    vv = vv[ieol+1:].lstrip()
+                    vv = vv[ieol + 1:].lstrip()
                 else:
-                    s.extend(('\n  ',indnt,vv))
+                    s.extend(('\n  ', indnt, vv))
                     break
         else:
             s.append(self._value)
 
-    def _write(self, s, level = 0):
+    def _write(self, s, level=0):
         """Internal method used to write the XML representation of each node."""
         if not self.name:
             return
@@ -211,6 +199,7 @@ class XMLnode(object):
                 s.extend(('\n', indnt))
             s.extend(('</', self._name, '>'))
 
+
 #--------------------------------------------------
 
 # constants that can be used in .cti files
@@ -233,12 +222,12 @@ _uenergy = 'J'
 _upres = 'Pa'
 
 # used to convert reaction pre-exponentials
-_length = {'cm':0.01, 'm':1.0, 'mm':0.001}
-_moles = {'kmol':1.0, 'mol':0.001, 'molec':1.0/6.02214129e26}
-_time = {'s':1.0, 'min':60.0, 'hr':3600.0}
+_length = {'cm': 0.01, 'm': 1.0, 'mm': 0.001}
+_moles = {'kmol': 1.0, 'mol': 0.001, 'molec': 1.0 / 6.02214129e26}
+_time = {'s': 1.0, 'min': 60.0, 'hr': 3600.0}
 
 # default std state pressure
-_pref = 1.0e5    # 1 bar
+_pref = 1.0e5  # 1 bar
 
 _name = 'noname'
 
@@ -261,21 +250,25 @@ _valfmt = ''
 # default for Motz & Wise correction
 _motz_wise = None
 
+
 def enable_motz_wise():
     global _motz_wise
     _motz_wise = True
+
 
 def disable_motz_wise():
     global _motz_wise
     _motz_wise = False
 
-def export_species(filename, fmt = 'CSV'):
+
+def export_species(filename, fmt='CSV'):
     global _valexport
     global _valfmt
     _valexport = filename
     _valfmt = fmt
 
-def validate(species = 'yes', reactions = 'yes'):
+
+def validate(species='yes', reactions='yes'):
     """
     Enable or disable validation of species and reactions.
 
@@ -291,6 +284,7 @@ def validate(species = 'yes', reactions = 'yes'):
     _valsp = species
     _valrxn = reactions
 
+
 def isnum(a):
     """True if a is an integer or floating-point number."""
     if isinstance(a, (int, float)):
@@ -298,24 +292,33 @@ def isnum(a):
     else:
         return 0
 
+
 def is_local_species(name):
     """true if the species named 'name' is defined in this file"""
     if name in _speciesnames:
         return 1
     return 0
 
+
 def dataset(nm):
     "Set the dataset name. Invoke this to change the name of the XML file."
     global _name
     _name = nm
+
 
 def standard_pressure(p0):
     """Set the default standard-state pressure."""
     global _pref
     _pref = p0
 
-def units(length = '', quantity = '', mass = '', time = '',
-          act_energy = '', energy = '', pressure = ''):
+
+def units(length='',
+          quantity='',
+          mass='',
+          time='',
+          act_energy='',
+          energy='',
+          pressure=''):
     """
     Set the default units.
 
@@ -343,13 +346,15 @@ def units(length = '', quantity = '', mass = '', time = '',
     if energy: _uenergy = energy
     if pressure: _upres = pressure
 
+
 def ufmt(base, n):
     """return a string representing a unit to a power n."""
     if n == 0: return ''
-    if n == 1: return '-'+base
-    if n == -1: return '/'+base
-    if n > 0: return '-'+base+str(n)
-    if n < 0: return '/'+base+str(-n)
+    if n == 1: return '-' + base
+    if n == -1: return '/' + base
+    if n > 0: return '-' + base + str(n)
+    if n < 0: return '/' + base + str(-n)
+
 
 def write(outName=None):
     """write the CTML file."""
@@ -365,7 +370,7 @@ def write(outName=None):
 
     for ph in _phases:
         ph.build(x)
-    s = species_set(name = _name, species = _species)
+    s = species_set(name=_name, species=_species)
     s.build(x)
 
     r = x.addChild('reactionData')
@@ -390,15 +395,16 @@ def write(outName=None):
     elif outName is not None:
         x.write(outName)
     elif _name != 'noname':
-        x.write(_name+'.xml')
+        x.write(_name + '.xml')
     else:
         print(x)
 
     if _valexport:
-        f = open(_valexport,'w')
+        f = open(_valexport, 'w')
         for s in _species:
             s.export(f, _valfmt)
         f.close()
+
 
 def addFloat(x, nm, val, fmt='', defunits=''):
     """
@@ -429,7 +435,7 @@ def addFloat(x, nm, val, fmt='', defunits=''):
 
 def getAtomicComp(atoms):
     if isinstance(atoms, dict): return atoms
-    a = atoms.replace(',',' ')
+    a = atoms.replace(',', ' ')
     toks = a.split()
     d = {}
     for t in toks:
@@ -439,6 +445,7 @@ def getAtomicComp(atoms):
         except ValueError:
             d[b[0]] = float(b[1])
     return d
+
 
 def getReactionSpecies(s):
     """Take a reaction string and return a
@@ -457,7 +464,7 @@ def getReactionSpecies(s):
     # get rid of the '+' signs separating species. Only plus signs
     # surrounded by spaces are replaced, so that plus signs may be
     # used in species names (e.g. 'Ar3+')
-    toks = s.replace(' + ',' ').split()
+    toks = s.replace(' + ', ' ').split()
     d = {}
     n = 1.0
     for t in toks:
@@ -466,8 +473,7 @@ def getReactionSpecies(s):
         try:
             n = float(t)
             if n < 0.0:
-                raise CTI_Error("negative stoichiometric coefficient:"
-                                +s)
+                raise CTI_Error("negative stoichiometric coefficient:" + s)
 
         #if t > '0' and t < '9':
         #    n = int(t)
@@ -492,9 +498,7 @@ def getReactionSpecies(s):
 
 class element(object):
     """ An atomic element or isotope. """
-    def __init__(self, symbol = '',
-                 atomic_mass = 0.01,
-                 atomic_number = 0):
+    def __init__(self, symbol='', atomic_mass=0.01, atomic_number=0):
         """
         :param symbol:
             The symbol for the element or isotope.
@@ -514,7 +518,7 @@ class element(object):
 
 
 class species_set(object):
-    def __init__(self, name = '', species = []):
+    def __init__(self, name='', species=[]):
         self._s = species
         self._name = name
         #self.type = SPECIES_SET
@@ -532,15 +536,14 @@ class species_set(object):
 
 class species(object):
     """A constituent of a phase or interface."""
-
     def __init__(self,
-                 name = 'missing name!',
-                 atoms = '',
-                 note = '',
-                 thermo = None,
-                 transport = None,
-                 charge = -999,
-                 size = 1.0):
+                 name='missing name!',
+                 atoms='',
+                 note='',
+                 thermo=None,
+                 transport=None,
+                 charge=-999,
+                 size=1.0):
         """
         :param name:
             The species name (or formula). The name may be arbitrarily long,
@@ -592,7 +595,9 @@ class species(object):
             chrg = -self._atoms['E']
             if self._charge != -999:
                 if self._charge != chrg:
-                    raise CTI_Error('specified charge inconsistent with number of electrons')
+                    raise CTI_Error(
+                        'specified charge inconsistent with number of electrons'
+                    )
             else:
                 self._charge = chrg
         self._size = size
@@ -602,12 +607,12 @@ class species(object):
         for e in self._atoms.keys():
             _enames[e] = 1
 
-    def export(self, f, fmt = 'CSV'):
+    def export(self, f, fmt='CSV'):
         if fmt == 'CSV':
-            s = self._name+','
+            s = self._name + ','
             for e in _enames:
                 if e in self._atoms:
-                    s += repr(self._atoms[e])+','
+                    s += repr(self._atoms[e]) + ','
                 else:
                     s += '0,'
             f.write(s)
@@ -619,22 +624,21 @@ class species(object):
                     self._thermo[n].export(f, fmt)
             f.write('\n')
 
-
     def build(self, p):
-        hdr = '    species '+self._name+'    '
+        hdr = '    species ' + self._name + '    '
         p.addComment(hdr)
         s = p.addChild("species")
         s["name"] = self._name
         a = ''
         for e in self._atoms.keys():
-            a += e+':'+str(self._atoms[e])+' '
-        s.addChild("atomArray",a)
+            a += e + ':' + str(self._atoms[e]) + ' '
+        s.addChild("atomArray", a)
         if self._comment:
-            s.addChild("note",self._comment)
+            s.addChild("note", self._comment)
         if self._charge != -999:
-            s.addChild("charge",self._charge)
+            s.addChild("charge", self._charge)
         if self._size != 1.0:
-            s.addChild("size",self._size)
+            s.addChild("size", self._size)
         if self._thermo:
             t = s.addChild("thermo")
             if isinstance(self._thermo, thermo):
@@ -652,21 +656,20 @@ class species(object):
                 for n in range(nt):
                     self._transport[n].build(t)
 
+
 class thermo(object):
     """Base class for species standard-state thermodynamic properties."""
     def _build(self, p):
         return p.addChild("thermo")
-    def export(self, f, fmt = 'CSV'):
+
+    def export(self, f, fmt='CSV'):
         pass
+
 
 class Mu0_table(thermo):
     """Properties are computed by specifying a table of standard
     chemical potentials vs. T."""
-
-    def __init__(self, Trange = (0.0, 0.0),
-                 h298 = 0.0,
-                 mu0 = None,
-                 p0 = -1.0):
+    def __init__(self, Trange=(0.0, 0.0), h298=0.0, mu0=None, p0=-1.0):
         self._t = Trange
         self._h298 = h298
         self._mu0 = mu0
@@ -680,10 +683,9 @@ class Mu0_table(thermo):
             n['P0'] = repr(_pref)
         else:
             n['P0'] = repr(self._pref)
-        energy_units = _uenergy+'/'+_umol
-        addFloat(n,"H298", self._h298, defunits = energy_units)
+        energy_units = _uenergy + '/' + _umol
+        addFloat(n, "H298", self._h298, defunits=energy_units)
         n.addChild("numPoints", len(self._mu0))
-
 
         mustr = ''
         tstr = ''
@@ -695,8 +697,8 @@ class Mu0_table(thermo):
             mustr += '%17.9E, ' % mu0
             col += 1
             if col == 3:
-                tstr = tstr[:-2]+'\n'
-                mustr = mustr[:-2]+'\n'
+                tstr = tstr[:-2] + '\n'
+                mustr = mustr[:-2] + '\n'
                 col = 0
 
         u = n.addChild("floatArray", mustr)
@@ -710,7 +712,7 @@ class Mu0_table(thermo):
 
 class NASA(thermo):
     """The 7-coefficient NASA polynomial parameterization."""
-    def __init__(self, Trange = (0.0, 0.0), coeffs = [], p0 = -1.0):
+    def __init__(self, Trange=(0.0, 0.0), coeffs=[], p0=-1.0):
         r"""
         :param Trange:
             The temperature range over which the parameterization is valid.
@@ -729,11 +731,10 @@ class NASA(thermo):
             raise CTI_Error('NASA coefficient list must have length = 7')
         self._coeffs = coeffs
 
-
     def export(self, f, fmt='CSV'):
         if fmt == 'CSV':
-            s = 'NASA,'+str(self._t[0])+','+str(self._t[1])+','
-            for i in  range(7):
+            s = 'NASA,' + str(self._t[0]) + ',' + str(self._t[1]) + ','
+            for i in range(7):
                 s += '%17.9E, ' % self._coeffs[i]
             f.write(s)
 
@@ -747,11 +748,11 @@ class NASA(thermo):
         else:
             n['P0'] = repr(self._pref)
         s = ''
-        for i in  range(4):
+        for i in range(4):
             s += '%17.9E, ' % self._coeffs[i]
         s += '\n'
-        s += '%17.9E, %17.9E, %17.9E' % (self._coeffs[4],
-                                           self._coeffs[5], self._coeffs[6])
+        s += '%17.9E, %17.9E, %17.9E' % (self._coeffs[4], self._coeffs[5],
+                                         self._coeffs[6])
         #if i > 0 and 3*((i+1)/3) == i: s += '\n'
         #s = s[:-2]
         u = n.addChild("floatArray", s)
@@ -761,9 +762,7 @@ class NASA(thermo):
 
 class NASA9(thermo):
     """NASA9 polynomial parameterization for a single temperature region."""
-
-    def __init__(self, Trange = (0.0, 0.0),
-                 coeffs = [], p0 = -1.0):
+    def __init__(self, Trange=(0.0, 0.0), coeffs=[], p0=-1.0):
         r"""
         :param Trange:
             The temperature range over which the parameterization is valid.
@@ -776,17 +775,16 @@ class NASA9(thermo):
             the default value is used, which is set by the ``standard_pressure``
             directive.
         """
-        self._t = Trange         # Range of the polynomial representation
-        self._pref = p0          # Reference pressure
+        self._t = Trange  # Range of the polynomial representation
+        self._pref = p0  # Reference pressure
         if len(coeffs) != 9:
             raise CTI_Error('NASA9 coefficient list must have length = 9')
         self._coeffs = coeffs
 
-
     def export(self, f, fmt='CSV'):
         if fmt == 'CSV':
-            s = 'NASA9,'+str(self._t[0])+','+str(self._t[1])+','
-            for i in  range(9):
+            s = 'NASA9,' + str(self._t[0]) + ',' + str(self._t[1]) + ','
+            for i in range(9):
                 s += '%17.9E, ' % self._coeffs[i]
             f.write(s)
 
@@ -799,11 +797,11 @@ class NASA9(thermo):
         else:
             n['P0'] = repr(self._pref)
         s = ''
-        for i in  range(4):
+        for i in range(4):
             s += '%17.9E, ' % self._coeffs[i]
         s += '\n'
-        s += '%17.9E, %17.9E, %17.9E, %17.9E,' % (self._coeffs[4], self._coeffs[5],
-                                                    self._coeffs[6], self._coeffs[7])
+        s += '%17.9E, %17.9E, %17.9E, %17.9E,' % (
+            self._coeffs[4], self._coeffs[5], self._coeffs[6], self._coeffs[7])
         s += '\n'
         s += '%17.9E' % (self._coeffs[8])
         u = n.addChild("floatArray", s)
@@ -818,50 +816,48 @@ class activityCoefficients(object):
 class pureFluidParameters(activityCoefficients):
     """
     """
-
-    def __init__(self, species = None, a_coeff = [], b_coeff = 0):
+    def __init__(self, species=None, a_coeff=[], b_coeff=0):
         """
         """
         self._species = species
         self._acoeff = a_coeff
         self._bcoeff = b_coeff
 
-    def build(self,a):
-        f= a.addChild("pureFluidParameters")
+    def build(self, a):
+        f = a.addChild("pureFluidParameters")
         f['species'] = self._species
         s = '%10.4E, %10.4E \n' % (self._acoeff[0], self._acoeff[1])
-        ac = f.addChild("a_coeff",s)
-        ac["units"] = _upres+'-'+_ulen+'6/'+_umol+'2'
+        ac = f.addChild("a_coeff", s)
+        ac["units"] = _upres + '-' + _ulen + '6/' + _umol + '2'
         ac["model"] = "linear_a"
         s = '%0.2f \n' % self._bcoeff
-        bc = f.addChild("b_coeff",s)
-        bc["units"] = _ulen+'3/'+_umol
+        bc = f.addChild("b_coeff", s)
+        bc["units"] = _ulen + '3/' + _umol
 
 
 class crossFluidParameters(activityCoefficients):
-    def __init__(self, species = None, a_coeff = [], b_coeff = []):
+    def __init__(self, species=None, a_coeff=[], b_coeff=[]):
         self._species1, self._species2 = species.split(' ')
         self._acoeff = a_coeff
         self._bcoeff = b_coeff
 
-    def build(self,a):
-        f= a.addChild("crossFluidParameters")
+    def build(self, a):
+        f = a.addChild("crossFluidParameters")
         f["species2"] = self._species2
         f["species1"] = self._species1
         s = '%10.4E, %10.4E \n' % (self._acoeff[0], self._acoeff[1])
-        ac = f.addChild("a_coeff",s)
-        ac["units"] = _upres+'-'+_ulen+'6/'+_umol+'2'
+        ac = f.addChild("a_coeff", s)
+        ac["units"] = _upres + '-' + _ulen + '6/' + _umol + '2'
         ac["model"] = "linear_a"
         if self._bcoeff:
             s = '%0.2f \n' % self._bcoeff
-            bc = f.addChild("b_coeff",s)
-            bc["units"] = _ulen+'3/'+_umol
+            bc = f.addChild("b_coeff", s)
+            bc["units"] = _ulen + '3/' + _umol
 
 
 class Shomate(thermo):
     """Shomate polynomial parameterization."""
-
-    def __init__(self, Trange = (0.0, 0.0), coeffs = [], p0 = -1.0):
+    def __init__(self, Trange=(0.0, 0.0), coeffs=[], p0=-1.0):
         r"""
         :param Trange:
             The temperature range over which the parameterization is valid.
@@ -879,7 +875,6 @@ class Shomate(thermo):
             raise CTI_Error('Shomate coefficient list must have length = 7')
         self._coeffs = coeffs
 
-
     def build(self, t):
         n = t.addChild("Shomate")
         n['Tmin'] = repr(self._t[0])
@@ -889,11 +884,11 @@ class Shomate(thermo):
         else:
             n['P0'] = repr(self._pref)
         s = ''
-        for i in  range(4):
+        for i in range(4):
             s += '%17.9E, ' % self._coeffs[i]
         s += '\n'
-        s += '%17.9E, %17.9E, %17.9E' % (self._coeffs[4],
-                                         self._coeffs[5], self._coeffs[6])
+        s += '%17.9E, %17.9E, %17.9E' % (self._coeffs[4], self._coeffs[5],
+                                         self._coeffs[6])
         u = n.addChild("floatArray", s)
         u["size"] = "7"
         u["name"] = "coeffs"
@@ -902,15 +897,15 @@ class Shomate(thermo):
 class Adsorbate(thermo):
     """Adsorbed species characterized by a binding energy and a set of
     vibrational frequencies."""
-
-    def __init__(self, Trange = (0.0, 0.0),
-                 binding_energy = 0.0,
-                 frequencies = [], p0 = -1.0):
+    def __init__(self,
+                 Trange=(0.0, 0.0),
+                 binding_energy=0.0,
+                 frequencies=[],
+                 p0=-1.0):
         self._t = Trange
         self._pref = p0
         self._freqs = frequencies
         self._be = binding_energy
-
 
     def build(self, t):
         n = t.addChild("adsorbate")
@@ -921,11 +916,11 @@ class Adsorbate(thermo):
         else:
             n['P0'] = repr(self._pref)
 
-        energy_units = _uenergy+'/'+_umol
-        addFloat(n,'binding_energy',self._be, defunits = energy_units)
+        energy_units = _uenergy + '/' + _umol
+        addFloat(n, 'binding_energy', self._be, defunits=energy_units)
         s = ""
         nfreq = len(self._freqs)
-        for i in  range(nfreq):
+        for i in range(nfreq):
             s += '%17.9E, ' % self._freqs[i]
         s += '\n'
         u = n.addChild("floatArray", s)
@@ -933,13 +928,15 @@ class Adsorbate(thermo):
         u["name"] = "freqs"
 
 
-
 class const_cp(thermo):
     """Constant specific heat."""
-
     def __init__(self,
-                 t0 = 298.15, cp0 = 0.0, h0 = 0.0, s0 = 0.0,
-                 tmax = 5000.0, tmin = 100.0):
+                 t0=298.15,
+                 cp0=0.0,
+                 h0=0.0,
+                 s0=0.0,
+                 tmax=5000.0,
+                 tmin=100.0):
         """
         :param t0:
             Temperature parameter T0. Default: 298.15 K.
@@ -958,23 +955,31 @@ class const_cp(thermo):
         c = t.addChild('const_cp')
         if self._t[0] >= 0.0: c['Tmin'] = repr(self._t[0])
         if self._t[1] >= 0.0: c['Tmax'] = repr(self._t[1])
-        energy_units = _uenergy+'/'+_umol
-        addFloat(c,'t0',self._c[0], defunits = 'K')
-        addFloat(c,'h0',self._c[1], defunits = energy_units)
-        addFloat(c,'s0',self._c[2], defunits = energy_units+'/K')
-        addFloat(c,'cp0',self._c[3], defunits = energy_units+'/K')
+        energy_units = _uenergy + '/' + _umol
+        addFloat(c, 't0', self._c[0], defunits='K')
+        addFloat(c, 'h0', self._c[1], defunits=energy_units)
+        addFloat(c, 's0', self._c[2], defunits=energy_units + '/K')
+        addFloat(c, 'cp0', self._c[3], defunits=energy_units + '/K')
+
 
 class transport(object):
     pass
+
 
 class gas_transport(transport):
     """
     Species-specific Transport coefficients for gas-phase transport models.
     """
-    def __init__(self, geom,
-                 diam = 0.0, well_depth = 0.0, dipole = 0.0,
-                 polar = 0.0, rot_relax = 0.0, acentric_factor = None,
-                 disp_coeff = 0.0, quad_polar = 0.0):
+    def __init__(self,
+                 geom,
+                 diam=0.0,
+                 well_depth=0.0,
+                 dipole=0.0,
+                 polar=0.0,
+                 rot_relax=0.0,
+                 acentric_factor=None,
+                 disp_coeff=0.0,
+                 quad_polar=0.0):
         """
         :param geom:
             A string specifying the molecular geometry. One of ``atom``,
@@ -1014,27 +1019,27 @@ class gas_transport(transport):
         #t = s.addChild("transport")
         t['model'] = 'gas_transport'
         #        t.addChild("geometry", self._geom)
-        tg = t.addChild('string',self._geom)
+        tg = t.addChild('string', self._geom)
         tg['title'] = 'geometry'
         addFloat(t, "LJ_welldepth", (self._well_depth, 'K'), '%8.3f')
-        addFloat(t, "LJ_diameter", (self._diam, 'A'),'%8.3f')
-        addFloat(t, "dipoleMoment", (self._dipole, 'Debye'),'%8.3f')
-        addFloat(t, "polarizability", (self._polar, 'A3'),'%8.3f')
-        addFloat(t, "rotRelax", self._rot_relax,'%8.3f')
+        addFloat(t, "LJ_diameter", (self._diam, 'A'), '%8.3f')
+        addFloat(t, "dipoleMoment", (self._dipole, 'Debye'), '%8.3f')
+        addFloat(t, "polarizability", (self._polar, 'A3'), '%8.3f')
+        addFloat(t, "rotRelax", self._rot_relax, '%8.3f')
         if self._w_ac is not None:
             addFloat(t, "acentric_factor", self._w_ac, '%8.3f')
-        addFloat(t, "dispersion_coefficient", (self._disp_coeff, 'A5'),'%8.3f')
-        addFloat(t, "quadrupole_polarizability", (self._quad_polar, 'A5'),'%8.3f')
+        addFloat(t, "dispersion_coefficient", (self._disp_coeff, 'A5'),
+                 '%8.3f')
+        addFloat(t, "quadrupole_polarizability", (self._quad_polar, 'A5'),
+                 '%8.3f')
+
 
 class rate_expression(object):
     pass
 
+
 class Arrhenius(rate_expression):
-    def __init__(self,
-                 A = 0.0,
-                 b = 0.0,
-                 E = 0.0,
-                 coverage = []):
+    def __init__(self, A=0.0, b=0.0, E=0.0, coverage=[]):
         """
         :param A:
             The pre-exponential coefficient. Required input. If entered without
@@ -1065,7 +1070,6 @@ class Arrhenius(rate_expression):
         else:
             self._cov = None
 
-
     def build(self, p, name='', a=None):
         if a is None:
             a = p.addChild('Arrhenius')
@@ -1076,12 +1080,14 @@ class Arrhenius(rate_expression):
         # factor to SI and write it to CTML as a pure number. Otherwise,
         # pass it as-is through to CTML with the unit string.
         if isnum(self._c[0]):
-            addFloat(a,'A',self._c[0]*self.unit_factor, fmt = '%14.6E')
+            addFloat(a, 'A', self._c[0] * self.unit_factor, fmt='%14.6E')
         elif len(self._c[0]) == 2 and self._c[0][1] == '/site':
-            addFloat(a,'A',self._c[0][0]/self.rxn_phase._sitedens,
-                     fmt = '%14.6E')
+            addFloat(a,
+                     'A',
+                     self._c[0][0] / self.rxn_phase._sitedens,
+                     fmt='%14.6E')
         else:
-            addFloat(a,'A',self._c[0], fmt = '%14.6E')
+            addFloat(a, 'A', self._c[0], fmt='%14.6E')
 
         # The b coefficient should be dimensionless, so there is no
         # need to use 'addFloat'
@@ -1089,16 +1095,17 @@ class Arrhenius(rate_expression):
 
         # If a pure number is entered for the activation energy,
         # add the default units, otherwise use the supplied units.
-        addFloat(a,'E', self._c[2], fmt = '%f', defunits = _ue)
+        addFloat(a, 'E', self._c[2], fmt='%f', defunits=_ue)
 
         # for surface reactions, a coverage dependence may be specified.
         if self._cov:
             for cov in self._cov:
                 c = a.addChild('coverage')
                 c['species'] = cov[0]
-                addFloat(c, 'a', cov[1], fmt = '%f')
+                addFloat(c, 'a', cov[1], fmt='%f')
                 c.addChild('m', repr(cov[2]))
-                addFloat(c, 'e', cov[3], fmt = '%f', defunits = _ue)
+                addFloat(c, 'e', cov[3], fmt='%f', defunits=_ue)
+
 
 class stick(Arrhenius):
     def __init__(self, *args, **kwargs):
@@ -1115,7 +1122,8 @@ class stick(Arrhenius):
         a['type'] = 'stick'
         ngas = len(self.gas_species)
         if ngas != 1:
-            raise CTI_Error("Sticking probabilities can only be used for "
+            raise CTI_Error(
+                "Sticking probabilities can only be used for "
                 "reactions with one gas-phase reactant, but this reaction has "
                 + str(ngas) + ': ' + str(self.gas_species))
 
@@ -1125,6 +1133,7 @@ class stick(Arrhenius):
         self.unit_factor = 1.0
         Arrhenius.build(self, p, name, a)
 
+
 def getPairs(s):
     toks = s.split()
     m = {}
@@ -1133,17 +1142,13 @@ def getPairs(s):
         m[key] = float(val)
     return m
 
+
 class reaction(object):
     """
     A homogeneous chemical reaction with pressure-independent rate coefficient
     and mass-action kinetics.
     """
-    def __init__(self,
-                 equation = '',
-                 kf = None,
-                 id = '',
-                 order = '',
-                 options = []):
+    def __init__(self, equation='', kf=None, id='', order='', options=[]):
         """
         :param equation:
             A string specifying the chemical equation.
@@ -1173,13 +1178,13 @@ class reaction(object):
             self._options = [options]
         else:
             self._options = options
-        self._num = len(_reactions)+1
+        self._num = len(_reactions) + 1
         r = ''
         p = ''
         for e in ['<=>', '=>', '=']:
             if self._e.find(e) >= 0:
                 r, p = self._e.split(e)
-                if e in ['<=>','=']: self.rev = 1
+                if e in ['<=>', '=']: self.rev = 1
                 else: self.rev = 0
                 break
         self._r = getReactionSpecies(r)
@@ -1189,8 +1194,8 @@ class reaction(object):
         if self._order:
             order = getPairs(self._order)
             for o in order.keys():
-                if (o not in self._rxnorder and
-                    'nonreactant_orders' not in self._options):
+                if (o not in self._rxnorder
+                        and 'nonreactant_orders' not in self._options):
                     raise CTI_Error("order specified for non-reactant '{}'"
                                     " and no 'nonreactant_orders' option given"
                                     " for reaction '{}'".format(o, self._e))
@@ -1199,7 +1204,7 @@ class reaction(object):
 
         self._kf = kf
         self._igspecies = []
-        self._dims = [0]*4
+        self._dims = [0] * 4
         self._rxnphase = None
         self._type = ''
         _reactions.append(self)
@@ -1226,7 +1231,6 @@ class reaction(object):
         else:
             id = '%04i' % self._num
 
-
         self.mdim = 0
         self.ldim = 0
 
@@ -1252,17 +1256,17 @@ class reaction(object):
                         break
                 if nm == -999:
                     raise CTI_Error("species '{0}' not found while parsing "
-                        "reaction: '{1}'.".format(s, self._e))
+                                    "reaction: '{1}'.".format(s, self._e))
             else:
                 # If no phases are defined, assume all reactants are in bulk
                 # phases
                 nm = 1
                 nl = -3
 
-            self.mdim += nm*ns
-            self.ldim += nl*ns
+            self.mdim += nm * ns
+            self.ldim += nl * ns
 
-        p.addComment("   reaction "+id+"    ")
+        p.addComment("   reaction " + id + "    ")
         r = p.addChild('reaction')
         r['id'] = id
         if self.rev:
@@ -1279,14 +1283,13 @@ class reaction(object):
         if 'nonreactant_orders' in self._options:
             r['nonreactant_orders'] = 'yes'
 
-        ee = self._e.replace('<','[').replace('>',']')
-        r.addChild('equation',ee)
+        ee = self._e.replace('<', '[').replace('>', ']')
+        r.addChild('equation', ee)
 
         if self._order:
             for osp in self._rxnorder:
-                o = r.addChild('order',self._rxnorder[osp])
+                o = r.addChild('order', self._rxnorder[osp])
                 o['species'] = osp
-
 
         # adjust the moles and length powers based on the dimensions of
         # the rate of progress (moles/length^2 or moles/length^3)
@@ -1295,15 +1298,17 @@ class reaction(object):
             self.ldim += 2
             p = self._dims[:3]
             if p[0] != 0 or p[1] != 0 or p[2] > 1:
-                raise CTI_Error(self._e +'\nA surface reaction may contain at most '+
-                                   'one surface phase.')
+                raise CTI_Error(self._e +
+                                '\nA surface reaction may contain at most ' +
+                                'one surface phase.')
         elif self._type == 'edge':
             self.mdim += -1
             self.ldim += 1
             p = self._dims[:2]
             if p[0] != 0 or p[1] > 1:
-                raise CTI_Error(self._e+'\nAn edge reaction may contain at most '+
-                                   'one edge phase.')
+                raise CTI_Error(self._e +
+                                '\nAn edge reaction may contain at most ' +
+                                'one edge phase.')
         else:
             self.mdim += -1
             self.ldim += 3
@@ -1340,7 +1345,7 @@ class reaction(object):
             if isinstance(kf, rate_expression):
                 k = kf
             else:
-                k = Arrhenius(A = kf[0], b = kf[1], E = kf[2])
+                k = Arrhenius(A=kf[0], b=kf[1], E=kf[2])
             if isinstance(kf, stick):
                 kf.gas_species = self._igspecies
                 kf.rxn_phase = self._rxnphase
@@ -1361,9 +1366,10 @@ class reaction(object):
 
         rstr = ' '.join('%s:%s' % item for item in self._r.items())
         pstr = ' '.join('%s:%s' % item for item in self._p.items())
-        r.addChild('reactants',rstr)
+        r.addChild('reactants', rstr)
         r.addChild('products', pstr)
         return r
+
 
 #-------------------
 
@@ -1373,12 +1379,11 @@ class three_body_reaction(reaction):
     A three-body reaction.
     """
     def __init__(self,
-                 equation = '',
-                 kf = None,
-                 efficiencies = '',
-                 id = '',
-                 options = []
-                 ):
+                 equation='',
+                 kf=None,
+                 efficiencies='',
+                 id='',
+                 options=[]):
         """
         :param equation:
             A string specifying the chemical equation. The reaction can be
@@ -1417,13 +1422,12 @@ class three_body_reaction(reaction):
         kfnode = r.child('rateCoeff')
 
         if self._eff:
-            eff = kfnode.addChild('efficiencies',self._eff)
+            eff = kfnode.addChild('efficiencies', self._eff)
             eff['default'] = repr(self._effm)
 
 
 class pdep_reaction(reaction):
     """ Base class for falloff_reaction and chemically_activated_reaction """
-
     def clean_up_reactants_products(self):
         del self._r['(+']
         del self._p['(+']
@@ -1438,10 +1442,11 @@ class pdep_reaction(reaction):
                 if r[-1] == ')' and r in self._p:
                     species = r[:-1]
                     if self._eff:
-                        raise CTI_Error("In reaction '{0}', explcit third body "
+                        raise CTI_Error(
+                            "In reaction '{0}', explcit third body "
                             "'(+ {1})' and efficiencies cannot both be "
                             "specified".format(self._e, species))
-                    self._eff = species+':1.0'
+                    self._eff = species + ':1.0'
                     self._effm = 0.0
 
                     del self._r[r]
@@ -1453,7 +1458,7 @@ class pdep_reaction(reaction):
         kfnode = r.child('rateCoeff')
 
         if self._eff and self._effm >= 0.0:
-            eff = kfnode.addChild('efficiencies',self._eff)
+            eff = kfnode.addChild('efficiencies', self._eff)
             eff['default'] = repr(self._effm)
 
         if self._falloff:
@@ -1462,8 +1467,14 @@ class pdep_reaction(reaction):
 
 class falloff_reaction(pdep_reaction):
     """ A gas-phase falloff reaction. """
-    def __init__(self, equation, kf0, kf,
-                 efficiencies='', falloff=None, id='', options=[]):
+    def __init__(self,
+                 equation,
+                 kf0,
+                 kf,
+                 efficiencies='',
+                 falloff=None,
+                 id='',
+                 options=[]):
         """
         :param equation:
             A string specifying the chemical equation.
@@ -1505,9 +1516,14 @@ class falloff_reaction(pdep_reaction):
 
 class chemically_activated_reaction(pdep_reaction):
     """ A gas-phase, chemically activated reaction. """
-
-    def __init__(self, equation, kLow, kHigh,
-                 efficiencies='', falloff=None, id='', options=[]):
+    def __init__(self,
+                 equation,
+                 kLow,
+                 kHigh,
+                 efficiencies='',
+                 falloff=None,
+                 id='',
+                 options=[]):
         """
         :param equation:
             A string specifying the chemical equation.
@@ -1545,6 +1561,7 @@ class chemically_activated_reaction(pdep_reaction):
 
         self.clean_up_reactants_products()
 
+
 class pdep_arrhenius(reaction):
     """
     Pressure-dependent rate calculated by interpolating between Arrhenius
@@ -1569,7 +1586,7 @@ class pdep_arrhenius(reaction):
     def build(self, p):
         r = reaction.build(self, p)
         kfnode = r.child('rateCoeff')
-        for i,c in enumerate(kfnode.children()):
+        for i, c in enumerate(kfnode.children()):
             assert c.name() == 'Arrhenius'
             addFloat(c, 'P', self.pressures[i])
 
@@ -1594,9 +1611,14 @@ class chebyshev_reaction(reaction):
         polynomial with M points in temperature and N points in pressure, this
         should be a list of M lists each with N elements.
     """
-    def __init__(self, equation='', Tmin=300.0, Tmax=2500.0,
-                 Pmin=(0.001, 'atm'), Pmax=(100.0, 'atm'),
-                 coeffs=[[]], **kwargs):
+    def __init__(self,
+                 equation='',
+                 Tmin=300.0,
+                 Tmax=2500.0,
+                 Pmin=(0.001, 'atm'),
+                 Pmax=(100.0, 'atm'),
+                 coeffs=[[]],
+                 **kwargs):
         reaction.__init__(self, equation, **kwargs)
         self._type = 'chebyshev'
         self.Pmin = Pmin
@@ -1624,12 +1646,11 @@ class chebyshev_reaction(reaction):
         addFloat(kfnode, 'Pmin', self.Pmin)
         addFloat(kfnode, 'Pmax', self.Pmax)
 
-        self.coeffs[0][0] += math.log10(self.unit_factor());
+        self.coeffs[0][0] += math.log10(self.unit_factor())
 
         lines = []
         for line in self.coeffs:
-            lines.append(', '.join('{0:12.5e}'.format(val)
-                                   for val in line))
+            lines.append(', '.join('{0:12.5e}'.format(val) for val in line))
 
         coeffNode = kfnode.addChild('floatArray', ',\n'.join(lines))
         coeffNode['name'] = 'coeffs'
@@ -1642,7 +1663,12 @@ class surface_reaction(reaction):
     A heterogeneous chemical reaction with pressure-independent rate
     coefficient and mass-action kinetics.
     """
-    def __init__(self, equation='', kf=None, id='', order='', beta = 0.0,
+    def __init__(self,
+                 equation='',
+                 kf=None,
+                 id='',
+                 order='',
+                 beta=0.0,
                  options=[]):
         """
         :param equation:
@@ -1677,20 +1703,20 @@ class surface_reaction(reaction):
 
 
 class edge_reaction(reaction):
-
     def __init__(self,
-                 equation = '',
-                 kf = None,
-                 id = '',
-                 order = '',
-                 beta = 0.0,
-                 options = []):
+                 equation='',
+                 kf=None,
+                 id='',
+                 order='',
+                 beta=0.0,
+                 options=[]):
         reaction.__init__(self, equation, kf, id, order, options)
         self._type = 'edge'
         self._beta = beta
 
 
 #--------------
+
 
 class lateral_interaction(object):
     """
@@ -1700,10 +1726,10 @@ class lateral_interaction(object):
     threhsold  parameter).
     """
     def __init__(self,
-                 species = '',
-                 strengths = None,
-                 coverage_thresholds = None,
-                 id = ''):
+                 species='',
+                 strengths=None,
+                 coverage_thresholds=None,
+                 id=''):
         """
         :param species:
             Pair of Surface species between which lateral interaction is
@@ -1759,10 +1785,9 @@ class lateral_interaction(object):
             if len(coverage_thresholds) == 3:
                 strengths.insert(0, 0)
 
-
         self._strengths = strengths
         self._coverage_thresholds = coverage_thresholds
-        self._num = len(_interactions)+1
+        self._num = len(_interactions) + 1
 
         _interactions.append(self)
 
@@ -1780,14 +1805,13 @@ class lateral_interaction(object):
         else:
             id = '%04i' % self._num
 
-
-        p.addComment("   interaction "+id+"    ")
+        p.addComment("   interaction " + id + "    ")
         i = p.addChild('interaction')
         i['id'] = id
 
         # Species definitions are considered local. If not local,
         # complicated processing done as in phase has to be adapted
-        sp = i.addChild('speciesArray',self._species)
+        sp = i.addChild('speciesArray', self._species)
         sp['datasrc'] = '#species_data'
 
         str_str = ''
@@ -1804,6 +1828,7 @@ class lateral_interaction(object):
 
         return i
 
+
 class lateral_interactions(object):
     """
     Coverage dependent Lateral interactions given conveniently in a 
@@ -1815,9 +1840,9 @@ class lateral_interactions(object):
     threhsold  parameter).
     """
     def __init__(self,
-                 species = '',
-                 interaction_matrix = None,
-                 coverage_thresholds = None):
+                 species='',
+                 interaction_matrix=None,
+                 coverage_thresholds=None):
         """
         :param species:
             Surface species between which lateral interactions are
@@ -1845,19 +1870,20 @@ class lateral_interactions(object):
             coverage_thresholds = [0] * len(interaction_matrix)
 
         if len(coverage_thresholds) < len(interaction_matrix):
-            coverage_threshoulds += [0] * (
-                    len(interaction_matrix) - len(coverage_thresholds))
+            coverage_threshoulds += [0] * (len(interaction_matrix) -
+                                           len(coverage_thresholds))
 
         self._intxn_mat = interaction_matrix
         self._coverage_thresholds = coverage_thresholds
-        
+
         # Define the individual lateral_interaction for every species pair
         species_lst = species.split()
         for i, species1 in enumerate(species_lst):
             for j, species2 in enumerate(species_lst):
-                lateral_interaction(" ".join([species1, species2]), 
+                lateral_interaction(" ".join([species1, species2]),
                                     interaction_matrix[i][j],
                                     coverage_thresholds[j])
+
 
 class bep(object):
     """
@@ -1870,9 +1896,9 @@ class bep(object):
                  slope,
                  intercept,
                  direction,
-                 cleavage_reactions = [],
-                 synthesis_reactions = [],
-                 id = ''):
+                 cleavage_reactions=[],
+                 synthesis_reactions=[],
+                 id=''):
         """
         :param slope:
             Slope (alpha) of the BEP relation
@@ -1913,7 +1939,6 @@ class bep(object):
 
         _beps.append(self)
 
-        
     def unit_factor(self):
         """
         Conversion factor from given rate constant units to the MKS (+kmol)
@@ -1928,7 +1953,7 @@ class bep(object):
             id = self._id
         else:
             id = '%04i' % self._num
-        return id;
+        return id
 
     def build(self, p):
         p.addComment("   bep " + self.id + "    ")
@@ -1947,24 +1972,24 @@ class bep(object):
         #sp['datasrc'] = '#species_data'
 
         if isinstance(self._clv_rxns, str):
-            self._clv_rxns = [self._clv_rxns] 
+            self._clv_rxns = [self._clv_rxns]
         self._clv_rx = []
 
         for r in self._clv_rxns:
             icolon = r.find(':')
-            if icolon > 0: 
+            if icolon > 0:
                 #datasrc, rnum = r.split(':')
                 datasrc = r[:icolon].strip()
-                rnum = r[icolon+1:]
-                self._clv_rx.append((datasrc+'.xml', rnum))
+                rnum = r[icolon + 1:]
+                self._clv_rx.append((datasrc + '.xml', rnum))
             else:
                 rnum = r
                 self._clv_rx.append(('', rnum))
 
         for r in self._clv_rx:
-            datasrc = r[0] 
+            datasrc = r[0]
             ra = clv_rx.addChild('reactionArray')
-            ra['datasrc'] = datasrc+'#reaction_data'
+            ra['datasrc'] = datasrc + '#reaction_data'
 
             rtoks = r[1].split()
             if rtoks[0] != 'all':
@@ -1982,24 +2007,24 @@ class bep(object):
         #sp['datasrc'] = '#species_data'
 
         if isinstance(self._syn_rxns, str):
-            self._syn_rxns = [self._syn_rxns] 
+            self._syn_rxns = [self._syn_rxns]
         self._syn_rx = []
 
         for r in self._syn_rxns:
             icolon = r.find(':')
-            if icolon > 0: 
+            if icolon > 0:
                 #datasrc, rnum = r.split(':')
                 datasrc = r[:icolon].strip()
-                rnum = r[icolon+1:]
-                self._syn_rx.append((datasrc+'.xml', rnum))
+                rnum = r[icolon + 1:]
+                self._syn_rx.append((datasrc + '.xml', rnum))
             else:
                 rnum = r
                 self._syn_rx.append(('', rnum))
 
         for r in self._syn_rx:
-            datasrc = r[0] 
+            datasrc = r[0]
             ra = syn_rx.addChild('reactionArray')
-            ra['datasrc'] = datasrc+'#reaction_data'
+            ra['datasrc'] = datasrc + '#reaction_data'
 
             rtoks = r[1].split()
             if rtoks[0] != 'all':
@@ -2009,8 +2034,6 @@ class bep(object):
                     i['max'] = rtoks[2]
                 else:
                     i['max'] = rtoks[0]
-
-
         """
         cleavage_rxn_str = ''
         for rxn in self._cleavage_reactions:
@@ -2030,7 +2053,6 @@ class bep(object):
         return b
 
 
-
 #-------------------
 
 
@@ -2040,13 +2062,13 @@ class state(object):
     or interface.
     """
     def __init__(self,
-                 temperature = None,
-                 pressure = None,
-                 mole_fractions = None,
-                 mass_fractions = None,
-                 density = None,
-                 coverages = None,
-                 solute_molalities = None):
+                 temperature=None,
+                 pressure=None,
+                 mole_fractions=None,
+                 mass_fractions=None,
+                 density=None,
+                 coverages=None,
+                 solute_molalities=None):
         """
         :param temperature:
             The temperature.
@@ -2074,9 +2096,13 @@ class state(object):
 
     def build(self, ph):
         st = ph.addChild('state')
-        if self._t: addFloat(st, 'temperature', self._t, defunits = 'K')
-        if self._p: addFloat(st, 'pressure', self._p, defunits = _upres)
-        if self._rho: addFloat(st, 'density', self._rho, defunits = _umass+'/'+_ulen+'3')
+        if self._t: addFloat(st, 'temperature', self._t, defunits='K')
+        if self._p: addFloat(st, 'pressure', self._p, defunits=_upres)
+        if self._rho:
+            addFloat(st,
+                     'density',
+                     self._rho,
+                     defunits=_umass + '/' + _ulen + '3')
         if self._x: st.addChild('moleFractions', self._x)
         if self._y: st.addChild('massFractions', self._y)
         if self._c: st.addChild('coverages', self._c)
@@ -2085,16 +2111,15 @@ class state(object):
 
 class phase(object):
     """Base class for phases of matter."""
-
     def __init__(self,
-                 name = '',
-                 dim = 3,
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 dim=3,
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 initial_state=None,
+                 options=[]):
         """
         :param name:
             A string to identify the phase. Must be unique among the phase
@@ -2161,14 +2186,15 @@ class phase(object):
 
         # and that only one species is declared if it is a pure phase
         if self.is_pure() and len(self._spmap) > 1:
-            raise CTI_Error('Stoichiometric phases must  declare exactly one species, \n'+
-                               'but phase '+self._name+' declares '+str(len(self._spmap))+'.')
+            raise CTI_Error(
+                'Stoichiometric phases must  declare exactly one species, \n' +
+                'but phase ' + self._name + ' declares ' +
+                str(len(self._spmap)) + '.')
 
         self._initial = initial_state
 
         # add this phase to the global phase list
         _phases.append(self)
-
 
     def is_ideal_gas(self):
         """True if the entry represents an ideal gas."""
@@ -2201,8 +2227,8 @@ class phase(object):
             if icolon > 0:
                 #datasrc, rnum = r.split(':')
                 datasrc = r[:icolon].strip()
-                rnum = r[icolon+1:]
-                self._rx.append((datasrc+'.xml', rnum))
+                rnum = r[icolon + 1:]
+                self._rx.append((datasrc + '.xml', rnum))
             else:
                 rnum = r
                 self._rx.append(('', rnum))
@@ -2210,7 +2236,7 @@ class phase(object):
         for r in self._rx:
             datasrc = r[0]
             ra = p.addChild('reactionArray')
-            ra['datasrc'] = datasrc+'#reaction_data'
+            ra['datasrc'] = datasrc + '#reaction_data'
             rk = None
             if 'skip_undeclared_species' in self._options:
                 rk = ra.addChild('skip')
@@ -2231,7 +2257,6 @@ class phase(object):
                 else:
                     i['max'] = rtoks[0]
 
-
     def build(self, p):
         # for each species string, check whether or not the species
         # are imported or defined locally. If imported, the string
@@ -2248,8 +2273,8 @@ class phase(object):
             if foundColon and not allLocal:
                 icolon = sp.find(':')
                 datasrc = sp[:icolon].strip()
-                spnames = sp[icolon+1:]
-                self._sp.append((datasrc+'.xml', spnames))
+                spnames = sp[icolon + 1:]
+                self._sp.append((datasrc + '.xml', spnames))
             else:
                 spnames = sp
                 self._sp.append(('', spnames))
@@ -2259,9 +2284,9 @@ class phase(object):
 
         # check that species have been declared
         if len(self._spmap) == 0:
-            raise CTI_Error('No species declared for phase '+self._name)
+            raise CTI_Error('No species declared for phase ' + self._name)
 
-        p.addComment('    phase '+self._name+'     ')
+        p.addComment('    phase ' + self._name + '     ')
         ph = p.addChild('phase')
         ph['id'] = self._name
         ph['dim'] = repr(self._dim)
@@ -2271,12 +2296,12 @@ class phase(object):
         #err.addChild('duplicateReactions','halt')
         #err.addChild('thermo','warn')
 
-        e = ph.addChild('elementArray',self._el)
+        e = ph.addChild('elementArray', self._el)
         e['datasrc'] = 'elements.xml'
         for s in self._sp:
             datasrc, names = s
-            sa = ph.addChild('speciesArray',names)
-            sa['datasrc'] = datasrc+'#species_data'
+            sa = ph.addChild('speciesArray', names)
+            sa['datasrc'] = datasrc + '#species_data'
 
             if 'skip_undeclared_elements' in self._options:
                 sk = sa.addChild('skip')
@@ -2290,7 +2315,7 @@ class phase(object):
             self._initial.build(ph)
 
         if self._comment:
-            ph.addChild('note',self._comment)
+            ph.addChild('note', self._comment)
 
         thermo = ph.addChild('thermo')
         if 'allow_discontinuous_thermo' in self._options:
@@ -2302,15 +2327,15 @@ class phase(object):
 class ideal_gas(phase):
     """An ideal gas mixture."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 kinetics = 'GasKinetics',
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 kinetics='GasKinetics',
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
         """
         The parameters correspond to those of :class:`.phase`, with the
         following modifications:
@@ -2330,13 +2355,11 @@ class ideal_gas(phase):
         self._kin = kinetics
         self._tr = transport
         if self.debug:
-            _printerr('Read ideal_gas entry '+self._name)
+            _printerr('Read ideal_gas entry ' + self._name)
             try:
-                _printerr('in file '+__name__)
+                _printerr('in file ' + __name__)
             except:
                 pass
-
-
 
     def build(self, p):
         ph = phase.build(self, p)
@@ -2358,14 +2381,14 @@ class stoichiometric_solid(phase):
     phases do not contain any concentration terms for the (one) species in the
     phase, since the concentration is always the same."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 density = None,
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 density=None,
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
         """
         See :class:`.phase` for descriptions of the parameters.
         """
@@ -2381,13 +2404,13 @@ class stoichiometric_solid(phase):
     def conc_dim(self):
         """A stoichiometric solid always has unit activity, so the
         generalized concentration is 1 (dimensionless)."""
-        return (0,0)
+        return (0, 0)
 
     def build(self, p):
         ph = phase.build(self, p)
         e = ph.child('thermo')
         e['model'] = 'StoichSubstance'
-        addFloat(e, 'density', self._dens, defunits = _umass+'/'+_ulen+'3')
+        addFloat(e, 'density', self._dens, defunits=_umass + '/' + _ulen + '3')
         if self._tr:
             t = ph.addChild('transport')
             t['model'] = self._tr
@@ -2401,33 +2424,33 @@ class stoichiometric_liquid(stoichiometric_solid):
     distinction between stoichiometric liquids and solids.
     """
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 density = -1.0,
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 density=-1.0,
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
         """
         See :class:`.phase` for descriptions of the parameters.
         """
-        stoichiometric_solid.__init__(self, name, elements,
-                                      species, note, density, transport,
-                                      initial_state, options)
+        stoichiometric_solid.__init__(self, name, elements, species, note,
+                                      density, transport, initial_state,
+                                      options)
 
 
 class metal(phase):
     """A metal."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 density = -1.0,
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 density=-1.0,
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
 
         phase.__init__(self, name, 3, elements, species, note, 'none',
                        initial_state, options)
@@ -2436,33 +2459,34 @@ class metal(phase):
         self._tr = transport
 
     def conc_dim(self):
-        return (0,0)
+        return (0, 0)
 
     def build(self, p):
         ph = phase.build(self, p)
         e = ph.child("thermo")
         e['model'] = 'Metal'
-        addFloat(e, 'density', self._dens, defunits = _umass+'/'+_ulen+'3')
+        addFloat(e, 'density', self._dens, defunits=_umass + '/' + _ulen + '3')
         if self._tr:
             t = ph.addChild('transport')
             t['model'] = self._tr
         k = ph.addChild("kinetics")
         k['model'] = 'none'
 
+
 class semiconductor(phase):
     """A semiconductor."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 density = -1.0,
-                 bandgap = 1.0 * eV,
-                 effectiveMass_e = 1.0 * ElectronMass,
-                 effectiveMass_h = 1.0 * ElectronMass,
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 density=-1.0,
+                 bandgap=1.0 * eV,
+                 effectiveMass_e=1.0 * ElectronMass,
+                 effectiveMass_h=1.0 * ElectronMass,
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
 
         phase.__init__(self, name, 3, elements, species, note, 'none',
                        initial_state, options)
@@ -2474,16 +2498,16 @@ class semiconductor(phase):
         self._bandgap = bandgap
 
     def conc_dim(self):
-        return (1,-3)
+        return (1, -3)
 
     def build(self, p):
         ph = phase.build(self, p)
         e = ph.child("thermo")
         e['model'] = 'Semiconductor'
-        addFloat(e, 'density', self._dens, defunits = _umass+'/'+_ulen+'3')
-        addFloat(e, 'effectiveMass_e', self._emass, defunits = _umass)
-        addFloat(e, 'effectiveMass_h', self._hmass, defunits = _umass)
-        addFloat(e, 'bandgap', self._bandgap, defunits = 'eV')
+        addFloat(e, 'density', self._dens, defunits=_umass + '/' + _ulen + '3')
+        addFloat(e, 'effectiveMass_e', self._emass, defunits=_umass)
+        addFloat(e, 'effectiveMass_h', self._hmass, defunits=_umass)
+        addFloat(e, 'bandgap', self._bandgap, defunits='eV')
         if self._tr:
             t = ph.addChild('transport')
             t['model'] = self._tr
@@ -2494,14 +2518,14 @@ class semiconductor(phase):
 class incompressible_solid(phase):
     """An incompressible solid."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 density = None,
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 density=None,
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
 
         phase.__init__(self, name, 3, elements, species, note, 'none',
                        initial_state, options)
@@ -2512,13 +2536,13 @@ class incompressible_solid(phase):
         self._tr = transport
 
     def conc_dim(self):
-        return (1,-3)
+        return (1, -3)
 
     def build(self, p):
         ph = phase.build(self, p)
         e = ph.child("thermo")
         e['model'] = 'Incompressible'
-        addFloat(e, 'density', self._dens, defunits = _umass+'/'+_ulen+'3')
+        addFloat(e, 'density', self._dens, defunits=_umass + '/' + _ulen + '3')
         if self._tr:
             t = ph.addChild('transport')
             t['model'] = self._tr
@@ -2528,17 +2552,17 @@ class incompressible_solid(phase):
 
 class lattice(phase):
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 transport = 'None',
-                 initial_state = None,
-                 options = [],
-                 site_density = None):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 transport='None',
+                 initial_state=None,
+                 options=[],
+                 site_density=None):
         phase.__init__(self, name, 3, elements, species, note, 'none',
-                        initial_state, options)
+                       initial_state, options)
         self._tr = transport
         self._n = site_density
         self._species = species
@@ -2547,33 +2571,37 @@ class lattice(phase):
         if species == '':
             raise CTI_Error('sublattice species must be specified')
         if site_density is None:
-            raise CTI_Error('sublattice '+name
-                            +' site density must be specified')
+            raise CTI_Error('sublattice ' + name +
+                            ' site density must be specified')
 
-    def build(self,p, visible = 0):
+    def build(self, p, visible=0):
         #if visible == 0:
         #    return
         ph = phase.build(self, p)
         e = ph.child('thermo')
         e['model'] = 'Lattice'
-        addFloat(e, 'site_density', self._n, defunits = _umol+'/'+_ulen+'3')
+        addFloat(e,
+                 'site_density',
+                 self._n,
+                 defunits=_umol + '/' + _ulen + '3')
         if self._tr:
             t = ph.addChild('transport')
             t['model'] = self._tr
         k = ph.addChild("kinetics")
         k['model'] = 'none'
 
+
 class lattice_solid(phase):
     """A solid crystal consisting of one or more sublattices."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 lattices = [],
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 lattices=[],
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
 
         # find elements
         elist = []
@@ -2605,7 +2633,7 @@ class lattice_solid(phase):
         self._tr = transport
 
     def conc_dim(self):
-        return (0,0)
+        return (0, 0)
 
     def build(self, p):
         ph = phase.build(self, p)
@@ -2615,7 +2643,7 @@ class lattice_solid(phase):
         if self._lattices:
             lat = e.addChild('LatticeArray')
             for n in self._lattices:
-                n.build(lat, visible = 1)
+                n.build(lat, visible=1)
 
         if self._tr:
             t = ph.addChild('transport')
@@ -2624,31 +2652,28 @@ class lattice_solid(phase):
         k['model'] = 'none'
 
 
-
 class liquid_vapor(phase):
     """A fluid with a complete liquid/vapor equation of state.
     This entry type selects one of a set of predefined fluids with
     built-in liquid/vapor equations of state. The substance_flag
     parameter selects the fluid. See liquidvapor.cti and liquidvapor.py
     for the usage of this entry type."""
-
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 substance_flag = 0,
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 substance_flag=0,
+                 initial_state=None,
+                 options=[]):
 
         phase.__init__(self, name, 3, elements, species, note, 'none',
                        initial_state, options)
         self._subflag = substance_flag
         self._pure = 1
 
-
     def conc_dim(self):
-        return (0,0)
+        return (0, 0)
 
     def build(self, p):
         ph = phase.build(self, p)
@@ -2658,31 +2683,31 @@ class liquid_vapor(phase):
         k = ph.addChild("kinetics")
         k['model'] = 'none'
 
+
 class RedlichKwongMFTP(phase):
     """A multi-component fluid model for non-ideal gas fluids.
         """
-
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 kinetics = 'GasKinetics',
-                 initial_state = None,
-                 activity_coefficients = None,
-                 transport = 'None',
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 kinetics='GasKinetics',
+                 initial_state=None,
+                 activity_coefficients=None,
+                 transport='None',
+                 options=[]):
 
-        phase.__init__(self,name, 3, elements, species, note, reactions,
-                       initial_state,options)
+        phase.__init__(self, name, 3, elements, species, note, reactions,
+                       initial_state, options)
         self._pure = 0
         self._kin = kinetics
         self._tr = transport
         self._activityCoefficients = activity_coefficients
 
     def build(self, p):
-        ph = phase.build(self,p)
+        ph = phase.build(self, p)
         e = ph.child("thermo")
         e['model'] = 'RedlichKwongMFTP'
         if self._activityCoefficients:
@@ -2705,17 +2730,17 @@ class RedlichKwongMFTP(phase):
 class ideal_interface(phase):
     """A chemically-reacting ideal surface solution of multiple species."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 site_density = 0.0,
-                 phases = [],
-                 kinetics = 'Interface',
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 site_density=0.0,
+                 phases=[],
+                 kinetics='Interface',
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
         """
         The parameters correspond to those of :class:`.phase`, with the
         following modifications:
@@ -2744,13 +2769,15 @@ class ideal_interface(phase):
         ph = phase.build(self, p)
         e = ph.child("thermo")
         e['model'] = 'Surface'
-        addFloat(e, 'site_density', self._sitedens, defunits = _umol+'/'+_ulen+'2')
+        addFloat(e,
+                 'site_density',
+                 self._sitedens,
+                 defunits=_umol + '/' + _ulen + '2')
         k = ph.addChild("kinetics")
         k['model'] = self._kin
         t = ph.addChild('transport')
         t['model'] = self._tr
-        p = ph.addChild('phaseArray',self._phases)
-
+        p = ph.addChild('phaseArray', self._phases)
 
     def conc_dim(self):
         return (1, -2)
@@ -2760,19 +2787,19 @@ class interacting_interface(phase):
     """A chemically-reacting surface solution of multiple species with coverage
     dependent lateral interactions."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 interactions = 'none',
-                 beps = 'none',
-                 site_density = 0.0,
-                 phases = [],
-                 kinetics = 'Interface',
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 interactions='none',
+                 beps='none',
+                 site_density=0.0,
+                 phases=[],
+                 kinetics='Interface',
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
         """
         The parameters correspond to those of :class:`.phase`, with the
         following modifications:
@@ -2789,8 +2816,8 @@ class interacting_interface(phase):
             at this interface.
         """
         self._type = 'interacting_surface'
-        phase.__init__(self, name, 2, elements, species, note,
-                       reactions, initial_state, options)
+        phase.__init__(self, name, 2, elements, species, note, reactions,
+                       initial_state, options)
         self._pure = 0
         self._intrxns = interactions
         self._beps = beps
@@ -2814,8 +2841,8 @@ class interacting_interface(phase):
             if icolon > 0:
                 #datasrc, rnum = r.split(':')
                 datasrc = ir[:icolon].strip()
-                irnum = ir[icolon+1:]
-                self._irx.append((datasrc+'.xml', irnum))
+                irnum = ir[icolon + 1:]
+                self._irx.append((datasrc + '.xml', irnum))
             else:
                 irnum = ir
                 self._irx.append(('', irnum))
@@ -2823,7 +2850,7 @@ class interacting_interface(phase):
         for ir in self._irx:
             datasrc = ir[0]
             ira = p.addChild('interactionArray')
-            ira['datasrc'] = datasrc+'#interaction_data'
+            ira['datasrc'] = datasrc + '#interaction_data'
             irk = None
             if 'skip_undeclared_species' in self._options:
                 irk = ira.addChild('skip')
@@ -2851,8 +2878,8 @@ class interacting_interface(phase):
             if icolon > 0:
                 #datasrc, rnum = r.split(':')
                 datasrc = bep[:icolon].strip()
-                bepnum = bep[icolon+1:]
-                self._BEPs.append((datasrc+'.xml', bepnum))
+                bepnum = bep[icolon + 1:]
+                self._BEPs.append((datasrc + '.xml', bepnum))
             else:
                 bepnum = bep
                 self._BEPs.append(('', bepnum))
@@ -2860,7 +2887,7 @@ class interacting_interface(phase):
         for bep in self._BEPs:
             datasrc, names = bep
             bepa = p.addChild('bepArray', names)
-            bepa['datasrc'] = datasrc+'#bep_data'
+            bepa['datasrc'] = datasrc + '#bep_data'
 
     def build(self, p):
         ph = phase.build(self, p)
@@ -2871,34 +2898,34 @@ class interacting_interface(phase):
             self._build_beps(ph)
         e = ph.child("thermo")
         e['model'] = 'SurfaceCoverage'
-        addFloat(e, 'site_density', self._sitedens, defunits = _umol+'/'+_ulen+'2')
+        addFloat(e,
+                 'site_density',
+                 self._sitedens,
+                 defunits=_umol + '/' + _ulen + '2')
         k = ph.addChild("kinetics")
         k['model'] = self._kin
         t = ph.addChild('transport')
         t['model'] = self._tr
-        p = ph.addChild('phaseArray',self._phases)
-
+        p = ph.addChild('phaseArray', self._phases)
 
     def conc_dim(self):
         return (1, -2)
 
 
-
-
 class edge(phase):
     """A 1D boundary between two surface phases."""
     def __init__(self,
-                 name = '',
-                 elements = '',
-                 species = '',
-                 note = '',
-                 reactions = 'none',
-                 site_density = 0.0,
-                 phases = [],
-                 kinetics = 'Edge',
-                 transport = 'None',
-                 initial_state = None,
-                 options = []):
+                 name='',
+                 elements='',
+                 species='',
+                 note='',
+                 reactions='none',
+                 site_density=0.0,
+                 phases=[],
+                 kinetics='Edge',
+                 transport='None',
+                 initial_state=None,
+                 options=[]):
 
         self._type = 'edge'
         phase.__init__(self, name, 1, elements, species, note, reactions,
@@ -2913,13 +2940,15 @@ class edge(phase):
         ph = phase.build(self, p)
         e = ph.child("thermo")
         e['model'] = 'Edge'
-        addFloat(e, 'site_density', self._sitedens, defunits = _umol+'/'+_ulen)
+        addFloat(e,
+                 'site_density',
+                 self._sitedens,
+                 defunits=_umol + '/' + _ulen)
         k = ph.addChild("kinetics")
         k['model'] = self._kin
         t = ph.addChild('transport')
         t['model'] = self._tr
-        p = ph.addChild('phaseArray',self._phases)
-
+        p = ph.addChild('phaseArray', self._phases)
 
     def conc_dim(self):
         return (1, -1)
@@ -3002,7 +3031,6 @@ class edge(phase):
 ##         s.addChild("Theta", self._theta)
 ##         s.addChild("Psi", self._psi)
 
-
 ## class theta_cation:
 ##     def __init__(self,
 ##                  cations = None,
@@ -3060,14 +3088,14 @@ class edge(phase):
 ##         k = ph.addChild("kinetics")
 ##         k['model'] = 'none'
 
-
 #-------------------------------------------------------------------
 
 # falloff parameterizations
 
+
 class Troe(object):
     """The Troe falloff function."""
-    def __init__(self, A = 0.0, T3 = 0.0, T1 = 0.0, T2 = -999.9):
+    def __init__(self, A=0.0, T3=0.0, T1=0.0, T2=-999.9):
         """
         Parameters: *A*, *T3*, *T1*, *T2*. These must be entered as pure
         numbers with no attached dimensions.
@@ -3087,7 +3115,7 @@ class Troe(object):
 
 class SRI(object):
     """ The SRI falloff function."""
-    def __init__(self, A = 0.0, B = 0.0, C = 0.0, D = -999.9, E=-999.9):
+    def __init__(self, A=0.0, B=0.0, C=0.0, D=-999.9, E=-999.9):
         """
         Parameters: *A*, *B*, *C*, *D*, *E*. These must be entered as
         pure numbers without attached dimensions.
@@ -3110,6 +3138,7 @@ class Lindemann(object):
     def __init__(self):
         """ This falloff function takes no parameters."""
         pass
+
     def build(self, p):
         f = p.addChild('falloff')
         f['type'] = 'Lindemann'
@@ -3117,6 +3146,7 @@ class Lindemann(object):
 
 #get_atomic_wts()
 validate()
+
 
 def convert(filename=None, outName=None, text=None):
     # Clear variables
@@ -3157,15 +3187,13 @@ def convert(filename=None, outName=None, text=None):
             text = open(filename, open_mode).readlines()
         else:
             text = text.split('\n')
-        _printerr('%s in "%s" on line %i:\n' % (err.__class__.__name__,
-                                                err.filename,
-                                                err.lineno))
+        _printerr('%s in "%s" on line %i:\n' %
+                  (err.__class__.__name__, err.filename, err.lineno))
         _printerr('|  Line |')
-        for i in range(max(err.lineno-6, 0),
-                       min(err.lineno+3, len(text))):
-            _printerr('| % 5i |' % (i+1), text[i].rstrip())
-            if i == err.lineno-1:
-                _printerr(' '* (err.offset+9) + '^')
+        for i in range(max(err.lineno - 6, 0), min(err.lineno + 3, len(text))):
+            _printerr('| % 5i |' % (i + 1), text[i].rstrip())
+            if i == err.lineno - 1:
+                _printerr(' ' * (err.offset + 9) + '^')
         _printerr()
         sys.exit(3)
     except Exception as err:
@@ -3180,16 +3208,16 @@ def convert(filename=None, outName=None, text=None):
         lineno = tb[-1][1]
         if tb[-1][0] == filename:
             # Error in input file
-            _printerr('%s on line %i of %s:' % (err.__class__.__name__, lineno, filename))
+            _printerr('%s on line %i of %s:' %
+                      (err.__class__.__name__, lineno, filename))
             _printerr(err)
             _printerr('\n| Line |')
 
-            for i in range(max(lineno-6, 0),
-                           min(lineno+3, len(text))):
-                if i == lineno-1:
-                    _printerr('> % 4i >' % (i+1), text[i].rstrip())
+            for i in range(max(lineno - 6, 0), min(lineno + 3, len(text))):
+                if i == lineno - 1:
+                    _printerr('> % 4i >' % (i + 1), text[i].rstrip())
                 else:
-                    _printerr('| % 4i |' % (i+1), text[i].rstrip())
+                    _printerr('| % 4i |' % (i + 1), text[i].rstrip())
         else:
             # Error in ctml_writer or elsewhere
             traceback.print_exc()
@@ -3200,9 +3228,10 @@ def convert(filename=None, outName=None, text=None):
 
 
 def main():
-    if len(sys.argv) not in (2,3):
+    if len(sys.argv) not in (2, 3):
         raise ValueError('Incorrect number of command line arguments.')
     convert(*sys.argv[1:])
+
 
 if __name__ == "__main__":
     main()

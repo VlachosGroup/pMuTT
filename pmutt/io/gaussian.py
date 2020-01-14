@@ -87,7 +87,6 @@ def read_electronic_and_zpe(filename, units='eV/molecule'):
            *c.convert_unit(initial='Ha/molecule', final=units)
 
 
-
 def read_frequencies(filename, units='1/cm'):
     """Reads the frequencies from the Gaussian log file.
 
@@ -169,7 +168,9 @@ def read_rot_symmetry_num(filename):
         rot_symmetry_num : int
             Rotational symmetry number
     """
-    return int(float(read_pattern(filename=filename,
-                                  pattern='Rotational symmetry number(.*)',
-                                  group=0,
-                                  return_immediately=True)))
+    return int(
+        float(
+            read_pattern(filename=filename,
+                         pattern='Rotational symmetry number(.*)',
+                         group=0,
+                         return_immediately=True)))

@@ -32,7 +32,6 @@ class PiecewiseCovEffect(_ModelBase):
         name : str, optional
             Name to assign. Default is None
     """
-
     def __init__(self, name_i, name_j, intervals, slopes, name=None):
         self.name_i = name_i
         self.name_j = name_j
@@ -89,10 +88,10 @@ class PiecewiseCovEffect(_ModelBase):
             else:
                 # Calculate H value at interval
                 prev_intercept = self._intercepts[-1]
-                prev_slope = self.slopes[i-1]
-                H = prev_slope*interval + prev_intercept
+                prev_slope = self.slopes[i - 1]
+                H = prev_slope * interval + prev_intercept
                 # Calculate intercept of new area of curve
-                self._intercepts.append(H - slope*interval)
+                self._intercepts.append(H - slope * interval)
 
     def get_UoRT(self, x=0., T=c.T0('K')):
         """Calculates the excess internal energy
@@ -108,8 +107,9 @@ class PiecewiseCovEffect(_ModelBase):
             UoRT : float
                 Dimensionless internal energy
         """
-        i = np.argmax(x < np.array(self.intervals))-1
-        UoRT = (self.slopes[i]*x + self._intercepts[i])/(c.R('kcal/mol/K')*T)
+        i = np.argmax(x < np.array(self.intervals)) - 1
+        UoRT = (self.slopes[i] * x +
+                self._intercepts[i]) / (c.R('kcal/mol/K') * T)
         return UoRT
 
     def get_HoRT(self, x=0., T=c.T0('K')):
@@ -202,12 +202,14 @@ class PiecewiseCovEffect(_ModelBase):
         -------
             obj_dict : dict
         """
-        obj_dict = {'class': str(self.__class__),
-                    'name_i': self.name_i,
-                    'name_j': self.name_j,
-                    'intervals': list(self.intervals),
-                    'slopes': list(self.slopes),
-                    'intercepts': list(self._intercepts)}
+        obj_dict = {
+            'class': str(self.__class__),
+            'name_i': self.name_i,
+            'name_j': self.name_j,
+            'intervals': list(self.intervals),
+            'slopes': list(self.slopes),
+            'intercepts': list(self._intercepts)
+        }
         return obj_dict
 
     @classmethod

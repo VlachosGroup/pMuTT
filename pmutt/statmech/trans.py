@@ -26,12 +26,11 @@ class FreeTrans(_ModelBase):
 
     .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
-
     def __init__(self, n_degrees=3, molecular_weight=None, atoms=None):
         self.n_degrees = n_degrees
         if molecular_weight is None and atoms is not None:
             self.molecular_weight = get_molecular_weight(
-                    atoms.get_chemical_formula(mode='hill'))
+                atoms.get_chemical_formula(mode='hill'))
         else:
             self.molecular_weight = molecular_weight
 
@@ -51,7 +50,8 @@ class FreeTrans(_ModelBase):
             V : float
                 Molar volume in m3
         """
-        return T*c.R('J/mol/K')/(P*c.convert_unit(initial='bar', final='Pa'))
+        return T * c.R('J/mol/K') / (P *
+                                     c.convert_unit(initial='bar', final='Pa'))
 
     def get_q(self, T, P=c.P0('bar')):
         """Calculates the partition function
@@ -87,7 +87,7 @@ class FreeTrans(_ModelBase):
             CvoR_trans : float
                 Translational dimensionless heat capacity at constant V
         """
-        return float(self.n_degrees)/2.
+        return float(self.n_degrees) / 2.
 
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
@@ -111,7 +111,7 @@ class FreeTrans(_ModelBase):
             UoRT_trans : float
                 Translational internal energy
         """
-        return float(self.n_degrees)/2.
+        return float(self.n_degrees) / 2.
 
     def get_HoRT(self):
         """Calculates the dimensionless enthalpy
@@ -168,7 +168,7 @@ class FreeTrans(_ModelBase):
             FoRT_trans : float
                 Translational dimensionless Helmholtz energy
         """
-        return self.get_UoRT()-self.get_SoR(T=T, P=P)
+        return self.get_UoRT() - self.get_SoR(T=T, P=P)
 
     def get_GoRT(self, T, P=c.P0('bar')):
         """Calculates the dimensionless Gibbs energy
@@ -187,7 +187,7 @@ class FreeTrans(_ModelBase):
             GoR_trans : float
                 Translational dimensionless Gibbs energy
         """
-        return self.get_HoRT()-self.get_SoR(T=T, P=P)
+        return self.get_HoRT() - self.get_SoR(T=T, P=P)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -196,6 +196,8 @@ class FreeTrans(_ModelBase):
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'n_degrees': self.n_degrees,
-                'molecular_weight': self.molecular_weight}
+        return {
+            'class': str(self.__class__),
+            'n_degrees': self.n_degrees,
+            'molecular_weight': self.molecular_weight
+        }

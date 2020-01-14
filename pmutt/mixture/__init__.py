@@ -11,8 +11,12 @@ from pmutt import (_apply_numpy_operation, _get_mode_quantity,
                    _get_specie_kwargs)
 
 
-def _get_mix_quantity(misc_models, method_name, raise_error=True,
-                      raise_warning=True, default_value=0., **kwargs):
+def _get_mix_quantity(misc_models,
+                      method_name,
+                      raise_error=True,
+                      raise_warning=True,
+                      default_value=0.,
+                      **kwargs):
     """Calculate contribution from mixing models to desired quantity
 
     Parameters
@@ -48,7 +52,8 @@ def _get_mix_quantity(misc_models, method_name, raise_error=True,
         return np.array([default_value])
 
     # Calculate contribution from mixing models if any
-    mix_quantity = np.full_like(a=misc_models, fill_value=default_value,
+    mix_quantity = np.full_like(a=misc_models,
+                                fill_value=default_value,
                                 dtype=np.double)
     for i, mix_model in enumerate(misc_models):
         if mix_model is None:

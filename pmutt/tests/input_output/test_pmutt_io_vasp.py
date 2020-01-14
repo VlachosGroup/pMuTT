@@ -8,15 +8,17 @@ class TestVasp(unittest.TestCase):
         test_file = os.path.join(os.path.dirname(__file__), 'test_OUTCAR')
         incorrect_file = 'this_is_not_a_file.txt'
         out_dict = dict()
-        expected_wavenumber_nocutoff = {'vib_wavenumbers':
-                                        [3821.717493, 3703.479948,
-                                         1535.727129, 115.153397,
-                                         105.380772, 64.404843]}
+        expected_wavenumber_nocutoff = {
+            'vib_wavenumbers': [
+                3821.717493, 3703.479948, 1535.727129, 115.153397, 105.380772,
+                64.404843
+            ]
+        }
         cutoff = 100
-        expected_wavenumber_cutoff = {'vib_wavenumbers':
-                                      [3821.717493, 3703.479948,
-                                       1535.727129, 115.153397,
-                                       105.380772]}
+        expected_wavenumber_cutoff = {
+            'vib_wavenumbers':
+            [3821.717493, 3703.479948, 1535.727129, 115.153397, 105.380772]
+        }
         # check parsing with no min_frequency_cutoff
         vasp.set_vib_wavenumbers_from_outcar(test_file, out_dict, 0.)
         self.assertDictEqual(out_dict, expected_wavenumber_nocutoff)

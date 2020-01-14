@@ -60,8 +60,16 @@ class Nasa(EmpiricalBase):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    def __init__(self, name, T_low, T_mid, T_high, a_low, a_high,
-                 cat_site=None, n_sites=None, **kwargs):
+    def __init__(self,
+                 name,
+                 T_low,
+                 T_mid,
+                 T_high,
+                 a_low,
+                 a_high,
+                 cat_site=None,
+                 n_sites=None,
+                 **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
         self.T_mid = T_mid
@@ -141,7 +149,7 @@ class Nasa(EmpiricalBase):
         else:
             a = self.get_a(T=T)
             CpoR = get_nasa_CpoR(a=a, T=T) \
-                + np.sum(_get_mix_quantity(self.misc_models, 
+                + np.sum(_get_mix_quantity(self.misc_models,
                                            method_name='get_CpoR',
                                            raise_error=raise_error,
                                            raise_warning=raise_warning,
@@ -176,7 +184,7 @@ class Nasa(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_CpoR(T=T)*R_adj
+        return self.get_CpoR(T=T) * R_adj
 
     def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
@@ -251,8 +259,10 @@ class Nasa(EmpiricalBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_HoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*T*R_adj
+        return self.get_HoRT(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * T * R_adj
 
     def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
@@ -326,8 +336,10 @@ class Nasa(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_SoR(T=T, raise_error=raise_error,
-                            raise_warning=raise_warning, **kwargs)*R_adj
+        return self.get_SoR(T=T,
+                            raise_error=raise_error,
+                            raise_warning=raise_warning,
+                            **kwargs) * R_adj
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
@@ -386,12 +398,22 @@ class Nasa(EmpiricalBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_GoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*T*R_adj
+        return self.get_GoRT(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * T * R_adj
 
     @classmethod
-    def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
-                  T_mid=None, **kwargs):
+    def from_data(cls,
+                  name,
+                  T,
+                  CpoR,
+                  T_ref,
+                  HoRT_ref,
+                  SoR_ref,
+                  elements=None,
+                  T_mid=None,
+                  **kwargs):
         """Calculates the NASA polynomials using thermodynamic data
 
         Parameters
@@ -432,19 +454,36 @@ class Nasa(EmpiricalBase):
         # Find midpoint temperature, and a[0] through a[4] parameters
         a_low, a_high, T_mid_out = _fit_CpoR(T=T, CpoR=CpoR, T_mid=T_mid)
         # Fit a[5] parameter using reference enthalpy
-        a_low[5], a_high[5] = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref,
-                                        a_low=a_low, a_high=a_high,
+        a_low[5], a_high[5] = _fit_HoRT(T_ref=T_ref,
+                                        HoRT_ref=HoRT_ref,
+                                        a_low=a_low,
+                                        a_high=a_high,
                                         T_mid=T_mid_out)
         # Fit a[6] parameter using reference entropy
-        a_low[6], a_high[6] = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref,
-                                       a_low=a_low, a_high=a_high,
+        a_low[6], a_high[6] = _fit_SoR(T_ref=T_ref,
+                                       SoR_ref=SoR_ref,
+                                       a_low=a_low,
+                                       a_high=a_high,
                                        T_mid=T_mid_out)
-        return cls(name=name, T_low=T_low, T_high=T_high, T_mid=T_mid_out,
-                   a_low=a_low, a_high=a_high, elements=elements, **kwargs)
+        return cls(name=name,
+                   T_low=T_low,
+                   T_high=T_high,
+                   T_mid=T_mid_out,
+                   a_low=a_low,
+                   a_high=a_high,
+                   elements=elements,
+                   **kwargs)
 
     @classmethod
-    def from_statmech(cls, name, statmech_model, T_low, T_high, T_mid=None,
-                      references=None, elements=None, **kwargs):
+    def from_statmech(cls,
+                      name,
+                      statmech_model,
+                      T_low,
+                      T_high,
+                      T_mid=None,
+                      references=None,
+                      elements=None,
+                      **kwargs):
         """Calculates the NASA polynomials using statistical mechanic models.
         Deprecated as of Version 1.2.13. Please use ``from_model`` instead.
 
@@ -484,8 +523,15 @@ class Nasa(EmpiricalBase):
         raise RuntimeError(err_msg)
 
     @classmethod
-    def from_model(cls, model, name=None, T_low=None, T_high=None, T_mid=None,
-                   elements=None, n_T=50, **kwargs):
+    def from_model(cls,
+                   model,
+                   name=None,
+                   T_low=None,
+                   T_high=None,
+                   T_mid=None,
+                   elements=None,
+                   n_T=50,
+                   **kwargs):
         """Calculates the NASA polynomials using the model passed
 
         Parameters
@@ -531,7 +577,7 @@ class Nasa(EmpiricalBase):
                 name = model.name
             except AttributeError:
                 err_msg = ('Name must either be passed to from_model directly '
-                           'or be an attribute of model.')                      
+                           'or be an attribute of model.')
                 raise AttributeError(err_msg)
         if T_low is None:
             try:
@@ -552,7 +598,7 @@ class Nasa(EmpiricalBase):
                 elements = model.elements
             except AttributeError:
                 pass
-        # Check if inputted T_low and T_high are outside model's T_low and 
+        # Check if inputted T_low and T_high are outside model's T_low and
         # T_high range
         try:
             if T_low < model.T_low:
@@ -580,12 +626,19 @@ class Nasa(EmpiricalBase):
             if not _is_iterable(CpoR) or len(CpoR) != len(T):
                 CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
         # Generate enthalpy and entropy data
-        T_mean = (T_low+T_high)/2.
+        T_mean = (T_low + T_high) / 2.
         HoRT_ref = model.get_HoRT(T=T_mean)
         SoR_ref = model.get_SoR(T=T_mean)
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mean,
-                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
-                             model=model, elements=elements, **kwargs)
+        return cls.from_data(name=name,
+                             T=T,
+                             CpoR=CpoR,
+                             T_ref=T_mean,
+                             HoRT_ref=HoRT_ref,
+                             SoR_ref=SoR_ref,
+                             T_mid=T_mid,
+                             model=model,
+                             elements=elements,
+                             **kwargs)
 
     def to_CTI(self):
         """Writes the object in Cantera's CTI format.
@@ -609,13 +662,12 @@ class Nasa(EmpiricalBase):
                    '                     [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}])))\n').format(
-                            self.name, obj_to_CTI(elements), size_str,
-                            self.T_low, self.T_mid, self.a_low[0], self.a_low[1],
-                            self.a_low[2], self.a_low[3], self.a_low[4],
-                            self.a_low[5], self.a_low[6], self.T_mid,
-                            self.T_high, self.a_high[0], self.a_high[1],
-                            self.a_high[2], self.a_high[3], self.a_high[4],
-                            self.a_high[5], self.a_high[6])
+                       self.name, obj_to_CTI(elements), size_str, self.T_low,
+                       self.T_mid, self.a_low[0], self.a_low[1], self.a_low[2],
+                       self.a_low[3], self.a_low[4], self.a_low[5],
+                       self.a_low[6], self.T_mid, self.T_high, self.a_high[0],
+                       self.a_high[1], self.a_high[2], self.a_high[3],
+                       self.a_high[4], self.a_high[5], self.a_high[6])
         return cti_str
 
     def to_dict(self):
@@ -658,6 +710,7 @@ class Nasa(EmpiricalBase):
         json_obj['cat_site'] = json_to_pmutt(json_obj['cat_site'])
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
+
 
 class Nasa9(EmpiricalBase):
     """Stores the NASA9 polynomials for species.
@@ -771,7 +824,7 @@ class Nasa9(EmpiricalBase):
         else:
             nasa = self._get_nasa(T=T)
             CpoR = nasa.get_CpoR(T=T) \
-                   + np.sum(_get_mix_quantity(self.misc_models, 
+                   + np.sum(_get_mix_quantity(self.misc_models,
                                               method_name='get_CpoR',
                                               raise_error=raise_error,
                                               raise_warning=raise_warning,
@@ -808,7 +861,7 @@ class Nasa9(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_CpoR(T=T)*R_adj
+        return self.get_CpoR(T=T) * R_adj
 
     def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
@@ -886,8 +939,10 @@ class Nasa9(EmpiricalBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_HoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*T*R_adj
+        return self.get_HoRT(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * T * R_adj
 
     def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
@@ -964,8 +1019,10 @@ class Nasa9(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_SoR(T=T, raise_error=raise_error,
-                            raise_warning=raise_warning, **kwargs)*R_adj
+        return self.get_SoR(T=T,
+                            raise_error=raise_error,
+                            raise_warning=raise_warning,
+                            **kwargs) * R_adj
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
@@ -1024,12 +1081,23 @@ class Nasa9(EmpiricalBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_GoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*T*R_adj
+        return self.get_GoRT(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * T * R_adj
 
     @classmethod
-    def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, elements=None,
-                  T_mid=None, fit_T_mid=True, **kwargs):
+    def from_data(cls,
+                  name,
+                  T,
+                  CpoR,
+                  T_ref,
+                  HoRT_ref,
+                  SoR_ref,
+                  elements=None,
+                  T_mid=None,
+                  fit_T_mid=True,
+                  **kwargs):
         """Calculates the NASA polynomials using thermodynamic data
 
         Parameters
@@ -1081,10 +1149,18 @@ class Nasa9(EmpiricalBase):
 
         return cls(name=name, nasas=nasas, elements=elements, **kwargs)
 
-
     @classmethod
-    def from_model(cls, name, model, T_low, T_high, elements=None, T_mid=None,
-                   n_interval=2, n_T=50, fit_T_mid=True, **kwargs):
+    def from_model(cls,
+                   name,
+                   model,
+                   T_low,
+                   T_high,
+                   elements=None,
+                   T_mid=None,
+                   n_interval=2,
+                   n_T=50,
+                   fit_T_mid=True,
+                   **kwargs):
         """Calculates the NASA polynomials using the model passed
 
         Parameters
@@ -1131,10 +1207,11 @@ class Nasa9(EmpiricalBase):
         if fit_T_mid:
             # If guesses not specified, use even spacing
             if T_mid is None:
-                T_mid0 = np.linspace(T_low, T_high, n_interval+1)[1:-1]
+                T_mid0 = np.linspace(T_low, T_high, n_interval + 1)[1:-1]
             else:
                 T_mid0 = T_mid
-            res = minimize(method='Nelder-Mead', x0=T_mid0,
+            res = minimize(method='Nelder-Mead',
+                           x0=T_mid0,
                            fun=_calc_T_mid_mse_nasa9,
                            args=(T_low, T_high, model, n_T))
             T_mid = res.x
@@ -1156,14 +1233,20 @@ class Nasa9(EmpiricalBase):
             if not _is_iterable(CpoR) or len(CpoR) != len(T):
                 CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
-
         # Generate enthalpy and entropy data
         HoRT_ref = model.get_HoRT(T=T_low)
         SoR_ref = model.get_SoR(T=T_low)
 
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_low,
-                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref, T_mid=T_mid,
-                             model=model, elements=elements, fit_T_mid=False,
+        return cls.from_data(name=name,
+                             T=T,
+                             CpoR=CpoR,
+                             T_ref=T_low,
+                             HoRT_ref=HoRT_ref,
+                             SoR_ref=SoR_ref,
+                             T_mid=T_mid,
+                             model=model,
+                             elements=elements,
+                             fit_T_mid=False,
                              **kwargs)
 
     def _get_T_limit(self, limit):
@@ -1303,7 +1386,7 @@ class SingleNasa9(EmpiricalBase):
                 Dimensionless enthalpy
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
-        """        
+        """
         # Convert T to 1D numpy format
         if not _is_iterable(T):
             T = [T]
@@ -1325,7 +1408,7 @@ class SingleNasa9(EmpiricalBase):
                 Dimensionless heat capacity
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
-        """        
+        """
         # Convert T to 1D numpy format
         if not _is_iterable(T):
             T = [T]
@@ -1395,6 +1478,7 @@ class SingleNasa9(EmpiricalBase):
                              self.a[5], self.a[6], self.a[7], self.a[8]))
         return cti_str
 
+
 def _fit_CpoR(T, CpoR, T_mid=None):
     """Fit a[0]-a[4] coefficients in a_low and a_high attributes given the
     dimensionless heat capacity data
@@ -1426,7 +1510,7 @@ def _fit_CpoR(T, CpoR, T_mid=None):
     # vibrational frequencies are listed), return default values
     if all([np.isclose(x, 0.) for x in CpoR]) \
        or any([np.isnan(x) for x in CpoR]):
-        T_mid = T[int(len(T)/2)]
+        T_mid = T[int(len(T) / 2)]
         a_low = np.zeros(7)
         a_high = np.zeros(7)
         return a_low, a_high, T_mid
@@ -1438,7 +1522,7 @@ def _fit_CpoR(T, CpoR, T_mid=None):
 
     # If a single value for T_mid is chosen, convert to a tuple
     if not _is_iterable(T_mid):
-        T_mid = (T_mid,)
+        T_mid = (T_mid, )
 
     # Initialize parameters for T_mid optimization
     mse_list = []
@@ -1543,14 +1627,14 @@ def _fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
         a6_high_out : float
             Higher a6 value for NASA polynomial
     """
-    a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref))*T_ref
-    a6_high = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref))*T_ref
+    a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref)) * T_ref
+    a6_high = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref)) * T_ref
 
     # Correcting for offset
-    H_low_last_T = get_nasa_HoRT(a=a_low, T=T_mid) + a6_low_out/T_mid
-    H_high_first_T = get_nasa_HoRT(a=a_high, T=T_mid) + a6_high/T_mid
+    H_low_last_T = get_nasa_HoRT(a=a_low, T=T_mid) + a6_low_out / T_mid
+    H_high_first_T = get_nasa_HoRT(a=a_high, T=T_mid) + a6_high / T_mid
     H_offset = H_low_last_T - H_high_first_T
-    a6_high_out = T_mid * (a6_high/T_mid + H_offset)
+    a6_high_out = T_mid * (a6_high / T_mid + H_offset)
 
     return a6_low_out, a6_high_out
 
@@ -1583,7 +1667,8 @@ def _fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
     S_offset = S_low_last_T - S_high_first_T
     a7_high_out = a7_high + S_offset
 
-    return a7_low_out, a7_high_out    
+    return a7_low_out, a7_high_out
+
 
 def _calc_T_mid_mse_nasa9(T_mid, T_low, T_high, model, n_T=50):
     """Calculates the mean squared error associated with temperature intervals
@@ -1619,11 +1704,14 @@ def _calc_T_mid_mse_nasa9(T_mid, T_low, T_high, model, n_T=50):
         CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Optimize NASA9 coefficients
-        res = minimize(method='BFGS', args=(T, CpoR),
-                       fun=_get_nasa9_mse, jac=_get_nasa9_mse_jacob,
+        res = minimize(method='BFGS',
+                       args=(T, CpoR),
+                       fun=_get_nasa9_mse,
+                       jac=_get_nasa9_mse_jacob,
                        x0=np.zeros(9))
         mse += res.fun
     return mse
+
 
 def _calc_T_mid_mse_nasa(T_mid, T_low, T_high, model, n_T=50):
     """Calculates the mean squared error associated with temperature intervals
@@ -1663,11 +1751,14 @@ def _calc_T_mid_mse_nasa(T_mid, T_low, T_high, model, n_T=50):
             CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Optimize NASA9 coefficients
-        res = minimize(method='BFGS', args=(T, CpoR),
-                       fun=_get_nasa_mse, jac=_get_nasa_mse_jacob,
+        res = minimize(method='BFGS',
+                       args=(T, CpoR),
+                       fun=_get_nasa_mse,
+                       jac=_get_nasa_mse_jacob,
                        x0=np.zeros(7))
         mse += res.fun
     return mse
+
 
 def _get_nasa_mse(a, T, CpoR):
     """Calculates the mean squared error associated with NASA coefficients
@@ -1689,6 +1780,7 @@ def _get_nasa_mse(a, T, CpoR):
     mse = np.mean((CpoR_fit - CpoR)**2)
     return mse
 
+
 def _get_nasa_mse_jacob(a, T, CpoR):
     """Calculates the Jacobian associated with NASA coefficients
 
@@ -1707,14 +1799,15 @@ def _get_nasa_mse_jacob(a, T, CpoR):
     """
     CpoR_fit = get_nasa_CpoR(a, T)
     error = CpoR_fit - CpoR
-    jac = 2./float(len(T))*np.array([1.,
-                                     np.sum(error*T),
-                                     np.sum(error*(T**2)),
-                                     np.sum(error*(T**3)),
-                                     np.sum(error*(T**4)),
-                                     0.,
-                                     0.])
+    jac = 2. / float(len(T)) * np.array([
+        1.,
+        np.sum(error * T),
+        np.sum(error * (T**2)),
+        np.sum(error * (T**3)),
+        np.sum(error * (T**4)), 0., 0.
+    ])
     return jac
+
 
 def _get_nasa9_mse(a, T, CpoR):
     """Calculates the mean squared error associated with NASA9 coefficients
@@ -1736,6 +1829,7 @@ def _get_nasa9_mse(a, T, CpoR):
     mse = np.mean((CpoR_fit - CpoR)**2)
     return mse
 
+
 def _get_nasa9_mse_jacob(a, T, CpoR):
     """Calculates the Jacobian associated with NASA9 coefficients
 
@@ -1754,16 +1848,16 @@ def _get_nasa9_mse_jacob(a, T, CpoR):
     """
     CpoR_fit = get_nasa9_CpoR(a, T)
     error = CpoR_fit - CpoR
-    jac = 2./float(len(T))*np.array([np.sum(error*(T**-2)),
-                                     np.sum(error*(T**-1)),
-                                     1.,
-                                     np.sum(error*T),
-                                     np.sum(error*(T**2)),
-                                     np.sum(error*(T**3)),
-                                     np.sum(error*(T**4)),
-                                     0.,
-                                     0.])
+    jac = 2. / float(len(T)) * np.array([
+        np.sum(error * (T**-2)),
+        np.sum(error * (T**-1)), 1.,
+        np.sum(error * T),
+        np.sum(error * (T**2)),
+        np.sum(error * (T**3)),
+        np.sum(error * (T**4)), 0., 0.
+    ])
     return jac
+
 
 def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
     """Fit a[0]-a[6] coefficients in a_low and a_high attributes given the
@@ -1795,7 +1889,7 @@ def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
     # vibrational frequencies are listed), return default values
     if all([np.isclose(x, 0.) for x in CpoR]) \
        or any([np.isnan(x) for x in CpoR]):
-        return [np.zeros(9)]*(len(T_mid)+1)
+        return [np.zeros(9)] * (len(T_mid) + 1)
 
     a = []
     T_interval = np.concatenate([[T_low], T_mid, [T_high]])
@@ -1805,11 +1899,14 @@ def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
         T_cond = np.extract(condition=condition, arr=T)
         CpoR_cond = np.extract(condition=condition, arr=CpoR)
 
-        res = minimize(method='BFGS', args=(T_cond, CpoR_cond),
-                       fun=_get_nasa9_mse, jac=_get_nasa9_mse_jacob,
+        res = minimize(method='BFGS',
+                       args=(T_cond, CpoR_cond),
+                       fun=_get_nasa9_mse,
+                       jac=_get_nasa9_mse_jacob,
                        x0=np.zeros(9))
         a.append(res.x)
     return a
+
 
 def _fit_HoRT9(T_ref, HoRT_ref, a, T_mid):
     """Fit a[7] coefficient in a_low and a_high attributes given the
@@ -1830,19 +1927,22 @@ def _fit_HoRT9(T_ref, HoRT_ref, a, T_mid):
         a : (N, 9) nd.ndarray
             NASA9 polynomials with a[:, 7] position corrected for HoRT_ref
     """
-    a[0][7] = (HoRT_ref - get_nasa9_HoRT(a=a[0], T=T_ref))*T_ref
+    a[0][7] = (HoRT_ref - get_nasa9_HoRT(a=a[0], T=T_ref)) * T_ref
     for i, row_a in enumerate(a[1:], start=1):
-        a8_low = (HoRT_ref - get_nasa9_HoRT(a=a[i-1], T=T_ref))*T_ref
-        a8_high = (HoRT_ref - get_nasa9_HoRT(a=a[i], T=T_ref))*T_ref
+        a8_low = (HoRT_ref - get_nasa9_HoRT(a=a[i - 1], T=T_ref)) * T_ref
+        a8_high = (HoRT_ref - get_nasa9_HoRT(a=a[i], T=T_ref)) * T_ref
 
-        HoRT_low = get_nasa9_HoRT(a=a[i-1], T=T_mid[i-1]) + a8_low/T_mid[i-1]
-        HoRT_high = get_nasa9_HoRT(a=a[i], T=T_mid[i-1]) + a8_high/T_mid[i-1]
+        HoRT_low = get_nasa9_HoRT(a=a[i - 1],
+                                  T=T_mid[i - 1]) + a8_low / T_mid[i - 1]
+        HoRT_high = get_nasa9_HoRT(a=a[i],
+                                   T=T_mid[i - 1]) + a8_high / T_mid[i - 1]
         HoRT_offset = HoRT_low - HoRT_high
-        a[i][7] = T_mid[i-1]*(a8_high/T_mid[i-1] + HoRT_offset)
+        a[i][7] = T_mid[i - 1] * (a8_high / T_mid[i - 1] + HoRT_offset)
 
         HoRT_ref = HoRT_low
-        T_ref = T_mid[i-1]
+        T_ref = T_mid[i - 1]
     return a
+
 
 def _fit_SoR9(T_ref, SoR_ref, a, T_mid):
     """Fit a[8] coefficient in a_low and a_high attributes given the
@@ -1865,17 +1965,18 @@ def _fit_SoR9(T_ref, SoR_ref, a, T_mid):
     """
     a[0][8] = SoR_ref - get_nasa9_SoR(a=a[0], T=T_ref)
     for i, row_a in enumerate(a[1:], start=1):
-        a9_low = SoR_ref - get_nasa9_SoR(a=a[i-1], T=T_ref)
+        a9_low = SoR_ref - get_nasa9_SoR(a=a[i - 1], T=T_ref)
         a9_high = SoR_ref - get_nasa9_SoR(a=a[i], T=T_ref)
 
-        SoR_low = get_nasa9_SoR(a=a[i-1], T=T_mid[i-1]) + a9_low
-        SoR_high = get_nasa9_SoR(a=a[i], T=T_mid[i-1]) + a9_high
+        SoR_low = get_nasa9_SoR(a=a[i - 1], T=T_mid[i - 1]) + a9_low
+        SoR_high = get_nasa9_SoR(a=a[i], T=T_mid[i - 1]) + a9_high
         SoR_offset = SoR_low - SoR_high
         a[i][8] = a9_high + SoR_offset
 
         SoR_ref = SoR_low
-        T_ref = T_mid[i-1]
+        T_ref = T_mid[i - 1]
     return a
+
 
 def get_nasa_CpoR(a, T):
     """Calculates the dimensionless heat capacity using NASA polynomial form
@@ -1913,7 +2014,8 @@ def get_nasa_HoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_arr = np.array([1., T/2., (T**2)/3., (T**3)/4., (T**4)/5., 1./T, 0.])
+    T_arr = np.array(
+        [1., T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5., 1. / T, 0.])
     return np.dot(a, T_arr)
 
 
@@ -1933,7 +2035,8 @@ def get_nasa_SoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_arr = np.array([np.log(T), T, (T**2)/2., (T**3)/3., (T**4)/4., 0., 1.])
+    T_arr = np.array(
+        [np.log(T), T, (T**2) / 2., (T**3) / 3., (T**4) / 4., 0., 1.])
     return np.dot(a, T_arr)
 
 
@@ -1973,8 +2076,11 @@ def get_nasa9_HoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_arr = np.array([-(T**-2), np.log(T)/T, 1., T/2., (T**2)/3., (T**3)/4.,
-                      (T**4)/5., 1./T, 0.])
+    T_arr = np.array([
+        -(T**-2),
+        np.log(T) / T, 1., T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5.,
+        1. / T, 0.
+    ])
     return np.dot(a, T_arr)
 
 
@@ -1994,6 +2100,8 @@ def get_nasa9_SoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_arr = np.array([-(T**-2)/2., -(T**-1), np.log(T), T, (T**2)/2., (T**3)/3.,
-                      (T**4)/4., 0., 1.])
+    T_arr = np.array([
+        -(T**-2) / 2., -(T**-1),
+        np.log(T), T, (T**2) / 2., (T**3) / 3., (T**4) / 4., 0., 1.
+    ])
     return np.dot(a, T_arr)

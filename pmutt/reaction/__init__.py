@@ -56,9 +56,13 @@ class Reaction(_pmuttBase):
                 'H2O_kwargs': {'P': 1.,}
             }
     """
-
-    def __init__(self, reactants, reactants_stoich, products, products_stoich,
-                 transition_state=None, transition_state_stoich=None,
+    def __init__(self,
+                 reactants,
+                 reactants_stoich,
+                 products,
+                 products_stoich,
+                 transition_state=None,
+                 transition_state_stoich=None,
                  notes=None):
         self.reactants = reactants
         self.reactants_stoich = reactants_stoich
@@ -137,8 +141,7 @@ class Reaction(_pmuttBase):
         """
         reactant_elements = _count_elements(self.reactants,
                                             self.reactants_stoich)
-        product_elements = _count_elements(self.products,
-                                           self.products_stoich)
+        product_elements = _count_elements(self.products, self.products_stoich)
         if reactant_elements != product_elements:
             err_msg = ('Number of elements in reactants and products do not '
                        'agree.\nReactant count: {}\nProduct count: {}'
@@ -206,7 +209,8 @@ class Reaction(_pmuttBase):
             q : float
                 Partition function of the reaction state
         """
-        return self.get_state_quantity(state=state, method_name='get_q',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_q',
                                        **kwargs)
 
     def get_CvoR_state(self, state, **kwargs):
@@ -232,7 +236,8 @@ class Reaction(_pmuttBase):
                 Dimensionless heat capacity at constant volume of the reaction
                 state
         """
-        return self.get_state_quantity(state=state, method_name='get_CvoR',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_CvoR',
                                        **kwargs)
 
     def get_Cv_state(self, state, units, **kwargs):
@@ -260,7 +265,7 @@ class Reaction(_pmuttBase):
             Cv : float
                 Heat capacity at constant volume of the reaction state
         """
-        return self.get_CvoR_state(state=state, **kwargs)*c.R(units)
+        return self.get_CvoR_state(state=state, **kwargs) * c.R(units)
 
     def get_CpoR_state(self, state, **kwargs):
         """Gets dimensionless heat capacity at constant pressure at a state
@@ -286,7 +291,8 @@ class Reaction(_pmuttBase):
                 Dimensionless heat capacity at constant pressure
                 of the reaction state
         """
-        return self.get_state_quantity(state=state, method_name='get_CpoR',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_CpoR',
                                        **kwargs)
 
     def get_Cp_state(self, state, units, **kwargs):
@@ -314,7 +320,7 @@ class Reaction(_pmuttBase):
             Cp : float
                 Heat capacity at constant pressure of the reaction state
         """
-        return self.get_CpoR_state(state=state, **kwargs)*c.R(units)
+        return self.get_CpoR_state(state=state, **kwargs) * c.R(units)
 
     def get_UoRT_state(self, state, **kwargs):
         """Gets dimensionless internal energy at a state
@@ -339,7 +345,8 @@ class Reaction(_pmuttBase):
                 Dimensionless internal energy of the reaction state.
 
         """
-        return self.get_state_quantity(state=state, method_name='get_UoRT',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_UoRT',
                                        **kwargs)
 
     def get_U_state(self, state, units, T, **kwargs):
@@ -396,10 +403,16 @@ class Reaction(_pmuttBase):
             EoRT : float
                 Dimensionless electronic energy of the reaction state.
         """
-        return self.get_state_quantity(state=state, method_name='get_EoRT',
-                                       include_ZPE=include_ZPE, **kwargs)
+        return self.get_state_quantity(state=state,
+                                       method_name='get_EoRT',
+                                       include_ZPE=include_ZPE,
+                                       **kwargs)
 
-    def get_E_state(self, state, units, T=c.T0('K'), include_ZPE=False,
+    def get_E_state(self,
+                    state,
+                    units,
+                    T=c.T0('K'),
+                    include_ZPE=False,
                     **kwargs):
         """Gets the electronic energy at a state
 
@@ -457,7 +470,8 @@ class Reaction(_pmuttBase):
                 Dimensionless heat capacity at constant pressure
                 of the reaction state.
         """
-        return self.get_state_quantity(state=state, method_name='get_HoRT',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_HoRT',
                                        **kwargs)
 
     def get_H_state(self, state, units, T, **kwargs):
@@ -512,7 +526,8 @@ class Reaction(_pmuttBase):
             SoR : float
                 Dimensionless entropy of the reaction state
         """
-        return self.get_state_quantity(state=state, method_name='get_SoR',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_SoR',
                                        **kwargs)
 
     def get_S_state(self, state, units, **kwargs):
@@ -540,7 +555,7 @@ class Reaction(_pmuttBase):
             S : float
                 Entropy of the reaction state
         """
-        return self.get_SoR_state(state=state, **kwargs)*c.R(units)
+        return self.get_SoR_state(state=state, **kwargs) * c.R(units)
 
     def get_FoRT_state(self, state, **kwargs):
         """Gets dimensionless Helmholtz energy at a state
@@ -565,7 +580,8 @@ class Reaction(_pmuttBase):
             FoRT : float
                 Dimensionless Helmoltz energy of the reaction state
         """
-        return self.get_state_quantity(state=state, method_name='get_FoRT',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_FoRT',
                                        **kwargs)
 
     def get_F_state(self, state, units, T, **kwargs):
@@ -620,7 +636,8 @@ class Reaction(_pmuttBase):
             GoRT : float
                 Dimensionless Gibbs energy of the reaction state
         """
-        return self.get_state_quantity(state=state, method_name='get_GoRT',
+        return self.get_state_quantity(state=state,
+                                       method_name='get_GoRT',
                                        **kwargs)
 
     def get_G_state(self, state, units, T, **kwargs):
@@ -676,7 +693,8 @@ class Reaction(_pmuttBase):
         initial_state, final_state = _get_states(rev=rev, act=act)
         delta_q = self.get_delta_quantity(initial_state=initial_state,
                                           final_state=final_state,
-                                          method_name='get_q', **kwargs)
+                                          method_name='get_q',
+                                          **kwargs)
         return delta_q
 
     def get_delta_CvoR(self, rev=False, act=False, **kwargs):
@@ -842,8 +860,8 @@ class Reaction(_pmuttBase):
             delta_U : float
                 Change in internal energy between reactants and products
         """
-        return self.get_delta_UoRT(rev=rev, T=T, act=act,
-                                   **kwargs)*T*c.R('{}/K'.format(units))
+        return self.get_delta_UoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
+            '{}/K'.format(units))
 
     def get_delta_EoRT(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless electronic energy between reactants and
@@ -898,8 +916,8 @@ class Reaction(_pmuttBase):
             delta_E : float
                 Change in electronic energy between reactants and products
         """
-        return self.get_delta_EoRT(rev=rev, act=act, T=T,
-                                   **kwargs)*T*c.R('{}/K'.format(units))
+        return self.get_delta_EoRT(rev=rev, act=act, T=T, **kwargs) * T * c.R(
+            '{}/K'.format(units))
 
     def get_delta_HoRT(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless enthalpy between reactants and products
@@ -953,8 +971,8 @@ class Reaction(_pmuttBase):
             delta_H : float
                 Change in enthalpy between reactants and products
         """
-        return self.get_delta_HoRT(rev=rev, T=T, act=act,
-                                   **kwargs)*T*c.R('{}/K'.format(units))
+        return self.get_delta_HoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
+            '{}/K'.format(units))
 
     def get_delta_SoR(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless entropy between reactants and products
@@ -1062,8 +1080,8 @@ class Reaction(_pmuttBase):
             delta_F : float
                 Change in Helmholtz energy between reactants and products
         """
-        return self.get_delta_FoRT(rev=rev, T=T, act=act,
-                                   **kwargs)*T*c.R('{}/K'.format(units))
+        return self.get_delta_FoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
+            '{}/K'.format(units))
 
     def get_delta_GoRT(self, rev=False, act=False, **kwargs):
         """Gets change in dimensionless Gibbs energy between reactants and
@@ -1118,8 +1136,8 @@ class Reaction(_pmuttBase):
             delta_G : float
                 Change in Gibbs energy between reactants and products
         """
-        return self.get_delta_GoRT(rev=rev, T=T, act=act,
-                                   **kwargs)*T*c.R('{}/K'.format(units))
+        return self.get_delta_GoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
+            '{}/K'.format(units))
 
     def get_q_act(self, rev=False, **kwargs):
         """Gets change in partition function between reactants/products and the
@@ -1485,8 +1503,7 @@ class Reaction(_pmuttBase):
             Keq : float
                 Equilibrium constant between reactants and products
         """
-        return np.exp(-self.get_delta_GoRT(rev=rev, act=act,
-                                           **kwargs))
+        return np.exp(-self.get_delta_GoRT(rev=rev, act=act, **kwargs))
 
     def get_EoRT_act(self, rev=False, del_m=1, **kwargs):
         """Gets dimensionless Arrhenius activation energy between reactants
@@ -1532,7 +1549,7 @@ class Reaction(_pmuttBase):
                 m_IS = _get_molecularity(self.reactants_stoich)
             del_m = m_FS - m_IS
         # Calculate H_TS and convert to Arrhenius activation energy
-        EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1-del_m)
+        EoRT = self.get_delta_HoRT(rev=rev, act=True, **kwargs) + (1 - del_m)
         return EoRT
 
     def get_E_act(self, units, T, rev=False, del_m=1, **kwargs):
@@ -1567,8 +1584,8 @@ class Reaction(_pmuttBase):
                 act energy between reactants (or products) and
                 transition state
         """
-        return self.get_EoRT_act(rev=rev, T=T, del_m=del_m,
-                                 **kwargs)*T*c.R('{}/K'.format(units))
+        return self.get_EoRT_act(rev=rev, T=T, del_m=del_m, **
+                                 kwargs) * T * c.R('{}/K'.format(units))
 
     def get_A(self, T=c.T0('K'), rev=False, m=0, use_q=True, **kwargs):
         """Gets pre-exponential factor between reactants (or products) and
@@ -1615,14 +1632,18 @@ class Reaction(_pmuttBase):
                 m = _get_molecularity(self.reactants_stoich)
         if use_q:
             try:
-                A = self.get_delta_q(rev=rev, act=True, T=T, ignore_q_elec=True,
-                                     include_ZPE=False, **kwargs)
+                A = self.get_delta_q(rev=rev,
+                                     act=True,
+                                     T=T,
+                                     ignore_q_elec=True,
+                                     include_ZPE=False,
+                                     **kwargs)
             except AttributeError:
                 # Partition function failed. Use entropy of activation instead
                 use_q = False
         if not use_q:
             A = np.exp(self.get_delta_SoR(rev=rev, act=True, T=T, **kwargs))
-        return c.kb('J/K')*T/c.h('J s')*A*np.exp(m)
+        return c.kb('J/K') * T / c.h('J s') * A * np.exp(m)
 
     def _parse_state(self, state):
         """Helper method to get the relevant species and stoichiometry
@@ -1746,13 +1767,18 @@ class Reaction(_pmuttBase):
                                                  method_name=method_name,
                                                  **kwargs)
         if method_name == 'get_q':
-            return final_quantity/initial_quantity
+            return final_quantity / initial_quantity
         else:
             return final_quantity - initial_quantity
 
     @classmethod
-    def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', notes=None, raise_error=True,
+    def from_string(cls,
+                    reaction_str,
+                    species,
+                    species_delimiter='+',
+                    reaction_delimiter='=',
+                    notes=None,
+                    raise_error=True,
                     raise_warning=True):
         """Create a reaction object using the reaction string
 
@@ -1788,11 +1814,10 @@ class Reaction(_pmuttBase):
                 Raised if `species` does not contain an entry for the
                 reactants, products or transition state in `reaction_str`
         """
-        (react_names, react_stoich, prod_names, prod_stoich,
-         ts_names, ts_stoich) = _parse_reaction(
-                reaction_str=reaction_str,
-                species_delimiter=species_delimiter,
-                reaction_delimiter=reaction_delimiter)
+        (react_names, react_stoich, prod_names, prod_stoich, ts_names,
+         ts_stoich) = _parse_reaction(reaction_str=reaction_str,
+                                      species_delimiter=species_delimiter,
+                                      reaction_delimiter=reaction_delimiter)
         reactants = []
         for name in react_names:
             try:
@@ -1840,13 +1865,20 @@ class Reaction(_pmuttBase):
                         warn(warn_msg, RuntimeWarning)
                         ts = None
 
-        return cls(reactants=reactants, reactants_stoich=react_stoich,
-                   products=products, products_stoich=prod_stoich,
-                   transition_state=ts, transition_state_stoich=ts_stoich,
+        return cls(reactants=reactants,
+                   reactants_stoich=react_stoich,
+                   products=products,
+                   products_stoich=prod_stoich,
+                   transition_state=ts,
+                   transition_state_stoich=ts_stoich,
                    notes=notes)
 
-    def to_string(self, species_delimiter='+', reaction_delimiter='=',
-                  stoich_format='.2f', include_TS=True, stoich_space=False,
+    def to_string(self,
+                  species_delimiter='+',
+                  reaction_delimiter='=',
+                  stoich_format='.2f',
+                  include_TS=True,
+                  stoich_space=False,
                   key='name'):
         """Writes the Reaction object as a stoichiometric reaction
 
@@ -1873,27 +1905,33 @@ class Reaction(_pmuttBase):
         """
         # Write reactants
         reaction_str = _write_reaction_state(
-                species=self.reactants, stoich=self.reactants_stoich,
-                species_delimiter=species_delimiter,
-                stoich_format=stoich_format, stoich_space=stoich_space, key=key)
+            species=self.reactants,
+            stoich=self.reactants_stoich,
+            species_delimiter=species_delimiter,
+            stoich_format=stoich_format,
+            stoich_space=stoich_space,
+            key=key)
         reaction_str += reaction_delimiter
 
         # Write transition state if any
         if include_TS and self.transition_state is not None:
             reaction_str += _write_reaction_state(
-                    species=self.transition_state,
-                    stoich=self.transition_state_stoich,
-                    species_delimiter=species_delimiter,
-                    stoich_format=stoich_format, stoich_space=stoich_space,
-                    key=key)
+                species=self.transition_state,
+                stoich=self.transition_state_stoich,
+                species_delimiter=species_delimiter,
+                stoich_format=stoich_format,
+                stoich_space=stoich_space,
+                key=key)
             reaction_str += reaction_delimiter
 
         # Write products
         reaction_str += _write_reaction_state(
-                species=self.products, stoich=self.products_stoich,
-                species_delimiter=species_delimiter,
-                stoich_format=stoich_format, stoich_space=stoich_space,
-                key=key)
+            species=self.products,
+            stoich=self.products_stoich,
+            species_delimiter=species_delimiter,
+            stoich_format=stoich_format,
+            stoich_space=stoich_space,
+            key=key)
         return reaction_str
 
     def to_dict(self):
@@ -1953,12 +1991,14 @@ class Reaction(_pmuttBase):
             Reaction : Reaction object
         """
         json_obj = remove_class(json_obj)
-        json_obj['reactants'] = [json_to_pmutt(reactant)
-                                 for reactant in json_obj['reactants']]
-        json_obj['products'] = [json_to_pmutt(product)
-                                for product in json_obj['products']]
+        json_obj['reactants'] = [
+            json_to_pmutt(reactant) for reactant in json_obj['reactants']
+        ]
+        json_obj['products'] = [
+            json_to_pmutt(product) for product in json_obj['products']
+        ]
         json_obj['transition_state'] = json_to_pmutt(
-                json_obj['transition_state'])
+            json_obj['transition_state'])
         reaction = cls(**json_obj)
         return reaction
 
@@ -1982,8 +2022,10 @@ class ChemkinReaction(Reaction):
             Keyword arguments used to initialize the reactants, transition
             state and products
     """
-
-    def __init__(self, beta=1., is_adsorption=False, sticking_coeff=0.5,
+    def __init__(self,
+                 beta=1.,
+                 is_adsorption=False,
+                 sticking_coeff=0.5,
                  **kwargs):
         super().__init__(**kwargs)
         self.beta = beta
@@ -2026,7 +2068,10 @@ class ChemkinReaction(Reaction):
             n_surf += stoich
         return n_surf
 
-    def get_A(self, sden_operation='min', include_entropy=True, T=c.T0('K'),
+    def get_A(self,
+              sden_operation='min',
+              include_entropy=True,
+              T=c.T0('K'),
               **kwargs):
         """Calculates the preexponential factor in the Chemkin format
 
@@ -2042,9 +2087,9 @@ class ChemkinReaction(Reaction):
             Parameters required to calculate pre-exponential factor
         """
         if self.transition_state is None or not include_entropy:
-            A = c.kb('J/K')/c.h('J s')
+            A = c.kb('J/K') / c.h('J s')
         else:
-            A = super().get_A(T=T, **kwargs)/T
+            A = super().get_A(T=T, **kwargs) / T
 
         # If this is a surface reaction, adjust for site density
         if not self.gas_phase:
@@ -2059,14 +2104,14 @@ class ChemkinReaction(Reaction):
                 # Skip bulk species
                 if reactant.name == reactant.cat_site.bulk_specie:
                     continue
-                site_dens.extend([site_den]*int(stoich))
+                site_dens.extend([site_den] * int(stoich))
 
             # Apply the operation to the site densities
             eff_site_den = _apply_numpy_operation(quantity=site_dens,
                                                   operation=sden_operation,
                                                   verbose=False)
             n_surf = self._get_n_surf()
-            A = A/eff_site_den**(n_surf-1)
+            A = A / eff_site_den**(n_surf - 1)
         return A
 
     def get_HoRT_act(self, rev=False, **kwargs):
@@ -2089,9 +2134,11 @@ class ChemkinReaction(Reaction):
                 transition state
         """
         act = self.transition_state is not None
-        return np.max([0.,
-                       super().get_delta_HoRT(rev=rev, act=act, **kwargs),
-                       super().get_delta_HoRT(rev=rev, act=False, **kwargs)])
+        return np.max([
+            0.,
+            super().get_delta_HoRT(rev=rev, act=act, **kwargs),
+            super().get_delta_HoRT(rev=rev, act=False, **kwargs)
+        ])
 
     def get_GoRT_act(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
@@ -2116,14 +2163,22 @@ class ChemkinReaction(Reaction):
                 transition state
         """
         act = self.transition_state is not None
-        return np.max([0., 
-                       super().get_delta_GoRT(rev=rev, act=act, **kwargs),
-                       super().get_delta_GoRT(rev=rev, act=False, **kwargs)])
+        return np.max([
+            0.,
+            super().get_delta_GoRT(rev=rev, act=act, **kwargs),
+            super().get_delta_GoRT(rev=rev, act=False, **kwargs)
+        ])
 
     @classmethod
-    def from_string(cls, reaction_str, species, species_delimiter='+',
-                    reaction_delimiter='=', notes=None,
-                    beta=1, is_adsorption=False, sticking_coeff=0.5):
+    def from_string(cls,
+                    reaction_str,
+                    species,
+                    species_delimiter='+',
+                    reaction_delimiter='=',
+                    notes=None,
+                    beta=1,
+                    is_adsorption=False,
+                    sticking_coeff=0.5):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -2162,10 +2217,13 @@ class ChemkinReaction(Reaction):
                                   reaction_delimiter=reaction_delimiter)
         return cls(reactants=rxn.reactants,
                    reactants_stoich=rxn.reactants_stoich,
-                   products=rxn.products, products_stoich=rxn.products_stoich,
+                   products=rxn.products,
+                   products_stoich=rxn.products_stoich,
                    transition_state=rxn.transition_state,
                    transition_state_stoich=rxn.transition_state_stoich,
-                   notes=notes, beta=beta, is_adsorption=is_adsorption,
+                   notes=notes,
+                   beta=beta,
+                   is_adsorption=is_adsorption,
                    sticking_coeff=sticking_coeff)
 
     def to_dict(self):
@@ -2225,13 +2283,22 @@ class Reactions(_pmuttBase):
                                                 key=key))
         return species
 
-    def plot_coordinate_diagram(self, method_name, ref_index=0,
-                                ref_state='reactants', x_offset=1.,
-                                include_TS=True, x_scale_TS=0.5,
-                                y_scale_TS=0.5, include_TS_labels=True,
-                                y_TS_label_offset=0.1, x_TS_label_offset=0.,
-                                TS_label_format='.2f', figure=None, axes=None,
-                                plt_kwargs={}, **reaction_kwargs):
+    def plot_coordinate_diagram(self,
+                                method_name,
+                                ref_index=0,
+                                ref_state='reactants',
+                                x_offset=1.,
+                                include_TS=True,
+                                x_scale_TS=0.5,
+                                y_scale_TS=0.5,
+                                include_TS_labels=True,
+                                y_TS_label_offset=0.1,
+                                x_TS_label_offset=0.,
+                                TS_label_format='.2f',
+                                figure=None,
+                                axes=None,
+                                plt_kwargs={},
+                                **reaction_kwargs):
         """Plots a reaction coordinate diagram.
 
         Parameters
@@ -2320,7 +2387,7 @@ class Reactions(_pmuttBase):
         x = 0.
         # Calculate reference value
         ref = self.reactions[ref_index].get_state_quantity(
-                method_name=method_name, state=ref_state, **reaction_kwargs)
+            method_name=method_name, state=ref_state, **reaction_kwargs)
 
         for i, reaction in enumerate(self.reactions):
             '''First state is the reactants of reaction 0.'''
@@ -2329,12 +2396,12 @@ class Reactions(_pmuttBase):
                                                       state='reactants',
                                                       **reaction_kwargs) \
                     - ref
-                x_plot.extend([x, x+x_offset])
+                x_plot.extend([x, x + x_offset])
                 y_plot.extend([y_react, y_react])
-                x_labels.append(_write_reaction_state(
-                        species=reaction.reactants,
-                        stoich=reaction.reactants_stoich))
-                x_label_pos.append(x + x_offset/2.)
+                x_labels.append(
+                    _write_reaction_state(species=reaction.reactants,
+                                          stoich=reaction.reactants_stoich))
+                x_label_pos.append(x + x_offset / 2.)
                 x += x_offset
 
             # Calculating y value for product in case we need it to fit the
@@ -2342,7 +2409,6 @@ class Reactions(_pmuttBase):
             y_product = reaction.get_state_quantity(method_name=method_name,
                                                     state='products',
                                                     **reaction_kwargs) - ref
-
             '''Calculate properties for TS if necessary'''
             if include_TS and reaction.transition_state is not None:
                 x += x_offset
@@ -2350,52 +2416,49 @@ class Reactions(_pmuttBase):
                                                    state='transition state',
                                                    **reaction_kwargs) - ref
                 '''Calculate data to fit spline'''
-                x_fit = np.array([x-x_offset,
-                                  x-x_offset*(1.-x_scale_TS),
-                                  x,
-                                  x+x_offset*(1.-x_scale_TS),
-                                  x+x_offset])
-                y_fit = np.array([y_plot[-1],
-                                  (y_TS-y_plot[-1])*y_scale_TS+y_plot[-1],
-                                  y_TS,
-                                  (y_TS-y_product)*y_scale_TS+y_product,
-                                  y_product])
+                x_fit = np.array([
+                    x - x_offset, x - x_offset * (1. - x_scale_TS), x,
+                    x + x_offset * (1. - x_scale_TS), x + x_offset
+                ])
+                y_fit = np.array([
+                    y_plot[-1],
+                    (y_TS - y_plot[-1]) * y_scale_TS + y_plot[-1], y_TS,
+                    (y_TS - y_product) * y_scale_TS + y_product, y_product
+                ])
                 tck = interpolate.splrep(x_fit, y_fit, k=2)
                 '''Calculate new x and y points from spline fit'''
-                x_spline = np.linspace(x-x_offset, x+x_offset)
+                x_spline = np.linspace(x - x_offset, x + x_offset)
                 y_spline = interpolate.splev(x_spline, tck)
-
                 '''Add new data to the appropriate lists'''
                 x_plot.extend(x_spline)
                 y_plot.extend(y_spline)
-                x_labels.append(_write_reaction_state(
-                    species=reaction.transition_state,
-                    stoich=reaction.transition_state_stoich))
+                x_labels.append(
+                    _write_reaction_state(
+                        species=reaction.transition_state,
+                        stoich=reaction.transition_state_stoich))
                 x_label_pos.append(x)
-
                 '''Record transition state labels if necessary'''
                 if include_TS_labels:
-                    TS_labels.append(reaction.get_delta_quantity(
+                    TS_labels.append(
+                        reaction.get_delta_quantity(
                             method_name=method_name,
                             initial_state='reactants',
                             final_state='transition state',
                             **reaction_kwargs))
-                    x_TS_label_pos.append(x + x_TS_label_offset*x_offset)
+                    x_TS_label_pos.append(x + x_TS_label_offset * x_offset)
                     # Add TS y values for now. Correct later we know the
                     # graph's scale
                     y_TS_label_pos.append(y_TS)
 
             x += x_offset
-
             '''Calculate properties for product'''
-            x_plot.extend([x, x+x_offset])
+            x_plot.extend([x, x + x_offset])
             y_plot.extend([y_product, y_product])
-            x_labels.append(_write_reaction_state(
-                    species=reaction.products,
-                    stoich=reaction.products_stoich))
-            x_label_pos.append(x + x_offset/2.)
+            x_labels.append(
+                _write_reaction_state(species=reaction.products,
+                                      stoich=reaction.products_stoich))
+            x_label_pos.append(x + x_offset / 2.)
             x += x_offset
-
         ''' Plot the diagram'''
         # Create a new plot if necessary
         if axes is None:
@@ -2417,12 +2480,14 @@ class Reactions(_pmuttBase):
         # Adding transition state labels
         if include_TS and include_TS_labels:
             y_ticks = axes.get_yticks()
-            y_perb = np.ptp(y_ticks)/len(y_ticks)*y_TS_label_offset
+            y_perb = np.ptp(y_ticks) / len(y_ticks) * y_TS_label_offset
             y_TS_label_pos = [y + y_perb for y in y_TS_label_pos]
             label_field = '{:%s}' % TS_label_format
             for TS_label, x_pos, y_pos in zip(TS_labels, x_TS_label_pos,
                                               y_TS_label_pos):
-                axes.text(x=x_pos, y=y_pos, s=label_field.format(TS_label),
+                axes.text(x=x_pos,
+                          y=y_pos,
+                          s=label_field.format(TS_label),
                           horizontalalignment='center')
 
         plt.tight_layout()
@@ -2465,15 +2530,15 @@ class Reactions(_pmuttBase):
                 # Skip states that are not occupied
                 if getattr(reaction, state) is None:
                     continue
-                states_G.append(reaction.get_G_state(state=state, units=units,
-                                                     **kwargs))
+                states_G.append(
+                    reaction.get_G_state(state=state, units=units, **kwargs))
         min_i = np.argmin(states_G)
         max_i = np.argmax(states_G)
         E_span = states_G[max_i] - states_G[min_i]
         if max_i < min_i:
             E_span += states_G[-1] - states_G[0]
         return E_span
-            
+
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
 
@@ -2500,8 +2565,9 @@ class Reactions(_pmuttBase):
             Reactions : Reactions object
         """
         json_obj = remove_class(json_obj)
-        json_obj['reactions'] = [json_to_pmutt(reaction)
-                                 for reaction in json_obj['reactions']]
+        json_obj['reactions'] = [
+            json_to_pmutt(reaction) for reaction in json_obj['reactions']
+        ]
         return cls(**json_obj)
 
 
@@ -2557,7 +2623,8 @@ def _parse_reaction_state(reaction_str, species_delimiter='+'):
     return (species, stoichiometry)
 
 
-def _parse_reaction(reaction_str, species_delimiter='+',
+def _parse_reaction(reaction_str,
+                    species_delimiter='+',
                     reaction_delimiter='='):
     """Takes a reaction string and parses it into reactants and products.
 
@@ -2598,16 +2665,16 @@ def _parse_reaction(reaction_str, species_delimiter='+',
 
     # Separate the species in each state
     reactants, reactants_stoich = _parse_reaction_state(
-            reaction_str=reactants_state, species_delimiter=species_delimiter)
+        reaction_str=reactants_state, species_delimiter=species_delimiter)
     products, products_stoich = _parse_reaction_state(
-            reaction_str=products_state, species_delimiter=species_delimiter)
+        reaction_str=products_state, species_delimiter=species_delimiter)
 
     # Check for transition state
     if len(reaction_states) > 2:
         transition_state_state = reaction_states[1]
         transition_state, transition_state_stoich = _parse_reaction_state(
-                reaction_str=transition_state_state,
-                species_delimiter=species_delimiter)
+            reaction_str=transition_state_state,
+            species_delimiter=species_delimiter)
     else:
         transition_state = None
         transition_state_stoich = None
@@ -2616,8 +2683,12 @@ def _parse_reaction(reaction_str, species_delimiter='+',
             transition_state, transition_state_stoich)
 
 
-def _write_reaction_state(species, stoich, species_delimiter='+',
-                          stoich_format='.2f', stoich_space=False, key='name'):
+def _write_reaction_state(species,
+                          stoich,
+                          species_delimiter='+',
+                          stoich_format='.2f',
+                          stoich_space=False,
+                          key='name'):
     """Writes one section of the reaction string
 
     Parameters
@@ -2656,7 +2727,7 @@ def _write_reaction_state(species, stoich, species_delimiter='+',
                 stoich_val = int(stoich_val)
             else:
                 # Otherwise, use the float format specified earlier
-                stoich_val = '{:{format}}'.format(stoich_val, 
+                stoich_val = '{:{format}}'.format(stoich_val,
                                                   format=stoich_format)
 
             # Add space between coefficient and species if required
@@ -2690,7 +2761,7 @@ def _count_elements(species, stoich):
     element_count = Counter()
     for specie, stoich_specie in zip(species, stoich):
         for element, coeff in specie.elements.items():
-            element_count += Counter({element: coeff*stoich_specie})
+            element_count += Counter({element: coeff * stoich_specie})
     return element_count
 
 

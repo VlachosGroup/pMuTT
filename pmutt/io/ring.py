@@ -1,7 +1,11 @@
 from pmutt.reaction import Reaction, Reactions
 
-def read_reactions(filename, species, species_delimiter='.',
-                   reaction_delimiter='>>', raise_error=True,
+
+def read_reactions(filename,
+                   species,
+                   species_delimiter='.',
+                   reaction_delimiter='>>',
+                   raise_error=True,
                    raise_warning=True):
     """Reads reactions from RING output file.
 

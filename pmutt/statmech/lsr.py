@@ -40,8 +40,13 @@ class LSR(_ModelBase):
         notes : str or dict, optional
             Extra notes such as the source of the LSR. Default is None
     """
-    def __init__(self, slope, intercept, reaction, surf_specie=0.,
-                 gas_specie=0., notes=None):
+    def __init__(self,
+                 slope,
+                 intercept,
+                 reaction,
+                 surf_specie=0.,
+                 gas_specie=0.,
+                 notes=None):
         self.slope = slope
         self.intercept = intercept
         if not isinstance(reaction, Reaction):
@@ -170,7 +175,7 @@ class LSR(_ModelBase):
                 :class:`~pmutt.statmech.StatMech` object that gives the val
                 when `get_E` is called
         """
-        val = val*c.convert_unit(initial='kcal/mol', final='eV/molecule')
+        val = val * c.convert_unit(initial='kcal/mol', final='eV/molecule')
         return StatMech(U=val, H=val, F=val, G=val, **presets['constant'])
 
     def _float_to_reaction(self, val):
@@ -188,8 +193,10 @@ class LSR(_ModelBase):
         """
         reactant = StatMech()
         product = self._float_to_specie(val=val)
-        return Reaction(reactants=[reactant], reactants_stoich=[1.],
-                        products=[product], products_stoich=[1.])
+        return Reaction(reactants=[reactant],
+                        reactants_stoich=[1.],
+                        products=[product],
+                        products_stoich=[1.])
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -198,13 +205,15 @@ class LSR(_ModelBase):
         -------
             obj_dict : dict
         """
-        obj_dict = {'class': str(self.__class__),
-                    'slope': self.slope,
-                    'intercept': self.intercept,
-                    'reaction': self.reaction.to_dict(),
-                    'surf_specie': self.surf_specie.to_dict(),
-                    'gas_specie': self.gas_specie.to_dict(),
-                    'notes': self.notes}
+        obj_dict = {
+            'class': str(self.__class__),
+            'slope': self.slope,
+            'intercept': self.intercept,
+            'reaction': self.reaction.to_dict(),
+            'surf_specie': self.surf_specie.to_dict(),
+            'gas_specie': self.gas_specie.to_dict(),
+            'notes': self.notes
+        }
         return obj_dict
 
     @classmethod
