@@ -36,7 +36,7 @@ def read_thermdat(filename, format='list', key='name'):
         IOError
             Invalid line number found.
     """
-    
+
     species = []
     with open(filename, 'r') as f_ptr:
         for line in f_ptr:
@@ -58,7 +58,6 @@ def read_thermdat(filename, format='list', key='name'):
             # Skip header temperatures
             if _is_temperature_header(line):
                 continue
-
             '''
             Parse lines
             '''
@@ -84,8 +83,9 @@ def read_thermdat(filename, format='list', key='name'):
     elif format == 'dict':
         species = pmutt_list_to_dict(species, key=key)
     else:
-        err_msg = ('Unsupported format: {}. See pmutt.io.thermdat.read_thermdat'
-                   ' docstring for supported formats.'.format(format))
+        err_msg = (
+            'Unsupported format: {}. See pmutt.io.thermdat.read_thermdat'
+            ' docstring for supported formats.'.format(format))
         raise ValueError(err_msg)
     return species
 
@@ -212,7 +212,7 @@ def _read_line1(line):
     nasa_data['phase'] = line[phase_pos]
 
     # Store the temperatures
-    fields = _get_fields(line[phase_pos+1:])
+    fields = _get_fields(line[phase_pos + 1:])
     nasa_data['T_low'] = float(fields[0])
     nasa_data['T_high'] = float(fields[1])
     nasa_data['T_mid'] = float(fields[2])
@@ -239,7 +239,7 @@ def _read_line2(line, nasa_data):
     nasa_data['a_high'] = np.zeros(7)
 
     for i, position in enumerate(positions):
-        nasa_data['a_high'][i] = float(line[position:position+offset])
+        nasa_data['a_high'][i] = float(line[position:position + offset])
     return nasa_data
 
 
@@ -267,10 +267,10 @@ def _read_line3(line, nasa_data):
     k = 0  # Counter for a_low
     for i, position in enumerate(positions):
         if i < 2:
-            nasa_data['a_high'][j] = float(line[position:position+offset])
+            nasa_data['a_high'][j] = float(line[position:position + offset])
             j += 1
         else:
-            nasa_data['a_low'][k] = float(line[position:position+offset])
+            nasa_data['a_low'][k] = float(line[position:position + offset])
             k += 1
     return nasa_data
 
@@ -295,13 +295,17 @@ def _read_line4(line, nasa_data):
 
     j = 3
     for position in positions:
-        nasa_data['a_low'][j] = float(line[position:position+offset])
+        nasa_data['a_low'][j] = float(line[position:position + offset])
         j += 1
     return nasa_data
 
 
-def write_thermdat(nasa_species, filename=None, write_date=True, supp_data=None,
-                   supp_txt=None, newline='\n'):
+def write_thermdat(nasa_species,
+                   filename=None,
+                   write_date=True,
+                   supp_data=None,
+                   supp_txt=None,
+                   newline='\n'):
     """Writes thermdats in the Chemkin format
 
     Parameters
@@ -385,13 +389,15 @@ def _write_line1(nasa_specie, write_date=True):
         34,  # Element 3
         38,  # Element 3#
         39,  # Element 4
-        43]  # Element 4#
+        43
+    ]  # Element 4#
     temperature_pos = [
         44,  # Phase
         45,  # T_low
         55,  # T_high
         65,  # T_mid
-        79]  # Line num
+        79
+    ]  # Line num
 
     # Adjusts the position based on the number of elements
     line1_pos = [16]
@@ -415,10 +421,12 @@ def _write_line1(nasa_specie, write_date=True):
     for element, val in nasa_specie.elements.items():
         if val > 0.:
             line1_fields.extend([element, '%d' % val])
-    line1_fields.extend([nasa_specie.phase,
-                         '%.1f' % nasa_specie.T_low,
-                         '%.1f' % nasa_specie.T_high,
-                         '%.1f' % nasa_specie.T_mid])
+    line1_fields.extend([
+        nasa_specie.phase,
+        '%.1f' % nasa_specie.T_low,
+        '%.1f' % nasa_specie.T_high,
+        '%.1f' % nasa_specie.T_mid
+    ])
 
     # Write the content with appropriate spacing
     line = ''
@@ -427,6 +435,7 @@ def _write_line1(nasa_specie, write_date=True):
         line = _insert_space(pos, line)
     line += '1\n'
     return line
+
 
 def _write_line2(nasa_specie):
     """Writes the second line of the thermdat file

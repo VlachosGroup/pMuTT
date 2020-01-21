@@ -10,7 +10,6 @@ from pmutt.cantera.phase import IdealGas, StoichSolid
 from pmutt.omkm.phase import InteractingInterface
 from pmutt.omkm.units import Units
 
-
 _Param = namedtuple('_Param', 'label val units')
 """Parameters as a NamedTuple for easier unit passing for YAML file.
 
@@ -27,9 +26,17 @@ _Param = namedtuple('_Param', 'label val units')
 """
 
 
-def write_cti(phases=None, species=None, reactions=None,
-              lateral_interactions=None, units=None, filename=None,
-              T=300., P=1., newline='\n', use_motz_wise=False):
+def write_cti(phases=None,
+              species=None,
+              reactions=None,
+              lateral_interactions=None,
+              units=None,
+              filename=None,
+              T=300.,
+              P=1.,
+              newline='\n',
+              use_motz_wise=False,
+              write_xml=True):
     """Writes the units, phases, species, lateral interactions, reactions and 
     additional options in the CTI format for OpenMKM
     
@@ -46,31 +53,34 @@ def write_cti(phases=None, species=None, reactions=None,
         units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
             Units to write file. If a dict is inputted, the key is the quantity
             and the value is the unit. If not specified, uses the default units
-            of :class:`~pmutt.omkm.units.Unit`
+            of :class:`~pmutt.omkm.units.Unit`.
         filename: str, optional
             Filename for the input.cti file. If not specified, returns file
-            as str
+            as str.
         T : float, optional
             Temperature in K. Default is 300 K.
         P : float, optional
             Pressure in atm. Default is 1 atm.
+        write_xml : bool, optional
+            If True and ``filename`` is not ``None``, automatically generates
+            an XML file with the CTI file.
     Returns
     -------
         lines_out : str
-            If ``filename`` is None, CTI file is returned
+            If ``filename`` is None, CTI file is returned.
     """
-    lines = [_get_file_timestamp(comment_char='# '),
-             '# See documentation for OpenMKM CTI file here:',
-             '# https://vlachosgroup.github.io/openmkm/input']
-
+    lines = [
+        _get_file_timestamp(comment_char='# '),
+        '# See documentation for OpenMKM CTI file here:',
+        '# https://vlachosgroup.github.io/openmkm/input'
+    ]
     '''Write units'''
-    lines.extend(['', '#' + '-'*79, '# UNITS', '#' + '-'*79])
+    lines.extend(['', '#' + '-' * 79, '# UNITS', '#' + '-' * 79])
     if units is None:
         units = Units()
     elif isinstance(units, dict):
         units = Units(**units)
     lines.append(units.to_CTI())
-
     '''Pre-assign IDs for lateral interactions so phases can be written'''
     if lateral_interactions is not None:
         lat_inter_lines = []
@@ -84,7 +94,6 @@ def write_cti(phases=None, species=None, reactions=None,
                 lat_inter_CTI = _force_pass_arguments(lat_interaction.to_CTI,
                                                       units=units)
                 lat_inter_lines.append(lat_inter_CTI)
-
     '''Pre-assign IDs for reactions so phases can be written'''
     if reactions is not None:
         beps = []
@@ -107,43 +116,40 @@ def write_cti(phases=None, species=None, reactions=None,
             else:
                 if bep is not None and bep not in beps:
                     beps.append(bep)
-
     '''Write phases'''
     if phases is not None:
-        lines.extend(['', '#' + '-'*79, '# PHASES', '#' + '-'*79])
+        lines.extend(['', '#' + '-' * 79, '# PHASES', '#' + '-' * 79])
         for phase in phases:
             phase_CTI = _force_pass_arguments(phase.to_CTI, units=units)
             lines.append(phase_CTI)
-
     '''Write species'''
     if species is not None:
-        lines.extend(['', '#' + '-'*79, '# SPECIES', '#' + '-'*79])
+        lines.extend(['', '#' + '-' * 79, '# SPECIES', '#' + '-' * 79])
         for ind_species in species:
             ind_species_CTI = _force_pass_arguments(ind_species.to_CTI,
                                                     units=units)
             lines.append(ind_species_CTI)
-
     '''Write lateral interactions'''
     if lateral_interactions is not None:
-        lines.extend(['', '#' + '-'*79, '# LATERAL INTERACTIONS', '#' + '-'*79])
+        lines.extend(
+            ['', '#' + '-' * 79, '# LATERAL INTERACTIONS', '#' + '-' * 79])
         lines.extend(lat_inter_lines)
 
     if reactions is not None:
         '''Write reaction options'''
-        lines.extend(['', '#' + '-'*79, '# REACTION OPTIONS', '#' + '-'*79])
+        lines.extend(
+            ['', '#' + '-' * 79, '# REACTION OPTIONS', '#' + '-' * 79])
         if use_motz_wise:
             lines.extend(['enable_motz_wise()\n'])
         else:
             lines.extend(['disable_motz_wise()\n'])
-
         '''Write reactions'''
-        lines.extend(['', '#' + '-'*79, '# REACTIONS', '#' + '-'*79])
+        lines.extend(['', '#' + '-' * 79, '# REACTIONS', '#' + '-' * 79])
         lines.extend(reaction_lines)
-
         '''Write BEP Relationships'''
         if len(beps) > 0:
-            lines.extend(['', '#' + '-'*79, '# BEP Relationships',
-                          '#' + '-'*79])
+            lines.extend(
+                ['', '#' + '-' * 79, '# BEP Relationships', '#' + '-' * 79])
             # Only write each BEP once
             i = 0
             for bep in beps:
@@ -152,29 +158,56 @@ def write_cti(phases=None, species=None, reactions=None,
                 if bep.name is None:
                     i += 1
                 lines.append(bep_CTI)
-
     '''Write to file'''
     lines_out = '\n'.join(lines)
     if filename is not None:
         with open(filename, 'w', newline=newline) as f_ptr:
             f_ptr.write(lines_out)
-
         '''Write XML file'''
-        xml_filename = '{}.xml'.format(filename.replace('.cti', ''))
-        convert(filename=filename, outName=xml_filename)
+        if write_xml:
+            xml_filename = '{}.xml'.format(filename.replace('.cti', ''))
+            convert(filename=filename, outName=xml_filename)
     else:
         # Or return as string
         return lines_out
 
-def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
-               L=None, cat_abyv=None, flow_rate=None, residence_time=None,
-               mass_flow_rate=None, end_time=None, transient=None,
-               stepping=None, init_step=None, step_size=None, atol=None,
-               rtol=None, phases=None, reactor=None, inlet_gas=None,
-               multi_T=None, multi_P=None, multi_flow_rate=None,
-               output_format=None, solver=None, simulation=None,
-               multi_input=None, misc=None, units=None, filename=None, 
-               yaml_options={'default_flow_style': False, 'indent': 4},
+
+def write_yaml(reactor_type=None,
+               mode=None,
+               nodes=None,
+               V=None,
+               T=None,
+               P=None,
+               A=None,
+               L=None,
+               cat_abyv=None,
+               flow_rate=None,
+               residence_time=None,
+               mass_flow_rate=None,
+               end_time=None,
+               transient=None,
+               stepping=None,
+               init_step=None,
+               step_size=None,
+               atol=None,
+               rtol=None,
+               phases=None,
+               reactor=None,
+               inlet_gas=None,
+               multi_T=None,
+               multi_P=None,
+               multi_flow_rate=None,
+               output_format=None,
+               solver=None,
+               simulation=None,
+               multi_input=None,
+               misc=None,
+               units=None,
+               filename=None,
+               yaml_options={
+                   'default_flow_style': False,
+                   'indent': 4
+               },
                newline='\n'):
     """Writes the reactor options in a YAML file for OpenMKM. 
     
@@ -183,9 +216,10 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         reactor_type : str
             Type of reactor. Supported options include:
             
-            - PFR
-            - CSTR
-            - Batch
+            - pfr
+            - pfr_0d
+            - cstr
+            - batch
 
             Value written to ``reactor.type``.
         mode : str
@@ -195,6 +229,9 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
             - Adiabatic
 
             Value written to ``reactor.mode``.
+        nodes : int
+            Number of nodes to use if ``reactor_type`` is 'pfr_0d'. Value
+            written to ``reactor.nodes``
         V : float or str
             Volume of reactor. Value written to ``reactor.volume``. Units of
             length^3. See Notes section regarding unit specification.
@@ -330,23 +367,26 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
 
     .. _`PyYAML Documentation`: https://pyyaml.org/wiki/PyYAMLDocumentation
     """
-    lines = [_get_file_timestamp(comment_char='# '),
-            '# See documentation for OpenMKM YAML file here:',
-            '# https://vlachosgroup.github.io/openmkm/input']
-
+    lines = [
+        _get_file_timestamp(comment_char='# '),
+        '# See documentation for OpenMKM YAML file here:',
+        '# https://vlachosgroup.github.io/openmkm/input'
+    ]
     '''Initialize units'''
     if isinstance(units, dict):
         units = Units(**units)
-
     '''Organize reactor parameters'''
     if reactor is None:
         reactor = {}
-    reactor_params = [_Param('type', reactor_type, None),
-                      _Param('mode', mode, None),
-                      _Param('volume', V, '_length3'),
-                      _Param('area', A, '_length2'),
-                      _Param('length', L, '_length'),
-                      _Param('cat_abyv', cat_abyv, '/_length')]
+    reactor_params = [
+        _Param('type', reactor_type, None),
+        _Param('mode', mode, None),
+        _Param('nodes', nodes, None),
+        _Param('volume', V, '_length3'),
+        _Param('area', A, '_length2'),
+        _Param('length', L, '_length'),
+        _Param('cat_abyv', cat_abyv, '/_length')
+    ]
     # Process temperature
     if T is not None:
         reactor_params.append(_Param('temperature', T, None))
@@ -357,33 +397,32 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         reactor_params.append(_Param('pressure', P, '_pressure'))
     elif multi_P is not None:
         reactor_params.append(_Param('pressure', multi_P[0], '_pressure'))
-    
+
     for parameter in reactor_params:
         _assign_yaml_val(parameter, reactor, units)
-
     '''Organize inlet gas parameters'''
     if inlet_gas is None:
         inlet_gas = {}
-    inlet_gas_params = [_Param('residence_time', residence_time, '_time'),
-                        _Param('mass_flow_rate', mass_flow_rate, '_mass/_time')]
+    inlet_gas_params = [
+        _Param('residence_time', residence_time, '_time'),
+        _Param('mass_flow_rate', mass_flow_rate, '_mass/_time')
+    ]
     # Process flow rate
     if flow_rate is not None:
-        inlet_gas_params.append(_Param('flow_rate', flow_rate,
-                                       '_length3/_time'))
+        inlet_gas_params.append(
+            _Param('flow_rate', flow_rate, '_length3/_time'))
     elif multi_flow_rate is not None:
-        inlet_gas_params.append(_Param('flow_rate', multi_flow_rate[0],
-                                       '_length3/_time'))
+        inlet_gas_params.append(
+            _Param('flow_rate', multi_flow_rate[0], '_length3/_time'))
 
     for parameter in inlet_gas_params:
         _assign_yaml_val(parameter, inlet_gas, units)
-
     '''Organize solver parameters'''
     if solver is None:
         solver = {}
     solver_params = [_Param('atol', atol, None), _Param('rtol', rtol, None)]
     for parameter in solver_params:
         _assign_yaml_val(parameter, solver, units)
-
     '''Organize multi parameters'''
     if multi_input is None:
         multi_input = {}
@@ -394,20 +433,20 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
         multi_P = list(multi_P)
     if _is_iterable(multi_flow_rate):
         multi_flow_rate = list(multi_flow_rate)
-    multi_input_params = [_Param('temperature', multi_T, None),
-                          _Param('pressure', multi_P, '_pressure'),
-                          _Param('flow_rate', multi_flow_rate,
-                                 '_length3/_time')]
+    multi_input_params = [
+        _Param('temperature', multi_T, None),
+        _Param('pressure', multi_P, '_pressure'),
+        _Param('flow_rate', multi_flow_rate, '_length3/_time')
+    ]
     for parameter in multi_input_params:
         _assign_yaml_val(parameter, multi_input, units)
-
     '''Organize simulation parameters'''
     if simulation is None:
         simulation = {}
-    simulation_params = (_Param('end_time', end_time, '_time'),
-                         _Param('transient', transient, None),
-                         _Param('stepping', stepping, None),
-                         _Param('step_size', step_size, '_time'),
+    simulation_params = (_Param('end_time', end_time,
+                                '_time'), _Param('transient', transient, None),
+                         _Param('stepping', stepping,
+                                None), _Param('step_size', step_size, None),
                          _Param('init_step', init_step, None),
                          _Param('output_format', output_format, None))
     for parameter in simulation_params:
@@ -417,7 +456,6 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
     if len(multi_input) > 0:
         _assign_yaml_val(_Param('multi_input', multi_input, None), simulation,
                          units)
-    
     '''Organize phase parameters'''
     if phases is not None:
         if isinstance(phases, dict):
@@ -431,7 +469,8 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                 if phase.initial_state is not None:
                     initial_state_str = '"'
                     for species, mole_frac in phase.initial_state.items():
-                        initial_state_str += '{}:{}, '.format(species,mole_frac)
+                        initial_state_str += '{}:{}, '.format(
+                            species, mole_frac)
                     initial_state_str = '{}"'.format(initial_state_str[:-2])
                     phase_info['initial_state'] = initial_state_str
 
@@ -449,26 +488,23 @@ def write_yaml(reactor_type=None, mode=None, V=None, T=None, P=None, A=None,
                     phases_dict[phase_type] = [phase_info]
         # If only one entry for phase type, reassign it.
         for phase_type, phases in phases_dict.items():
-            if len(phases) == 1:
+            if len(phases) == 1 and phase_type != 'surfaces':
                 phases_dict[phase_type] = phases[0]
     '''Assign misc values'''
     if misc is None:
         misc = {}
     yaml_dict = misc.copy()
-    
     '''Assign values to overall YAML dict'''
     headers = (('reactor', reactor), ('inlet_gas', inlet_gas),
                ('simulation', simulation), ('phases', phases_dict))
     for header in headers:
         if len(header[1]) > 0:
             yaml_dict[header[0]] = header[1]
-
     '''Convert dictionary to YAML str'''
     yaml_str = yaml.dump(yaml_dict, **yaml_options)
     # Remove redundant quotes
     yaml_str = yaml_str.replace('\'', '')
     lines.append(yaml_str)
-
     '''Write to file'''
     lines_out = '\n'.join(lines)
     if filename is not None:

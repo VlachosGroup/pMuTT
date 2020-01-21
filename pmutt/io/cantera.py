@@ -1,5 +1,6 @@
 from pmutt import constants as c
 
+
 def obj_to_CTI(obj, line_len=80, max_line_len=80, **kwargs):
     """Converts elementary data types to CTI format
     
@@ -41,7 +42,7 @@ def obj_to_CTI(obj, line_len=80, max_line_len=80, **kwargs):
         if cti_str_len < (line_len - 2):
             cti_str = '"{}"'.format(cti_str)
         else:
-            header_spaces = ' '*(max_line_len - line_len + 3)
+            header_spaces = ' ' * (max_line_len - line_len + 3)
 
             # Split string to be reassembled on multiple lines
             cti_list = cti_str.split(' ')

@@ -27,7 +27,6 @@ class Reference(EmpiricalBase):
         HoRT_ref : float
             Dimensionless enthalpy corresponding to T_ref
     """
-
     def __init__(self, T_ref, HoRT_ref, **kwargs):
         super().__init__(**kwargs)
         self.T_ref = T_ref
@@ -61,7 +60,10 @@ class References(_ModelBase):
         T_ref : float, optional
             Reference temperature in K. Default is 298.15 K
     """
-    def __init__(self, offset=None, references=None, descriptor='elements',
+    def __init__(self,
+                 offset=None,
+                 references=None,
+                 descriptor='elements',
                  T_ref=c.T0('K')):
         self.offset = offset
         self.references = references
@@ -169,20 +171,21 @@ class References(_ModelBase):
             warn(warn_msg)
         self.T_ref = np.mean(T_refs)
 
-        HoRT_ref_dft = np.array(
-                [reference.model.get_HoRT(T=reference.T_ref)
-                    for reference in self])
+        HoRT_ref_dft = np.array([
+            reference.model.get_HoRT(T=reference.T_ref) for reference in self
+        ])
         HoRT_ref_exp = np.array([reference.HoRT_ref for reference in self])
         # Offset between the DFT energies and experimentalvalues
         # for reference species
         ref_offset = HoRT_ref_dft - HoRT_ref_exp
         # Offset between the DFT energies and experimental values for
         # each descriptor
-        offset = np.linalg.lstsq(descriptors_mat, ref_offset,
-                                 rcond=None)[0]
+        offset = np.linalg.lstsq(descriptors_mat, ref_offset, rcond=None)[0]
         # Convert offset to a dictionary
-        self.offset = {descriptor: val for descriptor, val
-                       in zip(descriptors, offset)}
+        self.offset = {
+            descriptor: val
+            for descriptor, val in zip(descriptors, offset)
+        }
 
     def get_HoRT(self, descriptors, T=None):
         """Returns the offset due to the descriptor composition of a specie.
@@ -208,7 +211,7 @@ class References(_ModelBase):
         HoRT = 0.
         for descriptor, coefficient in descriptors.items():
             try:
-                HoRT -= self.offset[descriptor]*coefficient
+                HoRT -= self.offset[descriptor] * coefficient
             except KeyError:
                 warn_msg = ('References does not have offset value for the '
                             'descriptor: {}.'.format(descriptor))
@@ -217,7 +220,7 @@ class References(_ModelBase):
             return HoRT
         else:
             # Adjust for the temperature
-            return HoRT * self.T_ref/T
+            return HoRT * self.T_ref / T
 
     def get_CvoR(self):
         return 0.
@@ -244,10 +247,12 @@ class References(_ModelBase):
         -------
             obj_dict : dict
         """
-        obj_dict = {'class': str(self.__class__),
-                    'offset': self.offset,
-                    'descriptor': self.descriptor,
-                    'T_ref': self.T_ref}
+        obj_dict = {
+            'class': str(self.__class__),
+            'offset': self.offset,
+            'descriptor': self.descriptor,
+            'T_ref': self.T_ref
+        }
         try:
             obj_dict['references'] = [ref.to_dict() for ref in self.references]
         except (AttributeError, TypeError):
@@ -268,6 +273,7 @@ class References(_ModelBase):
         """
         json_obj = remove_class(json_obj)
         json_obj['offset'] = np.array(json_obj['offset'])
-        json_obj['references'] = [json_to_pmutt(ref_dict)
-                                  for ref_dict in json_obj['references']]
+        json_obj['references'] = [
+            json_to_pmutt(ref_dict) for ref_dict in json_obj['references']
+        ]
         return cls(**json_obj)

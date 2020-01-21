@@ -15,6 +15,7 @@ from pmutt import constants as c
 from pmutt import pmutt_list_to_dict
 from pmutt.io import _get_file_timestamp
 
+
 def read_reactions(filename, species=None):
     """Directly read reactions from Chemkin gas.inp or surf.inp files
 
@@ -106,16 +107,22 @@ def read_reactions(filename, species=None):
     for rxn, Prods in zip(rxns, Products):
         Reactions.append(rxn[0:rxn.rindex(Prods[-1]) + len(Prods[-1])])
     if species is not None:
-        return(Reactions, Reactants, React_obj, React_stoic,
-               Products, Prod_obj, Prod_stoic)
+        return (Reactions, Reactants, React_obj, React_stoic, Products,
+                Prod_obj, Prod_stoic)
     else:
-        return(Reactions, Reactants, React_stoic, Products, Prod_stoic)
+        return (Reactions, Reactants, React_stoic, Products, Prod_stoic)
 
 
-def write_EA(reactions, conditions, write_gas_phase=False,
-             filename=None, act_method_name='get_EoRT_act',
-             float_format=' .2E', species_delimiter='+',
-             reaction_delimiter='<=>', stoich_format='.0f', newline='\n',
+def write_EA(reactions,
+             conditions,
+             write_gas_phase=False,
+             filename=None,
+             act_method_name='get_EoRT_act',
+             float_format=' .2E',
+             species_delimiter='+',
+             reaction_delimiter='<=>',
+             stoich_format='.0f',
+             newline='\n',
              column_delimiter='  '):
     """Writes the EAs.inp or EAg.inp file for Chemkin
 
@@ -178,9 +185,9 @@ def write_EA(reactions, conditions, write_gas_phase=False,
         ('!be included in the reaction string with a stoichiometric '
          'coefficient equal to'),
         ('!the number of times the species appears in the reaction. '
-         'If not using'),
-        '!MultiInput, then only the first value is used.',
-        '  {}  !Number of reactions'.format(n_reactions)]
+         'If not using'), '!MultiInput, then only the first value is used.',
+        '  {}  !Number of reactions'.format(n_reactions)
+    ]
 
     # Find length to pad reactions
     max_rxn_len = _get_max_reaction_len(reactions=valid_reactions,
@@ -202,11 +209,13 @@ def write_EA(reactions, conditions, write_gas_phase=False,
 
     # Add line for each reaction step
     for reaction in valid_reactions:
-        line = [str_field.format(
-                    reaction.to_string(species_delimiter=species_delimiter,
-                                       reaction_delimiter=reaction_delimiter,
-                                       stoich_format=stoich_format,
-                                       include_TS=False))]
+        line = [
+            str_field.format(
+                reaction.to_string(species_delimiter=species_delimiter,
+                                   reaction_delimiter=reaction_delimiter,
+                                   stoich_format=stoich_format,
+                                   include_TS=False))
+        ]
         for condition in conditions:
             method = getattr(reaction, act_method_name)
             quantity = _force_pass_arguments(method, **condition)
@@ -221,11 +230,19 @@ def write_EA(reactions, conditions, write_gas_phase=False,
         return lines_out
 
 
-def write_gas(nasa_species, filename=None, T=c.T0('K'), reactions=[],
-              species_delimiter='+', reaction_delimiter='=',
-              act_method_name='get_E_act', act_unit='kcal/mol',
-              float_format=' .3E', stoich_format='.0f', newline='\n',
-              column_delimiter='  ', **kwargs):
+def write_gas(nasa_species,
+              filename=None,
+              T=c.T0('K'),
+              reactions=[],
+              species_delimiter='+',
+              reaction_delimiter='=',
+              act_method_name='get_E_act',
+              act_unit='kcal/mol',
+              float_format=' .3E',
+              stoich_format='.0f',
+              newline='\n',
+              column_delimiter='  ',
+              **kwargs):
     """Writes the gas.inp Chemkin file.
 
     Parameters
@@ -257,12 +274,18 @@ def write_gas(nasa_species, filename=None, T=c.T0('K'), reactions=[],
     # Get gas-phase reactions
     gas_reactions = [reaction for reaction in reactions if reaction.gas_phase]
     reaction_lines = _write_reaction_lines(
-            reactions=gas_reactions, species_delimiter=species_delimiter,
-            reaction_delimiter=reaction_delimiter, include_TS=False,
-            stoich_format=stoich_format, act_method_name=act_method_name,
-            act_unit=act_unit, float_format=float_format,
-            column_delimiter=column_delimiter, T=T, sden_operation=None,
-            **kwargs)
+        reactions=gas_reactions,
+        species_delimiter=species_delimiter,
+        reaction_delimiter=reaction_delimiter,
+        include_TS=False,
+        stoich_format=stoich_format,
+        act_method_name=act_method_name,
+        act_unit=act_unit,
+        float_format=float_format,
+        column_delimiter=column_delimiter,
+        T=T,
+        sden_operation=None,
+        **kwargs)
     # Check length of lines
     if any([(len(reaction_line) > 80) for reaction_line in reaction_lines]):
         warn_msg = ('Reaction lines exceed 80 character limit when writing '
@@ -275,25 +298,20 @@ def write_gas(nasa_species, filename=None, T=c.T0('K'), reactions=[],
     # Collect all the lines into a list
     lines = [
         _get_file_timestamp(comment_char='! '),
-        '!Elements present in gas and surface species',
-        'ELEMENTS']
+        '!Elements present in gas and surface species', 'ELEMENTS'
+    ]
     lines.extend(unique_elements)
-    lines.extend(['END',
-                  '',
-                  '!Gas-phase species',
-                  'SPECIES'])
+    lines.extend(['END', '', '!Gas-phase species', 'SPECIES'])
     lines.extend(gas_species)
-    lines.extend(['END',
-                  '',
-                  '!Gas-phase reactions. The rate constant expression is:',
-                  '!k = kb/h * (T)^beta * exp(-Ea/RT)',
-                  '!Each line has 4 columns:',
-                  '!- Reaction reactants and products separated by <=>',
-                  '!- Preexponential factor, kb/h',
-                  '!- Beta (power to raise T in rate constant expression)',
-                  ('!- Ea (Activation Energy or Gibbs energy of activation in '
-                   'kcal/mol'),
-                  'REACTIONS'])
+    lines.extend([
+        'END', '', '!Gas-phase reactions. The rate constant expression is:',
+        '!k = kb/h * (T)^beta * exp(-Ea/RT)', '!Each line has 4 columns:',
+        '!- Reaction reactants and products separated by <=>',
+        '!- Preexponential factor, kb/h',
+        '!- Beta (power to raise T in rate constant expression)',
+        ('!- Ea (Activation Energy or Gibbs energy of activation in '
+         'kcal/mol'), 'REACTIONS'
+    ])
     lines.extend(reaction_lines)
     lines.append('END')
 
@@ -304,11 +322,21 @@ def write_gas(nasa_species, filename=None, T=c.T0('K'), reactions=[],
     else:
         return lines_out
 
-def write_surf(reactions, sden_operation='min', filename=None, T=c.T0('K'),
-               species_delimiter='+', reaction_delimiter='=',
-               act_method_name='get_E_act', act_unit='kcal/mol',
-               float_format=' .3E', stoich_format='.0f', newline='\n',
-               column_delimiter='  ', use_mw_correction=True, **kwargs):
+
+def write_surf(reactions,
+               sden_operation='min',
+               filename=None,
+               T=c.T0('K'),
+               species_delimiter='+',
+               reaction_delimiter='=',
+               act_method_name='get_E_act',
+               act_unit='kcal/mol',
+               float_format=' .3E',
+               stoich_format='.0f',
+               newline='\n',
+               column_delimiter='  ',
+               use_mw_correction=True,
+               **kwargs):
     """Writes the surf.inp Chemkin file
 
     Parameters
@@ -374,7 +402,7 @@ def write_surf(reactions, sden_operation='min', filename=None, T=c.T0('K'),
         # Add catalyst site header
         cat_site_name = '{}/'.format(cat_site.name)
         cat_site_lines.append('SITE/{:<14}SDEN/{:.5E}/'.format(
-                cat_site_name, cat_site.site_density))
+            cat_site_name, cat_site.site_density))
         cat_site_lines.append('')
         # Add species adsorbed on that site
         for specie in cat_adsorbates[cat_site.name]:
@@ -392,12 +420,18 @@ def write_surf(reactions, sden_operation='min', filename=None, T=c.T0('K'),
     surf_reactions = \
         [reaction for reaction in reactions if not reaction.gas_phase]
     reaction_lines = _write_reaction_lines(
-                reactions=surf_reactions, species_delimiter=species_delimiter,
-                reaction_delimiter=reaction_delimiter, include_TS=False,
-                stoich_format=stoich_format, act_method_name=act_method_name,
-                act_unit=act_unit, float_format=float_format,
-                column_delimiter=column_delimiter, T=T,
-                sden_operation=sden_operation, **kwargs)
+        reactions=surf_reactions,
+        species_delimiter=species_delimiter,
+        reaction_delimiter=reaction_delimiter,
+        include_TS=False,
+        stoich_format=stoich_format,
+        act_method_name=act_method_name,
+        act_unit=act_unit,
+        float_format=float_format,
+        column_delimiter=column_delimiter,
+        T=T,
+        sden_operation=sden_operation,
+        **kwargs)
 
     # Check length of lines
     if any([(len(reaction_line) > 80) for reaction_line in reaction_lines]):
@@ -429,29 +463,27 @@ def write_surf(reactions, sden_operation='min', filename=None, T=c.T0('K'),
         '!BULK [Bulk name]/[Bulk density in g/cm3]',
     ]
     lines.extend(cat_site_lines)
-    lines.extend(['END',
-                  '',
-                  '!Surface-phase reactions.',
-                  '!The reaction line has the following format:',
-                  '!REACTIONS  MW[ON/OFF]   [Ea units]',
-                  '!where MW stands for Motz-Wise corrections and if the Ea',
-                  ('!units are left blank, then the activation energy should '
-                   'be in cal/mol'),
-                  '!The rate constant expression is:',
-                  '!k = kb/h/site_den^(n-1) * (T)^beta * exp(-Ea/RT)',
-                  ('!where site_den is the site density and is the number '
-                   'of surface species (including empty sites)'),
-                  '!Each line has 4 columns:',
-                  '!- Reaction reactants and products separated by =',
-                  '!- Preexponential factor, kb/h/site_den^(n-1), or ',
-                  '!  sticking coefficient if adsorption reaction',
-                  '!- Beta (power to raise T in rate constant expression)',
-                  ('!- Ea (Activation Energy or Gibbs energy of activation in '
-                   'specified units'),
-                  ('!Adsorption reactions can be represented using the STICK '
-                   'keyword'),
-                  'REACTIONS{2}{0}{2}{1}'.format(mw_str, act_unit_str,
-                                                 column_delimiter)])
+    lines.extend([
+        'END', '', '!Surface-phase reactions.',
+        '!The reaction line has the following format:',
+        '!REACTIONS  MW[ON/OFF]   [Ea units]',
+        '!where MW stands for Motz-Wise corrections and if the Ea',
+        ('!units are left blank, then the activation energy should '
+         'be in cal/mol'), '!The rate constant expression is:',
+        '!k = kb/h/site_den^(n-1) * (T)^beta * exp(-Ea/RT)',
+        ('!where site_den is the site density and is the number '
+         'of surface species (including empty sites)'),
+        '!Each line has 4 columns:',
+        '!- Reaction reactants and products separated by =',
+        '!- Preexponential factor, kb/h/site_den^(n-1), or ',
+        '!  sticking coefficient if adsorption reaction',
+        '!- Beta (power to raise T in rate constant expression)',
+        ('!- Ea (Activation Energy or Gibbs energy of activation in '
+         'specified units'),
+        ('!Adsorption reactions can be represented using the STICK '
+         'keyword'), 'REACTIONS{2}{0}{2}{1}'.format(mw_str, act_unit_str,
+                                                    column_delimiter)
+    ])
     lines.extend(reaction_lines)
     lines.append('END')
 
@@ -463,8 +495,15 @@ def write_surf(reactions, sden_operation='min', filename=None, T=c.T0('K'),
     else:
         return lines_out
 
-def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
-                 filename=None, float_format='.3E', newline='\n',
+
+def write_T_flow(T=None,
+                 P=None,
+                 Q=None,
+                 abyv=None,
+                 conditions=None,
+                 filename=None,
+                 float_format='.3E',
+                 newline='\n',
                  column_delimiter='  '):
     """Writes the T_flow.inp Chemkin file
 
@@ -492,21 +531,19 @@ def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
         lines_out : str
             T_flow lines as a string if ``filename`` is None
     """
-    line_field = '{:%s}{}{:%s}{}{:%s}{}{:%s}  !{:<3}' % (float_format,
-                                                         float_format,
-                                                         float_format,
-                                                         float_format)
+    line_field = '{:%s}{}{:%s}{}{:%s}{}{:%s}  !{:<3}' % (
+        float_format, float_format, float_format, float_format)
     lines = [
         _get_file_timestamp(comment_char='! '),
         '!Conditions for each reaction run',
         '!Only used when MultiInput in tube.inp is set to "T"',
         '!T[K]    {0}P[atm]   {0}Q[cm3/s] {0}abyv[cm-1]{0}Run #'.format(
-            column_delimiter)]
+            column_delimiter)
+    ]
     for i, (T_i, P_i, Q_i, abyv_i) in enumerate(zip(T, P, Q, abyv)):
-        lines.append(line_field.format(T_i, column_delimiter,
-                                       P_i, column_delimiter,
-                                       Q_i, column_delimiter,
-                                       abyv_i, i+1))
+        lines.append(
+            line_field.format(T_i, column_delimiter, P_i, column_delimiter,
+                              Q_i, column_delimiter, abyv_i, i + 1))
     lines.append('EOF')
 
     lines_out = '\n'.join(lines)
@@ -517,9 +554,12 @@ def write_T_flow(T=None, P=None, Q=None, abyv=None, conditions=None,
         return lines_out
 
 
-def write_tube_mole(mole_frac_conditions, nasa_species,
-                    filename=None, float_format=' .3f',
-                    newline='\n', column_delimiter='  '):
+def write_tube_mole(mole_frac_conditions,
+                    nasa_species,
+                    filename=None,
+                    float_format=' .3f',
+                    newline='\n',
+                    column_delimiter='  '):
     """Write tube_mole.inp Chemkin file
 
     Parameters
@@ -552,8 +592,9 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
         for specie_name in mole_fracs.keys():
             unique_specie_names.add(specie_name)
     # Convert nasa_species to a dict for quicker lookup
-    unique_species = [specie for specie in nasa_species
-                      if specie.name in unique_specie_names]
+    unique_species = [
+        specie for specie in nasa_species if specie.name in unique_specie_names
+    ]
 
     # Find length to pad species
     max_species_len = _get_max_species_len(species=unique_species,
@@ -567,8 +608,8 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
                                      n_conditions=len(mole_frac_conditions))
     species_lines = []
     for specie in unique_species:
-        specie_line = _get_specie_str(specie=specie,
-                                      include_phase=True).ljust(species_padding)
+        specie_line = _get_specie_str(
+            specie=specie, include_phase=True).ljust(species_padding)
         for condition in mole_frac_conditions:
             # If the mole fraction was not specified, assumed to be 0
             try:
@@ -606,6 +647,7 @@ def write_tube_mole(mole_frac_conditions, nasa_species,
     else:
         return lines_out
 
+
 def _get_max_reaction_len(reactions, species_delimiter, reaction_delimiter,
                           stoich_format, include_TS):
     """Returns the maximum length of the reactions
@@ -629,10 +671,11 @@ def _get_max_reaction_len(reactions, species_delimiter, reaction_delimiter,
     """
     rxns_len = []
     for reaction in reactions:
-        rxn_len = len(reaction.to_string(species_delimiter=species_delimiter,
-                                         reaction_delimiter=reaction_delimiter,
-                                         stoich_format=stoich_format,
-                                         include_TS=include_TS))
+        rxn_len = len(
+            reaction.to_string(species_delimiter=species_delimiter,
+                               reaction_delimiter=reaction_delimiter,
+                               stoich_format=stoich_format,
+                               include_TS=include_TS))
         rxns_len.append(rxn_len)
     if len(rxns_len) == 0:
         max_len = 0
@@ -727,31 +770,34 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             Reactions represented in Chemkin format
     """
     max_reaction_len = _get_max_reaction_len(
-            reactions=reactions, species_delimiter=species_delimiter,
-            reaction_delimiter=reaction_delimiter, stoich_format=stoich_format,
-            include_TS=include_TS)
+        reactions=reactions,
+        species_delimiter=species_delimiter,
+        reaction_delimiter=reaction_delimiter,
+        stoich_format=stoich_format,
+        include_TS=include_TS)
     float_field = '{:%s}' % float_format
 
     reaction_lines = []
     for reaction in reactions:
         # Get reaction string
         reaction_str = reaction.to_string(
-                species_delimiter=species_delimiter,
-                reaction_delimiter=reaction_delimiter,
-                stoich_format=stoich_format,
-                include_TS=include_TS).ljust(max_reaction_len)
+            species_delimiter=species_delimiter,
+            reaction_delimiter=reaction_delimiter,
+            stoich_format=stoich_format,
+            include_TS=include_TS).ljust(max_reaction_len)
         # Calculate preexponential factor
         if reaction.is_adsorption:
             A = reaction.sticking_coeff
         else:
             # If using delta_G, take out entropic contribution in A
-            if act_method_name in ('get_GoRT_act', 'get_G_act', 
+            if act_method_name in ('get_GoRT_act', 'get_G_act',
                                    'get_delta_GoRT', 'get_delta_G'):
                 include_entropy = False
             else:
                 include_entropy = True
             A = reaction.get_A(include_entropy=include_entropy,
-                               sden_operation=sden_operation, **kwargs)
+                               sden_operation=sden_operation,
+                               **kwargs)
         A_str = float_field.format(A)
 
         # Format beta value
@@ -778,8 +824,7 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
     return reaction_lines
 
 
-def _write_column_line(padding, column_delimiter, float_format,
-                       n_conditions):
+def _write_column_line(padding, column_delimiter, float_format, n_conditions):
     """Writes the run # in column format
 
     Parameters
@@ -799,8 +844,8 @@ def _write_column_line(padding, column_delimiter, float_format,
     """
     float_field = '{:%s}' % float_format
     column_line = '!'.ljust(padding)
-    float_field_len = len(float_field.format(np.pi)+column_delimiter)
+    float_field_len = len(float_field.format(np.pi) + column_delimiter)
     column_field = '{:> %d}' % float_field_len
     for i in range(n_conditions):
-        column_line += column_field.format(i+1)
+        column_line += column_field.format(i + 1)
     return column_line

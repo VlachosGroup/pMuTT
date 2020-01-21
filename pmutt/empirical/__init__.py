@@ -53,10 +53,16 @@ class EmpiricalBase(_pmuttBase):
             automatically be assigned :class:`~pmutt.empirical.GasPressureAdj`.
             Default is True.
     """
-
-    def __init__(self, name=None, phase=None, elements=None,
-                 model=None, misc_models=None, smiles=None, notes=None,
-                 add_gas_P_adj=True, **kwargs):
+    def __init__(self,
+                 name=None,
+                 phase=None,
+                 elements=None,
+                 model=None,
+                 misc_models=None,
+                 smiles=None,
+                 notes=None,
+                 add_gas_P_adj=True,
+                 **kwargs):
         self.name = name
         self.phase = phase
         self.elements = elements
@@ -69,7 +75,7 @@ class EmpiricalBase(_pmuttBase):
         # because all the models will have the same attributes. Figure out a
         # way to pass them. Perhaps have a dictionary that contains the
         # attributes separated by species
-        
+
         self.misc_models = _check_iterable_attr(misc_models)
 
         # Assign pressure adjustment if necessary
@@ -91,8 +97,13 @@ class EmpiricalBase(_pmuttBase):
                         misc_models.append(GasPressureAdj())
         self.misc_models = misc_models
 
-    def plot_empirical(self, T_low=None, T_high=None, Cp_units=None,
-                       H_units=None, S_units=None, G_units=None):
+    def plot_empirical(self,
+                       T_low=None,
+                       T_high=None,
+                       Cp_units=None,
+                       H_units=None,
+                       S_units=None,
+                       G_units=None):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
 
@@ -156,18 +167,26 @@ class EmpiricalBase(_pmuttBase):
                 y_labels.append('{} ({})'.format(method.replace('get_', ''),
                                                  units))
 
-        fig, ax = plot_1D(self, x_name='T', x_values=T, methods=methods,
+        fig, ax = plot_1D(self,
+                          x_name='T',
+                          x_values=T,
+                          methods=methods,
                           **kwargs)
-        
+
         # Add titles and labels
         ax[0].set_title('Species: {}'.format(self.name))
         for i, y_label in enumerate(y_labels):
-            ax[i].set_xlabel('Temperature (K)')            
+            ax[i].set_xlabel('Temperature (K)')
             ax[i].set_ylabel(y_label)
         return fig, ax
 
-    def plot_statmech(self, T_low=None, T_high=None, Cp_units=None,
-                      H_units=None, S_units=None, G_units=None,
+    def plot_statmech(self,
+                      T_low=None,
+                      T_high=None,
+                      Cp_units=None,
+                      H_units=None,
+                      S_units=None,
+                      G_units=None,
                       use_references=True):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
@@ -232,20 +251,27 @@ class EmpiricalBase(_pmuttBase):
                 y_labels.append('{} ({})'.format(method.replace('get_', ''),
                                                  units))
 
-        fig, ax = plot_1D(self.model, x_name='T', x_values=T,
-                          methods=methods, use_references=use_references,
+        fig, ax = plot_1D(self.model,
+                          x_name='T',
+                          x_values=T,
+                          methods=methods,
+                          use_references=use_references,
                           **kwargs)
-        
+
         # Add titles and labels
         ax[0].set_title('Species: {}'.format(self.name))
         for i, y_label in enumerate(y_labels):
-            ax[i].set_xlabel('Temperature (K)')            
+            ax[i].set_xlabel('Temperature (K)')
             ax[i].set_ylabel(y_label)
         return fig, ax
 
-    def plot_statmech_and_empirical(self, T_low=None, T_high=None,
-                                    Cp_units=None, H_units=None,
-                                    S_units=None, G_units=None,
+    def plot_statmech_and_empirical(self,
+                                    T_low=None,
+                                    T_high=None,
+                                    Cp_units=None,
+                                    H_units=None,
+                                    S_units=None,
+                                    G_units=None,
                                     use_references=True):
         """Plots the thermodynamic profiles between ``T_low`` and ``T_high``
         using empirical relationship
@@ -310,11 +336,19 @@ class EmpiricalBase(_pmuttBase):
                 y_labels.append('{} ({})'.format(method.replace('get_', ''),
                                                  units))
 
-        fig, ax = plot_1D(self, x_name='T', x_values=T, methods=methods,
+        fig, ax = plot_1D(self,
+                          x_name='T',
+                          x_values=T,
+                          methods=methods,
                           **kwargs)
-        fig, ax = plot_1D(self.model, x_name='T', x_values=T,
-                          methods=methods, figure=fig, ax=ax,
-                          use_references=use_references, **kwargs)
+        fig, ax = plot_1D(self.model,
+                          x_name='T',
+                          x_values=T,
+                          methods=methods,
+                          figure=fig,
+                          ax=ax,
+                          use_references=use_references,
+                          **kwargs)
 
         # Get class name of current model object
         model_class1 = str(self.__class__)
@@ -328,7 +362,7 @@ class EmpiricalBase(_pmuttBase):
         ax[0].set_title('Species: {}'.format(self.name))
         ax[0].legend([model_class1, model_class2])
         for i, y_label in enumerate(y_labels):
-            ax[i].set_xlabel('Temperature (K)')            
+            ax[i].set_xlabel('Temperature (K)')
             ax[i].set_ylabel(y_label)
         return fig, ax
 
@@ -460,13 +494,15 @@ class EmpiricalBase(_pmuttBase):
         -------
             obj_dict : dict
         """
-        obj_dict = {'class': str(self.__class__),
-                    'type': 'empiricalbase',
-                    'name': self.name,
-                    'phase': self.phase,
-                    'elements': self.elements,
-                    'notes': self.notes,
-                    'smiles': self.smiles, }
+        obj_dict = {
+            'class': str(self.__class__),
+            'type': 'empiricalbase',
+            'name': self.name,
+            'phase': self.phase,
+            'elements': self.elements,
+            'notes': self.notes,
+            'smiles': self.smiles,
+        }
         try:
             obj_dict['model'] = self.model.to_dict()
         except AttributeError:
@@ -500,9 +536,9 @@ class EmpiricalBase(_pmuttBase):
 
         return cls(**json_obj)
 
+
 class GasPressureAdj(_ModelBase):
     """Includes pressure's effect on entropy for gas molecules"""
-
     def __init__(self):
         pass
 

@@ -25,7 +25,6 @@ class PhaseDiagram(Reactions):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-
     def __init__(self, reactions, norm_factors=None):
         super().__init__(reactions=reactions)
         if norm_factors is None:
@@ -57,8 +56,9 @@ class PhaseDiagram(Reactions):
             PhaseDiagram : PhaseDiagram object
         """
         json_obj = remove_class(json_obj)
-        json_obj['reactions'] = [json_to_pmutt(reaction)
-                                 for reaction in json_obj['reactions']]
+        json_obj['reactions'] = [
+            json_to_pmutt(reaction) for reaction in json_obj['reactions']
+        ]
         return cls(**json_obj)
 
     def get_GoRT_1D(self, x_name, x_values, G_units=None, **kwargs):
@@ -86,15 +86,15 @@ class PhaseDiagram(Reactions):
                 stable phase at the x_values.
         """
         GoRT = np.zeros(shape=(len(self.reactions), len(x_values)))
-        for i, (reaction, norm_factor) in enumerate(zip(self.reactions,
-                                                        self.norm_factors)):
+        for i, (reaction, norm_factor) in enumerate(
+                zip(self.reactions, self.norm_factors)):
             for j, x in enumerate(x_values):
                 kwargs[x_name] = x
-                GoRT[i, j] = reaction.get_delta_GoRT(**kwargs)/norm_factor
+                GoRT[i, j] = reaction.get_delta_GoRT(**kwargs) / norm_factor
 
                 # Add unit corrections
                 if G_units is not None:
-                    GoRT[i, j] *= c.R('{}/K'.format(G_units))*kwargs['T']
+                    GoRT[i, j] *= c.R('{}/K'.format(G_units)) * kwargs['T']
         stable_phases = np.nanargmin(GoRT, axis=1)
         return (GoRT, stable_phases)
 
@@ -124,7 +124,8 @@ class PhaseDiagram(Reactions):
         fig, ax = plt.subplots()
         GoRT, stable_phases = self.get_GoRT_1D(x_name=x_name,
                                                x_values=x_values,
-                                               G_units=G_units, **kwargs)
+                                               G_units=G_units,
+                                               **kwargs)
         for GoRT_rxn, rxn in zip(GoRT, self.reactions):
             plt.plot(x_values, GoRT_rxn, label=rxn.to_string())
         ax.legend()
@@ -135,8 +136,13 @@ class PhaseDiagram(Reactions):
             ax.set_ylabel('G ({})'.format(G_units))
         return (fig, ax)
 
-    def get_GoRT_2D(self, x1_name, x1_values, x2_name, x2_values,
-                    G_units=None, **kwargs):
+    def get_GoRT_2D(self,
+                    x1_name,
+                    x1_values,
+                    x2_name,
+                    x2_values,
+                    G_units=None,
+                    **kwargs):
         """Calculates the Gibbs free energy for all the reactions for two
         varying parameters
 
@@ -164,10 +170,10 @@ class PhaseDiagram(Reactions):
                 Each element of the array corresponds to the index of the most
                 stable phase at the x_values.
         """
-        GoRT = np.zeros(
-                shape=(len(self.reactions), len(x1_values), len(x2_values)))
-        for i, (reaction, norm_factor) in enumerate(zip(self.reactions,
-                                                        self.norm_factors)):
+        GoRT = np.zeros(shape=(len(self.reactions), len(x1_values),
+                               len(x2_values)))
+        for i, (reaction, norm_factor) in enumerate(
+                zip(self.reactions, self.norm_factors)):
             for j, x1 in enumerate(x1_values):
                 kwargs[x1_name] = x1
                 for k, x2 in enumerate(x2_values):
@@ -186,7 +192,12 @@ class PhaseDiagram(Reactions):
 
         return GoRT, stable_phases
 
-    def plot_2D(self, x1_name, x1_values, x2_name, x2_values, G_units=None,
+    def plot_2D(self,
+                x1_name,
+                x1_values,
+                x2_name,
+                x2_values,
+                G_units=None,
                 **kwargs):
         """Make a 2D phase diagram.
 
@@ -226,20 +237,26 @@ class PhaseDiagram(Reactions):
                                                x1_values=x1_values,
                                                x2_name=x2_name,
                                                x2_values=x2_values,
-                                               G_units=G_units, **kwargs)
+                                               G_units=G_units,
+                                               **kwargs)
 
         fig, ax = plt.subplots()
         # Choosing color palette
         cmap = plt.get_cmap('viridis')
-        norm = matplotlib.colors.BoundaryNorm(np.arange(len(self.reactions)+1),
-                                              cmap.N)
+        norm = matplotlib.colors.BoundaryNorm(
+            np.arange(len(self.reactions) + 1), cmap.N)
         # Create colormap
-        c = plt.pcolormesh(x1_mesh, x2_mesh, stable_phases, cmap=cmap,
-                           norm=norm, vmin=0, vmax=len(self.reactions))
+        c = plt.pcolormesh(x1_mesh,
+                           x2_mesh,
+                           stable_phases,
+                           cmap=cmap,
+                           norm=norm,
+                           vmin=0,
+                           vmax=len(self.reactions))
         # Set colorbar
-        cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions))+0.5)
+        cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions)) + 0.5)
         cbar.ax.set_yticklabels(
-                [reaction.to_string() for reaction in self.reactions])
+            [reaction.to_string() for reaction in self.reactions])
         # Set axis labels
         ax.set_xlabel(x1_name)
         ax.set_ylabel(x2_name)

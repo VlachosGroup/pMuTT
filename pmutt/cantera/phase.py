@@ -4,6 +4,7 @@ from pmutt import constants as c
 from pmutt.cantera import _get_range_CTI
 from pmutt.io.cantera import obj_to_CTI
 
+
 class Phase:
     """Parent class for Cantera phases
 
@@ -29,8 +30,15 @@ class Phase:
             Not supplied during initialization. Attribute derived from
             ``species`` attribute.        
     """
-    def __init__(self, name, species=None, initial_state=None, kinetics=None,
-                 transport=None, reactions=None, options=None, note=None):
+    def __init__(self,
+                 name,
+                 species=None,
+                 initial_state=None,
+                 kinetics=None,
+                 transport=None,
+                 reactions=None,
+                 options=None,
+                 note=None):
         self.name = name
         self.species = species
         self.initial_state = initial_state
@@ -39,7 +47,7 @@ class Phase:
         self.reactions = reactions
         self.options = options
         self.note = note
-    
+
     @property
     def elements(self):
         elements = set()
@@ -89,6 +97,7 @@ class Phase:
     def copy_species(self):
         return self._species.copy()
 
+
 class IdealGas(Phase):
     """Expresses ideal gas as Cantera CTI file. Inherits from
     :class:`~pmutt.cantera.phase.Phase`.
@@ -117,11 +126,23 @@ class IdealGas(Phase):
             Currently not supported. Specify special options to the phase.
             Default is None.
     """
-    def __init__(self, name, species=[], initial_state=None, kinetics=None,
-                 reactions=None, transport=None, options=None, note=None):
-        super().__init__(name=name, species=species, kinetics=kinetics,
-                         transport=transport, options=options, note=note,
-                         reactions=reactions, initial_state=initial_state)
+    def __init__(self,
+                 name,
+                 species=[],
+                 initial_state=None,
+                 kinetics=None,
+                 reactions=None,
+                 transport=None,
+                 options=None,
+                 note=None):
+        super().__init__(name=name,
+                         species=species,
+                         kinetics=kinetics,
+                         transport=transport,
+                         options=options,
+                         note=note,
+                         reactions=reactions,
+                         initial_state=initial_state)
 
     def to_CTI(self, max_line_len=80, delimiter='_'):
         """Writes the object in Cantera's CTI format.
@@ -143,24 +164,29 @@ class IdealGas(Phase):
         cti_str = ('ideal_gas(name={},\n'
                    '          elements={},\n'
                    '          species={},\n'.format(
-                       obj_to_CTI(self.name, line_len=max_line_len-15,
-                                  max_line_len=max_line_len-16),
-                       obj_to_CTI(self.elements, line_len=max_line_len-19,
+                       obj_to_CTI(self.name,
+                                  line_len=max_line_len - 15,
+                                  max_line_len=max_line_len - 16),
+                       obj_to_CTI(self.elements,
+                                  line_len=max_line_len - 19,
                                   max_line_len=max_line_len),
-                       obj_to_CTI(species_names, line_len=max_line_len-18,
+                       obj_to_CTI(species_names,
+                                  line_len=max_line_len - 18,
                                   max_line_len=max_line_len)))
 
         # Fields with ranges
-        range_fields = ('reactions',)
+        range_fields = ('reactions', )
         for range_field in range_fields:
             val = getattr(self, range_field)
             # Skip empty fields
             if val is None:
                 continue
             cti_str += ('          {}={},\n'
-                        ''.format(range_field, 
-                                  _get_range_CTI(objs=val, parent_obj=self,
-                                                 delimiter=delimiter)))
+                        ''.format(
+                            range_field,
+                            _get_range_CTI(objs=val,
+                                           parent_obj=self,
+                                           delimiter=delimiter)))
 
         # Add optional fields
         optional_fields = ('kinetics', 'transport', 'options', 'note')
@@ -171,12 +197,15 @@ class IdealGas(Phase):
                 continue
 
             cti_str += '          {}={},\n'.format(
-                    field, obj_to_CTI(val, line_len=max_line_len-len(field)-11,
-                    max_line_len=max_line_len))
+                field,
+                obj_to_CTI(val,
+                           line_len=max_line_len - len(field) - 11,
+                           max_line_len=max_line_len))
 
         # Terminate the string
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
+
 
 class StoichSolid(Phase):
     """Expresses stoichiometric solid as Cantera CTI file. Inherits from
@@ -202,14 +231,28 @@ class StoichSolid(Phase):
         note : str, optional
             Comment field for users. Default is None.
     """
-    def __init__(self, name, species=[], initial_state=None, transport=None,
-                 reactions=None, options=None, density=None, note=None):
-        super().__init__(name=name, species=species, transport=transport,
-                         options=options, note=note, reactions=reactions,
+    def __init__(self,
+                 name,
+                 species=[],
+                 initial_state=None,
+                 transport=None,
+                 reactions=None,
+                 options=None,
+                 density=None,
+                 note=None):
+        super().__init__(name=name,
+                         species=species,
+                         transport=transport,
+                         options=options,
+                         note=note,
+                         reactions=reactions,
                          initial_state=initial_state)
         self.density = density
 
-    def to_CTI(self, max_line_len=80, mass_unit='g', length_unit='cm',
+    def to_CTI(self,
+               max_line_len=80,
+               mass_unit='g',
+               length_unit='cm',
                units=None):
         """Writes the object in Cantera's CTI format.
 
@@ -242,13 +285,15 @@ class StoichSolid(Phase):
                    '                     elements={},\n'
                    '                     species={},\n'
                    '                     density={},\n'.format(
-                       obj_to_CTI(self.name, line_len=max_line_len-26,
-                                  max_line_len=max_line_len-27),
-                       obj_to_CTI(self.elements,line_len=max_line_len-30,
+                       obj_to_CTI(self.name,
+                                  line_len=max_line_len - 26,
+                                  max_line_len=max_line_len - 27),
+                       obj_to_CTI(self.elements,
+                                  line_len=max_line_len - 30,
                                   max_line_len=max_line_len),
-                       obj_to_CTI(species_names, line_len=max_line_len-29,
-                                  max_line_len=max_line_len),
-                       density))
+                       obj_to_CTI(species_names,
+                                  line_len=max_line_len - 29,
+                                  max_line_len=max_line_len), density))
         # Add optional fields
         optional_fields = ('transport', 'options', 'note', 'initial_state')
         for field in optional_fields:
@@ -258,8 +303,10 @@ class StoichSolid(Phase):
                 continue
 
             cti_str += '                     {}={},\n'.format(
-                    field, obj_to_CTI(val, line_len=max_line_len-len(field)-22,
-                    max_line_len=max_line_len))
+                field,
+                obj_to_CTI(val,
+                           line_len=max_line_len - len(field) - 22,
+                           max_line_len=max_line_len))
 
         # Terminate the string
         cti_str = '{})\n'.format(cti_str[:-2])

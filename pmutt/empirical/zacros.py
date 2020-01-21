@@ -17,12 +17,21 @@ class Zacros(EmpiricalBase):
     """Stores the information for an individual nasa specie
     Inherits from pmutt.empirical.EmpiricalBase
     """
-    def __init__(self, A_st=None, atoms=None, symmetrynumber=None,
-                 inertia=None, geometry=None, vib_wavenumbers=None,
-                 potentialenergy=None, **kwargs):
-        super().__init__(atoms=atoms, symmetrynumber=symmetrynumber,
-                         geometry=geometry, vib_wavenumbers=vib_wavenumbers,
-                         potentialenergy=potentialenergy, **kwargs)
+    def __init__(self,
+                 A_st=None,
+                 atoms=None,
+                 symmetrynumber=None,
+                 inertia=None,
+                 geometry=None,
+                 vib_wavenumbers=None,
+                 potentialenergy=None,
+                 **kwargs):
+        super().__init__(atoms=atoms,
+                         symmetrynumber=symmetrynumber,
+                         geometry=geometry,
+                         vib_wavenumbers=vib_wavenumbers,
+                         potentialenergy=potentialenergy,
+                         **kwargs)
         self.A_st = A_st
         self.atoms = atoms
         self.geometry = geometry
@@ -34,8 +43,8 @@ class Zacros(EmpiricalBase):
         self.zpe = sum(np.array(self.vib_energies)/2.) *\
             c.convert_unit(initial='J', final='kcal')*c.Na
         if np.sum(self.vib_energies) != 0:
-            self.q_vib = np.product(np.divide(1, (1 - np.exp(-self.theta /
-                                                             c.T0('K')))))
+            self.q_vib = np.product(
+                np.divide(1, (1 - np.exp(-self.theta / c.T0('K')))))
         if self.phase == 'G':
             if self.inertia is not None:
                 self.I3 = self.inertia
@@ -43,20 +52,22 @@ class Zacros(EmpiricalBase):
                 self.I3 = atoms.get_moments_of_inertia() *\
                         c.convert_unit(initial='A2', final='m2') *\
                         c.convert_unit(initial='amu', final='kg')
-            self.T_I = c.h('J s')**2/(8*np.pi**2*c.kb('J/K'))
+            self.T_I = c.h('J s')**2 / (8 * np.pi**2 * c.kb('J/K'))
         if self.phase == 'G':
             Irot = np.max(self.I3)
             if self.geometry == 'nonlinear':
                 self.q_rot = np.sqrt(np.pi*Irot)/self.symmetrynumber *\
                                     (c.T0('K')/self.T_I)**(3./2.)
             else:
-                self.q_rot = (c.T0('K')*Irot/self.symmetrynumber)/self.T_I
+                self.q_rot = (c.T0('K') * Irot /
+                              self.symmetrynumber) / self.T_I
         else:
             self.q_rot = 0.
         if self.A_st is not None:
-            self.MW = mw(self.elements)*c.convert_unit(initial='g', final='kg')/c.Na
-            self.q_trans2D = self.A_st * (2*np.pi*self.MW*c.kb('J/K') *
-                                          c.T0('K'))/c.h('J s')**2
+            self.MW = mw(self.elements) * c.convert_unit(initial='g',
+                                                         final='kg') / c.Na
+            self.q_trans2D = self.A_st * (2 * np.pi * self.MW * c.kb('J/K') *
+                                          c.T0('K')) / c.h('J s')**2
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

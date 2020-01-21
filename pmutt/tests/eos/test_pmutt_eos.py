@@ -14,30 +14,26 @@ class TestIdealGas(unittest.TestCase):
 
     def test_get_V(self):
         self.assertAlmostEqual(
-            self.ideal_gas.get_V(P=c.P0('bar'), T=c.T0('K'), n=1.),
-            c.V0('m3'))
+            self.ideal_gas.get_V(P=c.P0('bar'), T=c.T0('K'), n=1.), c.V0('m3'))
 
     def test_get_T(self):
         self.assertAlmostEqual(
-            self.ideal_gas.get_T(P=c.P0('bar'), V=c.V0('m3'), n=1.),
-            c.T0('K'))
+            self.ideal_gas.get_T(P=c.P0('bar'), V=c.V0('m3'), n=1.), c.T0('K'))
 
     def test_get_P(self):
         self.assertAlmostEqual(
-            self.ideal_gas.get_P(T=c.T0('K'), V=c.V0('m3'), n=1.),
-            c.P0('bar'))
+            self.ideal_gas.get_P(T=c.T0('K'), V=c.V0('m3'), n=1.), c.P0('bar'))
 
     def test_get_n(self):
         self.assertAlmostEqual(
-            self.ideal_gas.get_n(T=c.T0('K'), V=c.V0('m3'), P=c.P0('bar')),
-            1.)
+            self.ideal_gas.get_n(T=c.T0('K'), V=c.V0('m3'), P=c.P0('bar')), 1.)
 
 
 class TestvanDerWaalsEOS(unittest.TestCase):
     def setUp(self):
         self.van_der_waals = vanDerWaalsEOS(a=0.547, b=30.52e-6)
-        self.van_der_waals_critical = vanDerWaalsEOS.from_critical(Tc=638.73248, 
-                                                                   Pc=217.49762)
+        self.van_der_waals_critical = vanDerWaalsEOS.from_critical(
+            Tc=638.73248, Pc=217.49762)
         self.T = 500.  # K
         self.V = 0.01  # m3
         self.n = 1.  # mol

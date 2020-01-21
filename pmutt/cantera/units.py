@@ -18,8 +18,13 @@ class Units:
         mass : str, optional
             Mass unit. Default is 'kg'
     """
-    def __init__(self, length='cm', time='s', quantity='molec',
-                 energy='cal/mol', act_energy='cal/mol', pressure='bar',
+    def __init__(self,
+                 length='cm',
+                 time='s',
+                 quantity='molec',
+                 energy='cal/mol',
+                 act_energy='cal/mol',
+                 pressure='bar',
                  mass='kg'):
         self.length = length
         self.time = time
@@ -41,10 +46,11 @@ class Units:
             CTI_str : str
                 Object represented as a CTI string.
         """
-        cti_str = ('units(length="{}", time="{}", quantity="{}", energy="{}",\n'
-                   '      act_energy="{}", pressure="{}", mass="{}")').format(
-                       self.length, self.time, self.quantity, self.energy,
-                       self.act_energy, self.pressure, self.mass)
+        cti_str = (
+            'units(length="{}", time="{}", quantity="{}", energy="{}",\n'
+            '      act_energy="{}", pressure="{}", mass="{}")').format(
+                self.length, self.time, self.quantity, self.energy,
+                self.act_energy, self.pressure, self.mass)
         return cti_str
 
     def to_CTI_dict(self):
@@ -56,10 +62,12 @@ class Units:
                 Dictionary whose keys are the parameter names of CTI IO
                 functions.
         """
-        return {'length_unit': self.length,
-                'time_unit': self.time,
-                'quantity_unit': self.quantity,
-                'energy_unit': self.energy,
-                'act_energy_unit': self.act_energy,
-                'pressure_unit': self.pressure,
-                'mass_unit': self.mass}
+        return {
+            'length_unit': self.length,
+            'time_unit': self.time,
+            'quantity_unit': self.quantity,
+            'energy_unit': self.energy,
+            'act_energy_unit': self.act_energy,
+            'pressure_unit': self.pressure,
+            'mass_unit': self.mass
+        }

@@ -58,9 +58,12 @@ class RigidRotor(_ModelBase):
 
     .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
-
-    def __init__(self, symmetrynumber, rot_temperatures=None, geometry=None,
-                 atoms=None, degree_tol=5.):
+    def __init__(self,
+                 symmetrynumber,
+                 rot_temperatures=None,
+                 geometry=None,
+                 atoms=None,
+                 degree_tol=5.):
         if isinstance(symmetrynumber, str):
             try:
                 symmetrynumber = c.symmetry_dict[symmetrynumber]
@@ -73,13 +76,13 @@ class RigidRotor(_ModelBase):
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
             self.rot_temperatures = get_rot_temperatures_from_atoms(
-                    atoms=atoms, degree_tol=degree_tol)
+                atoms=atoms, degree_tol=degree_tol)
         else:
             self.rot_temperatures = rot_temperatures
 
         if geometry is None and atoms is not None:
-            self.geometry = get_geometry_from_atoms(
-                    atoms=atoms, degree_tol=degree_tol)
+            self.geometry = get_geometry_from_atoms(atoms=atoms,
+                                                    degree_tol=degree_tol)
         else:
             self.geometry = geometry
 
@@ -105,7 +108,7 @@ class RigidRotor(_ModelBase):
         if self.geometry == 'monatomic':
             return 0.
         elif self.geometry == 'linear':
-            return T/self.symmetrynumber/np.prod(self.rot_temperatures)
+            return T / self.symmetrynumber / np.prod(self.rot_temperatures)
         elif self.geometry == 'nonlinear':
             return np.sqrt(np.pi)/self.symmetrynumber \
                 * (T**3/np.prod(self.rot_temperatures))**0.5
@@ -209,11 +212,12 @@ class RigidRotor(_ModelBase):
         if self.geometry == 'monatomic':
             return 0.
         elif self.geometry == 'linear':
-            return np.log(T/self.symmetrynumber
-                          / np.prod(self.rot_temperatures)) + 1.
+            return np.log(
+                T / self.symmetrynumber / np.prod(self.rot_temperatures)) + 1.
         elif self.geometry == 'nonlinear':
-            return np.log(np.sqrt(np.pi)/self.symmetrynumber
-                          * (T**3/np.prod(self.rot_temperatures))**0.5) + 1.5
+            return np.log(
+                np.sqrt(np.pi) / self.symmetrynumber *
+                (T**3 / np.prod(self.rot_temperatures))**0.5) + 1.5
         else:
             err_msg = 'Geometry, {}, not supported.'.format(self.geometry)
             raise ValueError(err_msg)
@@ -232,7 +236,7 @@ class RigidRotor(_ModelBase):
             FoRT_rot : float
                 Rotational dimensionless Helmholtz energy
         """
-        return self.get_UoRT()-self.get_SoR(T=T)
+        return self.get_UoRT() - self.get_SoR(T=T)
 
     def get_GoRT(self, T):
         """Calculates the dimensionless Gibbs energy
@@ -248,7 +252,7 @@ class RigidRotor(_ModelBase):
             GoRT_rot : float
                 Rotational dimensionless Gibbs energy
         """
-        return self.get_HoRT()-self.get_SoR(T=T)
+        return self.get_HoRT() - self.get_SoR(T=T)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -257,10 +261,13 @@ class RigidRotor(_ModelBase):
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'symmetrynumber': self.symmetrynumber,
-                'geometry': self.geometry,
-                'rot_temperatures': list(self.rot_temperatures)}
+        return {
+            'class': str(self.__class__),
+            'symmetrynumber': self.symmetrynumber,
+            'geometry': self.geometry,
+            'rot_temperatures': list(self.rot_temperatures)
+        }
+
 
 def get_rot_temperatures_from_atoms(atoms, geometry=None, degree_tol=5.):
     """Calculate the rotational temperatures from ase.Atoms object

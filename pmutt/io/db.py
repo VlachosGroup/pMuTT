@@ -8,6 +8,7 @@ Read from/write to databases
 from pymongo import MongoClient
 from pmutt.io.json import json_to_pmutt
 
+
 class PMRester:
     """User-friendly REST interface with the database
 
@@ -21,7 +22,6 @@ class PMRester:
     .. _`pymongo.database.Database`: http://api.mongodb.com/python/current/api/pymongo/database.html#pymongo.database.Database
     .. _``pymongo.collection.Collection`: http://api.mongodb.com/python/current/api/pymongo/collection.html#pymongo.collection.Collection
     """
-    
     def __init__(self, client, database, collection):
         self.client = client
         self.database = database
@@ -90,7 +90,7 @@ class PMRester:
                 break
             species.append(specie)
             # Determine if record limit reached
-            if (i+1) == max_records:
+            if (i + 1) == max_records:
                 break
         return species
 
@@ -117,9 +117,10 @@ class PMRester:
         """
         species = []
         for smiles in species_smiles:
-            species.append(self.get_specie_from_smiles(smiles=smiles, 
-                                                       obj_type=obj_type,
-                                                       max_records=1))
+            species.append(
+                self.get_specie_from_smiles(smiles=smiles,
+                                            obj_type=obj_type,
+                                            max_records=1))
         return species
 
     def find(self, **kwargs):
@@ -137,8 +138,9 @@ class PMRester:
             results : list of pmutt objects
         .. _`pymongo.collection.Collection.find`: http://api.mongodb.com/python/current/api/pymongo/collection.html#pymongo.collection.Collection.find     
         """
-        return [json_to_pmutt(result)
-                for result in self.collection.find(**kwargs)]
+        return [
+            json_to_pmutt(result) for result in self.collection.find(**kwargs)
+        ]
 
     def submit(self, pmutt_obj):
         """Submit pmutt object to `collection` encoded as JSON

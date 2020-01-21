@@ -17,7 +17,6 @@ class IdealGasEOS(_pmuttBase):
 
     :math:`PV=nRT`
     """
-
     def __init__(self):
         # Ideal gas does not have any attributes!
         pass
@@ -38,7 +37,7 @@ class IdealGasEOS(_pmuttBase):
             V : float
                 Volume in m3
         """
-        return n*c.R('m3 bar/mol/K')*T/P
+        return n * c.R('m3 bar/mol/K') * T / P
 
     def get_P(self, T=c.T0('K'), V=c.V0('m3'), n=1.):
         """Calculates the pressure of an ideal gas
@@ -56,7 +55,7 @@ class IdealGasEOS(_pmuttBase):
             P : float
                 Pressure in bar
         """
-        return n*c.R('m3 bar/mol/K')*T/V
+        return n * c.R('m3 bar/mol/K') * T / V
 
     def get_T(self, V=c.V0('m3'), P=c.P0('bar'), n=1.):
         """Calculates the temperature of an ideal gas
@@ -74,7 +73,7 @@ class IdealGasEOS(_pmuttBase):
             T : float
                 Temperature in K
         """
-        return P*V/c.R('m3 bar/mol/K')/n
+        return P * V / c.R('m3 bar/mol/K') / n
 
     def get_n(self, V=c.V0('m3'), P=c.P0('bar'), T=c.T0('K')):
         """Calculates the moles of an ideal gas
@@ -92,7 +91,7 @@ class IdealGasEOS(_pmuttBase):
             n : float
                 Number of moles in mol
         """
-        return P*V/c.R('m3 bar/mol/K')/T
+        return P * V / c.R('m3 bar/mol/K') / T
 
 
 class vanDerWaalsEOS(_pmuttBase):
@@ -108,7 +107,6 @@ class vanDerWaalsEOS(_pmuttBase):
         b : float
             Volume excluded by a mole of particles in m3/mol
     """
-
     def __init__(self, a, b):
         self.a = a
         self.b = b
@@ -131,9 +129,11 @@ class vanDerWaalsEOS(_pmuttBase):
             Vm : float
                 Volume in m3
         """
-        P_SI = P*c.convert_unit(initial='bar', final='Pa')
-        Vm = np.roots(
-            [P_SI, -(P_SI*self.b + c.R('J/mol/K')*T), self.a, -self.a*self.b])
+        P_SI = P * c.convert_unit(initial='bar', final='Pa')
+        Vm = np.roots([
+            P_SI, -(P_SI * self.b + c.R('J/mol/K') * T), self.a,
+            -self.a * self.b
+        ])
         real_Vm = np.real([Vm_i for Vm_i in Vm if np.isreal(Vm_i)])
         if gas_phase:
             return np.max(real_Vm)
@@ -160,7 +160,7 @@ class vanDerWaalsEOS(_pmuttBase):
             V : float
                 Volume in m3
         """
-        return self.get_Vm(T=T, P=P, gas_phase=gas_phase)*n
+        return self.get_Vm(T=T, P=P, gas_phase=gas_phase) * n
 
     def get_P(self, T=c.T0('K'), V=c.V0('m3'), n=1.):
         """Calculates the pressure of a van der Waals gas
@@ -178,7 +178,7 @@ class vanDerWaalsEOS(_pmuttBase):
             P : float
                 Pressure in bar
         """
-        Vm = V/n
+        Vm = V / n
         return (c.R('J/mol/K')*T/(Vm - self.b) - self.a*(1./Vm)**2) \
             * c.convert_unit(initial='Pa', final='bar')
 
@@ -198,7 +198,7 @@ class vanDerWaalsEOS(_pmuttBase):
             T : float
                 Temperature in K
         """
-        Vm = V/n
+        Vm = V / n
         return (P*c.convert_unit(initial='bar', final='Pa') + self.a/Vm**2) \
             * (Vm - self.b)/c.R('J/mol/K')
 
@@ -222,7 +222,7 @@ class vanDerWaalsEOS(_pmuttBase):
             n : float
                 Number of moles in mol
         """
-        return V/self.get_Vm(T=T, P=P, gas_phase=gas_phase)
+        return V / self.get_Vm(T=T, P=P, gas_phase=gas_phase)
 
     def get_Pc(self):
         """Calculates the critical pressure
@@ -232,7 +232,8 @@ class vanDerWaalsEOS(_pmuttBase):
             Pc : float
                 Critical pressure in bar
         """
-        return self.a/27./self.b**2*c.convert_unit(initial='Pa', final='bar')
+        return self.a / 27. / self.b**2 * c.convert_unit(initial='Pa',
+                                                         final='bar')
 
     def get_Tc(self):
         """Calculates the critical temperature
@@ -242,7 +243,7 @@ class vanDerWaalsEOS(_pmuttBase):
             Tc : float
                 Critcial temperature in K
         """
-        return 8.*self.a/27./self.b/c.R('J/mol/K')
+        return 8. * self.a / 27. / self.b / c.R('J/mol/K')
 
     def get_Vc(self, n=1.):
         """Calculates the critical volume
@@ -256,7 +257,7 @@ class vanDerWaalsEOS(_pmuttBase):
             Vc : float
                 Critical volume in m3
         """
-        return 3.*n*self.b
+        return 3. * n * self.b
 
     @classmethod
     def from_critical(cls, Tc, Pc):
@@ -273,7 +274,7 @@ class vanDerWaalsEOS(_pmuttBase):
         -------
             vanDerWaalsEOS : vanDerWaalsEOS object
         """
-        Pc_SI = Pc*c.convert_unit(initial='bar', final='Pa')
-        a = 27./64.*(c.R('J/mol/K')*Tc)**2/Pc_SI
-        b = c.R('J/mol/K')*Tc/8./Pc_SI
+        Pc_SI = Pc * c.convert_unit(initial='bar', final='Pa')
+        a = 27. / 64. * (c.R('J/mol/K') * Tc)**2 / Pc_SI
+        b = c.R('J/mol/K') * Tc / 8. / Pc_SI
         return cls(a=a, b=b)

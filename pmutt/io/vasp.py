@@ -31,7 +31,8 @@ def get_vib_wavenumber_from_line(in_line):
         raise TypeError(err_msg)
 
 
-def set_vib_wavenumbers_from_outcar(in_file, output_structure,
+def set_vib_wavenumbers_from_outcar(in_file,
+                                    output_structure,
                                     min_frequency_cutoff=0.,
                                     include_imaginary=False):
     """Parses OUTCAR files for vibrational frequencies and assigns to

@@ -16,31 +16,33 @@ class TestReferences(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
 
-        H2_thermo = Reference(
-            name='H2',
-            phase='G',
-            elements={'H': 2},
-            T_ref=c.T0('K'),
-            HoRT_ref=0.,
-            model=StatMech,
-            trans_model=trans.FreeTrans,
-            n_degrees=3,
-            vib_model=vib.HarmonicVib,
-            elec_model=elec.GroundStateElec,
-            rot_model=rot.RigidRotor,
-            vib_wavenumbers=np.array([4306.1793]),
-            potentialenergy=-6.7598,
-            geometry='linear',
-            symmetrynumber=2,
-            spin=0,
-            atoms=molecule('H2'))
+        H2_thermo = Reference(name='H2',
+                              phase='G',
+                              elements={'H': 2},
+                              T_ref=c.T0('K'),
+                              HoRT_ref=0.,
+                              model=StatMech,
+                              trans_model=trans.FreeTrans,
+                              n_degrees=3,
+                              vib_model=vib.HarmonicVib,
+                              elec_model=elec.GroundStateElec,
+                              rot_model=rot.RigidRotor,
+                              vib_wavenumbers=np.array([4306.1793]),
+                              potentialenergy=-6.7598,
+                              geometry='linear',
+                              symmetrynumber=2,
+                              spin=0,
+                              atoms=molecule('H2'))
 
         H2O_thermo = Reference(
             name='H2O',
             phase='G',
-            elements={'H': 2, 'O': 1},
+            elements={
+                'H': 2,
+                'O': 1
+            },
             T_ref=c.T0('K'),
-            HoRT_ref=-241.826/(c.R('kJ/mol/K') * c.T0('K')),
+            HoRT_ref=-241.826 / (c.R('kJ/mol/K') * c.T0('K')),
             model=StatMech,
             trans_model=trans.FreeTrans,
             n_degrees=3,
@@ -54,35 +56,31 @@ class TestReferences(unittest.TestCase):
             spin=0,
             atoms=molecule('H2O'))
 
-        O2_thermo = Reference(
-            name='H2O',
-            phase='G',
-            elements={'O': 2},
-            T_ref=c.T0('K'),
-            HoRT_ref=0.,
-            model=StatMech,
-            trans_model=trans.FreeTrans,
-            n_degrees=3,
-            vib_model=vib.HarmonicVib,
-            elec_model=elec.GroundStateElec,
-            rot_model=rot.RigidRotor,
-            vib_wavenumbers=np.array([2205.]),
-            potentialenergy=-9.86,
-            geometry='linear',
-            symmetrynumber=2,
-            spin=1,
-            atoms=molecule('O2'))
-        self.references = References(references=[H2_thermo, H2O_thermo,
-                                                 O2_thermo])
+        O2_thermo = Reference(name='H2O',
+                              phase='G',
+                              elements={'O': 2},
+                              T_ref=c.T0('K'),
+                              HoRT_ref=0.,
+                              model=StatMech,
+                              trans_model=trans.FreeTrans,
+                              n_degrees=3,
+                              vib_model=vib.HarmonicVib,
+                              elec_model=elec.GroundStateElec,
+                              rot_model=rot.RigidRotor,
+                              vib_wavenumbers=np.array([2205.]),
+                              potentialenergy=-9.86,
+                              geometry='linear',
+                              symmetrynumber=2,
+                              spin=1,
+                              atoms=molecule('O2'))
+        self.references = References(
+            references=[H2_thermo, H2O_thermo, O2_thermo])
 
     def test_get_descriptors(self):
         self.assertEqual(self.references.get_descriptors(), ('H', 'O'))
 
     def test_get_elements_matrix(self):
-        elements_matrix = np.array([
-            [2, 0],
-            [2, 1],
-            [0, 2]])
+        elements_matrix = np.array([[2, 0], [2, 1], [0, 2]])
         np.testing.assert_array_equal(self.references.get_descriptors_matrix(),
                                       elements_matrix)
 
@@ -100,11 +98,11 @@ class TestReferences(unittest.TestCase):
 
     def test_get_HoRT(self):
         elements = {'H': 2, 'O': 2}
-        self.assertAlmostEqual(
-                self.references.get_HoRT(descriptors=elements),
-                619.6674284923677)
+        self.assertAlmostEqual(self.references.get_HoRT(descriptors=elements),
+                               619.6674284923677)
         with self.assertWarns(RuntimeWarning):
-            self.assertEqual(self.references.get_HoRT(
+            self.assertEqual(
+                self.references.get_HoRT(
                     descriptors={'non-referenced element': 1}), 0.)
 
 

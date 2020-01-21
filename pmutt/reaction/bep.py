@@ -47,9 +47,14 @@ class BEP(_ModelBase):
             dictionary, the keys and values must be simple types supported by
             JSON
     """
-
-    def __init__(self, slope, intercept, name=None, reaction=None,
-                 descriptor='delta_H', elements=None, notes=None):
+    def __init__(self,
+                 slope,
+                 intercept,
+                 name=None,
+                 reaction=None,
+                 descriptor='delta_H',
+                 elements=None,
+                 notes=None):
         self.name = name
         self.slope = slope
         self.intercept = intercept
@@ -79,20 +84,24 @@ class BEP(_ModelBase):
         elif self.descriptor == 'rev_delta_H':
             val = reaction.get_delta_H(rev=True, units='kcal/mol', **kwargs)
         elif self.descriptor == 'reactants_H':
-            val = reaction.get_H_state(units='kcal/mol', state='reactants',
+            val = reaction.get_H_state(units='kcal/mol',
+                                       state='reactants',
                                        **kwargs)
         elif self.descriptor == 'products_H':
-            val = reaction.get_H_state(units='kcal/mol', state='products',
+            val = reaction.get_H_state(units='kcal/mol',
+                                       state='products',
                                        **kwargs)
         elif self.descriptor == 'delta_E':
             val = reaction.get_delta_E(rev=False, units='kcal/mol', **kwargs)
         elif self.descriptor == 'rev_delta_E':
             val = reaction.get_delta_E(rev=True, units='kcal/mol', **kwargs)
         elif self.descriptor == 'reactants_E':
-            val = reaction.get_E_state(units='kcal/mol', state='reactants',
+            val = reaction.get_E_state(units='kcal/mol',
+                                       state='reactants',
                                        **kwargs)
         elif self.descriptor == 'products_E':
-            val = reaction.get_E_state(units='kcal/mol', state='products',
+            val = reaction.get_E_state(units='kcal/mol',
+                                       state='products',
                                        **kwargs)
         else:
             err_msg = ('Descriptor "{}" not supported. See documentation of '
@@ -128,7 +137,6 @@ class BEP(_ModelBase):
                 adj_slope = self.slope
         return adj_slope
 
-
     def get_E_act(self, units, reaction, rev=False, **kwargs):
         """Calculate Arrhenius activation energy using BEP relationship
 
@@ -151,8 +159,8 @@ class BEP(_ModelBase):
         """
         adj_slope = self._get_adjusted_slope(rev=rev)
         descriptor_val = self._get_descriptor_val(reaction=reaction, **kwargs)
-        E_act = adj_slope*descriptor_val + self.intercept
-        return E_act*c.convert_unit(initial='kcal/mol', final=units)
+        E_act = adj_slope * descriptor_val + self.intercept
+        return E_act * c.convert_unit(initial='kcal/mol', final=units)
 
     def get_EoRT_act(self, reaction, rev=False, T=c.T0('K'), **kwargs):
         """Calculates dimensionless Arrhenius activation energy using BEP
@@ -174,8 +182,9 @@ class BEP(_ModelBase):
             EoRT_act : float
                 Dimensionless activation energy
         """
-        return self.get_E_act(units='kcal/mol', reaction=reaction,
-                              rev=rev, T=T, **kwargs)/c.R('kcal/mol/K')/T
+        return self.get_E_act(
+            units='kcal/mol', reaction=reaction, rev=rev, T=T, **
+            kwargs) / c.R('kcal/mol/K') / T
 
     def get_UoRT(self, reaction, T=c.T0('K'), **kwargs):
         """Calculates the dimensionless internal energy using BEP relationship
@@ -194,10 +203,11 @@ class BEP(_ModelBase):
             UoRT : float
                 Dimensionless internal energy
         """
-        UoRT_reactants = reaction.get_UoRT_state(state='reactants', T=T,
+        UoRT_reactants = reaction.get_UoRT_state(state='reactants',
+                                                 T=T,
                                                  **kwargs)
-        return self.get_EoRT_act(rev=True, reaction=reaction, T=T,
-                                 **kwargs) + UoRT_reactants
+        return self.get_EoRT_act(rev=True, reaction=reaction, T=T, **
+                                 kwargs) + UoRT_reactants
 
     def get_HoRT(self, reaction, T=c.T0('K'), **kwargs):
         """Calculates the dimensionless enthalpy using BEP relationship
@@ -216,12 +226,16 @@ class BEP(_ModelBase):
             HoRT : float
                 Dimensionless enthalpy
         """
-        HoRT_reactants = reaction.get_HoRT_state(state='reactants', T=T,
+        HoRT_reactants = reaction.get_HoRT_state(state='reactants',
+                                                 T=T,
                                                  **kwargs)
         return self.get_EoRT_act(rev=False, reaction=reaction, T=T, **kwargs) \
                + HoRT_reactants
 
-    def get_SoR(self, reaction=None, T=c.T0('K'), entropy_state='reactants',
+    def get_SoR(self,
+                reaction=None,
+                T=c.T0('K'),
+                entropy_state='reactants',
                 **kwargs):
         """Calculates the dimensionless entropy using reactants or products
         entropy. The BEP relationship has no entropic contribution
@@ -251,7 +265,9 @@ class BEP(_ModelBase):
             SoR = 0.
         else:
             try:
-                SoR = reaction.get_SoR_state(state=entropy_state, T=T, **kwargs)
+                SoR = reaction.get_SoR_state(state=entropy_state,
+                                             T=T,
+                                             **kwargs)
             except AttributeError:
                 err_msg = ('Unable to calculate SoR of BEP object since '
                            'a Reaction object was not supplied. Either set '
@@ -260,7 +276,10 @@ class BEP(_ModelBase):
                 raise ValueError(err_msg)
         return SoR
 
-    def get_GoRT(self, reaction, T=c.T0('K'), entropy_state='reactants', 
+    def get_GoRT(self,
+                 reaction,
+                 T=c.T0('K'),
+                 entropy_state='reactants',
                  **kwargs):
         """Calculates the dimensionless Gibbs energy using BEP relationship
         and reactants Gibbs energy. The BEP relationship has no entropic
@@ -287,7 +306,9 @@ class BEP(_ModelBase):
                 Dimensionless Gibbs energy
         """
         HoRT = self.get_HoRT(T=T, reaction=reaction, **kwargs)
-        SoR = self.get_SoR(T=T, reaction=reaction, entropy_state=entropy_state,
+        SoR = self.get_SoR(T=T,
+                           reaction=reaction,
+                           entropy_state=entropy_state,
                            **kwargs)
         return HoRT - SoR
 
@@ -304,5 +325,6 @@ class BEP(_ModelBase):
             'slope': self.slope,
             'intercept': self.intercept,
             'descriptor': self.descriptor,
-            'notes': self.notes}
+            'notes': self.notes
+        }
         return obj_dict

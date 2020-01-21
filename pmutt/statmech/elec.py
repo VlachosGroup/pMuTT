@@ -33,7 +33,6 @@ class GroundStateElec(_ModelBase):
 
     .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
-
     def __init__(self, potentialenergy=None, spin=0., atoms=None, D0=None):
         # If the potentialenergy was not specified, calculate from atoms object
         if potentialenergy is None:
@@ -46,7 +45,7 @@ class GroundStateElec(_ModelBase):
                 try:
                     potentialenergy = atoms.get_potential_energy()
                 except (RuntimeError, ValueError):
-                    potentialenergy = 0. 
+                    potentialenergy = 0.
         self.potentialenergy = potentialenergy
         self.D0 = D0
         self.spin = spin
@@ -54,11 +53,11 @@ class GroundStateElec(_ModelBase):
     @property
     def spin(self):
         return self._spin
-    
+
     @spin.setter
     def spin(self, val):
         self._spin = val
-        self._degeneracy = 2.*val + 1.
+        self._degeneracy = 2. * val + 1.
 
     def get_q(self, T, ignore_q_elec=True):
         """Calculates the partition function
@@ -82,10 +81,10 @@ class GroundStateElec(_ModelBase):
             return 1.
         else:
             if self.D0 is not None:
-                Epsilon = self.D0/c.kb('eV/K')/T
+                Epsilon = self.D0 / c.kb('eV/K') / T
             else:
                 Epsilon = self.get_UoRT(T=T)
-            return self._degeneracy*(1 + np.exp(-Epsilon))
+            return self._degeneracy * (1 + np.exp(-Epsilon))
 
     def get_CvoR(self):
         """Calculates the dimensionless heat capacity at constant volume
@@ -125,7 +124,7 @@ class GroundStateElec(_ModelBase):
             UoRT_elec : float
                 Electronic dimensionless internal energy
         """
-        return (self.potentialenergy)/c.kb('eV/K')/T
+        return (self.potentialenergy) / c.kb('eV/K') / T
 
     def get_HoRT(self, T):
         """Calculates the dimensionless enthalpy
@@ -194,6 +193,8 @@ class GroundStateElec(_ModelBase):
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'potentialenergy': self.potentialenergy,
-                'spin': self.spin}
+        return {
+            'class': str(self.__class__),
+            'potentialenergy': self.potentialenergy,
+            'spin': self.spin
+        }
