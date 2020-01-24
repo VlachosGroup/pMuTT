@@ -128,20 +128,23 @@ class IdealGas(Phase):
     """
     def __init__(self,
                  name,
-                 species=[],
+                 species=None,
                  initial_state=None,
                  kinetics=None,
                  reactions=None,
                  transport=None,
                  options=None,
                  note=None):
+        # Ensure the reactions assigned only have species in the gas phase
+        checked_reactions = _filter_reactions(reactions=reactions,
+                                              phase_name=name)
         super().__init__(name=name,
                          species=species,
                          kinetics=kinetics,
                          transport=transport,
                          options=options,
                          note=note,
-                         reactions=reactions,
+                         reactions=checked_reactions,
                          initial_state=initial_state)
 
     def to_CTI(self, max_line_len=80, delimiter='_'):
@@ -233,19 +236,21 @@ class StoichSolid(Phase):
     """
     def __init__(self,
                  name,
-                 species=[],
+                 species=None,
                  initial_state=None,
                  transport=None,
                  reactions=None,
                  options=None,
                  density=None,
                  note=None):
+        checked_reactions = _filter_reactions(reactions=reactions,
+                                              phase_name=name)
         super().__init__(name=name,
                          species=species,
                          transport=transport,
                          options=options,
                          note=note,
-                         reactions=reactions,
+                         reactions=checked_reactions,
                          initial_state=initial_state)
         self.density = density
 
@@ -311,3 +316,34 @@ class StoichSolid(Phase):
         # Terminate the string
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
+
+def _filter_reactions(reactions, phase_name):
+    """Helper method to remove reactions that occur in multiple phases. Required
+    for IdealGas and StoichSolid
+
+    Parameters
+    ----------
+        reactions : list of :class:`~pmutt.reaction.Reaction` objects
+            Reactions to filter
+        phase_name : str
+            Name of the phase
+    Returns
+    -------
+        reactions_out : list of :class:`~pmutt.reaction.Reaction` objects
+    """
+    # Skip this method if no reactions were assigned
+    if reactions is None:
+        return None
+
+    reactions_out = []
+    for reaction in reactions:
+        reaction_species = reaction.get_species(include_TS=True)
+        # If any species does not have the correct phase name, do not add it to
+        # the list of reactions returned
+        for ind_species in reaction_species.values():
+            phase = ind_species.phase
+            if phase is not None and phase != phase_name:
+                break
+        else:
+            reactions_out.append(reaction)
+    return reactions_out

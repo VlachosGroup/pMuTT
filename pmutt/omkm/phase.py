@@ -146,8 +146,7 @@ class InteractingInterface(phase_cantera.Phase):
                    '                      site_density={},\n'.format(
                        phase_cantera.obj_to_CTI(self.name,
                                                 line_len=max_line_len - 27,
-                                                max_line_len=max_line_len -
-                                                28),
+                                                max_line_len=max_line_len - 28),
                        phase_cantera.obj_to_CTI(self.elements,
                                                 line_len=max_line_len - 31,
                                                 max_line_len=max_line_len),

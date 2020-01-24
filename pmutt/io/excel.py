@@ -102,7 +102,7 @@ def read_excel(io,
             if isinstance(col, str):
                 col = col.strip()
 
-            # Special parsing instructions
+            '''Special parsing instructions'''
             if pd.isnull(cell_data):
                 # Skip empty cells
                 continue
