@@ -1,4 +1,4 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 
 import yaml
 
@@ -8,6 +8,7 @@ from pmutt.io.cantera import obj_to_CTI
 from pmutt.io.ctml_writer import convert
 from pmutt.cantera.phase import IdealGas, StoichSolid
 from pmutt.omkm.phase import InteractingInterface
+from pmutt.omkm import phase as omkm_phases
 from pmutt.omkm.units import Units
 
 _Param = namedtuple('_Param', 'label val units')
@@ -557,3 +558,131 @@ def _assign_yaml_val(param, header, units=None):
             for i, val in enumerate(vals_list):
                 vals_list[i] = val.replace(old_str, unit)
         header[param.label] = vals_list
+
+def read_yaml(filename):
+    """Reads the reactor options from an OpenMKM
+    
+    Parameters
+    ----------
+        filename : str
+            Filename for the YAML file.
+    Returns
+    -------
+        reactor_options : dict
+            Contents of YAML file expressed as dictionary.
+    """
+    with open(filename, 'r') as f_ptr:
+        yaml_data = yaml.load(f_ptr)
+    return yaml_data
+
+def get_species_phases(species):
+    """Helper method to organize species into its phases
+
+    Parameters
+    ----------
+        species : list of :class:`~pmutt.empirical.EmpiricalBase` objects
+            Species to extract phases
+    Returns
+    -------
+        species_phases : dict
+            Dictionary where the keys are strings of phase names and the
+            values are lists of the species
+    """
+    species_phases = defaultdict(list)
+    for ind_species in species:
+        try:
+            phase = ind_species.phase
+        except AttributeError:
+            # Skip species without a phase
+            continue
+        # Assign species to entry for phase
+        species_phases[phase].append(ind_species)
+    return species_phases
+
+def get_reactions_phases(reactions):
+    """Helper method to organize reaction into its phases
+
+    Parameters
+    ----------
+        reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction` objects
+            Reactions to extract phases
+    Returns
+    -------
+        species_phases : dict
+            Dictionary where the keys are strings of phase names and the
+            values are lists of the reactions
+    """
+    reactions_phases = defaultdict(list)
+    for reaction in reactions:
+        reaction_species = reaction.get_species(include_TS=True)
+        for ind_species in reaction_species.values():
+            try:
+                phase = ind_species.phase
+            except AttributeError:
+                # Skip species without a phase
+                continue
+            # Assign species to entry for phase
+            if reaction not in reactions_phases[phase]:
+                reactions_phases[phase].append(reaction)
+    return reactions_phases
+
+def get_interactions_phases(interactions, species):
+    """Helper method to organize reaction into its phases
+
+    Parameters
+    ----------
+        interactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction` objects
+            Lateral interactions to extract phases
+        species : dict of :class:`~pmutt.empirical.EmpiricalBase` objects
+            Species corresponding to interactions
+    Returns
+    -------
+        species_phases : dict
+            Dictionary where the keys are strings of phase names and the
+            values are lists of the reactions
+    """
+    interactions_phases = defaultdict(list)
+    for interaction in intearctions:
+        try:
+            phase = species[interaction.name_i].phase
+        except AttributeError:
+            # Skip species without a phase
+            continue
+        interactions_phases[phase].append(interaction)
+    return interactions_phases
+
+def get_phases(phases_data, species_phases=None, reactions_phases=None,
+               interactions_phases=None):
+    phases = []
+    phase_kwargs = {'species': species_phases,
+                    'reactions': reactions_phases,
+                    'interactions': interactions_phases}
+    for phase_data in phases_data:
+        # Pre-processing relevant data
+        phase_name = phase_data['name']
+        phase_type = phase_data.pop('phase_type')
+
+        # Add relevant data about species, reactions and interactions if present
+        for attr_name, attr_values in phase_kwargs.items():
+            # Skip if no data has been provided for this attribute
+            if attr_values is None:
+                continue
+
+            try:
+                attr_value = attr_values[phase_name]
+            except KeyError:
+                # Skip if the phase is not present
+                continue
+            else:
+                # Skip if the phase has no values assigned
+                # (occurs if attr_value is a defaultdict(list))
+                if len(attr_value) == 0:
+                    continue
+
+                # Assign the kwargs
+                phase_data[attr_name] = attr_value
+
+        phase_class = getattr(omkm_phases, phase_type)
+        phase = phase_class(**phase_data)
+        phases.append(phase)
+    return phases
