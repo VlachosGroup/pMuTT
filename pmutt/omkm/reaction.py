@@ -449,7 +449,7 @@ class BEP(BEP_parent):
                 continue
             # Separate and record index from reactions with BEP ID template
             reaction_ids.append(reaction.id)
-        if format is 'int':
+        if format == 'int':
             reaction_ids = [int(id.split('_')[-1]) for id in reaction_ids]
         return reaction_ids
 
