@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Reactions
@@ -15,7 +15,7 @@
 # - [thermdat](thermdat) Thermdat file used to initialize ``Nasa`` species
 
 # ## Initialize Species Used For Reaction
-# First, we need to describe our species as pmutt objects. For this example, we will be importing the thermdat from the [combustion database by Berkeley](http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat). We will store the species in a dictionary for code clarity later on.
+# First, we need to describe our species as pMuTT objects. For this example, we will be importing the thermdat from the [combustion database by Berkeley](http://combustion.berkeley.edu/gri_mech/version30/files30/thermo30.dat). We will store the species in a dictionary for code clarity later on.
 
 # In[1]:
 
@@ -34,7 +34,7 @@ species_dict = pmutt_list_to_dict(pmutt_list=species_list, key='name')
 pprint(species_dict)
 
 
-# To calculate transition state properties, we will need to represent the transition state species as a pmutt object. For this example, we will create a new ``Nasa`` object based on the H2O entry but modify the a6 parameter arbitrarily to give it a higher enthalpy.
+# To calculate transition state properties, we will need to represent the transition state species as a pMuTT object. For this example, we will create a new ``Nasa`` object based on the H2O entry but modify the a6 parameter arbitrarily to give it a higher enthalpy.
 
 # In[2]:
 
@@ -163,7 +163,7 @@ print('BEP: {:.2f} kJ/mol'.format(Ea_BEP))
 
 
 # ## Saving and Loading our Reaction as JSON
-# Similarly to pmutt objects, ``Reaction`` objects can be saved to and read from JSON format.
+# Similarly to pMuTT objects, ``Reaction`` objects can be saved to and read from JSON format.
 
 # In[8]:
 
@@ -203,8 +203,12 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 #    },
 #    "notes": "TPIS78",
 #    "smiles": null,
-#    "statmech_model": null,
-#    "misc_models": null,
+#    "model": null,
+#    "misc_models": [
+#     {
+#      "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+#     }
+#    ],
 #    "a_low": [
 #     2.34433112,
 #     0.00798052075,
@@ -239,8 +243,12 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 #    },
 #    "notes": "TPIS89",
 #    "smiles": null,
-#    "statmech_model": null,
-#    "misc_models": null,
+#    "model": null,
+#    "misc_models": [
+#     {
+#      "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+#     }
+#    ],
 #    "a_low": [
 #     3.78245636,
 #     -0.00299673416,
@@ -282,8 +290,12 @@ print('Activation Energy: {:.2f} kJ/mol'.format(Ea_io))
 #    },
 #    "notes": "L 8/89",
 #    "smiles": null,
-#    "statmech_model": null,
-#    "misc_models": null,
+#    "model": null,
+#    "misc_models": [
+#     {
+#      "class": "<class 'pmutt.empirical.GasPressureAdj'>"
+#     }
+#    ],
 #    "a_low": [
 #     4.19864056,
 #     -0.0020364341,
@@ -379,4 +391,10 @@ ax1.set_ylabel('Energy (eV)')
 fig1.set_size_inches(12, 10)
 fig1.dpi = 150
 plt.show()
+
+
+# In[ ]:
+
+
+
 

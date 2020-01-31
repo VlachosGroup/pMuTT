@@ -1,11 +1,11 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Experimental Data to Empirical Object
-# In this example, we will take experimental data (heat capacity, enthalpy of formation, and standard entropy) and convert it to a Shomate polynomial. We will then showcase some of the features of the object (such as calculating thermodynamic data). Note that even though we use a Shomate object in this example, the pmutt Nasa object has the same functionality.
+# In this example, we will take experimental data (heat capacity, enthalpy of formation, and standard entropy) and convert it to a Shomate polynomial. We will then showcase some of the features of the object (such as calculating thermodynamic data). Note that even though we use a Shomate object in this example, the pMuTT Nasa object has the same functionality.
 # 
 # ## Topics Covered
-# - Using pmutt's constants for unit conversions
+# - Using pMuTT's constants for unit conversions
 # - Create a Shomate object from experimental data
 # - Calculate thermodynamic properties using the Shomate object
 # - Plot the shape of the Shomate curve
@@ -136,21 +136,23 @@ with open('CH3OH_shomate.json', 'w') as f_ptr:
 # ```
 # {
 #  "class": "<class 'pmutt.empirical.shomate.Shomate'>",
+#  "type": "shomate",
 #  "name": "CH3OH",
 #  "phase": null,
 #  "elements": null,
 #  "notes": null,
-#  "references": null,
-#  "statmech_model": null,
+#  "smiles": null,
+#  "model": null,
+#  "misc_models": null,
 #  "a": [
-#   20.559062051378444,
-#   95.61493492328495,
-#   -31.306096957035635,
-#   3.514060046069981,
-#   0.025109140306619166,
-#   -215.02560486141684,
-#   237.77377186255637,
-#   205.0
+#   20.55906255664672,
+#   95.61493361898438,
+#   -31.306096062902366,
+#   3.5140598702327708,
+#   0.025109137759508435,
+#   -215.02560497018567,
+#   237.7737728103737,
+#   205.00000000000006
 #  ],
 #  "T_low": 50.0,
 #  "T_high": 3000.0

@@ -7,6 +7,25 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.17
+--------------
+
+Jan. 31, 2020
+
+- Added more descriptive warning messages when incorrect temperature values are
+  passed to :class:`~pmutt.empirical.nasa.Nasa`,
+  :class:`~pmutt.empirical.nasa.Nasa9`, and
+  :class:`~pmutt.empirical.shomate.Shomate`.
+- Fixed bug where the conversion factor for Hartrees was incorrect.
+- Added extra parameters for OpenMKM IO.
+- Added helper functions for OpenMKM IO to assign phases easily.
+- Added a helper method in :class:`~pmutt.omkm.cantera.IdealGas`
+  and :class:`~pmutt.omkm.cantera.StoichSolid` to only assign a reaction to the
+  phase if all the species belong to that phase.
+- Fixed outdated code in Chemkin example and OpenMKM example.
+- Reorganized documentation to use stubs. Shorter pages should hopefully
+  make the documentation easier to navigate.
+
 Version 1.2.16
 --------------
 Dec. 9, 2019

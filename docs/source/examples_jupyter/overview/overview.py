@@ -1,10 +1,10 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
-# # Overview of pmutt's Core Functionality
+# # Overview of pMuTT's Core Functionality
 # Originally written for Version 1.2.1
 # 
-# Last Updated for Version 1.2.3
+# Last Updated for Version 1.2.13
 # 
 # ## Topics Covered
 # 
@@ -17,12 +17,12 @@
 # 
 # ## Useful Links:
 # 
-# - Github: https://github.com/VlachosGroup/pmutt
-# - Documentation: https://vlachosgroup.github.io/pmutt/index.html
-# - Examples: https://vlachosgroup.github.io/pmutt/examples.html
+# - Github: https://github.com/VlachosGroup/pMuTT
+# - Documentation: https://vlachosgroup.github.io/pMuTT/index.html
+# - Examples: https://vlachosgroup.github.io/pMuTT/examples.html
 
 # ## Constants
-# pmutt has a wide variety of constants to increase readability of the code. See [Constants page][0] in the documentation for supported units.
+# pMuTT has a wide variety of constants to increase readability of the code. See [Constants page][0] in the documentation for supported units.
 # 
 # [0]: https://vlachosgroup.github.io/pmutt/constants.html#constants
 
@@ -30,6 +30,9 @@
 
 
 from pmutt import constants as c
+
+1.987
+print(c.R('kJ/mol/K'))
 
 print('Some constants')
 print('R (J/mol/K) = {}'.format(c.R('J/mol/K')))
@@ -187,12 +190,12 @@ print('G/RT = {}'.format(empty.get_GoRT()))
 
 from pmutt.empirical.nasa import Nasa
 
-butane_nasa = Nasa.from_statmech(name='butane',
-                                 statmech_model=butane_statmech,
-                                 T_low=298.,
-                                 T_high=800.,
-                                 elements={'C': 4, 'H': 10},
-                                 phase='G')
+butane_nasa = Nasa.from_model(name='butane',
+                              model=butane_statmech,
+                              T_low=298.,
+                              T_high=800.,
+                              elements={'C': 4, 'H': 10},
+                              phase='G')
 
 H_nasa = butane_nasa.get_H(T=298., units='kJ/mol')
 S_nasa = butane_nasa.get_S(T=298., units='J/mol/K')
@@ -330,12 +333,12 @@ print(refs.offset)
 # In[10]:
 
 
-butane_nasa_ref = Nasa.from_statmech(name='butane', 
-                                     statmech_model=butane_statmech,
-                                     T_low=298.,
-                                     T_high=800.,
-                                     elements={'C': 4, 'H': 10},
-                                     references=refs)
+butane_nasa_ref = Nasa.from_model(name='butane', 
+                                  model=butane_statmech,
+                                  T_low=298.,
+                                  T_high=800.,
+                                  elements={'C': 4, 'H': 10},
+                                  references=refs)
 H_nasa_ref = butane_nasa_ref.get_H(T=298., units='kJ/mol')
 S_nasa_ref = butane_nasa_ref.get_S(T=298., units='J/mol/K')
 print('H_butane(T=298) = {:.1f} kJ/mol'.format(H_nasa_ref))
@@ -358,8 +361,12 @@ from pmutt.io.excel import read_excel
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
 # Using pathlib can overcome this limiation
-notebook_folder = Path().resolve()
-
+try:
+    notebook_folder = os.path.dirname(__file__)
+except NameError:
+    notebook_folder = Path().resolve()
+os.chdir(notebook_folder)
+    
 # The Excel spreadsheet is located in the same folder as the Jupyter notebook
 refs_path = os.path.join(notebook_folder, 'refs.xlsx')
 
@@ -389,10 +396,10 @@ print(refs_excel.offset)
 butane_path = os.path.join(notebook_folder, 'butane.xlsx')
 butane_data = read_excel(butane_path)[0] # [0] accesses the butane data
 
-butane_excel = Nasa.from_statmech(T_low=298., 
-                                  T_high=800., 
-                                  references=refs_excel, 
-                                  **butane_data)
+butane_excel = Nasa.from_model(T_low=298., 
+                               T_high=800., 
+                               references=refs_excel, 
+                               **butane_data)
 
 H_excel = butane_excel.get_H(T=298., units='kJ/mol')
 S_excel = butane_excel.get_S(T=298., units='J/mol/K')
@@ -411,20 +418,20 @@ print('S_butane(T=298) = {:.2f} J/mol/K'.format(S_excel))
 from pmutt.io.thermdat import write_thermdat
 
 # Make Nasa objects from previously defined ethane and propane
-ethane_nasa = Nasa.from_statmech(name='ethane',
-                                 phase='G',
-                                 T_low=298.,
-                                 T_high=800.,
-                                 statmech_model=ethane_ref.statmech_model,
-                                 elements=ethane_ref.elements,
-                                 references=refs)
-propane_nasa = Nasa.from_statmech(name='propane',
-                                  phase='G',
-                                  T_low=298.,
-                                  T_high=800.,
-                                  statmech_model=propane_ref.statmech_model,
-                                  elements=propane_ref.elements,
-                                  references=refs)
+ethane_nasa = Nasa.from_model(name='ethane',
+                              phase='G',
+                              T_low=298.,
+                              T_high=800.,
+                              model=ethane_ref.model,
+                              elements=ethane_ref.elements,
+                              references=refs)
+propane_nasa = Nasa.from_model(name='propane',
+                               phase='G',
+                               T_low=298.,
+                               T_high=800.,
+                               model=propane_ref.model,
+                               elements=propane_ref.elements,
+                               references=refs)
 nasa_species = [ethane_nasa, propane_nasa, butane_nasa]
 
 # Determine the output path and write the thermdat file
@@ -494,7 +501,7 @@ print('S_rxn(T=298) = {:.2f} J/mol/K'.format(S_rxn))
 # #### H2O+Cu(111):
 # - electronic and harmonic vibration modes
 # - potential energy (eV): -238.4713854
-# - vibrational wavenumbers (1/cm): 3797.255519, 3658.895695, 1530.600295, 266.366130, 138.907356, 63.899768, 59.150454, 51.256019, -327.384554 (negative numbers represent imaginary frequencies. The default behavior of pmutt is to ignore these frequencies when calculating any thermodynamic property)
+# - vibrational wavenumbers (1/cm): 3797.255519, 3658.895695, 1530.600295, 266.366130, 138.907356, 63.899768, 59.150454, 51.256019, -327.384554 (negative numbers represent imaginary frequencies. The default behavior of pMuTT is to ignore these frequencies when calculating any thermodynamic property)
 # 
 # #### Reaction:
 # H2O + Cu(111) --> H2O+Cu(111)
@@ -534,4 +541,10 @@ species = {
 rxn = Reaction.from_string('H2O(g) + * = H2O*', species)
 del_H = rxn.get_delta_H(T=298., units='kcal/mol')
 print('del_H = {:.2f} kcal/mol'.format(del_H))
+
+
+# In[ ]:
+
+
+
 

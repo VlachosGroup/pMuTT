@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Chemkin Input and Output
@@ -192,26 +192,38 @@ print(thermdat_str)
 
 from pmutt.io import chemkin as ck_io
 
-ck_io.write_gas(filename='./outputs/gas.inp', nasa_species=species, reactions=reactions, act_method_name='get_GoRT_act')
-ck_io.write_surf(filename='./outputs/surf.inp', reactions=reactions, act_method_name='get_GoRT_act')
+ck_io.write_gas(filename='./outputs/gas.inp',
+                nasa_species=species,
+                reactions=reactions,
+                act_method_name='get_G_act',
+                act_unit='kcal/mol')
+ck_io.write_surf(filename='./outputs/surf.inp',
+                 reactions=reactions,
+                 act_method_name='get_G_act',
+                 act_unit='kcal/mol')
 
 
 # <a id='act_method_name_explanation'></a>
-# Note that `act_method_name` is 'get_GoRT_act'. We use this formalism here since we do not include entropic effects in the preexponential factor.
+# Note that `act_method_name` is 'get_G_act'. We use this formalism here since we do not include entropic effects in the preexponential factor.
 # 
 # Similarly to ``write_thermdat``, the gas.inp and surf.inp file can written as a string by omitting the filename. Note there are no gas-phase reactions.
 
 # In[14]:
 
 
-gas_file = ck_io.write_gas(nasa_species=species, reactions=reactions, act_method_name='get_GoRT_act')
+gas_file = ck_io.write_gas(nasa_species=species,
+                           reactions=reactions,
+                           act_method_name='get_G_act',
+                           act_units='kcal/mol')
 print(gas_file)
 
 
 # In[15]:
 
 
-surf_file = ck_io.write_surf(reactions=reactions, act_method_name='get_GoRT_act')
+surf_file = ck_io.write_surf(reactions=reactions,
+                             act_method_name='get_G_act',
+                             act_unit='kcal/mol')
 print(surf_file)
 
 

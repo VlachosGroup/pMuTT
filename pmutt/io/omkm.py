@@ -106,7 +106,8 @@ def write_cti(phases=None,
                 reaction.id = '{:04d}'.format(i)
                 i += 1
             # Write reaction
-            reaction_CTI = _force_pass_arguments(reaction.to_CTI, units=units)
+            reaction_CTI = _force_pass_arguments(reaction.to_CTI, units=units,
+                                                 T=T)
             reaction_lines.append(reaction_CTI)
 
             # Add unique BEP relationship if any
@@ -642,7 +643,7 @@ def get_interactions_phases(interactions, species):
             values are lists of the reactions
     """
     interactions_phases = defaultdict(list)
-    for interaction in intearctions:
+    for interaction in interactions:
         try:
             phase = species[interaction.name_i].phase
         except AttributeError:

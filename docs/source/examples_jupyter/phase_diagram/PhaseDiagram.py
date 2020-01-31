@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Phase Diagram
@@ -146,7 +146,7 @@ fig1.set_dpi(150.)
 
 # ## Creating a 2D Phase Diagram
 
-# In[7]:
+# In[5]:
 
 
 # Generate Pressure range
@@ -169,4 +169,10 @@ cbar2.ax.set_yticklabels(labels)
 
 fig2.set_dpi(150.)
 plt.show()
+
+
+# In[ ]:
+
+
+
 

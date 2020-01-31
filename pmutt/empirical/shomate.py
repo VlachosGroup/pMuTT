@@ -107,6 +107,7 @@ class Shomate(EmpiricalBase):
         if not _is_iterable(T):
             T = [T]
         T = np.array(T)
+        self._check_T(T)
 
         # Calculate pure properties
         CpoR = get_shomate_CpoR(a=self.a, T=T, units=self.units)
@@ -184,6 +185,7 @@ class Shomate(EmpiricalBase):
         if not _is_iterable(T):
             T = [T]
         T = np.array(T)
+        self._check_T(T)
 
         # Calculate pure properties
         HoRT = get_shomate_HoRT(a=self.a, T=T, units=self.units)
@@ -262,6 +264,7 @@ class Shomate(EmpiricalBase):
         if not _is_iterable(T):
             T = [T]
         T = np.array(T)
+        self._check_T(T)
 
         # Calculate pure properties
         SoR = get_shomate_SoR(a=self.a, T=T, units=self.units)
@@ -533,17 +536,24 @@ class Shomate(EmpiricalBase):
         # Check if inputted T_low and T_high are outside model's T_low and
         # T_high range
         try:
-            if T_low < model.T_low:
-                warn_msg = ('Inputted T_low is lower than model T_low. Fitted '
-                            'empirical object may not be valid.')
-                warn(warn_msg, UserWarning)
+            model.T_low
         except AttributeError:
             pass
+        else:
+            if T_low < model.T_low:
+                warn_msg = ('Inputted T_low ({} K) is lower than model '
+                            'T_low ({} K). Fitted empirical object may not be '
+                            'valid.'
+                            ''.format(T_low, model.T_low))
+                warn(warn_msg, UserWarning)
+
 
         try:
             if T_high > model.T_high:
-                warn_msg = ('Inputted T_high is higher than model T_high. '
-                            'Fitted empirical object may not be valid.')
+                warn_msg = ('Inputted T_high ({} K) is higher than model '
+                            'T_high ({} K). Fitted empirical object may not be '
+                            'valid.'
+                            ''.format(T_high, model.T_high))
                 warn(warn_msg, UserWarning)
         except AttributeError:
             pass
@@ -630,6 +640,19 @@ class Shomate(EmpiricalBase):
                        self.T_low, self.T_high, self.a[0], self.a[1],
                        self.a[2], self.a[3], self.a[4], self.a[5], self.a[6])
         return cti_str
+
+    def _check_T(self, T):
+        for T_i in T:
+            if T_i < self.T_low:
+                warn_msg = ('Requested temperature ({} K), below T_low ({} K)'
+                            'for Shomate object, {}'
+                            ''.format(T, self.T_low, self.name))
+                warn(warn_msg, RuntimeWarning)
+            elif T_i > self.T_high:
+                warn_msg = ('Requested temperature ({} K), above T_high ({} K)'
+                            'for Shomate object, {}'
+                            ''.format(T, self.T_high, self.name))
+                warn(warn_msg, RuntimeWarning)
 
 
 def _fit_CpoR(T, CpoR, units):
