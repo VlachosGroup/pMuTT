@@ -22,8 +22,8 @@ from pmutt.mixture import _get_mix_quantity
 
 
 class Nasa(EmpiricalBase):
-    """Stores the information for an individual species' NASA polynomial
-    Inherits from :class:`~pmutt.empirical.EmpiricalBase`
+    """Stores the NASA polynomial coefficients for species. Inherits from
+    :class:`~pmutt.empirical.EmpiricalBase`
 
     The thermodynamic properties are calculated using the following form:
 
@@ -103,12 +103,16 @@ class Nasa(EmpiricalBase):
             self.T_mid = self.T_mid[0]
         if T < self.T_mid:
             if T < self.T_low:
-                warn_msg = 'Temperature below T_low for {}'.format(self.name)
+                warn_msg = ('Requested temperature ({} K), below T_low ({} K)'
+                            'for Nasa object, {}'
+                            ''.format(T, self.T_low, self.name))
                 warn(warn_msg, RuntimeWarning)
             return self.a_low
         else:
             if T > self.T_high:
-                warn_msg = 'Temperature above T_high for {}'.format(self.name)
+                warn_msg = ('Requested temperature ({} K), above T_high ({} K)'
+                            'for Nasa object, {}'
+                            ''.format(T, self.T_high, self.name))
                 warn(warn_msg, RuntimeWarning)
             return self.a_high
 
@@ -762,6 +766,16 @@ class Nasa9(EmpiricalBase):
         self.T_low = self._get_T_limit(limit='min')
         self.T_high = self._get_T_limit(limit='max')
 
+    @property
+    def T_low(self):
+        T_lows = [nasa.T_low for nasa in self.nasas]
+        return np.min(T_lows)
+
+    @property
+    def T_high(self):
+        T_higs = [nasa.T_high for nasa in self.nasas]
+        return np.max(T_highs)
+
     def _get_nasa(self, T):
         """Gets the relevant :class:`~pmutt.empirical.nasa.SingleNasa9` object
         given a temperature
@@ -780,11 +794,15 @@ class Nasa9(EmpiricalBase):
                 Raised if no valid :class:`~pmutt.empirical.nasa.SingleNasa9`
                 exists for T
         """
+
         for nasa in self.nasas:
             if T <= nasa.T_high and T >= nasa.T_low:
                 return nasa
         else:
-            err_msg = 'No valid SingleNasa9 object for T: {}'.format(T)
+            err_msg = ('Requested T ({} K) has no valid SingleNasa9 object for '
+                       'species, {}. The global T_low is {} K and global '
+                       'T_high is {} K.'
+                       ''.format(T, self.name, self.T_low, self.T_high))
             raise ValueError(err_msg)
 
     def get_CpoR(self, T, raise_error=True, raise_warning=True, **kwargs):
@@ -1248,34 +1266,6 @@ class Nasa9(EmpiricalBase):
                              elements=elements,
                              fit_T_mid=False,
                              **kwargs)
-
-    def _get_T_limit(self, limit):
-        """Calculates the global `T_low` or `T_high` value from the inputted
-        NASA9 polynomials.
-
-        Parameters
-        ----------
-            limit : str
-                Limit to assess. 'min' returns the global `T_low` and 'max'
-                returns the global `T_high`
-        Raises
-        ------
-            ValueError
-                Raised if limit is not supported.
-
-        """
-        # Assign the relevant attribute based on limit
-        if limit == 'min':
-            T_attr = 'T_low'
-        elif limit == 'max':
-            T_attr = 'T_high'
-        else:
-            err_msg = ('Unsupported value for limit: {}. The only supported '
-                       'values are "min" and "max"'.format(limit))
-            raise ValueError(err_msg)
-        # Gather the values from the NASA9 polynomials
-        T_lim = [getattr(nasa, T_attr) for nasa in self._nasas]
-        return _apply_numpy_operation(quantity=T_lim, operation=limit)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

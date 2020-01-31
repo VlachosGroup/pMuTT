@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>OpenMKM_IO</title><script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js" nonce="6FCCB852E409FE48B7FEC199D5959357" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+
+<title>OpenMKM_IO</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
 
 <style type="text/css">
     /*!
@@ -199,7 +204,6 @@ th {
   *:before,
   *:after {
     background: transparent !important;
-    color: #000 !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -6744,15 +6748,15 @@ button.close {
 *
 */
 /*!
- *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../components/font-awesome/fonts/fontawesome-webfont.eot?v=4.2.0');
-  src: url('../components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../components/font-awesome/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../components/font-awesome/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+  src: url('../components/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../components/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../components/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../components/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -6809,6 +6813,19 @@ button.close {
   border: solid 0.08em #eee;
   border-radius: .1em;
 }
+.fa-pull-left {
+  float: left;
+}
+.fa-pull-right {
+  float: right;
+}
+.fa.fa-pull-left {
+  margin-right: .3em;
+}
+.fa.fa-pull-right {
+  margin-left: .3em;
+}
+/* Deprecated as of 4.4.0 */
 .pull-right {
   float: right;
 }
@@ -6824,6 +6841,10 @@ button.close {
 .fa-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
+}
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
 }
 @-webkit-keyframes fa-spin {
   0% {
@@ -6846,31 +6867,31 @@ button.close {
   }
 }
 .fa-rotate-90 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .fa-rotate-180 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 .fa-rotate-270 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
   -webkit-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .fa-flip-horizontal {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
   -webkit-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 .fa-flip-vertical {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
   -webkit-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
   transform: scale(1, -1);
@@ -7355,6 +7376,7 @@ button.close {
 .fa-twitter:before {
   content: "\f099";
 }
+.fa-facebook-f:before,
 .fa-facebook:before {
   content: "\f09a";
 }
@@ -7367,6 +7389,7 @@ button.close {
 .fa-credit-card:before {
   content: "\f09d";
 }
+.fa-feed:before,
 .fa-rss:before {
   content: "\f09e";
 }
@@ -8004,7 +8027,8 @@ button.close {
 .fa-male:before {
   content: "\f183";
 }
-.fa-gittip:before {
+.fa-gittip:before,
+.fa-gratipay:before {
   content: "\f184";
 }
 .fa-sun-o:before {
@@ -8108,7 +8132,7 @@ button.close {
 .fa-digg:before {
   content: "\f1a6";
 }
-.fa-pied-piper:before {
+.fa-pied-piper-pp:before {
   content: "\f1a7";
 }
 .fa-pied-piper-alt:before {
@@ -8234,6 +8258,7 @@ button.close {
   content: "\f1ce";
 }
 .fa-ra:before,
+.fa-resistance:before,
 .fa-rebel:before {
   content: "\f1d0";
 }
@@ -8247,6 +8272,8 @@ button.close {
 .fa-git:before {
   content: "\f1d3";
 }
+.fa-y-combinator-square:before,
+.fa-yc-square:before,
 .fa-hacker-news:before {
   content: "\f1d4";
 }
@@ -8414,6 +8441,657 @@ button.close {
 }
 .fa-meanpath:before {
   content: "\f20c";
+}
+.fa-buysellads:before {
+  content: "\f20d";
+}
+.fa-connectdevelop:before {
+  content: "\f20e";
+}
+.fa-dashcube:before {
+  content: "\f210";
+}
+.fa-forumbee:before {
+  content: "\f211";
+}
+.fa-leanpub:before {
+  content: "\f212";
+}
+.fa-sellsy:before {
+  content: "\f213";
+}
+.fa-shirtsinbulk:before {
+  content: "\f214";
+}
+.fa-simplybuilt:before {
+  content: "\f215";
+}
+.fa-skyatlas:before {
+  content: "\f216";
+}
+.fa-cart-plus:before {
+  content: "\f217";
+}
+.fa-cart-arrow-down:before {
+  content: "\f218";
+}
+.fa-diamond:before {
+  content: "\f219";
+}
+.fa-ship:before {
+  content: "\f21a";
+}
+.fa-user-secret:before {
+  content: "\f21b";
+}
+.fa-motorcycle:before {
+  content: "\f21c";
+}
+.fa-street-view:before {
+  content: "\f21d";
+}
+.fa-heartbeat:before {
+  content: "\f21e";
+}
+.fa-venus:before {
+  content: "\f221";
+}
+.fa-mars:before {
+  content: "\f222";
+}
+.fa-mercury:before {
+  content: "\f223";
+}
+.fa-intersex:before,
+.fa-transgender:before {
+  content: "\f224";
+}
+.fa-transgender-alt:before {
+  content: "\f225";
+}
+.fa-venus-double:before {
+  content: "\f226";
+}
+.fa-mars-double:before {
+  content: "\f227";
+}
+.fa-venus-mars:before {
+  content: "\f228";
+}
+.fa-mars-stroke:before {
+  content: "\f229";
+}
+.fa-mars-stroke-v:before {
+  content: "\f22a";
+}
+.fa-mars-stroke-h:before {
+  content: "\f22b";
+}
+.fa-neuter:before {
+  content: "\f22c";
+}
+.fa-genderless:before {
+  content: "\f22d";
+}
+.fa-facebook-official:before {
+  content: "\f230";
+}
+.fa-pinterest-p:before {
+  content: "\f231";
+}
+.fa-whatsapp:before {
+  content: "\f232";
+}
+.fa-server:before {
+  content: "\f233";
+}
+.fa-user-plus:before {
+  content: "\f234";
+}
+.fa-user-times:before {
+  content: "\f235";
+}
+.fa-hotel:before,
+.fa-bed:before {
+  content: "\f236";
+}
+.fa-viacoin:before {
+  content: "\f237";
+}
+.fa-train:before {
+  content: "\f238";
+}
+.fa-subway:before {
+  content: "\f239";
+}
+.fa-medium:before {
+  content: "\f23a";
+}
+.fa-yc:before,
+.fa-y-combinator:before {
+  content: "\f23b";
+}
+.fa-optin-monster:before {
+  content: "\f23c";
+}
+.fa-opencart:before {
+  content: "\f23d";
+}
+.fa-expeditedssl:before {
+  content: "\f23e";
+}
+.fa-battery-4:before,
+.fa-battery:before,
+.fa-battery-full:before {
+  content: "\f240";
+}
+.fa-battery-3:before,
+.fa-battery-three-quarters:before {
+  content: "\f241";
+}
+.fa-battery-2:before,
+.fa-battery-half:before {
+  content: "\f242";
+}
+.fa-battery-1:before,
+.fa-battery-quarter:before {
+  content: "\f243";
+}
+.fa-battery-0:before,
+.fa-battery-empty:before {
+  content: "\f244";
+}
+.fa-mouse-pointer:before {
+  content: "\f245";
+}
+.fa-i-cursor:before {
+  content: "\f246";
+}
+.fa-object-group:before {
+  content: "\f247";
+}
+.fa-object-ungroup:before {
+  content: "\f248";
+}
+.fa-sticky-note:before {
+  content: "\f249";
+}
+.fa-sticky-note-o:before {
+  content: "\f24a";
+}
+.fa-cc-jcb:before {
+  content: "\f24b";
+}
+.fa-cc-diners-club:before {
+  content: "\f24c";
+}
+.fa-clone:before {
+  content: "\f24d";
+}
+.fa-balance-scale:before {
+  content: "\f24e";
+}
+.fa-hourglass-o:before {
+  content: "\f250";
+}
+.fa-hourglass-1:before,
+.fa-hourglass-start:before {
+  content: "\f251";
+}
+.fa-hourglass-2:before,
+.fa-hourglass-half:before {
+  content: "\f252";
+}
+.fa-hourglass-3:before,
+.fa-hourglass-end:before {
+  content: "\f253";
+}
+.fa-hourglass:before {
+  content: "\f254";
+}
+.fa-hand-grab-o:before,
+.fa-hand-rock-o:before {
+  content: "\f255";
+}
+.fa-hand-stop-o:before,
+.fa-hand-paper-o:before {
+  content: "\f256";
+}
+.fa-hand-scissors-o:before {
+  content: "\f257";
+}
+.fa-hand-lizard-o:before {
+  content: "\f258";
+}
+.fa-hand-spock-o:before {
+  content: "\f259";
+}
+.fa-hand-pointer-o:before {
+  content: "\f25a";
+}
+.fa-hand-peace-o:before {
+  content: "\f25b";
+}
+.fa-trademark:before {
+  content: "\f25c";
+}
+.fa-registered:before {
+  content: "\f25d";
+}
+.fa-creative-commons:before {
+  content: "\f25e";
+}
+.fa-gg:before {
+  content: "\f260";
+}
+.fa-gg-circle:before {
+  content: "\f261";
+}
+.fa-tripadvisor:before {
+  content: "\f262";
+}
+.fa-odnoklassniki:before {
+  content: "\f263";
+}
+.fa-odnoklassniki-square:before {
+  content: "\f264";
+}
+.fa-get-pocket:before {
+  content: "\f265";
+}
+.fa-wikipedia-w:before {
+  content: "\f266";
+}
+.fa-safari:before {
+  content: "\f267";
+}
+.fa-chrome:before {
+  content: "\f268";
+}
+.fa-firefox:before {
+  content: "\f269";
+}
+.fa-opera:before {
+  content: "\f26a";
+}
+.fa-internet-explorer:before {
+  content: "\f26b";
+}
+.fa-tv:before,
+.fa-television:before {
+  content: "\f26c";
+}
+.fa-contao:before {
+  content: "\f26d";
+}
+.fa-500px:before {
+  content: "\f26e";
+}
+.fa-amazon:before {
+  content: "\f270";
+}
+.fa-calendar-plus-o:before {
+  content: "\f271";
+}
+.fa-calendar-minus-o:before {
+  content: "\f272";
+}
+.fa-calendar-times-o:before {
+  content: "\f273";
+}
+.fa-calendar-check-o:before {
+  content: "\f274";
+}
+.fa-industry:before {
+  content: "\f275";
+}
+.fa-map-pin:before {
+  content: "\f276";
+}
+.fa-map-signs:before {
+  content: "\f277";
+}
+.fa-map-o:before {
+  content: "\f278";
+}
+.fa-map:before {
+  content: "\f279";
+}
+.fa-commenting:before {
+  content: "\f27a";
+}
+.fa-commenting-o:before {
+  content: "\f27b";
+}
+.fa-houzz:before {
+  content: "\f27c";
+}
+.fa-vimeo:before {
+  content: "\f27d";
+}
+.fa-black-tie:before {
+  content: "\f27e";
+}
+.fa-fonticons:before {
+  content: "\f280";
+}
+.fa-reddit-alien:before {
+  content: "\f281";
+}
+.fa-edge:before {
+  content: "\f282";
+}
+.fa-credit-card-alt:before {
+  content: "\f283";
+}
+.fa-codiepie:before {
+  content: "\f284";
+}
+.fa-modx:before {
+  content: "\f285";
+}
+.fa-fort-awesome:before {
+  content: "\f286";
+}
+.fa-usb:before {
+  content: "\f287";
+}
+.fa-product-hunt:before {
+  content: "\f288";
+}
+.fa-mixcloud:before {
+  content: "\f289";
+}
+.fa-scribd:before {
+  content: "\f28a";
+}
+.fa-pause-circle:before {
+  content: "\f28b";
+}
+.fa-pause-circle-o:before {
+  content: "\f28c";
+}
+.fa-stop-circle:before {
+  content: "\f28d";
+}
+.fa-stop-circle-o:before {
+  content: "\f28e";
+}
+.fa-shopping-bag:before {
+  content: "\f290";
+}
+.fa-shopping-basket:before {
+  content: "\f291";
+}
+.fa-hashtag:before {
+  content: "\f292";
+}
+.fa-bluetooth:before {
+  content: "\f293";
+}
+.fa-bluetooth-b:before {
+  content: "\f294";
+}
+.fa-percent:before {
+  content: "\f295";
+}
+.fa-gitlab:before {
+  content: "\f296";
+}
+.fa-wpbeginner:before {
+  content: "\f297";
+}
+.fa-wpforms:before {
+  content: "\f298";
+}
+.fa-envira:before {
+  content: "\f299";
+}
+.fa-universal-access:before {
+  content: "\f29a";
+}
+.fa-wheelchair-alt:before {
+  content: "\f29b";
+}
+.fa-question-circle-o:before {
+  content: "\f29c";
+}
+.fa-blind:before {
+  content: "\f29d";
+}
+.fa-audio-description:before {
+  content: "\f29e";
+}
+.fa-volume-control-phone:before {
+  content: "\f2a0";
+}
+.fa-braille:before {
+  content: "\f2a1";
+}
+.fa-assistive-listening-systems:before {
+  content: "\f2a2";
+}
+.fa-asl-interpreting:before,
+.fa-american-sign-language-interpreting:before {
+  content: "\f2a3";
+}
+.fa-deafness:before,
+.fa-hard-of-hearing:before,
+.fa-deaf:before {
+  content: "\f2a4";
+}
+.fa-glide:before {
+  content: "\f2a5";
+}
+.fa-glide-g:before {
+  content: "\f2a6";
+}
+.fa-signing:before,
+.fa-sign-language:before {
+  content: "\f2a7";
+}
+.fa-low-vision:before {
+  content: "\f2a8";
+}
+.fa-viadeo:before {
+  content: "\f2a9";
+}
+.fa-viadeo-square:before {
+  content: "\f2aa";
+}
+.fa-snapchat:before {
+  content: "\f2ab";
+}
+.fa-snapchat-ghost:before {
+  content: "\f2ac";
+}
+.fa-snapchat-square:before {
+  content: "\f2ad";
+}
+.fa-pied-piper:before {
+  content: "\f2ae";
+}
+.fa-first-order:before {
+  content: "\f2b0";
+}
+.fa-yoast:before {
+  content: "\f2b1";
+}
+.fa-themeisle:before {
+  content: "\f2b2";
+}
+.fa-google-plus-circle:before,
+.fa-google-plus-official:before {
+  content: "\f2b3";
+}
+.fa-fa:before,
+.fa-font-awesome:before {
+  content: "\f2b4";
+}
+.fa-handshake-o:before {
+  content: "\f2b5";
+}
+.fa-envelope-open:before {
+  content: "\f2b6";
+}
+.fa-envelope-open-o:before {
+  content: "\f2b7";
+}
+.fa-linode:before {
+  content: "\f2b8";
+}
+.fa-address-book:before {
+  content: "\f2b9";
+}
+.fa-address-book-o:before {
+  content: "\f2ba";
+}
+.fa-vcard:before,
+.fa-address-card:before {
+  content: "\f2bb";
+}
+.fa-vcard-o:before,
+.fa-address-card-o:before {
+  content: "\f2bc";
+}
+.fa-user-circle:before {
+  content: "\f2bd";
+}
+.fa-user-circle-o:before {
+  content: "\f2be";
+}
+.fa-user-o:before {
+  content: "\f2c0";
+}
+.fa-id-badge:before {
+  content: "\f2c1";
+}
+.fa-drivers-license:before,
+.fa-id-card:before {
+  content: "\f2c2";
+}
+.fa-drivers-license-o:before,
+.fa-id-card-o:before {
+  content: "\f2c3";
+}
+.fa-quora:before {
+  content: "\f2c4";
+}
+.fa-free-code-camp:before {
+  content: "\f2c5";
+}
+.fa-telegram:before {
+  content: "\f2c6";
+}
+.fa-thermometer-4:before,
+.fa-thermometer:before,
+.fa-thermometer-full:before {
+  content: "\f2c7";
+}
+.fa-thermometer-3:before,
+.fa-thermometer-three-quarters:before {
+  content: "\f2c8";
+}
+.fa-thermometer-2:before,
+.fa-thermometer-half:before {
+  content: "\f2c9";
+}
+.fa-thermometer-1:before,
+.fa-thermometer-quarter:before {
+  content: "\f2ca";
+}
+.fa-thermometer-0:before,
+.fa-thermometer-empty:before {
+  content: "\f2cb";
+}
+.fa-shower:before {
+  content: "\f2cc";
+}
+.fa-bathtub:before,
+.fa-s15:before,
+.fa-bath:before {
+  content: "\f2cd";
+}
+.fa-podcast:before {
+  content: "\f2ce";
+}
+.fa-window-maximize:before {
+  content: "\f2d0";
+}
+.fa-window-minimize:before {
+  content: "\f2d1";
+}
+.fa-window-restore:before {
+  content: "\f2d2";
+}
+.fa-times-rectangle:before,
+.fa-window-close:before {
+  content: "\f2d3";
+}
+.fa-times-rectangle-o:before,
+.fa-window-close-o:before {
+  content: "\f2d4";
+}
+.fa-bandcamp:before {
+  content: "\f2d5";
+}
+.fa-grav:before {
+  content: "\f2d6";
+}
+.fa-etsy:before {
+  content: "\f2d7";
+}
+.fa-imdb:before {
+  content: "\f2d8";
+}
+.fa-ravelry:before {
+  content: "\f2d9";
+}
+.fa-eercast:before {
+  content: "\f2da";
+}
+.fa-microchip:before {
+  content: "\f2db";
+}
+.fa-snowflake-o:before {
+  content: "\f2dc";
+}
+.fa-superpowers:before {
+  content: "\f2dd";
+}
+.fa-wpexplorer:before {
+  content: "\f2de";
+}
+.fa-meetup:before {
+  content: "\f2e0";
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
 }
 /*!
 *
@@ -8694,6 +9372,10 @@ div.traceback-wrapper {
   max-width: 800px;
   margin: auto;
 }
+div.traceback-wrapper pre.traceback {
+  max-height: 600px;
+  overflow: auto;
+}
 /**
  * Primary styles
  *
@@ -8719,6 +9401,10 @@ body > #header {
   z-index: 100;
 }
 body > #header #header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
   padding-bottom: 5px;
   padding-top: 5px;
   box-sizing: border-box;
@@ -8750,13 +9436,16 @@ body > #header .header-bar {
   padding-top: 1px;
   padding-bottom: 1px;
 }
-@media (max-width: 991px) {
-  #ipython_notebook {
-    margin-left: 10px;
-  }
-}
 [dir="rtl"] #ipython_notebook {
+  margin-right: 10px;
+  margin-left: 0;
+}
+[dir="rtl"] #ipython_notebook.pull-left {
   float: right !important;
+  float: right;
+}
+.flex-spacer {
+  flex: 1;
 }
 #noscript {
   width: auto;
@@ -8791,8 +9480,14 @@ body > #header .header-bar {
 input.ui-button {
   padding: 0.3em 0.9em;
 }
+span#kernel_logo_widget {
+  margin: 0 10px;
+}
 span#login_widget {
   float: right;
+}
+[dir="rtl"] span#login_widget {
+  float: left;
 }
 span#login_widget > .button,
 #logout {
@@ -8908,6 +9603,9 @@ span#login_widget > .button .badge,
   overflow: auto;
   flex: 1;
 }
+.modal-header {
+  cursor: move;
+}
 @media (min-width: 768px) {
   .modal .modal-dialog {
     width: 700px;
@@ -8928,6 +9626,19 @@ span#login_widget > .button .badge,
   display: inline-block;
   margin-bottom: -4px;
 }
+[dir="rtl"] .center-nav form.pull-left {
+  float: right !important;
+  float: right;
+}
+[dir="rtl"] .center-nav .navbar-text {
+  float: right;
+}
+[dir="rtl"] .navbar-inner {
+  text-align: right;
+}
+[dir="rtl"] div.text-left {
+  text-align: right;
+}
 /*!
 *
 * IPython tree view
@@ -8944,34 +9655,42 @@ span#login_widget > .button .badge,
   margin: 0;
 }
 .alternate_upload input.fileinput {
-  text-align: center;
-  vertical-align: middle;
-  display: inline;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
   opacity: 0;
   z-index: 2;
-  width: 12ex;
-  margin-right: -12ex;
+}
+.alternate_upload .btn-xs > input.fileinput {
+  margin: -1px -5px;
 }
 .alternate_upload .btn-upload {
+  position: relative;
   height: 22px;
+}
+::-webkit-file-upload-button {
+  cursor: pointer;
 }
 /**
  * Primary styles
  *
  * Author: Jupyter Development Team
  */
-[dir="rtl"] #tabs li {
-  float: right;
-}
 ul#tabs {
   margin-bottom: 4px;
-}
-[dir="rtl"] ul#tabs {
-  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
   padding-bottom: 4px;
+}
+[dir="rtl"] ul#tabs.nav-tabs > li {
+  float: right;
+}
+[dir="rtl"] ul#tabs.nav.nav-tabs {
+  padding-right: 0;
 }
 ul.breadcrumb a:focus,
 ul.breadcrumb a:hover {
@@ -8991,15 +9710,13 @@ ul.breadcrumb span {
 .list_toolbar .tree-buttons {
   padding-top: 1px;
 }
-[dir="rtl"] .list_toolbar .tree-buttons {
+[dir="rtl"] .list_toolbar .tree-buttons .pull-right {
   float: left !important;
+  float: left;
 }
-[dir="rtl"] .list_toolbar .pull-right {
-  padding-top: 1px;
-  float: left !important;
-}
-[dir="rtl"] .list_toolbar .pull-left {
-  float: right !important;
+[dir="rtl"] .list_toolbar .col-sm-4,
+[dir="rtl"] .list_toolbar .col-sm-8 {
+  float: right;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9055,7 +9772,7 @@ ul.breadcrumb span {
 .list_item > div input {
   margin-right: 7px;
   margin-left: 14px;
-  vertical-align: baseline;
+  vertical-align: text-bottom;
   line-height: 22px;
   position: relative;
   top: -1px;
@@ -9065,6 +9782,9 @@ ul.breadcrumb span {
   margin-left: -1px;
   vertical-align: baseline;
   line-height: 22px;
+}
+[dir="rtl"] .list_item > div input {
+  margin-right: 0;
 }
 .new-file input[type=checkbox] {
   visibility: hidden;
@@ -9080,6 +9800,14 @@ ul.breadcrumb span {
   margin-left: 7px;
   line-height: 22px;
   vertical-align: baseline;
+}
+.item_modified {
+  margin-right: 7px;
+  margin-left: 7px;
+}
+[dir="rtl"] .item_modified.pull-right {
+  float: left !important;
+  float: left;
 }
 .item_buttons {
   line-height: 1em;
@@ -9108,6 +9836,14 @@ ul.breadcrumb span {
   margin-right: 7px;
   float: left;
 }
+[dir="rtl"] .item_buttons.pull-right {
+  float: left !important;
+  float: left;
+}
+[dir="rtl"] .item_buttons .kernel-name {
+  margin-left: 7px;
+  float: right;
+}
 .toolbar_info {
   height: 24px;
   line-height: 24px;
@@ -9133,18 +9869,32 @@ ul.breadcrumb span {
   background-color: transparent;
   font-weight: bold;
 }
+.sort_button {
+  display: inline-block;
+  padding-left: 7px;
+}
+[dir="rtl"] .sort_button.pull-right {
+  float: left !important;
+  float: left;
+}
 #tree-selector {
   padding-right: 0px;
-}
-[dir="rtl"] #tree-selector a {
-  float: right;
 }
 #button-select-all {
   min-width: 50px;
 }
+[dir="rtl"] #button-select-all.btn {
+  float: right ;
+}
 #select-all {
   margin-left: 7px;
   margin-right: 2px;
+  margin-top: 2px;
+  height: 16px;
+}
+[dir="rtl"] #select-all.pull-left {
+  float: right !important;
+  float: right;
 }
 .menu_icon {
   margin-right: 2px;
@@ -9162,6 +9912,12 @@ ul.breadcrumb span {
   -moz-osx-font-smoothing: grayscale;
   content: "\f114";
 }
+.folder_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.folder_icon:before.fa-pull-right {
+  margin-left: .3em;
+}
 .folder_icon:before.pull-left {
   margin-right: .3em;
 }
@@ -9178,6 +9934,12 @@ ul.breadcrumb span {
   content: "\f02d";
   position: relative;
   top: -1px;
+}
+.notebook_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.notebook_icon:before.fa-pull-right {
+  margin-left: .3em;
 }
 .notebook_icon:before.pull-left {
   margin-right: .3em;
@@ -9197,6 +9959,12 @@ ul.breadcrumb span {
   top: -1px;
   color: #5cb85c;
 }
+.running_notebook_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.running_notebook_icon:before.fa-pull-right {
+  margin-left: .3em;
+}
 .running_notebook_icon:before.pull-left {
   margin-right: .3em;
 }
@@ -9214,6 +9982,12 @@ ul.breadcrumb span {
   position: relative;
   top: -2px;
 }
+.file_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.file_icon:before.fa-pull-right {
+  margin-left: .3em;
+}
 .file_icon:before.pull-left {
   margin-right: .3em;
 }
@@ -9228,8 +10002,11 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
-[dir="rtl"] #new-menu {
-  text-align: right;
+#new-menu .dropdown-header {
+  font-size: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0 0 3px;
+  margin: -3px 20px 0;
 }
 .kernel-menu-icon {
   padding-right: 12px;
@@ -9276,9 +10053,6 @@ ul#new-menu {
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
 }
-[dir="rtl"] #running .col-sm-8 {
-  float: right !important;
-}
 .delete-button {
   display: none;
 }
@@ -9286,6 +10060,12 @@ ul#new-menu {
   display: none;
 }
 .rename-button {
+  display: none;
+}
+.move-button {
+  display: none;
+}
+.download-button {
   display: none;
 }
 .shutdown-button {
@@ -9328,6 +10108,12 @@ ul#new-menu {
   -moz-osx-font-smoothing: grayscale;
   width: 20px;
 }
+.dirty-indicator.fa-pull-left {
+  margin-right: .3em;
+}
+.dirty-indicator.fa-pull-right {
+  margin-left: .3em;
+}
 .dirty-indicator.pull-left {
   margin-right: .3em;
 }
@@ -9342,6 +10128,12 @@ ul#new-menu {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 20px;
+}
+.dirty-indicator-dirty.fa-pull-left {
+  margin-right: .3em;
+}
+.dirty-indicator-dirty.fa-pull-right {
+  margin-left: .3em;
 }
 .dirty-indicator-dirty.pull-left {
   margin-right: .3em;
@@ -9358,6 +10150,12 @@ ul#new-menu {
   -moz-osx-font-smoothing: grayscale;
   width: 20px;
 }
+.dirty-indicator-clean.fa-pull-left {
+  margin-right: .3em;
+}
+.dirty-indicator-clean.fa-pull-right {
+  margin-left: .3em;
+}
 .dirty-indicator-clean.pull-left {
   margin-right: .3em;
 }
@@ -9372,6 +10170,12 @@ ul#new-menu {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: "\f00c";
+}
+.dirty-indicator-clean:before.fa-pull-left {
+  margin-right: .3em;
+}
+.dirty-indicator-clean:before.fa-pull-right {
+  margin-left: .3em;
 }
 .dirty-indicator-clean:before.pull-left {
   margin-right: .3em;
@@ -9417,14 +10221,132 @@ ul#new-menu {
     box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
   }
 }
+.CodeMirror-dialog {
+  background-color: #fff;
+}
 /*!
 *
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -9503,12 +10425,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -9521,27 +10451,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -9737,7 +10679,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -9747,11 +10691,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -10005,6 +10962,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -10043,7 +11003,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -10203,39 +11163,35 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 .rendered_html ul {
   list-style: disc;
-  margin: 0em 2em;
-  padding-left: 0px;
 }
 .rendered_html ul ul {
   list-style: square;
-  margin: 0em 2em;
+  margin-top: 0;
 }
 .rendered_html ul ul ul {
   list-style: circle;
-  margin: 0em 2em;
 }
 .rendered_html ol {
   list-style: decimal;
-  margin: 0em 2em;
-  padding-left: 0px;
 }
 .rendered_html ol ol {
   list-style: upper-alpha;
-  margin: 0em 2em;
+  margin-top: 0;
 }
 .rendered_html ol ol ol {
   list-style: lower-alpha;
-  margin: 0em 2em;
 }
 .rendered_html ol ol ol ol {
   list-style: lower-roman;
-  margin: 0em 2em;
 }
 .rendered_html ol ol ol ol ol {
   list-style: decimal;
-  margin: 0em 2em;
 }
 .rendered_html * + ul {
   margin-top: 1em;
@@ -10249,14 +11205,23 @@ div.output_unrecognized a:hover {
 }
 .rendered_html pre {
   margin: 1em 2em;
+  padding: 0px;
+  background-color: #fff;
+}
+.rendered_html code {
+  background-color: #eff0f1;
+}
+.rendered_html p code {
+  padding: 1px 5px;
+}
+.rendered_html pre code {
+  background-color: #fff;
 }
 .rendered_html pre,
 .rendered_html code {
   border: 0;
-  background-color: #fff;
   color: #000;
   font-size: 100%;
-  padding: 0px;
 }
 .rendered_html blockquote {
   margin: 1em 2em;
@@ -10264,24 +11229,36 @@ div.output_unrecognized a:hover {
 .rendered_html table {
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid black;
+  border: none;
   border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
 }
 .rendered_html tr,
 .rendered_html th,
 .rendered_html td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  margin: 1em 2em;
-}
-.rendered_html td,
-.rendered_html th {
-  text-align: left;
+  text-align: right;
   vertical-align: middle;
-  padding: 4px;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
 }
 .rendered_html th {
   font-weight: bold;
+}
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
 }
 .rendered_html * + table {
   margin-top: 1em;
@@ -10308,6 +11285,15 @@ div.output_unrecognized a:hover {
 .rendered_html img.unconfined,
 .rendered_html svg.unconfined {
   max-width: none;
+}
+.rendered_html .alert {
+  margin-bottom: initial;
+}
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] .rendered_html p {
+  text-align: right;
 }
 div.text_cell {
   /* Old browsers */
@@ -10362,8 +11348,17 @@ h6:hover .anchor-link {
   overflow-x: auto;
   overflow-y: hidden;
 }
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered .rendered_html td {
+  max-width: none;
+}
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -10500,6 +11495,28 @@ kbd {
   padding-top: 1px;
   padding-bottom: 1px;
 }
+.jupyter-keybindings {
+  padding: 1px;
+  line-height: 24px;
+  border-bottom: 1px solid gray;
+}
+.jupyter-keybindings input {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.jupyter-keybindings i {
+  padding: 6px;
+}
+.well code {
+  background-color: #ffffff;
+  border-color: #ababab;
+  border-width: 1px;
+  border-style: solid;
+  padding: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
 /* CSS for the cell toolbar */
 .celltoolbar {
   border: thin solid #CFCFCF;
@@ -10632,6 +11649,152 @@ select[multiple].celltoolbar select {
   margin-left: 5px;
   margin-right: 5px;
 }
+.tags_button_container {
+  width: 100%;
+  display: flex;
+}
+.tag-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+}
+.tag-container > * {
+  margin: 0 4px;
+}
+.remove-tag-btn {
+  margin-left: 4px;
+}
+.tags-input {
+  display: flex;
+}
+.cell-tag:last-child:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  /* Fade to background color of cell toolbar */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), #EEE);
+}
+.tags-input > * {
+  margin-left: 4px;
+}
+.cell-tag,
+.tags-input input,
+.tags-input button {
+  display: block;
+  width: 100%;
+  height: 32px;
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 1px;
+  box-shadow: none;
+  width: inherit;
+  font-size: inherit;
+  height: 22px;
+  line-height: 22px;
+  padding: 0px 4px;
+  display: inline-block;
+}
+.cell-tag:focus,
+.tags-input input:focus,
+.tags-input button:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.cell-tag::-moz-placeholder,
+.tags-input input::-moz-placeholder,
+.tags-input button::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.cell-tag:-ms-input-placeholder,
+.tags-input input:-ms-input-placeholder,
+.tags-input button:-ms-input-placeholder {
+  color: #999;
+}
+.cell-tag::-webkit-input-placeholder,
+.tags-input input::-webkit-input-placeholder,
+.tags-input button::-webkit-input-placeholder {
+  color: #999;
+}
+.cell-tag::-ms-expand,
+.tags-input input::-ms-expand,
+.tags-input button::-ms-expand {
+  border: 0;
+  background-color: transparent;
+}
+.cell-tag[disabled],
+.tags-input input[disabled],
+.tags-input button[disabled],
+.cell-tag[readonly],
+.tags-input input[readonly],
+.tags-input button[readonly],
+fieldset[disabled] .cell-tag,
+fieldset[disabled] .tags-input input,
+fieldset[disabled] .tags-input button {
+  background-color: #eeeeee;
+  opacity: 1;
+}
+.cell-tag[disabled],
+.tags-input input[disabled],
+.tags-input button[disabled],
+fieldset[disabled] .cell-tag,
+fieldset[disabled] .tags-input input,
+fieldset[disabled] .tags-input button {
+  cursor: not-allowed;
+}
+textarea.cell-tag,
+textarea.tags-input input,
+textarea.tags-input button {
+  height: auto;
+}
+select.cell-tag,
+select.tags-input input,
+select.tags-input button {
+  height: 30px;
+  line-height: 30px;
+}
+textarea.cell-tag,
+textarea.tags-input input,
+textarea.tags-input button,
+select[multiple].cell-tag,
+select[multiple].tags-input input,
+select[multiple].tags-input button {
+  height: auto;
+}
+.cell-tag,
+.tags-input button {
+  padding: 0px 4px;
+}
+.cell-tag {
+  background-color: #fff;
+  white-space: nowrap;
+}
+.tags-input input[type=text]:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #ccc;
+}
 .completions {
   position: absolute;
   z-index: 110;
@@ -10657,16 +11820,28 @@ select[multiple].celltoolbar select {
 .completions select option.context {
   color: #286090;
 }
-#kernel_logo_widget {
-  float: right !important;
-  float: right;
-}
 #kernel_logo_widget .current_kernel_logo {
   display: none;
   margin-top: -1px;
   margin-bottom: -1px;
   width: 32px;
   height: 32px;
+}
+[dir="rtl"] #kernel_logo_widget {
+  float: left !important;
+  float: left;
+}
+.modal .modal-body .move-path {
+  display: flex;
+  flex-direction: row;
+  justify-content: space;
+  align-items: center;
+}
+.modal .modal-body .move-path .server-root {
+  padding-right: 20px;
+}
+.modal .modal-body .move-path .path-input {
+  flex: 1;
 }
 #menubar {
   box-sizing: border-box;
@@ -10688,11 +11863,41 @@ select[multiple].celltoolbar select {
 #menubar .navbar-collapse {
   clear: left;
 }
+[dir="rtl"] #menubar .navbar-toggle {
+  float: right;
+}
+[dir="rtl"] #menubar .navbar-collapse {
+  clear: right;
+}
+[dir="rtl"] #menubar .navbar-nav {
+  float: right;
+}
+[dir="rtl"] #menubar .nav {
+  padding-right: 0px;
+}
+[dir="rtl"] #menubar .navbar-nav > li {
+  float: right;
+}
+[dir="rtl"] #menubar .navbar-right {
+  float: left !important;
+}
+[dir="rtl"] ul.dropdown-menu {
+  text-align: right;
+  left: auto;
+}
+[dir="rtl"] ul#new-menu.dropdown-menu {
+  right: auto;
+  left: 0;
+}
 .nav-wrapper {
   border-bottom: 1px solid #e7e7e7;
 }
 i.menu-icon {
   padding-top: 4px;
+}
+[dir="rtl"] i.menu-icon.pull-right {
+  float: left !important;
+  float: left;
 }
 ul#help_menu li a {
   overflow: hidden;
@@ -10700,6 +11905,17 @@ ul#help_menu li a {
 }
 ul#help_menu li a i {
   margin-right: -1.2em;
+}
+[dir="rtl"] ul#help_menu li a {
+  padding-left: 2.2em;
+}
+[dir="rtl"] ul#help_menu li a i {
+  margin-right: 0;
+  margin-left: -1.2em;
+}
+[dir="rtl"] ul#help_menu li a i.pull-right {
+  float: left !important;
+  float: left;
 }
 .dropdown-submenu {
   position: relative;
@@ -10709,6 +11925,10 @@ ul#help_menu li a i {
   left: 100%;
   margin-top: -6px;
   margin-left: -1px;
+}
+[dir="rtl"] .dropdown-submenu > .dropdown-menu {
+  right: 100%;
+  margin-right: -1px;
 }
 .dropdown-submenu:hover > .dropdown-menu {
   display: block;
@@ -10727,11 +11947,23 @@ ul#help_menu li a i {
   margin-top: 2px;
   margin-right: -10px;
 }
+.dropdown-submenu > a:after.fa-pull-left {
+  margin-right: .3em;
+}
+.dropdown-submenu > a:after.fa-pull-right {
+  margin-left: .3em;
+}
 .dropdown-submenu > a:after.pull-left {
   margin-right: .3em;
 }
 .dropdown-submenu > a:after.pull-right {
   margin-left: .3em;
+}
+[dir="rtl"] .dropdown-submenu > a:after {
+  float: left;
+  content: "\f0d9";
+  margin-right: 0;
+  margin-left: -10px;
 }
 .dropdown-submenu:hover > a:after {
   color: #262626;
@@ -10748,6 +11980,10 @@ ul#help_menu li a i {
   float: right;
   z-index: 10;
 }
+[dir="rtl"] #notification_area {
+  float: left !important;
+  float: left;
+}
 .indicator_area {
   float: right !important;
   float: right;
@@ -10758,6 +11994,10 @@ ul#help_menu li a i {
   z-index: 10;
   text-align: center;
   width: auto;
+}
+[dir="rtl"] .indicator_area {
+  float: left !important;
+  float: left;
 }
 #kernel_indicator {
   float: right !important;
@@ -10775,6 +12015,12 @@ ul#help_menu li a i {
   padding-left: 5px;
   padding-right: 5px;
 }
+[dir="rtl"] #kernel_indicator {
+  float: left !important;
+  float: left;
+  border-left: 0;
+  border-right: 1px solid;
+}
 #modal_indicator {
   float: right !important;
   float: right;
@@ -10785,6 +12031,10 @@ ul#help_menu li a i {
   z-index: 10;
   text-align: center;
   width: auto;
+}
+[dir="rtl"] #modal_indicator {
+  float: left !important;
+  float: left;
 }
 #readonly-indicator {
   float: right !important;
@@ -10815,6 +12065,12 @@ ul#help_menu li a i {
   -moz-osx-font-smoothing: grayscale;
   content: "\f040";
 }
+.edit_mode .modal_indicator:before.fa-pull-left {
+  margin-right: .3em;
+}
+.edit_mode .modal_indicator:before.fa-pull-right {
+  margin-left: .3em;
+}
 .edit_mode .modal_indicator:before.pull-left {
   margin-right: .3em;
 }
@@ -10829,6 +12085,12 @@ ul#help_menu li a i {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: ' ';
+}
+.command_mode .modal_indicator:before.fa-pull-left {
+  margin-right: .3em;
+}
+.command_mode .modal_indicator:before.fa-pull-right {
+  margin-left: .3em;
 }
 .command_mode .modal_indicator:before.pull-left {
   margin-right: .3em;
@@ -10845,6 +12107,12 @@ ul#help_menu li a i {
   -moz-osx-font-smoothing: grayscale;
   content: "\f10c";
 }
+.kernel_idle_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.kernel_idle_icon:before.fa-pull-right {
+  margin-left: .3em;
+}
 .kernel_idle_icon:before.pull-left {
   margin-right: .3em;
 }
@@ -10859,6 +12127,12 @@ ul#help_menu li a i {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: "\f111";
+}
+.kernel_busy_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.kernel_busy_icon:before.fa-pull-right {
+  margin-left: .3em;
 }
 .kernel_busy_icon:before.pull-left {
   margin-right: .3em;
@@ -10875,6 +12149,12 @@ ul#help_menu li a i {
   -moz-osx-font-smoothing: grayscale;
   content: "\f1e2";
 }
+.kernel_dead_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.kernel_dead_icon:before.fa-pull-right {
+  margin-left: .3em;
+}
 .kernel_dead_icon:before.pull-left {
   margin-right: .3em;
 }
@@ -10889,6 +12169,12 @@ ul#help_menu li a i {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: "\f127";
+}
+.kernel_disconnected_icon:before.fa-pull-left {
+  margin-right: .3em;
+}
+.kernel_disconnected_icon:before.fa-pull-right {
+  margin-left: .3em;
 }
 .kernel_disconnected_icon:before.pull-left {
   margin-right: .3em;
@@ -11279,27 +12565,46 @@ div#pager .ui-resizable-handle::after {
   flex: 1;
 }
 span.save_widget {
-  margin-top: 6px;
+  height: 30px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 50%;
+  flex: 1;
 }
 span.save_widget span.filename {
-  height: 1em;
+  height: 100%;
   line-height: 1em;
-  padding: 3px;
   margin-left: 16px;
   border: none;
   font-size: 146.5%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   border-radius: 2px;
 }
 span.save_widget span.filename:hover {
   background-color: #e6e6e6;
 }
+[dir="rtl"] span.save_widget.pull-left {
+  float: right !important;
+  float: right;
+}
+[dir="rtl"] span.save_widget span.filename {
+  margin-left: 0;
+  margin-right: 16px;
+}
 span.checkpoint_status,
 span.autosave_status {
   font-size: small;
+  white-space: nowrap;
+  padding: 0 5px;
 }
 @media (max-width: 767px) {
   span.save_widget {
     font-size: small;
+    padding: 0 0 0 5px;
   }
   span.checkpoint_status,
   span.autosave_status {
@@ -11343,6 +12648,9 @@ span.autosave_status {
   margin-top: 0px;
   margin-left: 5px;
 }
+.toolbar-btn-label {
+  margin-left: 6px;
+}
 #maintoolbar {
   margin-bottom: -3px;
   margin-top: -8px;
@@ -11362,6 +12670,10 @@ span.autosave_status {
 }
 .select-xs {
   height: 24px;
+}
+[dir="rtl"] .btn-group > .btn,
+.btn-group-vertical > .btn {
+  float: right;
 }
 .pulse,
 .dropdown-menu > li > a.pulse,
@@ -11512,6 +12824,10 @@ ul.typeahead-list i {
   margin-left: -10px;
   width: 18px;
 }
+[dir="rtl"] ul.typeahead-list i {
+  margin-left: 0;
+  margin-right: -10px;
+}
 ul.typeahead-list {
   max-height: 80vh;
   overflow: auto;
@@ -11520,6 +12836,13 @@ ul.typeahead-list > li > a {
   /** Firefox bug **/
   /* see https://github.com/jupyter/notebook/issues/559 */
   white-space: normal;
+}
+ul.typeahead-list  > li > a.pull-right {
+  float: left !important;
+  float: left;
+}
+[dir="rtl"] .typeahead-list {
+  text-align: right;
 }
 .cmd-palette .modal-body {
   padding: 7px;
@@ -11531,10 +12854,19 @@ ul.typeahead-list > li > a {
   outline: none;
 }
 .no-shortcut {
-  display: none;
+  min-width: 20px;
+  color: transparent;
+}
+[dir="rtl"] .no-shortcut.pull-right {
+  float: left !important;
+  float: left;
+}
+[dir="rtl"] .command-shortcut.pull-right {
+  float: left !important;
+  float: left;
 }
 .command-shortcut:before {
-  content: "(command)";
+  content: "(command mode)";
   padding-right: 3px;
   color: #777777;
 }
@@ -11543,6 +12875,10 @@ ul.typeahead-list > li > a {
   padding-right: 3px;
   color: #777777;
 }
+[dir="rtl"] .edit-shortcut.pull-right {
+  float: left !important;
+  float: left;
+}
 #find-and-replace #replace-preview .match,
 #find-and-replace #replace-preview .insert {
   background-color: #BBDEFB;
@@ -11550,6 +12886,12 @@ ul.typeahead-list > li > a {
   border-style: solid;
   border-width: 1px;
   border-radius: 0px;
+}
+[dir="ltr"] #find-and-replace .input-group-btn + .form-control {
+  border-left: none;
+}
+[dir="rtl"] #find-and-replace .input-group-btn + .form-control {
+  border-right: none;
 }
 #find-and-replace #replace-preview .replace .match {
   background-color: #FFCDD2;
@@ -11675,45 +13017,6 @@ ul.typeahead-list > li > a {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
-<style type="text/css">
-    
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-
-    </style>
 
 
 <style type="text/css">
@@ -11747,7 +13050,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11772,659 +13075,40 @@ div#notebook {
     <div class="container" id="notebook-container">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="OpenMKM-Input-and-Output">OpenMKM Input and Output<a class="anchor-link" href="#OpenMKM-Input-and-Output">&#182;</a></h1><p>This notebook describes pmutt's functionality to read and write OpenMKM CTI files. We will use the NH3 formation mechanism as a case study.</p>
+<h1 id="OpenMKM-Input-and-Output">OpenMKM Input and Output<a class="anchor-link" href="#OpenMKM-Input-and-Output">&#182;</a></h1><p>This notebook describes pmutt's functionality to write OpenMKM CTI and YAML files. We will use the NH3 formation mechanism as a case study.</p>
 <h2 id="Topics-Covered">Topics Covered<a class="anchor-link" href="#Topics-Covered">&#182;</a></h2><ul>
-<li>Read species <em>ab-initio</em> data, reactions, lateral interactions and phases from a spreadsheet</li>
+<li>Read species <em>ab-initio</em> data, reactions, lateral interactions, phases, reactor operating conditions, and desired units from a spreadsheet</li>
 <li>Write the CTI file that can be read by OpenMKM</li>
+<li>Write a YAML file that can be read by OpenMKM</li>
 </ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Input-Spreadsheet">Input Spreadsheet<a class="anchor-link" href="#Input-Spreadsheet">&#182;</a></h2><p>All the data will be imported from the <a href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/openmkm_io/inputs/NH3_Input_Data.xlsx"><code>./inputs/NH3_Input_data.xlsx</code></a> file. There are five sheets:</p>
+<h2 id="Input-Spreadsheet">Input Spreadsheet<a class="anchor-link" href="#Input-Spreadsheet">&#182;</a></h2><p>All the data will be imported from the <a href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/inputs/NH3_Input_Data.xlsx"><code>./inputs/NH3_Input_data.xlsx</code></a> file. There are several sheets:</p>
 <ol>
+<li><code>units</code> contains the units that types of quantities should be written</li>
 <li><code>refs</code> contains <em>ab-initio</em> and experimental data for a handful of gas species to calculate references</li>
 <li><code>species</code> contains <em>ab-initio</em> data for each specie</li>
+<li><code>beps</code> contains Bronsted-Evans-Polanyi relationships for reactions</li>
 <li><code>reactions</code> contains elementary steps</li>
-<li><code>phases</code> contains phases for the species</li>
 <li><code>lateral_interactions</code> contains lateral interactions between species</li>
+<li><code>phases</code> contains phases for the species</li>
+<li><code>reactor</code> contains reactor operating conditions and solver tolerances</li>
 </ol>
-<p>The contents are displayed below:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>References</strong></p>
-<table>
-<thead><tr>
-<th>name</th>
-<th>elements.N</th>
-<th>elements.H</th>
-<th>elements.Ru</th>
-<th>T_ref</th>
-<th>HoRT_ref</th>
-<th>potentialenergy</th>
-<th>symmetrynumber</th>
-<th>statmech_model</th>
-<th>atoms</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>N2</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>298.15</td>
-<td>0</td>
-<td>-16.63</td>
-<td>2</td>
-<td>IdealGas</td>
-<td>./N2/CONTCAR</td>
-<td>2744</td>
-</tr>
-<tr>
-<td>NH3</td>
-<td>1</td>
-<td>3</td>
-<td>0</td>
-<td>298.15</td>
-<td>-18.38025311</td>
-<td>-19.54</td>
-<td>3</td>
-<td>IdealGas</td>
-<td>./NH3/CONTCAR</td>
-<td>3534</td>
-<td>3464</td>
-<td>1765</td>
-<td>1139</td>
-</tr>
-<tr>
-<td>H2</td>
-<td>0</td>
-<td>2</td>
-<td>0</td>
-<td>298.15</td>
-<td>0</td>
-<td>-6.7700</td>
-<td>2</td>
-<td>IdealGas</td>
-<td>./H2/CONTCAR</td>
-<td>4342</td>
-</tr>
-<tr>
-<td>Ru</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>298.15</td>
-<td>0.0000</td>
-<td></td>
-<td></td>
-<td>Placeholder</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Species</strong></p>
-<table>
-<thead><tr>
-<th>name</th>
-<th>elements.N</th>
-<th>elements.H</th>
-<th>elements.Ru</th>
-<th>phase</th>
-<th>statmech_model</th>
-<th>symmetrynumber</th>
-<th>atoms</th>
-<th>potentialenergy</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-<th>vib_wavenumber</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>N2</td>
-<td>2</td>
-<td></td>
-<td></td>
-<td>gas</td>
-<td>IdealGas</td>
-<td>2</td>
-<td>./N2/CONTCAR</td>
-<td>-16.63</td>
-<td>2744.00</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>NH3</td>
-<td>1</td>
-<td>3</td>
-<td></td>
-<td>gas</td>
-<td>IdealGas</td>
-<td>3</td>
-<td>./NH3/CONTCAR</td>
-<td>-19.54</td>
-<td>3534.00</td>
-<td>3464.00</td>
-<td>1765.00</td>
-<td>1139.00</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>H2</td>
-<td></td>
-<td>2</td>
-<td></td>
-<td>gas</td>
-<td>IdealGas</td>
-<td>2</td>
-<td>./H2/CONTCAR</td>
-<td>-6.77</td>
-<td>4342.00</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>N2(S)</td>
-<td>2</td>
-<td></td>
-<td></td>
-<td>terrace</td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-17.24</td>
-<td>2197.19</td>
-<td>360.42</td>
-<td>347.34</td>
-<td>335.67</td>
-<td>62.08</td>
-<td>32.18</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>N(S)</td>
-<td>1</td>
-<td></td>
-<td></td>
-<td>terrace</td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-9.34</td>
-<td>549.11</td>
-<td>538.56</td>
-<td>504.32</td>
-<td>475.81</td>
-<td>459.08</td>
-<td>410.02</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>H(S)</td>
-<td></td>
-<td>1</td>
-<td></td>
-<td>terrace</td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-4.00</td>
-<td>1003.51</td>
-<td>625.55</td>
-<td>616.29</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>NH3(S)</td>
-<td>1</td>
-<td>3</td>
-<td></td>
-<td>terrace</td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-20.43</td>
-<td>3491.09</td>
-<td>3488.82</td>
-<td>3364.52</td>
-<td>1583.52</td>
-<td>1582.07</td>
-<td>1124.22</td>
-<td>570.21</td>
-<td>567.22</td>
-<td>333.09</td>
-<td>122.86</td>
-<td>83.83</td>
-<td>70.63</td>
-</tr>
-<tr>
-<td>NH2(S)</td>
-<td>1</td>
-<td>2</td>
-<td></td>
-<td>terrace</td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-16.59</td>
-<td>3469.30</td>
-<td>3381.05</td>
-<td>1503.02</td>
-<td>698.87</td>
-<td>625.60</td>
-<td>615.94</td>
-<td>475.13</td>
-<td>298.12</td>
-<td>153.25</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>NH(S)</td>
-<td>1</td>
-<td>1</td>
-<td></td>
-<td>terrace</td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-13.21</td>
-<td>3403.13</td>
-<td>718.18</td>
-<td>710.58</td>
-<td>528.53</td>
-<td>415.20</td>
-<td>410.13</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>TS1_NH3(S)</td>
-<td>1</td>
-<td>3</td>
-<td></td>
-<td></td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-19.24</td>
-<td>3453.41</td>
-<td>3355.67</td>
-<td>1723.85</td>
-<td>1487.95</td>
-<td>959.15</td>
-<td>888.95</td>
-<td>594.09</td>
-<td>428.43</td>
-<td>227.03</td>
-<td>206.05</td>
-<td>142.14</td>
-<td></td>
-</tr>
-<tr>
-<td>TS2_NH2(S)</td>
-<td>1</td>
-<td>2</td>
-<td></td>
-<td></td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-15.87</td>
-<td>3426.44</td>
-<td>1293.72</td>
-<td>922.83</td>
-<td>660.97</td>
-<td>525.60</td>
-<td>496.84</td>
-<td>330.67</td>
-<td>290.28</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>TS3_NH(S)</td>
-<td>1</td>
-<td>1</td>
-<td></td>
-<td></td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-11.93</td>
-<td>1201.60</td>
-<td>491.57</td>
-<td>462.02</td>
-<td>402.16</td>
-<td>242.14</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>TS4_N2(S)</td>
-<td>2</td>
-<td></td>
-<td></td>
-<td></td>
-<td>Harmonic</td>
-<td></td>
-<td></td>
-<td>-14.67</td>
-<td>485.61</td>
-<td>392.98</td>
-<td>386.19</td>
-<td>280.94</td>
-<td>168.43</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>RU(S)</td>
-<td></td>
-<td></td>
-<td>1</td>
-<td>terrace</td>
-<td>Placeholder</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>RU(B)</td>
-<td></td>
-<td></td>
-<td>1</td>
-<td>bulk</td>
-<td>Placeholder</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Phases</strong></p>
-<table>
-<thead><tr>
-<th>name</th>
-<th>phase_type</th>
-<th>density</th>
-<th>site_density</th>
-<th>reactions</th>
-<th>interactions</th>
-<th>list.phases</th>
-<th>list.phases</th>
-<th>note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gas</td>
-<td>IdealGas</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>bulk</td>
-<td>StoichSolid</td>
-<td>12.4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>Ru Metal</td>
-</tr>
-<tr>
-<td>terrace</td>
-<td>InteractingInterface</td>
-<td></td>
-<td>2.17E-09</td>
-<td>all</td>
-<td>all</td>
-<td>gas</td>
-<td>bulk</td>
-<td>Ru(0001)</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Reactions</strong></p>
-<table>
-<thead><tr>
-<th>reaction_str</th>
-<th>is_adsorption</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>H2 + 2RU(S) = 2H(S) + 2RU(B)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>N2 + RU(S)  = N2(S) + RU(B)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>NH3 + RU(S) = NH3(S) + RU(B)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>NH3(S) + RU(S)= TS1_NH3(S) = NH2(S) + H(S) + RU(B)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>NH2(S) + RU(S) = TS2_NH2(S) = NH(S)  + H(S) + RU(B)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>NH(S)  + RU(S) = TS3_NH(S) = N(S)   + H(S) + RU(B)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>2N(S) + RU(B) = TS4_N2(S) = N2(S)  +  RU(S)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Lateral Interactions</strong></p>
-<table>
-<thead><tr>
-<th>name_i</th>
-<th>name_j</th>
-<th>list.intervals</th>
-<th>list.slopes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>N(S)</td>
-<td>N(S)</td>
-<td>0</td>
-<td>-52.6</td>
-</tr>
-<tr>
-<td>N(S)</td>
-<td>H(S)</td>
-<td>0</td>
-<td>-17.7</td>
-</tr>
-<tr>
-<td>H(S)</td>
-<td>N(S)</td>
-<td>0</td>
-<td>-17.7</td>
-</tr>
-<tr>
-<td>H(S)</td>
-<td>H(S)</td>
-<td>0</td>
-<td>-3</td>
-</tr>
-<tr>
-<td>NH2(S)</td>
-<td>N(S)</td>
-<td>0</td>
-<td>-20.7</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Designate-Units">Designate Units<a class="anchor-link" href="#Designate-Units">&#182;</a></h2><p>First, we will designate the units to write the CTI file.</p>
+<p>First, we change the working directory to the location of the Jupyter notebook.</p>
 
 </div>
 </div>
@@ -12434,22 +13118,30 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.omkm.units</span> <span class="k">import</span> <span class="n">Units</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="n">units</span> <span class="o">=</span> <span class="n">Units</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="s1">&#39;cm&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;mol&#39;</span><span class="p">,</span> <span class="n">act_energy</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="s1">&#39;kcal/mol&#39;</span><span class="p">)</span>
+<span class="c1"># Find the location of Jupyter notebook</span>
+<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
+<span class="c1"># Using pathlib can overcome this limiation</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
+<span class="n">input_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_Data.xlsx&#39;</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reading-data">Reading data<a class="anchor-link" href="#Reading-data">&#182;</a></h2><p>Before we can initialize our species, we need the references.</p>
-<h3 id="Reading-References">Reading References<a class="anchor-link" href="#Reading-References">&#182;</a></h3><p>We will open the <a href="https://github.com/VlachosGroup/pmutt/blob/master/docs/source/examples_jupyter/openmkm_io/inputs/NH3_Input_Data.xlsx">input spreadsheet</a> and read the <code>refs</code> sheet.</p>
+<p>And we define a helper function to print data from the Excel spreadsheet easily.</p>
 
 </div>
 </div>
@@ -12459,34 +13151,33 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 
-<span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="k">import</span> <span class="n">read_excel</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="k">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
-
-<span class="c1"># Find the location of Jupyter notebook</span>
-<span class="c1"># Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn&#39;t.</span>
-<span class="c1"># Using pathlib can overcome this limiation</span>
-<span class="n">notebook_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
-<span class="n">input_path</span> <span class="o">=</span> <span class="s1">&#39;./inputs/NH3_Input_Data.xlsx&#39;</span>
-
-<span class="n">refs_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
-<span class="n">refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_data</span> <span class="ow">in</span> <span class="n">refs_data</span><span class="p">]</span>
-<span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">(</span><span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">disp_data</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-Species">Reading Species<a class="anchor-link" href="#Reading-Species">&#182;</a></h3>
+<p>Below, we show the contents of the Excel sheets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Units</strong></p>
+
 </div>
 </div>
 </div>
@@ -12495,28 +13186,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="k">import</span> <span class="n">Nasa</span>
-
-<span class="c1"># Lower and higher temperatures</span>
-<span class="n">T_low</span> <span class="o">=</span> <span class="mf">298.</span> <span class="c1"># K</span>
-<span class="n">T_high</span> <span class="o">=</span> <span class="mf">800.</span> <span class="c1"># K</span>
-
-<span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
-<span class="n">species</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">species_phases</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">ind_species_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">:</span>
-    <span class="c1"># Initialize NASA from statistical mechanical data</span>
-    <span class="n">ind_species</span> <span class="o">=</span> <span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">T_low</span><span class="o">=</span><span class="n">T_low</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="n">T_high</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">,</span> <span class="o">**</span><span class="n">ind_species_data</span><span class="p">)</span>
-    <span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ind_species</span><span class="p">)</span>
-
-    <span class="c1"># Group the species by phase for later use</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">species_phases</span><span class="p">[</span><span class="n">ind_species</span><span class="o">.</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ind_species</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">species_phases</span><span class="p">[</span><span class="n">ind_species</span><span class="o">.</span><span class="n">phase</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ind_species</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;units&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -12526,14 +13199,52 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\Users\jonat\AppData\Roaming\Python\Python37\site-packages\scipy-1.3.0-py3.7-win-amd64.egg\scipy\stats\stats.py:1040: RuntimeWarning: invalid value encountered in double_scalars
-  return a.std(axis) / a.mean(axis)
-</pre>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>length</th>
+      <th>quantity</th>
+      <th>act_energy</th>
+      <th>mass</th>
+      <th>energy</th>
+      <th>pressure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>cm</td>
+      <td>mol</td>
+      <td>kcal/mol</td>
+      <td>g</td>
+      <td>kcal/mol</td>
+      <td>atm</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+</div>
+
 </div>
 
 </div>
@@ -12541,10 +13252,10 @@ div#notebook {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adding-species-from-other-empirical-sources">Adding species from other empirical sources<a class="anchor-link" href="#Adding-species-from-other-empirical-sources">&#182;</a></h3>
+<p><strong>References</strong></p>
+
 </div>
 </div>
 </div>
@@ -12553,26 +13264,145 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pmutt.empirical.shomate</span> <span class="k">import</span> <span class="n">Shomate</span>
-
-<span class="n">Ar</span> <span class="o">=</span> <span class="n">Shomate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Ar&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Ar&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;gas&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">6000.</span><span class="p">,</span>
-             <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">20.78600</span><span class="p">,</span> <span class="mf">2.825911e-7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.464191e-7</span><span class="p">,</span> <span class="mf">1.092131e-8</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.661371e-8</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.19735</span><span class="p">,</span> <span class="mf">179.999</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
-
-<span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ar</span><span class="p">)</span>
-<span class="n">species_phases</span><span class="p">[</span><span class="s1">&#39;gas&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ar</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
 </pre></div>
 
+    </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>elements.N</th>
+      <th>elements.H</th>
+      <th>elements.Ru</th>
+      <th>T_ref</th>
+      <th>HoRT_ref</th>
+      <th>potentialenergy</th>
+      <th>symmetrynumber</th>
+      <th>statmech_model</th>
+      <th>atoms</th>
+      <th>vib_wavenumber</th>
+      <th>vib_wavenumber.1</th>
+      <th>vib_wavenumber.2</th>
+      <th>vib_wavenumber.3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>298.15</td>
+      <td>0.000000</td>
+      <td>-16.63</td>
+      <td>2</td>
+      <td>IdealGas</td>
+      <td>./N2/CONTCAR</td>
+      <td>2744</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NH3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>298.15</td>
+      <td>-18.380253</td>
+      <td>-19.54</td>
+      <td>3</td>
+      <td>IdealGas</td>
+      <td>./NH3/CONTCAR</td>
+      <td>3534</td>
+      <td>3464</td>
+      <td>1765</td>
+      <td>1139</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>298.15</td>
+      <td>0.000000</td>
+      <td>-6.77</td>
+      <td>2</td>
+      <td>IdealGas</td>
+      <td>./H2/CONTCAR</td>
+      <td>4342</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ru</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>298.15</td>
+      <td>0.000000</td>
+      <td></td>
+      <td></td>
+      <td>Placeholder</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-BEP">Reading BEP<a class="anchor-link" href="#Reading-BEP">&#182;</a></h3>
+<p><strong>Species</strong></p>
+<p>In this mechanism, we have species existing on terraces and steps. We also define the transition states of species.</p>
+<p>Note that later we will use BEPs to calculate barriers. Hence, these transition state species will actually be ignored. You should use either transition state species or BEP relationships to calculate barriers.</p>
+
 </div>
 </div>
 </div>
@@ -12581,27 +13411,707 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.omkm.reaction</span> <span class="k">import</span> <span class="n">BEP</span>
-
-<span class="n">beps_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;beps&#39;</span><span class="p">)</span>
-<span class="n">beps</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">bep_data</span> <span class="ow">in</span> <span class="n">beps_data</span><span class="p">:</span>
-    <span class="n">beps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BEP</span><span class="p">(</span><span class="o">**</span><span class="n">bep_data</span><span class="p">))</span>
-
-<span class="c1"># Combine species and BEPs to make reactions</span>
-<span class="n">species_with_beps</span> <span class="o">=</span> <span class="n">species</span> <span class="o">+</span> <span class="n">beps</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
 </pre></div>
 
+    </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>elements.N</th>
+      <th>elements.H</th>
+      <th>elements.Ru</th>
+      <th>phase</th>
+      <th>n_sites</th>
+      <th>T_low</th>
+      <th>T_high</th>
+      <th>statmech_model</th>
+      <th>symmetrynumber</th>
+      <th>...</th>
+      <th>vib_wavenumber.2</th>
+      <th>vib_wavenumber.3</th>
+      <th>vib_wavenumber.4</th>
+      <th>vib_wavenumber.5</th>
+      <th>vib_wavenumber.6</th>
+      <th>vib_wavenumber.7</th>
+      <th>vib_wavenumber.8</th>
+      <th>vib_wavenumber.9</th>
+      <th>vib_wavenumber.10</th>
+      <th>vib_wavenumber.11</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N2</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td>gas</td>
+      <td></td>
+      <td>300</td>
+      <td>1000</td>
+      <td>IdealGas</td>
+      <td>2</td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NH3</td>
+      <td>1</td>
+      <td>3</td>
+      <td></td>
+      <td>gas</td>
+      <td></td>
+      <td>300</td>
+      <td>1000</td>
+      <td>IdealGas</td>
+      <td>3</td>
+      <td>...</td>
+      <td>1765</td>
+      <td>1139</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H2</td>
+      <td></td>
+      <td>2</td>
+      <td></td>
+      <td>gas</td>
+      <td></td>
+      <td>300</td>
+      <td>1000</td>
+      <td>IdealGas</td>
+      <td>2</td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>N2(T)</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>347.343</td>
+      <td>335.674</td>
+      <td>62.076</td>
+      <td>32.1794</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>N(T)</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>504.323</td>
+      <td>475.805</td>
+      <td>459.081</td>
+      <td>410.018</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>H(T)</td>
+      <td></td>
+      <td>1</td>
+      <td></td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>616.29</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NH3(T)</td>
+      <td>1</td>
+      <td>3</td>
+      <td></td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>3364.52</td>
+      <td>1583.52</td>
+      <td>1582.07</td>
+      <td>1124.22</td>
+      <td>570.212</td>
+      <td>567.221</td>
+      <td>333.09</td>
+      <td>122.859</td>
+      <td>83.8286</td>
+      <td>70.6251</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NH2(T)</td>
+      <td>1</td>
+      <td>2</td>
+      <td></td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>1503.02</td>
+      <td>698.869</td>
+      <td>625.596</td>
+      <td>615.94</td>
+      <td>475.13</td>
+      <td>298.12</td>
+      <td>153.25</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NH(T)</td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>710.581</td>
+      <td>528.526</td>
+      <td>415.196</td>
+      <td>410.131</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>TS1_NH3(T)</td>
+      <td>1</td>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>1723.85</td>
+      <td>1487.95</td>
+      <td>959.151</td>
+      <td>888.946</td>
+      <td>594.089</td>
+      <td>428.431</td>
+      <td>227.032</td>
+      <td>206.047</td>
+      <td>142.136</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>TS2_NH2(T)</td>
+      <td>1</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>922.831</td>
+      <td>660.967</td>
+      <td>525.595</td>
+      <td>496.837</td>
+      <td>330.674</td>
+      <td>290.278</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>TS3_NH(T)</td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>462.016</td>
+      <td>402.159</td>
+      <td>242.139</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>TS4_N2(T)</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>386.186</td>
+      <td>280.943</td>
+      <td>168.431</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>RU(T)</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>terrace</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Placeholder</td>
+      <td></td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>N2(S)</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>408.127</td>
+      <td>378.517</td>
+      <td>344.871</td>
+      <td>334.622</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>N(S)</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>471.098</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>H(S)</td>
+      <td></td>
+      <td>1</td>
+      <td></td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>616.29</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>NH3(S)</td>
+      <td>1</td>
+      <td>3</td>
+      <td></td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>3362.81</td>
+      <td>1590.91</td>
+      <td>1579.27</td>
+      <td>1140.76</td>
+      <td>564.975</td>
+      <td>555.5</td>
+      <td>336.1</td>
+      <td>117.162</td>
+      <td>86.7744</td>
+      <td>78.1001</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>NH2(S)</td>
+      <td>1</td>
+      <td>2</td>
+      <td></td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>1477.16</td>
+      <td>720.076</td>
+      <td>615.666</td>
+      <td>581.967</td>
+      <td>468.853</td>
+      <td>286.37</td>
+      <td>105.957</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>NH(S)</td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>669.429</td>
+      <td>506.278</td>
+      <td>409.502</td>
+      <td>387.808</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>TS1_NH3(S)</td>
+      <td>1</td>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>1685.83</td>
+      <td>1481</td>
+      <td>1002.07</td>
+      <td>916.147</td>
+      <td>575.405</td>
+      <td>431.307</td>
+      <td>345.149</td>
+      <td>221.65</td>
+      <td>70.3397</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>TS2_NH2(S)</td>
+      <td>1</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>1032.19</td>
+      <td>583.479</td>
+      <td>392.837</td>
+      <td>384.834</td>
+      <td>311.601</td>
+      <td>110.969</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>TS3_NH(S)</td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>489.065</td>
+      <td>443.451</td>
+      <td>396.193</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>TS4_N2(S)</td>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Harmonic</td>
+      <td></td>
+      <td>...</td>
+      <td>436.166</td>
+      <td>418.367</td>
+      <td>391.943</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>RU(S)</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>step</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Placeholder</td>
+      <td></td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>RU(B)</td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td>bulk</td>
+      <td>1</td>
+      <td>300</td>
+      <td>1000</td>
+      <td>Placeholder</td>
+      <td></td>
+      <td>...</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<p>26 rows × 24 columns</p>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-reactions">Read reactions<a class="anchor-link" href="#Read-reactions">&#182;</a></h3>
+<p><strong>BEPs</strong></p>
+
 </div>
 </div>
 </div>
@@ -12610,44 +14120,91 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="k">import</span> <span class="n">pmutt_list_to_dict</span>
-<span class="kn">from</span> <span class="nn">pmutt.omkm.reaction</span> <span class="k">import</span> <span class="n">SurfaceReaction</span>
-
-<span class="c1"># Convert species to dictionary for easier reaction assignment</span>
-<span class="n">species_with_beps_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_with_beps</span><span class="p">)</span>
-<span class="n">reactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactions&#39;</span><span class="p">)</span>
-<span class="n">reactions</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c1"># Store information about phases for later retrieval</span>
-<span class="n">reaction_phases</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">reaction_data</span> <span class="ow">in</span> <span class="n">reactions_data</span><span class="p">:</span>
-    <span class="n">reaction</span> <span class="o">=</span> <span class="n">SurfaceReaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">species_with_beps_dict</span><span class="p">,</span>
-                                           <span class="o">**</span><span class="n">reaction_data</span><span class="p">)</span>
-    <span class="n">reactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction</span><span class="p">)</span>
-    <span class="c1"># Assign phase information</span>
-    <span class="n">reaction_species</span> <span class="o">=</span> <span class="n">reaction</span><span class="o">.</span><span class="n">get_species</span><span class="p">(</span><span class="n">include_TS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">ind_species</span> <span class="ow">in</span> <span class="n">reaction_species</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">phase</span> <span class="o">=</span> <span class="n">species_with_beps_dict</span><span class="p">[</span><span class="n">ind_species</span><span class="p">]</span><span class="o">.</span><span class="n">phase</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="c1"># Assign if key already exists</span>
-        <span class="k">if</span> <span class="n">phase</span> <span class="ow">in</span> <span class="n">reaction_phases</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">reaction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reaction_phases</span><span class="p">[</span><span class="n">phase</span><span class="p">]:</span>
-                <span class="n">reaction_phases</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">reaction_phases</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">reaction</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;beps&#39;</span><span class="p">)</span>
 </pre></div>
 
+    </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>slope</th>
+      <th>intercept</th>
+      <th>direction</th>
+      <th>notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N-H</td>
+      <td>0.29</td>
+      <td>23.23</td>
+      <td>cleavage</td>
+      <td>Values taken from https://github.com/VlachosGr...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NH-H</td>
+      <td>0.52</td>
+      <td>19.78</td>
+      <td>cleavage</td>
+      <td>Values taken from https://github.com/VlachosGr...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NH2-H</td>
+      <td>0.71</td>
+      <td>23.69</td>
+      <td>cleavage</td>
+      <td>Values taken from https://github.com/VlachosGr...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-lateral-interactions">Read lateral interactions<a class="anchor-link" href="#Read-lateral-interactions">&#182;</a></h3>
+<p><strong>Reactions</strong></p>
+<p>Note that reactions with two '=' signs indicate it has a transition state.</p>
+
 </div>
 </div>
 </div>
@@ -12656,35 +14213,164 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.mixture.cov</span> <span class="k">import</span> <span class="n">PiecewiseCovEffect</span>
-
-<span class="n">interactions</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">interactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;lateral_interactions&#39;</span><span class="p">)</span>
-<span class="n">interaction_phases</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">interaction_data</span> <span class="ow">in</span> <span class="n">interactions_data</span><span class="p">:</span>
-    <span class="n">interaction</span> <span class="o">=</span> <span class="n">PiecewiseCovEffect</span><span class="p">(</span><span class="o">**</span><span class="n">interaction_data</span><span class="p">)</span>
-    <span class="n">interactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction</span><span class="p">)</span>
-
-    <span class="c1"># Assign phase information</span>
-    <span class="n">phase</span> <span class="o">=</span> <span class="n">species_with_beps_dict</span><span class="p">[</span><span class="n">interaction</span><span class="o">.</span><span class="n">name_i</span><span class="p">]</span><span class="o">.</span><span class="n">phase</span>
-    <span class="c1"># Assign if key already exists</span>
-    <span class="k">if</span> <span class="n">phase</span> <span class="ow">in</span> <span class="n">interaction_phases</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">interaction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">interaction_phases</span><span class="p">[</span><span class="n">phase</span><span class="p">]:</span>
-            <span class="n">interaction_phases</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">interaction_phases</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">interaction</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactions&#39;</span><span class="p">)</span>
 </pre></div>
 
+    </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>reaction_str</th>
+      <th>is_adsorption</th>
+      <th>direction</th>
+      <th>beta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>H2 + 2RU(T) = 2H(T) + 2RU(B)</td>
+      <td>True</td>
+      <td></td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>N2 + RU(T)  = N2(T) + RU(B)</td>
+      <td>True</td>
+      <td></td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NH3 + RU(T) = NH3(T) + RU(B)</td>
+      <td>True</td>
+      <td></td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NH3(T) + RU(T)= NH2-H = NH2(T) + H(T) + RU(B)</td>
+      <td>False</td>
+      <td>cleavage</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NH2(T) + RU(T) = NH-H = NH(T)  + H(T) + RU(B)</td>
+      <td>False</td>
+      <td>cleavage</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NH(T)  + RU(T) = N-H = N(T)   + H(T) + RU(B)</td>
+      <td>False</td>
+      <td>cleavage</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2N(T) + RU(B) = TS4_N2(T) = N2(T)  +  RU(T)</td>
+      <td>False</td>
+      <td></td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>H2 + 2RU(S) = 2H(S) + 2RU(B)</td>
+      <td>True</td>
+      <td></td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>N2 + RU(S)  = N2(S) + RU(B)</td>
+      <td>True</td>
+      <td></td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NH3 + RU(S) = NH3(S) + RU(B)</td>
+      <td>True</td>
+      <td></td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>NH3(S) + RU(S)= NH2-H = NH2(S) + H(S) + RU(B)</td>
+      <td>False</td>
+      <td>cleavage</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>NH2(S) + RU(S) = NH-H = NH(S)  + H(S) + RU(B)</td>
+      <td>False</td>
+      <td>cleavage</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>N(S) + H(S) + RU(B) = N-H = NH(S)  + RU(S)</td>
+      <td>False</td>
+      <td>synthesis</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2N(S) + RU(B) = TS4_N2(S) = N2(S)  +  RU(S)</td>
+      <td>False</td>
+      <td></td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-Phases">Reading Phases<a class="anchor-link" href="#Reading-Phases">&#182;</a></h3>
+<p><strong>Lateral Interactions</strong></p>
+<p>Currently we use piece-wise linear equations for lateral interactions. Here, we only define one line but additional <code>list.intervals</code> and <code>list.slopes</code> columns can be added for more complicated behavior.</p>
+
 </div>
 </div>
 </div>
@@ -12693,38 +14379,135 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.omkm.phase</span> <span class="k">import</span> <span class="n">IdealGas</span><span class="p">,</span> <span class="n">InteractingInterface</span><span class="p">,</span> <span class="n">StoichSolid</span>
-
-<span class="n">phases_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;phases&#39;</span><span class="p">)</span>
-<span class="n">phases</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">phase_data</span> <span class="ow">in</span> <span class="n">phases_data</span><span class="p">:</span>
-    <span class="c1"># Pre-processing relevant data</span>
-    <span class="n">phase_name</span> <span class="o">=</span> <span class="n">phase_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-    <span class="n">phase_type</span> <span class="o">=</span> <span class="n">phase_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;phase_type&#39;</span><span class="p">)</span>
-    <span class="n">phase_data</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">species_phases</span><span class="p">[</span><span class="n">phase_name</span><span class="p">]</span>
-
-    <span class="c1"># Create the appropriate object</span>
-    <span class="k">if</span> <span class="n">phase_type</span> <span class="o">==</span> <span class="s1">&#39;IdealGas&#39;</span><span class="p">:</span>
-        <span class="n">phase</span> <span class="o">=</span> <span class="n">IdealGas</span><span class="p">(</span><span class="o">**</span><span class="n">phase_data</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">phase_type</span> <span class="o">==</span> <span class="s1">&#39;StoichSolid&#39;</span><span class="p">:</span>
-        <span class="n">phase</span> <span class="o">=</span> <span class="n">StoichSolid</span><span class="p">(</span><span class="o">**</span><span class="n">phase_data</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">phase_type</span> <span class="o">==</span> <span class="s1">&#39;InteractingInterface&#39;</span><span class="p">:</span>
-        <span class="n">phase_data</span><span class="p">[</span><span class="s1">&#39;reactions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reaction_phases</span><span class="p">[</span><span class="n">phase_name</span><span class="p">]</span>
-        <span class="n">phase_data</span><span class="p">[</span><span class="s1">&#39;interactions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">interaction_phases</span><span class="p">[</span><span class="n">phase_name</span><span class="p">]</span>
-        <span class="n">phase</span> <span class="o">=</span> <span class="n">InteractingInterface</span><span class="p">(</span><span class="o">**</span><span class="n">phase_data</span><span class="p">)</span>
-    <span class="n">phases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;lateral_interactions&#39;</span><span class="p">)</span>
 </pre></div>
 
+    </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name_i</th>
+      <th>name_j</th>
+      <th>list.intervals</th>
+      <th>list.slopes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>N(T)</td>
+      <td>N(T)</td>
+      <td>0</td>
+      <td>-52.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>N(T)</td>
+      <td>H(T)</td>
+      <td>0</td>
+      <td>-17.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H(T)</td>
+      <td>N(T)</td>
+      <td>0</td>
+      <td>-17.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>H(T)</td>
+      <td>H(T)</td>
+      <td>0</td>
+      <td>-3.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NH2(T)</td>
+      <td>N(T)</td>
+      <td>0</td>
+      <td>-20.7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>N(S)</td>
+      <td>N(S)</td>
+      <td>0</td>
+      <td>-52.6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>N(S)</td>
+      <td>H(S)</td>
+      <td>0</td>
+      <td>-17.7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>H(S)</td>
+      <td>N(S)</td>
+      <td>0</td>
+      <td>-17.7</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>H(S)</td>
+      <td>H(S)</td>
+      <td>0</td>
+      <td>-3.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NH2(S)</td>
+      <td>N(S)</td>
+      <td>0</td>
+      <td>-20.7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Write-CTI-File">Write CTI File<a class="anchor-link" href="#Write-CTI-File">&#182;</a></h2>
+<p><strong>Phases</strong></p>
+
 </div>
 </div>
 </div>
@@ -12733,26 +14516,122 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="k">import</span> <span class="n">write_cti</span>
-
-<span class="n">output_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/input.cti&#39;</span>
-<span class="n">use_motz_wise</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
-          <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
-          <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;phases&#39;</span><span class="p">)</span>
 </pre></div>
 
+    </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>phase_type</th>
+      <th>density</th>
+      <th>site_density</th>
+      <th>list.phases</th>
+      <th>list.phases.1</th>
+      <th>dict.initial_state.RU(T)</th>
+      <th>dict.initial_state.RU(S)</th>
+      <th>dict.initial_state.NH3</th>
+      <th>note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>gas</td>
+      <td>IdealGas</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>1</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>bulk</td>
+      <td>StoichSolid</td>
+      <td>12.4</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Ru Metal</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>terrace</td>
+      <td>InteractingInterface</td>
+      <td></td>
+      <td>2.1671e-09</td>
+      <td>gas</td>
+      <td>bulk</td>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td>Ru(0001)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>step</td>
+      <td>InteractingInterface</td>
+      <td></td>
+      <td>4.4385e-10</td>
+      <td>gas</td>
+      <td>bulk</td>
+      <td></td>
+      <td>1</td>
+      <td></td>
+      <td>Ru(0001) with atoms deleted</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Output-CTI-File">Output CTI File<a class="anchor-link" href="#Output-CTI-File">&#182;</a></h2><p>If you would prefer to return the file as a string instead of writing it, omit the <code>filename</code>.</p>
+<p><strong>Reactor</strong></p>
 
 </div>
 </div>
@@ -12762,11 +14641,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
-                <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">disp_data</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactor&#39;</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -12776,11 +14654,468 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>reactor_type</th>
+      <th>mode</th>
+      <th>V</th>
+      <th>T</th>
+      <th>P</th>
+      <th>cat_abyv</th>
+      <th>end_time</th>
+      <th>flow_rate</th>
+      <th>transient</th>
+      <th>stepping</th>
+      <th>init_step</th>
+      <th>atol</th>
+      <th>rtol</th>
+      <th>output_format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>cstr</td>
+      <td>isothermal</td>
+      <td>1</td>
+      <td>900</td>
+      <td>1</td>
+      <td>1500</td>
+      <td>50</td>
+      <td>1</td>
+      <td>True</td>
+      <td>logarithmic</td>
+      <td>1.000000e-15</td>
+      <td>1.000000e-15</td>
+      <td>1.000000e-10</td>
+      <td>csv</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reading-data">Reading data<a class="anchor-link" href="#Reading-data">&#182;</a></h2><p>Throughout this exercise, we will use <code>pmutt.io.read_excel</code> to extract the data from the Excel spreadsheet.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Designate-Units">Designate Units<a class="anchor-link" href="#Designate-Units">&#182;</a></h3><p>First, we will designate the units to write the CTI and YAML file.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.excel</span> <span class="kn">import</span> <span class="n">read_excel</span>
+<span class="kn">from</span> <span class="nn">pmutt.omkm.units</span> <span class="kn">import</span> <span class="n">Units</span>
+
+<span class="n">units_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;units&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">units</span> <span class="o">=</span> <span class="n">Units</span><span class="p">(</span><span class="o">**</span><span class="n">units_data</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reading-References-(optional)">Reading References (optional)<a class="anchor-link" href="#Reading-References-(optional)">&#182;</a></h3><p>We will open the <a href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/inputs/NH3_Input_Data.xlsx">input spreadsheet</a> and read the <code>refs</code> sheet.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.references</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">References</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">refs_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># If references are not used, skip this section</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_data</span> <span class="ow">in</span> <span class="n">refs_data</span><span class="p">]</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="n">References</span><span class="p">(</span><span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reading-Species">Reading Species<a class="anchor-link" href="#Reading-Species">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.empirical.nasa</span> <span class="kn">import</span> <span class="n">Nasa</span>
+
+<span class="c1"># Read the species&#39; data</span>
+<span class="n">species_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create NASA polynomials from the species</span>
+<span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nasa</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">references</span><span class="o">=</span><span class="n">refs</span><span class="p">,</span> <span class="o">**</span><span class="n">ind_species_data</span><span class="p">)</span> \
+           <span class="k">for</span> <span class="n">ind_species_data</span> <span class="ow">in</span> <span class="n">species_data</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Adding-species-from-other-empirical-sources-(optional)">Adding species from other empirical sources (optional)<a class="anchor-link" href="#Adding-species-from-other-empirical-sources-(optional)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pmutt.empirical.shomate</span> <span class="kn">import</span> <span class="n">Shomate</span>
+
+<span class="n">Ar</span> <span class="o">=</span> <span class="n">Shomate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Ar&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Ar&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;gas&#39;</span><span class="p">,</span> <span class="n">T_low</span><span class="o">=</span><span class="mf">298.</span><span class="p">,</span> <span class="n">T_high</span><span class="o">=</span><span class="mf">6000.</span><span class="p">,</span>
+             <span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">20.78600</span><span class="p">,</span> <span class="mf">2.825911e-7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.464191e-7</span><span class="p">,</span> <span class="mf">1.092131e-8</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.661371e-8</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.19735</span><span class="p">,</span> <span class="mf">179.999</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+
+<span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ar</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reading-BEP-(optional)">Reading BEP (optional)<a class="anchor-link" href="#Reading-BEP-(optional)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.omkm.reaction</span> <span class="kn">import</span> <span class="n">BEP</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">beps_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;beps&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">beps</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">species_with_beps</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">beps</span> <span class="o">=</span> <span class="p">[</span><span class="n">BEP</span><span class="p">(</span><span class="o">**</span><span class="n">bep_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">bep_data</span> <span class="ow">in</span> <span class="n">beps_data</span><span class="p">]</span>
+    <span class="n">species_with_beps</span> <span class="o">=</span> <span class="n">species</span> <span class="o">+</span> <span class="n">beps</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Read-reactions">Read reactions<a class="anchor-link" href="#Read-reactions">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">pmutt_list_to_dict</span>
+<span class="kn">from</span> <span class="nn">pmutt.omkm.reaction</span> <span class="kn">import</span> <span class="n">SurfaceReaction</span>
+
+<span class="c1"># Convert species to dictionary for easier reaction assignment</span>
+<span class="n">species_with_beps_dict</span> <span class="o">=</span> <span class="n">pmutt_list_to_dict</span><span class="p">(</span><span class="n">species_with_beps</span><span class="p">)</span>
+
+<span class="n">reactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactions&#39;</span><span class="p">)</span>
+<span class="n">reactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">SurfaceReaction</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="n">species_with_beps_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">reaction_data</span><span class="p">)</span> \
+             <span class="k">for</span> <span class="n">reaction_data</span> <span class="ow">in</span> <span class="n">reactions_data</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Read-lateral-interactions-(optional)">Read lateral interactions (optional)<a class="anchor-link" href="#Read-lateral-interactions-(optional)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.mixture.cov</span> <span class="kn">import</span> <span class="n">PiecewiseCovEffect</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">interactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;lateral_interactions&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># If no lateral interactions exist, skip this section</span>
+    <span class="n">interactions</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">interactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">PiecewiseCovEffect</span><span class="p">(</span><span class="o">**</span><span class="n">interaction_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">interaction_data</span> <span class="ow">in</span> <span class="n">interactions_data</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reading-Phases">Reading Phases<a class="anchor-link" href="#Reading-Phases">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">get_species_phases</span><span class="p">,</span> <span class="n">get_reactions_phases</span><span class="p">,</span> <span class="n">get_interactions_phases</span><span class="p">,</span> <span class="n">get_phases</span>
+
+<span class="c1"># Get data associated with species, reactions and lateral interactions</span>
+<span class="n">species_phases</span> <span class="o">=</span> <span class="n">get_species_phases</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+<span class="n">reactions_phases</span> <span class="o">=</span> <span class="n">get_reactions_phases</span><span class="p">(</span><span class="n">reactions</span><span class="p">)</span>
+<span class="n">interactions_phases</span> <span class="o">=</span> <span class="n">get_interactions_phases</span><span class="p">(</span><span class="n">interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_with_beps_dict</span><span class="p">)</span>
+
+<span class="c1"># Read data from Excel sheet about phases</span>
+<span class="n">phases_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;phases&#39;</span><span class="p">)</span>
+<span class="n">phases</span> <span class="o">=</span> <span class="n">get_phases</span><span class="p">(</span><span class="n">phases_data</span><span class="o">=</span><span class="n">phases_data</span><span class="p">,</span>
+                    <span class="n">species_phases</span><span class="o">=</span><span class="n">species_phases</span><span class="p">,</span>
+                    <span class="n">reactions_phases</span><span class="o">=</span><span class="n">reactions_phases</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you would prefer to return the file as a string instead of writing it, omit the <code>filename</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Write-YAML-File">Write YAML File<a class="anchor-link" href="#Write-YAML-File">&#182;</a></h2><p>The YAML file specifying the reactor configuration can also be written using the <code>write_yaml</code> function. Note that if:</p>
+<ul>
+<li><code>units</code> is not specified, float values are assumed to be in SI units</li>
+<li><code>units</code> is specified, float values are consistent with <code>unit</code>'s attributes</li>
+<li>you would like a quantity to have particular units, pass the value as a string with the units  (e.g. "10 cm3/s").</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_yaml</span>
+
+<span class="n">yaml_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/cstr.yaml&#39;</span>
+<span class="n">reactor_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactor&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">write_yaml</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">yaml_path</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="o">**</span><span class="n">reactor_data</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you would prefer to return the file as a string instead of writing it, omit the <code>filename</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">write_yaml</span><span class="p">(</span><span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="o">**</span><span class="n">reactor_data</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.14) on 2019-10-27 19:31:04.545727
+<pre># File generated by pMuTT (v 1.2.17dev) on 2020-01-30 11:28:02.925725
+# See documentation for OpenMKM YAML file here:
+# https://vlachosgroup.github.io/openmkm/input
+inlet_gas:
+    flow_rate: &#34;1 cm3/s&#34;
+phases:
+    bulk:
+        name: bulk
+    gas:
+        initial_state: &#34;NH3:1.0&#34;
+        name: gas
+    surfaces:
+    -   initial_state: &#34;RU(T):1.0&#34;
+        name: terrace
+    -   initial_state: &#34;RU(S):1.0&#34;
+        name: step
+reactor:
+    cat_abyv: &#34;1500 /cm&#34;
+    mode: &#34;isothermal&#34;
+    pressure: &#34;1 atm&#34;
+    temperature: 900
+    type: &#34;cstr&#34;
+    volume: &#34;1 cm3&#34;
+simulation:
+    end_time: &#34;50 s&#34;
+    init_step: 1.0e-15
+    output_format: &#34;csv&#34;
+    solver:
+        atol: 1.0e-15
+        rtol: 1.0e-10
+    stepping: &#34;logarithmic&#34;
+    transient: true
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Write-CTI-File">Write CTI File<a class="anchor-link" href="#Write-CTI-File">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_cti</span>
+
+<span class="n">cti_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/thermo.cti&#39;</span>
+<span class="n">use_motz_wise</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">reactor_data</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">reactor_data</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+
+<span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+          <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">cti_path</span><span class="p">,</span>
+          <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+                <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre># File generated by pMuTT (v 1.2.17dev) on 2020-01-30 11:28:03.045770
 # See documentation for OpenMKM CTI file here:
 # https://vlachosgroup.github.io/openmkm/input
 
@@ -12788,14 +15123,15 @@ div#notebook {
 # UNITS
 #-------------------------------------------------------------------------------
 units(length=&#34;cm&#34;, time=&#34;s&#34;, quantity=&#34;mol&#34;, energy=&#34;kcal/mol&#34;,
-      act_energy=&#34;kcal/mol&#34;, pressure=&#34;bar&#34;, mass=&#34;g&#34;)
+      act_energy=&#34;kcal/mol&#34;, pressure=&#34;atm&#34;, mass=&#34;g&#34;)
 
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # PHASES
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 ideal_gas(name=&#34;gas&#34;,
-          elements=&#34;H Ar N&#34;,
-          species=&#34;N2 NH3 H2 Ar&#34;)
+          elements=&#34;N H Ar&#34;,
+          species=&#34;N2 NH3 H2 Ar&#34;,
+          reactions=[])
 
 stoichiometric_solid(name=&#34;bulk&#34;,
                      elements=&#34;Ru&#34;,
@@ -12804,285 +15140,283 @@ stoichiometric_solid(name=&#34;bulk&#34;,
                      note=&#34;Ru Metal&#34;)
 
 interacting_interface(name=&#34;terrace&#34;,
-                      elements=&#34;H N Ru&#34;,
+                      elements=&#34;N H Ru&#34;,
                       species=&#34;N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=2.1671e-09,
-                      interactions=[&#34;0000 to 0004&#34;],
                       reactions=[&#34;0000 to 0003&#34;, &#34;NH2-H_cle_0001&#34;, &#34;NH-H_cle_0001&#34;, &#34;N-H_cle_0001&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001)&#34;)
 
 interacting_interface(name=&#34;step&#34;,
-                      elements=&#34;H N Ru&#34;,
+                      elements=&#34;N H Ru&#34;,
                       species=&#34;N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=4.4385e-10,
-                      interactions=[&#34;0005 to 0009&#34;],
                       reactions=[&#34;0004 to 0007&#34;, &#34;NH2-H_cle_0002&#34;, &#34;NH-H_cle_0002&#34;, &#34;N-H_syn_0001&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001) with atoms deleted&#34;)
 
 
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # SPECIES
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 species(name=&#34;N2&#34;, atoms=&#34;N:2&#34;,
-        thermo=(NASA([298.0, 523.3877551020408],
-                     [ 3.41792195E+00,  8.91688129E-04, -3.46864753E-06,
-                       5.44691795E-09, -2.46804017E-12, -1.27218598E+02,
-                       3.46925446E+00]),
-                NASA([523.3877551020408, 800.0], 
-                     [ 3.75207309E+00, -1.30159027E-03,  1.83848785E-06,
-                      -1.17413430E-10, -3.65391117E-13, -1.67466046E+02,
-                       2.02487235E+00])))
+        thermo=(NASA([300.0, 642.8571428571429],
+                     [ 3.39563199E+00,  1.11570769E-03, -4.30199378E-06,
+                       6.80714240E-09, -3.29033128E-12, -1.25466298E+02,
+                       3.55611074E+00]),
+                NASA([642.8571428571429, 1000.0], 
+                     [ 4.05032999E+00, -2.96778541E-03,  5.32348501E-06,
+                      -3.35181224E-09,  7.58446718E-13, -2.10110264E+02,
+                       6.85822849E-01])))
 
 species(name=&#34;NH3&#34;, atoms=&#34;N:1 H:3&#34;,
-        thermo=(NASA([298.0, 533.6326530612245],
-                     [ 4.57124680E+00, -6.89724277E-03,  2.70972941E-05,
-                      -3.44331645E-08,  1.62568430E-11, -8.53630392E+03,
-                      -1.78236482E+00]),
-                NASA([533.6326530612245, 800.0], 
-                     [ 3.29427463E+00,  2.57481517E-03,  5.20883059E-07,
-                      -1.00678313E-09,  3.59356180E-13, -8.39739729E+03,
-                       3.59518179E+00])))
+        thermo=(NASA([300.0, 542.8571428571429],
+                     [ 4.56497242E+00, -6.83283784E-03,  2.68523703E-05,
+                      -3.40241693E-08,  1.60037499E-11, -8.53599972E+03,
+                      -1.75833190E+00]),
+                NASA([542.8571428571429, 1000.0], 
+                     [ 3.16096843E+00,  3.36237039E-03, -1.21423699E-06,
+                       6.82957529E-10, -2.54434966E-13, -8.37962629E+03,
+                       4.18565879E+00])))
 
 species(name=&#34;H2&#34;, atoms=&#34;H:2&#34;,
-        thermo=(NASA([298.0, 574.6122448979592],
-                     [ 3.50717925E+00, -8.50397135E-05,  3.79570576E-07,
-                      -7.57943298E-10,  5.72423558E-13,  1.68725521E+03,
-                      -4.30359616E+00]),
-                NASA([574.6122448979592, 800.0], 
-                     [ 3.37903251E+00,  7.92301907E-04, -1.88662952E-06,
-                       1.85974220E-09, -5.68447254E-13,  1.70231785E+03,
-                      -3.75384878E+00])))
+        thermo=(NASA([300.0, 614.2857142857142],
+                     [ 3.50597042E+00, -7.32519785E-05,  3.37172259E-07,
+                      -6.91264039E-10,  5.33718902E-13,  1.68735194E+03,
+                      -4.29885273E+00]),
+                NASA([614.2857142857142, 1000.0], 
+                     [ 3.39370134E+00,  7.19411242E-04, -1.75319719E-06,
+                       1.75349336E-09, -5.37568335E-13,  1.69999088E+03,
+                      -3.82131998E+00])))
 
 species(name=&#34;N2(T)&#34;, atoms=&#34;N:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 482.40816326530614],
-                     [ 4.40553502E-01,  2.97759950E-02, -8.47698148E-05,
-                       1.16195177E-07, -6.12938589E-11, -6.81713036E+03,
-                      -1.67535850E+00]),
-                NASA([482.40816326530614, 800.0], 
-                     [ 3.42605836E+00,  5.03710708E-03, -6.92689694E-06,
-                       6.03246113E-09, -2.18862675E-12, -7.10908593E+03,
-                      -1.39234158E+01])))
+        thermo=(NASA([300.0, 514.2857142857143],
+                     [ 6.39478024E-01,  2.76666736E-02, -7.64572031E-05,
+                       1.01764879E-07, -5.19823387E-11, -6.83022934E+03,
+                      -2.43739833E+00]),
+                NASA([514.2857142857143, 1000.0], 
+                     [ 3.85478658E+00,  2.45155339E-03, -1.12290413E-06,
+                       2.83662017E-10, -6.81451545E-14, -7.16375140E+03,
+                      -1.58113012E+01])))
 
 species(name=&#34;N(T)&#34;, atoms=&#34;N:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 502.8979591836735],
-                     [-5.23174593E+00,  6.11537184E-02, -1.47762309E-04,
-                       1.74618161E-07, -8.21997526E-11, -1.05501788E+04,
-                       1.88655390E+01]),
-                NASA([502.8979591836735, 800.0], 
-                     [-8.29107669E-01,  2.64469843E-02, -4.38832016E-05,
-                       3.47600781E-08, -1.07819310E-11, -1.10025322E+04,
-                       5.84860624E-01])))
+        thermo=(NASA([300.0, 557.1428571428571],
+                     [-4.89444279E+00,  5.76767621E-02, -1.34471582E-04,
+                       1.52287595E-07, -6.82821324E-11, -1.05753156E+04,
+                       1.75606204E+01]),
+                NASA([557.1428571428571, 1000.0], 
+                     [ 6.59846490E-01,  1.78229079E-02, -2.52499856E-05,
+                       1.69581138E-08, -4.43507913E-12, -1.12063258E+04,
+                      -6.04210537E+00])))
 
 species(name=&#34;H(T)&#34;, atoms=&#34;H:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 461.9183673469388],
-                     [-1.41307531E+00,  1.00687718E-02,  1.09758988E-06,
-                      -2.55216914E-08,  2.17566538E-11, -6.12991563E+03,
-                       5.64663049E+00]),
-                NASA([461.9183673469388, 800.0], 
-                     [-2.11302416E+00,  1.72572991E-02, -2.60046478E-05,
-                       1.92388088E-08, -5.68363784E-12, -6.07714366E+03,
-                       8.35375655E+00])))
+        thermo=(NASA([300.0, 557.1428571428571],
+                     [-1.80079590E+00,  1.41608858E-02, -1.49548712E-05,
+                       2.22205000E-09,  3.92668860E-12, -6.10089659E+03,
+                       7.13912887E+00]),
+                NASA([557.1428571428571, 1000.0], 
+                     [-1.45370074E+00,  1.34229326E-02, -1.76861908E-05,
+                       1.12587751E-08, -2.82681062E-12, -6.16746227E+03,
+                       5.42130351E+00])))
 
 species(name=&#34;NH3(T)&#34;, atoms=&#34;N:1 H:3&#34;, size=1.0,
-        thermo=(NASA([298.0, 461.9183673469388],
-                     [ 1.16759533E+00,  2.05732170E-02, -3.66958772E-05,
-                       4.56112325E-08, -2.49628744E-11, -1.42311185E+04,
-                      -4.80504278E+00]),
-                NASA([461.9183673469388, 800.0], 
-                     [ 1.58312977E+00,  1.57753291E-02, -1.71587153E-05,
-                       1.15414255E-08, -3.21958978E-12, -1.42567384E+04,
-                      -6.35076167E+00])))
+        thermo=(NASA([300.0, 428.57142857142856],
+                     [ 1.01855800E+00,  2.22467480E-02, -4.37028677E-05,
+                       5.85763469E-08, -3.39082529E-11, -1.42140038E+04,
+                      -4.22950956E+00]),
+                NASA([428.57142857142856, 1000.0], 
+                     [ 1.63904581E+00,  1.54367008E-02, -1.64055589E-05,
+                       1.08126917E-08, -2.96089447E-12, -1.42574216E+04,
+                      -6.58598939E+00])))
 
 species(name=&#34;NH2(T)&#34;, atoms=&#34;N:1 H:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 523.3877551020408],
-                     [-2.56305506E+00,  3.84726874E-02, -7.73503504E-05,
-                       8.09903199E-08, -3.43595838E-11, -1.17458655E+04,
-                       8.90806366E+00]),
-                NASA([523.3877551020408, 800.0], 
-                     [-6.86530719E-01,  2.43298826E-02, -3.68705157E-05,
-                       2.88483783E-08, -8.86963660E-12, -1.19475373E+04,
-                       1.03191178E+00])))
+        thermo=(NASA([300.0, 585.7142857142858],
+                     [-2.43505281E+00,  3.71813754E-02, -7.25285056E-05,
+                       7.30904953E-08, -2.95666916E-11, -1.17557722E+04,
+                       8.40995025E+00]),
+                NASA([585.7142857142858, 1000.0], 
+                     [ 5.91631735E-01,  1.71279786E-02, -2.17139679E-05,
+                       1.47263482E-08, -3.95343696E-12, -1.21281482E+04,
+                      -4.69375229E+00])))
 
 species(name=&#34;NH(T)&#34;, atoms=&#34;N:1 H:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 543.8775510204082],
-                     [-3.73687435E+00,  4.05226889E-02, -8.44226964E-05,
-                       8.65932632E-08, -3.53036247E-11, -1.46202196E+04,
-                       1.37781588E+01]),
-                NASA([543.8775510204082, 800.0], 
-                     [-1.33660645E+00,  2.33106600E-02, -3.77180253E-05,
-                       2.97486446E-08, -9.12157176E-12, -1.48903410E+04,
-                       3.58875263E+00])))
+        thermo=(NASA([300.0, 600.0],
+                     [-3.66688797E+00,  3.98278241E-02, -8.18733330E-05,
+                       8.24962240E-08, -3.28692112E-11, -1.46257191E+04,
+                       1.35047465E+01]),
+                NASA([600.0, 1000.0], 
+                     [ 1.06354564E-01,  1.52712512E-02, -2.09776190E-05,
+                       1.43058940E-08, -3.79582054E-12, -1.50967556E+04,
+                      -2.89197943E+00])))
 
 species(name=&#34;TS1_NH3(T)&#34;, atoms=&#34;N:1 H:3&#34;, size=1.0,
-        thermo=(NASA([298.0, 451.67346938775506],
-                     [ 4.96418515E-02,  2.15674671E-02, -2.75604959E-05,
-                       2.23225323E-08, -8.79255935E-12, -2.50469914E+03,
-                      -1.46480767E+00]),
-                NASA([451.67346938775506, 800.0], 
-                     [ 5.21221040E-02,  2.11615812E-02, -2.49542203E-05,
-                       1.66204937E-08, -4.59897868E-12, -2.50090675E+03,
-                      -1.43098814E+00])))
+        thermo=(NASA([300.0, 671.4285714285714],
+                     [ 1.67183313E-01,  2.03299804E-02, -2.27157893E-05,
+                       1.39605519E-08, -3.42136891E-12, -2.51362550E+03,
+                      -1.91775763E+00]),
+                NASA([671.4285714285714, 1000.0], 
+                     [ 8.08256077E-01,  1.71614234E-02, -1.70222108E-05,
+                       9.63265382E-09, -2.29112023E-12, -2.61525719E+03,
+                      -4.86743569E+00])))
 
 species(name=&#34;TS2_NH2(T)&#34;, atoms=&#34;N:1 H:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 554.1224489795918],
-                     [-2.58881424E+00,  3.43781302E-02, -5.87419101E-05,
-                       5.18321984E-08, -1.87340797E-11, -5.75828326E+03,
-                       8.95651588E+00]),
-                NASA([554.1224489795918, 800.0], 
-                     [-1.48538501E+00,  2.67287608E-02, -3.86606417E-05,
-                       2.81558194E-08, -8.15140597E-12, -5.88676392E+03,
-                       4.23478570E+00])))
+        thermo=(NASA([300.0, 628.5714285714287],
+                     [-2.54626149E+00,  3.39621837E-02, -5.72412569E-05,
+                       4.94632472E-08, -1.73527547E-11, -5.76170702E+03,
+                       8.78959011E+00]),
+                NASA([628.5714285714287, 1000.0], 
+                     [-2.29397518E-01,  1.98824970E-02, -2.46970340E-05,
+                       1.55243728E-08, -3.87491099E-12, -6.07066916E+03,
+                      -1.43448221E+00])))
 
 species(name=&#34;TS3_NH(T)&#34;, atoms=&#34;N:1 H:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 482.40816326530614],
-                     [-1.80701218E+00,  3.07479132E-02, -6.96816870E-05,
-                       8.30020912E-08, -4.08170225E-11, -2.37120889E+03,
-                       5.69776360E+00]),
-                NASA([482.40816326530614, 800.0], 
-                     [-1.24242592E-01,  1.65859456E-02, -2.43704704E-05,
-                       1.77594067E-08, -5.19878424E-12, -2.53350782E+03,
-                      -1.18098922E+00])))
+        thermo=(NASA([300.0, 542.8571428571429],
+                     [-1.55032579E+00,  2.80568482E-02, -5.92044647E-05,
+                       6.50466420E-08, -2.93863334E-11, -2.39009655E+03,
+                       4.70877084E+00]),
+                NASA([542.8571428571429, 1000.0], 
+                     [ 4.36775007E-01,  1.32992049E-02, -1.71938139E-05,
+                       1.08359913E-08, -2.70829956E-12, -2.60912494E+03,
+                      -3.67094273E+00])))
 
 species(name=&#34;TS4_N2(T)&#34;, atoms=&#34;N:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 482.40816326530614],
-                     [-1.75107618E+00,  4.12189598E-02, -1.09828935E-04,
-                       1.41320046E-07, -7.17404084E-11,  2.18956564E+04,
-                       4.82385770E+00]),
-                NASA([482.40816326530614, 800.0], 
-                     [ 1.52431744E+00,  1.40315985E-02, -2.40821843E-05,
-                       1.96281604E-08, -6.24114074E-12,  2.15756709E+04,
-                      -8.60900953E+00])))
+        thermo=(NASA([300.0, 528.5714285714286],
+                     [-1.42618300E+00,  3.77938301E-02, -9.64146781E-05,
+                       1.18187538E-07, -5.69177930E-11,  2.18726262E+04,
+                       3.57501908E+00]),
+                NASA([528.5714285714286, 1000.0], 
+                     [ 2.32431089E+00,  9.28279571E-03, -1.35835546E-05,
+                       9.38082335E-09, -2.51420502E-12,  2.14700072E+04,
+                      -1.21477192E+01])))
 
 species(name=&#34;RU(T)&#34;, atoms=&#34;Ru:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 554.1224489795918],
+        thermo=(NASA([300.0, 657.1428571428571],
                      [ 0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00]),
-                NASA([554.1224489795918, 800.0], 
+                NASA([657.1428571428571, 1000.0], 
                      [ 0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00])))
 
 species(name=&#34;N2(S)&#34;, atoms=&#34;N:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 492.65306122448976],
-                     [-2.61113029E+00,  4.30280784E-02, -1.00995865E-04,
-                       1.19786985E-07, -5.75841652E-11, -8.73636880E+03,
-                       8.24537861E+00]),
-                NASA([492.65306122448976, 800.0], 
-                     [ 7.86915518E-02,  2.11483916E-02, -3.33140389E-05,
-                       2.54979807E-08, -7.72804711E-12, -9.00472791E+03,
-                      -2.84148395E+00])))
+        thermo=(NASA([300.0, 542.8571428571429],
+                     [-2.33663547E+00,  4.01661399E-02, -8.99200036E-05,
+                       1.00928481E-07, -4.56623083E-11, -8.75645553E+03,
+                       7.18667587E+00]),
+                NASA([542.8571428571429, 1000.0], 
+                     [ 1.00403006E+00,  1.57327558E-02, -2.15006874E-05,
+                       1.41126959E-08, -3.63653615E-12, -9.12965945E+03,
+                      -6.94944717E+00])))
 
 species(name=&#34;N(S)&#34;, atoms=&#34;N:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 502.8979591836735],
-                     [-2.74170137E+00,  3.09262020E-02, -7.40012939E-05,
-                       8.66964232E-08, -4.04996423E-11, -1.22881492E+04,
-                       9.99157160E+00]),
-                NASA([502.8979591836735, 800.0], 
-                     [-5.50172452E-01,  1.37232473E-02, -2.27404363E-05,
-                       1.79947600E-08, -5.57731485E-12, -1.25142150E+04,
-                       8.82855257E-01])))
+        thermo=(NASA([300.0, 557.1428571428571],
+                     [-2.58498746E+00,  2.93109426E-02, -6.78276899E-05,
+                       7.63252496E-08, -3.40368127E-11, -1.22998155E+04,
+                       9.38530237E+00]),
+                NASA([557.1428571428571, 1000.0], 
+                     [ 2.18126819E-01,  9.27351107E-03, -1.31269469E-05,
+                       8.81076124E-09, -2.30321357E-12, -1.26194040E+04,
+                      -2.53674148E+00])))
 
 species(name=&#34;H(S)&#34;, atoms=&#34;H:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 461.9183673469388],
-                     [-1.41307531E+00,  1.00687718E-02,  1.09758988E-06,
-                      -2.55216914E-08,  2.17566538E-11, -6.12991563E+03,
-                       5.64663049E+00]),
-                NASA([461.9183673469388, 800.0], 
-                     [-2.11302416E+00,  1.72572991E-02, -2.60046478E-05,
-                       1.92388088E-08, -5.68363784E-12, -6.07714366E+03,
-                       8.35375655E+00])))
+        thermo=(NASA([300.0, 557.1428571428571],
+                     [-1.80079590E+00,  1.41608858E-02, -1.49548712E-05,
+                       2.22205000E-09,  3.92668860E-12, -6.10089659E+03,
+                       7.13912887E+00]),
+                NASA([557.1428571428571, 1000.0], 
+                     [-1.45370074E+00,  1.34229326E-02, -1.76861908E-05,
+                       1.12587751E-08, -2.82681062E-12, -6.16746227E+03,
+                       5.42130351E+00])))
 
 species(name=&#34;NH3(S)&#34;, atoms=&#34;N:1 H:3&#34;, size=1.0,
-        thermo=(NASA([298.0, 461.9183673469388],
-                     [ 1.14054296E+00,  2.11528629E-02, -3.94113500E-05,
-                       5.04119756E-08, -2.79498362E-11, -1.71372331E+04,
-                      -4.81930148E+00]),
-                NASA([461.9183673469388, 800.0], 
-                     [ 1.66079448E+00,  1.53778585E-02, -1.64435153E-05,
-                       1.09730315E-08, -3.04769119E-12, -1.71718653E+04,
-                      -6.78171189E+00])))
+        thermo=(NASA([300.0, 428.57142857142856],
+                     [ 9.76073327E-01,  2.29997091E-02, -4.71441123E-05,
+                       6.47201892E-08, -3.78220257E-11, -1.71183277E+04,
+                      -4.18414593E+00]),
+                NASA([428.57142857142856, 1000.0], 
+                     [ 1.70924374E+00,  1.50877297E-02, -1.58065126E-05,
+                       1.03659268E-08, -2.83601968E-12, -1.71709469E+04,
+                      -6.98345489E+00])))
 
 species(name=&#34;NH2(S)&#34;, atoms=&#34;N:1 H:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 513.1428571428571],
-                     [-2.26986613E+00,  3.69783572E-02, -7.37914233E-05,
-                       7.69637123E-08, -3.26409225E-11, -1.82944702E+04,
-                       7.98342065E+00]),
-                NASA([513.1428571428571, 800.0], 
-                     [-5.94719805E-01,  2.42276179E-02, -3.69256529E-05,
-                       2.89797307E-08, -8.92777368E-12, -1.84727350E+04,
-                       9.69000209E-01])))
+        thermo=(NASA([300.0, 585.7142857142858],
+                     [-2.13484631E+00,  3.56104434E-02, -6.86594530E-05,
+                       6.85121902E-08, -2.74842519E-11, -1.83049003E+04,
+                       7.45851009E+00]),
+                NASA([585.7142857142858, 1000.0], 
+                     [ 6.88429474E-01,  1.69826605E-02, -2.16460100E-05,
+                       1.47118317E-08, -3.94964423E-12, -1.86537029E+04,
+                      -4.77641769E+00])))
 
 species(name=&#34;NH(S)&#34;, atoms=&#34;N:1 H:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 533.6326530612245],
-                     [-3.67269046E+00,  4.12908126E-02, -8.83354768E-05,
-                       9.30708814E-08, -3.90095812E-11, -1.35450272E+04,
-                       1.34062488E+01]),
-                NASA([533.6326530612245, 800.0], 
-                     [-1.16677718E+00,  2.29677564E-02, -3.75818066E-05,
-                       2.99430978E-08, -9.26414211E-12, -1.38218900E+04,
-                       2.81582251E+00])))
+        thermo=(NASA([300.0, 585.7142857142858],
+                     [-3.58576772E+00,  4.04182472E-02, -8.50952522E-05,
+                       8.77947790E-08, -3.58300305E-11, -1.35517435E+04,
+                       1.30676542E+01]),
+                NASA([585.7142857142858, 1000.0], 
+                     [ 2.32508478E-01,  1.50840526E-02, -2.09916278E-05,
+                       1.44863139E-08, -3.88362426E-12, -1.40196424E+04,
+                      -3.45256448E+00])))
 
 species(name=&#34;TS1_NH3(S)&#34;, atoms=&#34;N:1 H:3&#34;, size=1.0,
-        thermo=(NASA([298.0, 461.9183673469388],
-                     [-2.15711800E-01,  2.23671232E-02, -2.90792507E-05,
-                       2.46217683E-08, -1.04098955E-11, -8.98514743E+03,
-                       1.18397898E-01]),
-                NASA([461.9183673469388, 800.0], 
-                     [-2.41469187E-01,  2.19587885E-02, -2.57139612E-05,
-                       1.67995163E-08, -4.53990713E-12, -8.97590560E+03,
-                       2.96197860E-01])))
+        thermo=(NASA([300.0, 671.4285714285714],
+                     [-3.73525885E-02,  2.05053911E-02, -2.18577672E-05,
+                       1.22803574E-08, -2.56575606E-12, -8.99877451E+03,
+                      -5.70339124E-01]),
+                NASA([671.4285714285714, 1000.0], 
+                     [ 4.55369167E-01,  1.83130943E-02, -1.85714440E-05,
+                       1.05884839E-08, -2.51704274E-12, -9.08238782E+03,
+                      -2.87822936E+00])))
 
 species(name=&#34;TS2_NH2(S)&#34;, atoms=&#34;N:1 H:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 482.40816326530614],
-                     [-1.29806321E+00,  3.33296291E-02, -7.49082969E-05,
-                       9.09398161E-08, -4.50950303E-11, -5.20663944E+03,
-                       3.68685183E+00]),
-                NASA([482.40816326530614, 800.0], 
-                     [ 6.60409671E-01,  1.69840135E-02, -2.30811277E-05,
-                       1.70174943E-08, -5.12349549E-12, -5.39692076E+03,
-                      -4.33432757E+00])))
+        thermo=(NASA([300.0, 542.8571428571429],
+                     [-1.03686638E+00,  3.05922775E-02, -6.42552305E-05,
+                       7.26912883E-08, -3.34835201E-11, -5.22580553E+03,
+                       2.68048729E+00]),
+                NASA([542.8571428571429, 1000.0], 
+                     [ 1.26116093E+00,  1.34629082E-02, -1.53891506E-05,
+                       9.59337411E-09, -2.45157713E-12, -5.47782545E+03,
+                      -7.00031080E+00])))
 
 species(name=&#34;TS3_NH(S)&#34;, atoms=&#34;N:1 H:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 482.40816326530614],
-                     [-3.19849368E+00,  4.08355096E-02, -1.04789990E-04,
-                       1.36204946E-07, -7.03581093E-11, -3.95925686E+03,
-                       1.12114765E+01]),
-                NASA([482.40816326530614, 800.0], 
-                     [ 2.10817763E-02,  1.38454046E-02, -1.89560044E-05,
-                       1.35775840E-08, -4.02213306E-12, -4.27023844E+03,
-                      -1.95813214E+00])))
+        thermo=(NASA([300.0, 514.2857142857143],
+                     [-2.97096518E+00,  3.84224932E-02, -9.52792006E-05,
+                       1.19692656E-07, -5.97020431E-11, -3.97417870E+03,
+                       1.03399925E+01]),
+                NASA([514.2857142857143, 1000.0], 
+                     [ 4.63947577E-01,  1.11845845E-02, -1.30068221E-05,
+                       7.70966762E-09, -1.86716695E-12, -4.32665579E+03,
+                      -3.90946846E+00])))
 
 species(name=&#34;TS4_N2(S)&#34;, atoms=&#34;N:2&#34;, size=1.0,
-        thermo=(NASA([298.0, 492.65306122448976],
-                     [-4.02990616E+00,  5.10850629E-02, -1.27788869E-04,
-                       1.55874918E-07, -7.55559553E-11, -2.23209290E+03,
-                       1.41653650E+01]),
-                NASA([492.65306122448976, 800.0], 
-                     [-2.46781062E-01,  2.06356563E-02, -3.46960019E-05,
-                       2.78040159E-08, -8.71443394E-12, -2.61299814E+03,
-                      -1.46528582E+00])))
+        thermo=(NASA([300.0, 542.8571428571429],
+                     [-3.71745094E+00,  4.78281768E-02, -1.15188567E-04,
+                       1.34429016E-07, -6.20044384E-11, -2.25482568E+03,
+                       1.29604008E+01]),
+                NASA([542.8571428571429, 1000.0], 
+                     [ 9.06288002E-01,  1.38764582E-02, -1.99273178E-05,
+                       1.35458084E-08, -3.58129564E-12, -2.76838492E+03,
+                      -6.58236000E+00])))
 
 species(name=&#34;RU(S)&#34;, atoms=&#34;Ru:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 554.1224489795918],
+        thermo=(NASA([300.0, 657.1428571428571],
                      [ 0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00]),
-                NASA([554.1224489795918, 800.0], 
+                NASA([657.1428571428571, 1000.0], 
                      [ 0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00])))
 
 species(name=&#34;RU(B)&#34;, atoms=&#34;Ru:1&#34;, size=1.0,
-        thermo=(NASA([298.0, 554.1224489795918],
+        thermo=(NASA([300.0, 657.1428571428571],
                      [ 0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00]),
-                NASA([554.1224489795918, 800.0], 
+                NASA([657.1428571428571, 1000.0], 
                      [ 0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00,  0.00000000E+00,  0.00000000E+00,
                        0.00000000E+00])))
@@ -13093,75 +15427,75 @@ species(name=&#34;Ar&#34;, atoms=&#34;Ar:1&#34;,
                          1.09213100E-08, -3.66137100E-08, -6.19735000E+00,
                          1.79999000E+02]))
 
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # LATERAL INTERACTIONS
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 lateral_interaction(&#34;N(T) N(T)&#34;, [-52.6], [0], id=&#34;0000&#34;)
 lateral_interaction(&#34;N(T) H(T)&#34;, [-17.7], [0], id=&#34;0001&#34;)
 lateral_interaction(&#34;H(T) N(T)&#34;, [-17.7], [0], id=&#34;0002&#34;)
-lateral_interaction(&#34;H(T) H(T)&#34;, [-3.], [0], id=&#34;0003&#34;)
+lateral_interaction(&#34;H(T) H(T)&#34;, [-3.0000000000000004], [0], id=&#34;0003&#34;)
 lateral_interaction(&#34;NH2(T) N(T)&#34;, [-20.7], [0], id=&#34;0004&#34;)
 lateral_interaction(&#34;N(S) N(S)&#34;, [-52.6], [0], id=&#34;0005&#34;)
 lateral_interaction(&#34;N(S) H(S)&#34;, [-17.7], [0], id=&#34;0006&#34;)
 lateral_interaction(&#34;H(S) N(S)&#34;, [-17.7], [0], id=&#34;0007&#34;)
-lateral_interaction(&#34;H(S) H(S)&#34;, [-3.], [0], id=&#34;0008&#34;)
+lateral_interaction(&#34;H(S) H(S)&#34;, [-3.0000000000000004], [0], id=&#34;0008&#34;)
 lateral_interaction(&#34;NH2(S) N(S)&#34;, [-20.7], [0], id=&#34;0009&#34;)
 
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # REACTION OPTIONS
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 enable_motz_wise()
 
 
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # REACTIONS
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 surface_reaction(&#34;H2 + 2 RU(T) &lt;=&gt; 2 H(T) + 2 RU(B)&#34;,
-                 stick( 5.00000e-01, 1,  0.00000e+00),
+                 stick( 5.00000e-01, 0,  0.00000e+00),
                  id=&#34;0000&#34;)
 surface_reaction(&#34;N2 + RU(T) &lt;=&gt; N2(T) + RU(B)&#34;,
-                 stick( 5.00000e-01, 1,  0.00000e+00),
+                 stick( 5.00000e-01, 0,  0.00000e+00),
                  id=&#34;0001&#34;)
 surface_reaction(&#34;NH3 + RU(T) &lt;=&gt; NH3(T) + RU(B)&#34;,
-                 stick( 5.00000e-01, 1,  0.00000e+00),
+                 stick( 5.00000e-01, 0,  0.00000e+00),
                  id=&#34;0002&#34;)
 surface_reaction(&#34;NH3(T) + RU(T) &lt;=&gt; NH2(T) + H(T) + RU(B)&#34;,
-                 [ 9.61497e+18, 1,  1.76804e+01],
+                 [ 9.61497e+18, 1,  1.76713e+01],
                  id=&#34;NH2-H_cle_0001&#34;)
 surface_reaction(&#34;NH2(T) + RU(T) &lt;=&gt; NH(T) + H(T) + RU(B)&#34;,
-                 [ 9.61497e+18, 1,  1.01500e+01],
+                 [ 9.61497e+18, 1,  1.01501e+01],
                  id=&#34;NH-H_cle_0001&#34;)
 surface_reaction(&#34;NH(T) + RU(T) &lt;=&gt; N(T) + H(T) + RU(B)&#34;,
-                 [ 9.61497e+18, 1,  2.20771e+01],
+                 [ 9.61497e+18, 1,  2.20797e+01],
                  id=&#34;N-H_cle_0001&#34;)
 surface_reaction(&#34;2 N(T) + RU(B) &lt;=&gt; N2(T) + RU(T)&#34;,
-                 [ 9.61497e+18, 1,  8.64725e+01],
+                 [ 9.61497e+18, 1,  8.64755e+01],
                  id=&#34;0003&#34;)
 surface_reaction(&#34;H2 + 2 RU(S) &lt;=&gt; 2 H(S) + 2 RU(B)&#34;,
-                 stick( 5.00000e-01, 1,  0.00000e+00),
+                 stick( 5.00000e-01, 0,  0.00000e+00),
                  id=&#34;0004&#34;)
 surface_reaction(&#34;N2 + RU(S) &lt;=&gt; N2(S) + RU(B)&#34;,
-                 stick( 5.00000e-01, 1,  0.00000e+00),
+                 stick( 5.00000e-01, 0,  0.00000e+00),
                  id=&#34;0005&#34;)
 surface_reaction(&#34;NH3 + RU(S) &lt;=&gt; NH3(S) + RU(B)&#34;,
-                 stick( 5.00000e-01, 1,  0.00000e+00),
+                 stick( 5.00000e-01, 0,  0.00000e+00),
                  id=&#34;0006&#34;)
 surface_reaction(&#34;NH3(S) + RU(S) &lt;=&gt; NH2(S) + H(S) + RU(B)&#34;,
-                 [ 4.69452e+19, 1,  1.26026e+01],
+                 [ 4.69452e+19, 1,  1.25926e+01],
                  id=&#34;NH2-H_cle_0002&#34;)
 surface_reaction(&#34;NH2(S) + RU(S) &lt;=&gt; NH(S) + H(S) + RU(B)&#34;,
-                 [ 4.69452e+19, 1,  1.80120e+01],
+                 [ 4.69452e+19, 1,  1.80122e+01],
                  id=&#34;NH-H_cle_0002&#34;)
 surface_reaction(&#34;N(S) + H(S) + RU(B) &lt;=&gt; NH(S) + RU(S)&#34;,
-                 [ 4.69452e+19, 1,  2.60809e+01],
+                 [ 4.69452e+19, 1,  2.60807e+01],
                  id=&#34;N-H_syn_0001&#34;)
 surface_reaction(&#34;2 N(S) + RU(B) &lt;=&gt; N2(S) + RU(S)&#34;,
-                 [ 4.69452e+19, 1,  4.45992e+01],
+                 [ 4.69452e+19, 1,  4.45995e+01],
                  id=&#34;0007&#34;)
 
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # BEP Relationships
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 bep(id=&#34;NH2-H&#34;,
     slope=0.71,
     intercept=23.69,

@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Excel to Empirical
@@ -125,4 +125,10 @@ print(thermdat_str)
 fig, ax = species[0].plot_statmech_and_empirical(Cp_units='J/mol/K', H_units='kJ/mol',
                                                  S_units='J/mol/K', G_units='kJ/mol')
 fig.set_size_inches((10, 8))
+
+
+# In[ ]:
+
+
+
 
