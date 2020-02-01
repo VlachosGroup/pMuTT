@@ -133,7 +133,7 @@ Special Thanks
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pmutt/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`see documentation for more thorough instructions`: https://vlachosgroup.github.io/pMuTT/install.html
-.. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples.html
+.. _`examples using the code`: https://vlachosgroup.github.io/pMuTT/examples_jupyter/examples.html
 .. _`Issues page`: https://github.com/VlachosGroup/pMuTT/issues
 .. _`pull request`: https://github.com/VlachosGroup/pMuTT/pulls
 .. _`unit tests`: https://vlachosgroup.github.io/pMuTT/install.html#running-unit-tests
