@@ -43,6 +43,9 @@ may use the high-resolution logos below.
 Cited By
 --------
 
+1. Wang, C., Wittreich, G.R., Lin, C. et al. Catal Lett (2019). https://doi.org/10.1007/s10562-019-03027-8
+
+
 If you have published work using pMuTT and would like to be featured here,
 please post an issue with the |Publication_label| tag.
 

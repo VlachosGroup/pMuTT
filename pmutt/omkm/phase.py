@@ -2,6 +2,7 @@ from pmutt import constants as c
 from pmutt.cantera import _get_range_CTI
 import pmutt.cantera.phase as phase_cantera
 
+
 class IdealGas(phase_cantera.IdealGas):
     """OpenMKM implementation of the ideal gas phase. Currently there are no
     differences between this class and :class:`~pmutt.cantera.phase.IdealGas`
@@ -48,12 +49,26 @@ class InteractingInterface(phase_cantera.Phase):
             Currently not supported. Specify special options to the phase.
             Default is None.
     """
-    def __init__(self, name, species=[], site_density=None, phases=None,
-                 initial_state=None, kinetics=None, reactions=None,
-                 transport=None, interactions=None, options=None, note=None):
-        super().__init__(name=name, species=species, kinetics=kinetics,
-                         transport=transport, options=options, note=note,
-                         reactions=reactions, initial_state=initial_state)
+    def __init__(self,
+                 name,
+                 species=[],
+                 site_density=None,
+                 phases=None,
+                 initial_state=None,
+                 kinetics=None,
+                 reactions=None,
+                 transport=None,
+                 interactions=None,
+                 options=None,
+                 note=None):
+        super().__init__(name=name,
+                         species=species,
+                         kinetics=kinetics,
+                         transport=transport,
+                         options=options,
+                         note=note,
+                         reactions=reactions,
+                         initial_state=initial_state)
         self.site_density = site_density
         self.phases = phases
         self.interactions = interactions
@@ -72,18 +87,20 @@ class InteractingInterface(phase_cantera.Phase):
                     continue
                 # Skip if the reaction does not have a BEP
                 if bep is None:
-                    continue 
+                    continue
                 # Skip if this is not a unique BEP
-                if bep in beps:
+                if bep.name in beps:
                     continue
                 # Append if this is a valid BEP
                 beps.append(bep.name)
         return beps
 
-
-
-    def to_CTI(self, max_line_len=80, quantity_unit='molec', length_unit='cm',
-               units=None, delimiter='_'):
+    def to_CTI(self,
+               max_line_len=80,
+               quantity_unit='molec',
+               length_unit='cm',
+               units=None,
+               delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -127,18 +144,18 @@ class InteractingInterface(phase_cantera.Phase):
                    '                      species={},\n'
                    '                      phases={},\n'
                    '                      site_density={},\n'.format(
-                       phase_cantera.obj_to_CTI(
-                                self.name, line_len=max_line_len-27,
-                                max_line_len=max_line_len-28),
-                       phase_cantera.obj_to_CTI(
-                                self.elements, line_len=max_line_len-31,
-                                max_line_len=max_line_len),
-                       phase_cantera.obj_to_CTI(
-                                species_names, line_len=max_line_len-30,
-                                max_line_len=max_line_len),
-                       phase_cantera.obj_to_CTI(
-                                phases_names, line_len=max_line_len-29,
-                                max_line_len=max_line_len),
+                       phase_cantera.obj_to_CTI(self.name,
+                                                line_len=max_line_len - 27,
+                                                max_line_len=max_line_len - 28),
+                       phase_cantera.obj_to_CTI(self.elements,
+                                                line_len=max_line_len - 31,
+                                                max_line_len=max_line_len),
+                       phase_cantera.obj_to_CTI(species_names,
+                                                line_len=max_line_len - 30,
+                                                max_line_len=max_line_len),
+                       phase_cantera.obj_to_CTI(phases_names,
+                                                line_len=max_line_len - 29,
+                                                max_line_len=max_line_len),
                        site_den))
         # Fields with ranges
         range_fields = ('interactions', 'reactions')
@@ -148,9 +165,11 @@ class InteractingInterface(phase_cantera.Phase):
             if val is None:
                 continue
             cti_str += ('                      {}={},\n'
-                        ''.format(range_field, 
-                                  _get_range_CTI(objs=val, parent_obj=self,
-                                                 delimiter=delimiter)))
+                        ''.format(
+                            range_field,
+                            _get_range_CTI(objs=val,
+                                           parent_obj=self,
+                                           delimiter=delimiter)))
 
         # Add optional fields
         optional_fields = ('beps', 'transport', 'options', 'note')
@@ -164,10 +183,11 @@ class InteractingInterface(phase_cantera.Phase):
                 continue
 
             cti_str += '                      {}={},\n'.format(
-                    field,
-                    phase_cantera.obj_to_CTI(
-                            val, max_line_len=max_line_len,
-                            line_len=max_line_len-len(field)-23))
+                field,
+                phase_cantera.obj_to_CTI(val,
+                                         max_line_len=max_line_len,
+                                         line_len=max_line_len - len(field) -
+                                         23))
 
         # Terminate the string
         cti_str = '{})\n'.format(cti_str[:-2])

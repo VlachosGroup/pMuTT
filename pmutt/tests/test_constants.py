@@ -14,13 +14,13 @@ from pmutt import constants as c
 
 
 class TestConstants(unittest.TestCase):
-
     def setUp(self):
         # Read excel sheet with answers
         os.chdir(os.path.dirname(__file__))
         self.ans = pd.read_excel('test_constants.xlsx',
                                  sheet_name='ans',
-                                 index_col=0, header=0)
+                                 index_col=0,
+                                 header=0)
 
     def test_R(self):
         # Test R for all units
@@ -47,12 +47,16 @@ class TestConstants(unittest.TestCase):
     def test_h(self):
         # Test h for all units (bar=False)
         self.assertAlmostEqual(c.h('J s', bar=False), self.ans.at['test_h', 0])
-        self.assertAlmostEqual(c.h('kJ s', bar=False), self.ans.at['test_h', 1])
-        self.assertAlmostEqual(c.h('eV s', bar=False), self.ans.at['test_h', 2])
-        self.assertAlmostEqual(c.h('Eh s', bar=False), self.ans.at['test_h', 3])
-        self.assertAlmostEqual(c.h('Ha s', bar=False), self.ans.at['test_h', 4])
+        self.assertAlmostEqual(c.h('kJ s', bar=False), self.ans.at['test_h',
+                                                                   1])
+        self.assertAlmostEqual(c.h('eV s', bar=False), self.ans.at['test_h',
+                                                                   2])
+        self.assertAlmostEqual(c.h('Eh s', bar=False), self.ans.at['test_h',
+                                                                   3])
+        self.assertAlmostEqual(c.h('Ha s', bar=False), self.ans.at['test_h',
+                                                                   4])
         # Test h for all units (bar=True)
-        self.assertAlmostEqual(c.h('J s', bar=True), self.ans.at['test_h',5])
+        self.assertAlmostEqual(c.h('J s', bar=True), self.ans.at['test_h', 5])
         self.assertAlmostEqual(c.h('kJ s', bar=True), self.ans.at['test_h', 6])
         self.assertAlmostEqual(c.h('eV s', bar=True), self.ans.at['test_h', 7])
         self.assertAlmostEqual(c.h('Eh s', bar=True), self.ans.at['test_h', 8])
@@ -136,33 +140,45 @@ class TestConstants(unittest.TestCase):
 
     def test_convert_unit(self):
         # Test all combinations for temperature conversion
-        self.assertAlmostEqual(c.convert_unit(c.T0('K'), initial='K', final='C'),
-                               self.ans.at['test_convert_unit', 1])
-        self.assertAlmostEqual(c.convert_unit(c.T0('K'), initial='K', final='F'),
-                               self.ans.at['test_convert_unit', 2])
-        self.assertAlmostEqual(c.convert_unit(c.T0('K'), initial='K', final='R'),
-                               self.ans.at['test_convert_unit', 3])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('K'), initial='K', final='C'),
+            self.ans.at['test_convert_unit', 1])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('K'), initial='K', final='F'),
+            self.ans.at['test_convert_unit', 2])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('K'), initial='K', final='R'),
+            self.ans.at['test_convert_unit', 3])
 
-        self.assertAlmostEqual(c.convert_unit(c.T0('C'), initial='C', final='K'),
-                               self.ans.at['test_convert_unit', 0])
-        self.assertAlmostEqual(c.convert_unit(c.T0('C'), initial='C', final='F'),
-                               self.ans.at['test_convert_unit', 2])
-        self.assertAlmostEqual(c.convert_unit(c.T0('C'), initial='C', final='R'),
-                               self.ans.at['test_convert_unit', 3])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('C'), initial='C', final='K'),
+            self.ans.at['test_convert_unit', 0])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('C'), initial='C', final='F'),
+            self.ans.at['test_convert_unit', 2])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('C'), initial='C', final='R'),
+            self.ans.at['test_convert_unit', 3])
 
-        self.assertAlmostEqual(c.convert_unit(c.T0('F'), initial='F', final='K'),
-                               self.ans.at['test_convert_unit', 0])
-        self.assertAlmostEqual(c.convert_unit(c.T0('F'), initial='F', final='C'),
-                               self.ans.at['test_convert_unit', 1])
-        self.assertAlmostEqual(c.convert_unit(c.T0('F'), initial='F', final='R'),
-                               self.ans.at['test_convert_unit', 3])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('F'), initial='F', final='K'),
+            self.ans.at['test_convert_unit', 0])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('F'), initial='F', final='C'),
+            self.ans.at['test_convert_unit', 1])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('F'), initial='F', final='R'),
+            self.ans.at['test_convert_unit', 3])
 
-        self.assertAlmostEqual(c.convert_unit(c.T0('R'), initial='R', final='K'),
-                               self.ans.at['test_convert_unit', 0])
-        self.assertAlmostEqual(c.convert_unit(c.T0('R'), initial='R', final='C'),
-                               self.ans.at['test_convert_unit', 1])
-        self.assertAlmostEqual(c.convert_unit(c.T0('R'), initial='R', final='F'),
-                               self.ans.at['test_convert_unit', 2])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('R'), initial='R', final='K'),
+            self.ans.at['test_convert_unit', 0])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('R'), initial='R', final='C'),
+            self.ans.at['test_convert_unit', 1])
+        self.assertAlmostEqual(
+            c.convert_unit(c.T0('R'), initial='R', final='F'),
+            self.ans.at['test_convert_unit', 2])
 
         # Test a unit conversion with multiple-based units
         self.assertAlmostEqual(c.convert_unit(initial='m', final='cm'),
@@ -230,7 +246,7 @@ class TestConstants(unittest.TestCase):
     def test_wavenumber_to_inertia(self):
         self.assertAlmostEqual(c.wavenumber_to_inertia(810.),
                                self.ans.at['test_wavenumber_to_inertia', 0])
-    
+
     def test_wavenumber_to_temp(self):
         self.assertAlmostEqual(c.wavenumber_to_temp(810.),
                                self.ans.at['test_wavenumber_to_temp', 0])
@@ -259,6 +275,7 @@ class TestConstants(unittest.TestCase):
 
     # def test_einstein_to_debye(self):
     #     self.assertAlmostEqual(c.einstein_to_debye(173.28913505677), 215.)
+
 
 if __name__ == '__main__':
     unittest.main()

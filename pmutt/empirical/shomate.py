@@ -49,7 +49,13 @@ class Shomate(EmpiricalBase):
             by :class:`~pmutt.constants.R` (e.g. J/mol/K, cal/mol/K, eV/K).
             Default is J/mol/K.
     """
-    def __init__(self, name, T_low, T_high, a, units='J/mol/K', n_sites=None,
+    def __init__(self,
+                 name,
+                 T_low,
+                 T_high,
+                 a,
+                 units='J/mol/K',
+                 n_sites=None,
                  **kwargs):
         super().__init__(name=name, **kwargs)
         self.T_low = T_low
@@ -61,7 +67,7 @@ class Shomate(EmpiricalBase):
     @property
     def units(self):
         return self._units
-    
+
     @units.setter
     def units(self, val):
         try:
@@ -101,6 +107,7 @@ class Shomate(EmpiricalBase):
         if not _is_iterable(T):
             T = [T]
         T = np.array(T)
+        self._check_T(T)
 
         # Calculate pure properties
         CpoR = get_shomate_CpoR(a=self.a, T=T, units=self.units)
@@ -111,7 +118,8 @@ class Shomate(EmpiricalBase):
                                          raise_error=raise_error,
                                          raise_warning=raise_warning,
                                          default_value=0.,
-                                         T=T_i, **kwargs)
+                                         T=T_i,
+                                         **kwargs)
         # Add mixing quantity in appropriate format
         CpoR = CpoR + CpoR_mix
         if len(T) == 1:
@@ -145,8 +153,10 @@ class Shomate(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_CpoR(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*R_adj
+        return self.get_CpoR(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * R_adj
 
     def get_HoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless enthalpy
@@ -175,6 +185,7 @@ class Shomate(EmpiricalBase):
         if not _is_iterable(T):
             T = [T]
         T = np.array(T)
+        self._check_T(T)
 
         # Calculate pure properties
         HoRT = get_shomate_HoRT(a=self.a, T=T, units=self.units)
@@ -185,7 +196,8 @@ class Shomate(EmpiricalBase):
                                          raise_error=raise_error,
                                          raise_warning=raise_warning,
                                          default_value=0.,
-                                         T=T_i, **kwargs)
+                                         T=T_i,
+                                         **kwargs)
         # Add mixing quantity in appropriate format
         HoRT = HoRT + HoRT_mix
         if len(T) == 1:
@@ -220,8 +232,10 @@ class Shomate(EmpiricalBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_HoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*T*R_adj
+        return self.get_HoRT(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * T * R_adj
 
     def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless entropy
@@ -250,6 +264,7 @@ class Shomate(EmpiricalBase):
         if not _is_iterable(T):
             T = [T]
         T = np.array(T)
+        self._check_T(T)
 
         # Calculate pure properties
         SoR = get_shomate_SoR(a=self.a, T=T, units=self.units)
@@ -260,7 +275,8 @@ class Shomate(EmpiricalBase):
                                         raise_error=raise_error,
                                         raise_warning=raise_warning,
                                         default_value=0.,
-                                        T=T_i, **kwargs)
+                                        T=T_i,
+                                        **kwargs)
         SoR = SoR + SoR_mix
         # If only one T specified, converted from (1,) numpy array to float
         if len(T) == 1:
@@ -294,7 +310,7 @@ class Shomate(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_SoR(T=T)*R_adj
+        return self.get_SoR(T=T) * R_adj
 
     def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
         """Calculate the dimensionless Gibbs free energy
@@ -352,11 +368,20 @@ class Shomate(EmpiricalBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_GoRT(T=T, raise_error=raise_error,
-                             raise_warning=raise_warning, **kwargs)*T*R_adj
+        return self.get_GoRT(T=T,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             **kwargs) * T * R_adj
 
     @classmethod
-    def from_data(cls, name, T, CpoR, T_ref, HoRT_ref, SoR_ref, units='J/mol/K',
+    def from_data(cls,
+                  name,
+                  T,
+                  CpoR,
+                  T_ref,
+                  HoRT_ref,
+                  SoR_ref,
+                  units='J/mol/K',
                   **kwargs):
         """Calculates the Shomate polynomials using thermodynamic data
 
@@ -390,12 +415,22 @@ class Shomate(EmpiricalBase):
         a = _fit_CpoR(T=T, CpoR=CpoR, units=units)
         a = _fit_HoRT(T_ref=T_ref, HoRT_ref=HoRT_ref, a=a, units=units)
         a = _fit_SoR(T_ref=T_ref, SoR_ref=SoR_ref, a=a, units=units)
-        return cls(name=name, T_low=T_low, T_high=T_high, a=a, units=units,
+        return cls(name=name,
+                   T_low=T_low,
+                   T_high=T_high,
+                   a=a,
+                   units=units,
                    **kwargs)
 
     @classmethod
-    def from_statmech(cls, name, statmech_model, T_low, T_high,
-                      references=None, elements=None, **kwargs):
+    def from_statmech(cls,
+                      name,
+                      statmech_model,
+                      T_low,
+                      T_high,
+                      references=None,
+                      elements=None,
+                      **kwargs):
         """Calculates the Shomate polynomial using statistical mechanic models.
         Deprecated as of Version 1.2.13. Please use ``from_model`` instead.
 
@@ -424,8 +459,15 @@ class Shomate(EmpiricalBase):
         raise RuntimeError(err_msg)
 
     @classmethod
-    def from_model(cls, model, name=None, T_low=None, T_high=None,
-                   elements=None, n_T=50, units='J/mol/K', **kwargs):
+    def from_model(cls,
+                   model,
+                   name=None,
+                   T_low=None,
+                   T_high=None,
+                   elements=None,
+                   n_T=50,
+                   units='J/mol/K',
+                   **kwargs):
         """Calculates the NASA polynomials using the model passed
 
         Parameters
@@ -470,7 +512,7 @@ class Shomate(EmpiricalBase):
                 name = model.name
             except AttributeError:
                 err_msg = ('Name must either be passed to from_model directly '
-                           'or be an attribute of model.')                      
+                           'or be an attribute of model.')
                 raise AttributeError(err_msg)
         if T_low is None:
             try:
@@ -491,20 +533,27 @@ class Shomate(EmpiricalBase):
                 elements = model.elements
             except AttributeError:
                 pass
-        # Check if inputted T_low and T_high are outside model's T_low and 
+        # Check if inputted T_low and T_high are outside model's T_low and
         # T_high range
         try:
-            if T_low < model.T_low:
-                warn_msg = ('Inputted T_low is lower than model T_low. Fitted '
-                            'empirical object may not be valid.')
-                warn(warn_msg, UserWarning)
+            model.T_low
         except AttributeError:
             pass
+        else:
+            if T_low < model.T_low:
+                warn_msg = ('Inputted T_low ({} K) is lower than model '
+                            'T_low ({} K). Fitted empirical object may not be '
+                            'valid.'
+                            ''.format(T_low, model.T_low))
+                warn(warn_msg, UserWarning)
+
 
         try:
             if T_high > model.T_high:
-                warn_msg = ('Inputted T_high is higher than model T_high. '
-                            'Fitted empirical object may not be valid.')
+                warn_msg = ('Inputted T_high ({} K) is higher than model '
+                            'T_high ({} K). Fitted empirical object may not be '
+                            'valid.'
+                            ''.format(T_high, model.T_high))
                 warn(warn_msg, UserWarning)
         except AttributeError:
             pass
@@ -520,12 +569,18 @@ class Shomate(EmpiricalBase):
                 CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Generate enthalpy and entropy data
-        T_mean = (T_low+T_high)/2.
+        T_mean = (T_low + T_high) / 2.
         HoRT_ref = model.get_HoRT(T=T_mean)
         SoR_ref = model.get_SoR(T=T_mean)
-        return cls.from_data(name=name, T=T, CpoR=CpoR, T_ref=T_mean,
-                             HoRT_ref=HoRT_ref, SoR_ref=SoR_ref,
-                             model=model, elements=elements, units=units,
+        return cls.from_data(name=name,
+                             T=T,
+                             CpoR=CpoR,
+                             T_ref=T_mean,
+                             HoRT_ref=HoRT_ref,
+                             SoR_ref=SoR_ref,
+                             model=model,
+                             elements=elements,
+                             units=units,
                              **kwargs)
 
     def to_dict(self):
@@ -581,11 +636,23 @@ class Shomate(EmpiricalBase):
                    '                       [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}]))').format(
-                            self.name, obj_to_CTI(self.elements), size_str,
-                            self.T_low, self.T_high, self.a[0], self.a[1],
-                            self.a[2], self.a[3], self.a[4], self.a[5],
-                            self.a[6])                            
+                       self.name, obj_to_CTI(self.elements), size_str,
+                       self.T_low, self.T_high, self.a[0], self.a[1],
+                       self.a[2], self.a[3], self.a[4], self.a[5], self.a[6])
         return cti_str
+
+    def _check_T(self, T):
+        for T_i in T:
+            if T_i < self.T_low:
+                warn_msg = ('Requested temperature ({} K), below T_low ({} K)'
+                            'for Shomate object, {}'
+                            ''.format(T, self.T_low, self.name))
+                warn(warn_msg, RuntimeWarning)
+            elif T_i > self.T_high:
+                warn_msg = ('Requested temperature ({} K), above T_high ({} K)'
+                            'for Shomate object, {}'
+                            ''.format(T, self.T_high, self.name))
+                warn(warn_msg, RuntimeWarning)
 
 
 def _fit_CpoR(T, CpoR, units):
@@ -614,9 +681,8 @@ def _fit_CpoR(T, CpoR, units):
         return np.zeros(7)
     else:
         # Pass the unit set
-        adj_shomate_CpoR = lambda T, A, B, C, D, E: _shomate_CpoR(T=T, A=A, B=B,
-                                                                  C=C, D=D, E=E,
-                                                                  units=units)
+        adj_shomate_CpoR = lambda T, A, B, C, D, E: _shomate_CpoR(
+            T=T, A=A, B=B, C=C, D=D, E=E, units=units)
         [a, _] = curve_fit(adj_shomate_CpoR, T, np.array(CpoR))
         a = np.append(a, [0., 0., 0.])
         return a
@@ -672,8 +738,8 @@ def _fit_SoR(T_ref, SoR_ref, a, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    a[6] = c.R(units)*(SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a,
-                                                 units=units))
+    a[6] = c.R(units) * (
+        SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a, units=units))
     return a
 
 
@@ -696,9 +762,9 @@ def get_shomate_CpoR(a, T, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    t = T/1000.
-    t_arr = np.array([[1., x, x**2, x**3, 1./x**2, 0., 0., 0.] for x in t])
-    return np.dot(t_arr, a)/c.R(units)
+    t = T / 1000.
+    t_arr = np.array([[1., x, x**2, x**3, 1. / x**2, 0., 0., 0.] for x in t])
+    return np.dot(t_arr, a) / c.R(units)
 
 
 def get_shomate_HoRT(a, T, units):
@@ -720,10 +786,10 @@ def get_shomate_HoRT(a, T, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    t = T/1000.
-    t_arr = np.array([[x, x**2/2., x**3/3., x**4/4., -1./x, 1., 0., 0.]
-                     for x in t])
-    HoRT = np.dot(t_arr, a)/(T*c.R(units)/c.prefixes['k'])
+    t = T / 1000.
+    t_arr = np.array(
+        [[x, x**2 / 2., x**3 / 3., x**4 / 4., -1. / x, 1., 0., 0.] for x in t])
+    HoRT = np.dot(t_arr, a) / (T * c.R(units) / c.prefixes['k'])
     return HoRT
 
 
@@ -746,10 +812,11 @@ def get_shomate_SoR(a, T, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    t = T/1000.
-    t_arr = np.array([[np.log(x), x, x**2/2., x**3/3., -1./2./x**2, 0., 1., 0.]
-                     for x in t])
-    SoR = np.dot(t_arr, a)/c.R(units)
+    t = T / 1000.
+    t_arr = np.array(
+        [[np.log(x), x, x**2 / 2., x**3 / 3., -1. / 2. / x**2, 0., 1., 0.]
+         for x in t])
+    SoR = np.dot(t_arr, a) / c.R(units)
     return SoR
 
 

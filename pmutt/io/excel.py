@@ -19,8 +19,12 @@ from pmutt.statmech import (EmptyMode, StatMech, elec, nucl, presets, rot,
                             trans, vib)
 
 
-def read_excel(io, skiprows=[1], header=0, delimiter='.',
-               min_frequency_cutoff=0., include_imaginary=False,
+def read_excel(io,
+               skiprows=[1],
+               header=0,
+               delimiter='.',
+               min_frequency_cutoff=0.,
+               include_imaginary=False,
                **kwargs):
     """Reads an excel file and returns it as a list of dictionaries to
     initialize objects
@@ -82,8 +86,10 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
 
     .. _`pandas.read_excel`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
     """
-    input_data = pd.read_excel(io=io, skiprows=skiprows,
-                               header=header, **kwargs)
+    input_data = pd.read_excel(io=io,
+                               skiprows=skiprows,
+                               header=header,
+                               **kwargs)
     excel_path = os.path.dirname(io)
     thermos_out = []
     for row, row_data in input_data.iterrows():
@@ -96,7 +102,7 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
             if isinstance(col, str):
                 col = col.strip()
 
-            # Special parsing instructions
+            '''Special parsing instructions'''
             if pd.isnull(cell_data):
                 # Skip empty cells
                 continue
@@ -107,12 +113,15 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                             ''.format(cell_data, io))
                 warnings.warn(warn_msg)
             elif 'element' in col:
-                set_element(header=col, value=cell_data,
-                            output_structure=thermo_data, delimiter=delimiter)
+                set_element(header=col,
+                            value=cell_data,
+                            output_structure=thermo_data,
+                            delimiter=delimiter)
             elif 'formula' in col:
                 set_formula(formula=cell_data, output_structure=thermo_data)
             elif 'atoms' in col:
-                set_atoms(path=cell_data, excel_path=excel_path,
+                set_atoms(path=cell_data,
+                          excel_path=excel_path,
                           output_structure=thermo_data)
             elif 'statmech_model' in col:
                 set_statmech_model(model=cell_data,
@@ -134,19 +143,22 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                                     output_structure=thermo_data)
             elif 'vib_outcar' in col:
                 set_vib_wavenumbers_from_outcar(
-                        in_file=cell_data, output_structure=thermo_data,
-                        min_frequency_cutoff=min_frequency_cutoff,
-                        include_imaginary=include_imaginary)
+                    in_file=cell_data,
+                    output_structure=thermo_data,
+                    min_frequency_cutoff=min_frequency_cutoff,
+                    include_imaginary=include_imaginary)
                 vib_set_by_outcar = True
             elif 'rot_temperature' in col:
                 set_rot_temperatures(value=cell_data,
                                      output_structure=thermo_data)
             elif 'nasa' in col:
                 if 'a_low' in col:
-                    set_nasa_a_low(header=col, value=cell_data,
+                    set_nasa_a_low(header=col,
+                                   value=cell_data,
                                    output_structure=thermo_data)
                 elif 'a_high' in col:
-                    set_nasa_a_high(header=col, value=cell_data,
+                    set_nasa_a_high(header=col,
+                                    value=cell_data,
                                     output_structure=thermo_data)
                 else:
                     err_msg = ('Unrecognized argument for nasa column: {}'
@@ -159,13 +171,16 @@ def read_excel(io, skiprows=[1], header=0, delimiter='.',
                 if '.' in header:
                     i = header.rfind('.')
                     header = header[:i]
-                set_list_value(header=header, value=cell_data,
+                set_list_value(header=header,
+                               value=cell_data,
                                output_structure=thermo_data)
             elif 'dict.' in col:
                 # Process dict_name and key
                 header = col.replace('dict.', '')
                 dict_name, key = header.split('.')
-                set_dict_value(dict_name=dict_name, key=key, value=cell_data,
+                set_dict_value(dict_name=dict_name,
+                               key=key,
+                               value=cell_data,
                                output_structure=thermo_data)
             else:
                 thermo_data[col] = cell_data
@@ -282,6 +297,7 @@ def set_statmech_model(model, output_structure):
             if key not in output_structure:
                 output_structure[key] = val
 
+
 def set_trans_model(model, output_structure):
     """Imports module and assigns the class to output_structure
 
@@ -304,6 +320,7 @@ def set_trans_model(model, output_structure):
                        ''.format(model))
             raise ValueError(err_msg)
     output_structure['model'] = StatMech
+
 
 def set_vib_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -328,6 +345,7 @@ def set_vib_model(model, output_structure):
             raise ValueError(err_msg)
     output_structure['model'] = StatMech
 
+
 def set_rot_model(model, output_structure):
     """Imports module and assigns the class to output_structure
 
@@ -345,10 +363,12 @@ def set_rot_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['rot_model'] = EmptyMode
         else:
-            err_msg = ('Unsupported rotational model, {}. See '
-                       'pmutt.statmech.rot for supported models.'.format(model))
+            err_msg = (
+                'Unsupported rotational model, {}. See '
+                'pmutt.statmech.rot for supported models.'.format(model))
             raise ValueError(err_msg)
     output_structure['model'] = StatMech
+
 
 def set_elec_model(model, output_structure):
     """Imports module and assigns the class to output_structure
@@ -373,6 +393,7 @@ def set_elec_model(model, output_structure):
             raise ValueError(err_msg)
     output_structure['model'] = StatMech
 
+
 def set_nucl_model(model, output_structure):
     """Imports module and assigns the class to output_structure
 
@@ -390,10 +411,12 @@ def set_nucl_model(model, output_structure):
         if model.lower() == 'emptymode':
             output_structure['nucl_model'] = EmptyMode
         else:
-            err_msg = ('Unsupported nuclear model, {}. See pmutt.statmech.nucl '
-                       'for supported models.'.format(model))
+            err_msg = (
+                'Unsupported nuclear model, {}. See pmutt.statmech.nucl '
+                'for supported models.'.format(model))
             raise ValueError(err_msg)
     output_structure['model'] = StatMech
+
 
 def set_vib_wavenumbers(value, output_structure):
     """Parses element header and assigns to output_structure['vib_wavenumber']
@@ -452,7 +475,7 @@ def set_nasa_a_low(header, value, output_structure, delimiter='.'):
     try:
         output_structure['a_low'][i] = value
     except KeyError:
-        output_structure['a_low'] = np.zeros(7,)
+        output_structure['a_low'] = np.zeros(7, )
         output_structure['a_low'][i] = value
 
 
@@ -479,8 +502,9 @@ def set_nasa_a_high(header, value, output_structure, delimiter='.'):
     try:
         output_structure['a_high'][i] = value
     except KeyError:
-        output_structure['a_high'] = np.zeros(7,)
+        output_structure['a_high'] = np.zeros(7, )
         output_structure['a_high'][i] = value
+
 
 def set_list_value(header, value, output_structure):
     """Generic function to read a list from a spreadsheet
@@ -499,6 +523,7 @@ def set_list_value(header, value, output_structure):
         output_structure[header].append(value)
     except KeyError:
         output_structure[header] = [value]
+
 
 def set_dict_value(dict_name, key, value, output_structure):
     """Generic function to read a dictionary from a spreadsheet

@@ -24,7 +24,6 @@ class HarmonicVib(_ModelBase):
             this value for calculations. Otherwise, imaginary frequencies are
             ignored. Default is None
     """
-
     def __init__(self, vib_wavenumbers=[], imaginary_substitute=None):
         self.imaginary_substitute = imaginary_substitute
         self.vib_wavenumbers = np.array(vib_wavenumbers)
@@ -37,9 +36,9 @@ class HarmonicVib(_ModelBase):
     def vib_wavenumbers(self, val):
         self._vib_wavenumbers = val
         self._valid_vib_wavenumbers = _get_valid_vib_wavenumbers(
-                wavenumbers=val, substitute=self.imaginary_substitute)
+            wavenumbers=val, substitute=self.imaginary_substitute)
         self._valid_vib_temperatures = c.wavenumber_to_temp(
-                self._valid_vib_wavenumbers)
+            self._valid_vib_wavenumbers)
 
     def get_q(self, T, include_ZPE=True):
         """Calculates the partition function
@@ -60,11 +59,12 @@ class HarmonicVib(_ModelBase):
             q_vib : float
                 Vibrational partition function
         """
-        vib_dimless = self._valid_vib_temperatures/T
+        vib_dimless = self._valid_vib_temperatures / T
         if include_ZPE:
-            qs = np.array(np.exp(-vib_dimless/2.)/(1. - np.exp(-vib_dimless)))
+            qs = np.array(
+                np.exp(-vib_dimless / 2.) / (1. - np.exp(-vib_dimless)))
         else:
-            qs = np.array(1./(1. - np.exp(-vib_dimless)))
+            qs = np.array(1. / (1. - np.exp(-vib_dimless)))
         return np.prod(qs)
 
     def get_CvoR(self, T):
@@ -82,9 +82,10 @@ class HarmonicVib(_ModelBase):
             CvoR_vib : float
                 Vibrational dimensionless heat capacity at constant volume
         """
-        vib_dimless = self._valid_vib_temperatures/T
-        CvoRs = np.array([(0.5*vib_dimless)**2 *
-                          (1./np.sinh(vib_dimless/2.))**2])
+        vib_dimless = self._valid_vib_temperatures / T
+        CvoRs = np.array([
+            (0.5 * vib_dimless)**2 * (1. / np.sinh(vib_dimless / 2.))**2
+        ])
         return np.sum(CvoRs)
 
     def get_CpoR(self, T):
@@ -115,7 +116,7 @@ class HarmonicVib(_ModelBase):
             zpe : float
                 Zero point energy in eV
         """
-        return 0.5*c.kb('eV/K')*np.sum(self._valid_vib_temperatures)
+        return 0.5 * c.kb('eV/K') * np.sum(self._valid_vib_temperatures)
 
     def get_UoRT(self, T):
         """Calculates the dimensionless internal energy
@@ -133,9 +134,11 @@ class HarmonicVib(_ModelBase):
             UoRT_vib : float
                 Vibrational dimensionless internal energy
         """
-        vib_dimless = self._valid_vib_temperatures/T
-        UoRT = np.array([vib_dimless/2. + vib_dimless*np.exp(-vib_dimless)
-                        / (1.-np.exp(-vib_dimless))])
+        vib_dimless = self._valid_vib_temperatures / T
+        UoRT = np.array([
+            vib_dimless / 2. + vib_dimless * np.exp(-vib_dimless) /
+            (1. - np.exp(-vib_dimless))
+        ])
         return np.sum(UoRT)
 
     def get_HoRT(self, T):
@@ -174,10 +177,11 @@ class HarmonicVib(_ModelBase):
             SoR_vib : float
                 Vibrational dimensionless entropy
         """
-        vib_dimless = self._valid_vib_temperatures/T
+        vib_dimless = self._valid_vib_temperatures / T
         return np.sum([
-               vib_dimless*np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless))
-               - np.log(1. - np.exp(-vib_dimless))])
+            vib_dimless * np.exp(-vib_dimless) / (1. - np.exp(-vib_dimless)) -
+            np.log(1. - np.exp(-vib_dimless))
+        ])
 
     def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
@@ -218,9 +222,11 @@ class HarmonicVib(_ModelBase):
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'vib_wavenumbers': list(self.vib_wavenumbers),
-                'imaginary_substitute': self.imaginary_substitute}
+        return {
+            'class': str(self.__class__),
+            'vib_wavenumbers': list(self.vib_wavenumbers),
+            'imaginary_substitute': self.imaginary_substitute
+        }
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -243,6 +249,7 @@ class HarmonicVib(_ModelBase):
         imaginary frequencies are replaced with that value. Otherwise,
         imaginary frequencies are ignored."""
         print(self._valid_vib_wavenumbers)
+
 
 class QRRHOVib(_ModelBase):
     """Vibrational modes using the Quasi Rigid Rotor Harmonic Oscillator
@@ -268,8 +275,11 @@ class QRRHOVib(_ModelBase):
             this value for calculations. Otherwise, imaginary frequencies are
             ignored. Default is None
     """
-
-    def __init__(self, vib_wavenumbers, Bav=1.e-44, v0=100., alpha=4,
+    def __init__(self,
+                 vib_wavenumbers,
+                 Bav=1.e-44,
+                 v0=100.,
+                 alpha=4,
                  imaginary_substitute=None):
         self.Bav = Bav
         self.v0 = v0
@@ -285,9 +295,9 @@ class QRRHOVib(_ModelBase):
     def vib_wavenumbers(self, val):
         self._vib_wavenumbers = val
         self._valid_vib_wavenumbers = _get_valid_vib_wavenumbers(
-                wavenumbers=val, substitute=self.imaginary_substitute)
+            wavenumbers=val, substitute=self.imaginary_substitute)
         self._valid_vib_temperatures = c.wavenumber_to_temp(
-                self._valid_vib_wavenumbers)
+            self._valid_vib_wavenumbers)
         self._valid_scaled_wavenumbers = self._get_scaled_wavenumber()
         self._valid_scaled_inertia = self._get_scaled_inertia()
 
@@ -302,7 +312,7 @@ class QRRHOVib(_ModelBase):
             scaled_wavenumber : float
                 Scaled wavenumber
         """
-        return 1./(1. + (self.v0/self._valid_vib_wavenumbers)**self.alpha)
+        return 1. / (1. + (self.v0 / self._valid_vib_wavenumbers)**self.alpha)
 
     def _get_scaled_inertia(self):
         """Calculates the scaled moment of inertia.
@@ -315,7 +325,7 @@ class QRRHOVib(_ModelBase):
                 Scaled moment of inertia in kg*m2
         """
         mu = c.wavenumber_to_inertia(self._valid_vib_wavenumbers)
-        return mu*self.Bav/(mu + self.Bav)
+        return mu * self.Bav / (mu + self.Bav)
 
     def get_q(self):
         """Calculates the partition function
@@ -347,12 +357,12 @@ class QRRHOVib(_ModelBase):
                 Vibrational dimensionless heat capacity at constant volume
         """
         CvoR = []
-        vib_dimless = self._valid_vib_temperatures/T
+        vib_dimless = self._valid_vib_temperatures / T
         for vib_dimless_i, w_i in zip(vib_dimless,
                                       self._valid_scaled_wavenumbers):
             CvoR_RRHO = np.exp(-vib_dimless_i) \
                         * (vib_dimless_i/(1. - np.exp(-vib_dimless_i)))**2
-            CvoR.append(w_i*CvoR_RRHO + 0.5*(1.-w_i))
+            CvoR.append(w_i * CvoR_RRHO + 0.5 * (1. - w_i))
         return np.sum(CvoR)
 
     def get_CpoR(self, T):
@@ -381,8 +391,8 @@ class QRRHOVib(_ModelBase):
             zpe : float
                 Zero point energy in eV
         """
-        return 0.5*c.kb('eV/K')*np.dot(self._valid_vib_temperatures,
-                                       self._valid_scaled_wavenumbers)
+        return 0.5 * c.kb('eV/K') * np.dot(self._valid_vib_temperatures,
+                                           self._valid_scaled_wavenumbers)
 
     def _get_UoRT_RRHO(self, T, vib_temperature):
         """Calculates the dimensionless RRHO contribution to internal energy
@@ -398,8 +408,9 @@ class QRRHOVib(_ModelBase):
             UoRT_RRHO : float
                Dimensionless internal energy of Rigid Rotor Harmonic Oscillator
         """
-        vib_dimless = vib_temperature/T
-        return vib_dimless*(0.5+np.exp(-vib_dimless)/(1.-np.exp(-vib_dimless)))
+        vib_dimless = vib_temperature / T
+        return vib_dimless * (0.5 + np.exp(-vib_dimless) /
+                              (1. - np.exp(-vib_dimless)))
 
     def get_UoRT(self, T):
         """Calculates the dimensionless internal energy
@@ -424,7 +435,7 @@ class QRRHOVib(_ModelBase):
         for theta_i, w_i in zip(self._valid_vib_temperatures,
                                 self._valid_scaled_wavenumbers):
             UoRT_RRHO = self._get_UoRT_RRHO(T=T, vib_temperature=theta_i)
-            UoRT_QRRHO.append(w_i*UoRT_RRHO + (1.-w_i)*0.5)
+            UoRT_QRRHO.append(w_i * UoRT_RRHO + (1. - w_i) * 0.5)
         return np.sum(UoRT_QRRHO)
 
     def get_HoRT(self, T):
@@ -475,8 +486,9 @@ class QRRHOVib(_ModelBase):
             SoR_RHHO : float
                 Dimensionless entropy of Rigid Rotor Harmonic Oscillator
         """
-        return 0.5 + np.log((8.*np.pi**3*vib_inertia*c.kb('J/K')*T
-                            / c.h('J s')**2)**0.5)
+        return 0.5 + np.log(
+            (8. * np.pi**3 * vib_inertia * c.kb('J/K') * T / c.h('J s')**2)**
+            0.5)
 
     def get_SoR(self, T):
         """Calculates the dimensionless entropy
@@ -506,7 +518,7 @@ class QRRHOVib(_ModelBase):
                                       self._valid_scaled_wavenumbers):
             SoR_H = self._get_SoR_H(T=T, vib_temperature=theta_i)
             SoR_RRHO = self._get_SoR_RRHO(T=T, vib_inertia=mu_i)
-            SoR_QRRHO.append(w_i*SoR_H + (1.-w_i)*SoR_RRHO)
+            SoR_QRRHO.append(w_i * SoR_H + (1. - w_i) * SoR_RRHO)
         return np.sum(SoR_QRRHO)
 
     def get_FoRT(self, T):
@@ -550,12 +562,14 @@ class QRRHOVib(_ModelBase):
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'vib_wavenumbers': list(self.vib_wavenumbers),
-                'Bav': self.Bav,
-                'v0': self.v0,
-                'alpha': self.alpha,
-                'imaginary_substitute': self.imaginary_substitute}
+        return {
+            'class': str(self.__class__),
+            'vib_wavenumbers': list(self.vib_wavenumbers),
+            'Bav': self.Bav,
+            'v0': self.v0,
+            'alpha': self.alpha,
+            'imaginary_substitute': self.imaginary_substitute
+        }
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -577,8 +591,9 @@ class QRRHOVib(_ModelBase):
         calculation. If ``self.imaginary_substitute`` is a float, then
         imaginary frequencies are replaced with that value. Otherwise,
         imaginary frequencies are ignored."""
-        print(_get_valid_vib_wavenumbers(wavenumbers=self.vib_wavenumbers,
-                                         substitute=self.imaginary_substitute))
+        print(
+            _get_valid_vib_wavenumbers(wavenumbers=self.vib_wavenumbers,
+                                       substitute=self.imaginary_substitute))
 
 
 class EinsteinVib(_ModelBase):
@@ -594,7 +609,6 @@ class EinsteinVib(_ModelBase):
         interaction_energy : float, optional
             Interaction energy (:math:`u`) per atom in eV. Default is 0 eV
     """
-
     def __init__(self, einstein_temperature, interaction_energy=0.):
         self.einstein_temperature = einstein_temperature
         self.interaction_energy = interaction_energy
@@ -636,7 +650,8 @@ class EinsteinVib(_ModelBase):
                 Vibrational dimensionless heat capacity at constant volume
         """
         theta_E = self.einstein_temperature
-        return 3.*(theta_E/T)**2*np.exp(-theta_E/T)/(1-np.exp(-theta_E/T))**2
+        return 3. * (theta_E / T)**2 * np.exp(
+            -theta_E / T) / (1 - np.exp(-theta_E / T))**2
 
     def get_CpoR(self, T):
         """Calculates the dimensionless heat capacity at constant pressure
@@ -724,8 +739,9 @@ class EinsteinVib(_ModelBase):
                 Vibrational dimensionless entropy
         """
         theta_E = self.einstein_temperature
-        exp_term = np.exp(-theta_E/T)
-        return 3.*(theta_E/T*exp_term/(1. - exp_term) - np.log(1. - exp_term))
+        exp_term = np.exp(-theta_E / T)
+        return 3. * (theta_E / T * exp_term /
+                     (1. - exp_term) - np.log(1. - exp_term))
 
     def get_FoRT(self, T):
         """Calculates the dimensionless Helmholtz energy
@@ -766,9 +782,11 @@ class EinsteinVib(_ModelBase):
         -------
             obj_dict : dict
         """
-        return {'class': str(self.__class__),
-                'einstein_temperature': self.einstein_temperature,
-                'interaction_energy': self.interaction_energy}
+        return {
+            'class': str(self.__class__),
+            'einstein_temperature': self.einstein_temperature,
+            'interaction_energy': self.interaction_energy
+        }
 
 
 class DebyeVib(_ModelBase):
@@ -784,7 +802,6 @@ class DebyeVib(_ModelBase):
         interaction_energy : float, optional
             Interaction energy (:math:`u`) per atom in eV. Default is 0 eV
     """
-
     def __init__(self, debye_temperature, interaction_energy):
         self.debye_temperature = debye_temperature
         self.interaction_energy = interaction_energy
@@ -830,8 +847,8 @@ class DebyeVib(_ModelBase):
                 Dimensionless heat capacity (constant V)
         """
         K = self._get_intermediate_fn(T=T, fn=self._K_integrand)
-        return 3.*K
-    
+        return 3. * K
+
     def get_CpoR(self, T):
         """Calculates dimensionless heat capacity (constant P)
 
@@ -872,7 +889,7 @@ class DebyeVib(_ModelBase):
         """
         return self.get_ZPE()/c.kb('eV/K')/T \
                + 3.*self._get_intermediate_fn(T=T, fn=self._F_integrand)
-    
+
     def get_HoRT(self, T):
         """Calculates dimensionless enthalpy
 
@@ -920,7 +937,7 @@ class DebyeVib(_ModelBase):
         """
         F = self._get_intermediate_fn(T=T, fn=self._F_integrand)
         G = self._get_intermediate_fn(T=T, fn=self._G_integrand)
-        return 3.*(F - G)
+        return 3. * (F - G)
 
     def get_FoRT(self, T):
         """Calculates dimensionless Helmholtz energy
@@ -982,7 +999,7 @@ class DebyeVib(_ModelBase):
             f(x) : float
                 Integrand evaluated at x
         """
-        return np.log(1. - np.exp(-x))*(x**2)
+        return np.log(1. - np.exp(-x)) * (x**2)
 
     def _K_integrand(self, x):
         """Integrand when evaluating intermediate function K.
@@ -999,7 +1016,7 @@ class DebyeVib(_ModelBase):
             f(x) : float
                 Integrand evaluated at x
         """
-        return (x**4)*np.exp(x)/(np.exp(x) - 1.)**2
+        return (x**4) * np.exp(x) / (np.exp(x) - 1.)**2
 
     def _F_integrand(self, x):
         """Integrand when evaluating intermediate function F.
@@ -1016,7 +1033,7 @@ class DebyeVib(_ModelBase):
             f(x) : float
                 Integrand evaluated at x
         """
-        return (x**3)*np.exp(x)/(np.exp(x) - 1.)
+        return (x**3) * np.exp(x) / (np.exp(x) - 1.)
 
     def _get_intermediate_fn(self, T, fn):
         """Calculates the intermediate function (i.e. F, G, or K)
@@ -1035,9 +1052,9 @@ class DebyeVib(_ModelBase):
             F : float
                 Intermediate function evaluated at T
         """
-        vib_dimless = self.debye_temperature/T
+        vib_dimless = self.debye_temperature / T
         integral = quad(func=fn, a=0., b=vib_dimless)[0]
-        return 3.*integral/vib_dimless**3
+        return 3. * integral / vib_dimless**3
 
 
 def _get_valid_vib_wavenumbers(wavenumbers, substitute=None):
@@ -1087,5 +1104,5 @@ def _get_vib_dimless(wavenumbers, T, substitute=None):
     """
     valid_wavenumbers = _get_valid_vib_wavenumbers(wavenumbers=wavenumbers,
                                                    substitute=substitute)
-    vib_dimless = c.wavenumber_to_temp(valid_wavenumbers)/T
+    vib_dimless = c.wavenumber_to_temp(valid_wavenumbers) / T
     return vib_dimless

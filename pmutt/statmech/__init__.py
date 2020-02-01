@@ -49,6 +49,7 @@ class EmptyMode(_ModelBase):
     def get_GoRT(self):
         return 0.
 
+
 class ConstantMode(_ModelBase):
     """Mode where thermodynamic properties can be arbitrarily set. Note that
     thermodynamic properties must be explicitly set and are not calculated from
@@ -77,7 +78,15 @@ class ConstantMode(_ModelBase):
             source of data. Default is None
             
     """
-    def __init__(self, q=1., Cv=0., Cp=0., U=0., H=0., S=0., F=0., G=0.,
+    def __init__(self,
+                 q=1.,
+                 Cv=0.,
+                 Cp=0.,
+                 U=0.,
+                 H=0.,
+                 S=0.,
+                 F=0.,
+                 G=0.,
                  notes=None):
         self.q = q
         self.Cv = Cv
@@ -107,7 +116,7 @@ class ConstantMode(_ModelBase):
             CvoR : float
                 Dimensionless heat capacity (constant volume)
         """
-        return self.Cv/c.R('eV/K')
+        return self.Cv / c.R('eV/K')
 
     def get_CpoR(self):
         """Calculate the dimensionless heat capacity (constant pressure)
@@ -117,7 +126,7 @@ class ConstantMode(_ModelBase):
             CpoR : float
                 Dimensionless heat capacity (constant pressure)
         """
-        return self.Cp/c.R('eV/K')
+        return self.Cp / c.R('eV/K')
 
     def get_UoRT(self, T=c.T0('K')):
         """Calculate the dimensionless internal energy
@@ -131,7 +140,7 @@ class ConstantMode(_ModelBase):
             UoRT : float
                 Dimensionless internal energy
         """
-        return self.U/c.R('eV/K')/T
+        return self.U / c.R('eV/K') / T
 
     def get_HoRT(self, T=c.T0('K')):
         """Calculate the dimensionless enthalpy
@@ -145,7 +154,7 @@ class ConstantMode(_ModelBase):
             HoRT : float
                 Dimensionless enthalpy
         """
-        return self.H/c.R('eV/K')/T
+        return self.H / c.R('eV/K') / T
 
     def get_SoR(self):
         """Calculate the dimensionless entropy
@@ -155,7 +164,7 @@ class ConstantMode(_ModelBase):
             SoR : float
                 Dimensionless entropy
         """
-        return self.S/c.R('eV/K')
+        return self.S / c.R('eV/K')
 
     def get_FoRT(self, T=c.T0('K')):
         """Calculate the dimensionless Helmholtz energy
@@ -169,7 +178,7 @@ class ConstantMode(_ModelBase):
             FoRT : float
                 Dimensionless Helmholtz energy
         """
-        return self.F/c.R('eV/K')/T
+        return self.F / c.R('eV/K') / T
 
     def get_GoRT(self, T=c.T0('K')):
         """Calculate the dimensionless Gibbs energy
@@ -183,7 +192,8 @@ class ConstantMode(_ModelBase):
             GoRT : float
                 Dimensionless Gibbs energy
         """
-        return self.G/c.R('eV/K')/T
+        return self.G / c.R('eV/K') / T
+
 
 class StatMech(_ModelBase):
     """Base class for statistical mechanic models.
@@ -225,12 +235,19 @@ class StatMech(_ModelBase):
             Any additional details you would like to include such as
             computational set up. Default is None
     """
-
-    def __init__(self, name=None, trans_model=EmptyMode(),
-                 vib_model=EmptyMode(), rot_model=EmptyMode(),
-                 elec_model=EmptyMode(), nucl_model=EmptyMode(),
-                 misc_models=None, elements=None, references=None,
-                 smiles=None, notes=None, **kwargs):
+    def __init__(self,
+                 name=None,
+                 trans_model=EmptyMode(),
+                 vib_model=EmptyMode(),
+                 rot_model=EmptyMode(),
+                 elec_model=EmptyMode(),
+                 nucl_model=EmptyMode(),
+                 misc_models=None,
+                 elements=None,
+                 references=None,
+                 smiles=None,
+                 notes=None,
+                 **kwargs):
         self.name = name
         self.smiles = smiles
         self.notes = notes
@@ -247,7 +264,7 @@ class StatMech(_ModelBase):
                         kwargs['atoms'].get_chemical_formula('hill'))
             except KeyError:
                 pass
-        self.elements=elements
+        self.elements = elements
 
         # Assign misc models
         # TODO misc models can not be initialized by passing the class
@@ -256,8 +273,13 @@ class StatMech(_ModelBase):
         # attributes separated by species
         self.misc_models = _check_iterable_attr(misc_models)
 
-    def get_quantity(self, method_name, raise_error=True, raise_warning=True,
-                     operation='sum', verbose=False, use_references=True,
+    def get_quantity(self,
+                     method_name,
+                     raise_error=True,
+                     raise_warning=True,
+                     operation='sum',
+                     verbose=False,
+                     use_references=True,
                      **kwargs):
         """Generic method to get any quantity from modes.
 
@@ -309,60 +331,71 @@ class StatMech(_ModelBase):
         # Calculate the quantity for each mode
         specie_kwargs = _get_specie_kwargs(specie_name=self.name, **kwargs)
         quantity = np.array([
-            _get_mode_quantity(mode=self.trans_model, method_name=method_name,
+            _get_mode_quantity(mode=self.trans_model,
+                               method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
-            _get_mode_quantity(mode=self.vib_model, method_name=method_name,
+            _get_mode_quantity(mode=self.vib_model,
+                               method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
-            _get_mode_quantity(mode=self.rot_model, method_name=method_name,
+            _get_mode_quantity(mode=self.rot_model,
+                               method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
-            _get_mode_quantity(mode=self.elec_model, method_name=method_name,
+            _get_mode_quantity(mode=self.elec_model,
+                               method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning,
                                default_value=default_value,
                                **specie_kwargs),
-            _get_mode_quantity(mode=self.nucl_model, method_name=method_name,
+            _get_mode_quantity(mode=self.nucl_model,
+                               method_name=method_name,
                                raise_error=raise_error,
                                raise_warning=raise_warning,
                                default_value=default_value,
-                               **specie_kwargs)])
+                               **specie_kwargs)
+        ])
         if use_references and self.references is not None:
             ref_kwargs = copy(specie_kwargs)
             ref_kwargs['descriptors'] = getattr(self,
                                                 self.references.descriptor)
             refs_quantity = np.atleast_1d(
-                    _get_mode_quantity(mode=self.references,
-                                       method_name=method_name,
-                                       raise_error=raise_error,
-                                       raise_warning=raise_warning,
-                                       default_value=default_value,
-                                       **ref_kwargs))
+                _get_mode_quantity(mode=self.references,
+                                   method_name=method_name,
+                                   raise_error=raise_error,
+                                   raise_warning=raise_warning,
+                                   default_value=default_value,
+                                   **ref_kwargs))
         else:
             refs_quantity = np.atleast_1d(default_value)
         # Calculate contribution from misc models if any
         misc_quantity = _get_mix_quantity(misc_models=self.misc_models,
-                                         method_name=method_name,
-                                         raise_error=raise_error,
-                                         raise_warning=raise_warning,
-                                         default_value=default_value,
-                                         verbose=verbose,
-                                         **kwargs)
+                                          method_name=method_name,
+                                          raise_error=raise_error,
+                                          raise_warning=raise_warning,
+                                          default_value=default_value,
+                                          verbose=verbose,
+                                          **kwargs)
         # Add misc quantities onto quantity
         quantity = np.concatenate([quantity, refs_quantity, misc_quantity])
-        quantity = _apply_numpy_operation(quantity, verbose=verbose,
+        quantity = _apply_numpy_operation(quantity,
+                                          verbose=verbose,
                                           operation=operation)
         return quantity
 
-    def get_q(self, verbose=False, raise_error=True, raise_warning=True,
-              use_references=True, **kwargs):
+    def get_q(self,
+              verbose=False,
+              raise_error=True,
+              raise_warning=True,
+              use_references=True,
+              **kwargs):
         """Partition function
 
         Parameters
@@ -390,13 +423,20 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_q', raise_error=raise_error,
-                                 raise_warning=raise_warning, operation='prod',
-                                 verbose=verbose, use_references=use_references,
+        return self.get_quantity(method_name='get_q',
+                                 raise_error=raise_error,
+                                 raise_warning=raise_warning,
+                                 operation='prod',
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_CvoR(self, verbose=False, raise_error=True, raise_warning=True,
-                 use_references=True, **kwargs):
+    def get_CvoR(self,
+                 verbose=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 use_references=True,
+                 **kwargs):
         """Dimensionless heat capacity (constant V)
 
         Parameters
@@ -425,14 +465,21 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_CvoR', operation='sum',
+        return self.get_quantity(method_name='get_CvoR',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, use_references=use_references,
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_Cv(self, units, verbose=False, raise_error=True,
-               raise_warning=True, use_references=True, **kwargs):
+    def get_Cv(self,
+               units,
+               verbose=False,
+               raise_error=True,
+               raise_warning=True,
+               use_references=True,
+               **kwargs):
         """Calculate the heat capacity (constant V)
 
         Parameters
@@ -464,12 +511,18 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_CvoR(verbose=verbose, raise_error=raise_error,
+        return self.get_CvoR(verbose=verbose,
+                             raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs)*R_adj
+                             use_references=use_references,
+                             **kwargs) * R_adj
 
-    def get_CpoR(self, verbose=False, raise_error=True, raise_warning=True,
-                 use_references=True, **kwargs):
+    def get_CpoR(self,
+                 verbose=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 use_references=True,
+                 **kwargs):
         """Dimensionless heat capacity (constant P)
 
         Parameters
@@ -498,14 +551,21 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_CpoR', operation='sum',
+        return self.get_quantity(method_name='get_CpoR',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, use_references=use_references,
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_Cp(self, units, verbose=False, raise_error=True,
-               raise_warning=True, use_references=True, **kwargs):
+    def get_Cp(self,
+               units,
+               verbose=False,
+               raise_error=True,
+               raise_warning=True,
+               use_references=True,
+               **kwargs):
         """Calculate the heat capacity (constant P)
 
         Parameters
@@ -537,12 +597,18 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_CpoR(verbose=verbose, raise_error=raise_error,
+        return self.get_CpoR(verbose=verbose,
+                             raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs)*R_adj
+                             use_references=use_references,
+                             **kwargs) * R_adj
 
-    def get_EoRT(self, T=c.T0('K'), include_ZPE=False,
-                 raise_error=True, raise_warning=True, **kwargs):
+    def get_EoRT(self,
+                 T=c.T0('K'),
+                 include_ZPE=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 **kwargs):
         """Dimensionless electronic energy
 
         Parameters
@@ -572,18 +638,24 @@ class StatMech(_ModelBase):
                                   method_name='get_UoRT',
                                   raise_error=raise_error,
                                   raise_warning=raise_warning,
-                                  default_value=0., **kwargs)
+                                  default_value=0.,
+                                  **kwargs)
         if include_ZPE:
             EoRT += _get_mode_quantity(mode=self.vib_model,
                                        method_name='get_ZPE',
                                        raise_error=raise_error,
                                        raise_warning=raise_warning,
                                        default_value=0.,
-                                       **kwargs)/c.R('eV/K')/T
+                                       **kwargs) / c.R('eV/K') / T
         return EoRT
 
-    def get_E(self, units, T=c.T0('K'), raise_error=True, raise_warning=True,
-              include_ZPE=False, **kwargs):
+    def get_E(self,
+              units,
+              T=c.T0('K'),
+              raise_error=True,
+              raise_warning=True,
+              include_ZPE=False,
+              **kwargs):
         """Calculate the electronic energy
 
         Parameters
@@ -613,12 +685,18 @@ class StatMech(_ModelBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_EoRT(T=T, raise_error=raise_error,
+        return self.get_EoRT(T=T,
+                             raise_error=raise_error,
                              raise_warning=raise_warning,
-                             include_ZPE=include_ZPE, **kwargs)*T*R_adj
-                             
-    def get_UoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 use_references=True, **kwargs):
+                             include_ZPE=include_ZPE,
+                             **kwargs) * T * R_adj
+
+    def get_UoRT(self,
+                 verbose=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 use_references=True,
+                 **kwargs):
         """Dimensionless internal energy
 
         Parameters
@@ -647,14 +725,22 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_UoRT', operation='sum',
+        return self.get_quantity(method_name='get_UoRT',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose,
-                                 use_references=use_references, **kwargs)
+                                 use_references=use_references,
+                                 **kwargs)
 
-    def get_U(self, units, T=c.T0('K'), verbose=False, raise_error=True,
-              raise_warning=True, use_references=True, **kwargs):
+    def get_U(self,
+              units,
+              T=c.T0('K'),
+              verbose=False,
+              raise_error=True,
+              raise_warning=True,
+              use_references=True,
+              **kwargs):
         """Calculate the internal energy
 
         Parameters
@@ -689,12 +775,19 @@ class StatMech(_ModelBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_UoRT(verbose=verbose, T=T, raise_error=raise_error,
+        return self.get_UoRT(verbose=verbose,
+                             T=T,
+                             raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs)*T*R_adj
+                             use_references=use_references,
+                             **kwargs) * T * R_adj
 
-    def get_HoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 use_references=True, **kwargs):
+    def get_HoRT(self,
+                 verbose=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 use_references=True,
+                 **kwargs):
         """Dimensionless enthalpy
 
         Parameters
@@ -723,14 +816,22 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_HoRT', operation='sum',
+        return self.get_quantity(method_name='get_HoRT',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, use_references=use_references,
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_H(self, units, T=c.T0('K'), raise_error=True, raise_warning=True,
-              verbose=False, use_references=True, **kwargs):
+    def get_H(self,
+              units,
+              T=c.T0('K'),
+              raise_error=True,
+              raise_warning=True,
+              verbose=False,
+              use_references=True,
+              **kwargs):
         """Calculate the enthalpy
 
         Parameters
@@ -765,12 +866,19 @@ class StatMech(_ModelBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_HoRT(verbose=verbose, raise_error=raise_error,
-                             raise_warning=raise_warning, T=T,
-                             use_references=use_references, **kwargs)*T*R_adj
+        return self.get_HoRT(verbose=verbose,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             T=T,
+                             use_references=use_references,
+                             **kwargs) * T * R_adj
 
-    def get_SoR(self, verbose=False, raise_error=True, raise_warning=True,
-                use_references=True, **kwargs):
+    def get_SoR(self,
+                verbose=False,
+                raise_error=True,
+                raise_warning=True,
+                use_references=True,
+                **kwargs):
         """Dimensionless entropy
 
         Parameters
@@ -798,14 +906,21 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_SoR', operation='sum',
+        return self.get_quantity(method_name='get_SoR',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, use_references=use_references,
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_S(self, units, verbose=False, raise_error=True,
-              raise_warning=True, use_references=True, **kwargs):
+    def get_S(self,
+              units,
+              verbose=False,
+              raise_error=True,
+              raise_warning=True,
+              use_references=True,
+              **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -837,12 +952,18 @@ class StatMech(_ModelBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_SoR(verbose=verbose, raise_error=raise_error,
-                            raise_warning=raise_warning, 
-                            use_references=use_references, **kwargs)*R_adj
+        return self.get_SoR(verbose=verbose,
+                            raise_error=raise_error,
+                            raise_warning=raise_warning,
+                            use_references=use_references,
+                            **kwargs) * R_adj
 
-    def get_FoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 use_references=True, **kwargs):
+    def get_FoRT(self,
+                 verbose=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 use_references=True,
+                 **kwargs):
         """Dimensionless Helmholtz energy
 
         Parameters
@@ -871,14 +992,22 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_FoRT', operation='sum',
+        return self.get_quantity(method_name='get_FoRT',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, use_references=use_references,
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_F(self, units, T=c.T0('K'), verbose=False, raise_error=True,
-              raise_warning=True, use_references=True, **kwargs):
+    def get_F(self,
+              units,
+              T=c.T0('K'),
+              verbose=False,
+              raise_error=True,
+              raise_warning=True,
+              use_references=True,
+              **kwargs):
         """Calculate the Helmholtz energy
 
         Parameters
@@ -913,12 +1042,19 @@ class StatMech(_ModelBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_FoRT(verbose=verbose, T=T, raise_error=raise_error,
+        return self.get_FoRT(verbose=verbose,
+                             T=T,
+                             raise_error=raise_error,
                              raise_warning=raise_warning,
-                             use_references=use_references, **kwargs)*T*R_adj
+                             use_references=use_references,
+                             **kwargs) * T * R_adj
 
-    def get_GoRT(self, verbose=False, raise_error=True, raise_warning=True,
-                 use_references=True, **kwargs):
+    def get_GoRT(self,
+                 verbose=False,
+                 raise_error=True,
+                 raise_warning=True,
+                 use_references=True,
+                 **kwargs):
         """Dimensionless Gibbs energy
 
         Parameters
@@ -947,14 +1083,22 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        return self.get_quantity(method_name='get_GoRT', operation='sum',
+        return self.get_quantity(method_name='get_GoRT',
+                                 operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
-                                 verbose=verbose, use_references=use_references,
+                                 verbose=verbose,
+                                 use_references=use_references,
                                  **kwargs)
 
-    def get_G(self, units, T=c.T0('K'), verbose=False, raise_error=True,
-              raise_warning=True, use_references=True, **kwargs):
+    def get_G(self,
+              units,
+              T=c.T0('K'),
+              verbose=False,
+              raise_error=True,
+              raise_warning=True,
+              use_references=True,
+              **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -987,9 +1131,12 @@ class StatMech(_ModelBase):
         """
         units = '{}/K'.format(units)
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_GoRT(verbose=verbose, raise_error=raise_error,
-                             raise_warning=raise_warning, T=T,
-                             use_references=use_references, **kwargs)*T*R_adj
+        return self.get_GoRT(verbose=verbose,
+                             raise_error=raise_error,
+                             raise_warning=raise_warning,
+                             T=T,
+                             use_references=use_references,
+                             **kwargs) * T * R_adj
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -1007,7 +1154,8 @@ class StatMech(_ModelBase):
             'elec_model': self.elec_model.to_dict(),
             'nucl_model': self.nucl_model.to_dict(),
             'smiles': self.smiles,
-            'notes': self.notes}
+            'notes': self.notes
+        }
 
         if _is_iterable(self.misc_models):
             obj_dict['misc_models'] = \
@@ -1056,16 +1204,22 @@ class StatMech(_ModelBase):
 
 presets = {
     'idealgas': {
-        'model': StatMech,
-        'trans_model': trans.FreeTrans,
-        'n_degrees': 3,
-        'vib_model': vib.HarmonicVib,
-        'elec_model': elec.GroundStateElec,
-        'rot_model': rot.RigidRotor,
+        'model':
+        StatMech,
+        'trans_model':
+        trans.FreeTrans,
+        'n_degrees':
+        3,
+        'vib_model':
+        vib.HarmonicVib,
+        'elec_model':
+        elec.GroundStateElec,
+        'rot_model':
+        rot.RigidRotor,
         'required': ('molecular_weight', 'vib_wavenumbers', 'potentialenergy',
                      'spin', 'geometry', 'rot_temperatures', 'symmetrynumber'),
         'optional': ('atoms')
-        },
+    },
     'harmonic': {
         'model': StatMech,
         'vib_model': vib.HarmonicVib,

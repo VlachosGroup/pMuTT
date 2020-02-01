@@ -15,11 +15,11 @@ class TestFreeTrans(unittest.TestCase):
         # Using Cl2 as an example
         molecular_weight = 71.
         self.trans_1D = trans.FreeTrans(molecular_weight=molecular_weight,
-                                         n_degrees=1)
+                                        n_degrees=1)
         self.trans_2D = trans.FreeTrans(molecular_weight=molecular_weight,
-                                         n_degrees=2)
+                                        n_degrees=2)
         self.trans_3D = trans.FreeTrans(molecular_weight=molecular_weight,
-                                         n_degrees=3)
+                                        n_degrees=3)
         self.trans_3D_dict = {
             'class': "<class 'pmutt.statmech.trans.FreeTrans'>",
             'molecular_weight': 71.,
@@ -32,12 +32,15 @@ class TestFreeTrans(unittest.TestCase):
     def test_get_q(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_q(T=self.T, P=self.P),
-                                   2090036406.020292))
-        self.assertTrue(np.isclose(self.trans_2D.get_q(T=self.T, P=self.P),
-                                   1.747204243477979e+20))
-        self.assertTrue(np.isclose(self.trans_3D.get_q(T=self.T, P=self.P),
-                                   1.4606074131695383e+31))
+        self.assertTrue(
+            np.isclose(self.trans_1D.get_q(T=self.T, P=self.P),
+                       2090036406.020292))
+        self.assertTrue(
+            np.isclose(self.trans_2D.get_q(T=self.T, P=self.P),
+                       1.747204243477979e+20))
+        self.assertTrue(
+            np.isclose(self.trans_3D.get_q(T=self.T, P=self.P),
+                       1.4606074131695383e+31))
 
     def test_get_CvoR(self):
         self.assertEqual(self.trans_1D.get_CvoR(), 0.5)
@@ -62,32 +65,41 @@ class TestFreeTrans(unittest.TestCase):
     def test_get_SoR(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_SoR(T=self.T, P=self.P),
-                                   -3.1794507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_SoR(T=self.T, P=self.P),
-                                   -6.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_SoR(T=self.T, P=self.P),
-                                   1.9504035007E+01))
+        self.assertTrue(
+            np.isclose(self.trans_1D.get_SoR(T=self.T, P=self.P),
+                       -3.1794507940E+01))
+        self.assertTrue(
+            np.isclose(self.trans_2D.get_SoR(T=self.T, P=self.P),
+                       -6.1452364662E+00))
+        self.assertTrue(
+            np.isclose(self.trans_3D.get_SoR(T=self.T, P=self.P),
+                       1.9504035007E+01))
 
     def test_get_FoRT(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_FoRT(T=self.T, P=self.P),
-                                   3.2294507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_FoRT(T=self.T, P=self.P),
-                                   7.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_FoRT(T=self.T, P=self.P),
-                                   -1.8004035007E+01))
+        self.assertTrue(
+            np.isclose(self.trans_1D.get_FoRT(T=self.T, P=self.P),
+                       3.2294507940E+01))
+        self.assertTrue(
+            np.isclose(self.trans_2D.get_FoRT(T=self.T, P=self.P),
+                       7.1452364662E+00))
+        self.assertTrue(
+            np.isclose(self.trans_3D.get_FoRT(T=self.T, P=self.P),
+                       -1.8004035007E+01))
 
     def test_get_GoRT(self):
         # Using np.isclose instead of self.assertAlmostEqual since the latter
         # does not compare large floats very well
-        self.assertTrue(np.isclose(self.trans_1D.get_GoRT(T=self.T, P=self.P),
-                                   3.3294507940E+01))
-        self.assertTrue(np.isclose(self.trans_2D.get_GoRT(T=self.T, P=self.P),
-                                   8.1452364662E+00))
-        self.assertTrue(np.isclose(self.trans_3D.get_GoRT(T=self.T, P=self.P),
-                                   -1.7004035007E+01))
+        self.assertTrue(
+            np.isclose(self.trans_1D.get_GoRT(T=self.T, P=self.P),
+                       3.3294507940E+01))
+        self.assertTrue(
+            np.isclose(self.trans_2D.get_GoRT(T=self.T, P=self.P),
+                       8.1452364662E+00))
+        self.assertTrue(
+            np.isclose(self.trans_3D.get_GoRT(T=self.T, P=self.P),
+                       -1.7004035007E+01))
 
     def test_to_dict(self):
         self.assertEqual(self.trans_3D.to_dict(), self.trans_3D_dict)

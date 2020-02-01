@@ -36,7 +36,6 @@ class Network(Reactions):
             - stoich
             - is_transition_state
     """
-
     def __init__(self, reactions):
         super().__init__(reactions=reactions)
         self.update_network()
@@ -55,7 +54,9 @@ class Network(Reactions):
         self.graph = nx.Graph()
         for reaction in self.reactions:
             states = [reaction.reactants, reaction.products]
-            states_stoich = [reaction.reactants_stoich,reaction.products_stoich]
+            states_stoich = [
+                reaction.reactants_stoich, reaction.products_stoich
+            ]
 
             # Add transition state if available
             if reaction.transition_state is not None:
@@ -70,7 +71,9 @@ class Network(Reactions):
 
                 # Transition states occupy index 2 of states
                 is_transition_state = (i == 2)
-                self.graph.add_node(species_set, species=state, stoich=stoich,
+                self.graph.add_node(species_set,
+                                    species=state,
+                                    stoich=stoich,
                                     is_transition_state=is_transition_state,
                                     name=_write_reaction_state(species=state,
                                                                stoich=stoich))
@@ -81,22 +84,29 @@ class Network(Reactions):
                 self.graph.add_edge(state_sets[0], state_sets[2])
                 self.graph.add_edge(state_sets[1], state_sets[2])
 
-    def get_min_E_span(self, source, target, units=None, species_delimiter='+',
-                       cutoff=None, **kwargs):
+    def get_min_E_span(self,
+                       source,
+                       target,
+                       units=None,
+                       species_delimiter='+',
+                       cutoff=None,
+                       **kwargs):
         # Convert target and source strings to sets
         if source is None:
             source_set = set()
         else:
             source_names, source_stoich = _parse_reaction_state(
-                    reaction_str=source, species_delimiter=species_delimiter)
+                reaction_str=source, species_delimiter=species_delimiter)
             source_set = state_str_to_set(species_names=source_names,
                                           stoich=source_stoich)
 
         target_sets = _get_target_sets(target=target,
                                        species_delimiter=species_delimiter)
         E_spans = []
-        for path in nx.all_simple_paths(self.graph, source=source_set,
-                                        target=target_sets, cutoff=cutoff):
+        for path in nx.all_simple_paths(self.graph,
+                                        source=source_set,
+                                        target=target_sets,
+                                        cutoff=cutoff):
             E_spans.append(self.get_E_span(path=path, units=units, **kwargs))
         return np.amin(E_spans)
 
@@ -139,12 +149,18 @@ class Network(Reactions):
             species = self.graph.nodes[state]['species']
             stoich = self.graph.nodes[state]['stoich']
             if units is None:
-                G.append(get_state_quantity(species=species, stoich=stoich,
-                                            method_name='get_GoRT', **kwargs))
+                G.append(
+                    get_state_quantity(species=species,
+                                       stoich=stoich,
+                                       method_name='get_GoRT',
+                                       **kwargs))
             else:
-                G.append(get_state_quantity(species=species, stoich=stoich,
-                                            method_name='get_G', units=units,
-                                            **kwargs))
+                G.append(
+                    get_state_quantity(species=species,
+                                       stoich=stoich,
+                                       method_name='get_G',
+                                       units=units,
+                                       **kwargs))
         # Get indices for TDI and TDTS
         min_i = np.argmin(G)
         max_i = np.argmax(G)
@@ -155,8 +171,11 @@ class Network(Reactions):
             energy_span += G[-1] - G[0]
         return energy_span
 
-    def plot_network(self, layout='kamada_kawai_layout', source=None,
-                     target=None, species_delimiter='+'):
+    def plot_network(self,
+                     layout='kamada_kawai_layout',
+                     source=None,
+                     target=None,
+                     species_delimiter='+'):
         """Draws the reaction network
 
         Parameters
@@ -190,13 +209,12 @@ class Network(Reactions):
         layout = getattr(nx, layout)
         pos = layout(self.graph)
 
-
         # Convert target and source strings to sets
         if source is None:
             source_set = set()
         else:
             source_names, source_stoich = _parse_reaction_state(
-                    reaction_str=source, species_delimiter=species_delimiter)
+                reaction_str=source, species_delimiter=species_delimiter)
             source_set = state_str_to_set(species_names=source_names,
                                           stoich=source_stoich)
 
@@ -218,22 +236,38 @@ class Network(Reactions):
             colors.append(color)
             labels[node[0]] = node[1]['name']
         figure, axes = plt.subplots()
-        nx.draw_networkx(self.graph, pos=pos, node_color=colors, ax=axes,
+        nx.draw_networkx(self.graph,
+                         pos=pos,
+                         node_color=colors,
+                         ax=axes,
                          with_labels=False)
         nx.draw_networkx_labels(self.graph, pos=pos, labels=labels, ax=axes)
         return figure, axes
 
-    def plot_coordinate_diagram(self, source, target, method_name, units=None,
-                                cutoff=None, max_energy_span=None,
-                                max_paths=None, pathway_numbers=None,
-                                min_x_spacing=1., x_width=0.5,
-                                x_scale_TS=0.5, y_scale_TS=0.5,
-                                x_label_offset=-0.1, y_label_offset=0.1,
-                                species_delimiter='+', viewer='matplotlib',
-                                show_state_table=True, show_state_labels=True,
-                                table_font_size=None, table_width_ratio=[3, 1],
+    def plot_coordinate_diagram(self,
+                                source,
+                                target,
+                                method_name,
+                                units=None,
+                                cutoff=None,
+                                max_energy_span=None,
+                                max_paths=None,
+                                pathway_numbers=None,
+                                min_x_spacing=1.,
+                                x_width=0.5,
+                                x_scale_TS=0.5,
+                                y_scale_TS=0.5,
+                                x_label_offset=-0.1,
+                                y_label_offset=0.1,
+                                species_delimiter='+',
+                                viewer='matplotlib',
+                                show_state_table=True,
+                                show_state_labels=True,
+                                table_font_size=None,
+                                table_width_ratio=[3, 1],
                                 show_energy_span=False,
-                                energy_span_format='.2f', colors=None,
+                                energy_span_format='.2f',
+                                colors=None,
                                 **kwargs):
         """Plots the reaction coordinate diagram
 
@@ -330,8 +364,7 @@ class Network(Reactions):
             # Split graph into two axes if including the table
             if show_state_table:
                 fig, axes = plt.subplots(
-                        ncols=2,
-                        gridspec_kw={'width_ratios': table_width_ratio})
+                    ncols=2, gridspec_kw={'width_ratios': table_width_ratio})
             else:
                 fig, axes = plt.subplots()
                 axes = [axes]
@@ -345,19 +378,23 @@ class Network(Reactions):
             if colors is None:
                 colors = style.colors
             for color in colors:
-                new_colors.extend([color]*2)
+                new_colors.extend([color] * 2)
             style.colors = new_colors
 
             # Initialize the graph
             graph = pygal.XY(x_title='Reaction Coordinate',
                              y_title=y_title,
-                             pretty_print=True, show_y_guides=False,
-                             show_x_guides=False, show_x_labels=False,
-                             x_value_formatter=x_value_formatter, style=style,
+                             pretty_print=True,
+                             show_y_guides=False,
+                             show_x_guides=False,
+                             show_x_labels=False,
+                             x_value_formatter=x_value_formatter,
+                             style=style,
                              truncate_legend=-1)
         else:
-            err_msg = ('Viewer {} not supported. Type help(pmutt.reaction.'
-                       'network.Network) for supported options.'.format(viewer))
+            err_msg = (
+                'Viewer {} not supported. Type help(pmutt.reaction.'
+                'network.Network) for supported options.'.format(viewer))
             raise ValueError(err_msg)
 
         # If the pathway to plot was specified as an integer, convert to a list
@@ -371,33 +408,32 @@ class Network(Reactions):
                                        species_delimiter=species_delimiter)
 
         # Get all the pathways and associated data for sorting
-        paths = list(path for path in nx.all_simple_paths(self.graph,
-                                                          source=source_set,
-                                                          target=target_sets,
-                                                          cutoff=cutoff))
+        paths = list(path for path in nx.all_simple_paths(
+            self.graph, source=source_set, target=target_sets, cutoff=cutoff))
         path_lens = list(len(path) for path in paths)
-        energy_spans = list(self.get_E_span(path, units, **kwargs)
-                            for path in paths)
+        energy_spans = list(
+            self.get_E_span(path, units, **kwargs) for path in paths)
 
         # Get n paths with smallest energy span
         if max_paths is not None:
-            paths_data = [(span, path_len, path) for span, path_len, path
-                          in zip(energy_spans, path_lens, paths)]
+            paths_data = [
+                (span, path_len, path)
+                for span, path_len, path in zip(energy_spans, path_lens, paths)
+            ]
             paths_data_reduced = heapq.nsmallest(max_paths, paths_data)
-            energy_spans, path_lens, paths = map(list, zip(*paths_data_reduced))
+            energy_spans, path_lens, paths = map(list,
+                                                 zip(*paths_data_reduced))
 
         # Remove pathways greater than the limit if any
         if max_energy_span is not None:
-            for i in range(len(paths)-1, -1, -1):
+            for i in range(len(paths) - 1, -1, -1):
                 if energy_spans[i] > max_energy_span:
                     del paths[i], path_lens[i], energy_spans[i]
 
         # Sort in descending order of path length
-        _, paths_sorted, energy_spans_sorted = zip(*sorted(zip(path_lens,
-                                                               paths,
-                                                               energy_spans),
-                                                   reverse=True))
-        
+        _, paths_sorted, energy_spans_sorted = zip(
+            *sorted(zip(path_lens, paths, energy_spans), reverse=True))
+
         # Determine x values for each state
         x_vals = {}
         for path in paths_sorted:
@@ -408,20 +444,21 @@ class Network(Reactions):
             # move to next path
             if len(duplicates) == 0:
                 for i, state in enumerate(path):
-                    x_vals[state] = i*x_spacing
+                    x_vals[state] = i * x_spacing
                 continue
             # If there is only one duplicate
             if len(duplicates) == 1:
                 # If it is the last index, then assign to the length of the
                 # reaction.
                 if duplicates[0] == path[-1]:
-                    x_vals[duplicates[0]] = i*x_spacing*(np.max(path_lens)-1)
+                    x_vals[duplicates[0]] = i * x_spacing * (
+                        np.max(path_lens) - 1)
                 else:
                     i = path.index(duplicates[0])
-                    prev_state = path[i-1]
-                    next_state = path[i+1]
-                    x_vals[duplicates[0]] = np.mean([x_vals[prev_state],
-                                                     x_vals[next_state]])
+                    prev_state = path[i - 1]
+                    next_state = path[i + 1]
+                    x_vals[duplicates[0]] = np.mean(
+                        [x_vals[prev_state], x_vals[next_state]])
                 continue
             # Skip this path if all the states are duplicates
             if len(duplicates) == len(path):
@@ -435,16 +472,17 @@ class Network(Reactions):
                 if j - i == 1:
                     continue
                 # Calculate spacing
-                x_spacing = (x_vals[duplicate_j] - x_vals[duplicate_i])/(j - i)
+                x_spacing = (x_vals[duplicate_j] - x_vals[duplicate_i]) / (j -
+                                                                           i)
 
                 # Assign x positions for new states
                 x_initial = x_vals[duplicate_i]
-                for l, k in enumerate(range(i+1, j), start=1):
-                    x_vals[path[k]] = x_spacing*l + x_initial
+                for l, k in enumerate(range(i + 1, j), start=1):
+                    x_vals[path[k]] = x_spacing * l + x_initial
 
         # Sort ascending order by energy span
-        energy_spans_sorted, paths_sorted = zip(*sorted(zip(energy_spans_sorted, 
-                                                            paths_sorted)))
+        energy_spans_sorted, paths_sorted = zip(
+            *sorted(zip(energy_spans_sorted, paths_sorted)))
 
         # Assign x, y values for plot
         labels_list = []
@@ -472,7 +510,7 @@ class Network(Reactions):
                     units_str = ''
                 else:
                     units_str = units
-                path_name = 'Pathway {:>3} ({:%s} {})'%energy_span_format
+                path_name = 'Pathway {:>3} ({:%s} {})' % energy_span_format
                 path_name = path_name.format(i, energy_span, units_str)
             else:
                 path_name = 'Pathway {:>3}'.format(i)
@@ -487,8 +525,10 @@ class Network(Reactions):
                 x_state = x_vals[state]
                 species = self.graph.nodes[state]['species']
                 stoich = self.graph.nodes[state]['stoich']
-                y_val = get_state_quantity(species=species, stoich=stoich,
-                                           method_name=method_name, units=units,
+                y_val = get_state_quantity(species=species,
+                                           stoich=stoich,
+                                           method_name=method_name,
+                                           units=units,
                                            **kwargs)
                 # Subtract the initial state's energy
                 if j == 0:
@@ -499,8 +539,8 @@ class Network(Reactions):
                 # Generate continuous points for plot
                 if self.graph.nodes[state]['is_transition_state']:
                     # Calculate product properties for y interpolation
-                    products = self.graph.nodes[path[j+1]]['species']
-                    prod_stoich = self.graph.nodes[path[j+1]]['stoich']
+                    products = self.graph.nodes[path[j + 1]]['species']
+                    prod_stoich = self.graph.nodes[path[j + 1]]['stoich']
                     y_prod = get_state_quantity(species=products,
                                                 stoich=prod_stoich,
                                                 method_name=method_name,
@@ -509,49 +549,53 @@ class Network(Reactions):
                     # Fit spline
                     delta_x = x_state - x_plot[-1]
                     delta_y = y_state - y_plot[-1]
-                    x_fit = np.array([x_plot[-1],
-                                      x_state - delta_x*x_scale_TS,
-                                      x_state,
-                                      x_state + delta_x*x_scale_TS,
-                                      x_state + delta_x])
-                    y_fit = np.array([y_plot[-1],
-                                      y_state - delta_y*y_scale_TS,
-                                      y_state,
-                                      (y_state-y_prod)*y_scale_TS+y_prod,
-                                      y_prod])
+                    x_fit = np.array([
+                        x_plot[-1], x_state - delta_x * x_scale_TS, x_state,
+                        x_state + delta_x * x_scale_TS, x_state + delta_x
+                    ])
+                    y_fit = np.array([
+                        y_plot[-1], y_state - delta_y * y_scale_TS, y_state,
+                        (y_state - y_prod) * y_scale_TS + y_prod, y_prod
+                    ])
                     tck = interpolate.splrep(x_fit, y_fit, k=2)
                     # Calculate new x and y points from spline fit
-                    x_spline = np.linspace(x_state-delta_x, x_state+delta_x,
-                                           100)
+                    x_spline = np.linspace(x_state - delta_x,
+                                           x_state + delta_x, 100)
                     y_spline = interpolate.splev(x_spline, tck)
 
                     # Get x value corresponding to peak for pygal
                     max_i = np.argmax(y_spline)
                     x_points.append(x_spline[max_i])
                     y_points.append(y_spline[max_i])
-    
+
                     # Add new data to the appropriate lists
                     x_plot.extend(x_spline)
                     y_plot.extend(y_spline)
                 else:
                     # For intermediates, use a straight line
-                    x_plot.extend([x_state-x_width/2.,
-                                   x_state,
-                                   x_state+x_width/2.])
+                    x_plot.extend([
+                        x_state - x_width / 2., x_state, x_state + x_width / 2.
+                    ])
                     y_plot.extend([y_state, y_state, y_state])
                     x_points.append(x_state)
                     y_points.append(y_state)
             # Add data to plot
             if viewer == 'matplotlib':
-                axes[0].plot(x_plot, y_plot, label=path_name, zorder=n_paths-i)
+                axes[0].plot(x_plot,
+                             y_plot,
+                             label=path_name,
+                             zorder=n_paths - i)
             elif viewer == 'pygal':
                 # Add line
-                line_data = [{'value': (x, y),} for x, y in zip(x_plot, y_plot)]
+                line_data = [{
+                    'value': (x, y),
+                } for x, y in zip(x_plot, y_plot)]
                 graph.add(path_name, line_data, show_dots=False)
                 # Add interactive points
-                point_data = [{'value': (x, y),
-                               'label': self.graph.nodes[state]['name'],}
-                              for x, y, state in zip(x_points, y_points, path)]
+                point_data = [{
+                    'value': (x, y),
+                    'label': self.graph.nodes[state]['name'],
+                } for x, y, state in zip(x_points, y_points, path)]
                 graph.add(point_name, point_data, stroke=False)
 
         if viewer == 'matplotlib':
@@ -559,25 +603,30 @@ class Network(Reactions):
             axes[0].legend()
             axes[0].set_ylabel(y_title)
             axes[0].set_xlabel('Reaction coordinate')
-            axes[0].tick_params(axis='x', which='both', bottom=False, top=False,
+            axes[0].tick_params(axis='x',
+                                which='both',
+                                bottom=False,
+                                top=False,
                                 labelbottom=False)
             # Add state labels
             if show_state_labels:
                 for i, label in enumerate(labels_list, start=1):
-                    axes[0].text(x=x_vals[label]+x_label_offset,
-                                y=y_states[label]+y_label_offset,
-                                s='{:^}'.format(i))
+                    axes[0].text(x=x_vals[label] + x_label_offset,
+                                 y=y_states[label] + y_label_offset,
+                                 s='{:^}'.format(i))
             # Add table
             if show_state_table:
                 axes[1].axis('off')
                 # Setting up table info
-                columns = ('State',)
-                rows = range(1, len(labels_list)+1)
-                cellText = tuple([self.graph.nodes[state]['name']] 
-                                for state in labels_list)
+                columns = ('State', )
+                rows = range(1, len(labels_list) + 1)
+                cellText = tuple([self.graph.nodes[state]['name']]
+                                 for state in labels_list)
                 # Adding table
-                table = axes[1].table(cellText=cellText, colLabels=columns,
-                                      rowLabels=rows, loc='center')
+                table = axes[1].table(cellText=cellText,
+                                      colLabels=columns,
+                                      rowLabels=rows,
+                                      loc='center')
                 # Adjust font size
                 if table_font_size is not None:
                     table.auto_set_font_size(False)
@@ -597,13 +646,14 @@ def state_to_set(species, stoich):
         except AttributeError:
             pass
         else:
-            for state, state_stoich in zip((specie.reaction.reactants,
-                                            specie.reaction.products),
-                                           (specie.reaction.reactants_stoich,
-                                            specie.reaction.products_stoich)):
+            for state, state_stoich in zip(
+                (specie.reaction.reactants, specie.reaction.products),
+                (specie.reaction.reactants_stoich,
+                 specie.reaction.products_stoich)):
                 species_names.append(state_to_set(state, state_stoich))
                 stoich_out.append(1)
     return state_str_to_set(species_names, stoich_out)
+
 
 def _get_target_sets(target, species_delimiter='+'):
     target_sets = []
@@ -614,16 +664,16 @@ def _get_target_sets(target, species_delimiter='+'):
             target = [target]
         for reaction_str in target:
             target_names, target_stoich = _parse_reaction_state(
-                    reaction_str=reaction_str,
-                    species_delimiter=species_delimiter)
-            target_set = state_str_to_set(
-                    species_names=target_names, stoich=target_stoich)
+                reaction_str=reaction_str, species_delimiter=species_delimiter)
+            target_set = state_str_to_set(species_names=target_names,
+                                          stoich=target_stoich)
             target_sets.append(target_set)
     return target_sets
 
 
 def state_str_to_set(species_names, stoich):
     return frozenset([(x, y) for x, y in zip(species_names, stoich)])
+
 
 def get_state_quantity(species, stoich, method_name, **kwargs):
     if method_name == 'get_q':

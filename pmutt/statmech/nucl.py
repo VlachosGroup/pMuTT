@@ -6,7 +6,6 @@ from pmutt.io.json import remove_class
 class EmptyNucl(_ModelBase):
     """Nuclear modes. Assumes no change in any chemical reaction and hence
     does not affect thermodynamic quantities."""
-
     def __init__(self):
         pass
 

@@ -12,8 +12,8 @@ Welcome to pmutt's documentation!
 
    includeme
    install
-   examples
-   workshops
+   examples_jupyter/examples
+   workshops/workshops
    publications
    referencing
 
@@ -21,20 +21,19 @@ Welcome to pmutt's documentation!
    :maxdepth: 2
    :caption: API Reference
 
-   constants
-   io
-   empirical
-   statmech
-   mixture
-   kinetic_models
-   reactions
-   phase_diagram
-   eos
-   visual
+   api/constants/constants
+   api/io/io
+   api/empirical/empirical
+   api/statmech/statmech
+   api/mixture/mixture
+   api/kinetic_models/kinetic_models
+   api/reactions/reactions
+   api/phase_diagram/phase_diagram
+   api/eos/eos
+   api/visualization/visual
    release_notes
 
 .. toctree::
-   :maxdepth: 2
    :caption: Useful Links
 
    View Source Code (GitHub) <https://github.com/VlachosGroup/pmutt>

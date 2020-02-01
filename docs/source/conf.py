@@ -12,9 +12,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+pmutt_path = os.path.join(os.path.dirname(__file__), '../../../pmutt')
+sys.path.insert(0, os.path.abspath(pmutt_path))
 
 
 # -- Project information -----------------------------------------------------
@@ -40,6 +41,7 @@ release = '1.2.16'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
@@ -48,6 +50,13 @@ extensions = [
     'sphinx.ext.napoleon',
     #'nbsphinx',
 ]
+
+# Automatically generate summaries
+autosummary_generate = True
+autodoc_default_flags = ['members',
+                         'undoc-members',
+                         'show-inheritance',
+                         'inherited-members']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -71,7 +80,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = ['_build', '**.ipynb_checkpoints']
+exclude_patterns = ['_build', '**.ipynb_checkpoints', '**.ipynb']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'

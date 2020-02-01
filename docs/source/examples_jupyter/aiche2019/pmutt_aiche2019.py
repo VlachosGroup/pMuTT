@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # AIChE 2019 pMuTT Workshop
@@ -393,7 +393,7 @@ try:
     notebook_path = os.path.dirname(__file__)
 except NameError:
     notebook_path = Path().resolve()
-os.chdir(notebook_folder)
+os.chdir(notebook_path)
 
 
 # Now we can read from the spreadsheet.

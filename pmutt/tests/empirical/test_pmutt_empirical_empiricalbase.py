@@ -16,7 +16,10 @@ class TestEmpiricalBase(unittest.TestCase):
         unittest.TestCase.setUp(self)
         self.EmpiricalBase = EmpiricalBase(
             name='H2O',
-            elements={'H': 2, 'O': 1},
+            elements={
+                'H': 2,
+                'O': 1
+            },
             phase='g',
             potentialenergy=-14.2209,
             atoms=molecule('H2O'),
@@ -24,6 +27,7 @@ class TestEmpiricalBase(unittest.TestCase):
             spin=0,
             vib_wavenumbers=np.array([3825.434, 3710.2642, 1582.432]),
             **presets['idealgas'])
+
 
 class TestGasPressureAdj(unittest.TestCase):
     def setUp(self):

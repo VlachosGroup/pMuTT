@@ -12,6 +12,7 @@ pmutt
 name = 'pmutt'
 __version__ = '1.2.16'
 
+import os
 import inspect
 import itertools
 import re
@@ -31,10 +32,9 @@ class _pmuttBase:
     - ``__eq__`` method that compares ``to_dict`` outputs
     - ``to_dict`` method that converts object to dictionary format
     - ``from_dict`` method that creates the object from a dictionary"""
-
     def __init__(self):
         pass
-    
+
     def __eq__(self, other):
         try:
             other_dict = other.to_dict()
@@ -79,7 +79,6 @@ class _ModelBase(_pmuttBase):
       ``get_F``, ``get_GoRT``, ``get_G``)
       
     Inherits from :class:`~pmutt._pmuttBase`"""
-
     def __init__(self):
         pass
 
@@ -98,7 +97,7 @@ class _ModelBase(_pmuttBase):
             Cv : float
                 Heat capacity (constant V) in appropriate units
         """
-        return _force_pass_arguments(self.get_CvoR, **kwargs)*c.R(units)
+        return _force_pass_arguments(self.get_CvoR, **kwargs) * c.R(units)
 
     def get_Cp(self, units, **kwargs):
         """Calculate the heat capacity (constant P)
@@ -116,7 +115,7 @@ class _ModelBase(_pmuttBase):
                 Heat capacity (constant P) in appropriate units
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return _force_pass_arguments(self.get_CpoR, **kwargs)*R_adj
+        return _force_pass_arguments(self.get_CpoR, **kwargs) * R_adj
 
     def get_U(self, units, T=c.T0('K'), **kwargs):
         """Calculate the internal energy
@@ -140,7 +139,7 @@ class _ModelBase(_pmuttBase):
 
         UoRT_kwargs = kwargs.copy()
         UoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_UoRT, **UoRT_kwargs)*T*R_adj
+        return _force_pass_arguments(self.get_UoRT, **UoRT_kwargs) * T * R_adj
 
     def get_H(self, units, T=c.T0('K'), **kwargs):
         """Calculate the enthalpy
@@ -164,7 +163,7 @@ class _ModelBase(_pmuttBase):
 
         HoRT_kwargs = kwargs.copy()
         HoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_HoRT, **HoRT_kwargs)*T*R_adj
+        return _force_pass_arguments(self.get_HoRT, **HoRT_kwargs) * T * R_adj
 
     def get_S(self, units, **kwargs):
         """Calculate the entropy
@@ -182,7 +181,7 @@ class _ModelBase(_pmuttBase):
                 Entropy in appropriate units
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return _force_pass_arguments(self.get_SoR, **kwargs)*R_adj
+        return _force_pass_arguments(self.get_SoR, **kwargs) * R_adj
 
     def get_FoRT(self, **kwargs):
         """Calculates the dimensionless Helmholtz energy
@@ -222,7 +221,7 @@ class _ModelBase(_pmuttBase):
 
         FoRT_kwargs = kwargs.copy()
         FoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_FoRT, **FoRT_kwargs)*T*R_adj
+        return _force_pass_arguments(self.get_FoRT, **FoRT_kwargs) * T * R_adj
 
     def get_GoRT(self, **kwargs):
         """Calculates the dimensionless Gibbs free energy
@@ -262,11 +261,19 @@ class _ModelBase(_pmuttBase):
 
         GoRT_kwargs = kwargs.copy()
         GoRT_kwargs['T'] = T
-        return _force_pass_arguments(self.get_GoRT, **GoRT_kwargs)*T*R_adj
+        return _force_pass_arguments(self.get_GoRT, **GoRT_kwargs) * T * R_adj
 
 
-def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
-            viewer='matplotlib', figure=None, ax=None, **kwargs):
+def plot_1D(obj,
+            x_name,
+            x_values,
+            methods,
+            nrows=None,
+            ncols=None,
+            viewer='matplotlib',
+            figure=None,
+            ax=None,
+            **kwargs):
     """Make a 1D plot
 
     Parameters
@@ -309,7 +316,7 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
     """
     # Check if single method passed
     if not _is_iterable(methods):
-        methods = (methods,)
+        methods = (methods, )
 
     # Set up the plot
     if viewer == 'matplotlib':
@@ -322,12 +329,15 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
         if ax is None:
             figure, ax = plt.subplots(nrows=nrows, ncols=ncols)
         # Force ax to be a list
-        if nrows*ncols == 1:
+        if nrows * ncols == 1:
             ax = [ax]
     elif viewer == 'pygal':
-        graph = pygal.XY(x_title=x_name, y_title=methods[0].replace('get_', ''),
-                         pretty_print=True, show_y_guides=False,
-                         show_x_guides=False, include_x_axis=True)
+        graph = pygal.XY(x_title=x_name,
+                         y_title=methods[0].replace('get_', ''),
+                         pretty_print=True,
+                         show_y_guides=False,
+                         show_x_guides=False,
+                         include_x_axis=True)
         if len(methods) != 1:
             err_msg = ('Currently, viewer {} only supports a single method.'
                        ''.format(viewer))
@@ -361,8 +371,16 @@ def plot_1D(obj, x_name, x_values, methods, nrows=None, ncols=None,
     elif viewer == 'pygal':
         return graph
 
-def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
-            nrows=None, ncols=None, **kwargs):
+
+def plot_2D(obj,
+            x1_name,
+            x1_values,
+            x2_name,
+            x2_values,
+            methods,
+            nrows=None,
+            ncols=None,
+            **kwargs):
     """Make a 2D plot
 
     Parameters
@@ -411,7 +429,7 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
     """
     # Check if single method passed
     if not _is_iterable(methods):
-        methods = (methods,)
+        methods = (methods, )
 
     # If rows/columns not specified, assing default values
     if nrows is None:
@@ -422,7 +440,7 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
 
     figure, ax = plt.subplots(nrows=nrows, ncols=ncols)
     # Force ax to be a list
-    if nrows*ncols == 1:
+    if nrows * ncols == 1:
         ax = [ax]
     c = []
     cbar = []
@@ -444,6 +462,7 @@ def plot_2D(obj, x1_name, x1_values, x2_name, x2_values, methods,
         ax[i].set_xlabel(x1_name)
         ax[i].set_ylabel(x2_name)
     return (figure, ax, c, cbar)
+
 
 def _get_expected_arguments(fn):
     """Returns the arguments expected by a function. Useful for determining
@@ -468,6 +487,7 @@ def _get_expected_arguments(fn):
     arg_count = fn_code.co_argcount
     args = fn_code.co_varnames[:arg_count]
     return args
+
 
 def _pass_expected_arguments(fn, **kwargs):
     """Finds expected values from a function or class and passes the
@@ -498,6 +518,7 @@ def _pass_expected_arguments(fn, **kwargs):
             continue
     return fn(**expected_arg_val)
 
+
 def _kwargs_allowed(fn):
     """Checks to see if kwargs is allowed
 
@@ -516,6 +537,7 @@ def _kwargs_allowed(fn):
             return True
     else:
         return False
+
 
 def _force_pass_arguments(fn, **kwargs):
     """Checks to see if fn accepts kwargs. If it does, pass arguments using
@@ -538,6 +560,7 @@ def _force_pass_arguments(fn, **kwargs):
         return fn(**kwargs)
     else:
         return _pass_expected_arguments(fn, **kwargs)
+
 
 def _is_iterable(val):
     """
@@ -564,8 +587,13 @@ def _is_iterable(val):
         else:
             return True
 
-def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
-                       default_value=0., **kwargs):
+
+def _get_mode_quantity(mode,
+                       method_name,
+                       raise_error=True,
+                       raise_warning=True,
+                       default_value=0.,
+                       **kwargs):
     """Calculate the quantity from that mode.
 
     Parameters
@@ -607,6 +635,7 @@ def _get_mode_quantity(mode, method_name, raise_error=True, raise_warning=True,
         quantity = _pass_expected_arguments(method, **kwargs)
     return quantity
 
+
 def _get_specie_kwargs(specie_name, **kwargs):
     """Gets the keyword arguments specific to a specie
 
@@ -646,6 +675,7 @@ def _get_specie_kwargs(specie_name, **kwargs):
         pass
     return specie_kwargs
 
+
 def _apply_numpy_operation(quantity, operation, verbose=False):
     """Apply operation to quantity
 
@@ -670,6 +700,7 @@ def _apply_numpy_operation(quantity, operation, verbose=False):
         out_quantity = np_method(quantity)
     return out_quantity
 
+
 def parse_formula(formula):
     """Parses chemical formula into its elements and returns it as a
     dictionary.
@@ -689,6 +720,7 @@ def parse_formula(formula):
     for (element, coefficient) in elements_tuples:
         elements[element] = elements.get(element, 0) + int(coefficient or '1')
     return elements
+
 
 def get_molecular_weight(elements):
     """Molecular mass (in g/mol) given the elemental composition.
@@ -719,6 +751,7 @@ def get_molecular_weight(elements):
 
     return molecular_weight
 
+
 def pmutt_list_to_dict(pmutt_list, key='name'):
     """Converts a pmutt list to a dictionary using a specified attribute. This
     allows for quicker searching.
@@ -740,6 +773,7 @@ def pmutt_list_to_dict(pmutt_list, key='name'):
             Raised if `key` is not an attribute of the pmutt objects
     """
     return {getattr(obj, key): obj for obj in pmutt_list}
+
 
 def format_conditions(**kwargs):
     """Converts an arbitrary number of lists to a list of dictionaries. Useful
@@ -764,6 +798,7 @@ def format_conditions(**kwargs):
                 conditions.append({cond_name: cond_value})
     return conditions
 
+
 def _get_mass_unit(units):
     """Determine the mass units present
     
@@ -787,6 +822,7 @@ def _get_mass_unit(units):
                 return unit
     return None
 
+
 def _get_R_adj(units, elements=None):
     """Get adjustment to mass when converting from mol to g
     
@@ -807,7 +843,7 @@ def _get_R_adj(units, elements=None):
             appropriate units.
     """
     mass_unit = _get_mass_unit(units)
-    
+
     # If no mass unit is found, return R in appropriate units
     if mass_unit is None:
         return c.R(units)
@@ -818,11 +854,12 @@ def _get_R_adj(units, elements=None):
                    'elements.')
         raise AttributeError(err_msg)
 
-    mol_weight = get_molecular_weight(elements) # g/mol
+    mol_weight = get_molecular_weight(elements)  # g/mol
     mol_units = units.replace('/{}'.format(mass_unit), '/mol')
-    R_adj = c.R(mol_units)/c.convert_unit(num=mol_weight, initial='g',
-                                          final=mass_unit)
+    R_adj = c.R(mol_units) / c.convert_unit(
+        num=mol_weight, initial='g', final=mass_unit)
     return R_adj
+
 
 def _check_obj(obj, **kwargs):
     """Helper function to create an object if the class definition is passed.
@@ -844,6 +881,7 @@ def _check_obj(obj, **kwargs):
         obj_out = obj
     return obj_out
 
+
 def _check_iterable_attr(obj):
     """Helper method to assign object to a list if only one non-iterable
     element specified.
@@ -862,3 +900,39 @@ def _check_iterable_attr(obj):
         return [obj]
     else:
         return obj
+
+
+def run_tests(python_command='python',
+              buffer=False,
+              failfast=False,
+              verbose=False):
+    """Run unit tests.
+    
+    Parameters
+    ----------
+        python_command : str
+            Command used by terminal to run python. Default is 'python'.
+        buffer : bool, optional
+            The standard output and standard error streams are buffered during
+            the test run. Output during a passing test is discarded. Output is
+            echoed normally on test fail or error and is added to the failure
+            messages. Default is False.
+        failfast : bool, optional
+            Stop the test run on the first error or failure. Default is False.
+        verbose : bool, optional
+            Verbose output. Default is False.
+    """
+    # Swich to test directory and run the tests
+    base_path = os.getcwd()
+    pmutt_path = os.path.dirname(__file__)
+    test_path = os.path.join(pmutt_path, 'tests')
+    os.chdir(test_path)
+    test_command = '{} -m unittest'.format(python_command)
+    if buffer:
+        test_command += ' -b'
+    if failfast:
+        test_command += ' -f'
+    if verbose:
+        test_command += ' -v'
+    os.system(test_command)
+    os.chdir(base_path)
