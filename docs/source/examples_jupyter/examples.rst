@@ -34,7 +34,7 @@ Overview
 --------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Foverview%overview.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Foverview%2Foverview.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/overview/overview.html
@@ -73,7 +73,7 @@ Experimental to Empirical
 -------------------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexpt_data_to_empirical%expt_data_to_empirical_object.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexpt_data_to_empirical%2Fexpt_data_to_empirical_object.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.html
@@ -105,7 +105,7 @@ Excel to Empirical Data
 -----------------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexcel_to_empirical%excel_to_empirical.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexcel_to_empirical%2Fexcel_to_empirical.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.html
@@ -136,7 +136,7 @@ Reaction
 --------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Freactions%reactions.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Freactions%2Freactions.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/reactions/reactions.html
@@ -169,7 +169,7 @@ Chemkin_IO
 ----------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fchemkin_io%Chemkin_IO.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fchemkin_io%2FChemkin_IO.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.html
@@ -199,7 +199,7 @@ OpenMKM_IO
 ----------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fomkm_io%OpenMKM_IO.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fomkm_io%2FOpenMKM_IO.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.html
@@ -228,7 +228,7 @@ Phase Diagram
 -------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fphase_diagram%PhaseDiagram.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fphase_diagram%2FPhaseDiagram.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.html
@@ -264,7 +264,7 @@ NAM26 Workshop
 --------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fnam2019%NAM_2019_Workshop.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fnam2019%2FNAM_2019_Workshop.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.html
