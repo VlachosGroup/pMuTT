@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to pmutt’s documentation! &mdash; pmutt 1.2.16 documentation</title>
+  <title>Welcome to pmutt’s documentation! &mdash; pmutt 1.2.17 documentation</title>
   
 
   
@@ -19,33 +19,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" href="includeme.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,23 +89,23 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshops/workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="kinetic_models.html">Kinetic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Useful Links</span></p>
@@ -200,19 +203,24 @@
 <li class="toctree-l2"><a class="reference internal" href="install.html#running-unit-tests">Running unit tests</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#experimental-to-empirical">Experimental to Empirical</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#excel-to-empirical-data">Excel to Empirical Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#reaction">Reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#chemkin-io">Chemkin_IO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#openmkm-io">OpenMKM_IO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#phase-diagram">Phase Diagram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#workshops">Workshops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#nam26-workshop">NAM26 Workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_jupyter/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#experimental-to-empirical">Experimental to Empirical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#excel-to-empirical-data">Excel to Empirical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#reaction">Reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#chemkin-io">Chemkin_IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#openmkm-io">OpenMKM_IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#phase-diagram">Phase Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#workshops">Workshops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#nam26-workshop">NAM26 Workshop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_jupyter/examples.html#aiche-2019-workshop">AIChE 2019 Workshop</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshops/workshops.html">Workshops</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workshops/nam_2019.html">NAM 2019</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workshops/aiche_2019.html">AICHE 2019</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="publications.html#logos">Logos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="publications.html#cited-by">Cited By</a></li>
@@ -224,75 +232,78 @@
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="io.html#excel">Excel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#thermdat">Thermdat</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#yaml">YAML</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#json">JSON</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#vasp">VASP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#module-pmutt.io.gaussian">Gaussian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#chemkin">Chemkin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="io.html#openmkm">OpenMKM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/constants/constants.html">Constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/constants/constants.html#id2">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/constants/constants.html#unit-conversions">Unit Conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/constants/constants.html#misc">Misc.</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#empiricalbase">EmpiricalBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#nasa">NASA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#nasa9">NASA9</a></li>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#shomate">Shomate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#reference">Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="empirical.html#misc">Misc.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/io/io.html">Input and Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#excel">Excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#thermdat">Thermdat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#json">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#yaml">YAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#vasp">VASP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#gaussian">Gaussian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#chemkin">Chemkin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/io/io.html#openmkm">OpenMKM</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#statmech-base-class">StatMech Base Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#presets">Presets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#translational-models">Translational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#vibrational-models">Vibrational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#rotational-models">Rotational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#electronic-models">Electronic Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#nuclear-models">Nuclear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#empty-mode">Empty Mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#constant-mode">Constant Mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statmech.html#creating-new-statmech-models">Creating New StatMech Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/empirical/empirical.html">Empirical Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/empirical/empirical.html#parent-class">Parent Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/empirical/empirical.html#nasa">Nasa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/empirical/empirical.html#shomate">Shomate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/empirical/empirical.html#referencing">Referencing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/empirical/empirical.html#misc">Misc.</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mixture.html#coverage-effects">Coverage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/statmech/statmech.html">Statistical Thermodynamic Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#statmech-base-class">StatMech Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#presets">Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#translational-models">Translational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#vibrational-models">Vibrational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#rotational-models">Rotational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#electronic-models">Electronic Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#nuclear-models">Nuclear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#misc">Misc.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/statmech/statmech.html#creating-new-statmech-models">Creating New StatMech Models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="kinetic_models.html">Kinetic Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="kinetic_models.html#chemkin">Chemkin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kinetic_models.html#cantera">Cantera</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kinetic_models.html#openmkm">OpenMKM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kinetic_models.html#zacros">Zacros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/mixture/mixture.html">Mixture Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/mixture/mixture.html#coverage-effects">Coverage Effects</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reactions.html#reaction">Reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reactions.html#chemkinreaction">ChemkinReaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reactions.html#id2">Reactions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reactions.html#bep">BEP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/kinetic_models/kinetic_models.html">Kinetic Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/kinetic_models/kinetic_models.html#chemkin">Chemkin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/kinetic_models/kinetic_models.html#cantera">Cantera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/kinetic_models/kinetic_models.html#openmkm">OpenMKM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/kinetic_models/kinetic_models.html#zacros">Zacros</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="phase_diagram.html#phasediagram">PhaseDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/reactions/reactions.html">Reactions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/reactions/reactions.html#reaction-objects">Reaction Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/reactions/reactions.html#reactions-objects">Reactions Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/reactions/reactions.html#bep">BEP</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="eos.html#idealgas">IdealGas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eos.html#van-der-waals">van der Waals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/phase_diagram/phase_diagram.html">Phase Diagrams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/phase_diagram/phase_diagram/pmutt.reaction.phasediagram.PhaseDiagram.html">pmutt.reaction.phasediagram.PhaseDiagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/phase_diagram/phase_diagram.html#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="visual.html#plot-1d">Plot_1D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visual.html#plot-2d">Plot_2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/eos/eos.html">Equations of State</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/eos/eos/pmutt.eos.IdealGasEOS.html">pmutt.eos.IdealGasEOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/eos/eos/pmutt.eos.vanDerWaalsEOS.html">pmutt.eos.vanDerWaalsEOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/visualization/visual.html#plot-1d">Plot_1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualization/visual.html#plot-2d">Plot_2D</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#version-1-2-17">Version 1.2.17</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#version-1-2-16">Version 1.2.16</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#version-1-2-15">Version 1.2.15</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#version-1-2-14">Version 1.2.14</a></li>
@@ -329,9 +340,9 @@
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
 
@@ -370,26 +381,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

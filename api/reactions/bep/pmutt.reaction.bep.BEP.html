@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pmutt.reaction.bep.BEP &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pmutt.omkm.reaction.BEP" href="pmutt.omkm.reaction.BEP.html" />
+    <link rel="prev" title="pmutt.omkm.reaction.SurfaceReaction" href="../reactions/pmutt.omkm.reaction.SurfaceReaction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../reactions.html">Reactions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reactions.html#reaction-objects">Reaction Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reactions.html#reactions-objects">Reactions Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../reactions.html#bep">BEP</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.reaction.bep.BEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.omkm.reaction.BEP.html">pmutt.omkm.reaction.BEP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../reactions.html">Reactions</a> &raquo;</li>
+        
+      <li>pmutt.reaction.bep.BEP</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/reactions/bep/pmutt.reaction.bep.BEP.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pmutt-reaction-bep-bep">
+<h1>pmutt.reaction.bep.BEP<a class="headerlink" href="#pmutt-reaction-bep-bep" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pmutt.reaction.bep.BEP">
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.reaction.bep.</code><code class="sig-name descname">BEP</code><span class="sig-paren">(</span><em class="sig-param">slope</em>, <em class="sig-param">intercept</em>, <em class="sig-param">name=None</em>, <em class="sig-param">reaction=None</em>, <em class="sig-param">descriptor='delta_H'</em>, <em class="sig-param">elements=None</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code></p>
+<p>Represents a Bronsted Evans Polyani relationship. Intended to represent
+a species. Inherits from <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code>.</p>
+<p><span class="math notranslate nohighlight">\(E_a = \alpha H + \beta\)</span></p>
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.slope">
+<code class="sig-name descname">slope</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.slope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of BEP relationship.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.intercept">
+<code class="sig-name descname">intercept</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.intercept" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intercept of BEP relationship in kcal/mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the BEP. Default is None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.descriptor">
+<code class="sig-name descname">descriptor</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.descriptor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Descriptor to calculate the activation energy. Supported options:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>delta_H</p></td>
+<td><p>H_products - H_reactants (change in enthalpy)</p></td>
+</tr>
+<tr class="row-odd"><td><p>rev_delta_H</p></td>
+<td><p>H_reactants - H_products (change in enthalpy in reverse direction)</p></td>
+</tr>
+<tr class="row-even"><td><p>reactants_H</p></td>
+<td><p>H_reactants (enthalpy of reactants)</p></td>
+</tr>
+<tr class="row-odd"><td><p>products_H</p></td>
+<td><p>H_products (enthalpy of products)</p></td>
+</tr>
+<tr class="row-even"><td><p>delta_E</p></td>
+<td><p>E_products - E_reactants (change in electronic energy)</p></td>
+</tr>
+<tr class="row-odd"><td><p>rev_delta_E</p></td>
+<td><p>E_reactants - E_products (change in electronic energy in reverse direction)</p></td>
+</tr>
+<tr class="row-even"><td><p>reactants_E</p></td>
+<td><p>E_reactants (electronic energy of reactants)</p></td>
+</tr>
+<tr class="row-odd"><td><p>products_E</p></td>
+<td><p>E_products (electronic energy of products)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Default is ‘delta_H’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.elements">
+<code class="sig-name descname">elements</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Composition of the species.
+Keys of dictionary are elements, values are stoichiometric
+values in a formula unit.
+e.g. CH3OH can be represented as:
+{‘C’: 1, ‘H’: 4, ‘O’: 1,}.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.reaction.bep.BEP.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#pmutt.reaction.bep.BEP.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notes relevant to BEP relationship such as its source. If using a
+dictionary, the keys and values must be simple types supported by
+JSON</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">slope</em>, <em class="sig-param">intercept</em>, <em class="sig-param">name=None</em>, <em class="sig-param">reaction=None</em>, <em class="sig-param">descriptor='delta_H'</em>, <em class="sig-param">elements=None</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.__init__" title="pmutt.reaction.bep.BEP.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(slope, intercept[, name, reaction, …])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.from_dict" title="pmutt.reaction.bep.BEP.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(json_obj)</p></td>
+<td><p>Recreate an object from the JSON representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_Cp" title="pmutt.reaction.bep.BEP.get_Cp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cp</span></code></a>(units, **kwargs)</p></td>
+<td><p>Calculate the heat capacity (constant P)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_Cv" title="pmutt.reaction.bep.BEP.get_Cv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cv</span></code></a>(units, **kwargs)</p></td>
+<td><p>Calculate the heat capacity (constant V)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_E_act" title="pmutt.reaction.bep.BEP.get_E_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_E_act</span></code></a>(units, reaction[, rev])</p></td>
+<td><p>Calculate Arrhenius activation energy using BEP relationship</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_EoRT_act" title="pmutt.reaction.bep.BEP.get_EoRT_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_EoRT_act</span></code></a>(reaction[, rev, T])</p></td>
+<td><p>Calculates dimensionless Arrhenius activation energy using BEP relationship</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_F" title="pmutt.reaction.bep.BEP.get_F"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_F</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the Helmholtz energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_FoRT" title="pmutt.reaction.bep.BEP.get_FoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_FoRT</span></code></a>(**kwargs)</p></td>
+<td><p>Calculates the dimensionless Helmholtz energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_G" title="pmutt.reaction.bep.BEP.get_G"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the Gibbs energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_GoRT" title="pmutt.reaction.bep.BEP.get_GoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_GoRT</span></code></a>(reaction[, T, entropy_state])</p></td>
+<td><p>Calculates the dimensionless Gibbs energy using BEP relationship and reactants Gibbs energy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_H" title="pmutt.reaction.bep.BEP.get_H"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_H</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the enthalpy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_HoRT" title="pmutt.reaction.bep.BEP.get_HoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_HoRT</span></code></a>(reaction[, T])</p></td>
+<td><p>Calculates the dimensionless enthalpy using BEP relationship and reactants or products enthalpy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_S" title="pmutt.reaction.bep.BEP.get_S"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_S</span></code></a>(units, **kwargs)</p></td>
+<td><p>Calculate the entropy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_SoR" title="pmutt.reaction.bep.BEP.get_SoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SoR</span></code></a>([reaction, T, entropy_state])</p></td>
+<td><p>Calculates the dimensionless entropy using reactants or products entropy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_U" title="pmutt.reaction.bep.BEP.get_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_U</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the internal energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.get_UoRT" title="pmutt.reaction.bep.BEP.get_UoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_UoRT</span></code></a>(reaction[, T])</p></td>
+<td><p>Calculates the dimensionless internal energy using BEP relationship and initial state internal energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.bep.BEP.to_dict" title="pmutt.reaction.bep.BEP.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<td><p>Represents object as dictionary with JSON-accepted datatypes</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.from_dict">
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – JSON representation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Obj</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Appropriate object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_Cp">
+<code class="sig-name descname">get_Cp</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_Cp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the heat capacity (constant P)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Cp</strong> – Heat capacity (constant P) in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_Cv">
+<code class="sig-name descname">get_Cv</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_Cv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the heat capacity (constant V)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Cv</strong> – Heat capacity (constant V) in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_E_act">
+<code class="sig-name descname">get_E_act</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">reaction</em>, <em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_E_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Arrhenius activation energy using BEP relationship</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>reaction</strong> (<a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object) – Reaction related to BEP.</p></li>
+<li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>E_act</strong> – Dimensionless activation energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_EoRT_act">
+<code class="sig-name descname">get_EoRT_act</code><span class="sig-paren">(</span><em class="sig-param">reaction</em>, <em class="sig-param">rev=False</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_EoRT_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates dimensionless Arrhenius activation energy using BEP
+relationship</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> (<a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object) – Reaction related to BEP.</p></li>
+<li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
+instead of reactants. Default is False</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>EoRT_act</strong> – Dimensionless activation energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_F">
+<code class="sig-name descname">get_F</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_F" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Helmholtz energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>F</strong> – Hemholtz energy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_FoRT">
+<code class="sig-name descname">get_FoRT</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_FoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code> and <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>FoRT</strong> – Dimensionless Helmholtz energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_G">
+<code class="sig-name descname">get_G</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Gibbs energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>G</strong> – Gibbs energy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_GoRT">
+<code class="sig-name descname">get_GoRT</code><span class="sig-paren">(</span><em class="sig-param">reaction</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">entropy_state='reactants'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy using BEP relationship
+and reactants Gibbs energy. The BEP relationship has no entropic
+contribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> (<a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object) – Reaction related to BEP.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</p></li>
+<li><p><strong>entropy_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) – <p>State to use to estimate entropy. Supported arguments:</p>
+<ul>
+<li><p>’reactants’ (default)</p></li>
+<li><p>’products’</p></li>
+<li><p>None (Entropy contribution is 0. Useful if misc_models
+have been specified for entropy)</p></li>
+</ul>
+</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>GoRT</strong> – Dimensionless Gibbs energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_H">
+<code class="sig-name descname">get_H</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_H" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the enthalpy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>H</strong> – Enthalpy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_HoRT">
+<code class="sig-name descname">get_HoRT</code><span class="sig-paren">(</span><em class="sig-param">reaction</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy using BEP relationship
+and reactants or products enthalpy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> (<a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object) – Reaction related to BEP.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>HoRT</strong> – Dimensionless enthalpy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_S">
+<code class="sig-name descname">get_S</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_S" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the entropy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>S</strong> – Entropy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_SoR">
+<code class="sig-name descname">get_SoR</code><span class="sig-paren">(</span><em class="sig-param">reaction=None</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">entropy_state='reactants'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy using reactants or products
+entropy. The BEP relationship has no entropic contribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> (<a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object, optional) – Reaction related to BEP. If <cite>entropy_state</cite> is None, <cite>reaction</cite>
+is not required.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</p></li>
+<li><p><strong>entropy_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) – <p>State to use to estimate entropy. Supported arguments:</p>
+<ul>
+<li><p>’reactants’ (default)</p></li>
+<li><p>’products’</p></li>
+<li><p>None (Entropy contribution is 0. Useful if misc_models
+have been specified for entropy)</p></li>
+</ul>
+</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>SoR</strong> – Dimensionless entropy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_U">
+<code class="sig-name descname">get_U</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_U" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the internal energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>U</strong> – Internal energy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.get_UoRT">
+<code class="sig-name descname">get_UoRT</code><span class="sig-paren">(</span><em class="sig-param">reaction</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless internal energy using BEP relationship
+and initial state internal energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> (<a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object) – Reaction related to BEP.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate the descriptor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>UoRT</strong> – Dimensionless internal energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.reaction.bep.BEP.to_dict">
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.bep.BEP.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>obj_dict</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pmutt.omkm.reaction.BEP.html" class="btn btn-neutral float-right" title="pmutt.omkm.reaction.BEP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../reactions/pmutt.omkm.reaction.SurfaceReaction.html" class="btn btn-neutral float-left" title="pmutt.omkm.reaction.SurfaceReaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

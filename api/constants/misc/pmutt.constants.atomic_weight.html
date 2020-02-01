@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pmutt.constants.atomic_weight &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pmutt.constants.prefixes" href="pmutt.constants.prefixes.html" />
+    <link rel="prev" title="pmutt.constants.wavenumber_to_temp" href="../unit_conv/pmutt.constants.wavenumber_to_temp.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../constants.html">Constants</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../constants.html#id2">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constants.html#unit-conversions">Unit Conversions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../constants.html#misc">Misc.</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.constants.atomic_weight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.prefixes.html">pmutt.constants.prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.symmetry_dict.html">pmutt.constants.symmetry_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.type_dict.html">pmutt.constants.type_dict</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../constants.html">Constants</a> &raquo;</li>
+        
+      <li>pmutt.constants.atomic_weight</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/constants/misc/pmutt.constants.atomic_weight.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pmutt-constants-atomic-weight">
+<h1>pmutt.constants.atomic_weight<a class="headerlink" href="#pmutt-constants-atomic-weight" title="Permalink to this headline">¶</a></h1>
+<dl class="data">
+<dt id="pmutt.constants.atomic_weight">
+<code class="sig-prename descclassname">pmutt.constants.</code><code class="sig-name descname">atomic_weight</code><em class="property"> = {1: 1.008, 2: 4.002602, 3: 6.938, 4: 9.0121831, 5: 10.806, 6: 12.0116, 7: 14.007, 8: 15.999, 9: 18.99840316, 10: 20.1797, 11: 22.98976928, 12: 24.305, 13: 26.9815385, 14: 28.085, 15: 30.973762, 16: 32.06, 17: 35.45, 18: 39.948, 19: 39.0983, 20: 40.078, 21: 44.955908, 22: 47.867, 23: 50.9415, 24: 51.9961, 25: 54.938044, 26: 55.845, 27: 58.933194, 28: 58.6934, 29: 63.546, 30: 65.38, 31: 69.723, 32: 72.63, 33: 74.921595, 34: 78.971, 35: 79.901, 36: 83.798, 37: 85.4678, 38: 87.62, 39: 88.90584, 40: 91.224, 41: 92.90637, 42: 95.95, 43: 98.0, 44: 101.07, 45: 102.9055, 46: 106.42, 47: 107.8682, 48: 112.414, 49: 114.818, 50: 118.71, 51: 121.76, 52: 127.6, 53: 126.90447, 54: 131.293, 55: 132.905452, 56: 137.327, 57: 138.90547, 58: 140.116, 59: 140.90766, 60: 144.242, 61: 145, 62: 150.36, 63: 151.964, 64: 157.25, 65: 158.92535, 66: 162.5, 67: 164.93033, 68: 167.259, 69: 168.93422, 70: 173.054, 71: 174.9668, 72: 178.49, 73: 180.94788, 74: 183.84, 75: 186.207, 76: 190.23, 77: 192.217, 78: 195.084, 79: 196.966569, 80: 200.592, 81: 204.382, 82: 207.2, 83: 208.9804, 84: 209.0, 85: 210.0, 86: 222.0, 87: 223.0, 88: 226.0, 89: 227.0, 90: 232.0377, 91: 231.03588, 92: 238.02891, 93: 237.0, 94: 244.0, 95: 243.0, 96: 247.0, 97: 247.0, 98: 251.0, 99: 252.0, 100: 257.0, 101: 258.0, 102: 259.0, 103: 262.0, 104: 267.0, 105: 268.0, 106: 271.0, 107: 272.0, 108: 270.0, 109: 276.0, 110: 281.0, 111: 280.0, 112: 285.0, 113: 284.0, 114: 289.0, 115: 288.0, 116: 293.0, 118: 294.0, 'H': 1.008, 'He': 4.002602, 'Li': 6.938, 'Be': 9.0121831, 'B': 10.806, 'C': 12.0116, 'N': 14.007, 'O': 15.999, 'F': 18.99840316, 'Ne': 20.1797, 'Na': 22.98976928, 'Mg': 24.305, 'Al': 26.9815385, 'Si': 28.085, 'P': 30.973762, 'S': 32.06, 'Cl': 35.45, 'Ar': 39.948, 'K': 39.0983, 'Ca': 40.078, 'Sc': 44.955908, 'Ti': 47.867, 'V': 50.9415, 'Cr': 51.9961, 'Mn': 54.938044, 'Fe': 55.845, 'Co': 58.933194, 'Ni': 58.6934, 'Cu': 63.546, 'Zn': 65.38, 'Ga': 69.723, 'Ge': 72.63, 'As': 74.921595, 'Se': 78.971, 'Br': 79.901, 'Kr': 83.798, 'Rb': 85.4678, 'Sr': 87.62, 'Y': 88.90584, 'Zr': 91.224, 'Nb': 92.90637, 'Mo': 95.95, 'Tc': 98.0, 'Ru': 101.07, 'Rh': 102.9055, 'Pd': 106.42, 'Ag': 107.8682, 'Cd': 112.414, 'In': 114.818, 'Sn': 118.71, 'Sb': 121.76, 'Te': 127.6, 'I': 126.90447, 'Xe': 131.293, 'Cs': 132.905452, 'Ba': 137.327, 'La': 138.90547, 'Ce': 140.116, 'Pr': 140.90766, 'Nd': 144.242, 'Pm': 145.0, 'Sm': 150.36, 'Eu': 151.964, 'Gd': 157.25, 'Tb': 158.92535, 'Dy': 162.5, 'Ho': 164.93033, 'Er': 167.259, 'Tm': 168.93422, 'Yb': 173.054, 'Lu': 174.9668, 'Hf': 178.49, 'Ta': 180.94788, 'W': 183.84, 'Re': 186.207, 'Os': 190.23, 'Ir': 192.217, 'Pt': 195.084, 'Au': 196.966569, 'Hg': 200.592, 'Tl': 204.382, 'Pb': 207.2, 'Bi': 208.9804, 'Po': 209.0, 'At': 210.0, 'Rn': 222.0, 'Fr': 223.0, 'Ra': 226.0, 'Ac': 227.0, 'Th': 232.0377, 'Pa': 231.03588, 'U': 238.02891, 'Np': 237.0, 'Pu': 244.0, 'Am': 243.0, 'Cm': 247.0, 'Bk': 247.0, 'Cf': 251.0, 'Es': 252.0, 'Fm': 257.0, 'Md': 258.0, 'No': 259.0, 'Lr': 262.0, 'Rf': 267.0, 'Db': 268.0, 'Sg': 271.0, 'Bh': 272.0, 'Hs': 270.0, 'Mt': 276.0, 'Ds': 281.0, 'Rg': 280.0, 'Cn': 285.0, 'Uut': 284.0, 'Fl': 289.0, 'Uup': 288.0, 'Lv': 293.0, 'Uuo': 294.0}</em><a class="headerlink" href="#pmutt.constants.atomic_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atomic weight. The key can be the atomic number, the element symbol,
+or the element name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pmutt.constants.prefixes.html" class="btn btn-neutral float-right" title="pmutt.constants.prefixes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../unit_conv/pmutt.constants.wavenumber_to_temp.html" class="btn btn-neutral float-left" title="pmutt.constants.wavenumber_to_temp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pmutt.io.excel.set_vib_model &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pmutt.io.excel.set_rot_model" href="pmutt.io.excel.set_rot_model.html" />
+    <link rel="prev" title="pmutt.io.excel.set_trans_model" href="pmutt.io.excel.set_trans_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../constants/constants.html">Constants</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../io.html">Input and Output</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../io.html#excel">Excel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.excel.read_excel.html">pmutt.io.excel.read_excel</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../io.html#special-rules">Special Rules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_element.html">pmutt.io.excel.set_element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_formula.html">pmutt.io.excel.set_formula</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_atoms.html">pmutt.io.excel.set_atoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_statmech_model.html">pmutt.io.excel.set_statmech_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_trans_model.html">pmutt.io.excel.set_trans_model</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pmutt.io.excel.set_vib_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_rot_model.html">pmutt.io.excel.set_rot_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_elec_model.html">pmutt.io.excel.set_elec_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_nucl_model.html">pmutt.io.excel.set_nucl_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_vib_wavenumbers.html">pmutt.io.excel.set_vib_wavenumbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_rot_temperatures.html">pmutt.io.excel.set_rot_temperatures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_nasa_a_low.html">pmutt.io.excel.set_nasa_a_low</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_nasa_a_high.html">pmutt.io.excel.set_nasa_a_high</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_list_value.html">pmutt.io.excel.set_list_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pmutt.io.excel.set_dict_value.html">pmutt.io.excel.set_dict_value</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#thermdat">Thermdat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#json">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#yaml">YAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#vasp">VASP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#gaussian">Gaussian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#chemkin">Chemkin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#openmkm">OpenMKM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../io.html">Input and Output</a> &raquo;</li>
+        
+      <li>pmutt.io.excel.set_vib_model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/io/excel/pmutt.io.excel.set_vib_model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pmutt-io-excel-set-vib-model">
+<h1>pmutt.io.excel.set_vib_model<a class="headerlink" href="#pmutt-io-excel-set-vib-model" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pmutt.io.excel.set_vib_model">
+<code class="sig-prename descclassname">pmutt.io.excel.</code><code class="sig-name descname">set_vib_model</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">output_structure</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.excel.set_vib_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports module and assigns the class to output_structure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Vibrational model to import</p></li>
+<li><p><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Structure to assign value. Will assign to
+output_structure[‘vib_model’]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pmutt.io.excel.set_rot_model.html" class="btn btn-neutral float-right" title="pmutt.io.excel.set_rot_model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pmutt.io.excel.set_trans_model.html" class="btn btn-neutral float-left" title="pmutt.io.excel.set_trans_model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

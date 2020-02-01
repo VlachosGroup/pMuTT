@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Constants &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pmutt.constants.R" href="constants/pmutt.constants.R.html" />
+    <link rel="prev" title="Referencing" href="../../referencing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.R.html">pmutt.constants.R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.kb.html">pmutt.constants.kb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.h.html">pmutt.constants.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.c.html">pmutt.constants.c</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.Na.html">pmutt.constants.Na</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.P0.html">pmutt.constants.P0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.T0.html">pmutt.constants.T0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.V0.html">pmutt.constants.V0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.e.html">pmutt.constants.e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.m_e.html">pmutt.constants.m_e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="constants/pmutt.constants.m_p.html">pmutt.constants.m_p</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#unit-conversions">Unit Conversions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.convert_unit.html">pmutt.constants.convert_unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.debye_to_einstein.html">pmutt.constants.debye_to_einstein</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.einstein_to_debye.html">pmutt.constants.einstein_to_debye</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.energy_to_freq.html">pmutt.constants.energy_to_freq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.energy_to_temp.html">pmutt.constants.energy_to_temp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.energy_to_wavenumber.html">pmutt.constants.energy_to_wavenumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.freq_to_energy.html">pmutt.constants.freq_to_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.freq_to_temp.html">pmutt.constants.freq_to_temp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.freq_to_wavenumber.html">pmutt.constants.freq_to_wavenumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.inertia_to_temp.html">pmutt.constants.inertia_to_temp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.temp_to_energy.html">pmutt.constants.temp_to_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.temp_to_freq.html">pmutt.constants.temp_to_freq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.temp_to_wavenumber.html">pmutt.constants.temp_to_wavenumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_energy.html">pmutt.constants.wavenumber_to_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_freq.html">pmutt.constants.wavenumber_to_freq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_inertia.html">pmutt.constants.wavenumber_to_inertia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_temp.html">pmutt.constants.wavenumber_to_temp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#misc">Misc.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="misc/pmutt.constants.atomic_weight.html">pmutt.constants.atomic_weight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc/pmutt.constants.prefixes.html">pmutt.constants.prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc/pmutt.constants.symmetry_dict.html">pmutt.constants.symmetry_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc/pmutt.constants.type_dict.html">pmutt.constants.type_dict</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Constants</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/constants/constants.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="constants">
+<span id="id1"></span><h1>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h1>
+<p>pMuTT will soon migrate its unit conversions and constants to <a class="reference external" href="https://vlachosgroup.github.io/vunits/">VUnits</a>!</p>
+<div class="section" id="id2">
+<h2>Constants<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code></a></p></td>
+<td><p>Universal molar gas constant, R</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="constants/pmutt.constants.kb.html#pmutt.constants.kb" title="pmutt.constants.kb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kb</span></code></a></p></td>
+<td><p>Boltzmann constant</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="constants/pmutt.constants.h.html#pmutt.constants.h" title="pmutt.constants.h"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h</span></code></a></p></td>
+<td><p>Planck’s constant, h</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="constants/pmutt.constants.c.html#pmutt.constants.c" title="pmutt.constants.c"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c</span></code></a></p></td>
+<td><p>Speed of light</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="constants/pmutt.constants.Na.html#pmutt.constants.Na" title="pmutt.constants.Na"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Na</span></code></a></p></td>
+<td><p>Avogadro’s number in molecules/mol</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="constants/pmutt.constants.P0.html#pmutt.constants.P0" title="pmutt.constants.P0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">P0</span></code></a></p></td>
+<td><p>Reference pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="constants/pmutt.constants.T0.html#pmutt.constants.T0" title="pmutt.constants.T0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">T0</span></code></a></p></td>
+<td><p>Room temperature</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="constants/pmutt.constants.V0.html#pmutt.constants.V0" title="pmutt.constants.V0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">V0</span></code></a></p></td>
+<td><p>Molar volume of ideal gas at standard temperature and pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="constants/pmutt.constants.e.html#pmutt.constants.e" title="pmutt.constants.e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">e</span></code></a></p></td>
+<td><p>Electronic charge in Coulombs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="constants/pmutt.constants.m_e.html#pmutt.constants.m_e" title="pmutt.constants.m_e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">m_e</span></code></a></p></td>
+<td><p>Mass of an electron</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="constants/pmutt.constants.m_p.html#pmutt.constants.m_p" title="pmutt.constants.m_p"><code class="xref py py-obj docutils literal notranslate"><span class="pre">m_p</span></code></a></p></td>
+<td><p>Mass of a proton</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="unit-conversions">
+<h2>Unit Conversions<a class="headerlink" href="#unit-conversions" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.convert_unit.html#pmutt.constants.convert_unit" title="pmutt.constants.convert_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_unit</span></code></a></p></td>
+<td><p>Converts units between two unit sets</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.debye_to_einstein.html#pmutt.constants.debye_to_einstein" title="pmutt.constants.debye_to_einstein"><code class="xref py py-obj docutils literal notranslate"><span class="pre">debye_to_einstein</span></code></a></p></td>
+<td><p>Converts Debye temperature to Einstein temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.einstein_to_debye.html#pmutt.constants.einstein_to_debye" title="pmutt.constants.einstein_to_debye"><code class="xref py py-obj docutils literal notranslate"><span class="pre">einstein_to_debye</span></code></a></p></td>
+<td><p>Converts Einstein temperature to Debye temperature</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.energy_to_freq.html#pmutt.constants.energy_to_freq" title="pmutt.constants.energy_to_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_to_freq</span></code></a></p></td>
+<td><p>Converts energy to frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.energy_to_temp.html#pmutt.constants.energy_to_temp" title="pmutt.constants.energy_to_temp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_to_temp</span></code></a></p></td>
+<td><p>Converts energy to temperature</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.energy_to_wavenumber.html#pmutt.constants.energy_to_wavenumber" title="pmutt.constants.energy_to_wavenumber"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_to_wavenumber</span></code></a></p></td>
+<td><p>Converts energy to wavenumber</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.freq_to_energy.html#pmutt.constants.freq_to_energy" title="pmutt.constants.freq_to_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freq_to_energy</span></code></a></p></td>
+<td><p>Converts frequency to energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.freq_to_temp.html#pmutt.constants.freq_to_temp" title="pmutt.constants.freq_to_temp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freq_to_temp</span></code></a></p></td>
+<td><p>Converts frequency to temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.freq_to_wavenumber.html#pmutt.constants.freq_to_wavenumber" title="pmutt.constants.freq_to_wavenumber"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freq_to_wavenumber</span></code></a></p></td>
+<td><p>Converts frequency to wavenumber</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.inertia_to_temp.html#pmutt.constants.inertia_to_temp" title="pmutt.constants.inertia_to_temp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inertia_to_temp</span></code></a></p></td>
+<td><p>Converts moment of inertia into rotational temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.temp_to_energy.html#pmutt.constants.temp_to_energy" title="pmutt.constants.temp_to_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temp_to_energy</span></code></a></p></td>
+<td><p>Converts temperature to energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.temp_to_freq.html#pmutt.constants.temp_to_freq" title="pmutt.constants.temp_to_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temp_to_freq</span></code></a></p></td>
+<td><p>Converts temperature to frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.temp_to_wavenumber.html#pmutt.constants.temp_to_wavenumber" title="pmutt.constants.temp_to_wavenumber"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temp_to_wavenumber</span></code></a></p></td>
+<td><p>Converts vibrational/rotational temperature to wavenumber</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_energy.html#pmutt.constants.wavenumber_to_energy" title="pmutt.constants.wavenumber_to_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavenumber_to_energy</span></code></a></p></td>
+<td><p>Converts wavenumbers (1/cm) to energies (J)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_freq.html#pmutt.constants.wavenumber_to_freq" title="pmutt.constants.wavenumber_to_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavenumber_to_freq</span></code></a></p></td>
+<td><p>Converts wavenumber to frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_inertia.html#pmutt.constants.wavenumber_to_inertia" title="pmutt.constants.wavenumber_to_inertia"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavenumber_to_inertia</span></code></a></p></td>
+<td><p>Converts wavenumber (1/cm) to moment of inertia</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="unit_conv/pmutt.constants.wavenumber_to_temp.html#pmutt.constants.wavenumber_to_temp" title="pmutt.constants.wavenumber_to_temp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavenumber_to_temp</span></code></a></p></td>
+<td><p>Converts wavenumbers (1/cm) to temperatures (K)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="misc">
+<h2>Misc.<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="misc/pmutt.constants.atomic_weight.html#pmutt.constants.atomic_weight" title="pmutt.constants.atomic_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atomic_weight</span></code></a></p></td>
+<td><p>Atomic weight.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="misc/pmutt.constants.prefixes.html#pmutt.constants.prefixes" title="pmutt.constants.prefixes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefixes</span></code></a></p></td>
+<td><p>SI unit prefixes</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="misc/pmutt.constants.symmetry_dict.html#pmutt.constants.symmetry_dict" title="pmutt.constants.symmetry_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetry_dict</span></code></a></p></td>
+<td><p>Symmetry number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="misc/pmutt.constants.type_dict.html#pmutt.constants.type_dict" title="pmutt.constants.type_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type_dict</span></code></a></p></td>
+<td><p>Key are units, values are the type of unit</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="constants/pmutt.constants.R.html" class="btn btn-neutral float-right" title="pmutt.constants.R" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../referencing.html" class="btn btn-neutral float-left" title="Referencing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

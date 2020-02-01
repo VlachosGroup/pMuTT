@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pmutt.constants.P0 &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pmutt.constants.T0" href="pmutt.constants.T0.html" />
+    <link rel="prev" title="pmutt.constants.Na" href="pmutt.constants.Na.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../constants.html">Constants</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../constants.html#id2">Constants</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.R.html">pmutt.constants.R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.kb.html">pmutt.constants.kb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.h.html">pmutt.constants.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.c.html">pmutt.constants.c</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.Na.html">pmutt.constants.Na</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.constants.P0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.T0.html">pmutt.constants.T0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.V0.html">pmutt.constants.V0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.e.html">pmutt.constants.e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.m_e.html">pmutt.constants.m_e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.constants.m_p.html">pmutt.constants.m_p</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../constants.html#unit-conversions">Unit Conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constants.html#misc">Misc.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../constants.html">Constants</a> &raquo;</li>
+        
+      <li>pmutt.constants.P0</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/constants/constants/pmutt.constants.P0.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pmutt-constants-p0">
+<h1>pmutt.constants.P0<a class="headerlink" href="#pmutt-constants-p0" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pmutt.constants.P0">
+<code class="sig-prename descclassname">pmutt.constants.</code><code class="sig-name descname">P0</code><span class="sig-paren">(</span><em class="sig-param">units</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.constants.P0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference pressure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – <p>Units for P0. Supported units</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 64%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Unit</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bar</p></td>
+<td><p>Bar</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>atm</p></td>
+<td><p>Atmosphere</p></td>
+<td><p>0.986923</p></td>
+</tr>
+<tr class="row-even"><td><p>Pa</p></td>
+<td><p>Pascal</p></td>
+<td><p>100000</p></td>
+</tr>
+<tr class="row-odd"><td><p>kPa</p></td>
+<td><p>Kilopascal</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>MPa</p></td>
+<td><p>Megapascal</p></td>
+<td><p>0.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>psi</p></td>
+<td><p>Pound per square inch</p></td>
+<td><p>14.5038</p></td>
+</tr>
+<tr class="row-even"><td><p>mmHg</p></td>
+<td><p>Millimeter of mercury</p></td>
+<td><p>750.062</p></td>
+</tr>
+<tr class="row-odd"><td><p>Torr</p></td>
+<td><p>Torr</p></td>
+<td><p>750.062</p></td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>P0</strong> – Reference pressure in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.8)"><strong>KeyError</strong></a> – If units is not supported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pmutt.constants.T0.html" class="btn btn-neutral float-right" title="pmutt.constants.T0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pmutt.constants.Na.html" class="btn btn-neutral float-left" title="pmutt.constants.Na" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

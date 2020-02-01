@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; pmutt 1.2.16 documentation</title>
+  <title>Installation &mdash; pmutt 1.2.17 documentation</title>
   
 
   
@@ -19,34 +19,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="next" title="Examples" href="examples_jupyter/examples.html" />
     <link rel="prev" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" href="includeme.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -88,30 +91,37 @@
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-python">Installing Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-using-pip">Installing pMuTT using pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-using-pip">Installing pMuTT using pip</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-installation-errors">Common installation errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyyaml-uninstallation-error">PyYAML Uninstallation Error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pip-permission-error">Pip Permission Error</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-pmutt-from-source">Installing pMuTT from source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-the-developer-branch">Installing the developer branch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#upgrading-pmutt-using-pip">Upgrading pMuTT using pip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshops/workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="kinetic_models.html">Kinetic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Useful Links</span></p>
@@ -194,8 +204,8 @@ applications. It is supported on Linux, Windows and Mac OS X.
 <h2>Installing pMuTT using pip<a class="headerlink" href="#installing-pmutt-using-pip" title="Permalink to this headline">¶</a></h2>
 <p>Using pip is the most straightforward way to install pMuTT.</p>
 <ol class="arabic simple">
-<li>Open a command prompt with access to Python (if Python is installed via
-Anaconda on Windows, open the Anaconda Prompt from the start menu).</li>
+<li><p>Open a command prompt with access to Python (if Python is installed via
+Anaconda on Windows, open the Anaconda Prompt from the start menu).</p></li>
 </ol>
 <p>2. Install pMuTT by typing the following in the command prompt:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pmutt</span>
@@ -203,6 +213,39 @@ Anaconda on Windows, open the Anaconda Prompt from the start menu).</li>
 </div>
 <p>The output towards the end should state “Successfully built pMuTT” if the
 installation was successful.</p>
+<p>Receiving installation errors? <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Post the error to our Issues page</a>.</p>
+<div class="section" id="common-installation-errors">
+<h3>Common installation errors<a class="headerlink" href="#common-installation-errors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pyyaml-uninstallation-error">
+<h4>PyYAML Uninstallation Error<a class="headerlink" href="#pyyaml-uninstallation-error" title="Permalink to this headline">¶</a></h4>
+<p><strong>Error</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span> <span class="n">Cannot</span> <span class="n">uninstall</span> <span class="s1">&#39;PyYAML&#39;</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">distutils</span> <span class="n">installed</span> <span class="n">project</span> <span class="ow">and</span>
+<span class="n">thus</span> <span class="n">we</span> <span class="n">cannot</span> <span class="n">accurately</span> <span class="n">determine</span> <span class="n">which</span> <span class="n">files</span> <span class="n">belong</span> <span class="n">to</span> <span class="n">it</span> <span class="n">which</span> <span class="n">would</span>
+<span class="n">lead</span> <span class="n">to</span> <span class="n">only</span> <span class="n">a</span> <span class="n">partial</span> <span class="n">uninstall</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Solution</strong></p>
+<p>Append <code class="docutils literal notranslate"><span class="pre">--ignore-installed</span> <span class="pre">PyYAML</span></code> to pip command.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pmutt</span> <span class="o">--</span><span class="n">ignore</span><span class="o">-</span><span class="n">installed</span> <span class="n">PyYAML</span>
+</pre></div>
+</div>
+<p>See issue regarding the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues/132">PyYAML error here</a>.</p>
+</div>
+<div class="section" id="pip-permission-error">
+<h4>Pip Permission Error<a class="headerlink" href="#pip-permission-error" title="Permalink to this headline">¶</a></h4>
+<p><strong>Error</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Could</span> <span class="ow">not</span> <span class="n">install</span> <span class="n">packages</span> <span class="n">due</span> <span class="n">to</span> <span class="n">an</span> <span class="ne">EnvironmentError</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">13</span><span class="p">]</span> <span class="n">Permission</span>
+<span class="n">denied</span><span class="p">:</span> <span class="s1">&#39;/usr/local/bin/pmutt&#39;</span>
+</pre></div>
+</div>
+<p><strong>Solution</strong></p>
+<p>Append <code class="docutils literal notranslate"><span class="pre">--user</span></code> to pip command.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pmutt</span> <span class="o">--</span><span class="n">user</span>
+</pre></div>
+</div>
+<p>See explanation why this <a class="reference external" href="https://pip.pypa.io/en/stable/user_guide/#user-installs">permission error occurs here</a>.</p>
+</div>
+</div>
 </div>
 <div class="section" id="installing-pmutt-from-source">
 <h2>Installing pMuTT from source<a class="headerlink" href="#installing-pmutt-from-source" title="Permalink to this headline">¶</a></h2>
@@ -231,10 +274,9 @@ the master branch. You can install using the following:</p>
 <div class="section" id="running-unit-tests">
 <h2>Running unit tests<a class="headerlink" href="#running-unit-tests" title="Permalink to this headline">¶</a></h2>
 <p>pMuTT has a suite of unit tests that should be run before committing any code.
-To run the tests, navigate to the tests folder (pmutt/tests) via a command line
-with access to Python.</p>
-<p>Run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">unittest</span>
+To run the tests, run the following commands in a Python terminal.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pmutt</span>
+<span class="n">pmutt</span><span class="o">.</span><span class="n">run_tests</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The expected output is shown below. The number of tests will not
@@ -257,10 +299,10 @@ necessarily be the same.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="examples_jupyter/examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="includeme.html" class="btn btn-neutral" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="includeme.html" class="btn btn-neutral float-left" title="Python Multiscale Thermochemistry Toolbox (pMuTT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -286,26 +328,16 @@ necessarily be the same.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

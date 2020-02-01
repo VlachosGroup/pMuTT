@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Examples &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Workshops" href="../workshops/workshops.html" />
+    <link rel="prev" title="Installation" href="../install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#topics-covered">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#experimental-to-empirical">Experimental to Empirical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#excel-to-empirical-data">Excel to Empirical Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reaction">Reaction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#chemkin-io">Chemkin_IO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#openmkm-io">OpenMKM_IO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-diagram">Phase Diagram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#workshops">Workshops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nam26-workshop">NAM26 Workshop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Topics Covered</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aiche-2019-workshop">AIChE 2019 Workshop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Examples</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples_jupyter/examples.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="examples">
+<span id="id1"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<p>This page and its subpages show some examples using the pMuTT code. There are
+several formats available.</p>
+<p>Running the example with Binder only requires the user to click the logo.
+For the other formats, a page of text may appear after clicking the link.
+Right-click and choose “Save Page As” or find the file in the ZIP folder.</p>
+<p>Downloading the ZIP folder is recommended because the code may not run without
+other files (e.g. spreadsheets).</p>
+<p>The pros and cons of each format are listed below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 17%" />
+<col style="width: 30%" />
+<col style="width: 13%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>File located in ZIP folder</p></th>
+<th class="head"><p>pMuTT installation required</p></th>
+<th class="head"><p>Jupyter Notebook installation required</p></th>
+<th class="head"><p>Code may require additional files to be downloaded (e.g. spreadsheets)</p></th>
+<th class="head"><p>Non-code elements easy to read</p></th>
+<th class="head"><p>Code easily editable</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Binder</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr class="row-odd"><td><p>HTML</p></td>
+<td><p>Y</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>Y</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-even"><td><p>Jupyter Notebook</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr class="row-odd"><td><p>Python Script</p></td>
+<td><p>Y</p></td>
+<td><p>Y</p></td>
+<td><p>N</p></td>
+<td><p>Y</p></td>
+<td><p>N</p></td>
+<td><p>Y</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<span id="overview-example"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Foverview%overview.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/overview/overview.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/overview/overview.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/overview/overview.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/overview/overview.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="topics-covered">
+<h3>Topics Covered<a class="headerlink" href="#topics-covered" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Using constants and converting units using the <code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code> module</p></li>
+<li><p>Initializing <a class="reference internal" href="../api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects by specifying all modes
+and by using <a class="reference internal" href="../api/statmech/statmech.html#presets"><span class="std std-ref">Presets</span></a></p></li>
+<li><p>Initializing empirical objects such as <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>
+objects using a <a class="reference internal" href="../api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object or from a previously
+generated Nasa polynomial</p></li>
+<li><p>Initializing <code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code> objects to adjust DFT’s
+reference to more traditional references</p></li>
+<li><p>Input (via Excel) and output <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> polynomials
+to thermdat format</p></li>
+<li><p>Initializing <a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects from strings</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="experimental-to-empirical">
+<span id="expt-to-empirical-example"></span><h2>Experimental to Empirical<a class="headerlink" href="#experimental-to-empirical" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexpt_data_to_empirical%expt_data_to_empirical_object.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id2">
+<h3>Topics Covered<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Using pmutt’s constants for unit conversions</p></li>
+<li><p>Create a <a class="reference internal" href="../api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object from experimental data</p></li>
+<li><p>Calculate thermodynamic properties using the <a class="reference internal" href="../api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object</p></li>
+<li><p>Plot the shape of the <a class="reference internal" href="../api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> curve</p></li>
+<li><p>Save the <a class="reference internal" href="../api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object as a JSON file</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="excel-to-empirical-data">
+<span id="excel-to-empirical-example"></span><h2>Excel to Empirical Data<a class="headerlink" href="#excel-to-empirical-data" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexcel_to_empirical%excel_to_empirical.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id3">
+<h3>Topics Covered<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Reading <em>ab-initio</em> data from an Excel file</p></li>
+<li><p>Initialize <code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code> objects and a <code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code> object</p></li>
+<li><p>Generate a <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object using <a class="reference internal" href="../api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> models</p></li>
+<li><p>Write <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object to a <code class="docutils literal notranslate"><span class="pre">thermdat</span></code> file</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="reaction">
+<span id="reaction-example"></span><h2>Reaction<a class="headerlink" href="#reaction" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Freactions%reactions.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/reactions/reactions.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/reactions/reactions.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/reactions/reactions.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/reactions/reactions.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id4">
+<h3>Topics Covered<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Read a thermdat file and convert it to a dictionary of Nasa objects</p></li>
+<li><p>Initialize a <a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object manually and from strings</p></li>
+<li><p>Add a BEP relationship to a <a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object</p></li>
+<li><p>Calculate thermodynamic and kinetic properties using the
+<a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object</p></li>
+<li><p>Save the <a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object as a <code class="docutils literal notranslate"><span class="pre">JSON</span></code> file</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="chemkin-io">
+<span id="chemkin-io-example"></span><h2>Chemkin_IO<a class="headerlink" href="#chemkin-io" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fchemkin_io%Chemkin_IO.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/chemkin_io/chemkin_io.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id5">
+<h3>Topics Covered<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Read species <em>ab-initio</em> data, reactions, and catalyst sites from a
+spreadsheet</p></li>
+<li><p>Write the thermdat, gas.inp, surf.inp, T_flow.inp, EAg.inp, EAs.inp,
+tube_mole.inp files</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="openmkm-io">
+<span id="openmkm-io-example"></span><h2>OpenMKM_IO<a class="headerlink" href="#openmkm-io" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fomkm_io%OpenMKM_IO.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/omkm_io.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id6">
+<h3>Topics Covered<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Read species <em>ab-initio</em> data, reactions, lateral interactions and phases
+from a spreadsheet</p></li>
+<li><p>Write the CTI input file</p></li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="phase-diagram">
+<span id="phase-diagram-example"></span><h2>Phase Diagram<a class="headerlink" href="#phase-diagram" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fphase_diagram%PhaseDiagram.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/phase_diagram/phase_diagram.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id7">
+<h3>Topics Covered<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Create <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
+<a class="reference internal" href="../api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects</p></li>
+<li><p>Initialize <a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects to describe the
+formation reaction of FeOx species</p></li>
+<li><p>Generate a 1D phase diagram by varying T</p></li>
+<li><p>Generate a 2D phase diagram by varying T and P</p></li>
+<li><p>Save the <a class="reference internal" href="../api/phase_diagram/phase_diagram/pmutt.reaction.phasediagram.PhaseDiagram.html#pmutt.reaction.phasediagram.PhaseDiagram" title="pmutt.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> object as a
+<code class="docutils literal notranslate"><span class="pre">JSON</span></code> file</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="workshops">
+<h2>Workshops<a class="headerlink" href="#workshops" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="nam26-workshop">
+<span id="nam26-workshop-example"></span><h2>NAM26 Workshop<a class="headerlink" href="#nam26-workshop" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fnam2019%NAM_2019_Workshop.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/nam2019/nam2019.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+<div class="section" id="id8">
+<h3>Topics Covered<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Using constants and converting units using the <code class="xref py py-mod docutils literal notranslate"><span class="pre">constants</span></code> module</p></li>
+<li><p>Initializing <a class="reference internal" href="../api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects by specifying all modes
+and by using <a class="reference internal" href="../api/statmech/statmech.html#presets"><span class="std std-ref">Presets</span></a></p></li>
+<li><p>Initializing empirical objects such as <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>
+objects using a <a class="reference internal" href="../api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object or directly using
+the polynomial</p></li>
+<li><p>Input (via Excel) and output <a class="reference internal" href="../api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> polynomials
+to thermdat format</p></li>
+<li><p>Initializing <a class="reference internal" href="../api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects from strings</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="aiche-2019-workshop">
+<h2>AIChE 2019 Workshop<a class="headerlink" href="#aiche-2019-workshop" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Faiche2019%2Fpmutt_aiche2019.ipynb"><img alt="../_images/binder_logo.png" src="../_images/binder_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/aiche2019/pmutt_aiche2019.html"><img alt="../_images/html_logo.png" src="../_images/html_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/aiche2019/pmutt_aiche2019.ipynb"><img alt="../_images/jupyter_notebook.png" src="../_images/jupyter_notebook.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/aiche2019/pmutt_aiche2019.py"><img alt="../_images/python_logo.png" src="../_images/python_logo.png" style="width: 15%;" /></a>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/aiche2019/aiche2019.zip"><img alt="../_images/zip_logo.png" src="../_images/zip_logo.png" style="width: 15%;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../workshops/workshops.html" class="btn btn-neutral float-right" title="Workshops" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

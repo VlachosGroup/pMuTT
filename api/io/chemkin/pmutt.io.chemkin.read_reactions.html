@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pmutt.io.chemkin.read_reactions &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pmutt.io.chemkin.write_EA" href="pmutt.io.chemkin.write_EA.html" />
+    <link rel="prev" title="pmutt.io.gaussian.read_rot_symmetry_num" href="../gaussian/pmutt.io.gaussian.read_rot_symmetry_num.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../constants/constants.html">Constants</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../io.html">Input and Output</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io.html#excel">Excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#thermdat">Thermdat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#json">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#yaml">YAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#vasp">VASP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#gaussian">Gaussian</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../io.html#chemkin">Chemkin</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.chemkin.read_reactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_EA.html">pmutt.io.chemkin.write_EA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_gas.html">pmutt.io.chemkin.write_gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_surf.html">pmutt.io.chemkin.write_surf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_T_flow.html">pmutt.io.chemkin.write_T_flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_tube_mole.html">pmutt.io.chemkin.write_tube_mole</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html#openmkm">OpenMKM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../io.html">Input and Output</a> &raquo;</li>
+        
+      <li>pmutt.io.chemkin.read_reactions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/io/chemkin/pmutt.io.chemkin.read_reactions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pmutt-io-chemkin-read-reactions">
+<h1>pmutt.io.chemkin.read_reactions<a class="headerlink" href="#pmutt-io-chemkin-read-reactions" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pmutt.io.chemkin.read_reactions">
+<code class="sig-prename descclassname">pmutt.io.chemkin.</code><code class="sig-name descname">read_reactions</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.read_reactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Input filename for Chemkin surf or gas .inp file</p></li>
+<li><p><strong>species</strong> (list of <a class="reference internal" href="../../empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – List of NASA objects containing thermodynamic properties for
+all Reactants and Products in Reactions
+default = None. Will not return React_obj and Prod_obj</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Reactions</strong> (<em>list of reactions</em>)</p></li>
+<li><p><strong>Reactants</strong> (<em>list of reactants found in reactions</em>)</p></li>
+<li><p><strong>React_obj</strong> (<em>list of NASA polynomials for each Reactant</em>) – If species object list is supplied</p></li>
+<li><p><strong>React_stoic</strong> (<em>list of reaction stoichiometries for Reactants</em>)</p></li>
+<li><p><strong>Products</strong> (<em>list of products found in reactions</em>)</p></li>
+<li><p><strong>Prod_obj</strong> (<em>list of NASA polynomials for each Product</em>) – If species object list is supplied</p></li>
+<li><p><strong>Prod_stoic</strong> (<em>list of reaction stoichiometries for Products</em>)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.8)"><strong>FileNotFoundError</strong></a> – If the surf.inp or gas.inp file isn’t found.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.8)"><strong>NameError</strong></a> – If the species file does not exist</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.8)"><strong>AttributeError</strong></a> – If the species list is incorrect format</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pmutt.io.chemkin.write_EA.html" class="btn btn-neutral float-right" title="pmutt.io.chemkin.write_EA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../gaussian/pmutt.io.gaussian.read_rot_symmetry_num.html" class="btn btn-neutral float-left" title="pmutt.io.gaussian.read_rot_symmetry_num" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

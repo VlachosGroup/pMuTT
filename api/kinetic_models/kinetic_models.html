@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kinetic Models &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pmutt.chemkin.CatSite" href="chemkin/pmutt.chemkin.CatSite.html" />
+    <link rel="prev" title="pmutt.mixture.cov.PiecewiseCovEffect" href="../mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kinetic Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#chemkin">Chemkin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chemkin/pmutt.chemkin.CatSite.html">pmutt.chemkin.CatSite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chemkin/pmutt.reaction.ChemkinReaction.html">pmutt.reaction.ChemkinReaction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#input-and-output">Input and Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cantera">Cantera</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#phases">Phases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.Phase.html">pmutt.cantera.phase.Phase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.IdealGas.html">pmutt.cantera.phase.IdealGas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.StoichSolid.html">pmutt.cantera.phase.StoichSolid</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#units">Units</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cantera_units/pmutt.cantera.units.Units.html">pmutt.cantera.units.Units</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Input and Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cantera_io/pmutt.io.cantera.obj_to_CTI.html">pmutt.io.cantera.obj_to_CTI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#openmkm">OpenMKM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Phases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.IdealGas.html">pmutt.omkm.phase.IdealGas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.StoichSolid.html">pmutt.omkm.phase.StoichSolid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.InteractingInterface.html">pmutt.omkm.phase.InteractingInterface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reactions">Reactions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html">pmutt.omkm.reaction.SurfaceReaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm_reactions/pmutt.omkm.reaction.BEP.html">pmutt.omkm.reaction.BEP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Units</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="omkm_units/pmutt.omkm.units.Units.html">pmutt.omkm.units.Units</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Input and Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.write_cti.html">pmutt.io.omkm.write_cti</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.write_yaml.html">pmutt.io.omkm.write_yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_species_phases.html">pmutt.io.omkm.get_species_phases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_reactions_phases.html">pmutt.io.omkm.get_reactions_phases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_interactions_phases.html">pmutt.io.omkm.get_interactions_phases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_phases.html">pmutt.io.omkm.get_phases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#zacros">Zacros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zacros/pmutt.empirical.zacros.Zacros.html">pmutt.empirical.zacros.Zacros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Kinetic Models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/kinetic_models/kinetic_models.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kinetic-models">
+<span id="id1"></span><h1>Kinetic Models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="chemkin">
+<h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this headline">¶</a></h2>
+<p>Classes and functions related to writing Chemkin files. Please note these
+modules were written specifically for the Vlachos group’s in-house version.
+Features may or may not be supported in the commercial version.</p>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="chemkin/pmutt.chemkin.CatSite.html#pmutt.chemkin.CatSite" title="pmutt.chemkin.CatSite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.CatSite</span></code></a></p></td>
+<td><p>Catalyst site for Chemkin</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reactions/reactions/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction" title="pmutt.reaction.ChemkinReaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reaction.ChemkinReaction</span></code></a></p></td>
+<td><p>Chemkin reaction.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="input-and-output">
+<h3>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.read_reactions.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.read_reactions</span></code></a></p></td>
+<td><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.write_EA.html#pmutt.io.chemkin.write_EA" title="pmutt.io.chemkin.write_EA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.write_EA</span></code></a></p></td>
+<td><p>Writes the EAs.inp or EAg.inp file for Chemkin</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.write_gas.html#pmutt.io.chemkin.write_gas" title="pmutt.io.chemkin.write_gas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.write_gas</span></code></a></p></td>
+<td><p>Writes the gas.inp Chemkin file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.write_surf.html#pmutt.io.chemkin.write_surf" title="pmutt.io.chemkin.write_surf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.write_surf</span></code></a></p></td>
+<td><p>Writes the surf.inp Chemkin file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.write_T_flow.html#pmutt.io.chemkin.write_T_flow" title="pmutt.io.chemkin.write_T_flow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.write_T_flow</span></code></a></p></td>
+<td><p>Writes the T_flow.inp Chemkin file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.write_tube_mole.html#pmutt.io.chemkin.write_tube_mole" title="pmutt.io.chemkin.write_tube_mole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.write_tube_mole</span></code></a></p></td>
+<td><p>Write tube_mole.inp Chemkin file</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../examples_jupyter/examples.html#chemkin-io-example"><span class="std std-ref">Chemkin_IO</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="cantera">
+<h2>Cantera<a class="headerlink" href="#cantera" title="Permalink to this headline">¶</a></h2>
+<p>Classes and functions related to <a class="reference external" href="https://cantera.org/">Cantera</a>. This functionality is still in
+its early stages.</p>
+<div class="section" id="phases">
+<h3>Phases<a class="headerlink" href="#phases" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.phase.Phase</span></code></a></p></td>
+<td><p>Parent class for Cantera phases</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.IdealGas.html#pmutt.cantera.phase.IdealGas" title="pmutt.cantera.phase.IdealGas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.phase.IdealGas</span></code></a></p></td>
+<td><p>Expresses ideal gas as Cantera CTI file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.StoichSolid.html#pmutt.cantera.phase.StoichSolid" title="pmutt.cantera.phase.StoichSolid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.phase.StoichSolid</span></code></a></p></td>
+<td><p>Expresses stoichiometric solid as Cantera CTI file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="units">
+<h3>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.units.Units</span></code></a></p></td>
+<td><p>Expresses units as Cantera CTI file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>Input and Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="cantera_io/pmutt.io.cantera.obj_to_CTI.html#pmutt.io.cantera.obj_to_CTI" title="pmutt.io.cantera.obj_to_CTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.cantera.obj_to_CTI</span></code></a></p></td>
+<td><p>Converts elementary data types to CTI format</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="openmkm">
+<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Permalink to this headline">¶</a></h2>
+<p>Classes and functions related to OpenMKM. This functionality is still in its
+early stages.</p>
+<div class="section" id="id3">
+<h3>Phases<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.IdealGas.html#pmutt.omkm.phase.IdealGas" title="pmutt.omkm.phase.IdealGas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.phase.IdealGas</span></code></a></p></td>
+<td><p>OpenMKM implementation of the ideal gas phase.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.StoichSolid.html#pmutt.omkm.phase.StoichSolid" title="pmutt.omkm.phase.StoichSolid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.phase.StoichSolid</span></code></a></p></td>
+<td><p>OpenMKM implementation of the stoichiometric solid phase.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.InteractingInterface.html#pmutt.omkm.phase.InteractingInterface" title="pmutt.omkm.phase.InteractingInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.phase.InteractingInterface</span></code></a></p></td>
+<td><p>OpenMKM implementation of interacting interface.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reactions">
+<h3>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.reaction.SurfaceReaction</span></code></a></p></td>
+<td><p>Expresses OpenMKM surface reaction in Cantera CTI format reaction.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reactions/bep/pmutt.omkm.reaction.BEP.html#pmutt.omkm.reaction.BEP" title="pmutt.omkm.reaction.BEP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.reaction.BEP</span></code></a></p></td>
+<td><p>Represents BEP relationships used by OpenMKM.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>Units<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.units.Units</span></code></a></p></td>
+<td><p>OpenMKM implementation of the units.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h3>Input and Output<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.write_cti</span></code></a></p></td>
+<td><p>Writes the units, phases, species, lateral interactions, reactions and additional options in the CTI format for OpenMKM</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.write_yaml.html#pmutt.io.omkm.write_yaml" title="pmutt.io.omkm.write_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.write_yaml</span></code></a></p></td>
+<td><p>Writes the reactor options in a YAML file for OpenMKM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.get_species_phases.html#pmutt.io.omkm.get_species_phases" title="pmutt.io.omkm.get_species_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.get_species_phases</span></code></a></p></td>
+<td><p>Helper method to organize species into its phases</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.get_reactions_phases.html#pmutt.io.omkm.get_reactions_phases" title="pmutt.io.omkm.get_reactions_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.get_reactions_phases</span></code></a></p></td>
+<td><p>Helper method to organize reaction into its phases</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.get_interactions_phases.html#pmutt.io.omkm.get_interactions_phases" title="pmutt.io.omkm.get_interactions_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.get_interactions_phases</span></code></a></p></td>
+<td><p>Helper method to organize reaction into its phases</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.get_phases.html#pmutt.io.omkm.get_phases" title="pmutt.io.omkm.get_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.get_phases</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../examples_jupyter/examples.html#openmkm-io-example"><span class="std std-ref">OpenMKM_IO</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="zacros">
+<h2>Zacros<a class="headerlink" href="#zacros" title="Permalink to this headline">¶</a></h2>
+<p>Classes related to <a class="reference external" href="http://zacros.org/">Zacros</a>.</p>
+<div class="section" id="id7">
+<h3>Classes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="zacros/pmutt.empirical.zacros.Zacros.html#pmutt.empirical.zacros.Zacros" title="pmutt.empirical.zacros.Zacros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">empirical.zacros.Zacros</span></code></a></p></td>
+<td><p>Stores the information for an individual nasa specie Inherits from pmutt.empirical.EmpiricalBase</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chemkin/pmutt.chemkin.CatSite.html" class="btn btn-neutral float-right" title="pmutt.chemkin.CatSite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html" class="btn btn-neutral float-left" title="pmutt.mixture.cov.PiecewiseCovEffect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

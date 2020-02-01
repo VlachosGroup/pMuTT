@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.16 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.17 documentation</title>
   
 
   
@@ -19,33 +19,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Visualization" href="visual.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+    <link rel="prev" title="Visualization" href="api/visualization/visual.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,25 +89,26 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshops/workshops.html">Workshops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">Input and Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="empirical.html">Empirical Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmech.html">Statistical Thermodynamic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixture.html">Mixture Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="kinetic_models.html">Kinetic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reactions.html">Reactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="phase_diagram.html">Phase Diagrams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-17">Version 1.2.17</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-16">Version 1.2.16</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-15">Version 1.2.15</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-14">Version 1.2.14</a><ul>
@@ -215,53 +219,72 @@
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
 </div>
+<div class="section" id="version-1-2-17">
+<h2>Version 1.2.17<a class="headerlink" href="#version-1-2-17" title="Permalink to this headline">¶</a></h2>
+<p>Jan. 31, 2020</p>
+<ul class="simple">
+<li><p>Added more descriptive warning messages when incorrect temperature values are
+passed to <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>,
+<a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html#pmutt.empirical.nasa.Nasa9" title="pmutt.empirical.nasa.Nasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa9</span></code></a>, and
+<a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>.</p></li>
+<li><p>Fixed bug where the conversion factor for Hartrees was incorrect.</p></li>
+<li><p>Added extra parameters for OpenMKM IO.</p></li>
+<li><p>Added helper functions for OpenMKM IO to assign phases easily.</p></li>
+<li><p>Added a helper method in <code class="xref py py-class docutils literal notranslate"><span class="pre">IdealGas</span></code>
+and <code class="xref py py-class docutils literal notranslate"><span class="pre">StoichSolid</span></code> to only assign a reaction to the
+phase if all the species belong to that phase.</p></li>
+<li><p>Fixed outdated code in Chemkin example and OpenMKM example.</p></li>
+<li><p>Reorganized documentation to use stubs. Shorter pages should hopefully
+make the documentation easier to navigate.</p></li>
+</ul>
+</div>
 <div class="section" id="version-1-2-16">
 <h2>Version 1.2.16<a class="headerlink" href="#version-1-2-16" title="Permalink to this headline">¶</a></h2>
 <p>Dec. 9, 2019</p>
 <ul class="simple">
-<li>Hotfix to correct a typo for PyYAML version required.</li>
+<li><p>Hotfix to correct a typo for PyYAML version required.</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-15">
 <h2>Version 1.2.15<a class="headerlink" href="#version-1-2-15" title="Permalink to this headline">¶</a></h2>
 <p>Dec. 5, 2019</p>
 <ul class="simple">
-<li>Added <a class="reference internal" href="kinetic_models.html#pmutt.io.omkm.write_yaml" title="pmutt.io.omkm.write_yaml"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_yaml()</span></code></a> to write YAML files for OpenMKM.</li>
-<li>Added warning for <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> if the header is blank
-but the cells are occupied.</li>
-<li>Fixed bug in <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> where <code class="docutils literal notranslate"><span class="pre">model</span></code> was not
-correctly initialized with <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-func docutils literal notranslate"><span class="pre">StatMech()</span></code></a>.</li>
-<li>Added the generic method, <a class="reference internal" href="io.html#pmutt.io.excel.set_dict_value" title="pmutt.io.excel.set_dict_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_dict_value()</span></code></a> to specify
-dictionaries in <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a></li>
-<li>Removed redundant statements involving returning dictionaries in functions to
-process Excel data.</li>
-<li>Fixed warning raised whenever CpoR = 0 when fitting empirical polynomials.</li>
+<li><p>Added <a class="reference internal" href="api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html#pmutt.io.omkm.write_yaml" title="pmutt.io.omkm.write_yaml"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_yaml()</span></code></a> to write YAML files for OpenMKM.</p></li>
+<li><p>Added warning for <a class="reference internal" href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> if the header is blank
+but the cells are occupied.</p></li>
+<li><p>Fixed bug in <a class="reference internal" href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> where <code class="docutils literal notranslate"><span class="pre">model</span></code> was not
+correctly initialized with <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-func docutils literal notranslate"><span class="pre">StatMech()</span></code></a>.</p></li>
+<li><p>Added the generic method, <a class="reference internal" href="api/io/excel/pmutt.io.excel.set_dict_value.html#pmutt.io.excel.set_dict_value" title="pmutt.io.excel.set_dict_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_dict_value()</span></code></a> to specify
+dictionaries in <a class="reference internal" href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a></p></li>
+<li><p>Removed redundant statements involving returning dictionaries in functions to
+process Excel data.</p></li>
+<li><p>Fixed warning raised whenever CpoR = 0 when fitting empirical polynomials.</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-14">
 <h2>Version 1.2.14<a class="headerlink" href="#version-1-2-14" title="Permalink to this headline">¶</a></h2>
 <p>Oct. 25, 2019</p>
 <ul class="simple">
-<li>Added functionality to write files (such as
-<a class="reference internal" href="io.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_thermdat()</span></code></a>) can return a string containing
-the file if <code class="docutils literal notranslate"><span class="pre">filename</span></code> is not specified.</li>
-<li>Bug fix where <code class="docutils literal notranslate"><span class="pre">from_model</span></code> for <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
-<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> returned errors. The fix was
-related to incorrect datatyping for <code class="docutils literal notranslate"><span class="pre">misc_models</span></code>.</li>
-<li>Improved <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> to allow users to specify
-the units for the polynomial coefficients.</li>
-<li>Energies from Gaussian input functions (<a class="reference internal" href="io.html#module-pmutt.io.gaussian" title="pmutt.io.gaussian"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gaussian</span></code></a>)
+<li><p>Added functionality to write files (such as
+<a class="reference internal" href="api/io/thermdat/pmutt.io.thermdat.write_thermdat.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_thermdat()</span></code></a>) can return a string containing
+the file if <code class="docutils literal notranslate"><span class="pre">filename</span></code> is not specified.</p></li>
+<li><p>Bug fix where <code class="docutils literal notranslate"><span class="pre">from_model</span></code> for <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
+<a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> returned errors. The fix was
+related to incorrect datatyping for <code class="docutils literal notranslate"><span class="pre">misc_models</span></code>.</p></li>
+<li><p>Improved <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> to allow users to specify
+the units for the polynomial coefficients.</p></li>
+<li><p>Energies from Gaussian input functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">gaussian</span></code>)
 was originally in Hartrees. Changed to allow users to specify what unit they
-desire (default in eV).</li>
-<li>Added functionality to write BEP relationships to OpenMKM CTI files.</li>
-<li>Restructured OpenMKM CTI writer to be more robust when specifying custom IDs</li>
-<li>Added functionality to remove leading and trailing spaces when reading from
-Excel sheets since users found this error hard to pick up.</li>
+desire (default in eV).</p></li>
+<li><p>Added functionality to write BEP relationships to OpenMKM CTI files.</p></li>
+<li><p>Restructured OpenMKM CTI writer to be more robust when specifying custom IDs</p></li>
+<li><p>Added functionality to remove leading and trailing spaces when reading from
+Excel sheets since users found this error hard to pick up.</p></li>
 </ul>
 <div class="section" id="contributors">
 <h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Qiang Li (<a class="reference external" href="https://github.com/lqcata">lqcata</a>)</li>
+<li><p>Qiang Li (<a class="reference external" href="https://github.com/lqcata">lqcata</a>)</p></li>
 </ul>
 </div>
 </div>
@@ -269,36 +292,36 @@ Excel sheets since users found this error hard to pick up.</li>
 <h2>Version 1.2.13<a class="headerlink" href="#version-1-2-13" title="Permalink to this headline">¶</a></h2>
 <p>Oct. 2, 2019</p>
 <ul class="simple">
-<li>Fixed bug where small non-zero rotational inertia modes were chosen
-preferentially over larger contributing modes.</li>
-<li>Fixed bug where presets had to be specified before statistical mechanical
-arguments. Now, the preset will not overwrite any previously set values.</li>
-<li>Updated <a class="reference internal" href="io.html#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a> to allow the user to return
-the <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects as a list, tuple, or
-dictionary.</li>
-<li>Updated <a class="reference internal" href="io.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_thermdat()</span></code></a> to accept a list or a
-dictionary of <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects</li>
-<li>Implemented <cite>from_model</cite> method in <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
-<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> classes so empirical objects can be
-created from <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects as well as other
-empirical objects. The <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method is deprecated.</li>
-<li>Added more descriptive warnings and errors.</li>
-<li>Created <a class="reference internal" href="empirical.html#pmutt.empirical.GasPressureAdj" title="pmutt.empirical.GasPressureAdj"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureAdj</span></code></a> so entropy and Gibbs energy
-of gas-phase empirical objects (like <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
-and <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) are dependent on pressure. This
+<li><p>Fixed bug where small non-zero rotational inertia modes were chosen
+preferentially over larger contributing modes.</p></li>
+<li><p>Fixed bug where presets had to be specified before statistical mechanical
+arguments. Now, the preset will not overwrite any previously set values.</p></li>
+<li><p>Updated <a class="reference internal" href="api/io/thermdat/pmutt.io.thermdat.read_thermdat.html#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_thermdat()</span></code></a> to allow the user to return
+the <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects as a list, tuple, or
+dictionary.</p></li>
+<li><p>Updated <a class="reference internal" href="api/io/thermdat/pmutt.io.thermdat.write_thermdat.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_thermdat()</span></code></a> to accept a list or a
+dictionary of <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects</p></li>
+<li><p>Implemented <cite>from_model</cite> method in <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> and
+<a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> classes so empirical objects can be
+created from <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects as well as other
+empirical objects. The <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method is deprecated.</p></li>
+<li><p>Added more descriptive warnings and errors.</p></li>
+<li><p>Created <code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureAdj</span></code> so entropy and Gibbs energy
+of gas-phase empirical objects (like <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
+and <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) are dependent on pressure. This
 object is assigned automatically to <code class="docutils literal notranslate"><span class="pre">misc_models</span></code> if <code class="docutils literal notranslate"><span class="pre">phase</span></code> is ‘g’ or
 ‘gas’ and the <code class="docutils literal notranslate"><span class="pre">add_gas_P_adj</span></code> can be set to False if users do not wish to
-assign this object automatically.</li>
-<li>Thermodynamic quantities of individual species can also be calculated on a
+assign this object automatically.</p></li>
+<li><p>Thermodynamic quantities of individual species can also be calculated on a
 per mass basis (i.e. users can calculate quantities in J/g, cal/kg, etc.).
 The object must contain a dictionary of its composition in <code class="docutils literal notranslate"><span class="pre">elements</span></code> for
-this functionality.</li>
-<li>Fixed broken hyperlinks.</li>
+this functionality.</p></li>
+<li><p>Fixed broken hyperlinks.</p></li>
 </ul>
 <div class="section" id="id2">
 <h3>Contributors<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Geun Ho Gu (<a class="reference external" href="https://github.com/googhgoo">googhgoo</a>)</li>
+<li><p>Geun Ho Gu (<a class="reference external" href="https://github.com/googhgoo">googhgoo</a>)</p></li>
 </ul>
 </div>
 </div>
@@ -306,15 +329,15 @@ this functionality.</li>
 <h2>Version 1.2.12<a class="headerlink" href="#version-1-2-12" title="Permalink to this headline">¶</a></h2>
 <p>Aug. 22, 2019</p>
 <ul class="simple">
-<li>Refactored <a class="reference internal" href="io.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-class docutils literal notranslate"><span class="pre">write_thermdat</span></code></a> so that it is simpler
-to understand</li>
-<li>Implemented <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa9" title="pmutt.empirical.nasa.Nasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa9</span></code></a> and
-<a class="reference internal" href="empirical.html#pmutt.empirical.nasa.SingleNasa9" title="pmutt.empirical.nasa.SingleNasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleNasa9</span></code></a> polynomials</li>
-<li>Added preliminary CTI file writer for Cantera and OpenMKM</li>
-<li>Added Binder notebooks to Examples page so users can try pMuTT before
-installing</li>
-<li>Fixed bug where <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> was not passed when
-modes were specified indivudally in spreadsheets.</li>
+<li><p>Refactored <a class="reference internal" href="api/io/thermdat/pmutt.io.thermdat.write_thermdat.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-class docutils literal notranslate"><span class="pre">write_thermdat</span></code></a> so that it is simpler
+to understand</p></li>
+<li><p>Implemented <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html#pmutt.empirical.nasa.Nasa9" title="pmutt.empirical.nasa.Nasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa9</span></code></a> and
+<a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.SingleNasa9.html#pmutt.empirical.nasa.SingleNasa9" title="pmutt.empirical.nasa.SingleNasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleNasa9</span></code></a> polynomials</p></li>
+<li><p>Added preliminary CTI file writer for Cantera and OpenMKM</p></li>
+<li><p>Added Binder notebooks to Examples page so users can try pMuTT before
+installing</p></li>
+<li><p>Fixed bug where <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> was not passed when
+modes were specified indivudally in spreadsheets.</p></li>
 </ul>
 <div class="section" id="id3">
 <h3>Contributors<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
@@ -325,171 +348,171 @@ modes were specified indivudally in spreadsheets.</li>
 <h2>Version 1.2.11<a class="headerlink" href="#version-1-2-11" title="Permalink to this headline">¶</a></h2>
 <p>Jun. 18, 2019</p>
 <ul class="simple">
-<li>Added xlrd dependency so spreadsheets can be read using pandas</li>
-<li>Updated documentation page with NAM 2019 instructions.</li>
+<li><p>Added xlrd dependency so spreadsheets can be read using pandas</p></li>
+<li><p>Updated documentation page with NAM 2019 instructions.</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-10">
 <h2>Version 1.2.10<a class="headerlink" href="#version-1-2-10" title="Permalink to this headline">¶</a></h2>
 <p>Jun. 13, 2019</p>
 <ul class="simple">
-<li>Another hotfix to fix a bug where the version was not incremented correctly</li>
+<li><p>Another hotfix to fix a bug where the version was not incremented correctly</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-9">
 <h2>Version 1.2.9<a class="headerlink" href="#version-1-2-9" title="Permalink to this headline">¶</a></h2>
 <p>Jun. 13, 2019</p>
 <ul class="simple">
-<li>Hotfix where pypi created the folder in the old case (pMuTT) instead of
-lower case (pmutt)</li>
+<li><p>Hotfix where pypi created the folder in the old case (pMuTT) instead of
+lower case (pmutt)</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-8">
 <h2>Version 1.2.8<a class="headerlink" href="#version-1-2-8" title="Permalink to this headline">¶</a></h2>
 <p>Jun. 13, 2019</p>
 <ul class="simple">
-<li>Importing from pMuTT is now all in lowercase. (i.e. <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pmutt</span></code> instead
-of <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pMuTT</span></code>)</li>
+<li><p>Importing from pMuTT is now all in lowercase. (i.e. <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pmutt</span></code> instead
+of <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pMuTT</span></code>)</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-7">
 <h2>Version 1.2.7<a class="headerlink" href="#version-1-2-7" title="Permalink to this headline">¶</a></h2>
 <p>Jun. 11, 2019</p>
 <ul class="simple">
-<li>Added documentation page for more verbose installation instructions.</li>
-<li>Updated <code class="xref py py-class docutils literal notranslate"><span class="pre">network</span></code> to use graph theory approach using
-states as nodes</li>
-<li>Bug fix for <a class="reference internal" href="statmech.html#pmutt.statmech.lsr.LSR" title="pmutt.statmech.lsr.LSR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code></a> to handle inputs that are not
-pmutt model objects</li>
-<li>Added ability to create interactive plots with Pygal</li>
-<li>Updated <a class="reference internal" href="statmech.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a> to read
-<code class="docutils literal notranslate"><span class="pre">potentialenergy</span></code> from inputted <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> object.</li>
+<li><p>Added documentation page for more verbose installation instructions.</p></li>
+<li><p>Updated <code class="xref py py-class docutils literal notranslate"><span class="pre">network</span></code> to use graph theory approach using
+states as nodes</p></li>
+<li><p>Bug fix for <a class="reference internal" href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR" title="pmutt.statmech.lsr.LSR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code></a> to handle inputs that are not
+pmutt model objects</p></li>
+<li><p>Added ability to create interactive plots with Pygal</p></li>
+<li><p>Updated <a class="reference internal" href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a> to read
+<code class="docutils literal notranslate"><span class="pre">potentialenergy</span></code> from inputted <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> object.</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-6">
 <h2>Version 1.2.6<a class="headerlink" href="#version-1-2-6" title="Permalink to this headline">¶</a></h2>
 <p>Apr. 26, 2019</p>
 <ul class="simple">
-<li>Moved <code class="docutils literal notranslate"><span class="pre">references</span></code> attribute from empirical classes to
-<a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a></li>
-<li>Changed <code class="docutils literal notranslate"><span class="pre">mix_models</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">misc_models</span></code> in  indicating any model
-object can be used</li>
-<li>Implemented <a class="reference internal" href="statmech.html#pmutt.statmech.vib.DebyeVib" title="pmutt.statmech.vib.DebyeVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">DebyeVib</span></code></a> and
-<a class="reference internal" href="statmech.html#pmutt.statmech.ConstantMode" title="pmutt.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> classes</li>
-<li>Restructured <a class="reference internal" href="reactions.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object to act as a transition
-state species in <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</li>
-<li>Implemented <code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code> object</li>
-<li>Added option to calculate pre-exponential factor using ratio of partition
-functions or entropy of activation</li>
-<li>Added option to use electronic energy as descriptor for
-<a class="reference internal" href="reactions.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object</li>
-<li>Added some imperial unit functionality to <code class="docutils literal notranslate"><span class="pre">pmutt.constants</span></code> module</li>
-<li>Renamed <code class="docutils literal notranslate"><span class="pre">from_</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">to</span></code> parameter in
-<a class="reference internal" href="constants.html#pmutt.constants.convert_unit" title="pmutt.constants.convert_unit"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmutt.constants.convert_unit()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">initial</span></code> and <code class="docutils literal notranslate"><span class="pre">final</span></code></li>
-<li>Added ability to import individual translational, rotational, vibrational,
-electronic and nuclear modes to Excel</li>
-<li>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.trans.IdealTrans</span></code> to
-<a class="reference internal" href="statmech.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a></li>
-<li>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.elec.IdealElec</span></code> to
-<a class="reference internal" href="statmech.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a></li>
-<li>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.nucl.IdealNucl</span></code> to
-<a class="reference internal" href="statmech.html#pmutt.statmech.nucl.EmptyNucl" title="pmutt.statmech.nucl.EmptyNucl"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyNucl</span></code></a></li>
+<li><p>Moved <code class="docutils literal notranslate"><span class="pre">references</span></code> attribute from empirical classes to
+<a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a></p></li>
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">mix_models</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">misc_models</span></code> in  indicating any model
+object can be used</p></li>
+<li><p>Implemented <a class="reference internal" href="api/statmech/vib/pmutt.statmech.vib.DebyeVib.html#pmutt.statmech.vib.DebyeVib" title="pmutt.statmech.vib.DebyeVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">DebyeVib</span></code></a> and
+<a class="reference internal" href="api/statmech/misc/pmutt.statmech.ConstantMode.html#pmutt.statmech.ConstantMode" title="pmutt.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> classes</p></li>
+<li><p>Restructured <a class="reference internal" href="api/reactions/bep/pmutt.reaction.bep.BEP.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object to act as a transition
+state species in <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> objects</p></li>
+<li><p>Implemented <code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code> object</p></li>
+<li><p>Added option to calculate pre-exponential factor using ratio of partition
+functions or entropy of activation</p></li>
+<li><p>Added option to use electronic energy as descriptor for
+<a class="reference internal" href="api/reactions/bep/pmutt.reaction.bep.BEP.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> object</p></li>
+<li><p>Added some imperial unit functionality to <code class="docutils literal notranslate"><span class="pre">pmutt.constants</span></code> module</p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">from_</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">to</span></code> parameter in
+<a class="reference internal" href="api/constants/unit_conv/pmutt.constants.convert_unit.html#pmutt.constants.convert_unit" title="pmutt.constants.convert_unit"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmutt.constants.convert_unit()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">initial</span></code> and <code class="docutils literal notranslate"><span class="pre">final</span></code></p></li>
+<li><p>Added ability to import individual translational, rotational, vibrational,
+electronic and nuclear modes to Excel</p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.trans.IdealTrans</span></code> to
+<a class="reference internal" href="api/statmech/trans/pmutt.statmech.trans.FreeTrans.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a></p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.elec.IdealElec</span></code> to
+<a class="reference internal" href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a></p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.nucl.IdealNucl</span></code> to
+<a class="reference internal" href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl" title="pmutt.statmech.nucl.EmptyNucl"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyNucl</span></code></a></p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-5">
 <h2>Version 1.2.5<a class="headerlink" href="#version-1-2-5" title="Permalink to this headline">¶</a></h2>
 <p>Mar. 21, 2019</p>
 <ul class="simple">
-<li>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.io_</span></code> module to <code class="docutils literal notranslate"><span class="pre">pmutt.io</span></code></li>
-<li>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.io_.jsonio</span></code> module to <code class="docutils literal notranslate"><span class="pre">pmutt.io.json</span></code></li>
-<li>Added preliminary IO support for MongoDB in module: <code class="docutils literal notranslate"><span class="pre">pmutt.io.db</span></code></li>
-<li>Bug fixes for Chemkin IO behavior</li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.io_</span></code> module to <code class="docutils literal notranslate"><span class="pre">pmutt.io</span></code></p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.io_.jsonio</span></code> module to <code class="docutils literal notranslate"><span class="pre">pmutt.io.json</span></code></p></li>
+<li><p>Added preliminary IO support for MongoDB in module: <code class="docutils literal notranslate"><span class="pre">pmutt.io.db</span></code></p></li>
+<li><p>Bug fixes for Chemkin IO behavior</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-4">
 <h2>Version 1.2.4<a class="headerlink" href="#version-1-2-4" title="Permalink to this headline">¶</a></h2>
 <p>Mar. 11, 2019</p>
 <ul class="simple">
-<li>Hotfix to correct Chemkin IO behavior</li>
+<li><p>Hotfix to correct Chemkin IO behavior</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-3">
 <h2>Version 1.2.3<a class="headerlink" href="#version-1-2-3" title="Permalink to this headline">¶</a></h2>
 <p>Feb. 25, 2019</p>
 <ul class="simple">
-<li>Added <code class="docutils literal notranslate"><span class="pre">smiles</span></code> attribute to <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
-<a class="reference internal" href="empirical.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a> classes</li>
-<li>Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files</li>
-<li>Added <code class="xref py py-class docutils literal notranslate"><span class="pre">CovEffect</span></code> class to model coverage effects
-and integrated it with <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
-<a class="reference internal" href="empirical.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a> classes</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">include_ZPE</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_E</span></code>, <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code>
-and <code class="docutils literal notranslate"><span class="pre">get_delta_E</span></code> for the <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> class and
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to add zero-point energy in
-calculations</li>
-<li>Renamed private methods <code class="docutils literal notranslate"><span class="pre">_get_delta_quantity</span></code> and <code class="docutils literal notranslate"><span class="pre">_get_state_quantity</span></code> to
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">smiles</span></code> attribute to <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
+<a class="reference internal" href="api/empirical/empirical_base/pmutt.empirical.EmpiricalBase.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a> classes</p></li>
+<li><p>Added functions to write Chemkin surf.inp, gas.inp, and EAs.inp files</p></li>
+<li><p>Added <code class="xref py py-class docutils literal notranslate"><span class="pre">CovEffect</span></code> class to model coverage effects
+and integrated it with <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
+<a class="reference internal" href="api/empirical/empirical_base/pmutt.empirical.EmpiricalBase.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a> classes</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">include_ZPE</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_E</span></code>, <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code>
+and <code class="docutils literal notranslate"><span class="pre">get_delta_E</span></code> for the <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> class and
+<a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to add zero-point energy in
+calculations</p></li>
+<li><p>Renamed private methods <code class="docutils literal notranslate"><span class="pre">_get_delta_quantity</span></code> and <code class="docutils literal notranslate"><span class="pre">_get_state_quantity</span></code> to
 public methods <code class="docutils literal notranslate"><span class="pre">get_delta_quantity</span></code> and <code class="docutils literal notranslate"><span class="pre">get_state_quantity</span></code> in
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class</li>
-<li>Added generic method <code class="docutils literal notranslate"><span class="pre">get_quantity</span></code> to <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
+<a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class</p></li>
+<li><p>Added generic method <code class="docutils literal notranslate"><span class="pre">get_quantity</span></code> to <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
 class so any method can be evaluated. It takes the parameters <code class="docutils literal notranslate"><span class="pre">raise_error</span></code>
 and <code class="docutils literal notranslate"><span class="pre">raise_warning</span></code> so the user has the ability to ignore modes if they do
-not have the desired properties</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">plot_coordinate_diagram</span></code> method to the
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a> class to plot coordinate diagrams.</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code> and <code class="docutils literal notranslate"><span class="pre">get_E</span></code> methods to <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
-class to calculate electronic contribution to thermodynamic properties</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">get_EoRT_state</span></code> and <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code> methods to
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> to calculate electronic contribution to
-reaction properties</li>
-<li>Added an optional parameter, <code class="docutils literal notranslate"><span class="pre">activation</span></code>, to <code class="docutils literal notranslate"><span class="pre">get_delta_X</span></code> methods to
+not have the desired properties</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">plot_coordinate_diagram</span></code> method to the
+<a class="reference internal" href="api/reactions/reactions/pmutt.reaction.Reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a> class to plot coordinate diagrams.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code> and <code class="docutils literal notranslate"><span class="pre">get_E</span></code> methods to <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
+class to calculate electronic contribution to thermodynamic properties</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">get_EoRT_state</span></code> and <code class="docutils literal notranslate"><span class="pre">get_delta_EoRT</span></code> methods to
+<a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> to calculate electronic contribution to
+reaction properties</p></li>
+<li><p>Added an optional parameter, <code class="docutils literal notranslate"><span class="pre">activation</span></code>, to <code class="docutils literal notranslate"><span class="pre">get_delta_X</span></code> methods to
 specify the difference between the reactants/products and the transition
-state.</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">pmutt.constants.symmetry_dict</span></code> to allow easy look up of common
-symmetry numbers</li>
-<li>Fixed bug where specie-specific arguments were not passed correctly for
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class</li>
+state.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">pmutt.constants.symmetry_dict</span></code> to allow easy look up of common
+symmetry numbers</p></li>
+<li><p>Fixed bug where specie-specific arguments were not passed correctly for
+<a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-2">
 <h2>Version 1.2.2<a class="headerlink" href="#version-1-2-2" title="Permalink to this headline">¶</a></h2>
 <p>Jan. 18, 2019</p>
 <ul class="simple">
-<li>Added option to extract imaginary frequencies from VASP’s OUTCAR files</li>
-<li>Added support for imaginary frequencies for
-<a class="reference internal" href="statmech.html#pmutt.statmech.vib.HarmonicVib" title="pmutt.statmech.vib.HarmonicVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicVib</span></code></a> and
-<a class="reference internal" href="statmech.html#pmutt.statmech.vib.QRRHOVib" title="pmutt.statmech.vib.QRRHOVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">QRRHOVib</span></code></a> classes</li>
-<li>Restructured <a class="reference internal" href="statmech.html#pmutt.statmech.vib.HarmonicVib" title="pmutt.statmech.vib.HarmonicVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicVib</span></code></a> and
-<a class="reference internal" href="statmech.html#pmutt.statmech.vib.QRRHOVib" title="pmutt.statmech.vib.QRRHOVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">QRRHOVib</span></code></a> classes to calculate vibrational
+<li><p>Added option to extract imaginary frequencies from VASP’s OUTCAR files</p></li>
+<li><p>Added support for imaginary frequencies for
+<a class="reference internal" href="api/statmech/vib/pmutt.statmech.vib.HarmonicVib.html#pmutt.statmech.vib.HarmonicVib" title="pmutt.statmech.vib.HarmonicVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicVib</span></code></a> and
+<a class="reference internal" href="api/statmech/vib/pmutt.statmech.vib.QRRHOVib.html#pmutt.statmech.vib.QRRHOVib" title="pmutt.statmech.vib.QRRHOVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">QRRHOVib</span></code></a> classes</p></li>
+<li><p>Restructured <a class="reference internal" href="api/statmech/vib/pmutt.statmech.vib.HarmonicVib.html#pmutt.statmech.vib.HarmonicVib" title="pmutt.statmech.vib.HarmonicVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicVib</span></code></a> and
+<a class="reference internal" href="api/statmech/vib/pmutt.statmech.vib.QRRHOVib.html#pmutt.statmech.vib.QRRHOVib" title="pmutt.statmech.vib.QRRHOVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">QRRHOVib</span></code></a> classes to calculate vibrational
 temperatures, scaled wavenumbers and scaled inertia when methods are called
 (rather than at initialization) to prevent incorrect calculations due to
-changes in the vibrational wavenumbers.</li>
-<li>Fixed unit test names</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">get_species</span></code> to <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> and
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></li>
-<li>Fixed bug related to <a class="reference internal" href="empirical.html#pmutt.empirical.references.References" title="pmutt.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a> and
-<a class="reference internal" href="empirical.html#pmutt.empirical.references.Reference" title="pmutt.empirical.references.Reference"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code></a> objects not JSON-write
-compatible.</li>
-<li>Fixed bug related to referencing in <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
-class</li>
+changes in the vibrational wavenumbers.</p></li>
+<li><p>Fixed unit test names</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">get_species</span></code> to <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> and
+<a class="reference internal" href="api/reactions/reactions/pmutt.reaction.Reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></p></li>
+<li><p>Fixed bug related to <code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code> objects not JSON-write
+compatible.</p></li>
+<li><p>Fixed bug related to referencing in <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
+class</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-2-1">
 <h2>Version 1.2.1<a class="headerlink" href="#version-1-2-1" title="Permalink to this headline">¶</a></h2>
 <p>Dec. 17, 2018</p>
 <ul class="simple">
-<li>Added <code class="docutils literal notranslate"><span class="pre">vib_outcar</span></code> special rule for <a class="reference internal" href="io.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> and
-<a class="reference internal" href="io.html#pmutt.io.vasp.set_vib_wavenumbers_from_outcar" title="pmutt.io.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a> to get vibrational
-frequencies directly from VASP’s OUTCAR file.</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">get_X</span></code> methods to <a class="reference internal" href="empirical.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>,
-<a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>, <a class="reference internal" href="statmech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
-and <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> to directly calculate thermodynamic
-properties (such as H, S, F, G) with the appropriate units</li>
-<li>Changed symbol for Hemlholtz energy from A to F</li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vib_outcar</span></code> special rule for <a class="reference internal" href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> and
+<a class="reference internal" href="api/io/vasp/pmutt.io.vasp.set_vib_wavenumbers_from_outcar.html#pmutt.io.vasp.set_vib_wavenumbers_from_outcar" title="pmutt.io.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a> to get vibrational
+frequencies directly from VASP’s OUTCAR file.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">get_X</span></code> methods to <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>,
+<a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>, <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a>
+and <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> to directly calculate thermodynamic
+properties (such as H, S, F, G) with the appropriate units</p></li>
+<li><p>Changed symbol for Hemlholtz energy from A to F</p></li>
 </ul>
 <div class="section" id="id4">
 <h3>Contributors<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Himaghna Bhattacharjee (<a class="reference external" href="https://github.com/himaghna">himaghna</a>)</li>
+<li><p>Himaghna Bhattacharjee (<a class="reference external" href="https://github.com/himaghna">himaghna</a>)</p></li>
 </ul>
 </div>
 </div>
@@ -497,61 +520,61 @@ properties (such as H, S, F, G) with the appropriate units</li>
 <h2>Version 1.2.0<a class="headerlink" href="#version-1-2-0" title="Permalink to this headline">¶</a></h2>
 <p>Dec. 12, 2018</p>
 <ul class="simple">
-<li>Restructured code to exclude <code class="docutils literal notranslate"><span class="pre">model</span></code> module</li>
+<li><p>Restructured code to exclude <code class="docutils literal notranslate"><span class="pre">model</span></code> module</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-1-3">
 <h2>Version 1.1.3<a class="headerlink" href="#version-1-1-3" title="Permalink to this headline">¶</a></h2>
 <p>Dec. 11, 2018</p>
 <ul class="simple">
-<li>Added <a class="reference internal" href="reactions.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> class</li>
-<li>Restructured <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class so reaction states (i.e.
-reactants, products, transition states) can be calculated separately</li>
-<li>Updated <a class="reference internal" href="empirical.html#pmutt.empirical.references.References" title="pmutt.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a> class to be able
-reference any attribute</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> entry to <a class="reference internal" href="statmech.html#pmutt.statmech.presets" title="pmutt.statmech.presets"><code class="xref py py-data docutils literal notranslate"><span class="pre">presets</span></code></a> dictionary to
-represent an empty species</li>
-<li>Added correction factor to calculate partition coefficient, q, in
-<code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code> class</li>
+<li><p>Added <a class="reference internal" href="api/reactions/bep/pmutt.reaction.bep.BEP.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> class</p></li>
+<li><p>Restructured <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class so reaction states (i.e.
+reactants, products, transition states) can be calculated separately</p></li>
+<li><p>Updated <code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code> class to be able
+reference any attribute</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> entry to <code class="xref py py-data docutils literal notranslate"><span class="pre">presets</span></code> dictionary to
+represent an empty species</p></li>
+<li><p>Added correction factor to calculate partition coefficient, q, in
+<code class="xref py py-class docutils literal notranslate"><span class="pre">IdealElec</span></code> class</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-1-2">
 <h2>Version 1.1.2<a class="headerlink" href="#version-1-1-2" title="Permalink to this headline">¶</a></h2>
 <p>Nov. 27, 2018</p>
 <ul class="simple">
-<li>Fixed bugs in <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class for calculating
-pre-exponential factors</li>
-<li>Added methods in <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to calculate rate
+<li><p>Fixed bugs in <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class for calculating
+pre-exponential factors</p></li>
+<li><p>Added methods in <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to calculate rate
 constants and activation energy (currently, this just calculates the
-difference in enthalpy between the reactant/product and the transition state)</li>
-<li>Quality of life improvements such as allowing
-<a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class inputs to be a single pmutt object
-instead of expecting a list</li>
+difference in enthalpy between the reactant/product and the transition state)</p></li>
+<li><p>Quality of life improvements such as allowing
+<a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class inputs to be a single pmutt object
+instead of expecting a list</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-1-1">
 <h2>Version 1.1.1<a class="headerlink" href="#version-1-1-1" title="Permalink to this headline">¶</a></h2>
 <p>Nov. 7, 2018</p>
 <ul class="simple">
-<li>Fixed bugs in <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class for <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>
+<li><p>Fixed bugs in <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class for <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>
 and <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code> where one temperature would return a 1x1 vector instead of a
-float</li>
-<li>Fixed bug in <a class="reference internal" href="kinetic_models.html#pmutt.empirical.zacros.Zacros" title="pmutt.empirical.zacros.Zacros"><code class="xref py py-class docutils literal notranslate"><span class="pre">Zacros</span></code></a> class where it expected
-vibrational energies instead of wavenumbers.</li>
+float</p></li>
+<li><p>Fixed bug in <a class="reference internal" href="api/kinetic_models/zacros/pmutt.empirical.zacros.Zacros.html#pmutt.empirical.zacros.Zacros" title="pmutt.empirical.zacros.Zacros"><code class="xref py py-class docutils literal notranslate"><span class="pre">Zacros</span></code></a> class where it expected
+vibrational energies instead of wavenumbers.</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-1-0">
 <h2>Version 1.1.0<a class="headerlink" href="#version-1-1-0" title="Permalink to this headline">¶</a></h2>
 <p>Oct. 26, 2018</p>
 <ul class="simple">
-<li>Updated <a class="reference internal" href="reactions.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to parse strings</li>
-<li>New <a class="reference internal" href="empirical.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class</li>
-<li>New equation of state classes: <a class="reference internal" href="eos.html#pmutt.eos.IdealGasEOS" title="pmutt.eos.IdealGasEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealGasEOS</span></code></a>,
-<a class="reference internal" href="eos.html#pmutt.eos.vanDerWaalsEOS" title="pmutt.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></li>
-<li>New <a class="reference internal" href="phase_diagram.html#pmutt.reaction.phasediagram.PhaseDiagram" title="pmutt.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</li>
-<li>New <a class="reference internal" href="statmech.html#pmutt.statmech.vib.EinsteinVib" title="pmutt.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</li>
-<li>New <a class="reference internal" href="kinetic_models.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
-reactions from Chemkin surf.inp and gas.inp files</li>
+<li><p>Updated <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to parse strings</p></li>
+<li><p>New <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class</p></li>
+<li><p>New equation of state classes: <a class="reference internal" href="api/eos/eos/pmutt.eos.IdealGasEOS.html#pmutt.eos.IdealGasEOS" title="pmutt.eos.IdealGasEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealGasEOS</span></code></a>,
+<a class="reference internal" href="api/eos/eos/pmutt.eos.vanDerWaalsEOS.html#pmutt.eos.vanDerWaalsEOS" title="pmutt.eos.vanDerWaalsEOS"><code class="xref py py-class docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a></p></li>
+<li><p>New <a class="reference internal" href="api/phase_diagram/phase_diagram/pmutt.reaction.phasediagram.PhaseDiagram.html#pmutt.reaction.phasediagram.PhaseDiagram" title="pmutt.reaction.phasediagram.PhaseDiagram"><code class="xref py py-class docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a> class</p></li>
+<li><p>New <a class="reference internal" href="api/statmech/vib/pmutt.statmech.vib.EinsteinVib.html#pmutt.statmech.vib.EinsteinVib" title="pmutt.statmech.vib.EinsteinVib"><code class="xref py py-class docutils literal notranslate"><span class="pre">EinsteinVib</span></code></a> class</p></li>
+<li><p>New <a class="reference internal" href="api/io/chemkin/pmutt.io.chemkin.read_reactions.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_reactions()</span></code></a> function to read species and
+reactions from Chemkin surf.inp and gas.inp files</p></li>
 </ul>
 </div>
 </div>
@@ -565,7 +588,7 @@ reactions from Chemkin surf.inp and gas.inp files</li>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="visual.html" class="btn btn-neutral" title="Visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/visualization/visual.html" class="btn btn-neutral float-left" title="Visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -591,26 +614,16 @@ reactions from Chemkin surf.inp and gas.inp files</li>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>  
+  </script>
+
+  
+  
+    
+    
 
   <style>
     /* Sidebar header (and topbar for mobile) */

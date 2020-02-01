@@ -1,0 +1,727 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Input and Output &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pmutt.io.excel.read_excel" href="excel/pmutt.io.excel.read_excel.html" />
+    <link rel="prev" title="pmutt.constants.type_dict" href="../constants/misc/pmutt.constants.type_dict.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../constants/constants.html">Constants</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input and Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#excel">Excel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="excel/pmutt.io.excel.read_excel.html">pmutt.io.excel.read_excel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-rules">Special Rules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_element.html">pmutt.io.excel.set_element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_formula.html">pmutt.io.excel.set_formula</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_atoms.html">pmutt.io.excel.set_atoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_statmech_model.html">pmutt.io.excel.set_statmech_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_trans_model.html">pmutt.io.excel.set_trans_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_vib_model.html">pmutt.io.excel.set_vib_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_rot_model.html">pmutt.io.excel.set_rot_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_elec_model.html">pmutt.io.excel.set_elec_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_nucl_model.html">pmutt.io.excel.set_nucl_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_vib_wavenumbers.html">pmutt.io.excel.set_vib_wavenumbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_rot_temperatures.html">pmutt.io.excel.set_rot_temperatures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_nasa_a_low.html">pmutt.io.excel.set_nasa_a_low</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_nasa_a_high.html">pmutt.io.excel.set_nasa_a_high</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_list_value.html">pmutt.io.excel.set_list_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="excel/pmutt.io.excel.set_dict_value.html">pmutt.io.excel.set_dict_value</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#thermdat">Thermdat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="thermdat/pmutt.io.thermdat.read_thermdat.html">pmutt.io.thermdat.read_thermdat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="thermdat/pmutt.io.thermdat.write_thermdat.html">pmutt.io.thermdat.write_thermdat</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#json">JSON</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="json/pmutt.io.json.pmuttEncoder.html">pmutt.io.json.pmuttEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="json/pmutt.io.json.json_to_pmutt.html">pmutt.io.json.json_to_pmutt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-json-file">Sample JSON File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-new-pmutt-classes">Creating New pmutt Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#encoding">Encoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#decoding">Decoding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#yaml">YAML</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-yaml-file">Sample YAML File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vasp">VASP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vasp/pmutt.io.vasp.set_vib_wavenumbers_from_outcar.html">pmutt.io.vasp.set_vib_wavenumbers_from_outcar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaussian">Gaussian</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_pattern.html">pmutt.io.gaussian.read_pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_zpe.html">pmutt.io.gaussian.read_zpe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_electronic_and_zpe.html">pmutt.io.gaussian.read_electronic_and_zpe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_frequencies.html">pmutt.io.gaussian.read_frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_rotational_temperatures.html">pmutt.io.gaussian.read_rotational_temperatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_molecular_mass.html">pmutt.io.gaussian.read_molecular_mass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_rot_symmetry_num.html">pmutt.io.gaussian.read_rot_symmetry_num</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#chemkin">Chemkin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chemkin/pmutt.io.chemkin.read_reactions.html">pmutt.io.chemkin.read_reactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_EA.html">pmutt.io.chemkin.write_EA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_gas.html">pmutt.io.chemkin.write_gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_surf.html">pmutt.io.chemkin.write_surf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_T_flow.html">pmutt.io.chemkin.write_T_flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_tube_mole.html">pmutt.io.chemkin.write_tube_mole</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#openmkm">OpenMKM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="omkm/pmutt.io.omkm.write_cti.html">pmutt.io.omkm.write_cti</a></li>
+<li class="toctree-l3"><a class="reference internal" href="omkm/pmutt.io.omkm.write_yaml.html">pmutt.io.omkm.write_yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="omkm/pmutt.io.omkm.get_species_phases.html">pmutt.io.omkm.get_species_phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="omkm/pmutt.io.omkm.get_reactions_phases.html">pmutt.io.omkm.get_reactions_phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="omkm/pmutt.io.omkm.get_interactions_phases.html">pmutt.io.omkm.get_interactions_phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="omkm/pmutt.io.omkm.get_phases.html">pmutt.io.omkm.get_phases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Input and Output</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/io/io.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="input-and-output">
+<span id="io"></span><h1>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h1>
+<p>Input and output to different forms is an active area of development for pMuTT.</p>
+<div class="section" id="excel">
+<h2>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.read_excel</span></code></a></p></td>
+<td><p>Reads an excel file and returns it as a list of dictionaries to initialize objects</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="special-rules">
+<h3>Special Rules<a class="headerlink" href="#special-rules" title="Permalink to this headline">¶</a></h3>
+<p>Special rules can be defined in the <a class="reference internal" href="excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>
+function to process inputs differently. Currently supported special rules are
+listed below.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_element.html#pmutt.io.excel.set_element" title="pmutt.io.excel.set_element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_element</span></code></a></p></td>
+<td><p>Parses element header and assigns to output_structure[‘elements’]</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_formula.html#pmutt.io.excel.set_formula" title="pmutt.io.excel.set_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_formula</span></code></a></p></td>
+<td><p>Parses stoichiometric formula unit and assigns to output_structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_atoms.html#pmutt.io.excel.set_atoms" title="pmutt.io.excel.set_atoms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_atoms</span></code></a></p></td>
+<td><p>Reads the atoms object ans assigns to output_structure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_statmech_model.html#pmutt.io.excel.set_statmech_model" title="pmutt.io.excel.set_statmech_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_statmech_model</span></code></a></p></td>
+<td><p>Imports module and assigns the class to output_structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_trans_model.html#pmutt.io.excel.set_trans_model" title="pmutt.io.excel.set_trans_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_trans_model</span></code></a></p></td>
+<td><p>Imports module and assigns the class to output_structure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_vib_model.html#pmutt.io.excel.set_vib_model" title="pmutt.io.excel.set_vib_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_vib_model</span></code></a></p></td>
+<td><p>Imports module and assigns the class to output_structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_rot_model.html#pmutt.io.excel.set_rot_model" title="pmutt.io.excel.set_rot_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_rot_model</span></code></a></p></td>
+<td><p>Imports module and assigns the class to output_structure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_elec_model.html#pmutt.io.excel.set_elec_model" title="pmutt.io.excel.set_elec_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_elec_model</span></code></a></p></td>
+<td><p>Imports module and assigns the class to output_structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_nucl_model.html#pmutt.io.excel.set_nucl_model" title="pmutt.io.excel.set_nucl_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_nucl_model</span></code></a></p></td>
+<td><p>Imports module and assigns the class to output_structure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_vib_wavenumbers.html#pmutt.io.excel.set_vib_wavenumbers" title="pmutt.io.excel.set_vib_wavenumbers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_vib_wavenumbers</span></code></a></p></td>
+<td><p>Parses element header and assigns to output_structure[‘vib_wavenumber’]</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_rot_temperatures.html#pmutt.io.excel.set_rot_temperatures" title="pmutt.io.excel.set_rot_temperatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_rot_temperatures</span></code></a></p></td>
+<td><p>Parses element header and assigns to output_structure [‘rot_temperatures’]</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_nasa_a_low.html#pmutt.io.excel.set_nasa_a_low" title="pmutt.io.excel.set_nasa_a_low"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_nasa_a_low</span></code></a></p></td>
+<td><p>Parses a_low parameter for <a class="reference internal" href="../empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_nasa_a_high.html#pmutt.io.excel.set_nasa_a_high" title="pmutt.io.excel.set_nasa_a_high"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_nasa_a_high</span></code></a></p></td>
+<td><p>Parses a_high parameter for <a class="reference internal" href="../empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> object</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_list_value.html#pmutt.io.excel.set_list_value" title="pmutt.io.excel.set_list_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_list_value</span></code></a></p></td>
+<td><p>Generic function to read a list from a spreadsheet</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="excel/pmutt.io.excel.set_dict_value.html#pmutt.io.excel.set_dict_value" title="pmutt.io.excel.set_dict_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">excel.set_dict_value</span></code></a></p></td>
+<td><p>Generic function to read a dictionary from a spreadsheet</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="thermdat">
+<h2>Thermdat<a class="headerlink" href="#thermdat" title="Permalink to this headline">¶</a></h2>
+<p>This is the output format used for Chemkin. A list of NASA objects can be
+written to a thermdat file.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="thermdat/pmutt.io.thermdat.read_thermdat.html#pmutt.io.thermdat.read_thermdat" title="pmutt.io.thermdat.read_thermdat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">thermdat.read_thermdat</span></code></a></p></td>
+<td><p>Directly read thermdat file that is in the Chemkin format</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="thermdat/pmutt.io.thermdat.write_thermdat.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">thermdat.write_thermdat</span></code></a></p></td>
+<td><p>Writes thermdats in the Chemkin format</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="json">
+<h2>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.json.org/">JavaScript Object Notation (JSON)</a> is a format that is easily read and
+written by both humans and machines. All pmutt objects with the methods
+<code class="docutils literal notranslate"><span class="pre">to_dict</span></code> and <code class="docutils literal notranslate"><span class="pre">from_dict</span></code> are JSON compatible.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="json/pmutt.io.json.pmuttEncoder.html#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json.pmuttEncoder</span></code></a></p></td>
+<td><p>Encodes pmutt objects to JSON format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="json/pmutt.io.json.json_to_pmutt.html#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json.json_to_pmutt</span></code></a></p></td>
+<td><p>Object hook to convert json to pmutt objects.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Saving pmutt objects can be done by using
+<a class="reference internal" href="json/pmutt.io.json.pmuttEncoder.html#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmuttEncoder()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">pmuttEncoder</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">pmuttEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Loading pmutt objects can be done by using the object hook:
+<a class="reference internal" href="json/pmutt.io.json.json_to_pmutt.html#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">json_to_pmutt</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">pmutt_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">json_to_pmutt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-json-file">
+<h3>Sample JSON File<a class="headerlink" href="#sample-json-file" title="Permalink to this headline">¶</a></h3>
+<p>JSON writes in a human-readable syntax. An example showing a H2
+<a class="reference internal" href="../empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object in JSON format is shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.shomate.Shomate&#39;&gt;&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;shomate&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H2&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mi">2</span>
+ <span class="p">},</span>
+ <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;smiles&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+ <span class="s2">&quot;misc_models&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+   <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;class &#39;pmutt.empirical.GasPressureAdj&#39;&gt;&quot;</span>
+  <span class="p">}</span>
+ <span class="p">],</span>
+ <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="mf">33.066178</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">11.363417</span><span class="p">,</span>
+  <span class="mf">11.432816</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">2.772874</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">0.158558</span><span class="p">,</span>
+  <span class="o">-</span><span class="mf">9.980797</span><span class="p">,</span>
+  <span class="mf">172.707974</span><span class="p">,</span>
+  <span class="mf">0.0</span>
+ <span class="p">],</span>
+ <span class="s2">&quot;T_low&quot;</span><span class="p">:</span> <span class="mf">298.0</span><span class="p">,</span>
+ <span class="s2">&quot;T_high&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
+ <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;J/mol/K&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-new-pmutt-classes">
+<h3>Creating New pmutt Classes<a class="headerlink" href="#creating-new-pmutt-classes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="encoding">
+<h4>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h4>
+<p>To ensure your new class can be encoded using the <code class="docutils literal notranslate"><span class="pre">pmuttEncoder</span></code>, the
+<code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method should be implemented. One of the entries of the
+dictionary should be <code class="docutils literal notranslate"><span class="pre">'class':</span> <span class="pre">str(self.__class__)</span></code> so that it can be decoded
+later. The other elements should be the attributes that can be used to
+reinitialize the object and must be JSON-supported objects. A simple example
+using <a class="reference internal" href="../statmech/trans/pmutt.statmech.trans.FreeTrans.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a> is shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
+            <span class="s1">&#39;n_degrees&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_degrees</span><span class="p">,</span>
+            <span class="s1">&#39;molecular_weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If the attributes are not supported by JSON (such as other pmutt objects), use
+their <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> methods to convert to JSON-supported objects. An example
+using <a class="reference internal" href="../statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
+            <span class="s1">&#39;trans_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;vib_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vib_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;rot_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rot_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;elec_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">elec_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;nucl_model&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nucl_model</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoding">
+<h4>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h4>
+<p>To ensure your object can be decoded using the <code class="docutils literal notranslate"><span class="pre">json_to_pmutt</span></code> object hook,
+add an entry to the dictionary in the <code class="docutils literal notranslate"><span class="pre">pmutt.io.json.type_to_class</span></code> method.
+The key should be the type of your object in string format (i.e. the result of
+<code class="docutils literal notranslate"><span class="pre">str(self.__class__)</span></code>). Your class should also have the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> class
+method to reinitialize your object. A simple example using
+<a class="reference internal" href="../statmech/trans/pmutt.statmech.trans.FreeTrans.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeTrans</span></code></a> is shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.json</span> <span class="kn">import</span> <span class="n">remove_class</span>
+
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
+    <span class="n">json_obj</span> <span class="o">=</span> <span class="n">remove_class</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">json_obj</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly to encoding, sometimes your object contains pmutt objects. You can
+use the <code class="docutils literal notranslate"><span class="pre">json_to_pmutt</span></code> object hook to remake these objects. An example using
+<a class="reference internal" href="../statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> is shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io</span> <span class="kn">import</span> <span class="n">json</span> <span class="k">as</span> <span class="n">json_pmutt</span>
+
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_obj</span><span class="p">):</span>
+    <span class="n">json_obj</span> <span class="o">=</span> <span class="n">remove_class</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+    <span class="n">trans_model</span> <span class="o">=</span> <span class="n">json_pmutt</span><span class="o">.</span><span class="n">json_to_pmutt</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;trans_model&#39;</span><span class="p">])</span>
+    <span class="n">vib_model</span> <span class="o">=</span> <span class="n">json_pmutt</span><span class="o">.</span><span class="n">json_to_pmutt</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;vib_model&#39;</span><span class="p">])</span>
+    <span class="n">rot_model</span> <span class="o">=</span> <span class="n">json_pmutt</span><span class="o">.</span><span class="n">json_to_pmutt</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;rot_model&#39;</span><span class="p">])</span>
+    <span class="n">elec_model</span> <span class="o">=</span> <span class="n">json_pmutt</span><span class="o">.</span><span class="n">json_to_pmutt</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;elec_model&#39;</span><span class="p">])</span>
+    <span class="n">nucl_model</span> <span class="o">=</span> <span class="n">json_pmutt</span><span class="o">.</span><span class="n">json_to_pmutt</span><span class="p">(</span><span class="n">json_obj</span><span class="p">[</span><span class="s1">&#39;nucl_model&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans_model</span><span class="p">,</span>
+               <span class="n">vib_model</span><span class="o">=</span><span class="n">vib_model</span><span class="p">,</span>
+               <span class="n">rot_model</span><span class="o">=</span><span class="n">rot_model</span><span class="p">,</span>
+               <span class="n">elec_model</span><span class="o">=</span><span class="n">elec_model</span><span class="p">,</span>
+               <span class="n">nucl_model</span><span class="o">=</span><span class="n">nucl_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="yaml">
+<h2>YAML<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://yaml.org/">YAML Ain’t Markup Language (YAML)</a> is a human friendly data serialization
+standard for all programming languages. All pmutt objects are natively supported
+by YAML.</p>
+<div class="section" id="id1">
+<h3>Examples<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Saving pmutt objects can be done by using
+<a class="reference internal" href="json/pmutt.io.json.pmuttEncoder.html#pmutt.io.json.pmuttEncoder" title="pmutt.io.json.pmuttEncoder"><code class="xref py py-func docutils literal notranslate"><span class="pre">pmuttEncoder()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pmutt_obj</span><span class="p">,</span> <span class="n">f_ptr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Loading pmutt objects can be done by using the object hook:
+<a class="reference internal" href="json/pmutt.io.json.json_to_pmutt.html#pmutt.io.json.json_to_pmutt" title="pmutt.io.json.json_to_pmutt"><code class="xref py py-func docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_ptr</span><span class="p">:</span>
+    <span class="n">pmutt_obj</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_ptr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-yaml-file">
+<h3>Sample YAML File<a class="headerlink" href="#sample-yaml-file" title="Permalink to this headline">¶</a></h3>
+<p>YAML writes in a human-readable syntax. An example showing a H2
+<a class="reference internal" href="../empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> object in YAML format is shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!!python/object:pmutt.empirical.shomate.Shomate
+T_high: 1000.0
+T_low: 298.0
+_units: J/mol/K
+a: !!python/object/apply:numpy.core.multiarray._reconstruct
+  args:
+  - !!python/name:numpy.ndarray &#39;&#39;
+  - !!python/tuple [0]
+  - !!binary |
+    Yg==
+  state: !!python/tuple
+  - 1
+  - !!python/tuple [8]
+  - !!python/object/apply:numpy.dtype
+    args: [f8, 0, 1]
+    state: !!python/tuple [3, &lt;, null, null, null, -1, -1, 0]
+  - false
+  - !!binary |
+    e9tMhXiIQEDxngPLEbomwP9eCg+a3SZA/G1PkNguBsAZdELooEvEv6MHPgYr9iPAYw0XuaeWZUAA
+    AAAAAAAAAA==
+elements: {H: 2}
+misc_models:
+- !!python/object:pmutt.empirical.GasPressureAdj {}
+model: null
+n_sites: null
+name: H2
+notes: null
+phase: G
+smiles: null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="vasp">
+<h2>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="vasp/pmutt.io.vasp.set_vib_wavenumbers_from_outcar.html#pmutt.io.vasp.set_vib_wavenumbers_from_outcar" title="pmutt.io.vasp.set_vib_wavenumbers_from_outcar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vasp.set_vib_wavenumbers_from_outcar</span></code></a></p></td>
+<td><p>Parses OUTCAR files for vibrational frequencies and assigns to output_structure[‘vib_wavenumber’].</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gaussian">
+<h2>Gaussian<a class="headerlink" href="#gaussian" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_pattern.html#pmutt.io.gaussian.read_pattern" title="pmutt.io.gaussian.read_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_pattern</span></code></a></p></td>
+<td><p>Reads the pattern from the Gaussian log file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_zpe.html#pmutt.io.gaussian.read_zpe" title="pmutt.io.gaussian.read_zpe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_zpe</span></code></a></p></td>
+<td><p>Reads the zero-point energy from the Gaussian log file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_electronic_and_zpe.html#pmutt.io.gaussian.read_electronic_and_zpe" title="pmutt.io.gaussian.read_electronic_and_zpe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_electronic_and_zpe</span></code></a></p></td>
+<td><p>Reads the electronic energy and zero-point energy from the Gaussian log file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_frequencies.html#pmutt.io.gaussian.read_frequencies" title="pmutt.io.gaussian.read_frequencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_frequencies</span></code></a></p></td>
+<td><p>Reads the frequencies from the Gaussian log file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_rotational_temperatures.html#pmutt.io.gaussian.read_rotational_temperatures" title="pmutt.io.gaussian.read_rotational_temperatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_rotational_temperatures</span></code></a></p></td>
+<td><p>Reads the rotational temperatures from the Gaussian log file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_molecular_mass.html#pmutt.io.gaussian.read_molecular_mass" title="pmutt.io.gaussian.read_molecular_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_molecular_mass</span></code></a></p></td>
+<td><p>Reads the molecular mass from the Gaussian log file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="gaussian/pmutt.io.gaussian.read_rot_symmetry_num.html#pmutt.io.gaussian.read_rot_symmetry_num" title="pmutt.io.gaussian.read_rot_symmetry_num"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian.read_rot_symmetry_num</span></code></a></p></td>
+<td><p>Reads the rotational symmetry number from the Gaussian log file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="chemkin">
+<h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="chemkin/pmutt.io.chemkin.read_reactions.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.read_reactions</span></code></a></p></td>
+<td><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_EA.html#pmutt.io.chemkin.write_EA" title="pmutt.io.chemkin.write_EA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.write_EA</span></code></a></p></td>
+<td><p>Writes the EAs.inp or EAg.inp file for Chemkin</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_gas.html#pmutt.io.chemkin.write_gas" title="pmutt.io.chemkin.write_gas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.write_gas</span></code></a></p></td>
+<td><p>Writes the gas.inp Chemkin file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_surf.html#pmutt.io.chemkin.write_surf" title="pmutt.io.chemkin.write_surf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.write_surf</span></code></a></p></td>
+<td><p>Writes the surf.inp Chemkin file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_T_flow.html#pmutt.io.chemkin.write_T_flow" title="pmutt.io.chemkin.write_T_flow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.write_T_flow</span></code></a></p></td>
+<td><p>Writes the T_flow.inp Chemkin file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="chemkin/pmutt.io.chemkin.write_tube_mole.html#pmutt.io.chemkin.write_tube_mole" title="pmutt.io.chemkin.write_tube_mole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.write_tube_mole</span></code></a></p></td>
+<td><p>Write tube_mole.inp Chemkin file</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="openmkm">
+<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.write_cti</span></code></a></p></td>
+<td><p>Writes the units, phases, species, lateral interactions, reactions and additional options in the CTI format for OpenMKM</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../kinetic_models/omkm/pmutt.io.omkm.write_yaml.html#pmutt.io.omkm.write_yaml" title="pmutt.io.omkm.write_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.write_yaml</span></code></a></p></td>
+<td><p>Writes the reactor options in a YAML file for OpenMKM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../kinetic_models/omkm/pmutt.io.omkm.get_species_phases.html#pmutt.io.omkm.get_species_phases" title="pmutt.io.omkm.get_species_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.get_species_phases</span></code></a></p></td>
+<td><p>Helper method to organize species into its phases</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../kinetic_models/omkm/pmutt.io.omkm.get_reactions_phases.html#pmutt.io.omkm.get_reactions_phases" title="pmutt.io.omkm.get_reactions_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.get_reactions_phases</span></code></a></p></td>
+<td><p>Helper method to organize reaction into its phases</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../kinetic_models/omkm/pmutt.io.omkm.get_interactions_phases.html#pmutt.io.omkm.get_interactions_phases" title="pmutt.io.omkm.get_interactions_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.get_interactions_phases</span></code></a></p></td>
+<td><p>Helper method to organize reaction into its phases</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../kinetic_models/omkm/pmutt.io.omkm.get_phases.html#pmutt.io.omkm.get_phases" title="pmutt.io.omkm.get_phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.get_phases</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="excel/pmutt.io.excel.read_excel.html" class="btn btn-neutral float-right" title="pmutt.io.excel.read_excel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../constants/misc/pmutt.constants.type_dict.html" class="btn btn-neutral float-left" title="pmutt.constants.type_dict" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>

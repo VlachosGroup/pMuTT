@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pmutt.statmech.elec.GroundStateElec &mdash; pmutt 1.2.17 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pmutt.statmech.lsr.LSR" href="pmutt.statmech.lsr.LSR.html" />
+    <link rel="prev" title="pmutt.statmech.rot.RigidRotor" href="../rot/pmutt.statmech.rot.RigidRotor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pmutt
+          
+
+          
+            
+            <img src="../../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples_jupyter/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshops/workshops.html">Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../constants/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io/io.html">Input and Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../statmech.html">Statistical Thermodynamic Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#statmech-base-class">StatMech Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#presets">Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#translational-models">Translational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#vibrational-models">Vibrational Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#rotational-models">Rotational Models</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../statmech.html#electronic-models">Electronic Models</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.elec.GroundStateElec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.statmech.lsr.LSR.html">pmutt.statmech.lsr.LSR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#nuclear-models">Nuclear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#misc">Misc.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#creating-new-statmech-models">Creating New StatMech Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pmutt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../statmech.html">Statistical Thermodynamic Models</a> &raquo;</li>
+        
+      <li>pmutt.statmech.elec.GroundStateElec</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api/statmech/elec/pmutt.statmech.elec.GroundStateElec.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pmutt-statmech-elec-groundstateelec">
+<h1>pmutt.statmech.elec.GroundStateElec<a class="headerlink" href="#pmutt-statmech-elec-groundstateelec" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pmutt.statmech.elec.GroundStateElec">
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.statmech.elec.</code><code class="sig-name descname">GroundStateElec</code><span class="sig-paren">(</span><em class="sig-param">potentialenergy=None</em>, <em class="sig-param">spin=0.0</em>, <em class="sig-param">atoms=None</em>, <em class="sig-param">D0=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code></p>
+<p>Electronic modes using the ideal gas assumption. Equations sourced from:</p>
+<ul class="simple">
+<li><p>Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
+John Wiley &amp; Sons, 2010.</p></li>
+</ul>
+<dl class="attribute">
+<dt id="pmutt.statmech.elec.GroundStateElec.potentialenergy">
+<code class="sig-name descname">potentialenergy</code><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.potentialenergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Potential energy in eV. If this value and <cite>atoms</cite> are not
+specified, defaults to 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.statmech.elec.GroundStateElec.spin">
+<code class="sig-name descname">spin</code><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total electron spin. Default is 0</p>
+<ul class="simple">
+<li><p>0 for molecules in which all electrons are paired</p></li>
+<li><p>0.5 for a free radical with a single unpaired electron</p></li>
+<li><p>1.0 for a triplet with two unpaired electrons, such as O <sub>2</sub></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.statmech.elec.GroundStateElec.atoms">
+<code class="sig-name descname">atoms</code><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <cite>potentialenergy</cite> is not specified, the energy will be obtained
+using <cite>atoms.get_potential_energy()</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a> object, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pmutt.statmech.elec.GroundStateElec.D0">
+<code class="sig-name descname">D0</code><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.D0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bond strength in eV. Preferentially used when calculating partition
+coefficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">potentialenergy=None</em>, <em class="sig-param">spin=0.0</em>, <em class="sig-param">atoms=None</em>, <em class="sig-param">D0=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.__init__" title="pmutt.statmech.elec.GroundStateElec.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([potentialenergy, spin, atoms, D0])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.from_dict" title="pmutt.statmech.elec.GroundStateElec.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(json_obj)</p></td>
+<td><p>Recreate an object from the JSON representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_Cp" title="pmutt.statmech.elec.GroundStateElec.get_Cp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cp</span></code></a>(units, **kwargs)</p></td>
+<td><p>Calculate the heat capacity (constant P)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_CpoR" title="pmutt.statmech.elec.GroundStateElec.get_CpoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_CpoR</span></code></a>()</p></td>
+<td><p>Calculates the dimensionless heat capacity at constant pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_Cv" title="pmutt.statmech.elec.GroundStateElec.get_Cv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cv</span></code></a>(units, **kwargs)</p></td>
+<td><p>Calculate the heat capacity (constant V)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_CvoR" title="pmutt.statmech.elec.GroundStateElec.get_CvoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_CvoR</span></code></a>()</p></td>
+<td><p>Calculates the dimensionless heat capacity at constant volume</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_F" title="pmutt.statmech.elec.GroundStateElec.get_F"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_F</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the Helmholtz energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_FoRT" title="pmutt.statmech.elec.GroundStateElec.get_FoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_FoRT</span></code></a>(T)</p></td>
+<td><p>Calculates the dimensionless Helmholtz energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_G" title="pmutt.statmech.elec.GroundStateElec.get_G"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the Gibbs energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_GoRT" title="pmutt.statmech.elec.GroundStateElec.get_GoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_GoRT</span></code></a>(T)</p></td>
+<td><p>Calculates the dimensionless Gibbs energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_H" title="pmutt.statmech.elec.GroundStateElec.get_H"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_H</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the enthalpy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_HoRT" title="pmutt.statmech.elec.GroundStateElec.get_HoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_HoRT</span></code></a>(T)</p></td>
+<td><p>Calculates the dimensionless enthalpy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_S" title="pmutt.statmech.elec.GroundStateElec.get_S"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_S</span></code></a>(units, **kwargs)</p></td>
+<td><p>Calculate the entropy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_SoR" title="pmutt.statmech.elec.GroundStateElec.get_SoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SoR</span></code></a>()</p></td>
+<td><p>Calculates the dimensionless entropy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_U" title="pmutt.statmech.elec.GroundStateElec.get_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_U</span></code></a>(units[, T])</p></td>
+<td><p>Calculate the internal energy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_UoRT" title="pmutt.statmech.elec.GroundStateElec.get_UoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_UoRT</span></code></a>(T)</p></td>
+<td><p>Calculates the imensionless internal energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.get_q" title="pmutt.statmech.elec.GroundStateElec.get_q"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q</span></code></a>(T[, ignore_q_elec])</p></td>
+<td><p>Calculates the partition function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.to_dict" title="pmutt.statmech.elec.GroundStateElec.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<td><p>Represents object as dictionary with JSON-accepted datatypes</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.elec.GroundStateElec.spin" title="pmutt.statmech.elec.GroundStateElec.spin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spin</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.from_dict">
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate an object from the JSON representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – JSON representation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Obj</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Appropriate object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_Cp">
+<code class="sig-name descname">get_Cp</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_Cp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the heat capacity (constant P)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Cp</strong> – Heat capacity (constant P) in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_CpoR">
+<code class="sig-name descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{elec}}{R}=\frac{C_P^{elec}}{R}\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>CpoR_elec</strong> – Electronic dimensionless heat capacity at constant pressure</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_Cv">
+<code class="sig-name descname">get_Cv</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_Cv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the heat capacity (constant V)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Cv</strong> – Heat capacity (constant V) in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_CvoR">
+<code class="sig-name descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{elec}}{R}=0\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>CvoR_elec</strong> – electronic dimensionless heat capacity at constant volume</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_F">
+<code class="sig-name descname">get_F</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_F" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Helmholtz energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>F</strong> – Hemholtz energy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_FoRT">
+<code class="sig-name descname">get_FoRT</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_FoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy</p>
+<p><span class="math notranslate nohighlight">\(\frac{A^{elec}}{RT}=\frac{U^{elec}}{RT}-\frac{S^{elec}}{R}\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>FoRT_elec</strong> – Electronic dimensionless Helmholtz energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_G">
+<code class="sig-name descname">get_G</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_G" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Gibbs energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>G</strong> – Gibbs energy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_GoRT">
+<code class="sig-name descname">get_GoRT</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy</p>
+<p><span class="math notranslate nohighlight">\(\frac{G^{elec}}{RT}=\frac{H^{elec}}{RT}-\frac{S^{elec}}{R}\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>GoRT_elec</strong> – Electronic dimensionless Gibbs energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_H">
+<code class="sig-name descname">get_H</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_H" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the enthalpy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>H</strong> – Enthalpy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_HoRT">
+<code class="sig-name descname">get_HoRT</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy</p>
+<p><span class="math notranslate nohighlight">\(\frac{H^{elec}}{RT}=\frac{U^{elec}}{RT}\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>HoRT_elec</strong> – Electronic dimensionless enthalpy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_S">
+<code class="sig-name descname">get_S</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_S" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the entropy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>S</strong> – Entropy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_SoR">
+<code class="sig-name descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy</p>
+<p><span class="math notranslate nohighlight">\(\frac{S^{elec}}{R}=\log \omega\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>SoR_elec</strong> – Electronic dimensionless entropy</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_U">
+<code class="sig-name descname">get_U</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_U" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the internal energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+units but omit the ‘/K’ (e.g. J/mol).</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>U</strong> – Internal energy in appropriate units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_UoRT">
+<code class="sig-name descname">get_UoRT</code><span class="sig-paren">(</span><em class="sig-param">T</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the imensionless internal energy</p>
+<p><span class="math notranslate nohighlight">\(\frac{U^{elec}}{RT}=\frac{E}{RT}\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>UoRT_elec</strong> – Electronic dimensionless internal energy</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.get_q">
+<code class="sig-name descname">get_q</code><span class="sig-paren">(</span><em class="sig-param">T</em>, <em class="sig-param">ignore_q_elec=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.get_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partition function</p>
+<p><span class="math notranslate nohighlight">\(q^{elec}=1 + \omega_i \exp\bigg(-\frac{E}{RT}\bigg)\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>ignore_q_elec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Ignore contribution of electronic mode to partition function
+. Often necessary since DFT’s value for potentialenergy is
+very negative causing q_elec to go to infinity. Default is True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>q_elec</strong> – Electronic partition function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">spin</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.elec.GroundStateElec.to_dict">
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.elec.GroundStateElec.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>obj_dict</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pmutt.statmech.lsr.LSR.html" class="btn btn-neutral float-right" title="pmutt.statmech.lsr.LSR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../rot/pmutt.statmech.rot.RigidRotor.html" class="btn btn-neutral float-left" title="pmutt.statmech.rot.RigidRotor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Vlachos Research Group
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #000000;
+    }
+    
+    .wy-menu-vertical header, .wy-menu-vertical p.caption {
+     color: #04B0A7;
+    }
+  </style>
+
+
+</body>
+</html>
