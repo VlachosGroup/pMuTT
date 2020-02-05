@@ -14,6 +14,8 @@ If you use pMuTT for your research, please cite the following reference.
 
 `Download citation as BibTex file.`_
 
+--------------------------------------------------------------------------------
+
 Logos
 -----
 
@@ -39,6 +41,8 @@ may use the high-resolution logos below.
 
 .. image:: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_white_web.png
    :align: center
+
+--------------------------------------------------------------------------------
 
 Cited By
 --------

@@ -57,7 +57,7 @@
 
           
             
-            <img src="_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+            <img src="_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -314,7 +314,7 @@ dictionary of <a class="reference internal" href="api/empirical/nasa/pmutt.empir
 created from <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects as well as other
 empirical objects. The <code class="docutils literal notranslate"><span class="pre">from_statmech</span></code> method is deprecated.</p></li>
 <li><p>Added more descriptive warnings and errors.</p></li>
-<li><p>Created <code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureAdj</span></code> so entropy and Gibbs energy
+<li><p>Created <a class="reference internal" href="api/empirical/misc/pmutt.empirical.GasPressureAdj.html#pmutt.empirical.GasPressureAdj" title="pmutt.empirical.GasPressureAdj"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureAdj</span></code></a> so entropy and Gibbs energy
 of gas-phase empirical objects (like <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
 and <a class="reference internal" href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>) are dependent on pressure. This
 object is assigned automatically to <code class="docutils literal notranslate"><span class="pre">misc_models</span></code> if <code class="docutils literal notranslate"><span class="pre">phase</span></code> is ‘g’ or
@@ -497,8 +497,8 @@ changes in the vibrational wavenumbers.</p></li>
 <li><p>Fixed unit test names</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">get_species</span></code> to <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> and
 <a class="reference internal" href="api/reactions/reactions/pmutt.reaction.Reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></p></li>
-<li><p>Fixed bug related to <code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code> and
-<code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code> objects not JSON-write
+<li><p>Fixed bug related to <a class="reference internal" href="api/empirical/references/pmutt.empirical.references.References.html#pmutt.empirical.references.References" title="pmutt.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a> and
+<a class="reference internal" href="api/empirical/references/pmutt.empirical.references.Reference.html#pmutt.empirical.references.Reference" title="pmutt.empirical.references.Reference"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reference</span></code></a> objects not JSON-write
 compatible.</p></li>
 <li><p>Fixed bug related to referencing in <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>
 class</p></li>
@@ -538,7 +538,7 @@ properties (such as H, S, F, G) with the appropriate units</p></li>
 <li><p>Added <a class="reference internal" href="api/reactions/bep/pmutt.reaction.bep.BEP.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> class</p></li>
 <li><p>Restructured <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class so reaction states (i.e.
 reactants, products, transition states) can be calculated separately</p></li>
-<li><p>Updated <code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code> class to be able
+<li><p>Updated <a class="reference internal" href="api/empirical/references/pmutt.empirical.references.References.html#pmutt.empirical.references.References" title="pmutt.empirical.references.References"><code class="xref py py-class docutils literal notranslate"><span class="pre">References</span></code></a> class to be able
 reference any attribute</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> entry to <code class="xref py py-data docutils literal notranslate"><span class="pre">presets</span></code> dictionary to
 represent an empty species</p></li>
@@ -636,11 +636,11 @@ reactions from Chemkin surf.inp and gas.inp files</p></li>
   <style>
     /* Sidebar header (and topbar for mobile) */
     .wy-side-nav-search, .wy-nav-top {
-      background: #000000;
+      background: #46494c;
     }
     
     .wy-menu-vertical header, .wy-menu-vertical p.caption {
-     color: #04B0A7;
+     color: #00C4B3;
     }
   </style>
 

@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="pmutt.statmech.StatMech" href="statmech/pmutt.statmech.StatMech.html" />
-    <link rel="prev" title="pmutt.empirical.shomate.Shomate" href="../empirical/shomate/pmutt.empirical.shomate.Shomate.html" /> 
+    <link rel="prev" title="pmutt.empirical.GasPressureAdj" href="../empirical/misc/pmutt.empirical.GasPressureAdj.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -58,7 +58,7 @@
 
           
             
-            <img src="../../_static/pmutt_inverse_icon.png" class="logo" alt="Logo"/>
+            <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -285,6 +285,7 @@ Helmholtz energy and Gibbs energy.</p>
                         <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="presets">
@@ -312,6 +313,14 @@ parameters to calculate a thermodynamic property (where the value in
 parentheses is the default value).</p>
 <div class="section" id="ideal-gas-idealgas">
 <h3>Ideal Gas (idealgas)<a class="headerlink" href="#ideal-gas-idealgas" title="Permalink to this headline">¶</a></h3>
+<p>Useful for modeling ideal gases. Assumes the system has:</p>
+<ul class="simple">
+<li><p>3 degrees of translational freedom and no interactions with other molecules</p></li>
+<li><p>harmonic vibrations</p></li>
+<li><p>rigid rotor rotations</p></li>
+<li><p>electronic ground state</p></li>
+<li><p>nuclear ground state</p></li>
+</ul>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 27%" />
@@ -436,7 +445,11 @@ have to be specified.</p></td>
 </div>
 <div class="section" id="harmonic-approximation-harmonic">
 <h3>Harmonic Approximation (harmonic)<a class="headerlink" href="#harmonic-approximation-harmonic" title="Permalink to this headline">¶</a></h3>
-<p>Typically used to model adsorbates.</p>
+<p>Typically used to model adsorbates. Assumes the system has:</p>
+<ul class="simple">
+<li><p>harmonic vibrations</p></li>
+<li><p>electronic ground state</p></li>
+</ul>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 21%" />
@@ -533,6 +546,11 @@ to be specified.</p></td>
 </div>
 <div class="section" id="electronic-electronic">
 <h3>Electronic (electronic)<a class="headerlink" href="#electronic-electronic" title="Permalink to this headline">¶</a></h3>
+<p>Typically used to model systems where the electronic modes dominate and changes
+due to temperature are not important. Assumes the system has:</p>
+<ul class="simple">
+<li><p>electronic ground state</p></li>
+</ul>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 22%" />
@@ -624,6 +642,8 @@ specified</p></td>
 </div>
 <div class="section" id="placeholder-placeholder">
 <h3>Placeholder (placeholder)<a class="headerlink" href="#placeholder-placeholder" title="Permalink to this headline">¶</a></h3>
+<p>Typically used to model species that have no contribution. The partition
+function is set to 1 and all other thermodynamic quantities evaluate to 0.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 27%" />
@@ -718,6 +738,11 @@ specified</p></td>
 </div>
 <div class="section" id="constant-constant">
 <h3>Constant (constant)<a class="headerlink" href="#constant-constant" title="Permalink to this headline">¶</a></h3>
+<p>Arbitrarily specify a constant for each quantity. This is primarily used for
+testing so be careful as you can disobey some fundamental thermodynamic
+quantities. For example,</p>
+<p><span class="math notranslate nohighlight">\(G = H - TS\)</span></p>
+<p>may not be obeyed.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -820,8 +845,9 @@ in eV/K. Default is 0</p></td>
 </tr>
 </tbody>
 </table>
-<p>The <code class="docutils literal notranslate"><span class="pre">presets</span></code> dictionary is flexible where you can create a new entry if you
-will use a model often.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.presets</span></code> dictionary is flexible where you can create a
+new entry if you will use a model often.</p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="translational-models">
@@ -837,6 +863,7 @@ will use a model often.</p>
 </tr>
 </tbody>
 </table>
+<hr class="docutils" />
 </div>
 <div class="section" id="vibrational-models">
 <span id="vib"></span><h2>Vibrational Models<a class="headerlink" href="#vibrational-models" title="Permalink to this headline">¶</a></h2>
@@ -860,6 +887,7 @@ will use a model often.</p>
 </tr>
 </tbody>
 </table>
+<hr class="docutils" />
 </div>
 <div class="section" id="rotational-models">
 <span id="rot"></span><h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Permalink to this headline">¶</a></h2>
@@ -874,6 +902,7 @@ will use a model often.</p>
 </tr>
 </tbody>
 </table>
+<hr class="docutils" />
 </div>
 <div class="section" id="electronic-models">
 <span id="elec"></span><h2>Electronic Models<a class="headerlink" href="#electronic-models" title="Permalink to this headline">¶</a></h2>
@@ -891,6 +920,7 @@ will use a model often.</p>
 </tr>
 </tbody>
 </table>
+<hr class="docutils" />
 </div>
 <div class="section" id="nuclear-models">
 <span id="nucl"></span><h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Permalink to this headline">¶</a></h2>
@@ -908,6 +938,7 @@ present in case nuclear modes become important in the future.</p>
 </tbody>
 </table>
 </div>
+<hr class="docutils" />
 <div class="section" id="misc">
 <h2>Misc.<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
@@ -925,19 +956,22 @@ present in case nuclear modes become important in the future.</p>
 </tbody>
 </table>
 </div>
+<hr class="docutils" />
 <div class="section" id="creating-new-statmech-models">
 <h2>Creating New StatMech Models<a class="headerlink" href="#creating-new-statmech-models" title="Permalink to this headline">¶</a></h2>
 <p>New models should inherit from <code class="docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code>. This class already has the
 dimensional methods (e.g. <code class="docutils literal notranslate"><span class="pre">get_Cv</span></code>, <code class="docutils literal notranslate"><span class="pre">get_U</span></code>, <code class="docutils literal notranslate"><span class="pre">get_S</span></code>), and some routine
 methods (e.g. <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">from_dict</span></code>, <code class="docutils literal notranslate"><span class="pre">to_dict</span></code>)
 implemented.</p>
-<p>For full accessibility, the following methods should be implemented:
-- <code class="docutils literal notranslate"><span class="pre">get_q</span></code>
-- <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code>
-- <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code>
-- <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code>
-- <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>
-- <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p>
+<p>For full accessibility, the following methods should be implemented:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_q</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p></li>
+</ul>
 </div>
 </div>
 
@@ -952,7 +986,7 @@ implemented.</p>
         <a href="statmech/pmutt.statmech.StatMech.html" class="btn btn-neutral float-right" title="pmutt.statmech.StatMech" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../empirical/shomate/pmutt.empirical.shomate.Shomate.html" class="btn btn-neutral float-left" title="pmutt.empirical.shomate.Shomate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../empirical/misc/pmutt.empirical.GasPressureAdj.html" class="btn btn-neutral float-left" title="pmutt.empirical.GasPressureAdj" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -992,11 +1026,11 @@ implemented.</p>
   <style>
     /* Sidebar header (and topbar for mobile) */
     .wy-side-nav-search, .wy-nav-top {
-      background: #000000;
+      background: #46494c;
     }
     
     .wy-menu-vertical header, .wy-menu-vertical p.caption {
-     color: #04B0A7;
+     color: #00C4B3;
     }
   </style>
 

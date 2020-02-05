@@ -66,6 +66,8 @@ Example of initialization using classes and parameters
                            potentialenergy=-14.2209,
                            spin=0)
 
+--------------------------------------------------------------------------------
+
 .. _presets:
 
 Presets
@@ -98,6 +100,14 @@ parentheses is the default value).
 
 Ideal Gas (idealgas)
 --------------------
+
+Useful for modeling ideal gases. Assumes the system has:
+
+- 3 degrees of translational freedom and no interactions with other molecules
+- harmonic vibrations
+- rigid rotor rotations
+- electronic ground state
+- nuclear ground state
 
 +------------------+-------------------------------------------------+
 | Set Attributes   | Default Value                                   |
@@ -162,7 +172,10 @@ Ideal Gas (idealgas)
 Harmonic Approximation (harmonic)
 ---------------------------------
 
-Typically used to model adsorbates.
+Typically used to model adsorbates. Assumes the system has:
+
+- harmonic vibrations
+- electronic ground state
 
 +-------------+------------------------------------------------+
 | Parameter   | Default Value                                  |
@@ -210,6 +223,11 @@ Typically used to model adsorbates.
 Electronic (electronic)
 -----------------------
 
+Typically used to model systems where the electronic modes dominate and changes
+due to temperature are not important. Assumes the system has:
+
+- electronic ground state
+
 +-------------+-----------------------------------------------+
 | Parameter   | Default Value                                 |
 +=============+===============================================+
@@ -251,6 +269,9 @@ Electronic (electronic)
 
 Placeholder (placeholder)
 -------------------------
+
+Typically used to model species that have no contribution. The partition
+function is set to 1 and all other thermodynamic quantities evaluate to 0.
 
 +-------------+------------------------------------+
 | Parameter   | Default Value                      |
@@ -294,6 +315,14 @@ Placeholder (placeholder)
 
 Constant (constant)
 -------------------
+
+Arbitrarily specify a constant for each quantity. This is primarily used for
+testing so be careful as you can disobey some fundamental thermodynamic
+quantities. For example,
+
+:math:`G = H - TS`
+
+may not be obeyed.
 
 +-------------+---------------------------------------+
 | Parameter   | Default Value                         |
@@ -344,8 +373,10 @@ Constant (constant)
 +-------------------------+---------------------+-----------------------+
 
 
-The ``presets`` dictionary is flexible where you can create a new entry if you 
-will use a model often.
+The ``pmutt.statmech.presets`` dictionary is flexible where you can create a
+new entry if you will use a model often.
+
+--------------------------------------------------------------------------------
 
 .. _trans:
 
@@ -356,6 +387,8 @@ Translational Models
    :toctree: trans
 
    trans.FreeTrans
+
+--------------------------------------------------------------------------------
 
 .. _vib:
 
@@ -370,6 +403,8 @@ Vibrational Models
    vib.EinsteinVib
    vib.DebyeVib
    
+--------------------------------------------------------------------------------
+
 .. _rot:
 
 Rotational Models
@@ -379,6 +414,8 @@ Rotational Models
    :toctree: rot
 
    rot.RigidRotor
+
+--------------------------------------------------------------------------------
 
 .. _elec:
 
@@ -390,6 +427,8 @@ Electronic Models
 
    elec.GroundStateElec
    lsr.LSR
+
+--------------------------------------------------------------------------------
 
 .. _nucl:
 
@@ -403,6 +442,8 @@ present in case nuclear modes become important in the future.
 
    nucl.EmptyNucl
 
+--------------------------------------------------------------------------------
+
 Misc.
 =====
 
@@ -412,6 +453,8 @@ Misc.
    EmptyMode
    ConstantMode
 
+--------------------------------------------------------------------------------
+
 Creating New StatMech Models
 ============================
 New models should inherit from ``pmutt._ModelBase``. This class already has the
@@ -420,6 +463,7 @@ methods (e.g. ``get_FoRT``, ``get_GoRT``, ``from_dict``, ``to_dict``)
 implemented.
 
 For full accessibility, the following methods should be implemented:
+
 - ``get_q`` 
 - ``get_CvoR`` 
 - ``get_CpoR`` 
