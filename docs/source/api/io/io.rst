@@ -43,6 +43,8 @@ listed below.
    excel.set_list_value
    excel.set_dict_value
 
+--------------------------------------------------------------------------------
+
 Thermdat
 ========
 
@@ -55,6 +57,8 @@ written to a thermdat file.
 
    thermdat.read_thermdat
    thermdat.write_thermdat
+
+--------------------------------------------------------------------------------
 
 JSON
 ====
@@ -210,6 +214,8 @@ use the ``json_to_pmutt`` object hook to remake these objects. An example using
                   elec_model=elec_model,
                   nucl_model=nucl_model)
 
+--------------------------------------------------------------------------------
+
 YAML
 ====
 
@@ -277,6 +283,8 @@ YAML writes in a human-readable syntax. An example showing a H2
    phase: G
    smiles: null
 
+--------------------------------------------------------------------------------
+
 VASP
 ====
 
@@ -285,6 +293,8 @@ VASP
    :nosignatures:
 
    vasp.set_vib_wavenumbers_from_outcar
+
+--------------------------------------------------------------------------------
 
 Gaussian
 ========
@@ -301,6 +311,8 @@ Gaussian
    gaussian.read_molecular_mass
    gaussian.read_rot_symmetry_num
 
+--------------------------------------------------------------------------------
+
 Chemkin
 =======
 
@@ -314,6 +326,8 @@ Chemkin
    chemkin.write_surf
    chemkin.write_T_flow
    chemkin.write_tube_mole
+
+--------------------------------------------------------------------------------
 
 OpenMKM
 =======
