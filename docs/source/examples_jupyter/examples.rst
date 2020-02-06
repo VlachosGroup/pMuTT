@@ -6,27 +6,34 @@ Examples
 This page and its subpages show some examples using the pMuTT code. There are
 several formats available. 
 
-Running the example with Binder only requires the user to click the logo.
-For the other formats, a page of text may appear after clicking the link.
-Right-click and choose "Save Page As" or find the file in the ZIP folder.
+**To run examples on Binder**, simply click the logo and wait for the session
+to be initialized.
 
-Downloading the ZIP folder is recommended because the code may not run without
-other files (e.g. spreadsheets).
+**To run examples on HTML, Jupyter, or Python**, it is recommended to download
+the ZIP folder. This will contain other files (like spreadsheets) that may be
+required for the code to run.
 
+**If a link leads to a page of text**, right-click any empty space on that page
+and choose "Save Page As". It will download to your computer in the appropriate
+format.
 
 The pros and cons of each format are listed below.
 
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| Format           | File located in ZIP folder | pMuTT installation required | Jupyter Notebook installation required | Code may require additional files to be downloaded (e.g. spreadsheets) | Non-code elements easy to read | Code easily editable |
-+==================+============================+=============================+========================================+========================================================================+================================+======================+
-| Binder           | N                          | N                           | N                                      | N                                                                      | Y                              | Y                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| HTML             | Y                          | N                           | N                                      | N                                                                      | Y                              | N                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| Jupyter Notebook | Y                          | Y                           | Y                                      | Y                                                                      | Y                              | Y                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| Python Script    | Y                          | Y                           | N                                      | Y                                                                      | N                              | Y                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
++--------------------------------------+--------+------+---------+--------+
+| Criteria                             | Binder | HTML | Jupyter | Python |
++======================================+========+======+=========+========+
+| File in ZIP Folder                   | N      | Y    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
+| pMuTT installation req.              | N      | N    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
+| Jupyter installation req.            | N      | N    | Y       | N      |
++--------------------------------------+--------+------+---------+--------+
+| Other files (e.g. spreadsheets) req. | N      | N    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
+| Non-code elements easy to read       | Y      | Y    | Y       | N      |
++--------------------------------------+--------+------+---------+--------+
+| Code elements easily editable        | Y      | N    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
 
 .. _overview_example:
 
