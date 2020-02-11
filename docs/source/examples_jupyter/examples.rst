@@ -6,27 +6,34 @@ Examples
 This page and its subpages show some examples using the pMuTT code. There are
 several formats available. 
 
-Running the example with Binder only requires the user to click the logo.
-For the other formats, a page of text may appear after clicking the link.
-Right-click and choose "Save Page As" or find the file in the ZIP folder.
+**To run examples on Binder**, simply click the logo and wait for the session
+to be initialized.
 
-Downloading the ZIP folder is recommended because the code may not run without
-other files (e.g. spreadsheets).
+**To run examples on HTML, Jupyter, or Python**, it is recommended to download
+the ZIP folder. This will contain other files (like spreadsheets) that may be
+required for the code to run.
 
+**If a link leads to a page of text**, right-click any empty space on that page
+and choose "Save Page As". It will download to your computer in the appropriate
+format.
 
 The pros and cons of each format are listed below.
 
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| Format           | File located in ZIP folder | pMuTT installation required | Jupyter Notebook installation required | Code may require additional files to be downloaded (e.g. spreadsheets) | Non-code elements easy to read | Code easily editable |
-+==================+============================+=============================+========================================+========================================================================+================================+======================+
-| Binder           | N                          | N                           | N                                      | N                                                                      | Y                              | Y                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| HTML             | Y                          | N                           | N                                      | N                                                                      | Y                              | N                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| Jupyter Notebook | Y                          | Y                           | Y                                      | Y                                                                      | Y                              | Y                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
-| Python Script    | Y                          | Y                           | N                                      | Y                                                                      | N                              | Y                    |
-+------------------+----------------------------+-----------------------------+----------------------------------------+------------------------------------------------------------------------+--------------------------------+----------------------+
++--------------------------------------+--------+------+---------+--------+
+| Criteria                             | Binder | HTML | Jupyter | Python |
++======================================+========+======+=========+========+
+| File in ZIP Folder                   | N      | Y    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
+| pMuTT installation req.              | N      | N    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
+| Jupyter installation req.            | N      | N    | Y       | N      |
++--------------------------------------+--------+------+---------+--------+
+| Other files (e.g. spreadsheets) req. | N      | N    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
+| Non-code elements easy to read       | Y      | Y    | Y       | N      |
++--------------------------------------+--------+------+---------+--------+
+| Code elements easily editable        | Y      | N    | Y       | Y      |
++--------------------------------------+--------+------+---------+--------+
 
 .. _overview_example:
 
@@ -34,7 +41,7 @@ Overview
 --------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Foverview%overview.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Foverview%2Foverview.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/overview/overview.html
@@ -73,7 +80,7 @@ Experimental to Empirical
 -------------------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexpt_data_to_empirical%expt_data_to_empirical_object.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexpt_data_to_empirical%2Fexpt_data_to_empirical_object.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/expt_data_to_empirical/expt_data_to_empirical_object.html
@@ -105,7 +112,7 @@ Excel to Empirical Data
 -----------------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexcel_to_empirical%excel_to_empirical.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fexcel_to_empirical%2Fexcel_to_empirical.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/excel_to_empirical/excel_to_empirical.html
@@ -136,7 +143,7 @@ Reaction
 --------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Freactions%reactions.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Freactions%2Freactions.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/reactions/reactions.html
@@ -169,7 +176,7 @@ Chemkin_IO
 ----------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fchemkin_io%Chemkin_IO.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fchemkin_io%2FChemkin_IO.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/chemkin_io/Chemkin_IO.html
@@ -199,7 +206,7 @@ OpenMKM_IO
 ----------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fomkm_io%OpenMKM_IO.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fomkm_io%2FOpenMKM_IO.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.html
@@ -228,7 +235,7 @@ Phase Diagram
 -------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fphase_diagram%PhaseDiagram.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fphase_diagram%2FPhaseDiagram.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/phase_diagram/PhaseDiagram.html
@@ -264,7 +271,7 @@ NAM26 Workshop
 --------------
 
 .. image:: ./images/binder_logo.png
-  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fnam2019%NAM_2019_Workshop.ipynb
+  :target: https://mybinder.org/v2/gh/VlachosGroup/pmutt/master?filepath=docs%2Fsource%2Fexamples_jupyter%2Fnam2019%2FNAM_2019_Workshop.ipynb
   :width: 15%
 .. image:: ./images/html_logo.png
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/nam2019/NAM_2019_Workshop.html

@@ -26,6 +26,8 @@ Constants
    m_e
    m_p
 
+--------------------------------------------------------------------------------
+
 Unit Conversions
 ----------------
 
@@ -50,6 +52,8 @@ Unit Conversions
    wavenumber_to_freq
    wavenumber_to_inertia
    wavenumber_to_temp
+
+--------------------------------------------------------------------------------
 
 Misc.
 -----

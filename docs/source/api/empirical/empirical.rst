@@ -25,6 +25,8 @@ Parent Class
 
    EmpiricalBase
 
+--------------------------------------------------------------------------------
+
 Nasa
 ----
 
@@ -36,6 +38,8 @@ Nasa
    nasa.SingleNasa9
    nasa.Nasa9
 
+--------------------------------------------------------------------------------
+
 Shomate
 -------
 
@@ -45,27 +49,34 @@ Shomate
 
    shomate.Shomate
 
+--------------------------------------------------------------------------------
+
 Referencing
 -----------
 
 Referencing is used to bridge the gap between *ab-initio* code reference states
 and the standard state reference. See :ref:`referencing` for more information.
 
-.. autosummary
+.. autosummary::
    :toctree: references
    :nosignatures:
 
    references.Reference
    references.References
 
+--------------------------------------------------------------------------------
+
 Misc.
 -----
 
-.. autosummary
+Miscellaneous models associated with the empirical models are located here.
+
+.. autosummary::
    :toctree: misc
    :nosignatures:
 
    GasPressureAdj
+
 
 .. _`NIST Chemistry WebBook`: https://webbook.nist.gov/chemistry/
 .. _`Burcat`: http://garfield.chem.elte.hu/Burcat/burcat.html
