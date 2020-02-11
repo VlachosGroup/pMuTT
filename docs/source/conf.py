@@ -27,7 +27,7 @@ author = 'Vlachos Research Group'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.17'
+release = '1.2.18'
 
 
 # -- General configuration ---------------------------------------------------
@@ -80,7 +80,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = ['_build', '**.ipynb_checkpoints', '**.ipynb']
+exclude_patterns = ['_build', '**.ipynb_checkpoints', '**.ipynb', '404.rst']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -192,5 +192,5 @@ imgmath_image_format = 'svg'
 imgmath_font_size = 18
 
 # Logo
-html_logo = './logos/pmutt_inverse_icon.png'
+html_logo = './logos/pmutt_inverse_highres.png'
 html_favicon = './logos/p_icon.ico'

@@ -9,6 +9,8 @@ Anaconda is the recommended method to install Python for scientific
 applications. It is supported on Linux, Windows and Mac OS X.
 `Download Anaconda here`_. Note that pMuTT runs on Python 3.X.
 
+--------------------------------------------------------------------------------
+
 Installing pMuTT using pip
 --------------------------
 Using pip is the most straightforward way to install pMuTT.
@@ -62,6 +64,8 @@ Append ``--user`` to pip command.::
 
 See explanation why this `permission error occurs here`_.
 
+--------------------------------------------------------------------------------
+
 Installing pMuTT from source
 ----------------------------
 If you would prefer to install from source or you are interested in development,
@@ -80,12 +84,16 @@ the master branch. You can install using the following:
 
     pip install --upgrade git+https://github.com/VlachosGroup/pMuTT.git@development
 
+--------------------------------------------------------------------------------
+
 Upgrading pMuTT using pip
 -------------------------
 To upgrade to a newer release, use the --upgrade flag:
 ::
 
     pip install --upgrade pmutt
+
+--------------------------------------------------------------------------------
 
 Running unit tests
 ------------------

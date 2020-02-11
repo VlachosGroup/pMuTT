@@ -21,6 +21,8 @@ for the appropriate modeling software.
    reaction.ChemkinReaction
    omkm.reaction.SurfaceReaction
 
+--------------------------------------------------------------------------------
+
 Reactions Objects
 =================
 
@@ -34,6 +36,8 @@ for phase diagrams, reaction coordinate diagrams, and other purposes.
    reaction.Reactions
    reaction.ChemkinReaction
    omkm.reaction.SurfaceReaction
+
+--------------------------------------------------------------------------------
 
 BEP
 ===

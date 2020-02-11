@@ -6,7 +6,8 @@ Mixture Models
 These models allow the user to excess thermodynamic properties that arise from
 species mixing. Mixture models are supported by 
 :class:`~pmutt.empirical.nasa.Nasa`, :class:`~pmutt.empirical.shomate.Shomate`,
-and :class:`~pmutt.statmech.StatMech` classes.
+:class:`~pmutt.empirical.nasa.Nasa9` and
+:class:`~pmutt.statmech.StatMech` classes.
 
 .. currentmodule:: pmutt.mixture
 

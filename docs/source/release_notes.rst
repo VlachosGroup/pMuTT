@@ -7,6 +7,13 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.18
+--------------
+
+Jan. 31, 2020
+
+- Hotfix to correct broken links in documentation.
+
 Version 1.2.17
 --------------
 
