@@ -16,7 +16,7 @@ from ase.io import read
 from pmutt import parse_formula
 from pmutt.io.vasp import set_vib_wavenumbers_from_outcar
 from pmutt.statmech import (EmptyMode, StatMech, elec, nucl, presets, rot,
-                            trans, vib)
+                            trans, vib, lsr)
 
 
 def read_excel(io,
@@ -386,6 +386,8 @@ def set_elec_model(model, output_structure):
     except AttributeError:
         if model.lower() == 'emptymode':
             output_structure['elec_model'] = EmptyMode
+        elif model.lower() == 'lsr':
+            output_structure['elec_model'] = lsr.LSR
         else:
             err_msg = ('Unsupported electronic model, {}. See '
                        'pmutt.statmech.elec for supported models.'

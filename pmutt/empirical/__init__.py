@@ -17,7 +17,7 @@ from pmutt import (_is_iterable, _ModelBase, _pmuttBase, _check_obj,
                    _check_iterable_attr)
 
 
-class EmpiricalBase(_pmuttBase):
+class EmpiricalBase(_ModelBase):
     """The empirical parent class.
     Holds properties of a species, the statistical-mechanical thermodynamic
     model.
