@@ -538,7 +538,17 @@ class EmpiricalBase(_ModelBase):
 
 
 class GasPressureAdj(_ModelBase):
-    """Includes pressure's effect on entropy for gas molecules"""
+    """Includes pressure's effect on entropy for gas molecules.
+    
+    Notes
+    -----
+    This adjustment is only valid for gas-phase molecules. When an empirical
+    object (like :class:`~pmutt.empirical.nasa.Nasa`,
+    :class:`~pmutt.empirical.nasa.Nasa9` or
+    :class:`~pmutt.empirical.shomate.Shomate`) has been assigned ``phase='g'``
+    or ``phase='gas'``, this adjustment factor will automatically be added
+    unless ``add_gas_P_adj=False``. 
+    """
     def __init__(self):
         pass
 

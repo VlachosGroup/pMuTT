@@ -12,6 +12,8 @@ Classes and functions related to writing Chemkin files. Please note these
 modules were written specifically for the Vlachos group's in-house version.
 Features may or may not be supported in the commercial version.
 
+--------------------------------------------------------------------------------
+
 Classes
 -------
 
@@ -21,7 +23,6 @@ Classes
 
    chemkin.CatSite
    reaction.ChemkinReaction
-
 
 Input and Output
 ----------------
@@ -40,6 +41,8 @@ Examples
 --------
 
 - :ref:`chemkin_io_example`
+
+--------------------------------------------------------------------------------
 
 Cantera
 =======
@@ -75,6 +78,8 @@ Input and Output
    :nosignatures:
 
    io.cantera.obj_to_CTI
+
+--------------------------------------------------------------------------------
 
 OpenMKM
 =======
@@ -129,6 +134,8 @@ Input and Output
 Examples
 --------
 - :ref:`openmkm_io_example`
+
+--------------------------------------------------------------------------------
 
 Zacros
 ======
