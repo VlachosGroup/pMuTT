@@ -190,7 +190,10 @@ class PiecewiseCovEffect(_ModelBase):
             energy_unit = units.energy
         slopes = [c.convert_unit(slope, initial='kcal/mol', final=energy_unit) \
                   for slope in self.slopes]
-        lat_inter_str = ('lateral_interaction("{} {}", {}, {}, id="{}")'
+        lat_inter_str = ('lateral_interaction("{} {}",\n'
+                         '                    coverage_thresholds={},\n'
+                         '                    strengths={},\n'
+                         '                    id="{}")'
                          ''.format(self.name_i, self.name_j,
                                    self.intervals, slopes, self.name))
         return lat_inter_str
