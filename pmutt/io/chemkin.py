@@ -408,7 +408,7 @@ def write_surf(reactions,
         for specie in cat_adsorbates[cat_site.name]:
             cat_site_lines.append('{}{}/{}/'.format(column_delimiter,
                                                     specie.name,
-                                                    specie.n_sites))
+                                                    int(specie.n_sites)))
         cat_site_lines.append('')
     # Write bulk species
     for cat_site in unique_cat_sites:
