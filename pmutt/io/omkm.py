@@ -38,6 +38,7 @@ def write_cti(phases=None,
               P=1.,
               newline='\n',
               use_motz_wise=False,
+              ads_act_method='get_H_act',
               write_xml=True):
     """Writes the units, phases, species, lateral interactions, reactions and 
     additional options in the CTI format for OpenMKM
@@ -63,6 +64,15 @@ def write_cti(phases=None,
             Temperature in K. Default is 300 K.
         P : float, optional
             Pressure in atm. Default is 1 atm.
+        newline : str, optional
+            Type of newline to use. Default is Linux newline ('\\n')
+        use_motz_wise : bool, optional
+            Whether to use Motz-wise sticking coefficients or not. Default is
+            False
+        ads_act_method : str, optional
+            Activation method to use for adsorption reactions. Accepted 
+            options include 'get_H_act' and 'get_G_act'. Default is
+            'get_H_act'.
         write_xml : bool, optional
             If True and ``filename`` is not ``None``, automatically generates
             an XML file with the CTI file.

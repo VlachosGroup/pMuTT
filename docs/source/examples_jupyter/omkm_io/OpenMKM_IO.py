@@ -51,9 +51,13 @@ import pandas as pd
 from IPython.display import display
 
 def disp_data(io, sheet_name):
-    data = pd.read_excel(io=io, sheet_name=sheet_name, skiprows=[1])
-    data = data.fillna(' ')
-    display(data)    
+    try:
+        data = pd.read_excel(io=io, sheet_name=sheet_name, skiprows=[1])
+    except:
+        print('Sheet could not be found.')
+    else:
+        data = data.fillna(' ')
+        display(data)
 
 
 # Below, we show the contents of the Excel sheets.
@@ -246,18 +250,11 @@ else:
 # In[18]:
 
 
-from pmutt.io.omkm import get_species_phases, get_reactions_phases, get_interactions_phases, get_phases
-
-# Get data associated with species, reactions and lateral interactions
-species_phases = get_species_phases(species)
-reactions_phases = get_reactions_phases(reactions)
-interactions_phases = get_interactions_phases(interactions=interactions, species=species_with_beps_dict)
+from pmutt.io.omkm import organize_phases
 
 # Read data from Excel sheet about phases
 phases_data = read_excel(io=input_path, sheet_name='phases')
-phases = get_phases(phases_data=phases_data,
-                    species_phases=species_phases,
-                    reactions_phases=reactions_phases)
+phases = organize_phases(phases_data, species=species, reactions=reactions, interactions=interactions)
 
 
 # If you would prefer to return the file as a string instead of writing it, omit the ``filename``.
@@ -274,7 +271,7 @@ phases = get_phases(phases_data=phases_data,
 
 from pmutt.io.omkm import write_yaml
 
-yaml_path = './outputs/cstr.yaml'
+yaml_path = './outputs/reactor.yaml'
 reactor_data = read_excel(io=input_path, sheet_name='reactor')[0]
 write_yaml(filename=yaml_path, phases=phases, units=units, **reactor_data)
 

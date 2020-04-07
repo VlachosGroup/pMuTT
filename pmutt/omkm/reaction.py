@@ -18,13 +18,15 @@ class SurfaceReaction(Reaction):
     ----------
         id : str, optional
             ID of the reaction. Default is None
-        beta : float, optional
-            Power to raise the temperature in the rate expression. Default is 1
         is_adsorption : bool, optional
             If True, the reaction represents an adsorption. Default is False
+        beta : float, optional
+            Power to raise the temperature in the rate expression. Default is 1
+            if ``is_adsorption`` is False, 0 if ``is_adsorption`` is True.
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True.
-            Default is 0.5
+            Default is 0.5 if ``is_adsorption`` is True, None if
+            ``is_adsorption`` is False.
         direction : str, optional
             Direction of the reaction. Used for BEP relationships.
             Accepted options are 'cleavage' and 'synthesis'.
@@ -34,19 +36,16 @@ class SurfaceReaction(Reaction):
     """
     def __init__(self,
                  id=None,
-                 beta=1.,
                  is_adsorption=False,
-                 sticking_coeff=0.5,
+                 beta=None,
+                 sticking_coeff=None,
                  direction=None,
                  **kwargs):
         super().__init__(**kwargs)
         self.id = id
-        self.beta = beta
         self.is_adsorption = is_adsorption
+        self.beta = beta
         self.direction = direction
-        # Sticking coefficient not relevant for non-adsorption reaction
-        if not self.is_adsorption:
-            sticking_coeff = None
         self.sticking_coeff = sticking_coeff
 
         # Assigns BEP to reaction
@@ -85,6 +84,29 @@ class SurfaceReaction(Reaction):
         if isinstance(val, int) or isinstance(val, float):
             val = '{:04d}'.format(int(val))
         self._id = val
+
+    @property
+    def beta(self):
+        return self._beta
+
+    @beta.setter
+    def beta(self, val):
+        if val is None:
+            if self.is_adsorption:
+                val = 0.
+            else:
+                val = 1.
+        self._beta = val
+
+    @property
+    def sticking_coeff(self):
+        return self._sticking_coeff
+
+    @sticking_coeff.setter
+    def sticking_coeff(self, val):
+        if val is None and self.is_adsorption:
+            val = 0.5
+        self._sticking_coeff = val
 
     def _get_n_surf(self):
         """Counts the number of surface reactants
@@ -161,8 +183,8 @@ class SurfaceReaction(Reaction):
         return A
 
     def get_HoRT_act(self, rev=False, **kwargs):
-        """Calculates the dimensionless enthalpy. If there is no transition
-        state species, calculates the delta dimensionless Gibbs energy
+        """Calculates the dimensionless enthalpy of activation. If there is no
+        transition state species, calculates the delta dimensionless enthalpy
 
         Parameters
         ----------
@@ -187,9 +209,35 @@ class SurfaceReaction(Reaction):
             super().get_delta_HoRT(rev=rev, act=False, **kwargs)
         ])
 
+    def get_H_act(self, units, T, rev=False, **kwargs):
+        """Calculates the enthalpy of activation. If there is no transition
+        state species, calculates the delta enthalpy
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            T : float
+                Temperature in K
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy of activation.
+        Returns
+        -------
+            HoRT_act : float
+                Dimensionless activation enthalpy. Returns the max of the
+                following to ensure stable MKM performance:
+                - Difference between reactants/products and the transition state
+                - Difference between the reactants and the products
+                - 0
+        """
+        R_units = '{}/K'.format(units)
+        return self.get_HoRT_act(rev=rev, T=T, **kwargs)*T*c.R(R_units)
+
     def get_GoRT_act(self, rev=False, act=False, **kwargs):
-        """Calculates the dimensionless Gibbs energy. If there is no transition
-        state species, calculates the delta dimensionless Gibbs energy
+        """Calculates the dimensionless Gibbs energy of activation. If there is
+        no transition state species, calculates the delta dimensionless
+        Gibbs energy
 
         Parameters
         ----------
@@ -216,6 +264,33 @@ class SurfaceReaction(Reaction):
             super().get_delta_GoRT(rev=rev, act=act, **kwargs),
             super().get_delta_GoRT(rev=rev, act=False, **kwargs)
         ])
+
+    def get_G_act(self, units, T, P=1., rev=False, **kwargs):
+        """Calculates the Gibbs energy of activation. If there is no transition
+        state species, calculates the delta Gibbs energy
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            T : float
+                Temperature in K
+            P : float, optional
+                Pressure in bar. Default is 1 bar
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy of activation.
+        Returns
+        -------
+            HoRT_act : float
+                Dimensionless activation enthalpy. Returns the max of the
+                following to ensure stable MKM performance:
+                - Difference between reactants/products and the transition state
+                - Difference between the reactants and the products
+                - 0
+        """
+        R_units = '{}/K'.format(units)
+        return self.get_GoRT_act(rev=rev, T=T, P=P, **kwargs)*T*c.R(R_units)
 
     @classmethod
     def from_string(cls,
@@ -297,6 +372,7 @@ class SurfaceReaction(Reaction):
                quantity_unit='molec',
                length_unit='cm',
                act_energy_unit='cal/mol',
+               ads_act_method='get_H_act',
                units=None):
         """Writes the object in Cantera's CTI format.
 
@@ -312,6 +388,10 @@ class SurfaceReaction(Reaction):
                 Length unit to calculate A. Default is 'cm'
             act_energy_unit : str, optional
                 Unit to use for activation energy. Default is 'cal/mol'
+            ads_act_method : str, optional
+                Activation method to use for adsorption reactions. Accepted 
+                options include 'get_H_act' and 'get_G_act'. Default is
+                'get_H_act'.
             units : :class:`~pmutt.omkm.units.Units` object
                 If specified, `quantity_unit`, `length_unit`, and
                 `act_energy_unit` are overwritten. Default is None.
@@ -341,22 +421,23 @@ class SurfaceReaction(Reaction):
                 id_str = ',\n                 id="{}"'.format(self.id)
 
         if self.is_adsorption:
-            G_act = self.get_G_act(units=act_energy_unit, T=T, P=P)
+            act_method = getattr(self, ads_act_method)
+            act_val = act_method(units=act_energy_unit, T=T, P=P)
             cti_str = ('surface_reaction("{}",\n'
                        '                 stick({: .5e}, {}, {: .5e}){})'
                        ''.format(reaction_str, self.sticking_coeff, self.beta,
-                                 G_act, id_str))
+                                 act_val, id_str))
         else:
             A_units = '{}/{}2'.format(quantity_unit, length_unit)
             cti_str = ('surface_reaction("{}",\n'
-                       '                 [{: .5e}, {}, {: .5e}]{})'.format(
-                           reaction_str,
-                           self.get_A(T=T,
-                                      P=P,
-                                      include_entropy=False,
-                                      units=A_units), self.beta,
-                           self.get_G_act(units=act_energy_unit, T=T, P=P),
-                           id_str))
+                       '                 [{: .5e}, {}, {: .5e}]{})'
+                       ''.format(reaction_str,
+                                 self.get_A(T=T, P=P, include_entropy=False,
+                                            units=A_units),
+                                 self.beta,
+                                 self.get_G_act(units=act_energy_unit, T=T,
+                                                P=P),
+                                 id_str))
         return cti_str
 
 

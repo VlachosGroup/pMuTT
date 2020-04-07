@@ -13155,9 +13155,13 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 
 <span class="k">def</span> <span class="nf">disp_data</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sheet could not be found.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13237,7 +13241,7 @@ div#notebook {
       <td>mol</td>
       <td>kcal/mol</td>
       <td>g</td>
-      <td>kcal/mol</td>
+      <td>kcal</td>
       <td>atm</td>
     </tr>
   </tbody>
@@ -14419,6 +14423,7 @@ div#notebook {
       <th>name_j</th>
       <th>list.intervals</th>
       <th>list.slopes</th>
+      <th>list.intervals.1</th>
     </tr>
   </thead>
   <tbody>
@@ -14428,6 +14433,7 @@ div#notebook {
       <td>N(T)</td>
       <td>0</td>
       <td>-52.6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -14435,6 +14441,7 @@ div#notebook {
       <td>H(T)</td>
       <td>0</td>
       <td>-17.7</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
@@ -14442,6 +14449,7 @@ div#notebook {
       <td>N(T)</td>
       <td>0</td>
       <td>-17.7</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
@@ -14449,6 +14457,7 @@ div#notebook {
       <td>H(T)</td>
       <td>0</td>
       <td>-3.0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
@@ -14456,6 +14465,7 @@ div#notebook {
       <td>N(T)</td>
       <td>0</td>
       <td>-20.7</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -14463,6 +14473,7 @@ div#notebook {
       <td>N(S)</td>
       <td>0</td>
       <td>-52.6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
@@ -14470,6 +14481,7 @@ div#notebook {
       <td>H(S)</td>
       <td>0</td>
       <td>-17.7</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>7</th>
@@ -14477,6 +14489,7 @@ div#notebook {
       <td>N(S)</td>
       <td>0</td>
       <td>-17.7</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>8</th>
@@ -14484,6 +14497,7 @@ div#notebook {
       <td>H(S)</td>
       <td>0</td>
       <td>-3.0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>9</th>
@@ -14491,6 +14505,7 @@ div#notebook {
       <td>N(S)</td>
       <td>0</td>
       <td>-20.7</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -14935,18 +14950,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">get_species_phases</span><span class="p">,</span> <span class="n">get_reactions_phases</span><span class="p">,</span> <span class="n">get_interactions_phases</span><span class="p">,</span> <span class="n">get_phases</span>
-
-<span class="c1"># Get data associated with species, reactions and lateral interactions</span>
-<span class="n">species_phases</span> <span class="o">=</span> <span class="n">get_species_phases</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
-<span class="n">reactions_phases</span> <span class="o">=</span> <span class="n">get_reactions_phases</span><span class="p">(</span><span class="n">reactions</span><span class="p">)</span>
-<span class="n">interactions_phases</span> <span class="o">=</span> <span class="n">get_interactions_phases</span><span class="p">(</span><span class="n">interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species_with_beps_dict</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">organize_phases</span>
 
 <span class="c1"># Read data from Excel sheet about phases</span>
 <span class="n">phases_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;phases&#39;</span><span class="p">)</span>
-<span class="n">phases</span> <span class="o">=</span> <span class="n">get_phases</span><span class="p">(</span><span class="n">phases_data</span><span class="o">=</span><span class="n">phases_data</span><span class="p">,</span>
-                    <span class="n">species_phases</span><span class="o">=</span><span class="n">species_phases</span><span class="p">,</span>
-                    <span class="n">reactions_phases</span><span class="o">=</span><span class="n">reactions_phases</span><span class="p">)</span>
+<span class="n">phases</span> <span class="o">=</span> <span class="n">organize_phases</span><span class="p">(</span><span class="n">phases_data</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14982,7 +14990,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_yaml</span>
 
-<span class="n">yaml_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/cstr.yaml&#39;</span>
+<span class="n">yaml_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/reactor.yaml&#39;</span>
 <span class="n">reactor_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactor&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">write_yaml</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">yaml_path</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="o">**</span><span class="n">reactor_data</span><span class="p">)</span>
 </pre></div>
@@ -15022,7 +15030,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.17dev) on 2020-01-30 11:28:02.925725
+<pre># File generated by pMuTT (v 1.2.19dev) on 2020-04-07 16:08:51.951297
 # See documentation for OpenMKM YAML file here:
 # https://vlachosgroup.github.io/openmkm/input
 inlet_gas:
@@ -15115,21 +15123,21 @@ simulation:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.17dev) on 2020-01-30 11:28:03.045770
+<pre># File generated by pMuTT (v 1.2.19dev) on 2020-04-07 16:08:52.057296
 # See documentation for OpenMKM CTI file here:
 # https://vlachosgroup.github.io/openmkm/input
 
 #-------------------------------------------------------------------------------
 # UNITS
 #-------------------------------------------------------------------------------
-units(length=&#34;cm&#34;, time=&#34;s&#34;, quantity=&#34;mol&#34;, energy=&#34;kcal/mol&#34;,
+units(length=&#34;cm&#34;, time=&#34;s&#34;, quantity=&#34;mol&#34;, energy=&#34;kcal&#34;,
       act_energy=&#34;kcal/mol&#34;, pressure=&#34;atm&#34;, mass=&#34;g&#34;)
 
 #-------------------------------------------------------------------------------
 # PHASES
 #-------------------------------------------------------------------------------
 ideal_gas(name=&#34;gas&#34;,
-          elements=&#34;N H Ar&#34;,
+          elements=&#34;Ar H N&#34;,
           species=&#34;N2 NH3 H2 Ar&#34;,
           reactions=[])
 
@@ -15140,19 +15148,21 @@ stoichiometric_solid(name=&#34;bulk&#34;,
                      note=&#34;Ru Metal&#34;)
 
 interacting_interface(name=&#34;terrace&#34;,
-                      elements=&#34;N H Ru&#34;,
+                      elements=&#34;H N Ru&#34;,
                       species=&#34;N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=2.1671e-09,
+                      interactions=[&#34;0000 to 0004&#34;],
                       reactions=[&#34;0000 to 0003&#34;, &#34;NH2-H_cle_0001&#34;, &#34;NH-H_cle_0001&#34;, &#34;N-H_cle_0001&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001)&#34;)
 
 interacting_interface(name=&#34;step&#34;,
-                      elements=&#34;N H Ru&#34;,
+                      elements=&#34;H N Ru&#34;,
                       species=&#34;N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=4.4385e-10,
+                      interactions=[&#34;0005 to 0009&#34;],
                       reactions=[&#34;0004 to 0007&#34;, &#34;NH2-H_cle_0002&#34;, &#34;NH-H_cle_0002&#34;, &#34;N-H_syn_0001&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001) with atoms deleted&#34;)
@@ -15430,16 +15440,46 @@ species(name=&#34;Ar&#34;, atoms=&#34;Ar:1&#34;,
 #-------------------------------------------------------------------------------
 # LATERAL INTERACTIONS
 #-------------------------------------------------------------------------------
-lateral_interaction(&#34;N(T) N(T)&#34;, [-52.6], [0], id=&#34;0000&#34;)
-lateral_interaction(&#34;N(T) H(T)&#34;, [-17.7], [0], id=&#34;0001&#34;)
-lateral_interaction(&#34;H(T) N(T)&#34;, [-17.7], [0], id=&#34;0002&#34;)
-lateral_interaction(&#34;H(T) H(T)&#34;, [-3.0000000000000004], [0], id=&#34;0003&#34;)
-lateral_interaction(&#34;NH2(T) N(T)&#34;, [-20.7], [0], id=&#34;0004&#34;)
-lateral_interaction(&#34;N(S) N(S)&#34;, [-52.6], [0], id=&#34;0005&#34;)
-lateral_interaction(&#34;N(S) H(S)&#34;, [-17.7], [0], id=&#34;0006&#34;)
-lateral_interaction(&#34;H(S) N(S)&#34;, [-17.7], [0], id=&#34;0007&#34;)
-lateral_interaction(&#34;H(S) H(S)&#34;, [-3.0000000000000004], [0], id=&#34;0008&#34;)
-lateral_interaction(&#34;NH2(S) N(S)&#34;, [-20.7], [0], id=&#34;0009&#34;)
+lateral_interaction(&#34;N(T) N(T)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-52.6],
+                    id=&#34;0000&#34;)
+lateral_interaction(&#34;N(T) H(T)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-17.7],
+                    id=&#34;0001&#34;)
+lateral_interaction(&#34;H(T) N(T)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-17.7],
+                    id=&#34;0002&#34;)
+lateral_interaction(&#34;H(T) H(T)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-3.0000000000000004],
+                    id=&#34;0003&#34;)
+lateral_interaction(&#34;NH2(T) N(T)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-20.7],
+                    id=&#34;0004&#34;)
+lateral_interaction(&#34;N(S) N(S)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-52.6],
+                    id=&#34;0005&#34;)
+lateral_interaction(&#34;N(S) H(S)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-17.7],
+                    id=&#34;0006&#34;)
+lateral_interaction(&#34;H(S) N(S)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-17.7],
+                    id=&#34;0007&#34;)
+lateral_interaction(&#34;H(S) H(S)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-3.0000000000000004],
+                    id=&#34;0008&#34;)
+lateral_interaction(&#34;NH2(S) N(S)&#34;,
+                    coverage_thresholds=[0, 1],
+                    strengths=[-20.7],
+                    id=&#34;0009&#34;)
 
 #-------------------------------------------------------------------------------
 # REACTION OPTIONS
