@@ -13,14 +13,15 @@
 # All the data will be imported from the [`./inputs/NH3_Input_data.xlsx`](https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/inputs/NH3_Input_Data.xlsx) file. There are several sheets:
 # 
 # 1. `units` contains the units that types of quantities should be written
-# 2. `refs` contains *ab-initio* and experimental data for a handful of gas species to calculate references
+# 2. `refs` contains *ab-initio* and experimental data for a handful of gas species to calculate references (optional)
 # 3. `species` contains *ab-initio* data for each specie
-# 4. `beps` contains Bronsted-Evans-Polanyi relationships for reactions
-# 5. `reactions` contains elementary steps
-# 6. `lateral_interactions` contains lateral interactions between species
+# 4. `beps` contains Bronsted-Evans-Polanyi relationships for reactions (optional)
+# 5. `reactions` contains elementary steps 
+# 6. `lateral_interactions` contains lateral interactions between species (optional)
 # 7. `phases` contains phases for the species
 # 8. `reactor` contains reactor operating conditions and solver tolerances
 # 
+# The ``refs``, ``beps`` and ``lateral_interactions`` sheets can be deleted and the code written below should still work.
 
 # First, we change the working directory to the location of the Jupyter notebook.
 
@@ -82,7 +83,7 @@ disp_data(io=input_path, sheet_name='refs')
 # 
 # In this mechanism, we have species existing on terraces and steps. We also define the transition states of species. 
 # 
-# Note that later we will use BEPs to calculate barriers. Hence, these transition state species will actually be ignored. You should use either transition state species or BEP relationships to calculate barriers.
+# Note that later we will use BEPs to calculate barriers for most steps. Hence, these transition state species will actually be ignored. You should use either transition state species or BEP relationships to calculate barriers.
 
 # In[5]:
 
@@ -100,7 +101,7 @@ disp_data(io=input_path, sheet_name='beps')
 
 # **Reactions**
 # 
-# Note that reactions with two '=' signs indicate it has a transition state.
+# Note that reactions with two '=' signs indicate it has a transition state or BEP relationship.
 
 # In[7]:
 
@@ -110,7 +111,7 @@ disp_data(io=input_path, sheet_name='reactions')
 
 # **Lateral Interactions**
 # 
-# Currently we use piece-wise linear equations for lateral interactions. Here, we only define one line but additional ``list.intervals`` and ``list.slopes`` columns can be added for more complicated behavior.
+# Currently we use piece-wise linear equations for lateral interactions. Here, we only define one interval between 0 - 1 ML but additional ``list.intervals`` and ``list.slopes`` columns can be added for more complicated behavior.
 
 # In[8]:
 
@@ -119,6 +120,8 @@ disp_data(io=input_path, sheet_name='lateral_interactions')
 
 
 # **Phases**
+# 
+# As previously stated, there are two surface sites: terrace and step. There are also the gas and bulk phases defined.
 
 # In[9]:
 
@@ -127,6 +130,8 @@ disp_data(io=input_path, sheet_name='phases')
 
 
 # **Reactor**
+# 
+# The reactor sheet contains options for the YAML file.
 
 # In[10]:
 
@@ -136,7 +141,7 @@ disp_data(io=input_path, sheet_name='reactor')
 
 # ## Reading data
 # 
-# Throughout this exercise, we will use ``pmutt.io.read_excel`` to extract the data from the Excel spreadsheet.
+# Throughout this exercise, we will use [``pmutt.io.read_excel``](https://vlachosgroup.github.io/pMuTT/api/io/excel/pmutt.io.excel.read_excel.html#pmutt-io-excel-read-excel) to extract the data from the Excel spreadsheet.
 
 # ### Designate Units
 # First, we will designate the units to write the CTI and YAML file.
@@ -152,7 +157,7 @@ units = Units(**units_data)
 
 
 # ### Reading References (optional)
-# We will open the [input spreadsheet](https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/inputs/NH3_Input_Data.xlsx) and read the `refs` sheet.
+# Second, we will open the input spreadsheet and read the `refs` sheet.
 
 # In[12]:
 
@@ -170,6 +175,8 @@ else:
 
 
 # ### Reading Species
+# 
+# Third, we will use the ``refs`` defined before and the ``species`` sheet to convert statistical mechanical data to [``NASA``](https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa) objects.
 
 # In[13]:
 
@@ -184,6 +191,8 @@ species = [Nasa.from_model(references=refs, **ind_species_data)            for i
 
 
 # ### Adding species from other empirical sources (optional)
+# 
+# Note that OpenMKM also supports [``Shomate``](https://vlachosgroup.github.io/pMuTT/api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate) and [``NASA9``](https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html) objects. Below, we define a single ``Shomate`` species.
 
 # In[14]:
 
@@ -198,6 +207,8 @@ species.append(Ar)
 
 
 # ### Reading BEP (optional)
+# 
+# Next, we read the BEP relationships to include.
 
 # In[15]:
 
@@ -215,6 +226,8 @@ else:
 
 
 # ### Read reactions
+# 
+# Then, we read the reactions to include.
 
 # In[16]:
 
@@ -230,6 +243,8 @@ reactions = [SurfaceReaction.from_string(species=species_with_beps_dict, **react
 
 
 # ### Read lateral interactions (optional)
+# 
+# After, we read lateral interactions to include.
 
 # In[17]:
 
@@ -246,6 +261,8 @@ else:
 
 
 # ### Reading Phases
+# 
+# Finally, we read the phases data from Excel and organize it for use in OpenMKM.
 
 # In[18]:
 
@@ -257,11 +274,9 @@ phases_data = read_excel(io=input_path, sheet_name='phases')
 phases = organize_phases(phases_data, species=species, reactions=reactions, interactions=interactions)
 
 
-# If you would prefer to return the file as a string instead of writing it, omit the ``filename``.
-
 # ## Write YAML File
 # 
-# The YAML file specifying the reactor configuration can also be written using the ``write_yaml`` function. Note that if:
+# The YAML file specifying the reactor configuration can be written using the [``write_yaml``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html) function. Note that if:
 # - ``units`` is not specified, float values are assumed to be in SI units
 # - ``units`` is specified, float values are consistent with ``unit``'s attributes
 # - you would like a quantity to have particular units, pass the value as a string with the units  (e.g. "10 cm3/s").
@@ -285,6 +300,8 @@ print(write_yaml(phases=phases, units=units, **reactor_data))
 
 
 # ## Write CTI File
+# 
+# The CTI file species the thermodynamics and kinetics of the system. It can be written using [``write_cti``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti). Note that we take the reactor operating conditions previously read for the YAML file to calculate thermodynamic and kinetic parameters.
 
 # In[21]:
 
@@ -300,6 +317,8 @@ write_cti(reactions=reactions, species=species, phases=phases, units=units,
           lateral_interactions=interactions, filename=cti_path,
           use_motz_wise=use_motz_wise, T=T, P=P)
 
+
+# Like before, omitting the ``filename`` parameter returns a string.
 
 # In[22]:
 

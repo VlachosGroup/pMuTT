@@ -13093,14 +13093,15 @@ div#notebook {
 <h2 id="Input-Spreadsheet">Input Spreadsheet<a class="anchor-link" href="#Input-Spreadsheet">&#182;</a></h2><p>All the data will be imported from the <a href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/inputs/NH3_Input_Data.xlsx"><code>./inputs/NH3_Input_data.xlsx</code></a> file. There are several sheets:</p>
 <ol>
 <li><code>units</code> contains the units that types of quantities should be written</li>
-<li><code>refs</code> contains <em>ab-initio</em> and experimental data for a handful of gas species to calculate references</li>
+<li><code>refs</code> contains <em>ab-initio</em> and experimental data for a handful of gas species to calculate references (optional)</li>
 <li><code>species</code> contains <em>ab-initio</em> data for each specie</li>
-<li><code>beps</code> contains Bronsted-Evans-Polanyi relationships for reactions</li>
-<li><code>reactions</code> contains elementary steps</li>
-<li><code>lateral_interactions</code> contains lateral interactions between species</li>
+<li><code>beps</code> contains Bronsted-Evans-Polanyi relationships for reactions (optional)</li>
+<li><code>reactions</code> contains elementary steps </li>
+<li><code>lateral_interactions</code> contains lateral interactions between species (optional)</li>
 <li><code>phases</code> contains phases for the species</li>
 <li><code>reactor</code> contains reactor operating conditions and solver tolerances</li>
 </ol>
+<p>The <code>refs</code>, <code>beps</code> and <code>lateral_interactions</code> sheets can be deleted and the code written below should still work.</p>
 
 </div>
 </div>
@@ -13405,7 +13406,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Species</strong></p>
 <p>In this mechanism, we have species existing on terraces and steps. We also define the transition states of species.</p>
-<p>Note that later we will use BEPs to calculate barriers. Hence, these transition state species will actually be ignored. You should use either transition state species or BEP relationships to calculate barriers.</p>
+<p>Note that later we will use BEPs to calculate barriers for most steps. Hence, these transition state species will actually be ignored. You should use either transition state species or BEP relationships to calculate barriers.</p>
 
 </div>
 </div>
@@ -14207,7 +14208,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Reactions</strong></p>
-<p>Note that reactions with two '=' signs indicate it has a transition state.</p>
+<p>Note that reactions with two '=' signs indicate it has a transition state or BEP relationship.</p>
 
 </div>
 </div>
@@ -14373,7 +14374,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Lateral Interactions</strong></p>
-<p>Currently we use piece-wise linear equations for lateral interactions. Here, we only define one line but additional <code>list.intervals</code> and <code>list.slopes</code> columns can be added for more complicated behavior.</p>
+<p>Currently we use piece-wise linear equations for lateral interactions. Here, we only define one interval between 0 - 1 ML but additional <code>list.intervals</code> and <code>list.slopes</code> columns can be added for more complicated behavior.</p>
 
 </div>
 </div>
@@ -14522,6 +14523,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Phases</strong></p>
+<p>As previously stated, there are two surface sites: terrace and step. There are also the gas and bulk phases defined.</p>
 
 </div>
 </div>
@@ -14647,6 +14649,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Reactor</strong></p>
+<p>The reactor sheet contains options for the YAML file.</p>
 
 </div>
 </div>
@@ -14740,7 +14743,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reading-data">Reading data<a class="anchor-link" href="#Reading-data">&#182;</a></h2><p>Throughout this exercise, we will use <code>pmutt.io.read_excel</code> to extract the data from the Excel spreadsheet.</p>
+<h2 id="Reading-data">Reading data<a class="anchor-link" href="#Reading-data">&#182;</a></h2><p>Throughout this exercise, we will use <a href="https://vlachosgroup.github.io/pMuTT/api/io/excel/pmutt.io.excel.read_excel.html#pmutt-io-excel-read-excel"><code>pmutt.io.read_excel</code></a> to extract the data from the Excel spreadsheet.</p>
 
 </div>
 </div>
@@ -14773,7 +14776,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-References-(optional)">Reading References (optional)<a class="anchor-link" href="#Reading-References-(optional)">&#182;</a></h3><p>We will open the <a href="https://github.com/VlachosGroup/pMuTT/blob/master/docs/source/examples_jupyter/omkm_io/inputs/NH3_Input_Data.xlsx">input spreadsheet</a> and read the <code>refs</code> sheet.</p>
+<h3 id="Reading-References-(optional)">Reading References (optional)<a class="anchor-link" href="#Reading-References-(optional)">&#182;</a></h3><p>Second, we will open the input spreadsheet and read the <code>refs</code> sheet.</p>
 
 </div>
 </div>
@@ -14803,7 +14806,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-Species">Reading Species<a class="anchor-link" href="#Reading-Species">&#182;</a></h3>
+<h3 id="Reading-Species">Reading Species<a class="anchor-link" href="#Reading-Species">&#182;</a></h3><p>Third, we will use the <code>refs</code> defined before and the <code>species</code> sheet to convert statistical mechanical data to <a href="https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa"><code>NASA</code></a> objects.</p>
+
 </div>
 </div>
 </div>
@@ -14830,7 +14834,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adding-species-from-other-empirical-sources-(optional)">Adding species from other empirical sources (optional)<a class="anchor-link" href="#Adding-species-from-other-empirical-sources-(optional)">&#182;</a></h3>
+<h3 id="Adding-species-from-other-empirical-sources-(optional)">Adding species from other empirical sources (optional)<a class="anchor-link" href="#Adding-species-from-other-empirical-sources-(optional)">&#182;</a></h3><p>Note that OpenMKM also supports <a href="https://vlachosgroup.github.io/pMuTT/api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate"><code>Shomate</code></a> and <a href="https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html"><code>NASA9</code></a> objects. Below, we define a single <code>Shomate</code> species.</p>
+
 </div>
 </div>
 </div>
@@ -14856,7 +14861,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-BEP-(optional)">Reading BEP (optional)<a class="anchor-link" href="#Reading-BEP-(optional)">&#182;</a></h3>
+<h3 id="Reading-BEP-(optional)">Reading BEP (optional)<a class="anchor-link" href="#Reading-BEP-(optional)">&#182;</a></h3><p>Next, we read the BEP relationships to include.</p>
+
 </div>
 </div>
 </div>
@@ -14885,7 +14891,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-reactions">Read reactions<a class="anchor-link" href="#Read-reactions">&#182;</a></h3>
+<h3 id="Read-reactions">Read reactions<a class="anchor-link" href="#Read-reactions">&#182;</a></h3><p>Then, we read the reactions to include.</p>
+
 </div>
 </div>
 </div>
@@ -14913,7 +14920,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-lateral-interactions-(optional)">Read lateral interactions (optional)<a class="anchor-link" href="#Read-lateral-interactions-(optional)">&#182;</a></h3>
+<h3 id="Read-lateral-interactions-(optional)">Read lateral interactions (optional)<a class="anchor-link" href="#Read-lateral-interactions-(optional)">&#182;</a></h3><p>After, we read lateral interactions to include.</p>
+
 </div>
 </div>
 </div>
@@ -14941,7 +14949,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Reading-Phases">Reading Phases<a class="anchor-link" href="#Reading-Phases">&#182;</a></h3>
+<h3 id="Reading-Phases">Reading Phases<a class="anchor-link" href="#Reading-Phases">&#182;</a></h3><p>Finally, we read the phases data from Excel and organize it for use in OpenMKM.</p>
+
 </div>
 </div>
 </div>
@@ -14965,15 +14974,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you would prefer to return the file as a string instead of writing it, omit the <code>filename</code>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Write-YAML-File">Write YAML File<a class="anchor-link" href="#Write-YAML-File">&#182;</a></h2><p>The YAML file specifying the reactor configuration can also be written using the <code>write_yaml</code> function. Note that if:</p>
+<h2 id="Write-YAML-File">Write YAML File<a class="anchor-link" href="#Write-YAML-File">&#182;</a></h2><p>The YAML file specifying the reactor configuration can be written using the <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html"><code>write_yaml</code></a> function. Note that if:</p>
 <ul>
 <li><code>units</code> is not specified, float values are assumed to be in SI units</li>
 <li><code>units</code> is specified, float values are consistent with <code>unit</code>'s attributes</li>
@@ -15030,7 +15031,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.19dev) on 2020-04-07 16:08:51.951297
+<pre># File generated by pMuTT (v 1.2.19) on 2020-04-08 03:27:58.405859
 # See documentation for OpenMKM YAML file here:
 # https://vlachosgroup.github.io/openmkm/input
 inlet_gas:
@@ -15074,7 +15075,8 @@ simulation:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Write-CTI-File">Write CTI File<a class="anchor-link" href="#Write-CTI-File">&#182;</a></h2>
+<h2 id="Write-CTI-File">Write CTI File<a class="anchor-link" href="#Write-CTI-File">&#182;</a></h2><p>The CTI file species the thermodynamics and kinetics of the system. It can be written using <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti"><code>write_cti</code></a>. Note that we take the reactor operating conditions previously read for the YAML file to calculate thermodynamic and kinetic parameters.</p>
+
 </div>
 </div>
 </div>
@@ -15100,6 +15102,14 @@ simulation:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Like before, omitting the <code>filename</code> parameter returns a string.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
@@ -15123,7 +15133,7 @@ simulation:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.19dev) on 2020-04-07 16:08:52.057296
+<pre># File generated by pMuTT (v 1.2.19) on 2020-04-08 03:27:58.517860
 # See documentation for OpenMKM CTI file here:
 # https://vlachosgroup.github.io/openmkm/input
 
@@ -15137,7 +15147,7 @@ units(length=&#34;cm&#34;, time=&#34;s&#34;, quantity=&#34;mol&#34;, energy=&#34
 # PHASES
 #-------------------------------------------------------------------------------
 ideal_gas(name=&#34;gas&#34;,
-          elements=&#34;Ar H N&#34;,
+          elements=&#34;N H Ar&#34;,
           species=&#34;N2 NH3 H2 Ar&#34;,
           reactions=[])
 
@@ -15148,7 +15158,7 @@ stoichiometric_solid(name=&#34;bulk&#34;,
                      note=&#34;Ru Metal&#34;)
 
 interacting_interface(name=&#34;terrace&#34;,
-                      elements=&#34;H N Ru&#34;,
+                      elements=&#34;Ru N H&#34;,
                       species=&#34;N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=2.1671e-09,
@@ -15158,7 +15168,7 @@ interacting_interface(name=&#34;terrace&#34;,
                       note=&#34;Ru(0001)&#34;)
 
 interacting_interface(name=&#34;step&#34;,
-                      elements=&#34;H N Ru&#34;,
+                      elements=&#34;Ru N H&#34;,
                       species=&#34;N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=4.4385e-10,
