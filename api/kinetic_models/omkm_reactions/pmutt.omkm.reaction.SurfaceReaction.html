@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.omkm.reaction.SurfaceReaction &mdash; pmutt 1.2.18 documentation</title>
+  <title>pmutt.omkm.reaction.SurfaceReaction &mdash; pmutt 1.2.19 documentation</title>
   
 
   
@@ -200,7 +200,7 @@
 <h1>pmutt.omkm.reaction.SurfaceReaction<a class="headerlink" href="#pmutt-omkm-reaction-surfacereaction" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pmutt.omkm.reaction.SurfaceReaction">
-<em class="property">class </em><code class="sig-prename descclassname">pmutt.omkm.reaction.</code><code class="sig-name descname">SurfaceReaction</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">beta=1.0</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">sticking_coeff=0.5</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.omkm.reaction.</code><code class="sig-name descname">SurfaceReaction</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">beta=None</em>, <em class="sig-param">sticking_coeff=None</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt.reaction.Reaction</span></code></a></p>
 <p>Expresses OpenMKM surface reaction in Cantera CTI format reaction.
 Inherits from <a class="reference internal" href="../../reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a>.</p>
@@ -211,17 +211,6 @@ Inherits from <a class="reference internal" href="../../reactions/reaction/pmutt
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pmutt.omkm.reaction.SurfaceReaction.beta">
-<code class="sig-name descname">beta</code><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.beta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Power to raise the temperature in the rate expression. Default is 1</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -238,10 +227,23 @@ Inherits from <a class="reference internal" href="../../reactions/reaction/pmutt
 </dd></dl>
 
 <dl class="attribute">
+<dt id="pmutt.omkm.reaction.SurfaceReaction.beta">
+<code class="sig-name descname">beta</code><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power to raise the temperature in the rate expression. Default is 1
+if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is False, 0 if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.sticking_coeff">
 <code class="sig-name descname">sticking_coeff</code><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.sticking_coeff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sticking coefficient. Only relevant if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True.
-Default is 0.5</p>
+Default is 0.5 if <code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is True, None if
+<code class="docutils literal notranslate"><span class="pre">is_adsorption</span></code> is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
@@ -275,7 +277,7 @@ state and products</p>
 
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">beta=1.0</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">sticking_coeff=0.5</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">beta=None</em>, <em class="sig-param">sticking_coeff=None</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -286,7 +288,7 @@ state and products</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.__init__" title="pmutt.omkm.reaction.SurfaceReaction.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([id, beta, is_adsorption, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.__init__" title="pmutt.omkm.reaction.SurfaceReaction.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([id, is_adsorption, beta, …])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.check_element_balance" title="pmutt.omkm.reaction.SurfaceReaction.check_element_balance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_element_balance</span></code></a>()</p></td>
@@ -349,26 +351,26 @@ state and products</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_FoRT_state" title="pmutt.omkm.reaction.SurfaceReaction.get_FoRT_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_FoRT_state</span></code></a>(state, **kwargs)</p></td>
 <td><p>Gets dimensionless Helmholtz energy at a state</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_G_act" title="pmutt.omkm.reaction.SurfaceReaction.get_G_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G_act</span></code></a>(units, T[, rev])</p></td>
-<td><p>Gets change in Gibbs energy between reactants/products and the transition state</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_G_act" title="pmutt.omkm.reaction.SurfaceReaction.get_G_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G_act</span></code></a>(units, T[, P, rev])</p></td>
+<td><p>Calculates the Gibbs energy of activation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_G_state" title="pmutt.omkm.reaction.SurfaceReaction.get_G_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G_state</span></code></a>(state, units, T, **kwargs)</p></td>
 <td><p>Gets the Gibbs energy at a state</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_GoRT_act" title="pmutt.omkm.reaction.SurfaceReaction.get_GoRT_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_GoRT_act</span></code></a>([rev, act])</p></td>
-<td><p>Calculates the dimensionless Gibbs energy.</p></td>
+<td><p>Calculates the dimensionless Gibbs energy of activation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_GoRT_state" title="pmutt.omkm.reaction.SurfaceReaction.get_GoRT_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_GoRT_state</span></code></a>(state, **kwargs)</p></td>
 <td><p>Gets dimensionless Gibbs energy at a state</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_H_act" title="pmutt.omkm.reaction.SurfaceReaction.get_H_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_H_act</span></code></a>(units, T[, rev])</p></td>
-<td><p>Gets change in enthalpy between reactants/products and the transition state</p></td>
+<td><p>Calculates the enthalpy of activation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_H_state" title="pmutt.omkm.reaction.SurfaceReaction.get_H_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_H_state</span></code></a>(state, units, T, **kwargs)</p></td>
 <td><p>Gets the enthalpy at a state</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_HoRT_act" title="pmutt.omkm.reaction.SurfaceReaction.get_HoRT_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_HoRT_act</span></code></a>([rev])</p></td>
-<td><p>Calculates the dimensionless enthalpy.</p></td>
+<td><p>Calculates the dimensionless enthalpy of activation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.get_HoRT_state" title="pmutt.omkm.reaction.SurfaceReaction.get_HoRT_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_HoRT_state</span></code></a>(state, **kwargs)</p></td>
 <td><p>Gets dimensionless enthalpy at a state</p></td>
@@ -507,6 +509,11 @@ state and products</p>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">beta</code></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.check_element_balance">
 <code class="sig-name descname">check_element_balance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.check_element_balance" title="Permalink to this definition">¶</a></dt>
@@ -1073,25 +1080,25 @@ different species.</p></li>
 
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.get_G_act">
-<code class="sig-name descname">get_G_act</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T</em>, <em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_G_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in Gibbs energy between reactants/products and the
-transition state</p>
+<code class="sig-name descname">get_G_act</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_G_act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the Gibbs energy of activation. If there is no transition
+state species, calculates the delta Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
-units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p></li>
 <li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</p></li>
-<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate Gibbs energy. See class
-docstring to see how to pass specific parameters to different
-species.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is 1 bar</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy of activation.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>G_act</strong> – Change in Gibbs energy between reactants/products and the
-transition state</p>
+<dd class="field-even"><p><strong>HoRT_act</strong> – Dimensionless activation enthalpy. Returns the max of the
+following to ensure stable MKM performance:
+- Difference between reactants/products and the transition state
+- Difference between the reactants and the products
+- 0</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
@@ -1135,8 +1142,9 @@ different species.</p></li>
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.get_GoRT_act">
 <code class="sig-name descname">get_GoRT_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">act=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_GoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless Gibbs energy. If there is no transition
-state species, calculates the delta dimensionless Gibbs energy</p>
+<dd><p>Calculates the dimensionless Gibbs energy of activation. If there is
+no transition state species, calculates the delta dimensionless
+Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1193,24 +1201,23 @@ different species.</p></li>
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.get_H_act">
 <code class="sig-name descname">get_H_act</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T</em>, <em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_H_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets change in enthalpy between reactants/products and the
-transition state</p>
+<dd><p>Calculates the enthalpy of activation. If there is no transition
+state species, calculates the delta enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
-units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p></li>
 <li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</p></li>
-<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy. See class
-docstring to see how to pass specific parameters to different
-species.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate enthalpy of activation.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>H_act</strong> – Change in enthalpy between reactants/products and the
-transition state</p>
+<dd class="field-even"><p><strong>HoRT_act</strong> – Dimensionless activation enthalpy. Returns the max of the
+following to ensure stable MKM performance:
+- Difference between reactants/products and the transition state
+- Difference between the reactants and the products
+- 0</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
@@ -1254,8 +1261,8 @@ different species.</p></li>
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.get_HoRT_act">
 <code class="sig-name descname">get_HoRT_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_HoRT_act" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the dimensionless enthalpy. If there is no transition
-state species, calculates the delta dimensionless Gibbs energy</p>
+<dd><p>Calculates the dimensionless enthalpy of activation. If there is no
+transition state species, calculates the delta dimensionless enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -2189,8 +2196,13 @@ interest.</p></li>
 <dd></dd></dl>
 
 <dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">sticking_coeff</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.to_CTI">
-<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">quantity_unit='molec'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">act_energy_unit='cal/mol'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.to_CTI" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">quantity_unit='molec'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">act_energy_unit='cal/mol'</em>, <em class="sig-param">ads_act_method='get_H_act'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.to_CTI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2200,6 +2212,9 @@ interest.</p></li>
 <li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit to calculate A. Default is ‘molec’</p></li>
 <li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit to calculate A. Default is ‘cm’</p></li>
 <li><p><strong>act_energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Unit to use for activation energy. Default is ‘cal/mol’</p></li>
+<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Activation method to use for adsorption reactions. Accepted
+options include ‘get_H_act’ and ‘get_G_act’. Default is
+‘get_H_act’.</p></li>
 <li><p><strong>units</strong> (<a class="reference internal" href="../omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <cite>quantity_unit</cite>, <cite>length_unit</cite>, and
 <cite>act_energy_unit</cite> are overwritten. Default is None.</p></li>
 </ul>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.empirical.GasPressureAdj &mdash; pmutt 1.2.18 documentation</title>
+  <title>pmutt.empirical.GasPressureAdj &mdash; pmutt 1.2.19 documentation</title>
   
 
   
@@ -195,7 +195,14 @@
 <dt id="pmutt.empirical.GasPressureAdj">
 <em class="property">class </em><code class="sig-prename descclassname">pmutt.empirical.</code><code class="sig-name descname">GasPressureAdj</code><a class="headerlink" href="#pmutt.empirical.GasPressureAdj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code></p>
-<p>Includes pressure’s effect on entropy for gas molecules</p>
+<p>Includes pressure’s effect on entropy for gas molecules.</p>
+<p class="rubric">Notes</p>
+<p>This adjustment is only valid for gas-phase molecules. When an empirical
+object (like <a class="reference internal" href="../nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a>,
+<a class="reference internal" href="../nasa/pmutt.empirical.nasa.Nasa9.html#pmutt.empirical.nasa.Nasa9" title="pmutt.empirical.nasa.Nasa9"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa9</span></code></a> or
+<a class="reference internal" href="../shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a>) has been assigned <code class="docutils literal notranslate"><span class="pre">phase='g'</span></code>
+or <code class="docutils literal notranslate"><span class="pre">phase='gas'</span></code>, this adjustment factor will automatically be added
+unless <code class="docutils literal notranslate"><span class="pre">add_gas_P_adj=False</span></code>.</p>
 <dl class="method">
 <dt id="pmutt.empirical.GasPressureAdj.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.GasPressureAdj.__init__" title="Permalink to this definition">¶</a></dt>

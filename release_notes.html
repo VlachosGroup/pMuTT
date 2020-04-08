@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.18 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.19 documentation</title>
   
 
   
@@ -108,6 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-19">Version 1.2.19</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-18">Version 1.2.18</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-17">Version 1.2.17</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-16">Version 1.2.16</a></li>
@@ -219,6 +220,21 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+</div>
+<div class="section" id="version-1-2-19">
+<h2>Version 1.2.19<a class="headerlink" href="#version-1-2-19" title="Permalink to this headline">¶</a></h2>
+<p>Apr. 8, 2020</p>
+<ul class="simple">
+<li><p>Fixed bug where <a class="reference internal" href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR" title="pmutt.statmech.lsr.LSR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code></a> could not be imported in
+<a class="reference internal" href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>.</p></li>
+<li><p>Updated <code class="xref py py-mod docutils literal notranslate"><span class="pre">io</span></code> sections to incorporate Pathlib library</p></li>
+<li><p>Added helper functions in <code class="xref py py-mod docutils literal notranslate"><span class="pre">omkm</span></code> to organize phases</p></li>
+<li><p>Fixed bug where slopes and y intercepts were switched for
+<a class="reference internal" href="api/mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html#pmutt.mixture.cov.PiecewiseCovEffect" title="pmutt.mixture.cov.PiecewiseCovEffect"><code class="xref py py-class docutils literal notranslate"><span class="pre">PiecewiseCovEffect</span></code></a> when writing CTI files.</p></li>
+<li><p>Fixed bug in <a class="reference internal" href="api/io/chemkin/pmutt.io.chemkin.write_surf.html#pmutt.io.chemkin.write_surf" title="pmutt.io.chemkin.write_surf"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_surf()</span></code></a> where <code class="docutils literal notranslate"><span class="pre">n_sites</span></code> could
+be written as a float</p></li>
+<li><p>Updated OpenMKM IO example</p></li>
+</ul>
 </div>
 <div class="section" id="version-1-2-18">
 <h2>Version 1.2.18<a class="headerlink" href="#version-1-2-18" title="Permalink to this headline">¶</a></h2>

@@ -129,7 +129,7 @@ Input and Output
    io.omkm.get_species_phases
    io.omkm.get_reactions_phases
    io.omkm.get_interactions_phases
-   io.omkm.get_phases
+   io.omkm.organize_phases
 
 Examples
 --------

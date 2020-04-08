@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.io.omkm.write_cti &mdash; pmutt 1.2.18 documentation</title>
+  <title>pmutt.io.omkm.write_cti &mdash; pmutt 1.2.19 documentation</title>
   
 
   
@@ -112,7 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_species_phases.html">pmutt.io.omkm.get_species_phases</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_reactions_phases.html">pmutt.io.omkm.get_reactions_phases</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_interactions_phases.html">pmutt.io.omkm.get_interactions_phases</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_phases.html">pmutt.io.omkm.get_phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.organize_phases.html">pmutt.io.omkm.get_species_phases</a></li>
 </ul>
 </li>
 </ul>
@@ -201,7 +201,7 @@
 <h1>pmutt.io.omkm.write_cti<a class="headerlink" href="#pmutt-io-omkm-write-cti" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt>
-<code class="sig-prename descclassname">pmutt.io.omkm.</code><code class="sig-name descname">write_cti</code><span class="sig-paren">(</span><em class="sig-param">phases=None</em>, <em class="sig-param">species=None</em>, <em class="sig-param">reactions=None</em>, <em class="sig-param">lateral_interactions=None</em>, <em class="sig-param">units=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">T=300.0</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">newline='\n'</em>, <em class="sig-param">use_motz_wise=False</em>, <em class="sig-param">write_xml=True</em><span class="sig-paren">)</span></dt>
+<code class="sig-prename descclassname">pmutt.io.omkm.</code><code class="sig-name descname">write_cti</code><span class="sig-paren">(</span><em class="sig-param">phases=None</em>, <em class="sig-param">species=None</em>, <em class="sig-param">reactions=None</em>, <em class="sig-param">lateral_interactions=None</em>, <em class="sig-param">units=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">T=300.0</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">newline='\n'</em>, <em class="sig-param">use_motz_wise=False</em>, <em class="sig-param">ads_act_method='get_H_act'</em>, <em class="sig-param">write_xml=True</em><span class="sig-paren">)</span></dt>
 <dd><p>Writes the units, phases, species, lateral interactions, reactions and
 additional options in the CTI format for OpenMKM</p>
 <dl class="field-list simple">
@@ -218,6 +218,12 @@ of <code class="xref py py-class docutils literal notranslate"><span class="pre"
 as str.</p></li>
 <li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K.</p></li>
 <li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm.</p></li>
+<li><p><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Type of newline to use. Default is Linux newline (‘n’)</p></li>
+<li><p><strong>use_motz_wise</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to use Motz-wise sticking coefficients or not. Default is
+False</p></li>
+<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Activation method to use for adsorption reactions. Accepted
+options include ‘get_H_act’ and ‘get_G_act’. Default is
+‘get_H_act’.</p></li>
 <li><p><strong>write_xml</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True and <code class="docutils literal notranslate"><span class="pre">filename</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, automatically generates
 an XML file with the CTI file.</p></li>
 </ul>

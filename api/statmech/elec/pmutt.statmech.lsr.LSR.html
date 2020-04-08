@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.statmech.lsr.LSR &mdash; pmutt 1.2.18 documentation</title>
+  <title>pmutt.statmech.lsr.LSR &mdash; pmutt 1.2.19 documentation</title>
   
 
   
@@ -198,11 +198,51 @@
 <h1>pmutt.statmech.lsr.LSR<a class="headerlink" href="#pmutt-statmech-lsr-lsr" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pmutt.statmech.lsr.LSR">
-<em class="property">class </em><code class="sig-prename descclassname">pmutt.statmech.lsr.</code><code class="sig-name descname">LSR</code><span class="sig-paren">(</span><em class="sig-param">slope</em>, <em class="sig-param">intercept</em>, <em class="sig-param">reaction</em>, <em class="sig-param">surf_specie=0.0</em>, <em class="sig-param">gas_specie=0.0</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.statmech.lsr.</code><code class="sig-name descname">LSR</code><span class="sig-paren">(</span><em class="sig-param">slope</em>, <em class="sig-param">intercept</em>, <em class="sig-param">reaction</em>, <em class="sig-param">surf_species=0.0</em>, <em class="sig-param">gas_species=0.0</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code></p>
 <p>Represents a linear scaling relationship</p>
 <p><span class="math notranslate nohighlight">\(\Delta E^{AH_x} = \alpha \Delta E^{A} + \beta\)</span></p>
 <p><span class="math notranslate nohighlight">\(E^{AH_{x}^*}=\Delta E^{AH_x} + E^* + E^{AH_{x(g)}}\)</span></p>
+<p>where:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 62%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Units</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Delta E^{AH_x}\)</span></p></td>
+<td><p>Binding energy of adsorbate, AHx, on interested surface.</p></td>
+<td><p>kcal/mol</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Delta E^{A}\)</span></p></td>
+<td><p>Binding energy of adsorbate, A, on interested surface.</p></td>
+<td><p>kcal/mol</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td><p>Slope of LSR</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\beta\)</span></p></td>
+<td><p>Intercept of LSR</p></td>
+<td><p>kcal/mol</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(E^*\)</span></p></td>
+<td><p>Electronic energy of interested surface.</p></td>
+<td><p>kcal/mol</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(E^{AH_{x(g)}}\)</span></p></td>
+<td><p>Electronic energy of AHx in the gas phase.</p></td>
+<td><p>kcal/mol</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="attribute">
 <dt id="pmutt.statmech.lsr.LSR.slope">
 <code class="sig-name descname">slope</code><a class="headerlink" href="#pmutt.statmech.lsr.LSR.slope" title="Permalink to this definition">¶</a></dt>
@@ -243,9 +283,9 @@ energy calculated using <code class="docutils literal notranslate"><span class="
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.lsr.LSR.surf_specie">
-<code class="sig-name descname">surf_specie</code><a class="headerlink" href="#pmutt.statmech.lsr.LSR.surf_specie" title="Permalink to this definition">¶</a></dt>
-<dd><p>Surface specie. If the surface’s energy is specified as a float (in
+<dt id="pmutt.statmech.lsr.LSR.surf_species">
+<code class="sig-name descname">surf_species</code><a class="headerlink" href="#pmutt.statmech.lsr.LSR.surf_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Surface species. If the surface’s energy is specified as a float (in
 kcal/mol), it will be converted to a
 <a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object with a single
 <a class="reference internal" href="../misc/pmutt.statmech.ConstantMode.html#pmutt.statmech.ConstantMode" title="pmutt.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> mode. Default is 0.</p>
@@ -257,9 +297,9 @@ kcal/mol), it will be converted to a
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.lsr.LSR.gas_specie">
-<code class="sig-name descname">gas_specie</code><a class="headerlink" href="#pmutt.statmech.lsr.LSR.gas_specie" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gas-phase specie. If the gas’ energy is specified as a float (in
+<dt id="pmutt.statmech.lsr.LSR.gas_species">
+<code class="sig-name descname">gas_species</code><a class="headerlink" href="#pmutt.statmech.lsr.LSR.gas_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gas-phase species. If the gas’ energy is specified as a float (in
 kcal/mol), it will be converted to a
 <a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object with a single
 <a class="reference internal" href="../misc/pmutt.statmech.ConstantMode.html#pmutt.statmech.ConstantMode" title="pmutt.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> mode. Default is 0.</p>
@@ -281,9 +321,18 @@ kcal/mol), it will be converted to a
 </dl>
 </dd></dl>
 
+<p class="rubric">Notes</p>
+<p>If the LSR relationship represents the binding of an adsorbate (AHx) on
+surface (M2) relative to a reference surface (M1) (see equation below),
+you may still use this class.</p>
+<p><span class="math notranslate nohighlight">\(\Delta E^{AH_x}_{M_2} = \alpha (\Delta E^{A}_{M_2}
+- \Delta E^{A}_{M_1}) + \Delta E^{AH_x}_{M_1}\)</span></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">reaction</span></code> inputted will represent the following stoichiometric
+reaction.</p>
+<p><span class="math notranslate nohighlight">\(*_{(M_1)} + A^*_{(M_2)} \leftrightarrow A^*_{(M_1)} + *_{(M_2)}\)</span></p>
 <dl class="method">
 <dt id="pmutt.statmech.lsr.LSR.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">slope</em>, <em class="sig-param">intercept</em>, <em class="sig-param">reaction</em>, <em class="sig-param">surf_specie=0.0</em>, <em class="sig-param">gas_specie=0.0</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">slope</em>, <em class="sig-param">intercept</em>, <em class="sig-param">reaction</em>, <em class="sig-param">surf_species=0.0</em>, <em class="sig-param">gas_species=0.0</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -359,6 +408,11 @@ kcal/mol), it will be converted to a
 </dd></dl>
 
 <dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">gas_species</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="pmutt.statmech.lsr.LSR.get_Cp">
 <code class="sig-name descname">get_Cp</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
@@ -380,6 +434,13 @@ units.</p></li>
 </dd></dl>
 
 <dl class="method">
+<dt id="pmutt.statmech.lsr.LSR.get_CpoR">
+<code class="sig-name descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure.</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{LSR}}{R}=0\)</span></p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pmutt.statmech.lsr.LSR.get_Cv">
 <code class="sig-name descname">get_Cv</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR.get_Cv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
@@ -398,6 +459,13 @@ units.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.lsr.LSR.get_CvoR">
+<code class="sig-name descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.LSR.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume.</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{LSR}}{R}=0\)</span></p>
 </dd></dl>
 
 <dl class="method">
@@ -612,6 +680,16 @@ energy and gas-phase energy</p></li>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">reaction</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">surf_species</code></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="pmutt.statmech.lsr.LSR.to_dict">

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.mixture.cov.PiecewiseCovEffect &mdash; pmutt 1.2.18 documentation</title>
+  <title>pmutt.mixture.cov.PiecewiseCovEffect &mdash; pmutt 1.2.19 documentation</title>
   
 
   
@@ -321,7 +321,7 @@ correctly specify a piecewise function with mole fraction domain
 <tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.mixture.cov.PiecewiseCovEffect.pop" title="pmutt.mixture.cov.PiecewiseCovEffect.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(i)</p></td>
 <td><p>Removes the interval and slope specified by an index</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI" title="pmutt.mixture.cov.PiecewiseCovEffect.to_CTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_CTI</span></code></a>([energy_unit, units])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI" title="pmutt.mixture.cov.PiecewiseCovEffect.to_CTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_CTI</span></code></a>([energy_unit, quantity_unit, units])</p></td>
 <td><p>Writes the lateral interaction in CTI format</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_dict" title="pmutt.mixture.cov.PiecewiseCovEffect.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
@@ -631,13 +631,15 @@ mole fractions to span from 0 to 1</p>
 
 <dl class="method">
 <dt id="pmutt.mixture.cov.PiecewiseCovEffect.to_CTI">
-<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><em class="sig-param">energy_unit='kcal/mol'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><em class="sig-param">energy_unit='kcal'</em>, <em class="sig-param">quantity_unit='mol'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the lateral interaction in CTI format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal/mol’</p></li>
-<li><p><strong>units</strong> (<a class="reference internal" href="../../kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, energy_unit` are overwritten. Default is None.</p></li>
+<li><p><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal’</p></li>
+<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit for slopes. Default is ‘mol’</p></li>
+<li><p><strong>units</strong> (<a class="reference internal" href="../../kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <code class="docutils literal notranslate"><span class="pre">energy_unit</span></code> and <code class="docutils literal notranslate"><span class="pre">quantity_unit</span></code> are
+overwritten. Default is None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
