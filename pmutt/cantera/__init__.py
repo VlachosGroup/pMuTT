@@ -31,6 +31,8 @@ def _get_range_CTI(objs, parent_obj=None, delimiter='_'):
         CTI_out = objs
     elif len(objs) == 0:
         CTI_out = '[]'
+    elif objs is None:
+        CTI_out = '[]'
     else:
         CTI_out = '['
 

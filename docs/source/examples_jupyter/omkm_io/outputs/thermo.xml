@@ -4,7 +4,7 @@
 
   <!-- phase gas     -->
   <phase id="gas" dim="3">
-    <elementArray datasrc="elements.xml">H N Ar</elementArray>
+    <elementArray datasrc="elements.xml">Ar H N</elementArray>
     <speciesArray datasrc="#species_data">N2 NH3 H2 Ar</speciesArray>
     <thermo model="IdealGas"/>
     <kinetics model="GasKinetics"/>
@@ -25,7 +25,7 @@
 
   <!-- phase terrace     -->
   <phase id="terrace" dim="2">
-    <elementArray datasrc="elements.xml">H Ru N</elementArray>
+    <elementArray datasrc="elements.xml">H N Ru</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0000" max="0003"/>
@@ -43,6 +43,9 @@
     <thermo model="SurfaceCoverage">
       <site_density units="mol/cm2">2.1671e-09</site_density>
     </thermo>
+    <interactionArray datasrc="#interaction_data">
+      <include min="0000" max="0004"/>
+    </interactionArray>
     <bepArray datasrc="#bep_data">NH2-H NH-H N-H</bepArray>
     <kinetics model="Interface"/>
     <transport model="None"/>
@@ -51,7 +54,7 @@
 
   <!-- phase step     -->
   <phase id="step" dim="2">
-    <elementArray datasrc="elements.xml">H Ru N</elementArray>
+    <elementArray datasrc="elements.xml">H N Ru</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0004" max="0007"/>
@@ -69,6 +72,9 @@
     <thermo model="SurfaceCoverage">
       <site_density units="mol/cm2">4.4385e-10</site_density>
     </thermo>
+    <interactionArray datasrc="#interaction_data">
+      <include min="0005" max="0009"/>
+    </interactionArray>
     <bepArray datasrc="#bep_data">NH2-H NH-H N-H</bepArray>
     <kinetics model="Interface"/>
     <transport model="None"/>
@@ -555,7 +561,7 @@
         <Arrhenius type="stick" species="N2">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">14.564200</E>
+           <E units="kcal/mol">0.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N2:1.0 RU(T):1</reactants>
@@ -569,7 +575,7 @@
         <Arrhenius type="stick" species="NH3">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">16.386700</E>
+           <E units="kcal/mol">0.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3:1.0 RU(T):1</reactants>
@@ -653,7 +659,7 @@
         <Arrhenius type="stick" species="N2">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">17.329900</E>
+           <E units="kcal/mol">0.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N2:1.0 RU(S):1</reactants>
@@ -667,7 +673,7 @@
         <Arrhenius type="stick" species="NH3">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">10.756700</E>
+           <E units="kcal/mol">0.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3:1.0 RU(S):1</reactants>
@@ -735,70 +741,70 @@
     <!-- interaction 0000    -->
     <interaction id="0000">
       <speciesArray datasrc="#species_data">N(T) N(T)</speciesArray>
-      <floatArray name="strength">-5.260000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-5.260000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0001    -->
     <interaction id="0001">
       <speciesArray datasrc="#species_data">N(T) H(T)</speciesArray>
-      <floatArray name="strength">-1.770000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0002    -->
     <interaction id="0002">
       <speciesArray datasrc="#species_data">H(T) N(T)</speciesArray>
-      <floatArray name="strength">-1.770000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0003    -->
     <interaction id="0003">
       <speciesArray datasrc="#species_data">H(T) H(T)</speciesArray>
-      <floatArray name="strength">-3.000000000E+00, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-3.000000000E+00, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0004    -->
     <interaction id="0004">
       <speciesArray datasrc="#species_data">NH2(T) N(T)</speciesArray>
-      <floatArray name="strength">-2.070000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-2.070000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0005    -->
     <interaction id="0005">
       <speciesArray datasrc="#species_data">N(S) N(S)</speciesArray>
-      <floatArray name="strength">-5.260000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-5.260000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0006    -->
     <interaction id="0006">
       <speciesArray datasrc="#species_data">N(S) H(S)</speciesArray>
-      <floatArray name="strength">-1.770000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0007    -->
     <interaction id="0007">
       <speciesArray datasrc="#species_data">H(S) N(S)</speciesArray>
-      <floatArray name="strength">-1.770000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0008    -->
     <interaction id="0008">
       <speciesArray datasrc="#species_data">H(S) H(S)</speciesArray>
-      <floatArray name="strength">-3.000000000E+00, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-3.000000000E+00, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
     <!-- interaction 0009    -->
     <interaction id="0009">
       <speciesArray datasrc="#species_data">NH2(S) N(S)</speciesArray>
-      <floatArray name="strength">-2.070000000E+01, </floatArray>
+      <floatArray name="strength" units="kcal/mol">-2.070000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
   </interactionData>

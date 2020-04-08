@@ -10,7 +10,7 @@ pmutt
 # present, too:
 #
 name = 'pmutt'
-__version__ = '1.2.18'
+__version__ = '1.2.19'
 
 import os
 import inspect
@@ -159,7 +159,11 @@ class _ModelBase(_pmuttBase):
                 Enthalpy in appropriate units
         """
         units = '{}/K'.format(units)
-        R_adj = _get_R_adj(units=units, elements=self.elements)
+        try:
+            elements = self.elements
+        except AttributeError:
+            elements = None
+        R_adj = _get_R_adj(units=units, elements=elements)
 
         HoRT_kwargs = kwargs.copy()
         HoRT_kwargs['T'] = T

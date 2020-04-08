@@ -172,15 +172,18 @@ class PiecewiseCovEffect(_ModelBase):
     def get_SoR(self):
         return 0.
 
-    def to_CTI(self, energy_unit='kcal/mol', units=None):
+    def to_CTI(self, energy_unit='kcal', quantity_unit='mol', units=None):
         """Writes the lateral interaction in CTI format
 
         Parameters
         ----------
             energy_unit : str, optional
-                Energy unit for slopes. Default is 'kcal/mol'
+                Energy unit for slopes. Default is 'kcal'
+            quantity_unit : str, optional
+                Quantity unit for slopes. Default is 'mol'
             units : :class:`~pmutt.cantera.units.Units` object
-                If specified, energy_unit` are overwritten. Default is None.
+                If specified, ``energy_unit`` and ``quantity_unit`` are
+                overwritten. Default is None.
         Returns
         -------
             lat_inter_str : str
@@ -188,11 +191,16 @@ class PiecewiseCovEffect(_ModelBase):
         """
         if units is not None:
             energy_unit = units.energy
-        slopes = [c.convert_unit(slope, initial='kcal/mol', final=energy_unit) \
+            quantity_unit = units.quantity
+        final = '{}/{}'.format(energy_unit, quantity_unit)
+        slopes = [c.convert_unit(slope, initial='kcal/mol', final=final) \
                   for slope in self.slopes]
-        lat_inter_str = ('lateral_interaction("{} {}", {}, {}, id="{}")'
-                         ''.format(self.name_i, self.name_j, slopes,
-                                   self.intervals, self.name))
+        lat_inter_str = ('lateral_interaction("{} {}",\n'
+                         '                    coverage_thresholds={},\n'
+                         '                    strengths={},\n'
+                         '                    id="{}")'
+                         ''.format(self.name_i, self.name_j,
+                                   self.intervals, slopes, self.name))
         return lat_inter_str
 
     def to_dict(self):

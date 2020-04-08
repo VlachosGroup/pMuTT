@@ -101,7 +101,7 @@ class GroundStateElec(_ModelBase):
     def get_CpoR(self):
         """Calculates the dimensionless heat capacity at constant pressure
 
-        :math:`\\frac{C_V^{elec}}{R}=\\frac{C_P^{elec}}{R}`
+        :math:`\\frac{C_P^{elec}}{R}=\\frac{C_V^{elec}}{R}=0`
 
         Returns
         -------

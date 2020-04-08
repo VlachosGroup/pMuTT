@@ -48,7 +48,7 @@ Cited By
 --------
 
 1. Wang, C., Wittreich, G.R., Lin, C. et al. Catal Lett (2019). https://doi.org/10.1007/s10562-019-03027-8
-
+2. Fu, J.; Lym, J.; Zheng, W.; Alexopoulos, K.; Mironenko, A. V.; Li, N.; Boscoboinik, J. A.; Su, D.; Weber, R. T.; Vlachos, D. G. Nat. Catal. 2020. https://doi.org/10.1038/s41929-020-0445-x
 
 If you have published work using pMuTT and would like to be featured here,
 please post an issue with the |Publication_label| tag.

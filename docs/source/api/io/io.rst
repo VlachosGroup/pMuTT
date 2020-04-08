@@ -341,7 +341,7 @@ OpenMKM
    omkm.get_species_phases
    omkm.get_reactions_phases
    omkm.get_interactions_phases
-   omkm.get_phases
+   omkm.organize_phases
 
 .. _`pmutt.examples.read_nasa_from_thermdat`: https://github.com/VlachosGroup/pmutt/tree/master/examples/read_nasa_from_thermdat 
 .. _`YAML Ain't Markup Language (YAML)`: https://yaml.org/

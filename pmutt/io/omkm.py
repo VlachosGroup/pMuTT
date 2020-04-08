@@ -1,8 +1,9 @@
+from pathlib import Path
 from collections import namedtuple, defaultdict
 
 import yaml
 
-from pmutt import _force_pass_arguments, _is_iterable
+from pmutt import _force_pass_arguments, _is_iterable, pmutt_list_to_dict
 from pmutt.io import _get_file_timestamp
 from pmutt.io.cantera import obj_to_CTI
 from pmutt.io.ctml_writer import convert
@@ -37,6 +38,7 @@ def write_cti(phases=None,
               P=1.,
               newline='\n',
               use_motz_wise=False,
+              ads_act_method='get_H_act',
               write_xml=True):
     """Writes the units, phases, species, lateral interactions, reactions and 
     additional options in the CTI format for OpenMKM
@@ -62,6 +64,15 @@ def write_cti(phases=None,
             Temperature in K. Default is 300 K.
         P : float, optional
             Pressure in atm. Default is 1 atm.
+        newline : str, optional
+            Type of newline to use. Default is Linux newline ('\\n')
+        use_motz_wise : bool, optional
+            Whether to use Motz-wise sticking coefficients or not. Default is
+            False
+        ads_act_method : str, optional
+            Activation method to use for adsorption reactions. Accepted 
+            options include 'get_H_act' and 'get_G_act'. Default is
+            'get_H_act'.
         write_xml : bool, optional
             If True and ``filename`` is not ``None``, automatically generates
             an XML file with the CTI file.
@@ -163,11 +174,12 @@ def write_cti(phases=None,
     '''Write to file'''
     lines_out = '\n'.join(lines)
     if filename is not None:
+        filename = Path(filename)
         with open(filename, 'w', newline=newline) as f_ptr:
             f_ptr.write(lines_out)
         '''Write XML file'''
         if write_xml:
-            xml_filename = '{}.xml'.format(filename.replace('.cti', ''))
+            xml_filename = filename.with_suffix('.xml').as_posix()
             convert(filename=filename, outName=xml_filename)
     else:
         # Or return as string
@@ -574,6 +586,9 @@ def read_yaml(filename):
     """
     with open(filename, 'r') as f_ptr:
         yaml_data = yaml.load(f_ptr)
+
+    # TODO When VUnits is incorporated, initialize each parameter as a
+    # Quantity object
     return yaml_data
 
 def get_species_phases(species):
@@ -589,12 +604,19 @@ def get_species_phases(species):
             Dictionary where the keys are strings of phase names and the
             values are lists of the species
     """
+    # Immediately return if species not supplied
+    if species is None:
+        return None
+
     species_phases = defaultdict(list)
     for ind_species in species:
         try:
             phase = ind_species.phase
         except AttributeError:
             # Skip species without a phase
+            continue
+        # Skip species without a phase
+        if phase is None:
             continue
         # Assign species to entry for phase
         species_phases[phase].append(ind_species)
@@ -609,10 +631,14 @@ def get_reactions_phases(reactions):
             Reactions to extract phases
     Returns
     -------
-        species_phases : dict
+        reactions_phases : dict
             Dictionary where the keys are strings of phase names and the
             values are lists of the reactions
     """
+    # Immediately return if reactions not supplied
+    if reactions is None:
+        return None
+
     reactions_phases = defaultdict(list)
     for reaction in reactions:
         reaction_species = reaction.get_species(include_TS=True)
@@ -622,9 +648,10 @@ def get_reactions_phases(reactions):
             except AttributeError:
                 # Skip species without a phase
                 continue
-            # Assign species to entry for phase
-            if reaction not in reactions_phases[phase]:
-                reactions_phases[phase].append(reaction)
+            # Skip duplicate reactions
+            if reaction in reactions_phases[phase]:
+                continue
+            reactions_phases[phase].append(reaction)
     return reactions_phases
 
 def get_interactions_phases(interactions, species):
@@ -638,10 +665,14 @@ def get_interactions_phases(interactions, species):
             Species corresponding to interactions
     Returns
     -------
-        species_phases : dict
+        interactions_phases : dict
             Dictionary where the keys are strings of phase names and the
             values are lists of the reactions
     """
+    # Immediately return if species not supplied
+    if interactions is None:
+        return None
+
     interactions_phases = defaultdict(list)
     for interaction in interactions:
         try:
@@ -649,11 +680,38 @@ def get_interactions_phases(interactions, species):
         except AttributeError:
             # Skip species without a phase
             continue
+        # Skip species without a phase
+        if phase is None:
+            continue
         interactions_phases[phase].append(interaction)
     return interactions_phases
 
-def get_phases(phases_data, species_phases=None, reactions_phases=None,
-               interactions_phases=None):
+def organize_phases(phases_data, species=None, reactions=None,
+                    interactions=None):
+    """Helper method to organize phase data for OpenMKM
+    
+    Parameters
+    ----------
+        phases_data : list of dict
+            Each element of the list corresponds to the data to initialize the
+            phase. Each dictionary are keyword arguments.
+        species : list of :class:`~pmutt.empirical.nasa.Nasa`, :class:`~pmutt.empirical.nasa.Nasa9` and/or :class:`~pmutt.empirical.shomate.Shomate` objects, optional
+            Species with phases to include. Default is None.
+        reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction` objects, optional
+            Reactions occuring on phases to include. Default is None.
+        interactions : list of :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
+            Lateral interactions to include. Default is None
+    Returns
+    -------
+        phases : list of :class:`~pmutt.cantera.phase.Phase` objects
+            Phases organized using parameters.
+    """
+    species_phases = get_species_phases(species)
+    reactions_phases = get_reactions_phases(reactions)
+    interactions_phases = \
+            get_interactions_phases(interactions=interactions,
+                                    species=pmutt_list_to_dict(species))
+    
     phases = []
     phase_kwargs = {'species': species_phases,
                     'reactions': reactions_phases,
@@ -674,14 +732,13 @@ def get_phases(phases_data, species_phases=None, reactions_phases=None,
             except KeyError:
                 # Skip if the phase is not present
                 continue
-            else:
-                # Skip if the phase has no values assigned
-                # (occurs if attr_value is a defaultdict(list))
-                if len(attr_value) == 0:
-                    continue
+            # Skip if the phase has no values assigned (occurs if attr_value is
+            # a defaultdict(list))
+            if len(attr_value) == 0:
+                continue
 
-                # Assign the kwargs
-                phase_data[attr_name] = attr_value
+            # Assign the kwargs
+            phase_data[attr_name] = attr_value
 
         phase_class = getattr(omkm_phases, phase_type)
         phase = phase_class(**phase_data)
