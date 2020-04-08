@@ -7,6 +7,22 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.19
+--------------
+
+Apr. 8, 2020
+
+- Fixed bug where :class:`~pmutt.statmech.lsr.LSR` could not be imported in
+  :func:`~pmutt.io.excel.read_excel`.
+- Updated :mod:`~pmutt.io` sections to incorporate Pathlib library
+- Added helper functions in :mod:`~pmutt.io.omkm` to organize phases
+- Fixed bug where slopes and y intercepts were switched for
+  :class:`~pmutt.mixture.cov.PiecewiseCovEffect` when writing CTI files.
+- Fixed bug in :func:`~pmutt.io.chemkin.write_surf` where ``n_sites`` could
+  be written as a float
+- Updated OpenMKM IO example
+
+
 Version 1.2.18
 --------------
 
