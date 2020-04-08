@@ -366,7 +366,7 @@ class SurfaceReaction(Reaction):
         obj_dict['sticking_coeff'] = self.sticking_coeff
         return obj_dict
 
-    def to_CTI(self,
+    def to_cti(self,
                T=c.T0('K'),
                P=c.P0('bar'),
                quantity_unit='molec',
@@ -439,6 +439,79 @@ class SurfaceReaction(Reaction):
                                                 P=P),
                                  id_str))
         return cti_str
+
+    def to_yaml_dict(self,
+                     T=c.T0('K'),
+                     P=c.P0('bar'),
+                     quantity_unit='molec',
+                     length_unit='cm',
+                     act_energy_unit='cal/mol',
+                     ads_act_method='get_H_act',
+                     units=None):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            P : float, optional
+                Pressure in bar. Default is 1 bar
+            quantity_unit : str, optional
+                Quantity unit to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to calculate A. Default is 'cm'
+            act_energy_unit : str, optional
+                Unit to use for activation energy. Default is 'cal/mol'
+            ads_act_method : str, optional
+                Activation method to use for adsorption reactions. Accepted 
+                options include 'get_H_act' and 'get_G_act'. Default is
+                'get_H_act'.
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit`, `length_unit`, and
+                `act_energy_unit` are overwritten. Default is None.
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        reaction_str = self.to_string(stoich_space=True,
+                                      species_delimiter=' + ',
+                                      reaction_delimiter=' <=> ',\
+                                      include_TS=False)
+        if units is not None:
+            quantity_unit = units.quantity
+            length_unit = units.length
+            act_energy_unit = units.act_energy
+
+        # Determine the reaction IDs
+        try:
+            id = self.id
+        except AttributeError:
+            id_str = ''
+        else:
+            if id is None:
+                id_str = ''
+            else:
+                id_str = ',\n                 id="{}"'.format(self.id)
+
+        if self.is_adsorption:
+            A = self.sticking_coeff
+            act_method = getattr(self, ads_act_method)
+            act_val = act_method(units=act_energy_unit, T=T, P=P)
+        else:
+            A_units = '{}/{}2'.format(quantity_unit, length_unit)
+            A = self.get_A(T=T, P=P, include_entropy=False, units=A_units)
+            act_val = act_method(units=act_energy_unit, T=T, P=P)
+
+        yaml_dict = {'equation': reaction_str,
+                     'type': 'elementary',
+                     'rate-constant': {'A': A,
+                                       'b': self.beta,
+                                       'Ea': act_val},
+                     'id': id_str,
+            }
+        return yaml_dict
+
 
 
 class BEP(BEP_parent):
@@ -600,7 +673,7 @@ class BEP(BEP_parent):
             CTI_out = '{}]'.format(CTI_out[:-2])
         return CTI_out
 
-    def to_CTI(self, act_energy_unit=None, units=None, delimiter='_'):
+    def to_cti(self, act_energy_unit=None, units=None, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters

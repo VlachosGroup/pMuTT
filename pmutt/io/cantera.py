@@ -1,7 +1,7 @@
 from pmutt import constants as c
 
 
-def obj_to_CTI(obj, line_len=80, max_line_len=80, **kwargs):
+def obj_to_cti(obj, line_len=80, max_line_len=80, **kwargs):
     """Converts elementary data types to CTI format
     
     Parameters
@@ -15,7 +15,7 @@ def obj_to_CTI(obj, line_len=80, max_line_len=80, **kwargs):
             Maximum number of characters available in line. Used to determine
             indentation. Default is 80
         kwargs : keyword arguments
-            Arguments to pass to `obj.to_CTI` function
+            Arguments to pass to `obj.to_cti` function
     Returns
     -------
         CTI_str : str
@@ -23,7 +23,7 @@ def obj_to_CTI(obj, line_len=80, max_line_len=80, **kwargs):
     """
     # See if the object has a specific format for CTI
     try:
-        cti_str = obj.to_CTI(**kwargs)
+        cti_str = obj.to_cti(**kwargs)
     except AttributeError:
         if isinstance(obj, str):
             cti_str = obj

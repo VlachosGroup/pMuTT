@@ -5,7 +5,7 @@ import yaml
 
 from pmutt import _force_pass_arguments, _is_iterable, pmutt_list_to_dict
 from pmutt.io import _get_file_timestamp
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.cantera import obj_to_cti
 from pmutt.io.ctml_writer import convert
 from pmutt.cantera.phase import IdealGas, StoichSolid
 from pmutt.omkm.phase import InteractingInterface
@@ -92,7 +92,7 @@ def write_cti(phases=None,
         units = Units()
     elif isinstance(units, dict):
         units = Units(**units)
-    lines.append(units.to_CTI())
+    lines.append(units.to_cti())
     '''Pre-assign IDs for lateral interactions so phases can be written'''
     if lateral_interactions is not None:
         lat_inter_lines = []
@@ -103,7 +103,7 @@ def write_cti(phases=None,
                     lat_interaction.name = '{:04d}'.format(i)
                     i += 1
 
-                lat_inter_CTI = _force_pass_arguments(lat_interaction.to_CTI,
+                lat_inter_CTI = _force_pass_arguments(lat_interaction.to_cti,
                                                       units=units)
                 lat_inter_lines.append(lat_inter_CTI)
     '''Pre-assign IDs for reactions so phases can be written'''
@@ -117,7 +117,7 @@ def write_cti(phases=None,
                 reaction.id = '{:04d}'.format(i)
                 i += 1
             # Write reaction
-            reaction_CTI = _force_pass_arguments(reaction.to_CTI, units=units,
+            reaction_CTI = _force_pass_arguments(reaction.to_cti, units=units,
                                                  T=T)
             reaction_lines.append(reaction_CTI)
 
@@ -133,13 +133,13 @@ def write_cti(phases=None,
     if phases is not None:
         lines.extend(['', '#' + '-' * 79, '# PHASES', '#' + '-' * 79])
         for phase in phases:
-            phase_CTI = _force_pass_arguments(phase.to_CTI, units=units)
+            phase_CTI = _force_pass_arguments(phase.to_cti, units=units)
             lines.append(phase_CTI)
     '''Write species'''
     if species is not None:
         lines.extend(['', '#' + '-' * 79, '# SPECIES', '#' + '-' * 79])
         for ind_species in species:
-            ind_species_CTI = _force_pass_arguments(ind_species.to_CTI,
+            ind_species_CTI = _force_pass_arguments(ind_species.to_cti,
                                                     units=units)
             lines.append(ind_species_CTI)
     '''Write lateral interactions'''
@@ -166,7 +166,7 @@ def write_cti(phases=None,
             # Only write each BEP once
             i = 0
             for bep in beps:
-                bep_CTI = _force_pass_arguments(bep.to_CTI, units=units)
+                bep_CTI = _force_pass_arguments(bep.to_cti, units=units)
                 # Increment counter if necessary
                 if bep.name is None:
                     i += 1
