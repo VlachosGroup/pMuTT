@@ -684,8 +684,8 @@ class Nasa(EmpiricalBase):
         obj_dict = super().to_dict()
         obj_dict['class'] = str(self.__class__)
         obj_dict['type'] = 'nasa'
-        obj_dict['a_low'] = list(self.a_low)
-        obj_dict['a_high'] = list(self.a_high)
+        obj_dict['a_low'] = self.a_low.tolist()
+        obj_dict['a_high'] = self.a_high.tolist()
         obj_dict['T_low'] = self.T_low
         obj_dict['T_mid'] = self.T_mid
         obj_dict['T_high'] = self.T_high
@@ -1468,7 +1468,7 @@ class SingleNasa9(EmpiricalBase):
             'type': 'singlenasa9',
             'T_low': self.T_low,
             'T_high': self.T_high,
-            'a': list(self.a)
+            'a': self.a.tolist()
         }
         return obj_dict
 

@@ -238,7 +238,7 @@ class InteractingInterface(phase_cantera.Phase):
 
         yaml_dict = {
             'name': self.name,
-            'state': 'ideal-surface'
+            'state': 'ideal-surface',
             'elements': self.elements,
             'species': species_names,
             'phases': phases_names,

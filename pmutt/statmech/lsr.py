@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from warnings import warn
+
 from pmutt import constants as c
 from pmutt import _force_pass_arguments, _ModelBase
 from pmutt.statmech import StatMech, ConstantMode, presets
@@ -270,6 +272,272 @@ class LSR(_ModelBase):
         """
         json_obj = remove_class(json_obj)
         json_obj['reaction'] = json_to_pmutt(json_obj['reaction'])
+        json_obj['surf_species'] = json_to_pmutt(json_obj['surf_species'])
+        json_obj['gas_species'] = json_to_pmutt(json_obj['gas_species'])
+        return cls(**json_obj)
+
+class ExtendedLSR(_ModelBase):
+    """Represents an extended linear scaling relationship
+
+    Attributes
+    ----------
+        slopes : (N,) np.ndarray
+            Slopes of extended LSR relationship. Represents alpha in above
+            equation
+        intercept : float
+            Intercept of LSR relationship in kcal/mol. Represents beta in above
+            equation
+        reactions : (N,) np.ndarray or list of :class:`~pmutt.reaction.Reaction` object
+            Reactions to use to calculate reference binding energies. Binding
+            energy calculated using ``get_delta_E`` and if that fails,
+            ``get_delta_H``. If the binding energy is specified as a float
+            (in kcal/mol), it will be converted to a
+            :class:`~pmutt.reaction.Reaction` made of
+            :class:`~pmutt.statmech.StatMech` objects
+        surf_species : (N,) np.ndarray or list of :class:`~pmutt.statmech.StatMech` object, optional
+            Surface species. If the surface's energies is specified as a ndarray (in
+            kcal/mol), it will be converted to a
+            :class:`~pmutt.statmech.StatMech` object with a single
+            :class:`~pmutt.statmech.ConstantMode` mode. Default is 0.
+        gas_species : (N,) np.ndarray or list of :class:`~pmutt.statmech.StatMech` object, optional
+            Gas-phase species. If the gas' energies is specified as a ndarray (in
+            kcal/mol), it will be converted to a
+            :class:`~pmutt.statmech.StatMech` object with a single
+            :class:`~pmutt.statmech.ConstantMode` mode. Default is 0.
+        notes : str or dict, optional
+            Extra notes such as the source of the Extended LSR. Default is None
+    """
+    def __init__(self,
+                 slopes,
+                 intercept,
+                 reactions,
+                 surf_species=None,
+                 gas_species=None):
+        self.slopes = slopes
+        self.intercept = intercept
+        self.reactions = reactions
+        self.surf_species = surf_species
+        self.gas_species = gas_species
+
+    @property
+    def reactions(self):
+        return self._reactions
+    
+    @reactions.setter
+    def reactions(self, val):
+        reactions = []
+        for rxn in val:
+            if isinstance(rxn, Reaction):
+                reactions.append(rxn)
+            else:
+                reactions.append(_float_to_reaction(rxn))
+        self._reactions = reactions
+
+    @property
+    def gas_species(self):
+        return self._gas_species
+    
+    @gas_species.setter
+    def gas_species(self, val):
+        if val is None:
+            val = [0.]*len(self.reactions)
+
+        gas_species = []
+        for ind_gas_species in val:
+            if isinstance(ind_gas_species, _ModelBase):
+                gas_species.append(ind_gas_species)
+            else:
+                gas_species.append(_float_to_species(ind_gas_species))
+        self._gas_species = gas_species
+
+    @property
+    def surf_species(self):
+        return self._surf_species
+    
+    @surf_species.setter
+    def surf_species(self, val):
+        if val is None:
+            val = [0.]*len(self.reactions)
+
+        surf_species = []
+        for ind_surf_species in val:
+            if isinstance(ind_surf_species, _ModelBase):
+                surf_species.append(ind_surf_species)
+            else:
+                surf_species.append(_float_to_species(ind_surf_species))
+        self._surf_species = surf_species
+
+    def get_CvoR(self):
+        """Calculates the dimensionless heat capacity at constant volume.
+
+        :math:`\\frac{C_V^{LSR}}{R}=0`
+        """
+        return 0.
+
+    def get_CpoR(self):
+        """Calculates the dimensionless heat capacity at constant pressure.
+
+        :math:`\\frac{C_V^{LSR}}{R}=0`
+        """
+        return self.get_CvoR()
+
+    def get_UoRT(self, T=c.T0('K'), **kwargs):
+        """Calculates the dimensionless internal energy using the Extended LSR
+        relationship
+        
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters to calculate reference binding energy, surface
+                energy and gas-phase energy
+        Returns
+        -------
+            UoRT : float
+                Dimensionless internal energy
+        """
+        # Check if number of surface species, gas species, and reactions are
+        # consistent
+        n_reactions = len(self.reactions)
+        n_surf = len(self.surf_species)
+        n_gas = len(self.gas_species)
+        n_slopes = len(self.slopes)
+        if n_reactions != n_surf \
+           or n_reactions != n_gas \
+           or n_reactions != n_slopes:
+            warn_msg = ('Extended LSR can an inconsistent number of slopes {} '
+                        'reactions ({}), gas species ({}), and surface species '
+                        '({}). Some contributions may be ignored.'
+                        ''.format(n_slopes, n_reactions, n_surf, n_gas))
+            warn(warn_msg)
+
+        kwargs['T'] = T
+        kwargs['units'] = 'kcal/mol'
+
+        UoRT = 0.
+        for slope, reaction, surf_species, gas_species in zip(self.slopes,
+                                                              self.reactions,
+                                                              self.surf_species,
+                                                              self.gas_species):
+            try:
+                deltaE_ref = reaction.get_delta_E(**kwargs)
+            except AttributeError:
+                deltaE_ref = reaction.get_delta_H(**kwargs)
+
+            # Calculate surface energy
+            try:
+                E_surf = surf_species.get_E(**kwargs)
+            except AttributeError:
+                E_surf = surf_species.get_H(**kwargs)
+            # Calculate gas-phase energy
+            try:
+                E_gas = gas_species.get_E(**kwargs)
+            except AttributeError:
+                E_gas = gas_species.get_H(**kwargs)
+            
+            UoRT += (slope*deltaE_ref + E_surf + E_gas)/c.R('kcal/mol/K')/T
+        return UoRT + self.intercept/c.R('kcal/mol/K')/T
+
+    def get_HoRT(self, T=c.T0('K'), **kwargs):
+        """Calculates the dimensionless enthalpy using the LSR
+        relationship
+        
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters to calculate reference binding energy, surface
+                energy and gas-phase energy
+        Returns
+        -------
+            HoRT : float
+                Dimensionless enthalpy
+        """
+        return self.get_UoRT(T=T, **kwargs)
+
+    def get_SoR(self):
+        """Calculates the dimensionless entropy using the LSR
+        relationship
+        
+        Returns
+        -------
+            SoR : float
+                Dimensionless entropy. Since LSR handles binding energies,
+                always returns 0
+        """
+        return 0.
+
+    def get_FoRT(self, T=c.T0('K'), **kwargs):
+        """Calculates the dimensionless Helmholtz energy using the LSR
+        relationship
+        
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters to calculate reference binding energy, surface
+                energy and gas-phase energy
+        Returns
+        -------
+            FoRT : float
+                Dimensionless Helmholtz energy
+        """
+        return self.get_UoRT(T=T, **kwargs) - self.get_SoR()
+
+    def get_GoRT(self, T=c.T0('K'), **kwargs):
+        """Calculates the dimensionless Gibbs energy using the LSR
+        relationship
+        
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            kwargs : keyword arguments
+                Parameters to calculate reference binding energy, surface
+                energy and gas-phase energy
+        Returns
+        -------
+            GoRT : float
+                Dimensionless Gibbs energy
+        """
+        return self.get_HoRT(T=T, **kwargs) - self.get_SoR()
+
+    def to_dict(self):
+        """Represents object as dictionary with JSON-accepted datatypes
+
+        Returns
+        -------
+            obj_dict : dict
+        """
+        obj_dict = {
+            'class': str(self.__class__),
+            'slopes': list(self.slope),
+            'intercept': self.intercept,
+            'reactions': [reaction.to_dict() for reaction in self.reactions],
+            'surf_species': [species.to_dict() \
+                             for species in self.surf_species],
+            'gas_species': [species.to_dict() for species in self.gas_species],
+            'notes': self.notes
+        }
+        return obj_dict
+
+    @classmethod
+    def from_dict(cls, json_obj):
+        """Recreate an object from the JSON representation.
+
+        Parameters
+        ----------
+            json_obj : dict
+                JSON representation
+        Returns
+        -------
+            LSR : LSR object
+        """
+        json_obj = remove_class(json_obj)
+        json_obj['reactions'] = json_to_pmutt(json_obj['reactions'])
         json_obj['surf_species'] = json_to_pmutt(json_obj['surf_species'])
         json_obj['gas_species'] = json_to_pmutt(json_obj['gas_species'])
         return cls(**json_obj)

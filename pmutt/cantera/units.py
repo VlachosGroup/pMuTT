@@ -10,7 +10,7 @@ class Units:
         quantity : str, optional
             Quantity unit. Default is 'molec'
         energy : str, optional
-            Energy unit. Default is 'cal/mol'
+            Energy unit. Default is 'cal'
         act_energy : str, optional
             Activation energy unit. Default is 'cal/mol'
         pressure : str, optional
@@ -22,7 +22,7 @@ class Units:
                  length='cm',
                  time='s',
                  quantity='molec',
-                 energy='cal/mol',
+                 energy='cal',
                  act_energy='cal/mol',
                  pressure='bar',
                  mass='kg'):
