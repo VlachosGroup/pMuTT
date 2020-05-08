@@ -55,7 +55,7 @@ def disp_data(io, sheet_name):
     try:
         data = pd.read_excel(io=io, sheet_name=sheet_name, skiprows=[1])
     except:
-        print('Sheet could not be found.')
+        print('The {} sheet could not be found in {}.'.format(sheet_name, io))
     else:
         data = data.fillna(' ')
         display(data)
@@ -168,6 +168,7 @@ try:
     refs_data = read_excel(io=input_path, sheet_name='refs')
 except:
     # If references are not used, skip this section
+    print('The "refs" sheet could not be found in {}. Skiping references'.format(input_path))
     refs = None
 else:
     refs = [Reference(**ref_data) for ref_data in refs_data]
@@ -218,6 +219,7 @@ from pmutt.omkm.reaction import BEP
 try:
     beps_data = read_excel(io=input_path, sheet_name='beps')
 except:
+    print('The "beps" sheet could not be found in {}. Skiping BEPs'.format(input_path))
     beps = None
     species_with_beps = species.copy()
 else:
@@ -255,6 +257,7 @@ try:
     interactions_data = read_excel(io=input_path, sheet_name='lateral_interactions')
 except:
     # If no lateral interactions exist, skip this section
+    print('The "lateral_interactions" sheet could not be found in {}. Skiping lateral interactions'.format(input_path))
     interactions = None
 else:
     interactions = [PiecewiseCovEffect(**interaction_data) for interaction_data in interactions_data]

@@ -13159,7 +13159,7 @@ div#notebook {
     <span class="k">try</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sheet could not be found.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The </span><span class="si">{}</span><span class="s1"> sheet could not be found in </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">io</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -14792,6 +14792,7 @@ div#notebook {
     <span class="n">refs_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="c1"># If references are not used, skip this section</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The &quot;refs&quot; sheet could not be found in </span><span class="si">{}</span><span class="s1">. Skiping references&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
     <span class="n">refs</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_data</span> <span class="ow">in</span> <span class="n">refs_data</span><span class="p">]</span>
@@ -14876,6 +14877,7 @@ div#notebook {
 <span class="k">try</span><span class="p">:</span>
     <span class="n">beps_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;beps&#39;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The &quot;beps&quot; sheet could not be found in </span><span class="si">{}</span><span class="s1">. Skiping BEPs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
     <span class="n">beps</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">species_with_beps</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
@@ -14936,6 +14938,7 @@ div#notebook {
     <span class="n">interactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;lateral_interactions&#39;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="c1"># If no lateral interactions exist, skip this section</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The &quot;lateral_interactions&quot; sheet could not be found in </span><span class="si">{}</span><span class="s1">. Skiping lateral interactions&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
     <span class="n">interactions</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">interactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">PiecewiseCovEffect</span><span class="p">(</span><span class="o">**</span><span class="n">interaction_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">interaction_data</span> <span class="ow">in</span> <span class="n">interactions_data</span><span class="p">]</span>
@@ -15031,7 +15034,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.19) on 2020-04-08 03:27:58.405859
+<pre># File generated by pMuTT (v 1.2.20dev) on 2020-05-08 16:48:11.477091
 # See documentation for OpenMKM YAML file here:
 # https://vlachosgroup.github.io/openmkm/input
 inlet_gas:
@@ -15133,7 +15136,7 @@ simulation:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.19) on 2020-04-08 03:27:58.517860
+<pre># File generated by pMuTT (v 1.2.20dev) on 2020-05-08 16:48:11.564092
 # See documentation for OpenMKM CTI file here:
 # https://vlachosgroup.github.io/openmkm/input
 
@@ -15147,7 +15150,7 @@ units(length=&#34;cm&#34;, time=&#34;s&#34;, quantity=&#34;mol&#34;, energy=&#34
 # PHASES
 #-------------------------------------------------------------------------------
 ideal_gas(name=&#34;gas&#34;,
-          elements=&#34;N H Ar&#34;,
+          elements=&#34;Ar N H&#34;,
           species=&#34;N2 NH3 H2 Ar&#34;,
           reactions=[])
 
@@ -15158,22 +15161,22 @@ stoichiometric_solid(name=&#34;bulk&#34;,
                      note=&#34;Ru Metal&#34;)
 
 interacting_interface(name=&#34;terrace&#34;,
-                      elements=&#34;Ru N H&#34;,
+                      elements=&#34;N H Ru&#34;,
                       species=&#34;N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=2.1671e-09,
                       interactions=[&#34;0000 to 0004&#34;],
-                      reactions=[&#34;0000 to 0003&#34;, &#34;NH2-H_cle_0001&#34;, &#34;NH-H_cle_0001&#34;, &#34;N-H_cle_0001&#34;],
+                      reactions=[&#34;0000 to 0006&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001)&#34;)
 
 interacting_interface(name=&#34;step&#34;,
-                      elements=&#34;Ru N H&#34;,
+                      elements=&#34;N H Ru&#34;,
                       species=&#34;N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=4.4385e-10,
                       interactions=[&#34;0005 to 0009&#34;],
-                      reactions=[&#34;0004 to 0007&#34;, &#34;NH2-H_cle_0002&#34;, &#34;NH-H_cle_0002&#34;, &#34;N-H_syn_0001&#34;],
+                      reactions=[&#34;0007 to 0013&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001) with atoms deleted&#34;)
 
@@ -15511,37 +15514,37 @@ surface_reaction(&#34;NH3 + RU(T) &lt;=&gt; NH3(T) + RU(B)&#34;,
                  id=&#34;0002&#34;)
 surface_reaction(&#34;NH3(T) + RU(T) &lt;=&gt; NH2(T) + H(T) + RU(B)&#34;,
                  [ 9.61497e+18, 1,  1.76713e+01],
-                 id=&#34;NH2-H_cle_0001&#34;)
+                 id=&#34;0003&#34;)
 surface_reaction(&#34;NH2(T) + RU(T) &lt;=&gt; NH(T) + H(T) + RU(B)&#34;,
                  [ 9.61497e+18, 1,  1.01501e+01],
-                 id=&#34;NH-H_cle_0001&#34;)
+                 id=&#34;0004&#34;)
 surface_reaction(&#34;NH(T) + RU(T) &lt;=&gt; N(T) + H(T) + RU(B)&#34;,
                  [ 9.61497e+18, 1,  2.20797e+01],
-                 id=&#34;N-H_cle_0001&#34;)
+                 id=&#34;0005&#34;)
 surface_reaction(&#34;2 N(T) + RU(B) &lt;=&gt; N2(T) + RU(T)&#34;,
                  [ 9.61497e+18, 1,  8.64755e+01],
-                 id=&#34;0003&#34;)
+                 id=&#34;0006&#34;)
 surface_reaction(&#34;H2 + 2 RU(S) &lt;=&gt; 2 H(S) + 2 RU(B)&#34;,
                  stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0004&#34;)
+                 id=&#34;0007&#34;)
 surface_reaction(&#34;N2 + RU(S) &lt;=&gt; N2(S) + RU(B)&#34;,
                  stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0005&#34;)
+                 id=&#34;0008&#34;)
 surface_reaction(&#34;NH3 + RU(S) &lt;=&gt; NH3(S) + RU(B)&#34;,
                  stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0006&#34;)
+                 id=&#34;0009&#34;)
 surface_reaction(&#34;NH3(S) + RU(S) &lt;=&gt; NH2(S) + H(S) + RU(B)&#34;,
                  [ 4.69452e+19, 1,  1.25926e+01],
-                 id=&#34;NH2-H_cle_0002&#34;)
+                 id=&#34;0010&#34;)
 surface_reaction(&#34;NH2(S) + RU(S) &lt;=&gt; NH(S) + H(S) + RU(B)&#34;,
                  [ 4.69452e+19, 1,  1.80122e+01],
-                 id=&#34;NH-H_cle_0002&#34;)
+                 id=&#34;0011&#34;)
 surface_reaction(&#34;N(S) + H(S) + RU(B) &lt;=&gt; NH(S) + RU(S)&#34;,
                  [ 4.69452e+19, 1,  2.60807e+01],
-                 id=&#34;N-H_syn_0001&#34;)
+                 id=&#34;0012&#34;)
 surface_reaction(&#34;2 N(S) + RU(B) &lt;=&gt; N2(S) + RU(S)&#34;,
                  [ 4.69452e+19, 1,  4.45995e+01],
-                 id=&#34;0007&#34;)
+                 id=&#34;0013&#34;)
 
 #-------------------------------------------------------------------------------
 # BEP Relationships
@@ -15550,22 +15553,22 @@ bep(id=&#34;NH2-H&#34;,
     slope=0.71,
     intercept=23.69,
     direction=&#34;cleavage&#34;,
-    cleavage_reactions=[&#34;NH2-H_cle_0001 to NH2-H_cle_0002&#34;],
+    cleavage_reactions=[&#34;0003&#34;, &#34;0010&#34;],
     synthesis_reactions=[])
 
 bep(id=&#34;NH-H&#34;,
     slope=0.52,
     intercept=19.78,
     direction=&#34;cleavage&#34;,
-    cleavage_reactions=[&#34;NH-H_cle_0001 to NH-H_cle_0002&#34;],
+    cleavage_reactions=[&#34;0004&#34;, &#34;0011&#34;],
     synthesis_reactions=[])
 
 bep(id=&#34;N-H&#34;,
     slope=0.29,
     intercept=23.23,
     direction=&#34;cleavage&#34;,
-    cleavage_reactions=[&#34;N-H_cle_0001&#34;],
-    synthesis_reactions=[&#34;N-H_syn_0001&#34;])
+    cleavage_reactions=[&#34;0005&#34;],
+    synthesis_reactions=[&#34;0012&#34;])
 
 </pre>
 </div>

@@ -59,10 +59,10 @@ class SurfaceReaction(Reaction):
                 self.bep = species
 
                 # Generate ID from BEP if not previously assigned
-                if self.id is None:
-                    new_id = species._get_new_id(direction=self.direction)
-                    self.id = '{}_{}_{:04d}'.format(species.name,
-                                                    self.direction[:3], new_id)
+                # if self.id is None:
+                #     new_id = species._get_new_id(direction=self.direction)
+                #     self.id = '{}_{}_{:04d}'.format(species.name,
+                #                                     self.direction[:3], new_id)
 
                 # Add reaction to BEP
                 if self.direction == 'synthesis':
@@ -538,7 +538,8 @@ class BEP(BEP_parent):
         self.cleavage_reactions = list(cleavage_reactions)
 
     def _get_bep_template(self, direction):
-        """Get the BEP reation ID template
+        """Deprecated in pMuTT version 1.2.20
+        Get the BEP reation ID template
 
         Parameters
         ----------
@@ -578,7 +579,8 @@ class BEP(BEP_parent):
         return reactions
 
     def _get_bep_reaction_ids(self, direction, format='int'):
-        """Get the indices of the reactions that match the BEP template.
+        """Deprecated in pMuTT version 1.2.20
+        Get the indices of the reactions that match the BEP template.
 
         Parameters
         ----------
@@ -608,7 +610,8 @@ class BEP(BEP_parent):
         return reaction_ids
 
     def _get_new_id(self, direction):
-        """Gets the ID for the new reaction being assigned.
+        """Deprecated in pMuTT version 1.2.20
+        Gets the ID for the new reaction being assigned.
         
         Parameters
         ----------
@@ -629,7 +632,7 @@ class BEP(BEP_parent):
             new_id = np.max(reaction_ids) + 1
         return new_id
 
-    def _get_reactions_CTI(self, direction):
+    def _get_reactions_CTI(self, direction, delimiter='_'):
         """Returns the reactions names using the BEP using the following format:
         <bep_id>_<direction>_<reaction_id>
         
@@ -645,32 +648,35 @@ class BEP(BEP_parent):
         if len(reactions) == 0:
             CTI_out = '[]'
         else:
-            CTI_out = '['
-            # Add reactions ranges with BEP template
-            bep_template = self._get_bep_template(direction=direction)
-            reaction_int_ids = self._get_bep_reaction_ids(direction=direction,
-                                                          format='int')
-            reaction_int_ids.sort()
-            reaction_id_ranges = mit.consecutive_groups(reaction_int_ids)
-            for id_range in reaction_id_ranges:
-                id_range = list(id_range)
-                if len(id_range) == 1:
-                    CTI_range = '"{}_{:04d}", '.format(bep_template,
-                                                       id_range[0])
-                else:
-                    CTI_range = ('"{0}_{1:04d} to {0}_{2:04d}", '
-                                 ''.format(bep_template, id_range[0],
-                                           id_range[-1]))
-                CTI_out += CTI_range
+            # CTI_out = '['
+            # # Add reactions ranges with BEP template
+            # bep_template = self._get_bep_template(direction=direction)
+            # reaction_int_ids = self._get_bep_reaction_ids(direction=direction,
+            #                                               format='int')
+            # reaction_int_ids.sort()
+            # reaction_id_ranges = mit.consecutive_groups(reaction_int_ids)
+            # for id_range in reaction_id_ranges:
+            #     id_range = list(id_range)
+            #     if len(id_range) == 1:
+            #         CTI_range = '"{}_{:04d}", '.format(bep_template,
+            #                                            id_range[0])
+            #     else:
+            #         CTI_range = ('"{0}_{1:04d} to {0}_{2:04d}", '
+            #                      ''.format(bep_template, id_range[0],
+            #                                id_range[-1]))
+            #     CTI_out += CTI_range
 
-            # Get reactions that do not have the BEP template
-            for reaction in reactions:
-                if isinstance(reaction.id,
-                              str) and bep_template in reaction.id:
-                    continue
-                CTI_out += '"{}", '.format(reaction.id)
+            # # Get reactions that do not have the BEP template
+            # for reaction in reactions:
+            #     if isinstance(reaction.id,
+            #                   str) and bep_template in reaction.id:
+            #         continue
+            #     CTI_out += '"{}", '.format(reaction.id)
 
-            CTI_out = '{}]'.format(CTI_out[:-2])
+            # CTI_out = '{}]'.format(CTI_out[:-2])
+            CTI_out = _get_range_CTI(objs=reactions,
+                                     parent_obj=self,
+                                     delimiter=delimiter)
         return CTI_out
 
     def to_cti(self, act_energy_unit=None, units=None, delimiter='_'):
