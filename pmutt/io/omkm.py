@@ -205,6 +205,8 @@ def write_yaml(reactor_type=None,
                step_size=None,
                atol=None,
                rtol=None,
+               full_SA=None,
+               reactions_SA=None,
                phases=None,
                reactor=None,
                inlet_gas=None,
@@ -308,6 +310,14 @@ def write_yaml(reactor_type=None,
         rtol : float
             Relative tolerance for solver. Value written to
             ``simulation.solver.rtol``.
+        full_SA : bool
+            If True, OpenMKM will do a full sensitivity analysis using the
+            Fisher Information Matrix (FIM). Value written to
+            ``simulation.sensitivity.full``.
+        reactions_SA : list of str or list of :class:`~pmutt.omkm.reaction.SurfaceReaction` obj
+            List of reactions to perturb using local sensitivity analysis (LSA).
+            If a list of :class:`~pmutt.omkm.reaction.SurfaceReaction` is given,
+            the ``id`` attribute will be used.
         phases : list of ``Phase`` objects
             Phases present in reactor. Each phase should have the ``name``
             and ``initial_state`` attribute.
@@ -340,7 +350,7 @@ def write_yaml(reactor_type=None,
             Generic dictionary for any parameter specified at the top level.
         solver : dict
             Generic dictionary for solver to specify values not supported by
-            ``write_yaml``.            
+            ``write_yaml``.
         simulation : dict
             Generic dictionary for simultaion to specify values not supported by
             ``write_yaml``.            
@@ -414,7 +424,7 @@ def write_yaml(reactor_type=None,
 
     for parameter in reactor_params:
         _assign_yaml_val(parameter, reactor, units)
-    '''Organize inlet gas parameters'''
+
     if inlet_gas is None:
         inlet_gas = {}
     inlet_gas_params = [
@@ -429,14 +439,17 @@ def write_yaml(reactor_type=None,
         inlet_gas_params.append(
             _Param('flow_rate', multi_flow_rate[0], '_length3/_time'))
 
+    '''Process inlet gas parameters'''
     for parameter in inlet_gas_params:
         _assign_yaml_val(parameter, inlet_gas, units)
+
     '''Organize solver parameters'''
     if solver is None:
         solver = {}
     solver_params = [_Param('atol', atol, None), _Param('rtol', rtol, None)]
     for parameter in solver_params:
         _assign_yaml_val(parameter, solver, units)
+
     '''Organize multi parameters'''
     if multi_input is None:
         multi_input = {}
@@ -454,13 +467,40 @@ def write_yaml(reactor_type=None,
     ]
     for parameter in multi_input_params:
         _assign_yaml_val(parameter, multi_input, units)
+
+    '''Organize sensitivity parameters'''
+    sensitivity = {}
+    if reactions_SA is None:
+        reactions_SA_names = None
+    else:
+        reactions_SA_names = []
+        for reaction in reactions_SA:
+            if isinstance(reaction, str):
+                name = reaction
+            else:
+                try:
+                    name = reaction.id
+                except AttributeError:
+                    err_msg = ('Unable to write reaction id to reactor YAML '
+                               'file because object is invalid type ({}). '
+                               'Expected str or '
+                               'pmutt.omkm.reaction.SurfaceReaction type with '
+                               'id attribute assigned.'
+                               ''.format(type(name)))
+                    raise TypeError(err_msg)
+            reactions_SA_names.append(name)
+    sensitivity_params = (_Param('full', full_SA, None),
+                          _Param('reactions', reactions_SA_names, None))
+    for parameter in sensitivity_params:
+        _assign_yaml_val(parameter, sensitivity, units)
+
     '''Organize simulation parameters'''
     if simulation is None:
         simulation = {}
-    simulation_params = (_Param('end_time', end_time,
-                                '_time'), _Param('transient', transient, None),
-                         _Param('stepping', stepping,
-                                None), _Param('step_size', step_size, None),
+    simulation_params = (_Param('end_time', end_time, '_time'),
+                         _Param('transient', transient, None),
+                         _Param('stepping', stepping, None),
+                         _Param('step_size', step_size, None),
                          _Param('init_step', init_step, None),
                          _Param('output_format', output_format, None))
     for parameter in simulation_params:
@@ -470,6 +510,10 @@ def write_yaml(reactor_type=None,
     if len(multi_input) > 0:
         _assign_yaml_val(_Param('multi_input', multi_input, None), simulation,
                          units)
+    if len(sensitivity) > 0:
+        _assign_yaml_val(_Param('sensitivity', sensitivity, None), simulation,
+                         units)
+
     '''Organize phase parameters'''
     if phases is not None:
         if isinstance(phases, dict):
@@ -572,20 +616,28 @@ def _assign_yaml_val(param, header, units=None):
                 vals_list[i] = val.replace(old_str, unit)
         header[param.label] = vals_list
 
-def read_yaml(filename):
+def read_yaml(filename, loader=None):
     """Reads the reactor options from an OpenMKM
     
     Parameters
     ----------
         filename : str
             Filename for the YAML file.
+        loader : yaml.Loader object
+            Loader to use for YAML.
+            `Supported loaders can be found on PyYAML documentation`_.
+            Default is ``yaml.SafeLoader``
     Returns
     -------
         reactor_options : dict
             Contents of YAML file expressed as dictionary.
+    
+    .. _`Supported loaders can be found on PyYAML documentation`: https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     """
+    if loader is None:
+        loader = yaml.SafeLoader
     with open(filename, 'r') as f_ptr:
-        yaml_data = yaml.load(f_ptr)
+        yaml_data = yaml.load(f_ptr, Loader=loader)
 
     # TODO When VUnits is incorporated, initialize each parameter as a
     # Quantity object
@@ -744,3 +796,4 @@ def organize_phases(phases_data, species=None, reactions=None,
         phase = phase_class(**phase_data)
         phases.append(phase)
     return phases
+
