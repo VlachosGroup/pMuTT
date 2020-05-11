@@ -207,6 +207,7 @@ def write_yaml(reactor_type=None,
                rtol=None,
                full_SA=None,
                reactions_SA=None,
+               species_SA=None,
                phases=None,
                reactor=None,
                inlet_gas=None,
@@ -318,6 +319,10 @@ def write_yaml(reactor_type=None,
             List of reactions to perturb using local sensitivity analysis (LSA).
             If a list of :class:`~pmutt.omkm.reaction.SurfaceReaction` is given,
             the ``id`` attribute will be used.
+        species_SA : list of str or list of :class:`~pmutt.empirical.EmpiricalBase` obj
+            List of species to perturb using local sensitivity analysis (LSA).
+            If a list of :class:`~pmutt.empirical.EmpiricalBase` is given,
+            the ``name`` attribute will be used.
         phases : list of ``Phase`` objects
             Phases present in reactor. Each phase should have the ``name``
             and ``initial_state`` attribute.
@@ -486,11 +491,31 @@ def write_yaml(reactor_type=None,
                                'Expected str or '
                                'pmutt.omkm.reaction.SurfaceReaction type with '
                                'id attribute assigned.'
-                               ''.format(type(name)))
+                               ''.format(type(reaction)))
                     raise TypeError(err_msg)
             reactions_SA_names.append(name)
+    if species_SA is None:
+        species_SA_names = None
+    else:
+        species_SA_names = []
+        for ind_species in species_SA:
+            if isinstance(ind_species, str):
+                name = ind_species
+            else:
+                try:
+                    name = ind_species.name
+                except AttributeError:
+                    err_msg = ('Unable to write species name to reactor YAML '
+                               'file because object is invalid type ({}). '
+                               'Expected str or '
+                               'pmutt.empirical.EmpiricalBase type with '
+                               'name attribute assigned.'
+                               ''.format(type(ind_species)))
+                    raise TypeError(err_msg)
+            species_SA_names.append(name)
     sensitivity_params = (_Param('full', full_SA, None),
-                          _Param('reactions', reactions_SA_names, None))
+                          _Param('reactions', reactions_SA_names, None),
+                          _Param('species', species_SA_names, None))
     for parameter in sensitivity_params:
         _assign_yaml_val(parameter, sensitivity, units)
 
