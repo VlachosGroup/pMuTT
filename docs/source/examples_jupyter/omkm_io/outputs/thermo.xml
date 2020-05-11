@@ -4,7 +4,7 @@
 
   <!-- phase gas     -->
   <phase id="gas" dim="3">
-    <elementArray datasrc="elements.xml">Ar N H</elementArray>
+    <elementArray datasrc="elements.xml">H N Ar</elementArray>
     <speciesArray datasrc="#species_data">N2 NH3 H2 Ar</speciesArray>
     <thermo model="IdealGas"/>
     <kinetics model="GasKinetics"/>
@@ -25,7 +25,7 @@
 
   <!-- phase terrace     -->
   <phase id="terrace" dim="2">
-    <elementArray datasrc="elements.xml">N H Ru</elementArray>
+    <elementArray datasrc="elements.xml">H N Ru</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0000" max="0006"/>
@@ -45,7 +45,7 @@
 
   <!-- phase step     -->
   <phase id="step" dim="2">
-    <elementArray datasrc="elements.xml">N H Ru</elementArray>
+    <elementArray datasrc="elements.xml">H N Ru</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0007" max="0013"/>
@@ -569,9 +569,9 @@
       <equation>NH3(T) + RU(T) [=] NH2(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>1.000000E+23</A>
            <b>1</b>
-           <E units="kcal/mol">18.444200</E>
+           <E units="kcal/mol">23.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3(T):1.0 RU(T):1</reactants>

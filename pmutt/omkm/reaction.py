@@ -20,9 +20,15 @@ class SurfaceReaction(Reaction):
             ID of the reaction. Default is None
         is_adsorption : bool, optional
             If True, the reaction represents an adsorption. Default is False
+        A : float, optional
+            Pre-exponential constant. If not specified, uses reaction to
+            determine value.
         beta : float, optional
             Power to raise the temperature in the rate expression. Default is 1
             if ``is_adsorption`` is False, 0 if ``is_adsorption`` is True.
+        Ea : float, optional
+            Activation energy. If not specified, uses reaction to determine
+            value.
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True.
             Default is 0.5 if ``is_adsorption`` is True, None if
@@ -37,14 +43,18 @@ class SurfaceReaction(Reaction):
     def __init__(self,
                  id=None,
                  is_adsorption=False,
+                 A=None,
                  beta=None,
+                 Ea=None,
                  sticking_coeff=None,
                  direction=None,
                  **kwargs):
         super().__init__(**kwargs)
         self.id = id
         self.is_adsorption = is_adsorption
+        self.A = A
         self.beta = beta
+        self.Ea = Ea
         self.direction = direction
         self.sticking_coeff = sticking_coeff
 
@@ -145,41 +155,44 @@ class SurfaceReaction(Reaction):
             Parameters required to calculate pre-exponential factor
         """
 
-        if self.transition_state is None or not include_entropy:
-            A = c.kb('J/K') / c.h('J s')
+        if self.A is None:
+            if self.transition_state is None or not include_entropy:
+                A = c.kb('J/K') / c.h('J s')
+            else:
+                A = super().get_A(T=T, **kwargs) / T
+
+            # Uses site with highest site density
+            site_dens = []
+            for reactant, stoich in zip(self.reactants, self.reactants_stoich):
+                # Skip species without a catalyst site
+                try:
+                    site_den = reactant.phase.site_density
+                except AttributeError:
+                    continue
+                site_dens.extend([site_den] * int(stoich))
+
+            # Apply the operation to the site densities
+            if len(site_dens) == 0:
+                err_msg = ('At least one species requires a catalytic site with '
+                        'site density to calculate A.')
+                raise ValueError(err_msg)
+            eff_site_den = _apply_numpy_operation(quantity=site_dens,
+                                                operation=sden_operation,
+                                                verbose=False)
+            # Convert site density to appropriate unit
+            if isinstance(units, Units):
+                quantity_unit = units.quantity
+                area_unit = '{}2'.format(units.length)
+            else:
+                quantity_unit, area_unit = units.split('/')
+            eff_site_den = eff_site_den\
+                        *c.convert_unit(initial='mol', final=quantity_unit)\
+                        /c.convert_unit(initial='cm2', final=area_unit)
+
+            n_surf = self._get_n_surf()
+            A = A / eff_site_den**(n_surf - 1)
         else:
-            A = super().get_A(T=T, **kwargs) / T
-
-        # Uses site with highest site density
-        site_dens = []
-        for reactant, stoich in zip(self.reactants, self.reactants_stoich):
-            # Skip species without a catalyst site
-            try:
-                site_den = reactant.phase.site_density
-            except AttributeError:
-                continue
-            site_dens.extend([site_den] * int(stoich))
-
-        # Apply the operation to the site densities
-        if len(site_dens) == 0:
-            err_msg = ('At least one species requires a catalytic site with '
-                       'site density to calculate A.')
-            raise ValueError(err_msg)
-        eff_site_den = _apply_numpy_operation(quantity=site_dens,
-                                              operation=sden_operation,
-                                              verbose=False)
-        # Convert site density to appropriate unit
-        if isinstance(units, Units):
-            quantity_unit = units.quantity
-            area_unit = '{}2'.format(units.length)
-        else:
-            quantity_unit, area_unit = units.split('/')
-        eff_site_den = eff_site_den\
-                       *c.convert_unit(initial='mol', final=quantity_unit)\
-                       /c.convert_unit(initial='cm2', final=area_unit)
-
-        n_surf = self._get_n_surf()
-        A = A / eff_site_den**(n_surf - 1)
+            A = self.A
         return A
 
     def get_HoRT_act(self, rev=False, **kwargs):
@@ -299,7 +312,9 @@ class SurfaceReaction(Reaction):
                     species_delimiter='+',
                     reaction_delimiter='=',
                     notes=None,
+                    A=None,
                     beta=1,
+                    Ea=None,
                     is_adsorption=False,
                     sticking_coeff=0.5,
                     direction=None,
@@ -321,9 +336,16 @@ class SurfaceReaction(Reaction):
                 trailing spaces will be trimmed. Default is '='
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
+            A : float, optional
+                Pre-exponential constant. If not specified, uses reaction to
+                determine value.
             beta : float, optional
-                Power to raise the temperature in the rate expression.
-                Default is 1
+                Power to raise the temperature in the rate expression. Default
+                is 1 if ``is_adsorption`` is False, 0 if ``is_adsorption``
+                is True.
+            Ea : float, optional
+                Activation energy. If not specified, uses reaction to determine
+                value.
             is_adsorption : bool, optional
                 If True, the reaction represents an adsorption. Default is False
             sticking_coeff : float, optional
@@ -347,7 +369,9 @@ class SurfaceReaction(Reaction):
                    transition_state=rxn.transition_state,
                    transition_state_stoich=rxn.transition_state_stoich,
                    notes=notes,
+                   A=A,
                    beta=beta,
+                   Ea=Ea,
                    is_adsorption=is_adsorption,
                    sticking_coeff=sticking_coeff,
                    direction=direction,
@@ -420,23 +444,29 @@ class SurfaceReaction(Reaction):
             else:
                 id_str = ',\n                 id="{}"'.format(self.id)
 
+        act_val = self.Ea
         if self.is_adsorption:
-            act_method = getattr(self, ads_act_method)
-            act_val = act_method(units=act_energy_unit, T=T, P=P)
+            # If activation energy not specified, calculate using requested
+            # method of activation
+            if act_val is None:
+                act_method = getattr(self, ads_act_method)
+                act_val = act_method(units=act_energy_unit, T=T, P=P)
+
             cti_str = ('surface_reaction("{}",\n'
                        '                 stick({: .5e}, {}, {: .5e}){})'
                        ''.format(reaction_str, self.sticking_coeff, self.beta,
                                  act_val, id_str))
         else:
             A_units = '{}/{}2'.format(quantity_unit, length_unit)
+            if act_val is None:
+                act_val = self.get_G_act(units=act_energy_unit, T=T, P=P)
             cti_str = ('surface_reaction("{}",\n'
                        '                 [{: .5e}, {}, {: .5e}]{})'
                        ''.format(reaction_str,
                                  self.get_A(T=T, P=P, include_entropy=False,
                                             units=A_units),
                                  self.beta,
-                                 self.get_G_act(units=act_energy_unit, T=T,
-                                                P=P),
+                                 act_val,
                                  id_str))
         return cti_str
 
