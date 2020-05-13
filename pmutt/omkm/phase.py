@@ -59,6 +59,7 @@ class InteractingInterface(phase_cantera.Phase):
                  reactions=None,
                  transport=None,
                  interactions=None,
+                 use_motz_wise=False,
                  options=None,
                  note=None):
         super().__init__(name=name,
@@ -69,6 +70,7 @@ class InteractingInterface(phase_cantera.Phase):
                          note=note,
                          reactions=reactions,
                          initial_state=initial_state)
+        self.use_motz_wise = use_motz_wise
         self.site_density = site_density
         self.phases = phases
         self.interactions = interactions
@@ -95,7 +97,7 @@ class InteractingInterface(phase_cantera.Phase):
                 beps.append(bep.name)
         return beps
 
-    def to_CTI(self,
+    def to_cti(self,
                max_line_len=80,
                quantity_unit='molec',
                length_unit='cm',
@@ -144,16 +146,16 @@ class InteractingInterface(phase_cantera.Phase):
                    '                      species={},\n'
                    '                      phases={},\n'
                    '                      site_density={},\n'.format(
-                       phase_cantera.obj_to_CTI(self.name,
+                       phase_cantera.obj_to_cti(self.name,
                                                 line_len=max_line_len - 27,
                                                 max_line_len=max_line_len - 28),
-                       phase_cantera.obj_to_CTI(self.elements,
+                       phase_cantera.obj_to_cti(self.elements,
                                                 line_len=max_line_len - 31,
                                                 max_line_len=max_line_len),
-                       phase_cantera.obj_to_CTI(species_names,
+                       phase_cantera.obj_to_cti(species_names,
                                                 line_len=max_line_len - 30,
                                                 max_line_len=max_line_len),
-                       phase_cantera.obj_to_CTI(phases_names,
+                       phase_cantera.obj_to_cti(phases_names,
                                                 line_len=max_line_len - 29,
                                                 max_line_len=max_line_len),
                        site_den))
@@ -184,7 +186,7 @@ class InteractingInterface(phase_cantera.Phase):
 
             cti_str += '                      {}={},\n'.format(
                 field,
-                phase_cantera.obj_to_CTI(val,
+                phase_cantera.obj_to_cti(val,
                                          max_line_len=max_line_len,
                                          line_len=max_line_len - len(field) -
                                          23))
@@ -192,3 +194,78 @@ class InteractingInterface(phase_cantera.Phase):
         # Terminate the string
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
+
+    def to_yaml_dict(self,
+                     quantity_unit='molec',
+                     length_unit='cm',
+                     units=None,
+                     delimiter='_'):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            quantity_unit : str, optional
+                Quantity unit to use to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to use to calculate A. Default is 'cm'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit` and `length_unit` are overwritten.
+                Default is None.
+            delimiter : str, optional
+                Delimiter used to separate header from footer of reaction and
+                lateral interaction IDs. Default is '_'.
+        Returns
+        -------
+            yaml_dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        if units is not None:
+            quantity_unit = units.quantity
+            length_unit = units.length
+
+        species_names = [species.name for species in self.species]
+        area_unit = '{}2'.format(length_unit)
+        site_den = self.site_density\
+                   *c.convert_unit(initial='mol', final=quantity_unit)\
+                   /c.convert_unit(initial='cm2', final=area_unit)
+
+        phases_names = []
+        for phase in self.phases:
+            try:
+                phases_names.append(phase.name)
+            except AttributeError:
+                phases_names.append(phase)
+
+        yaml_dict = {
+            'name': self.name,
+            'state': 'ideal-surface',
+            'elements': self.elements,
+            'species': species_names,
+            'phases': phases_names,
+            'site_density': site_den,
+            'Motz-Wise': self.use_motz_wise,
+        }
+
+        # Fields with ranges
+        range_fields = ('interactions', 'reactions')
+        for range_field in range_fields:
+            val = getattr(self, range_field)
+            # Skip empty fields
+            if val is None:
+                continue
+            yaml_dict[range_field] = _get_range_CTI(objs=val, parent_obj=self,
+                                                    delimiter=delimiter)
+
+        # Add optional fields
+        optional_fields = ('beps', 'transport', 'options', 'note')
+        for field in optional_fields:
+            val = getattr(self, field)
+            # Skip empty fields
+            if val is None:
+                continue
+            # Skip blank lists
+            if len(val) == 0:
+                continue
+            yaml_dict[range_field] = val
+
+        return yaml_dict

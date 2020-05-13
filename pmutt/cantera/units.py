@@ -10,7 +10,7 @@ class Units:
         quantity : str, optional
             Quantity unit. Default is 'molec'
         energy : str, optional
-            Energy unit. Default is 'cal/mol'
+            Energy unit. Default is 'cal'
         act_energy : str, optional
             Activation energy unit. Default is 'cal/mol'
         pressure : str, optional
@@ -22,7 +22,7 @@ class Units:
                  length='cm',
                  time='s',
                  quantity='molec',
-                 energy='cal/mol',
+                 energy='cal',
                  act_energy='cal/mol',
                  pressure='bar',
                  mass='kg'):
@@ -34,7 +34,7 @@ class Units:
         self.pressure = pressure
         self.mass = mass
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -53,7 +53,7 @@ class Units:
                 self.act_energy, self.pressure, self.mass)
         return cti_str
 
-    def to_CTI_dict(self):
+    def to_cti_dict(self):
         """Returns a useful dictionary for CTI IO functions.
         
         Returns
@@ -71,3 +71,19 @@ class Units:
             'pressure_unit': self.pressure,
             'mass_unit': self.mass
         }
+
+    def to_yaml_dict(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+        
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        return {'mass': self.mass,
+                'length': self.length,
+                'time': self.time,
+                'quantity': self.quantity,
+                'energy': self.energy,
+                'act_energy': self.act_energy,
+                'pressure': self.pressure}

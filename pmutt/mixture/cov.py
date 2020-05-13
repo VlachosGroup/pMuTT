@@ -172,7 +172,7 @@ class PiecewiseCovEffect(_ModelBase):
     def get_SoR(self):
         return 0.
 
-    def to_CTI(self, energy_unit='kcal', quantity_unit='mol', units=None):
+    def to_cti(self, energy_unit='kcal', quantity_unit='mol', units=None):
         """Writes the lateral interaction in CTI format
 
         Parameters

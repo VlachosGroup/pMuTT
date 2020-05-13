@@ -14,7 +14,7 @@ from scipy.optimize import curve_fit
 from pmutt import _get_R_adj, _is_iterable
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.cantera import obj_to_cti
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
 
@@ -599,6 +599,24 @@ class Shomate(EmpiricalBase):
         obj_dict['units'] = self.units
         return obj_dict
 
+    def to_yaml_dict(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+        
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        return {
+            'name': self.name,
+            'composition': self.elements,
+            'sites': self.n_sites,
+            'thermo': {'model': 'Shomate',
+                       'temperature-ranges': [self.T_low,
+                                              self.T_high],
+                       'data': [self.a.tolist()]} 
+        }
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.
@@ -619,7 +637,7 @@ class Shomate(EmpiricalBase):
 
         return cls(**json_obj)
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -636,7 +654,7 @@ class Shomate(EmpiricalBase):
                    '                       [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}]))').format(
-                       self.name, obj_to_CTI(self.elements), size_str,
+                       self.name, obj_to_cti(self.elements), size_str,
                        self.T_low, self.T_high, self.a[0], self.a[1],
                        self.a[2], self.a[3], self.a[4], self.a[5], self.a[6])
         return cti_str

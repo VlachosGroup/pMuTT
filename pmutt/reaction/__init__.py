@@ -1976,6 +1976,7 @@ class Reaction(_pmuttBase):
                     list(self.transition_state_stoich)
         else:
             obj_dict['transition_state_stoich'] = self.transition_state_stoich
+        obj_dict['reaction_str'] = str(self)
         return obj_dict
 
     @classmethod
