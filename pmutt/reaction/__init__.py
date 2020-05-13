@@ -1992,6 +1992,7 @@ class Reaction(_pmuttBase):
             Reaction : Reaction object
         """
         json_obj = remove_class(json_obj)
+        json_obj.pop('reaction_str', None)
         json_obj['reactants'] = [
             json_to_pmutt(reactant) for reactant in json_obj['reactants']
         ]

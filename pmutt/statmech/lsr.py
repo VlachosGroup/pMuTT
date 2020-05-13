@@ -574,7 +574,7 @@ def _float_to_reaction(val):
             when `get_delta_E` is called
     """
     reactant = StatMech()
-    product = self._float_to_specie(val=val)
+    product = _float_to_species(val=val)
     return Reaction(reactants=[reactant],
                     reactants_stoich=[1.],
                     products=[product],
