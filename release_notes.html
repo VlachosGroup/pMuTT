@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.19 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.20 documentation</title>
   
 
   
@@ -108,6 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-20">Version 1.2.20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-19">Version 1.2.19</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-18">Version 1.2.18</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-17">Version 1.2.17</a></li>
@@ -220,6 +221,19 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+</div>
+<div class="section" id="version-1-2-20">
+<h2>Version 1.2.20<a class="headerlink" href="#version-1-2-20" title="Permalink to this headline">¶</a></h2>
+<p>May 12, 2020</p>
+<ul class="simple">
+<li><p>Added sensitivity analysis options in <a class="reference internal" href="api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_cti()</span></code></a></p></li>
+<li><p>Added ability to arbitrarily specify pre-exponential constant and activation
+energy in <a class="reference internal" href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceReaction</span></code></a></p></li>
+<li><p>Reduced complexity of assigning reaction IDs to
+<a class="reference internal" href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceReaction</span></code></a>. Before, the ID would be
+renamed if it had a BEP associated with it. Changed the behavior to just
+assign numerical values.</p></li>
+</ul>
 </div>
 <div class="section" id="version-1-2-19">
 <h2>Version 1.2.19<a class="headerlink" href="#version-1-2-19" title="Permalink to this headline">¶</a></h2>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.omkm.units.Units &mdash; pmutt 1.2.19 documentation</title>
+  <title>pmutt.omkm.units.Units &mdash; pmutt 1.2.20 documentation</title>
   
 
   
@@ -199,14 +199,14 @@
 <h1>pmutt.omkm.units.Units<a class="headerlink" href="#pmutt-omkm-units-units" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pmutt.omkm.units.Units">
-<em class="property">class </em><code class="sig-prename descclassname">pmutt.omkm.units.</code><code class="sig-name descname">Units</code><span class="sig-paren">(</span><em class="sig-param">length='cm'</em>, <em class="sig-param">time='s'</em>, <em class="sig-param">quantity='molec'</em>, <em class="sig-param">energy='cal/mol'</em>, <em class="sig-param">act_energy='cal/mol'</em>, <em class="sig-param">pressure='bar'</em>, <em class="sig-param">mass='kg'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.omkm.units.</code><code class="sig-name descname">Units</code><span class="sig-paren">(</span><em class="sig-param">length='cm'</em>, <em class="sig-param">time='s'</em>, <em class="sig-param">quantity='molec'</em>, <em class="sig-param">energy='cal'</em>, <em class="sig-param">act_energy='cal/mol'</em>, <em class="sig-param">pressure='bar'</em>, <em class="sig-param">mass='kg'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt.cantera.units.Units</span></code></a></p>
 <p>OpenMKM implementation of the units. Currently there are no
 differences between this class and <a class="reference internal" href="../cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a>
 but one could add changes here in the future if necessary.</p>
 <dl class="method">
 <dt id="pmutt.omkm.units.Units.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">length='cm'</em>, <em class="sig-param">time='s'</em>, <em class="sig-param">quantity='molec'</em>, <em class="sig-param">energy='cal/mol'</em>, <em class="sig-param">act_energy='cal/mol'</em>, <em class="sig-param">pressure='bar'</em>, <em class="sig-param">mass='kg'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">length='cm'</em>, <em class="sig-param">time='s'</em>, <em class="sig-param">quantity='molec'</em>, <em class="sig-param">energy='cal'</em>, <em class="sig-param">act_energy='cal/mol'</em>, <em class="sig-param">pressure='bar'</em>, <em class="sig-param">mass='kg'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -220,17 +220,17 @@ but one could add changes here in the future if necessary.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.omkm.units.Units.__init__" title="pmutt.omkm.units.Units.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([length, time, quantity, energy, …])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.omkm.units.Units.to_CTI" title="pmutt.omkm.units.Units.to_CTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_CTI</span></code></a>()</p></td>
-<td><p>Writes the object in Cantera’s CTI format.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units.to_CTI</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.omkm.units.Units.to_CTI_dict" title="pmutt.omkm.units.Units.to_CTI_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_CTI_dict</span></code></a>()</p></td>
-<td><p>Returns a useful dictionary for CTI IO functions.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Units.to_CTI_dict</span></code></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="pmutt.omkm.units.Units.to_CTI">
-<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.to_CTI" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.omkm.units.Units.to_cti">
+<code class="sig-name descname">to_cti</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.to_cti" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,13 +246,27 @@ but one could add changes here in the future if necessary.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.omkm.units.Units.to_CTI_dict">
-<code class="sig-name descname">to_CTI_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.to_CTI_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.omkm.units.Units.to_cti_dict">
+<code class="sig-name descname">to_cti_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.to_cti_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a useful dictionary for CTI IO functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><strong>CTI_dict</strong> – Dictionary whose keys are the parameter names of CTI IO
 functions.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.omkm.units.Units.to_yaml_dict">
+<code class="sig-name descname">to_yaml_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.units.Units.to_yaml_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary compatible with Cantera’s YAML format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>yaml_dict</strong> – Dictionary compatible with Cantera’s YAML format</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>

@@ -7,6 +7,19 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.2.20
+--------------
+
+May 12, 2020
+
+- Added sensitivity analysis options in :func:`~pmutt.io.omkm.write_cti`
+- Added ability to arbitrarily specify pre-exponential constant and activation
+  energy in :class:`~pmutt.omkm.reaction.SurfaceReaction`
+- Reduced complexity of assigning reaction IDs to
+  :class:`~pmutt.omkm.reaction.SurfaceReaction`. Before, the ID would be
+  renamed if it had a BEP associated with it. Changed the behavior to just
+  assign numerical values.
+
 Version 1.2.19
 --------------
 

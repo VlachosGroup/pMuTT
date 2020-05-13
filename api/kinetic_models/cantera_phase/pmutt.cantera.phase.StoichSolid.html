@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.cantera.phase.StoichSolid &mdash; pmutt 1.2.19 documentation</title>
+  <title>pmutt.cantera.phase.StoichSolid &mdash; pmutt 1.2.20 documentation</title>
   
 
   
@@ -320,8 +320,8 @@ Default is None.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.cantera.phase.StoichSolid.remove_species" title="pmutt.cantera.phase.StoichSolid.remove_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_species</span></code></a>(name)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.cantera.phase.StoichSolid.to_CTI" title="pmutt.cantera.phase.StoichSolid.to_CTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_CTI</span></code></a>([max_line_len, mass_unit, …])</p></td>
-<td><p>Writes the object in Cantera’s CTI format.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">StoichSolid.to_CTI</span></code></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -394,8 +394,8 @@ Default is None.</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="pmutt.cantera.phase.StoichSolid.to_CTI">
-<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><em class="sig-param">max_line_len=80</em>, <em class="sig-param">mass_unit='g'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.to_CTI" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.cantera.phase.StoichSolid.to_cti">
+<code class="sig-name descname">to_cti</code><span class="sig-paren">(</span><em class="sig-param">max_line_len=80</em>, <em class="sig-param">mass_unit='g'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.to_cti" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -412,6 +412,28 @@ Default is None.</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.cantera.phase.StoichSolid.to_yaml_dict">
+<code class="sig-name descname">to_yaml_dict</code><span class="sig-paren">(</span><em class="sig-param">mass_unit='g'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.to_yaml_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the object in Cantera’s CTI format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Mass unit for <cite>density</cite>. Default is ‘g’</p></li>
+<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit for <cite>density</cite>. Default is ‘cm’</p></li>
+<li><p><strong>units</strong> (<a class="reference internal" href="../cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object, optional) – If specified, <cite>mass_unit</cite> and <cite>length_unit</cite> are overwritten.
+Default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary compatible with Cantera’s YAML format</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>yaml_dict</p>
 </dd>
 </dl>
 </dd></dl>

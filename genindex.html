@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pmutt 1.2.19 documentation</title>
+  <title>Index &mdash; pmutt 1.2.20 documentation</title>
   
 
   
@@ -273,6 +273,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.__init__">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.__init__">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.__init__">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.__init__">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -306,6 +308,8 @@
         <li><a href="api/eos/eos/pmutt.eos.vanDerWaalsEOS.html#pmutt.eos.vanDerWaalsEOS.a">(pmutt.eos.vanDerWaalsEOS attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.A">A (pmutt.omkm.reaction.SurfaceReaction attribute)</a>, <a href="api/reactions/reaction/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.A">[1]</a>, <a href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.A">[2]</a>
+</li>
       <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa.a_high">a_high (pmutt.empirical.nasa.Nasa attribute)</a>
 </li>
       <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa.a_low">a_low (pmutt.empirical.nasa.Nasa attribute)</a>
@@ -546,6 +550,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/constants/constants/pmutt.constants.e.html#pmutt.constants.e">e (in module pmutt.constants)</a>
 </li>
+      <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.Ea">Ea (pmutt.omkm.reaction.SurfaceReaction attribute)</a>, <a href="api/reactions/reaction/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.Ea">[1]</a>, <a href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.Ea">[2]</a>
+</li>
       <li><a href="api/statmech/vib/pmutt.statmech.vib.EinsteinVib.html#pmutt.statmech.vib.EinsteinVib.einstein_temperature">einstein_temperature (pmutt.statmech.vib.EinsteinVib attribute)</a>
 </li>
       <li><a href="api/constants/unit_conv/pmutt.constants.einstein_to_debye.html#pmutt.constants.einstein_to_debye">einstein_to_debye() (in module pmutt.constants)</a>
@@ -612,6 +618,8 @@
         <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.StoichSolid.html#pmutt.omkm.phase.StoichSolid.extend_species">(pmutt.omkm.phase.StoichSolid method)</a>
 </li>
       </ul></li>
+      <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR">ExtendedLSR (class in pmutt.statmech.lsr)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -687,6 +695,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.from_dict">(pmutt.statmech.EmptyMode class method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.from_dict">(pmutt.statmech.lsr.ExtendedLSR class method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.from_dict">(pmutt.statmech.lsr.LSR class method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.from_dict">(pmutt.statmech.nucl.EmptyNucl class method)</a>
@@ -740,10 +750,18 @@
 </li>
       <li><a href="api/kinetic_models/chemkin/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction.gas_phase">gas_phase (pmutt.reaction.ChemkinReaction attribute)</a>, <a href="api/reactions/reaction/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction.gas_phase">[1]</a>, <a href="api/reactions/reactions/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction.gas_phase">[2]</a>
 </li>
-      <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.gas_species">gas_species (pmutt.statmech.lsr.LSR attribute)</a>
+      <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.gas_species">gas_species (pmutt.statmech.lsr.ExtendedLSR attribute)</a>
+
+      <ul>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.gas_species">(pmutt.statmech.lsr.LSR attribute)</a>
 </li>
-      <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.gas_species">gas_species() (pmutt.statmech.lsr.LSR property)</a>
+      </ul></li>
+      <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.gas_species">gas_species() (pmutt.statmech.lsr.ExtendedLSR property)</a>
+
+      <ul>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.gas_species">(pmutt.statmech.lsr.LSR property)</a>
 </li>
+      </ul></li>
       <li><a href="api/empirical/misc/pmutt.empirical.GasPressureAdj.html#pmutt.empirical.GasPressureAdj">GasPressureAdj (class in pmutt.empirical)</a>
 </li>
       <li><a href="api/statmech/rot/pmutt.statmech.rot.RigidRotor.html#pmutt.statmech.rot.RigidRotor.geometry">geometry (pmutt.statmech.rot.RigidRotor attribute)</a>
@@ -790,6 +808,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_Cp">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_Cp">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_Cp">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_Cp">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -846,6 +866,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_CpoR">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_CpoR">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_CpoR">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_CpoR">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -913,6 +935,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_Cv">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_Cv">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_Cv">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.get_Cv">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -960,6 +984,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_CvoR">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_CvoR">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_CvoR">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_CvoR">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -1225,6 +1251,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_F">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_F">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_F">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.get_F">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -1291,6 +1319,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_FoRT">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_FoRT">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_FoRT">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.get_FoRT">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -1356,6 +1386,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_G">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_G">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_G">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_G">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -1424,6 +1456,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_GoRT">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_GoRT">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_GoRT">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_GoRT">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -1495,6 +1529,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_H">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_H">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_H">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.get_H">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -1554,6 +1590,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_HoRT">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_HoRT">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_HoRT">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_HoRT">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -1691,6 +1729,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_S">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_S">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_S">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.get_S">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -1750,6 +1790,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_SoR">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_SoR">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_SoR">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_SoR">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -1847,6 +1889,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_U">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_U">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_U">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.get_U">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -1898,6 +1942,8 @@
         <li><a href="api/statmech/elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec.get_UoRT">(pmutt.statmech.elec.GroundStateElec method)</a>
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.get_UoRT">(pmutt.statmech.EmptyMode method)</a>
+</li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.get_UoRT">(pmutt.statmech.lsr.ExtendedLSR method)</a>
 </li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_UoRT">(pmutt.statmech.lsr.LSR method)</a>
 </li>
@@ -2047,6 +2093,8 @@
       <li><a href="api/reactions/bep/pmutt.reaction.bep.BEP.html#pmutt.reaction.bep.BEP.intercept">intercept (pmutt.reaction.bep.BEP attribute)</a>
 
       <ul>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.intercept">(pmutt.statmech.lsr.ExtendedLSR attribute)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.intercept">(pmutt.statmech.lsr.LSR attribute)</a>
 </li>
       </ul></li>
@@ -2197,6 +2245,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.ConstantMode.html#pmutt.statmech.ConstantMode.notes">(pmutt.statmech.ConstantMode attribute)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.notes">(pmutt.statmech.lsr.ExtendedLSR attribute)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.notes">(pmutt.statmech.lsr.LSR attribute)</a>
 </li>
         <li><a href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech.notes">(pmutt.statmech.StatMech attribute)</a>
@@ -2210,7 +2260,7 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/kinetic_models/cantera_io/pmutt.io.cantera.obj_to_CTI.html#pmutt.io.cantera.obj_to_CTI">obj_to_CTI() (in module pmutt.io.cantera)</a>
+      <li><a href="api/kinetic_models/cantera_io/pmutt.io.cantera.obj_to_cti.html#pmutt.io.cantera.obj_to_cti">obj_to_cti() (in module pmutt.io.cantera)</a>
 </li>
       <li><a href="api/empirical/references/pmutt.empirical.references.References.html#pmutt.empirical.references.References.offset">offset (pmutt.empirical.references.References attribute)</a>
 </li>
@@ -2429,15 +2479,19 @@
 </li>
         <li><a href="api/reactions/reactions/pmutt.reaction.Reactions.html#pmutt.reaction.Reactions.reactions">(pmutt.reaction.Reactions attribute)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.reactions">(pmutt.statmech.lsr.ExtendedLSR attribute)</a>
+</li>
       </ul></li>
+      <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.reactions">reactions() (pmutt.statmech.lsr.ExtendedLSR property)</a>
+</li>
       <li><a href="api/io/gaussian/pmutt.io.gaussian.read_electronic_and_zpe.html#pmutt.io.gaussian.read_electronic_and_zpe">read_electronic_and_zpe() (in module pmutt.io.gaussian)</a>
 </li>
       <li><a href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel">read_excel() (in module pmutt.io.excel)</a>
 </li>
-      <li><a href="api/io/gaussian/pmutt.io.gaussian.read_frequencies.html#pmutt.io.gaussian.read_frequencies">read_frequencies() (in module pmutt.io.gaussian)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/io/gaussian/pmutt.io.gaussian.read_frequencies.html#pmutt.io.gaussian.read_frequencies">read_frequencies() (in module pmutt.io.gaussian)</a>
+</li>
       <li><a href="api/io/gaussian/pmutt.io.gaussian.read_molecular_mass.html#pmutt.io.gaussian.read_molecular_mass">read_molecular_mass() (in module pmutt.io.gaussian)</a>
 </li>
       <li><a href="api/io/gaussian/pmutt.io.gaussian.read_pattern.html#pmutt.io.gaussian.read_pattern">read_pattern() (in module pmutt.io.gaussian)</a>
@@ -2541,7 +2595,11 @@
 </li>
       </ul></li>
       <li><a href="api/mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html#pmutt.mixture.cov.PiecewiseCovEffect.slopes">slopes (pmutt.mixture.cov.PiecewiseCovEffect attribute)</a>
+
+      <ul>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.slopes">(pmutt.statmech.lsr.ExtendedLSR attribute)</a>
 </li>
+      </ul></li>
       <li><a href="api/empirical/empirical_base/pmutt.empirical.EmpiricalBase.html#pmutt.empirical.EmpiricalBase.smiles">smiles (pmutt.empirical.EmpiricalBase attribute)</a>
 
       <ul>
@@ -2608,10 +2666,18 @@
         <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.StoichSolid.html#pmutt.omkm.phase.StoichSolid">(class in pmutt.omkm.phase)</a>
 </li>
       </ul></li>
-      <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.surf_species">surf_species (pmutt.statmech.lsr.LSR attribute)</a>
+      <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.surf_species">surf_species (pmutt.statmech.lsr.ExtendedLSR attribute)</a>
+
+      <ul>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.surf_species">(pmutt.statmech.lsr.LSR attribute)</a>
 </li>
-      <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.surf_species">surf_species() (pmutt.statmech.lsr.LSR property)</a>
+      </ul></li>
+      <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.surf_species">surf_species() (pmutt.statmech.lsr.ExtendedLSR property)</a>
+
+      <ul>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.surf_species">(pmutt.statmech.lsr.LSR property)</a>
 </li>
+      </ul></li>
       <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction">SurfaceReaction (class in pmutt.omkm.reaction)</a>, <a href="api/reactions/reaction/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction">[1]</a>, <a href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction">[2]</a>
 </li>
       <li><a href="api/constants/misc/pmutt.constants.symmetry_dict.html#pmutt.constants.symmetry_dict">symmetry_dict (in module pmutt.constants)</a>
@@ -2666,40 +2732,40 @@
 </li>
       <li><a href="api/kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units.time">time (pmutt.cantera.units.Units attribute)</a>
 </li>
-      <li><a href="api/kinetic_models/cantera_phase/pmutt.cantera.phase.IdealGas.html#pmutt.cantera.phase.IdealGas.to_CTI">to_CTI() (pmutt.cantera.phase.IdealGas method)</a>
+      <li><a href="api/kinetic_models/cantera_phase/pmutt.cantera.phase.IdealGas.html#pmutt.cantera.phase.IdealGas.to_cti">to_cti() (pmutt.cantera.phase.IdealGas method)</a>
 
       <ul>
-        <li><a href="api/kinetic_models/cantera_phase/pmutt.cantera.phase.StoichSolid.html#pmutt.cantera.phase.StoichSolid.to_CTI">(pmutt.cantera.phase.StoichSolid method)</a>
+        <li><a href="api/kinetic_models/cantera_phase/pmutt.cantera.phase.StoichSolid.html#pmutt.cantera.phase.StoichSolid.to_cti">(pmutt.cantera.phase.StoichSolid method)</a>
 </li>
-        <li><a href="api/kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units.to_CTI">(pmutt.cantera.units.Units method)</a>
+        <li><a href="api/kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units.to_cti">(pmutt.cantera.units.Units method)</a>
 </li>
-        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa.to_CTI">(pmutt.empirical.nasa.Nasa method)</a>
+        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa.to_cti">(pmutt.empirical.nasa.Nasa method)</a>
 </li>
-        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html#pmutt.empirical.nasa.Nasa9.to_CTI">(pmutt.empirical.nasa.Nasa9 method)</a>
+        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html#pmutt.empirical.nasa.Nasa9.to_cti">(pmutt.empirical.nasa.Nasa9 method)</a>
 </li>
-        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.SingleNasa9.html#pmutt.empirical.nasa.SingleNasa9.to_CTI">(pmutt.empirical.nasa.SingleNasa9 method)</a>
+        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.SingleNasa9.html#pmutt.empirical.nasa.SingleNasa9.to_cti">(pmutt.empirical.nasa.SingleNasa9 method)</a>
 </li>
-        <li><a href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate.to_CTI">(pmutt.empirical.shomate.Shomate method)</a>
+        <li><a href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate.to_cti">(pmutt.empirical.shomate.Shomate method)</a>
 </li>
-        <li><a href="api/mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html#pmutt.mixture.cov.PiecewiseCovEffect.to_CTI">(pmutt.mixture.cov.PiecewiseCovEffect method)</a>
+        <li><a href="api/mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html#pmutt.mixture.cov.PiecewiseCovEffect.to_cti">(pmutt.mixture.cov.PiecewiseCovEffect method)</a>
 </li>
-        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.IdealGas.html#pmutt.omkm.phase.IdealGas.to_CTI">(pmutt.omkm.phase.IdealGas method)</a>
+        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.IdealGas.html#pmutt.omkm.phase.IdealGas.to_cti">(pmutt.omkm.phase.IdealGas method)</a>
 </li>
-        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.InteractingInterface.html#pmutt.omkm.phase.InteractingInterface.to_CTI">(pmutt.omkm.phase.InteractingInterface method)</a>
+        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.InteractingInterface.html#pmutt.omkm.phase.InteractingInterface.to_cti">(pmutt.omkm.phase.InteractingInterface method)</a>
 </li>
-        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.StoichSolid.html#pmutt.omkm.phase.StoichSolid.to_CTI">(pmutt.omkm.phase.StoichSolid method)</a>
+        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.StoichSolid.html#pmutt.omkm.phase.StoichSolid.to_cti">(pmutt.omkm.phase.StoichSolid method)</a>
 </li>
-        <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.BEP.html#pmutt.omkm.reaction.BEP.to_CTI">(pmutt.omkm.reaction.BEP method)</a>, <a href="api/reactions/bep/pmutt.omkm.reaction.BEP.html#pmutt.omkm.reaction.BEP.to_CTI">[1]</a>
+        <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.BEP.html#pmutt.omkm.reaction.BEP.to_cti">(pmutt.omkm.reaction.BEP method)</a>, <a href="api/reactions/bep/pmutt.omkm.reaction.BEP.html#pmutt.omkm.reaction.BEP.to_cti">[1]</a>
 </li>
-        <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_CTI">(pmutt.omkm.reaction.SurfaceReaction method)</a>, <a href="api/reactions/reaction/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_CTI">[1]</a>, <a href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_CTI">[2]</a>
+        <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_cti">(pmutt.omkm.reaction.SurfaceReaction method)</a>, <a href="api/reactions/reaction/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_cti">[1]</a>, <a href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_cti">[2]</a>
 </li>
-        <li><a href="api/kinetic_models/omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units.to_CTI">(pmutt.omkm.units.Units method)</a>
+        <li><a href="api/kinetic_models/omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units.to_cti">(pmutt.omkm.units.Units method)</a>
 </li>
       </ul></li>
-      <li><a href="api/kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units.to_CTI_dict">to_CTI_dict() (pmutt.cantera.units.Units method)</a>
+      <li><a href="api/kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units.to_cti_dict">to_cti_dict() (pmutt.cantera.units.Units method)</a>
 
       <ul>
-        <li><a href="api/kinetic_models/omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units.to_CTI_dict">(pmutt.omkm.units.Units method)</a>
+        <li><a href="api/kinetic_models/omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units.to_cti_dict">(pmutt.omkm.units.Units method)</a>
 </li>
       </ul></li>
       <li><a href="api/kinetic_models/chemkin/pmutt.chemkin.CatSite.html#pmutt.chemkin.CatSite.to_dict">to_dict() (pmutt.chemkin.CatSite method)</a>
@@ -2749,6 +2815,8 @@
 </li>
         <li><a href="api/statmech/misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode.to_dict">(pmutt.statmech.EmptyMode method)</a>
 </li>
+        <li><a href="api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.html#pmutt.statmech.lsr.ExtendedLSR.to_dict">(pmutt.statmech.lsr.ExtendedLSR method)</a>
+</li>
         <li><a href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.to_dict">(pmutt.statmech.lsr.LSR method)</a>
 </li>
         <li><a href="api/statmech/nucl/pmutt.statmech.nucl.EmptyNucl.html#pmutt.statmech.nucl.EmptyNucl.to_dict">(pmutt.statmech.nucl.EmptyNucl method)</a>
@@ -2776,6 +2844,30 @@
         <li><a href="api/kinetic_models/chemkin/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction.to_string">(pmutt.reaction.ChemkinReaction method)</a>, <a href="api/reactions/reaction/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction.to_string">[1]</a>, <a href="api/reactions/reactions/pmutt.reaction.ChemkinReaction.html#pmutt.reaction.ChemkinReaction.to_string">[2]</a>
 </li>
         <li><a href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction.to_string">(pmutt.reaction.Reaction method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/kinetic_models/cantera_phase/pmutt.cantera.phase.IdealGas.html#pmutt.cantera.phase.IdealGas.to_yaml_dict">to_yaml_dict() (pmutt.cantera.phase.IdealGas method)</a>
+
+      <ul>
+        <li><a href="api/kinetic_models/cantera_phase/pmutt.cantera.phase.StoichSolid.html#pmutt.cantera.phase.StoichSolid.to_yaml_dict">(pmutt.cantera.phase.StoichSolid method)</a>
+</li>
+        <li><a href="api/kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units.to_yaml_dict">(pmutt.cantera.units.Units method)</a>
+</li>
+        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa.to_yaml_dict">(pmutt.empirical.nasa.Nasa method)</a>
+</li>
+        <li><a href="api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html#pmutt.empirical.nasa.Nasa9.to_yaml_dict">(pmutt.empirical.nasa.Nasa9 method)</a>
+</li>
+        <li><a href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate.to_yaml_dict">(pmutt.empirical.shomate.Shomate method)</a>
+</li>
+        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.IdealGas.html#pmutt.omkm.phase.IdealGas.to_yaml_dict">(pmutt.omkm.phase.IdealGas method)</a>
+</li>
+        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.InteractingInterface.html#pmutt.omkm.phase.InteractingInterface.to_yaml_dict">(pmutt.omkm.phase.InteractingInterface method)</a>
+</li>
+        <li><a href="api/kinetic_models/omkm_phases/pmutt.omkm.phase.StoichSolid.html#pmutt.omkm.phase.StoichSolid.to_yaml_dict">(pmutt.omkm.phase.StoichSolid method)</a>
+</li>
+        <li><a href="api/kinetic_models/omkm_reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_yaml_dict">(pmutt.omkm.reaction.SurfaceReaction method)</a>, <a href="api/reactions/reaction/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_yaml_dict">[1]</a>, <a href="api/reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction.to_yaml_dict">[2]</a>
+</li>
+        <li><a href="api/kinetic_models/omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units.to_yaml_dict">(pmutt.omkm.units.Units method)</a>
 </li>
       </ul></li>
       <li><a href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech.trans_model">trans_model (pmutt.statmech.StatMech attribute)</a>

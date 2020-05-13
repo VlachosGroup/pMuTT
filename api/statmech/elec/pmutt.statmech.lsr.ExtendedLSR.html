@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.statmech.ConstantMode &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.statmech.lsr.LSR &mdash; pmutt 1.2.20 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Mixture Models" href="../../mixture/mixture.html" />
-    <link rel="prev" title="pmutt.statmech.EmptyMode" href="pmutt.statmech.EmptyMode.html" /> 
+    <link rel="next" title="pmutt.statmech.nucl.EmptyNucl" href="../nucl/pmutt.statmech.nucl.EmptyNucl.html" />
+    <link rel="prev" title="pmutt.statmech.lsr.LSR" href="pmutt.statmech.lsr.LSR.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -106,13 +106,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#translational-models">Translational Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#vibrational-models">Vibrational Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#rotational-models">Rotational Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../statmech.html#electronic-models">Electronic Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../statmech.html#nuclear-models">Nuclear Models</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../statmech.html#misc">Misc.</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="pmutt.statmech.EmptyMode.html">pmutt.statmech.EmptyMode</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.ConstantMode</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../statmech.html#electronic-models">Electronic Models</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pmutt.statmech.elec.GroundStateElec.html">pmutt.statmech.elec.GroundStateElec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pmutt.statmech.lsr.LSR.html">pmutt.statmech.lsr.LSR</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.lsr.LSR</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#nuclear-models">Nuclear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statmech.html#misc">Misc.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#creating-new-statmech-models">Creating New StatMech Models</a></li>
 </ul>
 </li>
@@ -175,13 +176,13 @@
         
           <li><a href="../statmech.html">Statistical Thermodynamic Models</a> &raquo;</li>
         
-      <li>pmutt.statmech.ConstantMode</li>
+      <li>pmutt.statmech.lsr.LSR</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/api/statmech/misc/pmutt.statmech.ConstantMode.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/api/statmech/elec/pmutt.statmech.lsr.ExtendedLSR.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -194,108 +195,85 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pmutt-statmech-constantmode">
-<h1>pmutt.statmech.ConstantMode<a class="headerlink" href="#pmutt-statmech-constantmode" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pmutt-statmech-lsr-lsr">
+<h1>pmutt.statmech.lsr.LSR<a class="headerlink" href="#pmutt-statmech-lsr-lsr" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="pmutt.statmech.ConstantMode">
-<em class="property">class </em><code class="sig-prename descclassname">pmutt.statmech.</code><code class="sig-name descname">ConstantMode</code><span class="sig-paren">(</span><em class="sig-param">q=1.0</em>, <em class="sig-param">Cv=0.0</em>, <em class="sig-param">Cp=0.0</em>, <em class="sig-param">U=0.0</em>, <em class="sig-param">H=0.0</em>, <em class="sig-param">S=0.0</em>, <em class="sig-param">F=0.0</em>, <em class="sig-param">G=0.0</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR">
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.statmech.lsr.</code><code class="sig-name descname">ExtendedLSR</code><span class="sig-paren">(</span><em class="sig-param">slopes</em>, <em class="sig-param">intercept</em>, <em class="sig-param">reactions</em>, <em class="sig-param">surf_species=None</em>, <em class="sig-param">gas_species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code></p>
-<p>Mode where thermodynamic properties can be arbitrarily set. Note that
-thermodynamic properties must be explicitly set and are not calculated from
-other properties.</p>
+<p>Represents an extended linear scaling relationship</p>
 <dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.q">
-<code class="sig-name descname">q</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.q" title="Permalink to this definition">¶</a></dt>
-<dd><p>Partition function. Default is 1</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.slopes">
+<code class="sig-name descname">slopes</code><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.slopes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slopes of extended LSR relationship. Represents alpha in above
+equation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+<dd class="field-odd"><p>(N,) np.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.Cv">
-<code class="sig-name descname">Cv</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.Cv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Heat capacity at constant volume in eV/K. Default is 0</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.intercept">
+<code class="sig-name descname">intercept</code><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.intercept" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intercept of LSR relationship in kcal/mol. Represents beta in above
+equation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.Cp">
-<code class="sig-name descname">Cp</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.Cp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Heat capacity at constant pressure in eV/K. Default is 0</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.reactions">
+<code class="sig-name descname">reactions</code><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.reactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reactions to use to calculate reference binding energies. Binding
+energy calculated using <code class="docutils literal notranslate"><span class="pre">get_delta_E</span></code> and if that fails,
+<code class="docutils literal notranslate"><span class="pre">get_delta_H</span></code>. If the binding energy is specified as a float
+(in kcal/mol), it will be converted to a
+<a class="reference internal" href="../../reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> made of
+<a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+<dd class="field-odd"><p>(N,) np.ndarray or list of <a class="reference internal" href="../../reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.U">
-<code class="sig-name descname">U</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.U" title="Permalink to this definition">¶</a></dt>
-<dd><p>Internal energy in eV. Default is 0</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.surf_species">
+<code class="sig-name descname">surf_species</code><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.surf_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Surface species. If the surface’s energies is specified as a ndarray (in
+kcal/mol), it will be converted to a
+<a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object with a single
+<a class="reference internal" href="../misc/pmutt.statmech.ConstantMode.html#pmutt.statmech.ConstantMode" title="pmutt.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> mode. Default is 0.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+<dd class="field-odd"><p>(N,) np.ndarray or list of <a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.H">
-<code class="sig-name descname">H</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.H" title="Permalink to this definition">¶</a></dt>
-<dd><p>Enthalpy in eV. Default is 0</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.gas_species">
+<code class="sig-name descname">gas_species</code><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.gas_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gas-phase species. If the gas’ energies is specified as a ndarray (in
+kcal/mol), it will be converted to a
+<a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object with a single
+<a class="reference internal" href="../misc/pmutt.statmech.ConstantMode.html#pmutt.statmech.ConstantMode" title="pmutt.statmech.ConstantMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantMode</span></code></a> mode. Default is 0.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
+<dd class="field-odd"><p>(N,) np.ndarray or list of <a class="reference internal" href="../statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> object, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.S">
-<code class="sig-name descname">S</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.S" title="Permalink to this definition">¶</a></dt>
-<dd><p>Entropy in eV/K. Default is 0</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.F">
-<code class="sig-name descname">F</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.F" title="Permalink to this definition">¶</a></dt>
-<dd><p>Helmholtz energy in eV. Default is 0</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.G">
-<code class="sig-name descname">G</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.G" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gibbs energy in eV. Default is 0</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pmutt.statmech.ConstantMode.notes">
-<code class="sig-name descname">notes</code><a class="headerlink" href="#pmutt.statmech.ConstantMode.notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Any additional details you would like to include such as
-source of data. Default is None</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extra notes such as the source of the Extended LSR. Default is None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a>, optional</p>
@@ -304,8 +282,8 @@ source of data. Default is None</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">q=1.0</em>, <em class="sig-param">Cv=0.0</em>, <em class="sig-param">Cp=0.0</em>, <em class="sig-param">U=0.0</em>, <em class="sig-param">H=0.0</em>, <em class="sig-param">S=0.0</em>, <em class="sig-param">F=0.0</em>, <em class="sig-param">G=0.0</em>, <em class="sig-param">notes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">slopes</em>, <em class="sig-param">intercept</em>, <em class="sig-param">reactions</em>, <em class="sig-param">surf_species=None</em>, <em class="sig-param">gas_species=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -316,82 +294,78 @@ source of data. Default is None</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.__init__" title="pmutt.statmech.ConstantMode.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([q, Cv, Cp, U, H, S, F, G, notes])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.__init__" title="pmutt.statmech.lsr.LSR.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(slope, intercept, reaction[, …])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.from_dict" title="pmutt.statmech.ConstantMode.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(json_obj)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.from_dict" title="pmutt.statmech.lsr.LSR.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(json_obj)</p></td>
 <td><p>Recreate an object from the JSON representation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_Cp" title="pmutt.statmech.ConstantMode.get_Cp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cp</span></code></a>(units, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_Cp" title="pmutt.statmech.lsr.LSR.get_Cp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cp</span></code></a>(units, **kwargs)</p></td>
 <td><p>Calculate the heat capacity (constant P)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_CpoR" title="pmutt.statmech.ConstantMode.get_CpoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_CpoR</span></code></a>()</p></td>
-<td><p>Calculate the dimensionless heat capacity (constant pressure)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_Cv" title="pmutt.statmech.ConstantMode.get_Cv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cv</span></code></a>(units, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_Cv" title="pmutt.statmech.lsr.LSR.get_Cv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Cv</span></code></a>(units, **kwargs)</p></td>
 <td><p>Calculate the heat capacity (constant V)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_CvoR" title="pmutt.statmech.ConstantMode.get_CvoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_CvoR</span></code></a>()</p></td>
-<td><p>Calculate the dimensionless heat capacity (constant volume)</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_F" title="pmutt.statmech.ConstantMode.get_F"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_F</span></code></a>(units[, T])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_F" title="pmutt.statmech.lsr.LSR.get_F"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_F</span></code></a>(units[, T])</p></td>
 <td><p>Calculate the Helmholtz energy</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_FoRT" title="pmutt.statmech.ConstantMode.get_FoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_FoRT</span></code></a>([T])</p></td>
-<td><p>Calculate the dimensionless Helmholtz energy</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_FoRT" title="pmutt.statmech.lsr.LSR.get_FoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_FoRT</span></code></a>([T])</p></td>
+<td><p>Calculates the dimensionless Helmholtz energy using the LSR relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_G" title="pmutt.statmech.ConstantMode.get_G"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G</span></code></a>(units[, T])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_G" title="pmutt.statmech.lsr.LSR.get_G"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_G</span></code></a>(units[, T])</p></td>
 <td><p>Calculate the Gibbs energy</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_GoRT" title="pmutt.statmech.ConstantMode.get_GoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_GoRT</span></code></a>([T])</p></td>
-<td><p>Calculate the dimensionless Gibbs energy</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_GoRT" title="pmutt.statmech.lsr.LSR.get_GoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_GoRT</span></code></a>([T])</p></td>
+<td><p>Calculates the dimensionless Gibbs energy using the LSR relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_H" title="pmutt.statmech.ConstantMode.get_H"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_H</span></code></a>(units[, T])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_H" title="pmutt.statmech.lsr.LSR.get_H"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_H</span></code></a>(units[, T])</p></td>
 <td><p>Calculate the enthalpy</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_HoRT" title="pmutt.statmech.ConstantMode.get_HoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_HoRT</span></code></a>([T])</p></td>
-<td><p>Calculate the dimensionless enthalpy</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_HoRT" title="pmutt.statmech.lsr.LSR.get_HoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_HoRT</span></code></a>([T])</p></td>
+<td><p>Calculates the dimensionless enthalpy using the LSR relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_S" title="pmutt.statmech.ConstantMode.get_S"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_S</span></code></a>(units, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_S" title="pmutt.statmech.lsr.LSR.get_S"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_S</span></code></a>(units, **kwargs)</p></td>
 <td><p>Calculate the entropy</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_SoR" title="pmutt.statmech.ConstantMode.get_SoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SoR</span></code></a>()</p></td>
-<td><p>Calculate the dimensionless entropy</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_SoR" title="pmutt.statmech.lsr.LSR.get_SoR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SoR</span></code></a>()</p></td>
+<td><p>Calculates the dimensionless entropy using the LSR relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_U" title="pmutt.statmech.ConstantMode.get_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_U</span></code></a>(units[, T])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_U" title="pmutt.statmech.lsr.LSR.get_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_U</span></code></a>(units[, T])</p></td>
 <td><p>Calculate the internal energy</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_UoRT" title="pmutt.statmech.ConstantMode.get_UoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_UoRT</span></code></a>([T])</p></td>
-<td><p>Calculate the dimensionless internal energy</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.get_UoRT" title="pmutt.statmech.lsr.LSR.get_UoRT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_UoRT</span></code></a>([T])</p></td>
+<td><p>Calculates the dimensionless internal energy using the LSR relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.get_q" title="pmutt.statmech.ConstantMode.get_q"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q</span></code></a>()</p></td>
-<td><p>Calculate the partition function</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.statmech.ConstantMode.to_dict" title="pmutt.statmech.ConstantMode.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR.to_dict" title="pmutt.statmech.lsr.LSR.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
 <td><p>Represents object as dictionary with JSON-accepted datatypes</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.from_dict">
-<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.from_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.from_dict">
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">json_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.from_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>Obj</strong></p>
+<dd class="field-even"><p><strong>LSR</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Appropriate object</p>
+<dd class="field-odd"><p>LSR object</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_Cp">
-<code class="sig-name descname">get_Cp</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_Cp" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">property </em><code class="sig-name descname">gas_species</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_Cp">
+<code class="sig-name descname">get_Cp</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_Cp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -411,22 +385,15 @@ units.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_CpoR">
-<code class="sig-name descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_CpoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless heat capacity (constant pressure)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>CpoR</strong> – Dimensionless heat capacity (constant pressure)</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
-</dd>
-</dl>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_CpoR">
+<code class="sig-name descname">get_CpoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_CpoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant pressure.</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{LSR}}{R}=0\)</span></p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_Cv">
-<code class="sig-name descname">get_Cv</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_Cv" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_Cv">
+<code class="sig-name descname">get_Cv</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_Cv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -446,22 +413,15 @@ units.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_CvoR">
-<code class="sig-name descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_CvoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless heat capacity (constant volume)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>CvoR</strong> – Dimensionless heat capacity (constant volume)</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
-</dd>
-</dl>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_CvoR">
+<code class="sig-name descname">get_CvoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_CvoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless heat capacity at constant volume.</p>
+<p><span class="math notranslate nohighlight">\(\frac{C_V^{LSR}}{R}=0\)</span></p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_F">
-<code class="sig-name descname">get_F</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_F" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_F">
+<code class="sig-name descname">get_F</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_F" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -482,12 +442,17 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_FoRT">
-<code class="sig-name descname">get_FoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_FoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless Helmholtz energy</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_FoRT">
+<code class="sig-name descname">get_FoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_FoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Helmholtz energy using the LSR
+relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to calculate reference binding energy, surface
+energy and gas-phase energy</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>FoRT</strong> – Dimensionless Helmholtz energy</p>
@@ -499,8 +464,8 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_G">
-<code class="sig-name descname">get_G</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_G" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_G">
+<code class="sig-name descname">get_G</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_G" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -521,12 +486,17 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_GoRT">
-<code class="sig-name descname">get_GoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_GoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless Gibbs energy</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_GoRT">
+<code class="sig-name descname">get_GoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_GoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless Gibbs energy using the LSR
+relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to calculate reference binding energy, surface
+energy and gas-phase energy</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>GoRT</strong> – Dimensionless Gibbs energy</p>
@@ -538,8 +508,8 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_H">
-<code class="sig-name descname">get_H</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_H" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_H">
+<code class="sig-name descname">get_H</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -560,12 +530,17 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_HoRT">
-<code class="sig-name descname">get_HoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_HoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless enthalpy</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_HoRT">
+<code class="sig-name descname">get_HoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_HoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless enthalpy using the LSR
+relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to calculate reference binding energy, surface
+energy and gas-phase energy</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>HoRT</strong> – Dimensionless enthalpy</p>
@@ -577,8 +552,8 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_S">
-<code class="sig-name descname">get_S</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_S" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_S">
+<code class="sig-name descname">get_S</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_S" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -598,12 +573,14 @@ units.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_SoR">
-<code class="sig-name descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_SoR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless entropy</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_SoR">
+<code class="sig-name descname">get_SoR</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_SoR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless entropy using the LSR
+relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>SoR</strong> – Dimensionless entropy</p>
+<dd class="field-odd"><p><strong>SoR</strong> – Dimensionless entropy. Since LSR handles binding energies,
+always returns 0</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
@@ -612,8 +589,8 @@ units.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_U">
-<code class="sig-name descname">get_U</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_U" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_U">
+<code class="sig-name descname">get_U</code><span class="sig-paren">(</span><em class="sig-param">units</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_U" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -634,12 +611,17 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_UoRT">
-<code class="sig-name descname">get_UoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_UoRT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the dimensionless internal energy</p>
+<dt id="pmutt.statmech.lsr.ExtendedLSR.get_UoRT">
+<code class="sig-name descname">get_UoRT</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.get_UoRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the dimensionless internal energy using the Extended LSR
+relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to calculate reference binding energy, surface
+energy and gas-phase energy</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>UoRT</strong> – Dimensionless internal energy</p>
@@ -651,22 +633,18 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.get_q">
-<code class="sig-name descname">get_q</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.get_q" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the partition function</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>q</strong> – Partition function</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
-</dd>
-</dl>
-</dd></dl>
+<dt>
+<em class="property">property </em><code class="sig-name descname">reactions</code></dt>
+<dd></dd></dl>
 
 <dl class="method">
-<dt id="pmutt.statmech.ConstantMode.to_dict">
-<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.ConstantMode.to_dict" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">property </em><code class="sig-name descname">surf_species</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pmutt.statmech.lsr.ExtendedLSR.to_dict">
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.lsr.ExtendedLSR.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -690,10 +668,10 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../mixture/mixture.html" class="btn btn-neutral float-right" title="Mixture Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../nucl/pmutt.statmech.nucl.EmptyNucl.html" class="btn btn-neutral float-right" title="pmutt.statmech.nucl.EmptyNucl" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pmutt.statmech.EmptyMode.html" class="btn btn-neutral float-left" title="pmutt.statmech.EmptyMode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pmutt.statmech.lsr.LSR.html" class="btn btn-neutral float-left" title="pmutt.statmech.lsr.LSR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

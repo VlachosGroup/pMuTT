@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.empirical.nasa.Nasa9 &mdash; pmutt 1.2.19 documentation</title>
+  <title>pmutt.empirical.nasa.Nasa9 &mdash; pmutt 1.2.20 documentation</title>
   
 
   
@@ -311,8 +311,8 @@ a_{3} \ln {T} + a_{4} T + a_{5} \frac {T^{2}} {2} + a_{6}
 <tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.empirical.nasa.Nasa9.plot_statmech_and_empirical" title="pmutt.empirical.nasa.Nasa9.plot_statmech_and_empirical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_statmech_and_empirical</span></code></a>([T_low, T_high, …])</p></td>
 <td><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code> using empirical relationship</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.empirical.nasa.Nasa9.to_CTI" title="pmutt.empirical.nasa.Nasa9.to_CTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_CTI</span></code></a>()</p></td>
-<td><p>Writes the object in Cantera’s CTI format.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Nasa9.to_CTI</span></code></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.empirical.nasa.Nasa9.to_dict" title="pmutt.empirical.nasa.Nasa9.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
 <td><p>Represents object as dictionary with JSON-accepted datatypes</p></td>
@@ -928,8 +928,8 @@ specified, dimensionless units used.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.empirical.nasa.Nasa9.to_CTI">
-<code class="sig-name descname">to_CTI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_CTI" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.empirical.nasa.Nasa9.to_cti">
+<code class="sig-name descname">to_cti</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_cti" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -948,6 +948,20 @@ specified, dimensionless units used.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.empirical.nasa.Nasa9.to_yaml_dict">
+<code class="sig-name descname">to_yaml_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_yaml_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary compatible with Cantera’s YAML format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>yaml_dict</strong> – Dictionary compatible with Cantera’s YAML format</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
