@@ -20,9 +20,15 @@ class SurfaceReaction(Reaction):
             ID of the reaction. Default is None
         is_adsorption : bool, optional
             If True, the reaction represents an adsorption. Default is False
+        A : float, optional
+            Pre-exponential constant. If not specified, uses reaction to
+            determine value.
         beta : float, optional
             Power to raise the temperature in the rate expression. Default is 1
             if ``is_adsorption`` is False, 0 if ``is_adsorption`` is True.
+        Ea : float, optional
+            Activation energy in kcal/mol. If not specified, uses reaction to
+            determine value.
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True.
             Default is 0.5 if ``is_adsorption`` is True, None if
@@ -37,14 +43,18 @@ class SurfaceReaction(Reaction):
     def __init__(self,
                  id=None,
                  is_adsorption=False,
+                 A=None,
                  beta=None,
+                 Ea=None,
                  sticking_coeff=None,
                  direction=None,
                  **kwargs):
         super().__init__(**kwargs)
         self.id = id
         self.is_adsorption = is_adsorption
+        self.A = A
         self.beta = beta
+        self.Ea = Ea
         self.direction = direction
         self.sticking_coeff = sticking_coeff
 
@@ -59,10 +69,10 @@ class SurfaceReaction(Reaction):
                 self.bep = species
 
                 # Generate ID from BEP if not previously assigned
-                if self.id is None:
-                    new_id = species._get_new_id(direction=self.direction)
-                    self.id = '{}_{}_{:04d}'.format(species.name,
-                                                    self.direction[:3], new_id)
+                # if self.id is None:
+                #     new_id = species._get_new_id(direction=self.direction)
+                #     self.id = '{}_{}_{:04d}'.format(species.name,
+                #                                     self.direction[:3], new_id)
 
                 # Add reaction to BEP
                 if self.direction == 'synthesis':
@@ -145,41 +155,44 @@ class SurfaceReaction(Reaction):
             Parameters required to calculate pre-exponential factor
         """
 
-        if self.transition_state is None or not include_entropy:
-            A = c.kb('J/K') / c.h('J s')
+        if self.A is None:
+            if self.transition_state is None or not include_entropy:
+                A = c.kb('J/K') / c.h('J s')
+            else:
+                A = super().get_A(T=T, **kwargs) / T
+
+            # Uses site with highest site density
+            site_dens = []
+            for reactant, stoich in zip(self.reactants, self.reactants_stoich):
+                # Skip species without a catalyst site
+                try:
+                    site_den = reactant.phase.site_density
+                except AttributeError:
+                    continue
+                site_dens.extend([site_den] * int(stoich))
+
+            # Apply the operation to the site densities
+            if len(site_dens) == 0:
+                err_msg = ('At least one species requires a catalytic site with '
+                        'site density to calculate A.')
+                raise ValueError(err_msg)
+            eff_site_den = _apply_numpy_operation(quantity=site_dens,
+                                                operation=sden_operation,
+                                                verbose=False)
+            # Convert site density to appropriate unit
+            if isinstance(units, Units):
+                quantity_unit = units.quantity
+                area_unit = '{}2'.format(units.length)
+            else:
+                quantity_unit, area_unit = units.split('/')
+            eff_site_den = eff_site_den\
+                        *c.convert_unit(initial='mol', final=quantity_unit)\
+                        /c.convert_unit(initial='cm2', final=area_unit)
+
+            n_surf = self._get_n_surf()
+            A = A / eff_site_den**(n_surf - 1)
         else:
-            A = super().get_A(T=T, **kwargs) / T
-
-        # Uses site with highest site density
-        site_dens = []
-        for reactant, stoich in zip(self.reactants, self.reactants_stoich):
-            # Skip species without a catalyst site
-            try:
-                site_den = reactant.phase.site_density
-            except AttributeError:
-                continue
-            site_dens.extend([site_den] * int(stoich))
-
-        # Apply the operation to the site densities
-        if len(site_dens) == 0:
-            err_msg = ('At least one species requires a catalytic site with '
-                       'site density to calculate A.')
-            raise ValueError(err_msg)
-        eff_site_den = _apply_numpy_operation(quantity=site_dens,
-                                              operation=sden_operation,
-                                              verbose=False)
-        # Convert site density to appropriate unit
-        if isinstance(units, Units):
-            quantity_unit = units.quantity
-            area_unit = '{}2'.format(units.length)
-        else:
-            quantity_unit, area_unit = units.split('/')
-        eff_site_den = eff_site_den\
-                       *c.convert_unit(initial='mol', final=quantity_unit)\
-                       /c.convert_unit(initial='cm2', final=area_unit)
-
-        n_surf = self._get_n_surf()
-        A = A / eff_site_den**(n_surf - 1)
+            A = self.A
         return A
 
     def get_HoRT_act(self, rev=False, **kwargs):
@@ -299,7 +312,9 @@ class SurfaceReaction(Reaction):
                     species_delimiter='+',
                     reaction_delimiter='=',
                     notes=None,
+                    A=None,
                     beta=1,
+                    Ea=None,
                     is_adsorption=False,
                     sticking_coeff=0.5,
                     direction=None,
@@ -321,9 +336,16 @@ class SurfaceReaction(Reaction):
                 trailing spaces will be trimmed. Default is '='
             notes : str or dict, optional
                 Other notes such as the source of the reaction. Default is None
+            A : float, optional
+                Pre-exponential constant. If not specified, uses reaction to
+                determine value.
             beta : float, optional
-                Power to raise the temperature in the rate expression.
-                Default is 1
+                Power to raise the temperature in the rate expression. Default
+                is 1 if ``is_adsorption`` is False, 0 if ``is_adsorption``
+                is True.
+            Ea : float, optional
+                Activation energy. If not specified, uses reaction to determine
+                value.
             is_adsorption : bool, optional
                 If True, the reaction represents an adsorption. Default is False
             sticking_coeff : float, optional
@@ -347,7 +369,9 @@ class SurfaceReaction(Reaction):
                    transition_state=rxn.transition_state,
                    transition_state_stoich=rxn.transition_state_stoich,
                    notes=notes,
+                   A=A,
                    beta=beta,
+                   Ea=Ea,
                    is_adsorption=is_adsorption,
                    sticking_coeff=sticking_coeff,
                    direction=direction,
@@ -364,9 +388,11 @@ class SurfaceReaction(Reaction):
         obj_dict['beta'] = self.beta
         obj_dict['is_adsorption'] = self.is_adsorption
         obj_dict['sticking_coeff'] = self.sticking_coeff
+        obj_dict['A'] = self.A
+        obj_dict['Ea'] = self.Ea
         return obj_dict
 
-    def to_CTI(self,
+    def to_cti(self,
                T=c.T0('K'),
                P=c.P0('bar'),
                quantity_unit='molec',
@@ -420,25 +446,106 @@ class SurfaceReaction(Reaction):
             else:
                 id_str = ',\n                 id="{}"'.format(self.id)
 
+        act_val = c.convert_unit(self.Ea,
+                                 initial='kcal/mol',
+                                 final=act_energy_unit)
         if self.is_adsorption:
-            act_method = getattr(self, ads_act_method)
-            act_val = act_method(units=act_energy_unit, T=T, P=P)
+            # If activation energy not specified, calculate using requested
+            # method of activation
+            if act_val is None:
+                act_method = getattr(self, ads_act_method)
+                act_val = act_method(units=act_energy_unit, T=T, P=P)
+
             cti_str = ('surface_reaction("{}",\n'
                        '                 stick({: .5e}, {}, {: .5e}){})'
                        ''.format(reaction_str, self.sticking_coeff, self.beta,
                                  act_val, id_str))
         else:
             A_units = '{}/{}2'.format(quantity_unit, length_unit)
+            if act_val is None:
+                act_val = self.get_G_act(units=act_energy_unit, T=T, P=P)
             cti_str = ('surface_reaction("{}",\n'
                        '                 [{: .5e}, {}, {: .5e}]{})'
                        ''.format(reaction_str,
                                  self.get_A(T=T, P=P, include_entropy=False,
                                             units=A_units),
                                  self.beta,
-                                 self.get_G_act(units=act_energy_unit, T=T,
-                                                P=P),
+                                 act_val,
                                  id_str))
         return cti_str
+
+    def to_yaml_dict(self,
+                     T=c.T0('K'),
+                     P=c.P0('bar'),
+                     quantity_unit='molec',
+                     length_unit='cm',
+                     act_energy_unit='cal/mol',
+                     ads_act_method='get_H_act',
+                     units=None):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 298.15 K
+            P : float, optional
+                Pressure in bar. Default is 1 bar
+            quantity_unit : str, optional
+                Quantity unit to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to calculate A. Default is 'cm'
+            act_energy_unit : str, optional
+                Unit to use for activation energy. Default is 'cal/mol'
+            ads_act_method : str, optional
+                Activation method to use for adsorption reactions. Accepted 
+                options include 'get_H_act' and 'get_G_act'. Default is
+                'get_H_act'.
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit`, `length_unit`, and
+                `act_energy_unit` are overwritten. Default is None.
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        reaction_str = self.to_string(stoich_space=True,
+                                      species_delimiter=' + ',
+                                      reaction_delimiter=' <=> ',\
+                                      include_TS=False)
+        if units is not None:
+            quantity_unit = units.quantity
+            length_unit = units.length
+            act_energy_unit = units.act_energy
+
+        # Determine the reaction IDs
+        try:
+            id = self.id
+        except AttributeError:
+            id_str = ''
+        else:
+            if id is None:
+                id_str = ''
+            else:
+                id_str = ',\n                 id="{}"'.format(self.id)
+
+        if self.is_adsorption:
+            A = self.sticking_coeff
+            act_method = getattr(self, ads_act_method)
+            act_val = act_method(units=act_energy_unit, T=T, P=P)
+        else:
+            A_units = '{}/{}2'.format(quantity_unit, length_unit)
+            A = self.get_A(T=T, P=P, include_entropy=False, units=A_units)
+            act_val = act_method(units=act_energy_unit, T=T, P=P)
+
+        yaml_dict = {'equation': reaction_str,
+                     'type': 'elementary',
+                     'rate-constant': {'A': A,
+                                       'b': self.beta,
+                                       'Ea': act_val},
+                     'id': id_str,
+            }
+        return yaml_dict
+
 
 
 class BEP(BEP_parent):
@@ -465,7 +572,8 @@ class BEP(BEP_parent):
         self.cleavage_reactions = list(cleavage_reactions)
 
     def _get_bep_template(self, direction):
-        """Get the BEP reation ID template
+        """Deprecated in pMuTT version 1.2.20
+        Get the BEP reation ID template
 
         Parameters
         ----------
@@ -505,7 +613,8 @@ class BEP(BEP_parent):
         return reactions
 
     def _get_bep_reaction_ids(self, direction, format='int'):
-        """Get the indices of the reactions that match the BEP template.
+        """Deprecated in pMuTT version 1.2.20
+        Get the indices of the reactions that match the BEP template.
 
         Parameters
         ----------
@@ -535,7 +644,8 @@ class BEP(BEP_parent):
         return reaction_ids
 
     def _get_new_id(self, direction):
-        """Gets the ID for the new reaction being assigned.
+        """Deprecated in pMuTT version 1.2.20
+        Gets the ID for the new reaction being assigned.
         
         Parameters
         ----------
@@ -556,7 +666,7 @@ class BEP(BEP_parent):
             new_id = np.max(reaction_ids) + 1
         return new_id
 
-    def _get_reactions_CTI(self, direction):
+    def _get_reactions_CTI(self, direction, delimiter='_'):
         """Returns the reactions names using the BEP using the following format:
         <bep_id>_<direction>_<reaction_id>
         
@@ -572,35 +682,38 @@ class BEP(BEP_parent):
         if len(reactions) == 0:
             CTI_out = '[]'
         else:
-            CTI_out = '['
-            # Add reactions ranges with BEP template
-            bep_template = self._get_bep_template(direction=direction)
-            reaction_int_ids = self._get_bep_reaction_ids(direction=direction,
-                                                          format='int')
-            reaction_int_ids.sort()
-            reaction_id_ranges = mit.consecutive_groups(reaction_int_ids)
-            for id_range in reaction_id_ranges:
-                id_range = list(id_range)
-                if len(id_range) == 1:
-                    CTI_range = '"{}_{:04d}", '.format(bep_template,
-                                                       id_range[0])
-                else:
-                    CTI_range = ('"{0}_{1:04d} to {0}_{2:04d}", '
-                                 ''.format(bep_template, id_range[0],
-                                           id_range[-1]))
-                CTI_out += CTI_range
+            # CTI_out = '['
+            # # Add reactions ranges with BEP template
+            # bep_template = self._get_bep_template(direction=direction)
+            # reaction_int_ids = self._get_bep_reaction_ids(direction=direction,
+            #                                               format='int')
+            # reaction_int_ids.sort()
+            # reaction_id_ranges = mit.consecutive_groups(reaction_int_ids)
+            # for id_range in reaction_id_ranges:
+            #     id_range = list(id_range)
+            #     if len(id_range) == 1:
+            #         CTI_range = '"{}_{:04d}", '.format(bep_template,
+            #                                            id_range[0])
+            #     else:
+            #         CTI_range = ('"{0}_{1:04d} to {0}_{2:04d}", '
+            #                      ''.format(bep_template, id_range[0],
+            #                                id_range[-1]))
+            #     CTI_out += CTI_range
 
-            # Get reactions that do not have the BEP template
-            for reaction in reactions:
-                if isinstance(reaction.id,
-                              str) and bep_template in reaction.id:
-                    continue
-                CTI_out += '"{}", '.format(reaction.id)
+            # # Get reactions that do not have the BEP template
+            # for reaction in reactions:
+            #     if isinstance(reaction.id,
+            #                   str) and bep_template in reaction.id:
+            #         continue
+            #     CTI_out += '"{}", '.format(reaction.id)
 
-            CTI_out = '{}]'.format(CTI_out[:-2])
+            # CTI_out = '{}]'.format(CTI_out[:-2])
+            CTI_out = _get_range_CTI(objs=reactions,
+                                     parent_obj=self,
+                                     delimiter=delimiter)
         return CTI_out
 
-    def to_CTI(self, act_energy_unit=None, units=None, delimiter='_'):
+    def to_cti(self, act_energy_unit=None, units=None, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters

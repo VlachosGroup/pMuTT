@@ -1976,6 +1976,7 @@ class Reaction(_pmuttBase):
                     list(self.transition_state_stoich)
         else:
             obj_dict['transition_state_stoich'] = self.transition_state_stoich
+        obj_dict['reaction_str'] = str(self)
         return obj_dict
 
     @classmethod
@@ -1991,6 +1992,7 @@ class Reaction(_pmuttBase):
             Reaction : Reaction object
         """
         json_obj = remove_class(json_obj)
+        json_obj.pop('reaction_str', None)
         json_obj['reactants'] = [
             json_to_pmutt(reactant) for reactant in json_obj['reactants']
         ]

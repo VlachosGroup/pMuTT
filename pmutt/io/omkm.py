@@ -5,7 +5,7 @@ import yaml
 
 from pmutt import _force_pass_arguments, _is_iterable, pmutt_list_to_dict
 from pmutt.io import _get_file_timestamp
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.cantera import obj_to_cti
 from pmutt.io.ctml_writer import convert
 from pmutt.cantera.phase import IdealGas, StoichSolid
 from pmutt.omkm.phase import InteractingInterface
@@ -92,7 +92,7 @@ def write_cti(phases=None,
         units = Units()
     elif isinstance(units, dict):
         units = Units(**units)
-    lines.append(units.to_CTI())
+    lines.append(units.to_cti())
     '''Pre-assign IDs for lateral interactions so phases can be written'''
     if lateral_interactions is not None:
         lat_inter_lines = []
@@ -103,7 +103,7 @@ def write_cti(phases=None,
                     lat_interaction.name = '{:04d}'.format(i)
                     i += 1
 
-                lat_inter_CTI = _force_pass_arguments(lat_interaction.to_CTI,
+                lat_inter_CTI = _force_pass_arguments(lat_interaction.to_cti,
                                                       units=units)
                 lat_inter_lines.append(lat_inter_CTI)
     '''Pre-assign IDs for reactions so phases can be written'''
@@ -117,7 +117,7 @@ def write_cti(phases=None,
                 reaction.id = '{:04d}'.format(i)
                 i += 1
             # Write reaction
-            reaction_CTI = _force_pass_arguments(reaction.to_CTI, units=units,
+            reaction_CTI = _force_pass_arguments(reaction.to_cti, units=units,
                                                  T=T)
             reaction_lines.append(reaction_CTI)
 
@@ -133,13 +133,13 @@ def write_cti(phases=None,
     if phases is not None:
         lines.extend(['', '#' + '-' * 79, '# PHASES', '#' + '-' * 79])
         for phase in phases:
-            phase_CTI = _force_pass_arguments(phase.to_CTI, units=units)
+            phase_CTI = _force_pass_arguments(phase.to_cti, units=units)
             lines.append(phase_CTI)
     '''Write species'''
     if species is not None:
         lines.extend(['', '#' + '-' * 79, '# SPECIES', '#' + '-' * 79])
         for ind_species in species:
-            ind_species_CTI = _force_pass_arguments(ind_species.to_CTI,
+            ind_species_CTI = _force_pass_arguments(ind_species.to_cti,
                                                     units=units)
             lines.append(ind_species_CTI)
     '''Write lateral interactions'''
@@ -166,7 +166,7 @@ def write_cti(phases=None,
             # Only write each BEP once
             i = 0
             for bep in beps:
-                bep_CTI = _force_pass_arguments(bep.to_CTI, units=units)
+                bep_CTI = _force_pass_arguments(bep.to_cti, units=units)
                 # Increment counter if necessary
                 if bep.name is None:
                     i += 1
@@ -205,6 +205,9 @@ def write_yaml(reactor_type=None,
                step_size=None,
                atol=None,
                rtol=None,
+               full_SA=None,
+               reactions_SA=None,
+               species_SA=None,
                phases=None,
                reactor=None,
                inlet_gas=None,
@@ -308,6 +311,18 @@ def write_yaml(reactor_type=None,
         rtol : float
             Relative tolerance for solver. Value written to
             ``simulation.solver.rtol``.
+        full_SA : bool
+            If True, OpenMKM will do a full sensitivity analysis using the
+            Fisher Information Matrix (FIM). Value written to
+            ``simulation.sensitivity.full``.
+        reactions_SA : list of str or list of :class:`~pmutt.omkm.reaction.SurfaceReaction` obj
+            List of reactions to perturb using local sensitivity analysis (LSA).
+            If a list of :class:`~pmutt.omkm.reaction.SurfaceReaction` is given,
+            the ``id`` attribute will be used.
+        species_SA : list of str or list of :class:`~pmutt.empirical.EmpiricalBase` obj
+            List of species to perturb using local sensitivity analysis (LSA).
+            If a list of :class:`~pmutt.empirical.EmpiricalBase` is given,
+            the ``name`` attribute will be used.
         phases : list of ``Phase`` objects
             Phases present in reactor. Each phase should have the ``name``
             and ``initial_state`` attribute.
@@ -340,7 +355,7 @@ def write_yaml(reactor_type=None,
             Generic dictionary for any parameter specified at the top level.
         solver : dict
             Generic dictionary for solver to specify values not supported by
-            ``write_yaml``.            
+            ``write_yaml``.
         simulation : dict
             Generic dictionary for simultaion to specify values not supported by
             ``write_yaml``.            
@@ -414,7 +429,7 @@ def write_yaml(reactor_type=None,
 
     for parameter in reactor_params:
         _assign_yaml_val(parameter, reactor, units)
-    '''Organize inlet gas parameters'''
+
     if inlet_gas is None:
         inlet_gas = {}
     inlet_gas_params = [
@@ -429,14 +444,17 @@ def write_yaml(reactor_type=None,
         inlet_gas_params.append(
             _Param('flow_rate', multi_flow_rate[0], '_length3/_time'))
 
+    '''Process inlet gas parameters'''
     for parameter in inlet_gas_params:
         _assign_yaml_val(parameter, inlet_gas, units)
+
     '''Organize solver parameters'''
     if solver is None:
         solver = {}
     solver_params = [_Param('atol', atol, None), _Param('rtol', rtol, None)]
     for parameter in solver_params:
         _assign_yaml_val(parameter, solver, units)
+
     '''Organize multi parameters'''
     if multi_input is None:
         multi_input = {}
@@ -454,13 +472,60 @@ def write_yaml(reactor_type=None,
     ]
     for parameter in multi_input_params:
         _assign_yaml_val(parameter, multi_input, units)
+
+    '''Organize sensitivity parameters'''
+    sensitivity = {}
+    if reactions_SA is None:
+        reactions_SA_names = None
+    else:
+        reactions_SA_names = []
+        for reaction in reactions_SA:
+            if isinstance(reaction, str):
+                name = reaction
+            else:
+                try:
+                    name = reaction.id
+                except AttributeError:
+                    err_msg = ('Unable to write reaction id to reactor YAML '
+                               'file because object is invalid type ({}). '
+                               'Expected str or '
+                               'pmutt.omkm.reaction.SurfaceReaction type with '
+                               'id attribute assigned.'
+                               ''.format(type(reaction)))
+                    raise TypeError(err_msg)
+            reactions_SA_names.append(name)
+    if species_SA is None:
+        species_SA_names = None
+    else:
+        species_SA_names = []
+        for ind_species in species_SA:
+            if isinstance(ind_species, str):
+                name = ind_species
+            else:
+                try:
+                    name = ind_species.name
+                except AttributeError:
+                    err_msg = ('Unable to write species name to reactor YAML '
+                               'file because object is invalid type ({}). '
+                               'Expected str or '
+                               'pmutt.empirical.EmpiricalBase type with '
+                               'name attribute assigned.'
+                               ''.format(type(ind_species)))
+                    raise TypeError(err_msg)
+            species_SA_names.append(name)
+    sensitivity_params = (_Param('full', full_SA, None),
+                          _Param('reactions', reactions_SA_names, None),
+                          _Param('species', species_SA_names, None))
+    for parameter in sensitivity_params:
+        _assign_yaml_val(parameter, sensitivity, units)
+
     '''Organize simulation parameters'''
     if simulation is None:
         simulation = {}
-    simulation_params = (_Param('end_time', end_time,
-                                '_time'), _Param('transient', transient, None),
-                         _Param('stepping', stepping,
-                                None), _Param('step_size', step_size, None),
+    simulation_params = (_Param('end_time', end_time, '_time'),
+                         _Param('transient', transient, None),
+                         _Param('stepping', stepping, None),
+                         _Param('step_size', step_size, None),
                          _Param('init_step', init_step, None),
                          _Param('output_format', output_format, None))
     for parameter in simulation_params:
@@ -470,6 +535,10 @@ def write_yaml(reactor_type=None,
     if len(multi_input) > 0:
         _assign_yaml_val(_Param('multi_input', multi_input, None), simulation,
                          units)
+    if len(sensitivity) > 0:
+        _assign_yaml_val(_Param('sensitivity', sensitivity, None), simulation,
+                         units)
+
     '''Organize phase parameters'''
     if phases is not None:
         if isinstance(phases, dict):
@@ -572,20 +641,28 @@ def _assign_yaml_val(param, header, units=None):
                 vals_list[i] = val.replace(old_str, unit)
         header[param.label] = vals_list
 
-def read_yaml(filename):
+def read_yaml(filename, loader=None):
     """Reads the reactor options from an OpenMKM
     
     Parameters
     ----------
         filename : str
             Filename for the YAML file.
+        loader : yaml.Loader object
+            Loader to use for YAML.
+            `Supported loaders can be found on PyYAML documentation`_.
+            Default is ``yaml.SafeLoader``
     Returns
     -------
         reactor_options : dict
             Contents of YAML file expressed as dictionary.
+    
+    .. _`Supported loaders can be found on PyYAML documentation`: https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
     """
+    if loader is None:
+        loader = yaml.SafeLoader
     with open(filename, 'r') as f_ptr:
-        yaml_data = yaml.load(f_ptr)
+        yaml_data = yaml.load(f_ptr, Loader=loader)
 
     # TODO When VUnits is incorporated, initialize each parameter as a
     # Quantity object
@@ -744,3 +821,4 @@ def organize_phases(phases_data, species=None, reactions=None,
         phase = phase_class(**phase_data)
         phases.append(phase)
     return phases
+
