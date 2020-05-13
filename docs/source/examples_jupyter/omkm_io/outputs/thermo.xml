@@ -4,7 +4,7 @@
 
   <!-- phase gas     -->
   <phase id="gas" dim="3">
-    <elementArray datasrc="elements.xml">H N Ar</elementArray>
+    <elementArray datasrc="elements.xml">Ar N H</elementArray>
     <speciesArray datasrc="#species_data">N2 NH3 H2 Ar</speciesArray>
     <thermo model="IdealGas"/>
     <kinetics model="GasKinetics"/>
@@ -25,7 +25,7 @@
 
   <!-- phase terrace     -->
   <phase id="terrace" dim="2">
-    <elementArray datasrc="elements.xml">H N Ru</elementArray>
+    <elementArray datasrc="elements.xml">Ru N H</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0000" max="0006"/>
@@ -37,7 +37,7 @@
     <interactionArray datasrc="#interaction_data">
       <include min="0000" max="0004"/>
     </interactionArray>
-    <bepArray datasrc="#bep_data">NH2-H NH-H N-H</bepArray>
+    <bepArray datasrc="#bep_data">NH-H N-H</bepArray>
     <kinetics model="Interface"/>
     <transport model="None"/>
     <phaseArray>gas bulk</phaseArray>
@@ -45,7 +45,7 @@
 
   <!-- phase step     -->
   <phase id="step" dim="2">
-    <elementArray datasrc="elements.xml">H N Ru</elementArray>
+    <elementArray datasrc="elements.xml">Ru N H</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="0007" max="0013"/>
@@ -529,7 +529,7 @@
         <Arrhenius type="stick" species="H2">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">0.000000</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>H2:1.0 RU(T):2.0</reactants>
@@ -543,7 +543,7 @@
         <Arrhenius type="stick" species="N2">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">0.000000</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N2:1.0 RU(T):1</reactants>
@@ -557,7 +557,7 @@
         <Arrhenius type="stick" species="NH3">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">0.000000</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3:1.0 RU(T):1</reactants>
@@ -569,9 +569,9 @@
       <equation>NH3(T) + RU(T) [=] NH2(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>1.000000E+23</A>
+           <A>9.600000E+16</A>
            <b>1</b>
-           <E units="kcal/mol">23.000000</E>
+           <E units="kcal/mol">14.200000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3(T):1.0 RU(T):1</reactants>
@@ -585,7 +585,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">10.631700</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH2(T):1.0 RU(T):1</reactants>
@@ -599,7 +599,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">23.183300</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH(T):1.0 RU(T):1</reactants>
@@ -613,7 +613,7 @@
         <Arrhenius>
            <A>9.614970E+17</A>
            <b>1</b>
-           <E units="kcal/mol">91.488900</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N(T):2.0 RU(B):1</reactants>
@@ -627,7 +627,7 @@
         <Arrhenius type="stick" species="H2">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">0.000000</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>H2:1.0 RU(S):2.0</reactants>
@@ -641,7 +641,7 @@
         <Arrhenius type="stick" species="N2">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">0.000000</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N2:1.0 RU(S):1</reactants>
@@ -655,7 +655,7 @@
         <Arrhenius type="stick" species="NH3">
            <A>5.000000E-01</A>
            <b>0</b>
-           <E units="kcal/mol">0.000000</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3:1.0 RU(S):1</reactants>
@@ -669,7 +669,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">13.395800</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3(S):1.0 RU(S):1</reactants>
@@ -683,7 +683,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">18.498900</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH2(S):1.0 RU(S):1</reactants>
@@ -697,7 +697,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">25.894500</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N(S):1.0 H(S):1 RU(B):1</reactants>
@@ -711,7 +711,7 @@
         <Arrhenius>
            <A>4.694520E+18</A>
            <b>1</b>
-           <E units="kcal/mol">45.088200</E>
+           <E units="kcal/mol">1.000000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>N(S):2.0 RU(B):1</reactants>
@@ -792,22 +792,6 @@
   </interactionData>
   <bepData id="bep_data">
 
-    <!-- bep NH2-H    -->
-    <bep id="NH2-H">
-      <alpha>0.71</alpha>
-      <beta units="kcal/mol">23.690000</beta>
-      <direction>cleavage</direction>
-      <cleavage_reactions>
-        <reactionArray datasrc="#reaction_data">
-           <include min="0003" max="0003"/>
-        </reactionArray>
-        <reactionArray datasrc="#reaction_data">
-           <include min="0010" max="0010"/>
-        </reactionArray>
-      </cleavage_reactions>
-      <synthesis_reactions/>
-    </bep>
-
     <!-- bep NH-H    -->
     <bep id="NH-H">
       <alpha>0.52</alpha>
@@ -839,6 +823,19 @@
            <include min="0012" max="0012"/>
         </reactionArray>
       </synthesis_reactions>
+    </bep>
+
+    <!-- bep NH2-H    -->
+    <bep id="NH2-H">
+      <alpha>0.71</alpha>
+      <beta units="kcal/mol">23.690000</beta>
+      <direction>cleavage</direction>
+      <cleavage_reactions>
+        <reactionArray datasrc="#reaction_data">
+           <include min="0010" max="0010"/>
+        </reactionArray>
+      </cleavage_reactions>
+      <synthesis_reactions/>
     </bep>
   </bepData>
 </ctml>
