@@ -427,6 +427,7 @@ Electronic Models
 
    elec.GroundStateElec
    lsr.LSR
+   lsr.ExtendedLSR
 
 --------------------------------------------------------------------------------
 
