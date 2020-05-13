@@ -27,8 +27,8 @@ class SurfaceReaction(Reaction):
             Power to raise the temperature in the rate expression. Default is 1
             if ``is_adsorption`` is False, 0 if ``is_adsorption`` is True.
         Ea : float, optional
-            Activation energy. If not specified, uses reaction to determine
-            value.
+            Activation energy in kcal/mol. If not specified, uses reaction to
+            determine value.
         sticking_coeff : float, optional
             Sticking coefficient. Only relevant if ``is_adsorption`` is True.
             Default is 0.5 if ``is_adsorption`` is True, None if
@@ -388,6 +388,8 @@ class SurfaceReaction(Reaction):
         obj_dict['beta'] = self.beta
         obj_dict['is_adsorption'] = self.is_adsorption
         obj_dict['sticking_coeff'] = self.sticking_coeff
+        obj_dict['A'] = self.A
+        obj_dict['Ea'] = self.Ea
         return obj_dict
 
     def to_cti(self,
@@ -444,7 +446,9 @@ class SurfaceReaction(Reaction):
             else:
                 id_str = ',\n                 id="{}"'.format(self.id)
 
-        act_val = self.Ea
+        act_val = c.convert_unit(self.Ea,
+                                 initial='kcal/mol',
+                                 final=act_energy_unit)
         if self.is_adsorption:
             # If activation energy not specified, calculate using requested
             # method of activation
