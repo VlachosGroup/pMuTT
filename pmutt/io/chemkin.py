@@ -68,7 +68,7 @@ def read_reactions(filename, species=None):
     Prod_stoic = []
     for Reacs, Prods in zip(LHS, RHS):
         Reactants.append(re.split(r' *\+ *| +', Reacs))
-        Products.append(re.split(r' *\+ *| +', Prods)[0:-3])
+        Products.append(re.split(r' *\+ *| +', Prods))
         R = []
         RS = []
         Rx = []
@@ -77,7 +77,7 @@ def read_reactions(filename, species=None):
             if stoic == '':
                 stoic = 1
             else:
-                RR = RR.replace(stoic, "")
+                RR = RR.replace(stoic, "", 1)
                 stoic = int(stoic)
             Rx.append(RR)
             RS.append(stoic)
@@ -93,7 +93,7 @@ def read_reactions(filename, species=None):
             if stoic == '':
                 stoic = 1
             else:
-                PP = PP.replace(stoic, "")
+                PP = PP.replace(stoic, "", 1)
                 stoic = int(stoic)
             Px.append(PP)
             PS.append(stoic)
