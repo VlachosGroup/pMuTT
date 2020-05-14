@@ -23,17 +23,11 @@
 # 
 # The ``refs``, ``beps`` and ``lateral_interactions`` sheets can be deleted and the code written below should still work.
 
-# First, we change the working directory to the location of the Jupyter notebook.
-
-
-
-
 import os
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from IPython.display import display
 
 from pmutt import pmutt_list_to_dict
 from pmutt.empirical.nasa import Nasa
@@ -73,7 +67,8 @@ try:
     refs_data = read_excel(io=input_path, sheet_name='refs')
 except:
     # If references are not used, skip this section
-    print('The "refs" sheet could not be found in {}. Skiping references'.format(input_path))
+    print(('The "refs" sheet could not be found in {}.'
+           'Skiping references'.format(input_path)))
     refs = None
 else:
     refs = [Reference(**ref_data) for ref_data in refs_data]
@@ -87,14 +82,20 @@ else:
 species_data = read_excel(io=input_path, sheet_name='species')
 
 # Create NASA polynomials from the species
-species = [Nasa.from_model(references=refs, **ind_species_data)            for ind_species_data in species_data]
+species = [Nasa.from_model(references=refs, **ind_species_data) \
+           for ind_species_data in species_data]
 
 
 # ### Adding species from other empirical sources (optional)
 # 
 # Note that OpenMKM also supports [``Shomate``](https://vlachosgroup.github.io/pMuTT/api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate) and [``NASA9``](https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html) objects. Below, we define a single ``Shomate`` species.
-Ar = Shomate(name='Ar', elements={'Ar': 1}, phase='gas', T_low=298., T_high=6000.,
-             a=np.array([20.78600, 2.825911e-7, -1.464191e-7, 1.092131e-8, -3.661371e-8, -6.19735, 179.999, 0.]))
+Ar = Shomate(name='Ar',
+             elements={'Ar': 1},
+             phase='gas',
+             T_low=298.,
+             T_high=6000.,
+             a=np.array([20.78600, 2.825911e-7, -1.464191e-7, 1.092131e-8,
+                         -3.661371e-8, -6.19735, 179.999, 0.]))
 species.append(Ar)
 
 
@@ -104,7 +105,8 @@ species.append(Ar)
 try:
     beps_data = read_excel(io=input_path, sheet_name='beps')
 except:
-    print('The "beps" sheet could not be found in {}. Skiping BEPs'.format(input_path))
+    print(('The "beps" sheet could not be found in {}. '
+           'Skiping BEPs'.format(input_path)))
     beps = None
     species_with_beps = species.copy()
 else:
@@ -119,20 +121,24 @@ else:
 species_with_beps_dict = pmutt_list_to_dict(species_with_beps)
 
 reactions_data = read_excel(io=input_path, sheet_name='reactions')
-reactions = [SurfaceReaction.from_string(species=species_with_beps_dict, **reaction_data)              for reaction_data in reactions_data]
+reactions = [SurfaceReaction.from_string(species=species_with_beps_dict, **reaction_data) \
+             for reaction_data in reactions_data]
 
 
 # ### Read lateral interactions (optional)
 # 
 # After, we read lateral interactions to include.
 try:
-    interactions_data = read_excel(io=input_path, sheet_name='lateral_interactions')
+    interactions_data = read_excel(io=input_path,
+                                   sheet_name='lateral_interactions')
 except:
     # If no lateral interactions exist, skip this section
-    print('The "lateral_interactions" sheet could not be found in {}. Skiping lateral interactions'.format(input_path))
+    print(('The "lateral_interactions" sheet could not be found in {}.'
+           'Skiping lateral interactions'.format(input_path)))
     interactions = None
 else:
-    interactions = [PiecewiseCovEffect(**interaction_data) for interaction_data in interactions_data]
+    interactions = [PiecewiseCovEffect(**interaction_data) \
+                    for interaction_data in interactions_data]
 
 
 # ### Reading Phases
@@ -140,7 +146,8 @@ else:
 # Finally, we read the phases data from Excel and organize it for use in OpenMKM.
 # Read data from Excel sheet about phases
 phases_data = read_excel(io=input_path, sheet_name='phases')
-phases = organize_phases(phases_data, species=species, reactions=reactions, interactions=interactions)
+phases = organize_phases(phases_data, species=species, reactions=reactions,
+                         interactions=interactions)
 
 
 # ## Write YAML File
@@ -160,8 +167,7 @@ write_yaml(filename=yaml_path, phases=phases, units=units, **reactor_data)
 cti_path = './outputs/thermo.cti'
 use_motz_wise = True
 T = reactor_data['T']
-P = reactor_data['P']
 
 write_cti(reactions=reactions, species=species, phases=phases, units=units,
           lateral_interactions=interactions, filename=cti_path,
-          use_motz_wise=use_motz_wise, T=T, P=P)
+          use_motz_wise=use_motz_wise, T=T, P=1.)
