@@ -1,7 +1,7 @@
 import more_itertools as mit
 
 
-def _get_range_CTI(objs, parent_obj=None, delimiter='_'):
+def _get_omkm_range(objs, parent_obj=None, delimiter='_', format='str'):
     """Returns the objs IDs
     
     Parameters
@@ -14,6 +14,8 @@ def _get_range_CTI(objs, parent_obj=None, delimiter='_'):
         delimiter : str, optional
             Delimiter to separate header and footer of obj strings. Default is
             '_'
+        format : str, optional
+            Format to output range. Supported options include 'str' and 'list'.
     Returns
     -------
         CTI_range_out : str
@@ -103,4 +105,7 @@ def _get_range_CTI(objs, parent_obj=None, delimiter='_'):
                                            footer_range[-1]))
                 CTI_out += CTI_range
         CTI_out = '{}]'.format(CTI_out[:-2])
+        if format == 'list':
+            CTI_out = CTI_out.replace('[', '').replace(']', '')
+            CTI_out = CTI_out.split(', ')
     return CTI_out

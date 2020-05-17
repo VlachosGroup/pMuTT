@@ -9,6 +9,7 @@ import numpy as np
 
 from pmutt import _ModelBase
 from pmutt import constants as c
+from pmutt.omkm import _Param, _assign_yaml_val
 from pmutt.io.json import remove_class
 
 
@@ -202,6 +203,30 @@ class PiecewiseCovEffect(_ModelBase):
                          ''.format(self.name_i, self.name_j,
                                    self.intervals, slopes, self.name))
         return lat_inter_str
+
+    def to_omkm_yaml(self, energy_unit=None, units=None):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            energy_unit : str, optional
+                Unit to use for energy. Default is 'cal/mol'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `energy_unit` is overwritten. Default is None.
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        yaml_dict = {}
+        yaml_dict['species'] = [self.name_i, self.name_j]
+        yaml_dict['coverage_threshold'] = self.intervals
+        '''Assign slope'''
+        strength_param = _Param('strength', self.slopes, '_energy')
+        _assign_yaml_val(strength_param, yaml_dict, units)
+        yaml_dict['id'] = self.name
+        return yaml_dict
+
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes

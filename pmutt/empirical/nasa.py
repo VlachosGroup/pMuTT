@@ -696,7 +696,7 @@ class Nasa(EmpiricalBase):
         obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
-    def to_yaml_dict(self):
+    def to_omkm_yaml(self):
         """Returns a dictionary compatible with Cantera's YAML format
         
         Returns
@@ -704,17 +704,19 @@ class Nasa(EmpiricalBase):
             yaml_dict : dict
                 Dictionary compatible with Cantera's YAML format
         """
-        return {
+        yaml_dict = {
             'name': self.name,
             'composition': self.elements,
-            'sites': self.n_sites,
             'thermo': {'model': 'NASA7',
-                       'temperature-ranges': [self.T_low,
-                                              self.T_mid,
-                                              self.T_high],
+                       'temperature-ranges': [float(self.T_low),
+                                              float(self.T_mid),
+                                              float(self.T_high)],
                        'data': [self.a_low.tolist(),
                                 self.a_high.tolist()]} 
         }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites
+        return yaml_dict
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -1299,7 +1301,7 @@ class Nasa9(EmpiricalBase):
         obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
-    def to_yaml_dict(self):
+    def to_omkm_yaml(self):
         """Returns a dictionary compatible with Cantera's YAML format
         
         Returns
@@ -1310,10 +1312,11 @@ class Nasa9(EmpiricalBase):
         yaml_dict = {
             'name': self.name,
             'composition': self.elements,
-            'sites': self.n_sites,
             'thermo': {'model': 'NASA9',
                        'reference-pressure': '1 bar'},            
         }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites
         
         # Ensure that sorted NASAs are consistent whether using T_low or T_high
         nasas_sorted_T_low = sorted(self.nasas, key=lambda nasa: nasa.T_low)
@@ -1324,9 +1327,9 @@ class Nasa9(EmpiricalBase):
         yaml_dict['thermo']['temperature-ranges'] = []
         yaml_dict['thermo']['data'] = []
         for nasa in nasas_sorted_T_low:
-            yaml_dict['thermo']['temperature-ranges'].append(nasa.T_low)
+            yaml_dict['thermo']['temperature-ranges'].append(float(nasa.T_low))
             yaml_dict['thermo']['data'].append(nasa.a.tolist())
-        yaml_dict['thermo']['temperature-ranges'].append(nasa.T_high)
+        yaml_dict['thermo']['temperature-ranges'].append(float(nasa.T_high))
 
         return yaml_dict
 
