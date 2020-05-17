@@ -819,7 +819,7 @@ class BEP(BEP_parent):
         _assign_yaml_val(intercept_param, yaml_dict, units)
 
         yaml_dict['direction'] = self.direction
-        yaml_dict['cleavage_reactions']: cleavage_reactions
-        yaml_dict['synthesis_reactions']: synthesis_reactions
+        yaml_dict['cleavage_reactions'] = cleavage_reactions
+        yaml_dict['synthesis_reactions'] = synthesis_reactions
 
         return yaml_dict
