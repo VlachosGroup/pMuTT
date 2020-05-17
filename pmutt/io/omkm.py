@@ -8,25 +8,10 @@ from pmutt.io import _get_file_timestamp
 from pmutt.io.cantera import obj_to_cti
 from pmutt.io.ctml_writer import convert
 from pmutt.cantera.phase import IdealGas, StoichSolid
+from pmutt.omkm import _Param, _assign_yaml_val
 from pmutt.omkm.phase import InteractingInterface
 from pmutt.omkm import phase as omkm_phases
 from pmutt.omkm.units import Units
-
-_Param = namedtuple('_Param', 'label val units')
-"""Parameters as a NamedTuple for easier unit passing for YAML file.
-
-    Attributes
-    ----------
-        label : str
-            Label name for attribute being assigned.
-        val : obj
-            Value that is assigned to header[label] if the key does not exist or
-            val is None.
-        val_units : str
-            Units for ``val`` where quantities are proceeded by '_'.
-            e.g. '_length3/_time' for the volumetric flow rate.
-"""
-
 
 def write_cti(phases=None,
               species=None,
@@ -185,6 +170,165 @@ def write_cti(phases=None,
         # Or return as string
         return lines_out
 
+def write_thermo_yaml(phases=None, species=None, reactions=None,
+                      lateral_interactions=None, units=None,
+                      filename=None, T=300., P=1., newline='\n',
+                      ads_act_method='get_H_act',
+                      yaml_options={'default_flow_style': None, 'indent': 2,
+                                    'sort_keys': False, 'width': 79}):
+    """Writes the units, phases, species, lateral interactions, reactions and 
+    additional options in the CTI format for OpenMKM
+    
+    Parameters
+    ----------
+        phases : list of :class:`~pmutt.omkm.phase.Phase` objects
+            Phases to write in YAML file. The species should already be assigned.
+        species : list of :class:`~pmutt.empirical.nasa.Nasa`, :class:`~pmutt.empirical.nasa.Nasa9` or :class:`~pmutt.empirical.shomate.Shomate`
+            Species to write in YAML file.
+        reactions : list of :class:`~pmutt.omkm.reaction.SurfaceReaction`
+            Reactions to write in YAML file.
+        lateral_interactions : list of :class:`~pmutt.mixture.cov.PiecewiseCovEffect` objects, optional
+            Lateral interactions to include in YAML file. Default is None.
+        units : dict or :class:`~pmutt.omkm.units.Unit` object, optional
+            Units to write file. If a dict is inputted, the key is the quantity
+            and the value is the unit. If not specified, uses the default units
+            of :class:`~pmutt.omkm.units.Unit`.
+        filename: str, optional
+            Filename for the input.yaml file. If not specified, returns file
+            as str.
+        T : float, optional
+            Temperature in K. Default is 300 K.
+        P : float, optional
+            Pressure in atm. Default is 1 atm.
+        newline : str, optional
+            Type of newline to use. Default is Linux newline ('\\n')
+        ads_act_method : str, optional
+            Activation method to use for adsorption reactions. Accepted 
+            options include 'get_H_act' and 'get_G_act'. Default is
+            'get_H_act'.
+    Returns
+    -------
+        lines_out : str
+            If ``filename`` is None, CTI file is returned.
+    """
+    lines = [
+        _get_file_timestamp(comment_char='# '),
+        '# See documentation for OpenMKM YAML file here:',
+        '# https://vlachosgroup.github.io/openmkm/input',
+    ]
+    yaml_dict = {}
+
+    '''Organize units units'''
+    if units is None:
+        units = Units()
+    elif isinstance(units, dict):
+        units = Units(**units)
+    units_out = units.to_omkm_yaml()
+
+    '''Pre-assign IDs for lateral interactions so phases can be written'''
+    if lateral_interactions is not None:
+        interactions_out = []
+        i = 0
+        for lat_interaction in lateral_interactions:
+            if lat_interaction.name is None:
+                lat_interaction.name = 'i_{:04d}'.format(i)
+                i += 1
+            interaction_dict = lat_interaction.to_omkm_yaml(units=units)
+            interactions_out.append(interaction_dict)
+
+    '''Pre-assign IDs for reactions so phases can be written'''
+    beps = []
+    if reactions is not None:
+        reactions_out = []
+        i = 0
+        for reaction in reactions:
+            # Assign reaction ID if not present
+            if reaction.id is None:
+                reaction.id = 'r_{:04d}'.format(i)
+                i += 1
+            # Write reaction
+            reaction_dict = reaction.to_omkm_yaml(units=units, T=T)
+            reactions_out.append(reaction_dict)
+
+            # Add unique BEP relationship if any
+            try:
+                bep = reaction.bep
+            except AttributeError:
+                pass
+            else:
+                if bep is not None and bep not in beps:
+                    beps.append(bep)
+
+    '''Write phases'''
+    if phases is not None:
+        phases_out = []
+        for phase in phases:
+            phase_dict = _force_pass_arguments(phase.to_omkm_yaml, units=units)
+            phases_out.append(phase_dict)
+        # yaml_dict['phases'] = phases_out
+
+    '''Write species'''
+    if species is not None:
+        species_out = []
+        for ind_species in species:
+            ind_species_dict = _force_pass_arguments(ind_species.to_omkm_yaml,
+                                                     units=units)
+            species_out.append(ind_species_dict)
+        # yaml_dict['species'] = species_out
+
+    '''Organize BEPs'''
+    if len(beps) > 0:
+        beps_out = []
+        i = 0
+        for bep in beps:
+            # Assign name if necessary
+            if bep.name is None:
+                bep.name = 'b_{:04d}'.format(i)
+                i += 1
+            bep_dict = _force_pass_arguments(bep.to_omkm_yaml, units=units)
+            beps_out.append(bep_dict)
+        # yaml_dict['beps'] = beps_out
+
+    '''Organize fields'''
+    fields = ('units', 'phases', 'species', 'reactions',
+              'beps', 'interactions',)
+    for field in fields:
+        try:
+            val = locals()['{}_out'.format(field)]
+        except:
+            pass
+        else:
+            # Create a YAML string
+            yaml_str = yaml.dump(data={field: val},
+                                 stream=None,
+                                 **yaml_options)
+            lines.extend(
+                ['',
+                 '#' + '-' * 79,
+                 '# {}'.format(field.upper()),
+                 '#' + '-' * 79,
+                 yaml_str])
+
+            # yaml_dict[field] = val
+
+    # Convert to YAML format
+    # yaml_str = yaml.dump(data=yaml_dict, stream=None, **yaml_options)
+    # Remove redundant quotes
+    # yaml_str = yaml_str.replace('\'', '')
+    # lines.append(yaml_str)
+
+    lines_out = '\n'.join(lines)
+    # Remove redundant strings
+    lines_out = lines_out.replace('\'', '')
+    # Add spacing between list elements
+    lines_out = lines_out.replace('\n-', '\n\n-')
+    if filename is not None:
+        filename = Path(filename)
+        with open(filename, 'w', newline=newline) as f_ptr:
+            f_ptr.write(lines_out)
+    else:
+        # Or return as string
+        return lines_out
 
 def write_yaml(reactor_type=None,
                mode=None,
@@ -596,50 +740,6 @@ def write_yaml(reactor_type=None,
     else:
         # Or return as string
         return lines_out
-
-
-def _assign_yaml_val(param, header, units=None):
-    """Helper method to assign label to header
-    
-    Parameters
-    ----------
-        param : _Param namedtuple
-            Parameter with three attributes: ``label``, ``val``, ``units``
-        header : dict
-            Upper level dictionary that ``label`` will be nested under.
-        units : :class:`~pmutt.omkm.units.Unit` object, optional
-            Units to write file.
-    """
-    # Do nothing if the label was previously assigned
-    if param.label in header:
-        return
-    # Do nothing if value is not specified
-    if param.val is None:
-        return
-    if isinstance(param.val, str):
-        param = param._replace(val='\"{}\"'.format(param.val))
-    # Assign the value as is if the unit type is None
-    if param.units is None:
-        header[param.label] = param.val
-        return
-    # Assume SI units if units is not specified
-    if param.units is None:
-        header[param.label] = param.val
-        return
-    # If the value is numerical and units were specified, add the units
-    if isinstance(param.val, (int, float)):
-        val_str = '\"{} {}\"'.format(param.val, param.units)
-        for unit_type, unit in units.__dict__.items():
-            val_str = val_str.replace('_{}'.format(unit_type), unit)
-        header[param.label] = val_str
-    # If the value is a list and units were specified, add units to each entry
-    elif isinstance(param.val, list):
-        vals_list = ['\"{} {}\"'.format(i, param.units) for i in param.val]
-        for unit_type, unit in units.__dict__.items():
-            old_str = '_{}'.format(unit_type)
-            for i, val in enumerate(vals_list):
-                vals_list[i] = val.replace(old_str, unit)
-        header[param.label] = vals_list
 
 def read_yaml(filename, loader=None):
     """Reads the reactor options from an OpenMKM

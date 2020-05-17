@@ -72,7 +72,7 @@ class Units:
             'mass_unit': self.mass
         }
 
-    def to_yaml_dict(self):
+    def to_omkm_yaml(self):
         """Returns a dictionary compatible with Cantera's YAML format
         
         Returns
@@ -85,5 +85,5 @@ class Units:
                 'time': self.time,
                 'quantity': self.quantity,
                 'energy': self.energy,
-                'act_energy': self.act_energy,
+                'activation-energy': self.act_energy,
                 'pressure': self.pressure}

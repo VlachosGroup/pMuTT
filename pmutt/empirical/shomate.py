@@ -599,7 +599,7 @@ class Shomate(EmpiricalBase):
         obj_dict['units'] = self.units
         return obj_dict
 
-    def to_yaml_dict(self):
+    def to_omkm_yaml(self):
         """Returns a dictionary compatible with Cantera's YAML format
         
         Returns
@@ -607,15 +607,17 @@ class Shomate(EmpiricalBase):
             yaml_dict : dict
                 Dictionary compatible with Cantera's YAML format
         """
-        return {
+        yaml_dict = {
             'name': self.name,
             'composition': self.elements,
-            'sites': self.n_sites,
             'thermo': {'model': 'Shomate',
-                       'temperature-ranges': [self.T_low,
-                                              self.T_high],
-                       'data': [self.a.tolist()]} 
+                       'temperature-ranges': [float(self.T_low),
+                                              float(self.T_high)],
+                       'data': [self.a.tolist()[:-1]]} 
         }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites,
+        return yaml_dict
 
     @classmethod
     def from_dict(cls, json_obj):

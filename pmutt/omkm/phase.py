@@ -1,5 +1,6 @@
 from pmutt import constants as c
-from pmutt.cantera import _get_range_CTI
+from pmutt.cantera import _get_omkm_range
+from pmutt.omkm import _Param, _assign_yaml_val
 import pmutt.cantera.phase as phase_cantera
 
 
@@ -8,8 +9,53 @@ class IdealGas(phase_cantera.IdealGas):
     differences between this class and :class:`~pmutt.cantera.phase.IdealGas`
     but one could add changes here in the future if necessary.
     """
-    pass
 
+    def to_omkm_yaml(self,
+                     T=300.,
+                     P=1.,
+                     pressure_unit='atm',
+                     units=None):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 300 K
+            P : float, optional
+                Pressure in atm. Default is 1 atm
+            quantity_unit : str, optional
+                Quantity unit to use to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to use to calculate A. Default is 'cm'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit` and `length_unit` are overwritten.
+                Default is None.
+            delimiter : str, optional
+                Delimiter used to separate header from footer of reaction and
+                lateral interaction IDs. Default is '_'.
+        Returns
+        -------
+            yaml_dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        if units is not None:
+            pressure_unit = units.pressure
+
+        species_names = [species.name for species in self.species]
+
+        yaml_dict = {}
+        yaml_dict['name'] = self.name
+        yaml_dict['elements'] = list(self.elements)
+        yaml_dict['species'] = species_names
+        yaml_dict['thermo'] = 'ideal-gas'
+        yaml_dict['kinetics'] = 'gas'
+
+        '''Assign reactions'''
+        if self.reactions is None or len(self.reactions) == 0:
+            yaml_dict['reactions'] = 'none'
+        else:
+            yaml_dict['reactions'] = 'all'
+        return yaml_dict
 
 class StoichSolid(phase_cantera.StoichSolid):
     """OpenMKM implementation of the stoichiometric solid phase. Currently there
@@ -17,7 +63,44 @@ class StoichSolid(phase_cantera.StoichSolid):
     :class:`~pmutt.cantera.phase.StoichSolid` but one could add changes here in
     the future if necessary.
     """
-    pass
+
+    def to_omkm_yaml(self,
+                     T=300.,
+                     P=1.,
+                     pressure_unit='atm',
+                     units=None):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            T : float, optional
+                Temperature in K. Default is 300 K
+            P : float, optional
+                Pressure in atm. Default is 1 atm
+            quantity_unit : str, optional
+                Quantity unit to use to calculate A. Default is 'molec'
+            length_unit : str, optional
+                Length unit to use to calculate A. Default is 'cm'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `quantity_unit` and `length_unit` are overwritten.
+                Default is None.
+        Returns
+        -------
+            yaml_dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        if units is not None:
+            pressure_unit = units.pressure
+
+        species_names = [species.name for species in self.species]
+
+        yaml_dict = {
+            'name': self.name,
+            'elements': list(self.elements),
+            'species': species_names,
+            'thermo': 'fixed-stoichiometry'
+        }
+        return yaml_dict
 
 
 class InteractingInterface(phase_cantera.Phase):
@@ -169,7 +252,7 @@ class InteractingInterface(phase_cantera.Phase):
             cti_str += ('                      {}={},\n'
                         ''.format(
                             range_field,
-                            _get_range_CTI(objs=val,
+                            _get_omkm_range(objs=val,
                                            parent_obj=self,
                                            delimiter=delimiter)))
 
@@ -195,15 +278,21 @@ class InteractingInterface(phase_cantera.Phase):
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
 
-    def to_yaml_dict(self,
+    def to_omkm_yaml(self,
+                     T=300.,
+                     P=1.,
                      quantity_unit='molec',
                      length_unit='cm',
-                     units=None,
-                     delimiter='_'):
+                     pressure_unit='atm',
+                     units=None):
         """Writes the object in Cantera's YAML format.
 
         Parameters
         ----------
+            T : float, optional
+                Temperature in K. Default is 300 K
+            P : float, optional
+                Pressure in atm. Default is 1 atm
             quantity_unit : str, optional
                 Quantity unit to use to calculate A. Default is 'molec'
             length_unit : str, optional
@@ -211,9 +300,6 @@ class InteractingInterface(phase_cantera.Phase):
             units : :class:`~pmutt.omkm.units.Units` object
                 If specified, `quantity_unit` and `length_unit` are overwritten.
                 Default is None.
-            delimiter : str, optional
-                Delimiter used to separate header from footer of reaction and
-                lateral interaction IDs. Default is '_'.
         Returns
         -------
             yaml_dict
@@ -222,50 +308,44 @@ class InteractingInterface(phase_cantera.Phase):
         if units is not None:
             quantity_unit = units.quantity
             length_unit = units.length
+            pressure_unit = units.pressure
 
         species_names = [species.name for species in self.species]
+        yaml_dict = {
+            'name': self.name,
+            'elements': list(self.elements),
+            'species': species_names,
+            'kinetics': 'surface',
+        }
+
+        '''Assign site density'''
+        # Convert to appropriate unit
         area_unit = '{}2'.format(length_unit)
         site_den = self.site_density\
                    *c.convert_unit(initial='mol', final=quantity_unit)\
                    /c.convert_unit(initial='cm2', final=area_unit)
+        site_den_param = _Param('site_density', site_den, '_quantity/_length2')
+        _assign_yaml_val(site_den_param, yaml_dict, units)
 
-        phases_names = []
-        for phase in self.phases:
-            try:
-                phases_names.append(phase.name)
-            except AttributeError:
-                phases_names.append(phase)
 
-        yaml_dict = {
-            'name': self.name,
-            'state': 'ideal-surface',
-            'elements': self.elements,
-            'species': species_names,
-            'phases': phases_names,
-            'site_density': site_den,
-            'Motz-Wise': self.use_motz_wise,
-        }
+        '''Assign thermo depending on presence of lateral interactions'''
+        if self.interactions is None or len(self.interactions) == 0:
+            yaml_dict['thermo'] = 'ideal-surface'
+            yaml_dict['interactions'] = 'none'
+        else:
+            yaml_dict['thermo'] = 'surface-lateral-interaction'
+            yaml_dict['interactions'] = 'declared-species'
 
-        # Fields with ranges
-        range_fields = ('interactions', 'reactions')
-        for range_field in range_fields:
-            val = getattr(self, range_field)
-            # Skip empty fields
-            if val is None:
-                continue
-            yaml_dict[range_field] = _get_range_CTI(objs=val, parent_obj=self,
-                                                    delimiter=delimiter)
+        '''Assign reactions'''
+        if self.reactions is None or len(self.reactions) == 0:
+            yaml_dict['reactions'] = 'none'
+        else:
+            yaml_dict['reactions'] = 'declared-species'
 
-        # Add optional fields
-        optional_fields = ('beps', 'transport', 'options', 'note')
-        for field in optional_fields:
-            val = getattr(self, field)
-            # Skip empty fields
-            if val is None:
-                continue
-            # Skip blank lists
-            if len(val) == 0:
-                continue
-            yaml_dict[range_field] = val
+        '''Assign BEPs'''
+        if self.beps is None or len(self.beps) == 0:
+            yaml_dict['beps'] = 'none'
+        else:
+            yaml_dict['beps'] = 'all'
 
         return yaml_dict

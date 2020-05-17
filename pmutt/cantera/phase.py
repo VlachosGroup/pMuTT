@@ -1,7 +1,7 @@
 import more_itertools as mit
 
 from pmutt import constants as c
-from pmutt.cantera import _get_range_CTI
+from pmutt.cantera import _get_omkm_range
 from pmutt.io.cantera import obj_to_cti
 
 
@@ -187,7 +187,7 @@ class IdealGas(Phase):
             cti_str += ('          {}={},\n'
                         ''.format(
                             range_field,
-                            _get_range_CTI(objs=val,
+                            _get_omkm_range(objs=val,
                                            parent_obj=self,
                                            delimiter=delimiter)))
 
@@ -209,7 +209,7 @@ class IdealGas(Phase):
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
 
-    def to_yaml_dict(self):
+    def to_omkm_yaml(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -352,54 +352,6 @@ class StoichSolid(Phase):
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
     
-    def to_yaml_dict(self,
-               mass_unit='g',
-               length_unit='cm',
-               units=None):
-        """Writes the object in Cantera's CTI format.
-
-        Parameters
-        ----------
-            mass_unit : str, optional
-                Mass unit for `density`. Default is 'g'
-            length_unit : str, optional
-                Length unit for `density`. Default is 'cm'
-            units : :class:`~pmutt.cantera.units.Units` object, optional
-                If specified, `mass_unit` and `length_unit` are overwritten.
-                Default is None.
-        Returns
-        -------
-            yaml_dict
-                Dictionary compatible with Cantera's YAML format
-        """
-        if units is not None:
-            length_unit = units.length
-            mass_unit = units.mass
-
-        species_names = [species.name for species in self.species]
-        volume_unit = '{}3'.format(length_unit)
-        density = self.density*c.convert_unit(initial='g', final=mass_unit)\
-                  /c.convert_unit(initial='cm3', final=volume_unit)
-        # Add required fields
-        yaml_dict = {
-            'name': self.name,
-            'elements': self.elements,
-            'species': species_names,
-            'density': density,
-            'state': 'constant-density'
-            
-        }
-
-        # Add optional fields
-        optional_fields = ('transport', 'options', 'note', 'initial_state')
-        for field in optional_fields:
-            val = getattr(self, field)
-            # Skip empty fields
-            if val is None:
-                continue
-            yaml_dict[field] = val
-        return yaml_dict
-
 def _filter_reactions(reactions, phase_name):
     """Helper method to remove reactions that occur in multiple phases. Required
     for IdealGas and StoichSolid
