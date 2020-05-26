@@ -2071,7 +2071,7 @@ class ChemkinReaction(Reaction):
         return n_surf
 
     def get_A(self,
-              sden_operation='min',
+              sden_operation='sum',
               include_entropy=True,
               T=c.T0('K'),
               **kwargs):
