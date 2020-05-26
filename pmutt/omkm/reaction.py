@@ -141,7 +141,7 @@ class SurfaceReaction(Reaction):
         return n_surf
 
     def get_A(self,
-              sden_operation='min',
+              sden_operation='sum',
               include_entropy=True,
               T=c.T0('K'),
               units='molec/cm2',
@@ -804,12 +804,6 @@ class BEP(BEP_parent):
         if units is not None:
             act_energy_unit = units.act_energy
 
-        synthesis_reactions = _get_omkm_range(objs=self.synthesis_reactions,
-                                              parent_obj=self,
-                                              format='list')
-        cleavage_reactions = _get_omkm_range(objs=self.cleavage_reactions,
-                                             parent_obj=self,
-                                             format='list')
         yaml_dict = {}
         yaml_dict['id'] = self.name
         yaml_dict['slope'] = self.slope
@@ -819,7 +813,18 @@ class BEP(BEP_parent):
         _assign_yaml_val(intercept_param, yaml_dict, units)
 
         yaml_dict['direction'] = self.direction
-        yaml_dict['cleavage_reactions'] = cleavage_reactions
-        yaml_dict['synthesis_reactions'] = synthesis_reactions
+        if self.synthesis_reactions is not None \
+           and len(self.synthesis_reactions) > 0:
+            synthesis_reactions = _get_omkm_range(objs=self.synthesis_reactions,
+                                                  parent_obj=self,
+                                                  format='list')
+            yaml_dict['synthesis-reactions'] = synthesis_reactions
+
+        if self.cleavage_reactions is not None \
+           and len(self.cleavage_reactions) > 0:
+            cleavage_reactions = _get_omkm_range(objs=self.cleavage_reactions,
+                                                 parent_obj=self,
+                                                 format='list')
+            yaml_dict['cleavage-reactions'] = cleavage_reactions
 
         return yaml_dict

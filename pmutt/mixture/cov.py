@@ -220,7 +220,7 @@ class PiecewiseCovEffect(_ModelBase):
         """
         yaml_dict = {}
         yaml_dict['species'] = [self.name_i, self.name_j]
-        yaml_dict['coverage_threshold'] = self.intervals
+        yaml_dict['coverage-threshold'] = self.intervals
         '''Assign slope'''
         strength_param = _Param('strength', self.slopes, '_energy')
         _assign_yaml_val(strength_param, yaml_dict, units)

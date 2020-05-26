@@ -25,7 +25,7 @@
 
   <!-- phase terrace     -->
   <phase id="terrace" dim="2">
-    <elementArray datasrc="elements.xml">N Ru H</elementArray>
+    <elementArray datasrc="elements.xml">Ru N H</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="r_0000" max="r_0006"/>
@@ -45,7 +45,7 @@
 
   <!-- phase step     -->
   <phase id="step" dim="2">
-    <elementArray datasrc="elements.xml">N Ru H</elementArray>
+    <elementArray datasrc="elements.xml">Ru N H</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
       <include min="r_0007" max="r_0013"/>
@@ -583,7 +583,7 @@
       <equation>NH2(T) + RU(T) [=] NH(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>4.807490E+17</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>
@@ -597,7 +597,7 @@
       <equation>NH(T) + RU(T) [=] N(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>4.807490E+17</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>
@@ -611,7 +611,7 @@
       <equation>2 N(T) + RU(B) [=] N2(T) + RU(T)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>4.807490E+17</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>
@@ -667,7 +667,7 @@
       <equation>NH3(S) + RU(S) [=] NH2(S) + H(S) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>
@@ -681,7 +681,7 @@
       <equation>NH2(S) + RU(S) [=] NH(S) + H(S) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>
@@ -695,7 +695,7 @@
       <equation>N(S) + H(S) + RU(B) [=] NH(S) + RU(S)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>
@@ -709,7 +709,7 @@
       <equation>2 N(S) + RU(B) [=] N2(S) + RU(S)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">1.000000</E>
         </Arrhenius>

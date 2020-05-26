@@ -324,7 +324,7 @@ class InteractingInterface(phase_cantera.Phase):
         site_den = self.site_density\
                    *c.convert_unit(initial='mol', final=quantity_unit)\
                    /c.convert_unit(initial='cm2', final=area_unit)
-        site_den_param = _Param('site_density', site_den, '_quantity/_length2')
+        site_den_param = _Param('site-density', site_den, '_quantity/_length^2')
         _assign_yaml_val(site_den_param, yaml_dict, units)
 
 
