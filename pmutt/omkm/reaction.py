@@ -460,9 +460,12 @@ class SurfaceReaction(Reaction):
             else:
                 id_str = ',\n                 id="{}"'.format(self.id)
 
-        act_val = c.convert_unit(self.Ea,
-                                 initial='kcal/mol',
-                                 final=act_energy_unit)
+        if self.Ea is None:
+            act_val = None
+        else:
+            act_val = c.convert_unit(self.Ea,
+                                     initial='kcal/mol',
+                                     final=act_energy_unit)
         if self.is_adsorption:
             # If activation energy not specified, calculate using requested
             # method of activation
