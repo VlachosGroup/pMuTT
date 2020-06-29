@@ -154,8 +154,9 @@ print(write_yaml(phases=phases, units=units, **reactor_data))
 # ## Write Thermo/Kinetic YAML File
 # 
 # As of OpenMKM version 0.6.0 onwards, the thermodynamic and kinetic parameters can be written as a YAML file. We recommend using this format over the older CTI format. To generate the Thermo/Kinetic YAML file using pMuTT, use the [``write_thermo_yaml``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_thermo_yaml.html) function
-
-write_thermo_yaml(phases=phases,
+T = reactor_data['T']
+write_thermo_yaml(T=T,
+                  phases=phases,
                   species=species,
                   reactions=reactions,
                   lateral_interactions=interactions,
@@ -176,7 +177,6 @@ print(write_thermo_yaml(phases=phases,
 # The CTI file species the thermodynamics and kinetics of the system. It can be written using [``write_cti``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti). Note that we take the reactor operating conditions previously read for the YAML file to calculate thermodynamic and kinetic parameters.
 cti_path = './outputs/thermo.cti'
 use_motz_wise = True
-T = reactor_data['T']
 
 write_cti(reactions=reactions, species=species, phases=phases, units=units,
          lateral_interactions=interactions, filename=cti_path,
