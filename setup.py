@@ -15,15 +15,15 @@ with open('README.rst', 'r') as fh:
 
 setuptools_info = {
 	'name': 'pmutt',
-	'version': '1.2.20',
+	'version': '1.2.21dev',
 	'author': 'Vlachos Research Group',
 	'author_email': 'vlachos@udel.edu',
 	'description': 'Python Multiscale Thermochemistry Toolbox (pmutt)',
 	'long_description': long_description,
-	'zip_safe': True,
+	'zip_safe': False,
 	'url': 'https://github.com/VlachosGroup/pmutt',
 	'packages': setuptools.find_packages(),
-	'package_data': {'':['*.xlsx', '*.log', 'OUTCAR']},
+	'package_data': {'':['*.xlsx', '*.log', '*OUTCAR']},
 	'install_requires': [
 		'ASE>=3.16.2',
 		'matplotlib>=2.2.3',

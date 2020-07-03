@@ -1139,7 +1139,7 @@ class Reaction(_pmuttBase):
         return self.get_delta_GoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
             '{}/K'.format(units))
 
-    def get_q_act(self, rev=False, **kwargs):
+    def get_q_act(self, rev=False, include_ZPE=False, **kwargs):
         """Gets change in partition function between reactants/products and the
         transition state
 
@@ -1148,6 +1148,9 @@ class Reaction(_pmuttBase):
             rev : bool, optional
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
+            include_ZPE: bool, optional
+                If True, includes zero-point energy when calculating the
+                value of the partition functions. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate partition function. See class
                 docstring to see how to pass specific parameters to different
@@ -1158,6 +1161,7 @@ class Reaction(_pmuttBase):
                 Change in partition function between reactants/products and the
                 transition state
         """
+        kwargs['include_ZPE'] = include_ZPE
         return self.get_delta_q(rev=rev, act=True, **kwargs)
 
     def get_CvoR_act(self, rev=False, **kwargs):
@@ -1607,14 +1611,15 @@ class Reaction(_pmuttBase):
             m : int, optional
                 Molecularity of gas-phase species in the reaction.
                 Condensed-phase reactions and unimolecular gas-phase reactions
-                should have a value of 1. Bimolecular gas-phase reactions 
-                should have a value of 2. If None specified, m will be 
-                calculated (assuming all species in the initial state are
+                should have a value of 1. Bimolecular gas-phase reactions
+                should have a value of 2. If None specified, m will be
+                calculated (assuming all species in the initial state arw
                 gas phase). To get the transition-state estimate of the
                 pre-exponential factor, set to 0 (default).
             use_q : bool, optional
-                If True, uses ratio of partition functions to calculate A. If
-                False, uses the entropy of activation to calculate A.
+                If True, uses ratio of partition functions to calculate A
+                (Note: include_ZPE=False). If False, uses the entropy of
+                activation to calculate A.
             kwargs : keyword arguments
                 Parameters required to calculate pre-exponential factor. See
                 class docstring to see how to pass specific parameters to
@@ -2071,7 +2076,7 @@ class ChemkinReaction(Reaction):
         return n_surf
 
     def get_A(self,
-              sden_operation='min',
+              sden_operation='sum',
               include_entropy=True,
               T=c.T0('K'),
               **kwargs):
@@ -2142,6 +2147,87 @@ class ChemkinReaction(Reaction):
             super().get_delta_HoRT(rev=rev, act=False, **kwargs)
         ])
 
+    def get_H_act(self, units, T, rev=False, **kwargs):
+        """Gets change in enthalpy between reactants/products and the
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pmutt.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            H_act : float
+                Change in enthalpy between reactants/products and the
+                transition state
+        """
+        return self.get_HoRT_act(T=T, **kwargs)*c.R('{}/K'.format(units))*T
+
+    def get_delta_HoRT(self, rev=False, act=False, **kwargs):
+        """Gets change in dimensionless enthalpy between reactants and products
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            act : bool, optional
+                If True, uses the transition state as the final state. Default
+                is False
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_HoRT : float
+                Change in enthalpy between reactants and products
+        """
+        initial_state, final_state = _get_states(rev=rev, act=act)
+        delta_HoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_HoRT',
+                                             **kwargs)
+        return delta_HoRT
+
+    def get_delta_H(self, units, T, rev=False, act=False, **kwargs):
+        """Gets change in enthalpy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pmutt.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            act : bool, optional
+                If True, uses the transition state as the final state. Default
+                is False
+            kwargs : keyword arguments
+                Parameters required to calculate enthalpy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_H : float
+                Change in enthalpy between reactants and products
+        """
+        return self.get_delta_HoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
+            '{}/K'.format(units))
+
     def get_GoRT_act(self, rev=False, act=False, **kwargs):
         """Calculates the dimensionless Gibbs energy. If there is no transition
         state species, calculates the delta dimensionless Gibbs energy
@@ -2170,6 +2256,89 @@ class ChemkinReaction(Reaction):
             super().get_delta_GoRT(rev=rev, act=act, **kwargs),
             super().get_delta_GoRT(rev=rev, act=False, **kwargs)
         ])
+
+    def get_delta_GoRT(self, rev=False, act=False, **kwargs):
+        """Gets change in dimensionless Gibbs energy between reactants and
+        products
+
+        Parameters
+        ----------
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            act : bool, optional
+                If True, uses the transition state as the final state. Default
+                is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_GoRT : float
+                Change in Gibbs energy between reactants and products
+        """
+        initial_state, final_state = _get_states(rev=rev, act=act)
+        delta_GoRT = self.get_delta_quantity(initial_state=initial_state,
+                                             final_state=final_state,
+                                             method_name='get_GoRT',
+                                             **kwargs)
+        return delta_GoRT
+
+    def get_G_act(self, units, T, rev=False, **kwargs):
+        """Gets change in Gibbs energy between reactants/products and the
+        transition state
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pmutt.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            G_act : float
+                Change in Gibbs energy between reactants/products and the
+                transition state
+        """
+        return self.get_GoRT_act(T=T, rev=rev, **kwargs)*T \
+               *c.R('{}/K'.format(units))
+
+    def get_delta_G(self, units, T, rev=False, act=False, **kwargs):
+        """Gets change in Gibbs energy between reactants and products
+
+        Parameters
+        ----------
+            units : str
+                Units as string. See :func:`~pmutt.constants.R` for accepted
+                units but omit the '/K' (e.g. J/mol).
+            T : float
+                Temperature in K
+            rev : bool, optional
+                Reverse direction. If True, uses products as initial state
+                instead of reactants. Default is False
+            act : bool, optional
+                If True, uses the transition state as the final state. Default
+                is False
+            kwargs : keyword arguments
+                Parameters required to calculate Gibbs energy. See class
+                docstring to see how to pass specific parameters to different
+                species.
+        Returns
+        -------
+            delta_G : float
+                Change in Gibbs energy between reactants and products
+        """
+        return self.get_delta_GoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
+            '{}/K'.format(units))
 
     @classmethod
     def from_string(cls,

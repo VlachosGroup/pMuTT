@@ -7,7 +7,7 @@ Development Branch
 ------------------
 `Development Branch`_
 
-Version 1.2.20
+Version 1.2.21dev
 --------------
 
 May 12, 2020

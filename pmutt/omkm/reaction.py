@@ -3,11 +3,13 @@ import more_itertools as mit
 
 from pmutt import _apply_numpy_operation
 from pmutt import constants as c
-from pmutt.cantera import _get_range_CTI
+from pmutt.cantera import _get_omkm_range
+from pmutt.cantera.phase import IdealGas
 from pmutt.omkm.phase import InteractingInterface, StoichSolid
 from pmutt.omkm.units import Units
 from pmutt.reaction import Reaction
 from pmutt.reaction.bep import BEP as BEP_parent
+from pmutt.omkm import _Param, _assign_yaml_val
 
 
 class SurfaceReaction(Reaction):
@@ -36,6 +38,10 @@ class SurfaceReaction(Reaction):
         direction : str, optional
             Direction of the reaction. Used for BEP relationships.
             Accepted options are 'cleavage' and 'synthesis'.
+        use_motz_wise : bool, optional
+            Used when generating OpenMKM YAML file. If True, uses Motz-Wise
+            correction to sticking coefficient. Only applicable to adsorption
+            reactions. Default is False.
         kwargs : keyword arguments
             Keyword arguments used to initialize the reactants, transition
             state and products
@@ -48,6 +54,7 @@ class SurfaceReaction(Reaction):
                  Ea=None,
                  sticking_coeff=None,
                  direction=None,
+                 use_motz_wise=False,
                  **kwargs):
         super().__init__(**kwargs)
         self.id = id
@@ -57,6 +64,7 @@ class SurfaceReaction(Reaction):
         self.Ea = Ea
         self.direction = direction
         self.sticking_coeff = sticking_coeff
+        self.use_motz_wise = use_motz_wise
 
         # Assigns BEP to reaction
         if self.transition_state is not None:
@@ -133,7 +141,7 @@ class SurfaceReaction(Reaction):
         return n_surf
 
     def get_A(self,
-              sden_operation='min',
+              sden_operation='sum',
               include_entropy=True,
               T=c.T0('K'),
               units='molec/cm2',
@@ -318,7 +326,8 @@ class SurfaceReaction(Reaction):
                     is_adsorption=False,
                     sticking_coeff=0.5,
                     direction=None,
-                    id=None):
+                    id=None,
+                    use_motz_wise=False):
         """Create a reaction object using the reaction string
 
         Parameters
@@ -354,6 +363,10 @@ class SurfaceReaction(Reaction):
             gas_phase : bool
                 True if the reaction has only gas-phase species. This attribute
                 is determined based on the reactants and products
+            use_motz_wise : bool, optional
+                Used when generating OpenMKM YAML file. If True, uses Motz-Wise
+                correction to sticking coefficient. Only applicable to
+                adsorption reactions. Default is False.
         Returns
         -------
             SurfaceReaction : :class:`~pmutt.omkm.SurfaceReaction` object
@@ -375,7 +388,8 @@ class SurfaceReaction(Reaction):
                    is_adsorption=is_adsorption,
                    sticking_coeff=sticking_coeff,
                    direction=direction,
-                   id=id)
+                   id=id,
+                   use_motz_wise=use_motz_wise)
 
     def to_dict(self):
         """Represents object as dictionary with JSON-accepted datatypes
@@ -446,9 +460,12 @@ class SurfaceReaction(Reaction):
             else:
                 id_str = ',\n                 id="{}"'.format(self.id)
 
-        act_val = c.convert_unit(self.Ea,
-                                 initial='kcal/mol',
-                                 final=act_energy_unit)
+        if self.Ea is None:
+            act_val = None
+        else:
+            act_val = c.convert_unit(self.Ea,
+                                     initial='kcal/mol',
+                                     final=act_energy_unit)
         if self.is_adsorption:
             # If activation energy not specified, calculate using requested
             # method of activation
@@ -474,7 +491,7 @@ class SurfaceReaction(Reaction):
                                  id_str))
         return cti_str
 
-    def to_yaml_dict(self,
+    def to_omkm_yaml(self,
                      T=c.T0('K'),
                      P=c.P0('bar'),
                      quantity_unit='molec',
@@ -508,45 +525,69 @@ class SurfaceReaction(Reaction):
             yaml_dict : dict
                 Dictionary compatible with Cantera's YAML format
         """
-        reaction_str = self.to_string(stoich_space=True,
-                                      species_delimiter=' + ',
-                                      reaction_delimiter=' <=> ',\
-                                      include_TS=False)
         if units is not None:
             quantity_unit = units.quantity
             length_unit = units.length
             act_energy_unit = units.act_energy
 
-        # Determine the reaction IDs
-        try:
-            id = self.id
-        except AttributeError:
-            id_str = ''
-        else:
-            if id is None:
-                id_str = ''
-            else:
-                id_str = ',\n                 id="{}"'.format(self.id)
-
+        yaml_dict = {}
+        # Assign reaction name
+        yaml_dict['equation'] = self.to_string(stoich_space=True,
+                                               species_delimiter=' + ',
+                                               reaction_delimiter=' <=> ',\
+                                               include_TS=False)
+        
         if self.is_adsorption:
-            A = self.sticking_coeff
+            rate_constant_name = 'sticking-coefficient'
+            # Pre-exponential
+            A_param = _Param('A', self.sticking_coeff, None)
+
+            # Activation energy
             act_method = getattr(self, ads_act_method)
             act_val = act_method(units=act_energy_unit, T=T, P=P)
+
+            # Sticking-species
+            for species in self.reactants:
+                # Look for gas phase species
+                if isinstance(species.phase, IdealGas) \
+                   or species.phase.lower() == 'g' \
+                   or species.phase.lower() == 'gas':
+                    yaml_dict['sticking-species'] = species.name
+                    break
+            else:
+                err_msg = ('Could not find gas reactant in reaction, {}. '
+                           'One species must have its phase attribute set to '
+                           '"g" or "gas".'
+                           ''.format(str(self)))
+                raise ValueError(err_msg)
+            # Motz-Wise correction
+            yaml_dict['Motz-Wise'] = self.use_motz_wise
         else:
+            rate_constant_name = 'rate-constant'
+            # Pre-exponential
             A_units = '{}/{}2'.format(quantity_unit, length_unit)
-            A = self.get_A(T=T, P=P, include_entropy=False, units=A_units)
-            act_val = act_method(units=act_energy_unit, T=T, P=P)
+            A = float(self.get_A(T=T, P=P, include_entropy=False, units=A_units))
+            # TODO Check units for A. Should have time dependence.
+            A_param = _Param('A', A, None)
+            # Activation energy
+            act_val = self.get_G_act(units=act_energy_unit, T=T, P=P)
 
-        yaml_dict = {'equation': reaction_str,
-                     'type': 'elementary',
-                     'rate-constant': {'A': A,
-                                       'b': self.beta,
-                                       'Ea': act_val},
-                     'id': id_str,
-            }
+        # Assign activation energy, beta and pre-exponential factor
+        rate_constant_dict = {}
+        _assign_yaml_val(A_param, rate_constant_dict, units)
+        rate_constant_dict['b'] = self.beta
+        act_param = _Param('Ea', act_val, '_act_energy')
+        _assign_yaml_val(act_param, rate_constant_dict, units)
+        # Add kinetic parameters to overall dictionary
+        yaml_dict[rate_constant_name] = rate_constant_dict
+
+        # Assign reaction ID
+        try:
+            yaml_dict['id'] = self.id
+        except AttributeError:
+            pass
+
         return yaml_dict
-
-
 
 class BEP(BEP_parent):
     """Represents BEP relationships used by OpenMKM. Contains other attributes
@@ -708,7 +749,7 @@ class BEP(BEP_parent):
             #     CTI_out += '"{}", '.format(reaction.id)
 
             # CTI_out = '{}]'.format(CTI_out[:-2])
-            CTI_out = _get_range_CTI(objs=reactions,
+            CTI_out = _get_omkm_range(objs=reactions,
                                      parent_obj=self,
                                      delimiter=delimiter)
         return CTI_out
@@ -731,10 +772,10 @@ class BEP(BEP_parent):
             act_energy_unit = units.act_energy
         # synthesis_reactions = self._get_reactions_CTI(direction='synthesis')
         # cleavage_reactions = self._get_reactions_CTI(direction='cleavage')
-        synthesis_reactions = _get_range_CTI(objs=self.synthesis_reactions,
+        synthesis_reactions = _get_omkm_range(objs=self.synthesis_reactions,
                                              parent_obj=self,
                                              delimiter=delimiter)
-        cleavage_reactions = _get_range_CTI(objs=self.cleavage_reactions,
+        cleavage_reactions = _get_omkm_range(objs=self.cleavage_reactions,
                                             parent_obj=self,
                                             delimiter=delimiter)
         intercept = c.convert_unit(self.intercept, 'kcal/mol', act_energy_unit)
@@ -747,3 +788,46 @@ class BEP(BEP_parent):
                    ''.format(self.name, self.slope, intercept, self.direction,
                              cleavage_reactions, synthesis_reactions))
         return cti_str
+
+    def to_omkm_yaml(self, act_energy_unit=None, units=None):
+        """Writes the object in Cantera's YAML format.
+
+        Parameters
+        ----------
+            act_energy_unit : str, optional
+                Unit to use for activation energy. Default is 'cal/mol'
+            units : :class:`~pmutt.omkm.units.Units` object
+                If specified, `act_energy_unit` is overwritten.
+                Default is None.
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        if units is not None:
+            act_energy_unit = units.act_energy
+
+        yaml_dict = {}
+        yaml_dict['id'] = self.name
+        yaml_dict['slope'] = self.slope
+        # Assign intercept
+        intercept = c.convert_unit(self.intercept, 'kcal/mol', act_energy_unit)
+        intercept_param = _Param('intercept', intercept, '_act_energy')
+        _assign_yaml_val(intercept_param, yaml_dict, units)
+
+        yaml_dict['direction'] = self.direction
+        if self.synthesis_reactions is not None \
+           and len(self.synthesis_reactions) > 0:
+            synthesis_reactions = _get_omkm_range(objs=self.synthesis_reactions,
+                                                  parent_obj=self,
+                                                  format='list')
+            yaml_dict['synthesis-reactions'] = synthesis_reactions
+
+        if self.cleavage_reactions is not None \
+           and len(self.cleavage_reactions) > 0:
+            cleavage_reactions = _get_omkm_range(objs=self.cleavage_reactions,
+                                                 parent_obj=self,
+                                                 format='list')
+            yaml_dict['cleavage-reactions'] = cleavage_reactions
+
+        return yaml_dict
