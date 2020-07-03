@@ -118,6 +118,7 @@ def write_EA(reactions,
              write_gas_phase=False,
              filename=None,
              act_method_name='get_EoRT_act',
+             ads_act_method='get_HoRT_act',
              float_format=' .2E',
              species_delimiter='+',
              reaction_delimiter='<=>',
@@ -146,7 +147,9 @@ def write_EA(reactions,
             - 'get_EoRT_act' (default)
             - 'get_HoRT_act'
             - 'get_GoRT_act'
-
+        ads_act_method : str, optional
+            Name of method to use to calculate activation function of adsorption
+            reactions. Default is 'get_HoRT_act'.
         float_format : float, optional
             Format to write numbers. Default is ' .2E' (scientific notation
             rounded to 2 decimal places with a preceding space if the value is
@@ -217,7 +220,10 @@ def write_EA(reactions,
                                    include_TS=False))
         ]
         for condition in conditions:
-            method = getattr(reaction, act_method_name)
+            if reaction.is_adsorption:
+                method = getattr(reaction, ads_act_method)
+            else:
+                method = getattr(reaction, act_method_name)
             quantity = _force_pass_arguments(method, **condition)
             line.append(float_field.format(quantity))
         lines.append(column_delimiter.join(line))
@@ -280,6 +286,7 @@ def write_gas(nasa_species,
         include_TS=False,
         stoich_format=stoich_format,
         act_method_name=act_method_name,
+        ads_act_method=None,
         act_unit=act_unit,
         float_format=float_format,
         column_delimiter=column_delimiter,
@@ -330,6 +337,7 @@ def write_surf(reactions,
                species_delimiter='+',
                reaction_delimiter='=',
                act_method_name='get_E_act',
+               ads_act_method='get_H_act',
                act_unit='kcal/mol',
                float_format=' .3E',
                stoich_format='.0f',
@@ -354,7 +362,11 @@ def write_surf(reactions,
         reaction_delimiter : str, optional
             Delimiter to separate reaction sides. Default is '='
         act_method_name : str, optional
-            Name of method to use to calculate activation function
+            Name of method to use to calculate activation function of surface 
+            reactions. Default is 'get_E_act'.
+        ads_act_method : str, optional
+            Name of method to use to calculate activation function of adsorption
+            reactions. Default is 'get_H_act'.
         act_unit : str, optional
             Units to calculate activation energy. Default is 'kcal/mol'
         float_format : str, optional
@@ -426,6 +438,7 @@ def write_surf(reactions,
         include_TS=False,
         stoich_format=stoich_format,
         act_method_name=act_method_name,
+        ads_act_method=ads_act_method,
         act_unit=act_unit,
         float_format=float_format,
         column_delimiter=column_delimiter,
@@ -738,8 +751,9 @@ def _get_max_species_len(species, ignore_gas_phase=False, include_phase=True):
 
 
 def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
-                          include_TS, stoich_format, act_method_name, act_unit,
-                          float_format, column_delimiter, sden_operation,
+                          include_TS, stoich_format, act_method_name,
+                          ads_act_method, act_unit, float_format,
+                          column_delimiter, sden_operation,
                           **kwargs):
     """Write the reaction lines in the Chemkin format
 
@@ -785,9 +799,10 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             reaction_delimiter=reaction_delimiter,
             stoich_format=stoich_format,
             include_TS=include_TS).ljust(max_reaction_len)
-        # Calculate preexponential factor
+        # Calculate preexponential factor and determine activation energy method
         if reaction.is_adsorption:
             A = reaction.sticking_coeff
+            Ea_method = getattr(reaction, ads_act_method)
         else:
             # If using delta_G, take out entropic contribution in A
             if act_method_name in ('get_GoRT_act', 'get_G_act',
@@ -798,17 +813,17 @@ def _write_reaction_lines(reactions, species_delimiter, reaction_delimiter,
             A = reaction.get_A(include_entropy=include_entropy,
                                sden_operation=sden_operation,
                                **kwargs)
+            Ea_method = getattr(reaction, act_method_name)
+            if act_method_name != 'get_EoRT_act' and \
+            act_method_name != 'get_E_act':
+                kwargs['activation'] = True
         A_str = float_field.format(A)
 
         # Format beta value
         beta_str = float_field.format(reaction.beta)
 
         # Calculate activation energy
-        if act_method_name != 'get_EoRT_act' and \
-           act_method_name != 'get_E_act':
-            kwargs['activation'] = True
         kwargs['units'] = act_unit
-        Ea_method = getattr(reaction, act_method_name)
         try:
             Ea = _force_pass_arguments(Ea_method, **kwargs)
         except AttributeError:
