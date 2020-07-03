@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.omkm.phase.StoichSolid &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.omkm.phase.StoichSolid &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -341,15 +341,17 @@ Default is None.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.omkm.phase.StoichSolid.to_yaml_dict">
-<code class="sig-name descname">to_yaml_dict</code><span class="sig-paren">(</span><em class="sig-param">mass_unit='g'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.StoichSolid.to_yaml_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes the object in Cantera’s CTI format.</p>
+<dt id="pmutt.omkm.phase.StoichSolid.to_omkm_yaml">
+<code class="sig-name descname">to_omkm_yaml</code><span class="sig-paren">(</span><em class="sig-param">T=300.0</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">pressure_unit='atm'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.StoichSolid.to_omkm_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the object in Cantera’s YAML format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mass_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Mass unit for <cite>density</cite>. Default is ‘g’</p></li>
-<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit for <cite>density</cite>. Default is ‘cm’</p></li>
-<li><p><strong>units</strong> (<a class="reference internal" href="../cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object, optional) – If specified, <cite>mass_unit</cite> and <cite>length_unit</cite> are overwritten.
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm</p></li>
+<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit to use to calculate A. Default is ‘molec’</p></li>
+<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit to use to calculate A. Default is ‘cm’</p></li>
+<li><p><strong>units</strong> (<a class="reference internal" href="../omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <cite>quantity_unit</cite> and <cite>length_unit</cite> are overwritten.
 Default is None.</p></li>
 </ul>
 </dd>
@@ -386,7 +388,7 @@ Default is None.</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>

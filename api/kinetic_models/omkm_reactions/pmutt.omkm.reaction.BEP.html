@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.omkm.reaction.BEP &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.omkm.reaction.BEP &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -670,6 +670,27 @@ and initial state internal energy</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="pmutt.omkm.reaction.BEP.to_omkm_yaml">
+<code class="sig-name descname">to_omkm_yaml</code><span class="sig-paren">(</span><em class="sig-param">act_energy_unit=None</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.BEP.to_omkm_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the object in Cantera’s YAML format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>act_energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Unit to use for activation energy. Default is ‘cal/mol’</p></li>
+<li><p><strong>units</strong> (<a class="reference internal" href="../omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <cite>act_energy_unit</cite> is overwritten.
+Default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>yaml_dict</strong> – Dictionary compatible with Cantera’s YAML format</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -694,7 +715,7 @@ and initial state internal energy</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>

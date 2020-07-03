@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.omkm.reaction.SurfaceReaction &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.omkm.reaction.SurfaceReaction &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -193,7 +193,7 @@
 <h1>pmutt.omkm.reaction.SurfaceReaction<a class="headerlink" href="#pmutt-omkm-reaction-surfacereaction" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pmutt.omkm.reaction.SurfaceReaction">
-<em class="property">class </em><code class="sig-prename descclassname">pmutt.omkm.reaction.</code><code class="sig-name descname">SurfaceReaction</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">A=None</em>, <em class="sig-param">beta=None</em>, <em class="sig-param">Ea=None</em>, <em class="sig-param">sticking_coeff=None</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pmutt.omkm.reaction.</code><code class="sig-name descname">SurfaceReaction</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">A=None</em>, <em class="sig-param">beta=None</em>, <em class="sig-param">Ea=None</em>, <em class="sig-param">sticking_coeff=None</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">use_motz_wise=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">pmutt.reaction.Reaction</span></code></a></p>
 <p>Expresses OpenMKM surface reaction in Cantera CTI format reaction.
 Inherits from <a class="reference internal" href="../reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a>.</p>
@@ -281,6 +281,19 @@ Accepted options are ‘cleavage’ and ‘synthesis’.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="pmutt.omkm.reaction.SurfaceReaction.use_motz_wise">
+<code class="sig-name descname">use_motz_wise</code><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.use_motz_wise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used when generating OpenMKM YAML file. If True, uses Motz-Wise
+correction to sticking coefficient. Only applicable to adsorption
+reactions. Default is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.kwargs">
 <code class="sig-name descname">kwargs</code><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.kwargs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keyword arguments used to initialize the reactants, transition
@@ -294,7 +307,7 @@ state and products</p>
 
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">A=None</em>, <em class="sig-param">beta=None</em>, <em class="sig-param">Ea=None</em>, <em class="sig-param">sticking_coeff=None</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">A=None</em>, <em class="sig-param">beta=None</em>, <em class="sig-param">Ea=None</em>, <em class="sig-param">sticking_coeff=None</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">use_motz_wise=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -473,7 +486,7 @@ state and products</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.omkm.reaction.SurfaceReaction.get_delta_quantity" title="pmutt.omkm.reaction.SurfaceReaction.get_delta_quantity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_delta_quantity</span></code></a>(initial_state, …)</p></td>
 <td><p>Helper method to calculate the change in thermodynamic quantity between states</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.omkm.reaction.SurfaceReaction.get_q_act" title="pmutt.omkm.reaction.SurfaceReaction.get_q_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_act</span></code></a>([rev])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.omkm.reaction.SurfaceReaction.get_q_act" title="pmutt.omkm.reaction.SurfaceReaction.get_q_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_act</span></code></a>([rev, include_ZPE])</p></td>
 <td><p>Gets change in partition function between reactants/products and the transition state</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.omkm.reaction.SurfaceReaction.get_q_state" title="pmutt.omkm.reaction.SurfaceReaction.get_q_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_state</span></code></a>(state, **kwargs)</p></td>
@@ -563,7 +576,7 @@ composition</p>
 
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.from_string">
-<em class="property">classmethod </em><code class="sig-name descname">from_string</code><span class="sig-paren">(</span><em class="sig-param">reaction_str</em>, <em class="sig-param">species</em>, <em class="sig-param">species_delimiter='+'</em>, <em class="sig-param">reaction_delimiter='='</em>, <em class="sig-param">notes=None</em>, <em class="sig-param">A=None</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">Ea=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">sticking_coeff=0.5</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.from_string" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_string</code><span class="sig-paren">(</span><em class="sig-param">reaction_str</em>, <em class="sig-param">species</em>, <em class="sig-param">species_delimiter='+'</em>, <em class="sig-param">reaction_delimiter='='</em>, <em class="sig-param">notes=None</em>, <em class="sig-param">A=None</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">Ea=None</em>, <em class="sig-param">is_adsorption=False</em>, <em class="sig-param">sticking_coeff=0.5</em>, <em class="sig-param">direction=None</em>, <em class="sig-param">id=None</em>, <em class="sig-param">use_motz_wise=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.from_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a reaction object using the reaction string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -588,6 +601,9 @@ value.</p></li>
 True. Default is 0.5</p></li>
 <li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – True if the reaction has only gas-phase species. This attribute
 is determined based on the reactants and products</p></li>
+<li><p><strong>use_motz_wise</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Used when generating OpenMKM YAML file. If True, uses Motz-Wise
+correction to sticking coefficient. Only applicable to
+adsorption reactions. Default is False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -601,7 +617,7 @@ is determined based on the reactants and products</p></li>
 
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.get_A">
-<code class="sig-name descname">get_A</code><span class="sig-paren">(</span><em class="sig-param">sden_operation='min'</em>, <em class="sig-param">include_entropy=True</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">units='molec/cm2'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_A</code><span class="sig-paren">(</span><em class="sig-param">sden_operation='sum'</em>, <em class="sig-param">include_entropy=True</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">units='molec/cm2'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the preexponential factor in the Cantera format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2086,7 +2102,7 @@ products</p></li>
 
 <dl class="method">
 <dt id="pmutt.omkm.reaction.SurfaceReaction.get_q_act">
-<code class="sig-name descname">get_q_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_q_act" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_q_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">include_ZPE=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.get_q_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants/products and the
 transition state</p>
 <dl class="field-list simple">
@@ -2094,6 +2110,8 @@ transition state</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</p></li>
+<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes zero-point energy when calculating the
+value of the partition functions. Default is False</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate partition function. See class
 docstring to see how to pass specific parameters to different
 species.</p></li>
@@ -2265,34 +2283,8 @@ options include ‘get_H_act’ and ‘get_G_act’. Default is
 </dd></dl>
 
 <dl class="method">
-<dt id="pmutt.omkm.reaction.SurfaceReaction.to_string">
-<code class="sig-name descname">to_string</code><span class="sig-paren">(</span><em class="sig-param">species_delimiter='+'</em>, <em class="sig-param">reaction_delimiter='='</em>, <em class="sig-param">stoich_format='.2f'</em>, <em class="sig-param">include_TS=True</em>, <em class="sig-param">stoich_space=False</em>, <em class="sig-param">key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.to_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes the Reaction object as a stoichiometric reaction</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Separates species. Default is ‘+’</p></li>
-<li><p><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Separates reaction states. Default is ‘=’</p></li>
-<li><p><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write stoichiometric numbers. Default is ‘.2f’ (float
-rounded to 2 decimal places)</p></li>
-<li><p><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes transition states in output. Default is True</p></li>
-<li><p><strong>stoich_space</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, inserts a space between stoichiometric coefficients
-and the species name. Default is False</p></li>
-<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use to print out species. Default is name</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>reaction_str</strong> – Reaction string</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pmutt.omkm.reaction.SurfaceReaction.to_yaml_dict">
-<code class="sig-name descname">to_yaml_dict</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">quantity_unit='molec'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">act_energy_unit='cal/mol'</em>, <em class="sig-param">ads_act_method='get_H_act'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.to_yaml_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pmutt.omkm.reaction.SurfaceReaction.to_omkm_yaml">
+<code class="sig-name descname">to_omkm_yaml</code><span class="sig-paren">(</span><em class="sig-param">T=298.15</em>, <em class="sig-param">P=1.0</em>, <em class="sig-param">quantity_unit='molec'</em>, <em class="sig-param">length_unit='cm'</em>, <em class="sig-param">act_energy_unit='cal/mol'</em>, <em class="sig-param">ads_act_method='get_H_act'</em>, <em class="sig-param">units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.to_omkm_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the object in Cantera’s YAML format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2314,6 +2306,32 @@ options include ‘get_H_act’ and ‘get_G_act’. Default is
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pmutt.omkm.reaction.SurfaceReaction.to_string">
+<code class="sig-name descname">to_string</code><span class="sig-paren">(</span><em class="sig-param">species_delimiter='+'</em>, <em class="sig-param">reaction_delimiter='='</em>, <em class="sig-param">stoich_format='.2f'</em>, <em class="sig-param">include_TS=True</em>, <em class="sig-param">stoich_space=False</em>, <em class="sig-param">key='name'</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.reaction.SurfaceReaction.to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the Reaction object as a stoichiometric reaction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Separates species. Default is ‘+’</p></li>
+<li><p><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Separates reaction states. Default is ‘=’</p></li>
+<li><p><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write stoichiometric numbers. Default is ‘.2f’ (float
+rounded to 2 decimal places)</p></li>
+<li><p><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes transition states in output. Default is True</p></li>
+<li><p><strong>stoich_space</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, inserts a space between stoichiometric coefficients
+and the species name. Default is False</p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use to print out species. Default is name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reaction_str</strong> – Reaction string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2352,7 +2370,7 @@ options include ‘get_H_act’ and ‘get_G_act’. Default is
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>

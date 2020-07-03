@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.reaction.ChemkinReaction &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.reaction.ChemkinReaction &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -435,7 +435,7 @@ state and products</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.ChemkinReaction.get_delta_quantity" title="pmutt.reaction.ChemkinReaction.get_delta_quantity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_delta_quantity</span></code></a>(initial_state, …)</p></td>
 <td><p>Helper method to calculate the change in thermodynamic quantity between states</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.ChemkinReaction.get_q_act" title="pmutt.reaction.ChemkinReaction.get_q_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_act</span></code></a>([rev])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.ChemkinReaction.get_q_act" title="pmutt.reaction.ChemkinReaction.get_q_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_act</span></code></a>([rev, include_ZPE])</p></td>
 <td><p>Gets change in partition function between reactants/products and the transition state</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.ChemkinReaction.get_q_state" title="pmutt.reaction.ChemkinReaction.get_q_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_state</span></code></a>(state, **kwargs)</p></td>
@@ -547,7 +547,7 @@ is determined based on the reactants and products</p></li>
 
 <dl class="method">
 <dt id="pmutt.reaction.ChemkinReaction.get_A">
-<code class="sig-name descname">get_A</code><span class="sig-paren">(</span><em class="sig-param">sden_operation='min'</em>, <em class="sig-param">include_entropy=True</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_A</code><span class="sig-paren">(</span><em class="sig-param">sden_operation='sum'</em>, <em class="sig-param">include_entropy=True</em>, <em class="sig-param">T=298.15</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_A" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the preexponential factor in the Chemkin format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2028,7 +2028,7 @@ products</p></li>
 
 <dl class="method">
 <dt id="pmutt.reaction.ChemkinReaction.get_q_act">
-<code class="sig-name descname">get_q_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_q_act" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_q_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">include_ZPE=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.ChemkinReaction.get_q_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants/products and the
 transition state</p>
 <dl class="field-list simple">
@@ -2036,6 +2036,8 @@ transition state</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</p></li>
+<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes zero-point energy when calculating the
+value of the partition functions. Default is False</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate partition function. See class
 docstring to see how to pass specific parameters to different
 species.</p></li>
@@ -2228,7 +2230,7 @@ and the species name. Default is False</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>

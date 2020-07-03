@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.io.chemkin.write_EA &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.io.chemkin.write_EA &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -201,7 +201,7 @@
 <h1>pmutt.io.chemkin.write_EA<a class="headerlink" href="#pmutt-io-chemkin-write-ea" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pmutt.io.chemkin.write_EA">
-<code class="sig-prename descclassname">pmutt.io.chemkin.</code><code class="sig-name descname">write_EA</code><span class="sig-paren">(</span><em class="sig-param">reactions</em>, <em class="sig-param">conditions</em>, <em class="sig-param">write_gas_phase=False</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">act_method_name='get_EoRT_act'</em>, <em class="sig-param">float_format=' .2E'</em>, <em class="sig-param">species_delimiter='+'</em>, <em class="sig-param">reaction_delimiter='&lt;=&gt;'</em>, <em class="sig-param">stoich_format='.0f'</em>, <em class="sig-param">newline='\n'</em>, <em class="sig-param">column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pmutt.io.chemkin.</code><code class="sig-name descname">write_EA</code><span class="sig-paren">(</span><em class="sig-param">reactions</em>, <em class="sig-param">conditions</em>, <em class="sig-param">write_gas_phase=False</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">act_method_name='get_EoRT_act'</em>, <em class="sig-param">ads_act_method='get_HoRT_act'</em>, <em class="sig-param">float_format=' .2E'</em>, <em class="sig-param">species_delimiter='+'</em>, <em class="sig-param">reaction_delimiter='&lt;=&gt;'</em>, <em class="sig-param">stoich_format='.0f'</em>, <em class="sig-param">newline='\n'</em>, <em class="sig-param">column_delimiter='  '</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_EA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the EAs.inp or EAg.inp file for Chemkin</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -221,6 +221,8 @@ as str</p></li>
 <li><p>’get_GoRT_act’</p></li>
 </ul>
 </p></li>
+<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function of adsorption
+reactions. Default is ‘get_HoRT_act’.</p></li>
 <li><p><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Format to write numbers. Default is ‘ .2E’ (scientific notation
 rounded to 2 decimal places with a preceding space if the value is
 positive)</p></li>
@@ -260,7 +262,7 @@ positive)</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>

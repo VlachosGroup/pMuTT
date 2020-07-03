@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Notes &mdash; pmutt 1.2.20 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -108,6 +108,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-2-21">Version 1.2.21</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-20">Version 1.2.20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-19">Version 1.2.19</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-2-18">Version 1.2.18</a></li>
@@ -221,6 +222,19 @@
 <div class="section" id="development-branch">
 <h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
+</div>
+<div class="section" id="version-1-2-21">
+<h2>Version 1.2.21<a class="headerlink" href="#version-1-2-21" title="Permalink to this headline">¶</a></h2>
+<p>Jul. 3, 2020</p>
+<ul class="simple">
+<li><p>Miscellaneous bug fixes for <a class="reference internal" href="api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_cti()</span></code></a></p></li>
+<li><p>Added preliminary support for OpenMKM YAML files.</p></li>
+<li><p>Fixed bug where test OUTCAR file was not present.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">ads_act_method</span></code> to <a class="reference internal" href="api/io/chemkin/pmutt.io.chemkin.write_surf.html#pmutt.io.chemkin.write_surf" title="pmutt.io.chemkin.write_surf"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_surf()</span></code></a> and
+<a class="reference internal" href="api/io/chemkin/pmutt.io.chemkin.write_EA.html#pmutt.io.chemkin.write_EA" title="pmutt.io.chemkin.write_EA"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_EA()</span></code></a> to allow users to specify a different
+method to calculate activation energies for surface versus adsorption
+reactions.</p></li>
+</ul>
 </div>
 <div class="section" id="version-1-2-20">
 <h2>Version 1.2.20<a class="headerlink" href="#version-1-2-20" title="Permalink to this headline">¶</a></h2>
@@ -635,7 +649,7 @@ reactions from Chemkin surf.inp and gas.inp files</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>

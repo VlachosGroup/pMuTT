@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pmutt.reaction.Reaction &mdash; pmutt 1.2.20 documentation</title>
+  <title>pmutt.reaction.Reaction &mdash; pmutt 1.2.21 documentation</title>
   
 
   
@@ -469,7 +469,7 @@ values were used so the quantity evaluated may be meaningless.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.Reaction.get_delta_quantity" title="pmutt.reaction.Reaction.get_delta_quantity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_delta_quantity</span></code></a>(initial_state, …)</p></td>
 <td><p>Helper method to calculate the change in thermodynamic quantity between states</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.Reaction.get_q_act" title="pmutt.reaction.Reaction.get_q_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_act</span></code></a>([rev])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.reaction.Reaction.get_q_act" title="pmutt.reaction.Reaction.get_q_act"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_act</span></code></a>([rev, include_ZPE])</p></td>
 <td><p>Gets change in partition function between reactants/products and the transition state</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.reaction.Reaction.get_q_state" title="pmutt.reaction.Reaction.get_q_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_q_state</span></code></a>(state, **kwargs)</p></td>
@@ -601,11 +601,12 @@ instead of reactants. Default is False</p></li>
 Condensed-phase reactions and unimolecular gas-phase reactions
 should have a value of 1. Bimolecular gas-phase reactions
 should have a value of 2. If None specified, m will be
-calculated (assuming all species in the initial state are
+calculated (assuming all species in the initial state arw
 gas phase). To get the transition-state estimate of the
 pre-exponential factor, set to 0 (default).</p></li>
-<li><p><strong>use_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses ratio of partition functions to calculate A. If
-False, uses the entropy of activation to calculate A.</p></li>
+<li><p><strong>use_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses ratio of partition functions to calculate A
+(Note: include_ZPE=False). If False, uses the entropy of
+activation to calculate A.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate pre-exponential factor. See
 class docstring to see how to pass specific parameters to
 different species.</p></li>
@@ -2085,7 +2086,7 @@ products</p></li>
 
 <dl class="method">
 <dt id="pmutt.reaction.Reaction.get_q_act">
-<code class="sig-name descname">get_q_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_q_act</code><span class="sig-paren">(</span><em class="sig-param">rev=False</em>, <em class="sig-param">include_ZPE=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.Reaction.get_q_act" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets change in partition function between reactants/products and the
 transition state</p>
 <dl class="field-list simple">
@@ -2093,6 +2094,8 @@ transition state</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – Reverse direction. If True, uses products as initial state
 instead of reactants. Default is False</p></li>
+<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes zero-point energy when calculating the
+value of the partition functions. Default is False</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters required to calculate partition function. See class
 docstring to see how to pass specific parameters to different
 species.</p></li>
@@ -2285,7 +2288,7 @@ and the species name. Default is False</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Vlachos Research Group
+        &copy; Copyright 2020, Vlachos Research Group
 
     </p>
   </div>
