@@ -7,7 +7,20 @@ Development Branch
 ------------------
 `Development Branch`_
 
-Version 1.2.21dev
+Version 1.2.21
+--------------
+
+Jul. 3, 2020
+
+- Miscellaneous bug fixes for :func:`~pmutt.io.omkm.write_cti`
+- Added preliminary support for OpenMKM YAML files.
+- Fixed bug where test OUTCAR file was not present.
+- Added ``ads_act_method`` to :func:`~pmutt.io.chemkin.write_surf` and
+  :func:`~pmutt.io.chemkin.write_EA` to allow users to specify a different
+  method to calculate activation energies for surface versus adsorption
+  reactions.
+
+Version 1.2.20
 --------------
 
 May 12, 2020
