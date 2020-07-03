@@ -200,6 +200,7 @@ ck_io.write_gas(filename='./outputs/gas.inp',
 ck_io.write_surf(filename='./outputs/surf.inp',
                  reactions=reactions,
                  act_method_name='get_G_act',
+                 ads_act_method='get_H_act',
                  act_unit='kcal/mol')
 
 
@@ -223,6 +224,7 @@ print(gas_file)
 
 surf_file = ck_io.write_surf(reactions=reactions,
                              act_method_name='get_G_act',
+                             ads_act_method='get_H_act',
                              act_unit='kcal/mol')
 print(surf_file)
 
@@ -270,6 +272,7 @@ ck_io.write_EA(filename='./outputs/EAs.inp',
                reactions=reactions,
                write_gas_phase=False,
                act_method_name='get_GoRT_act',
+               ads_act_method='get_HoRT_act',
                conditions=conditions)
 ck_io.write_EA(filename='./outputs/EAg.inp',
                reactions=reactions,
