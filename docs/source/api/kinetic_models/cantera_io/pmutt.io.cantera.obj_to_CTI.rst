@@ -1,4 +1,4 @@
-pmutt.io.cantera.obj\_to\_CTI
+pmutt.io.cantera.obj\_to\_cti
 =============================
 
 .. currentmodule:: pmutt.io.cantera
