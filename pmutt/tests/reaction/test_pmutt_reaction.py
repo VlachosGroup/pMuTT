@@ -198,7 +198,8 @@ class TestReaction(unittest.TestCase):
             'transition_state':
             None,
             'transition_state_stoich':
-            None
+            None,
+            'reaction_str': 'H2+0.50O2=H2O',
         }
         '''Reactions using StatMech'''
         ideal_gas_param = presets['idealgas']

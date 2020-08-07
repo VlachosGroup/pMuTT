@@ -16,7 +16,7 @@ from pmutt import (_apply_numpy_operation, _get_R_adj, _is_iterable,
                    _pass_expected_arguments)
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.cantera import obj_to_cti
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
 
@@ -644,7 +644,7 @@ class Nasa(EmpiricalBase):
                              elements=elements,
                              **kwargs)
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -666,7 +666,7 @@ class Nasa(EmpiricalBase):
                    '                     [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}])))\n').format(
-                       self.name, obj_to_CTI(elements), size_str, self.T_low,
+                       self.name, obj_to_cti(elements), size_str, self.T_low,
                        self.T_mid, self.a_low[0], self.a_low[1], self.a_low[2],
                        self.a_low[3], self.a_low[4], self.a_low[5],
                        self.a_low[6], self.T_mid, self.T_high, self.a_high[0],
@@ -684,8 +684,8 @@ class Nasa(EmpiricalBase):
         obj_dict = super().to_dict()
         obj_dict['class'] = str(self.__class__)
         obj_dict['type'] = 'nasa'
-        obj_dict['a_low'] = list(self.a_low)
-        obj_dict['a_high'] = list(self.a_high)
+        obj_dict['a_low'] = self.a_low.tolist()
+        obj_dict['a_high'] = self.a_high.tolist()
         obj_dict['T_low'] = self.T_low
         obj_dict['T_mid'] = self.T_mid
         obj_dict['T_high'] = self.T_high
@@ -695,6 +695,28 @@ class Nasa(EmpiricalBase):
             obj_dict['cat_site'] = None
         obj_dict['n_sites'] = self.n_sites
         return obj_dict
+
+    def to_omkm_yaml(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+        
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        yaml_dict = {
+            'name': self.name,
+            'composition': self.elements,
+            'thermo': {'model': 'NASA7',
+                       'temperature-ranges': [float(self.T_low),
+                                              float(self.T_mid),
+                                              float(self.T_high)],
+                       'data': [self.a_low.tolist(),
+                                self.a_high.tolist()]} 
+        }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites
+        return yaml_dict
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -763,8 +785,6 @@ class Nasa9(EmpiricalBase):
     @nasas.setter
     def nasas(self, val):
         self._nasas = copy(val)
-        self.T_low = self._get_T_limit(limit='min')
-        self.T_high = self._get_T_limit(limit='max')
 
     @property
     def T_low(self):
@@ -1281,6 +1301,38 @@ class Nasa9(EmpiricalBase):
         obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
+    def to_omkm_yaml(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+        
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        yaml_dict = {
+            'name': self.name,
+            'composition': self.elements,
+            'thermo': {'model': 'NASA9',
+                       'reference-pressure': '1 bar'},            
+        }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites
+        
+        # Ensure that sorted NASAs are consistent whether using T_low or T_high
+        nasas_sorted_T_low = sorted(self.nasas, key=lambda nasa: nasa.T_low)
+        nasas_sorted_T_high = sorted(self.nasas, key=lambda nasa: nasa.T_high)
+        assert nasas_sorted_T_low == nasas_sorted_T_high
+
+        # Add temperature ranges and polynomials
+        yaml_dict['thermo']['temperature-ranges'] = []
+        yaml_dict['thermo']['data'] = []
+        for nasa in nasas_sorted_T_low:
+            yaml_dict['thermo']['temperature-ranges'].append(float(nasa.T_low))
+            yaml_dict['thermo']['data'].append(nasa.a.tolist())
+        yaml_dict['thermo']['temperature-ranges'].append(float(nasa.T_high))
+
+        return yaml_dict
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.
@@ -1300,7 +1352,7 @@ class Nasa9(EmpiricalBase):
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -1315,10 +1367,10 @@ class Nasa9(EmpiricalBase):
             size_str = ' size={},'.format(self.n_sites)
         cti_str = ('species(name="{}", atoms={},{}\n'
                    '        thermo=('
-                   ''.format(self.name, obj_to_CTI(elements), size_str))
+                   ''.format(self.name, obj_to_cti(elements), size_str))
         for i, nasa in enumerate(self.nasas):
             line_indent = (i != 0)
-            cti_str += '{},\n'.format(nasa.to_CTI(line_indent=line_indent))
+            cti_str += '{},\n'.format(nasa.to_cti(line_indent=line_indent))
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
 
@@ -1419,7 +1471,7 @@ class SingleNasa9(EmpiricalBase):
             'type': 'singlenasa9',
             'T_low': self.T_low,
             'T_high': self.T_high,
-            'a': list(self.a)
+            'a': self.a.tolist()
         }
         return obj_dict
 
@@ -1442,7 +1494,7 @@ class SingleNasa9(EmpiricalBase):
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
 
-    def to_CTI(self, line_indent=False):
+    def to_cti(self, line_indent=False):
         """Writes the object in Cantera's CTI format.
 
         Parameters

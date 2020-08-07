@@ -27,7 +27,7 @@ author = 'Vlachos Research Group'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.19'
+release = '1.2.21dev'
 
 
 # -- General configuration ---------------------------------------------------

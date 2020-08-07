@@ -25,11 +25,23 @@
 
 # First, we change the working directory to the location of the Jupyter notebook.
 
-# In[1]:
-
-
 import os
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from IPython.display import display
+
+from pmutt import pmutt_list_to_dict
+from pmutt.empirical.nasa import Nasa
+from pmutt.empirical.references import Reference, References
+from pmutt.empirical.shomate import Shomate
+from pmutt.io.excel import read_excel
+from pmutt.io.omkm import (organize_phases, write_cti, write_thermo_yaml,
+                           write_yaml)
+from pmutt.mixture.cov import PiecewiseCovEffect
+from pmutt.omkm.reaction import BEP, SurfaceReaction
+from pmutt.omkm.units import Units
 
 # Find the location of Jupyter notebook
 # Note that normally Python scripts have a __file__ variable but Jupyter notebook doesn't.
@@ -43,131 +55,17 @@ os.chdir(notebook_path)
 input_path = './inputs/NH3_Input_Data.xlsx'
 
 
-# And we define a helper function to print data from the Excel spreadsheet easily.
-
-# In[2]:
-
-
-import pandas as pd
-from IPython.display import display
-
-def disp_data(io, sheet_name):
-    try:
-        data = pd.read_excel(io=io, sheet_name=sheet_name, skiprows=[1])
-    except:
-        print('Sheet could not be found.')
-    else:
-        data = data.fillna(' ')
-        display(data)
-
-
-# Below, we show the contents of the Excel sheets.
-
-# **Units**
-
-# In[3]:
-
-
-disp_data(io=input_path, sheet_name='units')
-
-
-# **References**
-
-# In[4]:
-
-
-disp_data(io=input_path, sheet_name='refs')
-
-
-# **Species**
-# 
-# In this mechanism, we have species existing on terraces and steps. We also define the transition states of species. 
-# 
-# Note that later we will use BEPs to calculate barriers for most steps. Hence, these transition state species will actually be ignored. You should use either transition state species or BEP relationships to calculate barriers.
-
-# In[5]:
-
-
-disp_data(io=input_path, sheet_name='species')
-
-
-# **BEPs**
-
-# In[6]:
-
-
-disp_data(io=input_path, sheet_name='beps')
-
-
-# **Reactions**
-# 
-# Note that reactions with two '=' signs indicate it has a transition state or BEP relationship.
-
-# In[7]:
-
-
-disp_data(io=input_path, sheet_name='reactions')
-
-
-# **Lateral Interactions**
-# 
-# Currently we use piece-wise linear equations for lateral interactions. Here, we only define one interval between 0 - 1 ML but additional ``list.intervals`` and ``list.slopes`` columns can be added for more complicated behavior.
-
-# In[8]:
-
-
-disp_data(io=input_path, sheet_name='lateral_interactions')
-
-
-# **Phases**
-# 
-# As previously stated, there are two surface sites: terrace and step. There are also the gas and bulk phases defined.
-
-# In[9]:
-
-
-disp_data(io=input_path, sheet_name='phases')
-
-
-# **Reactor**
-# 
-# The reactor sheet contains options for the YAML file.
-
-# In[10]:
-
-
-disp_data(io=input_path, sheet_name='reactor')
-
-
-# ## Reading data
-# 
-# Throughout this exercise, we will use [``pmutt.io.read_excel``](https://vlachosgroup.github.io/pMuTT/api/io/excel/pmutt.io.excel.read_excel.html#pmutt-io-excel-read-excel) to extract the data from the Excel spreadsheet.
-
-# ### Designate Units
-# First, we will designate the units to write the CTI and YAML file.
-
-# In[11]:
-
-
-from pmutt.io.excel import read_excel
-from pmutt.omkm.units import Units
-
 units_data = read_excel(io=input_path, sheet_name='units')[0]
 units = Units(**units_data)
 
 
 # ### Reading References (optional)
 # Second, we will open the input spreadsheet and read the `refs` sheet.
-
-# In[12]:
-
-
-from pmutt.empirical.references import Reference, References
-
 try:
     refs_data = read_excel(io=input_path, sheet_name='refs')
 except:
     # If references are not used, skip this section
+    print('The "refs" sheet could not be found in {}. Skiping references'.format(input_path))
     refs = None
 else:
     refs = [Reference(**ref_data) for ref_data in refs_data]
@@ -177,12 +75,6 @@ else:
 # ### Reading Species
 # 
 # Third, we will use the ``refs`` defined before and the ``species`` sheet to convert statistical mechanical data to [``NASA``](https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa) objects.
-
-# In[13]:
-
-
-from pmutt.empirical.nasa import Nasa
-
 # Read the species' data
 species_data = read_excel(io=input_path, sheet_name='species')
 
@@ -193,13 +85,6 @@ species = [Nasa.from_model(references=refs, **ind_species_data)            for i
 # ### Adding species from other empirical sources (optional)
 # 
 # Note that OpenMKM also supports [``Shomate``](https://vlachosgroup.github.io/pMuTT/api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate) and [``NASA9``](https://vlachosgroup.github.io/pMuTT/api/empirical/nasa/pmutt.empirical.nasa.Nasa9.html) objects. Below, we define a single ``Shomate`` species.
-
-# In[14]:
-
-
-import numpy as np
-from pmutt.empirical.shomate import Shomate
-
 Ar = Shomate(name='Ar', elements={'Ar': 1}, phase='gas', T_low=298., T_high=6000.,
              a=np.array([20.78600, 2.825911e-7, -1.464191e-7, 1.092131e-8, -3.661371e-8, -6.19735, 179.999, 0.]))
 
@@ -209,15 +94,10 @@ species.append(Ar)
 # ### Reading BEP (optional)
 # 
 # Next, we read the BEP relationships to include.
-
-# In[15]:
-
-
-from pmutt.omkm.reaction import BEP
-
 try:
     beps_data = read_excel(io=input_path, sheet_name='beps')
 except:
+    print('The "beps" sheet could not be found in {}. Skiping BEPs'.format(input_path))
     beps = None
     species_with_beps = species.copy()
 else:
@@ -228,13 +108,6 @@ else:
 # ### Read reactions
 # 
 # Then, we read the reactions to include.
-
-# In[16]:
-
-
-from pmutt import pmutt_list_to_dict
-from pmutt.omkm.reaction import SurfaceReaction
-
 # Convert species to dictionary for easier reaction assignment
 species_with_beps_dict = pmutt_list_to_dict(species_with_beps)
 
@@ -245,16 +118,11 @@ reactions = [SurfaceReaction.from_string(species=species_with_beps_dict, **react
 # ### Read lateral interactions (optional)
 # 
 # After, we read lateral interactions to include.
-
-# In[17]:
-
-
-from pmutt.mixture.cov import PiecewiseCovEffect
-
 try:
     interactions_data = read_excel(io=input_path, sheet_name='lateral_interactions')
 except:
     # If no lateral interactions exist, skip this section
+    print('The "lateral_interactions" sheet could not be found in {}. Skiping lateral interactions'.format(input_path))
     interactions = None
 else:
     interactions = [PiecewiseCovEffect(**interaction_data) for interaction_data in interactions_data]
@@ -263,66 +131,58 @@ else:
 # ### Reading Phases
 # 
 # Finally, we read the phases data from Excel and organize it for use in OpenMKM.
-
-# In[18]:
-
-
-from pmutt.io.omkm import organize_phases
-
 # Read data from Excel sheet about phases
 phases_data = read_excel(io=input_path, sheet_name='phases')
 phases = organize_phases(phases_data, species=species, reactions=reactions, interactions=interactions)
 
 
-# ## Write YAML File
+# ## Write Reactor YAML File
 # 
 # The YAML file specifying the reactor configuration can be written using the [``write_yaml``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html) function. Note that if:
 # - ``units`` is not specified, float values are assumed to be in SI units
 # - ``units`` is specified, float values are consistent with ``unit``'s attributes
 # - you would like a quantity to have particular units, pass the value as a string with the units  (e.g. "10 cm3/s").
-
-# In[19]:
-
-
-from pmutt.io.omkm import write_yaml
-
+Path('./outputs').mkdir(exist_ok=True)
 yaml_path = './outputs/reactor.yaml'
 reactor_data = read_excel(io=input_path, sheet_name='reactor')[0]
 write_yaml(filename=yaml_path, phases=phases, units=units, **reactor_data)
 
 
 # If you would prefer to return the file as a string instead of writing it, omit the ``filename``.
-
-# In[20]:
-
-
 print(write_yaml(phases=phases, units=units, **reactor_data))
+
+# ## Write Thermo/Kinetic YAML File
+# 
+# As of OpenMKM version 0.6.0 onwards, the thermodynamic and kinetic parameters can be written as a YAML file. We recommend using this format over the older CTI format. To generate the Thermo/Kinetic YAML file using pMuTT, use the [``write_thermo_yaml``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_thermo_yaml.html) function
+T = reactor_data['T']
+write_thermo_yaml(T=T,
+                  phases=phases,
+                  species=species,
+                  reactions=reactions,
+                  lateral_interactions=interactions,
+                  units=units,
+                  filename='./outputs/thermo.yaml')
+
+
+# Like before, omitting the ``filename`` parameter returns a string
+print(write_thermo_yaml(phases=phases,
+                        species=species,
+                        reactions=reactions,
+                        lateral_interactions=interactions,
+                        units=units))
 
 
 # ## Write CTI File
 # 
 # The CTI file species the thermodynamics and kinetics of the system. It can be written using [``write_cti``](https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti). Note that we take the reactor operating conditions previously read for the YAML file to calculate thermodynamic and kinetic parameters.
-
-# In[21]:
-
-
-from pmutt.io.omkm import write_cti
-
 cti_path = './outputs/thermo.cti'
 use_motz_wise = True
-T = reactor_data['T']
-P = reactor_data['P']
 
 write_cti(reactions=reactions, species=species, phases=phases, units=units,
-          lateral_interactions=interactions, filename=cti_path,
-          use_motz_wise=use_motz_wise, T=T, P=P)
+         lateral_interactions=interactions, filename=cti_path,
+         use_motz_wise=use_motz_wise, T=T, P=1.)
 
 
 # Like before, omitting the ``filename`` parameter returns a string.
-
-# In[22]:
-
-
 print(write_cti(reactions=reactions, species=species, phases=phases, units=units,
-                lateral_interactions=interactions, use_motz_wise=use_motz_wise))
-
+               lateral_interactions=interactions, use_motz_wise=use_motz_wise))

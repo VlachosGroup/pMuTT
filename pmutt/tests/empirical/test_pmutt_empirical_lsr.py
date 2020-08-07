@@ -52,18 +52,18 @@ class TestLSR(unittest.TestCase):
         self.lsr_const = LSR(slope=slope,
                              intercept=intercept,
                              reaction=del_E,
-                             surf_specie=E_surf,
-                             gas_specie=E_gas)
+                             surf_species=E_surf,
+                             gas_species=E_gas)
         self.lsr_shomate = LSR(slope=slope,
                                intercept=intercept,
                                reaction=reaction_shomate,
-                               surf_specie=species['surf'],
-                               gas_specie=species['gas'])
+                               surf_species=species['surf'],
+                               gas_species=species['gas'])
         self.lsr_statmech = LSR(slope=slope,
                                 intercept=intercept,
                                 reaction=reaction_statmech,
-                                surf_specie=species['surf'],
-                                gas_specie=species['gas'])
+                                surf_species=species['surf'],
+                                gas_species=species['gas'])
 
     def test_get_UoRT(self):
         self.assertAlmostEqual(self.lsr_const.get_UoRT(),

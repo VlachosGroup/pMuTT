@@ -1,8 +1,8 @@
 import more_itertools as mit
 
 from pmutt import constants as c
-from pmutt.cantera import _get_range_CTI
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.cantera import _get_omkm_range
+from pmutt.io.cantera import obj_to_cti
 
 
 class Phase:
@@ -147,7 +147,7 @@ class IdealGas(Phase):
                          reactions=checked_reactions,
                          initial_state=initial_state)
 
-    def to_CTI(self, max_line_len=80, delimiter='_'):
+    def to_cti(self, max_line_len=80, delimiter='_'):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -167,13 +167,13 @@ class IdealGas(Phase):
         cti_str = ('ideal_gas(name={},\n'
                    '          elements={},\n'
                    '          species={},\n'.format(
-                       obj_to_CTI(self.name,
+                       obj_to_cti(self.name,
                                   line_len=max_line_len - 15,
                                   max_line_len=max_line_len - 16),
-                       obj_to_CTI(self.elements,
+                       obj_to_cti(self.elements,
                                   line_len=max_line_len - 19,
                                   max_line_len=max_line_len),
-                       obj_to_CTI(species_names,
+                       obj_to_cti(species_names,
                                   line_len=max_line_len - 18,
                                   max_line_len=max_line_len)))
 
@@ -187,7 +187,7 @@ class IdealGas(Phase):
             cti_str += ('          {}={},\n'
                         ''.format(
                             range_field,
-                            _get_range_CTI(objs=val,
+                            _get_omkm_range(objs=val,
                                            parent_obj=self,
                                            delimiter=delimiter)))
 
@@ -201,7 +201,7 @@ class IdealGas(Phase):
 
             cti_str += '          {}={},\n'.format(
                 field,
-                obj_to_CTI(val,
+                obj_to_cti(val,
                            line_len=max_line_len - len(field) - 11,
                            max_line_len=max_line_len))
 
@@ -209,6 +209,41 @@ class IdealGas(Phase):
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
 
+    def to_omkm_yaml(self):
+        """Writes the object in Cantera's CTI format.
+
+        Returns
+        -------
+            yaml_dict
+                Dictionary compatible with Cantera's YAML format
+        """
+
+        yaml_dict = {
+            'name': self.name,
+            'elements': self.elements,
+            'species': [species.name for species in self.species],
+            'state': 'ideal-gas'
+        }
+
+        # Fields with ranges
+        range_fields = ('reactions', )
+        for range_field in range_fields:
+            val = getattr(self, range_field)
+            # Skip empty fields
+            if val is None:
+                continue
+            yaml_dict[range_field] = val
+
+        # Add optional fields
+        optional_fields = ('kinetics', 'transport', 'options', 'note')
+        for field in optional_fields:
+            val = getattr(self, field)
+            # Skip empty fields
+            if val is None:
+                continue
+            yaml_dict[field] = val
+
+        return yaml_dict
 
 class StoichSolid(Phase):
     """Expresses stoichiometric solid as Cantera CTI file. Inherits from
@@ -254,7 +289,7 @@ class StoichSolid(Phase):
                          initial_state=initial_state)
         self.density = density
 
-    def to_CTI(self,
+    def to_cti(self,
                max_line_len=80,
                mass_unit='g',
                length_unit='cm',
@@ -290,13 +325,13 @@ class StoichSolid(Phase):
                    '                     elements={},\n'
                    '                     species={},\n'
                    '                     density={},\n'.format(
-                       obj_to_CTI(self.name,
+                       obj_to_cti(self.name,
                                   line_len=max_line_len - 26,
                                   max_line_len=max_line_len - 27),
-                       obj_to_CTI(self.elements,
+                       obj_to_cti(self.elements,
                                   line_len=max_line_len - 30,
                                   max_line_len=max_line_len),
-                       obj_to_CTI(species_names,
+                       obj_to_cti(species_names,
                                   line_len=max_line_len - 29,
                                   max_line_len=max_line_len), density))
         # Add optional fields
@@ -309,14 +344,14 @@ class StoichSolid(Phase):
 
             cti_str += '                     {}={},\n'.format(
                 field,
-                obj_to_CTI(val,
+                obj_to_cti(val,
                            line_len=max_line_len - len(field) - 22,
                            max_line_len=max_line_len))
 
         # Terminate the string
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
-
+    
 def _filter_reactions(reactions, phase_name):
     """Helper method to remove reactions that occur in multiple phases. Required
     for IdealGas and StoichSolid

@@ -384,15 +384,23 @@ def set_elec_model(model, output_structure):
     try:
         output_structure['elec_model'] = getattr(elec, model)
     except AttributeError:
-        if model.lower() == 'emptymode':
-            output_structure['elec_model'] = EmptyMode
-        elif model.lower() == 'lsr':
-            output_structure['elec_model'] = lsr.LSR
-        else:
-            err_msg = ('Unsupported electronic model, {}. See '
-                       'pmutt.statmech.elec for supported models.'
-                       ''.format(model))
-            raise ValueError(err_msg)
+        try:
+            output_structure['elec_model'] = getattr(lsr, model)
+        except AttributeError:
+            if model.lower() == 'emptymode':
+                output_structure['elec_model'] = EmptyMode
+            else:
+                err_msg = ('Unsupported electronic model, {}. See '
+                        'pmutt.statmech.elec for supported models.'
+                        ''.format(model))
+                raise ValueError(err_msg)
+        
+
+        # elif model.lower() == 'lsr':
+        #     output_structure['elec_model'] = lsr.LSR
+        # elif model.lower() == 'extendedlsr':
+        #     output_structure['elec_model'] = lsr.ExtendedLSR
+        # else:
     output_structure['model'] = StatMech
 
 
