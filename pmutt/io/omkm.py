@@ -332,7 +332,7 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
 
 def write_yaml(reactor_type=None,
                temperature_mode=None,
-			   pressure_mode=None,
+               pressure_mode=None,
                nodes=None,
                V=None,
                T=None,
