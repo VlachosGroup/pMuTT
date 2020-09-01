@@ -555,7 +555,7 @@ def write_yaml(reactor_type=None,
     reactor_params = [
         _Param('type', reactor_type, None),
         _Param('temperature_mode', temperature_mode, None),
-		_Param('pressure_mode', pressure_mode, None),
+        _Param('pressure_mode', pressure_mode, None),
         _Param('nodes', nodes, None),
         _Param('volume', V, '_length3'),
         _Param('area', A, '_length2'),
