@@ -596,7 +596,7 @@ def convert_unit(num=None, initial=None, final=None):
     unit_dict = {
         'J': 1.,
         'kJ': 1.e-3,
-        'eV': 6.242e+18,
+        'eV': 6.2415090744607553e+18,
         'cal': 0.239006,
         'kcal': 0.000239006,
         'L atm': 101.33,
