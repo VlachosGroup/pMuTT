@@ -331,7 +331,8 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
         return lines_out
 
 def write_yaml(reactor_type=None,
-               mode=None,
+               temperature_mode=None,
+			   pressure_mode=None,
                nodes=None,
                V=None,
                T=None,
@@ -553,7 +554,8 @@ def write_yaml(reactor_type=None,
         reactor = {}
     reactor_params = [
         _Param('type', reactor_type, None),
-        _Param('mode', mode, None),
+        _Param('temperature_mode', temperature_mode, None),
+		_Param('pressure_mode', pressure_mode, None),
         _Param('nodes', nodes, None),
         _Param('volume', V, '_length3'),
         _Param('area', A, '_length2'),
