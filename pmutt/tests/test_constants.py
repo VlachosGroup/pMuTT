@@ -194,8 +194,11 @@ class TestConstants(unittest.TestCase):
 
     def test_energy_to_freq(self):
         E_J = c.convert_unit(0.1, initial='eV', final='J')
-        self.assertAlmostEqual(c.energy_to_freq(E_J),
-                               self.ans.at['test_energy_to_freq', 0])
+        np.testing.assert_almost_equal(c.energy_to_freq(E_J),
+                                       self.ans.at['test_energy_to_freq', 0],
+                                       decimal=1)
+        # Decimal set to 1 because expected result and actual result differ by
+        # 16th decimal place
 
     def test_energy_to_temp(self):
         E_J = c.convert_unit(0.1, initial='eV', final='J')
