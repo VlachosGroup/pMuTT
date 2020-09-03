@@ -1139,7 +1139,7 @@ class Reaction(_pmuttBase):
         return self.get_delta_GoRT(rev=rev, T=T, act=act, **kwargs) * T * c.R(
             '{}/K'.format(units))
 
-    def get_q_act(self, rev=False, **kwargs):
+    def get_q_act(self, rev=False, include_ZPE=False, **kwargs):
         """Gets change in partition function between reactants/products and the
         transition state
 
@@ -1148,6 +1148,9 @@ class Reaction(_pmuttBase):
             rev : bool, optional
                 Reverse direction. If True, uses products as initial state
                 instead of reactants. Default is False
+            include_ZPE: bool, optional
+                If True, includes zero-point energy when calculating the
+                value of the partition functions. Default is False
             kwargs : keyword arguments
                 Parameters required to calculate partition function. See class
                 docstring to see how to pass specific parameters to different
@@ -1158,6 +1161,7 @@ class Reaction(_pmuttBase):
                 Change in partition function between reactants/products and the
                 transition state
         """
+        kwargs['include_ZPE'] = include_ZPE
         return self.get_delta_q(rev=rev, act=True, **kwargs)
 
     def get_CvoR_act(self, rev=False, **kwargs):
@@ -1607,14 +1611,15 @@ class Reaction(_pmuttBase):
             m : int, optional
                 Molecularity of gas-phase species in the reaction.
                 Condensed-phase reactions and unimolecular gas-phase reactions
-                should have a value of 1. Bimolecular gas-phase reactions 
-                should have a value of 2. If None specified, m will be 
-                calculated (assuming all species in the initial state are
+                should have a value of 1. Bimolecular gas-phase reactions
+                should have a value of 2. If None specified, m will be
+                calculated (assuming all species in the initial state arw
                 gas phase). To get the transition-state estimate of the
                 pre-exponential factor, set to 0 (default).
             use_q : bool, optional
-                If True, uses ratio of partition functions to calculate A. If
-                False, uses the entropy of activation to calculate A.
+                If True, uses ratio of partition functions to calculate A
+                (Note: include_ZPE=False). If False, uses the entropy of
+                activation to calculate A.
             kwargs : keyword arguments
                 Parameters required to calculate pre-exponential factor. See
                 class docstring to see how to pass specific parameters to
