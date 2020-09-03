@@ -82,6 +82,27 @@ class _ModelBase(_pmuttBase):
     def __init__(self):
         pass
 
+    def get_q(self):
+        """Default method to calculate the partition coefficient.
+        
+        Returns
+        -------
+            q : float
+                Returns 1
+        """
+        return 1.
+
+    def get_CvoR(self):
+        """Default method to calculate the dimensionless heat capacity at
+        constant volume.
+        
+        Returns
+        -------
+            CvoR : float
+                Returns 0
+        """
+        return 0.
+
     def get_Cv(self, units, **kwargs):
         """Calculate the heat capacity (constant V)
 
@@ -98,6 +119,17 @@ class _ModelBase(_pmuttBase):
                 Heat capacity (constant V) in appropriate units
         """
         return _force_pass_arguments(self.get_CvoR, **kwargs) * c.R(units)
+
+    def get_CpoR(self):
+        """Default method to calculate the dimensionless heat capacity at
+        constant pressure.
+        
+        Returns
+        -------
+            CpoR : float
+                Returns 0
+        """
+        return 0.
 
     def get_Cp(self, units, **kwargs):
         """Calculate the heat capacity (constant P)
@@ -116,6 +148,16 @@ class _ModelBase(_pmuttBase):
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
         return _force_pass_arguments(self.get_CpoR, **kwargs) * R_adj
+
+    def get_UoRT(self):
+        """Default method to calculate the dimensionless internal energy.
+        
+        Returns
+        -------
+            UoRT : float
+                Returns 0
+        """
+        return 0.
 
     def get_U(self, units, T=c.T0('K'), **kwargs):
         """Calculate the internal energy
@@ -140,6 +182,16 @@ class _ModelBase(_pmuttBase):
         UoRT_kwargs = kwargs.copy()
         UoRT_kwargs['T'] = T
         return _force_pass_arguments(self.get_UoRT, **UoRT_kwargs) * T * R_adj
+
+    def get_HoRT(self):
+        """Default method to calculate the dimensionless enthalpy.
+        
+        Returns
+        -------
+            HoRT : float
+                Returns 0
+        """
+        return 0.
 
     def get_H(self, units, T=c.T0('K'), **kwargs):
         """Calculate the enthalpy
@@ -168,6 +220,16 @@ class _ModelBase(_pmuttBase):
         HoRT_kwargs = kwargs.copy()
         HoRT_kwargs['T'] = T
         return _force_pass_arguments(self.get_HoRT, **HoRT_kwargs) * T * R_adj
+
+    def get_SoR(self):
+        """Default method to calculate the dimensionless entropy.
+        
+        Returns
+        -------
+            SoR : float
+                Returns 0
+        """
+        return 0.
 
     def get_S(self, units, **kwargs):
         """Calculate the entropy
