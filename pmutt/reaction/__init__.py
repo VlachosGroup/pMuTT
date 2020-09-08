@@ -1820,7 +1820,7 @@ class Reaction(_pmuttBase):
                 Raised if `species` does not contain an entry for the
                 reactants, products or transition state in `reaction_str`
         """
-		if type(species) == list:
+        if type(species) == list:
             species = pmutt_list_to_dict(species)
 
         (react_names, react_stoich, prod_names, prod_stoich, ts_names,
