@@ -12,6 +12,7 @@ from scipy import interpolate
 from pmutt import (_apply_numpy_operation, _force_pass_arguments,
                    _get_specie_kwargs, _is_iterable, _pass_expected_arguments,
                    _pmuttBase, _check_iterable_attr)
+from pmutt import pmutt_list_to_dict
 from pmutt import constants as c
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.reaction.bep import BEP
@@ -1791,9 +1792,9 @@ class Reaction(_pmuttBase):
         ----------
             reaction_str : str
                 Reaction string.
-            species : dict
+            species : dict or list
                 Dictionary using the names as keys. If you have a list of
-                species, use pmutt.pmutt_list_to_dict to make a dict.
+                species it will automatically be converted to a dictionary.
             species_delimiter : str, optional
                 Delimiter that separate species. Leading and trailing spaces
                 will be trimmed. Default is '+'
@@ -1819,6 +1820,9 @@ class Reaction(_pmuttBase):
                 Raised if `species` does not contain an entry for the
                 reactants, products or transition state in `reaction_str`
         """
+		if type(species) == list:
+            species = pmutt_list_to_dict(species)
+
         (react_names, react_stoich, prod_names, prod_stoich, ts_names,
          ts_stoich) = _parse_reaction(reaction_str=reaction_str,
                                       species_delimiter=species_delimiter,
