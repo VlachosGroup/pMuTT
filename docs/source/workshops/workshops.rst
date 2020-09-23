@@ -9,3 +9,4 @@ Links to workshops involving pMuTT can be found here.
 
   nam_2019
   aiche_2019
+  polimi_2020
