@@ -114,7 +114,7 @@ class InteractingInterface(phase_cantera.Phase):
         species : list of :class:`~pmutt._ModelBase` objects
             Species present in Phase
         site_density : float, optional
-            Site density in g/cm2. Default is None
+            Site density in mol/cm2. Default is None
         phases : list of :class:`~pmutt.cantera.phase.Phase` objects or str
             Phases associated with this interface
         interactions : str, optional
