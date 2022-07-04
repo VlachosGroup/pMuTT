@@ -251,8 +251,7 @@ class PhaseDiagram(Reactions):
                            stable_phases,
                            cmap=cmap,
                            norm=norm,
-                           vmin=0,
-                           vmax=len(self.reactions))
+                           )
         # Set colorbar
         cbar = fig.colorbar(c, ticks=np.arange(len(self.reactions)) + 0.5)
         cbar.ax.set_yticklabels(
