@@ -21,13 +21,13 @@ sys.path.insert(0, os.path.abspath(pmutt_path))
 # -- Project information -----------------------------------------------------
 
 project = 'pmutt'
-copyright = '2019, Vlachos Research Group'
+copyright = '2020, Vlachos Research Group'
 author = 'Vlachos Research Group'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.2.21dev'
+release = '1.2.21'
 
 
 # -- General configuration ---------------------------------------------------
