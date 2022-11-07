@@ -204,13 +204,15 @@ class PiecewiseCovEffect(_ModelBase):
                                    self.intervals, slopes, self.name))
         return lat_inter_str
 
-    def to_omkm_yaml(self, energy_unit=None, units=None):
+    def to_omkm_yaml(self, energy_unit='kcal', quantity_unit='mol', units=None):
         """Writes the object in Cantera's YAML format.
 
         Parameters
         ----------
             energy_unit : str, optional
-                Unit to use for energy. Default is 'cal/mol'
+                Energy unit for slopes. Default is 'kcal'
+            quantity_unit : str, optional
+                Quantity unit for slopes. Default is 'mol'
             units : :class:`~pmutt.omkm.units.Units` object
                 If specified, `energy_unit` is overwritten. Default is None.
         Returns
@@ -218,11 +220,15 @@ class PiecewiseCovEffect(_ModelBase):
             yaml_dict : dict
                 Dictionary compatible with Cantera's YAML format
         """
+        if units is not None:
+            energy_unit = units.energy
+            quantity_unit = units.quantity
+        final = '{}/{}'.format(energy_unit, quantity_unit)
         yaml_dict = {}
         yaml_dict['species'] = [self.name_i, self.name_j]
         yaml_dict['coverage-threshold'] = self.intervals
         '''Assign slope'''
-        strength_param = _Param('strength', self.slopes, '_energy')
+        strength_param = _Param('strength', self.slopes, final)
         _assign_yaml_val(strength_param, yaml_dict, units)
         yaml_dict['id'] = self.name
         return yaml_dict
