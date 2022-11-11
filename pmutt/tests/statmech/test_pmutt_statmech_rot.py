@@ -97,11 +97,11 @@ class TestRotFunc(unittest.TestCase):
         rot_Ts_CO2 = rot.get_rot_temperatures_from_atoms(self.CO2,
                                                          geometry='linear')
         self.assertTrue(len(rot_Ts_CO2), 1)
-        np.testing.assert_almost_equal(rot_Ts_CO2[0], 0.5456089507450469)
+        np.testing.assert_almost_equal(rot_Ts_CO2[0], 0.545566039279433)
 
-        exp_rot_Ts_H2O = [38.0967658747342,
-                          20.652294121365664,
-                          13.392309833894341]
+        exp_rot_Ts_H2O = [38.093769611464324,
+		                  20.65066984411027,
+		                  13.391256545376727]
         rot_Ts_H2O = rot.get_rot_temperatures_from_atoms(self.H2O,
                                                          geometry='nonlinear')
         self.assertTrue(len(rot_Ts_H2O), 3)
