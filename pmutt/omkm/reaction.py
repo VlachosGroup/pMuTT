@@ -151,7 +151,7 @@ class SurfaceReaction(Reaction):
         Parameters
         ----------
         sden_operation : str, optional
-            Site density operation to use. Default is 'sum'
+            Site density operation to use. Default is 'min'
         include_entropy : bool, optional
             If True, includes the entropy of activation. Default is True
         T : float, optional
@@ -530,6 +530,13 @@ class SurfaceReaction(Reaction):
             length_unit = units.length
             act_energy_unit = units.act_energy
 
+        if self.Ea is None:
+            act_val = None
+        else:
+            act_val = c.convert_unit(self.Ea,
+                                     initial='kcal/mol',
+                                     final=act_energy_unit)
+
         yaml_dict = {}
         # Assign reaction name
         yaml_dict['equation'] = self.to_string(stoich_space=True,
@@ -543,8 +550,11 @@ class SurfaceReaction(Reaction):
             A_param = _Param('A', self.sticking_coeff, None)
 
             # Activation energy
-            act_method = getattr(self, ads_act_method)
-            act_val = act_method(units=act_energy_unit, T=T, P=P)
+            # If activation energy not specified, calculate using requested
+            # method of activation
+            if act_val is None:
+                act_method = getattr(self, ads_act_method)
+                act_val = act_method(units=act_energy_unit, T=T, P=P)
 
             # Sticking-species
             for species in self.reactants:
@@ -570,7 +580,8 @@ class SurfaceReaction(Reaction):
             # TODO Check units for A. Should have time dependence.
             A_param = _Param('A', A, None)
             # Activation energy
-            act_val = self.get_G_act(units=act_energy_unit, T=T, P=P)
+            if act_val is None:
+                act_val = self.get_G_act(units=act_energy_unit, T=T, P=P)
 
         # Assign activation energy, beta and pre-exponential factor
         rate_constant_dict = {}

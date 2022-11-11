@@ -174,6 +174,7 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
                       lateral_interactions=None, units=None,
                       filename=None, T=300., P=1., newline='\n',
                       ads_act_method='get_H_act',
+                      use_motz_wise='False',
                       yaml_options={'default_flow_style': None, 'indent': 2,
                                     'sort_keys': False, 'width': 79}):
     """Writes the units, phases, species, lateral interactions, reactions and 
@@ -246,6 +247,7 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
             if reaction.id is None:
                 reaction.id = 'r_{:04d}'.format(i)
                 i += 1
+            reaction.use_motz_wise = use_motz_wise
             # Write reaction
             reaction_dict = reaction.to_omkm_yaml(units=units, T=T)
             reactions_out.append(reaction_dict)
