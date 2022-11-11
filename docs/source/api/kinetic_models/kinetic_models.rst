@@ -77,7 +77,7 @@ Input and Output
    :toctree: cantera_io
    :nosignatures:
 
-   io.cantera.obj_to_CTI
+   io.cantera.obj_to_cti
 
 --------------------------------------------------------------------------------
 

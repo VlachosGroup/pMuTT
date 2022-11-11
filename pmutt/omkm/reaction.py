@@ -151,7 +151,7 @@ class SurfaceReaction(Reaction):
         Parameters
         ----------
         sden_operation : str, optional
-            Site density operation to use. Default is 'min'
+            Site density operation to use. Default is 'sum'
         include_entropy : bool, optional
             If True, includes the entropy of activation. Default is True
         T : float, optional

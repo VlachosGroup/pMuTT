@@ -71,10 +71,10 @@ class FreeTrans(_ModelBase):
             q_trans : float
                 Translational partition function
         """
-        V = self.get_V(T=T, P=P)
+        molecular_volume = self.get_V(T=T, P=P)/c.Na
         unit_mass = self.molecular_weight *\
             c.convert_unit(initial='g', final='kg')/c.Na
-        return V*(2*np.pi*c.kb('J/K')*T*unit_mass/c.h('J s')**2) \
+        return molecular_volume*(2.*np.pi*c.kb('J/K')*T*unit_mass/(c.h('J s')**2.0)) \
             ** (float(self.n_degrees)/2.)
 
     def get_CvoR(self):
