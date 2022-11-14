@@ -75,8 +75,8 @@ class TestStatMech(unittest.TestCase):
 
     def test_get_q(self):
         np.testing.assert_almost_equal(
-            self.CO2_pmutt.get_q(T=self.T0, ignore_q_elec=True, V=self.V0),
-            102.34984869477603)
+            self.CO2_pmutt.get_q(T=self.T0, ignore_q_elec=True, V=self.V0/c.Na),
+            102.341799006429)
 
     def test_get_CvoR(self):
         np.testing.assert_almost_equal(
