@@ -31,11 +31,11 @@ class TestFreeTrans(unittest.TestCase):
 
     def test_get_q(self):
         np.testing.assert_allclose(self.trans_1D.get_q(T=self.T, P=self.P),
-                                   3.470587046382E-15)
+                                   3.470587046381861E-15)
         np.testing.assert_allclose(self.trans_2D.get_q(T=self.T, P=self.P),
-                                   2.901300856450E-04)
+                                   2.901300856449876E-04)
         np.testing.assert_allclose(self.trans_3D.get_q(T=self.T, P=self.P),
-                                   2.425395631097E+07)
+                                   2.425395631097109E+07)
 
     def test_get_CvoR(self):
         self.assertEqual(self.trans_1D.get_CvoR(), 0.5)
