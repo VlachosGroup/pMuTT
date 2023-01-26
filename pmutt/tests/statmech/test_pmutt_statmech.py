@@ -75,8 +75,8 @@ class TestStatMech(unittest.TestCase):
 
     def test_get_q(self):
         np.testing.assert_almost_equal(
-            self.CO2_pmutt.get_q(T=self.T0, ignore_q_elec=True, V=self.V0/c.Na),
-            102.341799006429)
+            self.CO2_pmutt.get_q(T=self.T0, ignore_q_elec=True,
+                                 V=self.V0/c.Na), 102.341799006429)
 
     def test_get_CvoR(self):
         np.testing.assert_almost_equal(
@@ -189,6 +189,15 @@ class TestStatMech(unittest.TestCase):
                                           verbose=False)
         calc_G_CO2 = self.CO2_pmutt.get_G(T=self.T0, V=self.V0, units='eV')
         np.testing.assert_almost_equal(expected_G_CO2, calc_G_CO2, 3)
+
+    def test_get_GoRT_Selements(self):
+
+        HoRT_expected = -874.1095022368354
+        SoR_Selements_expected = 0.12909272475938138
+        GoRT_expected = HoRT_expected - SoR_Selements_expected
+        np.testing.assert_almost_equal(self.CO2_pmutt.
+                                       get_GoRT(T=self.T0, S_elements=True),
+                                       GoRT_expected)
 
 
 if __name__ == '__main__':

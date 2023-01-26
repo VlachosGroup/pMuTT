@@ -299,6 +299,32 @@ class TestNasa(unittest.TestCase):
         np.testing.assert_array_almost_equal(self.Nasa_direct.get_GoRT(T=T),
                                              GoRT_expected)
 
+    def test_get_GoRT_Selements(self):
+        T = np.array([
+            500., 600., 700., 800., 900., 1000., 1100., 1200., 1300., 1400.,
+            1500., 1600., 1700., 1800., 1900., 2000., 2100., 2200
+        ])
+        HoRT_expected = np.array([
+            -56.49930957, -46.36612849, -39.10913137, -33.64819891,
+            -29.38377578, -25.95653237, -23.13812007, -20.77654898,
+            -18.76677584, -17.03389718, -15.52306522, -14.19318522,
+            -13.01283758, -11.95756475, -11.00803153, -10.14874498,
+            -9.367140366, -8.652916499
+        ])
+        SoR_Selements_expected = np.array([
+            -3.20842299, -2.42482755, -1.74177783, -1.13065029, -0.57352711,
+            -0.05860148,  0.42221549,  0.87464214,  1.30283249,  1.70988279,
+            2.09816296,  2.46954073,  2.82553767,  3.16743482,  3.49633254,
+            3.81318723,  4.11883861,  4.41403058
+        ])
+        GoRT_expected = HoRT_expected - SoR_Selements_expected
+        np.testing.assert_almost_equal(self.Nasa_direct.
+                                       get_GoRT(T=T[0], S_elements=True),
+                                       GoRT_expected[0])
+        np.testing.assert_array_almost_equal(self.Nasa_direct.
+                                             get_GoRT(T=T, S_elements=True),
+                                             GoRT_expected)
+
     def test_to_dict(self):
         self.maxDiff = None
         self.assertEqual(self.Nasa_direct.to_dict(), self.Nasa_direct_dict)
