@@ -340,8 +340,8 @@ def write_thermdat(nasa_species,
     # Add supplementary text
     if supp_txt is not None:
         if supp_txt[-1] != '\n':
-            supp_data += '\n'
-        lines.append(supp_data)
+            supp_txt += '\n'
+        lines.append(supp_txt)
 
     # Iterate over nasa_species using appropriate method
     if isinstance(nasa_species, dict):

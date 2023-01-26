@@ -219,20 +219,20 @@ class TestShomate(unittest.TestCase):
         ]) * c.R('J/mol/K') * T
         np.testing.assert_almost_equal(self.Shomate_direct.get_H(
             T=T[0], units='J/mol'),
-                                       H_expected[0],
-                                       decimal=4)
+                                        H_expected[0],
+                                        decimal=4)
         np.testing.assert_array_almost_equal(self.Shomate_direct.get_H(
             T=T, units='J/mol'),
-                                             H_expected,
-                                             decimal=4)
+                                              H_expected,
+                                              decimal=4)
         np.testing.assert_almost_equal(self.Shomate_direct.get_H(T=T[0],
                                                                  units='J/g'),
                                        H_expected[0] / self.mw,
                                        decimal=4)
         np.testing.assert_array_almost_equal(self.Shomate_direct.get_H(
             T=T, units='J/g'),
-                                             H_expected / self.mw,
-                                             decimal=4)
+                                              H_expected / self.mw,
+                                              decimal=4)
 
     def test_get_SoR(self):
         T = np.array([
@@ -343,20 +343,63 @@ class TestShomate(unittest.TestCase):
         ]) * c.R('J/mol/K') * T
         np.testing.assert_almost_equal(self.Shomate_direct.get_G(
             T=T[0], units='J/mol'),
-                                       G_expected[0],
-                                       decimal=4)
+                                        G_expected[0],
+                                        decimal=4)
         np.testing.assert_array_almost_equal(self.Shomate_direct.get_G(
             T=T, units='J/mol'),
-                                             G_expected,
-                                             decimal=4)
+                                              G_expected,
+                                              decimal=4)
         np.testing.assert_almost_equal(self.Shomate_direct.get_G(T=T[0],
                                                                  units='J/g'),
                                        G_expected[0] / self.mw,
                                        decimal=4)
         np.testing.assert_array_almost_equal(self.Shomate_direct.get_G(
             T=T, units='J/g'),
-                                             G_expected / self.mw,
-                                             decimal=4)
+                                              G_expected / self.mw,
+                                              decimal=4)
+
+    def test_get_GoRT_Selements(self):
+        T = np.array([
+            500., 525., 550., 575., 600., 625., 650., 675., 700., 725., 750.,
+            775., 800., 825., 850., 875., 900., 925., 950., 975., 1000., 1025.,
+            1050., 1075., 1100., 1125., 1150., 1175., 1200., 1225., 1250.,
+            1275., 1300., 1325., 1350., 1375., 1400., 1425., 1450., 1475.,
+            1500., 1525., 1550., 1575., 1600., 1625., 1650., 1675., 1700.
+        ])
+        HoRT_expected = np.array([
+            -323.05349663, -307.33666348, -293.04863333, -280.00304059,
+            -268.04458057, -257.04279736, -246.88730516, -237.48407164,
+            -228.75249766, -220.62310120, -213.03566449, -205.93773984,
+            -199.28343547, -193.03242228, -187.14911574, -181.60199816,
+            -176.36305376, -171.40729556, -166.71236673, -162.25820348,
+            -158.02674840, -154.00170576, -150.16833181, -146.51325433,
+            -143.02431673, -139.69044303, -136.50152036, -133.44829652,
+            -130.52229034, -127.71571299, -125.02139873, -122.43274386,
+            -119.94365263, -117.54848937, -115.24203587, -113.01945340,
+            -110.87624887, -108.80824451, -106.81155064, -104.88254131,
+            -103.01783228, -101.21426126,  -99.46886995,  -97.77888789,
+            -96.14171777,  -94.55492211,  -93.01621117,  -91.52343190,
+            -90.0745579
+        ])
+        SoR_Selements_expected = np.array([
+            20.43862685, 20.78015798, 21.10579808, 21.41696041, 21.71487770,
+            22.00063165, 22.27517664, 22.53935892, 22.79393243, 23.03957166,
+            23.27688252, 23.50641127, 23.72865216, 23.94405376, 24.15302450,
+            24.35593726, 24.55313339, 24.74492621, 24.93160394, 25.11343234,
+            25.29065699, 25.46350528, 25.63218814, 25.79690162, 25.95782824,
+            26.11513823, 26.26899058, 26.41953401, 26.56690788, 26.71124289,
+            26.85266184, 26.99128023, 27.12720683, 27.26054419, 27.39138912,
+            27.51983309, 27.64596263, 27.76985967, 27.89160187, 28.01126290,
+            28.12891273, 28.24461784, 28.35844148, 28.47044387, 28.58068237,
+            28.68921168, 28.79608398, 28.90134912, 29.00505472
+        ])
+        GoRT_expected = HoRT_expected - SoR_Selements_expected
+        np.testing.assert_almost_equal(self.Shomate_statmech.
+                                       get_GoRT(T=T[0], S_elements=True),
+                                       GoRT_expected[0])
+        np.testing.assert_array_almost_equal(self.Shomate_statmech.
+                                             get_GoRT(T=T, S_elements=True),
+                                             GoRT_expected)
 
     def test_to_dict(self):
         self.maxDiff = None
