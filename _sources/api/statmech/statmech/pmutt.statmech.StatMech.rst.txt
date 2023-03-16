@@ -1,4 +1,4 @@
-pmutt.statmech.StatMech
+﻿pmutt.statmech.StatMech
 =======================
 
 .. currentmodule:: pmutt.statmech
@@ -28,6 +28,7 @@ pmutt.statmech.StatMech
       ~StatMech.get_H
       ~StatMech.get_HoRT
       ~StatMech.get_S
+      ~StatMech.get_Selements
       ~StatMech.get_SoR
       ~StatMech.get_U
       ~StatMech.get_UoRT

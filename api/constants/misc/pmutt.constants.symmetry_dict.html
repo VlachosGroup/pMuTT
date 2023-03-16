@@ -1,92 +1,50 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>pmutt.constants.symmetry_dict &mdash; pmutt 1.2.21 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-  
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pmutt.constants.symmetry_dict &mdash; pmutt 1.3.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="pmutt.constants.type_dict" href="pmutt.constants.type_dict.html" />
     <link rel="prev" title="pmutt.constants.prefixes" href="pmutt.constants.prefixes.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../index.html" class="icon icon-home"> pmutt
           
-
-          
-            
-            <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
-          
+          <a href="../../../index.html" class="icon icon-home">
+            pmutt
+              <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
@@ -95,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../constants.html">Constants</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../constants.html#id2">Constants</a></li>
@@ -115,143 +73,86 @@
 <li class="toctree-l1"><a class="reference internal" href="../../mixture/mixture.html">Mixture Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../kinetic_models/kinetic_models.html">Kinetic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../equilibrium/equilibrium.html">Equilibrium Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Useful Links</span></p>
+<p class="caption" role="heading"><span class="caption-text">Useful Links</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">pmutt</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../constants.html">Constants</a> &raquo;</li>
-        
-      <li>pmutt.constants.symmetry_dict</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../constants.html">Constants</a></li>
+      <li class="breadcrumb-item active">pmutt.constants.symmetry_dict</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../../../_sources/api/constants/misc/pmutt.constants.symmetry_dict.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="pmutt-constants-symmetry-dict">
-<h1>pmutt.constants.symmetry_dict<a class="headerlink" href="#pmutt-constants-symmetry-dict" title="Permalink to this headline">¶</a></h1>
-<dl class="data">
-<dt id="pmutt.constants.symmetry_dict">
-<code class="sig-prename descclassname">pmutt.constants.</code><code class="sig-name descname">symmetry_dict</code><em class="property"> = {'10025-78-2': 3, '10025-87-3': 2, '10026-04-7': 12, '10026-11-6': 12, '10026-13-8': 6, '10031-24-0': 2, '10038-98-9': 12, '10405-27-3': 1, '10545-58-1': 2, '10545-99-0': 2, '106-93-4': 2, '106-96-7': 1, '106-97-8': 2, '106-99-0': 2, '1066-43-9': 3, '107-02-8': 1, '107-04-0': 1, '107-06-2': 2, '107-12-0': 1, '107-22-2': 2, '107-31-3': 1, '1070-74-2': 2, '1076-43-3': 12, '109-77-3': 2, '110-00-9': 2, '110-02-1': 2, '110-82-7': 6, '1111-89-3': 3, '115-10-6': 2, '115-11-7': 2, '116-14-3': 4, '123-91-1': 2, '127-18-4': 4, '13025-73-5': 3, '13450-92-5': 12, '13455-01-1': 3, '13465-71-9': 3, '13465-73-1': 3, '13465-74-2': 3, '13465-75-3': 2, '13465-76-4': 3, '13465-78-6': 3, '13465-84-4': 12, '13478-20-1': 3, '13536-94-2': 2, '13537-03-6': 3, '13537-07-0': 12, '13537-30-9': 3, '13537-33-2': 3, '13550-49-7': 3, '13569-43-2': 3, '13637-65-5': 3, '13637-87-1': 1, '13768-94-0': 2, '13769-76-1': 1, '13770-22-4': 1, '13777-22-5': 12, '13777-23-6': 12, '13777-25-8': 12, '13780-57-9': 4, '13818-89-8': 6, '13986-26-0': 12, '143-36-2': 3, '1449-65-6': 3, '1455-13-6': 1, '1482-88-8': 3, '14940-63-7': 1, '1495-50-7': 1, '151-56-4': 1, '1517-52-8': 6, '15586-97-7': 3, '156-59-2': 2, '156-60-5': 2, '15930-75-3': 3, '1630-77-9': 2, '1632-89-9': 1, '1632-99-1': 6, '1664-98-8': 2, '16921-96-3': 10, '17178-58-4': 1, '1735-17-7': 6, '1849-29-2': 1, '18820-63-8': 1, '2003-31-8': 1, '2003-32-9': 1, '2031-95-0': 3, '2036-39-7': 2, '20427-56-9': 12, '2206-26-0': 3, '2210-34-6': 1, '2314-97-8': 3, '2404-52-6': 3, '25604-70-0': 1, '25604-71-1': 1, '2614-35-9': 1, '26395-29-9': 1, '2699-79-8': 2, '287-23-0': 4, '2875-94-7': 2, '2875-95-8': 2, '2875-96-9': 2, '288-37-9': 2, '3017-23-0': 1, '3114-46-3': 1, '353-36-6': 1, '353-49-1': 1, '353-50-4': 2, '353-54-8': 3, '353-58-2': 1, '353-85-5': 3, '37230-84-5': 12, '39130-85-3': 3, '3982-91-0': 3, '4109-96-0': 2, '4122-13-8': 1, '420-32-6': 2, '460-12-8': 2, '460-19-5': 2, '463-49-0': 4, '463-71-8': 2, '50-00-0': 2, '503-17-3': 6, '503-28-6': 2, '504-64-3': 2, '506-78-5': 1, '506-82-1': 6, '507-16-4': 1, '507-25-5': 12, '544-97-8': 6, '557-99-3': 1, '558-13-4': 12, '558-20-3': 12, '558-21-4': 3, '56-23-5': 12, '593-53-3': 3, '593-61-3': 1, '593-63-5': 1, '593-74-8': 6, '593-75-9': 3, '593-95-3': 2, '594-15-0': 3, '594-18-3': 2, '594-73-0': 6, '6088-90-0': 1, '6088-91-1': 1, '6089-44-7': 1, '6111-63-3': 3, '624-61-3': 2, '624-65-7': 1, '624-74-8': 2, '64-18-6': 1, '64-19-7': 1, '6552-57-4': 2, '659-86-9': 1, '661-54-1': 3, '666-52-4': 2, '67-56-1': 1, '67-64-1': 2, '67-66-3': 3, '67-72-1': 6, '673-93-8': 3, '676-49-3': 3, '676-55-1': 2, '676-80-2': 3, '683-73-8': 4, '71-43-2': 12, '74-82-8': 12, '74-83-9': 3, '74-84-0': 6, '74-85-1': 4, '74-86-2': 2, '74-87-3': 3, '74-88-4': 3, '74-89-5': 1, '74-90-8': 1, '74-95-3': 2, '74-96-4': 1, '74-97-5': 1, '74-98-6': 2, '74-99-7': 3, '7446-70-0': 3, '75-00-3': 1, '75-05-8': 3, '75-07-0': 1, '75-09-2': 2, '75-19-4': 6, '75-21-8': 2, '75-25-2': 3, '75-35-4': 2, '75-44-5': 2, '75-46-7': 3, '75-61-6': 2, '75-62-7': 3, '75-63-8': 3, '75-69-4': 3, '75-71-8': 2, '75-72-9': 3, '75-73-0': 12, '7550-45-0': 12, '7572-29-4': 2, '76-16-4': 6, '7646-78-8': 12, '7647-18-9': 6, '7647-19-0': 6, '7664-41-7': 3, '7720-83-4': 12, '7727-18-6': 3, '7732-18-5': 2, '7758-95-4': 2, '7772-99-8': 2, '7782-65-2': 12, '7782-79-8': 1, '7783-41-7': 2, '7783-42-8': 1, '7783-46-2': 2, '7783-47-3': 2, '7783-54-2': 3, '7783-55-3': 3, '7783-61-1': 12, '7783-75-7': 24, '7783-77-9': 24, '7783-79-1': 24, '7783-80-4': 24, '7783-81-5': 24, '7783-82-6': 24, '7784-35-2': 3, '7784-36-3': 6, '7784-42-1': 3, '7784-45-4': 3, '7787-71-5': 2, '7789-20-0': 2, '7789-57-3': 3, '7789-59-5': 3, '7789-66-4': 12, '7789-67-5': 12, '7789-68-6': 12, '7790-91-2': 2, '7791-25-5': 2, '78-93-3': 1, '7803-51-2': 3, '7803-52-3': 3, '7803-62-5': 12, '79-20-9': 1, '79-28-7': 4, '79-35-6': 2, '811-98-3': 1, '819-01-2': 3, '917-96-4': 3, '920-42-3': 1, '992-94-9': 3}</em><a class="headerlink" href="#pmutt.constants.symmetry_dict" title="Permalink to this definition">¶</a></dt>
+             
+  <section id="pmutt-constants-symmetry-dict">
+<h1>pmutt.constants.symmetry_dict<a class="headerlink" href="#pmutt-constants-symmetry-dict" title="Permalink to this heading"></a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="pmutt.constants.symmetry_dict">
+<span class="sig-prename descclassname"><span class="pre">pmutt.constants.</span></span><span class="sig-name descname"><span class="pre">symmetry_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'10025-78-2':</span> <span class="pre">3,</span> <span class="pre">'10025-87-3':</span> <span class="pre">2,</span> <span class="pre">'10026-04-7':</span> <span class="pre">12,</span> <span class="pre">'10026-11-6':</span> <span class="pre">12,</span> <span class="pre">'10026-13-8':</span> <span class="pre">6,</span> <span class="pre">'10031-24-0':</span> <span class="pre">2,</span> <span class="pre">'10038-98-9':</span> <span class="pre">12,</span> <span class="pre">'10405-27-3':</span> <span class="pre">1,</span> <span class="pre">'10545-58-1':</span> <span class="pre">2,</span> <span class="pre">'10545-99-0':</span> <span class="pre">2,</span> <span class="pre">'106-93-4':</span> <span class="pre">2,</span> <span class="pre">'106-96-7':</span> <span class="pre">1,</span> <span class="pre">'106-97-8':</span> <span class="pre">2,</span> <span class="pre">'106-99-0':</span> <span class="pre">2,</span> <span class="pre">'1066-43-9':</span> <span class="pre">3,</span> <span class="pre">'107-02-8':</span> <span class="pre">1,</span> <span class="pre">'107-04-0':</span> <span class="pre">1,</span> <span class="pre">'107-06-2':</span> <span class="pre">2,</span> <span class="pre">'107-12-0':</span> <span class="pre">1,</span> <span class="pre">'107-22-2':</span> <span class="pre">2,</span> <span class="pre">'107-31-3':</span> <span class="pre">1,</span> <span class="pre">'1070-74-2':</span> <span class="pre">2,</span> <span class="pre">'1076-43-3':</span> <span class="pre">12,</span> <span class="pre">'109-77-3':</span> <span class="pre">2,</span> <span class="pre">'110-00-9':</span> <span class="pre">2,</span> <span class="pre">'110-02-1':</span> <span class="pre">2,</span> <span class="pre">'110-82-7':</span> <span class="pre">6,</span> <span class="pre">'1111-89-3':</span> <span class="pre">3,</span> <span class="pre">'115-10-6':</span> <span class="pre">2,</span> <span class="pre">'115-11-7':</span> <span class="pre">2,</span> <span class="pre">'116-14-3':</span> <span class="pre">4,</span> <span class="pre">'123-91-1':</span> <span class="pre">2,</span> <span class="pre">'127-18-4':</span> <span class="pre">4,</span> <span class="pre">'13025-73-5':</span> <span class="pre">3,</span> <span class="pre">'13450-92-5':</span> <span class="pre">12,</span> <span class="pre">'13455-01-1':</span> <span class="pre">3,</span> <span class="pre">'13465-71-9':</span> <span class="pre">3,</span> <span class="pre">'13465-73-1':</span> <span class="pre">3,</span> <span class="pre">'13465-74-2':</span> <span class="pre">3,</span> <span class="pre">'13465-75-3':</span> <span class="pre">2,</span> <span class="pre">'13465-76-4':</span> <span class="pre">3,</span> <span class="pre">'13465-78-6':</span> <span class="pre">3,</span> <span class="pre">'13465-84-4':</span> <span class="pre">12,</span> <span class="pre">'13478-20-1':</span> <span class="pre">3,</span> <span class="pre">'13536-94-2':</span> <span class="pre">2,</span> <span class="pre">'13537-03-6':</span> <span class="pre">3,</span> <span class="pre">'13537-07-0':</span> <span class="pre">12,</span> <span class="pre">'13537-30-9':</span> <span class="pre">3,</span> <span class="pre">'13537-33-2':</span> <span class="pre">3,</span> <span class="pre">'13550-49-7':</span> <span class="pre">3,</span> <span class="pre">'13569-43-2':</span> <span class="pre">3,</span> <span class="pre">'13637-65-5':</span> <span class="pre">3,</span> <span class="pre">'13637-87-1':</span> <span class="pre">1,</span> <span class="pre">'13768-94-0':</span> <span class="pre">2,</span> <span class="pre">'13769-76-1':</span> <span class="pre">1,</span> <span class="pre">'13770-22-4':</span> <span class="pre">1,</span> <span class="pre">'13777-22-5':</span> <span class="pre">12,</span> <span class="pre">'13777-23-6':</span> <span class="pre">12,</span> <span class="pre">'13777-25-8':</span> <span class="pre">12,</span> <span class="pre">'13780-57-9':</span> <span class="pre">4,</span> <span class="pre">'13818-89-8':</span> <span class="pre">6,</span> <span class="pre">'13986-26-0':</span> <span class="pre">12,</span> <span class="pre">'143-36-2':</span> <span class="pre">3,</span> <span class="pre">'1449-65-6':</span> <span class="pre">3,</span> <span class="pre">'1455-13-6':</span> <span class="pre">1,</span> <span class="pre">'1482-88-8':</span> <span class="pre">3,</span> <span class="pre">'14940-63-7':</span> <span class="pre">1,</span> <span class="pre">'1495-50-7':</span> <span class="pre">1,</span> <span class="pre">'151-56-4':</span> <span class="pre">1,</span> <span class="pre">'1517-52-8':</span> <span class="pre">6,</span> <span class="pre">'15586-97-7':</span> <span class="pre">3,</span> <span class="pre">'156-59-2':</span> <span class="pre">2,</span> <span class="pre">'156-60-5':</span> <span class="pre">2,</span> <span class="pre">'15930-75-3':</span> <span class="pre">3,</span> <span class="pre">'1630-77-9':</span> <span class="pre">2,</span> <span class="pre">'1632-89-9':</span> <span class="pre">1,</span> <span class="pre">'1632-99-1':</span> <span class="pre">6,</span> <span class="pre">'1664-98-8':</span> <span class="pre">2,</span> <span class="pre">'16921-96-3':</span> <span class="pre">10,</span> <span class="pre">'17178-58-4':</span> <span class="pre">1,</span> <span class="pre">'1735-17-7':</span> <span class="pre">6,</span> <span class="pre">'1849-29-2':</span> <span class="pre">1,</span> <span class="pre">'18820-63-8':</span> <span class="pre">1,</span> <span class="pre">'2003-31-8':</span> <span class="pre">1,</span> <span class="pre">'2003-32-9':</span> <span class="pre">1,</span> <span class="pre">'2031-95-0':</span> <span class="pre">3,</span> <span class="pre">'2036-39-7':</span> <span class="pre">2,</span> <span class="pre">'20427-56-9':</span> <span class="pre">12,</span> <span class="pre">'2206-26-0':</span> <span class="pre">3,</span> <span class="pre">'2210-34-6':</span> <span class="pre">1,</span> <span class="pre">'2314-97-8':</span> <span class="pre">3,</span> <span class="pre">'2404-52-6':</span> <span class="pre">3,</span> <span class="pre">'25604-70-0':</span> <span class="pre">1,</span> <span class="pre">'25604-71-1':</span> <span class="pre">1,</span> <span class="pre">'2614-35-9':</span> <span class="pre">1,</span> <span class="pre">'26395-29-9':</span> <span class="pre">1,</span> <span class="pre">'2699-79-8':</span> <span class="pre">2,</span> <span class="pre">'287-23-0':</span> <span class="pre">4,</span> <span class="pre">'2875-94-7':</span> <span class="pre">2,</span> <span class="pre">'2875-95-8':</span> <span class="pre">2,</span> <span class="pre">'2875-96-9':</span> <span class="pre">2,</span> <span class="pre">'288-37-9':</span> <span class="pre">2,</span> <span class="pre">'3017-23-0':</span> <span class="pre">1,</span> <span class="pre">'3114-46-3':</span> <span class="pre">1,</span> <span class="pre">'353-36-6':</span> <span class="pre">1,</span> <span class="pre">'353-49-1':</span> <span class="pre">1,</span> <span class="pre">'353-50-4':</span> <span class="pre">2,</span> <span class="pre">'353-54-8':</span> <span class="pre">3,</span> <span class="pre">'353-58-2':</span> <span class="pre">1,</span> <span class="pre">'353-85-5':</span> <span class="pre">3,</span> <span class="pre">'37230-84-5':</span> <span class="pre">12,</span> <span class="pre">'39130-85-3':</span> <span class="pre">3,</span> <span class="pre">'3982-91-0':</span> <span class="pre">3,</span> <span class="pre">'4109-96-0':</span> <span class="pre">2,</span> <span class="pre">'4122-13-8':</span> <span class="pre">1,</span> <span class="pre">'420-32-6':</span> <span class="pre">2,</span> <span class="pre">'460-12-8':</span> <span class="pre">2,</span> <span class="pre">'460-19-5':</span> <span class="pre">2,</span> <span class="pre">'463-49-0':</span> <span class="pre">4,</span> <span class="pre">'463-71-8':</span> <span class="pre">2,</span> <span class="pre">'50-00-0':</span> <span class="pre">2,</span> <span class="pre">'503-17-3':</span> <span class="pre">6,</span> <span class="pre">'503-28-6':</span> <span class="pre">2,</span> <span class="pre">'504-64-3':</span> <span class="pre">2,</span> <span class="pre">'506-78-5':</span> <span class="pre">1,</span> <span class="pre">'506-82-1':</span> <span class="pre">6,</span> <span class="pre">'507-16-4':</span> <span class="pre">1,</span> <span class="pre">'507-25-5':</span> <span class="pre">12,</span> <span class="pre">'544-97-8':</span> <span class="pre">6,</span> <span class="pre">'557-99-3':</span> <span class="pre">1,</span> <span class="pre">'558-13-4':</span> <span class="pre">12,</span> <span class="pre">'558-20-3':</span> <span class="pre">12,</span> <span class="pre">'558-21-4':</span> <span class="pre">3,</span> <span class="pre">'56-23-5':</span> <span class="pre">12,</span> <span class="pre">'593-53-3':</span> <span class="pre">3,</span> <span class="pre">'593-61-3':</span> <span class="pre">1,</span> <span class="pre">'593-63-5':</span> <span class="pre">1,</span> <span class="pre">'593-74-8':</span> <span class="pre">6,</span> <span class="pre">'593-75-9':</span> <span class="pre">3,</span> <span class="pre">'593-95-3':</span> <span class="pre">2,</span> <span class="pre">'594-15-0':</span> <span class="pre">3,</span> <span class="pre">'594-18-3':</span> <span class="pre">2,</span> <span class="pre">'594-73-0':</span> <span class="pre">6,</span> <span class="pre">'6088-90-0':</span> <span class="pre">1,</span> <span class="pre">'6088-91-1':</span> <span class="pre">1,</span> <span class="pre">'6089-44-7':</span> <span class="pre">1,</span> <span class="pre">'6111-63-3':</span> <span class="pre">3,</span> <span class="pre">'624-61-3':</span> <span class="pre">2,</span> <span class="pre">'624-65-7':</span> <span class="pre">1,</span> <span class="pre">'624-74-8':</span> <span class="pre">2,</span> <span class="pre">'64-18-6':</span> <span class="pre">1,</span> <span class="pre">'64-19-7':</span> <span class="pre">1,</span> <span class="pre">'6552-57-4':</span> <span class="pre">2,</span> <span class="pre">'659-86-9':</span> <span class="pre">1,</span> <span class="pre">'661-54-1':</span> <span class="pre">3,</span> <span class="pre">'666-52-4':</span> <span class="pre">2,</span> <span class="pre">'67-56-1':</span> <span class="pre">1,</span> <span class="pre">'67-64-1':</span> <span class="pre">2,</span> <span class="pre">'67-66-3':</span> <span class="pre">3,</span> <span class="pre">'67-72-1':</span> <span class="pre">6,</span> <span class="pre">'673-93-8':</span> <span class="pre">3,</span> <span class="pre">'676-49-3':</span> <span class="pre">3,</span> <span class="pre">'676-55-1':</span> <span class="pre">2,</span> <span class="pre">'676-80-2':</span> <span class="pre">3,</span> <span class="pre">'683-73-8':</span> <span class="pre">4,</span> <span class="pre">'71-43-2':</span> <span class="pre">12,</span> <span class="pre">'74-82-8':</span> <span class="pre">12,</span> <span class="pre">'74-83-9':</span> <span class="pre">3,</span> <span class="pre">'74-84-0':</span> <span class="pre">6,</span> <span class="pre">'74-85-1':</span> <span class="pre">4,</span> <span class="pre">'74-86-2':</span> <span class="pre">2,</span> <span class="pre">'74-87-3':</span> <span class="pre">3,</span> <span class="pre">'74-88-4':</span> <span class="pre">3,</span> <span class="pre">'74-89-5':</span> <span class="pre">1,</span> <span class="pre">'74-90-8':</span> <span class="pre">1,</span> <span class="pre">'74-95-3':</span> <span class="pre">2,</span> <span class="pre">'74-96-4':</span> <span class="pre">1,</span> <span class="pre">'74-97-5':</span> <span class="pre">1,</span> <span class="pre">'74-98-6':</span> <span class="pre">2,</span> <span class="pre">'74-99-7':</span> <span class="pre">3,</span> <span class="pre">'7446-70-0':</span> <span class="pre">3,</span> <span class="pre">'75-00-3':</span> <span class="pre">1,</span> <span class="pre">'75-05-8':</span> <span class="pre">3,</span> <span class="pre">'75-07-0':</span> <span class="pre">1,</span> <span class="pre">'75-09-2':</span> <span class="pre">2,</span> <span class="pre">'75-19-4':</span> <span class="pre">6,</span> <span class="pre">'75-21-8':</span> <span class="pre">2,</span> <span class="pre">'75-25-2':</span> <span class="pre">3,</span> <span class="pre">'75-35-4':</span> <span class="pre">2,</span> <span class="pre">'75-44-5':</span> <span class="pre">2,</span> <span class="pre">'75-46-7':</span> <span class="pre">3,</span> <span class="pre">'75-61-6':</span> <span class="pre">2,</span> <span class="pre">'75-62-7':</span> <span class="pre">3,</span> <span class="pre">'75-63-8':</span> <span class="pre">3,</span> <span class="pre">'75-69-4':</span> <span class="pre">3,</span> <span class="pre">'75-71-8':</span> <span class="pre">2,</span> <span class="pre">'75-72-9':</span> <span class="pre">3,</span> <span class="pre">'75-73-0':</span> <span class="pre">12,</span> <span class="pre">'7550-45-0':</span> <span class="pre">12,</span> <span class="pre">'7572-29-4':</span> <span class="pre">2,</span> <span class="pre">'76-16-4':</span> <span class="pre">6,</span> <span class="pre">'7646-78-8':</span> <span class="pre">12,</span> <span class="pre">'7647-18-9':</span> <span class="pre">6,</span> <span class="pre">'7647-19-0':</span> <span class="pre">6,</span> <span class="pre">'7664-41-7':</span> <span class="pre">3,</span> <span class="pre">'7720-83-4':</span> <span class="pre">12,</span> <span class="pre">'7727-18-6':</span> <span class="pre">3,</span> <span class="pre">'7732-18-5':</span> <span class="pre">2,</span> <span class="pre">'7758-95-4':</span> <span class="pre">2,</span> <span class="pre">'7772-99-8':</span> <span class="pre">2,</span> <span class="pre">'7782-65-2':</span> <span class="pre">12,</span> <span class="pre">'7782-79-8':</span> <span class="pre">1,</span> <span class="pre">'7783-41-7':</span> <span class="pre">2,</span> <span class="pre">'7783-42-8':</span> <span class="pre">1,</span> <span class="pre">'7783-46-2':</span> <span class="pre">2,</span> <span class="pre">'7783-47-3':</span> <span class="pre">2,</span> <span class="pre">'7783-54-2':</span> <span class="pre">3,</span> <span class="pre">'7783-55-3':</span> <span class="pre">3,</span> <span class="pre">'7783-61-1':</span> <span class="pre">12,</span> <span class="pre">'7783-75-7':</span> <span class="pre">24,</span> <span class="pre">'7783-77-9':</span> <span class="pre">24,</span> <span class="pre">'7783-79-1':</span> <span class="pre">24,</span> <span class="pre">'7783-80-4':</span> <span class="pre">24,</span> <span class="pre">'7783-81-5':</span> <span class="pre">24,</span> <span class="pre">'7783-82-6':</span> <span class="pre">24,</span> <span class="pre">'7784-35-2':</span> <span class="pre">3,</span> <span class="pre">'7784-36-3':</span> <span class="pre">6,</span> <span class="pre">'7784-42-1':</span> <span class="pre">3,</span> <span class="pre">'7784-45-4':</span> <span class="pre">3,</span> <span class="pre">'7787-71-5':</span> <span class="pre">2,</span> <span class="pre">'7789-20-0':</span> <span class="pre">2,</span> <span class="pre">'7789-57-3':</span> <span class="pre">3,</span> <span class="pre">'7789-59-5':</span> <span class="pre">3,</span> <span class="pre">'7789-66-4':</span> <span class="pre">12,</span> <span class="pre">'7789-67-5':</span> <span class="pre">12,</span> <span class="pre">'7789-68-6':</span> <span class="pre">12,</span> <span class="pre">'7790-91-2':</span> <span class="pre">2,</span> <span class="pre">'7791-25-5':</span> <span class="pre">2,</span> <span class="pre">'78-93-3':</span> <span class="pre">1,</span> <span class="pre">'7803-51-2':</span> <span class="pre">3,</span> <span class="pre">'7803-52-3':</span> <span class="pre">3,</span> <span class="pre">'7803-62-5':</span> <span class="pre">12,</span> <span class="pre">'79-20-9':</span> <span class="pre">1,</span> <span class="pre">'79-28-7':</span> <span class="pre">4,</span> <span class="pre">'79-35-6':</span> <span class="pre">2,</span> <span class="pre">'811-98-3':</span> <span class="pre">1,</span> <span class="pre">'819-01-2':</span> <span class="pre">3,</span> <span class="pre">'917-96-4':</span> <span class="pre">3,</span> <span class="pre">'920-42-3':</span> <span class="pre">1,</span> <span class="pre">'992-94-9':</span> <span class="pre">3}</span></em><a class="headerlink" href="#pmutt.constants.symmetry_dict" title="Permalink to this definition"></a></dt>
 <dd><p>Symmetry number. The key is the CAS-ID</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="pmutt.constants.type_dict.html" class="btn btn-neutral float-right" title="pmutt.constants.type_dict" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="pmutt.constants.prefixes.html" class="btn btn-neutral float-left" title="pmutt.constants.prefixes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pmutt.constants.prefixes.html" class="btn btn-neutral float-left" title="pmutt.constants.prefixes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pmutt.constants.type_dict.html" class="btn btn-neutral float-right" title="pmutt.constants.type_dict" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Vlachos Research Group
-
-    </p>
+    <p>&#169; Copyright 2020, Vlachos Research Group.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

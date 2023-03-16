@@ -1,4 +1,4 @@
-pmutt.mixture.cov.PiecewiseCovEffect
+﻿pmutt.mixture.cov.PiecewiseCovEffect
 ====================================
 
 .. currentmodule:: pmutt.mixture.cov
@@ -32,8 +32,9 @@ pmutt.mixture.cov.PiecewiseCovEffect
       ~PiecewiseCovEffect.get_q
       ~PiecewiseCovEffect.insert
       ~PiecewiseCovEffect.pop
-      ~PiecewiseCovEffect.to_CTI
+      ~PiecewiseCovEffect.to_cti
       ~PiecewiseCovEffect.to_dict
+      ~PiecewiseCovEffect.to_omkm_yaml
    
    
 

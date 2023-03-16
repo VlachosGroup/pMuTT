@@ -1,92 +1,50 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Kinetic Models &mdash; pmutt 1.2.21 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-  
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kinetic Models &mdash; pmutt 1.3.3 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/p_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="pmutt.chemkin.CatSite" href="chemkin/pmutt.chemkin.CatSite.html" />
     <link rel="prev" title="pmutt.mixture.cov.PiecewiseCovEffect" href="../mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> pmutt
           
-
-          
-            
-            <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
-          
+          <a href="../../index.html" class="icon icon-home">
+            pmutt
+              <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
@@ -95,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../referencing.html">Referencing</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../constants/constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../io/io.html">Input and Output</a></li>
@@ -124,10 +82,7 @@
 <li class="toctree-l4"><a class="reference internal" href="cantera_units/pmutt.cantera.units.Units.html">pmutt.cantera.units.Units</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Input and Output</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cantera_io/pmutt.io.cantera.obj_to_cti.html">pmutt.io.cantera.obj_to_cti</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Input and Output</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#openmkm">OpenMKM</a><ul>
@@ -152,7 +107,7 @@
 <li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_species_phases.html">pmutt.io.omkm.get_species_phases</a></li>
 <li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_reactions_phases.html">pmutt.io.omkm.get_reactions_phases</a></li>
 <li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.get_interactions_phases.html">pmutt.io.omkm.get_interactions_phases</a></li>
-<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.organize_phases.html">pmutt.io.omkm.get_species_phases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="omkm/pmutt.io.omkm.organize_phases.html">pmutt.io.omkm.organize_phases</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">Examples</a></li>
@@ -168,94 +123,52 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../equilibrium/equilibrium.html">Equilibrium Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../eos/eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Useful Links</span></p>
+<p class="caption" role="heading"><span class="caption-text">Useful Links</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">pmutt</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
-      <li>Kinetic Models</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Kinetic Models</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../../_sources/api/kinetic_models/kinetic_models.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="kinetic-models">
-<span id="id1"></span><h1>Kinetic Models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="chemkin">
-<h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this headline">¶</a></h2>
+             
+  <section id="kinetic-models">
+<span id="id1"></span><h1>Kinetic Models<a class="headerlink" href="#kinetic-models" title="Permalink to this heading"></a></h1>
+<section id="chemkin">
+<h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this heading"></a></h2>
 <p>Classes and functions related to writing Chemkin files. Please note these
 modules were written specifically for the Vlachos group’s in-house version.
 Features may or may not be supported in the commercial version.</p>
 <hr class="docutils" />
-<div class="section" id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="chemkin/pmutt.chemkin.CatSite.html#pmutt.chemkin.CatSite" title="pmutt.chemkin.CatSite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.CatSite</span></code></a></p></td>
 <td><p>Catalyst site for Chemkin</p></td>
@@ -265,14 +178,10 @@ Features may or may not be supported in the commercial version.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input-and-output">
-<h3>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+</section>
+<section id="input-and-output">
+<h3>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.read_reactions.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.read_reactions</span></code></a></p></td>
 <td><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p></td>
@@ -294,26 +203,22 @@ Features may or may not be supported in the commercial version.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../examples_jupyter/examples.html#chemkin-io-example"><span class="std std-ref">Chemkin_IO</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="cantera">
-<h2>Cantera<a class="headerlink" href="#cantera" title="Permalink to this headline">¶</a></h2>
+<section id="cantera">
+<h2>Cantera<a class="headerlink" href="#cantera" title="Permalink to this heading"></a></h2>
 <p>Classes and functions related to <a class="reference external" href="https://cantera.org/">Cantera</a>. This functionality is still in
 its early stages.</p>
-<div class="section" id="phases">
-<h3>Phases<a class="headerlink" href="#phases" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<section id="phases">
+<h3>Phases<a class="headerlink" href="#phases" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.phase.Phase</span></code></a></p></td>
 <td><p>Parent class for Cantera phases</p></td>
@@ -326,48 +231,36 @@ its early stages.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="units">
-<h3>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+</section>
+<section id="units">
+<h3>Units<a class="headerlink" href="#units" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.units.Units</span></code></a></p></td>
 <td><p>Expresses units as Cantera CTI file.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id2">
-<h3>Input and Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+</section>
+<section id="id2">
+<h3>Input and Output<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="cantera_io/pmutt.io.cantera.obj_to_cti.html#pmutt.io.cantera.obj_to_cti" title="pmutt.io.cantera.obj_to_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.cantera.obj_to_cti</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="cantera_io/pmutt.io.cantera.obj_to_CTI.html#pmutt.io.cantera.obj_to_cti" title="pmutt.io.cantera.obj_to_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.cantera.obj_to_cti</span></code></a></p></td>
 <td><p>Converts elementary data types to CTI format</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="openmkm">
-<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Permalink to this headline">¶</a></h2>
+<section id="openmkm">
+<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Permalink to this heading"></a></h2>
 <p>Classes and functions related to OpenMKM. This functionality is still in its
 early stages.</p>
-<div class="section" id="id3">
-<h3>Phases<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<section id="id3">
+<h3>Phases<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.IdealGas.html#pmutt.omkm.phase.IdealGas" title="pmutt.omkm.phase.IdealGas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.phase.IdealGas</span></code></a></p></td>
 <td><p>OpenMKM implementation of the ideal gas phase.</p></td>
@@ -380,14 +273,10 @@ early stages.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="reactions">
-<h3>Reactions<a class="headerlink" href="#reactions" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+</section>
+<section id="reactions">
+<h3>Reactions<a class="headerlink" href="#reactions" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.reaction.SurfaceReaction</span></code></a></p></td>
 <td><p>Expresses OpenMKM surface reaction in Cantera CTI format reaction.</p></td>
@@ -397,28 +286,20 @@ early stages.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id4">
-<h3>Units<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+</section>
+<section id="id4">
+<h3>Units<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.units.Units</span></code></a></p></td>
 <td><p>OpenMKM implementation of the units.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id5">
-<h3>Input and Output<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+</section>
+<section id="id5">
+<h3>Input and Output<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.write_cti</span></code></a></p></td>
 <td><p>Writes the units, phases, species, lateral interactions, reactions and additional options in the CTI format for OpenMKM</p></td>
@@ -440,82 +321,60 @@ early stages.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id6">
-<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id6">
+<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../examples_jupyter/examples.html#openmkm-io-example"><span class="std std-ref">OpenMKM_IO</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="zacros">
-<h2>Zacros<a class="headerlink" href="#zacros" title="Permalink to this headline">¶</a></h2>
+<section id="zacros">
+<h2>Zacros<a class="headerlink" href="#zacros" title="Permalink to this heading"></a></h2>
 <p>Classes related to <a class="reference external" href="http://zacros.org/">Zacros</a>.</p>
-<div class="section" id="id7">
-<h3>Classes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<section id="id7">
+<h3>Classes<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="zacros/pmutt.empirical.zacros.Zacros.html#pmutt.empirical.zacros.Zacros" title="pmutt.empirical.zacros.Zacros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">empirical.zacros.Zacros</span></code></a></p></td>
 <td><p>Stores the information for an individual nasa specie Inherits from pmutt.empirical.EmpiricalBase</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="chemkin/pmutt.chemkin.CatSite.html" class="btn btn-neutral float-right" title="pmutt.chemkin.CatSite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html" class="btn btn-neutral float-left" title="pmutt.mixture.cov.PiecewiseCovEffect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../mixture/cov/pmutt.mixture.cov.PiecewiseCovEffect.html" class="btn btn-neutral float-left" title="pmutt.mixture.cov.PiecewiseCovEffect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chemkin/pmutt.chemkin.CatSite.html" class="btn btn-neutral float-right" title="pmutt.chemkin.CatSite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Vlachos Research Group
-
-    </p>
+    <p>&#169; Copyright 2020, Vlachos Research Group.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

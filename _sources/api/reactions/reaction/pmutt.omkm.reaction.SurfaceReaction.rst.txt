@@ -1,4 +1,4 @@
-pmutt.omkm.reaction.SurfaceReaction
+﻿pmutt.omkm.reaction.SurfaceReaction
 ===================================
 
 .. currentmodule:: pmutt.omkm.reaction
@@ -73,8 +73,9 @@ pmutt.omkm.reaction.SurfaceReaction
       ~SurfaceReaction.get_q_state
       ~SurfaceReaction.get_species
       ~SurfaceReaction.get_state_quantity
-      ~SurfaceReaction.to_CTI
+      ~SurfaceReaction.to_cti
       ~SurfaceReaction.to_dict
+      ~SurfaceReaction.to_omkm_yaml
       ~SurfaceReaction.to_string
    
    
@@ -85,11 +86,13 @@ pmutt.omkm.reaction.SurfaceReaction
 
    .. autosummary::
    
+      ~SurfaceReaction.beta
       ~SurfaceReaction.id
       ~SurfaceReaction.products
       ~SurfaceReaction.products_stoich
       ~SurfaceReaction.reactants
       ~SurfaceReaction.reactants_stoich
+      ~SurfaceReaction.sticking_coeff
       ~SurfaceReaction.transition_state
       ~SurfaceReaction.transition_state_stoich
    

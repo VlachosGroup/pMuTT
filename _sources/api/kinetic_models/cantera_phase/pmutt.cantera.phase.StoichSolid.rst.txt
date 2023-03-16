@@ -1,4 +1,4 @@
-pmutt.cantera.phase.StoichSolid
+﻿pmutt.cantera.phase.StoichSolid
 ===============================
 
 .. currentmodule:: pmutt.cantera.phase
@@ -21,7 +21,7 @@ pmutt.cantera.phase.StoichSolid
       ~StoichSolid.index_species
       ~StoichSolid.pop_species
       ~StoichSolid.remove_species
-      ~StoichSolid.to_CTI
+      ~StoichSolid.to_cti
    
    
 

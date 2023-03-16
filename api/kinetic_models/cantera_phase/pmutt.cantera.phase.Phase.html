@@ -1,92 +1,50 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>pmutt.cantera.phase.Phase &mdash; pmutt 1.2.21 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-  
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pmutt.cantera.phase.Phase &mdash; pmutt 1.3.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../../_static/p_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="pmutt.cantera.phase.IdealGas" href="pmutt.cantera.phase.IdealGas.html" />
     <link rel="prev" title="pmutt.reaction.ChemkinReaction" href="../chemkin/pmutt.reaction.ChemkinReaction.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../index.html" class="icon icon-home"> pmutt
           
-
-          
-            
-            <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
-          
+          <a href="../../../index.html" class="icon icon-home">
+            pmutt
+              <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../includeme.html">Python Multiscale Thermochemistry Toolbox (pMuTT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
@@ -95,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../referencing.html">Referencing</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../constants/constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io/io.html">Input and Output</a></li>
@@ -120,203 +78,159 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../equilibrium/equilibrium.html">Equilibrium Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../eos/eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Useful Links</span></p>
+<p class="caption" role="heading"><span class="caption-text">Useful Links</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">pmutt</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../kinetic_models.html">Kinetic Models</a> &raquo;</li>
-        
-      <li>pmutt.cantera.phase.Phase</li>
-    
-    
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../kinetic_models.html">Kinetic Models</a></li>
+      <li class="breadcrumb-item active">pmutt.cantera.phase.Phase</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../../../_sources/api/kinetic_models/cantera_phase/pmutt.cantera.phase.Phase.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="pmutt-cantera-phase-phase">
-<h1>pmutt.cantera.phase.Phase<a class="headerlink" href="#pmutt-cantera-phase-phase" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="pmutt.cantera.phase.Phase">
-<em class="property">class </em><code class="sig-prename descclassname">pmutt.cantera.phase.</code><code class="sig-name descname">Phase</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">species=None</em>, <em class="sig-param">initial_state=None</em>, <em class="sig-param">kinetics=None</em>, <em class="sig-param">transport=None</em>, <em class="sig-param">reactions=None</em>, <em class="sig-param">options=None</em>, <em class="sig-param">note=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+             
+  <section id="pmutt-cantera-phase-phase">
+<h1>pmutt.cantera.phase.Phase<a class="headerlink" href="#pmutt-cantera-phase-phase" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.cantera.phase.</span></span><span class="sig-name descname"><span class="pre">Phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Parent class for Cantera phases</p>
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.name" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.name" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the phase</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.species">
-<code class="sig-name descname">species</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.species" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.species">
+<span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.species" title="Permalink to this definition"></a></dt>
 <dd><p>Species present in Phase. Default is an empty list</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code> objects, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.initial_state">
-<code class="sig-name descname">initial_state</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.initial_state" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.initial_state">
+<span class="sig-name descname"><span class="pre">initial_state</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.initial_state" title="Permalink to this definition"></a></dt>
 <dd><p>Dictionary of initial mole fractions. Default is None</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a>, optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.kinetics">
-<code class="sig-name descname">kinetics</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.kinetics" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.kinetics">
+<span class="sig-name descname"><span class="pre">kinetics</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.kinetics" title="Permalink to this definition"></a></dt>
 <dd><p>Kinetics model to use for phase. Default is None</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Kinetics object, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.transport">
-<code class="sig-name descname">transport</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.transport" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.transport">
+<span class="sig-name descname"><span class="pre">transport</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.transport" title="Permalink to this definition"></a></dt>
 <dd><p>Transport model to use for transport. Default is None</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Transport object, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.reactions">
-<code class="sig-name descname">reactions</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.reactions" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.reactions">
+<span class="sig-name descname"><span class="pre">reactions</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.reactions" title="Permalink to this definition"></a></dt>
 <dd><p>Reactions associated with phase. Default is None</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of <a class="reference internal" href="../../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">SurfaceReaction</span></code></a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.options">
-<code class="sig-name descname">options</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.options" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.options">
+<span class="sig-name descname"><span class="pre">options</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.options" title="Permalink to this definition"></a></dt>
 <dd><p>Additional options. Default is None</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a>, optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.note">
-<code class="sig-name descname">note</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.note" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.note">
+<span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.note" title="Permalink to this definition"></a></dt>
 <dd><p>Note about the phase. Default is None.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pmutt.cantera.phase.Phase.elements">
-<code class="sig-name descname">elements</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.elements" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.elements">
+<span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.elements" title="Permalink to this definition"></a></dt>
 <dd><p>Not supplied during initialization. Attribute derived from
 <code class="docutils literal notranslate"><span class="pre">species</span></code> attribute.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.8)">set</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">species=None</em>, <em class="sig-param">initial_state=None</em>, <em class="sig-param">kinetics=None</em>, <em class="sig-param">transport=None</em>, <em class="sig-param">reactions=None</em>, <em class="sig-param">options=None</em>, <em class="sig-param">note=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <p class="rubric">Methods</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.cantera.phase.Phase.__init__" title="pmutt.cantera.phase.Phase.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(name[, species, initial_state, …])</p></td>
-<td><p>Initialize self.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.cantera.phase.Phase.__init__" title="pmutt.cantera.phase.Phase.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(name[, species, initial_state, ...])</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pmutt.cantera.phase.Phase.append_species" title="pmutt.cantera.phase.Phase.append_species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append_species</span></code></a>(val)</p></td>
 <td><p></p></td>
@@ -342,16 +256,12 @@
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.cantera.phase.Phase.elements" title="pmutt.cantera.phase.Phase.elements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elements</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="pmutt.cantera.phase.Phase.elements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elements</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pmutt.cantera.phase.Phase.species" title="pmutt.cantera.phase.Phase.species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">species</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id1" title="pmutt.cantera.phase.Phase.species"><code class="xref py py-obj docutils literal notranslate"><span class="pre">species</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pmutt.cantera.phase.Phase.species_names" title="pmutt.cantera.phase.Phase.species_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">species_names</span></code></a></p></td>
@@ -359,107 +269,89 @@
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.append_species">
-<code class="sig-name descname">append_species</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.append_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.append_species">
+<span class="sig-name descname"><span class="pre">append_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.append_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.clear_species">
-<code class="sig-name descname">clear_species</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.clear_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.clear_species">
+<span class="sig-name descname"><span class="pre">clear_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.clear_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.copy_species">
-<code class="sig-name descname">copy_species</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.copy_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.copy_species">
+<span class="sig-name descname"><span class="pre">copy_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.copy_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt>
-<em class="property">property </em><code class="sig-name descname">elements</code></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.extend_species">
-<code class="sig-name descname">extend_species</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.extend_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.extend_species">
+<span class="sig-name descname"><span class="pre">extend_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.extend_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.index_species">
-<code class="sig-name descname">index_species</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.index_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.index_species">
+<span class="sig-name descname"><span class="pre">index_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.index_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.pop_species">
-<code class="sig-name descname">pop_species</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.pop_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.pop_species">
+<span class="sig-name descname"><span class="pre">pop_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.pop_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.remove_species">
-<code class="sig-name descname">remove_species</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.remove_species" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.remove_species">
+<span class="sig-name descname"><span class="pre">remove_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.Phase.remove_species" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt>
-<em class="property">property </em><code class="sig-name descname">species</code></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="pmutt.cantera.phase.Phase.species_names">
-<em class="property">property </em><code class="sig-name descname">species_names</code><a class="headerlink" href="#pmutt.cantera.phase.Phase.species_names" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pmutt.cantera.phase.Phase.species_names">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#pmutt.cantera.phase.Phase.species_names" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="pmutt.cantera.phase.IdealGas.html" class="btn btn-neutral float-right" title="pmutt.cantera.phase.IdealGas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../chemkin/pmutt.reaction.ChemkinReaction.html" class="btn btn-neutral float-left" title="pmutt.reaction.ChemkinReaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chemkin/pmutt.reaction.ChemkinReaction.html" class="btn btn-neutral float-left" title="pmutt.reaction.ChemkinReaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pmutt.cantera.phase.IdealGas.html" class="btn btn-neutral float-right" title="pmutt.cantera.phase.IdealGas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Vlachos Research Group
-
-    </p>
+    <p>&#169; Copyright 2020, Vlachos Research Group.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

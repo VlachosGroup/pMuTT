@@ -1,92 +1,50 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Python Multiscale Thermochemistry Toolbox (pMuTT) &mdash; pmutt 1.2.21 documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-  
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Multiscale Thermochemistry Toolbox (pMuTT) &mdash; pmutt 1.3.3 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/p_icon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="install.html" />
     <link rel="prev" title="Welcome to pmutt’s documentation!" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home"> pmutt
           
-
-          
-            
-            <img src="_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
-          
+          <a href="index.html" class="icon icon-home">
+            pmutt
+              <img src="_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python Multiscale Thermochemistry Toolbox (pMuTT)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
@@ -107,7 +65,7 @@
 <li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencing.html">Referencing</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/constants/constants.html">Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/io/io.html">Input and Output</a></li>
@@ -116,81 +74,43 @@
 <li class="toctree-l1"><a class="reference internal" href="api/mixture/mixture.html">Mixture Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/kinetic_models/kinetic_models.html">Kinetic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/reactions/reactions.html">Reactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/equilibrium/equilibrium.html">Equilibrium Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/eos/eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Useful Links</span></p>
+<p class="caption" role="heading"><span class="caption-text">Useful Links</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pmutt">View Source Code (GitHub)</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Report an Issue</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">pmutt</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
-      <li>Python Multiscale Thermochemistry Toolbox (pMuTT)</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python Multiscale Thermochemistry Toolbox (pMuTT)</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="_sources/includeme.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="python-multiscale-thermochemistry-toolbox-pmutt">
-<h1>Python Multiscale Thermochemistry Toolbox (pMuTT)<a class="headerlink" href="#python-multiscale-thermochemistry-toolbox-pmutt" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="python-multiscale-thermochemistry-toolbox-pmutt">
+<h1>Python Multiscale Thermochemistry Toolbox (pMuTT)<a class="headerlink" href="#python-multiscale-thermochemistry-toolbox-pmutt" title="Permalink to this heading"></a></h1>
 <p>The <strong>P</strong>ython <strong>Mu</strong>ltiscale <strong>T</strong>hermochemistry <strong>T</strong>oolbox
 (pMuTT) is a Python library for Thermochemistry developed by the
 Vlachos Research Group at the University of Delaware. This code was
@@ -199,19 +119,19 @@ thermodynamic properties such as heat capacity, enthalpy, entropy, and
 Gibbs energy. These properties can be fit to empirical equations and
 written to different formats.</p>
 <a class="reference external image-reference" href="https://vlachosgroup.github.io/pMuTT/"><img alt="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png" class="align-center" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png" /></a>
-<div class="section" id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
 <p>See our <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/">documentation page</a> for examples, equations used, and docstrings.</p>
-</div>
-<div class="section" id="developers">
-<h2>Developers<a class="headerlink" href="#developers" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="developers">
+<h2>Developers<a class="headerlink" href="#developers" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p>Jonathan Lym (<a class="reference external" href="mailto:jlym&#37;&#52;&#48;udel&#46;edu">jlym<span>&#64;</span>udel<span>&#46;</span>edu</a>)</p></li>
+<li><p>Jonathan Lym (<a class="reference external" href="mailto:jonathanalym&#37;&#52;&#48;gmail&#46;com">jonathanalym<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p></li>
 <li><p>Gerhard Wittreich, P.E. (<a class="reference external" href="mailto:wittregr&#37;&#52;&#48;udel&#46;edu">wittregr<span>&#64;</span>udel<span>&#46;</span>edu</a>)</p></li>
 </ul>
-</div>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Python3</p></li>
 <li><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/">Atomic Simulation Environment</a>: Used for I/O operations and to
@@ -229,9 +149,9 @@ reaction coordinate diagram</p></li>
 <li><p><a class="reference external" href="https://more-itertools.readthedocs.io/en/stable/index.html">More Itertools</a>: Used for writing ranges for OpenMKM output.</p></li>
 <li><p><a class="reference external" href="https://pyyaml.org/">PyYAML</a>: Used to write YAML input files for OpenMKM.</p></li>
 </ul>
-</div>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
 <ol class="arabic">
 <li><p>Install using pip (<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/install.html">see documentation for more thorough instructions</a>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pmutt</span>
@@ -241,23 +161,23 @@ reaction coordinate diagram</p></li>
 <li><p>Look at <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/examples_jupyter/examples.html">examples using the code</a></p></li>
 <li><p>Run the <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/install.html#running-unit-tests">unit tests</a>.</p></li>
 </ol>
-</div>
-<div class="section" id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
 <p>This project is licensed under the MIT License - see the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md">LICENSE.md</a>
 file for details.</p>
-</div>
-<div class="section" id="publications">
-<h2>Publications<a class="headerlink" href="#publications" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="publications">
+<h2>Publications<a class="headerlink" href="#publications" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry
 Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer
 Physics Communications (2019) 106864,
 <a class="reference external" href="https://doi.org/10.1016/j.cpc.2019.106864">https://doi.org/10.1016/j.cpc.2019.106864</a>.</p></li>
 </ul>
-</div>
-<div class="section" id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading"></a></h2>
 <p>If you have a suggestion or find a bug, please post to our <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Issues page</a> with
 the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3Aenhancement"><img alt="enhancement_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/enhancement_small.png" style="height: 20px;" /></a> or <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3Abug"><img alt="bug_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/bug_small.png" style="height: 20px;" /></a> tag respectively.</p>
 <p>Finally, if you would like to add to the body of code, please:</p>
@@ -267,74 +187,56 @@ the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/is
 <li><p>write the appropriate unit tests</p></li>
 <li><p>submit a <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/pulls">pull request</a>.</p></li>
 </ul>
-</div>
-<div class="section" id="questions">
-<h2>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Permalink to this heading"></a></h2>
 <p>If you are having issues, please post to our <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Issues page</a> with the
 <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3A%22help%20wanted%22"><img alt="help_wanted_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/help_wanted_small.png" style="height: 20px;" /></a> or <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3Aquestion"><img alt="question_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/question_small.png" style="height: 20px;" /></a> tag. We will do our best to assist.</p>
-</div>
-<div class="section" id="funding">
-<h2>Funding<a class="headerlink" href="#funding" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="funding">
+<h2>Funding<a class="headerlink" href="#funding" title="Permalink to this heading"></a></h2>
 <p>This material is based upon work supported by the Department of Energy’s Office
 of Energy Efficient and Renewable Energy’s Advanced Manufacturing Office under
 Award Number DE-EE0007888-9.5.</p>
-</div>
-<div class="section" id="special-thanks">
-<h2>Special Thanks<a class="headerlink" href="#special-thanks" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="special-thanks">
+<h2>Special Thanks<a class="headerlink" href="#special-thanks" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Dr. Jeffrey Frey (pip and conda compatibility)</p></li>
 <li><p>Jaynell Keely (Logo design)</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to pmutt’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to pmutt’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Vlachos Research Group
-
-    </p>
+    <p>&#169; Copyright 2020, Vlachos Research Group.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-    
+  </script>  
 
   <style>
     /* Sidebar header (and topbar for mobile) */

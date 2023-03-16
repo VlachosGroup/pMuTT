@@ -1,4 +1,4 @@
-pmutt.empirical.references.References
+﻿pmutt.empirical.references.References
 =====================================
 
 .. currentmodule:: pmutt.empirical.references
@@ -36,6 +36,7 @@ pmutt.empirical.references.References
       ~References.get_UoRT
       ~References.get_descriptors
       ~References.get_descriptors_matrix
+      ~References.get_q
       ~References.index
       ~References.insert
       ~References.pop

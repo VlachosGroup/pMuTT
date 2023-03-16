@@ -28,6 +28,7 @@ Welcome to pmutt's documentation!
    api/mixture/mixture
    api/kinetic_models/kinetic_models
    api/reactions/reactions
+   api/equilibrium/equilibrium
    api/phase_diagram/phase_diagram
    api/eos/eos
    api/visualization/visual
