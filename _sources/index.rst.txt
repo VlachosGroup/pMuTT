@@ -37,6 +37,7 @@ Welcome to pmutt's documentation!
 .. toctree::
    :caption: Useful Links
 
+
    View Source Code (GitHub) <https://github.com/VlachosGroup/pmutt>
    Report an Issue <https://github.com/VlachosGroup/pMuTT/issues>
 
@@ -47,3 +48,4 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+:Sphinx Version: |sphinx_version|
