@@ -7,7 +7,7 @@ Development Branch
 ------------------
 `Development Branch`_
 
-Version 1.4.0
+Version 1.4.1
 -------------
 
 Mar. 17, 2023
