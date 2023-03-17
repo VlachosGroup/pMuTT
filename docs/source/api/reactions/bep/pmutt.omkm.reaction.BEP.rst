@@ -1,4 +1,4 @@
-pmutt.omkm.reaction.BEP
+﻿pmutt.omkm.reaction.BEP
 =======================
 
 .. currentmodule:: pmutt.omkm.reaction
@@ -16,7 +16,9 @@ pmutt.omkm.reaction.BEP
       ~BEP.__init__
       ~BEP.from_dict
       ~BEP.get_Cp
+      ~BEP.get_CpoR
       ~BEP.get_Cv
+      ~BEP.get_CvoR
       ~BEP.get_E_act
       ~BEP.get_EoRT_act
       ~BEP.get_F
@@ -29,8 +31,10 @@ pmutt.omkm.reaction.BEP
       ~BEP.get_SoR
       ~BEP.get_U
       ~BEP.get_UoRT
-      ~BEP.to_CTI
+      ~BEP.get_q
+      ~BEP.to_cti
       ~BEP.to_dict
+      ~BEP.to_omkm_yaml
    
    
 

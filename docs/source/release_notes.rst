@@ -7,6 +7,31 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.0
+-------------
+
+Mar. 17, 2023
+
+- Added new :class:`~pmutt.equilibrium.Equilibrium` class that computes the equilibrium
+  concentration on a network of species by minimizing the network
+  Gibbs free energy while maintaining the total atom balance of
+  the initial starting concentration of species
+- Major GitHub documentation update including the new functionality
+  from v1.3.2 and v1.4.0, corrections noted in the issues database,
+  fixes to broken links, addition of a new "Helper Functions. section,
+  and misc upgrades.
+
+Version 1.3.2
+-------------
+
+Jan. 26, 2023
+
+- Added ``S_elements`` parameter to entropy and Gibbs free energy
+  methods allowing you to compute an entropy and Gibbs free energy
+  of formation for a single species by including the entropy of the
+  elements in the species.
+- Misc bug fixes
+
 Version 1.2.21
 --------------
 

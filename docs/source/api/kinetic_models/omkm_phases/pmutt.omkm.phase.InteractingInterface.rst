@@ -1,4 +1,4 @@
-pmutt.omkm.phase.InteractingInterface
+﻿pmutt.omkm.phase.InteractingInterface
 =====================================
 
 .. currentmodule:: pmutt.omkm.phase
@@ -21,7 +21,8 @@ pmutt.omkm.phase.InteractingInterface
       ~InteractingInterface.index_species
       ~InteractingInterface.pop_species
       ~InteractingInterface.remove_species
-      ~InteractingInterface.to_CTI
+      ~InteractingInterface.to_cti
+      ~InteractingInterface.to_omkm_yaml
    
    
 

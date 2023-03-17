@@ -218,7 +218,7 @@ OpenMKM_IO
   :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/OpenMKM_IO.py
   :width: 15%
 .. image:: ./images/zip_logo.png
-  :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/omkm_io.zip
+  :target: https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/examples_jupyter/omkm_io/openmkm_io.zip
   :width: 15%
 
 Topics Covered

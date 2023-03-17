@@ -28,13 +28,16 @@ Welcome to pmutt's documentation!
    api/mixture/mixture
    api/kinetic_models/kinetic_models
    api/reactions/reactions
+   api/equilibrium/equilibrium
    api/phase_diagram/phase_diagram
    api/eos/eos
    api/visualization/visual
+   api/helper/helper
    release_notes
 
 .. toctree::
    :caption: Useful Links
+
 
    View Source Code (GitHub) <https://github.com/VlachosGroup/pmutt>
    Report an Issue <https://github.com/VlachosGroup/pMuTT/issues>
@@ -43,6 +46,6 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
+:Sphinx Version: |sphinx_version|

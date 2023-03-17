@@ -1,4 +1,4 @@
-pmutt.cantera.phase.IdealGas
+﻿pmutt.cantera.phase.IdealGas
 ============================
 
 .. currentmodule:: pmutt.cantera.phase
@@ -21,7 +21,8 @@ pmutt.cantera.phase.IdealGas
       ~IdealGas.index_species
       ~IdealGas.pop_species
       ~IdealGas.remove_species
-      ~IdealGas.to_CTI
+      ~IdealGas.to_cti
+      ~IdealGas.to_omkm_yaml
    
    
 
