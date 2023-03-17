@@ -32,6 +32,7 @@ Welcome to pmutt's documentation!
    api/phase_diagram/phase_diagram
    api/eos/eos
    api/visualization/visual
+   api/helper/helper
    release_notes
 
 .. toctree::
@@ -45,7 +46,6 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
 :Sphinx Version: |sphinx_version|
