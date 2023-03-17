@@ -15,7 +15,7 @@
 import os
 import sys
 import sphinx
-pmutt_path = os.path.join(os.path.dirname(__file__), '../../../pmutt_GRW')
+pmutt_path = os.path.join(os.path.dirname(__file__), '../../../pmutt')
 sys.path.insert(0, os.path.abspath(pmutt_path))
 
 
