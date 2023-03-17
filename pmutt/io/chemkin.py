@@ -349,7 +349,7 @@ def write_surf(reactions,
 
     Parameters
     ----------
-        reactions : list of :class:`~pmutt.reaction.ChemkinReaction` objects
+        reactions : A :class:`~pmutt.reaction.Reaction` object containing
             Chemkin reactions to write in surf.inp file. Purely gas-phase
             reactions will be ignored
         filename : str, optional

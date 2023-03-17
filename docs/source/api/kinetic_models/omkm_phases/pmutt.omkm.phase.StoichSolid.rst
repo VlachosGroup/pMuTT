@@ -1,4 +1,4 @@
-pmutt.omkm.phase.StoichSolid
+﻿pmutt.omkm.phase.StoichSolid
 ============================
 
 .. currentmodule:: pmutt.omkm.phase
@@ -21,7 +21,8 @@ pmutt.omkm.phase.StoichSolid
       ~StoichSolid.index_species
       ~StoichSolid.pop_species
       ~StoichSolid.remove_species
-      ~StoichSolid.to_CTI
+      ~StoichSolid.to_cti
+      ~StoichSolid.to_omkm_yaml
    
    
 

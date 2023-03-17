@@ -1,5 +1,5 @@
-pmutt.io.omkm.get\_species\_phases
-==================================
+﻿pmutt.io.omkm.organize\_phases
+==============================
 
 .. currentmodule:: pmutt.io.omkm
 

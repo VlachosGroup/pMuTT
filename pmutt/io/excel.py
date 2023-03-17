@@ -545,7 +545,7 @@ def set_dict_value(dict_name, key, value, output_structure):
         key : str
             Key corresponding to ``value``
         value : float
-            Value to assign to ``key
+            Value to assign to ``key``
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure[dict_name]

@@ -1,5 +1,5 @@
 from pathlib import Path
-from collections import namedtuple, defaultdict
+from collections import defaultdict
 
 import yaml
 
@@ -13,6 +13,7 @@ from pmutt.omkm.phase import InteractingInterface
 from pmutt.omkm import phase as omkm_phases
 from pmutt.omkm.units import Units
 
+
 def write_cti(phases=None,
               species=None,
               reactions=None,
@@ -25,9 +26,9 @@ def write_cti(phases=None,
               use_motz_wise=False,
               ads_act_method='get_H_act',
               write_xml=True):
-    """Writes the units, phases, species, lateral interactions, reactions and 
+    """Writes the units, phases, species, lateral interactions, reactions and
     additional options in the CTI format for OpenMKM
-    
+
     Parameters
     ----------
         phases : list of :class:`~pmutt.omkm.phase.Phase` objects
@@ -170,6 +171,7 @@ def write_cti(phases=None,
         # Or return as string
         return lines_out
 
+
 def write_thermo_yaml(phases=None, species=None, reactions=None,
                       lateral_interactions=None, units=None,
                       filename=None, T=300., P=1., newline='\n',
@@ -177,9 +179,9 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
                       use_motz_wise='False',
                       yaml_options={'default_flow_style': None, 'indent': 2,
                                     'sort_keys': False, 'width': 79}):
-    """Writes the units, phases, species, lateral interactions, reactions and 
+    """Writes the units, phases, species, lateral interactions, reactions and
     additional options in the CTI format for OpenMKM
-    
+
     Parameters
     ----------
         phases : list of :class:`~pmutt.omkm.phase.Phase` objects
@@ -204,7 +206,7 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
         newline : str, optional
             Type of newline to use. Default is Linux newline ('\\n')
         ads_act_method : str, optional
-            Activation method to use for adsorption reactions. Accepted 
+            Activation method to use for adsorption reactions. Accepted
             options include 'get_H_act' and 'get_G_act'. Default is
             'get_H_act'.
     Returns
@@ -386,13 +388,20 @@ def write_yaml(reactor_type=None,
             - batch
 
             Value written to ``reactor.type``.
-        mode : str
+        temperature_mode : str
             Operation of reactor. Supported options include:
 
             - Isothermal
             - Adiabatic
 
-            Value written to ``reactor.mode``.
+            Value written to ``reactor.temperature_mode``.
+        pressure_mode : str
+            Operation of reactor. Supported options include:
+
+            - Isobaric
+            - Isochoric
+
+            Value written to ``reactor.pressure_mode``.
         nodes : int
             Number of nodes to use if ``reactor_type`` is 'pfr_0d'. Value
             written to ``reactor.nodes``
