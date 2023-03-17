@@ -48,6 +48,7 @@ class Shomate(EmpiricalBase):
             Units used to fit the Shomate polynomial. Units should be supported
             by :class:`~pmutt.constants.R` (e.g. J/mol/K, cal/mol/K, eV/K).
             Default is J/mol/K.
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
 
     def __init__(self,

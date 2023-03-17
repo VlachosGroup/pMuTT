@@ -10,7 +10,7 @@ pmutt
 # present, too:
 #
 name = 'pmutt'
-__version__ = '1.3.1'
+__version__ = '1.3.3'
 
 import os
 import inspect
@@ -367,19 +367,20 @@ def plot_1D(obj,
             Other variables to use in the calculation. Method specific
             arguments can be passed by having a key that corresponds to
             the method name
-            ::
-                e.g. kwargs = {'get_H_kwargs': {'units': 'kcal/mol'},
-                               'get_S_kwargs': {'units': 'cal/mol/K'}}
+
+            e.g. kwargs = {'get_H_kwargs': {'units': 'kcal/mol'},
+                           'get_S_kwargs': {'units': 'cal/mol/K'}}
     Returns
     -------
         figure : `matplotlib.figure.Figure`_
             Figure
         ax : (N,) list of `matplotlib.axes.Axes.axis`_
-            Axes of the plots where N is the length of ``methods``
+            Axes of the plots.
 
     .. _`matplotlib.figure.Figure`: https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html
     .. _`matplotlib.axes.Axes.axis`: https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
     """
+
     # Check if single method passed
     if not _is_iterable(methods):
         methods = (methods, )
@@ -473,9 +474,9 @@ def plot_2D(obj,
             Other variables to use in the calculation. Method specific
             arguments can be passed by having a key that corresponds to
             the method name
-            
+
             e.g. kwargs = {'get_H': {'units': 'kcal/mol'},
-                            'get_S': {'units': 'cal/mol/K'}}
+                           'get_S': {'units': 'cal/mol/K'}}
     Returns
     -------
         figure : `matplotlib.figure.Figure`_
@@ -493,6 +494,7 @@ def plot_2D(obj,
     .. _`matplotlib.colorbar.Colorbar`: https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.colorbar.html
 
     """
+
     # Check if single method passed
     if not _is_iterable(methods):
         methods = (methods, )

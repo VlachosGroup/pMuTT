@@ -1476,6 +1476,7 @@ class SingleNasa9(EmpiricalBase):
             High temperature bound (in K)
         a : (9,) `numpy.ndarray`_
             NASA9 polynomial to use between T_low and T_high
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
 
     def __init__(self, T_low, T_high, a):

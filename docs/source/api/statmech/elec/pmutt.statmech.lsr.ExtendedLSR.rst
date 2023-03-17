@@ -1,5 +1,5 @@
-pmutt.statmech.lsr.LSR
-======================
+﻿pmutt.statmech.lsr.ExtendedLSR
+==============================
 
 .. currentmodule:: pmutt.statmech.lsr
 
@@ -13,24 +13,35 @@ pmutt.statmech.lsr.LSR
 
    .. autosummary::
    
-      ~LSR.__init__
-      ~LSR.from_dict
-      ~LSR.get_Cp
-      ~LSR.get_Cv
-      ~LSR.get_F
-      ~LSR.get_FoRT
-      ~LSR.get_G
-      ~LSR.get_GoRT
-      ~LSR.get_H
-      ~LSR.get_HoRT
-      ~LSR.get_S
-      ~LSR.get_SoR
-      ~LSR.get_U
-      ~LSR.get_UoRT
-      ~LSR.to_dict
+      ~ExtendedLSR.__init__
+      ~ExtendedLSR.from_dict
+      ~ExtendedLSR.get_Cp
+      ~ExtendedLSR.get_CpoR
+      ~ExtendedLSR.get_Cv
+      ~ExtendedLSR.get_CvoR
+      ~ExtendedLSR.get_F
+      ~ExtendedLSR.get_FoRT
+      ~ExtendedLSR.get_G
+      ~ExtendedLSR.get_GoRT
+      ~ExtendedLSR.get_H
+      ~ExtendedLSR.get_HoRT
+      ~ExtendedLSR.get_S
+      ~ExtendedLSR.get_SoR
+      ~ExtendedLSR.get_U
+      ~ExtendedLSR.get_UoRT
+      ~ExtendedLSR.get_q
+      ~ExtendedLSR.to_dict
    
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ExtendedLSR.gas_species
+      ~ExtendedLSR.reactions
+      ~ExtendedLSR.surf_species
    
    
