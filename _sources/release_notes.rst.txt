@@ -12,7 +12,7 @@ Version 1.4.0
 
 Mar. 17, 2023
 
-- Added new Equilibrium class that computes the equilibrium
+- Added new :class:`~pmutt.equilibrium.Equilibrium` class that computes the equilibrium
   concentration on a network of species by minimizing the network
   Gibbs free energy while maintaining the total atom balance of
   the initial starting concentration of species
