@@ -7,10 +7,17 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.3
+-------------
+
+Mar. 19, 2023
+
+- Updated PIP installation dependency requirements
+
 Version 1.4.2
 -------------
 
-Mar. 17, 2023
+Mar. 18, 2023
 
 - Added new :class:`~pmutt.equilibrium.Equilibrium` class that computes the equilibrium
   concentration on a network of species by minimizing the network
