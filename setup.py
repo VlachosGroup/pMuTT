@@ -15,7 +15,7 @@ with open('README.rst', 'r') as fh:
 
 setuptools_info = {
 	'name': 'pmutt',
-	'version': '1.4.2',
+	'version': '1.4.3',
 	'author': 'Vlachos Research Group',
 	'author_email': 'vlachos@udel.edu',
 	'description': 'Python Multiscale Thermochemistry Toolbox (pmutt)',
@@ -26,15 +26,15 @@ setuptools_info = {
 	'package_data': {'':['*.xlsx', '*.log', '*OUTCAR']},
 	'install_requires': [
 		'ASE>=3.22.1',
-		'matplotlib>=3.6.2',
-		'numpy>=1.21.5',
-		'scipy>=1.9.3',
-		'pandas>=1.4.4',
-		'pymongo>=4.2.0',
-		'dnspython>=2.2.1',
-		'networkx>=2.8.4',
-		'pygal>=3.0.0',
-		'xlrd>=2.0.1',
+		'matplotlib>=3.5.0',
+		'numpy>=1.21.0',
+		'scipy>=1.7.0',
+		'pandas>=1.1.0',
+		'pymongo>=3.2.0',
+		'dnspython>=1.16.0',
+		'networkx>=2.6.0',
+		'pygal>=2.4.0',
+		'xlrd>=1.2.0',
 		'more_itertools>=8.14.0',
 	    'PyYAML>=6.0.0'
 		],
