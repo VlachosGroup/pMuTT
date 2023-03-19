@@ -21,8 +21,8 @@ See our `documentation page`_ for examples, equations used, and docstrings.
 Developers
 ----------
 
--  Jonathan Lym (jonathanalym@gmail.com)
--  Gerhard Wittreich, P.E. (wittregr@udel.edu)
+-  Jonathan Lym, Ph.D. (jonathanalym@gmail.com)
+-  Gerhard Wittreich, Ph.D, P.E. (wittregr@udel.edu)
 
 Dependencies
 ------------
