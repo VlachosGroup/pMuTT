@@ -1760,14 +1760,16 @@ def _fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
         a6_high_out : float
             Higher a6 value for NASA polynomial
     """
-    a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref)) * T_ref
-    a6_high = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref)) * T_ref
-
-    # Correcting for offset
-    H_low_last_T = get_nasa_HoRT(a=a_low, T=T_mid) + a6_low_out / T_mid
-    H_high_first_T = get_nasa_HoRT(a=a_high, T=T_mid) + a6_high / T_mid
-    H_offset = H_low_last_T - H_high_first_T
-    a6_high_out = T_mid * (a6_high / T_mid + H_offset)
+    if T_ref <= T_mid:
+        a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref)) * T_ref
+        a6_high_out = (get_nasa_HoRT(a=a_low, T=T_mid) +
+                       a6_low_out/T_mid - get_nasa_HoRT(a=a_high, T=T_mid))\
+            * T_mid
+    else:
+        a6_high_out = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref)) * T_ref
+        a6_low_out = (get_nasa_HoRT(a=a_high, T=T_mid) +
+                      a6_high_out/T_mid - get_nasa_HoRT(a=a_low, T=T_mid))\
+            * T_mid
 
     return a6_low_out, a6_high_out
 
@@ -1791,14 +1793,14 @@ def _fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
         a7_high_out : float
             Higher a7 value for NASA polynomial
     """
-    a7_low_out = SoR_ref - get_nasa_SoR(a=a_low, T=T_ref)
-    a7_high = SoR_ref - get_nasa_SoR(a=a_high, T=T_ref)
-
-    # Correcting for offset
-    S_low_last_T = get_nasa_SoR(a=a_low, T=T_mid) + a7_low_out
-    S_high_first_T = get_nasa_SoR(a=a_high, T=T_mid) + a7_high
-    S_offset = S_low_last_T - S_high_first_T
-    a7_high_out = a7_high + S_offset
+    if T_ref <= T_mid:
+        a7_low_out = SoR_ref - get_nasa_SoR(a=a_low, T=T_ref)
+        a7_high_out = (get_nasa_SoR(a=a_low, T=T_mid) +
+                       a7_low_out - get_nasa_SoR(a=a_high, T=T_mid))
+    else:
+        a7_high_out = SoR_ref - get_nasa_SoR(a=a_high, T=T_ref)
+        a7_low_out = (get_nasa_SoR(a=a_high, T=T_mid) +
+                      a7_high_out - get_nasa_SoR(a=a_low, T=T_mid))
 
     return a7_low_out, a7_high_out
 
