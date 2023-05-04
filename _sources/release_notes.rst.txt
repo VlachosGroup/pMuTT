@@ -12,7 +12,7 @@ Version 1.4.4
 
 May 1, 2023
 
-- Fixed Nasa polynomial fit issue for enthalpy and entropy when T_ref > T_mid
+- CRITICAL UPDATE: Fixed Nasa polynomial fit issue for enthalpy and entropy when T_ref > T_mid
 
 Version 1.4.3
 -------------
