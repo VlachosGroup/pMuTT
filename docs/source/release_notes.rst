@@ -7,6 +7,14 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.5
+-------------
+
+June 23, 2023
+
+- Updated .iteritems dpecricated function in Pandas
+- Cleanup unused imports
+
 Version 1.4.4
 -------------
 
