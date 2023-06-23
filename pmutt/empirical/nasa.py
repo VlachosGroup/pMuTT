@@ -10,9 +10,9 @@ from copy import copy
 from warnings import warn
 
 import numpy as np
-from scipy.optimize import Bounds, LinearConstraint, minimize, minimize_scalar
+from scipy.optimize import minimize
 
-from pmutt import (_apply_numpy_operation, _get_R_adj, _is_iterable,
+from pmutt import (_get_R_adj, _is_iterable,
                    _pass_expected_arguments)
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase
