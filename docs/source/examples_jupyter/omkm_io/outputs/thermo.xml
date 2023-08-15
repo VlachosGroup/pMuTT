@@ -4,7 +4,7 @@
 
   <!-- phase gas     -->
   <phase id="gas" dim="3">
-    <elementArray datasrc="elements.xml">N H Ar</elementArray>
+    <elementArray datasrc="elements.xml">Ar N H</elementArray>
     <speciesArray datasrc="#species_data">N2 NH3 H2 Ar</speciesArray>
     <thermo model="IdealGas"/>
     <kinetics model="GasKinetics"/>
@@ -28,25 +28,16 @@
     <elementArray datasrc="elements.xml">Ru N H</elementArray>
     <speciesArray datasrc="#species_data">N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)</speciesArray>
     <reactionArray datasrc="#reaction_data">
-      <include min="0000" max="0003"/>
-    </reactionArray>
-    <reactionArray datasrc="#reaction_data">
-      <include min="NH2-H_cle_0001" max="NH2-H_cle_0001"/>
-    </reactionArray>
-    <reactionArray datasrc="#reaction_data">
-      <include min="NH-H_cle_0001" max="NH-H_cle_0001"/>
-    </reactionArray>
-    <reactionArray datasrc="#reaction_data">
-      <include min="N-H_cle_0001" max="N-H_cle_0001"/>
+      <include min="r_0000" max="r_0006"/>
     </reactionArray>
     <note>Ru(0001)</note>
     <thermo model="SurfaceCoverage">
       <site_density units="mol/cm2">2.1671e-09</site_density>
     </thermo>
     <interactionArray datasrc="#interaction_data">
-      <include min="0000" max="0004"/>
+      <include min="i_0000" max="i_0004"/>
     </interactionArray>
-    <bepArray datasrc="#bep_data">NH2-H NH-H N-H</bepArray>
+    <bepArray datasrc="#bep_data">NH-H N-H</bepArray>
     <kinetics model="Interface"/>
     <transport model="None"/>
     <phaseArray>gas bulk</phaseArray>
@@ -57,23 +48,14 @@
     <elementArray datasrc="elements.xml">Ru N H</elementArray>
     <speciesArray datasrc="#species_data">N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)</speciesArray>
     <reactionArray datasrc="#reaction_data">
-      <include min="0004" max="0007"/>
-    </reactionArray>
-    <reactionArray datasrc="#reaction_data">
-      <include min="NH2-H_cle_0002" max="NH2-H_cle_0002"/>
-    </reactionArray>
-    <reactionArray datasrc="#reaction_data">
-      <include min="NH-H_cle_0002" max="NH-H_cle_0002"/>
-    </reactionArray>
-    <reactionArray datasrc="#reaction_data">
-      <include min="N-H_syn_0001" max="N-H_syn_0001"/>
+      <include min="r_0007" max="r_0013"/>
     </reactionArray>
     <note>Ru(0001) with atoms deleted</note>
     <thermo model="SurfaceCoverage">
       <site_density units="mol/cm2">4.4385e-10</site_density>
     </thermo>
     <interactionArray datasrc="#interaction_data">
-      <include min="0005" max="0009"/>
+      <include min="i_0005" max="i_0009"/>
     </interactionArray>
     <bepArray datasrc="#bep_data">NH2-H NH-H N-H</bepArray>
     <kinetics model="Interface"/>
@@ -540,8 +522,8 @@
   </speciesData>
   <reactionData id="reaction_data" motz_wise="true">
 
-    <!-- reaction 0000    -->
-    <reaction id="0000" reversible="yes" type="surface">
+    <!-- reaction r_0000    -->
+    <reaction id="r_0000" reversible="yes" type="surface">
       <equation>H2 + 2 RU(T) [=] 2 H(T) + 2 RU(B)</equation>
       <rateCoeff>
         <Arrhenius type="stick" species="H2">
@@ -554,8 +536,8 @@
       <products>H(T):2.0 RU(B):2.0</products>
     </reaction>
 
-    <!-- reaction 0001    -->
-    <reaction id="0001" reversible="yes" type="surface">
+    <!-- reaction r_0001    -->
+    <reaction id="r_0001" reversible="yes" type="surface">
       <equation>N2 + RU(T) [=] N2(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius type="stick" species="N2">
@@ -568,8 +550,8 @@
       <products>N2(T):1.0 RU(B):1</products>
     </reaction>
 
-    <!-- reaction 0002    -->
-    <reaction id="0002" reversible="yes" type="surface">
+    <!-- reaction r_0002    -->
+    <reaction id="r_0002" reversible="yes" type="surface">
       <equation>NH3 + RU(T) [=] NH3(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius type="stick" species="NH3">
@@ -582,26 +564,26 @@
       <products>NH3(T):1.0 RU(B):1</products>
     </reaction>
 
-    <!-- reaction NH2-H_cle_0001    -->
-    <reaction id="NH2-H_cle_0001" reversible="yes" type="surface">
+    <!-- reaction r_0003    -->
+    <reaction id="r_0003" reversible="yes" type="surface">
       <equation>NH3(T) + RU(T) [=] NH2(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>9.600000E+16</A>
            <b>1</b>
-           <E units="kcal/mol">18.444200</E>
+           <E units="kcal/mol">14.200000</E>
         </Arrhenius>
       </rateCoeff>
       <reactants>NH3(T):1.0 RU(T):1</reactants>
       <products>NH2(T):1.0 H(T):1 RU(B):1</products>
     </reaction>
 
-    <!-- reaction NH-H_cle_0001    -->
-    <reaction id="NH-H_cle_0001" reversible="yes" type="surface">
+    <!-- reaction r_0004    -->
+    <reaction id="r_0004" reversible="yes" type="surface">
       <equation>NH2(T) + RU(T) [=] NH(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>4.807490E+17</A>
            <b>1</b>
            <E units="kcal/mol">10.631700</E>
         </Arrhenius>
@@ -610,12 +592,12 @@
       <products>NH(T):1.0 H(T):1 RU(B):1</products>
     </reaction>
 
-    <!-- reaction N-H_cle_0001    -->
-    <reaction id="N-H_cle_0001" reversible="yes" type="surface">
+    <!-- reaction r_0005    -->
+    <reaction id="r_0005" reversible="yes" type="surface">
       <equation>NH(T) + RU(T) [=] N(T) + H(T) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>4.807490E+17</A>
            <b>1</b>
            <E units="kcal/mol">23.183300</E>
         </Arrhenius>
@@ -624,12 +606,12 @@
       <products>N(T):1.0 H(T):1 RU(B):1</products>
     </reaction>
 
-    <!-- reaction 0003    -->
-    <reaction id="0003" reversible="yes" type="surface">
+    <!-- reaction r_0006    -->
+    <reaction id="r_0006" reversible="yes" type="surface">
       <equation>2 N(T) + RU(B) [=] N2(T) + RU(T)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>9.614970E+17</A>
+           <A>4.807490E+17</A>
            <b>1</b>
            <E units="kcal/mol">91.488900</E>
         </Arrhenius>
@@ -638,8 +620,8 @@
       <products>N2(T):1.0 RU(T):1</products>
     </reaction>
 
-    <!-- reaction 0004    -->
-    <reaction id="0004" reversible="yes" type="surface">
+    <!-- reaction r_0007    -->
+    <reaction id="r_0007" reversible="yes" type="surface">
       <equation>H2 + 2 RU(S) [=] 2 H(S) + 2 RU(B)</equation>
       <rateCoeff>
         <Arrhenius type="stick" species="H2">
@@ -652,8 +634,8 @@
       <products>H(S):2.0 RU(B):2.0</products>
     </reaction>
 
-    <!-- reaction 0005    -->
-    <reaction id="0005" reversible="yes" type="surface">
+    <!-- reaction r_0008    -->
+    <reaction id="r_0008" reversible="yes" type="surface">
       <equation>N2 + RU(S) [=] N2(S) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius type="stick" species="N2">
@@ -666,8 +648,8 @@
       <products>N2(S):1.0 RU(B):1</products>
     </reaction>
 
-    <!-- reaction 0006    -->
-    <reaction id="0006" reversible="yes" type="surface">
+    <!-- reaction r_0009    -->
+    <reaction id="r_0009" reversible="yes" type="surface">
       <equation>NH3 + RU(S) [=] NH3(S) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius type="stick" species="NH3">
@@ -680,12 +662,12 @@
       <products>NH3(S):1.0 RU(B):1</products>
     </reaction>
 
-    <!-- reaction NH2-H_cle_0002    -->
-    <reaction id="NH2-H_cle_0002" reversible="yes" type="surface">
+    <!-- reaction r_0010    -->
+    <reaction id="r_0010" reversible="yes" type="surface">
       <equation>NH3(S) + RU(S) [=] NH2(S) + H(S) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">13.395800</E>
         </Arrhenius>
@@ -694,12 +676,12 @@
       <products>NH2(S):1.0 H(S):1 RU(B):1</products>
     </reaction>
 
-    <!-- reaction NH-H_cle_0002    -->
-    <reaction id="NH-H_cle_0002" reversible="yes" type="surface">
+    <!-- reaction r_0011    -->
+    <reaction id="r_0011" reversible="yes" type="surface">
       <equation>NH2(S) + RU(S) [=] NH(S) + H(S) + RU(B)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">18.498900</E>
         </Arrhenius>
@@ -708,12 +690,12 @@
       <products>NH(S):1.0 H(S):1 RU(B):1</products>
     </reaction>
 
-    <!-- reaction N-H_syn_0001    -->
-    <reaction id="N-H_syn_0001" reversible="yes" type="surface">
+    <!-- reaction r_0012    -->
+    <reaction id="r_0012" reversible="yes" type="surface">
       <equation>N(S) + H(S) + RU(B) [=] NH(S) + RU(S)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">25.894500</E>
         </Arrhenius>
@@ -722,12 +704,12 @@
       <products>NH(S):1.0 RU(S):1</products>
     </reaction>
 
-    <!-- reaction 0007    -->
-    <reaction id="0007" reversible="yes" type="surface">
+    <!-- reaction r_0013    -->
+    <reaction id="r_0013" reversible="yes" type="surface">
       <equation>2 N(S) + RU(B) [=] N2(S) + RU(S)</equation>
       <rateCoeff>
         <Arrhenius>
-           <A>4.694520E+18</A>
+           <A>2.347260E+18</A>
            <b>1</b>
            <E units="kcal/mol">45.088200</E>
         </Arrhenius>
@@ -738,90 +720,77 @@
   </reactionData>
   <interactionData id="interaction_data">
 
-    <!-- interaction 0000    -->
-    <interaction id="0000">
+    <!-- interaction i_0000    -->
+    <interaction id="i_0000">
       <speciesArray datasrc="#species_data">N(T) N(T)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-5.260000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0001    -->
-    <interaction id="0001">
+    <!-- interaction i_0001    -->
+    <interaction id="i_0001">
       <speciesArray datasrc="#species_data">N(T) H(T)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0002    -->
-    <interaction id="0002">
+    <!-- interaction i_0002    -->
+    <interaction id="i_0002">
       <speciesArray datasrc="#species_data">H(T) N(T)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0003    -->
-    <interaction id="0003">
+    <!-- interaction i_0003    -->
+    <interaction id="i_0003">
       <speciesArray datasrc="#species_data">H(T) H(T)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-3.000000000E+00, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0004    -->
-    <interaction id="0004">
+    <!-- interaction i_0004    -->
+    <interaction id="i_0004">
       <speciesArray datasrc="#species_data">NH2(T) N(T)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-2.070000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0005    -->
-    <interaction id="0005">
+    <!-- interaction i_0005    -->
+    <interaction id="i_0005">
       <speciesArray datasrc="#species_data">N(S) N(S)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-5.260000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0006    -->
-    <interaction id="0006">
+    <!-- interaction i_0006    -->
+    <interaction id="i_0006">
       <speciesArray datasrc="#species_data">N(S) H(S)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0007    -->
-    <interaction id="0007">
+    <!-- interaction i_0007    -->
+    <interaction id="i_0007">
       <speciesArray datasrc="#species_data">H(S) N(S)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-1.770000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0008    -->
-    <interaction id="0008">
+    <!-- interaction i_0008    -->
+    <interaction id="i_0008">
       <speciesArray datasrc="#species_data">H(S) H(S)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-3.000000000E+00, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
 
-    <!-- interaction 0009    -->
-    <interaction id="0009">
+    <!-- interaction i_0009    -->
+    <interaction id="i_0009">
       <speciesArray datasrc="#species_data">NH2(S) N(S)</speciesArray>
       <floatArray name="strength" units="kcal/mol">-2.070000000E+01, </floatArray>
       <floatArray name="coverage_threshold">0.000000000E+00,   1.000000000E+00, </floatArray>
     </interaction>
   </interactionData>
   <bepData id="bep_data">
-
-    <!-- bep NH2-H    -->
-    <bep id="NH2-H">
-      <alpha>0.71</alpha>
-      <beta units="kcal/mol">23.690000</beta>
-      <direction>cleavage</direction>
-      <cleavage_reactions>
-        <reactionArray datasrc="#reaction_data">
-           <include min="NH2-H_cle_0001" max="NH2-H_cle_0002"/>
-        </reactionArray>
-      </cleavage_reactions>
-      <synthesis_reactions/>
-    </bep>
 
     <!-- bep NH-H    -->
     <bep id="NH-H">
@@ -830,7 +799,10 @@
       <direction>cleavage</direction>
       <cleavage_reactions>
         <reactionArray datasrc="#reaction_data">
-           <include min="NH-H_cle_0001" max="NH-H_cle_0002"/>
+           <include min="r_0004" max="r_0004"/>
+        </reactionArray>
+        <reactionArray datasrc="#reaction_data">
+           <include min="r_0011" max="r_0011"/>
         </reactionArray>
       </cleavage_reactions>
       <synthesis_reactions/>
@@ -843,14 +815,27 @@
       <direction>cleavage</direction>
       <cleavage_reactions>
         <reactionArray datasrc="#reaction_data">
-           <include min="N-H_cle_0001" max="N-H_cle_0001"/>
+           <include min="r_0005" max="r_0005"/>
         </reactionArray>
       </cleavage_reactions>
       <synthesis_reactions>
         <reactionArray datasrc="#reaction_data">
-           <include min="N-H_syn_0001" max="N-H_syn_0001"/>
+           <include min="r_0012" max="r_0012"/>
         </reactionArray>
       </synthesis_reactions>
+    </bep>
+
+    <!-- bep NH2-H    -->
+    <bep id="NH2-H">
+      <alpha>0.71</alpha>
+      <beta units="kcal/mol">23.690000</beta>
+      <direction>cleavage</direction>
+      <cleavage_reactions>
+        <reactionArray datasrc="#reaction_data">
+           <include min="r_0010" max="r_0010"/>
+        </reactionArray>
+      </cleavage_reactions>
+      <synthesis_reactions/>
     </bep>
   </bepData>
 </ctml>

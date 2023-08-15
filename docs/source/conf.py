@@ -14,6 +14,7 @@
 #
 import os
 import sys
+import sphinx
 pmutt_path = os.path.join(os.path.dirname(__file__), '../../../pmutt')
 sys.path.insert(0, os.path.abspath(pmutt_path))
 
@@ -21,13 +22,14 @@ sys.path.insert(0, os.path.abspath(pmutt_path))
 # -- Project information -----------------------------------------------------
 
 project = 'pmutt'
-copyright = '2019, Vlachos Research Group'
+copyright = '2020, Vlachos Research Group'
 author = 'Vlachos Research Group'
 
 # The short X.Y version
-version = ''
+version = '1.4.6'
 # The full version, including alpha/beta/rc tags
-release = '1.2.20dev'
+release = '1.4.6'
+sphinx_version = sphinx.__display_version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,15 +50,18 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
-    #'nbsphinx',
+	'sphinx_automodapi.automodapi'
 ]
-
-# Automatically generate summaries
 autosummary_generate = True
-autodoc_default_flags = ['members',
-                         'undoc-members',
-                         'show-inheritance',
-                         'inherited-members']
+autoclass_content = 'both'
+html_show_sourcelink = False
+autodoc_inherit_docstrings = True
+set_type_checking_flag = True
+autodoc_default_options = {'members': True,
+                           'undoc-members': False,
+                           'show-inheritance': True,
+                           'inherited-members': True
+						  }
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -75,7 +80,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -102,7 +107,7 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -194,3 +199,10 @@ imgmath_font_size = 18
 # Logo
 html_logo = './logos/pmutt_inverse_highres.png'
 html_favicon = './logos/p_icon.ico'
+
+variables_to_export = [
+   'sphinx_version',
+]
+frozen_locals = dict(locals())
+rst_epilog = '\n'.join(map(lambda x: f".. |{x}| replace:: {frozen_locals[x]}", variables_to_export))
+del frozen_locals

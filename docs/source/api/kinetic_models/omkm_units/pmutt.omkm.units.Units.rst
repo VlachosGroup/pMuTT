@@ -1,4 +1,4 @@
-pmutt.omkm.units.Units
+﻿pmutt.omkm.units.Units
 ======================
 
 .. currentmodule:: pmutt.omkm.units
@@ -14,8 +14,9 @@ pmutt.omkm.units.Units
    .. autosummary::
    
       ~Units.__init__
-      ~Units.to_CTI
-      ~Units.to_CTI_dict
+      ~Units.to_cti
+      ~Units.to_cti_dict
+      ~Units.to_omkm_yaml
    
    
 

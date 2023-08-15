@@ -15,7 +15,7 @@ from ase.io import read
 
 from pmutt import parse_formula
 from pmutt.io.vasp import set_vib_wavenumbers_from_outcar
-from pmutt.statmech import (EmptyMode, StatMech, elec, nucl, presets, rot,
+from pmutt.statmech import (EmptyMode, StatMech, elec, presets, rot,
                             trans, vib, lsr)
 
 
@@ -95,7 +95,7 @@ def read_excel(io,
     for row, row_data in input_data.iterrows():
         thermo_data = {}
         vib_set_by_outcar = False
-        for col, cell_data in row_data.iteritems():
+        for col, cell_data in row_data.items():
             # Trim whitespaces from cell_data and col
             if isinstance(cell_data, str):
                 cell_data = cell_data.strip()
@@ -275,7 +275,7 @@ def set_statmech_model(model, output_structure):
     Parameters
     ----------
         model : str
-            Thermodynamic model to import. See `pmutt.statmech.presets` for 
+            Thermodynamic model to import. See `pmutt.statmech.presets` for
             supported models.
         output_structure : dict
             Structure to assign value. Will assign to
@@ -384,15 +384,22 @@ def set_elec_model(model, output_structure):
     try:
         output_structure['elec_model'] = getattr(elec, model)
     except AttributeError:
-        if model.lower() == 'emptymode':
-            output_structure['elec_model'] = EmptyMode
-        elif model.lower() == 'lsr':
-            output_structure['elec_model'] = lsr.LSR
-        else:
-            err_msg = ('Unsupported electronic model, {}. See '
-                       'pmutt.statmech.elec for supported models.'
-                       ''.format(model))
-            raise ValueError(err_msg)
+        try:
+            output_structure['elec_model'] = getattr(lsr, model)
+        except AttributeError:
+            if model.lower() == 'emptymode':
+                output_structure['elec_model'] = EmptyMode
+            else:
+                err_msg = ('Unsupported electronic model, {}. See '
+                           'pmutt.statmech.elec for supported models.'
+                           ''.format(model))
+                raise ValueError(err_msg)
+
+        # elif model.lower() == 'lsr':
+        #     output_structure['elec_model'] = lsr.LSR
+        # elif model.lower() == 'extendedlsr':
+        #     output_structure['elec_model'] = lsr.ExtendedLSR
+        # else:
     output_structure['model'] = StatMech
 
 
@@ -537,7 +544,7 @@ def set_dict_value(dict_name, key, value, output_structure):
         key : str
             Key corresponding to ``value``
         value : float
-            Value to assign to ``key
+            Value to assign to ``key``
         output_structure : dict
             Structure to assign value. Will assign to
             output_structure[dict_name]

@@ -22,6 +22,7 @@ from pmutt.statmech import elec, rot, trans, vib
 class EmptyMode(_ModelBase):
     """Placeholder mode that returns 1 for partition function and
     0 for all functions other thermodynamic properties."""
+
     def __init__(self):
         pass
 
@@ -54,7 +55,7 @@ class ConstantMode(_ModelBase):
     """Mode where thermodynamic properties can be arbitrarily set. Note that
     thermodynamic properties must be explicitly set and are not calculated from
     other properties.
- 
+
     Attributes
     ----------
         q : float, optional
@@ -76,8 +77,8 @@ class ConstantMode(_ModelBase):
         notes : str or dict, optional
             Any additional details you would like to include such as
             source of data. Default is None
-            
     """
+
     def __init__(self,
                  q=1.,
                  Cv=0.,
@@ -100,7 +101,7 @@ class ConstantMode(_ModelBase):
 
     def get_q(self):
         """Calculate the partition function
-        
+
         Returns
         -------
             q : float
@@ -110,7 +111,7 @@ class ConstantMode(_ModelBase):
 
     def get_CvoR(self):
         """Calculate the dimensionless heat capacity (constant volume)
-        
+
         Returns
         -------
             CvoR : float
@@ -120,7 +121,7 @@ class ConstantMode(_ModelBase):
 
     def get_CpoR(self):
         """Calculate the dimensionless heat capacity (constant pressure)
-        
+
         Returns
         -------
             CpoR : float
@@ -158,7 +159,7 @@ class ConstantMode(_ModelBase):
 
     def get_SoR(self):
         """Calculate the dimensionless entropy
-        
+
         Returns
         -------
             SoR : float
@@ -168,7 +169,7 @@ class ConstantMode(_ModelBase):
 
     def get_FoRT(self, T=c.T0('K')):
         """Calculate the dimensionless Helmholtz energy
-        
+
         Parameters
         ----------
             T : float, optional
@@ -182,7 +183,7 @@ class ConstantMode(_ModelBase):
 
     def get_GoRT(self, T=c.T0('K')):
         """Calculate the dimensionless Gibbs energy
-        
+
         Parameters
         ----------
             T : float, optional
@@ -235,6 +236,7 @@ class StatMech(_ModelBase):
             Any additional details you would like to include such as
             computational set up. Default is None
     """
+
     def __init__(self,
                  name=None,
                  trans_model=EmptyMode(),
@@ -260,7 +262,7 @@ class StatMech(_ModelBase):
         # Assign elements from Atoms if necessary
         if elements is None:
             try:
-                elements = parse_formula( \
+                elements = parse_formula(
                         kwargs['atoms'].get_chemical_formula('hill'))
             except KeyError:
                 pass
@@ -873,11 +875,30 @@ class StatMech(_ModelBase):
                              use_references=use_references,
                              **kwargs) * T * R_adj
 
+    def get_Selements(self):
+        """Calculate the dimensionless entropy of the elements in the molecule
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        SoR : float
+              Entropy
+        """
+        elements = self.elements
+        S_ele = 0
+        for element in elements:
+            S_ele += c.S_elements[element]*elements[element]
+        return S_ele
+
     def get_SoR(self,
                 verbose=False,
                 raise_error=True,
                 raise_warning=True,
                 use_references=True,
+                S_elements=None,
                 **kwargs):
         """Dimensionless entropy
 
@@ -897,6 +918,9 @@ class StatMech(_ModelBase):
                 True
             use_references : bool, optional
                 If True, adds contribution from references. Default is True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
         Returns
         -------
             SoR : float or (N+5,) `numpy.ndarray`_
@@ -906,13 +930,18 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        if not S_elements:
+            S_ele = 0
+        else:
+            S_ele = self.get_Selements()
+
         return self.get_quantity(method_name='get_SoR',
                                  operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose,
                                  use_references=use_references,
-                                 **kwargs)
+                                 **kwargs) - S_ele
 
     def get_S(self,
               units,
@@ -920,6 +949,7 @@ class StatMech(_ModelBase):
               raise_error=True,
               raise_warning=True,
               use_references=True,
+              S_elements=None,
               **kwargs):
         """Calculate the entropy
 
@@ -940,6 +970,9 @@ class StatMech(_ModelBase):
                 True
             use_references : bool, optional
                 If True, adds contribution from references. Default is True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -956,6 +989,7 @@ class StatMech(_ModelBase):
                             raise_error=raise_error,
                             raise_warning=raise_warning,
                             use_references=use_references,
+                            S_elements=S_elements,
                             **kwargs) * R_adj
 
     def get_FoRT(self,
@@ -963,6 +997,7 @@ class StatMech(_ModelBase):
                  raise_error=True,
                  raise_warning=True,
                  use_references=True,
+                 S_elements=None,
                  **kwargs):
         """Dimensionless Helmholtz energy
 
@@ -980,6 +1015,9 @@ class StatMech(_ModelBase):
                 True
             use_references : bool, optional
                 If True, adds contribution from references. Default is True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -992,13 +1030,18 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        if not S_elements:
+            S_ele = 0
+        else:
+            S_ele = self.get_Selements()
+
         return self.get_quantity(method_name='get_FoRT',
                                  operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose,
                                  use_references=use_references,
-                                 **kwargs)
+                                 **kwargs) + S_ele
 
     def get_F(self,
               units,
@@ -1007,6 +1050,7 @@ class StatMech(_ModelBase):
               raise_error=True,
               raise_warning=True,
               use_references=True,
+              S_elements=None,
               **kwargs):
         """Calculate the Helmholtz energy
 
@@ -1029,6 +1073,9 @@ class StatMech(_ModelBase):
                 True
             use_references : bool, optional
                 If True, adds contribution from references. Default is True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -1047,6 +1094,7 @@ class StatMech(_ModelBase):
                              raise_error=raise_error,
                              raise_warning=raise_warning,
                              use_references=use_references,
+                             S_elements=S_elements,
                              **kwargs) * T * R_adj
 
     def get_GoRT(self,
@@ -1054,6 +1102,7 @@ class StatMech(_ModelBase):
                  raise_error=True,
                  raise_warning=True,
                  use_references=True,
+                 S_elements=None,
                  **kwargs):
         """Dimensionless Gibbs energy
 
@@ -1071,6 +1120,9 @@ class StatMech(_ModelBase):
                 True
             use_references : bool, optional
                 If True, adds contribution from references. Default is True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -1083,13 +1135,18 @@ class StatMech(_ModelBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
+        if not S_elements:
+            S_ele = 0
+        else:
+            S_ele = self.get_Selements()
+
         return self.get_quantity(method_name='get_GoRT',
                                  operation='sum',
                                  raise_error=raise_error,
                                  raise_warning=raise_warning,
                                  verbose=verbose,
                                  use_references=use_references,
-                                 **kwargs)
+                                 **kwargs) + S_ele
 
     def get_G(self,
               units,
@@ -1098,6 +1155,7 @@ class StatMech(_ModelBase):
               raise_error=True,
               raise_warning=True,
               use_references=True,
+              S_elements=None,
               **kwargs):
         """Calculate the Gibbs energy
 
@@ -1118,6 +1176,9 @@ class StatMech(_ModelBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Parameters passed to each mode
         Returns
@@ -1136,6 +1197,7 @@ class StatMech(_ModelBase):
                              raise_warning=raise_warning,
                              T=T,
                              use_references=use_references,
+                             S_elements=S_elements,
                              **kwargs) * T * R_adj
 
     def to_dict(self):

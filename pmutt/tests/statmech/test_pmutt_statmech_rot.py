@@ -97,17 +97,15 @@ class TestRotFunc(unittest.TestCase):
         rot_Ts_CO2 = rot.get_rot_temperatures_from_atoms(self.CO2,
                                                          geometry='linear')
         self.assertTrue(len(rot_Ts_CO2), 1)
-        self.assertTrue(np.isclose(rot_Ts_CO2[0], 0.545566039279433))
+        np.testing.assert_almost_equal(rot_Ts_CO2[0], 0.5456089507450469)
 
-        exp_rot_Ts_H2O = [38.0937696114643, 20.650669844110, 13.3912565453767]
+        exp_rot_Ts_H2O = [38.096765874734196,
+		                  20.652294121365664,
+		                  13.392309833894341]
         rot_Ts_H2O = rot.get_rot_temperatures_from_atoms(self.H2O,
                                                          geometry='nonlinear')
         self.assertTrue(len(rot_Ts_H2O), 3)
-        for rot_T in rot_Ts_H2O:
-            self.assertTrue(
-                any(
-                    np.isclose(rot_T, exp_rot_T)
-                    for exp_rot_T in exp_rot_Ts_H2O))
+        np.testing.assert_array_almost_equal(rot_Ts_H2O, exp_rot_Ts_H2O)
 
     def test_get_geometry_from_atoms(self):
         self.assertEqual(rot.get_geometry_from_atoms(self.He), 'monatomic')

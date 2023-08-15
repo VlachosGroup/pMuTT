@@ -1,4 +1,4 @@
-pmutt.empirical.GasPressureAdj
+﻿pmutt.empirical.GasPressureAdj
 ==============================
 
 .. currentmodule:: pmutt.empirical
@@ -29,6 +29,7 @@ pmutt.empirical.GasPressureAdj
       ~GasPressureAdj.get_SoR
       ~GasPressureAdj.get_U
       ~GasPressureAdj.get_UoRT
+      ~GasPressureAdj.get_q
       ~GasPressureAdj.to_dict
    
    

@@ -10,13 +10,13 @@ from copy import copy
 from warnings import warn
 
 import numpy as np
-from scipy.optimize import Bounds, LinearConstraint, minimize, minimize_scalar
+from scipy.optimize import minimize
 
-from pmutt import (_apply_numpy_operation, _get_R_adj, _is_iterable,
+from pmutt import (_get_R_adj, _is_iterable,
                    _pass_expected_arguments)
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.cantera import obj_to_cti
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
 
@@ -60,6 +60,7 @@ class Nasa(EmpiricalBase):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
+
     def __init__(self,
                  name,
                  T_low,
@@ -268,7 +269,26 @@ class Nasa(EmpiricalBase):
                              raise_warning=raise_warning,
                              **kwargs) * T * R_adj
 
-    def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
+    def get_Selements(self):
+        """Calculate the dimensionless entropy of the elements in the molecule
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        SoR : float
+              Entropy
+        """
+        elements = self.elements
+        S_ele = 0
+        for element in elements:
+            S_ele += c.S_elements[element]*elements[element]
+        return S_ele
+
+    def get_SoR(self, T, raise_error=True, raise_warning=True,
+                S_elements=None, **kwargs):
         """Calculate the dimensionless entropy
 
         Parameters
@@ -282,6 +302,9 @@ class Nasa(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -311,9 +334,14 @@ class Nasa(EmpiricalBase):
                                            raise_warning=raise_warning,
                                            default_value=0.,
                                            T=T, **kwargs))
-        return SoR
+        if not S_elements:
+            S_ele = 0
+        else:
+            S_ele = self.get_Selements()
+        return SoR - S_ele
 
-    def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
+    def get_S(self, T, units, raise_error=True, raise_warning=True,
+              S_elements=None, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -330,6 +358,9 @@ class Nasa(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -343,9 +374,11 @@ class Nasa(EmpiricalBase):
         return self.get_SoR(T=T,
                             raise_error=raise_error,
                             raise_warning=raise_warning,
+                            S_elements=S_elements,
                             **kwargs) * R_adj
 
-    def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
+    def get_GoRT(self, T, raise_error=True, raise_warning=True,
+                 S_elements=None, **kwargs):
         """Calculate the dimensionless Gibbs free energy
 
         Parameters
@@ -359,6 +392,9 @@ class Nasa(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -370,11 +406,13 @@ class Nasa(EmpiricalBase):
         """
         GoRT = self.get_HoRT(T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
-               - self.get_SoR(T, raise_error=raise_error,
-                              raise_warning=raise_warning, **kwargs)
+            - self.get_SoR(T, raise_error=raise_error,
+                           raise_warning=raise_warning,
+                           S_elements=S_elements, **kwargs)
         return GoRT
 
-    def get_G(self, T, units, raise_error=True, raise_warning=True, **kwargs):
+    def get_G(self, T, units, raise_error=True, raise_warning=True,
+              S_elements=None, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -391,6 +429,9 @@ class Nasa(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -405,6 +446,7 @@ class Nasa(EmpiricalBase):
         return self.get_GoRT(T=T,
                              raise_error=raise_error,
                              raise_warning=raise_warning,
+                             S_elements=S_elements,
                              **kwargs) * T * R_adj
 
     @classmethod
@@ -644,7 +686,7 @@ class Nasa(EmpiricalBase):
                              elements=elements,
                              **kwargs)
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -666,7 +708,7 @@ class Nasa(EmpiricalBase):
                    '                     [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                      {: 2.8E}])))\n').format(
-                       self.name, obj_to_CTI(elements), size_str, self.T_low,
+                       self.name, obj_to_cti(elements), size_str, self.T_low,
                        self.T_mid, self.a_low[0], self.a_low[1], self.a_low[2],
                        self.a_low[3], self.a_low[4], self.a_low[5],
                        self.a_low[6], self.T_mid, self.T_high, self.a_high[0],
@@ -684,8 +726,8 @@ class Nasa(EmpiricalBase):
         obj_dict = super().to_dict()
         obj_dict['class'] = str(self.__class__)
         obj_dict['type'] = 'nasa'
-        obj_dict['a_low'] = list(self.a_low)
-        obj_dict['a_high'] = list(self.a_high)
+        obj_dict['a_low'] = self.a_low.tolist()
+        obj_dict['a_high'] = self.a_high.tolist()
         obj_dict['T_low'] = self.T_low
         obj_dict['T_mid'] = self.T_mid
         obj_dict['T_high'] = self.T_high
@@ -695,6 +737,28 @@ class Nasa(EmpiricalBase):
             obj_dict['cat_site'] = None
         obj_dict['n_sites'] = self.n_sites
         return obj_dict
+
+    def to_omkm_yaml(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        yaml_dict = {
+            'name': self.name,
+            'composition': self.elements,
+            'thermo': {'model': 'NASA7',
+                       'temperature-ranges': [float(self.T_low),
+                                              float(self.T_mid),
+                                              float(self.T_high)],
+                       'data': [self.a_low.tolist(),
+                                self.a_high.tolist()]}
+        }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites
+        return yaml_dict
 
     @classmethod
     def from_dict(cls, json_obj):
@@ -741,6 +805,7 @@ class Nasa9(EmpiricalBase):
         T_high : float
             High temperature bound (in K). Determined from inputted `nasas`
     """
+
     def __init__(self, name, nasas, n_sites=1, **kwargs):
         super().__init__(name=name, **kwargs)
         self.n_sites = n_sites
@@ -763,8 +828,6 @@ class Nasa9(EmpiricalBase):
     @nasas.setter
     def nasas(self, val):
         self._nasas = copy(val)
-        self.T_low = self._get_T_limit(limit='min')
-        self.T_high = self._get_T_limit(limit='max')
 
     @property
     def T_low(self):
@@ -773,7 +836,7 @@ class Nasa9(EmpiricalBase):
 
     @property
     def T_high(self):
-        T_higs = [nasa.T_high for nasa in self.nasas]
+        T_highs = [nasa.T_high for nasa in self.nasas]
         return np.max(T_highs)
 
     def _get_nasa(self, T):
@@ -799,8 +862,8 @@ class Nasa9(EmpiricalBase):
             if T <= nasa.T_high and T >= nasa.T_low:
                 return nasa
         else:
-            err_msg = ('Requested T ({} K) has no valid SingleNasa9 object for '
-                       'species, {}. The global T_low is {} K and global '
+            err_msg = ('Requested T ({} K) has no valid SingleNasa9 object '
+                       'for species, {}. The global T_low is {} K and global '
                        'T_high is {} K.'
                        ''.format(T, self.name, self.T_low, self.T_high))
             raise ValueError(err_msg)
@@ -833,21 +896,21 @@ class Nasa9(EmpiricalBase):
             for i, T_i in enumerate(T):
                 nasa = self._get_nasa(T_i)
                 CpoR[i] = nasa.get_CpoR(T=T_i) \
-                          + np.sum(_get_mix_quantity(self.misc_models,
-                                                     method_name='get_CpoR',
-                                                     raise_error=raise_error,
-                                                     raise_warning=raise_warning,
-                                                     default_value=0.,
-                                                     T=T_i, **kwargs))
+                    + np.sum(_get_mix_quantity(self.misc_models,
+                                               method_name='get_CpoR',
+                                               raise_error=raise_error,
+                                               raise_warning=raise_warning,
+                                               default_value=0.,
+                                               T=T_i, **kwargs))
         else:
             nasa = self._get_nasa(T=T)
             CpoR = nasa.get_CpoR(T=T) \
-                   + np.sum(_get_mix_quantity(self.misc_models,
-                                              method_name='get_CpoR',
-                                              raise_error=raise_error,
-                                              raise_warning=raise_warning,
-                                              default_value=0.,
-                                              T=T, **kwargs))
+                + np.sum(_get_mix_quantity(self.misc_models,
+                                           method_name='get_CpoR',
+                                           raise_error=raise_error,
+                                           raise_warning=raise_warning,
+                                           default_value=0.,
+                                           T=T, **kwargs))
         if len(CpoR) == 1:
             CpoR = CpoR.item(0)
         return CpoR
@@ -909,7 +972,7 @@ class Nasa9(EmpiricalBase):
             for i, T_i in enumerate(T):
                 nasa = self._get_nasa(T=T_i)
                 HoRT[i] = nasa.get_HoRT(T=T_i) \
-                          + np.sum(_get_mix_quantity(
+                    + np.sum(_get_mix_quantity(
                                         misc_models=self.misc_models,
                                         method_name='get_HoRT',
                                         raise_error=raise_error,
@@ -919,14 +982,16 @@ class Nasa9(EmpiricalBase):
         else:
             nasa = self._get_nasa(T=T)
             HoRT = nasa.get_HoRT(T=T) \
-                   + np.sum(_get_mix_quantity(misc_models=self.misc_models,
-                                              method_name='get_HoRT',
-                                              raise_error=raise_error,
-                                              raise_warning=raise_warning,
-                                              default_value=0.,
-                                              T=T, **kwargs))
-        if len(HoRT) == 1:
+                + np.sum(_get_mix_quantity(misc_models=self.misc_models,
+                                           method_name='get_HoRT',
+                                           raise_error=raise_error,
+                                           raise_warning=raise_warning,
+                                           default_value=0.,
+                                           T=T, **kwargs))
             HoRT = HoRT.item(0)
+#        if not _is_iterable(T):
+#        if len(HoRT) == 1:
+#            HoRT = HoRT.item(0)
         return HoRT
 
     def get_H(self, T, units, raise_error=True, raise_warning=True, **kwargs):
@@ -962,7 +1027,26 @@ class Nasa9(EmpiricalBase):
                              raise_warning=raise_warning,
                              **kwargs) * T * R_adj
 
-    def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
+    def get_Selements(self):
+        """Calculate the dimensionless entropy of the elements in the molecule
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        SoR : float
+              Entropy
+        """
+        elements = self.elements
+        S_ele = 0
+        for element in elements:
+            S_ele += c.S_elements[element]*elements[element]
+        return S_ele
+
+    def get_SoR(self, T, raise_error=True, raise_warning=True,
+                S_elements=None, **kwargs):
         """Calculate the dimensionless entropy
 
         Parameters
@@ -976,6 +1060,9 @@ class Nasa9(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -990,7 +1077,7 @@ class Nasa9(EmpiricalBase):
             for i, T_i in enumerate(T):
                 nasa = self._get_nasa(T=T_i)
                 SoR[i] = nasa.get_SoR(T=T_i) \
-                         + np.sum(_get_mix_quantity(
+                    + np.sum(_get_mix_quantity(
                                         misc_models=self.misc_models,
                                         method_name='get_SoR',
                                         raise_error=raise_error,
@@ -1000,17 +1087,24 @@ class Nasa9(EmpiricalBase):
         else:
             nasa = self._get_nasa(T=T)
             SoR = nasa.get_SoR(T=T) \
-                  + np.sum(_get_mix_quantity(misc_models=self.misc_models,
-                                             method_name='get_SoR',
-                                             raise_error=raise_error,
-                                             raise_warning=raise_warning,
-                                             default_value=0.,
-                                             T=T, **kwargs))
+                + np.sum(_get_mix_quantity(misc_models=self.misc_models,
+                                           method_name='get_SoR',
+                                           raise_error=raise_error,
+                                           raise_warning=raise_warning,
+                                           default_value=0.,
+                                           T=T, **kwargs))
+        if not S_elements:
+            S_ele = 0
+        else:
+            S_ele = self.get_Selements()
+        return SoR - S_ele
+
         if len(SoR) == 1:
             SoR = SoR.item(0)
-        return SoR
+        return SoR - S_ele
 
-    def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
+    def get_S(self, T, units, raise_error=True, raise_warning=True,
+              S_elements=None, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -1027,6 +1121,9 @@ class Nasa9(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -1040,9 +1137,11 @@ class Nasa9(EmpiricalBase):
         return self.get_SoR(T=T,
                             raise_error=raise_error,
                             raise_warning=raise_warning,
+                            S_elements=S_elements,
                             **kwargs) * R_adj
 
-    def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
+    def get_GoRT(self, T, raise_error=True, raise_warning=True,
+                 S_elements=None, **kwargs):
         """Calculate the dimensionless Gibbs free energy
 
         Parameters
@@ -1056,6 +1155,9 @@ class Nasa9(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -1067,11 +1169,13 @@ class Nasa9(EmpiricalBase):
         """
         GoRT = self.get_HoRT(T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
-               - self.get_SoR(T, raise_error=raise_error,
-                              raise_warning=raise_warning, **kwargs)
+            - self.get_SoR(T, raise_error=raise_error,
+                           raise_warning=raise_warning,
+                           S_elements=S_elements, **kwargs)
         return GoRT
 
-    def get_G(self, T, units, raise_error=True, raise_warning=True, **kwargs):
+    def get_G(self, T, units, raise_error=True, raise_warning=True,
+              S_elements=None, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -1088,6 +1192,9 @@ class Nasa9(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -1102,6 +1209,7 @@ class Nasa9(EmpiricalBase):
         return self.get_GoRT(T=T,
                              raise_error=raise_error,
                              raise_warning=raise_warning,
+                             S_elements=S_elements,
                              **kwargs) * T * R_adj
 
     @classmethod
@@ -1152,7 +1260,8 @@ class Nasa9(EmpiricalBase):
         """
         T_low = min(T)
         T_high = max(T)
-
+        #if not isinstance(T_mid, np.ndarray):
+        #    T_mid = np.array([T_mid])
         # Find midpoint temperature, and a[0] through a[4] parameters
         a = _fit_CpoR9(T=T, CpoR=CpoR, T_low=T_low, T_high=T_high, T_mid=T_mid)
         # Fit a[7] parameter using reference enthalpy
@@ -1281,6 +1390,38 @@ class Nasa9(EmpiricalBase):
         obj_dict['n_sites'] = self.n_sites
         return obj_dict
 
+    def to_omkm_yaml(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        yaml_dict = {
+            'name': self.name,
+            'composition': self.elements,
+            'thermo': {'model': 'NASA9',
+                       'reference-pressure': '1 bar'},
+        }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites
+
+        # Ensure that sorted NASAs are consistent whether using T_low or T_high
+        nasas_sorted_T_low = sorted(self.nasas, key=lambda nasa: nasa.T_low)
+        nasas_sorted_T_high = sorted(self.nasas, key=lambda nasa: nasa.T_high)
+        assert nasas_sorted_T_low == nasas_sorted_T_high
+
+        # Add temperature ranges and polynomials
+        yaml_dict['thermo']['temperature-ranges'] = []
+        yaml_dict['thermo']['data'] = []
+        for nasa in nasas_sorted_T_low:
+            yaml_dict['thermo']['temperature-ranges'].append(float(nasa.T_low))
+            yaml_dict['thermo']['data'].append(nasa.a.tolist())
+        yaml_dict['thermo']['temperature-ranges'].append(float(nasa.T_high))
+
+        return yaml_dict
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.
@@ -1300,7 +1441,7 @@ class Nasa9(EmpiricalBase):
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -1315,10 +1456,10 @@ class Nasa9(EmpiricalBase):
             size_str = ' size={},'.format(self.n_sites)
         cti_str = ('species(name="{}", atoms={},{}\n'
                    '        thermo=('
-                   ''.format(self.name, obj_to_CTI(elements), size_str))
+                   ''.format(self.name, obj_to_cti(elements), size_str))
         for i, nasa in enumerate(self.nasas):
             line_indent = (i != 0)
-            cti_str += '{},\n'.format(nasa.to_CTI(line_indent=line_indent))
+            cti_str += '{},\n'.format(nasa.to_cti(line_indent=line_indent))
         cti_str = '{})\n'.format(cti_str[:-2])
         return cti_str
 
@@ -1335,7 +1476,9 @@ class SingleNasa9(EmpiricalBase):
             High temperature bound (in K)
         a : (9,) `numpy.ndarray`_
             NASA9 polynomial to use between T_low and T_high
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
+
     def __init__(self, T_low, T_high, a):
         self.T_low = T_low
         self.T_high = T_high
@@ -1419,7 +1562,7 @@ class SingleNasa9(EmpiricalBase):
             'type': 'singlenasa9',
             'T_low': self.T_low,
             'T_high': self.T_high,
-            'a': list(self.a)
+            'a': self.a.tolist()
         }
         return obj_dict
 
@@ -1442,7 +1585,7 @@ class SingleNasa9(EmpiricalBase):
         json_obj['misc_models'] = json_to_pmutt(json_obj['misc_models'])
         return cls(**json_obj)
 
-    def to_CTI(self, line_indent=False):
+    def to_cti(self, line_indent=False):
         """Writes the object in Cantera's CTI format.
 
         Parameters
@@ -1617,14 +1760,16 @@ def _fit_HoRT(T_ref, HoRT_ref, a_low, a_high, T_mid):
         a6_high_out : float
             Higher a6 value for NASA polynomial
     """
-    a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref)) * T_ref
-    a6_high = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref)) * T_ref
-
-    # Correcting for offset
-    H_low_last_T = get_nasa_HoRT(a=a_low, T=T_mid) + a6_low_out / T_mid
-    H_high_first_T = get_nasa_HoRT(a=a_high, T=T_mid) + a6_high / T_mid
-    H_offset = H_low_last_T - H_high_first_T
-    a6_high_out = T_mid * (a6_high / T_mid + H_offset)
+    if T_ref <= T_mid:
+        a6_low_out = (HoRT_ref - get_nasa_HoRT(a=a_low, T=T_ref)) * T_ref
+        a6_high_out = (get_nasa_HoRT(a=a_low, T=T_mid) +
+                       a6_low_out/T_mid - get_nasa_HoRT(a=a_high, T=T_mid))\
+            * T_mid
+    else:
+        a6_high_out = (HoRT_ref - get_nasa_HoRT(a=a_high, T=T_ref)) * T_ref
+        a6_low_out = (get_nasa_HoRT(a=a_high, T=T_mid) +
+                      a6_high_out/T_mid - get_nasa_HoRT(a=a_low, T=T_mid))\
+            * T_mid
 
     return a6_low_out, a6_high_out
 
@@ -1648,14 +1793,14 @@ def _fit_SoR(T_ref, SoR_ref, a_low, a_high, T_mid):
         a7_high_out : float
             Higher a7 value for NASA polynomial
     """
-    a7_low_out = SoR_ref - get_nasa_SoR(a=a_low, T=T_ref)
-    a7_high = SoR_ref - get_nasa_SoR(a=a_high, T=T_ref)
-
-    # Correcting for offset
-    S_low_last_T = get_nasa_SoR(a=a_low, T=T_mid) + a7_low_out
-    S_high_first_T = get_nasa_SoR(a=a_high, T=T_mid) + a7_high
-    S_offset = S_low_last_T - S_high_first_T
-    a7_high_out = a7_high + S_offset
+    if T_ref <= T_mid:
+        a7_low_out = SoR_ref - get_nasa_SoR(a=a_low, T=T_ref)
+        a7_high_out = (get_nasa_SoR(a=a_low, T=T_mid) +
+                       a7_low_out - get_nasa_SoR(a=a_high, T=T_mid))
+    else:
+        a7_high_out = SoR_ref - get_nasa_SoR(a=a_high, T=T_ref)
+        a7_low_out = (get_nasa_SoR(a=a_high, T=T_mid) +
+                      a7_high_out - get_nasa_SoR(a=a_low, T=T_mid))
 
     return a7_low_out, a7_high_out
 
@@ -1882,6 +2027,8 @@ def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
         return [np.zeros(9)] * (len(T_mid) + 1)
 
     a = []
+    #if not isinstance(T_mid, np.ndarray):
+    #    T_mid = np.array([T_mid])
     T_interval = np.concatenate([[T_low], T_mid, [T_high]])
     for T1, T2 in zip(T_interval, T_interval[1:]):
         # Find T and CpoR in interval
@@ -1984,7 +2131,8 @@ def get_nasa_CpoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_arr = np.array([1., T, T**2, T**3, T**4, 0., 0.])
+    T_arr = np.array([1., T, T**2, T**3, T**4, np.zeros_like(T),
+                      np.zeros_like(T)])
     return np.dot(a, T_arr)
 
 
@@ -2005,7 +2153,8 @@ def get_nasa_HoRT(a, T):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     T_arr = np.array(
-        [1., T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5., 1. / T, 0.])
+        [np.ones_like(T), T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5., 1. / T,
+         np.zeros_like(T)])
     return np.dot(a, T_arr)
 
 
@@ -2046,7 +2195,8 @@ def get_nasa9_CpoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_arr = np.array([T**-2, T**-1, 1., T, T**2, T**3, T**4, 0., 0.])
+    T_arr = np.array([T**-2, T**-1, np.ones_like(T), T, T**2, T**3, T**4,
+                      np.zeros_like(T), np.zeros_like(T)])
     return np.dot(a, T_arr)
 
 
@@ -2066,10 +2216,11 @@ def get_nasa9_HoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
+    T = float(T)
     T_arr = np.array([
         -(T**-2),
-        np.log(T) / T, 1., T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5.,
-        1. / T, 0.
+        np.log(T) / T, np.ones_like(T), T / 2., (T**2) / 3., (T**3) / 4.,
+        (T**4) / 5., 1. / T,  np.zeros_like(T)
     ])
     return np.dot(a, T_arr)
 
@@ -2090,8 +2241,10 @@ def get_nasa9_SoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
+    T = float(T)
     T_arr = np.array([
         -(T**-2) / 2., -(T**-1),
-        np.log(T), T, (T**2) / 2., (T**3) / 3., (T**4) / 4., 0., 1.
+        np.log(T), T, (T**2) / 2., (T**3) / 3., (T**4) / 4., np.zeros_like(T),
+        np.ones_like(T)
     ])
     return np.dot(a, T_arr)

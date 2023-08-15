@@ -14,7 +14,7 @@ from scipy.optimize import curve_fit
 from pmutt import _get_R_adj, _is_iterable
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase
-from pmutt.io.cantera import obj_to_CTI
+from pmutt.io.cantera import obj_to_cti
 from pmutt.io.json import json_to_pmutt, remove_class
 from pmutt.mixture import _get_mix_quantity
 
@@ -48,7 +48,9 @@ class Shomate(EmpiricalBase):
             Units used to fit the Shomate polynomial. Units should be supported
             by :class:`~pmutt.constants.R` (e.g. J/mol/K, cal/mol/K, eV/K).
             Default is J/mol/K.
+    .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
+
     def __init__(self,
                  name,
                  T_low,
@@ -137,7 +139,7 @@ class Shomate(EmpiricalBase):
                 Units as string. See :func:`~pmutt.constants.R` for accepted
                 units.
             raise_error : bool, optional
-                If True, raises an error if any of the modes do not have the 
+                If True, raises an error if any of the modes do not have the
                 quantity of interest. Default is True
             raise_warning : bool, optional
                 Only relevant if raise_error is False. Raises a warning if any
@@ -237,7 +239,26 @@ class Shomate(EmpiricalBase):
                              raise_warning=raise_warning,
                              **kwargs) * T * R_adj
 
-    def get_SoR(self, T, raise_error=True, raise_warning=True, **kwargs):
+    def get_Selements(self):
+        """Calculate the dimensionless entropy of the elements in the molecule
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        SoR : float
+              Entropy
+        """
+        elements = self.elements
+        S_ele = 0
+        for element in elements:
+            S_ele += c.S_elements[element]*elements[element]
+        return S_ele
+
+    def get_SoR(self, T, raise_error=True, raise_warning=True,
+                S_elements=None, **kwargs):
         """Calculate the dimensionless entropy
 
         Parameters
@@ -251,6 +272,9 @@ class Shomate(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -279,11 +303,17 @@ class Shomate(EmpiricalBase):
                                         **kwargs)
         SoR = SoR + SoR_mix
         # If only one T specified, converted from (1,) numpy array to float
+        if not S_elements:
+            S_ele = 0
+        else:
+            S_ele = self.get_Selements()
+
         if len(T) == 1:
             SoR = SoR.item(0)
-        return SoR
+        return SoR - S_ele
 
-    def get_S(self, T, units, raise_error=True, raise_warning=True, **kwargs):
+    def get_S(self, T, units, raise_error=True, raise_warning=True,
+              S_elements=None, **kwargs):
         """Calculate the entropy
 
         Parameters
@@ -300,6 +330,9 @@ class Shomate(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -310,9 +343,10 @@ class Shomate(EmpiricalBase):
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
         R_adj = _get_R_adj(units=units, elements=self.elements)
-        return self.get_SoR(T=T) * R_adj
+        return self.get_SoR(T=T, S_elements=S_elements) * R_adj
 
-    def get_GoRT(self, T, raise_error=True, raise_warning=True, **kwargs):
+    def get_GoRT(self, T, raise_error=True, raise_warning=True,
+                 S_elements=None, **kwargs):
         """Calculate the dimensionless Gibbs free energy
 
         Parameters
@@ -326,6 +360,9 @@ class Shomate(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -338,9 +375,11 @@ class Shomate(EmpiricalBase):
         return self.get_HoRT(T=T, raise_error=raise_error,
                              raise_warning=raise_warning, **kwargs) \
             - self.get_SoR(T=T, raise_error=raise_error,
-                           raise_warning=raise_warning, **kwargs)
+                           raise_warning=raise_warning,
+                           S_elements=S_elements, **kwargs)
 
-    def get_G(self, T, units, raise_error=True, raise_warning=True, **kwargs):
+    def get_G(self, T, units, raise_error=True, raise_warning=True,
+              S_elements=None, **kwargs):
         """Calculate the Gibbs energy
 
         Parameters
@@ -357,6 +396,9 @@ class Shomate(EmpiricalBase):
                 Only relevant if raise_error is False. Raises a warning if any
                 of the modes do not have the quantity of interest. Default is
                 True
+            S_elements : bool, optional
+                Includes the entropy of the elements to compute an entropy of
+                formation. Defauly is None
             kwargs : key-word arguments
                 Arguments to calculate mixture model properties, if any
         Returns
@@ -371,6 +413,7 @@ class Shomate(EmpiricalBase):
         return self.get_GoRT(T=T,
                              raise_error=raise_error,
                              raise_warning=raise_warning,
+                             S_elements=S_elements,
                              **kwargs) * T * R_adj
 
     @classmethod
@@ -547,12 +590,11 @@ class Shomate(EmpiricalBase):
                             ''.format(T_low, model.T_low))
                 warn(warn_msg, UserWarning)
 
-
         try:
             if T_high > model.T_high:
                 warn_msg = ('Inputted T_high ({} K) is higher than model '
-                            'T_high ({} K). Fitted empirical object may not be '
-                            'valid.'
+                            'T_high ({} K). Fitted empirical object may not '
+                            'be valid.'
                             ''.format(T_high, model.T_high))
                 warn(warn_msg, UserWarning)
         except AttributeError:
@@ -599,6 +641,26 @@ class Shomate(EmpiricalBase):
         obj_dict['units'] = self.units
         return obj_dict
 
+    def to_omkm_yaml(self):
+        """Returns a dictionary compatible with Cantera's YAML format
+
+        Returns
+        -------
+            yaml_dict : dict
+                Dictionary compatible with Cantera's YAML format
+        """
+        yaml_dict = {
+            'name': self.name,
+            'composition': self.elements,
+            'thermo': {'model': 'Shomate',
+                       'temperature-ranges': [float(self.T_low),
+                                              float(self.T_high)],
+                       'data': [self.a.tolist()[:-1]]}
+        }
+        if self.n_sites is not None:
+            yaml_dict['sites'] = self.n_sites,
+        return yaml_dict
+
     @classmethod
     def from_dict(cls, json_obj):
         """Recreate an object from the JSON representation.
@@ -619,7 +681,7 @@ class Shomate(EmpiricalBase):
 
         return cls(**json_obj)
 
-    def to_CTI(self):
+    def to_cti(self):
         """Writes the object in Cantera's CTI format.
 
         Returns
@@ -636,7 +698,7 @@ class Shomate(EmpiricalBase):
                    '                       [{: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}, {: 2.8E}, {: 2.8E},\n'
                    '                        {: 2.8E}]))').format(
-                       self.name, obj_to_CTI(self.elements), size_str,
+                       self.name, obj_to_cti(self.elements), size_str,
                        self.T_low, self.T_high, self.a[0], self.a[1],
                        self.a[2], self.a[3], self.a[4], self.a[5], self.a[6])
         return cti_str
@@ -665,8 +727,8 @@ def _fit_CpoR(T, CpoR, units):
         CpoR : (N,) `numpy.ndarray`_
             Dimensionless heat capacity
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         a : (8,) `numpy.ndarray`_
@@ -701,8 +763,8 @@ def _fit_HoRT(T_ref, HoRT_ref, a, units):
         T_mid : float
             Temperature to fit the offset
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         a : (8,) `numpy.ndarray`_
@@ -710,11 +772,11 @@ def _fit_HoRT(T_ref, HoRT_ref, a, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    a[5] = (HoRT_ref \
+    a[5] = (HoRT_ref
             - get_shomate_HoRT(T=np.array([T_ref]), a=a, units=units)) \
-            *c.R(units)*T_ref/c.prefixes['k']
+        * c.R(units)*T_ref/c.prefixes['k']
     a[7] = - get_shomate_HoRT(T=np.array([c.T0('K')]), a=a, units=units) \
-            *c.R(units)*c.T0('K')/c.prefixes['k']
+        * c.R(units)*c.T0('K')/c.prefixes['k']
     return a
 
 
@@ -729,8 +791,8 @@ def _fit_SoR(T_ref, SoR_ref, a, units):
         SoR_ref : float
             Reference dimensionless entropy
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         a : (8,) `numpy.ndarray`_
@@ -753,8 +815,8 @@ def get_shomate_CpoR(a, T, units):
         T : iterable
             Temperature in K
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         CpoR: float
@@ -777,8 +839,8 @@ def get_shomate_HoRT(a, T, units):
         T : iterable
             Temperature in K
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         HoRT : float
@@ -803,8 +865,8 @@ def get_shomate_SoR(a, T, units):
         T : iterable
             Temperature in K
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         SoR : float
@@ -831,8 +893,8 @@ def get_shomate_GoRT(a, T, units):
         T : iterable
             Temperature in K
         units : str
-            Units corresponding to Shomate polynomial. Units should be supported
-            by :class:`~pmutt.constants.R`.
+            Units corresponding to Shomate polynomial. Units should be
+            supported by :class:`~pmutt.constants.R`.
     Returns
     -------
         GoRT : float
@@ -841,7 +903,7 @@ def get_shomate_GoRT(a, T, units):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     GoRT = get_shomate_HoRT(a=a, T=T, units=units) \
-           - get_shomate_SoR(a=a, T=T, units=units)
+        - get_shomate_SoR(a=a, T=T, units=units)
     return GoRT
 
 

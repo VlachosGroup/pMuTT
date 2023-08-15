@@ -26,21 +26,16 @@ class TestFreeTrans(unittest.TestCase):
             'n_degrees': 3
         }
 
-        self.T = 300  # K
+        self.T = 300.  # K
         self.P = 0.99768  # bar
 
     def test_get_q(self):
-        # Using np.isclose instead of self.assertAlmostEqual since the latter
-        # does not compare large floats very well
-        self.assertTrue(
-            np.isclose(self.trans_1D.get_q(T=self.T, P=self.P),
-                       2090036406.020292))
-        self.assertTrue(
-            np.isclose(self.trans_2D.get_q(T=self.T, P=self.P),
-                       1.747204243477979e+20))
-        self.assertTrue(
-            np.isclose(self.trans_3D.get_q(T=self.T, P=self.P),
-                       1.4606074131695383e+31))
+        np.testing.assert_allclose(self.trans_1D.get_q(T=self.T, P=self.P),
+                                   3.470587046381861E-15)
+        np.testing.assert_allclose(self.trans_2D.get_q(T=self.T, P=self.P),
+                                   2.901300856449876E-04)
+        np.testing.assert_allclose(self.trans_3D.get_q(T=self.T, P=self.P),
+                                   2.425395631097109E+07)
 
     def test_get_CvoR(self):
         self.assertEqual(self.trans_1D.get_CvoR(), 0.5)

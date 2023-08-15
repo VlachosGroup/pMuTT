@@ -13159,7 +13159,7 @@ div#notebook {
     <span class="k">try</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">io</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sheet could not be found.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The </span><span class="si">{}</span><span class="s1"> sheet could not be found in </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">io</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -14258,6 +14258,9 @@ div#notebook {
       <th>is_adsorption</th>
       <th>direction</th>
       <th>beta</th>
+      <th>A</th>
+      <th>Ea</th>
+      <th>notes</th>
     </tr>
   </thead>
   <tbody>
@@ -14267,6 +14270,9 @@ div#notebook {
       <td>True</td>
       <td></td>
       <td>0</td>
+      <td></td>
+      <td></td>
+      <td>Adsorption reactions typically use beta = 0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -14274,6 +14280,9 @@ div#notebook {
       <td>True</td>
       <td></td>
       <td>0</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>2</th>
@@ -14281,13 +14290,19 @@ div#notebook {
       <td>True</td>
       <td></td>
       <td>0</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>3</th>
-      <td>NH3(T) + RU(T)= NH2-H = NH2(T) + H(T) + RU(B)</td>
+      <td>NH3(T) + RU(T) = NH2(T) + H(T) + RU(B)</td>
       <td>False</td>
-      <td>cleavage</td>
+      <td></td>
       <td>1</td>
+      <td>9.6e+17</td>
+      <td>14.2</td>
+      <td>Pre-exponential and activation energy set manu...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -14295,6 +14310,9 @@ div#notebook {
       <td>False</td>
       <td>cleavage</td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>5</th>
@@ -14302,6 +14320,9 @@ div#notebook {
       <td>False</td>
       <td>cleavage</td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>6</th>
@@ -14309,6 +14330,9 @@ div#notebook {
       <td>False</td>
       <td></td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>7</th>
@@ -14316,6 +14340,9 @@ div#notebook {
       <td>True</td>
       <td></td>
       <td>0</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>8</th>
@@ -14323,6 +14350,9 @@ div#notebook {
       <td>True</td>
       <td></td>
       <td>0</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>9</th>
@@ -14330,6 +14360,9 @@ div#notebook {
       <td>True</td>
       <td></td>
       <td>0</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>10</th>
@@ -14337,6 +14370,9 @@ div#notebook {
       <td>False</td>
       <td>cleavage</td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>11</th>
@@ -14344,6 +14380,9 @@ div#notebook {
       <td>False</td>
       <td>cleavage</td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th>12</th>
@@ -14351,6 +14390,9 @@ div#notebook {
       <td>False</td>
       <td>synthesis</td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td>Written in the synthesis direction (bonds are ...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -14358,6 +14400,9 @@ div#notebook {
       <td>False</td>
       <td></td>
       <td>1</td>
+      <td></td>
+      <td></td>
+      <td>Transition state used instead of BEP</td>
     </tr>
   </tbody>
 </table>
@@ -14425,6 +14470,7 @@ div#notebook {
       <th>list.intervals</th>
       <th>list.slopes</th>
       <th>list.intervals.1</th>
+      <th>notes</th>
     </tr>
   </thead>
   <tbody>
@@ -14435,6 +14481,7 @@ div#notebook {
       <td>0</td>
       <td>-52.6</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>1</th>
@@ -14443,6 +14490,7 @@ div#notebook {
       <td>0</td>
       <td>-17.7</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>2</th>
@@ -14451,6 +14499,7 @@ div#notebook {
       <td>0</td>
       <td>-17.7</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>3</th>
@@ -14459,6 +14508,7 @@ div#notebook {
       <td>0</td>
       <td>-3.0</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>4</th>
@@ -14467,6 +14517,7 @@ div#notebook {
       <td>0</td>
       <td>-20.7</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>5</th>
@@ -14475,6 +14526,7 @@ div#notebook {
       <td>0</td>
       <td>-52.6</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>6</th>
@@ -14483,6 +14535,7 @@ div#notebook {
       <td>0</td>
       <td>-17.7</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>7</th>
@@ -14491,6 +14544,7 @@ div#notebook {
       <td>0</td>
       <td>-17.7</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>8</th>
@@ -14499,6 +14553,7 @@ div#notebook {
       <td>0</td>
       <td>-3.0</td>
       <td>1</td>
+      <td></td>
     </tr>
     <tr>
       <th>9</th>
@@ -14507,6 +14562,7 @@ div#notebook {
       <td>0</td>
       <td>-20.7</td>
       <td>1</td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -14792,6 +14848,7 @@ div#notebook {
     <span class="n">refs_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;refs&#39;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="c1"># If references are not used, skip this section</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The &quot;refs&quot; sheet could not be found in </span><span class="si">{}</span><span class="s1">. Skiping references&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
     <span class="n">refs</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Reference</span><span class="p">(</span><span class="o">**</span><span class="n">ref_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">ref_data</span> <span class="ow">in</span> <span class="n">refs_data</span><span class="p">]</span>
@@ -14876,6 +14933,7 @@ div#notebook {
 <span class="k">try</span><span class="p">:</span>
     <span class="n">beps_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;beps&#39;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The &quot;beps&quot; sheet could not be found in </span><span class="si">{}</span><span class="s1">. Skiping BEPs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
     <span class="n">beps</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">species_with_beps</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
@@ -14936,6 +14994,7 @@ div#notebook {
     <span class="n">interactions_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;lateral_interactions&#39;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="c1"># If no lateral interactions exist, skip this section</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The &quot;lateral_interactions&quot; sheet could not be found in </span><span class="si">{}</span><span class="s1">. Skiping lateral interactions&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
     <span class="n">interactions</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">interactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">PiecewiseCovEffect</span><span class="p">(</span><span class="o">**</span><span class="n">interaction_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">interaction_data</span> <span class="ow">in</span> <span class="n">interactions_data</span><span class="p">]</span>
@@ -14974,7 +15033,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Write-YAML-File">Write YAML File<a class="anchor-link" href="#Write-YAML-File">&#182;</a></h2><p>The YAML file specifying the reactor configuration can be written using the <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html"><code>write_yaml</code></a> function. Note that if:</p>
+<h2 id="Write-Reactor-YAML-File">Write Reactor YAML File<a class="anchor-link" href="#Write-Reactor-YAML-File">&#182;</a></h2><p>The YAML file specifying the reactor configuration can be written using the <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html"><code>write_yaml</code></a> function. Note that if:</p>
 <ul>
 <li><code>units</code> is not specified, float values are assumed to be in SI units</li>
 <li><code>units</code> is specified, float values are consistent with <code>unit</code>'s attributes</li>
@@ -14991,6 +15050,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_yaml</span>
 
+<span class="n">Path</span><span class="p">(</span><span class="s1">&#39;./outputs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">yaml_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/reactor.yaml&#39;</span>
 <span class="n">reactor_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">input_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;reactor&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">write_yaml</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">yaml_path</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span> <span class="o">**</span><span class="n">reactor_data</span><span class="p">)</span>
@@ -15031,7 +15091,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.19) on 2020-04-08 03:27:58.405859
+<pre># File generated by pMuTT (v 1.2.21dev) on 2020-05-26 13:36:40.983379
 # See documentation for OpenMKM YAML file here:
 # https://vlachosgroup.github.io/openmkm/input
 inlet_gas:
@@ -15075,7 +15135,7 @@ simulation:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Write-CTI-File">Write CTI File<a class="anchor-link" href="#Write-CTI-File">&#182;</a></h2><p>The CTI file species the thermodynamics and kinetics of the system. It can be written using <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti"><code>write_cti</code></a>. Note that we take the reactor operating conditions previously read for the YAML file to calculate thermodynamic and kinetic parameters.</p>
+<h2 id="Write-Thermo/Kinetic-YAML-File">Write Thermo/Kinetic YAML File<a class="anchor-link" href="#Write-Thermo/Kinetic-YAML-File">&#182;</a></h2><p>As of OpenMKM version 0.6.0 onwards, the thermodynamic and kinetic parameters can be written as a YAML file. We recommend using this format over the older CTI format. To generate the Thermo/Kinetic YAML file using pMuTT, use the <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_thermo_yaml.html"><code>write_thermo_yaml</code></a> function</p>
 
 </div>
 </div>
@@ -15085,16 +15145,14 @@ simulation:
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_cti</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_thermo_yaml</span>
 
-<span class="n">cti_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/thermo.cti&#39;</span>
-<span class="n">use_motz_wise</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">reactor_data</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">reactor_data</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
-
-<span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
-          <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">cti_path</span><span class="p">,</span>
-          <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">)</span>
+<span class="n">write_thermo_yaml</span><span class="p">(</span><span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span>
+                  <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
+                  <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span>
+                  <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span>
+                  <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+                  <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;./outputs/thermo.yaml&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15105,7 +15163,7 @@ simulation:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Like before, omitting the <code>filename</code> parameter returns a string.</p>
+<p>Like before, omitting the <code>filename</code> parameter returns a string</p>
 
 </div>
 </div>
@@ -15115,8 +15173,11 @@ simulation:
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
-                <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">write_thermo_yaml</span><span class="p">(</span><span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span>
+                        <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
+                        <span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span>
+                        <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span>
+                        <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -15133,7 +15194,596 @@ simulation:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># File generated by pMuTT (v 1.2.19) on 2020-04-08 03:27:58.517860
+<pre># File generated by pMuTT (v 1.2.21dev) on 2020-05-26 13:36:41.107378
+# See documentation for OpenMKM YAML file here:
+# https://vlachosgroup.github.io/openmkm/input
+
+#-------------------------------------------------------------------------------
+# UNITS
+#-------------------------------------------------------------------------------
+units: {mass: g, length: cm, time: s, quantity: mol, energy: kcal, activation-energy: kcal/mol,
+  pressure: atm}
+
+
+#-------------------------------------------------------------------------------
+# PHASES
+#-------------------------------------------------------------------------------
+phases:
+
+- name: gas
+  elements: [H, N, Ar]
+  species: [N2, NH3, H2, Ar]
+  thermo: ideal-gas
+  kinetics: gas
+  reactions: none
+
+- name: bulk
+  elements: [Ru]
+  species: [RU(B)]
+  thermo: fixed-stoichiometry
+
+- name: terrace
+  elements: [H, Ru, N]
+  species: [N2(T), N(T), H(T), NH3(T), NH2(T), NH(T), RU(T)]
+  kinetics: surface
+  site-density: &#34;2.1671e-09 mol/cm^2&#34;
+  thermo: surface-lateral-interaction
+  interactions: declared-species
+  reactions: declared-species
+  beps: all
+
+- name: step
+  elements: [H, Ru, N]
+  species: [N2(S), N(S), H(S), NH3(S), NH2(S), NH(S), RU(S)]
+  kinetics: surface
+  site-density: &#34;4.4385e-10 mol/cm^2&#34;
+  thermo: surface-lateral-interaction
+  interactions: declared-species
+  reactions: declared-species
+  beps: all
+
+
+#-------------------------------------------------------------------------------
+# SPECIES
+#-------------------------------------------------------------------------------
+species:
+
+- name: N2
+  composition: {N: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 642.8571428571429, 1000.0]
+    data:
+    - [3.3956319945669633, 0.001115707689025668, -4.301993779374381e-06, 6.8071424019295535e-09,
+      -3.2903312791047058e-12, -125.46629834547932, 3.5561107385882806]
+    - [4.050329990684662, -0.0029677854067980108, 5.323485005316287e-06, -3.3518122405333548e-09,
+      7.58446718337381e-13, -210.11026414819972, 0.6858228492521796]
+
+- name: NH3
+  composition: {N: 1.0, H: 3.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 542.8571428571429, 1000.0]
+    data:
+    - [4.564972417951128, -0.006832837835873698, 2.685237031047407e-05, -3.40241692936106e-08,
+      1.6003749874693446e-11, -8535.999717545712, -1.7583318962760188]
+    - [3.1609684331689687, 0.003362370389171136, -1.2142369921834615e-06, 6.829575286260319e-10,
+      -2.54434965826972e-13, -8379.626286586808, 4.185658791424039]
+
+- name: H2
+  composition: {H: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 614.2857142857142, 1000.0]
+    data:
+    - [3.5059704188335177, -7.325197849360956e-05, 3.371722587049024e-07, -6.912640387891159e-10,
+      5.337189015741048e-13, 1687.3519365761772, -4.298852729497387]
+    - [3.3937013396919027, 0.0007194112421430606, -1.7531971899407386e-06, 1.7534933554342533e-09,
+      -5.375683345945896e-13, 1699.9908830788797, -3.821319983179503]
+
+- name: N2(T)
+  composition: {N: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 514.2857142857143, 1000.0]
+    data:
+    - [0.6394780241851414, 0.027666673612151815, -7.645720305897118e-05, 1.0176487948083283e-07,
+      -5.19823386998956e-11, -6830.2293384845825, -2.4373983302173254]
+    - [3.8547865818886304, 0.002451553391280693, -1.1229041254091556e-06, 2.836620170114086e-10,
+      -6.814515451765802e-14, -7163.7513951542915, -15.811301160783382]
+  sites: 1.0
+
+- name: N(T)
+  composition: {N: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 557.1428571428571, 1000.0]
+    data:
+    - [-4.894442791188698, 0.05767676205626723, -0.00013447158207005976, 1.5228759500727411e-07,
+      -6.828213240453864e-11, -10575.315555452235, 17.560620354866614]
+    - [0.6598464899392497, 0.017822907875229405, -2.524998562064707e-05, 1.6958113771951197e-08,
+      -4.435079126394282e-12, -11206.325808617066, -6.042105374266001]
+  sites: 1.0
+
+- name: H(T)
+  composition: {H: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 557.1428571428571, 1000.0]
+    data:
+    - [-1.8007958982617518, 0.014160885760779236, -1.4954871236615527e-05, 2.2220499972019704e-09,
+      3.926688603133256e-12, -6100.896586017127, 7.139128866846124]
+    - [-1.4537007356856155, 0.01342293260935598, -1.768619079260206e-05, 1.1258775063528586e-08,
+      -2.826810620829653e-12, -6167.46227369115, 5.421303508464117]
+  sites: 1.0
+
+- name: NH3(T)
+  composition: {N: 1.0, H: 3.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 428.57142857142856, 1000.0]
+    data:
+    - [1.0185579992488374, 0.022246747959228638, -4.370286768090834e-05, 5.8576346934492585e-08,
+      -3.390825287953804e-11, -14214.003842753298, -4.229509556183071]
+    - [1.6390458061230475, 0.015436700793334042, -1.6405558855182064e-05, 1.0812691723221286e-08,
+      -2.9608944658451726e-12, -14257.421618513974, -6.585989385183915]
+  sites: 1.0
+
+- name: NH2(T)
+  composition: {N: 1.0, H: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 585.7142857142858, 1000.0]
+    data:
+    - [-2.4350528056129472, 0.03718137542886255, -7.252850561422588e-05, 7.309049530582159e-08,
+      -2.956669163752849e-11, -11755.772200257523, 8.409950246927902]
+    - [0.5916317349519948, 0.017127978582404026, -2.171396792761983e-05, 1.4726348155896754e-08,
+      -3.9534369576339804e-12, -12128.14822629148, -4.693752289444842]
+  sites: 1.0
+
+- name: NH(T)
+  composition: {N: 1.0, H: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 600.0, 1000.0]
+    data:
+    - [-3.6668879702880055, 0.03982782412521621, -8.187333299912497e-05, 8.249622398493288e-08,
+      -3.286921120308004e-11, -14625.719115846838, 13.504746495617308]
+    - [0.1063545642473668, 0.015271251197937114, -2.097761902407342e-05, 1.4305894047220088e-08,
+      -3.795820539846915e-12, -15096.755597474243, -2.891979430990201]
+  sites: 1.0
+
+- name: TS1_NH3(T)
+  composition: {N: 1.0, H: 3.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 671.4285714285714, 1000.0]
+    data:
+    - [0.16718331336897327, 0.020329980402827984, -2.2715789281313686e-05, 1.396055194227525e-08,
+      -3.4213689130260705e-12, -2513.6254986662357, -1.9177576265691592]
+    - [0.8082560769434938, 0.017161423429626208, -1.702221083696219e-05, 9.632653817050899e-09,
+      -2.291120234312056e-12, -2615.2571907445895, -4.867435690136908]
+  sites: 1.0
+
+- name: TS2_NH2(T)
+  composition: {N: 1.0, H: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 628.5714285714287, 1000.0]
+    data:
+    - [-2.546261486549267, 0.03396218372795058, -5.7241256896206506e-05, 4.946324722557642e-08,
+      -1.7352754696747937e-11, -5761.707019993226, 8.789590109046689]
+    - [-0.22939751786703408, 0.01988249700954183, -2.4697033965083446e-05, 1.5524372835872282e-08,
+      -3.874910992202475e-12, -6070.669161900978, -1.4344822148231904]
+  sites: 1.0
+
+- name: TS3_NH(T)
+  composition: {N: 1.0, H: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 542.8571428571429, 1000.0]
+    data:
+    - [-1.550325786832137, 0.02805684817769237, -5.9204464743939565e-05, 6.504664203240556e-08,
+      -2.9386333379569044e-11, -2390.0965456230283, 4.70877083989161]
+    - [0.4367750071098204, 0.013299204888604829, -1.7193813868789944e-05, 1.0835991303856117e-08,
+      -2.708299561097233e-12, -2609.1249431827414, -3.67094272865846]
+  sites: 1.0
+
+- name: TS4_N2(T)
+  composition: {N: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 528.5714285714286, 1000.0]
+    data:
+    - [-1.426183002268343, 0.03779383005618639, -9.641467810794512e-05, 1.1818753814714894e-07,
+      -5.691779297044529e-11, 21872.62618453775, 3.575019075410285]
+    - [2.3243108861892066, 0.009282795711236863, -1.3583554649130437e-05, 9.380823346458842e-09,
+      -2.514205017827287e-12, 21470.007200863885, -12.147719162849816]
+  sites: 1.0
+
+- name: RU(T)
+  composition: {Ru: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 657.1428571428571, 1000.0]
+    data:
+    - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  sites: 1.0
+
+- name: N2(S)
+  composition: {N: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 542.8571428571429, 1000.0]
+    data:
+    - [-2.336635474195216, 0.04016613994195943, -8.992000355655354e-05, 1.0092848132559232e-07,
+      -4.5662308327121564e-11, -8756.455534491419, 7.186675872937272]
+    - [1.0040300585138415, 0.015732755750113465, -2.1500687407393788e-05, 1.4112695947173559e-08,
+      -3.636536147416892e-12, -9129.659453153845, -6.949447166751186]
+  sites: 1.0
+
+- name: N(S)
+  composition: {N: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 557.1428571428571, 1000.0]
+    data:
+    - [-2.5849874550678793, 0.029310942630531245, -6.782768990938232e-05, 7.632524955387304e-08,
+      -3.4036812652150437e-11, -12299.815547573347, 9.385302365886137]
+    - [0.21812681852373034, 0.009273511067135979, -1.312694685067916e-05, 8.810761240318494e-09,
+      -2.303213566137411e-12, -12619.403961000628, -2.536741481084843]
+  sites: 1.0
+
+- name: H(S)
+  composition: {H: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 557.1428571428571, 1000.0]
+    data:
+    - [-1.8007958982617518, 0.014160885760779236, -1.4954871236615527e-05, 2.2220499972019704e-09,
+      3.926688603133256e-12, -6100.896586017127, 7.139128866846124]
+    - [-1.4537007356856155, 0.01342293260935598, -1.768619079260206e-05, 1.1258775063528586e-08,
+      -2.826810620829653e-12, -6167.46227369115, 5.421303508464117]
+  sites: 1.0
+
+- name: NH3(S)
+  composition: {N: 1.0, H: 3.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 428.57142857142856, 1000.0]
+    data:
+    - [0.9760733268553489, 0.022999709118353844, -4.7144112328422e-05, 6.472018916855692e-08,
+      -3.782202572778842e-11, -17118.32767533135, -4.184145930004325]
+    - [1.7092437442450366, 0.015087729719952463, -1.5806512580778123e-05, 1.0365926782894892e-08,
+      -2.836019677839079e-12, -17170.94688188792, -6.983454889647479]
+  sites: 1.0
+
+- name: NH2(S)
+  composition: {N: 1.0, H: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 585.7142857142858, 1000.0]
+    data:
+    - [-2.134846314598767, 0.0356104434442669, -6.865945297445601e-05, 6.851219024341386e-08,
+      -2.7484251930293086e-11, -18304.90031293902, 7.45851008596866]
+    - [0.6884294740228686, 0.016982660476984567, -2.1646009999282705e-05, 1.4711831653840717e-08,
+      -3.949644232635474e-12, -18653.702884329432, -4.7764176851404985]
+  sites: 1.0
+
+- name: NH(S)
+  composition: {N: 1.0, H: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 585.7142857142858, 1000.0]
+    data:
+    - [-3.5857677200628846, 0.04041824721931891, -8.509525219329148e-05, 8.779477895906484e-08,
+      -3.583003048080367e-11, -13551.74351821945, 13.067654186793725]
+    - [0.23250847831381585, 0.015084052551408086, -2.0991627837752818e-05, 1.4486313872448512e-08,
+      -3.883624257502453e-12, -14019.642354896643, -3.4525644759344543]
+  sites: 1.0
+
+- name: TS1_NH3(S)
+  composition: {N: 1.0, H: 3.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 671.4285714285714, 1000.0]
+    data:
+    - [-0.03735258850223981, 0.020505391121308416, -2.185776716209172e-05, 1.2280357404965904e-08,
+      -2.5657560572043993e-12, -8998.774514615734, -0.570339124004084]
+    - [0.4553691668625345, 0.018313094306811304, -1.857144398084139e-05, 1.058848387303736e-08,
+      -2.5170427368793067e-12, -9082.387822169567, -2.878229360902699]
+  sites: 1.0
+
+- name: TS2_NH2(S)
+  composition: {N: 1.0, H: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 542.8571428571429, 1000.0]
+    data:
+    - [-1.036866383972045, 0.030592277521829653, -6.425523050987311e-05, 7.269128834796514e-08,
+      -3.348352008358944e-11, -5225.80553219122, 2.680487289862805]
+    - [1.2611609333482254, 0.013462908222612677, -1.538915061763511e-05, 9.593374111601978e-09,
+      -2.4515771294165935e-12, -5477.825448566679, -7.0003108016223585]
+  sites: 1.0
+
+- name: TS3_NH(S)
+  composition: {N: 1.0, H: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 514.2857142857143, 1000.0]
+    data:
+    - [-2.970965179922778, 0.03842249321850175, -9.527920060365471e-05, 1.1969265561516276e-07,
+      -5.970204310561188e-11, -3974.1786968486535, 10.33999247498289]
+    - [0.46394757698187555, 0.01118458452963758, -1.3006822073078597e-05, 7.709667616269628e-09,
+      -1.8671669511641015e-12, -4326.655786033964, -3.9094684579463275]
+  sites: 1.0
+
+- name: TS4_N2(S)
+  composition: {N: 2.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 542.8571428571429, 1000.0]
+    data:
+    - [-3.7174509392891895, 0.04782817681469442, -0.000115188567018151, 1.3442901586870685e-07,
+      -6.200443837365281e-11, -2254.8256799453657, 12.960400788703833]
+    - [0.9062880021971168, 0.013876458238608324, -1.9927317752312164e-05, 1.354580842449189e-08,
+      -3.5812956409457856e-12, -2768.384920969638, -6.582359999458994]
+  sites: 1.0
+
+- name: RU(S)
+  composition: {Ru: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 657.1428571428571, 1000.0]
+    data:
+    - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  sites: 1.0
+
+- name: RU(B)
+  composition: {Ru: 1.0}
+  thermo:
+    model: NASA7
+    temperature-ranges: [300.0, 657.1428571428571, 1000.0]
+    data:
+    - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  sites: 1.0
+
+- name: Ar
+  composition: {Ar: 1}
+  thermo:
+    model: Shomate
+    temperature-ranges: [298.0, 6000.0]
+    data:
+    - [20.786, 2.825911e-07, -1.464191e-07, 1.092131e-08, -3.661371e-08, -6.19735,
+      179.999]
+
+
+#-------------------------------------------------------------------------------
+# REACTIONS
+#-------------------------------------------------------------------------------
+reactions:
+
+- equation: H2 + 2 RU(T) &lt;=&gt; 2 H(T) + 2 RU(B)
+  sticking-species: H2
+  Motz-Wise: false
+  sticking-coefficient: {A: 0.5, b: 0, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0000
+
+- equation: N2 + RU(T) &lt;=&gt; N2(T) + RU(B)
+  sticking-species: N2
+  Motz-Wise: false
+  sticking-coefficient: {A: 0.5, b: 0, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0001
+
+- equation: NH3 + RU(T) &lt;=&gt; NH3(T) + RU(B)
+  sticking-species: NH3
+  Motz-Wise: false
+  sticking-coefficient: {A: 0.5, b: 0, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0002
+
+- equation: NH3(T) + RU(T) &lt;=&gt; NH2(T) + H(T) + RU(B)
+  rate-constant: {A: 9.6e+17, b: 1, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0003
+
+- equation: NH2(T) + RU(T) &lt;=&gt; NH(T) + H(T) + RU(B)
+  rate-constant: {A: 4.807487477533391e+18, b: 1, Ea: &#34;10.15009434208916 kcal/mol&#34;}
+  id: r_0004
+
+- equation: NH(T) + RU(T) &lt;=&gt; N(T) + H(T) + RU(B)
+  rate-constant: {A: 4.807487477533391e+18, b: 1, Ea: &#34;22.079721657118633 kcal/mol&#34;}
+  id: r_0005
+
+- equation: 2 N(T) + RU(B) &lt;=&gt; N2(T) + RU(T)
+  rate-constant: {A: 4.807487477533391e+18, b: 1, Ea: &#34;86.47548232695213 kcal/mol&#34;}
+  id: r_0006
+
+- equation: H2 + 2 RU(S) &lt;=&gt; 2 H(S) + 2 RU(B)
+  sticking-species: H2
+  Motz-Wise: false
+  sticking-coefficient: {A: 0.5, b: 0, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0007
+
+- equation: N2 + RU(S) &lt;=&gt; N2(S) + RU(B)
+  sticking-species: N2
+  Motz-Wise: false
+  sticking-coefficient: {A: 0.5, b: 0, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0008
+
+- equation: NH3 + RU(S) &lt;=&gt; NH3(S) + RU(B)
+  sticking-species: NH3
+  Motz-Wise: false
+  sticking-coefficient: {A: 0.5, b: 0, Ea: &#34;0.0 kcal/mol&#34;}
+  id: r_0009
+
+- equation: NH3(S) + RU(S) &lt;=&gt; NH2(S) + H(S) + RU(B)
+  rate-constant: {A: 2.34725833334744e+19, b: 1, Ea: &#34;12.592618179712357 kcal/mol&#34;}
+  id: r_0010
+
+- equation: NH2(S) + RU(S) &lt;=&gt; NH(S) + H(S) + RU(B)
+  rate-constant: {A: 2.34725833334744e+19, b: 1, Ea: &#34;18.012171751643198 kcal/mol&#34;}
+  id: r_0011
+
+- equation: N(S) + H(S) + RU(B) &lt;=&gt; NH(S) + RU(S)
+  rate-constant: {A: 2.34725833334744e+19, b: 1, Ea: &#34;26.08072567404924 kcal/mol&#34;}
+  id: r_0012
+
+- equation: 2 N(S) + RU(B) &lt;=&gt; N2(S) + RU(S)
+  rate-constant: {A: 2.34725833334744e+19, b: 1, Ea: &#34;44.5994818235098 kcal/mol&#34;}
+  id: r_0013
+
+
+#-------------------------------------------------------------------------------
+# BEPS
+#-------------------------------------------------------------------------------
+beps:
+
+- id: NH-H
+  slope: 0.52
+  intercept: &#34;19.78 kcal/mol&#34;
+  direction: cleavage
+  cleavage-reactions: [&#34;r_0004&#34;, &#34;r_0011&#34;]
+
+- id: N-H
+  slope: 0.29
+  intercept: &#34;23.23 kcal/mol&#34;
+  direction: cleavage
+  synthesis-reactions: [&#34;r_0012&#34;]
+  cleavage-reactions: [&#34;r_0005&#34;]
+
+- id: NH2-H
+  slope: 0.71
+  intercept: &#34;23.69 kcal/mol&#34;
+  direction: cleavage
+  cleavage-reactions: [&#34;r_0010&#34;]
+
+
+#-------------------------------------------------------------------------------
+# INTERACTIONS
+#-------------------------------------------------------------------------------
+interactions:
+
+- species: [N(T), N(T)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-52.6 kcal&#34;]
+  id: i_0000
+
+- species: [N(T), H(T)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-17.7 kcal&#34;]
+  id: i_0001
+
+- species: [H(T), N(T)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-17.7 kcal&#34;]
+  id: i_0002
+
+- species: [H(T), H(T)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-3.0 kcal&#34;]
+  id: i_0003
+
+- species: [NH2(T), N(T)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-20.7 kcal&#34;]
+  id: i_0004
+
+- species: [N(S), N(S)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-52.6 kcal&#34;]
+  id: i_0005
+
+- species: [N(S), H(S)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-17.7 kcal&#34;]
+  id: i_0006
+
+- species: [H(S), N(S)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-17.7 kcal&#34;]
+  id: i_0007
+
+- species: [H(S), H(S)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-3.0 kcal&#34;]
+  id: i_0008
+
+- species: [NH2(S), N(S)]
+  coverage-threshold: [0, 1]
+  strength: [&#34;-20.7 kcal&#34;]
+  id: i_0009
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Write-CTI-File">Write CTI File<a class="anchor-link" href="#Write-CTI-File">&#182;</a></h2><p>The CTI file species the thermodynamics and kinetics of the system. It can be written using <a href="https://vlachosgroup.github.io/pMuTT/api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti"><code>write_cti</code></a>. Note that we take the reactor operating conditions previously read for the YAML file to calculate thermodynamic and kinetic parameters.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pmutt.io.omkm</span> <span class="kn">import</span> <span class="n">write_cti</span>
+
+<span class="n">cti_path</span> <span class="o">=</span> <span class="s1">&#39;./outputs/thermo.cti&#39;</span>
+<span class="n">use_motz_wise</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">reactor_data</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+
+<span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+         <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">cti_path</span><span class="p">,</span>
+         <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Like before, omitting the <code>filename</code> parameter returns a string.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_outputPrepend">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">write_cti</span><span class="p">(</span><span class="n">reactions</span><span class="o">=</span><span class="n">reactions</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span> <span class="n">phases</span><span class="o">=</span><span class="n">phases</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+               <span class="n">lateral_interactions</span><span class="o">=</span><span class="n">interactions</span><span class="p">,</span> <span class="n">use_motz_wise</span><span class="o">=</span><span class="n">use_motz_wise</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre># File generated by pMuTT (v 1.2.21dev) on 2020-05-26 13:36:41.298380
 # See documentation for OpenMKM CTI file here:
 # https://vlachosgroup.github.io/openmkm/input
 
@@ -15147,7 +15797,7 @@ units(length=&#34;cm&#34;, time=&#34;s&#34;, quantity=&#34;mol&#34;, energy=&#34
 # PHASES
 #-------------------------------------------------------------------------------
 ideal_gas(name=&#34;gas&#34;,
-          elements=&#34;N H Ar&#34;,
+          elements=&#34;H N Ar&#34;,
           species=&#34;N2 NH3 H2 Ar&#34;,
           reactions=[])
 
@@ -15158,22 +15808,22 @@ stoichiometric_solid(name=&#34;bulk&#34;,
                      note=&#34;Ru Metal&#34;)
 
 interacting_interface(name=&#34;terrace&#34;,
-                      elements=&#34;Ru N H&#34;,
+                      elements=&#34;H Ru N&#34;,
                       species=&#34;N2(T) N(T) H(T) NH3(T) NH2(T) NH(T) RU(T)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=2.1671e-09,
-                      interactions=[&#34;0000 to 0004&#34;],
-                      reactions=[&#34;0000 to 0003&#34;, &#34;NH2-H_cle_0001&#34;, &#34;NH-H_cle_0001&#34;, &#34;N-H_cle_0001&#34;],
-                      beps=&#34;NH2-H NH-H N-H&#34;,
+                      interactions=[&#34;i_0000 to i_0004&#34;],
+                      reactions=[&#34;r_0000 to r_0006&#34;],
+                      beps=&#34;NH-H N-H&#34;,
                       note=&#34;Ru(0001)&#34;)
 
 interacting_interface(name=&#34;step&#34;,
-                      elements=&#34;Ru N H&#34;,
+                      elements=&#34;H Ru N&#34;,
                       species=&#34;N2(S) N(S) H(S) NH3(S) NH2(S) NH(S) RU(S)&#34;,
                       phases=&#34;gas bulk&#34;,
                       site_density=4.4385e-10,
-                      interactions=[&#34;0005 to 0009&#34;],
-                      reactions=[&#34;0004 to 0007&#34;, &#34;NH2-H_cle_0002&#34;, &#34;NH-H_cle_0002&#34;, &#34;N-H_syn_0001&#34;],
+                      interactions=[&#34;i_0005 to i_0009&#34;],
+                      reactions=[&#34;r_0007 to r_0013&#34;],
                       beps=&#34;NH2-H NH-H N-H&#34;,
                       note=&#34;Ru(0001) with atoms deleted&#34;)
 
@@ -15453,43 +16103,43 @@ species(name=&#34;Ar&#34;, atoms=&#34;Ar:1&#34;,
 lateral_interaction(&#34;N(T) N(T)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-52.6],
-                    id=&#34;0000&#34;)
+                    id=&#34;i_0000&#34;)
 lateral_interaction(&#34;N(T) H(T)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-17.7],
-                    id=&#34;0001&#34;)
+                    id=&#34;i_0001&#34;)
 lateral_interaction(&#34;H(T) N(T)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-17.7],
-                    id=&#34;0002&#34;)
+                    id=&#34;i_0002&#34;)
 lateral_interaction(&#34;H(T) H(T)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-3.0000000000000004],
-                    id=&#34;0003&#34;)
+                    id=&#34;i_0003&#34;)
 lateral_interaction(&#34;NH2(T) N(T)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-20.7],
-                    id=&#34;0004&#34;)
+                    id=&#34;i_0004&#34;)
 lateral_interaction(&#34;N(S) N(S)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-52.6],
-                    id=&#34;0005&#34;)
+                    id=&#34;i_0005&#34;)
 lateral_interaction(&#34;N(S) H(S)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-17.7],
-                    id=&#34;0006&#34;)
+                    id=&#34;i_0006&#34;)
 lateral_interaction(&#34;H(S) N(S)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-17.7],
-                    id=&#34;0007&#34;)
+                    id=&#34;i_0007&#34;)
 lateral_interaction(&#34;H(S) H(S)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-3.0000000000000004],
-                    id=&#34;0008&#34;)
+                    id=&#34;i_0008&#34;)
 lateral_interaction(&#34;NH2(S) N(S)&#34;,
                     coverage_thresholds=[0, 1],
                     strengths=[-20.7],
-                    id=&#34;0009&#34;)
+                    id=&#34;i_0009&#34;)
 
 #-------------------------------------------------------------------------------
 # REACTION OPTIONS
@@ -15501,71 +16151,71 @@ enable_motz_wise()
 # REACTIONS
 #-------------------------------------------------------------------------------
 surface_reaction(&#34;H2 + 2 RU(T) &lt;=&gt; 2 H(T) + 2 RU(B)&#34;,
-                 stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0000&#34;)
+                 stick( 5.00000e-01, 0,  1.00000e+00),
+                 id=&#34;r_0000&#34;)
 surface_reaction(&#34;N2 + RU(T) &lt;=&gt; N2(T) + RU(B)&#34;,
-                 stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0001&#34;)
+                 stick( 5.00000e-01, 0,  1.00000e+00),
+                 id=&#34;r_0001&#34;)
 surface_reaction(&#34;NH3 + RU(T) &lt;=&gt; NH3(T) + RU(B)&#34;,
-                 stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0002&#34;)
+                 stick( 5.00000e-01, 0,  1.00000e+00),
+                 id=&#34;r_0002&#34;)
 surface_reaction(&#34;NH3(T) + RU(T) &lt;=&gt; NH2(T) + H(T) + RU(B)&#34;,
-                 [ 9.61497e+18, 1,  1.76713e+01],
-                 id=&#34;NH2-H_cle_0001&#34;)
+                 [ 9.60000e+17, 1,  1.42000e+01],
+                 id=&#34;r_0003&#34;)
 surface_reaction(&#34;NH2(T) + RU(T) &lt;=&gt; NH(T) + H(T) + RU(B)&#34;,
-                 [ 9.61497e+18, 1,  1.01501e+01],
-                 id=&#34;NH-H_cle_0001&#34;)
+                 [ 4.80749e+18, 1,  1.00000e+00],
+                 id=&#34;r_0004&#34;)
 surface_reaction(&#34;NH(T) + RU(T) &lt;=&gt; N(T) + H(T) + RU(B)&#34;,
-                 [ 9.61497e+18, 1,  2.20797e+01],
-                 id=&#34;N-H_cle_0001&#34;)
+                 [ 4.80749e+18, 1,  1.00000e+00],
+                 id=&#34;r_0005&#34;)
 surface_reaction(&#34;2 N(T) + RU(B) &lt;=&gt; N2(T) + RU(T)&#34;,
-                 [ 9.61497e+18, 1,  8.64755e+01],
-                 id=&#34;0003&#34;)
+                 [ 4.80749e+18, 1,  1.00000e+00],
+                 id=&#34;r_0006&#34;)
 surface_reaction(&#34;H2 + 2 RU(S) &lt;=&gt; 2 H(S) + 2 RU(B)&#34;,
-                 stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0004&#34;)
+                 stick( 5.00000e-01, 0,  1.00000e+00),
+                 id=&#34;r_0007&#34;)
 surface_reaction(&#34;N2 + RU(S) &lt;=&gt; N2(S) + RU(B)&#34;,
-                 stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0005&#34;)
+                 stick( 5.00000e-01, 0,  1.00000e+00),
+                 id=&#34;r_0008&#34;)
 surface_reaction(&#34;NH3 + RU(S) &lt;=&gt; NH3(S) + RU(B)&#34;,
-                 stick( 5.00000e-01, 0,  0.00000e+00),
-                 id=&#34;0006&#34;)
+                 stick( 5.00000e-01, 0,  1.00000e+00),
+                 id=&#34;r_0009&#34;)
 surface_reaction(&#34;NH3(S) + RU(S) &lt;=&gt; NH2(S) + H(S) + RU(B)&#34;,
-                 [ 4.69452e+19, 1,  1.25926e+01],
-                 id=&#34;NH2-H_cle_0002&#34;)
+                 [ 2.34726e+19, 1,  1.00000e+00],
+                 id=&#34;r_0010&#34;)
 surface_reaction(&#34;NH2(S) + RU(S) &lt;=&gt; NH(S) + H(S) + RU(B)&#34;,
-                 [ 4.69452e+19, 1,  1.80122e+01],
-                 id=&#34;NH-H_cle_0002&#34;)
+                 [ 2.34726e+19, 1,  1.00000e+00],
+                 id=&#34;r_0011&#34;)
 surface_reaction(&#34;N(S) + H(S) + RU(B) &lt;=&gt; NH(S) + RU(S)&#34;,
-                 [ 4.69452e+19, 1,  2.60807e+01],
-                 id=&#34;N-H_syn_0001&#34;)
+                 [ 2.34726e+19, 1,  1.00000e+00],
+                 id=&#34;r_0012&#34;)
 surface_reaction(&#34;2 N(S) + RU(B) &lt;=&gt; N2(S) + RU(S)&#34;,
-                 [ 4.69452e+19, 1,  4.45995e+01],
-                 id=&#34;0007&#34;)
+                 [ 2.34726e+19, 1,  1.00000e+00],
+                 id=&#34;r_0013&#34;)
 
 #-------------------------------------------------------------------------------
 # BEP Relationships
 #-------------------------------------------------------------------------------
-bep(id=&#34;NH2-H&#34;,
-    slope=0.71,
-    intercept=23.69,
-    direction=&#34;cleavage&#34;,
-    cleavage_reactions=[&#34;NH2-H_cle_0001 to NH2-H_cle_0002&#34;],
-    synthesis_reactions=[])
-
 bep(id=&#34;NH-H&#34;,
     slope=0.52,
     intercept=19.78,
     direction=&#34;cleavage&#34;,
-    cleavage_reactions=[&#34;NH-H_cle_0001 to NH-H_cle_0002&#34;],
+    cleavage_reactions=[&#34;r_0004&#34;, &#34;r_0011&#34;],
     synthesis_reactions=[])
 
 bep(id=&#34;N-H&#34;,
     slope=0.29,
     intercept=23.23,
     direction=&#34;cleavage&#34;,
-    cleavage_reactions=[&#34;N-H_cle_0001&#34;],
-    synthesis_reactions=[&#34;N-H_syn_0001&#34;])
+    cleavage_reactions=[&#34;r_0005&#34;],
+    synthesis_reactions=[&#34;r_0012&#34;])
+
+bep(id=&#34;NH2-H&#34;,
+    slope=0.71,
+    intercept=23.69,
+    direction=&#34;cleavage&#34;,
+    cleavage_reactions=[&#34;r_0010&#34;],
+    synthesis_reactions=[])
 
 </pre>
 </div>

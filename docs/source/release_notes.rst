@@ -7,6 +7,86 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.6
+-------------
+
+August 15, 2023
+
+- Adding missing dependency for openpyxl
+=======
+Version 1.4.5
+-------------
+
+June 23, 2023
+
+- Updated .iteritems dpecricated function in Pandas
+- Cleanup unused imports
+
+Version 1.4.4
+-------------
+
+May 1, 2023
+
+- CRITICAL UPDATE: Fixed Nasa polynomial fit issue for enthalpy and entropy when T_ref > T_mid
+
+Version 1.4.3
+-------------
+
+Mar. 19, 2023
+
+- Updated PIP installation dependency requirements
+
+Version 1.4.2
+-------------
+
+Mar. 18, 2023
+
+- Added new :class:`~pmutt.equilibrium.Equilibrium` class that computes the equilibrium
+  concentration on a network of species by minimizing the network
+  Gibbs free energy while maintaining the total atom balance of
+  the initial starting concentration of species
+- Major GitHub documentation update including the new functionality
+  from v1.3.2 and v1.4.0, corrections noted in the issues database,
+  fixes to broken links, addition of a new "Helper Functions. section,
+  and misc upgrades.
+
+Version 1.3.2
+-------------
+
+Jan. 26, 2023
+
+- Added ``S_elements`` parameter to entropy and Gibbs free energy
+  methods allowing you to compute an entropy and Gibbs free energy
+  of formation for a single species by including the entropy of the
+  elements in the species.
+- Misc bug fixes
+
+Version 1.2.21
+--------------
+
+Jul. 3, 2020
+
+- Miscellaneous bug fixes for :func:`~pmutt.io.omkm.write_cti`
+- Added preliminary support for OpenMKM YAML files.
+- Fixed bug where test OUTCAR file was not present.
+- Added ``ads_act_method`` to :func:`~pmutt.io.chemkin.write_surf` and
+  :func:`~pmutt.io.chemkin.write_EA` to allow users to specify a different
+  method to calculate activation energies for surface versus adsorption
+  reactions.
+
+Version 1.2.20
+--------------
+
+May 12, 2020
+
+- Added sensitivity analysis options in :func:`~pmutt.io.omkm.write_cti`
+- Added ability to arbitrarily specify pre-exponential constant and activation
+  energy in :class:`~pmutt.omkm.reaction.SurfaceReaction`
+- Reduced complexity of assigning reaction IDs to
+  :class:`~pmutt.omkm.reaction.SurfaceReaction`. Before, the ID would be
+  renamed if it had a BEP associated with it. Changed the behavior to just
+  assign numerical values.
+
 Version 1.2.19
 --------------
 
