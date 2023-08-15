@@ -15,7 +15,7 @@ with open('README.rst', 'r') as fh:
 
 setuptools_info = {
 	'name': 'pmutt',
-	'version': '1.4.5',
+	'version': '1.4.6',
 	'author': 'Vlachos Research Group',
 	'author_email': 'vlachos@udel.edu',
 	'description': 'Python Multiscale Thermochemistry Toolbox (pmutt)',
@@ -36,7 +36,8 @@ setuptools_info = {
 		'pygal>=2.4.0',
 		'xlrd>=1.2.0',
 		'more_itertools>=8.14.0',
-	    'PyYAML>=6.0.0'
+	    'PyYAML>=6.0.0',
+		'openpyxl>=3.0.10'
 		],
 	'classifiers': [
 		"Programming Language :: Python :: 3",
