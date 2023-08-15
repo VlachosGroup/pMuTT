@@ -7,6 +7,13 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.6
+-------------
+
+August 15, 2023
+
+- Adding missing dependency for openpyxl
+=======
 Version 1.4.5
 -------------
 
