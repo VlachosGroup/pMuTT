@@ -86,7 +86,7 @@ def write_cti(phases=None,
         if lateral_interactions is not None:
             for lat_interaction in lateral_interactions:
                 if lat_interaction.name is None:
-                    lat_interaction.name = '{:04d}'.format(i)
+                    lat_interaction.name = 'i_{:04d}'.format(i)
                     i += 1
 
                 lat_inter_CTI = _force_pass_arguments(lat_interaction.to_cti,
@@ -100,7 +100,7 @@ def write_cti(phases=None,
         for reaction in reactions:
             # Assign reaction ID if not present
             if reaction.id is None:
-                reaction.id = '{:04d}'.format(i)
+                reaction.id = 'r_{:04d}'.format(i)
                 i += 1
             # Write reaction
             reaction_CTI = _force_pass_arguments(reaction.to_cti, units=units,
@@ -291,6 +291,7 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
                 i += 1
             bep_dict = _force_pass_arguments(bep.to_omkm_yaml, units=units)
             beps_out.append(bep_dict)
+
         # yaml_dict['beps'] = beps_out
 
     '''Organize fields'''
@@ -312,7 +313,6 @@ def write_thermo_yaml(phases=None, species=None, reactions=None,
                  '# {}'.format(field.upper()),
                  '#' + '-' * 79,
                  yaml_str])
-
             # yaml_dict[field] = val
 
     # Convert to YAML format
