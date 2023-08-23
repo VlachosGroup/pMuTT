@@ -7,6 +7,12 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.7
+-------------
+
+August 23, 2023
+
+- Fixed improper reaction and lateral interaction ID's in write_CTI
 
 Version 1.4.6
 -------------
