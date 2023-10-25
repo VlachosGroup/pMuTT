@@ -2216,7 +2216,7 @@ def get_nasa9_HoRT(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T = float(T)
+    T = float(np.squeeze(T))
     T_arr = np.array([
         -(T**-2),
         np.log(T) / T, np.ones_like(T), T / 2., (T**2) / 3., (T**3) / 4.,
@@ -2241,7 +2241,7 @@ def get_nasa9_SoR(a, T):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T = float(T)
+    T = float(np.squeeze(T))
     T_arr = np.array([
         -(T**-2) / 2., -(T**-1),
         np.log(T), T, (T**2) / 2., (T**3) / 3., (T**4) / 4., np.zeros_like(T),

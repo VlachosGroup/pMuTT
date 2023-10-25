@@ -772,6 +772,7 @@ def _fit_HoRT(T_ref, HoRT_ref, a, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
+    T_ref = np.squeeze(T_ref)
     a[5] = (HoRT_ref
             - get_shomate_HoRT(T=np.array([T_ref]), a=a, units=units)) \
         * c.R(units)*T_ref/c.prefixes['k']
