@@ -7,6 +7,14 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.8
+-------------
+
+October 25, 2023
+
+- Fixed deprecated numpy function impacting nasa.py and shomate.py
+  Conversion of an array with ndim > 0 to a scalar
+
 Version 1.4.7
 -------------
 
