@@ -772,11 +772,10 @@ def _fit_HoRT(T_ref, HoRT_ref, a, units):
 
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
-    T_ref = np.squeeze(T_ref)
     a[5] = (HoRT_ref
-            - get_shomate_HoRT(T=np.array([T_ref]), a=a, units=units)) \
+            - get_shomate_HoRT(T=np.array([T_ref]), a=a, units=units))[0] \
         * c.R(units)*T_ref/c.prefixes['k']
-    a[7] = - get_shomate_HoRT(T=np.array([c.T0('K')]), a=a, units=units) \
+    a[7] = - get_shomate_HoRT(T=np.array([c.T0('K')]), a=a, units=units)[0] \
         * c.R(units)*c.T0('K')/c.prefixes['k']
     return a
 
@@ -802,7 +801,7 @@ def _fit_SoR(T_ref, SoR_ref, a, units):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     a[6] = c.R(units) * (
-        SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a, units=units))
+        SoR_ref - get_shomate_SoR(T=np.array([T_ref]), a=a, units=units))[0]
     return a
 
 
