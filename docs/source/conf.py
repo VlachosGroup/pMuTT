@@ -26,9 +26,9 @@ copyright = '2020, Vlachos Research Group'
 author = 'Vlachos Research Group'
 
 # The short X.Y version
-version = '1.4.8'
+version = '1.4.9'
 # The full version, including alpha/beta/rc tags
-release = '1.4.8'
+release = '1.4.9'
 sphinx_version = sphinx.__display_version__
 
 
