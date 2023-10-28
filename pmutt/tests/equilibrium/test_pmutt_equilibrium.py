@@ -5,14 +5,15 @@ Tests for pmutt module
 Created on Wed Mar 8 2023
 """
 import unittest
+import os
 import numpy.testing as npt
 import numpy as np
 from pmutt import equilibrium
 
-
 class TestExamples(unittest.TestCase):
 
     def test_equilibrium_comp(self):
+        os.chdir(os.path.dirname(__file__))
         filepath = 'thermdat_equilibrium_unittest.txt'
         network = {'CH3CH2CH3': 1, 'H2O': 0.7, 'H2': 0, 'CH2CHCH3': 0,
                    'CH4': 0, 'CHCH': 0, 'CH2CH2': 0, 'CH3CH3': 0,
