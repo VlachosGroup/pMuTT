@@ -7,6 +7,14 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.10
+-------------
+
+February 2, 2024
+
+- Improved NASA9 polynomial fit function
+- Overall clean-up of NASA9 deprecated code
+
 Version 1.4.9
 -------------
 
