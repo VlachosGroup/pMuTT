@@ -12,8 +12,7 @@ from warnings import warn
 import numpy as np
 from scipy.optimize import minimize
 
-from pmutt import (_get_R_adj, _is_iterable,
-                   _pass_expected_arguments)
+from pmutt import (_get_R_adj, _is_iterable, _pass_expected_arguments)
 from pmutt import constants as c
 from pmutt.empirical import EmpiricalBase
 from pmutt.io.cantera import obj_to_cti
@@ -1260,7 +1259,7 @@ class Nasa9(EmpiricalBase):
         """
         T_low = min(T)
         T_high = max(T)
-        #if not isinstance(T_mid, np.ndarray):
+        # if not isinstance(T_mid, np.ndarray):
         #    T_mid = np.array([T_mid])
         # Find midpoint temperature, and a[0] through a[4] parameters
         a = _fit_CpoR9(T=T, CpoR=CpoR, T_low=T_low, T_high=T_high, T_mid=T_mid)
@@ -1839,109 +1838,10 @@ def _calc_T_mid_mse_nasa9(T_mid, T_low, T_high, model, n_T=50):
         CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
 
         # Optimize NASA9 coefficients
-        res = minimize(method='BFGS',
-                       args=(T, CpoR),
-                       fun=_get_nasa9_mse,
-                       jac=_get_nasa9_mse_jacob,
-                       x0=np.zeros(9))
-        mse += res.fun
+        res = np.polyfit(T, CpoR*T**2, 6)
+        a = np.append(res[::-1], [0, 0])
+        mse += _get_nasa9_mse(a, T, CpoR)
     return mse
-
-
-def _calc_T_mid_mse_nasa(T_mid, T_low, T_high, model, n_T=50):
-    """Calculates the mean squared error associated with temperature intervals
-    for NASA9 polynomials
-
-    Parameters
-    ----------
-        T_mid : float
-            Middle temperature bound in K being tested
-        T_low : float
-            Lower temperature bound in K
-        T_high : float
-            Higher temperature bound in K
-        model : Species object
-            Object that can provide heat capacity at any temperature
-        n_T : int
-            Number of temperature values to evaluate between each interval
-    Returns
-    -------
-        mse : float
-            Total mean squared error
-    """
-    # T_mid should be between T_low and T_high
-    if np.any(T_mid <= T_low) or np.any(T_mid >= T_high):
-        return np.inf
-
-    mse = 0.
-    # Calculate MSE for each interval
-    T_interval = np.array([T_low, T_mid[0], T_high])
-    for T1, T2 in zip(T_interval, T_interval[1:]):
-        T = np.linspace(T1, T2, n_T)
-
-        # Generate heat capacity data
-        try:
-            CpoR = model.get_CpoR(T=T)
-        except ValueError:
-            CpoR = np.array([model.get_CpoR(T=T_i) for T_i in T])
-
-        # Optimize NASA9 coefficients
-        res = minimize(method='BFGS',
-                       args=(T, CpoR),
-                       fun=_get_nasa_mse,
-                       jac=_get_nasa_mse_jacob,
-                       x0=np.zeros(7))
-        mse += res.fun
-    return mse
-
-
-def _get_nasa_mse(a, T, CpoR):
-    """Calculates the mean squared error associated with NASA coefficients
-
-    Parameters
-    ----------
-        a : (7,) nd.ndarray
-            Coefficients of NASA polynomial
-        T : (N,) nd.ndarray
-            Temperatures to evaluate the NASA coefficients in K
-        CpoR : (N,) nd.ndarray
-            Accurate dimensionless heat capacities corresponding to T
-    Returns
-    -------
-        mse : float
-            Total mean squared error
-    """
-    CpoR_fit = get_nasa_CpoR(a, T)
-    mse = np.mean((CpoR_fit - CpoR)**2)
-    return mse
-
-
-def _get_nasa_mse_jacob(a, T, CpoR):
-    """Calculates the Jacobian associated with NASA coefficients
-
-    Parameters
-    ----------
-        a : (7,) nd.ndarray
-            Coefficients of NASA polynomial
-        T : (N,) nd.ndarray
-            Temperatures to evaluate the NASA coefficients in K
-        CpoR : (N,) nd.ndarray
-            Accurate dimensionless heat capacities corresponding to T
-    Returns
-    -------
-        jac : (7,) nd.ndarray
-            Jacobian corresponding to a
-    """
-    CpoR_fit = get_nasa_CpoR(a, T)
-    error = CpoR_fit - CpoR
-    jac = 2. / float(len(T)) * np.array([
-        1.,
-        np.sum(error * T),
-        np.sum(error * (T**2)),
-        np.sum(error * (T**3)),
-        np.sum(error * (T**4)), 0., 0.
-    ])
-    return jac
 
 
 def _get_nasa9_mse(a, T, CpoR):
@@ -1963,35 +1863,6 @@ def _get_nasa9_mse(a, T, CpoR):
     CpoR_fit = get_nasa9_CpoR(a, T)
     mse = np.mean((CpoR_fit - CpoR)**2)
     return mse
-
-
-def _get_nasa9_mse_jacob(a, T, CpoR):
-    """Calculates the Jacobian associated with NASA9 coefficients
-
-    Parameters
-    ----------
-        a : (9,) nd.ndarray
-            Coefficients of NASA9 polynomial
-        T : (N,) nd.ndarray
-            Temperatures to evaluate the NASA9 coefficients in K
-        CpoR : (N,) nd.ndarray
-            Accurate dimensionless heat capacities corresponding to T
-    Returns
-    -------
-        jac : (9,) nd.ndarray
-            Jacobian corresponding to a
-    """
-    CpoR_fit = get_nasa9_CpoR(a, T)
-    error = CpoR_fit - CpoR
-    jac = 2. / float(len(T)) * np.array([
-        np.sum(error * (T**-2)),
-        np.sum(error * (T**-1)), 1.,
-        np.sum(error * T),
-        np.sum(error * (T**2)),
-        np.sum(error * (T**3)),
-        np.sum(error * (T**4)), 0., 0.
-    ])
-    return jac
 
 
 def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
@@ -2027,7 +1898,7 @@ def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
         return [np.zeros(9)] * (len(T_mid) + 1)
 
     a = []
-    #if not isinstance(T_mid, np.ndarray):
+    # if not isinstance(T_mid, np.ndarray):
     #    T_mid = np.array([T_mid])
     T_interval = np.concatenate([[T_low], T_mid, [T_high]])
     for T1, T2 in zip(T_interval, T_interval[1:]):
@@ -2035,13 +1906,8 @@ def _fit_CpoR9(T, CpoR, T_low, T_high, T_mid):
         condition = (T > T1) & (T <= T2)
         T_cond = np.extract(condition=condition, arr=T)
         CpoR_cond = np.extract(condition=condition, arr=CpoR)
-
-        res = minimize(method='BFGS',
-                       args=(T_cond, CpoR_cond),
-                       fun=_get_nasa9_mse,
-                       jac=_get_nasa9_mse_jacob,
-                       x0=np.zeros(9))
-        a.append(res.x)
+        res = np.polyfit(T_cond, CpoR_cond*T_cond**2, 6)
+        a.append(np.append(res[::-1], [0, 0]))
     return a
 
 
@@ -2153,8 +2019,8 @@ def get_nasa_HoRT(a, T):
     .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
     """
     T_arr = np.array(
-        [np.ones_like(T), T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5., 1. / T,
-         np.zeros_like(T)])
+        [np.ones_like(T), T / 2., (T**2) / 3., (T**3) / 4., (T**4) / 5.,
+         1. / T, np.zeros_like(T)])
     return np.dot(a, T_arr)
 
 
