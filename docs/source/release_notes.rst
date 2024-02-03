@@ -7,8 +7,16 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.11
+--------------
+
+February 3, 2024
+
+- Fix unittest for equilibrium class-Missing thermdat file
+- Fix unittest for equilibrium class-Lower bound solver violation
+
 Version 1.4.10
--------------
+--------------
 
 February 2, 2024
 
