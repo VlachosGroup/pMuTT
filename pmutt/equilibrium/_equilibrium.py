@@ -142,7 +142,7 @@ class Equilibrium():
         # Starting mole guesses = 1
         self.guess = list(repeat(1.0, len(self.species)))
         # Mole value bounds. Lower bound near zero
-        b = [1e-16, sum(self.ele_feed)]
+        b = [1e-20, sum(self.ele_feed)]
         # Upper bound is the total moles of elements
         self.bounds = list(repeat(b, len(self.species)))
 
