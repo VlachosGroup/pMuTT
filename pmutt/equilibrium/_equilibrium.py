@@ -1,11 +1,14 @@
 from scipy.optimize import minimize
 import numpy as np
 import sys
+import warnings
 from itertools import repeat
 from pmutt.io.thermdat import read_thermdat
 from pmutt import pmutt_list_to_dict
 from pmutt import constants as c
 from collections import namedtuple
+
+warnings.filterwarnings("ignore", "Values in x were outside bounds during a ")
 
 
 class Equilibrium():
@@ -142,7 +145,7 @@ class Equilibrium():
         # Starting mole guesses = 1
         self.guess = list(repeat(1.0, len(self.species)))
         # Mole value bounds. Lower bound near zero
-        b = [1e-20, sum(self.ele_feed)+0.1]
+        b = [1e-20, sum(self.ele_feed)]
         # Upper bound is the total moles of elements
         self.bounds = list(repeat(b, len(self.species)))
 

@@ -8,11 +8,13 @@ import unittest
 import os
 import numpy.testing as npt
 import numpy as np
+import warnings
 from pmutt import equilibrium
 
 class TestExamples(unittest.TestCase):
 
     def test_equilibrium_comp(self):
+        warnings.filterwarnings("ignore", "Values in x were outside bounds during a ")
         os.chdir(os.path.dirname(__file__))
         filepath = 'thermdat_equilibrium_unittest.txt'
         network = {'CH3CH2CH3': 1, 'H2O': 0.7, 'H2': 0, 'CH2CHCH3': 0,
@@ -35,6 +37,7 @@ class TestExamples(unittest.TestCase):
         self.assertEqual(species_list, sol.species)
         npt.assert_array_almost_equal(expected_moles, sol.moles)
         npt.assert_array_almost_equal(expected_mol_frac, sol.mole_frac)
+        warnings.filterwarnings("default")
         self.assertEqual(sol.T, 500)
         self.assertEqual(sol.P, 1.0)
 
