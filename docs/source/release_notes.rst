@@ -7,6 +7,13 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.14
+--------------
+
+February 8, 2024
+
+- Fix equilibrium unittest warning messages
+
 Version 1.4.13
 --------------
 
