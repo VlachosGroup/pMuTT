@@ -90,19 +90,20 @@ def _get_omkm_range(objs, parent_obj=None, delimiter='_', format='str'):
                 header_delim = header
             else:
                 header_delim = '{}{}'.format(header, delimiter)
-            # Sort the list and separate them into consecutive groups
+            # Sort the list and list all rxns individually
             footer_list.sort()
-            footer_ranges = mit.consecutive_groups(footer_list)
+            for f in footer_list:
+                CTI_range = '"{}{:04d}", '.format(header_delim, f)
             # Write the appropriate ranges
-            for footer_range in footer_ranges:
-                footer_range = list(footer_range)
-                if len(footer_range) == 1:
-                    CTI_range = '"{}{:04d}", '.format(header_delim,
-                                                      footer_range[0])
-                else:
-                    CTI_range = ('"{0}{1:04d} to {0}{2:04d}", '
-                                 ''.format(header_delim, footer_range[0],
-                                           footer_range[-1]))
+#            for footer_range in footer_ranges:
+#                footer_range = list(footer_range)
+#                if len(footer_range) == 1:
+#                    CTI_range = '"{}{:04d}", '.format(header_delim,
+#                                                      footer_range[0])
+#                else:
+#                    CTI_range = ('"{0}{1:04d} to {0}{2:04d}", '
+#                                 ''.format(header_delim, footer_range[0],
+#                                           footer_range[-1]))
                 CTI_out += CTI_range
         CTI_out = '{}]'.format(CTI_out[:-2])
         if format == 'list':
