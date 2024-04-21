@@ -7,6 +7,14 @@ Development Branch
 ------------------
 `Development Branch`_
 
+Version 1.4.15
+--------------
+
+April 21, 2024
+
+- Fixed reaction lists in BEP section of thermo.yaml openMKM file
+  so reactions are all listed individually and no longer grouped.
+
 Version 1.4.14
 --------------
 
