@@ -338,6 +338,7 @@ OpenMKM
 
    omkm.write_cti
    omkm.write_yaml
+   omkm.write_thermo_yaml
    omkm.get_species_phases
    omkm.get_reactions_phases
    omkm.get_interactions_phases
