@@ -66,10 +66,11 @@ class RigidRotor(_ModelBase):
                  degree_tol=5.):
         if isinstance(symmetrynumber, str):
             if symmetrynumber == 'pymatgen':
+                assert atoms is not None
                 from pymatgen.symmetry.analyzer import PointGroupAnalyzer
                 from pymatgen import Molecule
                 # symmetry number calculation. see Table II in  https://cccbdb.nist.gov/thermox.asp
-                mol = Molecule(species=syms,coords=xyzs)
+                mol = Molecule(species=atoms.get_chemical_symbols(),coords=atoms.get_positions())
                 sym = PointGroupAnalyzer(mol)
                 s = sym.sch_symbol
                 if s in ['C1','Ci','Cs','C*v']:
@@ -88,6 +89,10 @@ class RigidRotor(_ModelBase):
                     symmetrynumber = int(int(s[1])*2)
                 elif s[0] == 'S' and s[1].isdigit() and len(s) == 2: # Sn
                     symmetrynumber = int(int(s[1])/2)
+                if np.any(sym.eigvals < sym.eig_tol):
+                    geometry = 'linear'
+                else:
+                    geometry = 'nonlinear'
             else:
                 try:
                     symmetrynumber = c.symmetry_dict[symmetrynumber]
