@@ -65,13 +65,42 @@ class RigidRotor(_ModelBase):
                  atoms=None,
                  degree_tol=5.):
         if isinstance(symmetrynumber, str):
-            try:
-                symmetrynumber = c.symmetry_dict[symmetrynumber]
-            except KeyError:
-                err_msg = ('Point group, {}, not supported. See '
-                           'pmutt.statmech.rot.RigidRotor for supported '
-                           'options.'.format(symmetrynumber))
-                raise ValueError(err_msg)
+            if symmetrynumber == 'pymatgen':
+                assert atoms is not None
+                from pymatgen.symmetry.analyzer import PointGroupAnalyzer
+                from pymatgen import Molecule
+                # symmetry number calculation. see Table II in  https://cccbdb.nist.gov/thermox.asp
+                mol = Molecule(species=atoms.get_chemical_symbols(),coords=atoms.get_positions())
+                sym = PointGroupAnalyzer(mol)
+                s = sym.sch_symbol
+                if s in ['C1','Ci','Cs','C*v']:
+                    symmetrynumber = 1
+                elif s == 'D*h':
+                    symmetrynumber = 2
+                elif s in ['T','Td']:
+                    symmetrynumber = 12
+                elif s == 'Oh':
+                    symmetrynumber = 24
+                elif s == 'Ih':
+                    symmetrynumber = 60
+                elif s[0] == 'C' and s[1].isdigit() and (len(s) == 2 or s[2] in ['v','h']): # Cn, Cnv, Cnh
+                    symmetrynumber = int(s[1])
+                elif s[0] == 'D' and s[1].isdigit() and (len(s) == 2 or s[2] in ['h','d']): # Dn, Dnh, Dnd
+                    symmetrynumber = int(int(s[1])*2)
+                elif s[0] == 'S' and s[1].isdigit() and len(s) == 2: # Sn
+                    symmetrynumber = int(int(s[1])/2)
+                if np.any(sym.eigvals < sym.eig_tol):
+                    geometry = 'linear'
+                else:
+                    geometry = 'nonlinear'
+            else:
+                try:
+                    symmetrynumber = c.symmetry_dict[symmetrynumber]
+                except KeyError:
+                    err_msg = ('Point group, {}, not supported. See '
+                               'pmutt.statmech.rot.RigidRotor for supported '
+                               'options.'.format(symmetrynumber))
+                    raise ValueError(err_msg)
 
         self.symmetrynumber = symmetrynumber
         if rot_temperatures is None and atoms is not None:
