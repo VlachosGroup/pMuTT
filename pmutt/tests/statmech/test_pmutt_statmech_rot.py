@@ -22,6 +22,10 @@ class TestRigidRotor(unittest.TestCase):
         self.rot_H2O = rot.RigidRotor(symmetrynumber=2,
                                       geometry='nonlinear',
                                       rot_temperatures=[40.1, 20.9, 13.4])
+        self.rot_H2O_pymatgen = rot.RigidRotor(symmetrynumber='pymatgen',
+                                               geometry='nonlinear',
+                                               rot_temperatures=[40.1, 20.9,
+                                                                 13.4])
         self.T = 300  # K
 
         self.rot_CO2_dict = {
@@ -70,6 +74,8 @@ class TestRigidRotor(unittest.TestCase):
         self.assertAlmostEqual(self.rot_He.get_GoRT(T=self.T), 0.)
         self.assertAlmostEqual(self.rot_CO2.get_GoRT(T=self.T), -5.588669668)
         self.assertAlmostEqual(self.rot_H2O.get_GoRT(T=self.T), -3.771701374)
+        self.assertAlmostEqual(self.rot_H2O_pymatgen.get_GoRT(T=self.T),
+                               self.rot_H2O.get_GoRT(T=self.T))
 
     def test_to_dict(self):
         self.assertEqual(self.rot_CO2.to_dict(), self.rot_CO2_dict)

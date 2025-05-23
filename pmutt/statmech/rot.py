@@ -11,15 +11,16 @@ from pmutt.io.json import remove_class
 
 
 class RigidRotor(_ModelBase):
-    """Rotational mode using the rigid rotor assumption. Equations sourced from:
-    
+    """Rotational mode using the rigid rotor assumption.
+       Equations sourced from:
+
     * Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
       John Wiley & Sons, 2010.
 
     Attributes
     ----------
         symmetrynumber : float or str
-            Symmetry number of molecule. If a string is inputted, it represents 
+            Symmetry number of molecule. If a string is inputted, it represents
             the point group. Supported options are shown below.
 
             ===========    ===============
@@ -58,6 +59,7 @@ class RigidRotor(_ModelBase):
 
     .. _`ase.Atoms`: https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms
     """
+
     def __init__(self,
                  symmetrynumber,
                  rot_temperatures=None,
@@ -68,26 +70,30 @@ class RigidRotor(_ModelBase):
             if symmetrynumber == 'pymatgen':
                 assert atoms is not None
                 from pymatgen.symmetry.analyzer import PointGroupAnalyzer
-                from pymatgen import Molecule
-                # symmetry number calculation. see Table II in  https://cccbdb.nist.gov/thermox.asp
-                mol = Molecule(species=atoms.get_chemical_symbols(),coords=atoms.get_positions())
+                from pymatgen.core import Molecule
+                # symmetry number calculation. see Table II in
+                # https://cccbdb.nist.gov/thermox.asp
+                mol = Molecule(species=atoms.get_chemical_symbols(),
+                               coords=atoms.get_positions())
                 sym = PointGroupAnalyzer(mol)
                 s = sym.sch_symbol
-                if s in ['C1','Ci','Cs','C*v']:
+                if s in ['C1', 'Ci', 'Cs', 'C*v']:
                     symmetrynumber = 1
                 elif s == 'D*h':
                     symmetrynumber = 2
-                elif s in ['T','Td']:
+                elif s in ['T', 'Td']:
                     symmetrynumber = 12
                 elif s == 'Oh':
                     symmetrynumber = 24
                 elif s == 'Ih':
                     symmetrynumber = 60
-                elif s[0] == 'C' and s[1].isdigit() and (len(s) == 2 or s[2] in ['v','h']): # Cn, Cnv, Cnh
+                elif s[0] == 'C' and s[1].isdigit() and (len(s) == 2 or s[2] in
+                                                         ['v', 'h']):  # Cn, Cnv, Cnh
                     symmetrynumber = int(s[1])
-                elif s[0] == 'D' and s[1].isdigit() and (len(s) == 2 or s[2] in ['h','d']): # Dn, Dnh, Dnd
+                elif s[0] == 'D' and s[1].isdigit() and (len(s) == 2 or s[2] in
+                                                         ['h', 'd']):  # Dn, Dnh, Dnd
                     symmetrynumber = int(int(s[1])*2)
-                elif s[0] == 'S' and s[1].isdigit() and len(s) == 2: # Sn
+                elif s[0] == 'S' and s[1].isdigit() and len(s) == 2:  # Sn
                     symmetrynumber = int(int(s[1])/2)
                 if np.any(sym.eigvals < sym.eig_tol):
                     geometry = 'linear'
@@ -97,7 +103,7 @@ class RigidRotor(_ModelBase):
                 try:
                     symmetrynumber = c.symmetry_dict[symmetrynumber]
                 except KeyError:
-                    err_msg = ('Point group, {}, not supported. See '
+                    err_msg = ('Point group, {}, not very supported. See '
                                'pmutt.statmech.rot.RigidRotor for supported '
                                'options.'.format(symmetrynumber))
                     raise ValueError(err_msg)
