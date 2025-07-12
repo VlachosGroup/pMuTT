@@ -10,7 +10,7 @@ pmutt
 # present, too:
 #
 name = 'pmutt'
-__version__ = '1.4.16'
+__version__ = '1.4.17'
 
 import os
 import inspect
