@@ -22,6 +22,11 @@ class TestRigidRotor(unittest.TestCase):
         self.rot_H2O = rot.RigidRotor(symmetrynumber=2,
                                       geometry='nonlinear',
                                       rot_temperatures=[40.1, 20.9, 13.4])
+        self.rot_H2O_pymatgen = rot.RigidRotor(symmetrynumber='pymatgen',
+                                               geometry='nonlinear',
+                                               atoms=molecule('H2O'),
+                                               rot_temperatures=[
+                                                   40.1, 20.9, 13.4])
         self.T = 300  # K
 
         self.rot_CO2_dict = {
@@ -70,6 +75,8 @@ class TestRigidRotor(unittest.TestCase):
         self.assertAlmostEqual(self.rot_He.get_GoRT(T=self.T), 0.)
         self.assertAlmostEqual(self.rot_CO2.get_GoRT(T=self.T), -5.588669668)
         self.assertAlmostEqual(self.rot_H2O.get_GoRT(T=self.T), -3.771701374)
+        self.assertAlmostEqual(self.rot_H2O_pymatgen.get_GoRT(T=self.T),
+                               self.rot_H2O.get_GoRT(T=self.T))
 
     def test_to_dict(self):
         self.assertEqual(self.rot_CO2.to_dict(), self.rot_CO2_dict)
@@ -100,8 +107,8 @@ class TestRotFunc(unittest.TestCase):
         np.testing.assert_almost_equal(rot_Ts_CO2[0], 0.5456089507450469)
 
         exp_rot_Ts_H2O = [38.096765874734196,
-		                  20.652294121365664,
-		                  13.392309833894341]
+                          20.652294121365664,
+                          13.392309833894341]
         rot_Ts_H2O = rot.get_rot_temperatures_from_atoms(self.H2O,
                                                          geometry='nonlinear')
         self.assertTrue(len(rot_Ts_H2O), 3)
