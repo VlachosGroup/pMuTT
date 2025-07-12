@@ -105,7 +105,10 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        T = T.astype(float)
+        if isinstance(T, np.ndarray):
+            T = T.astype(float)
+        else:
+            T = float(T)
         # Convert T to 1D numpy format
         if not _is_iterable(T):
             T = [T]
@@ -184,7 +187,10 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        T = T.astype(float)
+        if isinstance(T, np.ndarray):
+            T = T.astype(float)
+        else:
+            T = float(T)
         # Convert T to 1D numpy format
         if not _is_iterable(T):
             T = [T]
@@ -286,7 +292,10 @@ class Shomate(EmpiricalBase):
 
         .. _`numpy.ndarray`: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html
         """
-        T = T.astype(float)
+        if isinstance(T, np.ndarray):
+            T = T.astype(float)
+        else:
+            T = float(T)
         # Convert T to 1D numpy format
         if not _is_iterable(T):
             T = [T]

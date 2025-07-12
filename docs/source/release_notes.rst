@@ -7,7 +7,7 @@ Development Branch
 ------------------
 `Development Branch`_
 
-Version 1.4.16
+Version 1.4.17
 --------------
 
 May 25, 2025
