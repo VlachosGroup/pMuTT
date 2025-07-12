@@ -21,7 +21,9 @@ class RigidRotor(_ModelBase):
     ----------
         symmetrynumber : float or str
             Symmetry number of molecule. If a string is inputted, it represents
-            the point group. Supported options are shown below.
+            the point group. Supported options are shown below. The string
+            'pymatgen' can also be entered to have pymatgen determine the
+            symmetry number.
 
             ===========    ===============
             Point group    symmetry number
