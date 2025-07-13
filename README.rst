@@ -131,6 +131,7 @@ Special Thanks
 .. _networkx: https://networkx.github.io/
 .. _`More Itertools`: https://more-itertools.readthedocs.io/en/stable/index.html
 .. _`PyYAML`: https://pyyaml.org/
+.. _`pymatgen`: https://pymatgen.org/
 .. _tests directory: https://github.com/VlachosGroup/pMuTT/tree/master/pmutt/tests
 .. _LICENSE.md: https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md
 .. _`see documentation for more thorough instructions`: https://vlachosgroup.github.io/pMuTT/install.html
