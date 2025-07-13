@@ -42,6 +42,7 @@ Dependencies
 -  `NetworkX`_: Used to plot reaction networks
 -  `More Itertools`_: Used for writing ranges for OpenMKM output.
 -  `PyYAML`_: Used to write YAML input files for OpenMKM.
+-  `pymatgen`_: Used to determine symmetry number for gas molecules.
 
 Getting Started
 ---------------
