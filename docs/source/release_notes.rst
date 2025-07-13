@@ -16,7 +16,7 @@ May 25, 2025
   a gas molecule and Pymatgen will determine the symmetry number
   
 - Added a check that forces temperatures submitted for thermodynamic
-  calculations to be astype=float to avoid clacluation issues encountered
+  calculations to be astype=float to avoid calculation issues encountered
   when temperatures are entered as astype=int.
 
 Version 1.4.15
