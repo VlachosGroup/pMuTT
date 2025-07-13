@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.mixture.cov.PiecewiseCovEffect &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.mixture.cov.PiecewiseCovEffect &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -65,7 +65,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../statmech/statmech.html">Statistical Thermodynamic Models</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../mixture.html">Mixture Models</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../mixture.html#coverage-effects">Coverage Effects</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.mixture.cov.PiecewiseCovEffect</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.mixture.cov.PiecewiseCovEffect</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.mixture.cov.PiecewiseCovEffect"><code class="docutils literal notranslate"><span class="pre">PiecewiseCovEffect</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -110,74 +113,74 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-mixture-cov-piecewisecoveffect">
-<h1>pmutt.mixture.cov.PiecewiseCovEffect<a class="headerlink" href="#pmutt-mixture-cov-piecewisecoveffect" title="Permalink to this heading"></a></h1>
+<h1>pmutt.mixture.cov.PiecewiseCovEffect<a class="headerlink" href="#pmutt-mixture-cov-piecewisecoveffect" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.mixture.cov.</span></span><span class="sig-name descname"><span class="pre">PiecewiseCovEffect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intervals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.mixture.cov.</span></span><span class="sig-name descname"><span class="pre">PiecewiseCovEffect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intervals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code></p>
 <p>Models enthalpic contribution to coverage effect between two species
 using piecewise linear functions</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.name_i">
-<span class="sig-name descname"><span class="pre">name_i</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.name_i" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name_i</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.name_i" title="Link to this definition"></a></dt>
 <dd><p>Name of specie’s properties affected by coverage of specie_j</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.name_j">
-<span class="sig-name descname"><span class="pre">name_j</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.name_j" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name_j</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.name_j" title="Link to this definition"></a></dt>
 <dd><p>Name of specie affecting the properties of specie_i</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.intervals">
-<span class="sig-name descname"><span class="pre">intervals</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.intervals" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">intervals</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.intervals" title="Link to this definition"></a></dt>
 <dd><p>Intervals (in ML) to change slopes. The first element of the list
 should be 0 and the list should be sorted in ascending order to
 correctly specify a piecewise function with mole fraction domain
 [0, 1]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a> (length N) of float</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a> (length N) of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.slopes">
-<span class="sig-name descname"><span class="pre">slopes</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.slopes" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">slopes</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.slopes" title="Link to this definition"></a></dt>
 <dd><p>Slopes (in kcal/mol) to use between the intervals</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a> (length N) of float</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a> (length N) of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.name" title="Link to this definition"></a></dt>
 <dd><p>Name to assign. Default is None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intervals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intervals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -253,11 +256,11 @@ correctly specify a piecewise function with mole fraction domain
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>EmpiricalBase</strong></p>
@@ -270,12 +273,12 @@ correctly specify a piecewise function with mole fraction domain
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_Cp">
-<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_Cp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_Cp" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></p></li>
 </ul>
@@ -284,14 +287,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cp</strong> – Heat capacity (constant P) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_CpoR">
-<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_CpoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_CpoR" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the dimensionless heat capacity at
 constant pressure.</p>
 <dl class="field-list simple">
@@ -299,19 +302,19 @@ constant pressure.</p>
 <dd class="field-odd"><p><strong>CpoR</strong> – Returns 0</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_Cv">
-<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_Cv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_Cv" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
 </ul>
@@ -320,14 +323,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cv</strong> – Heat capacity (constant V) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_CvoR">
-<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_CvoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_CvoR" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the dimensionless heat capacity at
 constant volume.</p>
 <dl class="field-list simple">
@@ -335,21 +338,21 @@ constant volume.</p>
 <dd class="field-odd"><p><strong>CvoR</strong> – Returns 0</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_F">
-<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_F" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_F" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></p></li>
 </ul>
 </dd>
@@ -357,41 +360,41 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>F</strong> – Hemholtz energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_FoRT">
-<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_FoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_FoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the excess Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>FoRT</strong> – Dimensionless excess Helmholtz energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_G">
-<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_G" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_G" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></p></li>
 </ul>
 </dd>
@@ -399,41 +402,41 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>G</strong> – Gibbs energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_GoRT">
-<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_GoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_GoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the excess Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>GoRT</strong> – Dimensionless excess Gibbs energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_H">
-<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_H" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_H" title="Link to this definition"></a></dt>
 <dd><p>Calculate the enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></p></li>
 </ul>
 </dd>
@@ -441,39 +444,39 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>H</strong> – Enthalpy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_HoRT">
-<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_HoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_HoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the excess enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>HoRT</strong> – Dimensionless excess enthalpy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_S">
-<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_S" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_S" title="Link to this definition"></a></dt>
 <dd><p>Calculate the entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p></li>
 </ul>
@@ -482,35 +485,35 @@ units.</p></li>
 <dd class="field-even"><p><strong>S</strong> – Entropy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_SoR">
-<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_SoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_SoR" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the dimensionless entropy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>SoR</strong> – Returns 0</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_U">
-<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_U" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_U" title="Link to this definition"></a></dt>
 <dd><p>Calculate the internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
 </ul>
 </dd>
@@ -518,56 +521,56 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>U</strong> – Internal energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_UoRT">
-<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_UoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_UoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the excess internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Coverage (in ML) of species j. Default is 0</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>UoRT</strong> – Dimensionless internal energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.get_q">
-<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_q" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.get_q" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the partition coefficient.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>q</strong> – Returns 1</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.insert">
-<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.insert" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.insert" title="Link to this definition"></a></dt>
 <dd><p>Inserts the a new interval and slope for the piecewise function</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Interval to insert. It will automatically be inserted in the
+<li><p><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Interval to insert. It will automatically be inserted in the
 intervals list in the position so that piecewise function
 remains continuous</p></li>
-<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Slope to insert. Inserted into the same position as interval</p></li>
+<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Slope to insert. Inserted into the same position as interval</p></li>
 </ul>
 </dd>
 </dl>
@@ -575,29 +578,29 @@ remains continuous</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.pop">
-<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.pop" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.pop" title="Link to this definition"></a></dt>
 <dd><p>Removes the interval and slope specified by an index</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>i</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Index to remove from <code class="docutils literal notranslate"><span class="pre">self.intervals</span></code> and <code class="docutils literal notranslate"><span class="pre">self.slopes</span></code>.
+<dd class="field-odd"><p><strong>i</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Index to remove from <code class="docutils literal notranslate"><span class="pre">self.intervals</span></code> and <code class="docutils literal notranslate"><span class="pre">self.slopes</span></code>.
 Value cannot be 0 since removing this index would not allow
 mole fractions to span from 0 to 1</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – Raised when i = 0</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Raised when i = 0</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.to_cti">
-<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kcal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_cti" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kcal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_cti" title="Link to this definition"></a></dt>
 <dd><p>Writes the lateral interaction in CTI format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal’</p></li>
-<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit for slopes. Default is ‘mol’</p></li>
+<li><p><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal’</p></li>
+<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit for slopes. Default is ‘mol’</p></li>
 <li><p><strong>units</strong> (<a class="reference internal" href="../../kinetic_models/cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <code class="docutils literal notranslate"><span class="pre">energy_unit</span></code> and <code class="docutils literal notranslate"><span class="pre">quantity_unit</span></code> are
 overwritten. Default is None.</p></li>
 </ul>
@@ -606,34 +609,34 @@ overwritten. Default is None.</p></li>
 <dd class="field-even"><p><strong>lat_inter_str</strong> – Lateral interaction in CTI format</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.mixture.cov.PiecewiseCovEffect.to_omkm_yaml">
-<span class="sig-name descname"><span class="pre">to_omkm_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kcal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_omkm_yaml" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_omkm_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kcal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.mixture.cov.PiecewiseCovEffect.to_omkm_yaml" title="Link to this definition"></a></dt>
 <dd><p>Writes the object in Cantera’s YAML format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal’</p></li>
-<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit for slopes. Default is ‘mol’</p></li>
+<li><p><strong>energy_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Energy unit for slopes. Default is ‘kcal’</p></li>
+<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit for slopes. Default is ‘mol’</p></li>
 <li><p><strong>units</strong> (<a class="reference internal" href="../../kinetic_models/omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <cite>energy_unit</cite> is overwritten. Default is None.</p></li>
 </ul>
 </dd>
@@ -641,7 +644,7 @@ overwritten. Default is None.</p></li>
 <dd class="field-even"><p><strong>yaml_dict</strong> – Dictionary compatible with Cantera’s YAML format</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

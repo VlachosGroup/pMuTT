@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Helper Functions &mdash; pmutt 1.4.15 documentation</title>
+  <title>Helper Functions &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -71,9 +71,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../eos/eos.html">Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/visual.html">Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Helper Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#get-molecular-weight">get_molecular_weight</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pmutt-list-to-dict">pmutt_list_to_dict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-geometry-from-atoms">get_geometry_from_atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-molecular-weight">get_molecular_weight</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.get_molecular_weight"><code class="docutils literal notranslate"><span class="pre">get_molecular_weight()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pmutt-list-to-dict">pmutt_list_to_dict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.pmutt_list_to_dict"><code class="docutils literal notranslate"><span class="pre">pmutt_list_to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-geometry-from-atoms">get_geometry_from_atoms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.statmech.rot.get_geometry_from_atoms"><code class="docutils literal notranslate"><span class="pre">get_geometry_from_atoms()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
@@ -108,18 +117,18 @@
            <div itemprop="articleBody">
              
   <section id="helper-functions">
-<span id="helper"></span><h1>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this heading"></a></h1>
+<span id="helper"></span><h1>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading"></a></h1>
 <p>This page contains various helper functions useful when working with pMuTT</p>
 <section id="get-molecular-weight">
-<h2>get_molecular_weight<a class="headerlink" href="#get-molecular-weight" title="Permalink to this heading"></a></h2>
+<h2>get_molecular_weight<a class="headerlink" href="#get-molecular-weight" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.get_molecular_weight">
-<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">get_molecular_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.get_molecular_weight" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">get_molecular_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.get_molecular_weight" title="Link to this definition"></a></dt>
 <dd><p>Molecular mass (in g/mol) given the elemental composition.
 Data taken from: <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_atomic_weight">https://en.wikipedia.org/wiki/Standard_atomic_weight</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – <p>Elemental composition of species.</p>
+<dd class="field-odd"><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – <p>Elemental composition of species.</p>
 <p>If a dictionary is passed, the keys are the element symbol, atomic
 number, or element name and the value is the stoichiometric
 coefficient.
@@ -131,24 +140,24 @@ pmutt.parse_formula</p>
 <dd class="field-even"><p><strong>molecular_weight</strong> – Molecular weight as float in kg/mol</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="pmutt-list-to-dict">
-<h2>pmutt_list_to_dict<a class="headerlink" href="#pmutt-list-to-dict" title="Permalink to this heading"></a></h2>
+<h2>pmutt_list_to_dict<a class="headerlink" href="#pmutt-list-to-dict" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.pmutt_list_to_dict">
-<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">pmutt_list_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmutt_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'name'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.pmutt_list_to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">pmutt_list_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmutt_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'name'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.pmutt_list_to_dict" title="Link to this definition"></a></dt>
 <dd><p>Converts a pmutt list to a dictionary using a specified attribute. This
 allows for quicker searching.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pmutt_list</strong> (<em>list of objects</em>) – List of pmutt objects to convert</p></li>
-<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Name of attribute used as the keys for the dictionary. Default is
+<li><p><strong>pmutt_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em> of </em><em>objects</em>) – List of pmutt objects to convert</p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Name of attribute used as the keys for the dictionary. Default is
 ‘name’</p></li>
 </ul>
 </dd>
@@ -156,33 +165,33 @@ allows for quicker searching.</p>
 <dd class="field-even"><p><strong>pmutt_dict</strong> – Dictionary of pmutt objects</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.12)"><strong>KeyError</strong></a> – Raised if <cite>key</cite> is not an attribute of the pmutt objects</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.13)"><strong>KeyError</strong></a> – Raised if <cite>key</cite> is not an attribute of the pmutt objects</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="get-geometry-from-atoms">
-<h2>get_geometry_from_atoms<a class="headerlink" href="#get-geometry-from-atoms" title="Permalink to this heading"></a></h2>
+<h2>get_geometry_from_atoms<a class="headerlink" href="#get-geometry-from-atoms" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.get_geometry_from_atoms">
-<span class="sig-prename descclassname"><span class="pre">pmutt.statmech.rot.</span></span><span class="sig-name descname"><span class="pre">get_geometry_from_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.get_geometry_from_atoms" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.statmech.rot.</span></span><span class="sig-name descname"><span class="pre">get_geometry_from_atoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.get_geometry_from_atoms" title="Link to this definition"></a></dt>
 <dd><p>Estimate the geometry using the <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms">ase.Atoms</a> object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>atoms</strong> (<em>ase.Atoms object</em>) – Atoms object</p></li>
-<li><p><strong>degree_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Degree tolerance in degrees. Default is 5 degrees</p></li>
+<li><p><strong>degree_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Degree tolerance in degrees. Default is 5 degrees</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>geometry</strong> – Geometry</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

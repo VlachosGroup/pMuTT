@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.json.json_to_pmutt &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.json.json_to_pmutt &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -65,7 +65,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../io.html#thermdat">Thermdat</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../io.html#json">JSON</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.json.pmuttEncoder.html">pmutt.io.json.pmuttEncoder</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.json.json_to_pmutt</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.json.json_to_pmutt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.json.json_to_pmutt"><code class="docutils literal notranslate"><span class="pre">json_to_pmutt()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../io.html#examples">Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../io.html#sample-json-file">Sample JSON File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../io.html#creating-new-pmutt-classes">Creating New pmutt Classes</a></li>
@@ -121,10 +124,10 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-json-json-to-pmutt">
-<h1>pmutt.io.json.json_to_pmutt<a class="headerlink" href="#pmutt-io-json-json-to-pmutt" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.json.json_to_pmutt<a class="headerlink" href="#pmutt-io-json-json-to-pmutt" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.json.json_to_pmutt">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.json.</span></span><span class="sig-name descname"><span class="pre">json_to_pmutt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.json.json_to_pmutt" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.json.</span></span><span class="sig-name descname"><span class="pre">json_to_pmutt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.json.json_to_pmutt" title="Link to this definition"></a></dt>
 <dd><p>Object hook to convert json to pmutt objects. Any complex object should
 be in the <code class="xref py py-data docutils literal notranslate"><span class="pre">type_to_class_dict</span></code>
 dictionary.</p>

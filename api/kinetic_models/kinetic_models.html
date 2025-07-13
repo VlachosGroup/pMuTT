@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kinetic Models &mdash; pmutt 1.4.15 documentation</title>
+  <title>Kinetic Models &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,12 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -38,7 +39,7 @@
               <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -164,15 +165,15 @@
            <div itemprop="articleBody">
              
   <section id="kinetic-models">
-<span id="id1"></span><h1>Kinetic Models<a class="headerlink" href="#kinetic-models" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Kinetic Models<a class="headerlink" href="#kinetic-models" title="Link to this heading"></a></h1>
 <section id="chemkin">
-<h2>Chemkin<a class="headerlink" href="#chemkin" title="Permalink to this heading"></a></h2>
+<h2>Chemkin<a class="headerlink" href="#chemkin" title="Link to this heading"></a></h2>
 <p>Classes and functions related to writing Chemkin files. Please note these
 modules were written specifically for the Vlachos group’s in-house version.
 Features may or may not be supported in the commercial version.</p>
 <hr class="docutils" />
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="chemkin/pmutt.chemkin.CatSite.html#pmutt.chemkin.CatSite" title="pmutt.chemkin.CatSite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemkin.CatSite</span></code></a></p></td>
@@ -185,7 +186,7 @@ Features may or may not be supported in the commercial version.</p>
 </table>
 </section>
 <section id="input-and-output">
-<h3>Input and Output<a class="headerlink" href="#input-and-output" title="Permalink to this heading"></a></h3>
+<h3>Input and Output<a class="headerlink" href="#input-and-output" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="../io/chemkin/pmutt.io.chemkin.read_reactions.html#pmutt.io.chemkin.read_reactions" title="pmutt.io.chemkin.read_reactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.chemkin.read_reactions</span></code></a></p></td>
@@ -210,7 +211,7 @@ Features may or may not be supported in the commercial version.</p>
 </table>
 </section>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../examples_jupyter/examples.html#chemkin-io-example"><span class="std std-ref">Chemkin_IO</span></a></p></li>
 </ul>
@@ -218,11 +219,11 @@ Features may or may not be supported in the commercial version.</p>
 </section>
 <hr class="docutils" />
 <section id="cantera">
-<h2>Cantera<a class="headerlink" href="#cantera" title="Permalink to this heading"></a></h2>
+<h2>Cantera<a class="headerlink" href="#cantera" title="Link to this heading"></a></h2>
 <p>Classes and functions related to <a class="reference external" href="https://cantera.org/">Cantera</a>. This functionality is still in
 its early stages.</p>
 <section id="phases">
-<h3>Phases<a class="headerlink" href="#phases" title="Permalink to this heading"></a></h3>
+<h3>Phases<a class="headerlink" href="#phases" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cantera_phase/pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.phase.Phase</span></code></a></p></td>
@@ -238,7 +239,7 @@ its early stages.</p>
 </table>
 </section>
 <section id="units">
-<h3>Units<a class="headerlink" href="#units" title="Permalink to this heading"></a></h3>
+<h3>Units<a class="headerlink" href="#units" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cantera.units.Units</span></code></a></p></td>
@@ -248,7 +249,7 @@ its early stages.</p>
 </table>
 </section>
 <section id="id2">
-<h3>Input and Output<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<h3>Input and Output<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cantera_io/pmutt.io.cantera.obj_to_CTI.html#pmutt.io.cantera.obj_to_cti" title="pmutt.io.cantera.obj_to_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.cantera.obj_to_cti</span></code></a></p></td>
@@ -260,11 +261,11 @@ its early stages.</p>
 </section>
 <hr class="docutils" />
 <section id="openmkm">
-<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Permalink to this heading"></a></h2>
+<h2>OpenMKM<a class="headerlink" href="#openmkm" title="Link to this heading"></a></h2>
 <p>Classes and functions related to OpenMKM. This functionality is still in its
 early stages.</p>
 <section id="id3">
-<h3>Phases<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<h3>Phases<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="omkm_phases/pmutt.omkm.phase.IdealGas.html#pmutt.omkm.phase.IdealGas" title="pmutt.omkm.phase.IdealGas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.phase.IdealGas</span></code></a></p></td>
@@ -280,7 +281,7 @@ early stages.</p>
 </table>
 </section>
 <section id="reactions">
-<h3>Reactions<a class="headerlink" href="#reactions" title="Permalink to this heading"></a></h3>
+<h3>Reactions<a class="headerlink" href="#reactions" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="../reactions/reactions/pmutt.omkm.reaction.SurfaceReaction.html#pmutt.omkm.reaction.SurfaceReaction" title="pmutt.omkm.reaction.SurfaceReaction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.reaction.SurfaceReaction</span></code></a></p></td>
@@ -293,7 +294,7 @@ early stages.</p>
 </table>
 </section>
 <section id="id4">
-<h3>Units<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<h3>Units<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omkm.units.Units</span></code></a></p></td>
@@ -303,7 +304,7 @@ early stages.</p>
 </table>
 </section>
 <section id="id5">
-<h3>Input and Output<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<h3>Input and Output<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.omkm.write_cti</span></code></a></p></td>
@@ -328,7 +329,7 @@ early stages.</p>
 </table>
 </section>
 <section id="id6">
-<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<h3>Examples<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../examples_jupyter/examples.html#openmkm-io-example"><span class="std std-ref">OpenMKM_IO</span></a></p></li>
 </ul>
@@ -336,10 +337,10 @@ early stages.</p>
 </section>
 <hr class="docutils" />
 <section id="zacros">
-<h2>Zacros<a class="headerlink" href="#zacros" title="Permalink to this heading"></a></h2>
+<h2>Zacros<a class="headerlink" href="#zacros" title="Link to this heading"></a></h2>
 <p>Classes related to <a class="reference external" href="http://zacros.org/">Zacros</a>.</p>
 <section id="id7">
-<h3>Classes<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<h3>Classes<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="zacros/pmutt.empirical.zacros.Zacros.html#pmutt.empirical.zacros.Zacros" title="pmutt.empirical.zacros.Zacros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">empirical.zacros.Zacros</span></code></a></p></td>

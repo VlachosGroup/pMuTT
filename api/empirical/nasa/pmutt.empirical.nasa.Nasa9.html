@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.empirical.nasa.Nasa9 &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.empirical.nasa.Nasa9 &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -39,7 +39,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -67,7 +67,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../empirical.html#nasa">Nasa</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pmutt.empirical.nasa.Nasa.html">pmutt.empirical.nasa.Nasa</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.empirical.nasa.SingleNasa9.html">pmutt.empirical.nasa.SingleNasa9</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.empirical.nasa.Nasa9</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.empirical.nasa.Nasa9</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.empirical.nasa.Nasa9"><code class="docutils literal notranslate"><span class="pre">Nasa9</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../empirical.html#shomate">Shomate</a></li>
@@ -117,10 +120,10 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-empirical-nasa-nasa9">
-<h1>pmutt.empirical.nasa.Nasa9<a class="headerlink" href="#pmutt-empirical-nasa-nasa9" title="Permalink to this heading"></a></h1>
+<h1>pmutt.empirical.nasa.Nasa9<a class="headerlink" href="#pmutt-empirical-nasa-nasa9" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.empirical.nasa.</span></span><span class="sig-name descname"><span class="pre">Nasa9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nasas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sites</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.empirical.nasa.</span></span><span class="sig-name descname"><span class="pre">Nasa9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nasas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sites</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../empirical_base/pmutt.empirical.EmpiricalBase.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p>
 <p>Stores the NASA9 polynomials for species.
 Inherits from <a class="reference internal" href="../empirical_base/pmutt.empirical.EmpiricalBase.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p>
@@ -135,7 +138,7 @@ a_{3} \ln {T} + a_{4} T + a_{5} \frac {T^{2}} {2} + a_{6}
 \frac {T^{3}} {3} + a_{7}\frac {T^{4}} {4} + a_{9}\)</span></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.nasas">
-<span class="sig-name descname"><span class="pre">nasas</span></span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.nasas" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nasas</span></span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.nasas" title="Link to this definition"></a></dt>
 <dd><p>NASA9 polynomials for each temperature interval</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -146,29 +149,29 @@ a_{3} \ln {T} + a_{4} T + a_{5} \frac {T^{2}} {2} + a_{6}
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.T_low">
-<span class="sig-name descname"><span class="pre">T_low</span></span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.T_low" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">T_low</span></span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.T_low" title="Link to this definition"></a></dt>
 <dd><p>Lower temperature bound (in K). Determined from inputted <cite>nasas</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.T_high">
-<span class="sig-name descname"><span class="pre">T_high</span></span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.T_high" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">T_high</span></span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.T_high" title="Link to this definition"></a></dt>
 <dd><p>High temperature bound (in K). Determined from inputted <cite>nasas</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nasas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sites</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nasas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sites</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -282,17 +285,17 @@ a_{3} \ln {T} + a_{4} T + a_{5} \frac {T^{2}} {2} + a_{6}
 </table>
 <dl class="py property">
 <dt class="sig sig-object py" id="id0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">T_high</span></span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">T_high</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="id1">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">T_low</span></span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">T_low</span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.compare_CpoR">
-<span class="sig-name descname"><span class="pre">compare_CpoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_CpoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compare_CpoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_CpoR" title="Link to this definition"></a></dt>
 <dd><p>Compares the dimensionless heat capacity of the statistical model
 and the empirical model</p>
 <dl class="field-list simple">
@@ -313,7 +316,7 @@ list of temperatures between self.T_low and self.T_high</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.compare_GoRT">
-<span class="sig-name descname"><span class="pre">compare_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_GoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compare_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_GoRT" title="Link to this definition"></a></dt>
 <dd><p>Compares the dimensionless Gibbs energy of the statistical model and
 the empirical model</p>
 <dl class="field-list simple">
@@ -334,7 +337,7 @@ list of temperatures between self.T_low and self.T_high</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.compare_HoRT">
-<span class="sig-name descname"><span class="pre">compare_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_HoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compare_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_HoRT" title="Link to this definition"></a></dt>
 <dd><p>Compares the dimensionless enthalpy of the statistical model and
 the empirical model</p>
 <dl class="field-list simple">
@@ -355,7 +358,7 @@ list of temperatures between self.T_low and self.T_high</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.compare_SoR">
-<span class="sig-name descname"><span class="pre">compare_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_SoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compare_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.compare_SoR" title="Link to this definition"></a></dt>
 <dd><p>Compares the dimensionless entropy of the statistical model and the
 empirical model</p>
 <dl class="field-list simple">
@@ -376,23 +379,23 @@ list of temperatures between self.T_low and self.T_high</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.from_data">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CpoR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HoRT_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SoR_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CpoR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HoRT_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SoR_ref</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_data" title="Link to this definition"></a></dt>
 <dd><p>Calculates the NASA polynomials using thermodynamic data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the species</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of the species</p></li>
 <li><p><strong>T</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperatures in K used for fitting CpoR.</p></li>
 <li><p><strong>CpoR</strong> ((N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Dimensionless heat capacity corresponding to T.</p></li>
-<li><p><strong>T_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Reference temperature in K used fitting empirical coefficients.</p></li>
-<li><p><strong>HoRT_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Dimensionless reference enthalpy that corresponds to T_ref.</p></li>
-<li><p><strong>SoR_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Dimensionless entropy that corresponds to T_ref.</p></li>
-<li><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Composition of the species.
+<li><p><strong>T_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Reference temperature in K used fitting empirical coefficients.</p></li>
+<li><p><strong>HoRT_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Dimensionless reference enthalpy that corresponds to T_ref.</p></li>
+<li><p><strong>SoR_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Dimensionless entropy that corresponds to T_ref.</p></li>
+<li><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – Composition of the species.
 Keys of dictionary are elements, values are stoichiometric
 values in a formula unit.
 e.g. CH3OH can be represented as:
 {‘C’: 1, ‘H’: 4, ‘O’: 1,}.</p></li>
-<li><p><strong>T_mid</strong> (<em>iterable of float</em><em>, </em><em>optional</em>) – Guess for T_mid. If float, only uses that value for T_mid. If
+<li><p><strong>T_mid</strong> (<em>iterable</em><em> of </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Guess for T_mid. If float, only uses that value for T_mid. If
 list, finds the best fit for each element in the list. If None,
 a range of T_mid values are screened between the 6th lowest
 and 6th highest value of T.</p></li>
@@ -409,11 +412,11 @@ and 6th highest value of T.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Nasa</strong></p>
@@ -426,28 +429,28 @@ and 6th highest value of T.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.from_model">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_model" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_T_mid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.from_model" title="Link to this definition"></a></dt>
 <dd><p>Calculates the NASA polynomials using the model passed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the species</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of the species</p></li>
 <li><p><strong>model</strong> (<em>Model object</em><em> or </em><em>class</em>) – Model to generate data. Must contain the methods <cite>get_CpoR</cite>,
 <cite>get_HoRT</cite> and <cite>get_SoR</cite></p></li>
-<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Lower limit temerature in K</p></li>
-<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Higher limit temperature in K</p></li>
-<li><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Composition of the species.
+<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Lower limit temerature in K</p></li>
+<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Higher limit temperature in K</p></li>
+<li><p><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – Composition of the species.
 Keys of dictionary are elements, values are stoichiometric
 values in a formula unit.
 e.g. CH3OH can be represented as:
 {‘C’: 1, ‘H’: 4, ‘O’: 1,}.</p></li>
 <li><p><strong>T_mid</strong> (<em>(</em><em>n_interval</em><em>,</em><em>) </em><em>nd.ndarray</em>) – Temperatures (in K) to use at intervals. See <cite>fit_T_mid</cite> for
 behavior.</p></li>
-<li><p><strong>n_interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of NASA9 polynomials to create. Default is 2</p></li>
-<li><p><strong>n_T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of temperature values to evaluate between each interval.
+<li><p><strong>n_interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of NASA9 polynomials to create. Default is 2</p></li>
+<li><p><strong>n_T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of temperature values to evaluate between each interval.
 Larger values result is a better fit but take longer to run.
 Default is 50.</p></li>
-<li><p><strong>fit_T_mid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, T_mid values initial values and can be changed. If
+<li><p><strong>fit_T_mid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, T_mid values initial values and can be changed. If
 False, T_mid values are not changed</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Used to initalize model if a class is passed.</p></li>
 </ul>
@@ -463,17 +466,17 @@ False, T_mid values are not changed</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_Cp">
-<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_Cp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_Cp" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
@@ -490,15 +493,15 @@ True</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_CpoR">
-<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_CpoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_CpoR" title="Link to this definition"></a></dt>
 <dd><p>Calculate the dimensionless heat capacity</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
@@ -515,12 +518,12 @@ True</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_Cv">
-<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_Cv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_Cv" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
 </ul>
@@ -529,14 +532,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cv</strong> – Heat capacity (constant V) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_CvoR">
-<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_CvoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_CvoR" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the dimensionless heat capacity at
 constant volume.</p>
 <dl class="field-list simple">
@@ -544,21 +547,21 @@ constant volume.</p>
 <dd class="field-odd"><p><strong>CvoR</strong> – Returns 0</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_F">
-<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_F" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_F" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></p></li>
 </ul>
 </dd>
@@ -566,14 +569,14 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>F</strong> – Hemholtz energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_FoRT">
-<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_FoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_FoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -583,27 +586,27 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>FoRT</strong> – Dimensionless Helmholtz energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_G">
-<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_G" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_G" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
 </ul>
@@ -619,18 +622,18 @@ formation. Defauly is None</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_GoRT">
-<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_GoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_GoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculate the dimensionless Gibbs free energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
 </ul>
@@ -646,17 +649,17 @@ formation. Defauly is None</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_H">
-<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_H" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_H" title="Link to this definition"></a></dt>
 <dd><p>Calculate the enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
@@ -673,15 +676,15 @@ True</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_HoRT">
-<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_HoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_HoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculate the dimensionless enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
@@ -698,20 +701,20 @@ True</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_S">
-<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_S" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_S" title="Link to this definition"></a></dt>
 <dd><p>Calculate the entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
 </ul>
@@ -727,35 +730,35 @@ formation. Defauly is None</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_Selements">
-<span class="sig-name descname"><span class="pre">get_Selements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_Selements" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Selements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_Selements" title="Link to this definition"></a></dt>
 <dd><p>Calculate the dimensionless entropy of the elements in the molecule</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
+<dd class="field-odd"><p><strong>None</strong></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>SoR</strong> – Entropy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_SoR">
-<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_SoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_SoR" title="Link to this definition"></a></dt>
 <dd><p>Calculate the dimensionless entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> (float or (N,) <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html">numpy.ndarray</a>) – Temperature(s) in K</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Arguments to calculate mixture model properties, if any</p></li>
 </ul>
@@ -771,14 +774,14 @@ formation. Defauly is None</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_U">
-<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_U" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_U" title="Link to this definition"></a></dt>
 <dd><p>Calculate the internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
 </ul>
 </dd>
@@ -786,64 +789,64 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>U</strong> – Internal energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_UoRT">
-<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_UoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_UoRT" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the dimensionless internal energy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>UoRT</strong> – Returns 0</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.get_q">
-<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_q" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.get_q" title="Link to this definition"></a></dt>
 <dd><p>Default method to calculate the partition coefficient.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>q</strong> – Returns 1</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="id14">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nasas</span></span><a class="headerlink" href="#id14" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nasas</span></span><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.plot_empirical">
-<span class="sig-name descname"><span class="pre">plot_empirical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cp_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.plot_empirical" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_empirical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cp_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.plot_empirical" title="Link to this definition"></a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Lower temperature in K. If not specified,
+<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Lower temperature in K. If not specified,
 <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used.</p></li>
-<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Upper temperature in K. If not specified,
+<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Upper temperature in K. If not specified,
 <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used.</p></li>
-<li><p><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><p><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units. If not specified, dimensionless units used.</p></li>
-<li><p><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</p></li>
-<li><p><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</p></li>
 </ul>
@@ -864,24 +867,24 @@ specified, dimensionless units used.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.plot_statmech">
-<span class="sig-name descname"><span class="pre">plot_statmech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cp_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.plot_statmech" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_statmech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cp_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.plot_statmech" title="Link to this definition"></a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Lower temperature in K. If not specified,
+<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Lower temperature in K. If not specified,
 <code class="docutils literal notranslate"><span class="pre">T_low</span></code> attribute used</p></li>
-<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Upper temperature in K. If not specified,
+<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Upper temperature in K. If not specified,
 <code class="docutils literal notranslate"><span class="pre">T_high</span></code> attribute used</p></li>
-<li><p><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><p><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units. If not specified, dimensionless units used.</p></li>
-<li><p><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</p></li>
-<li><p><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</p></li>
 </ul>
@@ -902,24 +905,24 @@ specified, dimensionless units used.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.plot_statmech_and_empirical">
-<span class="sig-name descname"><span class="pre">plot_statmech_and_empirical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cp_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.plot_statmech_and_empirical" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_statmech_and_empirical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cp_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.plot_statmech_and_empirical" title="Link to this definition"></a></dt>
 <dd><p>Plots the thermodynamic profiles between <code class="docutils literal notranslate"><span class="pre">T_low</span></code> and <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 using empirical relationship</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Lower temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_low</span></code>
+<li><p><strong>T_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Lower temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_low</span></code>
 attribute used</p></li>
-<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
+<li><p><strong>T_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Upper temperature in K. If not specified, <code class="docutils literal notranslate"><span class="pre">T_high</span></code>
 attribute used</p></li>
-<li><p><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>Cp_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot heat capacity. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</p></li>
-<li><p><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>H_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot enthalpy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</p></li>
-<li><p><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
+<li><p><strong>S_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot entropy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for
 accepted units. If not specified, dimensionless units used.</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units to plot Gibbs free energy. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a>
 for accepted units but omit the ‘/K’ (e.g. J/mol). If not
 specified, dimensionless units used.</p></li>
 </ul>
@@ -940,42 +943,42 @@ specified, dimensionless units used.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.to_cti">
-<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_cti" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_cti" title="Link to this definition"></a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>CTI_str</strong> – Object represented as a CTI string.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.empirical.nasa.Nasa9.to_omkm_yaml">
-<span class="sig-name descname"><span class="pre">to_omkm_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_omkm_yaml" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_omkm_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.empirical.nasa.Nasa9.to_omkm_yaml" title="Link to this definition"></a></dt>
 <dd><p>Returns a dictionary compatible with Cantera’s YAML format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>yaml_dict</strong> – Dictionary compatible with Cantera’s YAML format</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

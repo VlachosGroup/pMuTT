@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Multiscale Thermochemistry Toolbox (pMuTT) &mdash; pmutt 1.4.15 documentation</title>
+  <title>Python Multiscale Thermochemistry Toolbox (pMuTT) &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -38,7 +38,7 @@
               <img src="_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -115,7 +115,7 @@
            <div itemprop="articleBody">
              
   <section id="python-multiscale-thermochemistry-toolbox-pmutt">
-<h1>Python Multiscale Thermochemistry Toolbox (pMuTT)<a class="headerlink" href="#python-multiscale-thermochemistry-toolbox-pmutt" title="Permalink to this heading"></a></h1>
+<h1>Python Multiscale Thermochemistry Toolbox (pMuTT)<a class="headerlink" href="#python-multiscale-thermochemistry-toolbox-pmutt" title="Link to this heading"></a></h1>
 <p>The <strong>P</strong>ython <strong>Mu</strong>ltiscale <strong>T</strong>hermochemistry <strong>T</strong>oolbox
 (pMuTT) is a Python library for Thermochemistry developed by the
 Vlachos Research Group at the University of Delaware. This code was
@@ -123,20 +123,21 @@ originally developed to convert <em>ab-initio</em> data from DFT to observable
 thermodynamic properties such as heat capacity, enthalpy, entropy, and
 Gibbs energy. These properties can be fit to empirical equations and
 written to different formats.</p>
-<a class="reference external image-reference" href="https://vlachosgroup.github.io/pMuTT/"><img alt="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png" class="align-center" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png" /></a>
+<a class="reference external image-reference" href="https://vlachosgroup.github.io/pMuTT/"><img alt="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png" class="align-center" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/logos/pmutt_web.png" />
+</a>
 <section id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
 <p>See our <a class="reference external" href="https://vlachosgroup.github.io/pMuTT/">documentation page</a> for examples, equations used, and docstrings.</p>
 </section>
 <section id="developers">
-<h2>Developers<a class="headerlink" href="#developers" title="Permalink to this heading"></a></h2>
+<h2>Developers<a class="headerlink" href="#developers" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Jonathan Lym, Ph.D. (<a class="reference external" href="mailto:jonathanalym&#37;&#52;&#48;gmail&#46;com">jonathanalym<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p></li>
 <li><p>Gerhard Wittreich, Ph.D, P.E. (<a class="reference external" href="mailto:wittregr&#37;&#52;&#48;udel&#46;edu">wittregr<span>&#64;</span>udel<span>&#46;</span>edu</a>)</p></li>
 </ul>
 </section>
 <section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Python3</p></li>
 <li><p><a class="reference external" href="https://wiki.fysik.dtu.dk/ase/">Atomic Simulation Environment</a>: Used for I/O operations and to
@@ -156,7 +157,7 @@ reaction coordinate diagram</p></li>
 </ul>
 </section>
 <section id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
 <ol class="arabic">
 <li><p>Install using pip (<a class="reference external" href="https://vlachosgroup.github.io/pMuTT/install.html">see documentation for more thorough instructions</a>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pmutt</span>
@@ -168,12 +169,12 @@ reaction coordinate diagram</p></li>
 </ol>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
 <p>This project is licensed under the MIT License - see the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/blob/master/LICENSE.md">LICENSE.md</a>
 file for details.</p>
 </section>
 <section id="publications">
-<h2>Publications<a class="headerlink" href="#publications" title="Permalink to this heading"></a></h2>
+<h2>Publications<a class="headerlink" href="#publications" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>J. Lym, G.R. Wittreich and D.G. Vlachos, A Python Multiscale Thermochemistry
 Toolbox (pMuTT) for thermochemical and kinetic parameter estimation, Computer
@@ -182,7 +183,7 @@ Physics Communications (2019) 106864,
 </ul>
 </section>
 <section id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading"></a></h2>
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h2>
 <p>If you have a suggestion or find a bug, please post to our <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Issues page</a> with
 the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3Aenhancement"><img alt="enhancement_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/enhancement_small.png" style="height: 20px;" /></a> or <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3Abug"><img alt="bug_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/bug_small.png" style="height: 20px;" /></a> tag respectively.</p>
 <p>Finally, if you would like to add to the body of code, please:</p>
@@ -194,18 +195,18 @@ the <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/is
 </ul>
 </section>
 <section id="questions">
-<h2>Questions<a class="headerlink" href="#questions" title="Permalink to this heading"></a></h2>
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading"></a></h2>
 <p>If you are having issues, please post to our <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues">Issues page</a> with the
 <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3A%22help%20wanted%22"><img alt="help_wanted_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/help_wanted_small.png" style="height: 20px;" /></a> or <a class="reference external" href="https://github.com/VlachosGroup/pMuTT/issues?utf8=%E2%9C%93&amp;q=label%3Aquestion"><img alt="question_label" src="https://raw.githubusercontent.com/VlachosGroup/pMuTT/master/docs/source/images/labels/question_small.png" style="height: 20px;" /></a> tag. We will do our best to assist.</p>
 </section>
 <section id="funding">
-<h2>Funding<a class="headerlink" href="#funding" title="Permalink to this heading"></a></h2>
+<h2>Funding<a class="headerlink" href="#funding" title="Link to this heading"></a></h2>
 <p>This material is based upon work supported by the Department of Energy’s Office
 of Energy Efficient and Renewable Energy’s Advanced Manufacturing Office under
 Award Number DE-EE0007888-9.5.</p>
 </section>
 <section id="special-thanks">
-<h2>Special Thanks<a class="headerlink" href="#special-thanks" title="Permalink to this heading"></a></h2>
+<h2>Special Thanks<a class="headerlink" href="#special-thanks" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Dr. Jeffrey Frey (pip and conda compatibility)</p></li>
 <li><p>Jaynell Keely (Logo design)</p></li>

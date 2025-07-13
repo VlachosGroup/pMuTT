@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.statmech.rot.RigidRotor &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.statmech.rot.RigidRotor &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -39,7 +39,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -69,7 +69,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#translational-models">Translational Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#vibrational-models">Vibrational Models</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../statmech.html#rotational-models">Rotational Models</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.rot.RigidRotor</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.rot.RigidRotor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.statmech.rot.RigidRotor"><code class="docutils literal notranslate"><span class="pre">RigidRotor</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#electronic-models">Electronic Models</a></li>
@@ -119,21 +122,26 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-statmech-rot-rigidrotor">
-<h1>pmutt.statmech.rot.RigidRotor<a class="headerlink" href="#pmutt-statmech-rot-rigidrotor" title="Permalink to this heading"></a></h1>
+<h1>pmutt.statmech.rot.RigidRotor<a class="headerlink" href="#pmutt-statmech-rot-rigidrotor" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.statmech.rot.</span></span><span class="sig-name descname"><span class="pre">RigidRotor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symmetrynumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_temperatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.statmech.rot.</span></span><span class="sig-name descname"><span class="pre">RigidRotor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symmetrynumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_temperatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code></p>
-<p>Rotational mode using the rigid rotor assumption. Equations sourced from:</p>
+<dl class="simple">
+<dt>Rotational mode using the rigid rotor assumption.</dt><dd><p>Equations sourced from:</p>
+</dd>
+</dl>
 <ul class="simple">
 <li><p>Sandler, S. I. An Introduction to Applied Statistical Thermodynamics;
 John Wiley &amp; Sons, 2010.</p></li>
 </ul>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.symmetrynumber">
-<span class="sig-name descname"><span class="pre">symmetrynumber</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.symmetrynumber" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">symmetrynumber</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.symmetrynumber" title="Link to this definition"></a></dt>
 <dd><p>Symmetry number of molecule. If a string is inputted, it represents
-the point group. Supported options are shown below.</p>
+the point group. Supported options are shown below. The string
+‘pymatgen’ can also be entered to have pymatgen determine the
+symmetry number.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Point group</p></th>
@@ -185,25 +193,25 @@ the point group. Supported options are shown below.</p>
 <p>See DOI for more details: 10.1007/s00214-007-0328-0</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.rot_temperatures">
-<span class="sig-name descname"><span class="pre">rot_temperatures</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.rot_temperatures" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">rot_temperatures</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.rot_temperatures" title="Link to this definition"></a></dt>
 <dd><p>Rotational temperatures in K</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of float, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.geometry">
-<span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.geometry" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.geometry" title="Link to this definition"></a></dt>
 <dd><p>Geometry of molecule. Accepted options are:</p>
 <ul class="simple">
 <li><p>monatomic</p></li>
@@ -212,14 +220,14 @@ the point group. Supported options are shown below.</p>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.atoms">
-<span class="sig-name descname"><span class="pre">atoms</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.atoms" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">atoms</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.atoms" title="Link to this definition"></a></dt>
 <dd><p>An atoms object can be used to calculate rot_temperatures and
 guess geometry</p>
 <dl class="field-list simple">
@@ -231,19 +239,19 @@ guess geometry</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.degree_tol">
-<span class="sig-name descname"><span class="pre">degree_tol</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.degree_tol" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">degree_tol</span></span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.degree_tol" title="Link to this definition"></a></dt>
 <dd><p>Degree tolerance to estimate geometry. Only required if estimating
 geometry or rot_temperatures</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symmetrynumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_temperatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symmetrynumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_temperatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -307,11 +315,11 @@ geometry or rot_temperatures</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Obj</strong></p>
@@ -324,12 +332,12 @@ geometry or rot_temperatures</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_Cp">
-<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_Cp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_Cp" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></p></li>
 </ul>
@@ -338,14 +346,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cp</strong> – Heat capacity (constant P) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_CpoR">
-<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_CpoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_CpoR" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_P^{rot}}{R}=\frac{C_V^{rot}}{R}\)</span></p>
 <dl class="field-list simple">
@@ -353,19 +361,19 @@ units.</p></li>
 <dd class="field-odd"><p><strong>CpoR_rot</strong> – Rotational dimensionless heat capacity at constant pressure</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_Cv">
-<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_Cv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_Cv" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
 </ul>
@@ -374,14 +382,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cv</strong> – Heat capacity (constant V) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_CvoR">
-<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_CvoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_CvoR" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(\frac{C_V^{rot}}{R}=1\)</span> if linear</p>
@@ -391,21 +399,21 @@ units.</p></li>
 <dd class="field-odd"><p><strong>CvoR_rot</strong> – Rotational dimensionless heat capacity at constant volume</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_F">
-<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_F" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_F" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></p></li>
 </ul>
 </dd>
@@ -413,39 +421,39 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>F</strong> – Hemholtz energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_FoRT">
-<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_FoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_FoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{rot}}{RT}=\frac{U^{rot}}{RT}-\frac{S^{rot}}{R}\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>FoRT_rot</strong> – Rotational dimensionless Helmholtz energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_G">
-<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_G" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_G" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></p></li>
 </ul>
 </dd>
@@ -453,39 +461,39 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>G</strong> – Gibbs energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_GoRT">
-<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_GoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_GoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{rot}}{RT}=\frac{H^{rot}}{RT}-\frac{S^{rot}}{R}\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>GoRT_rot</strong> – Rotational dimensionless Gibbs energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_H">
-<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_H" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_H" title="Link to this definition"></a></dt>
 <dd><p>Calculate the enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></p></li>
 </ul>
 </dd>
@@ -493,14 +501,14 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>H</strong> – Enthalpy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_HoRT">
-<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_HoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_HoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=\frac{H^{rot}}{RT}\)</span></p>
 <dl class="field-list simple">
@@ -508,19 +516,19 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-odd"><p><strong>HoRT_rot</strong> – Rotational dimensionless enthalpy</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_S">
-<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_S" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_S" title="Link to this definition"></a></dt>
 <dd><p>Calculate the entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p></li>
 </ul>
@@ -529,14 +537,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>S</strong> – Entropy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_SoR">
-<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_SoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_SoR" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{rot}}{R}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(\frac{S}{R}=\log(\frac{T}{\sigma}\prod_i \frac{1}{
@@ -546,27 +554,27 @@ units.</p></li>
 if nonlinear</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>SoR_rot</strong> – Rotational dimensionless entropy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_U">
-<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_U" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_U" title="Link to this definition"></a></dt>
 <dd><p>Calculate the internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
 </ul>
 </dd>
@@ -574,14 +582,14 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>U</strong> – Internal energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_UoRT">
-<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_UoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_UoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{rot}}{RT}=1\)</span> if linear</p>
@@ -591,14 +599,14 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-odd"><p><strong>UoRT_rot</strong> – Rotational dimensionless internal energy</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.get_q">
-<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_q" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.get_q" title="Link to this definition"></a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q^{rot}=0\)</span> if monatomic</p>
 <p><span class="math notranslate nohighlight">\(q^{rot}=\frac{T}{\sigma}\prod_i\frac{1}{\Theta_R}\)</span> if linear</p>
@@ -606,27 +614,27 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 \Theta_{Ri}})^\frac{1}{2}\)</span> if nonlinear</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>q_rot</strong> – Rotational partition function</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.rot.RigidRotor.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.rot.RigidRotor.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

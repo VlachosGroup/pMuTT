@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Release Notes &mdash; pmutt 1.4.15 documentation</title>
+  <title>Release Notes &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -37,7 +37,7 @@
               <img src="_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -72,6 +72,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api/helper/helper.html">Helper Functions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#development-branch">Development Branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-4-17">Version 1.4.17</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-4-15">Version 1.4.15</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-4-14">Version 1.4.14</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-4-13">Version 1.4.13</a></li>
@@ -156,13 +157,24 @@
            <div itemprop="articleBody">
              
   <section id="release-notes">
-<span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading"></a></h1>
 <section id="development-branch">
-<h2>Development Branch<a class="headerlink" href="#development-branch" title="Permalink to this heading"></a></h2>
+<h2>Development Branch<a class="headerlink" href="#development-branch" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://github.com/VlachosGroup/pmutt/commits/development">Development Branch</a></p>
 </section>
+<section id="version-1-4-17">
+<h2>Version 1.4.17<a class="headerlink" href="#version-1-4-17" title="Link to this heading"></a></h2>
+<p>May 25, 2025</p>
+<ul class="simple">
+<li><p>Added feature where you can specify ‘pymatgen’ as the symmetry number for
+a gas molecule and Pymatgen will determine the symmetry number</p></li>
+<li><p>Added a check that forces temperatures submitted for thermodynamic
+calculations to be astype=float to avoid clacluation issues encountered
+when temperatures are entered as astype=int.</p></li>
+</ul>
+</section>
 <section id="version-1-4-15">
-<h2>Version 1.4.15<a class="headerlink" href="#version-1-4-15" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.15<a class="headerlink" href="#version-1-4-15" title="Link to this heading"></a></h2>
 <p>April 21, 2024</p>
 <ul class="simple">
 <li><p>Fixed reaction lists in BEP section of thermo.yaml openMKM file
@@ -170,21 +182,21 @@ so reactions are all listed individually and no longer grouped.</p></li>
 </ul>
 </section>
 <section id="version-1-4-14">
-<h2>Version 1.4.14<a class="headerlink" href="#version-1-4-14" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.14<a class="headerlink" href="#version-1-4-14" title="Link to this heading"></a></h2>
 <p>February 8, 2024</p>
 <ul class="simple">
 <li><p>Fix equilibrium unittest warning messages</p></li>
 </ul>
 </section>
 <section id="version-1-4-13">
-<h2>Version 1.4.13<a class="headerlink" href="#version-1-4-13" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.13<a class="headerlink" href="#version-1-4-13" title="Link to this heading"></a></h2>
 <p>February 4, 2024</p>
 <ul class="simple">
 <li><p>Fix equilibrium class-Upper bound solver violation</p></li>
 </ul>
 </section>
 <section id="version-1-4-11">
-<h2>Version 1.4.11<a class="headerlink" href="#version-1-4-11" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.11<a class="headerlink" href="#version-1-4-11" title="Link to this heading"></a></h2>
 <p>February 3, 2024</p>
 <ul class="simple">
 <li><p>Fix unittest for equilibrium class-Missing thermdat file</p></li>
@@ -192,7 +204,7 @@ so reactions are all listed individually and no longer grouped.</p></li>
 </ul>
 </section>
 <section id="version-1-4-10">
-<h2>Version 1.4.10<a class="headerlink" href="#version-1-4-10" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.10<a class="headerlink" href="#version-1-4-10" title="Link to this heading"></a></h2>
 <p>February 2, 2024</p>
 <ul class="simple">
 <li><p>Improved NASA9 polynomial fit function</p></li>
@@ -200,7 +212,7 @@ so reactions are all listed individually and no longer grouped.</p></li>
 </ul>
 </section>
 <section id="version-1-4-9">
-<h2>Version 1.4.9<a class="headerlink" href="#version-1-4-9" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.9<a class="headerlink" href="#version-1-4-9" title="Link to this heading"></a></h2>
 <p>October 25, 2023</p>
 <ul class="simple">
 <li><p>Fixed deprecated numpy function impacting nasa.py and shomate.py
@@ -208,21 +220,21 @@ Conversion of an array with ndim &gt; 0 to a scalar</p></li>
 </ul>
 </section>
 <section id="version-1-4-7">
-<h2>Version 1.4.7<a class="headerlink" href="#version-1-4-7" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.7<a class="headerlink" href="#version-1-4-7" title="Link to this heading"></a></h2>
 <p>August 23, 2023</p>
 <ul class="simple">
 <li><p>Fixed improper reaction and lateral interaction ID’s in write_CTI</p></li>
 </ul>
 </section>
 <section id="version-1-4-6">
-<h2>Version 1.4.6<a class="headerlink" href="#version-1-4-6" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.6<a class="headerlink" href="#version-1-4-6" title="Link to this heading"></a></h2>
 <p>August 15, 2023</p>
 <ul class="simple">
 <li><p>Adding missing dependency for openpyxl</p></li>
 </ul>
 </section>
 <section id="version-1-4-5">
-<h2>Version 1.4.5<a class="headerlink" href="#version-1-4-5" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.5<a class="headerlink" href="#version-1-4-5" title="Link to this heading"></a></h2>
 <p>June 23, 2023</p>
 <ul class="simple">
 <li><p>Updated .iteritems dpecricated function in Pandas</p></li>
@@ -230,21 +242,21 @@ Conversion of an array with ndim &gt; 0 to a scalar</p></li>
 </ul>
 </section>
 <section id="version-1-4-4">
-<h2>Version 1.4.4<a class="headerlink" href="#version-1-4-4" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.4<a class="headerlink" href="#version-1-4-4" title="Link to this heading"></a></h2>
 <p>May 1, 2023</p>
 <ul class="simple">
 <li><p>CRITICAL UPDATE: Fixed Nasa polynomial fit issue for enthalpy and entropy when T_ref &gt; T_mid</p></li>
 </ul>
 </section>
 <section id="version-1-4-3">
-<h2>Version 1.4.3<a class="headerlink" href="#version-1-4-3" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.3<a class="headerlink" href="#version-1-4-3" title="Link to this heading"></a></h2>
 <p>Mar. 19, 2023</p>
 <ul class="simple">
 <li><p>Updated PIP installation dependency requirements</p></li>
 </ul>
 </section>
 <section id="version-1-4-2">
-<h2>Version 1.4.2<a class="headerlink" href="#version-1-4-2" title="Permalink to this heading"></a></h2>
+<h2>Version 1.4.2<a class="headerlink" href="#version-1-4-2" title="Link to this heading"></a></h2>
 <p>Mar. 18, 2023</p>
 <ul class="simple">
 <li><p>Added new <a class="reference internal" href="api/equilibrium/Equilibrium/pmutt.equilibrium.Equilibrium.html#pmutt.equilibrium.Equilibrium" title="pmutt.equilibrium.Equilibrium"><code class="xref py py-class docutils literal notranslate"><span class="pre">Equilibrium</span></code></a> class that computes the equilibrium
@@ -258,7 +270,7 @@ and misc upgrades.</p></li>
 </ul>
 </section>
 <section id="version-1-3-2">
-<h2>Version 1.3.2<a class="headerlink" href="#version-1-3-2" title="Permalink to this heading"></a></h2>
+<h2>Version 1.3.2<a class="headerlink" href="#version-1-3-2" title="Link to this heading"></a></h2>
 <p>Jan. 26, 2023</p>
 <ul class="simple">
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">S_elements</span></code> parameter to entropy and Gibbs free energy
@@ -269,7 +281,7 @@ elements in the species.</p></li>
 </ul>
 </section>
 <section id="version-1-2-21">
-<h2>Version 1.2.21<a class="headerlink" href="#version-1-2-21" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.21<a class="headerlink" href="#version-1-2-21" title="Link to this heading"></a></h2>
 <p>Jul. 3, 2020</p>
 <ul class="simple">
 <li><p>Miscellaneous bug fixes for <a class="reference internal" href="api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_cti()</span></code></a></p></li>
@@ -282,7 +294,7 @@ reactions.</p></li>
 </ul>
 </section>
 <section id="version-1-2-20">
-<h2>Version 1.2.20<a class="headerlink" href="#version-1-2-20" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.20<a class="headerlink" href="#version-1-2-20" title="Link to this heading"></a></h2>
 <p>May 12, 2020</p>
 <ul class="simple">
 <li><p>Added sensitivity analysis options in <a class="reference internal" href="api/kinetic_models/omkm/pmutt.io.omkm.write_cti.html#pmutt.io.omkm.write_cti" title="pmutt.io.omkm.write_cti"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_cti()</span></code></a></p></li>
@@ -295,7 +307,7 @@ assign numerical values.</p></li>
 </ul>
 </section>
 <section id="version-1-2-19">
-<h2>Version 1.2.19<a class="headerlink" href="#version-1-2-19" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.19<a class="headerlink" href="#version-1-2-19" title="Link to this heading"></a></h2>
 <p>Apr. 8, 2020</p>
 <ul class="simple">
 <li><p>Fixed bug where <a class="reference internal" href="api/statmech/elec/pmutt.statmech.lsr.LSR.html#pmutt.statmech.lsr.LSR" title="pmutt.statmech.lsr.LSR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LSR</span></code></a> could not be imported in
@@ -310,14 +322,14 @@ be written as a float</p></li>
 </ul>
 </section>
 <section id="version-1-2-18">
-<h2>Version 1.2.18<a class="headerlink" href="#version-1-2-18" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.18<a class="headerlink" href="#version-1-2-18" title="Link to this heading"></a></h2>
 <p>Jan. 31, 2020</p>
 <ul class="simple">
 <li><p>Hotfix to correct broken links in documentation.</p></li>
 </ul>
 </section>
 <section id="version-1-2-17">
-<h2>Version 1.2.17<a class="headerlink" href="#version-1-2-17" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.17<a class="headerlink" href="#version-1-2-17" title="Link to this heading"></a></h2>
 <p>Jan. 31, 2020</p>
 <ul class="simple">
 <li><p>Added more descriptive warning messages when incorrect temperature values are
@@ -336,14 +348,14 @@ make the documentation easier to navigate.</p></li>
 </ul>
 </section>
 <section id="version-1-2-16">
-<h2>Version 1.2.16<a class="headerlink" href="#version-1-2-16" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.16<a class="headerlink" href="#version-1-2-16" title="Link to this heading"></a></h2>
 <p>Dec. 9, 2019</p>
 <ul class="simple">
 <li><p>Hotfix to correct a typo for PyYAML version required.</p></li>
 </ul>
 </section>
 <section id="version-1-2-15">
-<h2>Version 1.2.15<a class="headerlink" href="#version-1-2-15" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.15<a class="headerlink" href="#version-1-2-15" title="Link to this heading"></a></h2>
 <p>Dec. 5, 2019</p>
 <ul class="simple">
 <li><p>Added <a class="reference internal" href="api/kinetic_models/omkm/pmutt.io.omkm.write_yaml.html#pmutt.io.omkm.write_yaml" title="pmutt.io.omkm.write_yaml"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_yaml()</span></code></a> to write YAML files for OpenMKM.</p></li>
@@ -359,7 +371,7 @@ process Excel data.</p></li>
 </ul>
 </section>
 <section id="version-1-2-14">
-<h2>Version 1.2.14<a class="headerlink" href="#version-1-2-14" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.14<a class="headerlink" href="#version-1-2-14" title="Link to this heading"></a></h2>
 <p>Oct. 25, 2019</p>
 <ul class="simple">
 <li><p>Added functionality to write files (such as
@@ -379,14 +391,14 @@ desire (default in eV).</p></li>
 Excel sheets since users found this error hard to pick up.</p></li>
 </ul>
 <section id="contributors">
-<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this heading"></a></h3>
+<h3>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Qiang Li (<a class="reference external" href="https://github.com/lqcata">lqcata</a>)</p></li>
 </ul>
 </section>
 </section>
 <section id="version-1-2-13">
-<h2>Version 1.2.13<a class="headerlink" href="#version-1-2-13" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.13<a class="headerlink" href="#version-1-2-13" title="Link to this heading"></a></h2>
 <p>Oct. 2, 2019</p>
 <ul class="simple">
 <li><p>Fixed bug where small non-zero rotational inertia modes were chosen
@@ -416,14 +428,14 @@ this functionality.</p></li>
 <li><p>Fixed broken hyperlinks.</p></li>
 </ul>
 <section id="id2">
-<h3>Contributors<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<h3>Contributors<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Geun Ho Gu (<a class="reference external" href="https://github.com/googhgoo">googhgoo</a>)</p></li>
 </ul>
 </section>
 </section>
 <section id="version-1-2-12">
-<h2>Version 1.2.12<a class="headerlink" href="#version-1-2-12" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.12<a class="headerlink" href="#version-1-2-12" title="Link to this heading"></a></h2>
 <p>Aug. 22, 2019</p>
 <ul class="simple">
 <li><p>Refactored <a class="reference internal" href="api/io/thermdat/pmutt.io.thermdat.write_thermdat.html#pmutt.io.thermdat.write_thermdat" title="pmutt.io.thermdat.write_thermdat"><code class="xref py py-class docutils literal notranslate"><span class="pre">write_thermdat</span></code></a> so that it is simpler
@@ -437,12 +449,12 @@ installing</p></li>
 modes were specified indivudally in spreadsheets.</p></li>
 </ul>
 <section id="id3">
-<h3>Contributors<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<h3>Contributors<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <p>Xenhua Zhang (<a class="reference external" href="https://github.com/xenhua">xenhua</a>)</p>
 </section>
 </section>
 <section id="version-1-2-11">
-<h2>Version 1.2.11<a class="headerlink" href="#version-1-2-11" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.11<a class="headerlink" href="#version-1-2-11" title="Link to this heading"></a></h2>
 <p>Jun. 18, 2019</p>
 <ul class="simple">
 <li><p>Added xlrd dependency so spreadsheets can be read using pandas</p></li>
@@ -450,14 +462,14 @@ modes were specified indivudally in spreadsheets.</p></li>
 </ul>
 </section>
 <section id="version-1-2-10">
-<h2>Version 1.2.10<a class="headerlink" href="#version-1-2-10" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.10<a class="headerlink" href="#version-1-2-10" title="Link to this heading"></a></h2>
 <p>Jun. 13, 2019</p>
 <ul class="simple">
 <li><p>Another hotfix to fix a bug where the version was not incremented correctly</p></li>
 </ul>
 </section>
 <section id="version-1-2-9">
-<h2>Version 1.2.9<a class="headerlink" href="#version-1-2-9" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.9<a class="headerlink" href="#version-1-2-9" title="Link to this heading"></a></h2>
 <p>Jun. 13, 2019</p>
 <ul class="simple">
 <li><p>Hotfix where pypi created the folder in the old case (pMuTT) instead of
@@ -465,7 +477,7 @@ lower case (pmutt)</p></li>
 </ul>
 </section>
 <section id="version-1-2-8">
-<h2>Version 1.2.8<a class="headerlink" href="#version-1-2-8" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.8<a class="headerlink" href="#version-1-2-8" title="Link to this heading"></a></h2>
 <p>Jun. 13, 2019</p>
 <ul class="simple">
 <li><p>Importing from pMuTT is now all in lowercase. (i.e. <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pmutt</span></code> instead
@@ -473,7 +485,7 @@ of <code class="docutils literal notranslate"><span class="pre">import</span> <s
 </ul>
 </section>
 <section id="version-1-2-7">
-<h2>Version 1.2.7<a class="headerlink" href="#version-1-2-7" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.7<a class="headerlink" href="#version-1-2-7" title="Link to this heading"></a></h2>
 <p>Jun. 11, 2019</p>
 <ul class="simple">
 <li><p>Added documentation page for more verbose installation instructions.</p></li>
@@ -487,7 +499,7 @@ pmutt model objects</p></li>
 </ul>
 </section>
 <section id="version-1-2-6">
-<h2>Version 1.2.6<a class="headerlink" href="#version-1-2-6" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.6<a class="headerlink" href="#version-1-2-6" title="Link to this heading"></a></h2>
 <p>Apr. 26, 2019</p>
 <ul class="simple">
 <li><p>Moved <code class="docutils literal notranslate"><span class="pre">references</span></code> attribute from empirical classes to
@@ -517,7 +529,7 @@ electronic and nuclear modes to Excel</p></li>
 </ul>
 </section>
 <section id="version-1-2-5">
-<h2>Version 1.2.5<a class="headerlink" href="#version-1-2-5" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.5<a class="headerlink" href="#version-1-2-5" title="Link to this heading"></a></h2>
 <p>Mar. 21, 2019</p>
 <ul class="simple">
 <li><p>Renamed <code class="docutils literal notranslate"><span class="pre">pmutt.io_</span></code> module to <code class="docutils literal notranslate"><span class="pre">pmutt.io</span></code></p></li>
@@ -527,14 +539,14 @@ electronic and nuclear modes to Excel</p></li>
 </ul>
 </section>
 <section id="version-1-2-4">
-<h2>Version 1.2.4<a class="headerlink" href="#version-1-2-4" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.4<a class="headerlink" href="#version-1-2-4" title="Link to this heading"></a></h2>
 <p>Mar. 11, 2019</p>
 <ul class="simple">
 <li><p>Hotfix to correct Chemkin IO behavior</p></li>
 </ul>
 </section>
 <section id="version-1-2-3">
-<h2>Version 1.2.3<a class="headerlink" href="#version-1-2-3" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.3<a class="headerlink" href="#version-1-2-3" title="Link to this heading"></a></h2>
 <p>Feb. 25, 2019</p>
 <ul class="simple">
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">smiles</span></code> attribute to <a class="reference internal" href="api/statmech/statmech/pmutt.statmech.StatMech.html#pmutt.statmech.StatMech" title="pmutt.statmech.StatMech"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatMech</span></code></a> and
@@ -571,7 +583,7 @@ symmetry numbers</p></li>
 </ul>
 </section>
 <section id="version-1-2-2">
-<h2>Version 1.2.2<a class="headerlink" href="#version-1-2-2" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.2<a class="headerlink" href="#version-1-2-2" title="Link to this heading"></a></h2>
 <p>Jan. 18, 2019</p>
 <ul class="simple">
 <li><p>Added option to extract imaginary frequencies from VASP’s OUTCAR files</p></li>
@@ -594,7 +606,7 @@ class</p></li>
 </ul>
 </section>
 <section id="version-1-2-1">
-<h2>Version 1.2.1<a class="headerlink" href="#version-1-2-1" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.1<a class="headerlink" href="#version-1-2-1" title="Link to this heading"></a></h2>
 <p>Dec. 17, 2018</p>
 <ul class="simple">
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">vib_outcar</span></code> special rule for <a class="reference internal" href="api/io/excel/pmutt.io.excel.read_excel.html#pmutt.io.excel.read_excel" title="pmutt.io.excel.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a> and
@@ -607,21 +619,21 @@ properties (such as H, S, F, G) with the appropriate units</p></li>
 <li><p>Changed symbol for Hemlholtz energy from A to F</p></li>
 </ul>
 <section id="id4">
-<h3>Contributors<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<h3>Contributors<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Himaghna Bhattacharjee (<a class="reference external" href="https://github.com/himaghna">himaghna</a>)</p></li>
 </ul>
 </section>
 </section>
 <section id="version-1-2-0">
-<h2>Version 1.2.0<a class="headerlink" href="#version-1-2-0" title="Permalink to this heading"></a></h2>
+<h2>Version 1.2.0<a class="headerlink" href="#version-1-2-0" title="Link to this heading"></a></h2>
 <p>Dec. 12, 2018</p>
 <ul class="simple">
 <li><p>Restructured code to exclude <code class="docutils literal notranslate"><span class="pre">model</span></code> module</p></li>
 </ul>
 </section>
 <section id="version-1-1-3">
-<h2>Version 1.1.3<a class="headerlink" href="#version-1-1-3" title="Permalink to this heading"></a></h2>
+<h2>Version 1.1.3<a class="headerlink" href="#version-1-1-3" title="Link to this heading"></a></h2>
 <p>Dec. 11, 2018</p>
 <ul class="simple">
 <li><p>Added <a class="reference internal" href="api/reactions/bep/pmutt.reaction.bep.BEP.html#pmutt.reaction.bep.BEP" title="pmutt.reaction.bep.BEP"><code class="xref py py-class docutils literal notranslate"><span class="pre">BEP</span></code></a> class</p></li>
@@ -636,7 +648,7 @@ represent an empty species</p></li>
 </ul>
 </section>
 <section id="version-1-1-2">
-<h2>Version 1.1.2<a class="headerlink" href="#version-1-1-2" title="Permalink to this heading"></a></h2>
+<h2>Version 1.1.2<a class="headerlink" href="#version-1-1-2" title="Link to this heading"></a></h2>
 <p>Nov. 27, 2018</p>
 <ul class="simple">
 <li><p>Fixed bugs in <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class for calculating
@@ -650,7 +662,7 @@ instead of expecting a list</p></li>
 </ul>
 </section>
 <section id="version-1-1-1">
-<h2>Version 1.1.1<a class="headerlink" href="#version-1-1-1" title="Permalink to this heading"></a></h2>
+<h2>Version 1.1.1<a class="headerlink" href="#version-1-1-1" title="Link to this heading"></a></h2>
 <p>Nov. 7, 2018</p>
 <ul class="simple">
 <li><p>Fixed bugs in <a class="reference internal" href="api/empirical/shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shomate</span></code></a> class for <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>
@@ -661,7 +673,7 @@ vibrational energies instead of wavenumbers.</p></li>
 </ul>
 </section>
 <section id="version-1-1-0">
-<h2>Version 1.1.0<a class="headerlink" href="#version-1-1-0" title="Permalink to this heading"></a></h2>
+<h2>Version 1.1.0<a class="headerlink" href="#version-1-1-0" title="Link to this heading"></a></h2>
 <p>Oct. 26, 2018</p>
 <ul class="simple">
 <li><p>Updated <a class="reference internal" href="api/reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> class to parse strings</p></li>

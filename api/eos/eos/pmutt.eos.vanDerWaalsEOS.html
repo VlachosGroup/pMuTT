@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.eos.vanDerWaalsEOS &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.eos.vanDerWaalsEOS &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -39,7 +39,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -71,7 +71,26 @@
 <li class="toctree-l1"><a class="reference internal" href="../../phase_diagram/phase_diagram.html">Phase Diagrams</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../eos.html">Equations of State</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pmutt.eos.IdealGasEOS.html">pmutt.eos.IdealGasEOS</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pmutt.eos.vanDerWaalsEOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pmutt.eos.vanDerWaalsEOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.a"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.a</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.b"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.b</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.__init__"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.from_critical"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.from_critical()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.from_dict"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_P"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_P()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_Pc"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_Pc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_T"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_T()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_Tc"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_Tc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_V"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_V()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_Vc"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_Vc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_Vm"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_Vm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.get_n"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.get_n()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.eos.vanDerWaalsEOS.to_dict"><code class="docutils literal notranslate"><span class="pre">vanDerWaalsEOS.to_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../visualization/visual.html">Visualization</a></li>
@@ -109,39 +128,39 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-eos-vanderwaalseos">
-<h1>pmutt.eos.vanDerWaalsEOS<a class="headerlink" href="#pmutt-eos-vanderwaalseos" title="Permalink to this heading"></a></h1>
+<h1>pmutt.eos.vanDerWaalsEOS<a class="headerlink" href="#pmutt-eos-vanderwaalseos" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.eos.</span></span><span class="sig-name descname"><span class="pre">vanDerWaalsEOS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.eos.</span></span><span class="sig-name descname"><span class="pre">vanDerWaalsEOS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_pmuttBase</span></code></p>
 <p>van der Waals equation of state</p>
 <p><span class="math notranslate nohighlight">\(\bigg(P+a\big(\frac{n}{V}\big)^2 \bigg)\bigg(\frac{V}{n}-b
 \bigg)=RT\)</span></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.a">
-<span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.a" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">a</span></span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.a" title="Link to this definition"></a></dt>
 <dd><p>Measure of average attraction between particles in Pa m6/mol</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.b">
-<span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.b" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">b</span></span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.b" title="Link to this definition"></a></dt>
 <dd><p>Volume excluded by a mole of particles in m3/mol</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -187,14 +206,14 @@
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.from_critical">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_critical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.from_critical" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_critical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.from_critical" title="Link to this definition"></a></dt>
 <dd><p>Creates the van der Waals object from critical temperature and
 pressure</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Tc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Critical temperature in K</p></li>
-<li><p><strong>Pc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Critical pressure in bar</p></li>
+<li><p><strong>Tc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Critical temperature in K</p></li>
+<li><p><strong>Pc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Critical pressure in bar</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -208,11 +227,11 @@ pressure</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Obj</strong></p>
@@ -225,85 +244,85 @@ pressure</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_P">
-<span class="sig-name descname"><span class="pre">get_P</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0247895618937</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_P" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_P</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0247895618937</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_P" title="Link to this definition"></a></dt>
 <dd><p>Calculates the pressure of a van der Waals gas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
-<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
+<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>P</strong> – Pressure in bar</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_Pc">
-<span class="sig-name descname"><span class="pre">get_Pc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Pc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Pc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Pc" title="Link to this definition"></a></dt>
 <dd><p>Calculates the critical pressure</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Pc</strong> – Critical pressure in bar</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_T">
-<span class="sig-name descname"><span class="pre">get_T</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0247895618937</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_T" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_T</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0247895618937</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_T" title="Link to this definition"></a></dt>
 <dd><p>Calculates the temperature of a van der Waals gas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</p></li>
+<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>T</strong> – Temperature in K</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_Tc">
-<span class="sig-name descname"><span class="pre">get_Tc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Tc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Tc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Tc" title="Link to this definition"></a></dt>
 <dd><p>Calculates the critical temperature</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Tc</strong> – Critcial temperature in K</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_V">
-<span class="sig-name descname"><span class="pre">get_V</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_V" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_V</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_V" title="Link to this definition"></a></dt>
 <dd><p>Calculates the volume of a van der Waals gas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</p></li>
-<li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles (in mol). Default is 1 mol</p></li>
+<li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
 return the larger volume (gas phase). If False, returns the
 smaller volume (liquid phase).</p></li>
 </ul>
@@ -312,38 +331,38 @@ smaller volume (liquid phase).</p></li>
 <dd class="field-even"><p><strong>V</strong> – Volume in m3</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_Vc">
-<span class="sig-name descname"><span class="pre">get_Vc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Vc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Vc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Vc" title="Link to this definition"></a></dt>
 <dd><p>Calculates the critical volume</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles in mol. Default is 1 mol</p>
+<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Number of moles in mol. Default is 1 mol</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Vc</strong> – Critical volume in m3</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_Vm">
-<span class="sig-name descname"><span class="pre">get_Vm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Vm" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Vm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_Vm" title="Link to this definition"></a></dt>
 <dd><p>Calculates the molar volume of a van der Waals gas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
-<li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
+<li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
 return the larger volume (gas phase). If False, returns the
 smaller volume (liquid phase).</p></li>
 </ul>
@@ -352,22 +371,22 @@ smaller volume (liquid phase).</p></li>
 <dd class="field-even"><p><strong>Vm</strong> – Volume in m3</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.get_n">
-<span class="sig-name descname"><span class="pre">get_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0247895618937</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_n" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0247895618937</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.get_n" title="Link to this definition"></a></dt>
 <dd><p>Calculates the moles of a van der Waals gas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
-<li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
+<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Volume in m3. Default is standard volume</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in bar. Default is standard pressure</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is standard temperature</p></li>
+<li><p><strong>gas_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Relevant if system is in vapor-liquid equilibrium. If True,
 return the smaller moles (gas phase). If False, returns the
 larger moles (liquid phase).</p></li>
 </ul>
@@ -376,21 +395,21 @@ larger moles (liquid phase).</p></li>
 <dd class="field-even"><p><strong>n</strong> – Number of moles in mol</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.eos.vanDerWaalsEOS.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.eos.vanDerWaalsEOS.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

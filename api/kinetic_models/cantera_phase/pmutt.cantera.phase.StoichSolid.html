@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.cantera.phase.StoichSolid &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.cantera.phase.StoichSolid &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -120,27 +120,27 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-cantera-phase-stoichsolid">
-<h1>pmutt.cantera.phase.StoichSolid<a class="headerlink" href="#pmutt-cantera-phase-stoichsolid" title="Permalink to this heading"></a></h1>
+<h1>pmutt.cantera.phase.StoichSolid<a class="headerlink" href="#pmutt-cantera-phase-stoichsolid" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.cantera.phase.</span></span><span class="sig-name descname"><span class="pre">StoichSolid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.cantera.phase.</span></span><span class="sig-name descname"><span class="pre">StoichSolid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-class docutils literal notranslate"><span class="pre">Phase</span></code></a></p>
 <p>Expresses stoichiometric solid as Cantera CTI file. Inherits from
 <a class="reference internal" href="pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-class docutils literal notranslate"><span class="pre">Phase</span></code></a>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.name" title="Link to this definition"></a></dt>
 <dd><p>Name of the phase</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.species">
-<span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.species" title="Link to this definition"></a></dt>
 <dd><p>Species present in Phase</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -151,18 +151,18 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.density">
-<span class="sig-name descname"><span class="pre">density</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.density" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">density</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.density" title="Link to this definition"></a></dt>
 <dd><p>Bulk density in g/cm3. Default is None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.initial_state">
-<span class="sig-name descname"><span class="pre">initial_state</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.initial_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initial_state</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.initial_state" title="Link to this definition"></a></dt>
 <dd><p>Currently not supported. Gives ability to set initial temperature,
 pressure or other operating variables of the phase. Default is None.</p>
 <dl class="field-list simple">
@@ -174,7 +174,7 @@ pressure or other operating variables of the phase. Default is None.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.transport">
-<span class="sig-name descname"><span class="pre">transport</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.transport" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">transport</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.transport" title="Link to this definition"></a></dt>
 <dd><p>Currently not supported. Gives ability to specify transport model
 to use for phase. Default is None.</p>
 <dl class="field-list simple">
@@ -186,7 +186,7 @@ to use for phase. Default is None.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.options">
-<span class="sig-name descname"><span class="pre">options</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.options" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">options</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.options" title="Link to this definition"></a></dt>
 <dd><p>Currently not supported. Specify special options to the phase.
 Default is None.</p>
 <dl class="field-list simple">
@@ -198,18 +198,18 @@ Default is None.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.note">
-<span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.note" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.note" title="Link to this definition"></a></dt>
 <dd><p>Comment field for users. Default is None.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -260,64 +260,64 @@ Default is None.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.append_species">
-<span class="sig-name descname"><span class="pre">append_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.append_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">append_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.append_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.clear_species">
-<span class="sig-name descname"><span class="pre">clear_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.clear_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clear_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.clear_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.copy_species">
-<span class="sig-name descname"><span class="pre">copy_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.copy_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">copy_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.copy_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.elements">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.elements" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.elements" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.extend_species">
-<span class="sig-name descname"><span class="pre">extend_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.extend_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extend_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.extend_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.index_species">
-<span class="sig-name descname"><span class="pre">index_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.index_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">index_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.index_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.pop_species">
-<span class="sig-name descname"><span class="pre">pop_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.pop_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">pop_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.pop_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.remove_species">
-<span class="sig-name descname"><span class="pre">remove_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.remove_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.remove_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="id0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.species_names">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.species_names" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.species_names" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.cantera.phase.StoichSolid.to_cti">
-<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_line_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.to_cti" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_line_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.cantera.phase.StoichSolid.to_cti" title="Link to this definition"></a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>max_line_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Maximum number of characters in the line. Default is 80.</p></li>
-<li><p><strong>mass_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Mass unit for <cite>density</cite>. Default is ‘g’</p></li>
-<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit for <cite>density</cite>. Default is ‘cm’</p></li>
+<li><p><strong>max_line_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Maximum number of characters in the line. Default is 80.</p></li>
+<li><p><strong>mass_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Mass unit for <cite>density</cite>. Default is ‘g’</p></li>
+<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit for <cite>density</cite>. Default is ‘cm’</p></li>
 <li><p><strong>units</strong> (<a class="reference internal" href="../cantera_units/pmutt.cantera.units.Units.html#pmutt.cantera.units.Units" title="pmutt.cantera.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object, optional) – If specified, <cite>mass_unit</cite> and <cite>length_unit</cite> are overwritten.
 Default is None.</p></li>
 </ul>
@@ -326,7 +326,7 @@ Default is None.</p></li>
 <dd class="field-even"><p><strong>CTI_str</strong> – Object represented as a CTI string.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

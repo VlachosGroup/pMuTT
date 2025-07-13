@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.statmech.StatMech &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.statmech.StatMech &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -64,7 +64,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../empirical/empirical.html">Empirical Models</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../statmech.html">Statistical Thermodynamic Models</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../statmech.html#statmech-base-class">StatMech Base Class</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.StatMech</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.StatMech</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.statmech.StatMech"><code class="docutils literal notranslate"><span class="pre">StatMech</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../statmech.html#example-of-initialization-using-objects">Example of initialization using objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../statmech.html#example-of-initialization-using-classes-and-parameters">Example of initialization using classes and parameters</a></li>
 </ul>
@@ -120,26 +123,26 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-statmech-statmech">
-<h1>pmutt.statmech.StatMech<a class="headerlink" href="#pmutt-statmech-statmech" title="Permalink to this heading"></a></h1>
+<h1>pmutt.statmech.StatMech<a class="headerlink" href="#pmutt-statmech-statmech" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.statmech.</span></span><span class="sig-name descname"><span class="pre">StatMech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vib_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elec_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nucl_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc_models=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.statmech.</span></span><span class="sig-name descname"><span class="pre">StatMech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vib_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elec_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nucl_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc_models=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code></p>
 <p>Base class for statistical mechanic models.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.name" title="Link to this definition"></a></dt>
 <dd><p>Name of the specie. Default is None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.trans_model">
-<span class="sig-name descname"><span class="pre">trans_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.trans_model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">trans_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.trans_model" title="Link to this definition"></a></dt>
 <dd><p>Deals with translational modes. Default is
 <a class="reference internal" href="../misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode" title="pmutt.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
 <dl class="field-list simple">
@@ -151,7 +154,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.vib_model">
-<span class="sig-name descname"><span class="pre">vib_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.vib_model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">vib_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.vib_model" title="Link to this definition"></a></dt>
 <dd><p>Deals with vibrational modes. Default is
 <a class="reference internal" href="../misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode" title="pmutt.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
 <dl class="field-list simple">
@@ -163,7 +166,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.rot_model">
-<span class="sig-name descname"><span class="pre">rot_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.rot_model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">rot_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.rot_model" title="Link to this definition"></a></dt>
 <dd><p>Deals with rotational modes. Default is
 <a class="reference internal" href="../misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode" title="pmutt.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
 <dl class="field-list simple">
@@ -175,7 +178,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.elec_model">
-<span class="sig-name descname"><span class="pre">elec_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.elec_model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">elec_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.elec_model" title="Link to this definition"></a></dt>
 <dd><p>Deals with electronic modes. Default is
 <a class="reference internal" href="../misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode" title="pmutt.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
 <dl class="field-list simple">
@@ -187,7 +190,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.nucl_model">
-<span class="sig-name descname"><span class="pre">nucl_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.nucl_model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nucl_model</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.nucl_model" title="Link to this definition"></a></dt>
 <dd><p>Deals with nuclear modes. Default is
 <a class="reference internal" href="../misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode" title="pmutt.statmech.EmptyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyMode</span></code></a></p>
 <dl class="field-list simple">
@@ -199,7 +202,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.elements">
-<span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.elements" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.elements" title="Link to this definition"></a></dt>
 <dd><p>Composition of the species. Default is None.
 Keys of dictionary are elements, values are stoichiometric values
 in a formula unit.
@@ -207,14 +210,14 @@ e.g. CH3OH can be represented as:
 {‘C’: 1, ‘H’: 4, ‘O’: 1,}.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.references">
-<span class="sig-name descname"><span class="pre">references</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.references" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">references</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.references" title="Link to this definition"></a></dt>
 <dd><p>Contains references to adjust <code class="docutils literal notranslate"><span class="pre">HoRT</span></code>. If not specified
 then HoRT_dft will be used without adjustment. Default is None</p>
 <dl class="field-list simple">
@@ -226,42 +229,42 @@ then HoRT_dft will be used without adjustment. Default is None</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.misc_models">
-<span class="sig-name descname"><span class="pre">misc_models</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.misc_models" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">misc_models</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.misc_models" title="Link to this definition"></a></dt>
 <dd><p>Extra models that do not fit in the above attributes. Commonly used
 models would be <code class="docutils literal notranslate"><span class="pre">pmutt.statmech</span></code> and <code class="docutils literal notranslate"><span class="pre">pmutt.mixture</span></code> models</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of pmutt model objects, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a> of pmutt model objects, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.smiles">
-<span class="sig-name descname"><span class="pre">smiles</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.smiles" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">smiles</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.smiles" title="Link to this definition"></a></dt>
 <dd><p>Smiles representation of species</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.notes">
-<span class="sig-name descname"><span class="pre">notes</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.notes" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">notes</span></span><a class="headerlink" href="#pmutt.statmech.StatMech.notes" title="Link to this definition"></a></dt>
 <dd><p>Any additional details you would like to include such as
 computational set up. Default is None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vib_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elec_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nucl_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc_models=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vib_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elec_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nucl_model=&lt;pmutt.statmech.EmptyMode</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">misc_models=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -337,11 +340,11 @@ computational set up. Default is None</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>StatMech</strong></p>
@@ -354,21 +357,21 @@ computational set up. Default is None</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_Cp">
-<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_Cp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_Cp" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -385,19 +388,19 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_CpoR">
-<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_CpoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_CpoR" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless heat capacity (constant P)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -415,21 +418,21 @@ follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_Cv">
-<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_Cv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_Cv" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -446,19 +449,19 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_CvoR">
-<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_CvoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_CvoR" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total heat capacity. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -476,20 +479,20 @@ follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_E">
-<span class="sig-name descname"><span class="pre">get_E</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_ZPE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_E" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_E</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_ZPE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_E" title="Link to this definition"></a></dt>
 <dd><p>Calculate the electronic energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. If the electronic mode is
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. If the electronic mode is
 <a class="reference internal" href="../elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a>, then the output is
 insensitive to this input. Default is 298.15 K</p></li>
-<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</p></li>
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
@@ -499,25 +502,25 @@ True</p></li>
 <dd class="field-even"><p><strong>E</strong> – Electronic energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_EoRT">
-<span class="sig-name descname"><span class="pre">get_EoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_ZPE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_EoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_EoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_ZPE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_EoRT" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless electronic energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. If the electronic mode is
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. If the electronic mode is
 <a class="reference internal" href="../elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStateElec</span></code></a>, then the output is
 insensitive to this input. Default is 298.15 K</p></li>
-<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>include_ZPE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, includes the zero point energy. Default is False</p></li>
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to electronic mode</p></li>
@@ -527,30 +530,30 @@ True</p></li>
 <dd class="field-even"><p><strong>EoRT</strong> – Dimensionless electronic energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_F">
-<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_F" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_F" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the Helmholtz energy. If True, returns
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the Helmholtz energy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
@@ -568,20 +571,20 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_FoRT">
-<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_FoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_FoRT" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Helmholtz energy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Helmholtz energy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
@@ -600,22 +603,22 @@ are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_G">
-<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_G" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_G" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the Gibbs energy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the Gibbs energy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
@@ -633,20 +636,20 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_GoRT">
-<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_GoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_GoRT" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
@@ -665,22 +668,22 @@ follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_H">
-<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_H" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_H" title="Link to this definition"></a></dt>
 <dd><p>Calculate the enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the enthalpy. If True, returns
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the enthalpy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -697,19 +700,19 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_HoRT">
-<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_HoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_HoRT" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total enthalpy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total enthalpy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -727,22 +730,22 @@ follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_S">
-<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_S" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_S" title="Link to this definition"></a></dt>
 <dd><p>Calculate the entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the entropy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the entropy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
@@ -760,38 +763,38 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_Selements">
-<span class="sig-name descname"><span class="pre">get_Selements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_Selements" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Selements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_Selements" title="Link to this definition"></a></dt>
 <dd><p>Calculate the dimensionless entropy of the elements in the molecule</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
+<dd class="field-odd"><p><strong>None</strong></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>SoR</strong> – Entropy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_SoR">
-<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_SoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_SoR" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total entropy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total entropy. If True, returns
 contribution of each mode.</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
-<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>S_elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Includes the entropy of the elements to compute an entropy of
 formation. Defauly is None</p></li>
 </ul>
 </dd>
@@ -808,22 +811,22 @@ follows: [trans, vib, rot, elec, nucl, misc_models (if any)]</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_U">
-<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_U" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_U" title="Link to this definition"></a></dt>
 <dd><p>Calculate the internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the internal energy. If True, returns
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the internal energy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -840,19 +843,19 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_UoRT">
-<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_UoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_UoRT" title="Link to this definition"></a></dt>
 <dd><p>Dimensionless internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total internal energy. If True, returns
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total internal energy. If True, returns
 contribution of each mode.</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -870,19 +873,19 @@ are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_q">
-<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_q" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_q" title="Link to this definition"></a></dt>
 <dd><p>Partition function</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the product of partition functions. If True,
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the product of partition functions. If True,
 returns contributions of each mode</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
 </dd>
@@ -899,28 +902,28 @@ If verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.get_quantity">
-<span class="sig-name descname"><span class="pre">get_quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_quantity" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_references</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.get_quantity" title="Link to this definition"></a></dt>
 <dd><p>Generic method to get any quantity from modes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
+<li><p><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
 quantity as long as the relevant objects have the same method
 name</p></li>
-<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
+<li><p><strong>raise_error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, raises an error if any of the modes do not have the
 quantity of interest. Default is True</p></li>
-<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
+<li><p><strong>raise_warning</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Only relevant if raise_error is False. Raises a warning if any
 of the modes do not have the quantity of interest. Default is
 True</p></li>
-<li><p><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Operation to apply when combining the modes. Supported options
+<li><p><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Operation to apply when combining the modes. Supported options
 include:</p>
 <ul>
 <li><p>sum (Default)</p></li>
 <li><p>prod</p></li>
 </ul>
 </p></li>
-<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
+<li><p><strong>use_references</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds contribution from references. Default is True</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If False, returns the total Gibbs energy. If True, returns
 contribution of each mode.</p></li>
 <li><p><strong>kwargs</strong> (<em>key-word arguments</em>) – Parameters passed to each mode</p></li>
 </ul>
@@ -938,14 +941,14 @@ verbose is True, contribution to each mode are as follows:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.StatMech.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.StatMech.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

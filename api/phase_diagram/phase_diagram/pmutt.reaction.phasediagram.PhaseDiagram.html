@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.reaction.phasediagram.PhaseDiagram &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.reaction.phasediagram.PhaseDiagram &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -39,7 +39,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -69,7 +69,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../reactions/reactions.html">Reactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../equilibrium/equilibrium.html">Equilibrium Models</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../phase_diagram.html">Phase Diagrams</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pmutt.reaction.phasediagram.PhaseDiagram</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pmutt.reaction.phasediagram.PhaseDiagram</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.reactions"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.reactions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.norm_factors"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.norm_factors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.__init__"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.from_dict"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_E_span"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.get_E_span()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_1D"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.get_GoRT_1D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.get_GoRT_2D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_species"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.get_species()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_1D"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.plot_1D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_2D"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.plot_2D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_coordinate_diagram"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.plot_coordinate_diagram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.reaction.phasediagram.PhaseDiagram.to_dict"><code class="docutils literal notranslate"><span class="pre">PhaseDiagram.to_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../phase_diagram.html#examples">Examples</a></li>
 </ul>
 </li>
@@ -109,16 +126,16 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-reaction-phasediagram-phasediagram">
-<h1>pmutt.reaction.phasediagram.PhaseDiagram<a class="headerlink" href="#pmutt-reaction-phasediagram-phasediagram" title="Permalink to this heading"></a></h1>
+<h1>pmutt.reaction.phasediagram.PhaseDiagram<a class="headerlink" href="#pmutt-reaction-phasediagram-phasediagram" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.reaction.phasediagram.</span></span><span class="sig-name descname"><span class="pre">PhaseDiagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.reaction.phasediagram.</span></span><span class="sig-name descname"><span class="pre">PhaseDiagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../reactions/reactions/pmutt.reaction.Reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></p>
 <p>Generate phase diagrams based on reactions specified. Inherits from
 <a class="reference internal" href="../../reactions/reactions/pmutt.reaction.Reactions.html#pmutt.reaction.Reactions" title="pmutt.reaction.Reactions"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.reactions">
-<span class="sig-name descname"><span class="pre">reactions</span></span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.reactions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">reactions</span></span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.reactions" title="Link to this definition"></a></dt>
 <dd><p>Formation reactions for each phase. Reactions should be written
 with consistent reference species to obtain meaningful data.</p>
 <dl class="field-list simple">
@@ -130,7 +147,7 @@ with consistent reference species to obtain meaningful data.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.norm_factors">
-<span class="sig-name descname"><span class="pre">norm_factors</span></span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.norm_factors" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">norm_factors</span></span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.norm_factors" title="Link to this definition"></a></dt>
 <dd><p>Used for normalizing Gibbs energies. These factors could be
 surface areas when calculating surface energies or if the
 reactions stoichiometry is not consistent. Default is an array of
@@ -144,7 +161,7 @@ reactions stoichiometry is not consistent. Default is an array of
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -184,11 +201,11 @@ reactions stoichiometry is not consistent. Default is an array of
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>PhaseDiagram</strong></p>
@@ -201,7 +218,7 @@ reactions stoichiometry is not consistent. Default is an array of
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.get_E_span">
-<span class="sig-name descname"><span class="pre">get_E_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_E_span" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_E_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_E_span" title="Link to this definition"></a></dt>
 <dd><p>Gets the energy span of a set of reactions. Equations sourced from</p>
 <ul class="simple">
 <li><p>Kozuch, S.; Shaik, S. How to Conceptualize Catalytic Cycles? The
@@ -216,7 +233,7 @@ TOF-determining intermediate (TDI):</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters to evaluate Gibbs energy at each state.</p></li>
 </ul>
@@ -225,22 +242,22 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>E_span</strong> – Energy span of the Reactions</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_1D">
-<span class="sig-name descname"><span class="pre">get_GoRT_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_1D" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_1D" title="Link to this definition"></a></dt>
 <dd><p>Calculates the Gibbs free energy for all the reactions for 1 varying
 parameter</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of variable to vary</p></li>
+<li><p><strong>x_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of variable to vary</p></li>
 <li><p><strong>x_values</strong> (<em>iterable object</em>) – x values to use</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Other variables to use in the calculation</p></li>
 </ul>
 </dd>
@@ -259,17 +276,17 @@ stable phase at the x_values.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D">
-<span class="sig-name descname"><span class="pre">get_GoRT_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_GoRT_2D" title="Link to this definition"></a></dt>
 <dd><p>Calculates the Gibbs free energy for all the reactions for two
 varying parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of first variable to vary</p></li>
+<li><p><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of first variable to vary</p></li>
 <li><p><strong>x1_values</strong> (<em>iterable object</em>) – x1 values to use</p></li>
-<li><p><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of second variable to vary</p></li>
+<li><p><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of second variable to vary</p></li>
 <li><p><strong>x2_values</strong> (<em>iterable object</em>) – x2 values to use</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Other variables to use in the calculation</p></li>
 </ul>
 </dd>
@@ -288,13 +305,13 @@ stable phase at the x_values.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.get_species">
-<span class="sig-name descname"><span class="pre">get_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'name'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'name'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.get_species" title="Link to this definition"></a></dt>
 <dd><p>Returns the unique species included in the reactions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether transition states should be included. Default is True</p></li>
-<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use as the key in the output dictionary.
+<li><p><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether transition states should be included. Default is True</p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Attribute to use as the key in the output dictionary.
 Default is name</p></li>
 </ul>
 </dd>
@@ -302,21 +319,21 @@ Default is name</p></li>
 <dd class="field-even"><p><strong>species</strong> – Unique species in the reactions</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.plot_1D">
-<span class="sig-name descname"><span class="pre">plot_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_1D" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_1D" title="Link to this definition"></a></dt>
 <dd><p>Make a 1D phase diagram.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of variable to vary</p></li>
+<li><p><strong>x_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of variable to vary</p></li>
 <li><p><strong>x_values</strong> (<em>iterable object</em>) – x values to use</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Other variables to use in the calculation</p></li>
 </ul>
 </dd>
@@ -332,16 +349,16 @@ Default is name</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.plot_2D">
-<span class="sig-name descname"><span class="pre">plot_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_2D" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_2D" title="Link to this definition"></a></dt>
 <dd><p>Make a 2D phase diagram.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of first variable to vary</p></li>
+<li><p><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of first variable to vary</p></li>
 <li><p><strong>x1_values</strong> (<em>iterable object</em>) – x1 values to use</p></li>
-<li><p><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of first variable to vary</p></li>
+<li><p><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of first variable to vary</p></li>
 <li><p><strong>x2_values</strong> (<em>iterable object</em>) – x2 values to use</p></li>
-<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
+<li><p><strong>G_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Units for G. If None, uses GoRT. Default is None</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Other variables to use in the calculation</p></li>
 </ul>
 </dd>
@@ -359,18 +376,18 @@ Default is name</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.plot_coordinate_diagram">
-<span class="sig-name descname"><span class="pre">plot_coordinate_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reactants'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_scale_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_TS_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_TS_label_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_TS_label_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TS_label_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.2f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">reaction_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_coordinate_diagram" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_coordinate_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reactants'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_scale_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale_TS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_TS_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_TS_label_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_TS_label_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TS_label_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.2f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">reaction_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.plot_coordinate_diagram" title="Link to this definition"></a></dt>
 <dd><p>Plots a reaction coordinate diagram.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
+<li><p><strong>method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of method to use to calculate quantity. Calculates any
 quantity as long as the relevant objects have the same method
 name. Some examples include: <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_H</span></code>,
 <code class="docutils literal notranslate"><span class="pre">get_EoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_E</span></code></p></li>
-<li><p><strong>ref_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Reaction index to use to reference states. Default is the first
+<li><p><strong>ref_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Reaction index to use to reference states. Default is the first
 reaction (i.e. ref_index = 0)</p></li>
-<li><p><strong>ref_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – <p>State of the reference to use. Supported options include:</p>
+<li><p><strong>ref_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>State of the reference to use. Supported options include:</p>
 <ul>
 <li><p>reactants (default)</p></li>
 <li><p>products</p></li>
@@ -378,32 +395,32 @@ reaction (i.e. ref_index = 0)</p></li>
 <li><p>ts (same as transition state)</p></li>
 </ul>
 </p></li>
-<li><p><strong>x_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Spacing between reaction states. Shape of curve likely does not
+<li><p><strong>x_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Spacing between reaction states. Shape of curve likely does not
 change with this parameter since the x axis would rescale
 appropriately</p></li>
-<li><p><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether transition states should be included. Default is True</p></li>
-<li><p><strong>x_scale_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Value between 0 and 1 that controls curvature of transition
+<li><p><strong>include_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether transition states should be included. Default is True</p></li>
+<li><p><strong>x_scale_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Value between 0 and 1 that controls curvature of transition
 state peaks. Higher values produce sharper peaks. Default is
 0.5</p></li>
-<li><p><strong>y_scale_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Value between 0 and 1 that controls curvature of transition
+<li><p><strong>y_scale_TS</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Value between 0 and 1 that controls curvature of transition
 state peaks. Higher values produce sharper peaks. Default is
 0.5</p></li>
-<li><p><strong>include_TS_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds a label to the peaks indicating the difference
+<li><p><strong>include_TS_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, adds a label to the peaks indicating the difference
 between the reactants and the transition state. Default is True</p></li>
-<li><p><strong>y_TS_label_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Vertical value to offset TS_label from the TS position. This
+<li><p><strong>y_TS_label_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Vertical value to offset TS_label from the TS position. This
 value scales with the difference between major ticks. Negative
 values will shift the label downwards. Default is 0.10</p></li>
-<li><p><strong>x_TS_label_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Horizontal value to offset TS_label from the TS_position. This
+<li><p><strong>x_TS_label_offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Horizontal value to offset TS_label from the TS_position. This
 value scales with the x_offset value. Negative values will
 shift the label rightward. Default is 0 (i.e. labels are
 directly above peaks by default)</p></li>
-<li><p><strong>TS_label_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print TS_labels. Uses the
+<li><p><strong>TS_label_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print TS_labels. Uses the
 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str.format">str.format</a> syntax. Default is ‘.2f’ (i.e. a floating point
 value rounded to the second decimal place)</p></li>
 <li><p><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>) – Add plot to this figure. If not specified, one will be
 generated</p></li>
 <li><p><strong>axes</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html">matplotlib.axes.Axes.axis</a>, optional) – Adds plot to this axis. If not specified, one will be generated</p></li>
-<li><p><strong>plt_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Extra arguments that will be fed to
+<li><p><strong>plt_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – Extra arguments that will be fed to
 <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html">matplotlib.pyplot.subplots</a></p></li>
 <li><p><strong>reaction_kwargs</strong> (<em>keyword arguments</em>) – Extra arguments that will be fed to the reactions</p></li>
 </ul>
@@ -420,14 +437,14 @@ generated</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.reaction.phasediagram.PhaseDiagram.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.reaction.phasediagram.PhaseDiagram.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

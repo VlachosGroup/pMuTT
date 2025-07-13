@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.omkm.write_thermo_yaml &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.omkm.write_thermo_yaml &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -71,7 +71,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../io.html#openmkm">OpenMKM</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.write_cti.html">pmutt.io.omkm.write_cti</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.write_yaml.html">pmutt.io.omkm.write_yaml</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.omkm.write_thermo_yaml</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.omkm.write_thermo_yaml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.omkm.write_thermo_yaml"><code class="docutils literal notranslate"><span class="pre">write_thermo_yaml()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_species_phases.html">pmutt.io.omkm.get_species_phases</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_reactions_phases.html">pmutt.io.omkm.get_reactions_phases</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.omkm.get_interactions_phases.html">pmutt.io.omkm.get_interactions_phases</a></li>
@@ -123,10 +126,10 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-omkm-write-thermo-yaml">
-<h1>pmutt.io.omkm.write_thermo_yaml<a class="headerlink" href="#pmutt-io-omkm-write-thermo-yaml" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.omkm.write_thermo_yaml<a class="headerlink" href="#pmutt-io-omkm-write-thermo-yaml" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.omkm.write_thermo_yaml">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.omkm.</span></span><span class="sig-name descname"><span class="pre">write_thermo_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lateral_interactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ads_act_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'get_H_act'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_motz_wise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'False'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'default_flow_style':</span> <span class="pre">None,</span> <span class="pre">'indent':</span> <span class="pre">2,</span> <span class="pre">'sort_keys':</span> <span class="pre">False,</span> <span class="pre">'width':</span> <span class="pre">79}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_thermo_yaml" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.omkm.</span></span><span class="sig-name descname"><span class="pre">write_thermo_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lateral_interactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ads_act_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'get_H_act'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_motz_wise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'False'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'default_flow_style':</span> <span class="pre">None,</span> <span class="pre">'indent':</span> <span class="pre">2,</span> <span class="pre">'sort_keys':</span> <span class="pre">False,</span> <span class="pre">'width':</span> <span class="pre">79}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.omkm.write_thermo_yaml" title="Link to this definition"></a></dt>
 <dd><p>Writes the units, phases, species, lateral interactions, reactions and
 additional options in the CTI format for OpenMKM</p>
 <dl class="field-list simple">
@@ -139,12 +142,12 @@ additional options in the CTI format for OpenMKM</p>
 <li><p><strong>units</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code> object, optional) – Units to write file. If a dict is inputted, the key is the quantity
 and the value is the unit. If not specified, uses the default units
 of <code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code>.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for the input.yaml file. If not specified, returns file
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for the input.yaml file. If not specified, returns file
 as str.</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K.</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm.</p></li>
-<li><p><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Type of newline to use. Default is Linux newline (’n’)</p></li>
-<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Activation method to use for adsorption reactions. Accepted
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K.</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm.</p></li>
+<li><p><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Type of newline to use. Default is Linux newline (’n’)</p></li>
+<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Activation method to use for adsorption reactions. Accepted
 options include ‘get_H_act’ and ‘get_G_act’. Default is
 ‘get_H_act’.</p></li>
 </ul>
@@ -153,7 +156,7 @@ options include ‘get_H_act’ and ‘get_G_act’. Default is
 <dd class="field-even"><p><strong>lines_out</strong> – If <code class="docutils literal notranslate"><span class="pre">filename</span></code> is None, CTI file is returned.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

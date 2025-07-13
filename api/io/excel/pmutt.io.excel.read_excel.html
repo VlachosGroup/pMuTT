@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.excel.read_excel &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.excel.read_excel &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -62,7 +62,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../constants/constants.html">Constants</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../io.html">Input and Output</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../io.html#excel">Excel</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.excel.read_excel</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.excel.read_excel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.excel.read_excel"><code class="docutils literal notranslate"><span class="pre">read_excel()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../io.html#special-rules">Special Rules</a></li>
 </ul>
 </li>
@@ -118,25 +121,25 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-excel-read-excel">
-<h1>pmutt.io.excel.read_excel<a class="headerlink" href="#pmutt-io-excel-read-excel" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.excel.read_excel<a class="headerlink" href="#pmutt-io-excel-read-excel" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.excel.read_excel">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.excel.</span></span><span class="sig-name descname"><span class="pre">read_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skiprows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_frequency_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_imaginary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.excel.read_excel" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.excel.</span></span><span class="sig-name descname"><span class="pre">read_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skiprows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_frequency_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_imaginary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.excel.read_excel" title="Link to this definition"></a></dt>
 <dd><p>Reads an excel file and returns it as a list of dictionaries to
 initialize objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>io</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the Excel spreadsheet</p></li>
-<li><p><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed).
+<li><p><strong>io</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of the Excel spreadsheet</p></li>
+<li><p><strong>skiprows</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>, </em><em>optional</em>) – Rows to skip at the beginning (0-indexed).
 Default is [1] so comments can be put in that row</p></li>
-<li><p><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</p></li>
-<li><p><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
+<li><p><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Location to find header names (0-index). Default is 0</p></li>
+<li><p><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Minimum frequency cutoff (cm-1).
 Only frequencies greater than min_frequency_cutoff are read from
 OUTCAR. Default is 0 cm-1</p></li>
-<li><p><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Whether or not imaginary
+<li><p><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Applies for the vib_outcar header. Whether or not imaginary
 frequencies should be included. Default is False</p></li>
-<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</p></li>
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to parse column names. Default is ‘.’</p></li>
 <li><p><strong>**kwargs</strong> (<em>keyword arguments</em>) – <p>Parameters used by <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html">pandas.read_excel</a>. Not required but some
 potentially useful parameters include:</p>
 <ul>
@@ -156,7 +159,7 @@ int (i.e. 1.0 –&gt; 1)</p></li>
 <dd class="field-even"><p><strong>excel_data</strong> – Can be used to initialize objects with the <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs syntax</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of dict</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>

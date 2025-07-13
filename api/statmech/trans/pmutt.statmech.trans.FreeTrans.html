@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.statmech.trans.FreeTrans &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.statmech.trans.FreeTrans &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -39,7 +39,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -67,7 +67,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#statmech-base-class">StatMech Base Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#presets">Presets</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../statmech.html#translational-models">Translational Models</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.trans.FreeTrans</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.statmech.trans.FreeTrans</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.statmech.trans.FreeTrans"><code class="docutils literal notranslate"><span class="pre">FreeTrans</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../statmech.html#vibrational-models">Vibrational Models</a></li>
@@ -119,10 +122,10 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-statmech-trans-freetrans">
-<h1>pmutt.statmech.trans.FreeTrans<a class="headerlink" href="#pmutt-statmech-trans-freetrans" title="Permalink to this heading"></a></h1>
+<h1>pmutt.statmech.trans.FreeTrans<a class="headerlink" href="#pmutt-statmech-trans-freetrans" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.statmech.trans.</span></span><span class="sig-name descname"><span class="pre">FreeTrans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecular_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.statmech.trans.</span></span><span class="sig-name descname"><span class="pre">FreeTrans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecular_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_ModelBase</span></code></p>
 <p>Translational mode using ideal gas assumption. Equations sourced from:</p>
 <ul class="simple">
@@ -131,29 +134,29 @@ John Wiley &amp; Sons, 2010.</p></li>
 </ul>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.n_degrees">
-<span class="sig-name descname"><span class="pre">n_degrees</span></span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.n_degrees" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">n_degrees</span></span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.n_degrees" title="Link to this definition"></a></dt>
 <dd><p>Number of degrees of freedom. Default is 3</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.molecular_weight">
-<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.molecular_weight" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">molecular_weight</span></span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.molecular_weight" title="Link to this definition"></a></dt>
 <dd><p>Molecular weight of the molecule in g/mol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.atoms">
-<span class="sig-name descname"><span class="pre">atoms</span></span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.atoms" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">atoms</span></span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.atoms" title="Link to this definition"></a></dt>
 <dd><p>An atoms object can be used to calculate molecular weight. Not
 stored by FreeTrans</p>
 <dl class="field-list simple">
@@ -165,7 +168,7 @@ stored by FreeTrans</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecular_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molecular_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -232,11 +235,11 @@ stored by FreeTrans</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.from_dict" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.from_dict" title="Link to this definition"></a></dt>
 <dd><p>Recreate an object from the JSON representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – JSON representation</p>
+<dd class="field-odd"><p><strong>json_obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – JSON representation</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Obj</strong></p>
@@ -249,12 +252,12 @@ stored by FreeTrans</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_Cp">
-<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_Cp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_Cp" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant P)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CpoR</span></code></p></li>
 </ul>
@@ -263,14 +266,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cp</strong> – Heat capacity (constant P) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_CpoR">
-<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_CpoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CpoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_CpoR" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant pressure</p>
 <p><span class="math notranslate nohighlight">\(\frac{Cp^{trans}}{R}=\frac{Cv^{trans}}{R} + 1\)</span></p>
 <dl class="field-list simple">
@@ -278,19 +281,19 @@ units.</p></li>
 <dd class="field-odd"><p><strong>CpoR_trans</strong> – Translational dimensionless heat capacity at constant P</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_Cv">
-<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_Cv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_Cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_Cv" title="Link to this definition"></a></dt>
 <dd><p>Calculate the heat capacity (constant V)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_CvoR</span></code></p></li>
 </ul>
@@ -299,14 +302,14 @@ units.</p></li>
 <dd class="field-even"><p><strong>Cv</strong> – Heat capacity (constant V) in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_CvoR">
-<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_CvoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_CvoR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_CvoR" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless heat capacity at constant volume</p>
 <p><span class="math notranslate nohighlight">\(\frac{Cv^{trans}}{R}=\frac{n_{degrees}}{2}\)</span></p>
 <dl class="field-list simple">
@@ -314,21 +317,21 @@ units.</p></li>
 <dd class="field-odd"><p><strong>CvoR_trans</strong> – Translational dimensionless heat capacity at constant V</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_F">
-<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_F" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_F</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_F" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Helmholtz energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code></p></li>
 </ul>
 </dd>
@@ -336,21 +339,21 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>F</strong> – Hemholtz energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_FoRT">
-<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_FoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_FoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_FoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless Helmholtz energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{A^{trans}}{RT}=\frac{U^{trans}}{RT}-\frac{S^{trans}}{R}\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
 Default is atmospheric pressure</p></li>
 </ul>
 </dd>
@@ -358,21 +361,21 @@ Default is atmospheric pressure</p></li>
 <dd class="field-even"><p><strong>FoRT_trans</strong> – Translational dimensionless Helmholtz energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_G">
-<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_G" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_G" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Gibbs energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code></p></li>
 </ul>
 </dd>
@@ -380,21 +383,21 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>G</strong> – Gibbs energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_GoRT">
-<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_GoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_GoRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_GoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless Gibbs energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{G^{trans}}{RT}=\frac{H^{trans}}{RT}-\frac{S^{trans}}{R}\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
 Default is atmospheric pressure</p></li>
 </ul>
 </dd>
@@ -402,21 +405,21 @@ Default is atmospheric pressure</p></li>
 <dd class="field-even"><p><strong>GoR_trans</strong> – Translational dimensionless Gibbs energy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_H">
-<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_H" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_H" title="Link to this definition"></a></dt>
 <dd><p>Calculate the enthalpy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_HoRT</span></code></p></li>
 </ul>
 </dd>
@@ -424,14 +427,14 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>H</strong> – Enthalpy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_HoRT">
-<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_HoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_HoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_HoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless enthalpy</p>
 <p><span class="math notranslate nohighlight">\(\frac{H^{trans}}{RT}=\frac{U^{trans}}{RT} + 1\)</span></p>
 <dl class="field-list simple">
@@ -439,19 +442,19 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-odd"><p><strong>HoRT_trans</strong> – Translational enthalpy</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_S">
-<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_S" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_S" title="Link to this definition"></a></dt>
 <dd><p>Calculate the entropy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units.</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_SoR</span></code></p></li>
 </ul>
@@ -460,22 +463,22 @@ units.</p></li>
 <dd class="field-even"><p><strong>S</strong> – Entropy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_SoR">
-<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_SoR" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_SoR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_SoR" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless entropy</p>
 <p><span class="math notranslate nohighlight">\(\frac{S^{trans}}{R}=1+\frac{n_{degrees}}{2}+\log\bigg(\big(
 \frac{2\pi mk_bT}{h^2})^\frac{n_{degrees}}{2}\frac{RT}{PN_a}\bigg)\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
 Default is atmospheric pressure</p></li>
 </ul>
 </dd>
@@ -483,21 +486,21 @@ Default is atmospheric pressure</p></li>
 <dd class="field-even"><p><strong>SoR_trans</strong> – Translational dimensionless entropy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_U">
-<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_U" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_U" title="Link to this definition"></a></dt>
 <dd><p>Calculate the internal energy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units as string. See <a class="reference internal" href="../../constants/constants/pmutt.constants.R.html#pmutt.constants.R" title="pmutt.constants.R"><code class="xref py py-func docutils literal notranslate"><span class="pre">R()</span></code></a> for accepted
 units but omit the ‘/K’ (e.g. J/mol).</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 298.15 K</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed by <code class="docutils literal notranslate"><span class="pre">get_UoRT</span></code></p></li>
 </ul>
 </dd>
@@ -505,14 +508,14 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-even"><p><strong>U</strong> – Internal energy in appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_UoRT">
-<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_UoRT" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_UoRT</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_UoRT" title="Link to this definition"></a></dt>
 <dd><p>Calculates the dimensionless internal energy</p>
 <p><span class="math notranslate nohighlight">\(\frac{U^{trans}}{RT}=\frac{n_{degrees}}{2}\)</span></p>
 <dl class="field-list simple">
@@ -520,43 +523,43 @@ units but omit the ‘/K’ (e.g. J/mol).</p></li>
 <dd class="field-odd"><p><strong>UoRT_trans</strong> – Translational internal energy</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_V">
-<span class="sig-name descname"><span class="pre">get_V</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_V" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_V</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_V" title="Link to this definition"></a></dt>
 <dd><p>Calculates the molar volume of an ideal gas at T and P</p>
 <p><span class="math notranslate nohighlight">\(V_m=\frac{RT}{P}\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Pressure in bar</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Pressure in bar</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>V</strong> – Molar volume in m3</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.get_q">
-<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_q" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.get_q" title="Link to this definition"></a></dt>
 <dd><p>Calculates the partition function</p>
 <p><span class="math notranslate nohighlight">\(q_{trans} = \bigg(\frac{2\pi \sum_{i}^{atoms}m_ikT}{h^2}
 \bigg)^\frac {n_{degrees}} {2}V\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Temperature in K</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Temperature in K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure (bar) or pressure-like quantity.
 Default is atmospheric pressure</p></li>
 </ul>
 </dd>
@@ -564,21 +567,21 @@ Default is atmospheric pressure</p></li>
 <dd class="field-even"><p><strong>q_trans</strong> – Translational partition function</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.statmech.trans.FreeTrans.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.to_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.statmech.trans.FreeTrans.to_dict" title="Link to this definition"></a></dt>
 <dd><p>Represents object as dictionary with JSON-accepted datatypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>obj_dict</strong></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

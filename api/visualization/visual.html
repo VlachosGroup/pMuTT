@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visualization &mdash; pmutt 1.4.15 documentation</title>
+  <title>Visualization &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -71,10 +71,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../eos/eos.html">Equations of State</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#plot-1d">Plot_1D</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.plot_1D"><code class="docutils literal notranslate"><span class="pre">plot_1D()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#plot-2d">Plot_2D</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pmutt.plot_2D"><code class="docutils literal notranslate"><span class="pre">plot_2D()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Example</a></li>
 </ul>
 </li>
@@ -113,24 +115,24 @@
            <div itemprop="articleBody">
              
   <section id="visualization">
-<span id="visual"></span><h1>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading"></a></h1>
+<span id="visual"></span><h1>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h1>
 <p>This page contains various functions to visualize functions.</p>
 <section id="plot-1d">
-<h2>Plot_1D<a class="headerlink" href="#plot-1d" title="Permalink to this heading"></a></h2>
+<h2>Plot_1D<a class="headerlink" href="#plot-1d" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.plot_1D">
-<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">plot_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'matplotlib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.plot_1D" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">plot_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'matplotlib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.plot_1D" title="Link to this definition"></a></dt>
 <dd><p>Make a 1D plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obj</strong> (<em>Any model</em><em>, </em><em>species</em><em>, or </em><em>reaction object</em>) – pMuTT object to evaluate</p></li>
-<li><p><strong>x_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of variable to vary</p></li>
+<li><p><strong>x_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of variable to vary</p></li>
 <li><p><strong>x_values</strong> (<em>iterable object</em>) – x values to use</p></li>
-<li><p><strong>methods</strong> (<em>tuple of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Methods to use</p></li>
-<li><p><strong>nrows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows of the subplot grid. It not specified, defaults
+<li><p><strong>methods</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Methods to use</p></li>
+<li><p><strong>nrows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows of the subplot grid. It not specified, defaults
 to length of <code class="docutils literal notranslate"><span class="pre">methods</span></code></p></li>
-<li><p><strong>ncols</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of columns of the subplot grid. If not specified,
+<li><p><strong>ncols</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of columns of the subplot grid. If not specified,
 defaults to 1</p></li>
 <li><p><strong>figure</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a>, optional) – Add plot to this figure. If not specified, one will be
 generated</p></li>
@@ -156,13 +158,13 @@ the method name</p>
 </dd></dl>
 
 <section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
 <p>Below, we plot the enthalpy, entropy, and Gibbs energy of a water molecule
 as a function of temperature at 1 bar and 10 bar.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">plot_1D</span>
-<span class="kn">from</span> <span class="nn">pmutt.examples</span> <span class="kn">import</span> <span class="n">H2O_statmech</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_1D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt.examples</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2O_statmech</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.</span><span class="p">,</span> <span class="mf">500.</span><span class="p">)</span> <span class="c1"># K</span>
 <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plot_1D</span><span class="p">(</span><span class="n">H2O_statmech</span><span class="p">,</span> <span class="n">x_name</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">x_values</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
@@ -190,25 +192,25 @@ as a function of temperature at 1 bar and 10 bar.</p>
 <img alt="../../_images/plot_1D_example.svg" src="../../_images/plot_1D_example.svg" /></section>
 </section>
 <section id="plot-2d">
-<h2>Plot_2D<a class="headerlink" href="#plot-2d" title="Permalink to this heading"></a></h2>
+<h2>Plot_2D<a class="headerlink" href="#plot-2d" title="Link to this heading"></a></h2>
 <p>Below, we plot the enthalpy, entropy, and Gibbs energy of a water molecule
 as a function of temperature and pressure.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.plot_2D">
-<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">plot_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.plot_2D" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.</span></span><span class="sig-name descname"><span class="pre">plot_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.plot_2D" title="Link to this definition"></a></dt>
 <dd><p>Make a 2D plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obj</strong> (<em>Any model</em><em>, </em><em>species</em><em>, or </em><em>reaction object</em>) – pMuTT object to evaluate</p></li>
-<li><p><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of first variable to vary</p></li>
+<li><p><strong>x1_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of first variable to vary</p></li>
 <li><p><strong>x1_values</strong> (<em>iterable object</em>) – x1 values to use</p></li>
-<li><p><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of second variable to vary</p></li>
+<li><p><strong>x2_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of second variable to vary</p></li>
 <li><p><strong>x2_values</strong> (<em>iterable object</em>) – x2 values to use</p></li>
-<li><p><strong>methods</strong> (<em>tuple of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Methods to use</p></li>
-<li><p><strong>nrows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows of the subplot grid. It not specified, defaults
+<li><p><strong>methods</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Methods to use</p></li>
+<li><p><strong>nrows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of rows of the subplot grid. It not specified, defaults
 to length of <code class="docutils literal notranslate"><span class="pre">methods</span></code></p></li>
-<li><p><strong>ncols</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of columns of the subplot grid. If not specified,
+<li><p><strong>ncols</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of columns of the subplot grid. If not specified,
 defaults to 1</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – <p>Other variables to use in the calculation. Method specific
 arguments can be passed by having a key that corresponds to
@@ -233,11 +235,11 @@ the method name</p>
 </dd></dl>
 
 <section id="id3">
-<h3>Example<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pmutt</span> <span class="kn">import</span> <span class="n">plot_2D</span>
-<span class="kn">from</span> <span class="nn">pmutt.examples</span> <span class="kn">import</span> <span class="n">H2O_statmech</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<h3>Example<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt.examples</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2O_statmech</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.</span><span class="p">,</span> <span class="mf">500.</span><span class="p">)</span> <span class="c1"># K</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># bar</span>

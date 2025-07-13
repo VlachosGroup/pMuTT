@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.vasp.set_vib_wavenumbers_from_outcar &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.vasp.set_vib_wavenumbers_from_outcar &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -66,7 +66,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../io.html#json">JSON</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../io.html#yaml">YAML</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../io.html#vasp">VASP</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.vasp.set_vib_wavenumbers_from_outcar</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.vasp.set_vib_wavenumbers_from_outcar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.vasp.set_vib_wavenumbers_from_outcar"><code class="docutils literal notranslate"><span class="pre">set_vib_wavenumbers_from_outcar()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../io.html#gaussian">Gaussian</a></li>
@@ -117,26 +120,26 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-vasp-set-vib-wavenumbers-from-outcar">
-<h1>pmutt.io.vasp.set_vib_wavenumbers_from_outcar<a class="headerlink" href="#pmutt-io-vasp-set-vib-wavenumbers-from-outcar" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.vasp.set_vib_wavenumbers_from_outcar<a class="headerlink" href="#pmutt-io-vasp-set-vib-wavenumbers-from-outcar" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.vasp.set_vib_wavenumbers_from_outcar">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.vasp.</span></span><span class="sig-name descname"><span class="pre">set_vib_wavenumbers_from_outcar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_frequency_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_imaginary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.vasp.set_vib_wavenumbers_from_outcar" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.vasp.</span></span><span class="sig-name descname"><span class="pre">set_vib_wavenumbers_from_outcar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_frequency_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_imaginary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.vasp.set_vib_wavenumbers_from_outcar" title="Link to this definition"></a></dt>
 <dd><p>Parses OUTCAR files for vibrational frequencies and assigns to
 output_structure[‘vib_wavenumber’]. Imaginary frequencies are represented
 by negative numbers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>in_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – OUTCAR file of frequency jobs</p></li>
-<li><p><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Structure to assign value. Will assign to
+<li><p><strong>in_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – OUTCAR file of frequency jobs</p></li>
+<li><p><strong>output_structure</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – Structure to assign value. Will assign to
 output_structure[‘elements’][element]</p></li>
-<li><p><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Only frequencies less than min_frequency_cutoff (in cm-1)
+<li><p><strong>min_frequency_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Only frequencies less than min_frequency_cutoff (in cm-1)
 are read from OUTCAR. Default is 0 cm-1</p></li>
-<li><p><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether imaginary frequencies should be included. Default is False.</p></li>
+<li><p><strong>include_imaginary</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether imaginary frequencies should be included. Default is False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.12)"><strong>FileNotFoundError</strong></a> – Raised if in_file does not exist</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.13)"><strong>FileNotFoundError</strong></a> – Raised if in_file does not exist</p>
 </dd>
 </dl>
 </dd></dl>

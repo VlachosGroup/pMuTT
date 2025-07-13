@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.chemkin.write_surf &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.chemkin.write_surf &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -71,7 +71,10 @@
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.read_reactions.html">pmutt.io.chemkin.read_reactions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_EA.html">pmutt.io.chemkin.write_EA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_gas.html">pmutt.io.chemkin.write_gas</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.chemkin.write_surf</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.chemkin.write_surf</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.chemkin.write_surf"><code class="docutils literal notranslate"><span class="pre">write_surf()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_T_flow.html">pmutt.io.chemkin.write_T_flow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_tube_mole.html">pmutt.io.chemkin.write_tube_mole</a></li>
 </ul>
@@ -122,34 +125,34 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-chemkin-write-surf">
-<h1>pmutt.io.chemkin.write_surf<a class="headerlink" href="#pmutt-io-chemkin-write-surf" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.chemkin.write_surf<a class="headerlink" href="#pmutt-io-chemkin-write-surf" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.chemkin.write_surf">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.chemkin.</span></span><span class="sig-name descname"><span class="pre">write_surf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sden_operation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'+'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reaction_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_method_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'get_E_act'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ads_act_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'get_H_act'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kcal/mol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">.3E'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.0f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span>&#160; <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mw_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_surf" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.chemkin.</span></span><span class="sig-name descname"><span class="pre">write_surf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reactions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sden_operation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'+'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reaction_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_method_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'get_E_act'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ads_act_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'get_H_act'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kcal/mol'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">.3E'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.0f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span>&#160; <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mw_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.write_surf" title="Link to this definition"></a></dt>
 <dd><p>Writes the surf.inp Chemkin file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reactions</strong> (A <a class="reference internal" href="../../reactions/reaction/pmutt.reaction.Reaction.html#pmutt.reaction.Reaction" title="pmutt.reaction.Reaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reaction</span></code></a> object containing) – Chemkin reactions to write in surf.inp file. Purely gas-phase
 reactions will be ignored</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. If not specified, returns file as str</p></li>
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</p></li>
-<li><p><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Filename for surf.inp file. If not specified, returns file as str</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature to calculate activation energy. Default is 298.15 K</p></li>
+<li><p><strong>species_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate species when writing reactions.
 Default is ‘+’</p></li>
-<li><p><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate reaction sides. Default is ‘=’</p></li>
-<li><p><strong>act_method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function of surface
+<li><p><strong>reaction_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate reaction sides. Default is ‘=’</p></li>
+<li><p><strong>act_method_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function of surface
 reactions. Default is ‘get_E_act’.</p></li>
-<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function of adsorption
+<li><p><strong>ads_act_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Name of method to use to calculate activation function of adsorption
 reactions. Default is ‘get_H_act’.</p></li>
-<li><p><strong>act_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Units to calculate activation energy. Default is ‘kcal/mol’</p></li>
-<li><p><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print floating numbers. Default is ‘ .3E’ (i.e.
+<li><p><strong>act_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Units to calculate activation energy. Default is ‘kcal/mol’</p></li>
+<li><p><strong>float_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print floating numbers. Default is ‘ .3E’ (i.e.
 scientific notation rounded to 3 decimal places with a leading
 space for positive numbers)</p></li>
-<li><p><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print stoichiometric coefficients.
+<li><p><strong>stoich_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – String format to print stoichiometric coefficients.
 Default is ‘.0f’ (i.e. integers)</p></li>
-<li><p><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</p></li>
-<li><p><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate columns. Default is ‘  ‘</p></li>
-<li><p><strong>use_mw_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the Motz-Wise corrections. Default is True</p></li>
+<li><p><strong>newline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Newline character. Default is the Linux newline character</p></li>
+<li><p><strong>column_delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter to separate columns. Default is ‘  ‘</p></li>
+<li><p><strong>use_mw_correction</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, uses the Motz-Wise corrections. Default is True</p></li>
 <li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Parameters needed to calculate activation energy and preexponential
 factor</p></li>
 </ul>
@@ -158,7 +161,7 @@ factor</p></li>
 <dd class="field-even"><p><strong>lines_out</strong> – surf.inp lines as a string if <code class="docutils literal notranslate"><span class="pre">filename</span></code> is None</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>

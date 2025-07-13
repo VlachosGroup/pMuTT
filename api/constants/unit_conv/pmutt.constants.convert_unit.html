@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.constants.convert_unit &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.constants.convert_unit &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -62,7 +62,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../constants.html">Constants</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../constants.html#id2">Constants</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../constants.html#unit-conversions">Unit Conversions</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.constants.convert_unit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.constants.convert_unit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.constants.convert_unit"><code class="docutils literal notranslate"><span class="pre">convert_unit()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.constants.debye_to_einstein.html">pmutt.constants.debye_to_einstein</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.constants.einstein_to_debye.html">pmutt.constants.einstein_to_debye</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.constants.energy_to_freq.html">pmutt.constants.energy_to_freq</a></li>
@@ -128,28 +131,28 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-constants-convert-unit">
-<h1>pmutt.constants.convert_unit<a class="headerlink" href="#pmutt-constants-convert-unit" title="Permalink to this heading"></a></h1>
+<h1>pmutt.constants.convert_unit<a class="headerlink" href="#pmutt-constants-convert-unit" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.constants.convert_unit">
-<span class="sig-prename descclassname"><span class="pre">pmutt.constants.</span></span><span class="sig-name descname"><span class="pre">convert_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.constants.convert_unit" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.constants.</span></span><span class="sig-name descname"><span class="pre">convert_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.constants.convert_unit" title="Link to this definition"></a></dt>
 <dd><p>Converts units between two unit sets</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Number to convert. I not specified, will return the appropriate
+<li><p><strong>num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Number to convert. I not specified, will return the appropriate
 conversion factor.</p></li>
-<li><p><strong>initial</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units that num is currently in</p></li>
-<li><p><strong>final</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Units you would like num to be in</p></li>
+<li><p><strong>initial</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units that num is currently in</p></li>
+<li><p><strong>final</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Units you would like num to be in</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>conversion_num</strong> – num in the appropriate units</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – If unit types are not consistent or not supported</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If unit types are not consistent or not supported</p>
 </dd>
 </dl>
 <p><strong>Supported Units</strong></p>

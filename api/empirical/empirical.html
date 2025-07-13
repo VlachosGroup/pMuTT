@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Empirical Models &mdash; pmutt 1.4.15 documentation</title>
+  <title>Empirical Models &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,12 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -38,7 +39,7 @@
               <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -128,7 +129,7 @@
            <div itemprop="articleBody">
              
   <section id="empirical-models">
-<span id="empirical"></span><h1>Empirical Models<a class="headerlink" href="#empirical-models" title="Permalink to this heading"></a></h1>
+<span id="empirical"></span><h1>Empirical Models<a class="headerlink" href="#empirical-models" title="Link to this heading"></a></h1>
 <p>Empirical models predict thermodynamic properties of species using simple
 polynomials. These can be evaluated more quickly than statistical mechanical
 equations and tend to be used by kinetic modeling software.</p>
@@ -139,7 +140,7 @@ will have the same reference state as the original data. Databases like the
 formation of 0). However, data from DFT software (and DFT-based references) may
 use different references. See <a class="reference internal" href="../../referencing.html#referencing"><span class="std std-ref">Referencing</span></a> for more information.</p>
 <section id="parent-class">
-<h2>Parent Class<a class="headerlink" href="#parent-class" title="Permalink to this heading"></a></h2>
+<h2>Parent Class<a class="headerlink" href="#parent-class" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="empirical_base/pmutt.empirical.EmpiricalBase.html#pmutt.empirical.EmpiricalBase" title="pmutt.empirical.EmpiricalBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmpiricalBase</span></code></a></p></td>
@@ -150,7 +151,7 @@ use different references. See <a class="reference internal" href="../../referenc
 </section>
 <hr class="docutils" />
 <section id="nasa">
-<h2>Nasa<a class="headerlink" href="#nasa" title="Permalink to this heading"></a></h2>
+<h2>Nasa<a class="headerlink" href="#nasa" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nasa.Nasa</span></code></a></p></td>
@@ -167,7 +168,7 @@ use different references. See <a class="reference internal" href="../../referenc
 </section>
 <hr class="docutils" />
 <section id="shomate">
-<h2>Shomate<a class="headerlink" href="#shomate" title="Permalink to this heading"></a></h2>
+<h2>Shomate<a class="headerlink" href="#shomate" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="shomate/pmutt.empirical.shomate.Shomate.html#pmutt.empirical.shomate.Shomate" title="pmutt.empirical.shomate.Shomate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shomate.Shomate</span></code></a></p></td>
@@ -178,7 +179,7 @@ use different references. See <a class="reference internal" href="../../referenc
 </section>
 <hr class="docutils" />
 <section id="referencing">
-<h2>Referencing<a class="headerlink" href="#referencing" title="Permalink to this heading"></a></h2>
+<h2>Referencing<a class="headerlink" href="#referencing" title="Link to this heading"></a></h2>
 <p>Referencing is used to bridge the gap between <em>ab-initio</em> code reference states
 and the standard state reference. See <a class="reference internal" href="../../referencing.html#referencing"><span class="std std-ref">Referencing</span></a> for more information.</p>
 <table class="autosummary longtable docutils align-default">
@@ -194,7 +195,7 @@ and the standard state reference. See <a class="reference internal" href="../../
 </section>
 <hr class="docutils" />
 <section id="misc">
-<h2>Misc.<a class="headerlink" href="#misc" title="Permalink to this heading"></a></h2>
+<h2>Misc.<a class="headerlink" href="#misc" title="Link to this heading"></a></h2>
 <p>Miscellaneous models associated with the empirical models are located here.</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>

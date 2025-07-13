@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.gaussian.read_zpe &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.gaussian.read_zpe &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -68,7 +68,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../io.html#vasp">VASP</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../io.html#gaussian">Gaussian</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.gaussian.read_pattern.html">pmutt.io.gaussian.read_pattern</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.gaussian.read_zpe</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.gaussian.read_zpe</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.gaussian.read_zpe"><code class="docutils literal notranslate"><span class="pre">read_zpe()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.gaussian.read_electronic_and_zpe.html">pmutt.io.gaussian.read_electronic_and_zpe</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.gaussian.read_frequencies.html">pmutt.io.gaussian.read_frequencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.gaussian.read_rotational_temperatures.html">pmutt.io.gaussian.read_rotational_temperatures</a></li>
@@ -123,23 +126,23 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-gaussian-read-zpe">
-<h1>pmutt.io.gaussian.read_zpe<a class="headerlink" href="#pmutt-io-gaussian-read-zpe" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.gaussian.read_zpe<a class="headerlink" href="#pmutt-io-gaussian-read-zpe" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.gaussian.read_zpe">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.gaussian.</span></span><span class="sig-name descname"><span class="pre">read_zpe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eV/molecule'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.gaussian.read_zpe" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.gaussian.</span></span><span class="sig-name descname"><span class="pre">read_zpe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eV/molecule'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.gaussian.read_zpe" title="Link to this definition"></a></dt>
 <dd><p>Reads the zero-point energy from the Gaussian log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Log file</p></li>
-<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Units to return energy. Default is ‘eV/molecule’</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Log file</p></li>
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Units to return energy. Default is ‘eV/molecule’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>zero_point_energy</strong> – Zero point energy in <code class="docutils literal notranslate"><span class="pre">units</span></code>. Default units are ‘eV/molecule’</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 </dd></dl>

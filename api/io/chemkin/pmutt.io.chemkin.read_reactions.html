@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.io.chemkin.read_reactions &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.io.chemkin.read_reactions &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -68,7 +68,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../io.html#vasp">VASP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../io.html#gaussian">Gaussian</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../io.html#chemkin">Chemkin</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.chemkin.read_reactions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pmutt.io.chemkin.read_reactions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pmutt.io.chemkin.read_reactions"><code class="docutils literal notranslate"><span class="pre">read_reactions()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_EA.html">pmutt.io.chemkin.write_EA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_gas.html">pmutt.io.chemkin.write_gas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pmutt.io.chemkin.write_surf.html">pmutt.io.chemkin.write_surf</a></li>
@@ -122,15 +125,15 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-io-chemkin-read-reactions">
-<h1>pmutt.io.chemkin.read_reactions<a class="headerlink" href="#pmutt-io-chemkin-read-reactions" title="Permalink to this heading"></a></h1>
+<h1>pmutt.io.chemkin.read_reactions<a class="headerlink" href="#pmutt-io-chemkin-read-reactions" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pmutt.io.chemkin.read_reactions">
-<span class="sig-prename descclassname"><span class="pre">pmutt.io.chemkin.</span></span><span class="sig-name descname"><span class="pre">read_reactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.read_reactions" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pmutt.io.chemkin.</span></span><span class="sig-name descname"><span class="pre">read_reactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.io.chemkin.read_reactions" title="Link to this definition"></a></dt>
 <dd><p>Directly read reactions from Chemkin gas.inp or surf.inp files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Input filename for Chemkin surf or gas .inp file</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Input filename for Chemkin surf or gas .inp file</p></li>
 <li><p><strong>species</strong> (list of <a class="reference internal" href="../../empirical/nasa/pmutt.empirical.nasa.Nasa.html#pmutt.empirical.nasa.Nasa" title="pmutt.empirical.nasa.Nasa"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nasa</span></code></a> objects) – List of NASA objects containing thermodynamic properties for
 all Reactants and Products in Reactions
 default = None. Will not return React_obj and Prod_obj</p></li>
@@ -150,9 +153,9 @@ default = None. Will not return React_obj and Prod_obj</p></li>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.12)"><strong>FileNotFoundError</strong></a> – If the surf.inp or gas.inp file isn’t found.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.12)"><strong>NameError</strong></a> – If the species file does not exist</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.12)"><strong>AttributeError</strong></a> – If the species list is incorrect format</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.13)"><strong>FileNotFoundError</strong></a> – If the surf.inp or gas.inp file isn’t found.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.13)"><strong>NameError</strong></a> – If the species file does not exist</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.13)"><strong>AttributeError</strong></a> – If the species list is incorrect format</p></li>
 </ul>
 </dd>
 </dl>

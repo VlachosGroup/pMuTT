@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Statistical Thermodynamic Models &mdash; pmutt 1.4.15 documentation</title>
+  <title>Statistical Thermodynamic Models &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -39,7 +39,7 @@
               <img src="../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -151,9 +151,9 @@
            <div itemprop="articleBody">
              
   <section id="statistical-thermodynamic-models">
-<span id="statmech"></span><h1>Statistical Thermodynamic Models<a class="headerlink" href="#statistical-thermodynamic-models" title="Permalink to this heading"></a></h1>
+<span id="statmech"></span><h1>Statistical Thermodynamic Models<a class="headerlink" href="#statistical-thermodynamic-models" title="Link to this heading"></a></h1>
 <section id="statmech-base-class">
-<h2>StatMech Base Class<a class="headerlink" href="#statmech-base-class" title="Permalink to this heading"></a></h2>
+<h2>StatMech Base Class<a class="headerlink" href="#statmech-base-class" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">StatMech</span></code> class stores the classes associated with each mode. Each mode
 has methods that specifies how to calculate thermodynamic quantities, such as
 partition functions, heat capacities, internal energy, enthalpy, entropy,
@@ -172,10 +172,10 @@ Helmholtz energy and Gibbs energy.</p>
 </ol>
 <p>The examples below give an equivalent result:</p>
 <section id="example-of-initialization-using-objects">
-<h3>Example of initialization using objects<a class="headerlink" href="#example-of-initialization-using-objects" title="Permalink to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<h3>Example of initialization using objects<a class="headerlink" href="#example-of-initialization-using-objects" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.build</span><span class="w"> </span><span class="kn">import</span> <span class="n">molecule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt.statmech</span><span class="w"> </span><span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 <span class="n">atoms</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">)</span>
 <span class="n">H2O_trans</span> <span class="o">=</span> <span class="n">trans</span><span class="o">.</span><span class="n">FreeTrans</span><span class="p">(</span><span class="n">n_degrees</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">)</span>
@@ -190,10 +190,10 @@ Helmholtz energy and Gibbs energy.</p>
 </div>
 </section>
 <section id="example-of-initialization-using-classes-and-parameters">
-<h3>Example of initialization using classes and parameters<a class="headerlink" href="#example-of-initialization-using-classes-and-parameters" title="Permalink to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
+<h3>Example of initialization using classes and parameters<a class="headerlink" href="#example-of-initialization-using-classes-and-parameters" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.build</span><span class="w"> </span><span class="kn">import</span> <span class="n">molecule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt.statmech</span><span class="w"> </span><span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">vib</span><span class="p">,</span> <span class="n">rot</span><span class="p">,</span> <span class="n">elec</span>
 
 
 <span class="n">H2O_statmech</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">trans_model</span><span class="o">=</span><span class="n">trans</span><span class="o">.</span><span class="n">FreeTrans</span><span class="p">,</span>
@@ -212,13 +212,13 @@ Helmholtz energy and Gibbs energy.</p>
 </section>
 </section>
 <section id="presets">
-<span id="id1"></span><h2>Presets<a class="headerlink" href="#presets" title="Permalink to this heading"></a></h2>
+<span id="id1"></span><h2>Presets<a class="headerlink" href="#presets" title="Link to this heading"></a></h2>
 <p>If you are using a common model (e.g. the ideal gas model), then you can get
 the default parameters from the dictionary, <code class="docutils literal notranslate"><span class="pre">pmutt.statmech.presets</span></code>.
 The same H2O StatMech object can be specified without the need to pass all the
 types of modes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">molecule</span>
-<span class="kn">from</span> <span class="nn">pmutt.statmech</span> <span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ase.build</span><span class="w"> </span><span class="kn">import</span> <span class="n">molecule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pmutt.statmech</span><span class="w"> </span><span class="kn">import</span> <span class="n">StatMech</span><span class="p">,</span> <span class="n">presets</span>
 
 <span class="n">idealgas_defaults</span> <span class="o">=</span> <span class="n">presets</span><span class="p">[</span><span class="s1">&#39;idealgas&#39;</span><span class="p">]</span>
 <span class="n">H2O_new</span> <span class="o">=</span> <span class="n">StatMech</span><span class="p">(</span><span class="n">vib_wavenumbers</span><span class="o">=</span><span class="p">[</span><span class="mf">3825.434</span><span class="p">,</span> <span class="mf">3710.2642</span><span class="p">,</span> <span class="mf">1582.432</span><span class="p">],</span>
@@ -235,7 +235,7 @@ are still required, and the third table shows the required and optional
 parameters to calculate a thermodynamic property (where the value in
 parentheses is the default value).</p>
 <section id="ideal-gas-idealgas">
-<h3>Ideal Gas (idealgas)<a class="headerlink" href="#ideal-gas-idealgas" title="Permalink to this heading"></a></h3>
+<h3>Ideal Gas (idealgas)<a class="headerlink" href="#ideal-gas-idealgas" title="Link to this heading"></a></h3>
 <p>Useful for modeling ideal gases. Assumes the system has:</p>
 <ul class="simple">
 <li><p>3 degrees of translational freedom and no interactions with other molecules</p></li>
@@ -354,7 +354,7 @@ have to be specified.</p></td>
 </table>
 </section>
 <section id="harmonic-approximation-harmonic">
-<h3>Harmonic Approximation (harmonic)<a class="headerlink" href="#harmonic-approximation-harmonic" title="Permalink to this heading"></a></h3>
+<h3>Harmonic Approximation (harmonic)<a class="headerlink" href="#harmonic-approximation-harmonic" title="Link to this heading"></a></h3>
 <p>Typically used to model adsorbates. Assumes the system has:</p>
 <ul class="simple">
 <li><p>harmonic vibrations</p></li>
@@ -442,7 +442,7 @@ to be specified.</p></td>
 </table>
 </section>
 <section id="electronic-electronic">
-<h3>Electronic (electronic)<a class="headerlink" href="#electronic-electronic" title="Permalink to this heading"></a></h3>
+<h3>Electronic (electronic)<a class="headerlink" href="#electronic-electronic" title="Link to this heading"></a></h3>
 <p>Typically used to model systems where the electronic modes dominate and changes
 due to temperature are not important. Assumes the system has:</p>
 <ul class="simple">
@@ -525,7 +525,7 @@ specified</p></td>
 </table>
 </section>
 <section id="placeholder-placeholder">
-<h3>Placeholder (placeholder)<a class="headerlink" href="#placeholder-placeholder" title="Permalink to this heading"></a></h3>
+<h3>Placeholder (placeholder)<a class="headerlink" href="#placeholder-placeholder" title="Link to this heading"></a></h3>
 <p>Typically used to model species that have no contribution. The partition
 function is set to 1 and all other thermodynamic quantities evaluate to 0.</p>
 <table class="docutils align-default">
@@ -608,7 +608,7 @@ function is set to 1 and all other thermodynamic quantities evaluate to 0.</p>
 </table>
 </section>
 <section id="constant-constant">
-<h3>Constant (constant)<a class="headerlink" href="#constant-constant" title="Permalink to this heading"></a></h3>
+<h3>Constant (constant)<a class="headerlink" href="#constant-constant" title="Link to this heading"></a></h3>
 <p>Arbitrarily specify a constant for each quantity. This is primarily used for
 testing so be careful as you can disobey some fundamental thermodynamic
 quantities. For example,</p>
@@ -709,7 +709,7 @@ new entry if you will use a model often.</p>
 </section>
 </section>
 <section id="translational-models">
-<span id="trans"></span><h2>Translational Models<a class="headerlink" href="#translational-models" title="Permalink to this heading"></a></h2>
+<span id="trans"></span><h2>Translational Models<a class="headerlink" href="#translational-models" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="trans/pmutt.statmech.trans.FreeTrans.html#pmutt.statmech.trans.FreeTrans" title="pmutt.statmech.trans.FreeTrans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trans.FreeTrans</span></code></a>([n_degrees, ...])</p></td>
@@ -720,7 +720,7 @@ new entry if you will use a model often.</p>
 <hr class="docutils" />
 </section>
 <section id="vibrational-models">
-<span id="vib"></span><h2>Vibrational Models<a class="headerlink" href="#vibrational-models" title="Permalink to this heading"></a></h2>
+<span id="vib"></span><h2>Vibrational Models<a class="headerlink" href="#vibrational-models" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="vib/pmutt.statmech.vib.HarmonicVib.html#pmutt.statmech.vib.HarmonicVib" title="pmutt.statmech.vib.HarmonicVib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vib.HarmonicVib</span></code></a>([vib_wavenumbers, ...])</p></td>
@@ -740,7 +740,7 @@ new entry if you will use a model often.</p>
 <hr class="docutils" />
 </section>
 <section id="rotational-models">
-<span id="rot"></span><h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Permalink to this heading"></a></h2>
+<span id="rot"></span><h2>Rotational Models<a class="headerlink" href="#rotational-models" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="rot/pmutt.statmech.rot.RigidRotor.html#pmutt.statmech.rot.RigidRotor" title="pmutt.statmech.rot.RigidRotor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rot.RigidRotor</span></code></a>(symmetrynumber[, ...])</p></td>
@@ -751,7 +751,7 @@ new entry if you will use a model often.</p>
 <hr class="docutils" />
 </section>
 <section id="electronic-models">
-<span id="elec"></span><h2>Electronic Models<a class="headerlink" href="#electronic-models" title="Permalink to this heading"></a></h2>
+<span id="elec"></span><h2>Electronic Models<a class="headerlink" href="#electronic-models" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="elec/pmutt.statmech.elec.GroundStateElec.html#pmutt.statmech.elec.GroundStateElec" title="pmutt.statmech.elec.GroundStateElec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elec.GroundStateElec</span></code></a>([potentialenergy, ...])</p></td>
@@ -768,7 +768,7 @@ new entry if you will use a model often.</p>
 <hr class="docutils" />
 </section>
 <section id="nuclear-models">
-<span id="nucl"></span><h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Permalink to this heading"></a></h2>
+<span id="nucl"></span><h2>Nuclear Models<a class="headerlink" href="#nuclear-models" title="Link to this heading"></a></h2>
 <p>Typically these are unimportant for chemical reactions, but the module is
 present in case nuclear modes become important in the future.</p>
 <table class="autosummary longtable docutils align-default">
@@ -781,7 +781,7 @@ present in case nuclear modes become important in the future.</p>
 </section>
 <hr class="docutils" />
 <section id="misc">
-<h2>Misc.<a class="headerlink" href="#misc" title="Permalink to this heading"></a></h2>
+<h2>Misc.<a class="headerlink" href="#misc" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="misc/pmutt.statmech.EmptyMode.html#pmutt.statmech.EmptyMode" title="pmutt.statmech.EmptyMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmptyMode</span></code></a>()</p></td>
@@ -795,7 +795,7 @@ present in case nuclear modes become important in the future.</p>
 </section>
 <hr class="docutils" />
 <section id="creating-new-statmech-models">
-<h2>Creating New StatMech Models<a class="headerlink" href="#creating-new-statmech-models" title="Permalink to this heading"></a></h2>
+<h2>Creating New StatMech Models<a class="headerlink" href="#creating-new-statmech-models" title="Link to this heading"></a></h2>
 <p>New models should inherit from <code class="docutils literal notranslate"><span class="pre">pmutt._ModelBase</span></code>. This class already has the
 dimensional methods (e.g. <code class="docutils literal notranslate"><span class="pre">get_Cv</span></code>, <code class="docutils literal notranslate"><span class="pre">get_U</span></code>, <code class="docutils literal notranslate"><span class="pre">get_S</span></code>), and some routine
 methods (e.g. <code class="docutils literal notranslate"><span class="pre">get_FoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">get_GoRT</span></code>, <code class="docutils literal notranslate"><span class="pre">from_dict</span></code>, <code class="docutils literal notranslate"><span class="pre">to_dict</span></code>)

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pmutt.omkm.phase.InteractingInterface &mdash; pmutt 1.4.15 documentation</title>
+  <title>pmutt.omkm.phase.InteractingInterface &mdash; pmutt 1.4.17 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b7ef1615"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -38,7 +38,7 @@
               <img src="../../../_static/pmutt_inverse_highres.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.4.15
+                1.4.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -122,27 +122,27 @@
            <div itemprop="articleBody">
              
   <section id="pmutt-omkm-phase-interactinginterface">
-<h1>pmutt.omkm.phase.InteractingInterface<a class="headerlink" href="#pmutt-omkm-phase-interactinginterface" title="Permalink to this heading"></a></h1>
+<h1>pmutt.omkm.phase.InteractingInterface<a class="headerlink" href="#pmutt-omkm-phase-interactinginterface" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.omkm.phase.</span></span><span class="sig-name descname"><span class="pre">InteractingInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_motz_wise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pmutt.omkm.phase.</span></span><span class="sig-name descname"><span class="pre">InteractingInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_motz_wise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../cantera_phase/pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-class docutils literal notranslate"><span class="pre">Phase</span></code></a></p>
 <p>OpenMKM implementation of interacting interface. Inherits from
 <a class="reference internal" href="../cantera_phase/pmutt.cantera.phase.Phase.html#pmutt.cantera.phase.Phase" title="pmutt.cantera.phase.Phase"><code class="xref py py-class docutils literal notranslate"><span class="pre">Phase</span></code></a>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.name" title="Link to this definition"></a></dt>
 <dd><p>Name of the phase</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.species">
-<span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.species" title="Link to this definition"></a></dt>
 <dd><p>Species present in Phase</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -153,18 +153,18 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.site_density">
-<span class="sig-name descname"><span class="pre">site_density</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.site_density" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">site_density</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.site_density" title="Link to this definition"></a></dt>
 <dd><p>Site density in mol/cm2. Default is None</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.phases">
-<span class="sig-name descname"><span class="pre">phases</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.phases" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">phases</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.phases" title="Link to this definition"></a></dt>
 <dd><p>Phases associated with this interface</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -175,30 +175,30 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.interactions">
-<span class="sig-name descname"><span class="pre">interactions</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.interactions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">interactions</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.interactions" title="Link to this definition"></a></dt>
 <dd><p>Source of lateral interactions. If any lateral interactions in CTI
 file occur in this phase, specify ‘all’. Default is None.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.note">
-<span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.note" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.note" title="Link to this definition"></a></dt>
 <dd><p>Comment field for users. Default is None.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.initial_state">
-<span class="sig-name descname"><span class="pre">initial_state</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.initial_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initial_state</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.initial_state" title="Link to this definition"></a></dt>
 <dd><p>Currently not supported. Gives ability to set initial temperature,
 pressure or other operating variables of the phase. Default is None.</p>
 <dl class="field-list simple">
@@ -210,7 +210,7 @@ pressure or other operating variables of the phase. Default is None.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.transport">
-<span class="sig-name descname"><span class="pre">transport</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.transport" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">transport</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.transport" title="Link to this definition"></a></dt>
 <dd><p>Currently not supported. Gives ability to specify transport model
 to use for phase. Default is None.</p>
 <dl class="field-list simple">
@@ -222,7 +222,7 @@ to use for phase. Default is None.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.options">
-<span class="sig-name descname"><span class="pre">options</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.options" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">options</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.options" title="Link to this definition"></a></dt>
 <dd><p>Currently not supported. Specify special options to the phase.
 Default is None.</p>
 <dl class="field-list simple">
@@ -234,7 +234,7 @@ Default is None.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_motz_wise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_motz_wise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -291,72 +291,72 @@ Default is None.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.append_species">
-<span class="sig-name descname"><span class="pre">append_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.append_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">append_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.append_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.beps">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">beps</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.beps" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">beps</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.beps" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.clear_species">
-<span class="sig-name descname"><span class="pre">clear_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.clear_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clear_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.clear_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.copy_species">
-<span class="sig-name descname"><span class="pre">copy_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.copy_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">copy_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.copy_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.elements">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.elements" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elements</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.elements" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.extend_species">
-<span class="sig-name descname"><span class="pre">extend_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.extend_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extend_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.extend_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.index_species">
-<span class="sig-name descname"><span class="pre">index_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.index_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">index_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.index_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.pop_species">
-<span class="sig-name descname"><span class="pre">pop_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.pop_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">pop_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.pop_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.remove_species">
-<span class="sig-name descname"><span class="pre">remove_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.remove_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.remove_species" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="id0">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.species_names">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.species_names" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">species_names</span></span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.species_names" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.to_cti">
-<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_line_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'molec'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.to_cti" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_cti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_line_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'molec'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.to_cti" title="Link to this definition"></a></dt>
 <dd><p>Writes the object in Cantera’s CTI format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>max_line_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Maximum number of characters in the line. Default is 80.</p></li>
-<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit to use to calculate A. Default is ‘molec’</p></li>
-<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit to use to calculate A. Default is ‘cm’</p></li>
+<li><p><strong>max_line_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Maximum number of characters in the line. Default is 80.</p></li>
+<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit to use to calculate A. Default is ‘molec’</p></li>
+<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit to use to calculate A. Default is ‘cm’</p></li>
 <li><p><strong>units</strong> (<a class="reference internal" href="../omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <cite>quantity_unit</cite> and <cite>length_unit</cite> are overwritten.
 Default is None.</p></li>
-<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter used to separate header from footer of reaction and
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Delimiter used to separate header from footer of reaction and
 lateral interaction IDs. Default is ‘_’.</p></li>
 </ul>
 </dd>
@@ -364,22 +364,22 @@ lateral interaction IDs. Default is ‘_’.</p></li>
 <dd class="field-even"><p><strong>CTI_str</strong> – Object represented as a CTI string.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pmutt.omkm.phase.InteractingInterface.to_omkm_yaml">
-<span class="sig-name descname"><span class="pre">to_omkm_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'molec'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'atm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.to_omkm_yaml" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_omkm_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'molec'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'atm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pmutt.omkm.phase.InteractingInterface.to_omkm_yaml" title="Link to this definition"></a></dt>
 <dd><p>Writes the object in Cantera’s YAML format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K</p></li>
-<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm</p></li>
-<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit to use to calculate A. Default is ‘molec’</p></li>
-<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit to use to calculate A. Default is ‘cm’</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Temperature in K. Default is 300 K</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Pressure in atm. Default is 1 atm</p></li>
+<li><p><strong>quantity_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Quantity unit to use to calculate A. Default is ‘molec’</p></li>
+<li><p><strong>length_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Length unit to use to calculate A. Default is ‘cm’</p></li>
 <li><p><strong>units</strong> (<a class="reference internal" href="../omkm_units/pmutt.omkm.units.Units.html#pmutt.omkm.units.Units" title="pmutt.omkm.units.Units"><code class="xref py py-class docutils literal notranslate"><span class="pre">Units</span></code></a> object) – If specified, <cite>quantity_unit</cite> and <cite>length_unit</cite> are overwritten.
 Default is None.</p></li>
 </ul>
